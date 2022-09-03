@@ -1,1660 +1,1663 @@
 {
-  "backups-000028": {
-    "message": "Sauvegarde/Export"
-  },
-  "backups-000029": {
-    "message": "Choisissez un format"
-  },
-  "backups-000030": {
-    "message": "Merci de choisir"
-  },
-  "backups-000031": {
-    "message": "Sauvegarde de la base de données"
-  },
-  "backups-000032": {
-    "message": "Ficher CSV pré-défini"
-  },
-  "backups-000039": {
-    "message": "Mot de passe de la sauvegarde"
-  },
-  "backups-000040": {
-    "message": "(Optionnel) Chiffrer le ficher de sauvegarde"
-  },
-  "backups-000041": {
-    "message": "Seul un CSV peut être utilisé pour l’import"
-  },
-  "backups-000042": {
-    "message": "Exporter les mots de passe"
-  },
-  "backups-000043": {
-    "message": "Exporter les fichiers"
-  },
-  "backups-000044": {
-    "message": "Exporter les étiquettes"
-  },
-  "backups-000144": {
-    "message": "Dossier"
-  },
-  "backups-000145": {
-    "message": "Étiquettes"
-  },
-  "backups-000048": {
-    "message": "Parent"
-  },
-  "backups-000051": {
-    "message": "Id du parent"
-  },
-  "backups-000052": {
-    "message": "Vide"
-  },
-  "backups-000053": {
-    "message": "Ajouter un en-tête"
-  },
-  "backups-000054": {
-    "message": "Exporter les mots de passe partagés avec moi"
-  },
-  "backups-000055": {
-    "message": "Ne pas éditer les mots de passe partagés avec moi"
-  },
-  "backups-000057": {
-    "message": "Lancer l’export"
-  },
-  "backups-000059": {
-    "message": "En attente…"
-  },
-  "backups-000060": {
-    "message": "Erreur lors de l’export"
-  },
-  "backups-000061": {
-    "message": "Télécharger le ficher $FORMAT$",
-    "placeholders": {
-      "format": {
-        "content": "$1"
-      }
+    "backups-000028": {
+        "message": "Sauvegarde/Export"
+    },
+    "backups-000029": {
+        "message": "Choisissez un format"
+    },
+    "backups-000030": {
+        "message": "Merci de choisir"
+    },
+    "backups-000031": {
+        "message": "Sauvegarde de la base de données"
+    },
+    "backups-000032": {
+        "message": "Ficher CSV pré-défini"
+    },
+    "backups-000039": {
+        "message": "Mot de passe de la sauvegarde"
+    },
+    "backups-000040": {
+        "message": "(Optionnel) Chiffrer le ficher de sauvegarde"
+    },
+    "backups-000041": {
+        "message": "Seul un CSV peut être utilisé pour l’import"
+    },
+    "backups-000042": {
+        "message": "Exporter les mots de passe"
+    },
+    "backups-000043": {
+        "message": "Exporter les fichiers"
+    },
+    "backups-000044": {
+        "message": "Exporter les étiquettes"
+    },
+    "backups-000144": {
+        "message": "Dossier"
+    },
+    "backups-000145": {
+        "message": "Étiquettes"
+    },
+    "backups-000048": {
+        "message": "Parent"
+    },
+    "backups-000051": {
+        "message": "Id du parent"
+    },
+    "backups-000052": {
+        "message": "Vide"
+    },
+    "backups-000053": {
+        "message": "Ajouter un en-tête"
+    },
+    "backups-000054": {
+        "message": "Exporter les mots de passe partagés avec moi"
+    },
+    "backups-000055": {
+        "message": "Ne pas éditer les mots de passe partagés avec moi"
+    },
+    "backups-000057": {
+        "message": "Lancer l’export"
+    },
+    "backups-000059": {
+        "message": "En attente…"
+    },
+    "backups-000060": {
+        "message": "Erreur lors de l’export"
+    },
+    "backups-000061": {
+        "message": "Télécharger le ficher $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "Rien à exporter"
+    },
+    "backups-000063": {
+        "message": "Il n’y a aucune donnée à exporter"
+    },
+    "backups-000064": {
+        "message": "Restauration/Import"
+    },
+    "backups-000066": {
+        "message": "CSV des mots de passe"
+    },
+    "backups-000067": {
+        "message": "CSV des dossiers"
+    },
+    "backups-000068": {
+        "message": "CSV personnalisé"
+    },
+    "backups-000069": {
+        "message": "CSV personnalisé"
+    },
+    "backups-000070": {
+        "message": "Sélectionner un ficher"
+    },
+    "backups-000071": {
+        "message": "Choisissez les options"
+    },
+    "backups-000072": {
+        "message": "Gestion des conflits"
+    },
+    "backups-000073": {
+        "message": "Ignorer si n° de version identique"
+    },
+    "backups-000074": {
+        "message": "Toujours ignorer"
+    },
+    "backups-000075": {
+        "message": "Écraser l’existant"
+    },
+    "backups-000076": {
+        "message": "Fusionner avec l’existant"
+    },
+    "backups-000077": {
+        "message": "Créer une nouvelle entrée"
+    },
+    "backups-000078": {
+        "message": "Nécessaire pour les sauvegardes chiffrées"
+    },
+    "backups-000079": {
+        "message": "Options CSV"
+    },
+    "backups-000080": {
+        "message": "Base de données"
+    },
+    "backups-000081": {
+        "message": "Séparateur de chaîne de caractères"
+    },
+    "backups-000082": {
+        "message": "Caractère d’échappement"
+    },
+    "backups-000085": {
+        "message": "Apostrophe"
+    },
+    "backups-000086": {
+        "message": "Apostrophe simple"
+    },
+    "backups-000087": {
+        "message": "Barre oblique inversée"
+    },
+    "backups-000088": {
+        "message": "Detecter automatiquement"
+    },
+    "backups-000089": {
+        "message": "Virgule"
+    },
+    "backups-000090": {
+        "message": "Point-virgule"
+    },
+    "backups-000091": {
+        "message": "Espace"
+    },
+    "backups-000092": {
+        "message": "Tabulation"
+    },
+    "backups-000093": {
+        "message": "Détecter les apostrophes non échappées"
+    },
+    "backups-000094": {
+        "message": "Sauter la première ligne"
+    },
+    "backups-000095": {
+        "message": "Interpoler les champs manquants"
+    },
+    "backups-000096": {
+        "message": "Attribuer des champs CSV"
+    },
+    "backups-000097": {
+        "message": "Aperçus de la première ligne"
+    },
+    "backups-000098": {
+        "message": "Ligne $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000100": {
+        "message": "Ignorer"
+    },
+    "backups-000101": {
+        "message": "Lancer l’import"
+    },
+    "backups-000102": {
+        "message": "Importer"
+    },
+    "backups-000103": {
+        "message": "Analyse du fichier téléversé"
+    },
+    "backups-000104": {
+        "message": "Analyse des étiquettes"
+    },
+    "backups-000105": {
+        "message": "Analyse des dossiers"
+    },
+    "backups-000106": {
+        "message": "Lecture des étiquettes"
+    },
+    "backups-000107": {
+        "message": "Import des étiquettes"
+    },
+    "backups-000108": {
+        "message": "Lecture des dossiers"
+    },
+    "backups-000109": {
+        "message": "Import des dossiers"
+    },
+    "backups-000110": {
+        "message": "Lecture des mots de passe"
+    },
+    "backups-000111": {
+        "message": "Import des mots de passe"
+    },
+    "backups-000112": {
+        "message": "Échec de l’import"
+    },
+    "backups-000113": {
+        "message": "Import partiellement réussi"
+    },
+    "backups-000114": {
+        "message": "Import réussi"
+    },
+    "backups-000115": {
+        "message": "Erreur lors de l’import"
+    },
+    "backups-000117": {
+        "message": "Format de ficher invalide \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Un mot de passe requis"
+    },
+    "backups-000119": {
+        "message": "Mot de passe erroné"
+    },
+    "backups-000120": {
+        "message": "Déchiffrement des mots de passe échoué"
+    },
+    "backups-000121": {
+        "message": "Déchiffrement des dossiers échoué"
+    },
+    "backups-000122": {
+        "message": "Déchiffrement des étiquettes échoué"
+    },
+    "backups-000124": {
+        "message": "Le fichier CSV ne peut pas être cartographié"
+    },
+    "backups-000134": {
+        "message": "Le caractère de fin de champ est incorrecte"
+    },
+    "backups-000135": {
+        "message": "Le fichier n’a pas pu être traité : $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ ligne $LINE$, colonne $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000142": {
+        "message": "Le fichier est de type \"$ACTUAL$\" mais \"$EXPECTED$\" était attendu. Vous vous êtes trompé de ficher ou de choix juste avant.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ est connu pour créer des fichiers d’exportation erronés. Consultez le manuel si le fichier ne peut pas être traité.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000148": {
+        "message": "Mots de passe"
+    },
+    "frontend-000149": {
+        "message": "Tous"
+    },
+    "frontend-000150": {
+        "message": "Dossiers"
+    },
+    "frontend-000151": {
+        "message": "Récent"
+    },
+    "frontend-000152": {
+        "message": "Favoris"
+    },
+    "frontend-000153": {
+        "message": "Partagés"
+    },
+    "frontend-000154": {
+        "message": "Sécurité"
+    },
+    "frontend-000155": {
+        "message": "Corbeille"
+    },
+    "frontend-000156": {
+        "message": "Détails"
+    },
+    "frontend-000157": {
+        "message": "Modifier"
+    },
+    "frontend-000158": {
+        "message": "Renommer"
+    },
+    "frontend-000159": {
+        "message": "Effacer"
+    },
+    "frontend-000160": {
+        "message": "Restaurer"
+    },
+    "frontend-000161": {
+        "message": "Nouveau mot de passe"
+    },
+    "frontend-000162": {
+        "message": "Nouveau dossier"
+    },
+    "frontend-000163": {
+        "message": "Nouveau mot clé"
+    },
+    "frontend-000165": {
+        "message": "Statut"
+    },
+    "frontend-000164": {
+        "message": "Sécurisé"
+    },
+    "frontend-000166": {
+        "message": "Faible"
+    },
+    "frontend-000167": {
+        "message": "Faible (Dupliqué)"
+    },
+    "frontend-000168": {
+        "message": "Faible (Obsolète)"
+    },
+    "frontend-000169": {
+        "message": "Compromis"
+    },
+    "backups-000126": {
+        "message": "Notes"
+    },
+    "frontend-000170": {
+        "message": "Partager"
+    },
+    "frontend-000171": {
+        "message": "Révisions"
+    },
+    "frontend-000172": {
+        "message": "QR Code"
+    },
+    "frontend-000173": {
+        "message": "Mot de passe"
+    },
+    "frontend-000174": {
+        "message": "Nom d’utilisateur"
+    },
+    "frontend-000175": {
+        "message": "Site internet"
+    },
+    "frontend-000176": {
+        "message": "Ajouter des mots clés…"
+    },
+    "frontend-000177": {
+        "message": "Couleur"
+    },
+    "frontend-000178": {
+        "message": "Nom"
+    },
+    "frontend-000179": {
+        "message": "Libéllé"
+    },
+    "frontend-000180": {
+        "message": "Général"
+    },
+    "frontend-000181": {
+        "message": "Propriétés"
+    },
+    "frontend-000182": {
+        "message": "Nombres"
+    },
+    "frontend-000183": {
+        "message": "Caractères spéciaux"
+    },
+    "frontend-000184": {
+        "message": "Plus d’options"
+    },
+    "frontend-000185": {
+        "message": "Favori"
+    },
+    "frontend-000186": {
+        "message": "Chiffrement"
+    },
+    "frontend-000187": {
+        "message": "Sur le serveur"
+    },
+    "frontend-000188": {
+        "message": "Champs personnalisés"
+    },
+    "frontend-000189": {
+        "message": "Secret"
+    },
+    "frontend-000190": {
+        "message": "Texte"
+    },
+    "frontend-000191": {
+        "message": "Fichier"
+    },
+    "frontend-000192": {
+        "message": "Valeur"
+    },
+    "frontend-000193": {
+        "message": "Changer la visibilité"
+    },
+    "frontend-000194": {
+        "message": "Générer un mot de passe"
+    },
+    "frontend-000195": {
+        "message": "Version 1 simple chiffrement coté serveur"
+    },
+    "frontend-000196": {
+        "message": "Prendre quelques notes"
+    },
+    "frontend-000197": {
+        "message": "Sauvegarder"
+    },
+    "frontend-000198": {
+        "message": "Créer un dossier"
+    },
+    "frontend-000199": {
+        "message": "Dossier crée"
+    },
+    "frontend-000200": {
+        "message": "Le dossier n’a pas pu être créé"
+    },
+    "frontend-000201": {
+        "message": "Renommer le dossier"
+    },
+    "frontend-000202": {
+        "message": "Dossier renommé"
+    },
+    "frontend-000203": {
+        "message": "Le dossier n’a pas pu être renommé"
+    },
+    "frontend-000204": {
+        "message": "Dossier déplacé"
+    },
+    "frontend-000205": {
+        "message": "Le dossier n’a pas pu être déplacé"
+    },
+    "frontend-000206": {
+        "message": "Effacer le dossier"
+    },
+    "frontend-000207": {
+        "message": "Êtes vous sur de vouloir effacer le dossier ?"
+    },
+    "frontend-000208": {
+        "message": "Dossier effacé"
+    },
+    "frontend-000209": {
+        "message": "Le dossier n’a pas pu être effacé"
+    },
+    "frontend-000210": {
+        "message": "Dossier restauré"
+    },
+    "frontend-000211": {
+        "message": "Le dossier n’a pas pu être restauré"
+    },
+    "frontend-000212": {
+        "message": "Créer une étiquette"
+    },
+    "frontend-000213": {
+        "message": "Étiquette crée"
+    },
+    "frontend-000214": {
+        "message": "L’étiquette n’a pas pu être effacée"
+    },
+    "frontend-000215": {
+        "message": "Modifier l’étiquette"
+    },
+    "frontend-000217": {
+        "message": "Étiquette sauvegardée"
+    },
+    "frontend-000218": {
+        "message": "L’étiquette n’a pas pu être sauvegardée"
+    },
+    "frontend-000219": {
+        "message": "Effacer l’étiquette"
+    },
+    "frontend-000220": {
+        "message": "Êtes vous sûr de vouloir effacer l’étiquette ?"
+    },
+    "frontend-000221": {
+        "message": "Étiquette effacée"
+    },
+    "frontend-000222": {
+        "message": "L’étiquette n’a pas pu être effacée"
+    },
+    "frontend-000223": {
+        "message": "Étiquette restaurée"
+    },
+    "frontend-000224": {
+        "message": "L’étiquette n’a pas pu être restaurée"
+    },
+    "frontend-000225": {
+        "message": "Créer un mot de passe"
+    },
+    "frontend-000226": {
+        "message": "Mot de passe créé"
+    },
+    "frontend-000227": {
+        "message": "Le mot de passe n’a pas pu être créé"
+    },
+    "frontend-000228": {
+        "message": "Modifier le mot de passe"
+    },
+    "frontend-000229": {
+        "message": "Mot de passe sauvegardé"
+    },
+    "frontend-000230": {
+        "message": "Le mot de passe n’a pas pu être sauvegardé"
+    },
+    "frontend-000231": {
+        "message": "Mot de passe déplacé"
+    },
+    "frontend-000232": {
+        "message": "Le mot de passe n’a pas pu être déplacé"
+    },
+    "frontend-000233": {
+        "message": "Effacer le mot de passe"
+    },
+    "frontend-000234": {
+        "message": "Êtes vous sur de vouloir effacer le mot de passe ?"
+    },
+    "frontend-000235": {
+        "message": "Mot de passe effacé"
+    },
+    "frontend-000236": {
+        "message": "Mot de passe restauré"
+    },
+    "frontend-000237": {
+        "message": "Le mot de passe n’a pas pu être restauré"
+    },
+    "frontend-000238": {
+        "message": "Ouvrir le lien"
+    },
+    "frontend-000239": {
+        "message": "Copier le lien"
+    },
+    "frontend-000240": {
+        "message": "Copier l’utilisateur"
+    },
+    "frontend-000241": {
+        "message": "Copier le mot de passe"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ a été copié dans le presse-papier",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Dernière modification le $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Restaurer une version antérieure"
+    },
+    "frontend-000246": {
+        "message": "Version restaurée"
+    },
+    "frontend-000247": {
+        "message": "Échec à la restauration antérieure"
+    },
+    "frontend-000248": {
+        "message": "Êtes vous sûr de vouloir restaurer une version antérieure ?"
+    },
+    "frontend-000249": {
+        "message": "Partagé avec moi"
+    },
+    "frontend-000250": {
+        "message": "Partagé par moi"
+    },
+    "frontend-000251": {
+        "message": "Statistiques"
+    },
+    "frontend-000252": {
+        "message": "Crée sur"
+    },
+    "frontend-000253": {
+        "message": "Dernière mise à jour"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ révisions",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Partages"
+    },
+    "frontend-000256": {
+        "message": "$COUNT$ partages",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000264": {
+        "message": "Plus"
+    },
+    "frontend-000265": {
+        "message": "Sauvegarde et Restauration"
+    },
+    "frontend-000526": {
+        "message": "Extension navigateur"
+    },
+    "frontend-000267": {
+        "message": "Manuel"
+    },
+    "frontend-000268": {
+        "message": "Applications et extensions"
+    },
+    "frontend-000274": {
+        "message": "Chercher un utilisateur"
+    },
+    "frontend-000275": {
+        "message": "Définir une date d’expiration"
+    },
+    "frontend-000276": {
+        "message": "Expire le $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Choisissez une date d’expiration"
+    },
+    "frontend-000278": {
+        "message": "La date doit être ultérieure à aujourd’hui"
+    },
+    "frontend-000279": {
+        "message": "Date non valide"
+    },
+    "frontend-000280": {
+        "message": "L’utilisateur $UID$ n’existe pas",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Impossible de partager le mot de passe : $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Changer le droit d’écriture"
+    },
+    "frontend-000283": {
+        "message": "Changer le droit de partage"
+    },
+    "frontend-000284": {
+        "message": "Arrêter le partage"
+    },
+    "frontend-000285": {
+        "message": "Date"
+    },
+    "frontend-000286": {
+        "message": "Cache par défaut (0 fichiers, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Avatars (0 fichiers, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Favicon (0 fichiers, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Aperçus (0 fichiers, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Mots de passe (0 fichiers, 0 B)"
+    },
+    "backups-000046": {
+        "message": "Dossier"
+    },
+    "backups-000047": {
+        "message": "Étiquette"
+    },
+    "backups-000049": {
+        "message": "Id du dossier"
+    },
+    "backups-000050": {
+        "message": "Ids des étiquettes"
+    },
+    "backups-000058": {
+        "message": "Export"
+    },
+    "frontend-000667": {
+        "message": "CSV des étiquettes"
+    },
+    "backups-000083": {
+        "message": "Séparateur de champ"
+    },
+    "frontend-000291": {
+        "message": "Changé"
+    },
+    "frontend-000292": {
+        "message": "Modifié"
+    },
+    "frontend-000293": {
+        "message": "Édité"
+    },
+    "frontend-000294": {
+        "message": "Crée"
+    },
+    "frontend-000295": {
+        "message": "Révision"
+    },
+    "frontend-000296": {
+        "message": "Lien"
+    },
+    "frontend-000297": {
+        "message": "Parent"
+    },
+    "frontend-000298": {
+        "message": "Effacer tous les éléments"
+    },
+    "frontend-000299": {
+        "message": "Restaurer tous les éléments"
+    },
+    "frontend-000300": {
+        "message": "Restaure les éléments"
+    },
+    "frontend-000301": {
+        "message": "Restaurer les éléments contenus dans la corbeille"
+    },
+    "frontend-000302": {
+        "message": "Restaurer cet élément"
+    },
+    "frontend-000303": {
+        "message": "Élément restauré"
+    },
+    "frontend-000304": {
+        "message": "Vider la corbeille"
+    },
+    "frontend-000305": {
+        "message": "Effacer définitivement tout les éléments de la corbeille ?"
+    },
+    "frontend-000306": {
+        "message": "Corbeille vidée"
+    },
+    "frontend-000307": {
+        "message": "Recherche"
+    },
+    "frontend-000308": {
+        "message": "Utilise la boite de recherche afin de procéder à la recherche"
+    },
+    "frontend-000309": {
+        "message": "Tenter une cherche globale pour \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000266": {
+        "message": "Options"
+    },
+    "frontend-000528": {
+        "message": "Politique de mots de passe"
+    },
+    "frontend-000529": {
+        "message": "Signaler les dupliqués"
+    },
+    "frontend-000530": {
+        "message": "Age maximum en jours"
+    },
+    "frontend-000531": {
+        "message": "Générateur de mots de passe"
+    },
+    "frontend-000532": {
+        "message": "Complexité"
+    },
+    "frontend-000533": {
+        "message": "Inclure des chiffres"
+    },
+    "frontend-000534": {
+        "message": "Inclure des caractères spéciaux"
+    },
+    "frontend-000535": {
+        "message": "Interface utilisateur"
+    },
+    "frontend-000536": {
+        "message": "Section par défaut"
+    },
+    "frontend-000537": {
+        "message": "Tous les mots de passe"
+    },
+    "frontend-000538": {
+        "message": "Liste des mots de passe"
+    },
+    "frontend-000539": {
+        "message": "Définir le titre par"
+    },
+    "frontend-000540": {
+        "message": "Trier par"
+    },
+    "frontend-000541": {
+        "message": "Champs titre"
+    },
+    "frontend-000542": {
+        "message": "Action au clique"
+    },
+    "frontend-000543": {
+        "message": "Action au double clique"
+    },
+    "frontend-000544": {
+        "message": "Copier le mot de passe"
+    },
+    "frontend-000545": {
+        "message": "Copier le nom d’utilisateur"
+    },
+    "frontend-000546": {
+        "message": "Copier le lien"
+    },
+    "frontend-000547": {
+        "message": "Montrer les détails"
+    },
+    "frontend-000548": {
+        "message": "Ajout des choix de copie dans le menu"
+    },
+    "frontend-000549": {
+        "message": "Ajout de l’utilisateur dans la liste"
+    },
+    "frontend-000550": {
+        "message": "Ajout des étiquettes dans la liste"
+    },
+    "frontend-000551": {
+        "message": "Montrer les champs personnalisés cachés"
+    },
+    "frontend-000552": {
+        "message": "Recherche pendant la frappe"
+    },
+    "frontend-000553": {
+        "message": "Recherche globale avec \"Entrée\""
+    },
+    "frontend-000554": {
+        "message": "Toujours montrer la recherche"
+    },
+    "frontend-000555": {
+        "message": "Notifications"
+    },
+    "frontend-000556": {
+        "message": "Envoyer un courriel pour"
+    },
+    "frontend-000557": {
+        "message": "En cas de problème de sécurité"
+    },
+    "frontend-000558": {
+        "message": "En cas d’un partage avec moi"
+    },
+    "frontend-000559": {
+        "message": "Montrer notification pour"
+    },
+    "frontend-000560": {
+        "message": "Erreurs diverses"
+    },
+    "frontend-000561": {
+        "message": "Zone à risque"
+    },
+    "frontend-000562": {
+        "message": "Réinitialiser tous les paramètres"
+    },
+    "frontend-000563": {
+        "message": "Réinitialiser"
+    },
+    "frontend-000564": {
+        "message": "Tout effacer"
+    },
+    "frontend-000565": {
+        "message": "TOUT EFFACER"
+    },
+    "frontend-000566": {
+        "message": "Réinitialisation du compte requis"
+    },
+    "frontend-000567": {
+        "message": "Vue"
+    },
+    "frontend-000669": {
+        "message": "Standard"
+    },
+    "frontend-000568": {
+        "message": "Avancée"
+    },
+    "frontend-000310": {
+        "message": "Il n’y a rien ici"
+    },
+    "frontend-000311": {
+        "message": "Cliquez sur le symbole \"+\" pour ajouter un nouvel élément"
+    },
+    "frontend-000312": {
+        "message": "Les éléments supprimés apparaîtront ici"
+    },
+    "frontend-000313": {
+        "message": "Aucun mot de passe n’est partagé avec vous"
+    },
+    "frontend-000314": {
+        "message": "Vous n’avez partagé aucun mot de passe pour le moment"
+    },
+    "frontend-000315": {
+        "message": "Vos favoris apparaîtront ici"
+    },
+    "frontend-000316": {
+        "message": "Vous devriez verifier les autres sections"
+    },
+    "frontend-000317": {
+        "message": "C’est probablement un bon signe"
+    },
+    "frontend-000318": {
+        "message": "Aller à $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000320": {
+        "message": "Images $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Impossible d’atteindre la page : $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000324": {
+        "message": "Non trouvé"
+    },
+    "frontend-000328": {
+        "message": "Faites nous en part !"
+    },
+    "frontend-000325": {
+        "message": "Toujours besoin d’aide ?"
+    },
+    "frontend-000326": {
+        "message": "Demandez sur le forum !"
+    },
+    "frontend-000327": {
+        "message": "Vous avez trouvé une erreur ?"
+    },
+    "frontend-000331": {
+        "message": "Erreur réseau"
+    },
+    "frontend-000332": {
+        "message": "Le module $MODULE$ n’a pas pu être chargé",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Trier par nom"
+    },
+    "frontend-000334": {
+        "message": "Trier par date de modification"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ mots de passe",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 mot de passe"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ dossiers",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 dossier"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ étiquettes",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 étiquette"
+    },
+    "frontend-000341": {
+        "message": "Rien"
+    },
+    "frontend-000342": {
+        "message": " et "
+    },
+    "frontend-000343": {
+        "message": "correspond à"
+    },
+    "frontend-000344": {
+        "message": "correspondent à"
+    },
+    "frontend-000363": {
+        "message": "vrai"
+    },
+    "frontend-000364": {
+        "message": "faux"
+    },
+    "frontend-000365": {
+        "message": "oui"
+    },
+    "frontend-000366": {
+        "message": "non"
+    },
+    "frontend-000569": {
+        "message": "Marque les mots de passe comme \"Faible\" lorsqu’ils sont utilisés plusieurs fois pour différents comptes"
+    },
+    "frontend-000570": {
+        "message": "Marque les mots de passe comme \"Faible\" quand ils dépassent une durée limite spécifiée en jours"
+    },
+    "frontend-000571": {
+        "message": "Une complexité plus élevée produira des mots de passe plus longs et plus sécurisés"
+    },
+    "frontend-000572": {
+        "message": "Affiche l’attribut sélectionné comme titre dans la liste"
+    },
+    "frontend-000573": {
+        "message": "Trie les mots de passe en fonction de l’attribut spécifié au lieu du nom"
+    },
+    "frontend-000574": {
+        "message": "Action exécutée en cliquant sur un mot de passe dans la liste"
+    },
+    "frontend-000575": {
+        "message": "Action exécutée lorsque vous double-cliquez sur un mot de passe dans la liste"
+    },
+    "frontend-000576": {
+        "message": "Affiche les options pour copier le mot de passe et le nom d’utilisateur dans le menu."
+    },
+    "frontend-000577": {
+        "message": "La section qui sera affichée à l’ouverture de l’application"
+    },
+    "frontend-000578": {
+        "message": "Toujours afficher le nom d’utilisateur lié au mot de passe dans la liste"
+    },
+    "frontend-000579": {
+        "message": "Affiche les balises pour chaque mot de passe dans la vue liste. Augmente le temps de chargement"
+    },
+    "frontend-000580": {
+        "message": "Affiche les champs personnalisés cachés dans le formulaire de modification et dans les détails du mot de passe"
+    },
+    "frontend-000670": {
+        "message": "Commence la recherche dès qu’une touche est enfoncée"
+    },
+    "frontend-000671": {
+        "message": "Effectuez une recherche n’importe où lorsque vous appuyez sur la touche Entrée dans la zone de recherche"
+    },
+    "frontend-000583": {
+        "message": "Toujours afficher la section de recherche globale dans la navigation"
+    },
+    "frontend-000581": {
+        "message": "Vous envoie un courriel si un mot de passe est compromis ou que des problèmes de sécurité se produisent"
+    },
+    "frontend-000582": {
+        "message": "Vous envoie un courriel quand des mots de passe vous sont partagés"
+    },
+    "frontend-000584": {
+        "message": "Envoie une notification si un mot de passe est compromis ou que des problèmes de sécurité se produisent"
+    },
+    "frontend-000585": {
+        "message": "Envoie une notification quand des mots de passe vous sont partagés"
+    },
+    "frontend-000586": {
+        "message": "Envoie une notification quand une tache en arrière plan échoue"
+    },
+    "frontend-000587": {
+        "message": "Réinitialise tous les paramètres de cette page à leur valeur de défaut"
+    },
+    "frontend-000588": {
+        "message": "Cela réinitialisera tous les paramètres à leurs valeurs par défaut. Voulez-vous continuer ?"
+    },
+    "frontend-000589": {
+        "message": "Restaurer les paramètres d’usine et supprimer tous les mots de passe, dossiers et étiquettes"
+    },
+    "frontend-000368": {
+        "message": "Vous avez atteint la longueur maximale de 4096 caractères"
+    },
+    "frontend-000369": {
+        "message": "Rien n’à été trouvé pour la recherche \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "La page \"$PAGE$\" n’a pas pu être extraite du  serveur hébergeant le manuel.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Certaines données attendent d’être synchronisées"
+    },
+    "frontend-000590": {
+        "message": "Êtes-vous sûr de vouloir supprimer tous vos paramètres, mots de passe, dossiers et étiquettes et recommencer depuis le début ? \nCette action n’est PAS réversible."
+    },
+    "backend-000377": {
+        "message": "HTTPS Requis"
+    },
+    "backend-000378": {
+        "message": "recharger cette page"
+    },
+    "backend-000380": {
+        "message": "documentation"
+    },
+    "backend-000382": {
+        "message": "Cette application dépend de $STR_1$ afin de fonctionner correctement",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000381": {
+        "message": "Vous pouvez essayer de $STR_1$ avec HTTPS d’activé.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Si ce problème persiste, vous devriez contacter votre administrateur."
+    },
+    "backend-000389": {
+        "message": "Mots de passe Session $STR_1$ - $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Ouvrir la Documentation"
+    },
+    "backend-000391": {
+        "message": "Jamais"
+    },
+    "backend-000392": {
+        "message": "Traitement des données interne"
+    },
+    "backend-000393": {
+        "message": "Génération des images"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (recommandé)"
+    },
+    "backend-000395": {
+        "message": "Services Externes"
+    },
+    "backend-000396": {
+        "message": "Contrôle de la qualité du mot de passe"
+    },
+    "backend-000397": {
+        "message": "Have I been pwned? (recommandé)"
+    },
+    "backend-000398": {
+        "message": "25 Million de mots de passe (Local)"
+    },
+    "backend-000399": {
+        "message": "5 Million de mots de passe (Local)"
+    },
+    "backend-000400": {
+        "message": "25M de mots de passe & HIbp ?"
+    },
+    "backend-000401": {
+        "message": "Générateur de mot de passe"
+    },
+    "backend-000402": {
+        "message": "Dictionnaire local"
+    },
+    "backend-000403": {
+        "message": "Caractères Aléatoires"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Collection (recommandé)"
+    },
+    "backend-000406": {
+        "message": "Service de Favicon"
+    },
+    "backend-000407": {
+        "message": "Analyseur local"
+    },
+    "backend-000408": {
+        "message": "Besticon (recommandé)"
+    },
+    "backend-000409": {
+        "message": "Aucun"
+    },
+    "backend-000410": {
+        "message": "Service d’aperçus des sites internet"
+    },
+    "backend-000411": {
+        "message": "Clé d’API service d’aperçus"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (local)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (local)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "Options par défaut des courriels"
+    },
+    "backend-000416": {
+        "message": "Envoyer un courriel à chaque événement de sécurité"
+    },
+    "backend-000417": {
+        "message": "Envoyer un courriel à chaque événement de partage"
+    },
+    "backend-000418": {
+        "message": "Autres Options"
+    },
+    "backend-000419": {
+        "message": "Effacer définitivement les éléments de la base de données"
+    },
+    "backend-000420": {
+        "message": "Afficher Nightly Updates dans \"Apps\""
+    },
+    "backend-000421": {
+        "message": "Jamais"
+    },
+    "backend-000422": {
+        "message": "Immédiatement"
+    },
+    "backend-000423": {
+        "message": "Après deux heures"
+    },
+    "backend-000424": {
+        "message": "Après une journée"
+    },
+    "backend-000425": {
+        "message": "Après deux semaines"
+    },
+    "backend-000426": {
+        "message": "Après un mois"
+    },
+    "backend-000427": {
+        "message": "Après un an"
+    },
+    "backend-000428": {
+        "message": "Réglages de sauvegarde"
+    },
+    "backend-000429": {
+        "message": "Intervalle de sauvegarde"
+    },
+    "backend-000430": {
+        "message": "Toutes les heures"
+    },
+    "backend-000431": {
+        "message": "Toutes les six heures"
+    },
+    "backend-000432": {
+        "message": "Tous les jours"
+    },
+    "backend-000433": {
+        "message": "Tous les deux jours"
+    },
+    "backend-000434": {
+        "message": "Toutes les semaines"
+    },
+    "backend-000435": {
+        "message": "Toutes les deux semaines"
+    },
+    "backend-000436": {
+        "message": "Nombre de sauvegardes à garder"
+    },
+    "backend-000437": {
+        "message": "Caches"
+    },
+    "backend-000438": {
+        "message": "Cache par défaut ($STR_1$ fichiers, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatars ($STR_1$ fichiers, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon ($STR_1$ fichiers, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Aperçus ($STR_1$ fichiers, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Mots de passe ($STR_1$ fichiers, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "Purger"
+    },
+    "backend-000444": {
+        "message": "Purger ce cache"
+    },
+    "backend-000445": {
+        "message": "Vous ne pouvez pas vider ce cache tant que le service utilise une instance d’API partagée."
+    },
+    "backend-000446": {
+        "message": "Sauvé"
+    },
+    "backend-000447": {
+        "message": "Purgé"
+    },
+    "backend-000448": {
+        "message": "Échec"
+    },
+    "backend-000449": {
+        "message": "Besoin d’aide"
+    },
+    "backend-000450": {
+        "message": "Bogue trouvé"
+    },
+    "backend-000451": {
+        "message": "vous cherchez la documentation (anglais uniquement)"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Toute l’aide est par ici.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ n’est plus supporté.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "L’application nécessite HTTPS."
+    },
+    "backend-000455": {
+        "message": "L'utilisation de $STR_1$ pour exécuter des jobs d'arrière-plan peut entraîner de longs temps d'attente. Nous vous recommandons d'utiliser Cron.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Veuillez vérifier les exigences systèmes."
+    },
+    "backend-000457": {
+        "message": "Mot de passe non partagé"
+    },
+    "backend-000458": {
+        "message": "Un mot de passe n’a pu être partagé avec $STRING_1$, car il l’est déjà",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000459": {
+        "message": "Vous avez un mot de passe non sûr"
+    },
+    "backend-000460": {
+        "message": "Vous avez plusieurs mot de passe non sûrs"
+    },
+    "backend-000461": {
+        "message": "Un de vos mots de passe n’est plus sûr d’utilisation."
+    },
+    "backend-000462": {
+        "message": "Plusieurs de vos mots de passe ne sont plus sûr d’utilisation."
+    },
+    "backend-000463": {
+        "message": "L’application vérifiera régulièrement si vos mots de passe on été compromis suite à une fuite de données sur un site."
+    },
+    "backend-000464": {
+        "message": "Le test de sécurité a déterminé que l’un de vos mots de passe n’est pas sécurisé."
+    },
+    "backend-000465": {
+        "message": "Le test de sécurité a déterminé que $STR_1$ de vos mots de passe ne sont pas sécurisés.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Cela signifie que votre mot de passe a fuité sur internet et met en danger tous les comptes qui l’utilise."
+    },
+    "backend-000467": {
+        "message": "Cela signifie que vos mots de passe ont fuité sur internet et mettent en danger tous les comptes qui les utilises."
+    },
+    "backend-000468": {
+        "message": "Le mot de passe est donc marqué comme 'Faible' et devrait être changé."
+    },
+    "backend-000469": {
+        "message": "Les mots de passe sont donc marqués comme 'Faible' et devraient être changés."
+    },
+    "backend-000470": {
+        "message": "Vous pouvez créer un nouveau mot de passe sécurisé dans l’application."
+    },
+    "backend-000471": {
+        "message": "Vous pouvez créer des nouveaux mots de passe sécurisés dans l’application"
+    },
+    "backend-000472": {
+        "message": "Changer le mot de passe maintenant"
+    },
+    "backend-000473": {
+        "message": "Changer les mots de passe maintenant"
+    },
+    "backend-000474": {
+        "message": "Ouvrez l’application pour changer le mot de passe."
+    },
+    "backend-000475": {
+        "message": "Ouvrez l’application pour changer les mots de passe."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ à partagé un mot de passe avec vous.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ à partagé $STR_1$ mots de passe avec vous ",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ et $STRING_2$ autres ont partagés $STRING_1$ mots de passe avec vous.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Ouvrez l’application pour voir le mot de passe."
+    },
+    "backend-000482": {
+        "message": "Ouvrez l’application pour voir les mots de passe."
+    },
+    "backend-000483": {
+        "message": "Un mot de passe à été partagé avec vous sur $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Plusieurs mots de passe ont été partagé avec vous sur $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Voir les mots de passe partagés avec moi"
+    },
+    "backend-000486": {
+        "message": "Un ou plusieurs mots de passes ne peuvent être partagé, car le destinataire y  déjà accès."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ mots de passes ne peuvent être partagé, car le destinataire y a déjà accès.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Partager un mot de passe qui a déjà été partagé avec vous peut créer un boucle."
+    },
+    "backend-000490": {
+        "message": "Pour éviter cela, ces mots de passe ne devraient pas être partagé"
+    },
+    "backend-000496": {
+        "message": "Utilisateur effacé ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000644": {
+        "message": "Voir les mots de passe partagés"
     }
-  },
-  "backups-000062": {
-    "message": "Rien à exporter"
-  },
-  "backups-000063": {
-    "message": "Il n’y a aucune donnée à exporter"
-  },
-  "backups-000064": {
-    "message": "Restauration/Import"
-  },
-  "backups-000066": {
-    "message": "CSV des mots de passe"
-  },
-  "backups-000067": {
-    "message": "CSV des dossiers"
-  },
-  "backups-000068": {
-    "message": "CSV personnalisé"
-  },
-  "backups-000069": {
-    "message": "CSV personnalisé"
-  },
-  "backups-000070": {
-    "message": "Sélectionner un ficher"
-  },
-  "backups-000071": {
-    "message": "Choisissez les options"
-  },
-  "backups-000072": {
-    "message": "Gestion des conflits"
-  },
-  "backups-000073": {
-    "message": "Ignorer si n° de version identique"
-  },
-  "backups-000074": {
-    "message": "Toujours ignorer"
-  },
-  "backups-000075": {
-    "message": "Écraser l’existant"
-  },
-  "backups-000076": {
-    "message": "Fusionner avec l’existant"
-  },
-  "backups-000077": {
-    "message": "Créer une nouvelle entrée"
-  },
-  "backups-000078": {
-    "message": "Nécessaire pour les sauvegardes chiffrées"
-  },
-  "backups-000079": {
-    "message": "Options CSV"
-  },
-  "backups-000080": {
-    "message": "Base de données"
-  },
-  "backups-000081": {
-    "message": "Séparateur de chaîne de caractères"
-  },
-  "backups-000082": {
-    "message": "Caractère d’échappement"
-  },
-  "backups-000085": {
-    "message": "Apostrophe"
-  },
-  "backups-000086": {
-    "message": "Apostrophe simple"
-  },
-  "backups-000087": {
-    "message": "Barre oblique inversée"
-  },
-  "backups-000088": {
-    "message": "Detecter automatiquement"
-  },
-  "backups-000089": {
-    "message": "Virgule"
-  },
-  "backups-000090": {
-    "message": "Point-virgule"
-  },
-  "backups-000091": {
-    "message": "Espace"
-  },
-  "backups-000092": {
-    "message": "Tabulation"
-  },
-  "backups-000093": {
-    "message": "Détecter les apostrophes non échappées"
-  },
-  "backups-000094": {
-    "message": "Sauter la première ligne"
-  },
-  "backups-000095": {
-    "message": "Interpoler les champs manquants"
-  },
-  "backups-000096": {
-    "message": "Attribuer des champs CSV"
-  },
-  "backups-000097": {
-    "message": "Aperçus de la première ligne"
-  },
-  "backups-000098": {
-    "message": "Ligne $LINE$",
-    "placeholders": {
-      "line": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000100": {
-    "message": "Ignorer"
-  },
-  "backups-000101": {
-    "message": "Lancer l’import"
-  },
-  "backups-000102": {
-    "message": "Importer"
-  },
-  "backups-000103": {
-    "message": "Analyse du fichier téléversé"
-  },
-  "backups-000104": {
-    "message": "Analyse des étiquettes"
-  },
-  "backups-000105": {
-    "message": "Analyse des dossiers"
-  },
-  "backups-000106": {
-    "message": "Lecture des étiquettes"
-  },
-  "backups-000107": {
-    "message": "Import des étiquettes"
-  },
-  "backups-000108": {
-    "message": "Lecture des dossiers"
-  },
-  "backups-000109": {
-    "message": "Import des dossiers"
-  },
-  "backups-000110": {
-    "message": "Lecture des mots de passe"
-  },
-  "backups-000111": {
-    "message": "Import des mots de passe"
-  },
-  "backups-000112": {
-    "message": "Échec de l’import"
-  },
-  "backups-000113": {
-    "message": "Import partiellement réussi"
-  },
-  "backups-000114": {
-    "message": "Import réussi"
-  },
-  "backups-000115": {
-    "message": "Erreur lors de l’import"
-  },
-  "backups-000117": {
-    "message": "Format de ficher invalide \"$TYPE$\"",
-    "placeholders": {
-      "type": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000118": {
-    "message": "Un mot de passe requis"
-  },
-  "backups-000119": {
-    "message": "Mot de passe erroné"
-  },
-  "backups-000120": {
-    "message": "Déchiffrement des mots de passe échoué"
-  },
-  "backups-000121": {
-    "message": "Déchiffrement des dossiers échoué"
-  },
-  "backups-000122": {
-    "message": "Déchiffrement des étiquettes échoué"
-  },
-  "backups-000124": {
-    "message": "Le fichier CSV ne peut pas être cartographié"
-  },
-  "backups-000134": {
-    "message": "Le caractère de fin de champ est incorrecte"
-  },
-  "backups-000135": {
-    "message": "Le fichier n’a pas pu être traité : $ERRORS$",
-    "placeholders": {
-      "errors": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000136": {
-    "message": "$MESSAGE$ ligne $LINE$, colonne $CHARACTER$.",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      },
-      "line": {
-        "content": "$2"
-      },
-      "character": {
-        "content": "$3"
-      }
-    }
-  },
-  "backups-000142": {
-    "message": "Le fichier est de type \"$ACTUAL$\" mais \"$EXPECTED$\" était attendu. Vous vous êtes trompé de ficher ou de choix juste avant.",
-    "placeholders": {
-      "actual": {
-        "content": "$1"
-      },
-      "expected": {
-        "content": "$2"
-      }
-    }
-  },
-  "backups-000143": {
-    "message": "$SERVICE$ est connu pour créer des fichiers d’exportation erronés. Consultez le manuel si le fichier ne peut pas être traité.",
-    "placeholders": {
-      "service": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000148": {
-    "message": "Mots de passe"
-  },
-  "frontend-000149": {
-    "message": "Tous"
-  },
-  "frontend-000150": {
-    "message": "Dossiers"
-  },
-  "frontend-000151": {
-    "message": "Récent"
-  },
-  "frontend-000152": {
-    "message": "Favoris"
-  },
-  "frontend-000153": {
-    "message": "Partagés"
-  },
-  "frontend-000154": {
-    "message": "Sécurité"
-  },
-  "frontend-000155": {
-    "message": "Corbeille"
-  },
-  "frontend-000156": {
-    "message": "Détails"
-  },
-  "frontend-000157": {
-    "message": "Modifier"
-  },
-  "frontend-000158": {
-    "message": "Renommer"
-  },
-  "frontend-000159": {
-    "message": "Effacer"
-  },
-  "frontend-000160": {
-    "message": "Restaurer"
-  },
-  "frontend-000161": {
-    "message": "Nouveau mot de passe"
-  },
-  "frontend-000162": {
-    "message": "Nouveau dossier"
-  },
-  "frontend-000163": {
-    "message": "Nouveau mot clé"
-  },
-  "frontend-000165": {
-    "message": "Statut"
-  },
-  "frontend-000164": {
-    "message": "Sécurisé"
-  },
-  "frontend-000166": {
-    "message": "Faible"
-  },
-  "frontend-000167": {
-    "message": "Faible (Dupliqué)"
-  },
-  "frontend-000168": {
-    "message": "Faible (Obsolète)"
-  },
-  "frontend-000169": {
-    "message": "Compromis"
-  },
-  "backups-000126": {
-    "message": "Notes"
-  },
-  "frontend-000170": {
-    "message": "Partager"
-  },
-  "frontend-000171": {
-    "message": "Révisions"
-  },
-  "frontend-000172": {
-    "message": "QR Code"
-  },
-  "frontend-000173": {
-    "message": "Mot de passe"
-  },
-  "frontend-000174": {
-    "message": "Nom d’utilisateur"
-  },
-  "frontend-000175": {
-    "message": "Site internet"
-  },
-  "frontend-000176": {
-    "message": "Ajouter des mots clés…"
-  },
-  "frontend-000177": {
-    "message": "Couleur"
-  },
-  "frontend-000178": {
-    "message": "Nom"
-  },
-  "frontend-000179": {
-    "message": "Libéllé"
-  },
-  "frontend-000180": {
-    "message": "Général"
-  },
-  "frontend-000181": {
-    "message": "Propriétés"
-  },
-  "frontend-000182": {
-    "message": "Nombres"
-  },
-  "frontend-000183": {
-    "message": "Caractères spéciaux"
-  },
-  "frontend-000184": {
-    "message": "Plus d’options"
-  },
-  "frontend-000185": {
-    "message": "Favori"
-  },
-  "frontend-000186": {
-    "message": "Chiffrement"
-  },
-  "frontend-000187": {
-    "message": "Sur le serveur"
-  },
-  "frontend-000188": {
-    "message": "Champs personnalisés"
-  },
-  "frontend-000189": {
-    "message": "Secret"
-  },
-  "frontend-000190": {
-    "message": "Texte"
-  },
-  "frontend-000191": {
-    "message": "Fichier"
-  },
-  "frontend-000192": {
-    "message": "Valeur"
-  },
-  "frontend-000193": {
-    "message": "Changer la visibilité"
-  },
-  "frontend-000194": {
-    "message": "Générer un mot de passe"
-  },
-  "frontend-000195": {
-    "message": "Version 1 simple chiffrement coté serveur"
-  },
-  "frontend-000196": {
-    "message": "Prendre quelques notes"
-  },
-  "frontend-000197": {
-    "message": "Sauvegarder"
-  },
-  "frontend-000198": {
-    "message": "Créer un dossier"
-  },
-  "frontend-000199": {
-    "message": "Dossier crée"
-  },
-  "frontend-000200": {
-    "message": "Le dossier n’a pas pu être créé"
-  },
-  "frontend-000201": {
-    "message": "Renommer le dossier"
-  },
-  "frontend-000202": {
-    "message": "Dossier renommé"
-  },
-  "frontend-000203": {
-    "message": "Le dossier n’a pas pu être renommé"
-  },
-  "frontend-000204": {
-    "message": "Dossier déplacé"
-  },
-  "frontend-000205": {
-    "message": "Le dossier n’a pas pu être déplacé"
-  },
-  "frontend-000206": {
-    "message": "Effacer le dossier"
-  },
-  "frontend-000207": {
-    "message": "Êtes vous sur de vouloir effacer le dossier ?"
-  },
-  "frontend-000208": {
-    "message": "Dossier effacé"
-  },
-  "frontend-000209": {
-    "message": "Le dossier n’a pas pu être effacé"
-  },
-  "frontend-000210": {
-    "message": "Dossier restauré"
-  },
-  "frontend-000211": {
-    "message": "Le dossier n’a pas pu être restauré"
-  },
-  "frontend-000212": {
-    "message": "Créer une étiquette"
-  },
-  "frontend-000213": {
-    "message": "Étiquette crée"
-  },
-  "frontend-000214": {
-    "message": "L’étiquette n’a pas pu être effacée"
-  },
-  "frontend-000215": {
-    "message": "Modifier l’étiquette"
-  },
-  "frontend-000217": {
-    "message": "Étiquette sauvegardée"
-  },
-  "frontend-000218": {
-    "message": "L’étiquette n’a pas pu être sauvegardée"
-  },
-  "frontend-000219": {
-    "message": "Effacer l’étiquette"
-  },
-  "frontend-000220": {
-    "message": "Êtes vous sûr de vouloir effacer l’étiquette ?"
-  },
-  "frontend-000221": {
-    "message": "Étiquette effacée"
-  },
-  "frontend-000222": {
-    "message": "L’étiquette n’a pas pu être effacée"
-  },
-  "frontend-000223": {
-    "message": "Étiquette restaurée"
-  },
-  "frontend-000224": {
-    "message": "L’étiquette n’a pas pu être restaurée"
-  },
-  "frontend-000225": {
-    "message": "Créer un mot de passe"
-  },
-  "frontend-000226": {
-    "message": "Mot de passe créé"
-  },
-  "frontend-000227": {
-    "message": "Le mot de passe n’a pas pu être créé"
-  },
-  "frontend-000228": {
-    "message": "Modifier le mot de passe"
-  },
-  "frontend-000229": {
-    "message": "Mot de passe sauvegardé"
-  },
-  "frontend-000230": {
-    "message": "Le mot de passe n’a pas pu être sauvegardé"
-  },
-  "frontend-000231": {
-    "message": "Mot de passe déplacé"
-  },
-  "frontend-000232": {
-    "message": "Le mot de passe n’a pas pu être déplacé"
-  },
-  "frontend-000233": {
-    "message": "Effacer le mot de passe"
-  },
-  "frontend-000234": {
-    "message": "Êtes vous sur de vouloir effacer le mot de passe ?"
-  },
-  "frontend-000235": {
-    "message": "Mot de passe effacé"
-  },
-  "frontend-000236": {
-    "message": "Mot de passe restauré"
-  },
-  "frontend-000237": {
-    "message": "Le mot de passe n’a pas pu être restauré"
-  },
-  "frontend-000238": {
-    "message": "Ouvrir le lien"
-  },
-  "frontend-000239": {
-    "message": "Copier le lien"
-  },
-  "frontend-000240": {
-    "message": "Copier l’utilisateur"
-  },
-  "frontend-000241": {
-    "message": "Copier le mot de passe"
-  },
-  "frontend-000242": {
-    "message": "$ELEMENT$ a été copié dans le presse-papier",
-    "placeholders": {
-      "element": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000244": {
-    "message": "Dernière modification le $DATE$",
-    "placeholders": {
-      "date": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000245": {
-    "message": "Restaurer une version antérieure"
-  },
-  "frontend-000246": {
-    "message": "Version restaurée"
-  },
-  "frontend-000247": {
-    "message": "Échec à la restauration antérieure"
-  },
-  "frontend-000248": {
-    "message": "Êtes vous sûr de vouloir restaurer une version antérieure ?"
-  },
-  "frontend-000249": {
-    "message": "Partagé avec moi"
-  },
-  "frontend-000250": {
-    "message": "Partagé par moi"
-  },
-  "frontend-000251": {
-    "message": "Statistiques"
-  },
-  "frontend-000252": {
-    "message": "Crée sur"
-  },
-  "frontend-000253": {
-    "message": "Dernière mise à jour"
-  },
-  "frontend-000254": {
-    "message": "$COUNT$ révisions",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000255": {
-    "message": "Partages"
-  },
-  "frontend-000256": {
-    "message": "$COUNT$ partages",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000264": {
-    "message": "Plus"
-  },
-  "frontend-000265": {
-    "message": "Sauvegarde et Restauration"
-  },
-  "frontend-000526": {
-    "message": "Extension navigateur"
-  },
-  "frontend-000267": {
-    "message": "Manuel"
-  },
-  "frontend-000268": {
-    "message": "Applications et extensions"
-  },
-  "frontend-000274": {
-    "message": "Chercher un utilisateur"
-  },
-  "frontend-000275": {
-    "message": "Définir une date d’expiration"
-  },
-  "frontend-000276": {
-    "message": "Expire le $DATETIME$",
-    "placeholders": {
-      "datetime": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000277": {
-    "message": "Choisissez une date d’expiration"
-  },
-  "frontend-000278": {
-    "message": "La date doit être ultérieure à aujourd’hui"
-  },
-  "frontend-000279": {
-    "message": "Date non valide"
-  },
-  "frontend-000280": {
-    "message": "L’utilisateur $UID$ n’existe pas",
-    "placeholders": {
-      "uid": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000281": {
-    "message": "Impossible de partager le mot de passe : $MESSAGE$",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000282": {
-    "message": "Changer le droit d’écriture"
-  },
-  "frontend-000283": {
-    "message": "Changer le droit de partage"
-  },
-  "frontend-000284": {
-    "message": "Arrêter le partage"
-  },
-  "frontend-000285": {
-    "message": "Date"
-  },
-  "frontend-000286": {
-    "message": "Cache par défaut (0 fichiers, 0 B)"
-  },
-  "frontend-000287": {
-    "message": "Avatars (0 fichiers, 0 B)"
-  },
-  "frontend-000288": {
-    "message": "Favicon (0 fichiers, 0 B)"
-  },
-  "frontend-000289": {
-    "message": "Aperçus (0 fichiers, 0 B)"
-  },
-  "frontend-000290": {
-    "message": "Mots de passe (0 fichiers, 0 B)"
-  },
-  "backups-000046": {
-    "message": "Dossier"
-  },
-  "backups-000047": {
-    "message": "Étiquette"
-  },
-  "backups-000049": {
-    "message": "Id du dossier"
-  },
-  "backups-000050": {
-    "message": "Ids des étiquettes"
-  },
-  "backups-000058": {
-    "message": "Export"
-  },
-  "frontend-000667": {
-    "message": "CSV des étiquettes"
-  },
-  "backups-000083": {
-    "message": "Séparateur de champ"
-  },
-  "frontend-000291": {
-    "message": "Changé"
-  },
-  "frontend-000292": {
-    "message": "Modifié"
-  },
-  "frontend-000293": {
-    "message": "Édité"
-  },
-  "frontend-000294": {
-    "message": "Crée"
-  },
-  "frontend-000295": {
-    "message": "Révision"
-  },
-  "frontend-000296": {
-    "message": "Lien"
-  },
-  "frontend-000297": {
-    "message": "Parent"
-  },
-  "frontend-000298": {
-    "message": "Effacer tous les éléments"
-  },
-  "frontend-000299": {
-    "message": "Restaurer tous les éléments"
-  },
-  "frontend-000300": {
-    "message": "Restaure les éléments"
-  },
-  "frontend-000301": {
-    "message": "Restaurer les éléments contenus dans la corbeille"
-  },
-  "frontend-000302": {
-    "message": "Restaurer cet élément"
-  },
-  "frontend-000303": {
-    "message": "Élément restauré"
-  },
-  "frontend-000304": {
-    "message": "Vider la corbeille"
-  },
-  "frontend-000305": {
-    "message": "Effacer définitivement tout les éléments de la corbeille ?"
-  },
-  "frontend-000306": {
-    "message": "Corbeille vidée"
-  },
-  "frontend-000307": {
-    "message": "Recherche"
-  },
-  "frontend-000308": {
-    "message": "Utilise la boite de recherche afin de procéder à la recherche"
-  },
-  "frontend-000309": {
-    "message": "Tenter une cherche globale pour \"$QUERY$\"",
-    "placeholders": {
-      "query": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000266": {
-    "message": "Options"
-  },
-  "frontend-000528": {
-    "message": "Politique de mots de passe"
-  },
-  "frontend-000529": {
-    "message": "Signaler les dupliqués"
-  },
-  "frontend-000530": {
-    "message": "Age maximum en jours"
-  },
-  "frontend-000531": {
-    "message": "Générateur de mots de passe"
-  },
-  "frontend-000532": {
-    "message": "Complexité"
-  },
-  "frontend-000533": {
-    "message": "Inclure des chiffres"
-  },
-  "frontend-000534": {
-    "message": "Inclure des caractères spéciaux"
-  },
-  "frontend-000535": {
-    "message": "Interface utilisateur"
-  },
-  "frontend-000536": {
-    "message": "Section par défaut"
-  },
-  "frontend-000537": {
-    "message": "Tous les mots de passe"
-  },
-  "frontend-000538": {
-    "message": "Liste des mots de passe"
-  },
-  "frontend-000539": {
-    "message": "Définir le titre par"
-  },
-  "frontend-000540": {
-    "message": "Trier par"
-  },
-  "frontend-000541": {
-    "message": "Champs titre"
-  },
-  "frontend-000542": {
-    "message": "Action au clique"
-  },
-  "frontend-000543": {
-    "message": "Action au double clique"
-  },
-  "frontend-000544": {
-    "message": "Copier le mot de passe"
-  },
-  "frontend-000545": {
-    "message": "Copier le nom d’utilisateur"
-  },
-  "frontend-000546": {
-    "message": "Copier le lien"
-  },
-  "frontend-000547": {
-    "message": "Montrer les détails"
-  },
-  "frontend-000548": {
-    "message": "Ajout des choix de copie dans le menu"
-  },
-  "frontend-000549": {
-    "message": "Ajout de l’utilisateur dans la liste"
-  },
-  "frontend-000550": {
-    "message": "Ajout des étiquettes dans la liste"
-  },
-  "frontend-000551": {
-    "message": "Montrer les champs personnalisés cachés"
-  },
-  "frontend-000552": {
-    "message": "Recherche pendant la frappe"
-  },
-  "frontend-000553": {
-    "message": "Recherche globale avec \"Entrée\""
-  },
-  "frontend-000554": {
-    "message": "Toujours montrer la recherche"
-  },
-  "frontend-000555": {
-    "message": "Notifications"
-  },
-  "frontend-000556": {
-    "message": "Envoyer un courriel pour"
-  },
-  "frontend-000557": {
-    "message": "En cas de problème de sécurité"
-  },
-  "frontend-000558": {
-    "message": "En cas d’un partage avec moi"
-  },
-  "frontend-000559": {
-    "message": "Montrer notification pour"
-  },
-  "frontend-000560": {
-    "message": "Erreurs diverses"
-  },
-  "frontend-000561": {
-    "message": "Zone à risque"
-  },
-  "frontend-000562": {
-    "message": "Réinitialiser tous les paramètres"
-  },
-  "frontend-000563": {
-    "message": "Réinitialiser"
-  },
-  "frontend-000564": {
-    "message": "Tout effacer"
-  },
-  "frontend-000565": {
-    "message": "TOUT EFFACER"
-  },
-  "frontend-000566": {
-    "message": "Réinitialisation du compte requis"
-  },
-  "frontend-000567": {
-    "message": "Vue"
-  },
-  "frontend-000669": {
-    "message": "Standard"
-  },
-  "frontend-000568": {
-    "message": "Avancée"
-  },
-  "frontend-000310": {
-    "message": "Il n’y a rien ici"
-  },
-  "frontend-000311": {
-    "message": "Cliquez sur le symbole \"+\" pour ajouter un nouvel élément"
-  },
-  "frontend-000312": {
-    "message": "Les éléments supprimés apparaîtront ici"
-  },
-  "frontend-000313": {
-    "message": "Aucun mot de passe n’est partagé avec vous"
-  },
-  "frontend-000314": {
-    "message": "Vous n’avez partagé aucun mot de passe pour le moment"
-  },
-  "frontend-000315": {
-    "message": "Vos favoris apparaîtront ici"
-  },
-  "frontend-000316": {
-    "message": "Vous devriez verifier les autres sections"
-  },
-  "frontend-000317": {
-    "message": "C’est probablement un bon signe"
-  },
-  "frontend-000318": {
-    "message": "Aller à $HREF$",
-    "placeholders": {
-      "href": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000320": {
-    "message": "Images $COUNT$: $TITLE$",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      },
-      "title": {
-        "content": "$2"
-      }
-    }
-  },
-  "frontend-000321": {
-    "message": "Impossible d’atteindre la page : $MESSAGE$.",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000324": {
-    "message": "Non trouvé"
-  },
-  "frontend-000328": {
-    "message": "Faites nous en part !"
-  },
-  "frontend-000325": {
-    "message": "Toujours besoin d’aide ?"
-  },
-  "frontend-000326": {
-    "message": "Demandez sur le forum !"
-  },
-  "frontend-000327": {
-    "message": "Vous avez trouvé une erreur ?"
-  },
-  "frontend-000331": {
-    "message": "Erreur réseau"
-  },
-  "frontend-000332": {
-    "message": "Le module $MODULE$ n’a pas pu être chargé",
-    "placeholders": {
-      "module": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000333": {
-    "message": "Trier par nom"
-  },
-  "frontend-000334": {
-    "message": "Trier par date de modification"
-  },
-  "frontend-000335": {
-    "message": "$PASSWORDS$ mots de passe",
-    "placeholders": {
-      "passwords": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000336": {
-    "message": "1 mot de passe"
-  },
-  "frontend-000337": {
-    "message": "$FOLDERS$ dossiers",
-    "placeholders": {
-      "folders": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000338": {
-    "message": "1 dossier"
-  },
-  "frontend-000339": {
-    "message": "$TAGS$ étiquettes",
-    "placeholders": {
-      "tags": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000340": {
-    "message": "1 étiquette"
-  },
-  "frontend-000341": {
-    "message": "Rien"
-  },
-  "frontend-000342": {
-    "message": " et "
-  },
-  "frontend-000343": {
-    "message": "correspond à"
-  },
-  "frontend-000344": {
-    "message": "correspondent à"
-  },
-  "frontend-000363": {
-    "message": "vrai"
-  },
-  "frontend-000364": {
-    "message": "faux"
-  },
-  "frontend-000365": {
-    "message": "oui"
-  },
-  "frontend-000366": {
-    "message": "non"
-  },
-  "frontend-000569": {
-    "message": "Marque les mots de passe comme \"Faible\" lorsqu’ils sont utilisés plusieurs fois pour différents comptes"
-  },
-  "frontend-000570": {
-    "message": "Marque les mots de passe comme \"Faible\" quand ils dépassent une durée limite spécifiée en jours"
-  },
-  "frontend-000571": {
-    "message": "Une complexité plus élevée produira des mots de passe plus longs et plus sécurisés"
-  },
-  "frontend-000572": {
-    "message": "Affiche l’attribut sélectionné comme titre dans la liste"
-  },
-  "frontend-000573": {
-    "message": "Trie les mots de passe en fonction de l’attribut spécifié au lieu du nom"
-  },
-  "frontend-000574": {
-    "message": "Action exécutée en cliquant sur un mot de passe dans la liste"
-  },
-  "frontend-000575": {
-    "message": "Action exécutée lorsque vous double-cliquez sur un mot de passe dans la liste"
-  },
-  "frontend-000576": {
-    "message": "Affiche les options pour copier le mot de passe et le nom d’utilisateur dans le menu."
-  },
-  "frontend-000577": {
-    "message": "La section qui sera affichée à l’ouverture de l’application"
-  },
-  "frontend-000578": {
-    "message": "Toujours afficher le nom d’utilisateur lié au mot de passe dans la liste"
-  },
-  "frontend-000579": {
-    "message": "Affiche les balises pour chaque mot de passe dans la vue liste. Augmente le temps de chargement"
-  },
-  "frontend-000580": {
-    "message": "Affiche les champs personnalisés cachés dans le formulaire de modification et dans les détails du mot de passe"
-  },
-  "frontend-000670": {
-    "message": "Commence la recherche dès qu’une touche est enfoncée"
-  },
-  "frontend-000671": {
-    "message": "Effectuez une recherche n’importe où lorsque vous appuyez sur la touche Entrée dans la zone de recherche"
-  },
-  "frontend-000583": {
-    "message": "Toujours afficher la section de recherche globale dans la navigation"
-  },
-  "frontend-000581": {
-    "message": "Vous envoie un courriel si un mot de passe est compromis ou que des problèmes de sécurité se produisent"
-  },
-  "frontend-000582": {
-    "message": "Vous envoie un courriel quand des mots de passe vous sont partagés"
-  },
-  "frontend-000584": {
-    "message": "Envoie une notification si un mot de passe est compromis ou que des problèmes de sécurité se produisent"
-  },
-  "frontend-000585": {
-    "message": "Envoie une notification quand des mots de passe vous sont partagés"
-  },
-  "frontend-000586": {
-    "message": "Envoie une notification quand une tache en arrière plan échoue"
-  },
-  "frontend-000587": {
-    "message": "Réinitialise tous les paramètres de cette page à leur valeur de défaut"
-  },
-  "frontend-000588": {
-    "message": "Cela réinitialisera tous les paramètres à leurs valeurs par défaut. Voulez-vous continuer ?"
-  },
-  "frontend-000589": {
-    "message": "Restaurer les paramètres d’usine et supprimer tous les mots de passe, dossiers et étiquettes"
-  },
-  "frontend-000368": {
-    "message": "Vous avez atteint la longueur maximale de 4096 caractères"
-  },
-  "frontend-000369": {
-    "message": "Rien n’à été trouvé pour la recherche \"$QUERY$\"",
-    "placeholders": {
-      "query": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000370": {
-    "message": "La page \"$PAGE$\" n’a pas pu être extraite du  serveur hébergeant le manuel.",
-    "placeholders": {
-      "page": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000371": {
-    "message": "Certaines données attendent d’être synchronisées"
-  },
-  "frontend-000590": {
-    "message": "Êtes-vous sûr de vouloir supprimer tous vos paramètres, mots de passe, dossiers et étiquettes et recommencer depuis le début ? \nCette action n’est PAS réversible."
-  },
-  "backend-000377": {
-    "message": "HTTPS Requis"
-  },
-  "backend-000378": {
-    "message": "recharger cette page"
-  },
-  "backend-000380": {
-    "message": "documentation"
-  },
-  "backend-000382": {
-    "message": "Cette application dépend de $STR_1$ afin de fonctionner correctement",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000381": {
-    "message": "Vous pouvez essayer de $STR_1$ avec HTTPS d’activé.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000388": {
-    "message": "Si ce problème persiste, vous devriez contacter votre administrateur."
-  },
-  "backend-000389": {
-    "message": "Mots de passe Session $STR_1$ - $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000390": {
-    "message": "Ouvrir la Documentation"
-  },
-  "backend-000391": {
-    "message": "Jamais"
-  },
-  "backend-000392": {
-    "message": "Traitement des données interne"
-  },
-  "backend-000393": {
-    "message": "Génération des images"
-  },
-  "backend-000394": {
-    "message": "Imagick/GMagick (recommandé)"
-  },
-  "backend-000395": {
-    "message": "Services Externes"
-  },
-  "backend-000396": {
-    "message": "Contrôle de la qualité du mot de passe"
-  },
-  "backend-000397": {
-    "message": "Have I been pwned? (recommandé)"
-  },
-  "backend-000398": {
-    "message": "25 Million de mots de passe (Local)"
-  },
-  "backend-000399": {
-    "message": "5 Million de mots de passe (Local)"
-  },
-  "backend-000400": {
-    "message": "25M de mots de passe & HIbp ?"
-  },
-  "backend-000401": {
-    "message": "Générateur de mot de passe"
-  },
-  "backend-000402": {
-    "message": "Dictionnaire local"
-  },
-  "backend-000403": {
-    "message": "Caractères Aléatoires"
-  },
-  "backend-000404": {
-    "message": "watchout4snakes.com"
-  },
-  "backend-000405": {
-    "message": "Leipzig Corpora Collection (recommandé)"
-  },
-  "backend-000406": {
-    "message": "Service de Favicon"
-  },
-  "backend-000407": {
-    "message": "Analyseur local"
-  },
-  "backend-000408": {
-    "message": "Besticon (recommandé)"
-  },
-  "backend-000409": {
-    "message": "Aucun"
-  },
-  "backend-000410": {
-    "message": "Service d’aperçus des sites internet"
-  },
-  "backend-000411": {
-    "message": "Clé d’API service d’aperçus"
-  },
-  "backend-000412": {
-    "message": "Pageres/PhantomJS (local)"
-  },
-  "backend-000413": {
-    "message": "WKHTML (local)"
-  },
-  "backend-000414": {
-    "message": "screenshotapi.io"
-  },
-  "backend-000415": {
-    "message": "Options par défaut des courriels"
-  },
-  "backend-000416": {
-    "message": "Envoyer un courriel à chaque événement de sécurité"
-  },
-  "backend-000417": {
-    "message": "Envoyer un courriel à chaque événement de partage"
-  },
-  "backend-000418": {
-    "message": "Autres Options"
-  },
-  "backend-000419": {
-    "message": "Effacer définitivement les éléments de la base de données"
-  },
-  "backend-000420": {
-    "message": "Afficher Nightly Updates dans \"Apps\""
-  },
-  "backend-000421": {
-    "message": "Jamais"
-  },
-  "backend-000422": {
-    "message": "Immédiatement"
-  },
-  "backend-000423": {
-    "message": "Après deux heures"
-  },
-  "backend-000424": {
-    "message": "Après une journée"
-  },
-  "backend-000425": {
-    "message": "Après deux semaines"
-  },
-  "backend-000426": {
-    "message": "Après un mois"
-  },
-  "backend-000427": {
-    "message": "Après un an"
-  },
-  "backend-000428": {
-    "message": "Réglages de sauvegarde"
-  },
-  "backend-000429": {
-    "message": "Intervalle de sauvegarde"
-  },
-  "backend-000430": {
-    "message": "Toutes les heures"
-  },
-  "backend-000431": {
-    "message": "Toutes les six heures"
-  },
-  "backend-000432": {
-    "message": "Tous les jours"
-  },
-  "backend-000433": {
-    "message": "Tous les deux jours"
-  },
-  "backend-000434": {
-    "message": "Toutes les semaines"
-  },
-  "backend-000435": {
-    "message": "Toutes les deux semaines"
-  },
-  "backend-000436": {
-    "message": "Nombre de sauvegardes à garder"
-  },
-  "backend-000437": {
-    "message": "Caches"
-  },
-  "backend-000438": {
-    "message": "Cache par défaut ($STR_1$ fichiers, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000439": {
-    "message": "Avatars ($STR_1$ fichiers, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000440": {
-    "message": "Favicon ($STR_1$ fichiers, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000441": {
-    "message": "Aperçus ($STR_1$ fichiers, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000442": {
-    "message": "Mots de passe ($STR_1$ fichiers, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000443": {
-    "message": "Purger"
-  },
-  "backend-000444": {
-    "message": "Purger ce cache"
-  },
-  "backend-000445": {
-    "message": "Vous ne pouvez pas vider ce cache tant que le service utilise une instance d’API partagée."
-  },
-  "backend-000446": {
-    "message": "Sauvé"
-  },
-  "backend-000447": {
-    "message": "Purgé"
-  },
-  "backend-000448": {
-    "message": "Échec"
-  },
-  "backend-000449": {
-    "message": "Besoin d’aide"
-  },
-  "backend-000450": {
-    "message": "Bogue trouvé"
-  },
-  "backend-000451": {
-    "message": "vous cherchez la documentation (anglais uniquement)"
-  },
-  "backend-000452": {
-    "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Toute l’aide est par ici.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      },
-      "str_3": {
-        "content": "$3"
-      }
-    }
-  },
-  "backend-000453": {
-    "message": "$STRING_1$ $STRING_2$ n’est plus supporté.",
-    "placeholders": {
-      "string_1": {
-        "content": "$1"
-      },
-      "string_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000454": {
-    "message": "L’application nécessite HTTPS."
-  },
-  "backend-000455": {
-    "message": "L'utilisation de $STR_1$ pour exécuter des jobs d'arrière-plan peut entraîner de longs temps d'attente. Nous vous recommandons d'utiliser Cron.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000456": {
-    "message": "Veuillez vérifier les exigences systèmes."
-  },
-  "backend-000457": {
-    "message": "Mot de passe non partagé"
-  },
-  "backend-000458": {
-    "message": "Un mot de passe n’a pu être partagé avec $STRING_1$, car il l’est déjà",
-    "placeholders": {
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000459": {
-    "message": "Vous avez un mot de passe non sûr"
-  },
-  "backend-000460": {
-    "message": "Vous avez plusieurs mot de passe non sûrs"
-  },
-  "backend-000461": {
-    "message": "Un de vos mots de passe n’est plus sûr d’utilisation."
-  },
-  "backend-000462": {
-    "message": "Plusieurs de vos mots de passe ne sont plus sûr d’utilisation."
-  },
-  "backend-000463": {
-    "message": "L’application vérifiera régulièrement si vos mots de passe on été compromis suite à une fuite de données sur un site."
-  },
-  "backend-000464": {
-    "message": "Le test de sécurité a déterminé que l’un de vos mots de passe n’est pas sécurisé."
-  },
-  "backend-000465": {
-    "message": "Le test de sécurité a déterminé que $STR_1$ de vos mots de passe ne sont pas sécurisés.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000466": {
-    "message": "Cela signifie que votre mot de passe a fuité sur internet et met en danger tous les comptes qui l’utilise."
-  },
-  "backend-000467": {
-    "message": "Cela signifie que vos mots de passe ont fuité sur internet et mettent en danger tous les comptes qui les utilises."
-  },
-  "backend-000468": {
-    "message": "Le mot de passe est donc marqué comme 'Faible' et devrait être changé."
-  },
-  "backend-000469": {
-    "message": "Les mots de passe sont donc marqués comme 'Faible' et devraient être changés."
-  },
-  "backend-000470": {
-    "message": "Vous pouvez créer un nouveau mot de passe sécurisé dans l’application."
-  },
-  "backend-000471": {
-    "message": "Vous pouvez créer des nouveaux mots de passe sécurisés dans l’application"
-  },
-  "backend-000472": {
-    "message": "Changer le mot de passe maintenant"
-  },
-  "backend-000473": {
-    "message": "Changer les mots de passe maintenant"
-  },
-  "backend-000474": {
-    "message": "Ouvrez l’application pour changer le mot de passe."
-  },
-  "backend-000475": {
-    "message": "Ouvrez l’application pour changer les mots de passe."
-  },
-  "backend-000476": {
-    "message": "$STR_1$ à partagé un mot de passe avec vous.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000477": {
-    "message": "$STR_1$ à partagé $STR_1$ mots de passe avec vous ",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000478": {
-    "message": "$STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
-    "placeholders": {
-      "string_4": {
-        "content": "$4"
-      },
-      "string_3": {
-        "content": "$3"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000479": {
-    "message": "$STRING_5$, $STRING_4$ et $STRING_3$ ont partagés $STRING_1$ mots de passe avec vous.",
-    "placeholders": {
-      "string_5": {
-        "content": "$5"
-      },
-      "string_4": {
-        "content": "$4"
-      },
-      "string_3": {
-        "content": "$3"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000480": {
-    "message": "$STRING_5$, $STRING_4$ et $STRING_2$ autres ont partagés $STRING_1$ mots de passe avec vous.",
-    "placeholders": {
-      "string_5": {
-        "content": "$5"
-      },
-      "string_4": {
-        "content": "$4"
-      },
-      "string_2": {
-        "content": "$2"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000481": {
-    "message": "Ouvrez l’application pour voir le mot de passe."
-  },
-  "backend-000482": {
-    "message": "Ouvrez l’application pour voir les mots de passe."
-  },
-  "backend-000483": {
-    "message": "Un mot de passe à été partagé avec vous sur $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000484": {
-    "message": "Plusieurs mots de passe ont été partagé avec vous sur $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000485": {
-    "message": "Voir les mots de passe partagés avec moi"
-  },
-  "backend-000486": {
-    "message": "Un ou plusieurs mots de passes ne peuvent être partagé, car le destinataire y  déjà accès."
-  },
-  "backend-000487": {
-    "message": "$STR_1$ mots de passes ne peuvent être partagé, car le destinataire y a déjà accès.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000489": {
-    "message": "Partager un mot de passe qui a déjà été partagé avec vous peut créer un boucle."
-  },
-  "backend-000490": {
-    "message": "Pour éviter cela, ces mots de passe ne devraient pas être partagé"
-  },
-  "backend-000496": {
-    "message": "Utilisateur effacé ($STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  }
 }
