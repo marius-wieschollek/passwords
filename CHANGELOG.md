@@ -1,6 +1,10 @@
 ## [Unreleased]
+## 2022.9.0 - Feature release
 ### Added
-- Mousewheel click action for passwords
+- Mousewheel click action for password list items
+- Customizable button for password list items
+### Fixed
+- Some missing translations
 
 ## 2022.8.0 - Feature release
 ### Changed
