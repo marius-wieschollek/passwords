@@ -1659,5 +1659,35 @@
     },
     "backend-000644": {
         "message": "Voir les mots de passe partagés"
+    },
+    "frontend-000257": {
+        "message": "Chiffrement appliqué sur le serveur"
+    },
+    "frontend-000258": {
+        "message": "Chiffrement appliqué sur le client"
+    },
+    "frontend-000627": {
+        "message": "Veillez à ce que ce QR code ne soit visible que par les personnes en qui vous avez confiance."
+    },
+    "frontend-000609": {
+        "message": "Nouveau champ"
+    },
+    "frontend-000620": {
+        "message": "Racine"
+    },
+    "frontend-000599": {
+        "message": "Cliquez pour afficher le QR code."
+    },
+    "frontend-000600": {
+        "message": "Ne plus m'avertir"
+    },
+    "frontend-000260": {
+        "message": "Chiffrement simple (Gen. 1)"
+    },
+    "frontend-000261": {
+        "message": "Chiffrement simple (Gen. 2)"
+    },
+    "frontend-000259": {
+        "message": "Aucun chiffrement"
     }
 }
