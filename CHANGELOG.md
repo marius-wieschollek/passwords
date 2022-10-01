@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2022.10.0 - Feature release
+### Fixed
+- Disabled users no longer suggested for sharing
+### Changed
+- Updated translations
+
 ## 2022.9.0 - Feature release
 ### Added
 - Mousewheel click action for password list items
