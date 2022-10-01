@@ -129,7 +129,7 @@ class ShareUserListHelper {
         $usersTmp = $this->userManager->search($pattern, $limit);
 
         foreach($usersTmp as $user) {
-            if($user->getUID() === $this->userId) continue;
+            if(!$user->isEnabled() || $user->getUID() === $this->userId) continue;
             $partners[ $user->getUID() ] = $user->getDisplayName();
         }
 
