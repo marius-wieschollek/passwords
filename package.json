@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2022.9.0",
+    "version": "2022.10.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -61,8 +61,8 @@
         "jquery": "^3.6.0",
         "jszip": "^3.10.0",
         "libsodium-wrappers": "^0.7.10",
-        "marked": "^4.0.16",
-        "mermaid": "^9.1.1",
+        "marked": "^4.1.1",
+        "mermaid": "^9.1.7",
         "mini-css-extract-plugin": "^2.4.3",
         "passwords-client": "0.0.14",
         "sass": "^1.43.3",
