@@ -1,9 +1,10 @@
 ## [Unreleased]
+
 ## 2022.10.0 - Feature release
-### Fixed
-- Disabled users no longer suggested for sharing
 ### Changed
 - Updated translations
+### Fixed
+- Disabled users no longer suggested for sharing
 
 ## 2022.9.0 - Feature release
 ### Added
