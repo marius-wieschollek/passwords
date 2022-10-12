@@ -1342,6 +1342,15 @@
     "frontend-000376"                      : {
         "message": "Today in 2018, the first version of passwords was published. Thank you for using the app."
     },
+    "frontend-Tags"                        : {
+        "message": "Tags"
+    },
+    "frontend-Folder"                      : {
+        "message": "Folder"
+    },
+    "frontend-Id"                          : {
+        "message": "Id"
+    },
     "backend-000377"                       : {
         "message": "HTTPS Required"
     },
@@ -2670,7 +2679,7 @@
         "message"    : "Adds an extra button for the specified action in the desktop view",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
-    "settings-SettingsShowShareTab"    : {
+    "settings-SettingsShowShareTab"        : {
         "message"    : "Show Share Tab",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
