@@ -2007,5 +2007,14 @@
     },
     "frontend-000551": {
         "message": "Mostrar campos personalizados ocultos"
+    },
+    "frontend-Tags": {
+        "message": "Etiquetas"
+    },
+    "backups-FolderLabel": {
+        "message": "Pasta"
+    },
+    "backups-TagLabels": {
+        "message": "Etiquetas"
     }
 }
