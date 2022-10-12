@@ -2858,5 +2858,11 @@
     },
     "settings-000723": {
         "message": "Otevřít stránku v příručce, pojednávající o nastaveních"
+    },
+    "frontend-Folder": {
+        "message": "Složka"
+    },
+    "frontend-Tags": {
+        "message": "Štítky"
     }
 }
