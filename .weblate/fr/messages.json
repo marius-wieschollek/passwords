@@ -1689,5 +1689,14 @@
     },
     "frontend-000259": {
         "message": "Aucun chiffrement"
+    },
+    "frontend-Tags": {
+        "message": "Étiquette"
+    },
+    "backups-FolderLabel": {
+        "message": "Dossier"
+    },
+    "backups-TagLabels": {
+        "message": "Étiquette"
     }
 }
