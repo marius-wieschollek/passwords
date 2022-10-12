@@ -2847,5 +2847,26 @@
     },
     "settings-SettingsMouseWheelAction": {
         "message": "Aktion bei Mausradklick"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Fügt in der Desktop-Ansicht eine Schaltfläche für die ausgewählte Aktion hinzu",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Zeige Schnellzugriff für",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "frontend-Tags": {
+        "message": "Tags"
+    },
+    "frontend-Folder": {
+        "message": "Ordner"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Zeige \"Teilen\" Reiter",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
     }
 }
