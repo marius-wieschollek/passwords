@@ -2083,7 +2083,7 @@
         "message": "Anleitung öffnen"
     },
     "backend-000511": {
-        "message": "Die Konfiguration deines Favicon-Service ist unvollständig."
+        "message": "Die Konfiguration deines Favicon Dienstes ist unvollständig."
     },
     "backend-000512": {
         "message": "Die Konfiguration deines Webseitenansichtengenerators ist unvollständig."
@@ -2575,7 +2575,7 @@
         "message": "Benachrichtigt dich, wenn Hintergrundaufgaben fehlschlagen"
     },
     "settings-000714": {
-        "message": "Benachrichtigt dich über Konfigurationsfehler und andere administrative Probleme."
+        "message": "Benachrichtigt dich über Konfigurationsfehler und andere administrative Probleme"
     },
     "frontend-000587": {
         "message": "Alle Einstellungen auf dieser Seite zurücksetzen"
@@ -2622,7 +2622,7 @@
         "message": "Sende Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern"
     },
     "settings-000725": {
-        "message": "Wähle den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden."
+        "message": "Wähle den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden"
     },
     "frontend-000590": {
         "message": "Möchtest du wirklich alle deine Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."
