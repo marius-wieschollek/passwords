@@ -2864,5 +2864,8 @@
     },
     "frontend-Tags": {
         "message": "Štítky"
+    },
+    "frontend-Id": {
+        "message": "Identif."
     }
 }
