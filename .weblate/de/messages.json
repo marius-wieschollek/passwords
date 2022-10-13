@@ -1597,10 +1597,10 @@
         "message": "Leipzig Corpora Collection (empfohlen)"
     },
     "backend-000406": {
-        "message": "Favicon Service"
+        "message": "Favicon Dienst"
     },
     "backend-000632": {
-        "message": "Favicon Service Api"
+        "message": "Favicon Dienst Api"
     },
     "backend-000633": {
         "message": "(optional)"
@@ -2847,5 +2847,26 @@
     },
     "settings-SettingsMouseWheelActionHelp": {
         "message": "Aktion die ausgeführt wird, wenn mit dem Mausrad geklickt wird"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Zeige Schnellzugriff für",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Fügt in der Desktop-Ansicht eine Schaltfläche für die ausgewählte Aktion hinzu",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Zeige \"Teilen\"-Tab",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "frontend-Tags": {
+        "message": "Tags"
+    },
+    "frontend-Folder": {
+        "message": "Ordner"
+    },
+    "frontend-Id": {
+        "message": "Id"
     }
 }
