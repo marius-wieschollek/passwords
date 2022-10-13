@@ -27,8 +27,8 @@ Keep your password database manageable and accessible with folders and tags.
 The integrated password generator follows the new [NIST Digital Identity Guidelines](https://pages.nist.gov/800-63-3/).
 It generates long passwords which are easy to remember, yet long and secure.
 Say goodbye to pseudo random letters and numbers, random password requirements and contra productive expiration guidelines without reason.
-Why? Because it is easier for you to remember that your twitter account unlocks with a "FuriousToothbrush" than "fAu*j,4?rQ:25(#c".
-Of course we know that most websites still require numbers and special characters, so we will help you with that as well.
+Why? Because it is easier for you to remember that your Twitter account unlocks with a "FuriousToothbrush" than "fAu*j,4?rQ:25(#c".
+Of course, we know that most websites still require numbers and special characters, so we will help you with that as well.
 
 #### Integrated security check
 Passwords like "P@55w0rd" may fool most generic security checks, but they are so common that most hackers have them in their lists.
@@ -42,7 +42,7 @@ Rather than implementing own and possibly error-prone encryption algorithms Pass
 The web interface is mobile friendly and can be used with any modern web browser.
 
 #### Wide language support
-Passwords is available in english, german, french, spanish, italian, dutch, swedish, czech, russian and chinese640.
+Passwords is available in many languages including english, german, french, spanish, italian, portuguese, dutch, swedish, czech, russian and chinese.
 
 ## Security
 #### Server Side Encryption
