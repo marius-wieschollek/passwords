@@ -621,7 +621,7 @@
         "message": "Was haben Sie erwartet?"
     },
     "frontend-000599": {
-        "message": "Klicken, um den QR Code anzuzeigen"
+        "message": "Klicken, um den QR Code anzuzeigen."
     },
     "frontend-000600": {
         "message": "Diese Warnung abschalten"
@@ -1448,7 +1448,7 @@
         "message": "Stelln Sie sicher, dass dieser QR Code nur für Berechtigte sichtbar ist."
     },
     "frontend-000374": {
-        "message": "Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen"
+        "message": "Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen."
     },
     "frontend-000375": {
         "message": "Dast Sitzungs-token ist nicht mehr valide. Die App wird nun neu geladen."
@@ -1535,7 +1535,7 @@
         "message": "Wenn der Fehler weiterhin besteht sollten Sie den Administrator kontaktieren."
     },
     "backend-000389": {
-        "message": "Passwörter App Sitzung $STR_1$ - $STR_1$",
+        "message": "Passwörter App Sitzung $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1594,10 +1594,10 @@
         "message": "Leipzig Corpora Collection (empfohlen)"
     },
     "backend-000406": {
-        "message": "Favicon Service"
+        "message": "Favicon Dienst"
     },
     "backend-000632": {
-        "message": "Favicon Service Api"
+        "message": "Favicon Dienst Api"
     },
     "backend-000633": {
         "message": "(optional)"
@@ -2080,7 +2080,7 @@
         "message": "Anleitung öffnen"
     },
     "backend-000511": {
-        "message": "Die Konfiguration Ihres Favicon-Service ist unvollständig."
+        "message": "Die Konfiguration Ihres Favicon-Dienstes ist unvollständig."
     },
     "backend-000512": {
         "message": "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig."
@@ -2095,7 +2095,7 @@
         "message": "Öffnen Sie die Einstellungen um die Konfiguration abzuschließen oder einen anderen Service zu verwenden."
     },
     "backend-000636": {
-        "message": "Verdächtige Häufung fehlgeschlagener Anmeldeversuche entdeckt"
+        "message": "Verdächtige Häufung fehlgeschlagener Anmeldeversuche entdeckt."
     },
     "backend-000516": {
         "message": "Wir haben mehrere fehlgeschlagene Versuche von \"$STR_1$\" bemerkt, Ihre Passwortdatenbank zu öffnen.",
@@ -2572,7 +2572,7 @@
         "message": "Benachrichtigt Sie, wenn Hintergrundaufgaben fehlschlagen"
     },
     "settings-000714": {
-        "message": "Benachrichtigt Sie über Konfigurationsfehler und andere administrative Probleme."
+        "message": "Benachrichtigt Sie über Konfigurationsfehler und andere administrative Probleme"
     },
     "frontend-000587": {
         "message": "Alle Einstellungen auf dieser Seite zurücksetzen"
@@ -2619,7 +2619,7 @@
         "message": "Sendet Keepalive-Anfragen an den Server um das beenden der Sitzung zu verhindern"
     },
     "settings-000725": {
-        "message": "Wählen Sie den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden."
+        "message": "Wählen Sie den Verschlüsselungsmodus mit dem das Endgerät Daten verschlüsselt bevor sie zum Server geschickt werden"
     },
     "frontend-000590": {
         "message": "Möchten Sie wirklich alle Einstellungen, Passwörter, Ordner und Tags löschen und von vorne beginnen?\nDies lässt sich NICHT rückgängig machen."
