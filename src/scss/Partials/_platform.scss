@@ -1,0 +1,26 @@
+body[data-server-version="25"] {
+
+    #header .header-right form.searchbox {
+        display: flex;
+    }
+
+    #content.app-passwords #app {
+        display: flex;
+
+        #app-navigation ul#app-settings {
+            max-height: 60px;
+            background-color: transparent;
+        }
+
+        #app-content {
+            .app-content-left {
+                overflow-y: auto;
+                max-height: 100%;
+
+                #controls {
+                    top: 0;
+                }
+            }
+        }
+    }
+}
