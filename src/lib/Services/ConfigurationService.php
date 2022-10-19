@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -10,9 +14,11 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OC;
 use OC\AppConfig;
-use OC\Cache\CappedMemoryCache;
+use OC\Cache\CappedMemoryCache as LegacyCappedMemoryCache;
 use OC\SystemConfig;
 use OCA\Passwords\AppInfo\Application;
+use OCP\Cache\CappedMemoryCache;
+use OCP\HintException;
 use OCP\IConfig;
 use ReflectionClass;
 use ReflectionException;
@@ -35,8 +41,6 @@ class ConfigurationService {
     protected ?string $userId;
 
     /**
-     * FaviconService constructor.
-     *
      * @param IConfig            $config
      * @param EnvironmentService $environment
      */
@@ -51,10 +55,10 @@ class ConfigurationService {
      * @param null|string $user
      * @param string      $app
      *
-     * @return string
+     * @return string|null
      * @throws Exception
      */
-    public function getUserValue(string $key, $default = null, ?string $user = null, $app = Application::APP_NAME) {
+    public function getUserValue(string $key, $default = null, ?string $user = null, string $app = Application::APP_NAME): ?string {
         $userId = $this->getUserId($user);
 
         return $this->config->getUserValue($userId, $app, $key, $default);
@@ -65,9 +69,9 @@ class ConfigurationService {
      * @param null   $default
      * @param string $app
      *
-     * @return string
+     * @return string|null
      */
-    public function getAppValue(string $key, $default = null, $app = Application::APP_NAME) {
+    public function getAppValue(string $key, $default = null, string $app = Application::APP_NAME): ?string {
         return $this->config->getAppValue($app, $key, $default);
     }
 
@@ -77,7 +81,7 @@ class ConfigurationService {
      *
      * @return mixed
      */
-    public function getSystemValue(string $key, $default = null) {
+    public function getSystemValue(string $key, $default = null): mixed {
         return $this->config->getSystemValue($key, $default);
     }
 
@@ -89,14 +93,14 @@ class ConfigurationService {
      *
      * @throws Exception
      */
-    public function setUserValue(string $key, string $value, ?string $user = null, $app = Application::APP_NAME): void {
+    public function setUserValue(string $key, string $value, ?string $user = null, string $app = Application::APP_NAME): void {
         $userId = $this->getUserId($user);
         $this->config->setUserValue($userId, $app, $key, $value);
     }
 
     /**
      * @param string $key
-     * @param        $value
+     * @param string $value
      */
     public function setAppValue(string $key, string $value): void {
         $this->config->setAppValue(Application::APP_NAME, $key, $value);
@@ -105,6 +109,8 @@ class ConfigurationService {
     /**
      * @param string $key
      * @param        $value
+     *
+     * @throws HintException
      */
     public function setSystemValue(string $key, $value): void {
         $this->config->setSystemValue($key, $value);
@@ -118,7 +124,7 @@ class ConfigurationService {
      * @return bool
      * @throws Exception
      */
-    public function hasUserValue(string $key, ?string $user = null, $app = Application::APP_NAME): bool {
+    public function hasUserValue(string $key, ?string $user = null, string $app = Application::APP_NAME): bool {
         $userId = $this->getUserId($user);
 
         $keys = $this->config->getUserKeys($userId, $app);
@@ -132,7 +138,7 @@ class ConfigurationService {
      *
      * @return bool
      */
-    public function hasAppValue(string $key, $app = Application::APP_NAME): bool {
+    public function hasAppValue(string $key, string $app = Application::APP_NAME): bool {
         $keys = $this->config->getAppKeys($app);
 
         return in_array($key, $keys);
@@ -175,7 +181,7 @@ class ConfigurationService {
     /**
      * @return IConfig
      */
-    public function getConfig() {
+    public function getConfig(): IConfig {
         return $this->config;
     }
 
@@ -187,7 +193,12 @@ class ConfigurationService {
             $class    = new ReflectionClass($this->config);
             $property = $class->getProperty('userCache');
             $property->setAccessible(true);
-            $property->setValue($this->config, new CappedMemoryCache());
+            if(class_exists(CappedMemoryCache::class)) {
+                $property->setValue($this->config, new CappedMemoryCache());
+            } else {
+                // @TODO remove in 2023.1.0
+                $property->setValue($this->config, new LegacyCappedMemoryCache());
+            }
         } catch(ReflectionException $e) {
         }
 
@@ -223,7 +234,7 @@ class ConfigurationService {
     }
 
     /**
-     * @param $user
+     * @param string|null $user
      *
      * @return string|null
      * @throws Exception
