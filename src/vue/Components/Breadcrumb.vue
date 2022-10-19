@@ -3,7 +3,7 @@
         <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
-                <router-link :to="getBaseRoute" class="home">&nbsp;</router-link>
+                <router-link :to="getBaseRoute" class="home icon-home">&nbsp;</router-link>
             </div>
             <div class="crumb svg"
                  v-for="(item, index) in getItems"
@@ -290,7 +290,6 @@
                 }
 
                 .home {
-                    background : var(--icon-home-000) no-repeat center;
                     width      : 40px;
                 }
             }

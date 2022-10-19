@@ -8,19 +8,75 @@ body[data-server-version="25"] {
         display: flex;
 
         #app-navigation ul#app-settings {
-            max-height: 60px;
             background-color: transparent;
+
+            &:not(.open) {
+                max-height: 60px;
+            }
         }
 
         #app-content {
             .app-content-left {
                 overflow-y: auto;
                 max-height: 100%;
+                height: 100%;
+                margin-right: var(--body-container-margin);
 
                 #controls {
                     top: 0;
+                    margin-top: 4px;
+                    z-index: 1;
+
+                    .breadcrumb .crumb {
+                        max-height: 54px;
+                        height: 54px;
+
+                        a {
+                            padding: 16px;
+                        }
+                    }
+
+                    .passwords-more-menu{
+                        .button.new {
+                            display: inline-block;
+
+                            .icon.icon-add {
+                                min-width: 14px;
+                            }
+                        }
+
+                        &.active .menu {
+                            position: absolute;
+                            top: 108%;
+                        }
+                    }
+                }
+            }
+            .app-content-right {
+                border-top-right-radius: var(--body-container-radius);
+                border-bottom-right-radius: var(--body-container-radius);
+                height: var(--body-height);
+                margin-right: var(--body-container-margin);
+            }
+
+            &.show-details {
+                .app-content-left {
+                    margin-right: 0;
                 }
             }
         }
+    }
+
+    #app-content {
+        .help #controls {
+            width: auto;
+        }
+    }
+}
+
+body[data-server-version="23"],
+body[data-server-version="24"] {
+    #controls .breadcrumb .crumb .home {
+        background : var(--icon-home-000) no-repeat center;
     }
 }
