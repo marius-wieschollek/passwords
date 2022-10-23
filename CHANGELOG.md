@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Added
+- Nextcloud 25 Support
 
 ## 2022.10.0 - Feature release
 ### Changed
