@@ -348,17 +348,17 @@ class SearchManager {
      */
     _createSearchBox() {
         let form = document.createElement('form');
-        form.className = 'searchbox';
+        form.className = 'searchbox pw-searchbox';
         form.style.opacity = '0';
         form.setAttribute('action', '#');
         form.setAttribute('method', 'post');
         form.setAttribute('role', 'search');
         form.setAttribute('novalidate', 'novalidate');
         form.innerHTML = `<label for="searchbox" class="hidden-visually">Search</label>
-                <input id="searchbox" type="search" name="query" value="" required="" class="hidden icon-search-white icon-search-force-white" autocomplete="off" style="display: block;">
-                    <button class="icon-close-white" type="reset"><span class="hidden-visually"></span></button>`;
+                <input id="searchbox" type="search" name="query" value="" required="" class="hidden icon-search-dark" autocomplete="off" style="display: block;">
+                    <button class="icon-close-dark" type="reset"><span class="hidden-visually"></span></button>`;
         form.addEventListener('submit', (e) => {e.preventDefault();});
-        document.querySelector('.header-right').insertBefore(form, document.querySelector('.notifications'));
+        document.querySelector('.header-right').prepend(form);
     }
 }
 

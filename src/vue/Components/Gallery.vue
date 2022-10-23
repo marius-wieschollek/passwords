@@ -58,6 +58,7 @@
                     this.open(value);
                 } else {
                     if(this.instance) this.instance.close();
+                    document.getElementById('content').style.zIndex = 'auto';
                     this.$emit('close');
                 }
             }
@@ -67,6 +68,7 @@
             if(this.instance !== null) {
                 this.instance.close();
                 this.instance = null;
+                document.getElementById('content').style.zIndex = 'auto';
             }
         },
 
@@ -93,6 +95,7 @@
                           this.options
                       );
 
+                document.getElementById('content').style.zIndex = 2001;
                 this.instance = instance(this.images, options);
             },
             onSlideCustom(index, slide) {
@@ -147,6 +150,7 @@
             },
             close() {
                 document.getElementById('app').classList.remove('blocking');
+                document.getElementById('content').style.zIndex = 'auto';
                 this.$emit('close');
             }
         }
