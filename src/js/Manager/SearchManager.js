@@ -347,7 +347,7 @@ class SearchManager {
      * @private
      */
     _createSearchBox() {
-        let icon = SettingsService.get('server.version') === '25' ? 'dark':'light'
+        let icon = SettingsService.get('server.version') === '25' ? 'dark':'white'
         let form = document.createElement('form');
         form.className = 'searchbox pw-searchbox';
         form.style.opacity = '0';
