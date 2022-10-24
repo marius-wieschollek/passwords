@@ -156,8 +156,8 @@ class ServerReportHelper {
      */
     protected function getEnvironment(): array {
         $subdirectory = (
-            strlen(parse_url($this->config->getSystemValue('overwrite.cli.url', ''), PHP_URL_PATH)) > 1 ||
-            strlen($this->config->getSystemValue('overwritewebroot', '')) > 1
+            strlen(strval(parse_url($this->config->getSystemValue('overwrite.cli.url', ''), PHP_URL_PATH))) > 1 ||
+            strlen(strval($this->config->getSystemValue('overwritewebroot', ''))) > 1
         );
 
         return [

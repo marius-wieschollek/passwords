@@ -103,7 +103,7 @@ class AdminSettings implements ISettings {
                            'purgeTimeout'     => $this->getPurgeTimeout(),
                            'backupInterval'   => $this->getBackupInterval(),
                            'securityHash'     => $this->getSecurityHash(),
-                           'backupFiles'      => $this->config->getAppValue('backup/files/maximum', 14),
+                           'backupFiles'      => intval($this->config->getAppValue('backup/files/maximum', 14)),
                            'backupRestore'    => $this->config->getAppValue('backup/update/autorestore', true),
                            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
                            'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
@@ -356,7 +356,7 @@ class AdminSettings implements ISettings {
      */
     protected function getBackupInterval(): array {
         return [
-            'current' => $this->config->getAppValue('backup/interval', 86400),
+            'current' => intval($this->config->getAppValue('backup/interval', 86400)),
             'options' => [
                 3600    => 'Every hour',
                 21600   => 'Every six hours',

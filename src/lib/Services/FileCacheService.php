@@ -8,7 +8,8 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC\Cache\CappedMemoryCache;
+use OC\Cache\CappedMemoryCache as LegacyCappedMemoryCache;
+use OCP\Cache\CappedMemoryCache;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
@@ -149,7 +150,12 @@ class FileCacheService {
             $class    = new ReflectionClass($this->appData);
             $property = $class->getProperty('folders');
             $property->setAccessible(true);
-            $property->setValue($this->appData, new CappedMemoryCache());
+            if(class_exists(CappedMemoryCache::class)) {
+                $property->setValue($this->appData, new CappedMemoryCache());
+            } else {
+                // @TODO remove in 2023.1.0
+                $property->setValue($this->appData, new LegacyCappedMemoryCache());
+            }
         } catch(Throwable $e) {
             $this->logger->logException($e);
         }

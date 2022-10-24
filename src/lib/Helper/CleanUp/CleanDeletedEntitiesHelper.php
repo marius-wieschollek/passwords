@@ -156,7 +156,7 @@ class CleanDeletedEntitiesHelper {
      *
      */
     public function run(): void {
-        $timeout = $this->config->getAppValue('entity/purge/timeout', -1);
+        $timeout = intval($this->config->getAppValue('entity/purge/timeout', -1));
         if($timeout >= 0) $this->time = time() - $timeout;
 
         $objects = $this->deleteObjects($this->tagService);

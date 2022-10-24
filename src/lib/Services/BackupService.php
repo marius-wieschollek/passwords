@@ -177,7 +177,7 @@ class BackupService {
      * @throws NotPermittedException
      */
     public function removeOldBackups(): void {
-        $maxBackups = $this->config->getAppValue('backup/files/maximum', 28);
+        $maxBackups = intval($this->config->getAppValue('backup/files/maximum', 28));
         if($maxBackups === 0) return;
 
         $backups = array_values($this->getBackups(self::AUTO_BACKUPS));

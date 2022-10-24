@@ -96,21 +96,21 @@ class SendServerSurvey extends AbstractTimedJob {
      * @return int
      */
     protected function getReportMode(): int {
-        $mode = $this->config->getAppValue('survey/server/mode', -1);
+        $mode = intval($this->config->getAppValue('survey/server/mode', -1));
         if($mode === -1) {
             if($this->serverReport->hasData()) $this->sendNotifications();
 
             return 0;
         }
 
-        return intval($mode);
+        return $mode;
     }
 
     /**
      *
      */
     protected function sendNotifications(): void {
-        $time = $this->config->getAppValue('survey/server/notification', 0);
+        $time = intval($this->config->getAppValue('survey/server/notification', 0));
         if($time > strtotime('-6 months')) return;
 
         foreach($this->adminHelper->getAdmins() as $admin) {
