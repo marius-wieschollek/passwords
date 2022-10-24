@@ -253,7 +253,8 @@
                 transition : max-height 0.25s ease-in-out;
                 display    : block;
                 position   : relative;
-                left       : -134px;
+                left       : -200px;
+                width      : 220px;
 
                 ul {
                     padding-right : 0;

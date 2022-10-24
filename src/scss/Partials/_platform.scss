@@ -49,7 +49,6 @@ body[data-server-version="25"] {
         }
 
         #app-content {
-            margin-right               : var(--body-container-margin);
             border-top-right-radius    : var(--body-container-radius);
             border-bottom-right-radius : var(--body-container-radius);
 
@@ -96,12 +95,17 @@ body[data-server-version="25"] {
                 border-bottom-right-radius : var(--body-container-radius);
                 height                     : var(--body-height);
                 margin-right               : var(--body-container-margin);
+                right                      : calc(0px - var(--body-container-margin));
             }
 
             &.show-details {
                 .app-content-left {
                     border-top-right-radius    : 0;
                     border-bottom-right-radius : 0;
+                }
+
+                .app-content-right {
+                    transform: translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
                 }
             }
         }
