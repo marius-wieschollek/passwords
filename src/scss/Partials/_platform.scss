@@ -109,6 +109,24 @@ body[data-server-version="25"] {
                 }
             }
         }
+
+        .password-form-notes-wrapper #password-notes .toastui-editor-defaultUI .toastui-editor-toolbar .toastui-editor-defaultUI-toolbar .toastui-editor-toolbar-group .toastui-editor-toolbar-icons.fa:hover {
+            color: var(--color-primary-default);
+        }
+
+        #password-add-field,
+        .password-form-custom-field input {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        .password-form-custom-field-wrapper .field-label {
+            border: none;
+            height: auto;
+            margin: 0;
+            min-height: 0;
+            padding: 3px;
+        }
     }
 
     #app-content {

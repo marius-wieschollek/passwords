@@ -8,6 +8,7 @@
 /var/www/html/occ config:app:set passwords performance --value=6;
 
 # System Settings
+/var/www/html/occ app:disable firstrunwizard;
 /var/www/html/occ config:system:set loglevel --value=0 --type=int;
 /var/www/html/occ config:system:set defaultapp --value=passwords --type=string;
 /var/www/html/occ config:system:set trusted_domains 0 --value=localhost --type=string;

@@ -9,7 +9,7 @@
                 <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
                 <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
                 <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
-                <folder-field v-model="password.folder" />
+                <folder-field v-model="password.folder" v-on:folder="updateFolder" />
                 <tags-field v-model="password.tags" v-if="false"/>
                 <checkbox-field v-model="password.hidden" id="hidden" label="Hidden password" checkbox-label="Don't show this password anywhere" icon="eye-slash" v-if="showHidden"/>
 
@@ -48,6 +48,7 @@
     import DialogWindow from "@vue/Dialog/DialogWindow";
     import TagsField from "@vue/Dialog/CreatePassword/TagsField";
     import CheckboxField from "@vue/Dialog/CreatePassword/CheckboxField";
+    import Messages from "@js/Classes/Messages";
 
     export default {
         components: {
@@ -91,7 +92,7 @@
                 password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden:false}, this.properties),
                 dragService = new CustomFieldsDragService(password);
 
-            return {password, dragService};
+            return {password, dragService, isFolderHidden: false};
         },
 
         computed: {
@@ -110,10 +111,18 @@
             removeCustomField(index) {
                 this.password.customFields.splice(index, 1);
             },
-            submitAction() {
+            async submitAction() {
                 let password = Utility.cloneObject(this.password);
                 password = API.flattenPassword(password);
                 password = API.validatePassword(password);
+
+                if(
+                    password.hidden &&
+                   !this.isFolderHidden &&
+                   !await Messages.confirm('PwdSaveHiddenMessage', 'PwdSaveHiddenTitle', true)
+                ) {
+                    return;
+                }
 
                 if(this._success) {
                     try {
@@ -126,6 +135,9 @@
             },
             dragDrop($event) {
                 this.dragService.end($event);
+            },
+            updateFolder($event) {
+                this.isFolderHidden = $event.hidden;
             }
         },
 
