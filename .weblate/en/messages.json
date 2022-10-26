@@ -1351,6 +1351,14 @@
     "frontend-Id"                          : {
         "message": "Id"
     },
+    "frontend-PwdSaveHiddenMessage"        : {
+        "message"    : "Saving a hidden password in a folder that is not hidden itself will make the password inaccessible. This password will no longer be shown anywhere. Do you want to continue?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle"          : {
+        "message"    : "Hide this password?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
     "backend-000377"                       : {
         "message": "HTTPS Required"
     },

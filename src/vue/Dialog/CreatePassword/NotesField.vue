@@ -178,6 +178,7 @@
                             background-color      : transparent;
                             border-color          : var(--color-background-hover);
                             background-position-y : 4px;
+                            min-height            : 34px;
 
                             &:not(:disabled).active {
                                 background-color      : var(--color-primary-element-hover);
@@ -211,8 +212,20 @@
                 }
             }
 
-            .toastui-editor-main .toastui-editor-md-splitter {
-                background-color : var(--color-border);
+            .toastui-editor-main {
+                min-height : 100px;
+
+                .toastui-editor-main-container {
+                    min-height : 100px;
+
+                    .ProseMirror {
+                        box-shadow : none;
+                    }
+                }
+
+                .toastui-editor-md-splitter {
+                    background-color : var(--color-border);
+                }
             }
 
             div[contenteditable="true"] {

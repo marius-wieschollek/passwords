@@ -34,7 +34,6 @@
                 return `password-${this.id}`;
             },
             checkboxIcon() {
-                console.log(this.model);
                 return this.model ? 'check-square':'square-o';
             }
         }

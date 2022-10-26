@@ -53,12 +53,19 @@ class Messages {
      *
      * @param message
      * @param title
+     * @param booleanResponse
      */
-    confirm(message, title = 'Confirm') {
+    confirm(message, title = 'Confirm', booleanResponse = false) {
         return new Promise((resolve, reject) => {
             message = Localisation.translateArray(message);
             title = Localisation.translateArray(title);
-            let callback = function(success) { success ? resolve({}) : reject({}); };
+            let callback = function(success) {
+                if(booleanResponse) {
+                    resolve(success===true);
+                } else {
+                    success ? resolve({}) : reject({});
+                }
+            };
 
             OC.dialogs.confirm(message, title, callback, true);
         });

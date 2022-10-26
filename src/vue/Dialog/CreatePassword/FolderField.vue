@@ -37,12 +37,14 @@
                 let folder = await API.showFolder(this.value);
 
                 this.valueLabel = folder.label;
+                this.$emit('folder', folder)
             },
             async chooseFolder() {
                 let result = await FolderManager.selectFolder(this.model);
                 if(result) {
                     this.model = result.id;
                     this.valueLabel = result.label;
+                    this.$emit('folder', result)
                 }
             }
         }
