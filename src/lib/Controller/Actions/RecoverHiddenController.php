@@ -139,7 +139,7 @@ class RecoverHiddenController extends Controller {
             if($currentRevisionCache[ $modelUuid ] === $passwordRevision->getId()) {
                 if(
                     !$allPasswords &&
-                    $this->folderRevisionService->findCurrentRevisionByModel($passwordRevision->getModel())->isHidden()
+                    $this->folderRevisionService->findCurrentRevisionByModel($passwordRevision->getFolder())->isHidden()
                 ) {
                     continue;
                 }
