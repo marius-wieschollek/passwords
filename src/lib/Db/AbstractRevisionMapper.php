@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Db;
@@ -11,6 +15,7 @@ use OCA\Passwords\Exception\Database\DecryptedDataException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
  * Class AbstractRevisionMapper
@@ -20,6 +25,30 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 abstract class AbstractRevisionMapper extends AbstractMapper {
 
     const MODEL_TABLE_NAME = '';
+
+
+    /**
+     * @return EntityInterface[]
+     * @throws \OCP\DB\Exception
+     */
+    public function findAllHidden(): array {
+        $qb = $this->db->getQueryBuilder();
+
+        $qb->select('*')
+           ->from(static::TABLE_NAME)
+           ->where(
+               $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+               $qb->expr()->eq('hidden', $qb->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+           );
+
+        if($this->userId !== null) {
+            $qb->andWhere(
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
+            );
+        }
+
+        return $this->findEntities($qb);
+    }
 
     /**
      * @param string $modelUuid

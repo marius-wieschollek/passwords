@@ -365,6 +365,14 @@
                 <section class="danger">
                     <translate tag="h1" say="Danger Zone"/>
 
+                    <translate tag="label" for="danger-reset" say="SettingsRecoverItems"/>
+                    <translate tag="input"
+                               type="button"
+                               id="danger-reset"
+                               localized-value="SettingsRecoverItemsButton"
+                               @click="recoverItemsAction"/>
+                    <settings-help text="SettingsRecoverItemsHelp"/>
+
                     <translate tag="label" for="danger-reset" say="Reset all settings"/>
                     <translate tag="input"
                                type="button"
@@ -397,6 +405,7 @@
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
     import {getCurrentUser} from '@nextcloud/auth';
+    import RecoverHiddenItemsAction from "@js/Actions/RecoverHiddenItemsAction";
 
     export default {
         components: {
@@ -510,6 +519,19 @@
                     this.locked = false;
                     console.error(e);
                     Messages.alert(e.messsage ? e.message:'Invalid reset code');
+                }
+            },
+            async recoverItemsAction() {
+                this.locked = true;
+                try {
+                    let action = new RecoverHiddenItemsAction();
+
+                    await action.run();
+                    this.locked = false;
+                } catch(e) {
+                    this.locked = false;
+                    console.error(e);
+                    Messages.alert(e.messsage ? e.message:'RecoverItemsError');
                 }
             }
         },

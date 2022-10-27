@@ -5,6 +5,7 @@ namespace OCA\Passwords\AppInfo;
 $routes = [
     ['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
     ['name' => 'cron#execute', 'url' => '/cron/{job}', 'verb' => 'GET'],
+    ['name' => 'recover_hidden#execute', 'url' => '/action/recover-hidden', 'verb' => 'POST'],
     ['name' => 'language#get_file', 'url' => '/l10n/{section}/{language}.json', 'verb' => 'GET'],
     ['name' => 'notification#survey', 'url' => '/notification/survey/{answer}', 'verb' => 'GET'],
 

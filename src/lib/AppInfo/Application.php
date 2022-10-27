@@ -11,6 +11,7 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use OCA\Passwords\Controller\Actions\RecoverHiddenController;
 use OCA\Passwords\Controller\Admin\CacheController;
 use OCA\Passwords\Controller\Admin\SettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
@@ -183,6 +184,7 @@ class Application extends App implements IBootstrap {
         $context->registerServiceAlias('ShareApiController', ShareApiController::class);
         $context->registerServiceAlias('ConnectController', ConnectController::class);
         $context->registerServiceAlias('TagApiController', TagApiController::class);
+        $context->registerServiceAlias('RecoverHiddenController', RecoverHiddenController::class);
 
         $context->registerService(ShareUserListHelper::class,
             function (IAppContainer $c) {

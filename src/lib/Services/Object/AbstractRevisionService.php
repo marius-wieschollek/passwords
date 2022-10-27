@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services\Object;
@@ -54,12 +58,12 @@ abstract class AbstractRevisionService extends AbstractService {
      * @param EncryptionService      $encryption
      */
     public function __construct(
-        UuidHelper $uuidHelper,
-        IEventDispatcher $eventDispatcher,
-        EnvironmentService $environment,
+        UuidHelper             $uuidHelper,
+        IEventDispatcher       $eventDispatcher,
+        EnvironmentService     $environment,
         AbstractRevisionMapper $revisionMapper,
-        ValidationService $validationService,
-        EncryptionService $encryption
+        ValidationService      $validationService,
+        EncryptionService      $encryption
     ) {
         $this->mapper     = $revisionMapper;
         $this->validation = $validationService;
@@ -77,6 +81,24 @@ abstract class AbstractRevisionService extends AbstractService {
     public function findAll(bool $decrypt = false): array {
         /** @var RevisionInterface[] $revisions */
         $revisions = $this->mapper->findAll();
+        if(!$decrypt) return $revisions;
+
+        foreach($revisions as $revision) {
+            $this->encryption->decrypt($revision);
+        }
+
+        return $revisions;
+    }
+
+    /**
+     * @param bool $decrypt
+     *
+     * @return RevisionInterface[]
+     * @throws Exception
+     */
+    public function findAllHidden(bool $decrypt = false): array {
+        /** @var RevisionInterface[] $revisions */
+        $revisions = $this->mapper->findAllHidden();
         if(!$decrypt) return $revisions;
 
         foreach($revisions as $revision) {

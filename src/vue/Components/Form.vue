@@ -2,7 +2,7 @@
     <form class="passwords-form" :id="id" @submit="preventSubmit($event)">
         <translate tag="div" class="message" :say="message" v-if="message"/>
         <div v-for="field in getFields" class="field" :class="{large: field.button !== null}">
-            <translate tag="label" :for="field.id" :say="field.label"/>
+            <translate tag="label" :for="field.attributes.id" :say="field.label"/>
             <input v-bind="field.attributes" v-model="fields[field.name]">
             <translate tag="a"
                        v-if="field.button"
