@@ -2868,5 +2868,88 @@
     },
     "frontend-Id": {
         "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Du bist dabei, ein verstecktes Passwort in einem nicht versteckten Ordner zu speichern. Dadurch wird dieses Passwort nirgends mehr aufgelistet werden. Möchtest du wirklich fortfahren?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Versteckte Elemente wiederherstellen",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Versteckte Elemente wiederherstellen",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Zeigt alle versteckten Passwörter wieder an, unabhängig davon ob der Ordner versteckt ist",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Zeigt versteckte Passwörter in Ordnern, die selbst nicht versteckt sind, wieder an",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Dieses Passwort verstecken?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Wiederherstellen",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Diese Aktion entfernt die \"versteckt\"-Markierung von Elementen, damit diese wieder in der App angezeigt werden.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Bitte wähle alle Arten an versteckten Elementen die wiederhergestellt werden sollen.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Passwörter die in keinem versteckten Ordner sind",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Alle versteckten Passwörter",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Alle versteckten Ordner",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Zeigt alle versteckten Ordner wieder an",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Alle versteckten Tags",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Zeigt alle versteckten Tags wieder an",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Es wurden $PASSWORDS$ Passwörter, $FOLDERS$ Ordner und $TAGS$ Tags wiederhergestellt.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Elemente wiederhergestellt",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Ein Fehler ist aufgetreten.",
+        "description": "Generic error message if the recover hidden items action fails"
     }
 }
