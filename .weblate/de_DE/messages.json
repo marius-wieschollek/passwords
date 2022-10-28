@@ -2868,5 +2868,45 @@
     "settings-SettingsShowShareTab": {
         "message": "Zeige \"Teilen\" Reiter",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Du bist dabei ein verstecktes Passwort in einem nicht versteckten Ordner zu speichern. Dadurch wird dieses Passwort nirgends mehr aufgelistet werden. Möchtest du wirklich fortfahren?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Diese Aktion entfernt die \"versteckt\"-Markierung von Elementen damit diese wieder in der App angezeigt werden.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Passwörter die in keinem versteckten Ordner sind",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Dieses Passwort verstecken?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Versteckte Elemente wiederherstellen",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Wiederherstellen",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Versteckte Elemente wiederherstellen",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Bitte wähle alle Arten an versteckten Elementen die wiederhergestellt werden sollen.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Stellt versteckte Passwörter die in einem Ordner sind der selbst nicht versteckt ist wieder her",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Alle versteckten Passwörter",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
     }
 }
