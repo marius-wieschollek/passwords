@@ -60,9 +60,10 @@ body[data-server-version="25"] {
                 border-bottom-right-radius : var(--body-container-radius);
 
                 #controls {
-                    top        : 0;
-                    margin-top : 4px;
-                    z-index    : 1;
+                    top              : 0;
+                    margin-top       : 4px;
+                    z-index          : 1;
+                    background-color : var(--color-main-background);
 
                     .breadcrumb .crumb {
                         max-height : 54px;
@@ -105,27 +106,27 @@ body[data-server-version="25"] {
                 }
 
                 .app-content-right {
-                    transform: translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
+                    transform : translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
                 }
             }
         }
 
         .password-form-notes-wrapper #password-notes .toastui-editor-defaultUI .toastui-editor-toolbar .toastui-editor-defaultUI-toolbar .toastui-editor-toolbar-group .toastui-editor-toolbar-icons.fa:hover {
-            color: var(--color-primary-default);
+            color : var(--color-primary-default);
         }
 
         #password-add-field,
         .password-form-custom-field input {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
+            border-top-right-radius    : 0;
+            border-bottom-right-radius : 0;
         }
 
         .password-form-custom-field-wrapper .field-label {
-            border: none;
-            height: auto;
-            margin: 0;
-            min-height: 0;
-            padding: 3px;
+            border     : none;
+            height     : auto;
+            margin     : 0;
+            min-height : 0;
+            padding    : 3px;
         }
     }
 
