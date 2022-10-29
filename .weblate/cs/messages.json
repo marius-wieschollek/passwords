@@ -2867,5 +2867,13 @@
     },
     "frontend-Id": {
         "message": "Identif."
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Skrýt toto heslo?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Obnovit skryté položky",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     }
 }
