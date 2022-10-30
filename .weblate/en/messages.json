@@ -1,463 +1,463 @@
 {
-    "apps-000001"                           : {
+    "apps-000001": {
         "message": "official"
     },
-    "apps-000002"                           : {
-        "message"     : "by $AUTHOR$",
+    "apps-000002": {
+        "message": "by $AUTHOR$",
         "placeholders": {
             "author": {
                 "content": "$1"
             }
         }
     },
-    "apps-000003"                           : {
+    "apps-000003": {
         "message": "source code"
     },
-    "apps-000004"                           : {
+    "apps-000004": {
         "message": "learn more"
     },
-    "apps-000005"                           : {
+    "apps-000005": {
         "message": "Connect with PassLink"
     },
-    "apps-000006"                           : {
+    "apps-000006": {
         "message": "Connect a new device"
     },
-    "apps-000007"                           : {
+    "apps-000007": {
         "message": "Connect via link"
     },
-    "apps-000008"                           : {
+    "apps-000008": {
         "message": "Choose a name:"
     },
-    "apps-000009"                           : {
+    "apps-000009": {
         "message": "The codes don't match"
     },
-    "apps-000010"                           : {
+    "apps-000010": {
         "message": "Looks good"
     },
-    "apps-000011"                           : {
+    "apps-000011": {
         "message": "Connection successful"
     },
-    "apps-000012"                           : {
+    "apps-000012": {
         "message": "I'm done"
     },
-    "apps-000013"                           : {
+    "apps-000013": {
         "message": "Don't try again"
     },
-    "apps-000014"                           : {
+    "apps-000014": {
         "message": "Connect something else"
     },
-    "apps-000015"                           : {
+    "apps-000015": {
         "message": "Try again"
     },
-    "apps-000016"                           : {
+    "apps-000016": {
         "message": "Strong Encryption"
     },
-    "apps-000017"                           : {
-        "message"     : "Failed to fetch apps: $ERROR$",
+    "apps-000017": {
+        "message": "Failed to fetch apps: $ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"
             }
         }
     },
-    "apps-000018"                           : {
+    "apps-000018": {
         "message": "You cancelled the connection"
     },
-    "apps-000019"                           : {
+    "apps-000019": {
         "message": "You did not confirm the connection in time"
     },
-    "apps-000020"                           : {
+    "apps-000020": {
         "message": "Just scan the QR code with the app to connect it."
     },
-    "apps-000021"                           : {
+    "apps-000021": {
         "message": "Click the button when you are ready to start the connection."
     },
-    "apps-000022"                           : {
+    "apps-000022": {
         "message": "Check if the codes below match with the ones provided by the device or app:"
     },
-    "apps-000023"                           : {
+    "apps-000023": {
         "message": "Link this client to your Nextcloud account without annoying passwords and urls"
     },
-    "apps-000024"                           : {
+    "apps-000024": {
         "message": "This client officially supports our strong end-to-end encryption"
     },
-    "apps-000025"                           : {
+    "apps-000025": {
         "message": "This client is maintained by the authors of the Passwords app"
     },
-    "apps-000026"                           : {
+    "apps-000026": {
         "message": "Click the button to connect an app installed on this device or scan the QR code with the app if it's installed on another device."
     },
-    "backups-000028"                        : {
+    "backups-000028": {
         "message": "Backup or export"
     },
-    "backups-000029"                        : {
+    "backups-000029": {
         "message": "Choose Format"
     },
-    "backups-000030"                        : {
+    "backups-000030": {
         "message": "Please choose"
     },
-    "backups-000031"                        : {
+    "backups-000031": {
         "message": "Database Backup"
     },
-    "backups-000032"                        : {
+    "backups-000032": {
         "message": "Predefined CSV"
     },
-    "backups-000033"                        : {
-        "message"     : "Read the $LABEL$ import guide",
+    "backups-000033": {
+        "message": "Read the $LABEL$ import guide",
         "placeholders": {
             "label": {
                 "content": "$1"
             }
         }
     },
-    "backups-000034"                        : {
+    "backups-000034": {
         "message": "or"
     },
-    "backups-000035"                        : {
+    "backups-000035": {
         "message": "database backup"
     },
-    "backups-000036"                        : {
+    "backups-000036": {
         "message": "custom CSV"
     },
-    "backups-000037"                        : {
+    "backups-000037": {
         "message": "try the generic CSV import"
     },
-    "backups-000038"                        : {
+    "backups-000038": {
         "message": "No import for your CSV?"
     },
-    "backups-000039"                        : {
+    "backups-000039": {
         "message": "Backup password"
     },
-    "backups-000040"                        : {
+    "backups-000040": {
         "message": "(Optional) Encrypts the backup"
     },
-    "backups-000041"                        : {
+    "backups-000041": {
         "message": "The import only supports CSV"
     },
-    "backups-000042"                        : {
+    "backups-000042": {
         "message": "Export Passwords"
     },
-    "backups-000043"                        : {
+    "backups-000043": {
         "message": "Export Folders"
     },
-    "backups-000044"                        : {
+    "backups-000044": {
         "message": "Export Tags"
     },
-    "backups-000045"                        : {
+    "backups-000045": {
         "message": "Custom Fields"
     },
-    "backups-000046"                        : {
+    "backups-000046": {
         "message": "Folder"
     },
-    "backups-000047"                        : {
+    "backups-000047": {
         "message": "Tags"
     },
-    "backups-000048"                        : {
+    "backups-000048": {
         "message": "ParentLabel"
     },
-    "backups-000049"                        : {
+    "backups-000049": {
         "message": "Folder Id"
     },
-    "backups-000050"                        : {
+    "backups-000050": {
         "message": "Tag Ids"
     },
-    "backups-000051"                        : {
+    "backups-000051": {
         "message": "ParentId"
     },
-    "backups-CustomFields"                  : {
+    "backups-CustomFields": {
         "message": "Custom Fields"
     },
-    "backups-FolderLabel"                   : {
+    "backups-FolderLabel": {
         "message": "Folder"
     },
-    "backups-TagLabels"                     : {
+    "backups-TagLabels": {
         "message": "Tags"
     },
-    "backups-FolderId"                      : {
+    "backups-FolderId": {
         "message": "Folder Id"
     },
-    "backups-TagIds"                        : {
+    "backups-TagIds": {
         "message": "Tag Ids"
     },
-    "backups-000052"                        : {
+    "backups-000052": {
         "message": "Empty"
     },
-    "backups-000053"                        : {
+    "backups-000053": {
         "message": "Add Header Line"
     },
-    "backups-000054"                        : {
+    "backups-000054": {
         "message": "Export passwords shared with me"
     },
-    "backups-000055"                        : {
+    "backups-000055": {
         "message": "Don't edit passwords shared with me"
     },
-    "backups-000056"                        : {
+    "backups-000056": {
         "message": "Don't import empty fields"
     },
-    "backups-000057"                        : {
+    "backups-000057": {
         "message": "Run Export"
     },
-    "backups-000058"                        : {
+    "backups-000058": {
         "message": "Export"
     },
-    "backups-000059"                        : {
+    "backups-000059": {
         "message": "Waiting..."
     },
-    "backups-000060"                        : {
+    "backups-000060": {
         "message": "Export error"
     },
-    "backups-000061"                        : {
-        "message"     : "Download $FORMAT$",
+    "backups-000061": {
+        "message": "Download $FORMAT$",
         "placeholders": {
             "format": {
                 "content": "$1"
             }
         }
     },
-    "backups-000062"                        : {
+    "backups-000062": {
         "message": "Nothing to export"
     },
-    "backups-000063"                        : {
+    "backups-000063": {
         "message": "There is no data to export"
     },
-    "backups-000064"                        : {
+    "backups-000064": {
         "message": "Restore or import"
     },
-    "backups-000065"                        : {
+    "backups-000065": {
         "message": "Choose import format"
     },
-    "backups-000066"                        : {
+    "backups-000066": {
         "message": "Passwords CSV"
     },
-    "backups-000067"                        : {
+    "backups-000067": {
         "message": "Folder CSV"
     },
-    "backups-000068"                        : {
+    "backups-000068": {
         "message": "Custom CSV"
     },
-    "backups-000069"                        : {
+    "backups-000069": {
         "message": "Other / Custom CSV"
     },
-    "backups-000070"                        : {
+    "backups-000070": {
         "message": "Select File"
     },
-    "backups-000071"                        : {
+    "backups-000071": {
         "message": "Select Options"
     },
-    "backups-000072"                        : {
+    "backups-000072": {
         "message": "Conflict handling"
     },
-    "backups-000073"                        : {
+    "backups-000073": {
         "message": "Skip if same revision"
     },
-    "backups-000074"                        : {
+    "backups-000074": {
         "message": "Skip always"
     },
-    "backups-000075"                        : {
+    "backups-000075": {
         "message": "Overwrite existing"
     },
-    "backups-000076"                        : {
+    "backups-000076": {
         "message": "Merge with existing"
     },
-    "backups-000077"                        : {
+    "backups-000077": {
         "message": "Create new entry"
     },
-    "backups-000078"                        : {
+    "backups-000078": {
         "message": "For encrypted backups"
     },
-    "backups-000079"                        : {
+    "backups-000079": {
         "message": "CSV Options"
     },
-    "backups-000080"                        : {
+    "backups-000080": {
         "message": "Database"
     },
-    "backups-000081"                        : {
+    "backups-000081": {
         "message": "Quote Character"
     },
-    "backups-000082"                        : {
+    "backups-000082": {
         "message": "Escape Character"
     },
-    "backups-000083"                        : {
+    "backups-000083": {
         "message": "Field Delimiter"
     },
-    "backups-000084"                        : {
+    "backups-000084": {
         "message": "Line Break"
     },
-    "backups-000085"                        : {
+    "backups-000085": {
         "message": "Quote"
     },
-    "backups-000086"                        : {
+    "backups-000086": {
         "message": "Single Quote"
     },
-    "backups-000087"                        : {
+    "backups-000087": {
         "message": "Backslash"
     },
-    "backups-000088"                        : {
+    "backups-000088": {
         "message": "Detect"
     },
-    "backups-000089"                        : {
+    "backups-000089": {
         "message": "Comma"
     },
-    "backups-000090"                        : {
+    "backups-000090": {
         "message": "Semicolon"
     },
-    "backups-000091"                        : {
+    "backups-000091": {
         "message": "Space"
     },
-    "backups-000092"                        : {
+    "backups-000092": {
         "message": "Tab"
     },
-    "backups-000093"                        : {
+    "backups-000093": {
         "message": "Detect unescaped quotes"
     },
-    "backups-000094"                        : {
+    "backups-000094": {
         "message": "Skip first line"
     },
-    "backups-000095"                        : {
+    "backups-000095": {
         "message": "Interpolate missing fields"
     },
-    "backups-000096"                        : {
+    "backups-000096": {
         "message": "CSV Field Mapping"
     },
-    "backups-000097"                        : {
+    "backups-000097": {
         "message": "Preview Line"
     },
-    "backups-000098"                        : {
-        "message"     : "Line $LINE$",
+    "backups-000098": {
+        "message": "Line $LINE$",
         "placeholders": {
             "line": {
                 "content": "$1"
             }
         }
     },
-    "backups-000099"                        : {
+    "backups-000099": {
         "message": "(no value)"
     },
-    "backups-000100"                        : {
+    "backups-000100": {
         "message": "Ignore"
     },
-    "backups-000101"                        : {
+    "backups-000101": {
         "message": "Run Import"
     },
-    "backups-000102"                        : {
+    "backups-000102": {
         "message": "Import"
     },
-    "backups-000103"                        : {
+    "backups-000103": {
         "message": "Parsing input file"
     },
-    "backups-000104"                        : {
+    "backups-000104": {
         "message": "Analyzing tags"
     },
-    "backups-000105"                        : {
+    "backups-000105": {
         "message": "Analyzing folders"
     },
-    "backups-000106"                        : {
+    "backups-000106": {
         "message": "Reading tags"
     },
-    "backups-000107"                        : {
+    "backups-000107": {
         "message": "Importing tags"
     },
-    "backups-000108"                        : {
+    "backups-000108": {
         "message": "Reading folders"
     },
-    "backups-000109"                        : {
+    "backups-000109": {
         "message": "Importing folders"
     },
-    "backups-000110"                        : {
+    "backups-000110": {
         "message": "Reading passwords"
     },
-    "backups-000111"                        : {
+    "backups-000111": {
         "message": "Importing passwords"
     },
-    "backups-000112"                        : {
+    "backups-000112": {
         "message": "Import failed"
     },
-    "backups-000113"                        : {
+    "backups-000113": {
         "message": "Import partially failed"
     },
-    "backups-000114"                        : {
+    "backups-000114": {
         "message": "Import successful"
     },
-    "backups-000115"                        : {
+    "backups-000115": {
         "message": "Import error"
     },
-    "backups-000116"                        : {
+    "backups-000116": {
         "message": "Some objects had errors:"
     },
-    "backups-000117"                        : {
-        "message"     : "Invalid file type \"$TYPE$\"",
+    "backups-000117": {
+        "message": "Invalid file type \"$TYPE$\"",
         "placeholders": {
             "type": {
                 "content": "$1"
             }
         }
     },
-    "backups-000118"                        : {
+    "backups-000118": {
         "message": "Password required"
     },
-    "backups-000119"                        : {
+    "backups-000119": {
         "message": "Password invalid"
     },
-    "backups-000120"                        : {
+    "backups-000120": {
         "message": "Failed to decrypt passwords"
     },
-    "backups-000121"                        : {
+    "backups-000121": {
         "message": "Failed to decrypt folders"
     },
-    "backups-000122"                        : {
+    "backups-000122": {
         "message": "Failed to decrypt tags"
     },
-    "backups-000123"                        : {
+    "backups-000123": {
         "message": "Import file is empty"
     },
-    "backups-000124"                        : {
+    "backups-000124": {
         "message": "CSV file can not be mapped"
     },
-    "backups-000125"                        : {
+    "backups-000125": {
         "message": "Logins"
     },
-    "backups-000126"                        : {
+    "backups-000126": {
         "message": "Notes"
     },
-    "backups-000127"                        : {
+    "backups-000127": {
         "message": "Credit Cards"
     },
-    "backups-000128"                        : {
+    "backups-000128": {
         "message": "Identities"
     },
-    "backups-000129"                        : {
+    "backups-000129": {
         "message": "Finances"
     },
-    "backups-000130"                        : {
+    "backups-000130": {
         "message": "Licenses"
     },
-    "backups-000131"                        : {
+    "backups-000131": {
         "message": "Travel"
     },
-    "backups-000132"                        : {
+    "backups-000132": {
         "message": "Computers"
     },
-    "backups-000133"                        : {
+    "backups-000133": {
         "message": "Miscellaneous"
     },
-    "backups-000134"                        : {
+    "backups-000134": {
         "message": "Invalid trailing quote in quoted field"
     },
-    "backups-000135"                        : {
-        "message"     : "The file could not be parsed: $ERRORS$",
+    "backups-000135": {
+        "message": "The file could not be parsed: $ERRORS$",
         "placeholders": {
             "errors": {
                 "content": "$1"
             }
         }
     },
-    "backups-000136"                        : {
-        "message"     : "$MESSAGE$ in line $LINE$ character $CHARACTER$.",
+    "backups-000136": {
+        "message": "$MESSAGE$ in line $LINE$ character $CHARACTER$.",
         "placeholders": {
-            "message"  : {
+            "message": {
                 "content": "$1"
             },
-            "line"     : {
+            "line": {
                 "content": "$2"
             },
             "character": {
@@ -465,27 +465,16 @@
             }
         }
     },
-    "backups-000137"                        : {
-        "message"     : "\"$LABEL$\" has files attached which can not be imported.",
+    "backups-000137": {
+        "message": "\"$LABEL$\" has files attached which can not be imported.",
         "placeholders": {
             "label": {
                 "content": "$1"
             }
         }
     },
-    "backups-000138"                        : {
-        "message"     : "The type of \"$FIELD$\" in \"$LABEL$\" is unknown and can not be imported.",
-        "placeholders": {
-            "field": {
-                "content": "$1"
-            },
-            "label": {
-                "content": "$2"
-            }
-        }
-    },
-    "backups-000139"                        : {
-        "message"     : "The label of \"$FIELD$\" in \"$LABEL$\" exceeds 48 characters and was cut.",
+    "backups-000138": {
+        "message": "The type of \"$FIELD$\" in \"$LABEL$\" is unknown and can not be imported.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -495,8 +484,8 @@
             }
         }
     },
-    "backups-000140"                        : {
-        "message"     : "The value of \"$FIELD$\" in \"$LABEL$\" exceeds 320 characters and was cut.",
+    "backups-000139": {
+        "message": "The label of \"$FIELD$\" in \"$LABEL$\" exceeds 48 characters and was cut.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -506,13 +495,24 @@
             }
         }
     },
-    "backups-000141"                        : {
+    "backups-000140": {
+        "message": "The value of \"$FIELD$\" in \"$LABEL$\" exceeds 320 characters and was cut.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
         "message": "More information can be found in the log. (Press F12)"
     },
-    "backups-000142"                        : {
-        "message"     : "The file has the type \"$ACTUAL$\" but \"$EXPECTED$\" is expected. You might have chosen the wrong file or importer.",
+    "backups-000142": {
+        "message": "The file has the type \"$ACTUAL$\" but \"$EXPECTED$\" is expected. You might have chosen the wrong file or importer.",
         "placeholders": {
-            "actual"  : {
+            "actual": {
                 "content": "$1"
             },
             "expected": {
@@ -520,412 +520,412 @@
             }
         }
     },
-    "backups-000143"                        : {
-        "message"     : "$SERVICE$ is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.",
+    "backups-000143": {
+        "message": "$SERVICE$ is known to to generate faulty export files. Consult the manual for help if the file can not be parsed.",
         "placeholders": {
             "service": {
                 "content": "$1"
             }
         }
     },
-    "backups-000144"                        : {
+    "backups-000144": {
         "message": "Folder"
     },
-    "backups-000145"                        : {
+    "backups-000145": {
         "message": "Tags"
     },
-    "frontend-000148"                       : {
+    "frontend-000148": {
         "message": "Passwords"
     },
-    "frontend-000149"                       : {
+    "frontend-000149": {
         "message": "All"
     },
-    "frontend-000150"                       : {
+    "frontend-000150": {
         "message": "Folders"
     },
-    "frontend-000151"                       : {
+    "frontend-000151": {
         "message": "Recent"
     },
-    "frontend-000152"                       : {
+    "frontend-000152": {
         "message": "Favorites"
     },
-    "frontend-000153"                       : {
+    "frontend-000153": {
         "message": "Shared"
     },
-    "frontend-000154"                       : {
+    "frontend-000154": {
         "message": "Security"
     },
-    "frontend-000155"                       : {
+    "frontend-000155": {
         "message": "Trash"
     },
-    "frontend-000156"                       : {
+    "frontend-000156": {
         "message": "Details"
     },
-    "frontend-000157"                       : {
+    "frontend-000157": {
         "message": "Edit"
     },
-    "frontend-000158"                       : {
+    "frontend-000158": {
         "message": "Rename"
     },
-    "frontend-000159"                       : {
+    "frontend-000159": {
         "message": "Delete"
     },
-    "frontend-000160"                       : {
+    "frontend-000160": {
         "message": "Restore"
     },
-    "frontend-000161"                       : {
+    "frontend-000161": {
         "message": "New Password"
     },
-    "frontend-000162"                       : {
+    "frontend-000162": {
         "message": "New Folder"
     },
-    "frontend-000163"                       : {
+    "frontend-000163": {
         "message": "New Tag"
     },
-    "frontend-000164"                       : {
+    "frontend-000164": {
         "message": "Secure"
     },
-    "frontend-000165"                       : {
+    "frontend-000165": {
         "message": "Status"
     },
-    "frontend-000166"                       : {
+    "frontend-000166": {
         "message": "Weak"
     },
-    "frontend-000167"                       : {
+    "frontend-000167": {
         "message": "Weak (Duplicate)"
     },
-    "frontend-000168"                       : {
+    "frontend-000168": {
         "message": "Weak (Outdated)"
     },
-    "frontend-000169"                       : {
+    "frontend-000169": {
         "message": "Breached"
     },
-    "frontend-000170"                       : {
+    "frontend-000170": {
         "message": "Share"
     },
-    "frontend-000171"                       : {
+    "frontend-000171": {
         "message": "Revisions"
     },
-    "frontend-000172"                       : {
+    "frontend-000172": {
         "message": "QR Code"
     },
-    "frontend-000173"                       : {
+    "frontend-000173": {
         "message": "Password"
     },
-    "frontend-000174"                       : {
+    "frontend-000174": {
         "message": "Username"
     },
-    "frontend-000175"                       : {
+    "frontend-000175": {
         "message": "Website"
     },
-    "frontend-000176"                       : {
+    "frontend-000176": {
         "message": "Add Tags..."
     },
-    "frontend-000177"                       : {
+    "frontend-000177": {
         "message": "Color"
     },
-    "frontend-000178"                       : {
+    "frontend-000178": {
         "message": "Name"
     },
-    "frontend-000179"                       : {
+    "frontend-000179": {
         "message": "Label"
     },
-    "frontend-000180"                       : {
+    "frontend-000180": {
         "message": "General"
     },
-    "frontend-000181"                       : {
+    "frontend-000181": {
         "message": "Properties"
     },
-    "frontend-000182"                       : {
+    "frontend-000182": {
         "message": "Numbers"
     },
-    "frontend-000183"                       : {
+    "frontend-000183": {
         "message": "Special Characters"
     },
-    "frontend-000184"                       : {
+    "frontend-000184": {
         "message": "More Options"
     },
-    "frontend-000185"                       : {
+    "frontend-000185": {
         "message": "Favorite"
     },
-    "frontend-000186"                       : {
+    "frontend-000186": {
         "message": "Encryption"
     },
-    "frontend-000187"                       : {
+    "frontend-000187": {
         "message": "On the server"
     },
-    "frontend-000188"                       : {
+    "frontend-000188": {
         "message": "Custom Fields"
     },
-    "frontend-000189"                       : {
+    "frontend-000189": {
         "message": "Secret"
     },
-    "frontend-000190"                       : {
+    "frontend-000190": {
         "message": "Text"
     },
-    "frontend-000191"                       : {
+    "frontend-000191": {
         "message": "File"
     },
-    "frontend-000192"                       : {
+    "frontend-000192": {
         "message": "Value"
     },
-    "frontend-000193"                       : {
+    "frontend-000193": {
         "message": "Toggle visibility"
     },
-    "frontend-000194"                       : {
+    "frontend-000194": {
         "message": "Generate password"
     },
-    "frontend-000195"                       : {
+    "frontend-000195": {
         "message": "Simple Server Side Encryption V1"
     },
-    "frontend-000196"                       : {
+    "frontend-000196": {
         "message": "Take some notes"
     },
-    "frontend-000197"                       : {
+    "frontend-000197": {
         "message": "Save"
     },
-    "frontend-000198"                       : {
+    "frontend-000198": {
         "message": "Create folder"
     },
-    "frontend-000199"                       : {
+    "frontend-000199": {
         "message": "Folder created"
     },
-    "frontend-000200"                       : {
+    "frontend-000200": {
         "message": "Creating folder failed"
     },
-    "frontend-000201"                       : {
+    "frontend-000201": {
         "message": "Rename folder"
     },
-    "frontend-000202"                       : {
+    "frontend-000202": {
         "message": "Folder renamed"
     },
-    "frontend-000203"                       : {
+    "frontend-000203": {
         "message": "Renaming folder failed"
     },
-    "frontend-000204"                       : {
+    "frontend-000204": {
         "message": "Folder moved"
     },
-    "frontend-000205"                       : {
+    "frontend-000205": {
         "message": "Moving folder failed"
     },
-    "frontend-000206"                       : {
+    "frontend-000206": {
         "message": "Delete folder"
     },
-    "frontend-000207"                       : {
-        "message": "Do you want to delete the folder"
+    "frontend-000207": {
+        "message": "Do you want to delete the folder?"
     },
-    "frontend-000208"                       : {
+    "frontend-000208": {
         "message": "Folder deleted"
     },
-    "frontend-000209"                       : {
+    "frontend-000209": {
         "message": "Deleting folder failed"
     },
-    "frontend-000210"                       : {
+    "frontend-000210": {
         "message": "Folder restored"
     },
-    "frontend-000211"                       : {
+    "frontend-000211": {
         "message": "Restoring folder failed"
     },
-    "frontend-000212"                       : {
+    "frontend-000212": {
         "message": "Create tag"
     },
-    "frontend-000213"                       : {
+    "frontend-000213": {
         "message": "Tag created"
     },
-    "frontend-000214"                       : {
+    "frontend-000214": {
         "message": "Creating tag failed"
     },
-    "frontend-000215"                       : {
+    "frontend-000215": {
         "message": "Edit tag"
     },
-    "frontend-000216"                       : {
+    "frontend-000216": {
         "message": "Generate random color"
     },
-    "frontend-000217"                       : {
+    "frontend-000217": {
         "message": "Tag saved"
     },
-    "frontend-000218"                       : {
+    "frontend-000218": {
         "message": "Saving tag failed"
     },
-    "frontend-000219"                       : {
+    "frontend-000219": {
         "message": "Delete tag"
     },
-    "frontend-000220"                       : {
-        "message": "Do you want to delete the tag"
+    "frontend-000220": {
+        "message": "Do you want to delete the tag?"
     },
-    "frontend-000221"                       : {
+    "frontend-000221": {
         "message": "Tag deleted"
     },
-    "frontend-000222"                       : {
+    "frontend-000222": {
         "message": "Deleting tag failed"
     },
-    "frontend-000223"                       : {
+    "frontend-000223": {
         "message": "Tag restored"
     },
-    "frontend-000224"                       : {
+    "frontend-000224": {
         "message": "Restoring tag failed"
     },
-    "frontend-000225"                       : {
+    "frontend-000225": {
         "message": "Create password"
     },
-    "frontend-000226"                       : {
+    "frontend-000226": {
         "message": "Password created"
     },
-    "frontend-000227"                       : {
+    "frontend-000227": {
         "message": "Creating password failed"
     },
-    "frontend-000228"                       : {
+    "frontend-000228": {
         "message": "Edit password"
     },
-    "frontend-000229"                       : {
+    "frontend-000229": {
         "message": "Password saved"
     },
-    "frontend-000230"                       : {
+    "frontend-000230": {
         "message": "Saving password failed"
     },
-    "frontend-000231"                       : {
+    "frontend-000231": {
         "message": "Password moved"
     },
-    "frontend-000232"                       : {
+    "frontend-000232": {
         "message": "Moving password failed"
     },
-    "frontend-000233"                       : {
+    "frontend-000233": {
         "message": "Delete password"
     },
-    "frontend-000234"                       : {
-        "message": "Do you want to delete the password"
+    "frontend-000234": {
+        "message": "Do you want to delete the password?"
     },
-    "frontend-000235"                       : {
+    "frontend-000235": {
         "message": "Password deleted"
     },
-    "frontend-000236"                       : {
+    "frontend-000236": {
         "message": "Password restored"
     },
-    "frontend-000237"                       : {
+    "frontend-000237": {
         "message": "Restoring password failed"
     },
-    "frontend-000238"                       : {
+    "frontend-000238": {
         "message": "Open Url"
     },
-    "frontend-000239"                       : {
+    "frontend-000239": {
         "message": "Copy Url"
     },
-    "frontend-000240"                       : {
+    "frontend-000240": {
         "message": "Copy User"
     },
-    "frontend-000241"                       : {
+    "frontend-000241": {
         "message": "Copy Password"
     },
-    "frontend-000242"                       : {
-        "message"     : "$ELEMENT$ was copied to clipboard",
+    "frontend-000242": {
+        "message": "$ELEMENT$ was copied to clipboard",
         "placeholders": {
             "element": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000243"                       : {
-        "message"     : "Error copying $ELEMENT$ to clipboard",
+    "frontend-000243": {
+        "message": "Error copying $ELEMENT$ to clipboard",
         "placeholders": {
             "element": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000244"                       : {
-        "message"     : "Last modified on $DATE$",
+    "frontend-000244": {
+        "message": "Last modified on $DATE$",
         "placeholders": {
             "date": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000245"                       : {
+    "frontend-000245": {
         "message": "Restore revision"
     },
-    "frontend-000246"                       : {
+    "frontend-000246": {
         "message": "Revision restored"
     },
-    "frontend-000247"                       : {
+    "frontend-000247": {
         "message": "Restoring revision failed"
     },
-    "frontend-000248"                       : {
+    "frontend-000248": {
         "message": "Do you want to restore the revision?"
     },
-    "frontend-000249"                       : {
+    "frontend-000249": {
         "message": "Shared with you"
     },
-    "frontend-000250"                       : {
+    "frontend-000250": {
         "message": "Shared by you"
     },
-    "frontend-000251"                       : {
+    "frontend-000251": {
         "message": "Statistics"
     },
-    "frontend-000252"                       : {
+    "frontend-000252": {
         "message": "Created on"
     },
-    "frontend-000253"                       : {
+    "frontend-000253": {
         "message": "Last updated"
     },
-    "frontend-000254"                       : {
-        "message"     : "$COUNT$ revisions",
+    "frontend-000254": {
+        "message": "$COUNT$ revisions",
         "placeholders": {
             "count": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000255"                       : {
+    "frontend-000255": {
         "message": "Shares"
     },
-    "frontend-000256"                       : {
-        "message"     : "Shared $COUNT$ times",
+    "frontend-000256": {
+        "message": "Shared $COUNT$ times",
         "placeholders": {
             "count": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000257"                       : {
+    "frontend-000257": {
         "message": "Encryption applied on server"
     },
-    "frontend-000258"                       : {
+    "frontend-000258": {
         "message": "Encryption applied on client"
     },
-    "frontend-000259"                       : {
+    "frontend-000259": {
         "message": "No encryption"
     },
-    "frontend-000260"                       : {
+    "frontend-000260": {
         "message": "Simple encryption (Gen. 1)"
     },
-    "frontend-000261"                       : {
+    "frontend-000261": {
         "message": "Simple encryption (Gen. 2)"
     },
-    "frontend-000262"                       : {
+    "frontend-000262": {
         "message": "Advanced encryption (SSE V2)"
     },
-    "frontend-000263"                       : {
+    "frontend-000263": {
         "message": "Encryption with libsodium"
     },
-    "frontend-000264"                       : {
+    "frontend-000264": {
         "message": "More"
     },
-    "frontend-000265"                       : {
+    "frontend-000265": {
         "message": "Backup and Restore"
     },
-    "frontend-000266"                       : {
+    "frontend-000266": {
         "message": "Settings"
     },
-    "frontend-000267"                       : {
+    "frontend-000267": {
         "message": "Handbook"
     },
-    "frontend-000268"                       : {
+    "frontend-000268": {
         "message": "Apps and Extensions"
     },
-    "frontend-000269"                       : {
-        "message"     : "$EDITABLE$ and $SHAREABLE$.",
+    "frontend-000269": {
+        "message": "$EDITABLE$ and $SHAREABLE$.",
         "placeholders": {
-            "editable" : {
+            "editable": {
                 "content": "$1"
             },
             "shareable": {
@@ -933,183 +933,183 @@
             }
         }
     },
-    "frontend-000270"                       : {
+    "frontend-000270": {
         "message": "Editing allowed"
     },
-    "frontend-000271"                       : {
+    "frontend-000271": {
         "message": "Editing disallowed"
     },
-    "frontend-000272"                       : {
+    "frontend-000272": {
         "message": "sharing allowed"
     },
-    "frontend-000273"                       : {
+    "frontend-000273": {
         "message": "sharing disallowed"
     },
-    "frontend-000274"                       : {
+    "frontend-000274": {
         "message": "Search user"
     },
-    "frontend-000275"                       : {
+    "frontend-000275": {
         "message": "Set expiration date"
     },
-    "frontend-000276"                       : {
-        "message"     : "Expires $DATETIME$",
+    "frontend-000276": {
+        "message": "Expires $DATETIME$",
         "placeholders": {
             "datetime": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000277"                       : {
+    "frontend-000277": {
         "message": "Choose an expiration date or leave empty to share forever"
     },
-    "frontend-000278"                       : {
+    "frontend-000278": {
         "message": "Please choose a date in the future"
     },
-    "frontend-000279"                       : {
+    "frontend-000279": {
         "message": "Invalid date"
     },
-    "frontend-000280"                       : {
-        "message"     : "The user $UID$ does not exist",
+    "frontend-000280": {
+        "message": "The user $UID$ does not exist",
         "placeholders": {
             "uid": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000281"                       : {
-        "message"     : "Unable to share password: $MESSAGE$",
+    "frontend-000281": {
+        "message": "Unable to share password: $MESSAGE$",
         "placeholders": {
             "message": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000282"                       : {
+    "frontend-000282": {
         "message": "Toggle write permissions"
     },
-    "frontend-000283"                       : {
+    "frontend-000283": {
         "message": "Toggle share permissions"
     },
-    "frontend-000284"                       : {
+    "frontend-000284": {
         "message": "Stop sharing"
     },
-    "frontend-000285"                       : {
+    "frontend-000285": {
         "message": "Date"
     },
-    "frontend-000286"                       : {
+    "frontend-000286": {
         "message": "Default Cache (0 files, 0 B)"
     },
-    "frontend-000287"                       : {
+    "frontend-000287": {
         "message": "Avatars Cache (0 files, 0 B)"
     },
-    "frontend-000288"                       : {
+    "frontend-000288": {
         "message": "Favicon Cache (0 files, 0 B)"
     },
-    "frontend-000289"                       : {
+    "frontend-000289": {
         "message": "Preview Cache (0 files, 0 B)"
     },
-    "frontend-000290"                       : {
+    "frontend-000290": {
         "message": "Passwords Cache (0 files, 0 B)"
     },
-    "frontend-000291"                       : {
+    "frontend-000291": {
         "message": "Changed"
     },
-    "frontend-000292"                       : {
+    "frontend-000292": {
         "message": "Modified"
     },
-    "frontend-000293"                       : {
+    "frontend-000293": {
         "message": "Edited"
     },
-    "frontend-000294"                       : {
+    "frontend-000294": {
         "message": "Created"
     },
-    "frontend-000295"                       : {
+    "frontend-000295": {
         "message": "Revision"
     },
-    "frontend-000296"                       : {
+    "frontend-000296": {
         "message": "Url"
     },
-    "frontend-000297"                       : {
+    "frontend-000297": {
         "message": "Parent"
     },
-    "frontend-000298"                       : {
+    "frontend-000298": {
         "message": "Delete All Items"
     },
-    "frontend-000299"                       : {
+    "frontend-000299": {
         "message": "Restore All Items"
     },
-    "frontend-000300"                       : {
+    "frontend-000300": {
         "message": "Restore Items"
     },
-    "frontend-000301"                       : {
+    "frontend-000301": {
         "message": "Restore all items in trash?"
     },
-    "frontend-000302"                       : {
+    "frontend-000302": {
         "message": "Restore this item"
     },
-    "frontend-000303"                       : {
+    "frontend-000303": {
         "message": "Items restored"
     },
-    "frontend-000304"                       : {
+    "frontend-000304": {
         "message": "Empty Trash"
     },
-    "frontend-000305"                       : {
+    "frontend-000305": {
         "message": "Delete all items in trash?"
     },
-    "frontend-000306"                       : {
+    "frontend-000306": {
         "message": "Trash emptied"
     },
-    "frontend-000307"                       : {
+    "frontend-000307": {
         "message": "Search"
     },
-    "frontend-000308"                       : {
+    "frontend-000308": {
         "message": "Use the search box to search"
     },
-    "frontend-000309"                       : {
-        "message"     : "Search everywhere for \"$QUERY$\"",
+    "frontend-000309": {
+        "message": "Search everywhere for \"$QUERY$\"",
         "placeholders": {
             "query": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000310"                       : {
+    "frontend-000310": {
         "message": "There is nothing here"
     },
-    "frontend-000311"                       : {
+    "frontend-000311": {
         "message": "Click on \"+\" to add something"
     },
-    "frontend-000312"                       : {
+    "frontend-000312": {
         "message": "Deleted items will appear here"
     },
-    "frontend-000313"                       : {
+    "frontend-000313": {
         "message": "No passwords were shared with you"
     },
-    "frontend-000314"                       : {
+    "frontend-000314": {
         "message": "You did not share any passwords"
     },
-    "frontend-000315"                       : {
+    "frontend-000315": {
         "message": "Your favorites will appear here"
     },
-    "frontend-000316"                       : {
+    "frontend-000316": {
         "message": "Better check the other sections"
     },
-    "frontend-000317"                       : {
+    "frontend-000317": {
         "message": "That's probably a good sign"
     },
-    "frontend-000318"                       : {
-        "message"     : "Go to $HREF$",
+    "frontend-000318": {
+        "message": "Go to $HREF$",
         "placeholders": {
             "href": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000319"                       : {
+    "frontend-000319": {
         "message": "Contents"
     },
-    "frontend-000320"                       : {
-        "message"     : "Figure $COUNT$: $TITLE$",
+    "frontend-000320": {
+        "message": "Figure $COUNT$: $TITLE$",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -1119,314 +1119,314 @@
             }
         }
     },
-    "frontend-000321"                       : {
-        "message"     : "Unable to fetch page: $MESSAGE$.",
+    "frontend-000321": {
+        "message": "Unable to fetch page: $MESSAGE$.",
         "placeholders": {
             "message": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000322"                       : {
-        "message"     : "Invalid content type $MIME$",
+    "frontend-000322": {
+        "message": "Invalid content type $MIME$",
         "placeholders": {
             "mime": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000323"                       : {
+    "frontend-000323": {
         "message": "No content available"
     },
-    "frontend-000324"                       : {
+    "frontend-000324": {
         "message": "Not Found"
     },
-    "frontend-000325"                       : {
+    "frontend-000325": {
         "message": "Still need help?"
     },
-    "frontend-000326"                       : {
+    "frontend-000326": {
         "message": "Ask in our forum!"
     },
-    "frontend-000327"                       : {
+    "frontend-000327": {
         "message": "Found an error?"
     },
-    "frontend-000328"                       : {
+    "frontend-000328": {
         "message": "Tell us!"
     },
-    "frontend-000329"                       : {
+    "frontend-000329": {
         "message": "The session has expired"
     },
-    "frontend-000330"                       : {
+    "frontend-000330": {
         "message": "API Session Token expired"
     },
-    "frontend-000331"                       : {
+    "frontend-000331": {
         "message": "Network error"
     },
-    "frontend-000332"                       : {
-        "message"     : "Unable to load $MODULE$",
+    "frontend-000332": {
+        "message": "Unable to load $MODULE$",
         "placeholders": {
             "module": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000333"                       : {
+    "frontend-000333": {
         "message": "Sort by name"
     },
-    "frontend-000334"                       : {
+    "frontend-000334": {
         "message": "Sort by modified date"
     },
-    "frontend-000335"                       : {
-        "message"     : "$PASSWORDS$ passwords",
+    "frontend-000335": {
+        "message": "$PASSWORDS$ passwords",
         "placeholders": {
             "passwords": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000336"                       : {
+    "frontend-000336": {
         "message": "1 password"
     },
-    "frontend-000337"                       : {
-        "message"     : "$FOLDERS$ folders",
+    "frontend-000337": {
+        "message": "$FOLDERS$ folders",
         "placeholders": {
             "folders": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000338"                       : {
+    "frontend-000338": {
         "message": "1 folder"
     },
-    "frontend-000339"                       : {
-        "message"     : "$TAGS$ tags",
+    "frontend-000339": {
+        "message": "$TAGS$ tags",
         "placeholders": {
             "tags": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000340"                       : {
+    "frontend-000340": {
         "message": "1 tag"
     },
-    "frontend-000341"                       : {
+    "frontend-000341": {
         "message": "Nothing"
     },
-    "frontend-000342"                       : {
+    "frontend-000342": {
         "message": " and "
     },
-    "frontend-000343"                       : {
+    "frontend-000343": {
         "message": "match"
     },
-    "frontend-000344"                       : {
+    "frontend-000344": {
         "message": "matches"
     },
-    "frontend-000345"                       : {
+    "frontend-000345": {
         "message": "Created by"
     },
-    "frontend-000346"                       : {
-        "message"     : "You are logging in as $USER$",
+    "frontend-000346": {
+        "message": "You are logging in as $USER$",
         "placeholders": {
             "user": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000347"                       : {
+    "frontend-000347": {
         "message": "Login"
     },
-    "frontend-000348"                       : {
+    "frontend-000348": {
         "message": "Request token again"
     },
-    "frontend-000349"                       : {
+    "frontend-000349": {
         "message": "Too many attempts"
     },
-    "frontend-000350"                       : {
+    "frontend-000350": {
         "message": "Password is too short"
     },
-    "frontend-000351"                       : {
+    "frontend-000351": {
         "message": "Unknown Error"
     },
-    "frontend-000352"                       : {
+    "frontend-000352": {
         "message": "Token request failed"
     },
-    "frontend-000353"                       : {
+    "frontend-000353": {
         "message": "System Maintenance"
     },
-    "frontend-000354"                       : {
+    "frontend-000354": {
         "message": "Not Available"
     },
-    "frontend-000355"                       : {
+    "frontend-000355": {
         "message": "System"
     },
-    "frontend-000356"                       : {
+    "frontend-000356": {
         "message": "Public Access"
     },
-    "frontend-000357"                       : {
+    "frontend-000357": {
         "message": "Automatic Background Task"
     },
-    "frontend-000358"                       : {
+    "frontend-000358": {
         "message": "Server Command Line"
     },
-    "frontend-000359"                       : {
+    "frontend-000359": {
         "message": "Please correct your input"
     },
-    "frontend-000360"                       : {
+    "frontend-000360": {
         "message": "Show value"
     },
-    "frontend-000361"                       : {
+    "frontend-000361": {
         "message": "Cancel"
     },
-    "frontend-000362"                       : {
+    "frontend-000362": {
         "message": "Ok"
     },
-    "frontend-000363"                       : {
+    "frontend-000363": {
         "message": "true"
     },
-    "frontend-000364"                       : {
+    "frontend-000364": {
         "message": "false"
     },
-    "frontend-000365"                       : {
+    "frontend-000365": {
         "message": "yes"
     },
-    "frontend-000366"                       : {
+    "frontend-000366": {
         "message": "no"
     },
-    "frontend-000367"                       : {
-        "message"     : "$NAME$ has shared this password with you.",
+    "frontend-000367": {
+        "message": "$NAME$ has shared this password with you.",
         "placeholders": {
             "name": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000368"                       : {
+    "frontend-000368": {
         "message": "You have reached the maximum length of 4096 characters"
     },
-    "frontend-000369"                       : {
-        "message"     : "We could not find anything for \"$QUERY$\"",
+    "frontend-000369": {
+        "message": "We could not find anything for \"$QUERY$\"",
         "placeholders": {
             "query": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000370"                       : {
-        "message"     : "The page \"$PAGE$\" could not be fetched from the handbook server.",
+    "frontend-000370": {
+        "message": "The page \"$PAGE$\" could not be fetched from the handbook server.",
         "placeholders": {
             "page": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000371"                       : {
+    "frontend-000371": {
         "message": "Some data is waiting to be synchronized"
     },
-    "frontend-000372"                       : {
-        "message"     : "You will be logged out in $TIME$ seconds",
+    "frontend-000372": {
+        "message": "You will be logged out in $TIME$ seconds",
         "placeholders": {
             "time": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000373"                       : {
+    "frontend-000373": {
         "message": "You may have requested too many tokens. Please try again later."
     },
-    "frontend-000374"                       : {
+    "frontend-000374": {
         "message": "End-to-End encryption will be disabled for this password if you share it."
     },
-    "frontend-000375"                       : {
+    "frontend-000375": {
         "message": "The session token is no longer valid. The app will now reload."
     },
-    "frontend-000376"                       : {
+    "frontend-000376": {
         "message": "Today in 2018, the first version of passwords was published. Thank you for using the app."
     },
-    "frontend-Tags"                         : {
+    "frontend-Tags": {
         "message": "Tags"
     },
-    "frontend-Folder"                       : {
+    "frontend-Folder": {
         "message": "Folder"
     },
-    "frontend-Id"                           : {
+    "frontend-Id": {
         "message": "Id"
     },
-    "frontend-PwdSaveHiddenMessage"         : {
-        "message"    : "Saving a hidden password in a folder that is not hidden itself will make the password inaccessible. This password will no longer be shown anywhere. Do you want to continue?",
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Saving a hidden password in a folder that is not hidden itself will make the password inaccessible. This password will no longer be shown anywhere. Do you want to continue?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
-    "frontend-PwdSaveHiddenTitle"           : {
-        "message"    : "Hide this password?",
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Hide this password?",
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
-    "backend-000377"                        : {
+    "backend-000377": {
         "message": "HTTPS Required"
     },
-    "backend-000378"                        : {
+    "backend-000378": {
         "message": "reload this page"
     },
-    "backend-000379"                        : {
+    "backend-000379": {
         "message": "forum"
     },
-    "backend-000380"                        : {
+    "backend-000380": {
         "message": "documentation"
     },
-    "backend-000381"                        : {
-        "message"     : "You can try to $STR_1$ the page with HTTPS.",
+    "backend-000381": {
+        "message": "You can try to $STR_1$ the page with HTTPS.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000382"                        : {
-        "message"     : "This application requires $STR_1$ in order to work safely.",
+    "backend-000382": {
+        "message": "This application requires $STR_1$ in order to work safely.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000383"                        : {
-        "message"     : "This is NOT a bug. Visit our $STR_1$ if you need help.",
+    "backend-000383": {
+        "message": "This is NOT a bug. Visit our $STR_1$ if you need help.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000384"                        : {
+    "backend-000384": {
         "message": "Review the HTTPS report below to debug the issue."
     },
-    "backend-000385"                        : {
-        "message"     : "Read this $STR_1$ to configure your server to use HTTPS.",
+    "backend-000385": {
+        "message": "Read this $STR_1$ to configure your server to use HTTPS.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000386"                        : {
-        "message"     : "Read this $STR_1$ if you are using any kind of proxy.",
+    "backend-000386": {
+        "message": "Read this $STR_1$ if you are using any kind of proxy.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000387"                        : {
-        "message"     : "Go to $STR_1$ to ge a free HTTPS certificate if you need one.",
+    "backend-000387": {
+        "message": "Go to $STR_1$ to ge a free HTTPS certificate if you need one.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000388"                        : {
+    "backend-000388": {
         "message": "If this problem persists, you should contact your administrator."
     },
-    "backend-000389"                        : {
-        "message"     : "Passwords Session $STR_1$ - $STR_2$",
+    "backend-000389": {
+        "message": "Passwords Session $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1436,152 +1436,152 @@
             }
         }
     },
-    "backend-000390"                        : {
+    "backend-000390": {
         "message": "Open documentation"
     },
-    "backend-000391"                        : {
+    "backend-000391": {
         "message": "never"
     },
-    "backend-000392"                        : {
+    "backend-000392": {
         "message": "Internal Data Processing"
     },
-    "backend-000393"                        : {
+    "backend-000393": {
         "message": "Image Rendering"
     },
-    "backend-000394"                        : {
+    "backend-000394": {
         "message": "Imagick/GMagick (recommended)"
     },
-    "backend-000395"                        : {
+    "backend-000395": {
         "message": "External Services"
     },
-    "backend-000396"                        : {
+    "backend-000396": {
         "message": "Password Security Checks"
     },
-    "backend-000397"                        : {
+    "backend-000397": {
         "message": "Have I been pwned? (recommended)"
     },
-    "backend-000398"                        : {
+    "backend-000398": {
         "message": "Big local database (25M passwords)"
     },
-    "backend-000399"                        : {
+    "backend-000399": {
         "message": "Small local database (5M passwords)"
     },
-    "backend-000400"                        : {
+    "backend-000400": {
         "message": "Big local database & Hibp?"
     },
-    "backend-000401"                        : {
+    "backend-000401": {
         "message": "Password Generator Service"
     },
-    "backend-000402"                        : {
+    "backend-000402": {
         "message": "Local dictionary"
     },
-    "backend-000403"                        : {
+    "backend-000403": {
         "message": "Random Characters"
     },
-    "backend-000404"                        : {
+    "backend-000404": {
         "message": "watchout4snakes.com"
     },
-    "backend-000405"                        : {
+    "backend-000405": {
         "message": "Leipzig Corpora Collection (recommended)"
     },
-    "backend-000406"                        : {
+    "backend-000406": {
         "message": "Favicon Service"
     },
-    "backend-000407"                        : {
+    "backend-000407": {
         "message": "Local analyzer"
     },
-    "backend-000408"                        : {
+    "backend-000408": {
         "message": "Besticon (recommended)"
     },
-    "backend-000409"                        : {
+    "backend-000409": {
         "message": "None"
     },
-    "backend-000410"                        : {
+    "backend-000410": {
         "message": "Website Preview Service"
     },
-    "backend-000411"                        : {
+    "backend-000411": {
         "message": "Website Preview API Key"
     },
-    "backend-000412"                        : {
+    "backend-000412": {
         "message": "Pageres/PhantomJS (Local)"
     },
-    "backend-000413"                        : {
+    "backend-000413": {
         "message": "WKHTML (Local)"
     },
-    "backend-000414"                        : {
+    "backend-000414": {
         "message": "screenshotapi.io"
     },
-    "backend-000415"                        : {
+    "backend-000415": {
         "message": "Default Email Settings"
     },
-    "backend-000416"                        : {
+    "backend-000416": {
         "message": "Send emails for security events"
     },
-    "backend-000417"                        : {
+    "backend-000417": {
         "message": "Send emails for sharing events"
     },
-    "backend-000418"                        : {
+    "backend-000418": {
         "message": "Other Settings"
     },
-    "backend-000419"                        : {
+    "backend-000419": {
         "message": "Remove deleted objects from database"
     },
-    "backend-000420"                        : {
+    "backend-000420": {
         "message": "Show Nightly Updates in \"Apps\""
     },
-    "backend-000421"                        : {
+    "backend-000421": {
         "message": "Never"
     },
-    "backend-000422"                        : {
+    "backend-000422": {
         "message": "Immediately"
     },
-    "backend-000423"                        : {
+    "backend-000423": {
         "message": "After two hours"
     },
-    "backend-000424"                        : {
+    "backend-000424": {
         "message": "After one day"
     },
-    "backend-000425"                        : {
+    "backend-000425": {
         "message": "After two weeks"
     },
-    "backend-000426"                        : {
+    "backend-000426": {
         "message": "After one month"
     },
-    "backend-000427"                        : {
+    "backend-000427": {
         "message": "After one year"
     },
-    "backend-000428"                        : {
+    "backend-000428": {
         "message": "Backup Settings"
     },
-    "backend-000429"                        : {
+    "backend-000429": {
         "message": "Backup Interval"
     },
-    "backend-000430"                        : {
+    "backend-000430": {
         "message": "Every hour"
     },
-    "backend-000431"                        : {
+    "backend-000431": {
         "message": "Every six hours"
     },
-    "backend-000432"                        : {
+    "backend-000432": {
         "message": "Every day"
     },
-    "backend-000433"                        : {
+    "backend-000433": {
         "message": "Every two days"
     },
-    "backend-000434"                        : {
+    "backend-000434": {
         "message": "Every week"
     },
-    "backend-000435"                        : {
+    "backend-000435": {
         "message": "Every two weeks"
     },
-    "backend-000436"                        : {
+    "backend-000436": {
         "message": "Amount of backups to keep"
     },
-    "backend-000437"                        : {
+    "backend-000437": {
         "message": "Caches"
     },
-    "backend-000438"                        : {
-        "message"     : "Default Cache ($STR_1$ files, $STR_1$)",
+    "backend-000438": {
+        "message": "Default Cache ($STR_1$ files, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1591,8 +1591,8 @@
             }
         }
     },
-    "backend-000439"                        : {
-        "message"     : "Avatars Cache ($STR_1$ files, $STR_1$)",
+    "backend-000439": {
+        "message": "Avatars Cache ($STR_1$ files, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1602,8 +1602,8 @@
             }
         }
     },
-    "backend-000440"                        : {
-        "message"     : "Favicon Cache ($STR_1$ files, $STR_1$)",
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ files, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1613,8 +1613,8 @@
             }
         }
     },
-    "backend-000441"                        : {
-        "message"     : "Preview Cache ($STR_1$ files, $STR_1$)",
+    "backend-000441": {
+        "message": "Preview Cache ($STR_1$ files, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1624,8 +1624,8 @@
             }
         }
     },
-    "backend-000442"                        : {
-        "message"     : "Passwords Cache ($STR_1$ files, $STR_1$)",
+    "backend-000442": {
+        "message": "Passwords Cache ($STR_1$ files, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1635,35 +1635,35 @@
             }
         }
     },
-    "backend-000443"                        : {
+    "backend-000443": {
         "message": "clear"
     },
-    "backend-000444"                        : {
+    "backend-000444": {
         "message": "Clear this cache"
     },
-    "backend-000445"                        : {
+    "backend-000445": {
         "message": "You can not clear a cache using a shared service"
     },
-    "backend-000446"                        : {
+    "backend-000446": {
         "message": "Saved"
     },
-    "backend-000447"                        : {
+    "backend-000447": {
         "message": "Cleared"
     },
-    "backend-000448"                        : {
+    "backend-000448": {
         "message": "Failed"
     },
-    "backend-000449"                        : {
+    "backend-000449": {
         "message": "Need help"
     },
-    "backend-000450"                        : {
+    "backend-000450": {
         "message": "found a bug"
     },
-    "backend-000451"                        : {
+    "backend-000451": {
         "message": "looking for the documentation"
     },
-    "backend-000452"                        : {
-        "message"     : "$STR_1$, $STR_1$ or $STR_1$? We've got you covered!",
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ or $STR_1$? We've got you covered!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1676,8 +1676,8 @@
             }
         }
     },
-    "backend-000453"                        : {
-        "message"     : "$STRING_1$ $STRING_2$ is no longer supported.",
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ is no longer supported.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -1687,97 +1687,97 @@
             }
         }
     },
-    "backend-000454"                        : {
+    "backend-000454": {
         "message": "Passwords requires HTTPS."
     },
-    "backend-000455"                        : {
-        "message"     : "Using $STR_1$ to execute background jobs may cause delays. We recommend using Cron.",
+    "backend-000455": {
+        "message": "Using $STR_1$ to execute background jobs may cause delays. We recommend using Cron.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000456"                        : {
+    "backend-000456": {
         "message": "Please check the system requirements."
     },
-    "backend-000457"                        : {
+    "backend-000457": {
         "message": "Password not shared"
     },
-    "backend-000458"                        : {
-        "message"     : "A password was not shared with $STRING_1$ because it already is",
+    "backend-000458": {
+        "message": "A password was not shared with $STRING_1$ because it already is",
         "placeholders": {
             "string_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000459"                        : {
+    "backend-000459": {
         "message": "You have an insecure password"
     },
-    "backend-000460"                        : {
+    "backend-000460": {
         "message": "You have insecure passwords"
     },
-    "backend-000461"                        : {
+    "backend-000461": {
         "message": "One of your passwords is no longer secure."
     },
-    "backend-000462"                        : {
+    "backend-000462": {
         "message": "Some of your passwords are no longer secure."
     },
-    "backend-000463"                        : {
+    "backend-000463": {
         "message": "Passwords regularly checks if your passwords have been compromised by a data breach."
     },
-    "backend-000464"                        : {
+    "backend-000464": {
         "message": "This security check has found that one of your passwords is insecure."
     },
-    "backend-000465"                        : {
-        "message"     : "This security check has found that $STR_1$ of your passwords are insecure.",
+    "backend-000465": {
+        "message": "This security check has found that $STR_1$ of your passwords are insecure.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000466"                        : {
+    "backend-000466": {
         "message": "That means that the password is out on the internet and puts your account at risk."
     },
-    "backend-000467"                        : {
+    "backend-000467": {
         "message": "That means that the passwords are out on the internet and puts your accounts at risk."
     },
-    "backend-000468"                        : {
+    "backend-000468": {
         "message": "Therefore the password has been marked as insecure and should be changed now."
     },
-    "backend-000469"                        : {
+    "backend-000469": {
         "message": "Therefore the passwords have been marked as insecure and should be changed now."
     },
-    "backend-000470"                        : {
+    "backend-000470": {
         "message": "You can create a new secure password in the passwords app."
     },
-    "backend-000471"                        : {
+    "backend-000471": {
         "message": "You can create new secure passwords in the passwords app."
     },
-    "backend-000472"                        : {
+    "backend-000472": {
         "message": "Change password now"
     },
-    "backend-000473"                        : {
+    "backend-000473": {
         "message": "Change passwords now"
     },
-    "backend-000474"                        : {
+    "backend-000474": {
         "message": "Open the passwords app to change it."
     },
-    "backend-000475"                        : {
+    "backend-000475": {
         "message": "Open the passwords app to change them."
     },
-    "backend-000476"                        : {
-        "message"     : "$STR_1$ shared a password with you.",
+    "backend-000476": {
+        "message": "$STR_1$ shared a password with you.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000477"                        : {
-        "message"     : "$STR_1$ shared $STR_1$ passwords with you.",
+    "backend-000477": {
+        "message": "$STR_1$ shared $STR_1$ passwords with you.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1787,8 +1787,8 @@
             }
         }
     },
-    "backend-000478"                        : {
-        "message"     : "$STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
+    "backend-000478": {
+        "message": "$STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
         "placeholders": {
             "string_4": {
                 "content": "$4"
@@ -1801,8 +1801,8 @@
             }
         }
     },
-    "backend-000479"                        : {
-        "message"     : "$STRING_5$, $STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1818,8 +1818,8 @@
             }
         }
     },
-    "backend-000480"                        : {
-        "message"     : "$STRING_5$, $STRING_4$ and $STRING_2$ others shared $STRING_1$ passwords with you.",
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ and $STRING_2$ others shared $STRING_1$ passwords with you.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1835,53 +1835,53 @@
             }
         }
     },
-    "backend-000481"                        : {
+    "backend-000481": {
         "message": "Open the passwords app to see it."
     },
-    "backend-000482"                        : {
+    "backend-000482": {
         "message": "Open the passwords app to see them."
     },
-    "backend-000483"                        : {
-        "message"     : "A password was shared with you on $STR_1$",
+    "backend-000483": {
+        "message": "A password was shared with you on $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000484"                        : {
-        "message"     : "Several passwords were shared with you on $STR_1$",
+    "backend-000484": {
+        "message": "Several passwords were shared with you on $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000485"                        : {
+    "backend-000485": {
         "message": "View passwords shared with me"
     },
-    "backend-000486"                        : {
+    "backend-000486": {
         "message": "One of your passwords could not be shared because the recipient already has access to it."
     },
-    "backend-000487"                        : {
-        "message"     : "$STR_1$ of your passwords could not be shared because the recipient already has access to them.",
+    "backend-000487": {
+        "message": "$STR_1$ of your passwords could not be shared because the recipient already has access to them.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000489"                        : {
+    "backend-000489": {
         "message": "Sharing a password that has been shared with you can sometimes create a loop."
     },
-    "backend-000490"                        : {
+    "backend-000490": {
         "message": "To prevent this, these passwords will not be shared."
     },
-    "backend-000491"                        : {
+    "backend-000491": {
         "message": "Administrative access to your account"
     },
-    "backend-000492"                        : {
-        "message"     : "$STR_1$ tried to log into your account on $STR_1$.",
+    "backend-000492": {
+        "message": "$STR_1$ tried to log into your account on $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1891,8 +1891,8 @@
             }
         }
     },
-    "backend-000493"                        : {
-        "message"     : "$STR_1$ logged into your account on $STR_1$.",
+    "backend-000493": {
+        "message": "$STR_1$ logged into your account on $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1902,498 +1902,498 @@
             }
         }
     },
-    "backend-000494"                        : {
+    "backend-000494": {
         "message": "Since you use a master password, this does not mean that access to your data was granted."
     },
-    "backend-000495"                        : {
+    "backend-000495": {
         "message": "To prevent unwanted access to your data, you should set up a master password."
     },
-    "backend-000496"                        : {
-        "message"     : "Deleted User ($STR_1$)",
+    "backend-000496": {
+        "message": "Deleted User ($STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000497"                        : {
+    "backend-000497": {
         "message": "Help us to improve Passwords"
     },
-    "backend-000498"                        : {
+    "backend-000498": {
         "message": "You can help us to improve the Passwords app by participating in our server survey."
     },
-    "backend-000499"                        : {
+    "backend-000499": {
         "message": "This will send us some anonymised data about your setup and selected settings."
     },
-    "backend-000500"                        : {
+    "backend-000500": {
         "message": "You can change this at any time in the app settings."
     },
-    "backend-000501"                        : {
+    "backend-000501": {
         "message": "Not yet"
     },
-    "backend-000502"                        : {
+    "backend-000502": {
         "message": "Participate"
     },
-    "backend-000503"                        : {
+    "backend-000503": {
         "message": "Server survey participation"
     },
-    "backend-000504"                        : {
+    "backend-000504": {
         "message": "Basic"
     },
-    "backend-000505"                        : {
+    "backend-000505": {
         "message": "Full"
     },
-    "backend-000506"                        : {
+    "backend-000506": {
         "message": "Not set"
     },
-    "backend-000507"                        : {
+    "backend-000507": {
         "message": "Please consider self-hosting your favicon api"
     },
-    "backend-000508"                        : {
+    "backend-000508": {
         "message": "Your Nextcloud uses our shared Besticon instances to fetch website icons."
     },
-    "backend-000509"                        : {
+    "backend-000509": {
         "message": "These instances are intended for small Nextcloud setups with very little traffic."
     },
-    "backend-000510"                        : {
+    "backend-000510": {
         "message": "Please click the link and follow our easy tutorial to host Besticon yourself."
     },
-    "backend-000511"                        : {
+    "backend-000511": {
         "message": "Your favicon service configuration is invalid"
     },
-    "backend-000512"                        : {
+    "backend-000512": {
         "message": "Your preview service configuration is invalid"
     },
-    "backend-000513"                        : {
+    "backend-000513": {
         "message": "Your chosen favicon service requires an api key or endpoint, but none is given."
     },
-    "backend-000514"                        : {
+    "backend-000514": {
         "message": "Your chosen preview service requires an api key or endpoint, but none is given."
     },
-    "backend-000515"                        : {
+    "backend-000515": {
         "message": "Open the admin settings to update the configuration or chose another service."
     },
-    "backend-000516"                        : {
-        "message"     : "We have detected several failed attempts to unlock your password database by \"$STR_1$\".",
+    "backend-000516": {
+        "message": "We have detected several failed attempts to unlock your password database by \"$STR_1$\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000517"                        : {
+    "backend-000517": {
         "message": "This could indicate that someone is trying to break into your account."
     },
-    "backend-000518"                        : {
+    "backend-000518": {
         "message": "To prevent further attempts, the API credentials of this client were revoked."
     },
-    "backend-000519"                        : {
+    "backend-000519": {
         "message": "Also, password based API authentication has been disabled."
     },
-    "backend-000520"                        : {
+    "backend-000520": {
         "message": "If you want to continue using this client, you need to create a new token for it."
     },
-    "backend-000521"                        : {
+    "backend-000521": {
         "message": "If you don't know this client, please change your password and review your device list."
     },
-    "backend-000522"                        : {
+    "backend-000522": {
         "message": "To prevent further attempts, password based API authentication has been disabled."
     },
-    "backend-000523"                        : {
+    "backend-000523": {
         "message": "To enable it again, log in with the webapp or any client using token authentication."
     },
-    "backend-000524"                        : {
+    "backend-000524": {
         "message": "If you don't know this client, please change your master password and Nextcloud password."
     },
-    "backend-000525"                        : {
+    "backend-000525": {
         "message": "To increase security, we recommend using device specific tokens instead of your password."
     },
-    "frontend-000526"                       : {
+    "frontend-000526": {
         "message": "Browser Extension"
     },
-    "frontend-000528"                       : {
+    "frontend-000528": {
         "message": "Password Rules"
     },
-    "frontend-000529"                       : {
+    "frontend-000529": {
         "message": "Mark duplicates"
     },
-    "frontend-000530"                       : {
+    "frontend-000530": {
         "message": "Maximum age in days"
     },
-    "frontend-000531"                       : {
+    "frontend-000531": {
         "message": "Password Generator"
     },
-    "frontend-000532"                       : {
+    "frontend-000532": {
         "message": "Password strength"
     },
-    "frontend-000533"                       : {
+    "frontend-000533": {
         "message": "Include numbers"
     },
-    "frontend-000534"                       : {
+    "frontend-000534": {
         "message": "Include special characters"
     },
-    "frontend-000535"                       : {
+    "frontend-000535": {
         "message": "User Interface"
     },
-    "frontend-000536"                       : {
+    "frontend-000536": {
         "message": "Initial section"
     },
-    "frontend-000537"                       : {
+    "frontend-000537": {
         "message": "All Passwords"
     },
-    "frontend-000538"                       : {
+    "frontend-000538": {
         "message": "Passwords List View"
     },
-    "frontend-000539"                       : {
+    "frontend-000539": {
         "message": "Set title from"
     },
-    "frontend-000540"                       : {
+    "frontend-000540": {
         "message": "Sort by"
     },
-    "frontend-000541"                       : {
+    "frontend-000541": {
         "message": "Title field"
     },
-    "frontend-000542"                       : {
+    "frontend-000542": {
         "message": "Single click action"
     },
-    "frontend-000543"                       : {
+    "frontend-000543": {
         "message": "Double click action"
     },
-    "frontend-000544"                       : {
+    "frontend-000544": {
         "message": "Copy password"
     },
-    "frontend-000545"                       : {
+    "frontend-000545": {
         "message": "Copy username"
     },
-    "frontend-000546"                       : {
+    "frontend-000546": {
         "message": "Copy website"
     },
-    "frontend-000547"                       : {
+    "frontend-000547": {
         "message": "Show details"
     },
-    "frontend-000548"                       : {
+    "frontend-000548": {
         "message": "Add copy options in menu"
     },
-    "frontend-000549"                       : {
+    "frontend-000549": {
         "message": "Show username in list view"
     },
-    "frontend-000550"                       : {
+    "frontend-000550": {
         "message": "Show tags in list view"
     },
-    "frontend-000551"                       : {
+    "frontend-000551": {
         "message": "Show hidden custom fields"
     },
-    "frontend-000552"                       : {
+    "frontend-000552": {
         "message": "Search as i type"
     },
-    "frontend-000553"                       : {
+    "frontend-000553": {
         "message": "Search everywhere with Enter"
     },
-    "frontend-000554"                       : {
+    "frontend-000554": {
         "message": "Always show search section"
     },
-    "frontend-000555"                       : {
+    "frontend-000555": {
         "message": "Notifications"
     },
-    "frontend-000556"                       : {
+    "frontend-000556": {
         "message": "Send Emails for"
     },
-    "frontend-000557"                       : {
+    "frontend-000557": {
         "message": "Security issues"
     },
-    "frontend-000558"                       : {
+    "frontend-000558": {
         "message": "Passwords shared with me"
     },
-    "frontend-000559"                       : {
+    "frontend-000559": {
         "message": "Show Notifications for"
     },
-    "frontend-000560"                       : {
+    "frontend-000560": {
         "message": "Other errors"
     },
-    "frontend-000561"                       : {
+    "frontend-000561": {
         "message": "Danger Zone"
     },
-    "frontend-000562"                       : {
+    "frontend-000562": {
         "message": "Reset all settings"
     },
-    "frontend-000563"                       : {
+    "frontend-000563": {
         "message": "Reset"
     },
-    "frontend-000564"                       : {
+    "frontend-000564": {
         "message": "Delete everything"
     },
-    "frontend-000565"                       : {
+    "frontend-000565": {
         "message": "DELETE EVERYTHING"
     },
-    "frontend-000566"                       : {
+    "frontend-000566": {
         "message": "Account reset requested"
     },
-    "frontend-000567"                       : {
+    "frontend-000567": {
         "message": "View"
     },
-    "frontend-000568"                       : {
+    "frontend-000568": {
         "message": "Advanced"
     },
-    "frontend-000569"                       : {
+    "frontend-000569": {
         "message": "Mark passwords as weak if they are being used for multiple accounts"
     },
-    "frontend-000570"                       : {
+    "frontend-000570": {
         "message": "Mark passwords as weak if they surpass the specified amount of days"
     },
-    "frontend-000571"                       : {
+    "frontend-000571": {
         "message": "A higher strength results in longer, more complex passwords"
     },
-    "frontend-000572"                       : {
+    "frontend-000572": {
         "message": "Show the selected property as title in the list view"
     },
-    "frontend-000573"                       : {
+    "frontend-000573": {
         "message": "Sorts passwords by the selected property when sorting by name is selected"
     },
-    "frontend-000574"                       : {
+    "frontend-000574": {
         "message": "Action to perform when clicking on a password in the list view"
     },
-    "frontend-000575"                       : {
+    "frontend-000575": {
         "message": "Action to perform when double clicking on a password in the list view"
     },
-    "frontend-000576"                       : {
+    "frontend-000576": {
         "message": "Shows options to copy the password and user name in the menu"
     },
-    "frontend-000577"                       : {
+    "frontend-000577": {
         "message": "The initial section to be shown when the app is opened"
     },
-    "frontend-000578"                       : {
+    "frontend-000578": {
         "message": "Always show the username related to the password in the list view"
     },
-    "frontend-000579"                       : {
+    "frontend-000579": {
         "message": "Show the tags for each password in the list view. Increases loading times"
     },
-    "frontend-000580"                       : {
+    "frontend-000580": {
         "message": "Show hidden custom fields in the edit form and detail section of a password"
     },
-    "frontend-000581"                       : {
+    "frontend-000581": {
         "message": "Sends you e-mails about compromised passwords and other security issues"
     },
-    "frontend-000582"                       : {
+    "frontend-000582": {
         "message": "Sends you e-mails when other people share passwords with you"
     },
-    "frontend-000583"                       : {
+    "frontend-000583": {
         "message": "Always show the section for global search in the navigation"
     },
-    "frontend-000584"                       : {
+    "frontend-000584": {
         "message": "Notifies you about compromised passwords and other security issues"
     },
-    "frontend-000585"                       : {
+    "frontend-000585": {
         "message": "Notifies you when other people share passwords with you"
     },
-    "frontend-000586"                       : {
+    "frontend-000586": {
         "message": "Notifies you when a background operation fails"
     },
-    "frontend-000587"                       : {
+    "frontend-000587": {
         "message": "Reset all settings on this page to their defaults"
     },
-    "frontend-000588"                       : {
+    "frontend-000588": {
         "message": "This will reset all settings to their defaults. Do you want to continue?"
     },
-    "frontend-000589"                       : {
+    "frontend-000589": {
         "message": "Start over and delete all configuration, passwords, folders and tags"
     },
-    "frontend-000590"                       : {
+    "frontend-000590": {
         "message": "Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this."
     },
-    "frontend-000593"                       : {
+    "frontend-000593": {
         "message": "Edit as new"
     },
-    "frontend-000594"                       : {
+    "frontend-000594": {
         "message": "Move"
     },
-    "frontend-000595"                       : {
-        "message"     : "Open $LABEL$",
+    "frontend-000595": {
+        "message": "Open $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000596"                       : {
+    "frontend-000596": {
         "message": "Unknown (Not_checked)"
     },
-    "frontend-000597"                       : {
+    "frontend-000597": {
         "message": "SHA-1"
     },
-    "frontend-000598"                       : {
+    "frontend-000598": {
         "message": "What did you expect?"
     },
-    "frontend-000599"                       : {
+    "frontend-000599": {
         "message": "Click to show the QR code."
     },
-    "frontend-000600"                       : {
+    "frontend-000600": {
         "message": "Don't warn me again"
     },
-    "frontend-000601"                       : {
+    "frontend-000601": {
         "message": "Strength"
     },
-    "frontend-000602"                       : {
+    "frontend-000602": {
         "message": "Close"
     },
-    "frontend-000603"                       : {
+    "frontend-000603": {
         "message": "Remove from favorites"
     },
-    "frontend-000604"                       : {
+    "frontend-000604": {
         "message": "Mark as favorite"
     },
-    "frontend-000605"                       : {
+    "frontend-000605": {
         "message": "Hidden password"
     },
-    "frontend-000606"                       : {
+    "frontend-000606": {
         "message": "Don't show this password anywhere"
     },
-    "frontend-000607"                       : {
+    "frontend-000607": {
         "message": "Data"
     },
-    "frontend-000608"                       : {
+    "frontend-000608": {
         "message": "Type"
     },
-    "frontend-000609"                       : {
+    "frontend-000609": {
         "message": "New field"
     },
-    "frontend-000610"                       : {
+    "frontend-000610": {
         "message": "Delete field"
     },
-    "frontend-000611"                       : {
+    "frontend-000611": {
         "message": "Open Markdown Guide"
     },
-    "frontend-000612"                       : {
+    "frontend-000612": {
         "message": "Undo"
     },
-    "frontend-000613"                       : {
+    "frontend-000613": {
         "message": "Redo"
     },
-    "frontend-000614"                       : {
-        "message"     : "It will expire $DATE$.",
+    "frontend-000614": {
+        "message": "It will expire $DATE$.",
         "placeholders": {
             "date": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000615"                       : {
+    "frontend-000615": {
         "message": "Or in our Chat!"
     },
-    "frontend-000616"                       : {
+    "frontend-000616": {
         "message": "Too many failed login attempts"
     },
-    "frontend-000617"                       : {
+    "frontend-000617": {
         "message": "Select a folder"
     },
-    "frontend-000618"                       : {
-        "message"     : "Select \"$FOLDER$\"",
+    "frontend-000618": {
+        "message": "Select \"$FOLDER$\"",
         "placeholders": {
             "folder": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000619"                       : {
-        "message"     : "$LABEL$ can't be used",
+    "frontend-000619": {
+        "message": "$LABEL$ can't be used",
         "placeholders": {
             "label": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000620"                       : {
+    "frontend-000620": {
         "message": "Home"
     },
-    "frontend-000621"                       : {
-        "message"     : "\"$FOLDER$\" contains no folders",
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" contains no folders",
         "placeholders": {
             "folder": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000622"                       : {
+    "frontend-000622": {
         "message": "Passwords App Encryption Passphrase"
     },
-    "frontend-000623"                       : {
+    "frontend-000623": {
         "message": "Unknown"
     },
-    "frontend-000624"                       : {
+    "frontend-000624": {
         "message": "Help"
     },
-    "frontend-000625"                       : {
+    "frontend-000625": {
         "message": "Choose the encryption type for this password"
     },
-    "frontend-000626"                       : {
-        "message"     : "Do you want to delete the field \"$FIELD$\"?",
+    "frontend-000626": {
+        "message": "Do you want to delete the field \"$FIELD$\"?",
         "placeholders": {
             "field": {
                 "content": "$1"
             }
         }
     },
-    "frontend-000627"                       : {
+    "frontend-000627": {
         "message": "Make sure this QR code is only visible to people you trust."
     },
-    "frontend-000628"                       : {
+    "frontend-000628": {
         "message": "The encryption applied by the server before storing the data in the database"
     },
-    "frontend-000629"                       : {
+    "frontend-000629": {
         "message": "The encryption applied by the client before sending the data to the server"
     },
-    "frontend-000630"                       : {
+    "frontend-000630": {
         "message": "Password invalid. Session revoked for too many failed login attempts."
     },
-    "frontend-000631"                       : {
+    "frontend-000631": {
         "message": "This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook."
     },
-    "backend-000632"                        : {
+    "backend-000632": {
         "message": "Favicon Service Api"
     },
-    "backend-000633"                        : {
+    "backend-000633": {
         "message": "(optional)"
     },
-    "backend-000634"                        : {
+    "backend-000634": {
         "message": "Your Nextcloud requests significantly more icons than the average."
     },
-    "backend-000635"                        : {
+    "backend-000635": {
         "message": "Open tutorial"
     },
-    "backend-000636"                        : {
+    "backend-000636": {
         "message": "Suspicious amount of failed login attempts detected."
     },
-    "backend-000637"                        : {
+    "backend-000637": {
         "message": "More information"
     },
-    "backend-000638"                        : {
+    "backend-000638": {
         "message": "View insecure passwords"
     },
-    "backend-000639"                        : {
+    "backend-000639": {
         "message": "Open settings"
     },
-    "backend-000640"                        : {
+    "backend-000640": {
         "message": "Open passwords"
     },
-    "backend-000641"                        : {
+    "backend-000641": {
         "message": "View apps"
     },
-    "backend-000642"                        : {
+    "backend-000642": {
         "message": "View apps & devices"
     },
-    "backend-000643"                        : {
+    "backend-000643": {
         "message": "Manage devices & apps"
     },
-    "backend-000644"                        : {
+    "backend-000644": {
         "message": "View shared passwords"
     },
-    "backend-000645"                        : {
+    "backend-000645": {
         "message": "App upgrade recommended"
     },
-    "backend-000646"                        : {
+    "backend-000646": {
         "message": "A new client or app was connected to your account"
     },
-    "backend-000647"                        : {
-        "message"     : "\"$STR_1$\" was granted access to your $STR_1$ Passwords account via PassLink.",
+    "backend-000647": {
+        "message": "\"$STR_1$\" was granted access to your $STR_1$ Passwords account via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2403,16 +2403,16 @@
             }
         }
     },
-    "backend-000648"                        : {
-        "message"     : "You can manage all connected devices and apps in your $STR_1$ settings in the security section.",
+    "backend-000648": {
+        "message": "You can manage all connected devices and apps in your $STR_1$ settings in the security section.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000649"                        : {
-        "message"     : "The last background job was executed with PHP $STRING_1$, but the webserver uses PHP $STRING_2$.",
+    "backend-000649": {
+        "message": "The last background job was executed with PHP $STRING_1$, but the webserver uses PHP $STRING_2$.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -2422,60 +2422,60 @@
             }
         }
     },
-    "backend-000650"                        : {
+    "backend-000650": {
         "message": "Using different major versions of PHP may cause issues."
     },
-    "backend-000651"                        : {
+    "backend-000651": {
         "message": "Default Password Security Settings"
     },
-    "backend-000652"                        : {
+    "backend-000652": {
         "message": "Security Check Hash"
     },
-    "backend-000653"                        : {
+    "backend-000653": {
         "message": "Don't store hashes"
     },
-    "backend-000654"                        : {
+    "backend-000654": {
         "message": "Store 50% of the hash"
     },
-    "backend-000655"                        : {
+    "backend-000655": {
         "message": "Store 75% of the hash"
     },
-    "backend-000656"                        : {
+    "backend-000656": {
         "message": "Store the full hash"
     },
-    "backend-000657"                        : {
+    "backend-000657": {
         "message": "Backup automatically restored"
     },
-    "backend-000658"                        : {
+    "backend-000658": {
         "message": "The passwords app seems tho have encountered a database issue."
     },
-    "backend-000659"                        : {
-        "message"     : "Because of this, the app backup \"$STR_1$\" was restored automatically.",
+    "backend-000659": {
+        "message": "Because of this, the app backup \"$STR_1$\" was restored automatically.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000660"                        : {
+    "backend-000660": {
         "message": "If this was an error, a backup of the database was made before restoring it."
     },
-    "backend-000661"                        : {
+    "backend-000661": {
         "message": "You can disable automatic backup restoring in the app settings."
     },
-    "backend-000662"                        : {
+    "backend-000662": {
         "message": "Restore backups automatically when database wiped"
     },
-    "backend-000663"                        : {
-        "message"     : "Passwords ends updates for Nextcloud $STR_1$",
+    "backend-000663": {
+        "message": "Passwords ends updates for Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
             }
         }
     },
-    "backend-000664"                        : {
-        "message"     : "Passwords $STR_1$ is the last update for Nextcloud $STR_1$.",
+    "backend-000664": {
+        "message": "Passwords $STR_1$ is the last update for Nextcloud $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2485,8 +2485,8 @@
             }
         }
     },
-    "backend-000665"                        : {
-        "message"     : "Upgrade to Nextcloud $STR_1$ and PHP $STR_1$ (or PHP $STR_1$ for LSR) for future upgrades.",
+    "backend-000665": {
+        "message": "Upgrade to Nextcloud $STR_1$ and PHP $STR_1$ (or PHP $STR_1$ for LSR) for future upgrades.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2499,459 +2499,459 @@
             }
         }
     },
-    "backend-000666"                        : {
+    "backend-000666": {
         "message": "Select automatically"
     },
-    "frontend-000667"                       : {
+    "frontend-000667": {
         "message": "Tags CSV"
     },
-    "frontend-000669"                       : {
+    "frontend-000669": {
         "message": "Default"
     },
-    "frontend-000670"                       : {
+    "frontend-000670": {
         "message": "Start search when a key is pressed anywhere on the page"
     },
-    "frontend-000671"                       : {
+    "frontend-000671": {
         "message": "Search everywhere when the enter key is pressed in the search box"
     },
-    "settings-000678"                       : {
+    "settings-000678": {
         "message": "Login & Session"
     },
-    "settings-000679"                       : {
+    "settings-000679": {
         "message": "Keep me logged in"
     },
-    "settings-000680"                       : {
+    "settings-000680": {
         "message": "Always"
     },
-    "settings-000681"                       : {
+    "settings-000681": {
         "message": "When i'm working"
     },
-    "settings-000682"                       : {
+    "settings-000682": {
         "message": "When i'm active"
     },
-    "settings-000683"                       : {
+    "settings-000683": {
         "message": "End session after"
     },
-    "settings-000684"                       : {
+    "settings-000684": {
         "message": "One minute"
     },
-    "settings-000685"                       : {
-        "message"     : "$MINUTES$ minutes",
+    "settings-000685": {
+        "message": "$MINUTES$ minutes",
         "placeholders": {
             "minutes": {
                 "content": "$1"
             }
         }
     },
-    "settings-000686"                       : {
+    "settings-000686": {
         "message": "End-to-end Encryption"
     },
-    "settings-000687"                       : {
+    "settings-000687": {
         "message": "Server encryption mode"
     },
-    "settings-000688"                       : {
+    "settings-000688": {
         "message": "None if CSE used"
     },
-    "settings-000689"                       : {
+    "settings-000689": {
         "message": "Simple encryption"
     },
-    "settings-000690"                       : {
+    "settings-000690": {
         "message": "Advanced encryption"
     },
-    "settings-000691"                       : {
+    "settings-000691": {
         "message": "Client encryption mode"
     },
-    "settings-000692"                       : {
+    "settings-000692": {
         "message": "Enable"
     },
-    "settings-000693"                       : {
+    "settings-000693": {
         "message": "Change Password"
     },
-    "settings-000694"                       : {
+    "settings-000694": {
         "message": "Passwords Detail View"
     },
-    "settings-000695"                       : {
+    "settings-000695": {
         "message": "Show website preview"
     },
-    "settings-000696"                       : {
+    "settings-000696": {
         "message": "New password"
     },
-    "settings-000697"                       : {
+    "settings-000697": {
         "message": "Repeat password"
     },
-    "settings-000698"                       : {
+    "settings-000698": {
         "message": "Old password"
     },
-    "settings-000699"                       : {
+    "settings-000699": {
         "message": "Password changed"
     },
-    "settings-000700"                       : {
+    "settings-000700": {
         "message": "Changing password failed"
     },
-    "settings-000701"                       : {
+    "settings-000701": {
         "message": "Administration Issues"
     },
-    "settings-000702"                       : {
+    "settings-000702": {
         "message": "Password Sharing"
     },
-    "settings-000703"                       : {
+    "settings-000703": {
         "message": "Share as editable by default"
     },
-    "settings-000704"                       : {
+    "settings-000704": {
         "message": "Allow sharing by default"
     },
-    "settings-000705"                       : {
+    "settings-000705": {
         "message": "Code"
     },
-    "settings-000706"                       : {
+    "settings-000706": {
         "message": "Invalid reset code"
     },
-    "settings-000707"                       : {
+    "settings-000707": {
         "message": "Add numbers to generated passwords"
     },
-    "settings-000708"                       : {
+    "settings-000708": {
         "message": "Add special characters to generated passwords"
     },
-    "settings-000709"                       : {
+    "settings-000709": {
         "message": "Specify the amount of time after a request before the session is cancelled"
     },
-    "settings-000710"                       : {
+    "settings-000710": {
         "message": "Choose the type of encryption used to encrypt data on the server"
     },
-    "settings-000711"                       : {
+    "settings-000711": {
         "message": "Run the installation wizard to set up encryption for your passwords"
     },
-    "settings-000712"                       : {
+    "settings-000712": {
         "message": "Change the encryption password"
     },
-    "settings-000713"                       : {
+    "settings-000713": {
         "message": "Show a preview of the associated website in the details. (Not on mobiles)"
     },
-    "settings-000714"                       : {
+    "settings-000714": {
         "message": "Notifies you of configuration errors and other administrative issues"
     },
-    "settings-000715"                       : {
-        "message"     : "Enter \"$CODE$\" to reset your account and delete everything.",
+    "settings-000715": {
+        "message": "Enter \"$CODE$\" to reset your account and delete everything.",
         "placeholders": {
             "code": {
                 "content": "$1"
             }
         }
     },
-    "settings-000716"                       : {
+    "settings-000716": {
         "message": "You can use this dialog to change your master password."
     },
-    "settings-000717"                       : {
+    "settings-000717": {
         "message": "Your password must be longer than 12 characters and not the old password"
     },
-    "settings-000718"                       : {
+    "settings-000718": {
         "message": "Please confirm your new password"
     },
-    "settings-000719"                       : {
+    "settings-000719": {
         "message": "You must enter your old password"
     },
-    "settings-000720"                       : {
+    "settings-000720": {
         "message": "Your password has been changed successfully."
     },
-    "settings-000721"                       : {
+    "settings-000721": {
         "message": "Enable the option to let other users edit a shared password by default"
     },
-    "settings-000722"                       : {
+    "settings-000722": {
         "message": "Enable the option to let other users share a shared password by default"
     },
-    "settings-000723"                       : {
+    "settings-000723": {
         "message": "Open the settings page in the handbook"
     },
-    "settings-000724"                       : {
+    "settings-000724": {
         "message": "Send keep-alive requests to the server to prevent the session from being cancelled"
     },
-    "settings-000725"                       : {
+    "settings-000725": {
         "message": "Choose the type of encryption used to encrypt data on the client before it's sent to the server"
     },
-    "settings-000726"                       : {
+    "settings-000726": {
         "message": "The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached."
     },
-    "settings-SettingsMouseWheelAction"     : {
-        "message"    : "Mousewheel click action",
+    "settings-SettingsMouseWheelAction": {
+        "message": "Mousewheel click action",
         "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
-    "settings-SettingsMouseWheelActionHelp" : {
-        "message"    : "Action to be performed when the mouse wheel is clicked on a password entry",
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Action to be performed when the mouse wheel is clicked on a password entry",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
-    "settings-SettingsCustomAction"         : {
-        "message"    : "Show shortcut button for",
+    "settings-SettingsCustomAction": {
+        "message": "Show shortcut button for",
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
-    "settings-SettingsCustomActionHelp"     : {
-        "message"    : "Adds an extra button for the specified action in the desktop view",
+    "settings-SettingsCustomActionHelp": {
+        "message": "Adds an extra button for the specified action in the desktop view",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
-    "settings-SettingsShowShareTab"         : {
-        "message"    : "Show Share Tab",
+    "settings-SettingsShowShareTab": {
+        "message": "Show Share Tab",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
-    "settings-SettingsRecoverItems"         : {
-        "message"    : "Recover hidden items",
+    "settings-SettingsRecoverItems": {
+        "message": "Recover hidden items",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     },
-    "settings-SettingsRecoverItemsButton"   : {
-        "message"    : "Recover Items",
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recover Items",
         "description": "Button to trigger the recover hidden items action dialog"
     },
-    "settings-SettingsRecoverItemsHelp"     : {
-        "message"    : "This action removes the \"hidden\" flag from items so that these items show up in the app again.",
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "This action removes the \"hidden\" flag from items so that these items show up in the app again.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
-    "settings-RecoverItemsSelectTitle"      : {
-        "message"    : "Recover hidden items",
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recover hidden items",
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
-    "settings-RecoverItemsSelectText"       : {
-        "message"    : "Please select any type of hidden items you wish to recover.",
+    "settings-RecoverItemsSelectText": {
+        "message": "Please select any type of hidden items you wish to recover.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
-    "settings-RecoverItemsInvisiblePwd"     : {
-        "message"    : "Passwords which aren't in a hidden folder",
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Passwords which aren't in a hidden folder",
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message"    : "Recover hidden passwords which are in a folder that is not hidden itself",
+        "message": "Recover hidden passwords which are in a folder that is not hidden itself",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
-    "settings-RecoverItemsPasswords"        : {
-        "message"    : "All hidden passwords",
+    "settings-RecoverItemsPasswords": {
+        "message": "All hidden passwords",
         "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
     },
-    "settings-RecoverItemsPasswordsTitle"   : {
-        "message"    : "Recover all hidden passwords regardless of folder status",
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recover all hidden passwords regardless of folder status",
         "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
     },
-    "settings-RecoverItemsFolders"          : {
-        "message"    : "All hidden folders",
+    "settings-RecoverItemsFolders": {
+        "message": "All hidden folders",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
-    "settings-RecoverItemsFoldersTitle"     : {
-        "message"    : "Recover all hidden folders",
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recover all hidden folders",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
-    "settings-RecoverItemsTags"             : {
-        "message"    : "All hidden tags",
+    "settings-RecoverItemsTags": {
+        "message": "All hidden tags",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
-    "settings-RecoverItemsTagsTitle"        : {
-        "message"    : "Recover all hidden tags",
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recover all hidden tags",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
-    "settings-RecoverItemsSuccessMessage"   : {
-        "message"     : "Recovered $PASSWORDS$ password(s), $FOLDERS$ folder(s) and $TAGS$ tag(s).",
-        "description" : "Success message after the recover hidden items action was executed",
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recovered $PASSWORDS$ password(s), $FOLDERS$ folder(s) and $TAGS$ tag(s).",
+        "description": "Success message after the recover hidden items action was executed",
         "placeholders": {
             "passwords": {
                 "content": "$1"
             },
-            "folders"  : {
+            "folders": {
                 "content": "$2"
             },
-            "tags"     : {
+            "tags": {
                 "content": "$3"
             }
         }
     },
-    "settings-RecoverItemsTitle"            : {
-        "message"    : "Items recovered",
+    "settings-RecoverItemsTitle": {
+        "message": "Items recovered",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
-    "settings-RecoverItemsError"            : {
-        "message"    : "An error occurred.",
+    "settings-RecoverItemsError": {
+        "message": "An error occurred.",
         "description": "Generic error message if the recover hidden items action fails"
     },
-    "tutorial-000730"                       : {
+    "tutorial-000730": {
         "message": "After launch, show my"
     },
-    "tutorial-000731"                       : {
+    "tutorial-000731": {
         "message": "folders"
     },
-    "tutorial-000732"                       : {
+    "tutorial-000732": {
         "message": "tags"
     },
-    "tutorial-000733"                       : {
+    "tutorial-000733": {
         "message": "favorites"
     },
-    "tutorial-000734"                       : {
+    "tutorial-000734": {
         "message": "passwords"
     },
-    "tutorial-000735"                       : {
+    "tutorial-000735": {
         "message": "recently changed"
     },
-    "tutorial-000736"                       : {
+    "tutorial-000736": {
         "message": "Mark my passwords if..."
     },
-    "tutorial-000737"                       : {
+    "tutorial-000737": {
         "message": "they are older than"
     },
-    "tutorial-000738"                       : {
+    "tutorial-000738": {
         "message": "three months"
     },
-    "tutorial-000739"                       : {
+    "tutorial-000739": {
         "message": "six months"
     },
-    "tutorial-000740"                       : {
+    "tutorial-000740": {
         "message": "one year"
     },
-    "tutorial-000741"                       : {
+    "tutorial-000741": {
         "message": "two years"
     },
-    "tutorial-000742"                       : {
-        "message"     : "$DAYS$ days",
+    "tutorial-000742": {
+        "message": "$DAYS$ days",
         "placeholders": {
             "days": {
                 "content": "$1"
             }
         }
     },
-    "tutorial-000743"                       : {
+    "tutorial-000743": {
         "message": "they are duplicates"
     },
-    "tutorial-000744"                       : {
+    "tutorial-000744": {
         "message": "Make my new passwords"
     },
-    "tutorial-000745"                       : {
+    "tutorial-000745": {
         "message": "strong"
     },
-    "tutorial-000746"                       : {
+    "tutorial-000746": {
         "message": "stronger"
     },
-    "tutorial-000747"                       : {
+    "tutorial-000747": {
         "message": "very strong"
     },
-    "tutorial-000748"                       : {
+    "tutorial-000748": {
         "message": "extremely strong"
     },
-    "tutorial-000749"                       : {
+    "tutorial-000749": {
         "message": "include numbers"
     },
-    "tutorial-000750"                       : {
+    "tutorial-000750": {
         "message": "include special characters"
     },
-    "tutorial-000751"                       : {
+    "tutorial-000751": {
         "message": "A safe home for your passwords"
     },
-    "tutorial-000752"                       : {
+    "tutorial-000752": {
         "message": "Keep your passwords secret"
     },
-    "tutorial-000753"                       : {
+    "tutorial-000753": {
         "message": "Customize your experience"
     },
-    "tutorial-000754"                       : {
+    "tutorial-000754": {
         "message": "Bring order to your passwords"
     },
-    "tutorial-000755"                       : {
+    "tutorial-000755": {
         "message": "Get connected"
     },
-    "tutorial-000756"                       : {
+    "tutorial-000756": {
         "message": "Encrypt my existing passwords"
     },
-    "tutorial-000757"                       : {
+    "tutorial-000757": {
         "message": "Save the password"
     },
-    "tutorial-000758"                       : {
+    "tutorial-000758": {
         "message": "Repeat your password"
     },
-    "tutorial-000759"                       : {
+    "tutorial-000759": {
         "message": "Installing Encryption"
     },
-    "tutorial-000760"                       : {
+    "tutorial-000760": {
         "message": "Keychain"
     },
-    "tutorial-000761"                       : {
+    "tutorial-000761": {
         "message": "Clean up"
     },
-    "tutorial-000762"                       : {
+    "tutorial-000762": {
         "message": "Success"
     },
-    "tutorial-000763"                       : {
+    "tutorial-000763": {
         "message": "Find help when you need it"
     },
-    "tutorial-000764"                       : {
+    "tutorial-000764": {
         "message": "Go to Apps and Extensions"
     },
-    "tutorial-000765"                       : {
+    "tutorial-000765": {
         "message": "Continue"
     },
-    "tutorial-000766"                       : {
+    "tutorial-000766": {
         "message": "Skip"
     },
-    "tutorial-000767"                       : {
+    "tutorial-000767": {
         "message": "Check password security with"
     },
-    "tutorial-000768"                       : {
+    "tutorial-000768": {
         "message": "Generate passwords using"
     },
-    "tutorial-000769"                       : {
+    "tutorial-000769": {
         "message": "Get favicons from"
     },
-    "tutorial-000770"                       : {
+    "tutorial-000770": {
         "message": "Get website previews from"
     },
-    "tutorial-000771"                       : {
+    "tutorial-000771": {
         "message": "Make backups"
     },
-    "tutorial-000772"                       : {
+    "tutorial-000772": {
         "message": "View all settings"
     },
-    "tutorial-000773"                       : {
+    "tutorial-000773": {
         "message": "Read our tips for admins"
     },
-    "tutorial-000774"                       : {
+    "tutorial-000774": {
         "message": "Password (min. 12 characters)"
     },
-    "tutorial-000775"                       : {
+    "tutorial-000775": {
         "message": "Encryption in progress…"
     },
-    "tutorial-000776"                       : {
+    "tutorial-000776": {
         "message": "There are many settings so you can customize your experience."
     },
-    "tutorial-000777"                       : {
+    "tutorial-000777": {
         "message": "You can find all of them in \"More\", but we put the most common here:"
     },
-    "tutorial-000778"                       : {
+    "tutorial-000778": {
         "message": "Passwords offers modern and strong encryption to protect your data from prying eyes."
     },
-    "tutorial-000779"                       : {
+    "tutorial-000779": {
         "message": "Choose a secure password below to activate the ultimate protection for your passwords."
     },
-    "tutorial-000780"                       : {
+    "tutorial-000780": {
         "message": "Access your passwords with ease from anywhere, thanks to our apps and extensions."
     },
-    "tutorial-000781"                       : {
+    "tutorial-000781": {
         "message": "You can find our Apps and Extensions section in \"More\" or just click the button below."
     },
-    "tutorial-000782"                       : {
+    "tutorial-000782": {
         "message": "Passwords can be customized in a lot of different ways."
     },
-    "tutorial-000783"                       : {
+    "tutorial-000783": {
         "message": "As administrator you might want to take a look at these common settings."
     },
-    "tutorial-000784"                       : {
+    "tutorial-000784": {
         "message": "Whenever you don't know how something works, have questions or need help with a problem:"
     },
-    "tutorial-000785"                       : {
+    "tutorial-000785": {
         "message": "Help is just around the corner."
     },
-    "tutorial-000786"                       : {
+    "tutorial-000786": {
         "message": "Our built-in handbook can be found by clicking on \"More\" and explains the app in all details."
     },
-    "tutorial-000787"                       : {
+    "tutorial-000787": {
         "message": "In any other case, our community is the right place to ask your questions."
     },
-    "tutorial-000788"                       : {
+    "tutorial-000788": {
         "message": "Handbook will be opened after the tutorial"
     },
-    "tutorial-000789"                       : {
+    "tutorial-000789": {
         "message": "Enter a password with 12 characters or more"
     },
-    "tutorial-000790"                       : {
+    "tutorial-000790": {
         "message": "Your password needs at least 12 characters and the confirmation password must be the same"
     }
 }
