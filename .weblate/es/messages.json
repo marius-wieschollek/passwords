@@ -1918,9 +1918,6 @@
     "backend-000510": {
         "message": "Por favor, haz click en el enlace y sigue el sencillo tutorial para montar tu propio Besticon."
     },
-    "backend-000511": {
-        "message": "Tu configuración del servicio de faviconos es inválida"
-    },
     "backend-000512": {
         "message": "Tu configuración del servicio de vistas preliminares es inválida"
     },
