@@ -201,7 +201,7 @@
         "message": "Export"
     },
     "backups-000059": {
-        "message": "Waiting..."
+        "message": "Waiting…"
     },
     "backups-000060": {
         "message": "Export error"
@@ -619,7 +619,7 @@
         "message": "Website"
     },
     "frontend-000176": {
-        "message": "Add Tags..."
+        "message": "Add Tags…"
     },
     "frontend-000177": {
         "message": "Color"
@@ -712,7 +712,7 @@
         "message": "Delete folder"
     },
     "frontend-000207": {
-        "message": "Do you want to delete the folder?"
+        "message": "Do you want to delete the folder and its contents?"
     },
     "frontend-000208": {
         "message": "Folder deleted"
@@ -2774,7 +2774,7 @@
         "message": "recently changed"
     },
     "tutorial-000736": {
-        "message": "Mark my passwords if..."
+        "message": "Mark my passwords if…"
     },
     "tutorial-000737": {
         "message": "they are older than"
