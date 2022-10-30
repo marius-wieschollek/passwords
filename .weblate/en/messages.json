@@ -1950,9 +1950,6 @@
     "backend-000510": {
         "message": "Please click the link and follow our easy tutorial to host Besticon yourself."
     },
-    "backend-000511": {
-        "message": "Your favicon service configuration is invalid"
-    },
     "backend-000512": {
         "message": "Your preview service configuration is invalid"
     },
