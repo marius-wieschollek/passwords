@@ -1913,9 +1913,6 @@
     "backend-000510": {
         "message": "Si us plau, feu clic a l'enllaç i seguiu el nostre senzill tutorial per allotjar Besticon al vostre servidor."
     },
-    "backend-000511": {
-        "message": "La vostra configuració del servei de favicon no és vàlida"
-    },
     "backend-000512": {
         "message": "La vostra configuració del servei de vista prèvia no és vàlida"
     },
