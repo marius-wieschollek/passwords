@@ -1704,14 +1704,6 @@
     "backend-000457": {
         "message": "Password not shared"
     },
-    "backend-000458": {
-        "message": "A password was not shared with $STRING_1$ because it already is",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "You have an insecure password"
     },
