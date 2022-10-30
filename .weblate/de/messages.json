@@ -759,7 +759,7 @@
         "message": "Ordner löschen"
     },
     "frontend-000207": {
-        "message": "Möchtest du den Ordner und alle enthaltenen Elemente löschen?"
+        "message": "Möchtest du den Ordner seinen Inhalt löschen?"
     },
     "frontend-000208": {
         "message": "Ordner gelöscht"
