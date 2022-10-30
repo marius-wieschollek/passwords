@@ -1,1639 +1,1631 @@
 {
-  "backups-000126": {
-    "message": "Notitie"
-  },
-  "backups-000028": {
-    "message": "Backup of Exporteren"
-  },
-  "backups-000029": {
-    "message": "Kies Format"
-  },
-  "backups-000030": {
-    "message": "Alstublieft kiezen"
-  },
-  "backups-000032": {
-    "message": "Voorgedefinieerde CSV"
-  },
-  "backups-000039": {
-    "message": "Backup Wachtwoord"
-  },
-  "backups-000040": {
-    "message": "(Optional) Versleutel de backup met een wachtwoord dat minimaal 10 karakters lang is"
-  },
-  "backups-000041": {
-    "message": "De import ondersteund alleen CSV bestanden"
-  },
-  "backups-000042": {
-    "message": "Wachtwoorden exporteren"
-  },
-  "backups-000043": {
-    "message": "Mappen exporteren"
-  },
-  "backups-000044": {
-    "message": "Tags exporteren"
-  },
-  "backups-000144": {
-    "message": "Map"
-  },
-  "backups-000145": {
-    "message": "Tags"
-  },
-  "backups-000048": {
-    "message": "Bovenliggende map"
-  },
-  "backups-000051": {
-    "message": "Bovenliggende map Id"
-  },
-  "backups-000052": {
-    "message": "Leeg"
-  },
-  "backups-000053": {
-    "message": "Kopregel toevoegen"
-  },
-  "backups-000054": {
-    "message": "Exporteer wachtwoorden die met mij gedeeld zijn"
-  },
-  "backups-000055": {
-    "message": "Geen wachtwoorden veranderen die met mij gedeeld zijn"
-  },
-  "backups-000057": {
-    "message": "Export uitvoeren"
-  },
-  "backups-000058": {
-    "message": "Exporteren"
-  },
-  "backups-000059": {
-    "message": "Loopt..."
-  },
-  "backups-000060": {
-    "message": "Export Fout"
-  },
-  "backups-000062": {
-    "message": "Niks te exporteren"
-  },
-  "backups-000063": {
-    "message": "Er is geen data voorhanden om te exporteren"
-  },
-  "backups-000064": {
-    "message": "Restore of importeren"
-  },
-  "backups-000066": {
-    "message": "Wachtwoorden CSV"
-  },
-  "backups-000067": {
-    "message": "Mappen CSV"
-  },
-  "backups-000068": {
-    "message": "Overige CSV"
-  },
-  "backups-000069": {
-    "message": "Overige CSV"
-  },
-  "backups-000070": {
-    "message": "Selecteer bestand"
-  },
-  "backups-000071": {
-    "message": "Selecteer opties"
-  },
-  "backups-000072": {
-    "message": "Conflict afhandeling"
-  },
-  "backups-000073": {
-    "message": "Overslaan wanneer zelfde revisie"
-  },
-  "backups-000074": {
-    "message": "Altijd overslaan"
-  },
-  "backups-000075": {
-    "message": "Bestaande overschrijven"
-  },
-  "backups-000076": {
-    "message": "Samenvoegen met bestaande"
-  },
-  "backups-000077": {
-    "message": "Nieuw record aanmaken"
-  },
-  "backups-000078": {
-    "message": "Verplicht bij versleutelde backups"
-  },
-  "backups-000079": {
-    "message": "CSV Opties"
-  },
-  "backups-000081": {
-    "message": "Aanhalingsteken"
-  },
-  "backups-000082": {
-    "message": "Escape karakter"
-  },
-  "backups-000083": {
-    "message": "Veldbegrenzer"
-  },
-  "backups-000085": {
-    "message": "Aanhalingsteken"
-  },
-  "backups-000086": {
-    "message": "Enkelvoudig aanhalingsteken"
-  },
-  "backups-000087": {
-    "message": "Terugschrap"
-  },
-  "backups-000088": {
-    "message": "Detecteren"
-  },
-  "backups-000089": {
-    "message": "Komma"
-  },
-  "backups-000090": {
-    "message": "Puntkomma"
-  },
-  "backups-000091": {
-    "message": "Spatie"
-  },
-  "backups-000093": {
-    "message": "Detecteer niet ge-escapete aanhalingstekens"
-  },
-  "backups-000094": {
-    "message": "Eerste regel overslaan"
-  },
-  "backups-000095": {
-    "message": "Ontbrekende velden interpoleren"
-  },
-  "backups-000096": {
-    "message": "CSV veld keuze volgorde"
-  },
-  "backups-000097": {
-    "message": "Regel voorvertonen"
-  },
-  "backups-000098": {
-    "message": "Regel $LINE$",
-    "placeholders": {
-      "line": {
-        "content": "$1"
-      }
+    "backups-000126": {
+        "message": "Notitie"
+    },
+    "backups-000028": {
+        "message": "Backup of Exporteren"
+    },
+    "backups-000029": {
+        "message": "Kies Format"
+    },
+    "backups-000030": {
+        "message": "Alstublieft kiezen"
+    },
+    "backups-000032": {
+        "message": "Voorgedefinieerde CSV"
+    },
+    "backups-000039": {
+        "message": "Backup Wachtwoord"
+    },
+    "backups-000040": {
+        "message": "(Optional) Versleutel de backup met een wachtwoord dat minimaal 10 karakters lang is"
+    },
+    "backups-000041": {
+        "message": "De import ondersteund alleen CSV bestanden"
+    },
+    "backups-000042": {
+        "message": "Wachtwoorden exporteren"
+    },
+    "backups-000043": {
+        "message": "Mappen exporteren"
+    },
+    "backups-000044": {
+        "message": "Tags exporteren"
+    },
+    "backups-000144": {
+        "message": "Map"
+    },
+    "backups-000145": {
+        "message": "Tags"
+    },
+    "backups-000048": {
+        "message": "Bovenliggende map"
+    },
+    "backups-000051": {
+        "message": "Bovenliggende map Id"
+    },
+    "backups-000052": {
+        "message": "Leeg"
+    },
+    "backups-000053": {
+        "message": "Kopregel toevoegen"
+    },
+    "backups-000054": {
+        "message": "Exporteer wachtwoorden die met mij gedeeld zijn"
+    },
+    "backups-000055": {
+        "message": "Geen wachtwoorden veranderen die met mij gedeeld zijn"
+    },
+    "backups-000057": {
+        "message": "Export uitvoeren"
+    },
+    "backups-000058": {
+        "message": "Exporteren"
+    },
+    "backups-000059": {
+        "message": "Loopt..."
+    },
+    "backups-000060": {
+        "message": "Export Fout"
+    },
+    "backups-000062": {
+        "message": "Niks te exporteren"
+    },
+    "backups-000063": {
+        "message": "Er is geen data voorhanden om te exporteren"
+    },
+    "backups-000064": {
+        "message": "Restore of importeren"
+    },
+    "backups-000066": {
+        "message": "Wachtwoorden CSV"
+    },
+    "backups-000067": {
+        "message": "Mappen CSV"
+    },
+    "backups-000068": {
+        "message": "Overige CSV"
+    },
+    "backups-000069": {
+        "message": "Overige CSV"
+    },
+    "backups-000070": {
+        "message": "Selecteer bestand"
+    },
+    "backups-000071": {
+        "message": "Selecteer opties"
+    },
+    "backups-000072": {
+        "message": "Conflict afhandeling"
+    },
+    "backups-000073": {
+        "message": "Overslaan wanneer zelfde revisie"
+    },
+    "backups-000074": {
+        "message": "Altijd overslaan"
+    },
+    "backups-000075": {
+        "message": "Bestaande overschrijven"
+    },
+    "backups-000076": {
+        "message": "Samenvoegen met bestaande"
+    },
+    "backups-000077": {
+        "message": "Nieuw record aanmaken"
+    },
+    "backups-000078": {
+        "message": "Verplicht bij versleutelde backups"
+    },
+    "backups-000079": {
+        "message": "CSV Opties"
+    },
+    "backups-000081": {
+        "message": "Aanhalingsteken"
+    },
+    "backups-000082": {
+        "message": "Escape karakter"
+    },
+    "backups-000083": {
+        "message": "Veldbegrenzer"
+    },
+    "backups-000085": {
+        "message": "Aanhalingsteken"
+    },
+    "backups-000086": {
+        "message": "Enkelvoudig aanhalingsteken"
+    },
+    "backups-000087": {
+        "message": "Terugschrap"
+    },
+    "backups-000088": {
+        "message": "Detecteren"
+    },
+    "backups-000089": {
+        "message": "Komma"
+    },
+    "backups-000090": {
+        "message": "Puntkomma"
+    },
+    "backups-000091": {
+        "message": "Spatie"
+    },
+    "backups-000093": {
+        "message": "Detecteer niet ge-escapete aanhalingstekens"
+    },
+    "backups-000094": {
+        "message": "Eerste regel overslaan"
+    },
+    "backups-000095": {
+        "message": "Ontbrekende velden interpoleren"
+    },
+    "backups-000096": {
+        "message": "CSV veld keuze volgorde"
+    },
+    "backups-000097": {
+        "message": "Regel voorvertonen"
+    },
+    "backups-000098": {
+        "message": "Regel $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000100": {
+        "message": "Negeren"
+    },
+    "backups-000101": {
+        "message": "Import uitvoeren"
+    },
+    "backups-000102": {
+        "message": "Importeren"
+    },
+    "backups-000103": {
+        "message": "Ivoerbestand doorvoeren"
+    },
+    "backups-000104": {
+        "message": "Analyseer Tags"
+    },
+    "backups-000105": {
+        "message": "Analyseer mappen"
+    },
+    "backups-000106": {
+        "message": "Bezig met lezen Tags"
+    },
+    "backups-000107": {
+        "message": "Bezig met importeren Tags"
+    },
+    "backups-000108": {
+        "message": "Bezig met lezen mappen"
+    },
+    "backups-000109": {
+        "message": "Bezig met importeren mappen"
+    },
+    "backups-000110": {
+        "message": "Bezig met lezen wachtwoorden"
+    },
+    "backups-000111": {
+        "message": "Bezig met importeren wachtwoorden"
+    },
+    "backups-000112": {
+        "message": "Import mislukt"
+    },
+    "backups-000113": {
+        "message": "Import gedeeltelijk mislukt"
+    },
+    "backups-000114": {
+        "message": "Import succesvol"
+    },
+    "backups-000115": {
+        "message": "Import fout"
+    },
+    "backups-000117": {
+        "message": "Ongeldig bestandstype \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Wachtwoord benodigd"
+    },
+    "backups-000119": {
+        "message": "Ongeldig wachtwoord"
+    },
+    "backups-000120": {
+        "message": "Ontsleutelen van wachtwoorden mislukt"
+    },
+    "backups-000121": {
+        "message": "Ontsleutelen van mappen mislukt"
+    },
+    "backups-000122": {
+        "message": "Ontleutelen van Tags mislukt"
+    },
+    "backups-000124": {
+        "message": "CSV bestand kan niet ingedeeld worden"
+    },
+    "backups-000134": {
+        "message": "Ongeldig afsluitdend aanhalingsteken in geciteerd veld"
+    },
+    "backups-000135": {
+        "message": "Het bestand kon niet verwerkt worden: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ op regel $LINE$, Karakter $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000142": {
+        "message": "Het bestand heeft type \"$ACTUAL$\" maar \"$EXPECTED$\" wordt verwacht. Misschien heeft u een verkeerd bestand of verkeerde import methode gekozen..",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ staat erom bekend dat het foutieve export bestanden genereerd. Raadpleeg de handleiding voor hulp wanneer het bestand niet verwerkt kan worden.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000148": {
+        "message": "Wachtwoorden"
+    },
+    "frontend-000149": {
+        "message": "Alle"
+    },
+    "frontend-000150": {
+        "message": "Mappen"
+    },
+    "frontend-000151": {
+        "message": "Recent"
+    },
+    "frontend-000152": {
+        "message": "Favorieten"
+    },
+    "frontend-000153": {
+        "message": "Gedeeld"
+    },
+    "frontend-000154": {
+        "message": "Beveiliging"
+    },
+    "frontend-000155": {
+        "message": "Prullenbak"
+    },
+    "frontend-000156": {
+        "message": "Details"
+    },
+    "frontend-000157": {
+        "message": "Bewerken"
+    },
+    "frontend-000158": {
+        "message": "Hernoemen"
+    },
+    "frontend-000159": {
+        "message": "Verwijderen"
+    },
+    "frontend-000160": {
+        "message": "Terugzetten"
+    },
+    "frontend-000161": {
+        "message": "Nieuw Wachtwoord"
+    },
+    "frontend-000162": {
+        "message": "Nieuwe Map"
+    },
+    "frontend-000163": {
+        "message": "Nieuwe Tag"
+    },
+    "frontend-000164": {
+        "message": "Veilig"
+    },
+    "frontend-000166": {
+        "message": "Onveilig"
+    },
+    "frontend-000167": {
+        "message": "Onveilig (Duplicaat)"
+    },
+    "frontend-000168": {
+        "message": "Onveilig (Verouderd)"
+    },
+    "frontend-000169": {
+        "message": "Gecompromiteerd"
+    },
+    "frontend-000170": {
+        "message": "Delen"
+    },
+    "frontend-000171": {
+        "message": "Revisies"
+    },
+    "frontend-000172": {
+        "message": "QR Code"
+    },
+    "frontend-000173": {
+        "message": "Wachtwoord"
+    },
+    "frontend-000174": {
+        "message": "Gebruikersnaam"
+    },
+    "frontend-000175": {
+        "message": "Website"
+    },
+    "frontend-000176": {
+        "message": "Tags toevoegen..."
+    },
+    "frontend-000177": {
+        "message": "Kleur"
+    },
+    "frontend-000178": {
+        "message": "Naam"
+    },
+    "frontend-000179": {
+        "message": "Label"
+    },
+    "frontend-000180": {
+        "message": "Algemeen"
+    },
+    "frontend-000181": {
+        "message": "Eigenschappen"
+    },
+    "frontend-000182": {
+        "message": "Nummers"
+    },
+    "frontend-000183": {
+        "message": "Speciale karakters"
+    },
+    "frontend-000184": {
+        "message": "Meer Opties"
+    },
+    "frontend-000185": {
+        "message": "Favoriet"
+    },
+    "frontend-000186": {
+        "message": "Versleuteling"
+    },
+    "frontend-000187": {
+        "message": "Op de Server"
+    },
+    "frontend-000188": {
+        "message": "Eigen Velden"
+    },
+    "frontend-000189": {
+        "message": "Geheim"
+    },
+    "frontend-000191": {
+        "message": "Bestand"
+    },
+    "frontend-000192": {
+        "message": "Waarde"
+    },
+    "frontend-000193": {
+        "message": "Zichtbaarheid wisselen"
+    },
+    "frontend-000194": {
+        "message": "Wachtwoord genereren"
+    },
+    "frontend-000195": {
+        "message": "Simple Server Side Encryption V1"
+    },
+    "frontend-000196": {
+        "message": "Maak aantekeningen"
+    },
+    "frontend-000197": {
+        "message": "Opslaan"
+    },
+    "frontend-000198": {
+        "message": "Map aanmaken"
+    },
+    "frontend-000199": {
+        "message": "Map Aangemaakt"
+    },
+    "frontend-000200": {
+        "message": "Map aanmaken mislukt"
+    },
+    "frontend-000201": {
+        "message": "Map hernoemen"
+    },
+    "frontend-000202": {
+        "message": "Map hernoemd"
+    },
+    "frontend-000203": {
+        "message": "Map hernoemen mislukt"
+    },
+    "frontend-000204": {
+        "message": "Map verplaatst"
+    },
+    "frontend-000205": {
+        "message": "Map verplaatsen mislukt"
+    },
+    "frontend-000206": {
+        "message": "Map verwijderen"
+    },
+    "frontend-000207": {
+        "message": "Wilt u deze map verwijderen?"
+    },
+    "frontend-000208": {
+        "message": "Map verwijderd"
+    },
+    "frontend-000209": {
+        "message": "Verwijderen van map mislukt"
+    },
+    "frontend-000210": {
+        "message": "Map hersteld"
+    },
+    "frontend-000211": {
+        "message": "Herstellen van map mistlukt"
+    },
+    "frontend-000212": {
+        "message": "Tag aanmaken"
+    },
+    "frontend-000213": {
+        "message": "Tag aangemaakt"
+    },
+    "frontend-000214": {
+        "message": "Tag aanmaken mislukt"
+    },
+    "frontend-000215": {
+        "message": "Tag bewerken"
+    },
+    "frontend-000217": {
+        "message": "Tag opgeslagen"
+    },
+    "frontend-000218": {
+        "message": "Opslaan van Tag mislukt"
+    },
+    "frontend-000219": {
+        "message": "Tag verwijderen"
+    },
+    "frontend-000220": {
+        "message": "Wilt u de Tag verwijderen?"
+    },
+    "frontend-000221": {
+        "message": "Tag verwijderd"
+    },
+    "frontend-000222": {
+        "message": "Verwijderen van Tag mislukt"
+    },
+    "frontend-000223": {
+        "message": "Tag hersteld"
+    },
+    "frontend-000224": {
+        "message": "Herstellen van Tag Mislukt"
+    },
+    "frontend-000225": {
+        "message": "Nieuw Wachtwoord aanmaken"
+    },
+    "frontend-000226": {
+        "message": "Wachtwoord aangemaakt"
+    },
+    "frontend-000227": {
+        "message": "Wachtwoord aanmaken mislukt"
+    },
+    "frontend-000228": {
+        "message": "Wachtwoord bewerken"
+    },
+    "frontend-000229": {
+        "message": "Wachtwoord opgeslagen"
+    },
+    "frontend-000230": {
+        "message": "Wachtwoord opslaan mislukt"
+    },
+    "frontend-000231": {
+        "message": "Wachtwoord verplaatst"
+    },
+    "frontend-000232": {
+        "message": "Wachtwoord verplaatsen mislukt"
+    },
+    "frontend-000233": {
+        "message": "Wachtwoord verwijderen"
+    },
+    "frontend-000234": {
+        "message": "Wilt u het wachtwoord verwijderen?"
+    },
+    "frontend-000235": {
+        "message": "Wachtwoord verwijderd"
+    },
+    "frontend-000236": {
+        "message": "Wachtwoord hersteld"
+    },
+    "frontend-000237": {
+        "message": "Wachtwoord herstellen mislukt"
+    },
+    "frontend-000238": {
+        "message": "Open URL"
+    },
+    "frontend-000239": {
+        "message": "URL kopieren"
+    },
+    "frontend-000240": {
+        "message": "Gebruiker kopieren"
+    },
+    "frontend-000241": {
+        "message": "Wachtwoord kopieren"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ is naar het klembord gekopieerd",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Laatst gewijzigd op $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Herstel revisie"
+    },
+    "frontend-000246": {
+        "message": "Revisie hersteld"
+    },
+    "frontend-000247": {
+        "message": "Herstellen van revisie mislukt"
+    },
+    "frontend-000248": {
+        "message": "Wilt u de revisie herstellen?"
+    },
+    "frontend-000249": {
+        "message": "Met mij gedeeld"
+    },
+    "frontend-000250": {
+        "message": "Door mij gedeeld"
+    },
+    "frontend-000251": {
+        "message": "Statistieken"
+    },
+    "frontend-000252": {
+        "message": "Aangemaakt op"
+    },
+    "frontend-000253": {
+        "message": "Laatst geupdated"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ revisies",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Shares"
+    },
+    "frontend-000256": {
+        "message": "$COUNT$ keer gedeeld",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000264": {
+        "message": "Meer"
+    },
+    "frontend-000265": {
+        "message": "Backup en Restore"
+    },
+    "frontend-000526": {
+        "message": "Browser Extensie"
+    },
+    "frontend-000267": {
+        "message": "Handboek"
+    },
+    "frontend-000268": {
+        "message": "Apps & uitbreidingen"
+    },
+    "frontend-000274": {
+        "message": "Gebruiker zoeken"
+    },
+    "frontend-000275": {
+        "message": "Stel verloopdatum in"
+    },
+    "frontend-000276": {
+        "message": "Verloopt op $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Kies een verloopdatum of laat het veld leeg om oneindig lang te delen"
+    },
+    "frontend-000278": {
+        "message": "Kies een verloopdatum die in de toekomst ligt"
+    },
+    "frontend-000279": {
+        "message": "Ongeldige datum"
+    },
+    "frontend-000280": {
+        "message": "De gebruiker $UID$ bestaat niet",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Kan wachtwoord niet delen: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Schijfrechten omschakelen"
+    },
+    "frontend-000283": {
+        "message": "Deelrechten omschakelen"
+    },
+    "frontend-000284": {
+        "message": "Delen beeindigen"
+    },
+    "frontend-000285": {
+        "message": "Datum"
+    },
+    "frontend-000286": {
+        "message": "Standaard Cache (0 Bestanden, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Avatar Cache (0 Bestanden, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Favicon Cache (0 Bestanden, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Voorvertonings Cache (0 Bestanden, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Wachtwoord Cache (0 Bestanden, 0 B)"
+    },
+    "backups-000031": {
+        "message": "Database Backup"
+    },
+    "backups-000046": {
+        "message": "Maplabel"
+    },
+    "backups-000047": {
+        "message": "Taglabels"
+    },
+    "backups-000049": {
+        "message": "Map Id"
+    },
+    "backups-000050": {
+        "message": "Tag Ids"
+    },
+    "backups-000061": {
+        "message": "Download $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000080": {
+        "message": "Database"
+    },
+    "backups-000092": {
+        "message": "Tab"
+    },
+    "frontend-000291": {
+        "message": "Veranderd"
+    },
+    "frontend-000292": {
+        "message": "Veranderd"
+    },
+    "frontend-000293": {
+        "message": "Bewerkt op"
+    },
+    "frontend-000294": {
+        "message": "Aangemaakt op"
+    },
+    "frontend-000295": {
+        "message": "Revisie"
+    },
+    "frontend-000296": {
+        "message": "URL"
+    },
+    "frontend-000297": {
+        "message": "Bovenliggende"
+    },
+    "frontend-000298": {
+        "message": "Alle items verwijderen"
+    },
+    "frontend-000299": {
+        "message": "Alle items restoren"
+    },
+    "frontend-000300": {
+        "message": "Restore Items"
+    },
+    "frontend-000301": {
+        "message": "Alle items restoren in de prullenbak?"
+    },
+    "frontend-000302": {
+        "message": "Dit item restoren"
+    },
+    "frontend-000303": {
+        "message": "Item restored"
+    },
+    "frontend-000304": {
+        "message": "Prullenbak legen"
+    },
+    "frontend-000305": {
+        "message": "Wilt u alle items in de prullenbak definitief verwijderen?"
+    },
+    "frontend-000306": {
+        "message": "Prullenbak geleegd"
+    },
+    "frontend-000307": {
+        "message": "Zoeken"
+    },
+    "frontend-000308": {
+        "message": "Gebruik het zoekvenster om te zoeken"
+    },
+    "frontend-000309": {
+        "message": "Zoek overal naar \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000266": {
+        "message": "Instellingen"
+    },
+    "frontend-000528": {
+        "message": "Wachtwoord regels"
+    },
+    "frontend-000529": {
+        "message": "Markeer duplicaten"
+    },
+    "frontend-000530": {
+        "message": "Maximale leeftijd in dagen"
+    },
+    "frontend-000531": {
+        "message": "Wachtwoord generator"
+    },
+    "frontend-000532": {
+        "message": "Wachtwoord sterkte"
+    },
+    "frontend-000533": {
+        "message": "Cijfers gebruiken"
+    },
+    "frontend-000534": {
+        "message": "Bijzondere tekens gebruiken"
+    },
+    "frontend-000535": {
+        "message": "Gebruikersinterface"
+    },
+    "frontend-000536": {
+        "message": "Startpagina"
+    },
+    "frontend-000537": {
+        "message": "Alle wachtwoorden"
+    },
+    "frontend-000538": {
+        "message": "Wachtwoorden in lijstweergave"
+    },
+    "frontend-000539": {
+        "message": "Dit veld als titel gebruiken"
+    },
+    "frontend-000540": {
+        "message": "Sorteer op"
+    },
+    "frontend-000541": {
+        "message": "Titelveld"
+    },
+    "frontend-000542": {
+        "message": "Actie bij klik"
+    },
+    "frontend-000543": {
+        "message": "Actie bij dubbelklik"
+    },
+    "frontend-000544": {
+        "message": "Kopieer wachtwoord"
+    },
+    "frontend-000545": {
+        "message": "Kopieer gebruikersnaam"
+    },
+    "frontend-000546": {
+        "message": "Kopieer URL"
+    },
+    "frontend-000547": {
+        "message": "Laat details zien"
+    },
+    "frontend-000548": {
+        "message": "Voeg kopieer opties toe in menu"
+    },
+    "frontend-000549": {
+        "message": "Laat gebruikersnaam zien in lijstweergave"
+    },
+    "frontend-000550": {
+        "message": "Laat Tags zien in lijstweergave"
+    },
+    "frontend-000551": {
+        "message": "Laat verborgen eigen velden zien"
+    },
+    "frontend-000552": {
+        "message": "Zoek terwijl ik tik"
+    },
+    "frontend-000553": {
+        "message": "Toets Enter om overal te zoeken"
+    },
+    "frontend-000554": {
+        "message": "Altijd de zoeksectie laten zien"
+    },
+    "frontend-000555": {
+        "message": "Berichtgeving"
+    },
+    "frontend-000556": {
+        "message": "Stuur E-Mails bij"
+    },
+    "frontend-000557": {
+        "message": "Beveiligingsproblemen"
+    },
+    "frontend-000558": {
+        "message": "Met mij gedeelde wachtwoorden"
+    },
+    "frontend-000559": {
+        "message": "Laat notificaties zien bij"
+    },
+    "frontend-000560": {
+        "message": "Andere fouten"
+    },
+    "frontend-000561": {
+        "message": "Gevarenzone"
+    },
+    "frontend-000562": {
+        "message": "Alle instellingen resetten"
+    },
+    "frontend-000563": {
+        "message": "Reset"
+    },
+    "frontend-000564": {
+        "message": "Alles verwijderen"
+    },
+    "frontend-000565": {
+        "message": "ALLES VERWIJDEREN"
+    },
+    "frontend-000566": {
+        "message": "Account reset aangevraagd"
+    },
+    "frontend-000567": {
+        "message": "Weergave"
+    },
+    "frontend-000669": {
+        "message": "Standaard"
+    },
+    "frontend-000568": {
+        "message": "Geavanceerd"
+    },
+    "frontend-000310": {
+        "message": "Er is hier niets"
+    },
+    "frontend-000311": {
+        "message": "Klik op het \"+\" symbool om iets toe te voegen"
+    },
+    "frontend-000312": {
+        "message": "Verwijderde items verschijnen hier"
+    },
+    "frontend-000313": {
+        "message": "Er zijn geen wachtwoorden met u gedeeld"
+    },
+    "frontend-000314": {
+        "message": "U heeft geen wachtwoorden gedeeld"
+    },
+    "frontend-000315": {
+        "message": "Uw favorieten verschijnen hier"
+    },
+    "frontend-000316": {
+        "message": "Mogenlijkerwijs heeft u nog geen wachtwoorden"
+    },
+    "frontend-000317": {
+        "message": "Dat is een goed teken"
+    },
+    "frontend-000318": {
+        "message": "Ga naar $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000320": {
+        "message": "AFbeelding $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "De pagina kan niet geladen worden: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000324": {
+        "message": "Pagina niet gevonden"
+    },
+    "frontend-000328": {
+        "message": "Meld het ons dan!"
+    },
+    "frontend-000331": {
+        "message": "Netwerkfout"
+    },
+    "frontend-000332": {
+        "message": "De module $MODULE$ kon niet geladen worden. Mogelijk is de verbinding met Nextcloud verbroken",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Sorteer op naam"
+    },
+    "frontend-000334": {
+        "message": "Sorteer op datum gewijzigd"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ Wachtwoorden",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 Wachtwoord"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ Mappen",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 Map"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ Tags",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 Tag"
+    },
+    "frontend-000341": {
+        "message": "Niets"
+    },
+    "frontend-000342": {
+        "message": " en "
+    },
+    "frontend-000343": {
+        "message": "overeenkomst"
+    },
+    "frontend-000344": {
+        "message": "Overeenkomsten"
+    },
+    "frontend-000363": {
+        "message": "waar"
+    },
+    "frontend-000364": {
+        "message": "niet waar"
+    },
+    "frontend-000365": {
+        "message": "Ja"
+    },
+    "frontend-000366": {
+        "message": "nee"
+    },
+    "frontend-000569": {
+        "message": "Markeer wachtwoorden als zwak wanneer ze gebruikt worden vor meerdere accounts"
+    },
+    "frontend-000570": {
+        "message": "Markeer wachtwoorden als zwak wanneer ze het aangegeven aantal dagen overschijden"
+    },
+    "frontend-000571": {
+        "message": "Een hogere sterkte resulteert in langere en complexere wachtwoorden"
+    },
+    "frontend-000572": {
+        "message": "Laat de geselecteerde eigenschap als titel zien in lijstoverzicht"
+    },
+    "frontend-000573": {
+        "message": "Sorteert wachtwoorden op hun geselecteerde eigenschap wanneer sorteren op naam is geselecteerd"
+    },
+    "frontend-000574": {
+        "message": "Actie die die bij een klik op het Wachtwoord wordt uitgevoerd"
+    },
+    "frontend-000575": {
+        "message": "Actie die bij een dubbelklik op een wachtwoord wordt uitgevoerd"
+    },
+    "frontend-000576": {
+        "message": "Laat de opties om te kopieren van een wachtwoord en gebruikersnaam zien in het menu"
+    },
+    "frontend-000577": {
+        "message": "De initieele sectie die te zien is bij het openen van de APP"
+    },
+    "frontend-000578": {
+        "message": "Laat altijd de gebruiksnaam voor een wachtwoord in lijstoverzicht zien"
+    },
+    "frontend-000579": {
+        "message": "Laat de Tags voor elk wachtwoord zien in een lijstoverzicht. Dit verhoogt de laadtijd"
+    },
+    "frontend-000580": {
+        "message": "Laat de verborgen eigen velden en de details sectie van een wachtwoord zien in het bewerkformulier"
+    },
+    "frontend-000581": {
+        "message": "Stuurt u E-Mails wanneer wachtwoorden gecompromiteerd zijn of wanneer er andere beveiligingsproblemen optreden"
+    },
+    "frontend-000582": {
+        "message": "Stuurt u E-Mails wanneer anderen wachtwoorden met u delen"
+    },
+    "frontend-000670": {
+        "message": "Start de zoekopdracht zodra u een toets indrukt"
+    },
+    "frontend-000671": {
+        "message": "Zoekt overal wanneer de Enter toets in het zoekveld wordt ingedrukt"
+    },
+    "frontend-000583": {
+        "message": "Laat altijd de sectie voor globaal zoeken in de navigatie zien"
+    },
+    "frontend-000584": {
+        "message": "Waarschuwt u over gecompromiteerde wachtwoorden of andere beveiligingsproblemen"
+    },
+    "frontend-000585": {
+        "message": "Waarschuwt u wanneer anderen wachtwoorden met u delen"
+    },
+    "frontend-000586": {
+        "message": "Waarschuwt u wanneer er een achtergrondproces fout gaat"
+    },
+    "frontend-000587": {
+        "message": "Reset alle instellingen op deze pagina naar standaard waarden"
+    },
+    "frontend-000588": {
+        "message": "Dit zal alle instellingen resetten naar hun standaard waarden. Wilt u doorgaan?"
+    },
+    "frontend-000589": {
+        "message": "Verwijder ale configuratie, wachtwoorden, mappen en Tags en begin overnieuw"
+    },
+    "frontend-000368": {
+        "message": "U heeft de maximumlengte van 4096 tekens bereikt"
+    },
+    "frontend-000369": {
+        "message": "We konden niets vinden voor \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "De pagina \"$PAGE$\" kon niet opgehaald worden van de handleidingsserver.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Er staat data gereed om gesynchroniseerd te worden"
+    },
+    "frontend-000590": {
+        "message": "Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen."
+    },
+    "backend-000377": {
+        "message": "HTTPS verplicht"
+    },
+    "backend-000378": {
+        "message": "herladen"
+    },
+    "backend-000380": {
+        "message": "Documentatie"
+    },
+    "backend-000382": {
+        "message": "Deze applicatie heeft $STR_1$ nodig om veilig te functioneren.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000381": {
+        "message": "U kan proberen om de pagina te $STR_1$ met HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Neem contact op met uw beheerder wanneer het probleem zich weer voordoet."
+    },
+    "backend-000389": {
+        "message": "Wachtwoorden sessie $STR_1$ - $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Documentatie openen"
+    },
+    "backend-000391": {
+        "message": "nooit"
+    },
+    "backend-000392": {
+        "message": "Interne Data Verwerking"
+    },
+    "backend-000393": {
+        "message": "Beeldverwerking"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (aanbevolen)"
+    },
+    "backend-000395": {
+        "message": "Externe Diensten"
+    },
+    "backend-000396": {
+        "message": "Wachtwoord Beveiligingscontroles"
+    },
+    "backend-000397": {
+        "message": "Have I been pwned? (aanbevolen)"
+    },
+    "backend-000398": {
+        "message": "25 Miljoen Wachtwoorden (Lokaal)"
+    },
+    "backend-000399": {
+        "message": "5 Miljoen Wachtwoorden (Lokaal)"
+    },
+    "backend-000400": {
+        "message": "25Mio Wachtwoorden & Hibp?"
+    },
+    "backend-000401": {
+        "message": "Wachtwoord Generator"
+    },
+    "backend-000402": {
+        "message": "Lokaal Woordenboek"
+    },
+    "backend-000403": {
+        "message": "Random Karakters"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Collection (aanbevolen)"
+    },
+    "backend-000406": {
+        "message": "Favicon Service"
+    },
+    "backend-000407": {
+        "message": "Lokale Icon Zoekdienst"
+    },
+    "backend-000408": {
+        "message": "Besticon (aanbevolen)"
+    },
+    "backend-000409": {
+        "message": "Geen"
+    },
+    "backend-000410": {
+        "message": "Website Voorvertoning Service"
+    },
+    "backend-000411": {
+        "message": "API Sleuten"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (Lokaal)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (Lokaal)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "E-Mail Standaardinstellingen"
+    },
+    "backend-000416": {
+        "message": "Verstuur E-Mails voor Beveiligingsproblemen"
+    },
+    "backend-000417": {
+        "message": "Verstuur E-Mails bij Delen"
+    },
+    "backend-000418": {
+        "message": "Overige Instellingen"
+    },
+    "backend-000419": {
+        "message": "Verwijderde Objecten uit te database verwijderen"
+    },
+    "backend-000420": {
+        "message": "Activeer Nightly Builds in \"Apps\""
+    },
+    "backend-000421": {
+        "message": "Nooit"
+    },
+    "backend-000422": {
+        "message": "Direct"
+    },
+    "backend-000423": {
+        "message": "Na twee uur"
+    },
+    "backend-000424": {
+        "message": "Na een dag"
+    },
+    "backend-000425": {
+        "message": "Na twee weken"
+    },
+    "backend-000426": {
+        "message": "Na een maand"
+    },
+    "backend-000427": {
+        "message": "Nach een jaar"
+    },
+    "backend-000428": {
+        "message": "Backup Instellingen"
+    },
+    "backend-000430": {
+        "message": "Elk uur"
+    },
+    "backend-000431": {
+        "message": "Om de zes uur"
+    },
+    "backend-000432": {
+        "message": "Yeden Tag"
+    },
+    "backend-000433": {
+        "message": "Elke twee dagen"
+    },
+    "backend-000434": {
+        "message": "Elke week"
+    },
+    "backend-000435": {
+        "message": "Elke twee weken"
+    },
+    "backend-000436": {
+        "message": "Aantal backups om bij te houden"
+    },
+    "backend-000437": {
+        "message": "Cache"
+    },
+    "backend-000438": {
+        "message": "Standard Cache ($STR_1$ Bestanden, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatar Cache ($STR_1$ Bestanden, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon ($STR_1$ Bestanden, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Voorvertoning Cache ($STR_1$ Bestanden, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Wachtwoorden Cache ($STR_1$ Bestanden, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "Legen"
+    },
+    "backend-000444": {
+        "message": "Deze cache legen"
+    },
+    "backend-000445": {
+        "message": "U kan deze cache niet legen omdat deze gebuikt wordt door een gedeelde dienst"
+    },
+    "backend-000446": {
+        "message": "Opgeslagen"
+    },
+    "backend-000447": {
+        "message": "Geleegd"
+    },
+    "backend-000448": {
+        "message": "Mislukt"
+    },
+    "backend-000449": {
+        "message": "Heeft u hulp nodig"
+    },
+    "backend-000450": {
+        "message": "heeft u een bug gevonden"
+    },
+    "backend-000451": {
+        "message": "zoekt u naar de documentatie"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ of $STR_1$? We staan voor u klaar!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ wordt niet meer ondersteund.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "Wachtwoorden heeft HTTPS nodig."
+    },
+    "backend-000455": {
+        "message": "Het gebruik van $STR_1$ om achtergrondtaken uit te voeren kan lange wachttijden veroorzaken. Wij raden het gebruik van Cron aan.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Controleer de systeemvereisten a.u.b."
+    },
+    "backend-000457": {
+        "message": "Wachtwoord niet gedeeld"
+    },
+    "backend-000459": {
+        "message": "U heeft een onveilig wachtwoord"
+    },
+    "backend-000460": {
+        "message": "U heeft onveilige wachtwoorden"
+    },
+    "backend-000461": {
+        "message": "Een van uw wachtwoorden is niet meer veilig."
+    },
+    "backend-000462": {
+        "message": "Sommige van uw wachtwoorden zijn niet meer veilig."
+    },
+    "backend-000463": {
+        "message": "Passwords controleert regelmatig of uw wachtwoorden zijn gecompromiteerd zijn door data diefstal."
+    },
+    "backend-000464": {
+        "message": "Deze veiligheidscontrole heeft vastgesteld dat een van uw wachtwoorden onveilig is."
+    },
+    "backend-000465": {
+        "message": "Deze veiligheidscontrole heeft vastgesteld dat $STR_1$ van uw wachtwoorden onveilig zijn.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Dit betekent dat het wachtwoord op het internet te vinden is en dat het account niet meer veilig is."
+    },
+    "backend-000467": {
+        "message": "Dit betekent dat de wachtwoorden op het internet te vinden zijn en de bijbehorende accounts niet meer veilig zijn."
+    },
+    "backend-000468": {
+        "message": "Daarom is het wachtwoord als onveilig gemarkeerd en dient deze gewijzigd te worden."
+    },
+    "backend-000469": {
+        "message": "Daarom zijn de wachtwoorden als onveilig gemarkeerd en dienen deze gewijzigd te worden."
+    },
+    "backend-000470": {
+        "message": "U kan in de Passwords app een nieuw veilig wachtwoord aanmaken."
+    },
+    "backend-000471": {
+        "message": "U kan in de Passwords app nieuwe veilige wachtwoorden aanmaken."
+    },
+    "backend-000472": {
+        "message": "Verander het wachtwoord nu"
+    },
+    "backend-000473": {
+        "message": "Verander de wachtwoorden nu"
+    },
+    "backend-000474": {
+        "message": "Open de Passwords APP om hem te veranderen."
+    },
+    "backend-000475": {
+        "message": "Open de Passwords APP om ze te veranderen."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ heeft een wachtwoord met u gedeeld.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ heeft $STR_1$ wachtwoorden met u gedeeld.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ en $STRING_2$ anderen hebben $STRING_1$ wachtwoorden met u gedeeld.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Open de Passwords APP om hem te zien."
+    },
+    "backend-000482": {
+        "message": "Open de Passwords APP om ze te zien."
+    },
+    "backend-000483": {
+        "message": "Er is een wachtwoord met u gedeeld op $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Er zijn meerdere wachtwoorden met u gedeeld op $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Laat met mij gedeelde wachtwoorden zien"
+    },
+    "backend-000486": {
+        "message": "Een van uw wachtwoorden kon niet gedeeld worden omdat de ontvanger reeds toegang tot dit wachtwoorden heeft."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ van uw wachtwoorden konden niet gedeeld worden omdat de ontvanger reeds toegang tot deze wachtwoorden heeft.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Een wachtwoord delen dat reeds met u gedeeld is kan een loop veroorzaken."
+    },
+    "backend-000490": {
+        "message": "Om dit te voorkomen zullen deze wachtwoorden niet worden gedeeld."
+    },
+    "backend-000496": {
+        "message": "Verwijderde Gebruiker ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
-  },
-  "backups-000100": {
-    "message": "Negeren"
-  },
-  "backups-000101": {
-    "message": "Import uitvoeren"
-  },
-  "backups-000102": {
-    "message": "Importeren"
-  },
-  "backups-000103": {
-    "message": "Ivoerbestand doorvoeren"
-  },
-  "backups-000104": {
-    "message": "Analyseer Tags"
-  },
-  "backups-000105": {
-    "message": "Analyseer mappen"
-  },
-  "backups-000106": {
-    "message": "Bezig met lezen Tags"
-  },
-  "backups-000107": {
-    "message": "Bezig met importeren Tags"
-  },
-  "backups-000108": {
-    "message": "Bezig met lezen mappen"
-  },
-  "backups-000109": {
-    "message": "Bezig met importeren mappen"
-  },
-  "backups-000110": {
-    "message": "Bezig met lezen wachtwoorden"
-  },
-  "backups-000111": {
-    "message": "Bezig met importeren wachtwoorden"
-  },
-  "backups-000112": {
-    "message": "Import mislukt"
-  },
-  "backups-000113": {
-    "message": "Import gedeeltelijk mislukt"
-  },
-  "backups-000114": {
-    "message": "Import succesvol"
-  },
-  "backups-000115": {
-    "message": "Import fout"
-  },
-  "backups-000117": {
-    "message": "Ongeldig bestandstype \"$TYPE$\"",
-    "placeholders": {
-      "type": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000118": {
-    "message": "Wachtwoord benodigd"
-  },
-  "backups-000119": {
-    "message": "Ongeldig wachtwoord"
-  },
-  "backups-000120": {
-    "message": "Ontsleutelen van wachtwoorden mislukt"
-  },
-  "backups-000121": {
-    "message": "Ontsleutelen van mappen mislukt"
-  },
-  "backups-000122": {
-    "message": "Ontleutelen van Tags mislukt"
-  },
-  "backups-000124": {
-    "message": "CSV bestand kan niet ingedeeld worden"
-  },
-  "backups-000134": {
-    "message": "Ongeldig afsluitdend aanhalingsteken in geciteerd veld"
-  },
-  "backups-000135": {
-    "message": "Het bestand kon niet verwerkt worden: $ERRORS$",
-    "placeholders": {
-      "errors": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000136": {
-    "message": "$MESSAGE$ op regel $LINE$, Karakter $CHARACTER$.",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      },
-      "line": {
-        "content": "$2"
-      },
-      "character": {
-        "content": "$3"
-      }
-    }
-  },
-  "backups-000142": {
-    "message": "Het bestand heeft type \"$ACTUAL$\" maar \"$EXPECTED$\" wordt verwacht. Misschien heeft u een verkeerd bestand of verkeerde import methode gekozen..",
-    "placeholders": {
-      "actual": {
-        "content": "$1"
-      },
-      "expected": {
-        "content": "$2"
-      }
-    }
-  },
-  "backups-000143": {
-    "message": "$SERVICE$ staat erom bekend dat het foutieve export bestanden genereerd. Raadpleeg de handleiding voor hulp wanneer het bestand niet verwerkt kan worden.",
-    "placeholders": {
-      "service": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000148": {
-    "message": "Wachtwoorden"
-  },
-  "frontend-000149": {
-    "message": "Alle"
-  },
-  "frontend-000150": {
-    "message": "Mappen"
-  },
-  "frontend-000151": {
-    "message": "Recent"
-  },
-  "frontend-000152": {
-    "message": "Favorieten"
-  },
-  "frontend-000153": {
-    "message": "Gedeeld"
-  },
-  "frontend-000154": {
-    "message": "Beveiliging"
-  },
-  "frontend-000155": {
-    "message": "Prullenbak"
-  },
-  "frontend-000156": {
-    "message": "Details"
-  },
-  "frontend-000157": {
-    "message": "Bewerken"
-  },
-  "frontend-000158": {
-    "message": "Hernoemen"
-  },
-  "frontend-000159": {
-    "message": "Verwijderen"
-  },
-  "frontend-000160": {
-    "message": "Terugzetten"
-  },
-  "frontend-000161": {
-    "message": "Nieuw Wachtwoord"
-  },
-  "frontend-000162": {
-    "message": "Nieuwe Map"
-  },
-  "frontend-000163": {
-    "message": "Nieuwe Tag"
-  },
-  "frontend-000164": {
-    "message": "Veilig"
-  },
-  "frontend-000166": {
-    "message": "Onveilig"
-  },
-  "frontend-000167": {
-    "message": "Onveilig (Duplicaat)"
-  },
-  "frontend-000168": {
-    "message": "Onveilig (Verouderd)"
-  },
-  "frontend-000169": {
-    "message": "Gecompromiteerd"
-  },
-  "frontend-000170": {
-    "message": "Delen"
-  },
-  "frontend-000171": {
-    "message": "Revisies"
-  },
-  "frontend-000172": {
-    "message": "QR Code"
-  },
-  "frontend-000173": {
-    "message": "Wachtwoord"
-  },
-  "frontend-000174": {
-    "message": "Gebruikersnaam"
-  },
-  "frontend-000175": {
-    "message": "Website"
-  },
-  "frontend-000176": {
-    "message": "Tags toevoegen..."
-  },
-  "frontend-000177": {
-    "message": "Kleur"
-  },
-  "frontend-000178": {
-    "message": "Naam"
-  },
-  "frontend-000179": {
-    "message": "Label"
-  },
-  "frontend-000180": {
-    "message": "Algemeen"
-  },
-  "frontend-000181": {
-    "message": "Eigenschappen"
-  },
-  "frontend-000182": {
-    "message": "Nummers"
-  },
-  "frontend-000183": {
-    "message": "Speciale karakters"
-  },
-  "frontend-000184": {
-    "message": "Meer Opties"
-  },
-  "frontend-000185": {
-    "message": "Favoriet"
-  },
-  "frontend-000186": {
-    "message": "Versleuteling"
-  },
-  "frontend-000187": {
-    "message": "Op de Server"
-  },
-  "frontend-000188": {
-    "message": "Eigen Velden"
-  },
-  "frontend-000189": {
-    "message": "Geheim"
-  },
-  "frontend-000191": {
-    "message": "Bestand"
-  },
-  "frontend-000192": {
-    "message": "Waarde"
-  },
-  "frontend-000193": {
-    "message": "Zichtbaarheid wisselen"
-  },
-  "frontend-000194": {
-    "message": "Wachtwoord genereren"
-  },
-  "frontend-000195": {
-    "message": "Simple Server Side Encryption V1"
-  },
-  "frontend-000196": {
-    "message": "Maak aantekeningen"
-  },
-  "frontend-000197": {
-    "message": "Opslaan"
-  },
-  "frontend-000198": {
-    "message": "Map aanmaken"
-  },
-  "frontend-000199": {
-    "message": "Map Aangemaakt"
-  },
-  "frontend-000200": {
-    "message": "Map aanmaken mislukt"
-  },
-  "frontend-000201": {
-    "message": "Map hernoemen"
-  },
-  "frontend-000202": {
-    "message": "Map hernoemd"
-  },
-  "frontend-000203": {
-    "message": "Map hernoemen mislukt"
-  },
-  "frontend-000204": {
-    "message": "Map verplaatst"
-  },
-  "frontend-000205": {
-    "message": "Map verplaatsen mislukt"
-  },
-  "frontend-000206": {
-    "message": "Map verwijderen"
-  },
-  "frontend-000207": {
-    "message": "Wilt u deze map verwijderen?"
-  },
-  "frontend-000208": {
-    "message": "Map verwijderd"
-  },
-  "frontend-000209": {
-    "message": "Verwijderen van map mislukt"
-  },
-  "frontend-000210": {
-    "message": "Map hersteld"
-  },
-  "frontend-000211": {
-    "message": "Herstellen van map mistlukt"
-  },
-  "frontend-000212": {
-    "message": "Tag aanmaken"
-  },
-  "frontend-000213": {
-    "message": "Tag aangemaakt"
-  },
-  "frontend-000214": {
-    "message": "Tag aanmaken mislukt"
-  },
-  "frontend-000215": {
-    "message": "Tag bewerken"
-  },
-  "frontend-000217": {
-    "message": "Tag opgeslagen"
-  },
-  "frontend-000218": {
-    "message": "Opslaan van Tag mislukt"
-  },
-  "frontend-000219": {
-    "message": "Tag verwijderen"
-  },
-  "frontend-000220": {
-    "message": "Wilt u de Tag verwijderen?"
-  },
-  "frontend-000221": {
-    "message": "Tag verwijderd"
-  },
-  "frontend-000222": {
-    "message": "Verwijderen van Tag mislukt"
-  },
-  "frontend-000223": {
-    "message": "Tag hersteld"
-  },
-  "frontend-000224": {
-    "message": "Herstellen van Tag Mislukt"
-  },
-  "frontend-000225": {
-    "message": "Nieuw Wachtwoord aanmaken"
-  },
-  "frontend-000226": {
-    "message": "Wachtwoord aangemaakt"
-  },
-  "frontend-000227": {
-    "message": "Wachtwoord aanmaken mislukt"
-  },
-  "frontend-000228": {
-    "message": "Wachtwoord bewerken"
-  },
-  "frontend-000229": {
-    "message": "Wachtwoord opgeslagen"
-  },
-  "frontend-000230": {
-    "message": "Wachtwoord opslaan mislukt"
-  },
-  "frontend-000231": {
-    "message": "Wachtwoord verplaatst"
-  },
-  "frontend-000232": {
-    "message": "Wachtwoord verplaatsen mislukt"
-  },
-  "frontend-000233": {
-    "message": "Wachtwoord verwijderen"
-  },
-  "frontend-000234": {
-    "message": "Wilt u het wachtwoord verwijderen?"
-  },
-  "frontend-000235": {
-    "message": "Wachtwoord verwijderd"
-  },
-  "frontend-000236": {
-    "message": "Wachtwoord hersteld"
-  },
-  "frontend-000237": {
-    "message": "Wachtwoord herstellen mislukt"
-  },
-  "frontend-000238": {
-    "message": "Open URL"
-  },
-  "frontend-000239": {
-    "message": "URL kopieren"
-  },
-  "frontend-000240": {
-    "message": "Gebruiker kopieren"
-  },
-  "frontend-000241": {
-    "message": "Wachtwoord kopieren"
-  },
-  "frontend-000242": {
-    "message": "$ELEMENT$ is naar het klembord gekopieerd",
-    "placeholders": {
-      "element": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000244": {
-    "message": "Laatst gewijzigd op $DATE$",
-    "placeholders": {
-      "date": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000245": {
-    "message": "Herstel revisie"
-  },
-  "frontend-000246": {
-    "message": "Revisie hersteld"
-  },
-  "frontend-000247": {
-    "message": "Herstellen van revisie mislukt"
-  },
-  "frontend-000248": {
-    "message": "Wilt u de revisie herstellen?"
-  },
-  "frontend-000249": {
-    "message": "Met mij gedeeld"
-  },
-  "frontend-000250": {
-    "message": "Door mij gedeeld"
-  },
-  "frontend-000251": {
-    "message": "Statistieken"
-  },
-  "frontend-000252": {
-    "message": "Aangemaakt op"
-  },
-  "frontend-000253": {
-    "message": "Laatst geupdated"
-  },
-  "frontend-000254": {
-    "message": "$COUNT$ revisies",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000255": {
-    "message": "Shares"
-  },
-  "frontend-000256": {
-    "message": "$COUNT$ keer gedeeld",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000264": {
-    "message": "Meer"
-  },
-  "frontend-000265": {
-    "message": "Backup en Restore"
-  },
-  "frontend-000526": {
-    "message": "Browser Extensie"
-  },
-  "frontend-000267": {
-    "message": "Handboek"
-  },
-  "frontend-000268": {
-    "message": "Apps & uitbreidingen"
-  },
-  "frontend-000274": {
-    "message": "Gebruiker zoeken"
-  },
-  "frontend-000275": {
-    "message": "Stel verloopdatum in"
-  },
-  "frontend-000276": {
-    "message": "Verloopt op $DATETIME$",
-    "placeholders": {
-      "datetime": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000277": {
-    "message": "Kies een verloopdatum of laat het veld leeg om oneindig lang te delen"
-  },
-  "frontend-000278": {
-    "message": "Kies een verloopdatum die in de toekomst ligt"
-  },
-  "frontend-000279": {
-    "message": "Ongeldige datum"
-  },
-  "frontend-000280": {
-    "message": "De gebruiker $UID$ bestaat niet",
-    "placeholders": {
-      "uid": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000281": {
-    "message": "Kan wachtwoord niet delen: $MESSAGE$",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000282": {
-    "message": "Schijfrechten omschakelen"
-  },
-  "frontend-000283": {
-    "message": "Deelrechten omschakelen"
-  },
-  "frontend-000284": {
-    "message": "Delen beeindigen"
-  },
-  "frontend-000285": {
-    "message": "Datum"
-  },
-  "frontend-000286": {
-    "message": "Standaard Cache (0 Bestanden, 0 B)"
-  },
-  "frontend-000287": {
-    "message": "Avatar Cache (0 Bestanden, 0 B)"
-  },
-  "frontend-000288": {
-    "message": "Favicon Cache (0 Bestanden, 0 B)"
-  },
-  "frontend-000289": {
-    "message": "Voorvertonings Cache (0 Bestanden, 0 B)"
-  },
-  "frontend-000290": {
-    "message": "Wachtwoord Cache (0 Bestanden, 0 B)"
-  },
-  "backups-000031": {
-    "message": "Database Backup"
-  },
-  "backups-000046": {
-    "message": "Maplabel"
-  },
-  "backups-000047": {
-    "message": "Taglabels"
-  },
-  "backups-000049": {
-    "message": "Map Id"
-  },
-  "backups-000050": {
-    "message": "Tag Ids"
-  },
-  "backups-000061": {
-    "message": "Download $FORMAT$",
-    "placeholders": {
-      "format": {
-        "content": "$1"
-      }
-    }
-  },
-  "backups-000080": {
-    "message": "Database"
-  },
-  "backups-000092": {
-    "message": "Tab"
-  },
-  "frontend-000291": {
-    "message": "Veranderd"
-  },
-  "frontend-000292": {
-    "message": "Veranderd"
-  },
-  "frontend-000293": {
-    "message": "Bewerkt op"
-  },
-  "frontend-000294": {
-    "message": "Aangemaakt op"
-  },
-  "frontend-000295": {
-    "message": "Revisie"
-  },
-  "frontend-000296": {
-    "message": "URL"
-  },
-  "frontend-000297": {
-    "message": "Bovenliggende"
-  },
-  "frontend-000298": {
-    "message": "Alle items verwijderen"
-  },
-  "frontend-000299": {
-    "message": "Alle items restoren"
-  },
-  "frontend-000300": {
-    "message": "Restore Items"
-  },
-  "frontend-000301": {
-    "message": "Alle items restoren in de prullenbak?"
-  },
-  "frontend-000302": {
-    "message": "Dit item restoren"
-  },
-  "frontend-000303": {
-    "message": "Item restored"
-  },
-  "frontend-000304": {
-    "message": "Prullenbak legen"
-  },
-  "frontend-000305": {
-    "message": "Wilt u alle items in de prullenbak definitief verwijderen?"
-  },
-  "frontend-000306": {
-    "message": "Prullenbak geleegd"
-  },
-  "frontend-000307": {
-    "message": "Zoeken"
-  },
-  "frontend-000308": {
-    "message": "Gebruik het zoekvenster om te zoeken"
-  },
-  "frontend-000309": {
-    "message": "Zoek overal naar \"$QUERY$\"",
-    "placeholders": {
-      "query": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000266": {
-    "message": "Instellingen"
-  },
-  "frontend-000528": {
-    "message": "Wachtwoord regels"
-  },
-  "frontend-000529": {
-    "message": "Markeer duplicaten"
-  },
-  "frontend-000530": {
-    "message": "Maximale leeftijd in dagen"
-  },
-  "frontend-000531": {
-    "message": "Wachtwoord generator"
-  },
-  "frontend-000532": {
-    "message": "Wachtwoord sterkte"
-  },
-  "frontend-000533": {
-    "message": "Cijfers gebruiken"
-  },
-  "frontend-000534": {
-    "message": "Bijzondere tekens gebruiken"
-  },
-  "frontend-000535": {
-    "message": "Gebruikersinterface"
-  },
-  "frontend-000536": {
-    "message": "Startpagina"
-  },
-  "frontend-000537": {
-    "message": "Alle wachtwoorden"
-  },
-  "frontend-000538": {
-    "message": "Wachtwoorden in lijstweergave"
-  },
-  "frontend-000539": {
-    "message": "Dit veld als titel gebruiken"
-  },
-  "frontend-000540": {
-    "message": "Sorteer op"
-  },
-  "frontend-000541": {
-    "message": "Titelveld"
-  },
-  "frontend-000542": {
-    "message": "Actie bij klik"
-  },
-  "frontend-000543": {
-    "message": "Actie bij dubbelklik"
-  },
-  "frontend-000544": {
-    "message": "Kopieer wachtwoord"
-  },
-  "frontend-000545": {
-    "message": "Kopieer gebruikersnaam"
-  },
-  "frontend-000546": {
-    "message": "Kopieer URL"
-  },
-  "frontend-000547": {
-    "message": "Laat details zien"
-  },
-  "frontend-000548": {
-    "message": "Voeg kopieer opties toe in menu"
-  },
-  "frontend-000549": {
-    "message": "Laat gebruikersnaam zien in lijstweergave"
-  },
-  "frontend-000550": {
-    "message": "Laat Tags zien in lijstweergave"
-  },
-  "frontend-000551": {
-    "message": "Laat verborgen eigen velden zien"
-  },
-  "frontend-000552": {
-    "message": "Zoek terwijl ik tik"
-  },
-  "frontend-000553": {
-    "message": "Toets Enter om overal te zoeken"
-  },
-  "frontend-000554": {
-    "message": "Altijd de zoeksectie laten zien"
-  },
-  "frontend-000555": {
-    "message": "Berichtgeving"
-  },
-  "frontend-000556": {
-    "message": "Stuur E-Mails bij"
-  },
-  "frontend-000557": {
-    "message": "Beveiligingsproblemen"
-  },
-  "frontend-000558": {
-    "message": "Met mij gedeelde wachtwoorden"
-  },
-  "frontend-000559": {
-    "message": "Laat notificaties zien bij"
-  },
-  "frontend-000560": {
-    "message": "Andere fouten"
-  },
-  "frontend-000561": {
-    "message": "Gevarenzone"
-  },
-  "frontend-000562": {
-    "message": "Alle instellingen resetten"
-  },
-  "frontend-000563": {
-    "message": "Reset"
-  },
-  "frontend-000564": {
-    "message": "Alles verwijderen"
-  },
-  "frontend-000565": {
-    "message": "ALLES VERWIJDEREN"
-  },
-  "frontend-000566": {
-    "message": "Account reset aangevraagd"
-  },
-  "frontend-000567": {
-    "message": "Weergave"
-  },
-  "frontend-000669": {
-    "message": "Standaard"
-  },
-  "frontend-000568": {
-    "message": "Geavanceerd"
-  },
-  "frontend-000310": {
-    "message": "Er is hier niets"
-  },
-  "frontend-000311": {
-    "message": "Klik op het \"+\" symbool om iets toe te voegen"
-  },
-  "frontend-000312": {
-    "message": "Verwijderde items verschijnen hier"
-  },
-  "frontend-000313": {
-    "message": "Er zijn geen wachtwoorden met u gedeeld"
-  },
-  "frontend-000314": {
-    "message": "U heeft geen wachtwoorden gedeeld"
-  },
-  "frontend-000315": {
-    "message": "Uw favorieten verschijnen hier"
-  },
-  "frontend-000316": {
-    "message": "Mogenlijkerwijs heeft u nog geen wachtwoorden"
-  },
-  "frontend-000317": {
-    "message": "Dat is een goed teken"
-  },
-  "frontend-000318": {
-    "message": "Ga naar $HREF$",
-    "placeholders": {
-      "href": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000320": {
-    "message": "AFbeelding $COUNT$: $TITLE$",
-    "placeholders": {
-      "count": {
-        "content": "$1"
-      },
-      "title": {
-        "content": "$2"
-      }
-    }
-  },
-  "frontend-000321": {
-    "message": "De pagina kan niet geladen worden: $MESSAGE$.",
-    "placeholders": {
-      "message": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000324": {
-    "message": "Pagina niet gevonden"
-  },
-  "frontend-000328": {
-    "message": "Meld het ons dan!"
-  },
-  "frontend-000331": {
-    "message": "Netwerkfout"
-  },
-  "frontend-000332": {
-    "message": "De module $MODULE$ kon niet geladen worden. Mogelijk is de verbinding met Nextcloud verbroken",
-    "placeholders": {
-      "module": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000333": {
-    "message": "Sorteer op naam"
-  },
-  "frontend-000334": {
-    "message": "Sorteer op datum gewijzigd"
-  },
-  "frontend-000335": {
-    "message": "$PASSWORDS$ Wachtwoorden",
-    "placeholders": {
-      "passwords": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000336": {
-    "message": "1 Wachtwoord"
-  },
-  "frontend-000337": {
-    "message": "$FOLDERS$ Mappen",
-    "placeholders": {
-      "folders": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000338": {
-    "message": "1 Map"
-  },
-  "frontend-000339": {
-    "message": "$TAGS$ Tags",
-    "placeholders": {
-      "tags": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000340": {
-    "message": "1 Tag"
-  },
-  "frontend-000341": {
-    "message": "Niets"
-  },
-  "frontend-000342": {
-    "message": " en "
-  },
-  "frontend-000343": {
-    "message": "overeenkomst"
-  },
-  "frontend-000344": {
-    "message": "Overeenkomsten"
-  },
-  "frontend-000363": {
-    "message": "waar"
-  },
-  "frontend-000364": {
-    "message": "niet waar"
-  },
-  "frontend-000365": {
-    "message": "Ja"
-  },
-  "frontend-000366": {
-    "message": "nee"
-  },
-  "frontend-000569": {
-    "message": "Markeer wachtwoorden als zwak wanneer ze gebruikt worden vor meerdere accounts"
-  },
-  "frontend-000570": {
-    "message": "Markeer wachtwoorden als zwak wanneer ze het aangegeven aantal dagen overschijden"
-  },
-  "frontend-000571": {
-    "message": "Een hogere sterkte resulteert in langere en complexere wachtwoorden"
-  },
-  "frontend-000572": {
-    "message": "Laat de geselecteerde eigenschap als titel zien in lijstoverzicht"
-  },
-  "frontend-000573": {
-    "message": "Sorteert wachtwoorden op hun geselecteerde eigenschap wanneer sorteren op naam is geselecteerd"
-  },
-  "frontend-000574": {
-    "message": "Actie die die bij een klik op het Wachtwoord wordt uitgevoerd"
-  },
-  "frontend-000575": {
-    "message": "Actie die bij een dubbelklik op een wachtwoord wordt uitgevoerd"
-  },
-  "frontend-000576": {
-    "message": "Laat de opties om te kopieren van een wachtwoord en gebruikersnaam zien in het menu"
-  },
-  "frontend-000577": {
-    "message": "De initieele sectie die te zien is bij het openen van de APP"
-  },
-  "frontend-000578": {
-    "message": "Laat altijd de gebruiksnaam voor een wachtwoord in lijstoverzicht zien"
-  },
-  "frontend-000579": {
-    "message": "Laat de Tags voor elk wachtwoord zien in een lijstoverzicht. Dit verhoogt de laadtijd"
-  },
-  "frontend-000580": {
-    "message": "Laat de verborgen eigen velden en de details sectie van een wachtwoord zien in het bewerkformulier"
-  },
-  "frontend-000581": {
-    "message": "Stuurt u E-Mails wanneer wachtwoorden gecompromiteerd zijn of wanneer er andere beveiligingsproblemen optreden"
-  },
-  "frontend-000582": {
-    "message": "Stuurt u E-Mails wanneer anderen wachtwoorden met u delen"
-  },
-  "frontend-000670": {
-    "message": "Start de zoekopdracht zodra u een toets indrukt"
-  },
-  "frontend-000671": {
-    "message": "Zoekt overal wanneer de Enter toets in het zoekveld wordt ingedrukt"
-  },
-  "frontend-000583": {
-    "message": "Laat altijd de sectie voor globaal zoeken in de navigatie zien"
-  },
-  "frontend-000584": {
-    "message": "Waarschuwt u over gecompromiteerde wachtwoorden of andere beveiligingsproblemen"
-  },
-  "frontend-000585": {
-    "message": "Waarschuwt u wanneer anderen wachtwoorden met u delen"
-  },
-  "frontend-000586": {
-    "message": "Waarschuwt u wanneer er een achtergrondproces fout gaat"
-  },
-  "frontend-000587": {
-    "message": "Reset alle instellingen op deze pagina naar standaard waarden"
-  },
-  "frontend-000588": {
-    "message": "Dit zal alle instellingen resetten naar hun standaard waarden. Wilt u doorgaan?"
-  },
-  "frontend-000589": {
-    "message": "Verwijder ale configuratie, wachtwoorden, mappen en Tags en begin overnieuw"
-  },
-  "frontend-000368": {
-    "message": "U heeft de maximumlengte van 4096 tekens bereikt"
-  },
-  "frontend-000369": {
-    "message": "We konden niets vinden voor \"$QUERY$\"",
-    "placeholders": {
-      "query": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000370": {
-    "message": "De pagina \"$PAGE$\" kon niet opgehaald worden van de handleidingsserver.",
-    "placeholders": {
-      "page": {
-        "content": "$1"
-      }
-    }
-  },
-  "frontend-000371": {
-    "message": "Er staat data gereed om gesynchroniseerd te worden"
-  },
-  "frontend-000590": {
-    "message": "Wilt u alle instellingen, wachtwoorden, mappen en Tags verwijderen?\nHet is niet mogelijk dit achteraf te herstellen."
-  },
-  "backend-000377": {
-    "message": "HTTPS verplicht"
-  },
-  "backend-000378": {
-    "message": "herladen"
-  },
-  "backend-000380": {
-    "message": "Documentatie"
-  },
-  "backend-000382": {
-    "message": "Deze applicatie heeft $STR_1$ nodig om veilig te functioneren.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000381": {
-    "message": "U kan proberen om de pagina te $STR_1$ met HTTPS.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000388": {
-    "message": "Neem contact op met uw beheerder wanneer het probleem zich weer voordoet."
-  },
-  "backend-000389": {
-    "message": "Wachtwoorden sessie $STR_1$ - $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000390": {
-    "message": "Documentatie openen"
-  },
-  "backend-000391": {
-    "message": "nooit"
-  },
-  "backend-000392": {
-    "message": "Interne Data Verwerking"
-  },
-  "backend-000393": {
-    "message": "Beeldverwerking"
-  },
-  "backend-000394": {
-    "message": "Imagick/GMagick (aanbevolen)"
-  },
-  "backend-000395": {
-    "message": "Externe Diensten"
-  },
-  "backend-000396": {
-    "message": "Wachtwoord Beveiligingscontroles"
-  },
-  "backend-000397": {
-    "message": "Have I been pwned? (aanbevolen)"
-  },
-  "backend-000398": {
-    "message": "25 Miljoen Wachtwoorden (Lokaal)"
-  },
-  "backend-000399": {
-    "message": "5 Miljoen Wachtwoorden (Lokaal)"
-  },
-  "backend-000400": {
-    "message": "25Mio Wachtwoorden & Hibp?"
-  },
-  "backend-000401": {
-    "message": "Wachtwoord Generator"
-  },
-  "backend-000402": {
-    "message": "Lokaal Woordenboek"
-  },
-  "backend-000403": {
-    "message": "Random Karakters"
-  },
-  "backend-000404": {
-    "message": "watchout4snakes.com"
-  },
-  "backend-000405": {
-    "message": "Leipzig Corpora Collection (aanbevolen)"
-  },
-  "backend-000406": {
-    "message": "Favicon Service"
-  },
-  "backend-000407": {
-    "message": "Lokale Icon Zoekdienst"
-  },
-  "backend-000408": {
-    "message": "Besticon (aanbevolen)"
-  },
-  "backend-000409": {
-    "message": "Geen"
-  },
-  "backend-000410": {
-    "message": "Website Voorvertoning Service"
-  },
-  "backend-000411": {
-    "message": "API Sleuten"
-  },
-  "backend-000412": {
-    "message": "Pageres/PhantomJS (Lokaal)"
-  },
-  "backend-000413": {
-    "message": "WKHTML (Lokaal)"
-  },
-  "backend-000414": {
-    "message": "screenshotapi.io"
-  },
-  "backend-000415": {
-    "message": "E-Mail Standaardinstellingen"
-  },
-  "backend-000416": {
-    "message": "Verstuur E-Mails voor Beveiligingsproblemen"
-  },
-  "backend-000417": {
-    "message": "Verstuur E-Mails bij Delen"
-  },
-  "backend-000418": {
-    "message": "Overige Instellingen"
-  },
-  "backend-000419": {
-    "message": "Verwijderde Objecten uit te database verwijderen"
-  },
-  "backend-000420": {
-    "message": "Activeer Nightly Builds in \"Apps\""
-  },
-  "backend-000421": {
-    "message": "Nooit"
-  },
-  "backend-000422": {
-    "message": "Direct"
-  },
-  "backend-000423": {
-    "message": "Na twee uur"
-  },
-  "backend-000424": {
-    "message": "Na een dag"
-  },
-  "backend-000425": {
-    "message": "Na twee weken"
-  },
-  "backend-000426": {
-    "message": "Na een maand"
-  },
-  "backend-000427": {
-    "message": "Nach een jaar"
-  },
-  "backend-000428": {
-    "message": "Backup Instellingen"
-  },
-  "backend-000430": {
-    "message": "Elk uur"
-  },
-  "backend-000431": {
-    "message": "Om de zes uur"
-  },
-  "backend-000432": {
-    "message": "Yeden Tag"
-  },
-  "backend-000433": {
-    "message": "Elke twee dagen"
-  },
-  "backend-000434": {
-    "message": "Elke week"
-  },
-  "backend-000435": {
-    "message": "Elke twee weken"
-  },
-  "backend-000436": {
-    "message": "Aantal backups om bij te houden"
-  },
-  "backend-000437": {
-    "message": "Cache"
-  },
-  "backend-000438": {
-    "message": "Standard Cache ($STR_1$ Bestanden, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000439": {
-    "message": "Avatar Cache ($STR_1$ Bestanden, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000440": {
-    "message": "Favicon ($STR_1$ Bestanden, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000441": {
-    "message": "Voorvertoning Cache ($STR_1$ Bestanden, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000442": {
-    "message": "Wachtwoorden Cache ($STR_1$ Bestanden, $STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000443": {
-    "message": "Legen"
-  },
-  "backend-000444": {
-    "message": "Deze cache legen"
-  },
-  "backend-000445": {
-    "message": "U kan deze cache niet legen omdat deze gebuikt wordt door een gedeelde dienst"
-  },
-  "backend-000446": {
-    "message": "Opgeslagen"
-  },
-  "backend-000447": {
-    "message": "Geleegd"
-  },
-  "backend-000448": {
-    "message": "Mislukt"
-  },
-  "backend-000449": {
-    "message": "Heeft u hulp nodig"
-  },
-  "backend-000450": {
-    "message": "heeft u een bug gevonden"
-  },
-  "backend-000451": {
-    "message": "zoekt u naar de documentatie"
-  },
-  "backend-000452": {
-    "message": "$STR_1$, $STR_1$ of $STR_1$? We staan voor u klaar!",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      },
-      "str_3": {
-        "content": "$3"
-      }
-    }
-  },
-  "backend-000453": {
-    "message": "$STRING_1$ $STRING_2$ wordt niet meer ondersteund.",
-    "placeholders": {
-      "string_1": {
-        "content": "$1"
-      },
-      "string_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000454": {
-    "message": "Wachtwoorden heeft HTTPS nodig."
-  },
-  "backend-000455": {
-    "message": "Het gebruik van $STR_1$ om achtergrondtaken uit te voeren kan lange wachttijden veroorzaken. Wij raden het gebruik van Cron aan.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000456": {
-    "message": "Controleer de systeemvereisten a.u.b."
-  },
-  "backend-000457": {
-    "message": "Wachtwoord niet gedeeld"
-  },
-  "backend-000458": {
-    "message": "Een wachtwoord is niet gedeeld met $STRING_1$ omdat deze al gedeeld is.",
-    "placeholders": {
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000459": {
-    "message": "U heeft een onveilig wachtwoord"
-  },
-  "backend-000460": {
-    "message": "U heeft onveilige wachtwoorden"
-  },
-  "backend-000461": {
-    "message": "Een van uw wachtwoorden is niet meer veilig."
-  },
-  "backend-000462": {
-    "message": "Sommige van uw wachtwoorden zijn niet meer veilig."
-  },
-  "backend-000463": {
-    "message": "Passwords controleert regelmatig of uw wachtwoorden zijn gecompromiteerd zijn door data diefstal."
-  },
-  "backend-000464": {
-    "message": "Deze veiligheidscontrole heeft vastgesteld dat een van uw wachtwoorden onveilig is."
-  },
-  "backend-000465": {
-    "message": "Deze veiligheidscontrole heeft vastgesteld dat $STR_1$ van uw wachtwoorden onveilig zijn.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000466": {
-    "message": "Dit betekent dat het wachtwoord op het internet te vinden is en dat het account niet meer veilig is."
-  },
-  "backend-000467": {
-    "message": "Dit betekent dat de wachtwoorden op het internet te vinden zijn en de bijbehorende accounts niet meer veilig zijn."
-  },
-  "backend-000468": {
-    "message": "Daarom is het wachtwoord als onveilig gemarkeerd en dient deze gewijzigd te worden."
-  },
-  "backend-000469": {
-    "message": "Daarom zijn de wachtwoorden als onveilig gemarkeerd en dienen deze gewijzigd te worden."
-  },
-  "backend-000470": {
-    "message": "U kan in de Passwords app een nieuw veilig wachtwoord aanmaken."
-  },
-  "backend-000471": {
-    "message": "U kan in de Passwords app nieuwe veilige wachtwoorden aanmaken."
-  },
-  "backend-000472": {
-    "message": "Verander het wachtwoord nu"
-  },
-  "backend-000473": {
-    "message": "Verander de wachtwoorden nu"
-  },
-  "backend-000474": {
-    "message": "Open de Passwords APP om hem te veranderen."
-  },
-  "backend-000475": {
-    "message": "Open de Passwords APP om ze te veranderen."
-  },
-  "backend-000476": {
-    "message": "$STR_1$ heeft een wachtwoord met u gedeeld.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000477": {
-    "message": "$STR_1$ heeft $STR_1$ wachtwoorden met u gedeeld.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      },
-      "str_2": {
-        "content": "$2"
-      }
-    }
-  },
-  "backend-000478": {
-    "message": "$STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
-    "placeholders": {
-      "string_4": {
-        "content": "$4"
-      },
-      "string_3": {
-        "content": "$3"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000479": {
-    "message": "$STRING_5$, $STRING_4$ en $STRING_3$ hebben $STRING_1$ wachtwoorden met u gedeeld.",
-    "placeholders": {
-      "string_5": {
-        "content": "$5"
-      },
-      "string_4": {
-        "content": "$4"
-      },
-      "string_3": {
-        "content": "$3"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000480": {
-    "message": "$STRING_5$, $STRING_4$ en $STRING_2$ anderen hebben $STRING_1$ wachtwoorden met u gedeeld.",
-    "placeholders": {
-      "string_5": {
-        "content": "$5"
-      },
-      "string_4": {
-        "content": "$4"
-      },
-      "string_2": {
-        "content": "$2"
-      },
-      "string_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000481": {
-    "message": "Open de Passwords APP om hem te zien."
-  },
-  "backend-000482": {
-    "message": "Open de Passwords APP om ze te zien."
-  },
-  "backend-000483": {
-    "message": "Er is een wachtwoord met u gedeeld op $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000484": {
-    "message": "Er zijn meerdere wachtwoorden met u gedeeld op $STR_1$",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000485": {
-    "message": "Laat met mij gedeelde wachtwoorden zien"
-  },
-  "backend-000486": {
-    "message": "Een van uw wachtwoorden kon niet gedeeld worden omdat de ontvanger reeds toegang tot dit wachtwoorden heeft."
-  },
-  "backend-000487": {
-    "message": "$STR_1$ van uw wachtwoorden konden niet gedeeld worden omdat de ontvanger reeds toegang tot deze wachtwoorden heeft.",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  },
-  "backend-000489": {
-    "message": "Een wachtwoord delen dat reeds met u gedeeld is kan een loop veroorzaken."
-  },
-  "backend-000490": {
-    "message": "Om dit te voorkomen zullen deze wachtwoorden niet worden gedeeld."
-  },
-  "backend-000496": {
-    "message": "Verwijderde Gebruiker ($STR_1$)",
-    "placeholders": {
-      "str_1": {
-        "content": "$1"
-      }
-    }
-  }
 }
