@@ -1819,14 +1819,6 @@
     "backend-000457": {
         "message": "Password nicht geteilt"
     },
-    "backend-000458": {
-        "message": "Ein Passwort wurde nicht mit $STRING_1$ geteilt, da dies bereits von einer anderen Person getan wurde.",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Sie haben ein unsicheres Passwort"
     },
