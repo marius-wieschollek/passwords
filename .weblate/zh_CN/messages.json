@@ -2047,14 +2047,6 @@
     "backend-000457": {
         "message": "密码未分享"
     },
-    "backend-000458": {
-        "message": "未与 $STRING_1$ 共享密码，因为该密码已经被共享",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "您有一个不安全的密码"
     },
