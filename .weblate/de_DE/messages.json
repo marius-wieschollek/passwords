@@ -2071,9 +2071,6 @@
     "backend-000635": {
         "message": "Anleitung öffnen"
     },
-    "backend-000511": {
-        "message": "Die Konfiguration Ihres Favicon-Dienstes ist unvollständig."
-    },
     "backend-000512": {
         "message": "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig."
     },
