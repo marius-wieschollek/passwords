@@ -1589,14 +1589,6 @@
     "backend-000457": {
         "message": "Lösenordet har inte delats"
     },
-    "backend-000458": {
-        "message": "Lösenordet kunde inte delas med $STRING_1$ då en delning redan existerar.",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Du har ett osäkert lösenord"
     },

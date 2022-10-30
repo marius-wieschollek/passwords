@@ -759,7 +759,7 @@
         "message": "Ordner löschen"
     },
     "frontend-000207": {
-        "message": "Möchtest du den Ordner und alle enthaltenen Elemente löschen?"
+        "message": "Möchtest du den Ordner seinen Inhalt löschen?"
     },
     "frontend-000208": {
         "message": "Ordner gelöscht"
@@ -1821,14 +1821,6 @@
     },
     "backend-000457": {
         "message": "Password nicht geteilt"
-    },
-    "backend-000458": {
-        "message": "Ein Passwort wurde nicht mit $STRING_1$ geteilt, da jemand anderes das bereits getan hat.",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
     },
     "backend-000459": {
         "message": "Du hast ein unsicheres Passwort"

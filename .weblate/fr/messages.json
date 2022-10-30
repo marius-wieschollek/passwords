@@ -1476,14 +1476,6 @@
     "backend-000457": {
         "message": "Mot de passe non partagé"
     },
-    "backend-000458": {
-        "message": "Un mot de passe n’a pu être partagé avec $STRING_1$, car il l’est déjà",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Vous avez un mot de passe non sûr"
     },

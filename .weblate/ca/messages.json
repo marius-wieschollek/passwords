@@ -1672,14 +1672,6 @@
     "backend-000457": {
         "message": "Contrasenya no compartida"
     },
-    "backend-000458": {
-        "message": "Alguna contrasenya no s'ha compartit ara amb $STRING_1$ perquè ja s'havia compartit",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Teniu una contrasenya insegura"
     },

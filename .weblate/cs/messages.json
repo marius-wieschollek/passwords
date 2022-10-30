@@ -1610,14 +1610,6 @@
     "backend-000457": {
         "message": "Heslo nebylo nasdíleno"
     },
-    "backend-000458": {
-        "message": "Heslo nemohlo být nasdíleno $STRING_1$, protože už je danému uživateli sdílené",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Používáte nebezpečné heslo"
     },

@@ -1250,14 +1250,6 @@
     "backend-000457": {
         "message": "Senha não compartilhada"
     },
-    "backend-000458": {
-        "message": "A senha não foi compartilhada com $STRING_1$ porque já é",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Você tem uma senha insegura"
     },
