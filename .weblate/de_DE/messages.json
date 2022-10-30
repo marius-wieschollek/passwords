@@ -186,7 +186,7 @@
         "message": "Exportieren"
     },
     "backups-000059": {
-        "message": "Läuft..."
+        "message": "Läuft…"
     },
     "backups-000060": {
         "message": "Export Fehler"
@@ -627,7 +627,7 @@
         "message": "Diese Warnung abschalten"
     },
     "frontend-000176": {
-        "message": "Tags hinzufügen..."
+        "message": "Tags hinzufügen…"
     },
     "frontend-000177": {
         "message": "Farbe"
@@ -2072,7 +2072,7 @@
         "message": "Anleitung öffnen"
     },
     "backend-000512": {
-        "message": "Die Konfiguration Ihres Webseitenansichtengenerators ist unvollständig."
+        "message": "Die Konfiguration des Webseitenvorschaudienstes ist unvollständig"
     },
     "backend-000513": {
         "message": "Der von Ihnen gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren."
@@ -2635,7 +2635,7 @@
         "message": "neuesten Änderungen"
     },
     "tutorial-000736": {
-        "message": "Passwörter markieren wenn..."
+        "message": "Passwörter markieren wenn…"
     },
     "tutorial-000737": {
         "message": "sie älter sind als"
