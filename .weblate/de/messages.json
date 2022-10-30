@@ -186,7 +186,7 @@
         "message": "Exportieren"
     },
     "backups-000059": {
-        "message": "Läuft..."
+        "message": "Läuft…"
     },
     "backups-000060": {
         "message": "Export Fehler"
@@ -630,7 +630,7 @@
         "message": "Nicht erneut warnen"
     },
     "frontend-000176": {
-        "message": "Tags hinzufügen..."
+        "message": "Tags hinzufügen…"
     },
     "frontend-000177": {
         "message": "Farbe"
@@ -759,7 +759,7 @@
         "message": "Ordner löschen"
     },
     "frontend-000207": {
-        "message": "Möchtest du den Ordner seinen Inhalt löschen?"
+        "message": "Möchtest du den Ordner und seinen Inhalt löschen?"
     },
     "frontend-000208": {
         "message": "Ordner gelöscht"
@@ -2075,7 +2075,7 @@
         "message": "Anleitung öffnen"
     },
     "backend-000512": {
-        "message": "Die Konfiguration deines Webseitenansichtengenerators ist unvollständig."
+        "message": "Die Konfiguration deines Webseitenvorschaudienstes ist unvollständig"
     },
     "backend-000513": {
         "message": "Der von dir gewählte Favicon-Service benötigt einen API-Endpoint um zu funktionieren."
@@ -2638,7 +2638,7 @@
         "message": "zuletzt Geänderten"
     },
     "tutorial-000736": {
-        "message": "Markiere meine Passwörter wenn..."
+        "message": "Markiere meine Passwörter wenn…"
     },
     "tutorial-000737": {
         "message": "sie älter sind als"
