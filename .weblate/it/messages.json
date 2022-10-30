@@ -1643,14 +1643,6 @@
     "backend-000457": {
         "message": "Password non condivisa"
     },
-    "backend-000458": {
-        "message": "La password non è stata condivisa con $STRING_1$ perchè ha già l'accesso (da qualcun'altro)",
-        "placeholders": {
-            "string_1": {
-                "content": "$1"
-            }
-        }
-    },
     "backend-000459": {
         "message": "Hai una password insicura"
     },
