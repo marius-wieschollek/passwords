@@ -3247,5 +3247,22 @@
     },
     "frontend-PasswordActionQrcode": {
         "message": ""
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": ""
+    },
+    "tutorial-StartText1": {
+        "message": ""
     }
 }
