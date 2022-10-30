@@ -756,7 +756,7 @@
         "message": "Ordner löschen"
     },
     "frontend-000207": {
-        "message": "Möchten Sie den Ordner und alle enthaltenen Elemente löschen?"
+        "message": "Möchten Sie den Ordner und alle darin enthaltenen Elemente löschen?"
     },
     "frontend-000208": {
         "message": "Ordner gelöscht"
