@@ -688,7 +688,7 @@
         "message": "Smazat složku"
     },
     "frontend-000207": {
-        "message": "Opravdu si přejete tuto složku smazat"
+        "message": "Opravdu si přejete tuto složku a vše co obsahuje smazat?"
     },
     "frontend-000208": {
         "message": "Složka smazána"
@@ -724,7 +724,7 @@
         "message": "Odstranit štítek"
     },
     "frontend-000220": {
-        "message": "Opravdu si přejete tento štítek odstranit"
+        "message": "Opravdu si přejete tento štítek odstranit?"
     },
     "frontend-000221": {
         "message": "Štítek odstraněn"
@@ -766,7 +766,7 @@
         "message": "Smazat heslo"
     },
     "frontend-000234": {
-        "message": "Opravdu si přejete toto heslo smazat"
+        "message": "Opravdu si přejete toto heslo smazat?"
     },
     "frontend-000235": {
         "message": "Heslo odstraněno"
@@ -1980,7 +1980,7 @@
         "message": "nedávno změněné"
     },
     "tutorial-000736": {
-        "message": "Označovat moje hesla když…"
+        "message": "Označovat moje hesla pokud…"
     },
     "tutorial-000737": {
         "message": "jsou starší než"
@@ -2864,5 +2864,80 @@
     "settings-SettingsRecoverItems": {
         "message": "Obnovit skryté položky",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Uložení skrytého hesla do složky, která není sama skrytá způsobí, že heslo nebude přístupné. Toto heslo přestane být zobrazováno, kdekoli bylo. Přejete si pokračovat?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Vyberte libovolný typ skrytých položek, které si přejete obnovit.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Obnovit skrytá hesla, která se nacházejí ve složce, která sama není skrytá",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Obnovit veškeré skryté štítky",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Obnovit položky",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Tato akce položkám odebere příznak „skryté“, takže se znovu zobrazí v aplikaci.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Obnovit skryté položky",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Veškerá skrytá hesla",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Obnovit veškerá skrytá hesla nezávisle na stavu složky",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Veškeré skryté složky",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Obnovit veškeré skryté složky",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Veškeré skryté štítky",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Obnoveno $PASSWORDS$ hesel, $FOLDERS$ složek a $TAGS$ štítků.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Položek obnoveno",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Došlo k chybě.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Hesla která se nenacházejí ve skryté složce",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     }
 }
