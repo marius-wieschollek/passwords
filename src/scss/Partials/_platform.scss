@@ -109,6 +109,12 @@ body[data-server-version="25"] {
                     transform : translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
                 }
             }
+
+            .help .handbook-footer {
+                position : sticky;
+                margin   : 1em auto 0;
+                width    : 100%;
+            }
         }
 
         .password-form-notes-wrapper #password-notes .toastui-editor-defaultUI .toastui-editor-toolbar .toastui-editor-defaultUI-toolbar .toastui-editor-toolbar-group .toastui-editor-toolbar-icons.fa:hover {
@@ -134,6 +140,13 @@ body[data-server-version="25"] {
         .help #controls {
             width : auto;
         }
+    }
+
+    &#body-user[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
+        background-repeat          : no-repeat;
+        background-size            : cover;
+        height                     : 100vh;
+        border-bottom-right-radius : 0;
     }
 }
 

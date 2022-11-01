@@ -133,7 +133,11 @@ class ThemeSettingsHelper {
         if(method_exists($this->theming, 'getBackground') && (!($this->theming instanceof ThemingDefaults) || (!empty($themingBackground) && $themingBackground !== 'backgroundColor'))) {
             $url = $this->theming->getBackground();
         } else {
-            $url = $this->urlGenerator->imagePath('core', 'background.png');
+            if(str_starts_with($this->config->getSystemValue('version'), '25')) {
+                $url = $this->urlGenerator->imagePath('core', 'app-background.jpg');
+            } else {
+                $url = $this->urlGenerator->imagePath('core', 'background.png');
+            }
         }
         if($this->config->isAppEnabled('unsplash')) {
             return 'https://source.unsplash.com/random/featured/?nature';
