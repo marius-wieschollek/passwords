@@ -110,7 +110,7 @@
         "message": "Webseite"
     },
     "frontend-000176": {
-        "message": "Adicionar etiquetas ..."
+        "message": "Adicionar Etiquetas…"
     },
     "frontend-000177": {
         "message": "Cor"
@@ -224,7 +224,7 @@
         "message": "Excluir pasta"
     },
     "frontend-000207": {
-        "message": "Você quer deletar a pasta"
+        "message": "Quer apagar a pasta e o seu conteúdo?"
     },
     "frontend-000208": {
         "message": "Pasta excluída"
@@ -263,7 +263,7 @@
         "message": "Excluir etiqueta"
     },
     "frontend-000220": {
-        "message": "Você quer deletar a etiqueta"
+        "message": "Quer apagar a etiqueta?"
     },
     "frontend-000221": {
         "message": "Etiqueta deletada"
@@ -305,7 +305,7 @@
         "message": "Excluir senha"
     },
     "frontend-000234": {
-        "message": "Você quer deletar a senha"
+        "message": "Quer apagar a palavra-passe?"
     },
     "frontend-000235": {
         "message": "Senha excluída"
@@ -1653,7 +1653,7 @@
         "message": "Exportar"
     },
     "backups-000059": {
-        "message": "Aguardando..."
+        "message": "À espera…"
     },
     "backups-000061": {
         "message": "Baixar $FORMAT$",
@@ -2005,5 +2005,942 @@
     },
     "backups-TagLabels": {
         "message": "Etiquetas"
+    },
+    "backups-000048": {
+        "message": "Rótulo ParentLabel"
+    },
+    "backups-000066": {
+        "message": "Senhas CSV"
+    },
+    "tutorial-000736": {
+        "message": "Marcar as minhas palavras-passe se…"
+    },
+    "frontend-Folder": {
+        "message": "Pasta"
+    },
+    "frontend-000563": {
+        "message": "Reinicialização"
+    },
+    "tutorial-000781": {
+        "message": "Pode encontrar a nossa secção Apps e Extensões em \"Mais\" ou simplesmente clicar no botão abaixo."
+    },
+    "apps-000014": {
+        "message": "Ligar algo mais"
+    },
+    "apps-000017": {
+        "message": "Falha na busca de aplicações: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000023": {
+        "message": "Ligue este cliente à sua conta Nextcloud sem palavras-passe e urls irritantes"
+    },
+    "tutorial-000749": {
+        "message": "Incluir números"
+    },
+    "apps-000026": {
+        "message": "Clique no botão para ligar uma aplicação instalada neste dispositivo ou digitalizar o código QR com a aplicação se esta estiver instalada noutro dispositivo."
+    },
+    "backups-000028": {
+        "message": "Cópia de segurança ou exportação"
+    },
+    "backups-000033": {
+        "message": "Leia o guia de importação $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000037": {
+        "message": "experimente a importação genérica do CSV"
+    },
+    "backups-000038": {
+        "message": "Nenhuma importação para o seu CSV?"
+    },
+    "backups-000039": {
+        "message": "Palavra-passe de segurança"
+    },
+    "backups-000041": {
+        "message": "A importação apenas suporta CSV"
+    },
+    "backups-000050": {
+        "message": "Tag Ids"
+    },
+    "backups-000051": {
+        "message": "ParentId"
+    },
+    "backups-CustomFields": {
+        "message": "Campos Personalizados"
+    },
+    "backups-FolderId": {
+        "message": "ID da pasta"
+    },
+    "backups-TagIds": {
+        "message": "Tag Ids"
+    },
+    "backups-000053": {
+        "message": "Adicionar linha de cabeçalho"
+    },
+    "backups-000067": {
+        "message": "Pasta CSV"
+    },
+    "backups-000068": {
+        "message": "CSV personalizado"
+    },
+    "backups-000069": {
+        "message": "Outros / CSV personalizados"
+    },
+    "backups-000072": {
+        "message": "Tratamento de conflitos"
+    },
+    "backups-000077": {
+        "message": "Criar nova entrada"
+    },
+    "backups-000078": {
+        "message": "Para cópias de segurança encriptadas"
+    },
+    "backups-000079": {
+        "message": "Opções CSV"
+    },
+    "backups-000081": {
+        "message": "Citação de carácter"
+    },
+    "backups-000082": {
+        "message": "Escape Character"
+    },
+    "backups-000093": {
+        "message": "Detectar citações não gravadas"
+    },
+    "backups-000095": {
+        "message": "Interpolar campos em falta"
+    },
+    "backups-000096": {
+        "message": "Mapeamento de Campo CSV"
+    },
+    "backups-000097": {
+        "message": "Linha de pré-visualização"
+    },
+    "backups-000098": {
+        "message": "Linha $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000103": {
+        "message": "Ficheiro de entrada de análise"
+    },
+    "backups-000124": {
+        "message": "O ficheiro CSV não pode ser mapeado"
+    },
+    "backups-000134": {
+        "message": "Citação inválida no campo citado"
+    },
+    "backups-000135": {
+        "message": "O ficheiro não pôde ser analisado: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ na linha $LINE$ personagem $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" tem ficheiros anexados que não podem ser importados.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "O tipo de \"$FIELD$\" em \"$LABEL$\" é desconhecido e não pode ser importado.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "O rótulo de \"$FIELD$\" em \"$LABEL$\" excede 48 caracteres e foi cortado.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "O valor de \"$FIELD$\" em \"$LABEL$\" excede 320 caracteres e foi cortado.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000142": {
+        "message": "O ficheiro tem o tipo \"$ACTUAL$\" mas \"$EXPECTED$\" é esperado. Poderá ter escolhido o ficheiro ou importador errado.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ é conhecido por gerar ficheiros de exportação defeituosos. Consulte o manual para obter ajuda se o ficheiro não puder ser analisado.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-000539": {
+        "message": "Definir título de"
+    },
+    "frontend-000548": {
+        "message": "Adicionar opções de cópia no menu"
+    },
+    "frontend-000549": {
+        "message": "Mostrar nome de utilizador na vista de lista"
+    },
+    "frontend-000552": {
+        "message": "Pesquisar como i digitar"
+    },
+    "frontend-000553": {
+        "message": "Pesquisar em todo o lado com Enter"
+    },
+    "frontend-000554": {
+        "message": "Mostrar sempre a secção de pesquisa"
+    },
+    "frontend-000556": {
+        "message": "Enviar e-mails para"
+    },
+    "frontend-000557": {
+        "message": "Questões de segurança"
+    },
+    "frontend-000566": {
+        "message": "Pedido de reposição de conta"
+    },
+    "frontend-000558": {
+        "message": "Palavras-passe partilhadas comigo"
+    },
+    "frontend-000605": {
+        "message": "Palavra-passe escondida"
+    },
+    "frontend-000606": {
+        "message": "Não mostre esta palavra-chave em lado nenhum"
+    },
+    "frontend-000559": {
+        "message": "Mostrar Notificações para"
+    },
+    "frontend-000562": {
+        "message": "Repor todas as definições"
+    },
+    "frontend-000567": {
+        "message": "Ver"
+    },
+    "frontend-000569": {
+        "message": "Marcar palavras-passe como fracas se estiverem a ser usadas para múltiplas contas"
+    },
+    "frontend-000570": {
+        "message": "Marcar palavras-passe como fracas se ultrapassarem a quantidade de dias especificada"
+    },
+    "frontend-000571": {
+        "message": "Uma maior força resulta em palavras-passe mais longas e mais complexas"
+    },
+    "frontend-000572": {
+        "message": "Mostrar o imóvel seleccionado como título na vista de lista"
+    },
+    "frontend-000573": {
+        "message": "Ordena as senhas pelos bens seleccionados quando a ordenação pelo nome é seleccionada"
+    },
+    "frontend-000574": {
+        "message": "Acção a executar ao clicar numa palavra-passe na vista de lista"
+    },
+    "frontend-000575": {
+        "message": "Acção a executar ao fazer duplo clique sobre uma palavra-passe na vista de lista"
+    },
+    "frontend-000576": {
+        "message": "Mostra opções para copiar a palavra-chave e o nome de utilizador no menu"
+    },
+    "frontend-000577": {
+        "message": "A secção inicial a ser mostrada quando a aplicação é aberta"
+    },
+    "frontend-000578": {
+        "message": "Mostrar sempre o nome de utilizador relacionado com a palavra-passe na vista de lista"
+    },
+    "frontend-000579": {
+        "message": "Mostrar as etiquetas para cada palavra-passe na vista de lista. Aumenta os tempos de carregamento"
+    },
+    "frontend-000580": {
+        "message": "Mostrar campos personalizados ocultos no formulário de edição e na secção de detalhes de uma palavra-passe"
+    },
+    "frontend-000581": {
+        "message": "Envia-lhe e-mails sobre palavras-passe comprometidas e outras questões de segurança"
+    },
+    "frontend-000582": {
+        "message": "Envia-lhe e-mails quando outras pessoas partilham palavras-passe consigo"
+    },
+    "frontend-000583": {
+        "message": "Mostrar sempre a secção de pesquisa global na navegação"
+    },
+    "frontend-000584": {
+        "message": "Notifica-o sobre palavras-passe comprometidas e outras questões de segurança"
+    },
+    "frontend-000585": {
+        "message": "Notifica-o quando outras pessoas partilham palavras-passe consigo"
+    },
+    "frontend-000586": {
+        "message": "Notifica-o quando uma operação de fundo falha"
+    },
+    "frontend-000587": {
+        "message": "Repor todas as definições nesta página aos seus valores por defeito"
+    },
+    "frontend-000588": {
+        "message": "Isto irá repor todas as definições para os seus valores por defeito. Quer continuar?"
+    },
+    "frontend-000589": {
+        "message": "Recomeçar e apagar todas as configurações, palavras-passe, pastas e etiquetas"
+    },
+    "frontend-000590": {
+        "message": "Quer apagar todas as suas definições, palavras-passe, pastas e etiquetas?\nNÃO será possível desfazer isto."
+    },
+    "frontend-000596": {
+        "message": "Desconhecido (Not_checked)"
+    },
+    "frontend-000598": {
+        "message": "O que esperava?"
+    },
+    "frontend-000599": {
+        "message": "Clique para mostrar o código QR."
+    },
+    "frontend-000613": {
+        "message": "Redo"
+    },
+    "frontend-000614": {
+        "message": "Vai expirar $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000616": {
+        "message": "Demasiadas tentativas de login falhadas"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" não contém pastas",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Passwords Passphrase de Apêndice"
+    },
+    "frontend-000623": {
+        "message": "Desconhecido"
+    },
+    "frontend-000624": {
+        "message": "Ajuda"
+    },
+    "frontend-000627": {
+        "message": "Certifique-se de que este código QR é visível apenas para as pessoas em quem confia."
+    },
+    "frontend-000630": {
+        "message": "Senha inválida. Sessão revogada por demasiadas tentativas de login falhadas."
+    },
+    "frontend-000631": {
+        "message": "Esta é uma cópia da frase-chave que escolheu para a encriptação. A alteração ou eliminação desta entrada não afecta a encriptação. A frase-chave só pode ser alterada nas definições. Mais informações podem ser encontradas no manual."
+    },
+    "backend-000649": {
+        "message": "O último trabalho de fundo foi executado com PHP $STRING_1$, mas o webserver utiliza PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000651": {
+        "message": "Senha predefinida Configurações de segurança"
+    },
+    "backend-000652": {
+        "message": "Controlo de Segurança Hash"
+    },
+    "backend-000653": {
+        "message": "Não armazenar hashes"
+    },
+    "backend-000654": {
+        "message": "Armazenar 50% do haxixe"
+    },
+    "backend-000655": {
+        "message": "Armazenar 75% do haxixe"
+    },
+    "backend-000656": {
+        "message": "Armazenar o haxixe completo"
+    },
+    "backend-000657": {
+        "message": "Cópia de segurança restaurada automaticamente"
+    },
+    "backend-000658": {
+        "message": "A aplicação de palavras-passe parece ter encontrado um problema com a base de dados."
+    },
+    "backend-000659": {
+        "message": "Devido a isso, a cópia de segurança da aplicação \"$STR_1$\" foi restaurada automaticamente.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Se isto foi um erro, foi feita uma cópia de segurança da base de dados antes de a restaurar."
+    },
+    "backend-000661": {
+        "message": "Pode desactivar o restauro automático de cópias de segurança nas definições da aplicação."
+    },
+    "backend-000662": {
+        "message": "Restauração automática de cópias de segurança quando a base de dados é apagada"
+    },
+    "backend-000663": {
+        "message": "As palavras-passe terminam as actualizações para Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Passwords $STR_1$ é a última actualização para Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Actualização para Nextcloud $STR_1$ e PHP $STR_1$ (ou PHP $STR_1$ para LSR) para futuras actualizações.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Seleccione automaticamente"
+    },
+    "frontend-000667": {
+        "message": "Etiquetas CSV"
+    },
+    "frontend-000669": {
+        "message": "Predefinição"
+    },
+    "frontend-000670": {
+        "message": "Iniciar a pesquisa quando uma tecla é premida em qualquer parte da página"
+    },
+    "frontend-000671": {
+        "message": "Pesquisar em todo o lado quando a tecla enter é premida na caixa de pesquisa"
+    },
+    "settings-000678": {
+        "message": "Login e Sessão"
+    },
+    "settings-000679": {
+        "message": "Manter-me logado"
+    },
+    "settings-000680": {
+        "message": "Sempre"
+    },
+    "settings-000681": {
+        "message": "Quando estou a trabalhar"
+    },
+    "settings-000682": {
+        "message": "Quando estou activo"
+    },
+    "settings-000683": {
+        "message": "Sessão final após"
+    },
+    "settings-000684": {
+        "message": "Um minuto"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ acta",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Criptografia de ponta a ponta"
+    },
+    "settings-000687": {
+        "message": "Modo de encriptação do servidor"
+    },
+    "settings-000688": {
+        "message": "Nenhum se CSE usado"
+    },
+    "settings-000689": {
+        "message": "Encriptação simples"
+    },
+    "settings-000690": {
+        "message": "Encriptação avançada"
+    },
+    "settings-000691": {
+        "message": "Modo de encriptação do cliente"
+    },
+    "settings-000692": {
+        "message": "Habilitar"
+    },
+    "settings-000708": {
+        "message": "Adicionar caracteres especiais às palavras-passe geradas"
+    },
+    "settings-000709": {
+        "message": "Especificar a quantidade de tempo após um pedido antes de a sessão ser cancelada"
+    },
+    "settings-000710": {
+        "message": "Escolha o tipo de encriptação utilizado para encriptar os dados no servidor"
+    },
+    "settings-000711": {
+        "message": "Execute o assistente de instalação para configurar a encriptação das suas palavras-passe"
+    },
+    "settings-000712": {
+        "message": "Alterar a palavra-passe de encriptação"
+    },
+    "settings-000713": {
+        "message": "Mostrar uma pré-visualização do website associado nos detalhes. (Não em telemóveis)"
+    },
+    "settings-000714": {
+        "message": "Notifica-o de erros de configuração e outras questões administrativas"
+    },
+    "settings-000717": {
+        "message": "A sua palavra-passe deve ser superior a 12 caracteres e não a palavra-passe antiga"
+    },
+    "settings-000718": {
+        "message": "Por favor, confirme a sua nova palavra-passe"
+    },
+    "settings-000719": {
+        "message": "Deve introduzir a sua antiga palavra-passe"
+    },
+    "settings-000720": {
+        "message": "A sua palavra-chave foi alterada com sucesso."
+    },
+    "settings-000721": {
+        "message": "Activar a opção de deixar outros utilizadores editar uma palavra-passe partilhada por defeito"
+    },
+    "settings-000722": {
+        "message": "Activar a opção de permitir que outros utilizadores partilhem uma palavra-passe partilhada por defeito"
+    },
+    "settings-000723": {
+        "message": "Abrir a página de definições no manual"
+    },
+    "settings-000724": {
+        "message": "Enviar pedidos de \"keep-alive\" ao servidor para evitar que a sessão seja cancelada"
+    },
+    "settings-000725": {
+        "message": "Escolha o tipo de encriptação utilizada para encriptar os dados no cliente antes de serem enviados para o servidor"
+    },
+    "settings-000726": {
+        "message": "O hash SHA-1 é utilizado para verificar a existência de palavras-passe violadas. Um hash parcial pode impedir ataques de força bruta no caso do servidor ser pirateado, mas também pode fazer com que as senhas seguras sejam erroneamente reportadas como tendo sido infringidas."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Acção de clique na roda do rato",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Acção a ser executada quando a roda do rato é clicada sobre uma entrada de palavra-passe",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Mostrar botão de atalho para",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Adiciona um botão extra para a acção especificada na vista do ambiente de trabalho",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Mostrar separador Partilha",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Recuperar itens escondidos",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recuperar artigos",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Esta acção remove a bandeira \"escondida\" dos artigos para que estes apareçam novamente na aplicação.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recuperar itens escondidos",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Por favor, seleccione qualquer tipo de itens escondidos que deseje recuperar.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Palavras-passe que não estão numa pasta escondida",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Recuperar palavras-passe ocultas que se encontram numa pasta que não está escondida por si própria",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Todas as palavras-passe ocultas",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recuperar todas as palavras-passe ocultas, independentemente do estado da pasta",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Todas as pastas ocultas",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recuperar todas as pastas escondidas",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "tutorial-000783": {
+        "message": "Como administrador poderá querer dar uma vista de olhos a estas configurações comuns."
+    },
+    "tutorial-000784": {
+        "message": "Sempre que não souber como algo funciona, tiver dúvidas ou precisar de ajuda com um problema:"
+    },
+    "tutorial-000785": {
+        "message": "A ajuda está mesmo ao virar da esquina."
+    },
+    "tutorial-000786": {
+        "message": "O nosso manual integrado pode ser encontrado clicando em \"Mais\" e explica a aplicação em todos os detalhes."
+    },
+    "tutorial-000787": {
+        "message": "Em qualquer outro caso, a nossa comunidade é o lugar certo para fazer as suas perguntas."
+    },
+    "tutorial-000788": {
+        "message": "O manual será aberto após o tutorial"
+    },
+    "tutorial-000789": {
+        "message": "Introduza uma palavra-passe com 12 ou mais caracteres"
+    },
+    "tutorial-000790": {
+        "message": "A sua senha precisa de pelo menos 12 caracteres e a senha de confirmação deve ser a mesma"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Todas as etiquetas ocultas",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recuperar todas as etiquetas escondidas",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recuperado $PASSWORDS$ senha(s), $FOLDERS$ pasta(s) e $TAGS$ tag(s).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Artigos recuperados",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Ocorreu um erro.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Após o lançamento, mostrar o meu"
+    },
+    "tutorial-000731": {
+        "message": "pastas"
+    },
+    "tutorial-000732": {
+        "message": "etiquetas"
+    },
+    "tutorial-000733": {
+        "message": "favoritos"
+    },
+    "tutorial-000734": {
+        "message": "palavras-passe"
+    },
+    "tutorial-000735": {
+        "message": "mudou recentemente"
+    },
+    "tutorial-000737": {
+        "message": "são mais velhos do que"
+    },
+    "tutorial-000738": {
+        "message": "três meses"
+    },
+    "tutorial-000739": {
+        "message": "seis meses"
+    },
+    "tutorial-000740": {
+        "message": "um ano"
+    },
+    "tutorial-000741": {
+        "message": "dois anos"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ dias",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "são duplicados"
+    },
+    "tutorial-000744": {
+        "message": "Fazer as minhas novas palavras-passe"
+    },
+    "tutorial-000745": {
+        "message": "forte"
+    },
+    "tutorial-000746": {
+        "message": "mais forte"
+    },
+    "tutorial-000747": {
+        "message": "muito forte"
+    },
+    "tutorial-000748": {
+        "message": "extremamente forte"
+    },
+    "tutorial-000750": {
+        "message": "Incluir caracteres especiais"
+    },
+    "tutorial-000751": {
+        "message": "Uma casa segura para as suas palavras-passe"
+    },
+    "tutorial-000752": {
+        "message": "Mantenha as suas palavras-passe em segredo"
+    },
+    "tutorial-000753": {
+        "message": "Personalize a sua experiência"
+    },
+    "tutorial-000754": {
+        "message": "Traga ordem para as suas palavras-passe"
+    },
+    "tutorial-000755": {
+        "message": "Liga-te"
+    },
+    "tutorial-000756": {
+        "message": "Encriptar as minhas palavras-passe existentes"
+    },
+    "tutorial-000757": {
+        "message": "Guardar a palavra-passe"
+    },
+    "tutorial-000759": {
+        "message": "Instalação de Encriptação"
+    },
+    "tutorial-000761": {
+        "message": "Limpeza"
+    },
+    "tutorial-000762": {
+        "message": "Sucesso"
+    },
+    "tutorial-000763": {
+        "message": "Encontre ajuda quando precisar dela"
+    },
+    "tutorial-000764": {
+        "message": "Ir para Apps e Extensões"
+    },
+    "tutorial-000765": {
+        "message": "Continuar"
+    },
+    "tutorial-000766": {
+        "message": "Saltar"
+    },
+    "tutorial-000767": {
+        "message": "Verifique a segurança da senha com"
+    },
+    "tutorial-000768": {
+        "message": "Gerar palavras-passe usando"
+    },
+    "tutorial-000769": {
+        "message": "Obter favicons de"
+    },
+    "tutorial-000770": {
+        "message": "Obtenha pré-visualizações do website a partir de"
+    },
+    "tutorial-000771": {
+        "message": "Fazer cópias de segurança"
+    },
+    "tutorial-000772": {
+        "message": "Ver todas as definições"
+    },
+    "tutorial-000773": {
+        "message": "Leia as nossas dicas para admins"
+    },
+    "tutorial-000774": {
+        "message": "Palavra-passe (min. 12 caracteres)"
+    },
+    "frontend-000530": {
+        "message": "Idade máxima em dias"
+    },
+    "frontend-000538": {
+        "message": "Lista de palavras-passe Ver"
+    },
+    "frontend-000611": {
+        "message": "Guia Markdown aberto"
+    },
+    "tutorial-000775": {
+        "message": "Criptografia em curso…"
+    },
+    "frontend-000600": {
+        "message": "Não me avise de novo"
+    },
+    "frontend-000612": {
+        "message": "Desfazer"
+    },
+    "backend-000650": {
+        "message": "A utilização de diferentes versões principais do PHP pode causar problemas."
+    },
+    "tutorial-000760": {
+        "message": "Porta-chaves"
+    },
+    "tutorial-000782": {
+        "message": "As palavras-passe podem ser personalizadas de muitas maneiras diferentes."
+    },
+    "tutorial-000758": {
+        "message": "Repita a sua palavra-passe"
+    },
+    "tutorial-000776": {
+        "message": "Há muitas configurações para que possa personalizar a sua experiência."
+    },
+    "tutorial-000780": {
+        "message": "Aceda facilmente às suas palavras-passe a partir de qualquer lugar, graças às nossas aplicações e extensões."
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Guardar uma palavra-passe escondida numa pasta que não esteja escondida em si tornará a palavra-passe inacessível. Esta palavra-passe deixará de ser mostrada em qualquer lugar. Quer continuar?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Ocultar esta palavra-passe?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "settings-000706": {
+        "message": "Código de reinicialização inválido"
+    },
+    "settings-000707": {
+        "message": "Adicionar números às palavras-passe geradas"
+    },
+    "settings-000716": {
+        "message": "Pode utilizar este diálogo para alterar a sua palavra-passe principal."
+    },
+    "settings-000693": {
+        "message": "Alterar Palavra-passe"
+    },
+    "settings-000694": {
+        "message": "Vista de detalhe de palavras-passe"
+    },
+    "settings-000695": {
+        "message": "Mostrar visualização do website"
+    },
+    "settings-000696": {
+        "message": "Nova Senha"
+    },
+    "settings-000697": {
+        "message": "Repetir palavra-passe"
+    },
+    "settings-000698": {
+        "message": "Palavra-passe antiga"
+    },
+    "settings-000699": {
+        "message": "Senha alterada"
+    },
+    "settings-000700": {
+        "message": "Mudança de senha falhou"
+    },
+    "settings-000701": {
+        "message": "Questões administrativas"
+    },
+    "settings-000702": {
+        "message": "Partilha de Senha"
+    },
+    "settings-000703": {
+        "message": "Partilhar como editável por defeito"
+    },
+    "settings-000704": {
+        "message": "Permitir a partilha por defeito"
+    },
+    "settings-000705": {
+        "message": "Código"
+    },
+    "settings-000715": {
+        "message": "Introduza \"$CODE$\" para repor a sua conta e apagar tudo.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000777": {
+        "message": "Pode encontrar todos eles em \"Mais\", mas colocamos aqui os mais comuns:"
+    },
+    "tutorial-000778": {
+        "message": "As senhas oferecem uma encriptação moderna e forte para proteger os seus dados de olhares curiosos."
+    },
+    "tutorial-000779": {
+        "message": "Escolha uma palavra-passe segura abaixo para activar a derradeira protecção para as suas palavras-passe."
     }
 }
