@@ -4,31 +4,32 @@ declare(strict_types=1);
 
 use Rector\Core\Configuration\Option;
 use Rector\Core\ValueObject\PhpVersion;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Rector\Set\ValueObject\DowngradeSetList;
+use Rector\Config\RectorConfig;
 
 require_once ".rector/RemovePureAnnotation.php";
 require_once ".rector/FixReturnTypeExtension.php";
 
-return static function (ContainerConfigurator $containerConfigurator): void {
-    $parameters = $containerConfigurator->parameters();
+return static function (RectorConfig $rectorConfig): void {
+    $rectorConfig->paths(
+        [
+            __DIR__.'/src/appinfo',
+            __DIR__.'/src/lib',
+            __DIR__.'/src/templates'
+        ]
+    );
 
-    $parameters->set(Option::PATHS, [
-        __DIR__ . '/src/appinfo',
-        __DIR__ . '/src/lib',
-        __DIR__ . '/src/templates'
-    ]);
+    $rectorConfig->sets(
+        [
+            DowngradeSetList::PHP_81,
+            DowngradeSetList::PHP_80,
+            DowngradeSetList::PHP_74
+        ]
+    );
 
-    $containerConfigurator->import(DowngradeSetList::PHP_81);
-    $containerConfigurator->import(DowngradeSetList::PHP_80);
-    $containerConfigurator->import(DowngradeSetList::PHP_74);
+    $rectorConfig->phpVersion(PhpVersion::PHP_73);
+    $rectorConfig->bootstrapFiles([__DIR__.'/rector-shells.php',]);
 
-    $parameters->set(Option::PHP_VERSION_FEATURES, PhpVersion::PHP_73);
-    $parameters->set(Option::BOOTSTRAP_FILES, [
-        __DIR__ . '/rector-shells.php',
-    ]);
-
-    $services = $containerConfigurator->services();
-    $services->set(\Utils\Rector\Rector\RemovePureAnnotation::class);
-    $services->set(\Utils\Rector\Rector\FixReturnTypeExtension::class);
+    $rectorConfig->rule(\Utils\Rector\Rector\RemovePureAnnotation::class);
+    $rectorConfig->rule(\Utils\Rector\Rector\FixReturnTypeExtension::class);
 };

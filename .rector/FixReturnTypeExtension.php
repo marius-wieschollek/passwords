@@ -35,7 +35,7 @@ class FixReturnTypeExtension extends AbstractRector {
         }
 
         if($node->returnType === null || $node->returnType->toString() === 'OCA\Passwords\Db\AbstractRevision') {
-            $node->returnType = new Identifier('Entity');
+            $node->returnType = new \PhpParser\Node\Name\FullyQualified('OCP\AppFramework\Db\Entity');
 
             return $node;
         }
@@ -48,11 +48,11 @@ class FixReturnTypeExtension extends AbstractRector {
      */
     public function getRuleDefinition(): RuleDefinition {
         return new RuleDefinition(
-            'Remove attributes from method calls',
+            'Remove incompatible PHP return type hints',
             [
                 new CodeSample(
-                    '#[Pure] public function __construct',
-                    'public function __construct'
+                    'public function insert(): \OCA\Passwords\Db\AbstractRevision',
+                    'public function insert(): Entity'
                 ),
             ]
         );
