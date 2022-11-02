@@ -12,7 +12,7 @@
 namespace Utils\Rector\Rector;
 
 use PhpParser\Node;
-use PhpParser\Node\Identifier;
+use PhpParser\Node\Name\FullyQualified;
 use PhpParser\Node\Stmt\ClassMethod;
 use Rector\Core\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -35,7 +35,7 @@ class FixReturnTypeExtension extends AbstractRector {
         }
 
         if($node->returnType === null || $node->returnType->toString() === 'OCA\Passwords\Db\AbstractRevision') {
-            $node->returnType = new \PhpParser\Node\Name\FullyQualified('OCP\AppFramework\Db\Entity');
+            $node->returnType = new FullyQualified('OCP\AppFramework\Db\Entity');
 
             return $node;
         }
