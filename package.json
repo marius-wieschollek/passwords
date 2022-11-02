@@ -34,7 +34,7 @@
         "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
         "handbook": "codeceptjs run --steps",
         "selenium": "docker run --net=host selenium/standalone-firefox",
-        "rector": "node scripts/generate-nc-shells.mjs && rector process",
+        "rector": "node scripts/generate-nc-shells.mjs && rector --version && rector process",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
