@@ -1,6 +1,13 @@
 ## [Unreleased]
 ### Added
 - Nextcloud 25 Support
+- Dialog to restore hidden items
+- Portuguese language
+### Changed
+- Lowered automatic performance settings for SQLite
+- Updated translations
+### Fixed
+- Some missing translations
 
 ## 2022.10.0 - Feature release
 ### Changed

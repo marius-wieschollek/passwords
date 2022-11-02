@@ -143,6 +143,8 @@ class ServerSettingsHelper {
     protected function getServerPerformanceHint(): int {
         $performance = $this->config->getAppValue('performance', null);
         if($performance === null) {
+            if($this->config->getSystemValue('dbtype') === 'sqlite') return 1;
+
             return in_array(php_uname('m'), ['amd64', 'x86_64']) ? 5:1;
         }
 
