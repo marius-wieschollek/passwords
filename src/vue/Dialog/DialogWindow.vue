@@ -52,6 +52,14 @@
             }
         },
 
+        mounted() {
+            document.getElementById('content').style.zIndex = '2001';
+        },
+
+        destroyed() {
+            document.getElementById('content').style.zIndex = 'auto';
+        },
+
         methods: {
             closeWindow() {
                 this.$emit('close');

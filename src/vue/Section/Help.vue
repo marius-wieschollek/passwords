@@ -36,6 +36,7 @@
     import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
+    import SettingsService from '@js/Services/SettingsService';
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -157,8 +158,16 @@
                 this.loading = false;
             },
             jumpToAnchor(behavior = 'smooth') {
+                let scrollTarget = window;
+                /**
+                 * @TODO remove in 2023.1.0
+                 */
+                if(SettingsService.get('server.version') === '25') {
+                    scrollTarget = document.querySelector('#app-content .app-content-left');
+                }
+
                 if(!this.$route.hash) {
-                    Utility.scrollTo(0, 0, behavior);
+                    Utility.scrollTo(0, 0, behavior, scrollTarget);
                     return;
                 }
 
@@ -166,7 +175,7 @@
                 if($el) {
                     let top = $el.offsetTop - document.getElementById('controls').offsetHeight;
 
-                    Utility.scrollTo(top, 0, behavior);
+                    Utility.scrollTo(top, 0, behavior, scrollTarget);
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                     this.anchor = this.$route.hash;

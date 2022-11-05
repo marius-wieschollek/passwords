@@ -42,9 +42,14 @@ body[data-server-version="25"] {
 
         #app-navigation ul#app-settings {
             background-color : transparent;
+            padding-bottom: 4px;
 
             &:not(.open) {
                 max-height : 60px;
+
+                li:nth-child(2) {
+                    opacity: 0;
+                }
             }
         }
 
@@ -119,10 +124,30 @@ body[data-server-version="25"] {
                 }
             }
 
-            .help .handbook-footer {
-                position : sticky;
-                margin   : 1em auto 0;
-                width    : 100%;
+            .help {
+                .handbook-footer {
+                    position : sticky;
+                    margin   : 1em auto 0;
+                    width    : 100%;
+                }
+
+                .handbook-page {
+                    blockquote.info {
+                        background-color: var(--color-primary-element);
+                    }
+
+                    h1, h2, h3, h4, h5, h6 {
+                        a.help-anchor {
+                            margin: 0 0 0 -1.1em;
+                        }
+                    }
+                }
+            }
+
+            .appstore-container {
+                .appstore-item {
+                    width: 505px;
+                }
             }
         }
 

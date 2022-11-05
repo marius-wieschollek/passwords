@@ -72,12 +72,17 @@ export default class Utility {
      * @param top
      * @param left
      * @param behavior
+     * @param target
      */
-    static scrollTo(top = 0, left = 0, behavior = 'smooth') {
+    static scrollTo(top = 0, left = 0, behavior = 'smooth', target = undefined) {
+        if(target === undefined) {
+            target = window;
+        }
+
         if(navigator.userAgent.indexOf('MSIE') === -1 && navigator.userAgent.indexOf('Edge') === -1 && navigator.userAgent.indexOf('Safari') === -1) {
-            window.scrollTo({left, top, behavior});
+            target.scrollTo(left, top);
         } else {
-            window.scrollTo(left, top);
+            target.scrollTo(left, top);
         }
     }
 

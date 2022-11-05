@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Fixed
+- Nextcloud 25 styling issues
+- Navigation in Handbook not working in Nextcloud 25
+
 ## 2022.11.0 - Feature release
 ### Added
 - Nextcloud 25 Support
