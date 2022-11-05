@@ -23,3 +23,9 @@ body {
         background-image : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
     }
 }
+
+form.passwords-form[data-form="item-recovery-form"] {
+    div.field {
+        grid-template-columns: 4fr 1fr;
+    }
+}

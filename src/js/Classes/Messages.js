@@ -104,12 +104,13 @@ class Messages {
 
     /**
      *
-     * @param form
-     * @param title
-     * @param message
+     * @param {Object} form
+     * @param {String} title
+     * @param {String} message
+     * @param {String} name
      * @returns {Promise<any>}
      */
-    form(form, title = 'Form', message = '') {
+    form(form, title = 'Form', message = '', name = '') {
         let id   = `passwords-form-${Math.round(Math.random() * 10)}`,
             html = `<div id="${id}"></div>`;
 
@@ -131,7 +132,7 @@ class Messages {
 
             let FormTemplate  = await import(/* webpackChunkName: "Form" */ '@vue/Components/Form.vue'),
                 FormComponent = Vue.extend(FormTemplate.default),
-                Form          = new FormComponent({propsData: {form, message, id}});
+                Form          = new FormComponent({propsData: {form, message, id, name}});
 
             this._loadForm(id, Form);
         });

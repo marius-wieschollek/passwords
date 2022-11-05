@@ -1,5 +1,5 @@
 <template>
-    <form class="passwords-form" :id="id" @submit="preventSubmit($event)">
+    <form class="passwords-form" :id="id" :data-form="name" @submit="preventSubmit($event)">
         <translate tag="div" class="message" :say="message" v-if="message"/>
         <div v-for="field in getFields" class="field" :class="{large: field.button !== null}">
             <translate tag="label" :for="field.attributes.id" :say="field.label"/>
@@ -23,6 +23,9 @@
         components: {Translate},
         props     : {
             id     : {
+                type: String
+            },
+            name     : {
                 type: String
             },
             message: {

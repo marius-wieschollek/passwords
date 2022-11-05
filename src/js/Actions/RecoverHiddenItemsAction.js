@@ -59,7 +59,8 @@ export default class RecoverHiddenItemsAction {
                 }
             },
             'RecoverItemsSelectTitle',
-            'RecoverItemsSelectText'
+            'RecoverItemsSelectText',
+            'item-recovery-form'
         );
     }
 
