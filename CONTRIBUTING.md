@@ -85,13 +85,14 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
  - Open [PhpLdapAdmin](https://localhost:9090) and log in
  - Create a new entry with the template "Generic: Posix Group"
  - Create a new Entry with the template "Generic: User Account" as child entry of the group
- - Enable "LDAP user and group backend"
+ - Enable "LDAP user and group backend" in Nextcloud
  - Go to "Settings" > "LDAP/AD Integration"
  - Enter `openldap` as server and `389` as port
  - Enter `cn=admin,dc=nextcloud` as User-DN and `nextcloud` as password
  - Click on "Save Credentials"
  - Enter `dc=nextcloud` as Base DN
  - Click on "Continue"
+- Select "posixAccount" in "Object Classes"
  - Click on "Continue"
  - Select "cn" in "other attributes"
  - Click on "Continue"

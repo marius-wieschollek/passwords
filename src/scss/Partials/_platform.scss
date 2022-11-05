@@ -83,9 +83,18 @@ body[data-server-version="25"] {
                             }
                         }
 
+                        .menu {
+                            position : absolute;
+                        }
+
                         &.active .menu {
                             position : absolute;
                             top      : 108%;
+                            padding  : 0;
+
+                            .menuitem {
+                                width : 100%;
+                            }
                         }
                     }
                 }
