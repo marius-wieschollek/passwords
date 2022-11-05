@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2022.11.0 - Feature release
 ### Added
 - Nextcloud 25 Support
 - Dialog to restore hidden items
