@@ -7,7 +7,7 @@
                    target="_blank"
                    rel="noopener noreferrer"
                    :href="link"
-                   class="share-link button primary"
+                   class="connect-link button primary"
                    say="Connect via link" v-if="hasLink" />
     </div>
 </template>
@@ -119,7 +119,7 @@
         width  : 300px;
     }
 
-    .share-link {
+    .connect-link {
         display    : block;
         margin     : 1rem;
         text-align : center;
