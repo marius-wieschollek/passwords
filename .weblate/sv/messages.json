@@ -1311,7 +1311,7 @@
         "message": "Om felet kvarstår bör du kontakta administratören."
     },
     "backend-000389": {
-        "message": "Lösenord $STR_1$ - $STR_1$",
+        "message": "Lösenord $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1770,5 +1770,1177 @@
     },
     "backups-TagLabels": {
         "message": "Tagg"
+    },
+    "backend-000499": {
+        "message": "Detta kommer att skicka oss anonymiserade uppgifter om din installation och valda inställningar."
+    },
+    "backend-000502": {
+        "message": "Delta"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000599": {
+        "message": "Klicka för att visa QR-koden."
+    },
+    "frontend-000620": {
+        "message": "Hem"
+    },
+    "backend-000650": {
+        "message": "Användning av olika större versioner av PHP kan orsaka problem."
+    },
+    "tutorial-000731": {
+        "message": "mappar"
+    },
+    "tutorial-000732": {
+        "message": "taggar"
+    },
+    "tutorial-000749": {
+        "message": "Inkludera siffror"
+    },
+    "tutorial-000751": {
+        "message": "Ett säkert hem för dina lösenord"
+    },
+    "tutorial-000755": {
+        "message": "Få kontakt"
+    },
+    "frontend-Folder": {
+        "message": "Mapp"
+    },
+    "apps-000004": {
+        "message": "Läs mer"
+    },
+    "apps-000008": {
+        "message": "Välj ett namn:"
+    },
+    "backend-000493": {
+        "message": "$STR_1$ loggat in på ditt konto på $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Eftersom du använder ett huvudlösenord betyder det inte att du har fått tillgång till dina uppgifter."
+    },
+    "backend-000495": {
+        "message": "För att förhindra oönskad åtkomst till dina uppgifter bör du skapa ett huvudlösenord."
+    },
+    "backend-000497": {
+        "message": "Hjälp oss att förbättra lösenord"
+    },
+    "backend-000498": {
+        "message": "Du kan hjälpa oss att förbättra appen Passwords genom att delta i vår serverundersökning."
+    },
+    "backend-000500": {
+        "message": "Du kan ändra detta när som helst i appens inställningar."
+    },
+    "backend-000503": {
+        "message": "Deltagande i serverundersökningen"
+    },
+    "backend-000504": {
+        "message": "Grundläggande"
+    },
+    "backend-000505": {
+        "message": "Fullständigt"
+    },
+    "backend-000506": {
+        "message": "Inte inställd"
+    },
+    "backend-000507": {
+        "message": "Överväg att självhosta ditt favicon api."
+    },
+    "backend-000508": {
+        "message": "Ditt Nextcloud använder våra delade Besticon-instanser för att hämta webbplatsikoner."
+    },
+    "backend-000509": {
+        "message": "Dessa instanser är avsedda för små Nextcloud-uppsättningar med mycket liten trafik."
+    },
+    "backend-000510": {
+        "message": "Klicka på länken och följ vår enkla handledning för att själv vara värd för Besticon."
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "backend-000491": {
+        "message": "Administrativ åtkomst till ditt konto"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ försökte logga in på ditt konto på $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000512": {
+        "message": "Din konfiguration för förhandsvisningstjänsten är ogiltig"
+    },
+    "backups-000033": {
+        "message": "Läs $LABEL$ importguide",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "eller ."
+    },
+    "backups-000035": {
+        "message": "säkerhetskopiering av databaser"
+    },
+    "backups-000036": {
+        "message": "anpassad CSV"
+    },
+    "backups-000037": {
+        "message": "prova den generiska CSV-importen"
+    },
+    "backups-000038": {
+        "message": "Ingen import för ditt CSV?"
+    },
+    "backups-000045": {
+        "message": "Egendefinerade fält"
+    },
+    "frontend-000594": {
+        "message": "Flytta"
+    },
+    "backups-000056": {
+        "message": "Importera inte tomma fält"
+    },
+    "apps-000005": {
+        "message": "Anslut med PassLink"
+    },
+    "apps-000006": {
+        "message": "Anslut en ny enhet"
+    },
+    "apps-000007": {
+        "message": "Anslut via en länk"
+    },
+    "apps-000009": {
+        "message": "Koderna stämmer inte överens"
+    },
+    "apps-000010": {
+        "message": "Ser bra ut"
+    },
+    "apps-000011": {
+        "message": "Anslutning lyckad"
+    },
+    "apps-000012": {
+        "message": "Jag är klar"
+    },
+    "apps-000013": {
+        "message": "Försök inte igen"
+    },
+    "apps-000014": {
+        "message": "Anslut något annat"
+    },
+    "apps-000015": {
+        "message": "Försök igen"
+    },
+    "apps-000016": {
+        "message": "Stark kryptering"
+    },
+    "apps-000018": {
+        "message": "Du avbröt anslutningen"
+    },
+    "apps-000019": {
+        "message": "Du bekräftade inte anslutningen i tid"
+    },
+    "apps-000020": {
+        "message": "Skanna bara QR-koden med appen för att ansluta den."
+    },
+    "settings-000705": {
+        "message": "Kod"
+    },
+    "tutorial-000733": {
+        "message": "favoriter"
+    },
+    "apps-000021": {
+        "message": "Klicka på knappen när du är redo att starta anslutningen."
+    },
+    "apps-000022": {
+        "message": "Kontrollera om koderna nedan stämmer överens med de koder som tillhandahålls av enheten eller appen:"
+    },
+    "apps-000023": {
+        "message": "Länka den här klienten till ditt Nextcloud-konto utan irriterande lösenord och webbadresser."
+    },
+    "apps-000024": {
+        "message": "Den här klienten stöder officiellt vår starka kryptering från början till slut."
+    },
+    "apps-000025": {
+        "message": "Den här klienten underhålls av författarna till appen Passwords."
+    },
+    "apps-000026": {
+        "message": "Klicka på knappen för att ansluta en app som är installerad på den här enheten eller skanna QR-koden med appen om den är installerad på en annan enhet."
+    },
+    "backend-000513": {
+        "message": "Den valda favicon-tjänsten kräver en api-nyckel eller slutpunkt, men ingen har angetts."
+    },
+    "backend-000514": {
+        "message": "Den valda förhandsvisningstjänsten kräver en api-nyckel eller slutpunkt, men ingen har angetts."
+    },
+    "backend-000515": {
+        "message": "Öppna administratörsinställningarna för att uppdatera konfigurationen eller välja en annan tjänst."
+    },
+    "backend-000516": {
+        "message": "Vi har upptäckt flera misslyckade försök att låsa upp din lösenordsdatabas av \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Det kan tyda på att någon försöker ta sig in på ditt konto."
+    },
+    "backend-000518": {
+        "message": "För att förhindra ytterligare försök återkallades klientens API-uppgifter."
+    },
+    "backend-000519": {
+        "message": "Dessutom har lösenordbaserad API-autentisering inaktiverats."
+    },
+    "backend-000520": {
+        "message": "Om du vill fortsätta att använda den här klienten måste du skapa en ny token för den."
+    },
+    "backend-000521": {
+        "message": "Om du inte känner till den här klienten ska du ändra ditt lösenord och se över din enhetslista."
+    },
+    "backend-000522": {
+        "message": "För att förhindra ytterligare försök har lösenordbaserad API-autentisering inaktiverats."
+    },
+    "backend-000523": {
+        "message": "För att aktivera den igen loggar du in med webbappen eller en klient med tokenautentisering."
+    },
+    "backend-000524": {
+        "message": "Om du inte känner till den här klienten ska du ändra ditt huvudlösenord och Nextcloud-lösenord."
+    },
+    "backend-000525": {
+        "message": "För att öka säkerheten rekommenderar vi att du använder enhetsspecifika tokens i stället för ditt lösenord."
+    },
+    "frontend-000595": {
+        "message": "Öppna $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Okänd (Not_checked)"
+    },
+    "frontend-000598": {
+        "message": "Vad förväntade du dig?"
+    },
+    "frontend-000600": {
+        "message": "Varna mig inte igen"
+    },
+    "frontend-000601": {
+        "message": "Styrka"
+    },
+    "frontend-000602": {
+        "message": "Stäng"
+    },
+    "frontend-000603": {
+        "message": "Ta bort från favoriter"
+    },
+    "frontend-000604": {
+        "message": "Markera som favorit"
+    },
+    "frontend-000605": {
+        "message": "Dolt lösenord"
+    },
+    "frontend-000609": {
+        "message": "Nytt fält"
+    },
+    "frontend-000610": {
+        "message": "Radera fältet"
+    },
+    "frontend-000611": {
+        "message": "Öppna Markdown-guiden"
+    },
+    "frontend-000612": {
+        "message": "Ångra"
+    },
+    "frontend-000613": {
+        "message": "Gör om"
+    },
+    "frontend-000614": {
+        "message": "Den kommer att upphöra att gälla $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Eller i vår chatt!"
+    },
+    "frontend-000616": {
+        "message": "För många misslyckade inloggningsförsök"
+    },
+    "frontend-000617": {
+        "message": "Välj en mapp"
+    },
+    "frontend-000618": {
+        "message": "Välj \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ kan inte användas",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" innehåller inga mappar",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Lösenord App-kryptering Lösenord"
+    },
+    "frontend-000623": {
+        "message": "Okänd"
+    },
+    "frontend-000624": {
+        "message": "Hjälp"
+    },
+    "frontend-000625": {
+        "message": "Välj krypteringstyp för det här lösenordet"
+    },
+    "frontend-000626": {
+        "message": "Vill du ta bort fältet \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Se till att QR-koden endast är synlig för personer som du litar på."
+    },
+    "frontend-000628": {
+        "message": "Den kryptering som används av servern innan data lagras i databasen."
+    },
+    "frontend-000629": {
+        "message": "Den kryptering som klienten tillämpar innan data skickas till servern."
+    },
+    "frontend-000630": {
+        "message": "Lösenordet är ogiltigt. Sessionen har återkallats på grund av för många misslyckade inloggningsförsök."
+    },
+    "frontend-000631": {
+        "message": "Detta är en kopia av den lösenfras som du valde för kryptering. Om du ändrar eller raderar den här posten påverkas inte krypteringen. Lösenfrasen kan endast ändras i inställningarna. Mer information finns i handboken."
+    },
+    "backend-000632": {
+        "message": "Api för Favicon-tjänsten"
+    },
+    "backend-000633": {
+        "message": "(valfritt)"
+    },
+    "backend-000634": {
+        "message": "Ditt Nextcloud begär betydligt fler ikoner än genomsnittet."
+    },
+    "backend-000635": {
+        "message": "Öppna handledning"
+    },
+    "backend-000636": {
+        "message": "Ett misstänkt antal misslyckade inloggningsförsök har upptäckts."
+    },
+    "backend-000637": {
+        "message": "Mer information"
+    },
+    "backend-000638": {
+        "message": "Visa osäkra lösenord"
+    },
+    "backend-000639": {
+        "message": "Öppna inställningar"
+    },
+    "backend-000640": {
+        "message": "Öppna lösenord"
+    },
+    "backend-000641": {
+        "message": "Visa appar"
+    },
+    "backend-000642": {
+        "message": "Visa appar och enheter"
+    },
+    "backend-000643": {
+        "message": "Hantera enheter och appar"
+    },
+    "backend-000644": {
+        "message": "Visa delade lösenord"
+    },
+    "backend-000645": {
+        "message": "Uppgradering av appen rekommenderas"
+    },
+    "backend-000646": {
+        "message": "En ny klient eller app har anslutits till ditt konto."
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" har fått tillgång till ditt $STR_1$ Passwords-konto via PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Du kan hantera alla anslutna enheter och appar i inställningarna för $STR_1$ i avsnittet Säkerhet.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Det senaste bakgrundsjobbet utfördes med PHP $STRING_1$, men webbservern använder PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000651": {
+        "message": "Standardinställningar för lösenordssäkerhet"
+    },
+    "backend-000652": {
+        "message": "Hash vid säkerhetskontroll"
+    },
+    "backend-000653": {
+        "message": "Lagra inte hash-koder"
+    },
+    "backend-000654": {
+        "message": "Lagra 50 % av hashvärdet"
+    },
+    "backend-000655": {
+        "message": "Lagra 75 % av hashvärdet"
+    },
+    "backend-000656": {
+        "message": "Lagra den fullständiga hash-koden"
+    },
+    "backend-000657": {
+        "message": "Säkerhetskopiering återställs automatiskt"
+    },
+    "backend-000658": {
+        "message": "Lösenordsappen verkar ha stött på ett databasproblem."
+    },
+    "backend-000659": {
+        "message": "På grund av detta återställdes appbackupen \"$STR_1$\" automatiskt.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Om detta var ett fel gjordes en säkerhetskopia av databasen innan den återställdes."
+    },
+    "backend-000665": {
+        "message": "Uppgradera till Nextcloud $STR_1$ och PHP $STR_1$ (eller PHP $STR_1$ för LSR) för framtida uppgraderingar.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Välj automatiskt"
+    },
+    "frontend-000667": {
+        "message": "Taggar CSV"
+    },
+    "settings-000678": {
+        "message": "Inloggning och session"
+    },
+    "settings-000679": {
+        "message": "Håll mig inloggad"
+    },
+    "settings-000680": {
+        "message": "Alltid"
+    },
+    "settings-000681": {
+        "message": "När jag arbetar"
+    },
+    "settings-000682": {
+        "message": "När jag är aktiv"
+    },
+    "settings-000683": {
+        "message": "Avsluta sessionen efter"
+    },
+    "settings-000684": {
+        "message": "En minut"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ minuter",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Kryptering från början till slut"
+    },
+    "settings-000687": {
+        "message": "Krypteringsläge för server"
+    },
+    "settings-000688": {
+        "message": "Ingen om CSE används."
+    },
+    "settings-000689": {
+        "message": "Enkel kryptering"
+    },
+    "settings-000690": {
+        "message": "Avancerad kryptering"
+    },
+    "settings-000691": {
+        "message": "Krypteringsläge för klienten"
+    },
+    "settings-000692": {
+        "message": "Aktivera"
+    },
+    "settings-000693": {
+        "message": "Ändra lösenord"
+    },
+    "settings-000696": {
+        "message": "Nytt lösenord"
+    },
+    "settings-000697": {
+        "message": "Upprepa lösenordet"
+    },
+    "settings-000698": {
+        "message": "Gammalt lösenord"
+    },
+    "settings-000699": {
+        "message": "Lösenordet har ändrats"
+    },
+    "settings-000700": {
+        "message": "Ändring av lösenordet misslyckades"
+    },
+    "settings-000701": {
+        "message": "Administrativa frågor"
+    },
+    "settings-000702": {
+        "message": "Delning av lösenord"
+    },
+    "settings-000703": {
+        "message": "Dela som redigerbart som standard"
+    },
+    "settings-000704": {
+        "message": "Tillåt delning som standard"
+    },
+    "settings-000706": {
+        "message": "Ogiltig återställningskod"
+    },
+    "settings-000707": {
+        "message": "Lägg till siffror i genererade lösenord"
+    },
+    "settings-000708": {
+        "message": "Lägg till specialtecken i genererade lösenord"
+    },
+    "settings-000709": {
+        "message": "Ange hur lång tid efter en begäran som ska gå innan sessionen avbryts."
+    },
+    "settings-000710": {
+        "message": "Välj vilken typ av kryptering som används för att kryptera data på servern."
+    },
+    "settings-000711": {
+        "message": "Kör installationsguiden för att konfigurera kryptering av dina lösenord."
+    },
+    "settings-000712": {
+        "message": "Ändra krypteringslösenordet"
+    },
+    "settings-000725": {
+        "message": "Välj vilken typ av kryptering som används för att kryptera data på klienten innan de skickas till servern."
+    },
+    "settings-000726": {
+        "message": "SHA-1-hashningen används för att kontrollera om lösenord har brutits. En partiell hash kan förhindra brute force-attacker om servern hackas, men kan också leda till att säkra lösenord felaktigt rapporteras som brytta."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Klicka på mushjulet",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Åtgärd som ska utföras när mushjulet klickas på ett lösenord.",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Visa genvägsknappen för",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Lägger till en extra knapp för den angivna åtgärden i skrivbordsvyn.",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Visa fliken Dela",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Återskapa dolda föremål",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Återskapa objekt",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Den här åtgärden tar bort flaggan \"dold\" från objekt så att dessa objekt visas i appen igen.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Återskapa dolda föremål",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Välj vilken typ av dolda föremål du vill återställa.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Lösenord som inte finns i en dold mapp",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Återskapa dolda lösenord som finns i en mapp som inte är dold i sig själv.",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Alla dolda lösenord",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Återställ alla dolda lösenord oavsett mappstatus",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Alla dolda mappar",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Återskapa alla dolda mappar",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Alla dolda taggar",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Återskapa alla dolda taggar",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Återställde $PASSWORDS$ lösenord, $FOLDERS$ mapp(ar) och $TAGS$ tagg(ar).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Återvunna föremål",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Ett fel inträffade.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000734": {
+        "message": "lösenord"
+    },
+    "tutorial-000735": {
+        "message": "nyligen ändrat"
+    },
+    "tutorial-000737": {
+        "message": "de är äldre än"
+    },
+    "tutorial-000738": {
+        "message": "tre månader"
+    },
+    "tutorial-000739": {
+        "message": "sex månader"
+    },
+    "tutorial-000740": {
+        "message": "ett år"
+    },
+    "tutorial-000741": {
+        "message": "två år"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ dagar",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "De är dubbletter."
+    },
+    "tutorial-000744": {
+        "message": "Skapa mina nya lösenord"
+    },
+    "tutorial-000745": {
+        "message": "stark"
+    },
+    "tutorial-000746": {
+        "message": "starkare"
+    },
+    "tutorial-000747": {
+        "message": "mycket stark"
+    },
+    "tutorial-000748": {
+        "message": "extremt stark"
+    },
+    "tutorial-000750": {
+        "message": "Inkludera special tecken"
+    },
+    "tutorial-000752": {
+        "message": "Håll dina lösenord hemliga"
+    },
+    "tutorial-000753": {
+        "message": "Anpassa din upplevelse"
+    },
+    "tutorial-000754": {
+        "message": "Få ordning på dina lösenord"
+    },
+    "tutorial-000756": {
+        "message": "Kryptera mina befintliga lösenord"
+    },
+    "tutorial-000757": {
+        "message": "Spara lösenordet"
+    },
+    "tutorial-000758": {
+        "message": "Upprepa ditt lösenord"
+    },
+    "tutorial-000759": {
+        "message": "Installation av kryptering"
+    },
+    "tutorial-000760": {
+        "message": "Nyckelring"
+    },
+    "tutorial-000761": {
+        "message": "Rensa upp"
+    },
+    "tutorial-000762": {
+        "message": "Framgång"
+    },
+    "tutorial-000763": {
+        "message": "Hitta hjälp när du behöver den"
+    },
+    "tutorial-000764": {
+        "message": "Gå till Appar och tillägg"
+    },
+    "tutorial-000765": {
+        "message": "Fortsätt"
+    },
+    "tutorial-000766": {
+        "message": "Hoppa över"
+    },
+    "tutorial-000767": {
+        "message": "Kontrollera lösenordssäkerheten med"
+    },
+    "tutorial-000768": {
+        "message": "Generera lösenord med hjälp av"
+    },
+    "tutorial-000769": {
+        "message": "Hämta favicons från"
+    },
+    "tutorial-000770": {
+        "message": "Få förhandsgranskningar av webbplatser från"
+    },
+    "tutorial-000771": {
+        "message": "Gör säkerhetskopior"
+    },
+    "tutorial-000772": {
+        "message": "Visa alla inställningar"
+    },
+    "tutorial-000773": {
+        "message": "Läs våra tips för administratörer"
+    },
+    "tutorial-000774": {
+        "message": "Lösenord (minst 12 tecken)"
+    },
+    "tutorial-000775": {
+        "message": "Kryptering pågår…"
+    },
+    "tutorial-000776": {
+        "message": "Det finns många inställningar så att du kan anpassa din upplevelse."
+    },
+    "tutorial-000777": {
+        "message": "Du kan hitta dem alla i \"Mer\", men vi har tagit med de vanligaste här:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords erbjuder modern och stark kryptering för att skydda dina data från nyfikna ögon."
+    },
+    "tutorial-000779": {
+        "message": "Välj ett säkert lösenord nedan för att aktivera det ultimata skyddet för dina lösenord."
+    },
+    "tutorial-000780": {
+        "message": "Du kan enkelt komma åt dina lösenord var du än befinner dig, tack vare våra appar och tillägg."
+    },
+    "tutorial-000736": {
+        "message": "Markera mina lösenord om…"
+    },
+    "backups-000065": {
+        "message": "Välj importformat"
+    },
+    "backups-000084": {
+        "message": "Radbrytning"
+    },
+    "backups-000099": {
+        "message": "(inget värde)"
+    },
+    "backups-000123": {
+        "message": "Importfilen är tom"
+    },
+    "backups-000125": {
+        "message": "Inloggningar"
+    },
+    "backups-000127": {
+        "message": "Kreditkort"
+    },
+    "backups-000128": {
+        "message": "Identiteter"
+    },
+    "backups-000129": {
+        "message": "Ekonomi"
+    },
+    "backups-000130": {
+        "message": "Licenser"
+    },
+    "backups-000131": {
+        "message": "Resa"
+    },
+    "backups-000132": {
+        "message": "Datorer"
+    },
+    "backups-000133": {
+        "message": "Diverse"
+    },
+    "frontend-000257": {
+        "message": "Kryptering tillämpas på servern"
+    },
+    "frontend-000258": {
+        "message": "Kryptering tillämpas på klienten"
+    },
+    "frontend-000260": {
+        "message": "Enkel kryptering (1 Mos 1)"
+    },
+    "frontend-000261": {
+        "message": "Enkel kryptering (1 Mos 2)"
+    },
+    "frontend-000262": {
+        "message": "Avancerad kryptering (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Kryptering med libsodium"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ och $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Redigering tillåten"
+    },
+    "frontend-000271": {
+        "message": "Redigering förbjuden"
+    },
+    "frontend-000272": {
+        "message": "delning tillåten"
+    },
+    "frontend-000273": {
+        "message": "delning inte tillåten"
+    },
+    "frontend-000319": {
+        "message": "Innehåll"
+    },
+    "frontend-000322": {
+        "message": "Ogiltig innehållstyp $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Inget innehåll tillgängligt"
+    },
+    "frontend-000329": {
+        "message": "Sessionen har löpt ut"
+    },
+    "frontend-000330": {
+        "message": "API-sessionstoken har gått ut"
+    },
+    "frontend-000345": {
+        "message": "Skapad av"
+    },
+    "frontend-000346": {
+        "message": "Du loggar in som $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Inloggning"
+    },
+    "frontend-000348": {
+        "message": "Begär token igen"
+    },
+    "frontend-000349": {
+        "message": "För många försök"
+    },
+    "frontend-000350": {
+        "message": "Lösenordet är för kort"
+    },
+    "frontend-000351": {
+        "message": "Okänt fel"
+    },
+    "frontend-000352": {
+        "message": "Begäran om token misslyckades"
+    },
+    "frontend-000353": {
+        "message": "Systemunderhåll"
+    },
+    "frontend-000354": {
+        "message": "Inte tillgänglig"
+    },
+    "frontend-000355": {
+        "message": "System"
+    },
+    "frontend-000356": {
+        "message": "Allmänhetens tillgång"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Om du sparar ett dolt lösenord i en mapp som inte själv är dold, blir lösenordet oåtkomligt. Lösenordet kommer inte längre att visas någonstans. Vill du fortsätta?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Gömma detta lösenord?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000501": {
+        "message": "Inte ännu"
+    },
+    "frontend-000593": {
+        "message": "Redigera som ny"
+    },
+    "frontend-000606": {
+        "message": "Visa inte det här lösenordet någonstans"
+    },
+    "frontend-000607": {
+        "message": "Uppgifter"
+    },
+    "frontend-000608": {
+        "message": "Typ"
+    },
+    "backend-000661": {
+        "message": "Du kan inaktivera automatisk återställning av säkerhetskopior i appens inställningar."
+    },
+    "backend-000662": {
+        "message": "Återställa säkerhetskopior automatiskt när databasen torkas bort"
+    },
+    "backend-000663": {
+        "message": "Lösenord avslutar uppdateringar för Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Lösenord $STR_1$ är den sista uppdateringen för Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "tutorial-000781": {
+        "message": "Du kan hitta vår sektion Appar och tillägg i \"Mer\" eller klicka på knappen nedan."
+    },
+    "tutorial-000782": {
+        "message": "Lösenord kan anpassas på många olika sätt."
+    },
+    "tutorial-000783": {
+        "message": "Som administratör kan du ta en titt på dessa vanliga inställningar."
+    },
+    "tutorial-000784": {
+        "message": "När du inte vet hur något fungerar, har frågor eller behöver hjälp med ett problem:"
+    },
+    "tutorial-000785": {
+        "message": "Hjälpen är precis runt hörnet."
+    },
+    "tutorial-000786": {
+        "message": "Du hittar vår inbyggda handbok genom att klicka på \"Mer\" och den förklarar appen i alla detaljer."
+    },
+    "tutorial-000787": {
+        "message": "I alla andra fall är vår community rätt ställe att ställa dina frågor."
+    },
+    "tutorial-000788": {
+        "message": "Handboken kommer att öppnas efter handledningen"
+    },
+    "tutorial-000789": {
+        "message": "Ange ett lösenord med minst 12 tecken"
+    },
+    "tutorial-000790": {
+        "message": "Lösenordet måste innehålla minst 12 tecken och bekräftelse-lösenordet måste vara detsamma."
+    },
+    "apps-000017": {
+        "message": "Det gick inte att hämta appar: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-CustomFields": {
+        "message": "Egendefinerade fält"
+    },
+    "backups-FolderId": {
+        "message": "Mapp Id"
+    },
+    "backups-TagIds": {
+        "message": "Tagg Ids"
+    },
+    "frontend-000165": {
+        "message": "Status"
+    },
+    "frontend-000216": {
+        "message": "Generera en slumpmässig färg"
+    },
+    "frontend-000259": {
+        "message": "Ingen kryptering"
+    },
+    "frontend-000357": {
+        "message": "Automatisk bakgrundsuppgift"
+    },
+    "frontend-000358": {
+        "message": "Serverkommandoraden"
+    },
+    "frontend-000359": {
+        "message": "Vänligen korrigera din inmatning"
+    },
+    "frontend-000360": {
+        "message": "Visa värde"
+    },
+    "frontend-000361": {
+        "message": "Avbryt"
+    },
+    "frontend-000362": {
+        "message": "Okej"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ har delat detta lösenord med dig.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000372": {
+        "message": "Du kommer att loggas ut om $TIME$ sekunder.",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Du kan ha begärt för många polletter. Försök igen senare."
+    },
+    "frontend-000374": {
+        "message": "End-to-End-kryptering inaktiveras för det här lösenordet om du delar det."
+    },
+    "frontend-000375": {
+        "message": "Sessionstoken är inte längre giltig. Appen kommer nu att laddas om."
+    },
+    "settings-000714": {
+        "message": "Meddela dig om konfigurationsfel och andra administrativa problem."
+    },
+    "settings-000715": {
+        "message": "Skriv \"$CODE$\" för att återställa ditt konto och radera allt.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Du kan använda den här dialogrutan för att ändra ditt huvudlösenord."
+    },
+    "settings-000717": {
+        "message": "Lösenordet måste vara längre än 12 tecken och får inte vara det gamla lösenordet."
+    },
+    "settings-000718": {
+        "message": "Bekräfta ditt nya lösenord"
+    },
+    "settings-000719": {
+        "message": "Du måste ange ditt gamla lösenord"
+    },
+    "settings-000720": {
+        "message": "Ditt lösenord har ändrats framgångsrikt."
+    },
+    "settings-000721": {
+        "message": "Aktivera alternativet att låta andra användare redigera ett delat lösenord som standard"
+    },
+    "settings-000722": {
+        "message": "Aktivera alternativet att låta andra användare dela ett delat lösenord som standard"
+    },
+    "settings-000723": {
+        "message": "Öppna sidan med inställningar i handboken"
+    },
+    "settings-000724": {
+        "message": "Skicka keep-alive-förfrågningar till servern för att förhindra att sessionen avbryts."
+    },
+    "tutorial-000730": {
+        "message": "Efter lanseringen visar du min"
     }
 }
