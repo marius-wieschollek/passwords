@@ -2531,5 +2531,416 @@
     },
     "backups-TagLabels": {
         "message": "Etiquetas"
+    },
+    "frontend-000605": {
+        "message": "Contraseña oculta"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Acción de clic con la rueda del ratón",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Acción que se realizará cuando se pulse la rueda del ratón sobre una entrada de contraseña",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "frontend-000595": {
+        "message": "Abrir $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000612": {
+        "message": "Deshacer"
+    },
+    "frontend-000613": {
+        "message": "Rehacer"
+    },
+    "frontend-000614": {
+        "message": "Expira $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "backend-000657": {
+        "message": "Copia de seguridad restaurada automáticamente"
+    },
+    "backend-000658": {
+        "message": "La aplicación de contraseñas parece haber encontrado un problema en la base de datos."
+    },
+    "backend-000659": {
+        "message": "Debido a esto, la copia de seguridad de la aplicación \"$STR_1$\" se restauró automáticamente.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Si se trata de un error, se hizo una copia de seguridad de la base de datos antes de restaurarla."
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Mostrar botón de acceso directo para",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Añade un botón adicional para la acción especificada en la vista de escritorio",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Mostrar la pestaña Compartir",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Recuperar objetos ocultos",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "frontend-Folder": {
+        "message": "Carpeta"
+    },
+    "frontend-000607": {
+        "message": "Datos"
+    },
+    "backend-000666": {
+        "message": "Seleccione automáticamente"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recuperar objetos ocultos",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Se ha producido un error.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "frontend-000594": {
+        "message": "Mover"
+    },
+    "frontend-000599": {
+        "message": "Haga clic para mostrar el código QR."
+    },
+    "frontend-000600": {
+        "message": "No me vuelvas a avisar"
+    },
+    "frontend-000617": {
+        "message": "Seleccione una carpeta"
+    },
+    "frontend-000620": {
+        "message": "Inicio"
+    },
+    "backend-000645": {
+        "message": "Actualización de la aplicación recomendada"
+    },
+    "frontend-000596": {
+        "message": "Desconocido (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "¿Qué esperabas?"
+    },
+    "frontend-000526": {
+        "message": "Extensión del navegador"
+    },
+    "frontend-000601": {
+        "message": "Fuerza"
+    },
+    "frontend-000602": {
+        "message": "Cerrar"
+    },
+    "frontend-000603": {
+        "message": "Eliminar de los favoritos"
+    },
+    "frontend-000604": {
+        "message": "Marcar como favorito"
+    },
+    "frontend-000606": {
+        "message": "No muestres esta contraseña en ningún sitio"
+    },
+    "frontend-000608": {
+        "message": "Tipo"
+    },
+    "frontend-000609": {
+        "message": "Nuevo campo"
+    },
+    "frontend-000610": {
+        "message": "Borrar campo"
+    },
+    "frontend-000611": {
+        "message": "Guía de Open Markdown"
+    },
+    "frontend-000615": {
+        "message": "¡O en nuestro Chat!"
+    },
+    "frontend-000616": {
+        "message": "Demasiados intentos fallidos de inicio de sesión"
+    },
+    "frontend-000618": {
+        "message": "Seleccione \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ no se puede utilizar",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" no contiene carpetas",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Contraseñas Frase de paso de encriptación de la aplicación"
+    },
+    "frontend-000623": {
+        "message": "Desconocido"
+    },
+    "frontend-000624": {
+        "message": "Ayuda"
+    },
+    "frontend-000625": {
+        "message": "Elija el tipo de cifrado para esta contraseña"
+    },
+    "frontend-000626": {
+        "message": "¿Desea eliminar el campo \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Asegúrese de que este código QR sólo sea visible para las personas de su confianza."
+    },
+    "frontend-000628": {
+        "message": "El cifrado aplicado por el servidor antes de almacenar los datos en la base de datos"
+    },
+    "frontend-000629": {
+        "message": "El cifrado aplicado por el cliente antes de enviar los datos al servidor"
+    },
+    "frontend-000630": {
+        "message": "Contraseña inválida. Sesión revocada por demasiados intentos fallidos de inicio de sesión."
+    },
+    "frontend-000631": {
+        "message": "Se trata de una copia de la frase de contraseña que elegiste para la encriptación. Cambiar o borrar esta entrada no afecta al cifrado. La frase de contraseña sólo puede cambiarse en la configuración. Puedes encontrar más información en el manual."
+    },
+    "backend-000633": {
+        "message": "(opcional)"
+    },
+    "backend-000634": {
+        "message": "Su Nextcloud solicita muchos más iconos que la media."
+    },
+    "backend-000635": {
+        "message": "Tutorial abierto"
+    },
+    "backend-000636": {
+        "message": "Se ha detectado una cantidad sospechosa de intentos de inicio de sesión fallidos."
+    },
+    "backend-000637": {
+        "message": "Más información"
+    },
+    "backend-000638": {
+        "message": "Ver contraseñas inseguras"
+    },
+    "backend-000639": {
+        "message": "Abrir la configuración"
+    },
+    "backend-000640": {
+        "message": "Contraseñas abiertas"
+    },
+    "backend-000641": {
+        "message": "Ver aplicaciones"
+    },
+    "backend-000642": {
+        "message": "Ver aplicaciones y dispositivos"
+    },
+    "backend-000643": {
+        "message": "Gestionar dispositivos y aplicaciones"
+    },
+    "backend-000644": {
+        "message": "Ver contraseñas compartidas"
+    },
+    "backend-000646": {
+        "message": "Se ha conectado un nuevo cliente o aplicación a su cuenta"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" ha obtenido acceso a su cuenta de $STR_1$ Passwords a través de PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Puedes gestionar todos los dispositivos y aplicaciones conectados en los ajustes de $STR_1$, en la sección de seguridad.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "El último trabajo en segundo plano se ejecutó con PHP $STRING_1$, pero el servidor web utiliza PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "El uso de diferentes versiones principales de PHP puede causar problemas."
+    },
+    "backend-000651": {
+        "message": "Configuración de seguridad de la contraseña por defecto"
+    },
+    "backend-000661": {
+        "message": "Puedes desactivar la restauración automática de copias de seguridad en los ajustes de la aplicación."
+    },
+    "backend-000662": {
+        "message": "Restaurar las copias de seguridad automáticamente cuando se borra la base de datos"
+    },
+    "backend-000663": {
+        "message": "Las contraseñas terminan las actualizaciones de Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Contraseñas $STR_1$ es la última actualización de Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Actualice a Nextcloud $STR_1$ y PHP $STR_1$ (o PHP $STR_1$ para LSR) para futuras actualizaciones.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-000667": {
+        "message": "Etiquetas CSV"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recuperar artículos",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Esta acción elimina la bandera \"oculta\" de los elementos para que estos vuelvan a aparecer en la aplicación.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Seleccione el tipo de elementos ocultos que desea recuperar.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Contraseñas que no están en una carpeta oculta",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Recuperar contraseñas ocultas que se encuentran en una carpeta que no está oculta",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Todas las contraseñas ocultas",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recupera todas las contraseñas ocultas independientemente del estado de la carpeta",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Todas las carpetas ocultas",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recuperar todas las carpetas ocultas",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Todas las etiquetas ocultas",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recuperar todas las etiquetas ocultas",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recuperado $PASSWORDS$ contraseña(s), $FOLDERS$ carpeta(s) y $TAGS$ etiqueta(s).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Artículos recuperados",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Guardar una contraseña oculta en una carpeta que no está oculta hará que la contraseña sea inaccesible. Esta contraseña ya no se mostrará en ningún sitio. ¿Desea continuar?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "¿Ocultar esta contraseña?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "frontend-000593": {
+        "message": "Editar como nuevo"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "backups-CustomFields": {
+        "message": "Campos personalizados"
+    },
+    "backups-FolderId": {
+        "message": "ID de la carpeta"
+    },
+    "backups-TagIds": {
+        "message": "IDs de las etiquetas"
     }
 }
