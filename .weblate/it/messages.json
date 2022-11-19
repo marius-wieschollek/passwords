@@ -2440,5 +2440,507 @@
     },
     "backups-TagLabels": {
         "message": "Etichette"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Azione del clic della rotella del mouse",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "frontend-000594": {
+        "message": "Muoversi"
+    },
+    "frontend-000595": {
+        "message": "Aperto $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000626": {
+        "message": "Si vuole eliminare il campo \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000702": {
+        "message": "Condivisione della password"
+    },
+    "settings-000703": {
+        "message": "Condividi come modificabile per impostazione predefinita"
+    },
+    "tutorial-000774": {
+        "message": "Password (min. 12 caratteri)"
+    },
+    "tutorial-000775": {
+        "message": "Crittografia in corso…"
+    },
+    "frontend-Folder": {
+        "message": "Cartella"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Il salvataggio di una password nascosta in una cartella non nascosta renderà la password inaccessibile. La password non sarà più visualizzata da nessuna parte. Volete continuare?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Azione da eseguire quando si fa clic con la rotellina del mouse su una voce di password",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Mostra il pulsante di scelta rapida per",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "frontend-000596": {
+        "message": "Sconosciuto (Non_controllato)"
+    },
+    "frontend-000598": {
+        "message": "Cosa ti aspettavi?"
+    },
+    "frontend-000599": {
+        "message": "Fare clic per visualizzare il codice QR."
+    },
+    "frontend-000600": {
+        "message": "Non avvertirmi più"
+    },
+    "frontend-000601": {
+        "message": "La forza"
+    },
+    "frontend-000603": {
+        "message": "Rimuovi dai preferiti"
+    },
+    "frontend-000604": {
+        "message": "Segna come preferito"
+    },
+    "frontend-000605": {
+        "message": "Password nascosta"
+    },
+    "frontend-000606": {
+        "message": "Non mostrate questa password da nessuna parte"
+    },
+    "frontend-000607": {
+        "message": "Dati"
+    },
+    "frontend-000608": {
+        "message": "Tipo"
+    },
+    "frontend-000609": {
+        "message": "Nuovo campo"
+    },
+    "frontend-000610": {
+        "message": "Cancellare il campo"
+    },
+    "frontend-000611": {
+        "message": "Guida all'apertura di Markdown"
+    },
+    "frontend-000612": {
+        "message": "Annullamento"
+    },
+    "frontend-000613": {
+        "message": "Rifare"
+    },
+    "frontend-000614": {
+        "message": "Scadrà $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "O nella nostra Chat!"
+    },
+    "frontend-000616": {
+        "message": "Troppi tentativi di accesso falliti"
+    },
+    "frontend-000617": {
+        "message": "Selezionare una cartella"
+    },
+    "frontend-000618": {
+        "message": "Selezionare \"$FOLDER$\".",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ non può essere utilizzato",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Casa"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" non contiene cartelle",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Password Crittografia app Passphrase"
+    },
+    "frontend-000623": {
+        "message": "Sconosciuto"
+    },
+    "frontend-000624": {
+        "message": "Aiuto"
+    },
+    "frontend-000625": {
+        "message": "Scegliere il tipo di crittografia per questa password"
+    },
+    "frontend-000627": {
+        "message": "Assicuratevi che il codice QR sia visibile solo alle persone di fiducia."
+    },
+    "frontend-000628": {
+        "message": "La crittografia applicata dal server prima di memorizzare i dati nel database"
+    },
+    "frontend-000629": {
+        "message": "La crittografia applicata dal client prima di inviare i dati al server"
+    },
+    "frontend-000630": {
+        "message": "Password non valida. Sessione revocata per troppi tentativi di accesso falliti."
+    },
+    "frontend-000631": {
+        "message": "È una copia della passphrase scelta per la crittografia. La modifica o l'eliminazione di questa voce non influisce sulla crittografia. La passphrase può essere modificata solo nelle impostazioni. Per ulteriori informazioni, consultare il manuale."
+    },
+    "backend-000632": {
+        "message": "Servizio Favicon Api"
+    },
+    "backend-000633": {
+        "message": "(opzionale)"
+    },
+    "backend-000634": {
+        "message": "Il vostro Nextcloud richiede un numero di icone significativamente superiore alla media."
+    },
+    "backend-000635": {
+        "message": "Tutorial aperto"
+    },
+    "backend-000636": {
+        "message": "Rilevato un numero sospetto di tentativi di accesso non riusciti."
+    },
+    "backend-000637": {
+        "message": "Ulteriori informazioni"
+    },
+    "backend-000638": {
+        "message": "Visualizza le password non sicure"
+    },
+    "backend-000639": {
+        "message": "Apri impostazioni"
+    },
+    "backend-000640": {
+        "message": "Password aperte"
+    },
+    "backend-000641": {
+        "message": "Visualizza le applicazioni"
+    },
+    "backend-000642": {
+        "message": "Visualizza le app e i dispositivi"
+    },
+    "backend-000643": {
+        "message": "Gestione di dispositivi e app"
+    },
+    "backend-000644": {
+        "message": "Visualizza le password condivise"
+    },
+    "backend-000645": {
+        "message": "Aggiornamento dell'app consigliato"
+    },
+    "backend-000646": {
+        "message": "Un nuovo client o un'app è stata collegata al vostro account"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" ha ottenuto l'accesso al vostro account $STR_1$ Passwords tramite PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "È possibile gestire tutti i dispositivi e le app collegate nelle impostazioni di $STR_1$, nella sezione sicurezza.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "L'ultimo lavoro in background è stato eseguito con PHP $STRING_1$, ma il server web utilizza PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "L'uso di versioni principali diverse di PHP può causare problemi."
+    },
+    "backend-000651": {
+        "message": "Impostazioni di sicurezza della password predefinite"
+    },
+    "backend-000652": {
+        "message": "Controllo di sicurezza Hash"
+    },
+    "backend-000653": {
+        "message": "Non memorizzare gli hash"
+    },
+    "backend-000654": {
+        "message": "Memorizzare il 50% dell'hash"
+    },
+    "backend-000655": {
+        "message": "Memorizzare il 75% dell'hash"
+    },
+    "backend-000656": {
+        "message": "Memorizzare l'hash completo"
+    },
+    "backend-000657": {
+        "message": "Il backup viene ripristinato automaticamente"
+    },
+    "backend-000658": {
+        "message": "L'applicazione per le password sembra aver riscontrato un problema con il database."
+    },
+    "backend-000659": {
+        "message": "Per questo motivo, il backup dell'app \"$STR_1$\" è stato ripristinato automaticamente.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Se si tratta di un errore, è stato eseguito un backup del database prima di ripristinarlo."
+    },
+    "backend-000661": {
+        "message": "È possibile disattivare il ripristino automatico del backup nelle impostazioni dell'app."
+    },
+    "backend-000662": {
+        "message": "Ripristino automatico dei backup in caso di cancellazione del database"
+    },
+    "backend-000663": {
+        "message": "Le password terminano gli aggiornamenti per Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Passwords $STR_1$ è l'ultimo aggiornamento per Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Aggiornare a Nextcloud $STR_1$ e PHP $STR_1$ (o PHP $STR_1$ per LSR) per gli aggiornamenti futuri.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Selezionare automaticamente"
+    },
+    "frontend-000667": {
+        "message": "Tag CSV"
+    },
+    "settings-000704": {
+        "message": "Consentire la condivisione per impostazione predefinita"
+    },
+    "settings-000715": {
+        "message": "Digitare \"$CODE$\" per resettare l'account e cancellare tutto.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000721": {
+        "message": "Abilitare l'opzione che consente agli altri utenti di modificare una password condivisa per impostazione predefinita."
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Aggiunge un pulsante aggiuntivo per l'azione specificata nella vista desktop.",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Mostra scheda Condividi",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Recuperare gli oggetti nascosti",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recuperare gli articoli",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Questa azione rimuove il flag \"nascosto\" dagli elementi, in modo che questi vengano nuovamente visualizzati nell'app.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recuperare gli oggetti nascosti",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Selezionare il tipo di elementi nascosti che si desidera recuperare.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Password che non si trovano in una cartella nascosta",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Recuperare le password nascoste che si trovano in una cartella non nascosta.",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Tutte le password nascoste",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recupera tutte le password nascoste, indipendentemente dallo stato della cartella.",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Tutte le cartelle nascoste",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recuperare tutte le cartelle nascoste",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Tutti i tag nascosti",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recuperare tutti i tag nascosti",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recuperate le password di $PASSWORDS$, le cartelle di $FOLDERS$ e i tag di $TAGS$.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Oggetti recuperati",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Si è verificato un errore.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "settings-000705": {
+        "message": "Codice"
+    },
+    "settings-000706": {
+        "message": "Codice di reset non valido"
+    },
+    "tutorial-000789": {
+        "message": "Inserire una password di almeno 12 caratteri"
+    },
+    "tutorial-000790": {
+        "message": "La password deve essere composta da almeno 12 caratteri e la password di conferma deve essere la stessa."
+    },
+    "apps-000004": {
+        "message": "Per saperne di più"
+    },
+    "apps-000016": {
+        "message": "Crittografia forte"
+    },
+    "apps-000020": {
+        "message": "È sufficiente scansionare il codice QR con l'app per collegarlo."
+    },
+    "apps-000021": {
+        "message": "Fare clic sul pulsante quando si è pronti ad avviare la connessione."
+    },
+    "apps-000023": {
+        "message": "Collegate questo client al vostro account Nextcloud senza fastidiose password e url"
+    },
+    "apps-000024": {
+        "message": "Questo cliente supporta ufficialmente la nostra forte crittografia end-to-end"
+    },
+    "apps-000025": {
+        "message": "Questo client è gestito dagli autori dell'applicazione Passwords."
+    },
+    "apps-000026": {
+        "message": "Fare clic sul pulsante per collegare un'app installata su questo dispositivo o scansionare il codice QR con l'app se è installata su un altro dispositivo."
+    },
+    "frontend-000526": {
+        "message": "Estensione del browser"
+    },
+    "frontend-000593": {
+        "message": "Modifica come nuovo"
+    },
+    "apps-000017": {
+        "message": "Impossibile recuperare le applicazioni: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-CustomFields": {
+        "message": "Campi personalizzati"
+    },
+    "backups-FolderId": {
+        "message": "ID Cartella"
+    },
+    "backups-TagIds": {
+        "message": "ID Etichette"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Nascondere questa password?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "settings-000722": {
+        "message": "Abilitare l'opzione che consente agli altri utenti di condividere una password condivisa per impostazione predefinita."
+    },
+    "settings-000723": {
+        "message": "Aprire la pagina delle impostazioni nel manuale"
+    },
+    "settings-000726": {
+        "message": "L'hash SHA-1 viene utilizzato per verificare la presenza di password violate. Un hash parziale può prevenire attacchi di forza bruta nel caso in cui il server venga violato, ma può anche far sì che le password sicure vengano erroneamente segnalate come violate."
     }
 }
