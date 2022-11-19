@@ -1,1 +1,2946 @@
-{}
+{
+    "backups-000034": {
+        "message": "eller"
+    },
+    "backups-TagLabels": {
+        "message": "Tags"
+    },
+    "backend-000524": {
+        "message": "Hvis du ikke kender denne klient, skal du ændre din hovedadgangskode og Nextcloud-adgangskode."
+    },
+    "frontend-000526": {
+        "message": "Browser-udvidelse"
+    },
+    "tutorial-000752": {
+        "message": "Hold dine adgangskoder hemmelige"
+    },
+    "tutorial-000753": {
+        "message": "Tilpas din oplevelse"
+    },
+    "tutorial-000754": {
+        "message": "Skab orden i dine adgangskoder"
+    },
+    "tutorial-000755": {
+        "message": "Få forbindelse"
+    },
+    "tutorial-000756": {
+        "message": "Kryptere mine eksisterende adgangskoder"
+    },
+    "tutorial-000757": {
+        "message": "Gem adgangskoden"
+    },
+    "tutorial-000758": {
+        "message": "Gentag din adgangskode"
+    },
+    "tutorial-000759": {
+        "message": "Installation af kryptering"
+    },
+    "apps-000001": {
+        "message": "officiel"
+    },
+    "apps-000002": {
+        "message": "af $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000003": {
+        "message": "kildekode"
+    },
+    "apps-000004": {
+        "message": "Lær mere"
+    },
+    "apps-000005": {
+        "message": "Forbind med PassLink"
+    },
+    "apps-000006": {
+        "message": "Tilslut en ny enhed"
+    },
+    "apps-000007": {
+        "message": "Forbind via link"
+    },
+    "apps-000008": {
+        "message": "Vælg et navn:"
+    },
+    "apps-000009": {
+        "message": "Koderne stemmer ikke overens"
+    },
+    "apps-000010": {
+        "message": "Ser godt ud"
+    },
+    "apps-000011": {
+        "message": "Forbindelse vellykket"
+    },
+    "apps-000012": {
+        "message": "Jeg er færdig"
+    },
+    "apps-000013": {
+        "message": "Prøv ikke igen"
+    },
+    "apps-000014": {
+        "message": "Tilslut noget andet"
+    },
+    "apps-000015": {
+        "message": "Prøv igen"
+    },
+    "apps-000016": {
+        "message": "Stærk kryptering"
+    },
+    "apps-000017": {
+        "message": "Det lykkedes ikke at hente apps: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Du afbrød forbindelsen"
+    },
+    "apps-000019": {
+        "message": "Du har ikke bekræftet forbindelsen i tide"
+    },
+    "apps-000020": {
+        "message": "Du skal blot scanne QR-koden med appen for at tilslutte den."
+    },
+    "apps-000021": {
+        "message": "Klik på knappen, når du er klar til at starte forbindelsen."
+    },
+    "apps-000022": {
+        "message": "Kontroller, om nedenstående koder stemmer overens med de koder, der er angivet af enheden eller appen:"
+    },
+    "apps-000023": {
+        "message": "Link denne klient til din Nextcloud-konto uden irriterende adgangskoder og url'er"
+    },
+    "apps-000024": {
+        "message": "Denne klient understøtter officielt vores stærke end-to-end-kryptering"
+    },
+    "apps-000025": {
+        "message": "Denne klient vedligeholdes af forfatterne af appen Passwords"
+    },
+    "apps-000026": {
+        "message": "Klik på knappen for at forbinde en app, der er installeret på denne enhed, eller scan QR-koden med appen, hvis den er installeret på en anden enhed."
+    },
+    "backups-000028": {
+        "message": "Sikkerhedskopiering eller eksport"
+    },
+    "backups-000029": {
+        "message": "Vælg format"
+    },
+    "backups-000030": {
+        "message": "Vælg venligst"
+    },
+    "backups-000031": {
+        "message": "Sikkerhedskopiering af database"
+    },
+    "backups-000032": {
+        "message": "Foruddefineret CSV"
+    },
+    "backups-000033": {
+        "message": "Læs $LABEL$ importvejledning",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000035": {
+        "message": "database backup"
+    },
+    "backups-000036": {
+        "message": "brugerdefineret CSV"
+    },
+    "backups-000037": {
+        "message": "prøv den generiske CSV-import"
+    },
+    "backups-000038": {
+        "message": "Ingen import til din CSV?"
+    },
+    "backups-000039": {
+        "message": "Sikkerhedskopi af adgangskode"
+    },
+    "backups-000040": {
+        "message": "(Valgfrit) Krypterer sikkerhedskopien"
+    },
+    "backups-000041": {
+        "message": "Importen understøtter kun CSV"
+    },
+    "backups-000042": {
+        "message": "Eksportere adgangskoder"
+    },
+    "backups-000043": {
+        "message": "Eksporter mapper"
+    },
+    "backups-000044": {
+        "message": "Eksporter etiketter"
+    },
+    "backups-000045": {
+        "message": "Brugerdefinerede felter"
+    },
+    "backups-000046": {
+        "message": "Mappe"
+    },
+    "backups-000047": {
+        "message": "Tags"
+    },
+    "backups-000048": {
+        "message": "ParentLabel"
+    },
+    "backups-000049": {
+        "message": "Mappe Id"
+    },
+    "backups-000050": {
+        "message": "Tag Ids"
+    },
+    "backups-000051": {
+        "message": "ParentId"
+    },
+    "backups-CustomFields": {
+        "message": "Brugerdefinerede felter"
+    },
+    "backups-FolderLabel": {
+        "message": "Mappe"
+    },
+    "backups-FolderId": {
+        "message": "Mappe Id"
+    },
+    "backups-TagIds": {
+        "message": "Tag Ids"
+    },
+    "backups-000052": {
+        "message": "Tomme"
+    },
+    "backups-000053": {
+        "message": "Tilføj overskriftslinje"
+    },
+    "backups-000054": {
+        "message": "Eksporter adgangskoder, der er delt med mig"
+    },
+    "backups-000055": {
+        "message": "Rediger ikke adgangskoder, der er delt med mig"
+    },
+    "backups-000056": {
+        "message": "Importér ikke tomme felter"
+    },
+    "backups-000057": {
+        "message": "Kør eksport"
+    },
+    "backups-000058": {
+        "message": "Eksport"
+    },
+    "backups-000059": {
+        "message": "Venter…"
+    },
+    "backups-000060": {
+        "message": "Eksportfejl"
+    },
+    "backups-000061": {
+        "message": "Download $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "Intet at eksportere"
+    },
+    "backups-000063": {
+        "message": "Der er ingen data, der skal eksporteres"
+    },
+    "backups-000064": {
+        "message": "Gendannelse eller import"
+    },
+    "backups-000065": {
+        "message": "Vælg importformat"
+    },
+    "backups-000066": {
+        "message": "Adgangskoder CSV"
+    },
+    "backups-000067": {
+        "message": "Mappe CSV"
+    },
+    "backups-000068": {
+        "message": "Brugerdefineret CSV"
+    },
+    "backups-000069": {
+        "message": "Andet / Brugerdefineret CSV"
+    },
+    "backups-000070": {
+        "message": "Vælg Fil"
+    },
+    "backups-000071": {
+        "message": "Vælg indstillinger"
+    },
+    "backups-000072": {
+        "message": "Konflikthåndtering"
+    },
+    "backups-000073": {
+        "message": "Spring over, hvis samme revision"
+    },
+    "backups-000074": {
+        "message": "Spring altid over"
+    },
+    "backups-000075": {
+        "message": "Overskrive eksisterende"
+    },
+    "backups-000076": {
+        "message": "Sammenlægning med eksisterende"
+    },
+    "backups-000077": {
+        "message": "Opret ny post"
+    },
+    "backups-000078": {
+        "message": "For krypterede sikkerhedskopier"
+    },
+    "backups-000079": {
+        "message": "CSV-indstillinger"
+    },
+    "backups-000080": {
+        "message": "Database"
+    },
+    "backups-000081": {
+        "message": "Citat Karakter"
+    },
+    "backups-000082": {
+        "message": "Escape-tegn"
+    },
+    "backups-000083": {
+        "message": "Felt afgrænser"
+    },
+    "backups-000084": {
+        "message": "Linjeskift"
+    },
+    "backups-000085": {
+        "message": "Citat"
+    },
+    "backups-000086": {
+        "message": "Enkelt tilbud"
+    },
+    "backups-000087": {
+        "message": "Backslash"
+    },
+    "backups-000088": {
+        "message": "Registrer"
+    },
+    "backups-000089": {
+        "message": "Komma"
+    },
+    "backups-000090": {
+        "message": "Semikolon"
+    },
+    "backups-000091": {
+        "message": "Rummet"
+    },
+    "backups-000092": {
+        "message": "Fanen"
+    },
+    "backups-000093": {
+        "message": "Registrerer anførselstegn uden anførselstegn"
+    },
+    "backups-000094": {
+        "message": "Spring første linje over"
+    },
+    "backups-000095": {
+        "message": "Interpolere manglende felter"
+    },
+    "backups-000096": {
+        "message": "CSV-felttilknytning"
+    },
+    "backups-000097": {
+        "message": "Preview Line"
+    },
+    "backups-000098": {
+        "message": "Linje $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(ingen værdi)"
+    },
+    "backups-000100": {
+        "message": "Ignorer"
+    },
+    "backups-000101": {
+        "message": "Kør import"
+    },
+    "backups-000102": {
+        "message": "Import"
+    },
+    "backups-000103": {
+        "message": "Parsing af inddatafil"
+    },
+    "backups-000104": {
+        "message": "Analyse af tags"
+    },
+    "backups-000105": {
+        "message": "Analyse af mapper"
+    },
+    "backups-000106": {
+        "message": "Læsning af tags"
+    },
+    "backups-000107": {
+        "message": "Import af tags"
+    },
+    "backups-000108": {
+        "message": "Læsning af mapper"
+    },
+    "backups-000109": {
+        "message": "Import af mapper"
+    },
+    "backups-000110": {
+        "message": "Læsning af adgangskoder"
+    },
+    "backups-000111": {
+        "message": "Import af adgangskoder"
+    },
+    "backups-000112": {
+        "message": "Import mislykkedes"
+    },
+    "backups-000113": {
+        "message": "Importen mislykkedes delvist"
+    },
+    "backups-000114": {
+        "message": "Import vellykket"
+    },
+    "backups-000115": {
+        "message": "Importfejl"
+    },
+    "backups-000116": {
+        "message": "Nogle objekter havde fejl:"
+    },
+    "backups-000117": {
+        "message": "Ugyldig filtype \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Kodeord påkrævet"
+    },
+    "backups-000119": {
+        "message": "Adgangskode ugyldig"
+    },
+    "backups-000120": {
+        "message": "Det er ikke lykkedes at dekryptere adgangskoder"
+    },
+    "backups-000121": {
+        "message": "Det er ikke lykkedes at dekryptere mapper"
+    },
+    "backups-000122": {
+        "message": "Det er ikke lykkedes at dekryptere tags"
+    },
+    "backups-000123": {
+        "message": "Importfilen er tom"
+    },
+    "backups-000124": {
+        "message": "CSV-fil kan ikke tilknyttes"
+    },
+    "backups-000125": {
+        "message": "Logins"
+    },
+    "backups-000126": {
+        "message": "Noter"
+    },
+    "backups-000127": {
+        "message": "Kreditkort"
+    },
+    "backups-000128": {
+        "message": "Identiteter"
+    },
+    "backups-000129": {
+        "message": "Økonomi"
+    },
+    "backups-000130": {
+        "message": "Licenser"
+    },
+    "backups-000131": {
+        "message": "Rejser"
+    },
+    "backups-000132": {
+        "message": "Computere"
+    },
+    "backups-000133": {
+        "message": "Diverse"
+    },
+    "backups-000134": {
+        "message": "Ugyldigt afsluttende citationstegn i et felt med anførselstegn"
+    },
+    "backups-000135": {
+        "message": "Filen kunne ikke analyseres: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ i linje $LINE$ tegn $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" har vedhæftede filer, som ikke kan importeres.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "Typen af \"$FIELD$\" i \"$LABEL$\" er ukendt og kan ikke importeres.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "Etiketten \"$FIELD$\" i \"$LABEL$\" har over 48 tegn og blev klippet.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "Værdien af \"$FIELD$\" i \"$LABEL$\" overstiger 320 tegn og er blevet klippet.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Du kan finde flere oplysninger i logbogen. (Tryk på F12)"
+    },
+    "backups-000142": {
+        "message": "Filen har typen \"$ACTUAL$\", men der forventes \"$EXPECTED$\". Du har muligvis valgt den forkerte fil eller importør.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ er kendt for at generere fejlbehæftede eksportfiler. Se manualen for at få hjælp, hvis filen ikke kan analyseres.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": "Mappe"
+    },
+    "backups-000145": {
+        "message": "Tags"
+    },
+    "frontend-000148": {
+        "message": "Adgangskoder"
+    },
+    "frontend-000149": {
+        "message": "Alle"
+    },
+    "frontend-000150": {
+        "message": "Mapper"
+    },
+    "frontend-000151": {
+        "message": "Nyere"
+    },
+    "frontend-000152": {
+        "message": "Favoritter"
+    },
+    "frontend-000153": {
+        "message": "Fælles"
+    },
+    "frontend-000154": {
+        "message": "Sikkerhed"
+    },
+    "frontend-000155": {
+        "message": "Affald"
+    },
+    "frontend-000156": {
+        "message": "Detaljer"
+    },
+    "frontend-000157": {
+        "message": "Rediger"
+    },
+    "frontend-000158": {
+        "message": "Omdøb"
+    },
+    "frontend-000159": {
+        "message": "Slet"
+    },
+    "frontend-000160": {
+        "message": "Gendan"
+    },
+    "frontend-000161": {
+        "message": "Nyt kodeord"
+    },
+    "frontend-000162": {
+        "message": "Ny mappe"
+    },
+    "frontend-000163": {
+        "message": "Nyt tag"
+    },
+    "frontend-000164": {
+        "message": "Sikker"
+    },
+    "frontend-000165": {
+        "message": "Status"
+    },
+    "frontend-000166": {
+        "message": "Svag"
+    },
+    "frontend-000167": {
+        "message": "Svag (duplikat)"
+    },
+    "frontend-000168": {
+        "message": "Svag (forældet)"
+    },
+    "frontend-000169": {
+        "message": "Overtrådt"
+    },
+    "frontend-000170": {
+        "message": "Del"
+    },
+    "frontend-000171": {
+        "message": "Revisioner"
+    },
+    "frontend-000172": {
+        "message": "QR-kode"
+    },
+    "frontend-000173": {
+        "message": "Adgangskode"
+    },
+    "frontend-000174": {
+        "message": "Brugernavn"
+    },
+    "frontend-000175": {
+        "message": "Websted"
+    },
+    "frontend-000176": {
+        "message": "Tilføj etiketter…"
+    },
+    "frontend-000177": {
+        "message": "Farve"
+    },
+    "frontend-000178": {
+        "message": "Navn"
+    },
+    "frontend-000179": {
+        "message": "Etiket"
+    },
+    "frontend-000180": {
+        "message": "Generelt"
+    },
+    "frontend-000181": {
+        "message": "Egenskaber"
+    },
+    "frontend-000182": {
+        "message": "Tal"
+    },
+    "frontend-000183": {
+        "message": "Særlige tegn"
+    },
+    "frontend-000184": {
+        "message": "Flere muligheder"
+    },
+    "frontend-000185": {
+        "message": "Favorit"
+    },
+    "frontend-000186": {
+        "message": "Kryptering"
+    },
+    "frontend-000187": {
+        "message": "På serveren"
+    },
+    "frontend-000188": {
+        "message": "Brugerdefinerede felter"
+    },
+    "frontend-000189": {
+        "message": "Hemmeligt"
+    },
+    "frontend-000190": {
+        "message": "Tekst"
+    },
+    "frontend-000191": {
+        "message": "Fil"
+    },
+    "frontend-000192": {
+        "message": "Værdi"
+    },
+    "frontend-000193": {
+        "message": "Skift synlighed"
+    },
+    "frontend-000194": {
+        "message": "Generer adgangskode"
+    },
+    "frontend-000195": {
+        "message": "Simpel kryptering på serversiden V1"
+    },
+    "frontend-000196": {
+        "message": "Tag nogle noter"
+    },
+    "frontend-000197": {
+        "message": "Gem"
+    },
+    "frontend-000198": {
+        "message": "Opret mappe"
+    },
+    "frontend-000199": {
+        "message": "Mappe oprettet"
+    },
+    "frontend-000200": {
+        "message": "Oprettelse af mappe mislykkedes"
+    },
+    "frontend-000201": {
+        "message": "Omdøbe mappe"
+    },
+    "frontend-000202": {
+        "message": "Mappe omdøbt"
+    },
+    "frontend-000203": {
+        "message": "Omdøbning af mappe mislykkedes"
+    },
+    "frontend-000204": {
+        "message": "Mappe flyttet"
+    },
+    "frontend-000205": {
+        "message": "Flytning af mappe mislykkedes"
+    },
+    "frontend-000206": {
+        "message": "Slet mappe"
+    },
+    "frontend-000207": {
+        "message": "Ønsker du at slette mappen og dens indhold?"
+    },
+    "frontend-000208": {
+        "message": "Mappe slettet"
+    },
+    "frontend-000209": {
+        "message": "Sletning af mappe mislykkedes"
+    },
+    "frontend-000210": {
+        "message": "Mappe gendannet"
+    },
+    "frontend-000211": {
+        "message": "Gendannelse af mappe mislykkedes"
+    },
+    "frontend-000212": {
+        "message": "Opret tag"
+    },
+    "frontend-000213": {
+        "message": "Tag oprettet"
+    },
+    "frontend-000214": {
+        "message": "Oprettelse af tag mislykkedes"
+    },
+    "frontend-000215": {
+        "message": "Rediger tag"
+    },
+    "frontend-000216": {
+        "message": "Generer tilfældig farve"
+    },
+    "frontend-000217": {
+        "message": "Tag gemt"
+    },
+    "frontend-000218": {
+        "message": "Gemning af tag mislykkedes"
+    },
+    "frontend-000219": {
+        "message": "Slet tag"
+    },
+    "frontend-000220": {
+        "message": "Ønsker du at slette tagget?"
+    },
+    "frontend-000221": {
+        "message": "Tag slettet"
+    },
+    "frontend-000222": {
+        "message": "Sletning af tag mislykkedes"
+    },
+    "frontend-000223": {
+        "message": "Tag restaureret"
+    },
+    "frontend-000224": {
+        "message": "Gendannelse af tag mislykkedes"
+    },
+    "frontend-000225": {
+        "message": "Opret adgangskode"
+    },
+    "frontend-000226": {
+        "message": "Oprettet adgangskode"
+    },
+    "frontend-000227": {
+        "message": "Oprettelse af adgangskode mislykkedes"
+    },
+    "frontend-000228": {
+        "message": "Rediger adgangskode"
+    },
+    "frontend-000229": {
+        "message": "Gemt adgangskode"
+    },
+    "frontend-000230": {
+        "message": "Det lykkedes ikke at gemme adgangskode"
+    },
+    "frontend-000231": {
+        "message": "Adgangskode flyttet"
+    },
+    "frontend-000232": {
+        "message": "Flytning af adgangskode mislykkedes"
+    },
+    "frontend-000233": {
+        "message": "Slet adgangskode"
+    },
+    "frontend-000234": {
+        "message": "Ønsker du at slette adgangskoden?"
+    },
+    "frontend-000235": {
+        "message": "Adgangskode slettet"
+    },
+    "frontend-000236": {
+        "message": "Adgangskode gendannet"
+    },
+    "frontend-000237": {
+        "message": "Gendannelse af adgangskode mislykkedes"
+    },
+    "frontend-000238": {
+        "message": "Åbn webadresse"
+    },
+    "frontend-000239": {
+        "message": "Kopier Url"
+    },
+    "frontend-000240": {
+        "message": "Kopier bruger"
+    },
+    "frontend-000241": {
+        "message": "Kopier adgangskode"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ blev kopieret til udklipsholderen",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "Fejl ved kopiering af $ELEMENT$ til udklipsholderen",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Sidst ændret den $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Genoprette revision"
+    },
+    "frontend-000246": {
+        "message": "Revision genoprettet"
+    },
+    "frontend-000247": {
+        "message": "Gendannelse af revision mislykkedes"
+    },
+    "frontend-000248": {
+        "message": "Ønsker du at genoprette revisionen?"
+    },
+    "frontend-000249": {
+        "message": "Deles med dig"
+    },
+    "frontend-000250": {
+        "message": "Deles af dig"
+    },
+    "frontend-000251": {
+        "message": "Statistik"
+    },
+    "frontend-000252": {
+        "message": "Oprettet den"
+    },
+    "frontend-000253": {
+        "message": "Sidst opdateret"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ revisioner",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Aktier"
+    },
+    "frontend-000256": {
+        "message": "Deles $COUNT$ gange",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": "Kryptering anvendt på serveren"
+    },
+    "frontend-000258": {
+        "message": "Kryptering anvendt på klienten"
+    },
+    "frontend-000259": {
+        "message": "Ingen kryptering"
+    },
+    "frontend-000260": {
+        "message": "Simpel kryptering (1. Mosebog 1)"
+    },
+    "frontend-000261": {
+        "message": "Simpel kryptering (1. Mosebog 2)"
+    },
+    "frontend-000262": {
+        "message": "Avanceret kryptering (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Kryptering med libsodium"
+    },
+    "frontend-000264": {
+        "message": "Mere"
+    },
+    "frontend-000265": {
+        "message": "Sikkerhedskopiering og gendannelse"
+    },
+    "frontend-000266": {
+        "message": "Indstillinger"
+    },
+    "frontend-000267": {
+        "message": "Håndbog"
+    },
+    "frontend-000268": {
+        "message": "Apps og udvidelser"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ og $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Redigering tilladt"
+    },
+    "frontend-000271": {
+        "message": "Redigering ikke tilladt"
+    },
+    "frontend-000272": {
+        "message": "deling tilladt"
+    },
+    "frontend-000273": {
+        "message": "deling ikke tilladt"
+    },
+    "frontend-000274": {
+        "message": "Søg bruger"
+    },
+    "frontend-000275": {
+        "message": "Indstil udløbsdato"
+    },
+    "frontend-000276": {
+        "message": "Udløber $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Vælg en udløbsdato, eller lad den være tom for at dele for evigt"
+    },
+    "frontend-000278": {
+        "message": "Vælg venligst en dato i fremtiden"
+    },
+    "frontend-000279": {
+        "message": "Ugyldig dato"
+    },
+    "frontend-000280": {
+        "message": "Brugeren $UID$ findes ikke",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Kan ikke dele adgangskode: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Skift skrivetilladelser"
+    },
+    "frontend-000283": {
+        "message": "Skift mellem delingstilladelser"
+    },
+    "frontend-000284": {
+        "message": "Stop med at dele"
+    },
+    "frontend-000285": {
+        "message": "Dato"
+    },
+    "frontend-000286": {
+        "message": "Standard Cache (0 filer, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Avatars Cache (0 filer, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Favicon Cache (0 filer, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Preview Cache (0 filer, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Passwords Cache (0 filer, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "Ændret"
+    },
+    "frontend-000292": {
+        "message": "Ændret"
+    },
+    "frontend-000293": {
+        "message": "Redigeret"
+    },
+    "frontend-000294": {
+        "message": "Oprettet"
+    },
+    "frontend-000295": {
+        "message": "Revision"
+    },
+    "frontend-000296": {
+        "message": "Url"
+    },
+    "frontend-000297": {
+        "message": "Forældre"
+    },
+    "frontend-000298": {
+        "message": "Slet alle elementer"
+    },
+    "frontend-000299": {
+        "message": "Gendan alle elementer"
+    },
+    "frontend-000300": {
+        "message": "Gendan genstande"
+    },
+    "frontend-000301": {
+        "message": "Gendan alle elementer i papirkurven?"
+    },
+    "frontend-000302": {
+        "message": "Gendan denne vare"
+    },
+    "frontend-000303": {
+        "message": "Genstande, der er restaureret"
+    },
+    "frontend-000304": {
+        "message": "Tøm papirkurven"
+    },
+    "frontend-000305": {
+        "message": "Slet alle elementer i papirkurven?"
+    },
+    "frontend-000306": {
+        "message": "Tømning af skraldespanden"
+    },
+    "frontend-000307": {
+        "message": "Søg på"
+    },
+    "frontend-000308": {
+        "message": "Brug søgefeltet til at søge"
+    },
+    "frontend-000309": {
+        "message": "Søg overalt efter \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000310": {
+        "message": "Der er intet her"
+    },
+    "frontend-000311": {
+        "message": "Klik på \"+\" for at tilføje noget"
+    },
+    "frontend-000312": {
+        "message": "Slettede elementer vises her"
+    },
+    "frontend-000313": {
+        "message": "Ingen adgangskoder blev delt med dig"
+    },
+    "frontend-000314": {
+        "message": "Du har ikke delt nogen adgangskoder"
+    },
+    "frontend-000315": {
+        "message": "Dine favoritter vil blive vist her"
+    },
+    "frontend-000316": {
+        "message": "Du må hellere tjekke de andre afsnit"
+    },
+    "frontend-000317": {
+        "message": "Det er sandsynligvis et godt tegn"
+    },
+    "frontend-000318": {
+        "message": "Gå til $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": "Indhold"
+    },
+    "frontend-000320": {
+        "message": "Figur $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Kan ikke hente siden: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "Ugyldig indholdstype $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Intet indhold tilgængeligt"
+    },
+    "frontend-000324": {
+        "message": "Ikke fundet"
+    },
+    "frontend-000325": {
+        "message": "Har du stadig brug for hjælp?"
+    },
+    "frontend-000326": {
+        "message": "Spørg i vores forum!"
+    },
+    "frontend-000327": {
+        "message": "Har du fundet en fejl?"
+    },
+    "frontend-000328": {
+        "message": "Fortæl os det!"
+    },
+    "frontend-000329": {
+        "message": "Sessionen er udløbet"
+    },
+    "frontend-000330": {
+        "message": "API-sessionstoken er udløbet"
+    },
+    "frontend-000331": {
+        "message": "Netværksfejl"
+    },
+    "frontend-000332": {
+        "message": "Kan ikke indlæses $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Sorter efter navn"
+    },
+    "frontend-000334": {
+        "message": "Sorter efter ændret dato"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ adgangskoder",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 adgangskode"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ mapper",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 mappe"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ tags",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 tag"
+    },
+    "frontend-000341": {
+        "message": "Intet"
+    },
+    "frontend-000342": {
+        "message": " og "
+    },
+    "frontend-000343": {
+        "message": "match"
+    },
+    "frontend-000344": {
+        "message": "matcher"
+    },
+    "frontend-000345": {
+        "message": "Oprettet af"
+    },
+    "frontend-000346": {
+        "message": "Du logger ind som $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Login"
+    },
+    "frontend-000348": {
+        "message": "Anmod om token igen"
+    },
+    "frontend-000349": {
+        "message": "For mange forsøg"
+    },
+    "frontend-000350": {
+        "message": "Adgangskoden er for kort"
+    },
+    "frontend-000351": {
+        "message": "Ukendt fejl"
+    },
+    "frontend-000352": {
+        "message": "Anmodning om et symbol mislykkedes"
+    },
+    "frontend-000353": {
+        "message": "Vedligeholdelse af systemet"
+    },
+    "frontend-000354": {
+        "message": "Ikke tilgængelig"
+    },
+    "frontend-000355": {
+        "message": "System"
+    },
+    "frontend-000356": {
+        "message": "Offentlig adgang"
+    },
+    "frontend-000357": {
+        "message": "Automatisk baggrundsopgave"
+    },
+    "frontend-000358": {
+        "message": "Server-kommandolinje"
+    },
+    "frontend-000359": {
+        "message": "Ret venligst din indtastning"
+    },
+    "frontend-000360": {
+        "message": "Vis værdi"
+    },
+    "frontend-000361": {
+        "message": "Annuller"
+    },
+    "frontend-000362": {
+        "message": "Ok"
+    },
+    "frontend-000363": {
+        "message": "sand"
+    },
+    "frontend-000364": {
+        "message": "falsk"
+    },
+    "frontend-000365": {
+        "message": "ja"
+    },
+    "frontend-000366": {
+        "message": "ingen"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ har delt denne adgangskode med dig.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": "Du har nået den maksimale længde på 4096 tegn"
+    },
+    "frontend-000369": {
+        "message": "Vi kunne ikke finde noget for \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "Siden \"$PAGE$\" kunne ikke hentes fra håndbogsserveren.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Nogle data venter på at blive synkroniseret"
+    },
+    "frontend-000372": {
+        "message": "Du vil blive logget ud om $TIME$ sekunder",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Du har muligvis anmodet om for mange tokens. Prøv venligst igen senere."
+    },
+    "frontend-000374": {
+        "message": "End-to-End-kryptering vil blive deaktiveret for denne adgangskode, hvis du deler den."
+    },
+    "frontend-000375": {
+        "message": "Sessionstokenet er ikke længere gyldigt. Appen vil nu blive indlæst igen."
+    },
+    "frontend-000376": {
+        "message": "I dag i 2018 blev den første version af passwords offentliggjort. Tak, fordi du bruger appen."
+    },
+    "frontend-Tags": {
+        "message": "Tags"
+    },
+    "frontend-Folder": {
+        "message": "Mappe"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Hvis du gemmer en skjult adgangskode i en mappe, der ikke selv er skjult, er adgangskoden utilgængelig. Adgangskoden vil ikke længere blive vist nogen steder. Ønsker du at fortsætte?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Skjuler du denne adgangskode?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000377": {
+        "message": "HTTPS påkrævet"
+    },
+    "backend-000378": {
+        "message": "genindlæs denne side"
+    },
+    "backend-000379": {
+        "message": "forum"
+    },
+    "backend-000380": {
+        "message": "dokumentation"
+    },
+    "backend-000381": {
+        "message": "Du kan prøve at $STR_1$ siden med HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "Denne applikation kræver $STR_1$ for at kunne arbejde sikkert.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "Dette er IKKE en fejl. Besøg vores $STR_1$, hvis du har brug for hjælp.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Gennemgå HTTPS-rapporten nedenfor for at fejlfinde problemet."
+    },
+    "backend-000385": {
+        "message": "Læs denne $STR_1$ for at konfigurere din server til at bruge HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Læs denne $STR_1$, hvis du bruger en proxy.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "Gå til $STR_1$ for at få et gratis HTTPS-certifikat, hvis du har brug for et.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Hvis problemet fortsætter, skal du kontakte din administrator."
+    },
+    "backend-000389": {
+        "message": "Adgangskoder Session $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Åben dokumentation"
+    },
+    "backend-000391": {
+        "message": "aldrig"
+    },
+    "backend-000392": {
+        "message": "Intern databehandling"
+    },
+    "backend-000393": {
+        "message": "Billedgengivelse"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (anbefales)"
+    },
+    "backend-000395": {
+        "message": "Eksterne tjenester"
+    },
+    "backend-000396": {
+        "message": "Sikkerhedskontrol af adgangskoder"
+    },
+    "backend-000397": {
+        "message": "Er jeg blevet pwned? (anbefalet)"
+    },
+    "backend-000398": {
+        "message": "Stor lokal database (25 mio. adgangskoder)"
+    },
+    "backend-000399": {
+        "message": "Lille lokal database (5M adgangskoder)"
+    },
+    "backend-000400": {
+        "message": "Stor lokal database & Hibp?"
+    },
+    "backend-000401": {
+        "message": "Tjeneste til generering af adgangskoder"
+    },
+    "backend-000402": {
+        "message": "Lokal ordbog"
+    },
+    "backend-000403": {
+        "message": "Tilfældige figurer"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Collection (anbefalet)"
+    },
+    "backend-000406": {
+        "message": "Favicon-service"
+    },
+    "backend-000407": {
+        "message": "Lokal analysator"
+    },
+    "backend-000408": {
+        "message": "Besticon (anbefales)"
+    },
+    "backend-000409": {
+        "message": "Ingen"
+    },
+    "backend-000410": {
+        "message": "Tjeneste til forhåndsvisning af websteder"
+    },
+    "backend-000411": {
+        "message": "API-nøgle til forhåndsvisning af websted"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (lokalt)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (lokal)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "Standardindstillinger for e-mail"
+    },
+    "backend-000416": {
+        "message": "Send e-mails ved sikkerhedshændelser"
+    },
+    "backend-000417": {
+        "message": "Send e-mails for at dele begivenheder"
+    },
+    "backend-000418": {
+        "message": "Andre indstillinger"
+    },
+    "backend-000419": {
+        "message": "Fjern slettede objekter fra databasen"
+    },
+    "backend-000420": {
+        "message": "Vis natlige opdateringer i \"Apps\""
+    },
+    "backend-000421": {
+        "message": "Aldrig"
+    },
+    "backend-000422": {
+        "message": "Umiddelbart"
+    },
+    "backend-000423": {
+        "message": "Efter to timer"
+    },
+    "backend-000424": {
+        "message": "Efter en dag"
+    },
+    "backend-000425": {
+        "message": "Efter to uger"
+    },
+    "backend-000426": {
+        "message": "Efter en måned"
+    },
+    "backend-000427": {
+        "message": "Efter et år"
+    },
+    "backend-000428": {
+        "message": "Backup-indstillinger"
+    },
+    "backend-000429": {
+        "message": "Interval for sikkerhedskopiering"
+    },
+    "backend-000430": {
+        "message": "Hver time"
+    },
+    "backend-000431": {
+        "message": "Hver sjette time"
+    },
+    "backend-000432": {
+        "message": "Hver dag"
+    },
+    "backend-000433": {
+        "message": "Hver anden dag"
+    },
+    "backend-000434": {
+        "message": "Hver uge"
+    },
+    "backend-000435": {
+        "message": "Hver anden uge"
+    },
+    "backend-000436": {
+        "message": "Antallet af sikkerhedskopier, der skal gemmes"
+    },
+    "backend-000437": {
+        "message": "Caches"
+    },
+    "backend-000438": {
+        "message": "Standard Cache ($STR_1$ filer, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatars Cache ($STR_1$ filer, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ filer, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Preview Cache ($STR_1$ filer, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Cache af adgangskoder ($STR_1$ filer, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "klar"
+    },
+    "backend-000444": {
+        "message": "Ryd denne cache"
+    },
+    "backend-000445": {
+        "message": "Du kan ikke rydde en cache ved hjælp af en delt tjeneste"
+    },
+    "backend-000446": {
+        "message": "Gemte"
+    },
+    "backend-000447": {
+        "message": "Ryddet"
+    },
+    "backend-000448": {
+        "message": "Mislykkedes"
+    },
+    "backend-000449": {
+        "message": "Har brug for hjælp"
+    },
+    "backend-000450": {
+        "message": "fundet en fejl"
+    },
+    "backend-000451": {
+        "message": "leder efter dokumentation"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi har styr på dig!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ understøttes ikke længere.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "Adgangskoder kræver HTTPS."
+    },
+    "backend-000455": {
+        "message": "Hvis du bruger $STR_1$ til at udføre baggrundsjobs, kan det medføre forsinkelser. Vi anbefaler, at du bruger Cron.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Tjek venligst systemkravene."
+    },
+    "backend-000457": {
+        "message": "Adgangskode ikke delt"
+    },
+    "backend-000459": {
+        "message": "Du har et usikkert kodeord"
+    },
+    "backend-000460": {
+        "message": "Du har usikre adgangskoder"
+    },
+    "backend-000461": {
+        "message": "En af dine adgangskoder er ikke længere sikker."
+    },
+    "backend-000462": {
+        "message": "Nogle af dine adgangskoder er ikke længere sikre."
+    },
+    "backend-000463": {
+        "message": "Adgangskoder kontrollerer regelmæssigt, om dine adgangskoder er blevet kompromitteret i forbindelse med et databrud."
+    },
+    "backend-000464": {
+        "message": "Denne sikkerhedskontrol har fundet ud af, at en af dine adgangskoder er usikker."
+    },
+    "backend-000465": {
+        "message": "Denne sikkerhedskontrol har vist, at $STR_1$ af dine adgangskoder er usikre.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Det betyder, at adgangskoden er ude på internettet, og at din konto er i fare."
+    },
+    "backend-000467": {
+        "message": "Det betyder, at adgangskoderne er ude på internettet, og at dine konti er i fare."
+    },
+    "backend-000468": {
+        "message": "Derfor er adgangskoden blevet markeret som usikker og skal ændres nu."
+    },
+    "backend-000469": {
+        "message": "Derfor er adgangskoderne blevet markeret som usikre og bør ændres nu."
+    },
+    "backend-000470": {
+        "message": "Du kan oprette en ny sikker adgangskode i appen Adgangskoder."
+    },
+    "backend-000471": {
+        "message": "Du kan oprette nye sikre adgangskoder i appen Adgangskoder."
+    },
+    "backend-000472": {
+        "message": "Ændre adgangskode nu"
+    },
+    "backend-000473": {
+        "message": "Skift adgangskoder nu"
+    },
+    "backend-000474": {
+        "message": "Åbn appen Adgangskoder for at ændre den."
+    },
+    "backend-000475": {
+        "message": "Åbn appen Adgangskoder for at ændre dem."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ har delt en adgangskode med dig.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ delt $STR_1$ adgangskoder med dig.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ og $STRING_3$ har delt $STRING_1$ adgangskoder med dig.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ og $STRING_3$ delte $STRING_1$ adgangskoder med dig.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ og $STRING_2$ andre har delt $STRING_1$ adgangskoder med dig.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Åbn appen Adgangskoder for at se den."
+    },
+    "backend-000482": {
+        "message": "Åbn appen Adgangskoder for at se dem."
+    },
+    "backend-000483": {
+        "message": "Du har fået en adgangskode på $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Flere adgangskoder blev delt med dig på $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Se adgangskoder, der er delt med mig"
+    },
+    "backend-000486": {
+        "message": "En af dine adgangskoder kan ikke deles, fordi modtageren allerede har adgang til den."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ af dine adgangskoder kan ikke deles, fordi modtageren allerede har adgang til dem.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Hvis du deler en adgangskode, som du har fået delt med dig selv, kan det nogle gange skabe et loop."
+    },
+    "backend-000490": {
+        "message": "For at forhindre dette vil disse adgangskoder ikke blive delt."
+    },
+    "backend-000491": {
+        "message": "Administrativ adgang til din konto"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ forsøgte at logge ind på din konto på $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ logget ind på din konto på $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Da du bruger en hovedadgangskode, betyder det ikke, at du har fået adgang til dine data."
+    },
+    "backend-000495": {
+        "message": "For at forhindre uønsket adgang til dine data bør du oprette en hovedadgangskode."
+    },
+    "backend-000496": {
+        "message": "Slettet bruger ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "Hjælp os med at forbedre adgangskoder"
+    },
+    "backend-000498": {
+        "message": "Du kan hjælpe os med at forbedre Passwords-appen ved at deltage i vores serverundersøgelse."
+    },
+    "backend-000499": {
+        "message": "Dette sender os nogle anonymiserede data om din opsætning og de valgte indstillinger."
+    },
+    "backend-000500": {
+        "message": "Du kan til enhver tid ændre dette i appens indstillinger."
+    },
+    "backend-000501": {
+        "message": "Ikke endnu"
+    },
+    "backend-000502": {
+        "message": "Deltag"
+    },
+    "backend-000503": {
+        "message": "Deltagelse i serverundersøgelsen"
+    },
+    "backend-000504": {
+        "message": "Grundlæggende"
+    },
+    "backend-000505": {
+        "message": "Fuldstændig"
+    },
+    "backend-000506": {
+        "message": "Ikke indstillet"
+    },
+    "backend-000507": {
+        "message": "Overvej venligst at hoste din favicon api selv"
+    },
+    "backend-000508": {
+        "message": "Din Nextcloud bruger vores delte Besticon-instanser til at hente websideikoner."
+    },
+    "backend-000509": {
+        "message": "Disse instanser er beregnet til små Nextcloud-opsætninger med meget lidt trafik."
+    },
+    "backend-000510": {
+        "message": "Klik på linket og følg vores nemme vejledning til at være vært for Besticon selv."
+    },
+    "backend-000512": {
+        "message": "Din konfiguration af preview-tjenesten er ugyldig"
+    },
+    "backend-000513": {
+        "message": "Den valgte favicon-tjeneste kræver en api-nøgle eller et slutpunkt, men der er ikke angivet nogen."
+    },
+    "backend-000514": {
+        "message": "Den valgte preview-tjeneste kræver en api-nøgle eller et slutpunkt, men der er ikke angivet nogen."
+    },
+    "backend-000515": {
+        "message": "Åbn administratorindstillingerne for at opdatere konfigurationen eller vælge en anden tjeneste."
+    },
+    "backend-000516": {
+        "message": "Vi har opdaget flere mislykkede forsøg på at låse din adgangskode-database op med \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Det kan være et tegn på, at nogen forsøger at bryde ind på din konto."
+    },
+    "backend-000518": {
+        "message": "For at forhindre yderligere forsøg blev API-oplysningerne for denne klient tilbagekaldt for at forhindre yderligere forsøg."
+    },
+    "backend-000519": {
+        "message": "Desuden er passwordbaseret API-godkendelse blevet deaktiveret."
+    },
+    "backend-000520": {
+        "message": "Hvis du vil fortsætte med at bruge denne klient, skal du oprette et nyt token til den."
+    },
+    "backend-000521": {
+        "message": "Hvis du ikke kender denne klient, skal du ændre din adgangskode og gennemgå din enhedsliste."
+    },
+    "backend-000522": {
+        "message": "For at forhindre yderligere forsøg er adgangskodebaseret API-godkendelse blevet deaktiveret for at forhindre yderligere forsøg."
+    },
+    "backend-000523": {
+        "message": "For at aktivere den igen skal du logge ind med webappen eller en klient med tokengodkendelse."
+    },
+    "backend-000525": {
+        "message": "For at øge sikkerheden anbefaler vi, at du bruger enhedsspecifikke tokens i stedet for din adgangskode."
+    },
+    "frontend-000528": {
+        "message": "Regler for adgangskode"
+    },
+    "frontend-000529": {
+        "message": "Markere dubletter"
+    },
+    "frontend-000530": {
+        "message": "Maksimal alder i dage"
+    },
+    "frontend-000531": {
+        "message": "Kodeordsgenerator"
+    },
+    "frontend-000532": {
+        "message": "Styrke af kodeord"
+    },
+    "frontend-000533": {
+        "message": "Medtag numre"
+    },
+    "frontend-000534": {
+        "message": "Medtag specialtegn"
+    },
+    "frontend-000535": {
+        "message": "Brugergrænseflade"
+    },
+    "frontend-000536": {
+        "message": "Indledende afsnit"
+    },
+    "frontend-000537": {
+        "message": "Alle adgangskoder"
+    },
+    "frontend-000538": {
+        "message": "Visning af liste over adgangskoder"
+    },
+    "frontend-000539": {
+        "message": "Indstil titel fra"
+    },
+    "frontend-000540": {
+        "message": "Sorter efter"
+    },
+    "frontend-000541": {
+        "message": "Feltet for titel"
+    },
+    "frontend-000542": {
+        "message": "Handling med et enkelt klik"
+    },
+    "frontend-000543": {
+        "message": "Dobbeltklik på handling"
+    },
+    "frontend-000544": {
+        "message": "Kopier adgangskode"
+    },
+    "frontend-000545": {
+        "message": "Kopier brugernavn"
+    },
+    "frontend-000546": {
+        "message": "Kopier websted"
+    },
+    "frontend-000547": {
+        "message": "Vis detaljer"
+    },
+    "frontend-000548": {
+        "message": "Tilføj kopieringsmuligheder i menuen"
+    },
+    "frontend-000549": {
+        "message": "Vis brugernavn i listevisning"
+    },
+    "frontend-000550": {
+        "message": "Vis tags i listevisning"
+    },
+    "frontend-000551": {
+        "message": "Vis skjulte brugerdefinerede felter"
+    },
+    "frontend-000552": {
+        "message": "Søg mens jeg skriver"
+    },
+    "frontend-000553": {
+        "message": "Søg overalt med Enter"
+    },
+    "frontend-000554": {
+        "message": "Vis altid søgeafsnittet"
+    },
+    "frontend-000555": {
+        "message": "Meddelelser"
+    },
+    "frontend-000556": {
+        "message": "Send e-mails til"
+    },
+    "frontend-000557": {
+        "message": "Sikkerhedsspørgsmål"
+    },
+    "frontend-000558": {
+        "message": "Adgangskoder, der er delt med mig"
+    },
+    "frontend-000559": {
+        "message": "Vis meddelelser for"
+    },
+    "frontend-000560": {
+        "message": "Andre fejl"
+    },
+    "frontend-000561": {
+        "message": "Farezonen"
+    },
+    "frontend-000562": {
+        "message": "Nulstil alle indstillinger"
+    },
+    "frontend-000563": {
+        "message": "Nulstil"
+    },
+    "frontend-000564": {
+        "message": "Slet alt"
+    },
+    "frontend-000565": {
+        "message": "SLETTE ALT"
+    },
+    "frontend-000566": {
+        "message": "Anmodning om nulstilling af konto"
+    },
+    "frontend-000567": {
+        "message": "Se"
+    },
+    "frontend-000568": {
+        "message": "Avanceret"
+    },
+    "frontend-000569": {
+        "message": "Markér adgangskoder som svage, hvis de bruges til flere konti"
+    },
+    "frontend-000570": {
+        "message": "Markér adgangskoder som svage, hvis de overskrider det angivne antal dage"
+    },
+    "frontend-000571": {
+        "message": "En højere styrke resulterer i længere og mere komplekse adgangskoder"
+    },
+    "frontend-000572": {
+        "message": "Vis den valgte egenskab som titel i listevisningen"
+    },
+    "frontend-000573": {
+        "message": "Sorterer adgangskoder efter den valgte egenskab, når sortering efter navn er valgt"
+    },
+    "frontend-000574": {
+        "message": "Handling, der skal udføres, når der klikkes på en adgangskode i listevisningen"
+    },
+    "frontend-000575": {
+        "message": "Handling, der skal udføres, når der dobbeltklikkes på en adgangskode i listevisningen"
+    },
+    "frontend-000576": {
+        "message": "Viser muligheder for at kopiere adgangskode og brugernavn i menuen"
+    },
+    "frontend-000577": {
+        "message": "Det første afsnit, der skal vises, når appen åbnes"
+    },
+    "frontend-000578": {
+        "message": "Vis altid det brugernavn, der er relateret til adgangskoden, i listevisningen"
+    },
+    "frontend-000579": {
+        "message": "Vis mærkerne for hvert kodeord i listevisningen. Øger indlæsningstiden"
+    },
+    "frontend-000580": {
+        "message": "Vis skjulte brugerdefinerede felter i redigeringsformularen og detaljeafsnittet for en adgangskode"
+    },
+    "frontend-000581": {
+        "message": "Sender dig e-mails om kompromitterede adgangskoder og andre sikkerhedsproblemer"
+    },
+    "frontend-000582": {
+        "message": "Sender dig e-mails, når andre personer deler adgangskoder med dig"
+    },
+    "frontend-000583": {
+        "message": "Vis altid afsnittet for global søgning i navigationen"
+    },
+    "frontend-000584": {
+        "message": "Meddeler dig om kompromitterede adgangskoder og andre sikkerhedsproblemer"
+    },
+    "frontend-000585": {
+        "message": "Giver dig besked, når andre personer deler adgangskoder med dig"
+    },
+    "frontend-000586": {
+        "message": "Meddeler dig, når en baggrundsoperation mislykkes"
+    },
+    "frontend-000587": {
+        "message": "Nulstille alle indstillinger på denne side til standardindstillingerne"
+    },
+    "frontend-000588": {
+        "message": "Dette vil nulstille alle indstillinger til standardindstillingerne. Ønsker du at fortsætte?"
+    },
+    "frontend-000589": {
+        "message": "Start forfra, og slet al konfiguration, adgangskoder, mapper og tags"
+    },
+    "frontend-000590": {
+        "message": "Ønsker du at slette alle dine indstillinger, adgangskoder, mapper og tags?\nDet vil IKKE være muligt at fortryde dette."
+    },
+    "frontend-000593": {
+        "message": "Rediger som ny"
+    },
+    "frontend-000594": {
+        "message": "Flyt"
+    },
+    "frontend-000595": {
+        "message": "Åbn $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Ukendt (Ikke_kontrolleret)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "Hvad havde du forventet?"
+    },
+    "frontend-000599": {
+        "message": "Klik for at vise QR-koden."
+    },
+    "frontend-000600": {
+        "message": "Du skal ikke advare mig igen"
+    },
+    "frontend-000601": {
+        "message": "Styrke"
+    },
+    "frontend-000602": {
+        "message": "Luk"
+    },
+    "frontend-000603": {
+        "message": "Fjern fra favoritter"
+    },
+    "frontend-000604": {
+        "message": "Markér som favorit"
+    },
+    "frontend-000605": {
+        "message": "Skjult adgangskode"
+    },
+    "frontend-000606": {
+        "message": "Vis ikke denne adgangskode nogen steder"
+    },
+    "frontend-000607": {
+        "message": "Data"
+    },
+    "frontend-000608": {
+        "message": "Type"
+    },
+    "frontend-000609": {
+        "message": "Nyt felt"
+    },
+    "frontend-000610": {
+        "message": "Slet felt"
+    },
+    "frontend-000611": {
+        "message": "Åbn Markdown-guide"
+    },
+    "frontend-000612": {
+        "message": "Fortryd"
+    },
+    "frontend-000613": {
+        "message": "Redo"
+    },
+    "frontend-000614": {
+        "message": "Den udløber på $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Eller i vores chat!"
+    },
+    "frontend-000616": {
+        "message": "For mange mislykkede login-forsøg"
+    },
+    "frontend-000617": {
+        "message": "Vælg en mappe"
+    },
+    "frontend-000618": {
+        "message": "Vælg \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ kan ikke anvendes",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Hjem"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" indeholder ingen mapper",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Adgangskoder App-kryptering Passphrase"
+    },
+    "frontend-000623": {
+        "message": "Ukendt"
+    },
+    "frontend-000624": {
+        "message": "Hjælp"
+    },
+    "frontend-000625": {
+        "message": "Vælg krypteringstype for denne adgangskode"
+    },
+    "frontend-000626": {
+        "message": "Ønsker du at slette feltet \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Sørg for, at denne QR-kode kun er synlig for personer, du har tillid til."
+    },
+    "frontend-000628": {
+        "message": "Den kryptering, som serveren anvender, før dataene lagres i databasen"
+    },
+    "frontend-000629": {
+        "message": "Den kryptering, som klienten anvender, før dataene sendes til serveren"
+    },
+    "frontend-000630": {
+        "message": "Adgangskode er ugyldig. Session tilbagekaldt på grund af for mange mislykkede loginforsøg."
+    },
+    "frontend-000631": {
+        "message": "Dette er en kopi af den adgangsfrase, du har valgt til kryptering. Ændring eller sletning af denne post påvirker ikke krypteringen. Passphrase kan kun ændres i indstillingerne. Du kan finde flere oplysninger i håndbogen."
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "backend-000633": {
+        "message": "(valgfrit)"
+    },
+    "backend-000634": {
+        "message": "Din Nextcloud anmoder om betydeligt flere ikoner end gennemsnittet."
+    },
+    "backend-000635": {
+        "message": "Åbn vejledning"
+    },
+    "backend-000636": {
+        "message": "Der er registreret et mistænkeligt antal mislykkede loginforsøg."
+    },
+    "backend-000637": {
+        "message": "Flere oplysninger"
+    },
+    "backend-000638": {
+        "message": "Vis usikre adgangskoder"
+    },
+    "backend-000639": {
+        "message": "Åbn indstillinger"
+    },
+    "backend-000640": {
+        "message": "Åbne adgangskoder"
+    },
+    "backend-000641": {
+        "message": "Se apps"
+    },
+    "backend-000642": {
+        "message": "Se apps og enheder"
+    },
+    "backend-000643": {
+        "message": "Administrer enheder og apps"
+    },
+    "backend-000644": {
+        "message": "Se delte adgangskoder"
+    },
+    "backend-000645": {
+        "message": "App-opgradering anbefales"
+    },
+    "backend-000646": {
+        "message": "En ny klient eller app blev tilsluttet til din konto"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" har fået adgang til din $STR_1$ Passwords-konto via PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Du kan administrere alle tilsluttede enheder og apps i dine indstillinger på $STR_1$ i afsnittet Sikkerhed.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Det sidste baggrundsjob blev udført med PHP $STRING_1$, men webserveren bruger PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "Brug af forskellige større versioner af PHP kan give problemer."
+    },
+    "backend-000651": {
+        "message": "Standardindstillinger for passwordsikkerhed"
+    },
+    "backend-000652": {
+        "message": "Sikkerhedskontrol Hash"
+    },
+    "backend-000653": {
+        "message": "Opbevar ikke hashes"
+    },
+    "backend-000654": {
+        "message": "Gem 50% af hash'en"
+    },
+    "backend-000655": {
+        "message": "Gem 75% af hash'en"
+    },
+    "backend-000656": {
+        "message": "Gem den fulde hash"
+    },
+    "backend-000657": {
+        "message": "Sikkerhedskopi gendannes automatisk"
+    },
+    "backend-000658": {
+        "message": "Det ser ud til, at der er opstået et problem med databasen i appen Adgangskoder."
+    },
+    "backend-000659": {
+        "message": "På grund af dette blev app-backuppen \"$STR_1$\" automatisk gendannet.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Hvis der var tale om en fejl, blev der taget en sikkerhedskopi af databasen, før den blev gendannet."
+    },
+    "backend-000661": {
+        "message": "Du kan deaktivere automatisk gendannelse af sikkerhedskopier i appens indstillinger."
+    },
+    "backend-000662": {
+        "message": "Gendan sikkerhedskopier automatisk, når databasen slettes"
+    },
+    "backend-000663": {
+        "message": "Adgangskoder slutter opdateringer til Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Passwords $STR_1$ er den sidste opdatering af Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Opgrader til Nextcloud $STR_1$ og PHP $STR_1$ (eller PHP $STR_1$ for LSR) for fremtidige opgraderinger.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Vælg automatisk"
+    },
+    "frontend-000667": {
+        "message": "Tags CSV"
+    },
+    "frontend-000669": {
+        "message": "Standard"
+    },
+    "frontend-000670": {
+        "message": "Start søgning, når der trykkes på en tast et vilkårligt sted på siden"
+    },
+    "frontend-000671": {
+        "message": "Søg overalt, når der trykkes på enter-tasten i søgefeltet"
+    },
+    "settings-000678": {
+        "message": "Login og session"
+    },
+    "settings-000679": {
+        "message": "Hold mig logget ind"
+    },
+    "settings-000680": {
+        "message": "Altid"
+    },
+    "settings-000681": {
+        "message": "Når jeg arbejder"
+    },
+    "settings-000682": {
+        "message": "Når jeg er aktiv"
+    },
+    "settings-000683": {
+        "message": "Afslut session efter"
+    },
+    "settings-000684": {
+        "message": "Et minut"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ minutter",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "End-to-end-kryptering"
+    },
+    "settings-000687": {
+        "message": "Server-krypteringstilstand"
+    },
+    "settings-000688": {
+        "message": "Ingen, hvis CSE anvendes"
+    },
+    "settings-000689": {
+        "message": "Enkel kryptering"
+    },
+    "settings-000690": {
+        "message": "Avanceret kryptering"
+    },
+    "settings-000691": {
+        "message": "Klient-krypteringstilstand"
+    },
+    "settings-000692": {
+        "message": "Aktiver"
+    },
+    "settings-000693": {
+        "message": "Ændre adgangskode"
+    },
+    "settings-000694": {
+        "message": "Visning af detaljer om adgangskoder"
+    },
+    "settings-000695": {
+        "message": "Visning af website"
+    },
+    "settings-000696": {
+        "message": "Ny adgangskode"
+    },
+    "settings-000697": {
+        "message": "Gentag adgangskode"
+    },
+    "settings-000698": {
+        "message": "Gammel adgangskode"
+    },
+    "settings-000699": {
+        "message": "Adgangskode ændret"
+    },
+    "settings-000700": {
+        "message": "Ændring af adgangskode mislykkedes"
+    },
+    "settings-000701": {
+        "message": "Administrationsspørgsmål"
+    },
+    "settings-000702": {
+        "message": "Deling af adgangskode"
+    },
+    "settings-000703": {
+        "message": "Del som standard som redigerbar"
+    },
+    "settings-000704": {
+        "message": "Tillad deling som standard"
+    },
+    "settings-000705": {
+        "message": "Kode"
+    },
+    "settings-000706": {
+        "message": "Ugyldig nulstillingskode"
+    },
+    "settings-000707": {
+        "message": "Tilføj tal til genererede adgangskoder"
+    },
+    "settings-000708": {
+        "message": "Tilføj specialtegn til genererede adgangskoder"
+    },
+    "settings-000709": {
+        "message": "Angiv, hvor lang tid der skal gå efter en anmodning, før sessionen annulleres"
+    },
+    "settings-000710": {
+        "message": "Vælg den krypteringstype, der bruges til at kryptere data på serveren"
+    },
+    "settings-000711": {
+        "message": "Kør installationsguiden for at konfigurere kryptering af dine adgangskoder"
+    },
+    "settings-000712": {
+        "message": "Ændre krypteringsadgangskoden"
+    },
+    "settings-000713": {
+        "message": "Vis et eksempel på det tilknyttede websted i detaljerne. (Ikke på mobiler)"
+    },
+    "settings-000714": {
+        "message": "Meddeler dig om konfigurationsfejl og andre administrative problemer"
+    },
+    "settings-000715": {
+        "message": "Indtast \"$CODE$\" for at nulstille din konto og slette alt.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Du kan bruge denne dialogboks til at ændre din hovedadgangskode."
+    },
+    "settings-000717": {
+        "message": "Dit password skal være længere end 12 tegn og må ikke være det gamle password"
+    },
+    "settings-000718": {
+        "message": "Bekræft venligst dit nye password"
+    },
+    "settings-000719": {
+        "message": "Du skal indtaste din gamle adgangskode"
+    },
+    "settings-000720": {
+        "message": "Din adgangskode er blevet ændret."
+    },
+    "settings-000721": {
+        "message": "Aktiver indstillingen til at lade andre brugere redigere en delt adgangskode som standard"
+    },
+    "settings-000722": {
+        "message": "Aktiver indstillingen til at lade andre brugere dele en delt adgangskode som standard"
+    },
+    "settings-000723": {
+        "message": "Åbn siden med indstillinger i håndbogen"
+    },
+    "settings-000724": {
+        "message": "Send keep-alive-forespørgsler til serveren for at forhindre, at sessionen afbrydes"
+    },
+    "settings-000725": {
+        "message": "Vælg den krypteringstype, der bruges til at kryptere data på klienten, før de sendes til serveren"
+    },
+    "settings-000726": {
+        "message": "SHA-1 hash-koden bruges til at kontrollere, om der er brudt adgangskoder. En delvis hash kan forhindre brute force-angreb i tilfælde af, at serveren bliver hacket, men kan også medføre, at sikre adgangskoder fejlagtigt rapporteres som brudt."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Klik med musen på hjulet",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Handling, der skal udføres, når der klikkes med musen på en adgangskode",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Vis genvejsknap til",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Tilføjer en ekstra knap til den angivne handling i skrivebordsvisningen",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Vis fanen Deling",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Gendanne skjulte genstande",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Genoprette emner",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Denne handling fjerner \"skjult\"-flaget fra elementer, så disse elementer vises i appen igen.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Gendanne skjulte genstande",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Vælg den type skjulte genstande, du ønsker at gendanne.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Adgangskoder, der ikke er i en skjult mappe",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Gendanne skjulte adgangskoder, der er i en mappe, som ikke selv er skjult",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Alle skjulte adgangskoder",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Gendanne alle skjulte adgangskoder uanset mappestatus",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Alle skjulte mapper",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Gendanne alle skjulte mapper",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Alle skjulte tags",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Gendanne alle skjulte tags",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Gendannet $PASSWORDS$ password(s), $FOLDERS$ mappe(r) og $TAGS$ tag(s).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Genvundne genstande",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Der er opstået en fejl.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Efter lanceringen skal du vise min"
+    },
+    "tutorial-000731": {
+        "message": "mapper"
+    },
+    "tutorial-000732": {
+        "message": "tags"
+    },
+    "tutorial-000733": {
+        "message": "favoritter"
+    },
+    "tutorial-000734": {
+        "message": "adgangskoder"
+    },
+    "tutorial-000735": {
+        "message": "for nylig ændret"
+    },
+    "tutorial-000736": {
+        "message": "Markér mine adgangskoder, hvis…"
+    },
+    "tutorial-000737": {
+        "message": "de er ældre end"
+    },
+    "tutorial-000738": {
+        "message": "tre måneder"
+    },
+    "tutorial-000739": {
+        "message": "seks måneder"
+    },
+    "tutorial-000740": {
+        "message": "et år"
+    },
+    "tutorial-000741": {
+        "message": "to år"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ dage",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "de er dubletter"
+    },
+    "tutorial-000744": {
+        "message": "Lav mine nye adgangskoder"
+    },
+    "tutorial-000745": {
+        "message": "stærk"
+    },
+    "tutorial-000746": {
+        "message": "stærkere"
+    },
+    "tutorial-000747": {
+        "message": "meget stærk"
+    },
+    "tutorial-000748": {
+        "message": "ekstremt stærk"
+    },
+    "tutorial-000749": {
+        "message": "omfatter numre"
+    },
+    "tutorial-000750": {
+        "message": "indeholde specialtegn"
+    },
+    "tutorial-000751": {
+        "message": "Et sikkert hjem for dine adgangskoder"
+    },
+    "tutorial-000760": {
+        "message": "Nøglering"
+    },
+    "tutorial-000761": {
+        "message": "Oprydning"
+    },
+    "tutorial-000762": {
+        "message": "Succes"
+    },
+    "tutorial-000763": {
+        "message": "Find hjælp, når du har brug for det"
+    },
+    "tutorial-000764": {
+        "message": "Gå til Apps og udvidelser"
+    },
+    "tutorial-000765": {
+        "message": "Fortsæt"
+    },
+    "tutorial-000766": {
+        "message": "Spring"
+    },
+    "tutorial-000767": {
+        "message": "Kontroller adgangskode-sikkerheden med"
+    },
+    "tutorial-000768": {
+        "message": "Generer adgangskoder ved hjælp af"
+    },
+    "tutorial-000769": {
+        "message": "Få favicons fra"
+    },
+    "tutorial-000770": {
+        "message": "Få forhåndsvisninger af websteder fra"
+    },
+    "tutorial-000771": {
+        "message": "Lav sikkerhedskopier"
+    },
+    "tutorial-000772": {
+        "message": "Vis alle indstillinger"
+    },
+    "tutorial-000773": {
+        "message": "Læs vores tips til administratorer"
+    },
+    "tutorial-000774": {
+        "message": "Adgangskode (min. 12 tegn)"
+    },
+    "tutorial-000775": {
+        "message": "Kryptering i gang…"
+    },
+    "tutorial-000776": {
+        "message": "Der er mange indstillinger, så du kan tilpasse din oplevelse."
+    },
+    "tutorial-000777": {
+        "message": "Du kan finde dem alle i \"Mere\", men vi har samlet de mest almindelige her:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords tilbyder moderne og stærk kryptering for at beskytte dine data mod nysgerrige øjne."
+    },
+    "tutorial-000779": {
+        "message": "Vælg en sikker adgangskode nedenfor for at aktivere den ultimative beskyttelse af dine adgangskoder."
+    },
+    "tutorial-000780": {
+        "message": "Du kan nemt få adgang til dine adgangskoder overalt takket være vores apps og udvidelser."
+    },
+    "tutorial-000781": {
+        "message": "Du kan finde vores sektion Apps og udvidelser under \"Mere\" eller blot klikke på knappen nedenfor."
+    },
+    "tutorial-000782": {
+        "message": "Adgangskoder kan tilpasses på mange forskellige måder."
+    },
+    "tutorial-000783": {
+        "message": "Som administrator bør du måske kigge på disse almindelige indstillinger."
+    },
+    "tutorial-000784": {
+        "message": "Når du ikke ved, hvordan noget fungerer, har spørgsmål eller har brug for hjælp til at løse et problem:"
+    },
+    "tutorial-000785": {
+        "message": "Hjælpen er lige rundt om hjørnet."
+    },
+    "tutorial-000786": {
+        "message": "Vores indbyggede håndbog kan findes ved at klikke på \"Mere\" og forklarer appen i alle detaljer."
+    },
+    "tutorial-000787": {
+        "message": "I alle andre tilfælde er vores fællesskab det rette sted at stille dine spørgsmål."
+    },
+    "tutorial-000788": {
+        "message": "Håndbogen vil blive åbnet efter vejledningen"
+    },
+    "tutorial-000789": {
+        "message": "Indtast en adgangskode med 12 tegn eller mere"
+    },
+    "tutorial-000790": {
+        "message": "Din adgangskode skal bestå af mindst 12 tegn, og bekræftelsesadgangskoden skal være den samme"
+    }
+}
