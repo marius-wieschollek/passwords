@@ -1690,5 +1690,1257 @@
     },
     "backups-TagLabels": {
         "message": "Étiquette"
+    },
+    "backups-000033": {
+        "message": "Lire le guide d'importation $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "ou"
+    },
+    "backups-000035": {
+        "message": "sauvegarde de données"
+    },
+    "backups-000056": {
+        "message": "N'importez pas les champs vides"
+    },
+    "backups-000065": {
+        "message": "Choisir le format d'importation"
+    },
+    "backups-000123": {
+        "message": "Le fichier d'importation est vide"
+    },
+    "backups-000125": {
+        "message": "Logins"
+    },
+    "backups-000127": {
+        "message": "Cartes de crédit"
+    },
+    "backups-000128": {
+        "message": "Identités"
+    },
+    "backups-000129": {
+        "message": "Finances"
+    },
+    "backups-000130": {
+        "message": "Licences"
+    },
+    "backups-000131": {
+        "message": "Voyage"
+    },
+    "backups-000132": {
+        "message": "Ordinateurs"
+    },
+    "backups-000133": {
+        "message": "Divers"
+    },
+    "backups-000138": {
+        "message": "Le type de \"$FIELD$\" dans \"$LABEL$\" est inconnu et ne peut être importé.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "Le libellé de \"$FIELD$\" dans \"$LABEL$\" dépasse 48 caractères et a été coupé.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "La valeur de \"$FIELD$\" dans \"$LABEL$\" dépasse 320 caractères et a été coupée.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "De plus amples informations peuvent être trouvées dans le journal. (Appuyez sur F12)"
+    },
+    "backend-000510": {
+        "message": "Veuillez cliquer sur le lien et suivre notre tutoriel facile pour héberger vous-même Besticon."
+    },
+    "backend-000492": {
+        "message": "$STR_1$ J'ai essayé de me connecter à votre compte sur $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Comme vous utilisez un mot de passe principal, cela ne signifie pas que l'accès à vos données a été accordé."
+    },
+    "backend-000497": {
+        "message": "Aidez-nous à améliorer les mots de passe"
+    },
+    "backend-000498": {
+        "message": "Vous pouvez nous aider à améliorer l'application Passwords en participant à notre enquête sur les serveurs."
+    },
+    "backend-000499": {
+        "message": "Nous recevrons ainsi des données anonymes sur votre configuration et les paramètres sélectionnés."
+    },
+    "backend-000500": {
+        "message": "Vous pouvez le modifier à tout moment dans les paramètres de l'application."
+    },
+    "backend-000501": {
+        "message": "Pas encore."
+    },
+    "backend-000502": {
+        "message": "Participer"
+    },
+    "backend-000503": {
+        "message": "Participation à l'enquête sur les serveurs"
+    },
+    "backend-000504": {
+        "message": "Base"
+    },
+    "backend-000505": {
+        "message": "Full"
+    },
+    "backend-000506": {
+        "message": "Non défini"
+    },
+    "backend-000507": {
+        "message": "Veuillez envisager d'héberger vous-même votre api favicon."
+    },
+    "backend-000508": {
+        "message": "Votre Nextcloud utilise nos instances partagées de Besticon pour récupérer les icônes des sites web."
+    },
+    "backend-000517": {
+        "message": "Cela pourrait indiquer que quelqu'un essaie de s'introduire dans votre compte."
+    },
+    "frontend-000345": {
+        "message": "Créé par"
+    },
+    "backend-000379": {
+        "message": "forum"
+    },
+    "frontend-000356": {
+        "message": "Accès public"
+    },
+    "frontend-000357": {
+        "message": "Tâche automatique en arrière-plan"
+    },
+    "frontend-000361": {
+        "message": "Annuler"
+    },
+    "apps-000001": {
+        "message": "officiel"
+    },
+    "apps-000002": {
+        "message": "par $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000003": {
+        "message": "code source"
+    },
+    "apps-000004": {
+        "message": "en savoir plus"
+    },
+    "apps-000005": {
+        "message": "Connectez-vous avec PassLink"
+    },
+    "apps-000006": {
+        "message": "Connecter un nouveau dispositif"
+    },
+    "apps-000007": {
+        "message": "Connectez-vous via le lien"
+    },
+    "apps-000008": {
+        "message": "Choisissez un nom :"
+    },
+    "apps-000009": {
+        "message": "Les codes ne correspondent pas"
+    },
+    "apps-000010": {
+        "message": "Il a l'air bien"
+    },
+    "apps-000011": {
+        "message": "Connexion réussie"
+    },
+    "apps-000012": {
+        "message": "J'ai fini."
+    },
+    "apps-000013": {
+        "message": "N'essayez pas de nouveau"
+    },
+    "apps-000014": {
+        "message": "Connecter quelque chose d'autre"
+    },
+    "apps-000015": {
+        "message": "Essayez à nouveau"
+    },
+    "apps-000016": {
+        "message": "Cryptage fort"
+    },
+    "apps-000017": {
+        "message": "Échec de la récupération des applications : $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Vous avez annulé la connexion"
+    },
+    "apps-000019": {
+        "message": "Vous n'avez pas confirmé la connexion à temps"
+    },
+    "apps-000020": {
+        "message": "Il suffit de scanner le code QR avec l'application pour le connecter."
+    },
+    "apps-000021": {
+        "message": "Cliquez sur le bouton lorsque vous êtes prêt à démarrer la connexion."
+    },
+    "apps-000022": {
+        "message": "Vérifiez si les codes ci-dessous correspondent à ceux fournis par l'appareil ou l'application :"
+    },
+    "apps-000023": {
+        "message": "Liez ce client à votre compte Nextcloud sans mots de passe et urls ennuyeux."
+    },
+    "apps-000024": {
+        "message": "Ce client prend officiellement en charge notre système de cryptage de bout en bout."
+    },
+    "apps-000025": {
+        "message": "Ce client est maintenu par les auteurs de l'application Passwords."
+    },
+    "apps-000026": {
+        "message": "Cliquez sur le bouton pour connecter une application installée sur cet appareil ou scannez le code QR avec l'application si elle est installée sur un autre appareil."
+    },
+    "frontend-000593": {
+        "message": "Modifier comme nouveau"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Cacher ce mot de passe ?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000384": {
+        "message": "Examinez le rapport HTTPS ci-dessous pour déboguer le problème."
+    },
+    "frontend-000594": {
+        "message": "Déplacements"
+    },
+    "tutorial-000743": {
+        "message": "il s'agit de doublons"
+    },
+    "tutorial-000744": {
+        "message": "Créer mes nouveaux mots de passe"
+    },
+    "tutorial-000745": {
+        "message": "fort"
+    },
+    "tutorial-000746": {
+        "message": "plus fort"
+    },
+    "tutorial-000788": {
+        "message": "Le manuel sera ouvert après le tutoriel"
+    },
+    "backups-000036": {
+        "message": "CSV personnalisé"
+    },
+    "backups-000037": {
+        "message": "essayez l'importation CSV générique"
+    },
+    "backups-000038": {
+        "message": "Pas d'importation pour votre CSV ?"
+    },
+    "backups-000045": {
+        "message": "Champs personnalisés"
+    },
+    "backups-000084": {
+        "message": "Saut de ligne"
+    },
+    "backups-000099": {
+        "message": "(sans valeur)"
+    },
+    "backend-000493": {
+        "message": "$STR_1$ connecté à votre compte sur $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000509": {
+        "message": "Ces instances sont destinées aux petites installations Nextcloud avec un trafic très faible."
+    },
+    "frontend-000329": {
+        "message": "La session a expiré"
+    },
+    "frontend-000330": {
+        "message": "Token de session API expiré"
+    },
+    "frontend-000346": {
+        "message": "Vous vous connectez en tant que $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Connexion"
+    },
+    "frontend-000348": {
+        "message": "Demander à nouveau le jeton"
+    },
+    "frontend-000349": {
+        "message": "Trop de tentatives"
+    },
+    "frontend-000350": {
+        "message": "Le mot de passe est trop court"
+    },
+    "frontend-000351": {
+        "message": "Erreur inconnue"
+    },
+    "frontend-000352": {
+        "message": "La requête du jeton a échoué"
+    },
+    "frontend-000353": {
+        "message": "Maintenance du système"
+    },
+    "frontend-000354": {
+        "message": "Non disponible"
+    },
+    "backend-000654": {
+        "message": "Stocker 50% du hachage"
+    },
+    "backend-000666": {
+        "message": "Sélectionnez automatiquement"
+    },
+    "frontend-000355": {
+        "message": "Système"
+    },
+    "frontend-000358": {
+        "message": "Ligne de commande du serveur"
+    },
+    "frontend-000359": {
+        "message": "Veuillez corriger votre entrée"
+    },
+    "frontend-000360": {
+        "message": "Montrer la valeur"
+    },
+    "frontend-000362": {
+        "message": "Ok"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ a partagé ce mot de passe avec vous.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000372": {
+        "message": "Vous serez déconnecté dans $TIME$ secondes",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Vous avez peut-être demandé trop de jetons. Veuillez réessayer plus tard."
+    },
+    "frontend-000374": {
+        "message": "Le cryptage de bout en bout sera désactivé pour ce mot de passe si vous le partagez."
+    },
+    "frontend-000375": {
+        "message": "Le jeton de session n'est plus valide. L'application va maintenant se recharger."
+    },
+    "frontend-000376": {
+        "message": "Aujourd'hui en 2018, la première version de mots de passe a été publiée. Nous vous remercions d'avoir utilisé l'application."
+    },
+    "frontend-Folder": {
+        "message": "Dossier"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "backend-000491": {
+        "message": "Accès administratif à votre compte"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "L'enregistrement d'un mot de passe caché dans un dossier qui n'est pas lui-même caché rendra le mot de passe inaccessible. Ce mot de passe ne sera plus affiché nulle part. Voulez-vous continuer ?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "backend-000383": {
+        "message": "Il ne s'agit PAS d'un bogue. Visitez notre site $STR_1$ si vous avez besoin d'aide.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000385": {
+        "message": "Lisez ce site $STR_1$ pour configurer votre serveur afin d'utiliser HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Lisez cette page $STR_1$ si vous utilisez un quelconque proxy.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "Rendez-vous sur $STR_1$ pour obtenir un certificat HTTPS gratuit si vous en avez besoin.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000512": {
+        "message": "La configuration de votre service de prévisualisation n'est pas valide"
+    },
+    "backend-000513": {
+        "message": "Le service favicon que vous avez choisi nécessite une clé d'api ou un point de terminaison, mais aucune n'est fournie."
+    },
+    "backend-000514": {
+        "message": "Le service de prévisualisation que vous avez choisi nécessite une clé API ou un point de terminaison, mais aucune n'est fournie."
+    },
+    "backend-000515": {
+        "message": "Ouvrez les paramètres d'administration pour mettre à jour la configuration ou choisir un autre service."
+    },
+    "backend-000516": {
+        "message": "Nous avons détecté plusieurs tentatives infructueuses de déverrouillage de votre base de données de mots de passe par \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000518": {
+        "message": "Pour empêcher toute nouvelle tentative, les informations d'identification de l'API de ce client ont été révoquées."
+    },
+    "backend-000519": {
+        "message": "De plus, l'authentification API basée sur un mot de passe a été désactivée."
+    },
+    "backend-000520": {
+        "message": "Si vous voulez continuer à utiliser ce client, vous devez créer un nouveau jeton pour lui."
+    },
+    "backend-000521": {
+        "message": "Si vous ne connaissez pas ce client, veuillez changer votre mot de passe et revoir la liste de vos appareils."
+    },
+    "backend-000522": {
+        "message": "Pour éviter toute nouvelle tentative, l'authentification API par mot de passe a été désactivée."
+    },
+    "backend-000523": {
+        "message": "Pour l'activer à nouveau, connectez-vous avec la webapp ou tout client utilisant l'authentification par jeton."
+    },
+    "backend-000524": {
+        "message": "Si vous ne connaissez pas ce client, veuillez changer votre mot de passe principal et votre mot de passe Nextcloud."
+    },
+    "backend-000525": {
+        "message": "Pour renforcer la sécurité, nous vous recommandons d'utiliser des jetons spécifiques aux appareils au lieu de votre mot de passe."
+    },
+    "frontend-000595": {
+        "message": "Ouvrir $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Inconnu (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "A quoi vous attendiez-vous ?"
+    },
+    "frontend-000601": {
+        "message": "Force"
+    },
+    "frontend-000602": {
+        "message": "Fermer"
+    },
+    "frontend-000603": {
+        "message": "Retirer des favoris"
+    },
+    "frontend-000604": {
+        "message": "Marquer comme favori"
+    },
+    "frontend-000605": {
+        "message": "Mot de passe caché"
+    },
+    "frontend-000606": {
+        "message": "Ne montrez ce mot de passe nulle part"
+    },
+    "frontend-000607": {
+        "message": "Données"
+    },
+    "frontend-000608": {
+        "message": "Type"
+    },
+    "frontend-000610": {
+        "message": "Supprimer le champ"
+    },
+    "frontend-000611": {
+        "message": "Guide Open Markdown"
+    },
+    "frontend-000612": {
+        "message": "Annuler"
+    },
+    "frontend-000613": {
+        "message": "Refaire"
+    },
+    "frontend-000614": {
+        "message": "Il expirera à l'adresse $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Ou dans notre Chat !"
+    },
+    "frontend-000616": {
+        "message": "Trop de tentatives de connexion échouées"
+    },
+    "frontend-000617": {
+        "message": "Sélectionnez un dossier"
+    },
+    "frontend-000618": {
+        "message": "Sélectionnez \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ ne peut pas être utilisé",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" ne contient aucun dossier",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Mots de passe App Encryption Passphrase"
+    },
+    "frontend-000623": {
+        "message": "Inconnu"
+    },
+    "frontend-000624": {
+        "message": "Aide"
+    },
+    "frontend-000625": {
+        "message": "Choisissez le type de cryptage pour ce mot de passe"
+    },
+    "frontend-000626": {
+        "message": "Voulez-vous supprimer le champ \"$FIELD$\" ?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000628": {
+        "message": "Le cryptage appliqué par le serveur avant de stocker les données dans la base de données."
+    },
+    "frontend-000629": {
+        "message": "Le cryptage appliqué par le client avant d'envoyer les données au serveur."
+    },
+    "frontend-000630": {
+        "message": "Mot de passe invalide. Session révoquée pour trop de tentatives de connexion infructueuses."
+    },
+    "frontend-000631": {
+        "message": "Il s'agit d'une copie de la phrase de passe que vous avez choisie pour le cryptage. La modification ou la suppression de cette entrée n'affecte pas le cryptage. La phrase de passe ne peut être modifiée que dans les paramètres. Vous trouverez de plus amples informations dans le manuel."
+    },
+    "backend-000632": {
+        "message": "Api de service Favicon"
+    },
+    "backend-000633": {
+        "message": "(facultatif)"
+    },
+    "backend-000634": {
+        "message": "Votre Nextcloud demande beaucoup plus d'icônes que la moyenne."
+    },
+    "backend-000635": {
+        "message": "Tutoriel ouvert"
+    },
+    "backend-000636": {
+        "message": "Un nombre suspect de tentatives de connexion échouées a été détecté."
+    },
+    "backend-000637": {
+        "message": "Plus d'informations"
+    },
+    "backend-000638": {
+        "message": "Afficher les mots de passe non sécurisés"
+    },
+    "backend-000639": {
+        "message": "Paramètres ouverts"
+    },
+    "backend-000640": {
+        "message": "Mots de passe ouverts"
+    },
+    "backend-000641": {
+        "message": "Voir les applications"
+    },
+    "backend-000642": {
+        "message": "Voir les applications et les appareils"
+    },
+    "backend-000643": {
+        "message": "Gérer les appareils et les applications"
+    },
+    "backend-000645": {
+        "message": "Mise à jour de l'application recommandée"
+    },
+    "backend-000646": {
+        "message": "Un nouveau client ou une nouvelle application a été connecté à votre compte"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" a été autorisé à accéder à votre compte $STR_1$ Passwords via PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Vous pouvez gérer tous les appareils et applications connectés dans vos paramètres $STR_1$, dans la section sécurité.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "La dernière tâche d'arrière-plan a été exécutée avec PHP $STRING_1$, mais le serveur Web utilise PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "L'utilisation de différentes versions majeures de PHP peut causer des problèmes."
+    },
+    "backend-000651": {
+        "message": "Paramètres de sécurité du mot de passe par défaut"
+    },
+    "backend-000652": {
+        "message": "Contrôle de sécurité Hash"
+    },
+    "backend-000653": {
+        "message": "Ne pas stocker les hashs"
+    },
+    "backend-000655": {
+        "message": "Stocker 75% du hachage"
+    },
+    "backend-000656": {
+        "message": "Stocker le hachage complet"
+    },
+    "backend-000657": {
+        "message": "Sauvegarde automatiquement restaurée"
+    },
+    "backend-000658": {
+        "message": "L'application mots de passe semble avoir rencontré un problème de base de données."
+    },
+    "backend-000659": {
+        "message": "Pour cette raison, la sauvegarde de l'application \"$STR_1$\" a été restaurée automatiquement.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "S'il s'agissait d'une erreur, une sauvegarde de la base de données a été effectuée avant de la restaurer."
+    },
+    "backend-000661": {
+        "message": "Vous pouvez désactiver la restauration automatique des sauvegardes dans les paramètres de l'application."
+    },
+    "backend-000662": {
+        "message": "Restauration automatique des sauvegardes lorsque la base de données est effacée"
+    },
+    "backend-000663": {
+        "message": "Fin des mises à jour des mots de passe pour Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Passwords $STR_1$ est la dernière mise à jour de Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Passez à Nextcloud $STR_1$ et PHP $STR_1$ (ou PHP $STR_1$ pour LSR) pour les futures mises à niveau.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-000678": {
+        "message": "Connexion et session"
+    },
+    "settings-000679": {
+        "message": "Gardez-moi connecté"
+    },
+    "settings-000680": {
+        "message": "Toujours"
+    },
+    "settings-000681": {
+        "message": "Quand je travaille"
+    },
+    "settings-000682": {
+        "message": "Quand je suis actif"
+    },
+    "settings-000683": {
+        "message": "Fin de la session après"
+    },
+    "settings-000684": {
+        "message": "Une minute"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ minutes",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Cryptage de bout en bout"
+    },
+    "settings-000687": {
+        "message": "Mode de cryptage du serveur"
+    },
+    "settings-000688": {
+        "message": "Aucun si le CSE est utilisé"
+    },
+    "settings-000689": {
+        "message": "Cryptage simple"
+    },
+    "settings-000691": {
+        "message": "Mode de cryptage du client"
+    },
+    "settings-000692": {
+        "message": "Activer"
+    },
+    "settings-000693": {
+        "message": "Changer le mot de passe"
+    },
+    "settings-000694": {
+        "message": "Vue détaillée des mots de passe"
+    },
+    "settings-000695": {
+        "message": "Aperçu du site web de l'exposition"
+    },
+    "settings-000696": {
+        "message": "Nouveau mot de passe"
+    },
+    "settings-000697": {
+        "message": "Répéter le mot de passe"
+    },
+    "settings-000698": {
+        "message": "Ancien mot de passe"
+    },
+    "settings-000699": {
+        "message": "Mot de passe modifié"
+    },
+    "settings-000700": {
+        "message": "Le changement de mot de passe a échoué"
+    },
+    "settings-000701": {
+        "message": "Questions administratives"
+    },
+    "settings-000702": {
+        "message": "Partage de mot de passe"
+    },
+    "settings-000703": {
+        "message": "Partager comme modifiable par défaut"
+    },
+    "settings-000704": {
+        "message": "Autoriser le partage par défaut"
+    },
+    "settings-000705": {
+        "message": "Code"
+    },
+    "settings-000706": {
+        "message": "Code de réinitialisation non valide"
+    },
+    "settings-000707": {
+        "message": "Ajouter des chiffres aux mots de passe générés"
+    },
+    "settings-000708": {
+        "message": "Ajouter des caractères spéciaux aux mots de passe générés"
+    },
+    "settings-000709": {
+        "message": "Spécifiez le délai après une demande avant que la session ne soit annulée."
+    },
+    "settings-000710": {
+        "message": "Choisissez le type de cryptage utilisé pour chiffrer les données sur le serveur"
+    },
+    "settings-000711": {
+        "message": "Exécutez l'assistant d'installation pour configurer le cryptage de vos mots de passe."
+    },
+    "settings-000712": {
+        "message": "Modifier le mot de passe de cryptage"
+    },
+    "settings-000713": {
+        "message": "Afficher un aperçu du site web associé dans les détails. (Pas sur les mobiles)"
+    },
+    "settings-000714": {
+        "message": "Vous informe des erreurs de configuration et d'autres problèmes administratifs."
+    },
+    "settings-000715": {
+        "message": "Entrez \"$CODE$\" pour réinitialiser votre compte et tout effacer.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Vous pouvez utiliser cette boîte de dialogue pour modifier votre mot de passe principal."
+    },
+    "settings-000717": {
+        "message": "Votre mot de passe doit comporter plus de 12 caractères et ne doit pas être l'ancien mot de passe."
+    },
+    "settings-000718": {
+        "message": "Veuillez confirmer votre nouveau mot de passe"
+    },
+    "settings-000719": {
+        "message": "Vous devez entrer votre ancien mot de passe"
+    },
+    "settings-000720": {
+        "message": "Votre mot de passe a été modifié avec succès."
+    },
+    "settings-000721": {
+        "message": "Activez l'option permettant aux autres utilisateurs de modifier un mot de passe partagé par défaut."
+    },
+    "settings-000722": {
+        "message": "Activez l'option permettant aux autres utilisateurs de partager un mot de passe partagé par défaut."
+    },
+    "settings-000723": {
+        "message": "Ouvrez la page des paramètres dans le manuel"
+    },
+    "settings-000724": {
+        "message": "Envoyer des requêtes keep-alive au serveur pour empêcher l'annulation de la session."
+    },
+    "settings-000725": {
+        "message": "Choisissez le type de cryptage utilisé pour chiffrer les données sur le client avant qu'elles ne soient envoyées au serveur."
+    },
+    "settings-000726": {
+        "message": "Le hachage SHA-1 est utilisé pour vérifier les mots de passe violés. Un hachage partiel permet d'éviter les attaques par force brute en cas de piratage du serveur, mais peut également entraîner la déclaration par erreur de mots de passe sûrs comme étant violés."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Action du clic de la molette de la souris",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Action à exécuter lorsque la molette de la souris est cliquée sur une entrée de mot de passe.",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Afficher le bouton de raccourci pour",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Ajoute un bouton supplémentaire pour l'action spécifiée dans la vue du bureau.",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Afficher l'onglet Partage",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Récupérer les éléments cachés",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Récupérer des éléments",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Cette action supprime l'indicateur \"caché\" des éléments, de sorte que ces éléments apparaissent à nouveau dans l'application.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Récupérer les éléments cachés",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Veuillez sélectionner le type d'objets cachés que vous souhaitez récupérer.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Mots de passe qui ne sont pas dans un dossier caché",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Récupérer les mots de passe cachés qui se trouvent dans un dossier qui n'est pas lui-même caché",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Tous les mots de passe cachés",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Récupérer tous les mots de passe cachés, quel que soit l'état du dossier.",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Tous les dossiers cachés",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Récupérer tous les dossiers cachés",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Tous les tags cachés",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Récupérer tous les tags cachés",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Récupéré le(s) mot(s) de passe $PASSWORDS$, le(s) dossier(s) $FOLDERS$ et le(s) tag(s) $TAGS$.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Articles récupérés",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Une erreur s'est produite.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Après le lancement, montrez mon"
+    },
+    "tutorial-000731": {
+        "message": "dossiers"
+    },
+    "tutorial-000732": {
+        "message": "tags"
+    },
+    "tutorial-000733": {
+        "message": "favoris"
+    },
+    "tutorial-000734": {
+        "message": "mots de passe"
+    },
+    "tutorial-000735": {
+        "message": "récemment changé"
+    },
+    "tutorial-000737": {
+        "message": "ils sont plus âgés que"
+    },
+    "tutorial-000738": {
+        "message": "trois mois"
+    },
+    "tutorial-000739": {
+        "message": "six mois"
+    },
+    "tutorial-000740": {
+        "message": "un an"
+    },
+    "tutorial-000741": {
+        "message": "deux ans"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ jours",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000747": {
+        "message": "très forte"
+    },
+    "tutorial-000748": {
+        "message": "extrêmement fort"
+    },
+    "tutorial-000749": {
+        "message": "Inclure des chiffres"
+    },
+    "tutorial-000750": {
+        "message": "Inclure des caractères spéciaux"
+    },
+    "tutorial-000751": {
+        "message": "Une maison sûre pour vos mots de passe"
+    },
+    "tutorial-000752": {
+        "message": "Gardez vos mots de passe secrets"
+    },
+    "tutorial-000753": {
+        "message": "Personnalisez votre expérience"
+    },
+    "tutorial-000754": {
+        "message": "Mettez de l'ordre dans vos mots de passe"
+    },
+    "tutorial-000755": {
+        "message": "Se connecter"
+    },
+    "tutorial-000756": {
+        "message": "Crypter mes mots de passe existants"
+    },
+    "tutorial-000757": {
+        "message": "Sauvegarder le mot de passe"
+    },
+    "tutorial-000758": {
+        "message": "Répétez votre mot de passe"
+    },
+    "tutorial-000759": {
+        "message": "Installation du cryptage"
+    },
+    "tutorial-000760": {
+        "message": "Porte-clés"
+    },
+    "tutorial-000761": {
+        "message": "Nettoyer"
+    },
+    "tutorial-000762": {
+        "message": "Succès"
+    },
+    "tutorial-000763": {
+        "message": "Trouvez de l'aide quand vous en avez besoin"
+    },
+    "tutorial-000764": {
+        "message": "Allez dans Apps et Extensions"
+    },
+    "tutorial-000765": {
+        "message": "Continuer"
+    },
+    "tutorial-000766": {
+        "message": "Skip"
+    },
+    "tutorial-000767": {
+        "message": "Vérifiez la sécurité des mots de passe avec"
+    },
+    "tutorial-000768": {
+        "message": "Générer des mots de passe en utilisant"
+    },
+    "tutorial-000769": {
+        "message": "Obtenir des favicons à partir de"
+    },
+    "tutorial-000770": {
+        "message": "Obtenez des aperçus du site Web de"
+    },
+    "tutorial-000771": {
+        "message": "Faites des sauvegardes"
+    },
+    "tutorial-000772": {
+        "message": "Voir tous les paramètres"
+    },
+    "tutorial-000773": {
+        "message": "Lisez nos conseils pour les administrateurs"
+    },
+    "tutorial-000774": {
+        "message": "Mot de passe (12 caractères minimum)"
+    },
+    "tutorial-000775": {
+        "message": "Cryptage en cours…"
+    },
+    "tutorial-000776": {
+        "message": "Il existe de nombreux paramètres qui vous permettent de personnaliser votre expérience."
+    },
+    "tutorial-000777": {
+        "message": "Vous pouvez les trouver tous dans \"Plus\", mais nous avons mis les plus courants ici :"
+    },
+    "tutorial-000778": {
+        "message": "Passwords offre un cryptage moderne et puissant pour protéger vos données des regards indiscrets."
+    },
+    "tutorial-000779": {
+        "message": "Choisissez un mot de passe sécurisé ci-dessous pour activer la protection ultime de vos mots de passe."
+    },
+    "tutorial-000780": {
+        "message": "Accédez à vos mots de passe en toute simplicité, où que vous soyez, grâce à nos applications et extensions."
+    },
+    "tutorial-000781": {
+        "message": "Vous pouvez trouver notre section Apps et Extensions dans \"Plus\" ou simplement cliquer sur le bouton ci-dessous."
+    },
+    "tutorial-000782": {
+        "message": "Les mots de passe peuvent être personnalisés de nombreuses manières différentes."
+    },
+    "tutorial-000783": {
+        "message": "En tant qu'administrateur, vous voudrez peut-être jeter un coup d'œil à ces paramètres courants."
+    },
+    "tutorial-000784": {
+        "message": "Chaque fois que vous ne savez pas comment quelque chose fonctionne, que vous avez des questions ou que vous avez besoin d'aide pour résoudre un problème :"
+    },
+    "tutorial-000785": {
+        "message": "L'aide est juste au coin de la rue."
+    },
+    "tutorial-000786": {
+        "message": "Notre manuel intégré peut être consulté en cliquant sur \"Plus\" et explique l'application dans tous ses détails."
+    },
+    "backend-000495": {
+        "message": "Pour éviter tout accès indésirable à vos données, vous devez définir un mot de passe principal."
+    },
+    "settings-000690": {
+        "message": "Cryptage avancé"
+    },
+    "tutorial-000736": {
+        "message": "Marquez mes mots de passe si…"
+    },
+    "tutorial-000787": {
+        "message": "Dans tous les autres cas, notre communauté est le bon endroit pour poser vos questions."
+    },
+    "tutorial-000789": {
+        "message": "Entrez un mot de passe de 12 caractères ou plus"
+    },
+    "tutorial-000790": {
+        "message": "Votre mot de passe doit comporter au moins 12 caractères et le mot de passe de confirmation doit être le même."
+    },
+    "frontend-000216": {
+        "message": "Générer une couleur aléatoire"
+    },
+    "frontend-000263": {
+        "message": "Cryptage avec libsodium"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ et $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Édition autorisée"
+    },
+    "frontend-000271": {
+        "message": "Modification non autorisée"
+    },
+    "frontend-000272": {
+        "message": "partage autorisé"
+    },
+    "frontend-000273": {
+        "message": "partage non autorisé"
+    },
+    "backups-CustomFields": {
+        "message": "Champs personnalisés"
+    },
+    "backups-FolderId": {
+        "message": "Id du dossier"
+    },
+    "backups-TagIds": {
+        "message": "Ids des étiquettes"
+    },
+    "backups-000116": {
+        "message": "Certains objets avaient des erreurs :"
+    },
+    "backups-000137": {
+        "message": "Le site \"$LABEL$\" contient des fichiers attachés qui ne peuvent pas être importés.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "Erreur de copie de $ELEMENT$ dans le presse-papiers",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000262": {
+        "message": "Cryptage avancé (SSE V2)"
+    },
+    "frontend-000319": {
+        "message": "Contenu"
+    },
+    "frontend-000322": {
+        "message": "Type de contenu non valide $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Aucun contenu disponible"
     }
 }
