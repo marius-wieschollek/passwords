@@ -1415,7 +1415,7 @@
         }
     },
     "backend-000387": {
-        "message": "Go to $STR_1$ to ge a free HTTPS certificate if you need one.",
+        "message": "Go to $STR_1$ to get a free HTTPS certificate if you need one.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
