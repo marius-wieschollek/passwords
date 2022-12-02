@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Added
+- Translations for Danish and Ukrainian
+### Changed
+- Updated translations for Dutch, Spanish, French, Swedish and Italian
+
 ## 2022.11.1 - Bugfix release
 ### Fixed
 - Nextcloud 25 styling issues
