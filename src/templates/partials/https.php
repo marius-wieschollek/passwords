@@ -36,7 +36,7 @@ if($isAdmin) {
     $messageDebugging   = $l->t('Review the HTTPS report below to debug the issue.');
     $messageConfigure   = $l->t('Read this %s to configure your server to use HTTPS.', ["<a href='{$linkDocumentation}' target='_blank'>{$l10nDocs}</a>"]);
     $messageProxy       = $l->t('Read this %s if you are using any kind of proxy.', ["<a href='{$linkReverseProxy}' target='_blank'>{$l10nDocs}</a>"]);
-    $messageCertificate = $l->t('Go to %s to ge a free HTTPS certificate if you need one.', ["<a href='{$linkCertificate}' target='_blank'>Let's Encrypt</a>"]);
+    $messageCertificate = $l->t('Go to %s to get a free HTTPS certificate if you need one.', ["<a href='{$linkCertificate}' target='_blank'>Let's Encrypt</a>"]);
 } else {
     $messageAdmin = $l->t('If this problem persists, you should contact your administrator.');
 }

@@ -382,7 +382,7 @@
     "backend-000384" : "Review the HTTPS report below to debug the issue.",
     "backend-000385" : "Read this %s to configure your server to use HTTPS.",
     "backend-000386" : "Read this %s if you are using any kind of proxy.",
-    "backend-000387" : "Go to %s to ge a free HTTPS certificate if you need one.",
+    "backend-000387" : "Go to %s to get a free HTTPS certificate if you need one.",
     "backend-000388" : "If this problem persists, you should contact your administrator.",
     "backend-000389" : "Passwords Session %s - %s",
     "backend-000390" : "Open documentation",
