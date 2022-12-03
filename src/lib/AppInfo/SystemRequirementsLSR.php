@@ -20,7 +20,7 @@ class SystemRequirements {
 
     const APP_LSR = true;
 
-    const NC_MINIMUM_ID      = 25;
+    const NC_MINIMUM_ID      = 23;
     const NC_NOTIFICATION_ID = 25;
     const NC_UPGRADE_MINIMUM = '25';
 
