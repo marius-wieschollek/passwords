@@ -89,7 +89,7 @@
         "message": "导出"
     },
     "backups-000059": {
-        "message": "请等候..."
+        "message": "等待着…"
     },
     "backups-000060": {
         "message": "导出出错"
@@ -752,7 +752,7 @@
         "message": "最近更改"
     },
     "tutorial-000736": {
-        "message": "如果...，高亮我的密码"
+        "message": "标记我的密码，如果…"
     },
     "tutorial-000737": {
         "message": "它们比...久"
@@ -979,7 +979,7 @@
         "message": "网站"
     },
     "frontend-000176": {
-        "message": "创建标签..."
+        "message": "添加标签…"
     },
     "frontend-000177": {
         "message": "颜色"
@@ -1075,7 +1075,7 @@
         "message": "删除分类"
     },
     "frontend-000207": {
-        "message": "你想删除这个分类吗"
+        "message": "你想删除该文件夹和它的内容吗？"
     },
     "frontend-000208": {
         "message": "分类已删除"
@@ -1114,7 +1114,7 @@
         "message": "删除标签"
     },
     "frontend-000220": {
-        "message": "你想删除这个标签吗"
+        "message": "你想删除这个标签吗？"
     },
     "frontend-000221": {
         "message": "标签已删除"
@@ -1156,7 +1156,7 @@
         "message": "删除密码"
     },
     "frontend-000234": {
-        "message": "你想删除这个密码吗"
+        "message": "你想删除密码吗？"
     },
     "frontend-000235": {
         "message": "密码已删除"
@@ -1764,7 +1764,7 @@
         }
     },
     "backend-000387": {
-        "message": "如需要，前往 $STR_1$ 以获得免费的 HTTPS 证书。",
+        "message": "如果你需要的话，请到$STR_1$ ，获得一个免费的HTTPS证书。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
