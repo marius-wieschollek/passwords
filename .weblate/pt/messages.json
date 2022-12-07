@@ -2710,16 +2710,16 @@
         "message": "Após o lançamento, mostrar o meu"
     },
     "tutorial-000731": {
-        "message": "pastas"
+        "message": "Pastas"
     },
     "tutorial-000732": {
         "message": "etiquetas"
     },
     "tutorial-000733": {
-        "message": "favoritos"
+        "message": "Favoritos"
     },
     "tutorial-000734": {
-        "message": "palavras-passe"
+        "message": "Senhas"
     },
     "tutorial-000735": {
         "message": "mudou recentemente"
@@ -2909,7 +2909,7 @@
         "message": "Senha alterada"
     },
     "settings-000700": {
-        "message": "Mudança de senha falhou"
+        "message": "Falha ao salvar senha"
     },
     "settings-000701": {
         "message": "Questões administrativas"
