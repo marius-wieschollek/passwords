@@ -2465,7 +2465,7 @@
         }
     },
     "backend-000387": {
-        "message": "Pokud ho potřebujete, jděte na $STR_1$ a získejte certifikát pro HTTPS zdarma.",
+        "message": "Pokud potřebujete bezplatný certifikát HTTPS, přejděte na stránku $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
