@@ -1612,5 +1612,1335 @@
     },
     "backups-TagLabels": {
         "message": "Теги"
+    },
+    "tutorial-000736": {
+        "message": "Отметьте мои пароли, если…"
+    },
+    "frontend-000329": {
+        "message": "Сессия истекла"
+    },
+    "frontend-000330": {
+        "message": "Срок действия токена сессии API истек"
+    },
+    "frontend-000345": {
+        "message": "Создано"
+    },
+    "frontend-000346": {
+        "message": "Вы вошли в систему как $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Вход в систему"
+    },
+    "frontend-000348": {
+        "message": "Повторный запрос маркера"
+    },
+    "frontend-000349": {
+        "message": "Слишком много попыток"
+    },
+    "frontend-000350": {
+        "message": "Пароль слишком короткий"
+    },
+    "frontend-000351": {
+        "message": "Неизвестная ошибка"
+    },
+    "frontend-000352": {
+        "message": "Запрос токена не прошел"
+    },
+    "frontend-000353": {
+        "message": "Обслуживание системы"
+    },
+    "frontend-000354": {
+        "message": "Недоступно"
+    },
+    "frontend-000355": {
+        "message": "Система"
+    },
+    "frontend-000356": {
+        "message": "Общественный доступ"
+    },
+    "frontend-000357": {
+        "message": "Автоматическая фоновая задача"
+    },
+    "frontend-000358": {
+        "message": "Командная строка сервера"
+    },
+    "frontend-000359": {
+        "message": "Пожалуйста, исправьте свои данные"
+    },
+    "frontend-000360": {
+        "message": "Показать значение"
+    },
+    "frontend-000361": {
+        "message": "Отмена"
+    },
+    "frontend-000362": {
+        "message": "Хорошо"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ поделился с вами этим паролем.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000379": {
+        "message": "форум"
+    },
+    "tutorial-000763": {
+        "message": "Найдите помощь, когда она вам нужна"
+    },
+    "backend-000501": {
+        "message": "Пока нет"
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "settings-000680": {
+        "message": "Всегда"
+    },
+    "backups-000034": {
+        "message": "или"
+    },
+    "backend-000387": {
+        "message": "Перейдите на сайт $STR_1$, чтобы получить бесплатный сертификат HTTPS, если он вам нужен.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-Folder": {
+        "message": "Папка"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "tutorial-000732": {
+        "message": "теги"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "tutorial-000737": {
+        "message": "они старше"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Скрыть этот пароль?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "tutorial-000776": {
+        "message": "Имеется множество настроек, позволяющих вам настроить свой опыт."
+    },
+    "apps-000002": {
+        "message": "по $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000017": {
+        "message": "Не удалось получить приложения: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-CustomFields": {
+        "message": "Дополнительные поля"
+    },
+    "backups-FolderId": {
+        "message": "Id папки"
+    },
+    "backups-TagIds": {
+        "message": "Id тегов"
+    },
+    "backups-000056": {
+        "message": "Не импортируйте пустые поля"
+    },
+    "backups-000065": {
+        "message": "Выберите формат импорта"
+    },
+    "backups-000130": {
+        "message": "Лицензии"
+    },
+    "frontend-000190": {
+        "message": "Текст"
+    },
+    "frontend-000243": {
+        "message": "Ошибка при копировании $ELEMENT$ в буфер обмена",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000372": {
+        "message": "Вы выйдете из системы через $TIME$ секунд.",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Возможно, вы запросили слишком много жетонов. Пожалуйста, повторите попытку позже."
+    },
+    "frontend-000374": {
+        "message": "Для этого пароля будет отключено End-to-End шифрование, если вы поделитесь им."
+    },
+    "frontend-000375": {
+        "message": "Токен сессии больше не действителен. Теперь приложение будет перезагружено."
+    },
+    "frontend-000376": {
+        "message": "Сегодня в 2018 году была опубликована первая версия паролей. Спасибо за использование приложения."
+    },
+    "backend-000428": {
+        "message": "Настройки резервного копирования"
+    },
+    "frontend-000593": {
+        "message": "Редактировать как новый"
+    },
+    "settings-000693": {
+        "message": "Изменить пароль"
+    },
+    "settings-000694": {
+        "message": "Подробный просмотр паролей"
+    },
+    "settings-000695": {
+        "message": "Предварительный просмотр веб-сайта выставки"
+    },
+    "settings-000696": {
+        "message": "Новый пароль"
+    },
+    "settings-000697": {
+        "message": "Повторите пароль"
+    },
+    "settings-000698": {
+        "message": "Старый пароль"
+    },
+    "settings-000699": {
+        "message": "Пароль изменен"
+    },
+    "settings-000700": {
+        "message": "Изменение пароля не удалось"
+    },
+    "settings-000701": {
+        "message": "Вопросы администрирования"
+    },
+    "settings-000702": {
+        "message": "Совместное использование паролей"
+    },
+    "settings-000703": {
+        "message": "Поделиться как редактируемый по умолчанию"
+    },
+    "settings-000704": {
+        "message": "Разрешить общий доступ по умолчанию"
+    },
+    "settings-000705": {
+        "message": "Код"
+    },
+    "settings-000706": {
+        "message": "Неверный код сброса"
+    },
+    "settings-000707": {
+        "message": "Добавление цифр к сгенерированным паролям"
+    },
+    "backend-000491": {
+        "message": "Административный доступ к вашей учетной записи"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ попытался войти в свой аккаунт на сайте $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ войти в свою учетную запись на сайте $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Поскольку вы используете мастер-пароль, это не означает, что доступ к вашим данным был предоставлен."
+    },
+    "backend-000495": {
+        "message": "Чтобы предотвратить нежелательный доступ к вашим данным, следует установить главный пароль."
+    },
+    "backend-000497": {
+        "message": "Помогите нам улучшить пароли"
+    },
+    "apps-000021": {
+        "message": "Нажмите кнопку, когда будете готовы начать подключение."
+    },
+    "backend-000498": {
+        "message": "Вы можете помочь нам улучшить приложение \"Пароли\", приняв участие в опросе нашего сервера."
+    },
+    "backend-000499": {
+        "message": "Это отправит нам некоторые анонимизированные данные о вашей установке и выбранных настройках."
+    },
+    "backend-000500": {
+        "message": "Вы можете изменить это в любое время в настройках приложения."
+    },
+    "backend-000502": {
+        "message": "Участвуйте"
+    },
+    "backend-000503": {
+        "message": "Участие в опросе серверов"
+    },
+    "backend-000504": {
+        "message": "Основной"
+    },
+    "backend-000505": {
+        "message": "Полный"
+    },
+    "backend-000506": {
+        "message": "Не установлено"
+    },
+    "backend-000507": {
+        "message": "Пожалуйста, рассмотрите возможность самостоятельного хостинга вашего favicon api"
+    },
+    "backend-000508": {
+        "message": "Ваш Nextcloud использует наши общие экземпляры Besticon для получения иконок веб-сайтов."
+    },
+    "backend-000509": {
+        "message": "Эти экземпляры предназначены для небольших установок Nextcloud с очень небольшим трафиком."
+    },
+    "backend-000510": {
+        "message": "Пожалуйста, перейдите по ссылке и следуйте нашему простому руководству, чтобы самостоятельно разместить Besticon."
+    },
+    "backups-000033": {
+        "message": "Ознакомьтесь с руководством по импорту $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000035": {
+        "message": "резервное копирование базы данных"
+    },
+    "backups-000036": {
+        "message": "пользовательский CSV"
+    },
+    "backups-000037": {
+        "message": "попробуйте стандартный импорт CSV"
+    },
+    "backups-000038": {
+        "message": "Нет импорта для вашего CSV?"
+    },
+    "backups-000045": {
+        "message": "Дополнительные поля"
+    },
+    "frontend-000165": {
+        "message": "Статус"
+    },
+    "apps-000001": {
+        "message": "официальный"
+    },
+    "apps-000003": {
+        "message": "исходный код"
+    },
+    "apps-000004": {
+        "message": "узнать больше"
+    },
+    "apps-000005": {
+        "message": "Связь с PassLink"
+    },
+    "apps-000006": {
+        "message": "Подключение нового устройства"
+    },
+    "apps-000007": {
+        "message": "Подключиться по ссылке"
+    },
+    "apps-000008": {
+        "message": "Выберите имя:"
+    },
+    "apps-000009": {
+        "message": "Коды не совпадают"
+    },
+    "apps-000010": {
+        "message": "Выглядит хорошо"
+    },
+    "apps-000011": {
+        "message": "Подключение успешно"
+    },
+    "apps-000012": {
+        "message": "С меня хватит"
+    },
+    "apps-000013": {
+        "message": "Не пытайтесь больше"
+    },
+    "apps-000014": {
+        "message": "Подключить что-то еще"
+    },
+    "apps-000015": {
+        "message": "Попробуйте еще раз"
+    },
+    "apps-000016": {
+        "message": "Надежное шифрование"
+    },
+    "apps-000018": {
+        "message": "Вы отменили соединение"
+    },
+    "apps-000019": {
+        "message": "Вы не подтвердили подключение вовремя"
+    },
+    "apps-000020": {
+        "message": "Просто отсканируйте QR-код с помощью приложения, чтобы подключить его."
+    },
+    "apps-000022": {
+        "message": "Проверьте, совпадают ли приведенные ниже коды с кодами, предоставленными устройством или приложением:"
+    },
+    "apps-000023": {
+        "message": "Свяжите этот клиент с вашей учетной записью Nextcloud без надоедливых паролей и урлов"
+    },
+    "apps-000024": {
+        "message": "Этот клиент официально поддерживает наше надежное сквозное шифрование"
+    },
+    "apps-000025": {
+        "message": "Этот клиент поддерживается авторами приложения \"Пароли\"."
+    },
+    "apps-000026": {
+        "message": "Нажмите кнопку, чтобы подключить приложение, установленное на этом устройстве, или отсканируйте QR-код с приложением, если оно установлено на другом устройстве."
+    },
+    "backend-000383": {
+        "message": "Это НЕ ошибка. Посетите наш сайт $STR_1$, если вам нужна помощь.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Просмотрите отчет HTTPS ниже, чтобы отладить проблему."
+    },
+    "backend-000385": {
+        "message": "Прочитайте этот $STR_1$, чтобы настроить свой сервер на использование HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Прочитайте этот $STR_1$, если вы используете любой вид прокси.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000123": {
+        "message": "Файл импорта пуст"
+    },
+    "backend-000512": {
+        "message": "Ваша конфигурация службы предварительного просмотра недействительна"
+    },
+    "backend-000513": {
+        "message": "Выбранный вами сервис favicon требует api-ключа или конечной точки, но ни один из них не указан."
+    },
+    "backend-000514": {
+        "message": "Выбранная вами служба предварительного просмотра требует api-ключа или конечной точки, но ни один из них не указан."
+    },
+    "backend-000515": {
+        "message": "Откройте настройки администратора, чтобы обновить конфигурацию или выбрать другую службу."
+    },
+    "backend-000516": {
+        "message": "Мы обнаружили несколько неудачных попыток разблокировать вашу базу паролей по адресу \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Это может указывать на то, что кто-то пытается взломать ваш аккаунт."
+    },
+    "backend-000518": {
+        "message": "Чтобы предотвратить дальнейшие попытки, учетные данные API этого клиента были отозваны."
+    },
+    "backend-000519": {
+        "message": "Также была отключена аутентификация API на основе пароля."
+    },
+    "backend-000520": {
+        "message": "Если вы хотите продолжать использовать этот клиент, вам необходимо создать для него новый токен."
+    },
+    "backend-000521": {
+        "message": "Если вы не знаете этого клиента, пожалуйста, измените пароль и просмотрите список своих устройств."
+    },
+    "backend-000522": {
+        "message": "Чтобы предотвратить дальнейшие попытки, аутентификация API на основе пароля была отключена."
+    },
+    "backend-000523": {
+        "message": "Чтобы снова включить его, войдите в веб-приложение или любой клиент, используя аутентификацию с помощью маркера."
+    },
+    "backend-000524": {
+        "message": "Если вы не знаете этого клиента, пожалуйста, измените свой мастер-пароль и пароль Nextcloud."
+    },
+    "backend-000525": {
+        "message": "Для повышения безопасности мы рекомендуем использовать вместо пароля маркеры для конкретного устройства."
+    },
+    "frontend-000594": {
+        "message": "Переместить"
+    },
+    "frontend-000595": {
+        "message": "Открыть $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Неизвестно (Not_checked)"
+    },
+    "frontend-000598": {
+        "message": "А чего вы ожидали?"
+    },
+    "frontend-000599": {
+        "message": "Нажмите, чтобы показать QR-код."
+    },
+    "frontend-000600": {
+        "message": "Не предупреждай меня больше"
+    },
+    "frontend-000601": {
+        "message": "Прочность"
+    },
+    "frontend-000602": {
+        "message": "Закрыть"
+    },
+    "frontend-000603": {
+        "message": "Удалить из избранного"
+    },
+    "frontend-000604": {
+        "message": "Отметить как любимое"
+    },
+    "frontend-000605": {
+        "message": "Скрытый пароль"
+    },
+    "frontend-000606": {
+        "message": "Нигде не показывайте этот пароль"
+    },
+    "frontend-000607": {
+        "message": "Данные"
+    },
+    "frontend-000608": {
+        "message": "Тип"
+    },
+    "frontend-000609": {
+        "message": "Новое поле"
+    },
+    "frontend-000610": {
+        "message": "Удалить поле"
+    },
+    "frontend-000611": {
+        "message": "Открытое руководство по разметке"
+    },
+    "frontend-000612": {
+        "message": "Отменить"
+    },
+    "frontend-000613": {
+        "message": "Redo"
+    },
+    "frontend-000614": {
+        "message": "Срок действия истекает $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Или в нашем чате!"
+    },
+    "frontend-000616": {
+        "message": "Слишком много неудачных попыток входа в систему"
+    },
+    "frontend-000617": {
+        "message": "Выберите папку"
+    },
+    "frontend-000618": {
+        "message": "Выберите \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ не может быть использована",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Главная"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" не содержит папок",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Пароли Шифрование приложений Пассфраза"
+    },
+    "frontend-000623": {
+        "message": "Неизвестно"
+    },
+    "frontend-000624": {
+        "message": "Помощь"
+    },
+    "frontend-000626": {
+        "message": "Вы хотите удалить поле \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000628": {
+        "message": "Шифрование, применяемое сервером перед хранением данных в базе данных"
+    },
+    "frontend-000629": {
+        "message": "Шифрование, применяемое клиентом перед отправкой данных на сервер"
+    },
+    "frontend-000630": {
+        "message": "Пароль недействителен. Сессия отозвана за слишком большое количество неудачных попыток входа."
+    },
+    "backend-000661": {
+        "message": "Автоматическое восстановление резервных копий можно отключить в настройках приложения."
+    },
+    "frontend-000631": {
+        "message": "Это копия парольной фразы, которую вы выбрали для шифрования. Изменение или удаление этой записи не влияет на шифрование. Кодовую фразу можно изменить только в настройках. Более подробную информацию можно найти в справочнике."
+    },
+    "backend-000633": {
+        "message": "(необязательно)"
+    },
+    "backend-000634": {
+        "message": "Ваш Nextcloud запрашивает значительно больше значков, чем в среднем."
+    },
+    "backend-000635": {
+        "message": "Открытый учебник"
+    },
+    "backend-000636": {
+        "message": "Обнаружено подозрительное количество неудачных попыток входа в систему."
+    },
+    "backend-000637": {
+        "message": "Дополнительная информация"
+    },
+    "backend-000638": {
+        "message": "Просмотр небезопасных паролей"
+    },
+    "backend-000639": {
+        "message": "Открытые настройки"
+    },
+    "backend-000640": {
+        "message": "Открытые пароли"
+    },
+    "backend-000641": {
+        "message": "Просмотр приложений"
+    },
+    "backend-000642": {
+        "message": "Просмотр приложений и устройств"
+    },
+    "backend-000643": {
+        "message": "Управление устройствами и приложениями"
+    },
+    "backend-000644": {
+        "message": "Просмотр общих паролей"
+    },
+    "backend-000645": {
+        "message": "Рекомендуется обновление приложения"
+    },
+    "backend-000646": {
+        "message": "К вашей учетной записи был подключен новый клиент или приложение"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" был предоставлен доступ к вашей учетной записи $STR_1$ Passwords через PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Управлять всеми подключенными устройствами и приложениями можно в настройках $STR_1$ в разделе \"Безопасность\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Последнее фоновое задание было выполнено с PHP $STRING_1$, но веб-сервер использует PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "Использование различных основных версий PHP может вызвать проблемы."
+    },
+    "backend-000651": {
+        "message": "Настройки безопасности пароля по умолчанию"
+    },
+    "backend-000652": {
+        "message": "Хеш проверки безопасности"
+    },
+    "backend-000653": {
+        "message": "Не храните хэши"
+    },
+    "backend-000654": {
+        "message": "Храните 50% хэша"
+    },
+    "backend-000655": {
+        "message": "Храните 75% хэша"
+    },
+    "backend-000656": {
+        "message": "Храните полный хэш"
+    },
+    "backend-000657": {
+        "message": "Автоматическое восстановление резервной копии"
+    },
+    "backend-000658": {
+        "message": "Похоже, что приложение \"Пароли\" столкнулось с проблемой базы данных."
+    },
+    "backend-000659": {
+        "message": "В связи с этим резервная копия приложения \"$STR_1$\" была восстановлена автоматически.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Если это была ошибка, то перед восстановлением базы данных создается ее резервная копия."
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Все скрытые папки",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "backend-000662": {
+        "message": "Автоматическое восстановление резервных копий при стирании базы данных"
+    },
+    "backend-000663": {
+        "message": "Пароли заканчиваются обновления для Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Пароли $STR_1$ - это последнее обновление для Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Обновитесь до Nextcloud $STR_1$ и PHP $STR_1$ (или PHP $STR_1$ для LSR) для будущих обновлений.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Выберите автоматически"
+    },
+    "frontend-000667": {
+        "message": "Теги CSV"
+    },
+    "settings-000678": {
+        "message": "Вход и сессия"
+    },
+    "settings-000679": {
+        "message": "Сохраняйте мой вход в систему"
+    },
+    "settings-000681": {
+        "message": "Когда я работаю"
+    },
+    "settings-000682": {
+        "message": "Когда я активен"
+    },
+    "settings-000683": {
+        "message": "Завершите сеанс после"
+    },
+    "settings-000684": {
+        "message": "Одна минута"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ минут",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Сквозное шифрование"
+    },
+    "settings-000687": {
+        "message": "Режим шифрования сервера"
+    },
+    "settings-000688": {
+        "message": "Нет, если используется CSE"
+    },
+    "settings-000689": {
+        "message": "Простое шифрование"
+    },
+    "settings-000690": {
+        "message": "Расширенное шифрование"
+    },
+    "settings-000691": {
+        "message": "Режим шифрования клиента"
+    },
+    "settings-000692": {
+        "message": "Включить"
+    },
+    "settings-000708": {
+        "message": "Добавление специальных символов в генерируемые пароли"
+    },
+    "settings-000709": {
+        "message": "Укажите, через какое время после запроса сеанс будет отменен"
+    },
+    "settings-000710": {
+        "message": "Выберите тип шифрования, используемый для шифрования данных на сервере"
+    },
+    "settings-000711": {
+        "message": "Запустите мастер установки, чтобы настроить шифрование паролей"
+    },
+    "settings-000712": {
+        "message": "Изменение пароля шифрования"
+    },
+    "settings-000713": {
+        "message": "Показать предварительный просмотр связанного веб-сайта в подробной информации. (Не на мобильных устройствах)"
+    },
+    "settings-000714": {
+        "message": "Уведомляет вас об ошибках конфигурации и других административных проблемах"
+    },
+    "settings-000715": {
+        "message": "Введите \"$CODE$\", чтобы сбросить свой аккаунт и удалить все.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Вы можете использовать это диалоговое окно для изменения мастер-пароля."
+    },
+    "settings-000717": {
+        "message": "Ваш пароль должен быть длиннее 12 символов и не должен быть старым паролем"
+    },
+    "settings-000718": {
+        "message": "Пожалуйста, подтвердите ваш новый пароль"
+    },
+    "settings-000719": {
+        "message": "Вы должны ввести свой старый пароль"
+    },
+    "settings-000720": {
+        "message": "Ваш пароль был успешно изменен."
+    },
+    "settings-000721": {
+        "message": "Включите опцию, позволяющую другим пользователям редактировать общий пароль по умолчанию"
+    },
+    "settings-000722": {
+        "message": "Включите опцию, позволяющую другим пользователям использовать общий пароль по умолчанию"
+    },
+    "settings-000723": {
+        "message": "Откройте страницу настроек в справочнике"
+    },
+    "settings-000724": {
+        "message": "Отправляйте запросы на сервер, чтобы предотвратить отмену сеанса."
+    },
+    "settings-000725": {
+        "message": "Выберите тип шифрования, используемый для шифрования данных на клиенте перед их отправкой на сервер"
+    },
+    "settings-000726": {
+        "message": "Хеш SHA-1 используется для проверки взломанных паролей. Неполный хэш может предотвратить атаки методом перебора в случае взлома сервера, но также может привести к ошибочному сообщению о взломе безопасных паролей."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Действие при нажатии на колесико мыши",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Действие, выполняемое при нажатии колесика мыши на вводе пароля",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Показать кнопку быстрого доступа для",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Добавляет дополнительную кнопку для указанного действия в представлении рабочего стола",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Показать вкладку \"Поделиться",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Восстановление скрытых предметов",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Восстановить предметы",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Это действие снимает флаг \"скрытый\" с элементов, чтобы эти элементы снова отображались в приложении.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Восстановление скрытых предметов",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Пожалуйста, выберите тип скрытых элементов, которые вы хотите восстановить.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Пароли, которые не находятся в скрытой папке",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Восстановление скрытых паролей, находящихся в папке, которая сама не является скрытой",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Все скрытые пароли",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Восстановление всех скрытых паролей независимо от состояния папки",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "frontend-000326": {
+        "message": "Спрашивайте на нашем форуме!"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Восстановление всех скрытых папок",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Все скрытые теги",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Восстановление всех скрытых тегов",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Восстановлен пароль(ы) $PASSWORDS$, папка(и) $FOLDERS$ и тег(и) $TAGS$.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Найденные предметы",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Произошла ошибка.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "После запуска покажите"
+    },
+    "tutorial-000731": {
+        "message": "папки"
+    },
+    "tutorial-000733": {
+        "message": "избранное"
+    },
+    "tutorial-000734": {
+        "message": "пароли"
+    },
+    "tutorial-000735": {
+        "message": "недавно изменился"
+    },
+    "tutorial-000738": {
+        "message": "три месяца"
+    },
+    "tutorial-000739": {
+        "message": "шесть месяцев"
+    },
+    "tutorial-000740": {
+        "message": "один год"
+    },
+    "tutorial-000741": {
+        "message": "два года"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ дней",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "они дубликаты"
+    },
+    "tutorial-000744": {
+        "message": "Сделайте мои новые пароли"
+    },
+    "tutorial-000745": {
+        "message": "сильный"
+    },
+    "tutorial-000746": {
+        "message": "сильнее"
+    },
+    "tutorial-000747": {
+        "message": "очень сильный"
+    },
+    "tutorial-000748": {
+        "message": "очень прочный"
+    },
+    "tutorial-000749": {
+        "message": "Требовать цифры"
+    },
+    "tutorial-000750": {
+        "message": "Требовать спецсимволы"
+    },
+    "tutorial-000752": {
+        "message": "Храните свои пароли в секрете"
+    },
+    "tutorial-000753": {
+        "message": "Настройте свой опыт"
+    },
+    "tutorial-000754": {
+        "message": "Наведите порядок в своих паролях"
+    },
+    "tutorial-000755": {
+        "message": "Подключиться"
+    },
+    "tutorial-000756": {
+        "message": "Шифровать мои существующие пароли"
+    },
+    "tutorial-000757": {
+        "message": "Сохранить пароль"
+    },
+    "tutorial-000758": {
+        "message": "Повторите свой пароль"
+    },
+    "tutorial-000759": {
+        "message": "Установка шифрования"
+    },
+    "tutorial-000760": {
+        "message": "Брелок"
+    },
+    "tutorial-000761": {
+        "message": "Уборка"
+    },
+    "tutorial-000762": {
+        "message": "Успех"
+    },
+    "tutorial-000764": {
+        "message": "Перейдите в раздел \"Приложения и расширения"
+    },
+    "tutorial-000765": {
+        "message": "Продолжить"
+    },
+    "tutorial-000766": {
+        "message": "Скип"
+    },
+    "tutorial-000767": {
+        "message": "Проверьте безопасность пароля с помощью"
+    },
+    "tutorial-000772": {
+        "message": "Просмотр всех настроек"
+    },
+    "tutorial-000775": {
+        "message": "Идет шифрование…"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Сохранение скрытого пароля в папке, которая сама не является скрытой, сделает пароль недоступным. Этот пароль больше нигде не будет отображаться. Вы хотите продолжить?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "backend-000429": {
+        "message": "Интервал резервного копирования"
+    },
+    "backend-000430": {
+        "message": "Каждый час"
+    },
+    "backend-000431": {
+        "message": "Каждые шесть часов"
+    },
+    "backend-000432": {
+        "message": "Каждый день"
+    },
+    "backend-000433": {
+        "message": "Каждые два дня"
+    },
+    "backend-000434": {
+        "message": "Каждую неделю"
+    },
+    "backend-000435": {
+        "message": "Каждые две недели"
+    },
+    "backend-000436": {
+        "message": "Количество резервных копий для хранения"
+    },
+    "frontend-000625": {
+        "message": "Выберите тип шифрования для этого пароля"
+    },
+    "frontend-000627": {
+        "message": "Убедитесь, что этот QR-код виден только людям, которым вы доверяете."
+    },
+    "tutorial-000751": {
+        "message": "Надежный дом для ваших паролей"
+    },
+    "tutorial-000768": {
+        "message": "Генерируйте пароли с помощью"
+    },
+    "tutorial-000769": {
+        "message": "Получите фавиконы из"
+    },
+    "tutorial-000770": {
+        "message": "Получайте предварительные просмотры веб-сайтов от"
+    },
+    "tutorial-000771": {
+        "message": "Создайте резервные копии"
+    },
+    "tutorial-000773": {
+        "message": "Читайте наши советы для администраторов"
+    },
+    "tutorial-000774": {
+        "message": "Пароль (мин. 12 символов)"
+    },
+    "tutorial-000777": {
+        "message": "Вы можете найти все из них в разделе \"Подробнее\", но мы поместили здесь наиболее распространенные:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords предлагает современное и надежное шифрование для защиты ваших данных от посторонних глаз."
+    },
+    "tutorial-000779": {
+        "message": "Выберите надежный пароль ниже, чтобы активировать максимальную защиту ваших паролей."
+    },
+    "tutorial-000780": {
+        "message": "Благодаря нашим приложениям и расширениям вы можете легко получить доступ к своим паролям из любого места."
+    },
+    "tutorial-000781": {
+        "message": "Вы можете найти наш раздел \"Приложения и расширения\" в разделе \"Еще\" или просто нажмите кнопку ниже."
+    },
+    "tutorial-000782": {
+        "message": "Пароли можно настраивать по-разному."
+    },
+    "tutorial-000783": {
+        "message": "Как администратор вы, возможно, захотите взглянуть на эти общие настройки."
+    },
+    "tutorial-000784": {
+        "message": "Когда вы не знаете, как что-то работает, у вас есть вопросы или вам нужна помощь в решении проблемы:"
+    },
+    "tutorial-000785": {
+        "message": "Помощь не за горами."
+    },
+    "tutorial-000786": {
+        "message": "Наше встроенное руководство можно найти, нажав на кнопку \"Подробнее\", оно подробно объясняет работу приложения."
+    },
+    "frontend-000327": {
+        "message": "Нашли ошибку?"
+    },
+    "tutorial-000787": {
+        "message": "В любом другом случае наше сообщество - подходящее место для того, чтобы задать свои вопросы."
+    },
+    "tutorial-000788": {
+        "message": "Справочник будет открыт после окончания учебного курса"
+    },
+    "tutorial-000789": {
+        "message": "Введите пароль, состоящий из 12 символов или более"
+    },
+    "tutorial-000790": {
+        "message": "Ваш пароль должен содержать не менее 12 символов, а пароль подтверждения должен быть таким же"
+    },
+    "backups-000084": {
+        "message": "Разрыв строки"
+    },
+    "backups-000099": {
+        "message": "(нет значения)"
+    },
+    "backups-000116": {
+        "message": "Некоторые объекты имели ошибки:"
+    },
+    "backups-000125": {
+        "message": "Логины"
+    },
+    "backups-000127": {
+        "message": "Кредитные карты"
+    },
+    "backups-000128": {
+        "message": "Личности"
+    },
+    "backups-000129": {
+        "message": "Финансы"
+    },
+    "backups-000131": {
+        "message": "Путешествие"
+    },
+    "backups-000132": {
+        "message": "Компьютеры"
+    },
+    "backups-000133": {
+        "message": "Разное"
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" имеет вложенные файлы, которые не могут быть импортированы.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "Тип \"$FIELD$\" в \"$LABEL$\" неизвестен и не может быть импортирован.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "Метка \"$FIELD$\" в \"$LABEL$\" превышает 48 символов и была вырезана.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "Значение \"$FIELD$\" в \"$LABEL$\" превышает 320 символов и было вырезано.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Более подробную информацию можно найти в журнале. (Нажмите F12)"
+    },
+    "frontend-000216": {
+        "message": "Генерировать случайный цвет"
+    },
+    "frontend-000257": {
+        "message": "Шифрование применяется на сервере"
+    },
+    "frontend-000258": {
+        "message": "Шифрование применяется на клиенте"
+    },
+    "frontend-000259": {
+        "message": "Нет шифрования"
+    },
+    "frontend-000260": {
+        "message": "Простое шифрование (Быт. 1)"
+    },
+    "frontend-000261": {
+        "message": "Простое шифрование (Быт. 2)"
+    },
+    "frontend-000262": {
+        "message": "Расширенное шифрование (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Шифрование с помощью libsodium"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ и $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Редактирование разрешено"
+    },
+    "frontend-000271": {
+        "message": "Редактирование запрещено"
+    },
+    "frontend-000272": {
+        "message": "совместное использование разрешено"
+    },
+    "frontend-000273": {
+        "message": "совместное использование запрещено"
+    },
+    "frontend-000319": {
+        "message": "Содержание"
+    },
+    "frontend-000322": {
+        "message": "Недопустимый тип содержимого $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Содержание недоступно"
+    },
+    "frontend-000325": {
+        "message": "Вам все еще нужна помощь?"
     }
 }
