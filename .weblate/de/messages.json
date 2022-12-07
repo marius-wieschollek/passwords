@@ -1527,7 +1527,7 @@
         }
     },
     "backend-000387": {
-        "message": "Verwende ein kostenloses $STR_1$ Zertifikat falls du keines hast.",
+        "message": "Gehe zu $STR_1$, um ein kostenloses HTTPS-Zertifikat zu erhalten, wenn du eins brauchst.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
