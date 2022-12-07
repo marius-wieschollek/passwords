@@ -80,7 +80,7 @@
         "message": "Exportera"
     },
     "backups-000059": {
-        "message": "Vänta..."
+        "message": "Väntar…"
     },
     "backups-000060": {
         "message": "Exporten misslyckades"
@@ -456,7 +456,7 @@
         "message": "Webbsida"
     },
     "frontend-000176": {
-        "message": "Lägg till taggar..."
+        "message": "Lägg till taggar…"
     },
     "frontend-000177": {
         "message": "Färg"
@@ -549,7 +549,7 @@
         "message": "Radera mapp"
     },
     "frontend-000207": {
-        "message": "Vill du radera mappen?"
+        "message": "Vill du radera mappen och dess innehåll?"
     },
     "frontend-000208": {
         "message": "Mapp raderad"
@@ -585,7 +585,7 @@
         "message": "Radera tagg"
     },
     "frontend-000220": {
-        "message": "Vill du radera taggen?"
+        "message": "Vill du ta bort taggen?"
     },
     "frontend-000221": {
         "message": "Tagg raderad"
@@ -1300,7 +1300,7 @@
         }
     },
     "backend-000387": {
-        "message": "Besök $STR_1$ för att skaffa ett gratis HTTPS-certifikat.",
+        "message": "Gå till $STR_1$ för att få ett gratis HTTPS-certifikat om du behöver ett.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
