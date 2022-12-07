@@ -1,1 +1,2946 @@
-{}
+{
+    "apps-000001": {
+        "message": "resmi"
+    },
+    "frontend-000359": {
+        "message": "Lütfen girdinizi düzeltin"
+    },
+    "backend-000396": {
+        "message": "Parola Güvenlik Kontrolleri"
+    },
+    "backend-000397": {
+        "message": "Kandırıldım mı? (tavsiye edilir)"
+    },
+    "backend-000400": {
+        "message": "Büyük yerel veri tabanı ve Hibp?"
+    },
+    "backend-000443": {
+        "message": "temiz"
+    },
+    "backend-000501": {
+        "message": "Henüz değil"
+    },
+    "frontend-000567": {
+        "message": "Görünüm"
+    },
+    "frontend-000615": {
+        "message": "Ya da Sohbetimizde!"
+    },
+    "settings-000718": {
+        "message": "Lütfen yeni şifrenizi onaylayın"
+    },
+    "tutorial-000777": {
+        "message": "Hepsini \"Daha Fazla\" bölümünde bulabilirsiniz, ancak biz en yaygın olanları buraya koyduk:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords, verilerinizi meraklı gözlerden korumak için modern ve güçlü şifreleme sunar."
+    },
+    "tutorial-000779": {
+        "message": "Parolalarınız için en üst düzey korumayı etkinleştirmek için aşağıdan güvenli bir parola seçin."
+    },
+    "tutorial-000780": {
+        "message": "Uygulamalarımız ve uzantılarımız sayesinde parolalarınıza her yerden kolayca erişin."
+    },
+    "tutorial-000781": {
+        "message": "Uygulamalar ve Uzantılar bölümümüzü \"Daha Fazla\" kısmında bulabilir veya aşağıdaki butona tıklayabilirsiniz."
+    },
+    "tutorial-000782": {
+        "message": "Parolalar pek çok farklı şekilde özelleştirilebilir."
+    },
+    "tutorial-000783": {
+        "message": "Yönetici olarak bu ortak ayarlara bir göz atmak isteyebilirsiniz."
+    },
+    "tutorial-000784": {
+        "message": "Bir şeyin nasıl çalıştığını bilmediğinizde, sorularınız olduğunda veya bir sorunla ilgili yardıma ihtiyaç duyduğunuzda:"
+    },
+    "tutorial-000785": {
+        "message": "Yardım hemen köşede."
+    },
+    "tutorial-000786": {
+        "message": "Yerleşik el kitabımız \"Daha Fazla\" seçeneğine tıklayarak bulunabilir ve uygulamayı tüm ayrıntılarıyla açıklar."
+    },
+    "tutorial-000787": {
+        "message": "Diğer her durumda, topluluğumuz sorularınızı sormak için doğru yerdir."
+    },
+    "tutorial-000788": {
+        "message": "El kitabı eğitimden sonra açılacaktır"
+    },
+    "tutorial-000789": {
+        "message": "12 veya daha fazla karakter içeren bir parola girin"
+    },
+    "tutorial-000790": {
+        "message": "Şifrenizin en az 12 karakter olması ve onay şifresinin de aynı olması gerekir"
+    },
+    "apps-000002": {
+        "message": "tarafından $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000003": {
+        "message": "kaynak kodu"
+    },
+    "apps-000004": {
+        "message": "daha fazla öğren"
+    },
+    "apps-000005": {
+        "message": "PassLink ile bağlanın"
+    },
+    "apps-000006": {
+        "message": "Yeni bir cihaz bağlama"
+    },
+    "apps-000007": {
+        "message": "Bağlantı üzerinden bağlanın"
+    },
+    "apps-000008": {
+        "message": "Bir isim seçin:"
+    },
+    "apps-000009": {
+        "message": "Kodlar eşleşmiyor"
+    },
+    "apps-000010": {
+        "message": "İyi görünüyor."
+    },
+    "apps-000011": {
+        "message": "Bağlantı başarılı"
+    },
+    "apps-000012": {
+        "message": "Benden bu kadar."
+    },
+    "apps-000013": {
+        "message": "Tekrar deneme"
+    },
+    "apps-000014": {
+        "message": "Başka bir şey bağlayın"
+    },
+    "apps-000015": {
+        "message": "Tekrar deneyin"
+    },
+    "apps-000016": {
+        "message": "Güçlü Şifreleme"
+    },
+    "apps-000017": {
+        "message": "Uygulamalar getirilemedi: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Bağlantıyı iptal ettiniz"
+    },
+    "apps-000019": {
+        "message": "Bağlantıyı zamanında onaylamadınız"
+    },
+    "apps-000020": {
+        "message": "Bağlanmak için QR kodunu uygulama ile taramanız yeterlidir."
+    },
+    "apps-000021": {
+        "message": "Bağlantıyı başlatmaya hazır olduğunuzda düğmeye tıklayın."
+    },
+    "apps-000022": {
+        "message": "Aşağıdaki kodların cihaz veya uygulama tarafından sağlananlarla eşleşip eşleşmediğini kontrol edin:"
+    },
+    "apps-000023": {
+        "message": "Bu istemciyi can sıkıcı şifreler ve URL'ler olmadan Nextcloud hesabınıza bağlayın"
+    },
+    "apps-000024": {
+        "message": "Bu müşteri güçlü uçtan uca şifrelememizi resmi olarak desteklemektedir"
+    },
+    "apps-000025": {
+        "message": "Bu istemci, Passwords uygulamasının yazarları tarafından korunmaktadır"
+    },
+    "apps-000026": {
+        "message": "Bu cihazda yüklü bir uygulamayı bağlamak için düğmeye tıklayın veya başka bir cihazda yüklüyse QR kodunu uygulama ile tarayın."
+    },
+    "backups-000028": {
+        "message": "Yedekleme veya dışa aktarma"
+    },
+    "backups-000029": {
+        "message": "Biçim Seçin"
+    },
+    "backups-000030": {
+        "message": "Lütfen seçiniz"
+    },
+    "backups-000031": {
+        "message": "Veritabanı Yedekleme"
+    },
+    "backups-000032": {
+        "message": "Önceden Tanımlanmış CSV"
+    },
+    "backups-000033": {
+        "message": "$LABEL$ ithalat kılavuzunu okuyun",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "veya"
+    },
+    "backups-000035": {
+        "message": "veritabanı yedekleme"
+    },
+    "backups-000036": {
+        "message": "özel CSV"
+    },
+    "backups-000037": {
+        "message": "genel CSV içe aktarımını deneyin"
+    },
+    "backups-000038": {
+        "message": "CSV'niz için içe aktarma yok mu?"
+    },
+    "backups-000039": {
+        "message": "Yedek şifre"
+    },
+    "backups-000040": {
+        "message": "(İsteğe bağlı) Yedeklemeyi şifreler"
+    },
+    "backups-000041": {
+        "message": "İçe aktarma yalnızca CSV'yi destekler"
+    },
+    "backups-000042": {
+        "message": "Parolaları Dışa Aktar"
+    },
+    "backups-000043": {
+        "message": "Klasörleri Dışa Aktar"
+    },
+    "backups-000044": {
+        "message": "Etiketleri Dışa Aktar"
+    },
+    "backups-000045": {
+        "message": "Özel Alanlar"
+    },
+    "backups-000046": {
+        "message": "Klasör"
+    },
+    "backups-000047": {
+        "message": "Etiketler"
+    },
+    "backups-000048": {
+        "message": "ParentLabel"
+    },
+    "backups-000049": {
+        "message": "Klasör Kimliği"
+    },
+    "backups-000050": {
+        "message": "Etiket Kimlikleri"
+    },
+    "backups-000051": {
+        "message": "EbeveynId"
+    },
+    "backups-CustomFields": {
+        "message": "Özel Alanlar"
+    },
+    "backups-FolderLabel": {
+        "message": "Klasör"
+    },
+    "backups-TagLabels": {
+        "message": "Etiketler"
+    },
+    "backups-FolderId": {
+        "message": "Klasör Kimliği"
+    },
+    "backups-TagIds": {
+        "message": "Etiket Kimlikleri"
+    },
+    "backups-000052": {
+        "message": "Boş"
+    },
+    "backups-000053": {
+        "message": "Başlık Satırı Ekleme"
+    },
+    "backups-000054": {
+        "message": "Benimle paylaşılan şifreleri dışa aktarın"
+    },
+    "backups-000055": {
+        "message": "Benimle paylaşılan parolaları düzenleme"
+    },
+    "backups-000056": {
+        "message": "Boş alanları içe aktarmayın"
+    },
+    "backups-000057": {
+        "message": "Dışa Aktarmayı Çalıştır"
+    },
+    "backups-000058": {
+        "message": "İhracat"
+    },
+    "backups-000059": {
+        "message": "Bekliyorum."
+    },
+    "backups-000060": {
+        "message": "Dışa aktarma hatası"
+    },
+    "backups-000061": {
+        "message": "İndir $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "İhraç edilecek bir şey yok"
+    },
+    "backups-000063": {
+        "message": "Dışa aktarılacak veri yok"
+    },
+    "backups-000064": {
+        "message": "Geri yükleme veya içe aktarma"
+    },
+    "backups-000065": {
+        "message": "İçe aktarma biçimini seçin"
+    },
+    "backups-000066": {
+        "message": "Parolalar CSV"
+    },
+    "backups-000067": {
+        "message": "Klasör CSV"
+    },
+    "backups-000068": {
+        "message": "Özel CSV"
+    },
+    "backups-000069": {
+        "message": "Diğer / Özel CSV"
+    },
+    "backups-000070": {
+        "message": "Dosya Seçiniz"
+    },
+    "backups-000071": {
+        "message": "Seçenekleri Seçin"
+    },
+    "backups-000072": {
+        "message": "Çatışma yönetimi"
+    },
+    "backups-000073": {
+        "message": "Aynı revizyon ise atla"
+    },
+    "backups-000074": {
+        "message": "Her zaman atla"
+    },
+    "backups-000075": {
+        "message": "Var olanın üzerine yaz"
+    },
+    "backups-000076": {
+        "message": "Mevcut ile birleştirme"
+    },
+    "backups-000077": {
+        "message": "Yeni giriş oluştur"
+    },
+    "backups-000078": {
+        "message": "Şifrelenmiş yedeklemeler için"
+    },
+    "backups-000079": {
+        "message": "CSV Seçenekleri"
+    },
+    "backups-000080": {
+        "message": "Veritabanı"
+    },
+    "backups-000081": {
+        "message": "Alıntı Karakter"
+    },
+    "backups-000082": {
+        "message": "Kaçış Karakteri"
+    },
+    "backups-000083": {
+        "message": "Alan Sınırlayıcı"
+    },
+    "backups-000084": {
+        "message": "Satır Sonu"
+    },
+    "backups-000085": {
+        "message": "Alıntı"
+    },
+    "backups-000086": {
+        "message": "Tek Alıntı"
+    },
+    "backups-000087": {
+        "message": "Ters eğik çizgi"
+    },
+    "backups-000088": {
+        "message": "Tespit etmek"
+    },
+    "backups-000089": {
+        "message": "Virgül"
+    },
+    "backups-000090": {
+        "message": "Noktalı virgül"
+    },
+    "backups-000091": {
+        "message": "Uzay"
+    },
+    "backups-000092": {
+        "message": "Tab"
+    },
+    "backups-000093": {
+        "message": "Tırnak işaretlerini algıla"
+    },
+    "backups-000094": {
+        "message": "İlk satırı atla"
+    },
+    "backups-000095": {
+        "message": "Eksik alanları enterpole edin"
+    },
+    "backups-000096": {
+        "message": "CSV Alan Eşlemesi"
+    },
+    "backups-000097": {
+        "message": "Önizleme Hattı"
+    },
+    "backups-000098": {
+        "message": "Hat $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(değer yok)"
+    },
+    "backups-000100": {
+        "message": "Görmezden gel"
+    },
+    "backups-000101": {
+        "message": "İçe Aktarmayı Çalıştır"
+    },
+    "backups-000102": {
+        "message": "İthalat"
+    },
+    "backups-000103": {
+        "message": "Giriş dosyasını ayrıştırma"
+    },
+    "backups-000104": {
+        "message": "Etiketleri analiz etme"
+    },
+    "backups-000105": {
+        "message": "Klasörleri analiz etme"
+    },
+    "backups-000106": {
+        "message": "Okuma etiketleri"
+    },
+    "backups-000107": {
+        "message": "Etiketleri içe aktarma"
+    },
+    "backups-000108": {
+        "message": "Okuma klasörleri"
+    },
+    "backups-000109": {
+        "message": "Klasörleri içe aktarma"
+    },
+    "backups-000110": {
+        "message": "Şifreleri okuma"
+    },
+    "backups-000111": {
+        "message": "Parolaları içe aktarma"
+    },
+    "backups-000112": {
+        "message": "İçe aktarma başarısız"
+    },
+    "backups-000113": {
+        "message": "İçe aktarma kısmen başarısız oldu"
+    },
+    "backups-000114": {
+        "message": "İçe aktarma başarılı"
+    },
+    "backups-000115": {
+        "message": "İçe aktarma hatası"
+    },
+    "backups-000116": {
+        "message": "Bazı nesnelerde hatalar vardı:"
+    },
+    "backups-000117": {
+        "message": "Geçersiz dosya türü \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Şifre gerekli"
+    },
+    "backups-000119": {
+        "message": "Şifre geçersiz"
+    },
+    "backups-000120": {
+        "message": "Parolaların şifresi çözülemedi"
+    },
+    "backups-000121": {
+        "message": "Klasörlerin şifresi çözülemedi"
+    },
+    "backups-000122": {
+        "message": "Etiketlerin şifresi çözülemedi"
+    },
+    "backups-000123": {
+        "message": "İçe aktarma dosyası boş"
+    },
+    "backups-000124": {
+        "message": "CSV dosyası eşlenemiyor"
+    },
+    "backups-000125": {
+        "message": "Girişler"
+    },
+    "backups-000126": {
+        "message": "Notlar"
+    },
+    "backups-000127": {
+        "message": "Kredi Kartları"
+    },
+    "backups-000128": {
+        "message": "Kimlikler"
+    },
+    "backups-000129": {
+        "message": "Finans"
+    },
+    "backups-000130": {
+        "message": "Lisanslar"
+    },
+    "backups-000131": {
+        "message": "Seyahat"
+    },
+    "backups-000132": {
+        "message": "Bilgisayarlar"
+    },
+    "backups-000133": {
+        "message": "Çeşitli"
+    },
+    "backups-000134": {
+        "message": "Alıntılanan alanda geçersiz sondan alıntı"
+    },
+    "backups-000135": {
+        "message": "Dosya ayrıştırılamadı: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ $LINE$ satırındaki karakter $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" ekinde içe aktarılamayan dosyalar var.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "\"$LABEL$\" içindeki \"$FIELD$\" türü bilinmiyor ve içe aktarılamıyor.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "\"$LABEL$\" içindeki \"$FIELD$\" etiketi 48 karakteri aştığı için kesilmiştir.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "\"$LABEL$\" içindeki \"$FIELD$\" değeri 320 karakteri aşıyor ve kesildi.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Günlükte daha fazla bilgi bulunabilir. (F12'ye basın)"
+    },
+    "backups-000142": {
+        "message": "Dosyanın türü \"$ACTUAL$\" ancak \"$EXPECTED$\" bekleniyor. Yanlış dosyayı veya ithalatçıyı seçmiş olabilirsiniz.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ 'nin hatalı dışa aktarma dosyaları oluşturduğu bilinmektedir. Dosya ayrıştırılamıyorsa yardım için kılavuza başvurun.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": "Klasör"
+    },
+    "backups-000145": {
+        "message": "Etiketler"
+    },
+    "frontend-000148": {
+        "message": "Parolalar"
+    },
+    "frontend-000149": {
+        "message": "Tümü"
+    },
+    "frontend-000150": {
+        "message": "Klasörler"
+    },
+    "frontend-000151": {
+        "message": "Yakın zamanda"
+    },
+    "frontend-000152": {
+        "message": "Favoriler"
+    },
+    "frontend-000153": {
+        "message": "Paylaşılan"
+    },
+    "frontend-000154": {
+        "message": "Güvenlik"
+    },
+    "frontend-000155": {
+        "message": "Çöp"
+    },
+    "frontend-000156": {
+        "message": "Detaylar"
+    },
+    "frontend-000157": {
+        "message": "Düzenle"
+    },
+    "frontend-000158": {
+        "message": "Yeniden Adlandır"
+    },
+    "frontend-000159": {
+        "message": "Silme"
+    },
+    "frontend-000160": {
+        "message": "Geri Yükleme"
+    },
+    "frontend-000161": {
+        "message": "Yeni Şifre"
+    },
+    "frontend-000162": {
+        "message": "Yeni Klasör"
+    },
+    "frontend-000163": {
+        "message": "Yeni Etiket"
+    },
+    "frontend-000164": {
+        "message": "Güvenli"
+    },
+    "frontend-000165": {
+        "message": "Durum"
+    },
+    "frontend-000166": {
+        "message": "Zayıf"
+    },
+    "frontend-000167": {
+        "message": "Zayıf (Kopya)"
+    },
+    "frontend-000168": {
+        "message": "Zayıf (Eski)"
+    },
+    "frontend-000169": {
+        "message": "İhlal Edildi"
+    },
+    "frontend-000170": {
+        "message": "Paylaş"
+    },
+    "frontend-000171": {
+        "message": "Revizyonlar"
+    },
+    "frontend-000172": {
+        "message": "QR Kodu"
+    },
+    "frontend-000173": {
+        "message": "Parola"
+    },
+    "frontend-000174": {
+        "message": "Kullanıcı"
+    },
+    "frontend-000175": {
+        "message": "Url"
+    },
+    "frontend-000176": {
+        "message": "Etiket Ekle…"
+    },
+    "frontend-000177": {
+        "message": "Renk"
+    },
+    "frontend-000178": {
+        "message": "İsim"
+    },
+    "frontend-000179": {
+        "message": "Etiket"
+    },
+    "frontend-000180": {
+        "message": "Genel"
+    },
+    "frontend-000181": {
+        "message": "Özellikler"
+    },
+    "frontend-000182": {
+        "message": "Sayılar"
+    },
+    "frontend-000183": {
+        "message": "Özel Karakterler"
+    },
+    "frontend-000184": {
+        "message": "Daha Fazla Seçenek"
+    },
+    "frontend-000185": {
+        "message": "Favori"
+    },
+    "frontend-000186": {
+        "message": "Şifreleme"
+    },
+    "frontend-000187": {
+        "message": "Sunucu üzerinde"
+    },
+    "frontend-000188": {
+        "message": "Özel Alanlar"
+    },
+    "frontend-000189": {
+        "message": "Gizli"
+    },
+    "frontend-000190": {
+        "message": "Metin"
+    },
+    "frontend-000191": {
+        "message": "Dosya"
+    },
+    "frontend-000192": {
+        "message": "Değer"
+    },
+    "frontend-000193": {
+        "message": "Görünürlüğü aç / kapat"
+    },
+    "frontend-000194": {
+        "message": "Parola oluştur"
+    },
+    "frontend-000195": {
+        "message": "Basit Sunucu Tarafı Şifreleme V1"
+    },
+    "frontend-000196": {
+        "message": "Bazı notlar alın"
+    },
+    "frontend-000197": {
+        "message": "Kaydet"
+    },
+    "frontend-000198": {
+        "message": "Klasör oluştur"
+    },
+    "frontend-000199": {
+        "message": "Klasör oluşturuldu"
+    },
+    "frontend-000200": {
+        "message": "Klasör oluşturma başarısız"
+    },
+    "frontend-000201": {
+        "message": "Klasörü yeniden adlandır"
+    },
+    "frontend-000202": {
+        "message": "Klasör yeniden adlandırıldı"
+    },
+    "frontend-000203": {
+        "message": "Klasör yeniden adlandırma başarısız oldu"
+    },
+    "frontend-000204": {
+        "message": "Klasör taşındı"
+    },
+    "frontend-000205": {
+        "message": "Klasör taşıma başarısız oldu"
+    },
+    "frontend-000206": {
+        "message": "Klasörü sil"
+    },
+    "frontend-000207": {
+        "message": "Klasörü ve içeriğini silmek istiyor musunuz?"
+    },
+    "frontend-000208": {
+        "message": "Klasör silindi"
+    },
+    "frontend-000209": {
+        "message": "Klasör silme başarısız oldu"
+    },
+    "frontend-000210": {
+        "message": "Klasör geri yüklendi"
+    },
+    "frontend-000211": {
+        "message": "Klasör geri yükleme başarısız oldu"
+    },
+    "frontend-000212": {
+        "message": "Etiket oluştur"
+    },
+    "frontend-000213": {
+        "message": "Etiket oluşturuldu"
+    },
+    "frontend-000214": {
+        "message": "Etiket oluşturma başarısız oldu"
+    },
+    "frontend-000215": {
+        "message": "Etiketi düzenle"
+    },
+    "frontend-000216": {
+        "message": "Rastgele renk oluştur"
+    },
+    "frontend-000217": {
+        "message": "Etiket kaydedildi"
+    },
+    "frontend-000218": {
+        "message": "Etiket kaydedilemedi"
+    },
+    "frontend-000219": {
+        "message": "Etiketi sil"
+    },
+    "frontend-000220": {
+        "message": "Etiketi silmek istiyor musunuz?"
+    },
+    "frontend-000221": {
+        "message": "Etiket silindi"
+    },
+    "frontend-000222": {
+        "message": "Etiket silme başarısız oldu"
+    },
+    "frontend-000223": {
+        "message": "Etiket restore edildi"
+    },
+    "frontend-000224": {
+        "message": "Etiket geri yükleme başarısız oldu"
+    },
+    "frontend-000225": {
+        "message": "Parola oluştur"
+    },
+    "frontend-000226": {
+        "message": "Şifre oluşturuldu"
+    },
+    "frontend-000227": {
+        "message": "Parola oluşturma başarısız oldu"
+    },
+    "frontend-000228": {
+        "message": "Parolayı düzenle"
+    },
+    "frontend-000229": {
+        "message": "Şifre kaydedildi"
+    },
+    "frontend-000230": {
+        "message": "Parola kaydedilemedi"
+    },
+    "frontend-000231": {
+        "message": "Şifre taşındı"
+    },
+    "frontend-000232": {
+        "message": "Şifre taşıma başarısız oldu"
+    },
+    "frontend-000233": {
+        "message": "Parolayı sil"
+    },
+    "frontend-000234": {
+        "message": "Şifreyi silmek istiyor musunuz?"
+    },
+    "frontend-000235": {
+        "message": "Şifre silindi"
+    },
+    "frontend-000236": {
+        "message": "Parola geri yüklendi"
+    },
+    "frontend-000237": {
+        "message": "Parola geri yükleme başarısız oldu"
+    },
+    "frontend-000238": {
+        "message": "Açık URL"
+    },
+    "frontend-000239": {
+        "message": "URL'yi Kopyala"
+    },
+    "frontend-000240": {
+        "message": "Kullanıcı Kopyala"
+    },
+    "frontend-000241": {
+        "message": "Şifreyi Kopyala"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ panoya kopyalandı",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "$ELEMENT$ adresini panoya kopyalarken hata oluştu",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Son değişiklik tarihi $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Revizyonu geri yükle"
+    },
+    "frontend-000246": {
+        "message": "Revizyon geri yüklendi"
+    },
+    "frontend-000247": {
+        "message": "Revizyon geri yükleme başarısız oldu"
+    },
+    "frontend-000248": {
+        "message": "Revizyonu geri yüklemek istiyor musunuz?"
+    },
+    "frontend-000249": {
+        "message": "Sizinle paylaşıldı"
+    },
+    "frontend-000250": {
+        "message": "Sizin tarafınızdan paylaşıldı"
+    },
+    "frontend-000251": {
+        "message": "İstatistikler"
+    },
+    "frontend-000252": {
+        "message": "Üzerinde oluşturuldu"
+    },
+    "frontend-000253": {
+        "message": "Son güncelleme"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ revi̇zyonlar",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Hisseler"
+    },
+    "frontend-000256": {
+        "message": "$COUNT$ kez paylaşıldı",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": "Sunucuda uygulanan şifreleme"
+    },
+    "frontend-000258": {
+        "message": "İstemcide uygulanan şifreleme"
+    },
+    "frontend-000259": {
+        "message": "Şifreleme yok"
+    },
+    "frontend-000260": {
+        "message": "Basit şifreleme (Gen. 1)"
+    },
+    "frontend-000261": {
+        "message": "Basit şifreleme (Gen. 2)"
+    },
+    "frontend-000262": {
+        "message": "Gelişmiş şifreleme (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "libsodium ile şifreleme"
+    },
+    "frontend-000264": {
+        "message": "Daha fazla"
+    },
+    "frontend-000265": {
+        "message": "Yedekleme ve Geri Yükleme"
+    },
+    "frontend-000266": {
+        "message": "Ayarlar"
+    },
+    "frontend-000267": {
+        "message": "El Kitabı"
+    },
+    "frontend-000268": {
+        "message": "Uygulamalar ve Uzantılar"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ ve $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Düzenlemeye izin verildi"
+    },
+    "frontend-000271": {
+        "message": "Düzenlemeye izin verilmedi"
+    },
+    "frontend-000272": {
+        "message": "paylaşıma izin verildi"
+    },
+    "frontend-000273": {
+        "message": "paylaşıma izin verilmedi"
+    },
+    "frontend-000274": {
+        "message": "Kullanıcı ara"
+    },
+    "frontend-000275": {
+        "message": "Son kullanma tarihini ayarlayın"
+    },
+    "frontend-000276": {
+        "message": "Sona erdi $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Bir son kullanma tarihi seçin veya sonsuza kadar paylaşmak için boş bırakın"
+    },
+    "frontend-000278": {
+        "message": "Lütfen gelecekte bir tarih seçin"
+    },
+    "frontend-000279": {
+        "message": "Geçersiz tarih"
+    },
+    "frontend-000280": {
+        "message": "$UID$ kullanıcısı mevcut değil",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Şifre paylaşılamıyor: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Yazma izinlerini değiştir"
+    },
+    "frontend-000283": {
+        "message": "Paylaşım izinlerini değiştir"
+    },
+    "frontend-000284": {
+        "message": "Paylaşmayı bırakın"
+    },
+    "frontend-000285": {
+        "message": "Tarih"
+    },
+    "frontend-000286": {
+        "message": "Varsayılan Önbellek (0 dosya, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Avatars Cache (0 dosya, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Favicon Cache (0 dosya, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Önizleme Önbelleği (0 dosya, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Parolalar Önbelleği (0 dosya, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "Değişti"
+    },
+    "frontend-000292": {
+        "message": "Değiştirilmiş"
+    },
+    "frontend-000293": {
+        "message": "Düzenlendi"
+    },
+    "frontend-000294": {
+        "message": "Oluşturuldu"
+    },
+    "frontend-000295": {
+        "message": "Revizyon"
+    },
+    "frontend-000296": {
+        "message": "Url"
+    },
+    "frontend-000297": {
+        "message": "Ebeveyn"
+    },
+    "frontend-000298": {
+        "message": "Tüm Öğeleri Sil"
+    },
+    "frontend-000299": {
+        "message": "Tüm Öğeleri Geri Yükle"
+    },
+    "frontend-000300": {
+        "message": "Öğeleri Geri Yükle"
+    },
+    "frontend-000301": {
+        "message": "Çöp kutusundaki tüm öğeleri geri yükle?"
+    },
+    "frontend-000302": {
+        "message": "Bu öğeyi geri yükle"
+    },
+    "frontend-000303": {
+        "message": "Geri yüklenen öğeler"
+    },
+    "frontend-000304": {
+        "message": "Boş Çöp Kutusu"
+    },
+    "frontend-000305": {
+        "message": "Çöp kutusundaki tüm öğeleri sil?"
+    },
+    "frontend-000306": {
+        "message": "Çöp boşaltıldı"
+    },
+    "frontend-000307": {
+        "message": "Arama"
+    },
+    "frontend-000308": {
+        "message": "Arama yapmak için arama kutusunu kullanın"
+    },
+    "frontend-000309": {
+        "message": "Her yerde \"$QUERY$\" için arama yapın",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000310": {
+        "message": "Burada hiçbir şey yok."
+    },
+    "frontend-000311": {
+        "message": "Bir şey eklemek için \"+\" üzerine tıklayın"
+    },
+    "frontend-000312": {
+        "message": "Silinen öğeler burada görünecektir"
+    },
+    "frontend-000313": {
+        "message": "Sizinle hiçbir parola paylaşılmadı"
+    },
+    "frontend-000314": {
+        "message": "Herhangi bir şifre paylaşmadınız"
+    },
+    "frontend-000315": {
+        "message": "Favorileriniz burada görünecek"
+    },
+    "frontend-000316": {
+        "message": "Diğer bölümleri kontrol etseniz iyi olur"
+    },
+    "frontend-000317": {
+        "message": "Bu muhtemelen iyiye işaret."
+    },
+    "frontend-000318": {
+        "message": "Gitmek $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": "İçindekiler"
+    },
+    "frontend-000320": {
+        "message": "Şekil $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Sayfa getirilemiyor: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "Geçersiz içerik türü $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "İçerik mevcut değil"
+    },
+    "frontend-000324": {
+        "message": "Bulunamadı"
+    },
+    "frontend-000325": {
+        "message": "Hala yardıma ihtiyacınız var mı?"
+    },
+    "frontend-000326": {
+        "message": "Forumumuzda sorun!"
+    },
+    "frontend-000327": {
+        "message": "Bir hata mı buldunuz?"
+    },
+    "frontend-000328": {
+        "message": "Anlat bize!"
+    },
+    "frontend-000329": {
+        "message": "Oturumun süresi doldu"
+    },
+    "frontend-000330": {
+        "message": "API Oturum Belirtecinin süresi doldu"
+    },
+    "frontend-000331": {
+        "message": "Ağ hatası"
+    },
+    "frontend-000332": {
+        "message": "Yüklenemiyor $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "İsme göre sırala"
+    },
+    "frontend-000334": {
+        "message": "Değiştirilme tarihine göre sırala"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ Şifreler",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 şifre"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ klasörler",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 klasör"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ Etiketler",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 etiket"
+    },
+    "frontend-000341": {
+        "message": "Hiçbir şey"
+    },
+    "frontend-000342": {
+        "message": " ve "
+    },
+    "frontend-000343": {
+        "message": "maç"
+    },
+    "frontend-000344": {
+        "message": "eşleşmeler"
+    },
+    "frontend-000345": {
+        "message": "Tarafından oluşturuldu"
+    },
+    "frontend-000346": {
+        "message": "Şu şekilde giriş yapıyorsunuz $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Giriş"
+    },
+    "frontend-000348": {
+        "message": "Tekrar belirteç iste"
+    },
+    "frontend-000349": {
+        "message": "Çok fazla deneme"
+    },
+    "frontend-000350": {
+        "message": "Şifre çok kısa"
+    },
+    "frontend-000351": {
+        "message": "Bilinmeyen Hata"
+    },
+    "frontend-000352": {
+        "message": "Belirteç isteği başarısız oldu"
+    },
+    "frontend-000353": {
+        "message": "Sistem Bakımı"
+    },
+    "frontend-000354": {
+        "message": "Mevcut değil"
+    },
+    "frontend-000355": {
+        "message": "Sistem"
+    },
+    "frontend-000356": {
+        "message": "Kamu Erişimi"
+    },
+    "frontend-000357": {
+        "message": "Otomatik Arka Plan Görevi"
+    },
+    "frontend-000358": {
+        "message": "Sunucu Komut Satırı"
+    },
+    "frontend-000360": {
+        "message": "Değer göster"
+    },
+    "frontend-000361": {
+        "message": "İptal"
+    },
+    "frontend-000362": {
+        "message": "Tamam."
+    },
+    "frontend-000363": {
+        "message": "gerçek"
+    },
+    "frontend-000364": {
+        "message": "Yanlış"
+    },
+    "frontend-000365": {
+        "message": "Evet."
+    },
+    "frontend-000366": {
+        "message": "Hayır"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ bu şifreyi sizinle paylaştı.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": "Maksimum uzunluk olan 4096 karaktere ulaştınız"
+    },
+    "frontend-000369": {
+        "message": "\"$QUERY$\" için bir şey bulamadık.",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "\"$PAGE$\" sayfası el kitabı sunucusundan getirilemedi.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Bazı veriler senkronize edilmeyi bekliyor"
+    },
+    "frontend-000372": {
+        "message": "Oturumunuz $TIME$ saniye içinde kapatılacaktır.",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Çok fazla jeton talep etmiş olabilirsiniz. Lütfen daha sonra tekrar deneyin."
+    },
+    "frontend-000374": {
+        "message": "Paylaşırsanız bu parola için Uçtan Uca şifreleme devre dışı bırakılacaktır."
+    },
+    "frontend-000375": {
+        "message": "Oturum belirteci artık geçerli değil. Uygulama şimdi yeniden yüklenecektir."
+    },
+    "frontend-000376": {
+        "message": "Bugün 2018'de şifrelerin ilk sürümü yayınlandı. Uygulamayı kullandığınız için teşekkür ederiz."
+    },
+    "frontend-Tags": {
+        "message": "Etiketler"
+    },
+    "frontend-Folder": {
+        "message": "Klasör"
+    },
+    "frontend-Id": {
+        "message": "Kimlik"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Gizli bir parolayı kendisi gizli olmayan bir klasöre kaydetmek parolayı erişilemez hale getirecektir. Bu parola artık hiçbir yerde gösterilmeyecektir. Devam etmek istiyor musunuz?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Bu şifreyi saklayayım mı?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000377": {
+        "message": "HTTPS Gerekli"
+    },
+    "backend-000378": {
+        "message": "bu sayfayı yeniden yükle"
+    },
+    "backend-000379": {
+        "message": "forum"
+    },
+    "backend-000380": {
+        "message": "dokümantasyon"
+    },
+    "backend-000381": {
+        "message": "Sayfayı HTTPS ile $STR_1$ adresinde deneyebilirsiniz.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "Bu uygulama, güvenli bir şekilde çalışmak için $STR_1$ adresini gerektirir.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "Bu bir hata DEĞİLDİR. Yardıma ihtiyacınız varsa $STR_1$ adresimizi ziyaret edin.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Sorunu ayıklamak için aşağıdaki HTTPS raporunu inceleyin."
+    },
+    "backend-000385": {
+        "message": "Sunucunuzu HTTPS kullanacak şekilde yapılandırmak için bu $STR_1$ adresini okuyun.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Herhangi bir proxy kullanıyorsanız bu $STR_1$ adresini okuyun.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Bu sorun devam ederse, yöneticinize başvurmalısınız."
+    },
+    "backend-000389": {
+        "message": "Parolalar Oturum $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Açık dokümantasyon"
+    },
+    "backend-000391": {
+        "message": "asla"
+    },
+    "backend-000392": {
+        "message": "Dahili Veri İşleme"
+    },
+    "backend-000393": {
+        "message": "Görüntü Oluşturma"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (önerilir)"
+    },
+    "backend-000395": {
+        "message": "Dış Hizmetler"
+    },
+    "backend-000398": {
+        "message": "Büyük yerel veritabanı (25 milyon parola)"
+    },
+    "backend-000399": {
+        "message": "Küçük yerel veritabanı (5 milyon parola)"
+    },
+    "backend-000401": {
+        "message": "Şifre Oluşturma Hizmeti"
+    },
+    "backend-000402": {
+        "message": "Yerel sözlük"
+    },
+    "backend-000403": {
+        "message": "Rastgele Karakterler"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Koleksiyonu (tavsiye edilir)"
+    },
+    "backend-000406": {
+        "message": "Favicon Hizmeti"
+    },
+    "backend-000407": {
+        "message": "Yerel analizör"
+    },
+    "backend-000408": {
+        "message": "Besticon (önerilir)"
+    },
+    "backend-000409": {
+        "message": "Hiçbiri"
+    },
+    "backend-000410": {
+        "message": "Web Sitesi Önizleme Hizmeti"
+    },
+    "backend-000411": {
+        "message": "Web Sitesi Önizleme API Anahtarı"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (Yerel)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (Yerel)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "Varsayılan E-posta Ayarları"
+    },
+    "backend-000416": {
+        "message": "Güvenlik olayları için e-posta gönderme"
+    },
+    "backend-000417": {
+        "message": "Etkinlik paylaşımı için e-posta gönderin"
+    },
+    "backend-000418": {
+        "message": "Diğer Ayarlar"
+    },
+    "backend-000419": {
+        "message": "Silinen nesneleri veritabanından kaldırma"
+    },
+    "backend-000420": {
+        "message": "\"Uygulamalar \"da Gecelik Güncellemeleri Göster"
+    },
+    "backend-000421": {
+        "message": "Asla"
+    },
+    "backend-000422": {
+        "message": "Derhal"
+    },
+    "backend-000423": {
+        "message": "İki saat sonra"
+    },
+    "backend-000424": {
+        "message": "Bir gün sonra"
+    },
+    "backend-000425": {
+        "message": "İki hafta sonra"
+    },
+    "backend-000426": {
+        "message": "Bir ay sonra"
+    },
+    "backend-000427": {
+        "message": "Bir yıl sonra"
+    },
+    "backend-000428": {
+        "message": "Yedekleme Ayarları"
+    },
+    "backend-000429": {
+        "message": "Yedekleme Aralığı"
+    },
+    "backend-000430": {
+        "message": "Her saat başı"
+    },
+    "backend-000431": {
+        "message": "Her altı saatte bir"
+    },
+    "backend-000432": {
+        "message": "Her gün"
+    },
+    "backend-000433": {
+        "message": "Her iki günde bir"
+    },
+    "backend-000434": {
+        "message": "Her hafta"
+    },
+    "backend-000435": {
+        "message": "Her iki haftada bir"
+    },
+    "backend-000436": {
+        "message": "Tutulacak yedekleme miktarı"
+    },
+    "backend-000437": {
+        "message": "Önbellekler"
+    },
+    "backend-000438": {
+        "message": "Varsayılan Önbellek ($STR_1$ dosyaları, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatarlar Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ dosyaları, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Önizleme Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Parolalar Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000444": {
+        "message": "Bu önbelleği temizleyin"
+    },
+    "backend-000445": {
+        "message": "Paylaşılan bir hizmet kullanarak önbelleği temizleyemezsiniz"
+    },
+    "backend-000446": {
+        "message": "Kurtarıldı"
+    },
+    "backend-000447": {
+        "message": "Temizlendi"
+    },
+    "backend-000448": {
+        "message": "Başarısız"
+    },
+    "backend-000449": {
+        "message": "Yardıma ihtiyacım var."
+    },
+    "backend-000450": {
+        "message": "bir hata bulundu"
+    },
+    "backend-000451": {
+        "message": "belgeleri arıyorum"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ veya $STR_1$? Biz sizi koruruz!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ artık desteklenmemektedir.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "Parolalar HTTPS gerektirir."
+    },
+    "backend-000455": {
+        "message": "Arka plan işlerini yürütmek için $STR_1$ adresini kullanmak gecikmelere neden olabilir. Cron kullanmanızı öneririz.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Lütfen sistem gereksinimlerini kontrol edin."
+    },
+    "backend-000457": {
+        "message": "Şifre paylaşılmadı"
+    },
+    "backend-000459": {
+        "message": "Güvenli olmayan bir şifreniz var"
+    },
+    "backend-000460": {
+        "message": "Güvenli olmayan şifreleriniz var"
+    },
+    "backend-000461": {
+        "message": "Parolalarınızdan biri artık güvenli değil."
+    },
+    "backend-000462": {
+        "message": "Bazı şifreleriniz artık güvenli değil."
+    },
+    "backend-000463": {
+        "message": "Parolalar, parolalarınızın bir veri ihlali nedeniyle ele geçirilip geçirilmediğini düzenli olarak kontrol eder."
+    },
+    "backend-000464": {
+        "message": "Bu güvenlik kontrolü, parolalarınızdan birinin güvensiz olduğunu tespit etti."
+    },
+    "backend-000465": {
+        "message": "Bu güvenlik kontrolü $STR_1$ şifrelerinizin güvensiz olduğunu tespit etmiştir.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Bu, şifrenin internette olduğu ve hesabınızı riske attığı anlamına gelir."
+    },
+    "backend-000467": {
+        "message": "Bu da şifrelerin internette dolaştığı ve hesaplarınızın risk altında olduğu anlamına gelir."
+    },
+    "backend-000468": {
+        "message": "Bu nedenle şifre güvensiz olarak işaretlenmiştir ve hemen değiştirilmelidir."
+    },
+    "backend-000469": {
+        "message": "Bu nedenle şifreler güvensiz olarak işaretlenmiştir ve hemen değiştirilmelidir."
+    },
+    "backend-000470": {
+        "message": "Parolalar uygulamasında yeni bir güvenli parola oluşturabilirsiniz."
+    },
+    "backend-000471": {
+        "message": "Parolalar uygulamasında yeni güvenli parolalar oluşturabilirsiniz."
+    },
+    "backend-000472": {
+        "message": "Şifreyi şimdi değiştir"
+    },
+    "backend-000473": {
+        "message": "Parolaları şimdi değiştirin"
+    },
+    "backend-000474": {
+        "message": "Değiştirmek için parolalar uygulamasını açın."
+    },
+    "backend-000475": {
+        "message": "Değiştirmek için parolalar uygulamasını açın."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ seninle bir şifre paylaştı.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ $STR_1$ şifrelerini sizinle paylaştı.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ ve $STRING_3$ sizinle $STRING_1$ şifrelerini paylaştı.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ ve $STRING_3$ $STRING_1$ şifrelerini sizinle paylaştı.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ ve $STRING_2$ diğerleri $STRING_1$ şifrelerini sizinle paylaştı.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Görmek için şifreler uygulamasını açın."
+    },
+    "backend-000482": {
+        "message": "Parolaları görmek için parolalar uygulamasını açın."
+    },
+    "backend-000483": {
+        "message": "Sizinle bir şifre paylaşıldı $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Sizinle birkaç şifre paylaşıldı $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Benimle paylaşılan parolaları görüntüle"
+    },
+    "backend-000486": {
+        "message": "Şifrelerinizden biri paylaşılamadı çünkü alıcının zaten buna erişimi var."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ şifrelerinizin paylaşılamayacağını çünkü alıcının zaten bunlara erişimi olduğunu unutmayın.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Sizinle paylaşılan bir parolayı paylaşmak bazen bir döngü yaratabilir."
+    },
+    "backend-000490": {
+        "message": "Bunu önlemek için bu şifreler paylaşılmayacaktır."
+    },
+    "backend-000491": {
+        "message": "Hesabınıza idari erişim"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ $STR_1$ adresinden hesabınıza giriş yapmaya çalıştım.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ $STR_1$ adresinden hesabınıza giriş yaptınız.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Bir ana parola kullandığınız için bu, verilerinize erişim izni verildiği anlamına gelmez."
+    },
+    "backend-000495": {
+        "message": "Verilerinize istenmeyen erişimi önlemek için bir ana şifre belirlemelisiniz."
+    },
+    "backend-000496": {
+        "message": "Silinen Kullanıcı ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "Şifreleri geliştirmemize yardımcı olun"
+    },
+    "backend-000498": {
+        "message": "Sunucu anketimize katılarak Parolalar uygulamasını geliştirmemize yardımcı olabilirsiniz."
+    },
+    "backend-000499": {
+        "message": "Bu bize kurulumunuz ve seçtiğiniz ayarlar hakkında bazı anonimleştirilmiş veriler gönderecektir."
+    },
+    "backend-000500": {
+        "message": "Bunu istediğiniz zaman uygulama ayarlarından değiştirebilirsiniz."
+    },
+    "backend-000502": {
+        "message": "Katılmak"
+    },
+    "backend-000503": {
+        "message": "Sunucu anketine katılım"
+    },
+    "backend-000504": {
+        "message": "Temel"
+    },
+    "backend-000505": {
+        "message": "Tam"
+    },
+    "backend-000506": {
+        "message": "Ayarlanmamış"
+    },
+    "backend-000507": {
+        "message": "Lütfen favicon api'nizi kendiniz barındırmayı düşünün"
+    },
+    "backend-000508": {
+        "message": "Nextcloud'unuz web sitesi simgelerini almak için paylaşılan Besticon örneklerimizi kullanır."
+    },
+    "backend-000509": {
+        "message": "Bu örnekler, çok az trafiğe sahip küçük Nextcloud kurulumları için tasarlanmıştır."
+    },
+    "backend-000510": {
+        "message": "Lütfen bağlantıya tıklayın ve Besticon'u kendiniz barındırmak için kolay öğreticimizi izleyin."
+    },
+    "backend-000512": {
+        "message": "Önizleme hizmeti yapılandırmanız geçersiz"
+    },
+    "backend-000513": {
+        "message": "Seçtiğiniz favicon hizmeti bir api anahtarı veya uç nokta gerektiriyor, ancak hiçbiri verilmemiş."
+    },
+    "backend-000514": {
+        "message": "Seçtiğiniz önizleme hizmeti bir api anahtarı veya uç nokta gerektiriyor, ancak hiçbiri verilmemiş."
+    },
+    "backend-000515": {
+        "message": "Yapılandırmayı güncellemek veya başka bir hizmet seçmek için yönetici ayarlarını açın."
+    },
+    "backend-000516": {
+        "message": "\"$STR_1$\" tarafından şifre veritabanınızın kilidini açmak için birkaç başarısız girişim tespit ettik.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Bu, birinin hesabınıza girmeye çalıştığını gösterebilir."
+    },
+    "backend-000518": {
+        "message": "Başka girişimleri önlemek için bu istemcinin API kimlik bilgileri iptal edildi."
+    },
+    "backend-000519": {
+        "message": "Ayrıca, parola tabanlı API kimlik doğrulaması devre dışı bırakıldı."
+    },
+    "backend-000520": {
+        "message": "Bu istemciyi kullanmaya devam etmek istiyorsanız, bunun için yeni bir belirteç oluşturmanız gerekir."
+    },
+    "backend-000521": {
+        "message": "Bu istemciyi bilmiyorsanız, lütfen şifrenizi değiştirin ve cihaz listenizi gözden geçirin."
+    },
+    "backend-000522": {
+        "message": "Başka girişimleri önlemek için parola tabanlı API kimlik doğrulaması devre dışı bırakılmıştır."
+    },
+    "backend-000523": {
+        "message": "Tekrar etkinleştirmek için web uygulaması veya token kimlik doğrulamasını kullanan herhangi bir istemci ile oturum açın."
+    },
+    "backend-000524": {
+        "message": "Bu istemciyi bilmiyorsanız, lütfen ana parolanızı ve Nextcloud parolanızı değiştirin."
+    },
+    "backend-000525": {
+        "message": "Güvenliği artırmak için parolanız yerine cihaza özel belirteçler kullanmanızı öneririz."
+    },
+    "frontend-000526": {
+        "message": "Tarayıcı Uzantısı"
+    },
+    "frontend-000528": {
+        "message": "Şifre Kuralları"
+    },
+    "frontend-000529": {
+        "message": "Yinelenenleri işaretleyin"
+    },
+    "frontend-000530": {
+        "message": "Gün cinsinden maksimum yaş"
+    },
+    "frontend-000531": {
+        "message": "Şifre Oluşturucu"
+    },
+    "frontend-000532": {
+        "message": "Parola gücü"
+    },
+    "frontend-000533": {
+        "message": "Numaraları dahil edin"
+    },
+    "frontend-000534": {
+        "message": "Özel karakterler ekleyin"
+    },
+    "frontend-000535": {
+        "message": "Kullanıcı Arayüzü"
+    },
+    "frontend-000536": {
+        "message": "İlk bölüm"
+    },
+    "frontend-000537": {
+        "message": "Tüm Şifreler"
+    },
+    "frontend-000538": {
+        "message": "Parolalar Liste Görünümü"
+    },
+    "frontend-000539": {
+        "message": "Başlığı şuradan ayarlayın"
+    },
+    "frontend-000540": {
+        "message": "Göre sırala"
+    },
+    "frontend-000541": {
+        "message": "Başlık alanı"
+    },
+    "frontend-000542": {
+        "message": "Tek tıklama eylemi"
+    },
+    "frontend-000543": {
+        "message": "Çift tıklama eylemi"
+    },
+    "frontend-000544": {
+        "message": "Şifreyi kopyala"
+    },
+    "frontend-000545": {
+        "message": "Kullanıcı adını kopyala"
+    },
+    "frontend-000546": {
+        "message": "Web sitesini kopyalayın"
+    },
+    "frontend-000547": {
+        "message": "Detayları göster"
+    },
+    "frontend-000548": {
+        "message": "Menüye kopyalama seçenekleri ekleyin"
+    },
+    "frontend-000549": {
+        "message": "Liste görünümünde kullanıcı adını göster"
+    },
+    "frontend-000550": {
+        "message": "Liste görünümünde etiketleri göster"
+    },
+    "frontend-000551": {
+        "message": "Gizli özel alanları göster"
+    },
+    "frontend-000552": {
+        "message": "Yazarken ara"
+    },
+    "frontend-000553": {
+        "message": "Enter ile her yerde arama yapın"
+    },
+    "frontend-000554": {
+        "message": "Her zaman arama bölümünü göster"
+    },
+    "frontend-000555": {
+        "message": "Bildirimler"
+    },
+    "frontend-000556": {
+        "message": "İçin E-posta Gönder"
+    },
+    "frontend-000557": {
+        "message": "Güvenlik sorunları"
+    },
+    "frontend-000558": {
+        "message": "Benimle paylaşılan şifreler"
+    },
+    "frontend-000559": {
+        "message": "Şunlar için Bildirimleri Göster"
+    },
+    "frontend-000560": {
+        "message": "Diğer hatalar"
+    },
+    "frontend-000561": {
+        "message": "Tehlike Bölgesi"
+    },
+    "frontend-000562": {
+        "message": "Tüm ayarları sıfırla"
+    },
+    "frontend-000563": {
+        "message": "Sıfırla"
+    },
+    "frontend-000564": {
+        "message": "Her şeyi sil"
+    },
+    "frontend-000565": {
+        "message": "HER ŞEYI SIL"
+    },
+    "frontend-000566": {
+        "message": "Hesap sıfırlama talep edildi"
+    },
+    "frontend-000568": {
+        "message": "Gelişmiş"
+    },
+    "frontend-000569": {
+        "message": "Birden fazla hesap için kullanılıyorsa parolaları zayıf olarak işaretleyin"
+    },
+    "frontend-000570": {
+        "message": "Belirlenen gün sayısını aşan parolaları zayıf olarak işaretleyin"
+    },
+    "frontend-000571": {
+        "message": "Daha yüksek bir güç daha uzun, daha karmaşık parolalarla sonuçlanır"
+    },
+    "frontend-000572": {
+        "message": "Seçilen özelliği liste görünümünde başlık olarak gösterme"
+    },
+    "frontend-000573": {
+        "message": "Ada göre sıralama seçildiğinde parolaları seçilen özelliğe göre sıralar"
+    },
+    "frontend-000574": {
+        "message": "Liste görünümünde bir parolaya tıklandığında gerçekleştirilecek eylem"
+    },
+    "frontend-000575": {
+        "message": "Liste görünümünde bir parolaya çift tıklandığında gerçekleştirilecek eylem"
+    },
+    "frontend-000576": {
+        "message": "Menüdeki şifreyi ve kullanıcı adını kopyalama seçeneklerini gösterir"
+    },
+    "frontend-000577": {
+        "message": "Uygulama açıldığında gösterilecek ilk bölüm"
+    },
+    "frontend-000578": {
+        "message": "Liste görünümünde her zaman parola ile ilgili kullanıcı adını gösterin"
+    },
+    "frontend-000579": {
+        "message": "Liste görünümünde her şifre için etiketleri gösterin. Yükleme sürelerini artırır"
+    },
+    "frontend-000580": {
+        "message": "Bir parolanın düzenleme formunda ve ayrıntı bölümünde gizli özel alanları gösterme"
+    },
+    "frontend-000581": {
+        "message": "Ele geçirilen parolalar ve diğer güvenlik sorunları hakkında size e-posta gönderir"
+    },
+    "frontend-000582": {
+        "message": "Başkaları sizinle parola paylaştığında size e-posta gönderir"
+    },
+    "frontend-000583": {
+        "message": "Navigasyonda her zaman global arama bölümünü gösterin"
+    },
+    "frontend-000584": {
+        "message": "Ele geçirilen parolalar ve diğer güvenlik sorunları hakkında sizi bilgilendirir"
+    },
+    "frontend-000585": {
+        "message": "Diğer kişiler sizinle parola paylaştığında sizi bilgilendirir"
+    },
+    "frontend-000586": {
+        "message": "Bir arka plan işlemi başarısız olduğunda sizi bilgilendirir"
+    },
+    "frontend-000587": {
+        "message": "Bu sayfadaki tüm ayarları varsayılanlarına sıfırlayın"
+    },
+    "frontend-000588": {
+        "message": "Bu, tüm ayarları varsayılan değerlerine sıfırlayacaktır. Devam etmek istiyor musunuz?"
+    },
+    "frontend-000589": {
+        "message": "Baştan başlayın ve tüm yapılandırmayı, parolaları, klasörleri ve etiketleri silin"
+    },
+    "frontend-000590": {
+        "message": "Tüm ayarlarınızı, şifrelerinizi, klasörlerinizi ve etiketlerinizi silmek mi istiyorsunuz?\nBunu geri almak mümkün OLMAYACAKTIR."
+    },
+    "frontend-000593": {
+        "message": "Yeni olarak düzenle"
+    },
+    "frontend-000594": {
+        "message": "Hareket"
+    },
+    "frontend-000595": {
+        "message": "Açık $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Bilinmiyor (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "Ne bekliyordun ki?"
+    },
+    "frontend-000599": {
+        "message": "QR kodunu göstermek için tıklayın."
+    },
+    "frontend-000600": {
+        "message": "Beni bir daha uyarma."
+    },
+    "frontend-000601": {
+        "message": "Güç"
+    },
+    "frontend-000602": {
+        "message": "Kapat"
+    },
+    "frontend-000603": {
+        "message": "Sık kullanılanlardan kaldır"
+    },
+    "frontend-000604": {
+        "message": "Favori olarak işaretle"
+    },
+    "frontend-000605": {
+        "message": "Gizli şifre"
+    },
+    "frontend-000606": {
+        "message": "Bu şifreyi hiçbir yerde göstermeyin"
+    },
+    "frontend-000607": {
+        "message": "Veri"
+    },
+    "frontend-000608": {
+        "message": "Tip"
+    },
+    "frontend-000609": {
+        "message": "Yeni alan"
+    },
+    "frontend-000610": {
+        "message": "Alan silme"
+    },
+    "frontend-000611": {
+        "message": "Açık Markdown Kılavuzu"
+    },
+    "frontend-000612": {
+        "message": "Geri al"
+    },
+    "frontend-000613": {
+        "message": "Yeniden Yap"
+    },
+    "frontend-000614": {
+        "message": "Süresi $DATE$ adresinde sona erecektir.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000616": {
+        "message": "Çok fazla başarısız giriş denemesi"
+    },
+    "frontend-000617": {
+        "message": "Bir klasör seçin"
+    },
+    "frontend-000618": {
+        "message": "\"$FOLDER$\" adresini seçin.",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ kullanılamaz",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Ev"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" hiçbir klasör içermiyor",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Parolalar Uygulama Şifreleme Parolası"
+    },
+    "frontend-000623": {
+        "message": "Bilinmiyor"
+    },
+    "frontend-000624": {
+        "message": "Yardım"
+    },
+    "frontend-000625": {
+        "message": "Bu parola için şifreleme türünü seçin"
+    },
+    "frontend-000626": {
+        "message": "\"$FIELD$\" alanını silmek istiyor musunuz?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Bu QR kodunun yalnızca güvendiğiniz kişiler tarafından görülebildiğinden emin olun."
+    },
+    "frontend-000628": {
+        "message": "Verileri veritabanında saklamadan önce sunucu tarafından uygulanan şifreleme"
+    },
+    "frontend-000629": {
+        "message": "Verileri sunucuya göndermeden önce istemci tarafından uygulanan şifreleme"
+    },
+    "frontend-000630": {
+        "message": "Şifre geçersiz. Oturum, çok sayıda başarısız oturum açma denemesi nedeniyle iptal edildi."
+    },
+    "frontend-000631": {
+        "message": "Bu, şifreleme için seçtiğiniz parolanın bir kopyasıdır. Bu girdinin değiştirilmesi veya silinmesi şifrelemeyi etkilemez. Parola yalnızca ayarlardan değiştirilebilir. Daha fazla bilgi el kitabında bulunabilir."
+    },
+    "backend-000632": {
+        "message": "Favicon Servis Api"
+    },
+    "backend-000633": {
+        "message": "(isteğe bağlı)"
+    },
+    "backend-000634": {
+        "message": "Nextcloud'unuz ortalamadan çok daha fazla simge talep ediyor."
+    },
+    "backend-000635": {
+        "message": "Açık öğretici"
+    },
+    "backend-000636": {
+        "message": "Şüpheli miktarda başarısız oturum açma girişimi tespit edildi."
+    },
+    "backend-000637": {
+        "message": "Daha fazla bilgi"
+    },
+    "backend-000638": {
+        "message": "Güvensiz parolaları görüntüleme"
+    },
+    "backend-000639": {
+        "message": "Açık ayarlar"
+    },
+    "backend-000640": {
+        "message": "Açık şifreler"
+    },
+    "backend-000641": {
+        "message": "Uygulamaları görüntüle"
+    },
+    "backend-000642": {
+        "message": "Uygulamaları ve cihazları görüntüle"
+    },
+    "backend-000643": {
+        "message": "Cihazları ve uygulamaları yönetin"
+    },
+    "backend-000644": {
+        "message": "Paylaşılan parolaları görüntüleme"
+    },
+    "backend-000645": {
+        "message": "Uygulama yükseltmesi önerilir"
+    },
+    "backend-000646": {
+        "message": "Hesabınıza yeni bir müşteri veya uygulama bağlandı"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" PassLink aracılığıyla $STR_1$ Passwords hesabınıza erişim izni verildi.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Tüm bağlı cihazları ve uygulamaları $STR_1$ ayarlarınızdaki güvenlik bölümünden yönetebilirsiniz.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Son arka plan işi PHP $STRING_1$ ile yürütülmüştür, ancak web sunucusu PHP $STRING_2$ kullanmaktadır.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "PHP'nin farklı ana sürümlerini kullanmak sorunlara neden olabilir."
+    },
+    "backend-000651": {
+        "message": "Varsayılan Parola Güvenlik Ayarları"
+    },
+    "backend-000652": {
+        "message": "Güvenlik Kontrolü Hash"
+    },
+    "backend-000653": {
+        "message": "Hash'leri saklamayın"
+    },
+    "backend-000654": {
+        "message": "Hash'in %50'sini saklayın"
+    },
+    "backend-000655": {
+        "message": "Hash'in %75'ini saklayın"
+    },
+    "backend-000656": {
+        "message": "Tam hash'i saklayın"
+    },
+    "backend-000657": {
+        "message": "Yedekleme otomatik olarak geri yüklenir"
+    },
+    "backend-000658": {
+        "message": "Parolalar uygulaması bir veritabanı sorunuyla karşılaşmış gibi görünüyor."
+    },
+    "backend-000659": {
+        "message": "Bu nedenle, uygulama yedeği \"$STR_1$\" otomatik olarak geri yüklendi.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Bu bir hataysa, geri yüklemeden önce veritabanının bir yedeği alınmıştır."
+    },
+    "backend-000661": {
+        "message": "Uygulama ayarlarından otomatik yedekleme geri yüklemeyi devre dışı bırakabilirsiniz."
+    },
+    "backend-000662": {
+        "message": "Veritabanı silindiğinde yedekleri otomatik olarak geri yükleme"
+    },
+    "backend-000663": {
+        "message": "Şifreler Nextcloud için güncellemeleri sonlandırır $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Parolalar $STR_1$ Nextcloud $STR_1$ için son güncellemedir.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ ve PHP $STR_1$ (veya LSR için PHP $STR_1$ ) sürümlerine yükseltin.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Otomatik olarak seçin"
+    },
+    "frontend-000667": {
+        "message": "Etiketler CSV"
+    },
+    "frontend-000669": {
+        "message": "Varsayılan"
+    },
+    "frontend-000670": {
+        "message": "Sayfanın herhangi bir yerinde bir tuşa basıldığında aramayı başlatın"
+    },
+    "frontend-000671": {
+        "message": "Arama kutusunda enter tuşuna basıldığında her yerde arama yapın"
+    },
+    "settings-000678": {
+        "message": "Giriş ve Oturum"
+    },
+    "settings-000679": {
+        "message": "Oturumumu açık tut"
+    },
+    "settings-000680": {
+        "message": "Her zaman"
+    },
+    "settings-000681": {
+        "message": "Çalışırken"
+    },
+    "settings-000682": {
+        "message": "Aktif olduğumda"
+    },
+    "settings-000683": {
+        "message": "Oturumu sonra sonlandırın"
+    },
+    "settings-000684": {
+        "message": "Bir dakika"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ dakika",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Uçtan uca Şifreleme"
+    },
+    "settings-000687": {
+        "message": "Sunucu şifreleme modu"
+    },
+    "settings-000688": {
+        "message": "CSE kullanılıyorsa yok"
+    },
+    "settings-000689": {
+        "message": "Basit şifreleme"
+    },
+    "settings-000690": {
+        "message": "Gelişmiş şifreleme"
+    },
+    "settings-000691": {
+        "message": "İstemci şifreleme modu"
+    },
+    "settings-000692": {
+        "message": "Etkinleştir"
+    },
+    "settings-000693": {
+        "message": "Şifre Değiştir"
+    },
+    "settings-000694": {
+        "message": "Şifreler Detay Görünümü"
+    },
+    "settings-000695": {
+        "message": "Web sitesi önizlemesini göster"
+    },
+    "settings-000696": {
+        "message": "Yeni şifre"
+    },
+    "settings-000697": {
+        "message": "Şifreyi tekrarla"
+    },
+    "settings-000698": {
+        "message": "Eski şifre"
+    },
+    "settings-000699": {
+        "message": "Şifre değiştirildi"
+    },
+    "settings-000700": {
+        "message": "Parola değiştirme başarısız oldu"
+    },
+    "settings-000701": {
+        "message": "Yönetim Sorunları"
+    },
+    "settings-000702": {
+        "message": "Şifre Paylaşımı"
+    },
+    "settings-000703": {
+        "message": "Varsayılan olarak düzenlenebilir olarak paylaş"
+    },
+    "settings-000704": {
+        "message": "Varsayılan olarak paylaşıma izin ver"
+    },
+    "settings-000705": {
+        "message": "Kod"
+    },
+    "settings-000706": {
+        "message": "Geçersiz sıfırlama kodu"
+    },
+    "settings-000707": {
+        "message": "Oluşturulan parolalara sayı ekleme"
+    },
+    "settings-000708": {
+        "message": "Oluşturulan parolalara özel karakterler ekleme"
+    },
+    "settings-000709": {
+        "message": "Bir istekten sonra oturumun iptal edilmesinden önce geçecek süreyi belirtin"
+    },
+    "settings-000710": {
+        "message": "Sunucudaki verileri şifrelemek için kullanılan şifreleme türünü seçin"
+    },
+    "settings-000711": {
+        "message": "Parolalarınız için şifreleme ayarlamak üzere kurulum sihirbazını çalıştırın"
+    },
+    "settings-000712": {
+        "message": "Şifreleme parolasını değiştirme"
+    },
+    "settings-000713": {
+        "message": "Ayrıntılarda ilişkili web sitesinin bir önizlemesini gösterin. (Cep telefonlarında değil)"
+    },
+    "settings-000714": {
+        "message": "Yapılandırma hatalarını ve diğer idari sorunları size bildirir"
+    },
+    "settings-000715": {
+        "message": "Hesabınızı sıfırlamak ve her şeyi silmek için \"$CODE$\" girin.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Ana parolanızı değiştirmek için bu iletişim kutusunu kullanabilirsiniz."
+    },
+    "settings-000717": {
+        "message": "Parolanız 12 karakterden uzun olmalı ve eski parolanız olmamalıdır"
+    },
+    "settings-000719": {
+        "message": "Eski şifrenizi girmelisiniz"
+    },
+    "settings-000720": {
+        "message": "Parolanız başarıyla değiştirildi."
+    },
+    "settings-000721": {
+        "message": "Diğer kullanıcıların varsayılan olarak paylaşılan bir parolayı düzenlemesine izin verme seçeneğini etkinleştirin"
+    },
+    "settings-000722": {
+        "message": "Diğer kullanıcıların varsayılan olarak paylaşılan bir parolayı paylaşmasına izin verme seçeneğini etkinleştirin"
+    },
+    "settings-000723": {
+        "message": "El kitabındaki ayarlar sayfasını açın"
+    },
+    "settings-000724": {
+        "message": "Oturumun iptal edilmesini önlemek için sunucuya canlı tutma istekleri gönderin"
+    },
+    "settings-000725": {
+        "message": "Sunucuya gönderilmeden önce istemcideki verileri şifrelemek için kullanılan şifreleme türünü seçin"
+    },
+    "settings-000726": {
+        "message": "SHA-1 karması, ihlal edilen parolaları kontrol etmek için kullanılır. Kısmi bir karma, sunucunun saldırıya uğraması durumunda kaba kuvvet saldırılarını önleyebilir, ancak güvenli parolaların yanlışlıkla ihlal edilmiş olarak bildirilmesine de neden olabilir."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Fare tekerleği tıklama eylemi",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Fare tekerleği bir parola girişine tıklandığında gerçekleştirilecek eylem",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Şunlar için kısayol düğmesini göster",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Masaüstü görünümünde belirtilen eylem için ekstra bir düğme ekler",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Paylaşım Sekmesini Göster",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Gizli öğeleri kurtarın",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Öğeleri Kurtarın",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Bu eylem, öğelerdeki \"gizli\" işaretini kaldırarak bu öğelerin uygulamada tekrar görünmesini sağlar.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Gizli öğeleri kurtarın",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Lütfen kurtarmak istediğiniz gizli öğe türünü seçin.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Gizli bir klasörde bulunmayan şifreler",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Kendisi gizli olmayan bir klasörde bulunan gizli parolaları kurtarma",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Tüm gizli şifreler",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Klasör durumundan bağımsız olarak tüm gizli parolaları kurtarın",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Tüm gizli klasörler",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Tüm gizli klasörleri kurtarın",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Tüm gizli etiketler",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Tüm gizli etiketleri kurtarın",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "$PASSWORDS$ parola(lar)ı, $FOLDERS$ klasör(ler)i ve $TAGS$ etiket(ler)i kurtarıldı.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Kurtarılan eşyalar",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Bir hata oluştu.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Başlattıktan sonra"
+    },
+    "tutorial-000731": {
+        "message": "klasörler"
+    },
+    "tutorial-000732": {
+        "message": "Etiketler"
+    },
+    "tutorial-000733": {
+        "message": "favoriler"
+    },
+    "tutorial-000734": {
+        "message": "Şifreler"
+    },
+    "tutorial-000735": {
+        "message": "yakın zamanda değişti"
+    },
+    "tutorial-000736": {
+        "message": "Şifrelerimi işaretleyin eğer…"
+    },
+    "tutorial-000737": {
+        "message": "daha yaşlılar"
+    },
+    "tutorial-000738": {
+        "message": "üç ay"
+    },
+    "tutorial-000739": {
+        "message": "ALTI AY"
+    },
+    "tutorial-000740": {
+        "message": "bir yıl"
+    },
+    "tutorial-000741": {
+        "message": "iki yıl"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ günler",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "onlar birbirinin kopyası"
+    },
+    "tutorial-000744": {
+        "message": "Yeni şifrelerimi oluşturun"
+    },
+    "tutorial-000745": {
+        "message": "güçlü"
+    },
+    "tutorial-000746": {
+        "message": "daha güçlü"
+    },
+    "tutorial-000747": {
+        "message": "çok güçlü"
+    },
+    "tutorial-000748": {
+        "message": "son derece güçlü"
+    },
+    "tutorial-000749": {
+        "message": "sayıları içerir"
+    },
+    "tutorial-000750": {
+        "message": "özel karakterler içerir"
+    },
+    "tutorial-000751": {
+        "message": "Şifreleriniz için güvenli bir yuva"
+    },
+    "tutorial-000752": {
+        "message": "Şifrelerinizi gizli tutun"
+    },
+    "tutorial-000753": {
+        "message": "Deneyiminizi özelleştirin"
+    },
+    "tutorial-000754": {
+        "message": "Şifrelerinize düzen getirin"
+    },
+    "tutorial-000755": {
+        "message": "Bağlanın"
+    },
+    "tutorial-000756": {
+        "message": "Mevcut şifrelerimi şifreleyin"
+    },
+    "tutorial-000757": {
+        "message": "Şifreyi kaydedin"
+    },
+    "tutorial-000758": {
+        "message": "Şifrenizi tekrarlayın"
+    },
+    "tutorial-000759": {
+        "message": "Şifrelemenin Yüklenmesi"
+    },
+    "tutorial-000760": {
+        "message": "Anahtarlık"
+    },
+    "tutorial-000761": {
+        "message": "Temizlik"
+    },
+    "tutorial-000762": {
+        "message": "Başarı"
+    },
+    "tutorial-000763": {
+        "message": "İhtiyacınız olduğunda yardım bulun"
+    },
+    "tutorial-000764": {
+        "message": "Uygulamalar ve Uzantılar'a gidin"
+    },
+    "tutorial-000765": {
+        "message": "Devam et"
+    },
+    "tutorial-000766": {
+        "message": "Atla"
+    },
+    "tutorial-000767": {
+        "message": "ile parola güvenliğini kontrol edin"
+    },
+    "tutorial-000768": {
+        "message": "Kullanarak parola oluşturun"
+    },
+    "tutorial-000769": {
+        "message": "Faviconları şuradan alın"
+    },
+    "tutorial-000770": {
+        "message": "Web sitesi önizlemelerini şuradan alın"
+    },
+    "tutorial-000771": {
+        "message": "Yedekleme yapın"
+    },
+    "tutorial-000772": {
+        "message": "Tüm ayarları görüntüle"
+    },
+    "tutorial-000773": {
+        "message": "Yöneticiler için ipuçlarımızı okuyun"
+    },
+    "tutorial-000774": {
+        "message": "Şifre (min. 12 karakter)"
+    },
+    "tutorial-000775": {
+        "message": "Şifreleme devam ediyor…"
+    },
+    "tutorial-000776": {
+        "message": "Deneyiminizi özelleştirebilmeniz için birçok ayar vardır."
+    },
+    "backend-000387": {
+        "message": "İhtiyacınız varsa ücretsiz bir HTTPS sertifikası almak için $STR_1$ adresine gidin.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    }
+}
