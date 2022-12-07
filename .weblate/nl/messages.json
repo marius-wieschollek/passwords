@@ -63,7 +63,7 @@
         "message": "Exporteren"
     },
     "backups-000059": {
-        "message": "Loopt..."
+        "message": "Wachten…"
     },
     "backups-000060": {
         "message": "Export Fout"
@@ -372,7 +372,7 @@
         "message": "Website"
     },
     "frontend-000176": {
-        "message": "Tags toevoegen..."
+        "message": "Tags toevoegen…"
     },
     "frontend-000177": {
         "message": "Kleur"
@@ -462,7 +462,7 @@
         "message": "Map verwijderen"
     },
     "frontend-000207": {
-        "message": "Wilt u deze map verwijderen?"
+        "message": "Wilt u de map en de inhoud ervan verwijderen?"
     },
     "frontend-000208": {
         "message": "Map verwijderd"
@@ -498,7 +498,7 @@
         "message": "Tag verwijderen"
     },
     "frontend-000220": {
-        "message": "Wilt u de Tag verwijderen?"
+        "message": "Wil je de tag verwijderen?"
     },
     "frontend-000221": {
         "message": "Tag verwijderd"
