@@ -60,7 +60,7 @@
         "message": "Lancer l’export"
     },
     "backups-000059": {
-        "message": "En attente…"
+        "message": "Attendre…"
     },
     "backups-000060": {
         "message": "Erreur lors de l’export"
@@ -386,7 +386,7 @@
         "message": "Site internet"
     },
     "frontend-000176": {
-        "message": "Ajouter des mots clés…"
+        "message": "Ajouter des étiquettes…"
     },
     "frontend-000177": {
         "message": "Couleur"
@@ -479,7 +479,7 @@
         "message": "Effacer le dossier"
     },
     "frontend-000207": {
-        "message": "Êtes vous sur de vouloir effacer le dossier ?"
+        "message": "Voulez-vous supprimer le dossier et son contenu ?"
     },
     "frontend-000208": {
         "message": "Dossier effacé"
@@ -515,7 +515,7 @@
         "message": "Effacer l’étiquette"
     },
     "frontend-000220": {
-        "message": "Êtes vous sûr de vouloir effacer l’étiquette ?"
+        "message": "Voulez-vous supprimer l'étiquette ?"
     },
     "frontend-000221": {
         "message": "Étiquette effacée"
@@ -557,7 +557,7 @@
         "message": "Effacer le mot de passe"
     },
     "frontend-000234": {
-        "message": "Êtes vous sur de vouloir effacer le mot de passe ?"
+        "message": "Voulez-vous supprimer le mot de passe ?"
     },
     "frontend-000235": {
         "message": "Mot de passe effacé"
