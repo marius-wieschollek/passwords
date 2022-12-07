@@ -2526,5 +2526,17 @@
     },
     "backups-TagLabels": {
         "message": "Etiquetes"
+    },
+    "backups-TagIds": {
+        "message": "IDs de les etiquetes"
+    },
+    "frontend-Folder": {
+        "message": "Carpeta"
+    },
+    "backups-CustomFields": {
+        "message": "Camps personalizats"
+    },
+    "backups-FolderId": {
+        "message": "ID de la carpeta"
     }
 }
