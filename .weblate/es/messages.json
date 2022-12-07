@@ -186,7 +186,7 @@
         "message": "Exportar"
     },
     "backups-000059": {
-        "message": "En proceso..."
+        "message": "Esperando…"
     },
     "backups-000060": {
         "message": "Error de exportación"
@@ -601,7 +601,7 @@
         "message": "Sitio web"
     },
     "frontend-000176": {
-        "message": "Añadir etiqueta…"
+        "message": "Añadir etiquetas…"
     },
     "frontend-000177": {
         "message": "Color"
@@ -694,7 +694,7 @@
         "message": "Borrar carpeta"
     },
     "frontend-000207": {
-        "message": "Deseas borrar esta carpeta?"
+        "message": "¿Desea eliminar la carpeta y su contenido?"
     },
     "frontend-000208": {
         "message": "Carpeta borrada"
@@ -733,7 +733,7 @@
         "message": "Borrar etiqueta"
     },
     "frontend-000220": {
-        "message": "¿Deseas borrar la etiqueta?"
+        "message": "¿Desea eliminar la etiqueta?"
     },
     "frontend-000221": {
         "message": "Etiqueta borrada"
@@ -775,7 +775,7 @@
         "message": "Borrar contraseña"
     },
     "frontend-000234": {
-        "message": "Deseas borrar la contraseña?"
+        "message": "¿Desea eliminar la contraseña?"
     },
     "frontend-000235": {
         "message": "Contraseña borrada"
@@ -1383,7 +1383,7 @@
         }
     },
     "backend-000387": {
-        "message": "Visita $STR_1$ para obtener un certificado gratuito, en caso de que no tengas uno.",
+        "message": "Visite $STR_1$ para obtener un certificado HTTPS gratuito si lo necesita.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2354,7 +2354,7 @@
         "message": "cambiados recientemente"
     },
     "tutorial-000736": {
-        "message": "Marcar mis contraseñas si..."
+        "message": "Marcar mis contraseñas si…"
     },
     "tutorial-000737": {
         "message": "fueron creadas hace más de"
