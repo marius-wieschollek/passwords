@@ -154,7 +154,7 @@
         "message": "Esporta"
     },
     "backups-000059": {
-        "message": "Aspettando..."
+        "message": "In attesa…"
     },
     "backups-000060": {
         "message": "Errore esportazione"
@@ -569,7 +569,7 @@
         "message": "Sito web"
     },
     "frontend-000176": {
-        "message": "Aggiungi etichetta..."
+        "message": "Aggiungi tag…"
     },
     "frontend-000177": {
         "message": "Colore"
@@ -665,7 +665,7 @@
         "message": "Cancella cartella"
     },
     "frontend-000207": {
-        "message": "Desideri cancellare questa cartella?"
+        "message": "Si desidera eliminare la cartella e il suo contenuto?"
     },
     "frontend-000208": {
         "message": "Cartella cancellata"
@@ -704,7 +704,7 @@
         "message": "Cancella etichetta"
     },
     "frontend-000220": {
-        "message": "Desideri cancellare questa etichetta?"
+        "message": "Si desidera eliminare l'etichetta?"
     },
     "frontend-000221": {
         "message": "Etichetta cancellata"
@@ -746,7 +746,7 @@
         "message": "Cancella password"
     },
     "frontend-000234": {
-        "message": "Vuoi cancellare questa password?"
+        "message": "Volete cancellare la password?"
     },
     "frontend-000235": {
         "message": "Password cancellata"
@@ -1354,7 +1354,7 @@
         }
     },
     "backend-000387": {
-        "message": "Visita $STR_1$ per ottenere un certificato gratuito, nel caso ru non ne abbia uno.",
+        "message": "Andate su $STR_1$ per ottenere un certificato HTTPS gratuito, se ne avete bisogno.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2275,7 +2275,7 @@
         "message": "cambiati recentemente"
     },
     "tutorial-000736": {
-        "message": "Segnala le mie password se..."
+        "message": "Segna le mie password se…"
     },
     "tutorial-000737": {
         "message": "sono più vecchie di"
