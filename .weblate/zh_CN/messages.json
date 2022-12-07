@@ -2348,5 +2348,599 @@
     },
     "backups-FolderLabel": {
         "message": "分类名"
+    },
+    "frontend-000595": {
+        "message": "开放式$LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "未知 (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000600": {
+        "message": "不要再警告我"
+    },
+    "frontend-000601": {
+        "message": "强度"
+    },
+    "frontend-000603": {
+        "message": "从收藏夹中删除"
+    },
+    "frontend-000604": {
+        "message": "标记为最爱"
+    },
+    "frontend-000605": {
+        "message": "隐藏的密码"
+    },
+    "frontend-000606": {
+        "message": "不要在任何地方显示这个密码"
+    },
+    "frontend-000607": {
+        "message": "数据"
+    },
+    "frontend-000611": {
+        "message": "开放性的马克顿指南"
+    },
+    "frontend-000612": {
+        "message": "撤销"
+    },
+    "frontend-000613": {
+        "message": "重做"
+    },
+    "frontend-000614": {
+        "message": "它将在$DATE$ 。",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "或者在我们的聊天中!"
+    },
+    "frontend-000616": {
+        "message": "登录失败次数过多"
+    },
+    "frontend-000617": {
+        "message": "选择一个文件夹"
+    },
+    "frontend-000618": {
+        "message": "选择 \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "首页"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" 不包含任何文件夹",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "密码 应用程序加密口令"
+    },
+    "frontend-000623": {
+        "message": "不详"
+    },
+    "frontend-000624": {
+        "message": "帮助"
+    },
+    "frontend-000625": {
+        "message": "选择该密码的加密类型"
+    },
+    "frontend-000626": {
+        "message": "你想删除字段\"$FIELD$\"吗？",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "确保这个二维码只对你信任的人可见。"
+    },
+    "frontend-000628": {
+        "message": "服务器在将数据存储到数据库之前所应用的加密技术"
+    },
+    "frontend-000629": {
+        "message": "客户端在向服务器发送数据之前所应用的加密技术"
+    },
+    "frontend-000630": {
+        "message": "密码无效。由于登录失败次数过多，会话被撤销。"
+    },
+    "frontend-000631": {
+        "message": "这是你为加密选择的口令的副本。改变或删除这个条目并不影响加密。密码口令只能在设置中改变。更多信息可以在手册中找到。"
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "backend-000633": {
+        "message": "(可选)"
+    },
+    "backend-000634": {
+        "message": "您的Nextcloud请求的图标明显多于平均值。"
+    },
+    "backend-000635": {
+        "message": "开放式教程"
+    },
+    "backend-000636": {
+        "message": "检测到可疑的失败登录尝试数量。"
+    },
+    "backend-000637": {
+        "message": "更多信息"
+    },
+    "backend-000638": {
+        "message": "查看不安全的密码"
+    },
+    "backend-000639": {
+        "message": "打开设置"
+    },
+    "backend-000640": {
+        "message": "公开密码"
+    },
+    "backend-000641": {
+        "message": "查看应用程序"
+    },
+    "backend-000642": {
+        "message": "查看应用程序和设备"
+    },
+    "backend-000643": {
+        "message": "管理设备和应用程序"
+    },
+    "backend-000644": {
+        "message": "查看共享密码"
+    },
+    "backend-000645": {
+        "message": "建议升级应用程序"
+    },
+    "backend-000646": {
+        "message": "一个新的客户或应用程序被连接到你的账户上"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" 被授权通过PassLink访问您的$STR_1$ Passwords账户。",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "你可以在你的$STR_1$ 设置中的安全部分管理所有连接的设备和应用程序。",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "最后一个后台作业是用PHP$STRING_1$ 执行的，但webserver用的是PHP$STRING_2$ 。",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "使用不同主要版本的PHP可能会导致问题。"
+    },
+    "backend-000651": {
+        "message": "默认的密码安全设置"
+    },
+    "backend-000653": {
+        "message": "不要存储哈希值"
+    },
+    "backend-000655": {
+        "message": "存储75%的哈希值"
+    },
+    "backend-000656": {
+        "message": "存储完整的哈希值"
+    },
+    "backend-000657": {
+        "message": "自动恢复的备份"
+    },
+    "backend-000658": {
+        "message": "密码应用程序似乎遇到了一个数据库问题。"
+    },
+    "backend-000659": {
+        "message": "正因为如此，应用程序的备份 \"$STR_1$\" 被自动恢复。",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "如果这是一个错误，在恢复数据库之前，先对其进行了备份。"
+    },
+    "backend-000661": {
+        "message": "你可以在应用程序设置中禁用自动备份恢复功能。"
+    },
+    "backend-000662": {
+        "message": "当数据库被擦除时自动恢复备份"
+    },
+    "backend-000663": {
+        "message": "密码结束了Nextcloud的更新$STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000702": {
+        "message": "密码共享"
+    },
+    "settings-000703": {
+        "message": "默认情况下，分享为可编辑"
+    },
+    "settings-000704": {
+        "message": "默认情况下允许共享"
+    },
+    "settings-000706": {
+        "message": "无效的重置代码"
+    },
+    "settings-000715": {
+        "message": "输入 \"$CODE$\" 重置你的账户并删除所有内容。",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "恢复项目",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "这个动作可以移除项目的 \"隐藏 \"标志，这样这些项目就会再次显示在应用程序中。",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "恢复隐藏的物品",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "请选择你希望恢复的任何类型的隐藏项目。",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "不在隐藏文件夹中的密码",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "恢复隐藏在一个本身没有隐藏的文件夹中的密码",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "所有隐藏的密码",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "恢复所有隐藏的密码，无论文件夹状态如何",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "所有隐藏的文件夹",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "恢复所有隐藏的文件夹",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "所有隐藏的标签",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "恢复所有隐藏的标签",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "恢复了$PASSWORDS$ 密码、$FOLDERS$ 文件夹和$TAGS$ 标签。",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "回收的物品",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "发生了一个错误。",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "backend-000664": {
+        "message": "密码$STR_1$ 是Nextcloud$STR_1$ 的最后一次更新。",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "升级到Nextcloud$STR_1$ 和PHP$STR_1$ （或LSR的PHP$STR_1$ ），以便将来升级。",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "自动选择"
+    },
+    "frontend-000667": {
+        "message": "标签 CSV"
+    },
+    "settings-000722": {
+        "message": "启用默认让其他用户分享共享密码的选项"
+    },
+    "settings-000723": {
+        "message": "打开手册中的设置页面"
+    },
+    "settings-000726": {
+        "message": "SHA-1哈希值是用来检查被破解的密码的。部分哈希值可以防止服务器被黑客攻击，但也可能导致安全的密码被错误地报告为被破坏。"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "恢复隐藏的物品",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "frontend-Id": {
+        "message": "同上"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "将一个隐藏的密码保存在一个本身没有隐藏的文件夹中，会使密码无法被访问。这个密码将不再显示在任何地方。你想继续吗？",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "隐藏这个密码？",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000413": {
+        "message": "WKHTML (本地)"
+    },
+    "tutorial-000785": {
+        "message": "帮助就在附近。"
+    },
+    "tutorial-000786": {
+        "message": "我们的内置手册可以通过点击 \"更多 \"找到，并解释了该应用程序的所有细节。"
+    },
+    "tutorial-000787": {
+        "message": "在任何其他情况下，我们的社区是提出问题的正确场所。"
+    },
+    "tutorial-000788": {
+        "message": "辅导结束后将打开手册"
+    },
+    "tutorial-000789": {
+        "message": "输入12个字符或以上的密码"
+    },
+    "tutorial-000790": {
+        "message": "你的密码需要至少12个字符，确认密码必须是相同的。"
+    },
+    "backups-CustomFields": {
+        "message": "自定义字段"
+    },
+    "backups-FolderId": {
+        "message": "分类编号"
+    },
+    "backups-TagIds": {
+        "message": "标签编号"
+    },
+    "backups-000065": {
+        "message": "选择导入格式"
+    },
+    "frontend-000593": {
+        "message": "编辑为新的"
+    },
+    "tutorial-000763": {
+        "message": "在你需要的时候找到帮助"
+    },
+    "tutorial-000774": {
+        "message": "密码（最少12个字符）。"
+    },
+    "tutorial-000775": {
+        "message": "加密正在进行中…"
+    },
+    "backend-000654": {
+        "message": "存储50%的哈希值"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "鼠标滑轮点击动作",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "当鼠标滚轮点击一个密码条目时要执行的动作",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "显示快捷键，用于",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "在桌面视图中为指定的动作添加一个额外的按钮。",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "显示共享标签",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "frontend-000526": {
+        "message": "浏览器扩展"
+    },
+    "frontend-000594": {
+        "message": "移动"
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ 用不着",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000721": {
+        "message": "启用默认让其他用户编辑共享密码的选项"
+    },
+    "frontend-Folder": {
+        "message": "分类"
+    },
+    "backups-000033": {
+        "message": "阅读$LABEL$ 进口指南",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "或"
+    },
+    "backups-000035": {
+        "message": "数据库备份"
+    },
+    "backups-000036": {
+        "message": "自定义CSV"
+    },
+    "backups-000037": {
+        "message": "尝试通用的CSV导入"
+    },
+    "backups-000038": {
+        "message": "没有导入你的CSV？"
+    },
+    "apps-000004": {
+        "message": "了解更多"
+    },
+    "apps-000005": {
+        "message": "与PassLink连接"
+    },
+    "apps-000006": {
+        "message": "连接一个新的设备"
+    },
+    "apps-000007": {
+        "message": "通过链接连接"
+    },
+    "apps-000008": {
+        "message": "选择一个名字。"
+    },
+    "apps-000009": {
+        "message": "代码不匹配"
+    },
+    "apps-000010": {
+        "message": "看起来不错"
+    },
+    "apps-000011": {
+        "message": "连接成功"
+    },
+    "apps-000012": {
+        "message": "我不干了"
+    },
+    "apps-000013": {
+        "message": "不要再试了"
+    },
+    "apps-000014": {
+        "message": "连接其他东西"
+    },
+    "apps-000015": {
+        "message": "再试一次"
+    },
+    "apps-000016": {
+        "message": "强大的加密功能"
+    },
+    "apps-000018": {
+        "message": "你取消了连接"
+    },
+    "apps-000019": {
+        "message": "你没有及时确认连接"
+    },
+    "apps-000020": {
+        "message": "只要用应用程序扫描二维码就可以连接。"
+    },
+    "apps-000021": {
+        "message": "当你准备好开始连接时，点击按钮。"
+    },
+    "apps-000022": {
+        "message": "检查下面的代码是否与设备或应用程序提供的代码相符。"
+    },
+    "apps-000023": {
+        "message": "将此客户端链接到您的Nextcloud账户，无需烦人的密码和URL"
+    },
+    "apps-000024": {
+        "message": "该客户端正式支持我们强大的端到端加密技术"
+    },
+    "apps-000025": {
+        "message": "这个客户端是由密码应用的作者维护的。"
+    },
+    "apps-000026": {
+        "message": "点击按钮连接安装在此设备上的应用程序，如果该应用程序安装在其他设备上，则用该应用程序扫描QR码。"
+    },
+    "frontend-000598": {
+        "message": "你期待什么？"
+    },
+    "frontend-000599": {
+        "message": "单击以显示二维码。"
+    },
+    "frontend-000608": {
+        "message": "类型"
+    },
+    "frontend-000609": {
+        "message": "新领域"
+    },
+    "frontend-000610": {
+        "message": "删除字段"
+    },
+    "backend-000652": {
+        "message": "安全检查哈希值"
+    },
+    "settings-000705": {
+        "message": "编码"
+    },
+    "tutorial-000784": {
+        "message": "每当你不知道某样东西是如何工作的，有疑问或需要帮助的时候。"
+    },
+    "apps-000017": {
+        "message": "获取应用程序失败。$ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000165": {
+        "message": "状况"
     }
 }
