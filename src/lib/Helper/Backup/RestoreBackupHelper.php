@@ -245,7 +245,7 @@ class RestoreBackupHelper {
         }
 
         $serverSecret = $this->config->getSystemValue('secret', null);
-        if($serverSecret !== $keys['server']['secret']) {
+        if($serverSecret !== $keys['server']['secret'] && !empty($keys['server']['secret'])) {
             if($user !== null && $serverSecret !== null) {
                 throw new Exception('Can not restore single user data because server secret has changed');
             }
