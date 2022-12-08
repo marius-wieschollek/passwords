@@ -12,6 +12,7 @@
 namespace OCA\Passwords\Encryption\Keychain;
 
 use Exception;
+use OC;
 use OCA\Passwords\Db\Keychain;
 use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\ConfigurationService;
@@ -117,7 +118,28 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
      * @throws Exception
      */
     public function decryptKeychain(Keychain $keychain): Keychain {
-        $decryptedData = $this->crypto->decrypt($keychain->getData(), $this->getEncryptionPassword());
+        try {
+            $decryptedData = $this->crypto->decrypt($keychain->getData(), $this->getEncryptionPassword());
+            $keychain->setData($decryptedData);
+
+            return $keychain;
+        } catch(\Exception $e) {
+            return $this->tryDecryptKeychainWithoutServerSecret($keychain);
+        }
+    }
+
+    /**
+     * Some servers may have had an empty secret
+     * @see https://github.com/marius-wieschollek/passwords/issues/551
+     *
+     * @param Keychain $keychain
+     *
+     * @return Keychain
+     * @throws Exception
+     */
+    public function tryDecryptKeychainWithoutServerSecret(Keychain $keychain): Keychain {
+        $userSecret   = $this->sessionService->get(SessionService::VALUE_USER_SECRET);
+        $decryptedData = $this->crypto->decrypt($keychain->getData(), $userSecret);
         $keychain->setData($decryptedData);
 
         return $keychain;

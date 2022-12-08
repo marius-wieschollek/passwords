@@ -114,10 +114,29 @@ abstract class AbstractRevisionRepair {
             $fixed = true;
         }
 
+        /**
+         * Some servers may have had an empty secret
+         * @see https://github.com/marius-wieschollek/passwords/issues/551
+         */
+        if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R2) {
+            try {
+                $this->encryption->decrypt($revision);
+            } catch(Exception $e) {
+                $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R1);
+                if($this->decryptOrDelete($revision)) $fixed = true;
+            }
+        }
+
+        /**
+         * If it's not SSEv2 and can't be decrypted, delete it
+         */
         if($this->enhancedRepair && $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) {
             if(!$this->decryptOrDelete($revision)) $fixed = true;
         }
 
+        /**
+         * If it's SSEv1r1, try an upgrade
+         */
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_V1R1) {
             if($this->decryptOrDelete($revision)) {
                 $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
@@ -125,6 +144,9 @@ abstract class AbstractRevisionRepair {
             }
         }
 
+        /**
+         * If it has no encryption, try adding one
+         */
         if($this->enhancedRepair && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE) {
             if($this->decryptOrDelete($revision)) {
                 $revision->setSseType(EncryptionService::SSE_ENCRYPTION_V1R2);
