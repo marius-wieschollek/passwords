@@ -97,12 +97,13 @@ class NotificationService implements INotifier {
     /**
      * @var BackupFailedNotification
      */
-    protected BackupFailedNotification         $backupFailedNotification;
+    protected BackupFailedNotification $backupFailedNotification;
 
     /**
      * @var BackupRestoredNotification
      */
-    protected BackupRestoredNotification       $backupRestoredNotification;
+    protected BackupRestoredNotification $backupRestoredNotification;
+    protected ConfigurationService       $configurationService;
 
     /**
      * NotificationService constructor.
@@ -123,23 +124,25 @@ class NotificationService implements INotifier {
      * @param EmptyRequiredSettingNotification $emptyRequiredSettingNotification
      */
     public function __construct(
-        IFactory $l10nFactory,
-        UserSettingsService $settings,
-        SurveyNotification $surveyNotification,
-        NewClientNotification $newClientNotification,
-        ShareLoopNotification $shareLoopNotification,
-        BadPasswordNotification $badPasswordNotification,
-        BesticonApiNotification $besticonApiNotification,
-        ShareCreatedNotification $shareCreatedNotification,
-        LoginAttemptNotification $loginAttemptNotification,
-        BackupFailedNotification $backupFailedNotification,
-        ImpersonationNotification $impersonationNotification,
-        BackupRestoredNotification $backupRestoredNotification,
-        UpgradeRequiredNotification $upgradeRequiredNotification,
+        IFactory                         $l10nFactory,
+        UserSettingsService              $settings,
+        SurveyNotification               $surveyNotification,
+        ConfigurationService             $configurationService,
+        NewClientNotification            $newClientNotification,
+        ShareLoopNotification            $shareLoopNotification,
+        BadPasswordNotification          $badPasswordNotification,
+        BesticonApiNotification          $besticonApiNotification,
+        ShareCreatedNotification         $shareCreatedNotification,
+        LoginAttemptNotification         $loginAttemptNotification,
+        BackupFailedNotification         $backupFailedNotification,
+        ImpersonationNotification        $impersonationNotification,
+        BackupRestoredNotification       $backupRestoredNotification,
+        UpgradeRequiredNotification      $upgradeRequiredNotification,
         EmptyRequiredSettingNotification $emptyRequiredSettingNotification
     ) {
         $this->settings                         = $settings;
         $this->l10NFactory                      = $l10nFactory;
+        $this->configurationService             = $configurationService;
         $this->surveyNotification               = $surveyNotification;
         $this->newClientNotification            = $newClientNotification;
         $this->shareLoopNotification            = $shareLoopNotification;
@@ -271,13 +274,20 @@ class NotificationService implements INotifier {
 
     /**
      * @param string $userId
+     * @param int    $ncVersion
+     * @param string $appVersion
+     *
+     * @throws Exception
      */
     public function sendUpgradeRequiredNotification(string $userId, int $ncVersion, string $appVersion): void {
-        $this->sendNotification(
-            $this->upgradeRequiredNotification,
-            $userId,
-            ['ncVersion' => $ncVersion, 'appVersion' => $appVersion]
-        );
+        if($this->configurationService->getUserValue('notification/eol/'.$appVersion, '0', $userId) !== '1') {
+            $this->sendNotification(
+                $this->upgradeRequiredNotification,
+                $userId,
+                ['ncVersion' => $ncVersion, 'appVersion' => $appVersion]
+            );
+            $this->configurationService->setUserValue('notification/eol/'.$appVersion, '1', $userId);
+        }
     }
 
     /**
