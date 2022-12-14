@@ -1,4 +1,11 @@
 ## [Unreleased]
+## 2022.12.1 - Bugfix release
+### Fixed
+- Data loss caused by NC 25 secret migration
+- Platform deprecation notification potentially sent more than once
+
+
+## 2022.12.0 - Feature release
 ### Added
 - Translations for Danish and Ukrainian
 ### Changed
