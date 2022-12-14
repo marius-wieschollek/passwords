@@ -124,13 +124,19 @@ class EncryptionService {
     public function decrypt(RevisionInterface $object): RevisionInterface {
         if($object->_isDecrypted()) return $object;
 
-        $object->_setDecrypted(true);
-        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) return $object;
+        if($object->getSseType() === self::SSE_ENCRYPTION_NONE) {
+            $object->_setDecrypted(true);
+
+            return $object;
+        }
         $encryption = $this->getObjectEncryptionByType($object->getSseType());
 
         if(!$encryption->isAvailable()) throw new Exception("Object encryption type {$encryption->getType()} is not available");
 
-        return $encryption->decryptObject($object);
+        $object = $encryption->decryptObject($object);
+        $object->_setDecrypted(true);
+
+        return $object;
     }
 
     /**

@@ -101,6 +101,8 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
             $fixed = true;
         }
 
+        $fixed = $this->checkEmptySecretDecryption($revision, $fixed);
+
         if($revision->getCustomFields() === null && $revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() !== EncryptionService::SSE_ENCRYPTION_V2R1) {
             if($this->decryptOrDelete($revision)) $revision->setCustomFields('[]');
             $fixed = true;
