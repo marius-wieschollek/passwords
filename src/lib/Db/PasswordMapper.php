@@ -75,9 +75,12 @@ class PasswordMapper extends AbstractMapper {
         $sql->select('a.*')
             ->from(static::TABLE_NAME, 'a')
             ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', 'a.`uuid` = b.`target_password`')
-            ->where(
-                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
-                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+            ->orWhere(
+                $sql->where(
+                    $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                    $sql->expr()->eq('b.deleted', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+                ),
+                $sql->where($sql->expr()->isNull('b.uuid'))
             );
 
         return $this->findEntities($sql);

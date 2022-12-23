@@ -79,7 +79,7 @@ class FolderRevisionRepair extends AbstractRevisionRepair {
 
         if($fixed) $this->revisionService->save($revision);
 
-        return $fixed || parent::repairRevision($revision);
+        return parent::repairRevision($revision) || $fixed;
     }
 
     /**
