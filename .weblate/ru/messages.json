@@ -2942,5 +2942,8 @@
     },
     "frontend-000325": {
         "message": "Вам все еще нужна помощь?"
+    },
+    "backend-Passwords": {
+        "message": "Пароли"
     }
 }
