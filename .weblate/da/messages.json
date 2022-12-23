@@ -2942,5 +2942,8 @@
     },
     "tutorial-000790": {
         "message": "Din adgangskode skal bestå af mindst 12 tegn, og bekræftelsesadgangskoden skal være den samme"
+    },
+    "backend-Passwords": {
+        "message": "Adgangskoder"
     }
 }
