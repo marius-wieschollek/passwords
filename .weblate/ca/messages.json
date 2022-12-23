@@ -2538,5 +2538,8 @@
     },
     "backups-FolderId": {
         "message": "ID de la carpeta"
+    },
+    "backend-Passwords": {
+        "message": "Contrasenyes"
     }
 }
