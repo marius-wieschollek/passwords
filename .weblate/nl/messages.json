@@ -2942,5 +2942,8 @@
     },
     "settings-000726": {
         "message": "De SHA-1 hash wordt gebruikt om te controleren op geschonden wachtwoorden. Een gedeeltelijke hash kan brute force aanvallen voorkomen indien de server wordt gehackt, maar kan er ook toe leiden dat veilige wachtwoorden ten onrechte als geschonden worden gerapporteerd."
+    },
+    "backend-Passwords": {
+        "message": "Wachtwoorden"
     }
 }
