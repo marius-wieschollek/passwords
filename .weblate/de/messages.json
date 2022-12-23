@@ -1527,7 +1527,7 @@
         }
     },
     "backend-000387": {
-        "message": "Verwende ein kostenloses $STR_1$ Zertifikat falls du keines hast.",
+        "message": "Verwende ein kostenloses Zertifikat von $STR_1$ falls du keines hast.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
