@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2022 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -86,7 +86,7 @@
 </script>
 
 <style lang="scss">
-.password-form-custom-field {
+#content.app-passwords .password-form-custom-field {
     display               : grid;
     grid-template-columns : 3fr 1fr;
 

@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2022 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -105,7 +105,7 @@
 </script>
 
 <style lang="scss">
-.password-form-custom-field-wrapper {
+#content.app-passwords .password-form-custom-field-wrapper {
     background-color : var(--color-main-background);
     border-radius    : var(--border-radius);
 
@@ -118,10 +118,13 @@
         }
 
         .field-label {
-            margin       : -5px calc(-.25rem + 1px) -5px .25rem;
-            border-color : rgba(0, 0, 0, 0);
+            margin     : 0;
+            border     : none;
             font-weight  : bold;
             flex-grow    : 1;
+            height     : auto;
+            min-height : 0;
+            padding    : 3px;
 
             &:hover,
             &:active,

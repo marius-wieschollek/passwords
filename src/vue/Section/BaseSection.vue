@@ -192,90 +192,103 @@
 </script>
 
 <style lang="scss">
-    #app-content {
-        height     : calc(100vh - 50px);
-        overflow-y : initial;
-        overflow-x : initial;
+#app-content {
+    height                     : calc(100vh - 50px);
+    overflow-y                 : initial;
+    overflow-x                 : initial;
+    border-top-right-radius    : var(--body-container-radius);
+    border-bottom-right-radius : var(--body-container-radius);
 
+    .app-content-left {
+        width                      : 100%;
+        transition                 : width 300ms;
+        transform                  : translate3d(0, 0, 0);
+        background                 : var(--color-main-background);
+        overflow-y                 : auto;
+        max-height                 : 100%;
+        height                     : 100%;
+        border-top-right-radius    : var(--body-container-radius);
+        border-bottom-right-radius : var(--body-container-radius);
+    }
+
+    .app-content-right {
+        background  : var(--color-main-background);
+        border-left : 1px solid var(--color-border);
+        width       : 27vw;
+        position    : fixed;
+        top         : 50px;
+        right                      : calc(0px - var(--body-container-margin));
+        overflow-y  : auto;
+        overflow-x  : hidden;
+        z-index     : 1500;
+        height                     : var(--body-height);
+        transform   : translate3d(27vw, 0, 0);
+        transition  : transform 300ms;
+        border-top-right-radius    : var(--body-container-radius);
+        border-bottom-right-radius : var(--body-container-radius);
+        margin-right               : var(--body-container-margin);
+
+    }
+
+    &.show-details {
         .app-content-left {
-            width      : 100%;
-            transition : width 300ms;
-            transform  : translate3d(0, 0, 0);
-            background : var(--color-main-background);
+            width : calc(100% - 27vw);
+            border-top-right-radius    : 0;
+            border-bottom-right-radius : 0;
         }
 
         .app-content-right {
-            background  : var(--color-main-background);
-            border-left : 1px solid var(--color-border);
-            width       : 27vw;
-            position    : fixed;
-            top         : 50px;
-            right       : 0;
-            overflow-y  : auto;
-            overflow-x  : hidden;
-            z-index     : 1500;
-            height      : calc(100vh - 50px);
-            transform   : translate3d(27vw, 0, 0);
-            transition  : transform 300ms;
+            transform : translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
+        }
+    }
+
+    > #app-navigation-toggle {
+        display : none !important;
+    }
+
+    @media(max-width : $width-large) {
+        .app-content-right {
+            width     : 360px;
+            transform : translate3d(360px, 0, 0);
         }
 
         &.show-details {
             .app-content-left {
-                width : calc(100% - 27vw);
-            }
-
-            .app-content-right {
-                transform : translate3d(0, 0, 0);
-            }
-        }
-
-        > #app-navigation-toggle {
-            display : none !important;
-        }
-
-        @media(max-width : $width-large) {
-            .app-content-right {
-                width     : 360px;
-                transform : translate3d(360px, 0, 0);
-            }
-
-            &.show-details {
-                .app-content-left {
-                    width : calc(100% - 360px);
-                }
-            }
-        }
-
-        @media(max-width : $width-medium) {
-            .app-content-right {
-                width     : calc(50% - 150px);
-                transform : translate3d(100%, 0, 0);
-            }
-
-            &.show-details {
-                .app-content-left {
-                    width : 50%;
-                }
-            }
-        }
-
-        @media(max-width : $width-small) {
-            .app-content-right {
-                width : 50%;
-            }
-
-            &.show-details {
-                .app-content-left {
-                    width     : 50%;
-                    transform : none;
-                }
-            }
-        }
-
-        @media(max-width : $width-extra-small) {
-            .app-content-right {
-                width : 100%;
+                width : calc(100% - 360px);
             }
         }
     }
+
+    @media(max-width : $width-medium) {
+        .app-content-right {
+            width     : calc(50% - 150px);
+            transform : translate3d(100%, 0, 0);
+        }
+
+        &.show-details {
+            .app-content-left {
+                width : 50%;
+            }
+        }
+    }
+
+    @media(max-width : $width-small) {
+        .app-content-right {
+            width : 50%;
+        }
+
+        &.show-details {
+            .app-content-left {
+                width     : 50%;
+                transform : none;
+            }
+        }
+    }
+
+    @media(max-width : $width-extra-small) {
+        .app-content-right {
+            width : 100%;
+        }
+    }
+}
 </style>

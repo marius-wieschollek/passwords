@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Removed
+- NC 23 & 24 support
+
 ## 2022.12.1 - Bugfix release
 ### Fixed
 - Data loss caused by NC 25 secret migration

@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2022 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -196,7 +196,7 @@
 
                                 &:hover {
                                     padding-bottom : 2px;
-                                    color          : var(--color-primary-element-light);
+                                    color          : var(--color-primary-default);
                                 }
                             }
                         }

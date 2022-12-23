@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2022 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -65,7 +65,7 @@
         display               : grid;
         grid-template-columns : 3fr 1fr;
 
-        input {
+        input#password-add-field {
             width                      : 100%;
             border-top-right-radius    : 0;
             border-bottom-right-radius : 0;

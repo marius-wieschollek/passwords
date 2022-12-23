@@ -244,10 +244,12 @@ body#body-user {
     }
 
     &[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
-        background-image      : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
-        background-repeat     : repeat;
-        background-size       : contain;
-        background-attachment : fixed;
+        background-repeat          : no-repeat;
+        background-size            : cover;
+        height                     : 100vh;
+        border-bottom-right-radius : 0;
+        background-image           : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-attachment      : fixed;
     }
 
     &[data-custom-background="true"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {

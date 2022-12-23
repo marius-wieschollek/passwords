@@ -14,7 +14,6 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OC;
 use OC\AppConfig;
-use OC\Cache\CappedMemoryCache as LegacyCappedMemoryCache;
 use OC\SystemConfig;
 use OCA\Passwords\AppInfo\Application;
 use OCP\Cache\CappedMemoryCache;
@@ -193,12 +192,7 @@ class ConfigurationService {
             $class    = new ReflectionClass($this->config);
             $property = $class->getProperty('userCache');
             $property->setAccessible(true);
-            if(class_exists(CappedMemoryCache::class)) {
-                $property->setValue($this->config, new CappedMemoryCache());
-            } else {
-                // @TODO remove in 2023.1.0
-                $property->setValue($this->config, new LegacyCappedMemoryCache());
-            }
+            $property->setValue($this->config, new CappedMemoryCache());
         } catch(ReflectionException $e) {
         }
 

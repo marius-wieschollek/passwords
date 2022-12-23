@@ -8,7 +8,7 @@
             <div class="crumb svg"
                  v-for="(item, index) in getItems"
                  :class="{first:index===0,current:index === getItems.length - 1}">
-                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{item.label }}</router-link>
+                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
             </div>
             <div class="crumb svg crumbmenu" :class="{active: showCrumbMenu}" v-if="getCrumbMenuItems.length !== 0">
                 <span class="icon icon-more" @click="toggleCrumbMenu"></span>
@@ -210,140 +210,164 @@
 </script>
 
 <style lang="scss">
-    #controls {
-        position : sticky;
-        top      : 50px;
-        width    : 100%;
+#controls {
+    position         : sticky;
+    top              : 0;
+    width            : 100%;
+    margin-top       : 4px;
+    z-index          : 1;
+    background-color : var(--color-main-background);
 
-        .crumbmenu,
-        .passwords-more-menu {
-            position : relative;
-            order    : 2;
+    .crumbmenu,
+    .passwords-more-menu {
+        position : relative;
+        order    : 2;
 
-            &.passwords-more-menu {
-                margin-left : 10px;
-                display     : inline-block;
-            }
+        &.passwords-more-menu {
+            margin-left : 10px;
+            display     : inline-block;
 
-            &.crumbmenu {
-                display : none;
+            .button.new {
+                display : inline-block;
 
-                .icon-more {
-                    cursor  : pointer;
-                    padding : 12px 1rem;
+                .icon.icon-add {
+                    min-width : 14px;
                 }
-
-                .fa {
-                    padding   : 10px;
-                    font-size : 1rem;
-                    margin    : 0;
-                }
-
-                .menu {
-                    left       : auto;
-                    right      : 58%;
-                    max-height : 90px;
-                }
-            }
-
-            .menu {
-                max-height : 0;
-                margin     : 0;
-                overflow   : hidden;
-                transition : max-height 0.25s ease-in-out;
-                display    : block;
-                position   : relative;
-                left       : -200px;
-                width      : 220px;
-
-                ul {
-                    padding-right : 0;
-                }
-
-                a {
-                    overflow      : hidden;
-                    white-space   : nowrap;
-                    text-overflow : ellipsis;
-                    display       : block;
-                }
-            }
-
-            &:not(.active) .menu {
-                filter       : none;
-                border-color : transparent;
-            }
-
-            &.active .menu {
-                overflow   : visible;
-                max-height : 90px;
-                animation  : 0.25s delay-overflow;
             }
         }
 
+        &.crumbmenu {
+            display : none;
+
+            .icon-more {
+                cursor  : pointer;
+                padding : 12px 1rem;
+            }
+
+            .fa {
+                padding   : 10px;
+                font-size : 1rem;
+                margin    : 0;
+            }
+
+            .menu {
+                left       : auto;
+                right      : 58%;
+                max-height : 90px;
+            }
+        }
+
+        .menu {
+            max-height : 0;
+            margin     : 0;
+            overflow   : hidden;
+            transition : max-height 0.25s ease-in-out;
+            display    : block;
+            position   : relative;
+            left       : -200px;
+            width      : 220px;
+
+            ul {
+                padding-right : 0;
+            }
+
+            a {
+                overflow      : hidden;
+                white-space   : nowrap;
+                text-overflow : ellipsis;
+                display       : block;
+            }
+        }
+
+        &:not(.active) .menu {
+            filter       : none;
+            border-color : transparent;
+        }
+
+        &.active .menu {
+            overflow   : visible;
+            max-height : 90px;
+            animation  : 0.25s delay-overflow;
+            position   : absolute;
+            top        : 108%;
+            padding    : 0;
+
+            .menuitem {
+                width : 100%;
+            }
+        }
+    }
+
+    .breadcrumb {
+        display : flex;
+
+        .crumb {
+            white-space : nowrap;
+            max-height  : 54px;
+            height      : 54px;
+
+            a {
+                padding : 16px;
+            }
+
+            .home {
+                width : 40px;
+            }
+
+            &.current {
+                font-weight : 600;
+            }
+        }
+    }
+
+    #app-navigation-toggle {
+        display : none !important;
+
+        @media(max-width : $width-medium) {
+            display : block !important;
+        }
+    }
+
+    @keyframes delay-overflow {
+        0% { overflow : hidden; }
+        99% { overflow : hidden; }
+        100% { overflow : visible; }
+    }
+
+    @media(max-width : $width-small) {
+        padding-left : 0 !important;
+
         .breadcrumb {
-            display : flex;
+            .crumb:not(.first):not(.crumbmenu) {
+                display : none;
+            }
 
-            .crumb {
-                white-space : nowrap;
+            .crumbmenu {
+                background-image : none;
+                display          : inline-flex;
 
-                &.current {
-                    font-weight : 600;
-                }
-
-                .home {
-                    width      : 40px;
+                .menu.menu-center {
+                    position : absolute;
                 }
             }
         }
 
         #app-navigation-toggle {
-            display : none !important;
-
-            @media(max-width : $width-medium) {
-                display   : block !important;
-            }
+            display   : block !important;
+            position  : static;
+            min-width : 44px;
+            top       : 0;
+            opacity   : 1;
+            z-index   : 1;
         }
+    }
 
-        @keyframes delay-overflow {
-            0% { overflow : hidden; }
-            99% { overflow : hidden; }
-            100% { overflow : visible; }
-        }
-
-        @media(max-width : $width-small) {
-            padding-left : 0 !important;
-
-            .breadcrumb {
-                .crumb:not(.first):not(.crumbmenu) {
-                    display : none;
-                }
-
-                .crumbmenu {
-                    background-image : none;
-                    display          : inline-flex;
-
-                    .menu.menu-center {
-                        position : absolute;
-                    }
-                }
-            }
-
-            #app-navigation-toggle {
-                display   : block !important;
-                position  : static;
-                min-width : 44px;
-                top       : 0;
-                opacity   : 1;
-                z-index   : 1;
-            }
-        }
-
-        @media(max-width : $width-extra-small) {
-            .crumbmenu {
-                &.active .menu.menu-center {
-                    z-index : 111;
-                }
+    @media(max-width : $width-extra-small) {
+        .crumbmenu {
+            &.active .menu.menu-center {
+                z-index : 111;
             }
         }
     }
+}
 </style>

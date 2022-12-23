@@ -1,14 +1,17 @@
 <?php
-/**
+/*
+ * @copyright 2022 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC\Cache\CappedMemoryCache as LegacyCappedMemoryCache;
 use OCP\Cache\CappedMemoryCache;
 use OCP\Files\IAppData;
 use OCP\Files\NotFoundException;
@@ -150,12 +153,7 @@ class FileCacheService {
             $class    = new ReflectionClass($this->appData);
             $property = $class->getProperty('folders');
             $property->setAccessible(true);
-            if(class_exists(CappedMemoryCache::class)) {
-                $property->setValue($this->appData, new CappedMemoryCache());
-            } else {
-                // @TODO remove in 2023.1.0
-                $property->setValue($this->appData, new LegacyCappedMemoryCache());
-            }
+            $property->setValue($this->appData, new CappedMemoryCache());
         } catch(Throwable $e) {
             $this->logger->logException($e);
         }

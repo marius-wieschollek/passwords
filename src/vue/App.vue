@@ -4,98 +4,98 @@
             <ul class="menu-main">
                 <li>
                     <router-link :to="{ name: 'All'}" active-class="active" :exact="true">
-                        <translate say="All" icon="globe" />
+                        <translate say="All" icon="globe"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Folders'}" active-class="active">
-                        <translate say="Folders" icon="folder" />
+                        <translate say="Folders" icon="folder"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Recent'}" active-class="active">
-                        <translate say="Recent" icon="clock-o" />
+                        <translate say="Recent" icon="clock-o"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Favorites'}" active-class="active">
-                        <translate say="Favorites" icon="star" />
+                        <translate say="Favorites" icon="star"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Shares'}" active-class="active">
-                        <translate say="Shares" icon="share-alt" />
+                        <translate say="Shares" icon="share-alt"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Tags'}" active-class="active">
-                        <translate say="Tags" icon="tag" />
+                        <translate say="Tags" icon="tag"/>
                     </router-link>
                 </li>
                 <li v-if="isSecurityVisible">
                     <router-link :to="{ name: 'Security'}" active-class="active">
-                        <translate say="Security" icon="shield" />
+                        <translate say="Security" icon="shield"/>
                     </router-link>
                 </li>
                 <li v-if="isSearchVisible">
                     <router-link :to="{ name: 'Search'}"
                                  active-class="active">
-                        <translate say="Search" icon="search" />
+                        <translate say="Search" icon="search"/>
                     </router-link>
                 </li>
             </ul>
             <ul class="menu-secondary">
-                <session-timeout v-if="!isMobile" />
+                <session-timeout v-if="!isMobile"/>
                 <li>
                     <router-link :to="{ name: 'Trash'}" active-class="active" data-drop-type="trash">
-                        <translate say="Trash" icon="trash" />
+                        <translate say="Trash" icon="trash"/>
                     </router-link>
                 </li>
             </ul>
             <ul id="app-settings" :class="{open: showMore}">
                 <li class="more">
-                    <translate @click="showMore = !showMore" say="More" :icon="showMore ? 'minus':'plus'" :class="{active:showMore}" tag="a" />
+                    <translate @click="showMore = !showMore" say="More" :icon="showMore ? 'minus':'plus'" :class="{active:showMore}" tag="a"/>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Settings'}" active-class="active">
-                        <translate say="Settings" icon="cog" />
+                        <translate say="Settings" icon="cog"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Backup'}" active-class="active">
-                        <translate say="Backup and Restore" icon="archive" />
+                        <translate say="Backup and Restore" icon="archive"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Help'}" active-class="active">
-                        <translate say="Handbook" icon="question-circle" />
+                        <translate say="Handbook" icon="question-circle"/>
                     </router-link>
                 </li>
                 <li>
                     <router-link :to="{ name: 'Apps and Extensions'}" active-class="active">
-                        <translate say="Apps and Extensions" icon="puzzle-piece" />
+                        <translate say="Apps and Extensions" icon="puzzle-piece"/>
                     </router-link>
                 </li>
             </ul>
         </div>
 
-        <router-view name="main" />
+        <router-view name="main"/>
         <div id="app-popup">
             <div></div>
         </div>
-        <session-timeout scope="global" v-if="isMobile" />
-        <star-chaser v-if="starChaser" />
-        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup" />
+        <session-timeout scope="global" v-if="isMobile"/>
+        <star-chaser v-if="starChaser"/>
+        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </div>
 </template>
 
 <script>
     import '@scss/app';
-    import Translate       from '@vc/Translate';
-    import router          from '@js/Helper/router';
-    import Messages        from '@js/Classes/Messages';
+    import Translate from '@vc/Translate';
+    import router from '@js/Helper/router';
+    import Messages from '@js/Classes/Messages';
     import SettingsService from '@js/Services/SettingsService';
-    import SessionTimeout  from '@vue/Components/SessionTimeout';
+    import SessionTimeout from '@vue/Components/SessionTimeout';
 
     export default {
         el        : '#main',
@@ -107,7 +107,7 @@
         },
 
         data() {
-            let showSearch = SettingsService.get('client.search.show'),
+            let showSearch   = SettingsService.get('client.search.show'),
                 showSecurity = SettingsService.get('user.password.security.hash') > 0;
 
             return {
@@ -163,7 +163,8 @@
 
 <style lang="scss">
 #app {
-    width : 100%;
+    width   : 100%;
+    display : flex;
 
     &.blocking {
         #app-content {
@@ -276,12 +277,13 @@
         &#app-settings {
             position         : relative;
             overflow         : hidden;
-            max-height       : 44px;
+            max-height       : 60px;
             height           : auto;
             z-index          : 100;
-            background-color : var(--color-main-background);
             border-right     : 1px solid var(--color-border);
             transition       : max-height 0.25s ease-in-out;
+            background-color : transparent;
+            padding-bottom   : 4px;
 
             .more {
 
@@ -298,6 +300,12 @@
                 @media (max-height : 360px) {
                     position : fixed;
                     bottom   : 0;
+                }
+            }
+
+            &:not(.open) {
+                li:nth-child(2) {
+                    opacity : 0;
                 }
             }
         }
