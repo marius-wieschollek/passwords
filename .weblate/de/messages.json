@@ -2264,6 +2264,9 @@
     "backend-000666": {
         "message": "Automatisch auswählen"
     },
+    "backend-Passwords": {
+        "message": "Passwörter"
+    },
     "frontend-000528": {
         "message": "Regeln für Passwörter"
     },
