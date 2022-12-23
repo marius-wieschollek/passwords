@@ -2942,5 +2942,8 @@
     },
     "frontend-000323": {
         "message": "Aucun contenu disponible"
+    },
+    "backend-Passwords": {
+        "message": "Mots de passe"
     }
 }
