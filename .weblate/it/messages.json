@@ -2942,5 +2942,8 @@
     },
     "settings-000726": {
         "message": "L'hash SHA-1 viene utilizzato per verificare la presenza di password violate. Un hash parziale può prevenire attacchi di forza bruta nel caso in cui il server venga violato, ma può anche far sì che le password sicure vengano erroneamente segnalate come violate."
+    },
+    "backend-Passwords": {
+        "message": "Password"
     }
 }
