@@ -2939,5 +2939,8 @@
     "settings-RecoverItemsInvisiblePwd": {
         "message": "Hesla která se nenacházejí ve skryté složce",
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "backend-Passwords": {
+        "message": "Hesla"
     }
 }
