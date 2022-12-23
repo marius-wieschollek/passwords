@@ -2942,5 +2942,8 @@
     },
     "tutorial-000779": {
         "message": "Escolha uma palavra-passe segura abaixo para activar a derradeira protecção para as suas palavras-passe."
+    },
+    "backend-Passwords": {
+        "message": "Senhas"
     }
 }
