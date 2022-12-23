@@ -2942,5 +2942,8 @@
     },
     "backups-TagIds": {
         "message": "IDs de las etiquetas"
+    },
+    "backend-Passwords": {
+        "message": "Contraseñas"
     }
 }
