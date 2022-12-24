@@ -1,1 +1,2949 @@
-{}
+{
+    "apps-000001": {
+        "message": "resmi"
+    },
+    "apps-000002": {
+        "message": "oleh $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000312": {
+        "message": "Item yang dihapus akan muncul di sini"
+    },
+    "backend-000377": {
+        "message": "Diperlukan HTTPS"
+    },
+    "frontend-000593": {
+        "message": "Edit sebagai baru"
+    },
+    "frontend-000669": {
+        "message": "Default"
+    },
+    "settings-000706": {
+        "message": "Kode reset tidak valid"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Tampilkan Tab Berbagi",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "apps-000003": {
+        "message": "kode sumber"
+    },
+    "apps-000004": {
+        "message": "Pelajari lebih lanjut"
+    },
+    "apps-000005": {
+        "message": "Terhubung dengan PassLink"
+    },
+    "apps-000006": {
+        "message": "Menghubungkan perangkat baru"
+    },
+    "apps-000007": {
+        "message": "Terhubung melalui tautan"
+    },
+    "apps-000008": {
+        "message": "Pilih nama:"
+    },
+    "apps-000009": {
+        "message": "Kode-kode tidak cocok"
+    },
+    "apps-000010": {
+        "message": "Terlihat bagus"
+    },
+    "apps-000011": {
+        "message": "Koneksi berhasil"
+    },
+    "apps-000012": {
+        "message": "Aku sudah selesai"
+    },
+    "apps-000013": {
+        "message": "Jangan coba-coba lagi"
+    },
+    "apps-000014": {
+        "message": "Hubungkan sesuatu yang lain"
+    },
+    "apps-000015": {
+        "message": "Coba lagi"
+    },
+    "apps-000016": {
+        "message": "Enkripsi yang Kuat"
+    },
+    "apps-000017": {
+        "message": "Gagal mengambil aplikasi: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Anda membatalkan koneksi"
+    },
+    "apps-000019": {
+        "message": "Anda tidak mengonfirmasi koneksi tepat waktu"
+    },
+    "apps-000020": {
+        "message": "Cukup pindai kode QR dengan aplikasi untuk menghubungkannya."
+    },
+    "apps-000021": {
+        "message": "Klik tombol apabila Anda siap untuk memulai koneksi."
+    },
+    "apps-000022": {
+        "message": "Periksa apakah kode di bawah ini cocok dengan kode yang disediakan oleh perangkat atau aplikasi:"
+    },
+    "apps-000023": {
+        "message": "Tautkan klien ini ke akun Nextcloud Anda tanpa kata sandi dan url yang mengganggu"
+    },
+    "apps-000024": {
+        "message": "Klien ini secara resmi mendukung enkripsi end-to-end kami yang kuat"
+    },
+    "apps-000025": {
+        "message": "Klien ini dikelola oleh penulis aplikasi Passwords"
+    },
+    "apps-000026": {
+        "message": "Klik tombol untuk menyambungkan aplikasi yang diinstal pada perangkat ini atau pindai kode QR dengan aplikasi jika diinstal pada perangkat lain."
+    },
+    "backups-000028": {
+        "message": "Pencadangan atau ekspor"
+    },
+    "backups-000029": {
+        "message": "Pilih Format"
+    },
+    "backups-000030": {
+        "message": "Silakan pilih"
+    },
+    "backups-000031": {
+        "message": "Pencadangan Basis Data"
+    },
+    "backups-000032": {
+        "message": "CSV yang telah ditentukan sebelumnya"
+    },
+    "backups-000033": {
+        "message": "Baca $LABEL$ panduan impor",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "atau"
+    },
+    "backups-000035": {
+        "message": "pencadangan basis data"
+    },
+    "backups-000036": {
+        "message": "CSV khusus"
+    },
+    "backups-000037": {
+        "message": "coba impor CSV generik"
+    },
+    "backups-000038": {
+        "message": "Tidak ada impor untuk CSV Anda?"
+    },
+    "backups-000039": {
+        "message": "Kata sandi cadangan"
+    },
+    "backups-000040": {
+        "message": "(Opsional) Mengenkripsi cadangan"
+    },
+    "backups-000041": {
+        "message": "Impor hanya mendukung CSV"
+    },
+    "backups-000042": {
+        "message": "Ekspor Kata Sandi"
+    },
+    "backups-000043": {
+        "message": "Ekspor Folder"
+    },
+    "backups-000044": {
+        "message": "Tag Ekspor"
+    },
+    "backups-000045": {
+        "message": "Bidang Khusus"
+    },
+    "backups-000046": {
+        "message": "Map"
+    },
+    "backups-000047": {
+        "message": "Tags"
+    },
+    "backups-000048": {
+        "message": "ParentLabel"
+    },
+    "backups-000049": {
+        "message": "Id Folder"
+    },
+    "backups-000050": {
+        "message": "Tag Ids"
+    },
+    "backups-000051": {
+        "message": "ParentId"
+    },
+    "backups-CustomFields": {
+        "message": "Bidang Khusus"
+    },
+    "backups-FolderLabel": {
+        "message": "Map"
+    },
+    "backups-TagLabels": {
+        "message": "Tags"
+    },
+    "backups-FolderId": {
+        "message": "Id Folder"
+    },
+    "backups-TagIds": {
+        "message": "Tag Ids"
+    },
+    "backups-000052": {
+        "message": "Kosong"
+    },
+    "backups-000053": {
+        "message": "Tambahkan Baris Header"
+    },
+    "backups-000054": {
+        "message": "Ekspor kata sandi yang dibagikan kepada saya"
+    },
+    "backups-000055": {
+        "message": "Jangan mengedit kata sandi yang dibagikan kepada saya"
+    },
+    "backups-000056": {
+        "message": "Jangan mengimpor bidang kosong"
+    },
+    "backups-000057": {
+        "message": "Jalankan Ekspor"
+    },
+    "backups-000058": {
+        "message": "Ekspor"
+    },
+    "backups-000059": {
+        "message": "Menunggu…"
+    },
+    "backups-000060": {
+        "message": "Kesalahan ekspor"
+    },
+    "backups-000061": {
+        "message": "Unduh $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "Tidak ada yang diekspor"
+    },
+    "backups-000063": {
+        "message": "Tidak ada data untuk diekspor"
+    },
+    "backups-000064": {
+        "message": "Memulihkan atau mengimpor"
+    },
+    "backups-000065": {
+        "message": "Pilih format impor"
+    },
+    "backups-000066": {
+        "message": "Kata sandi CSV"
+    },
+    "backups-000067": {
+        "message": "Folder CSV"
+    },
+    "backups-000068": {
+        "message": "CSV Khusus"
+    },
+    "backups-000069": {
+        "message": "CSV Lain / Kustom"
+    },
+    "backups-000070": {
+        "message": "Pilih File"
+    },
+    "backups-000071": {
+        "message": "Pilih Opsi"
+    },
+    "backups-000072": {
+        "message": "Penanganan konflik"
+    },
+    "backups-000073": {
+        "message": "Lewati jika revisi yang sama"
+    },
+    "backups-000074": {
+        "message": "Lewati selalu"
+    },
+    "backups-000075": {
+        "message": "Timpa yang sudah ada"
+    },
+    "backups-000076": {
+        "message": "Menggabungkan dengan yang sudah ada"
+    },
+    "backups-000077": {
+        "message": "Buat entri baru"
+    },
+    "backups-000078": {
+        "message": "Untuk cadangan terenkripsi"
+    },
+    "backups-000079": {
+        "message": "Opsi CSV"
+    },
+    "backups-000080": {
+        "message": "Basis Data"
+    },
+    "backups-000081": {
+        "message": "Kutipan Karakter"
+    },
+    "backups-000082": {
+        "message": "Karakter Pelarian"
+    },
+    "backups-000083": {
+        "message": "Pembatas Bidang"
+    },
+    "backups-000084": {
+        "message": "Istirahat Baris"
+    },
+    "backups-000085": {
+        "message": "Kutipan"
+    },
+    "backups-000086": {
+        "message": "Kutipan Tunggal"
+    },
+    "backups-000087": {
+        "message": "Backslash"
+    },
+    "backups-000088": {
+        "message": "Mendeteksi"
+    },
+    "backups-000089": {
+        "message": "Koma"
+    },
+    "backups-000090": {
+        "message": "Titik koma"
+    },
+    "backups-000091": {
+        "message": "Ruang angkasa"
+    },
+    "backups-000092": {
+        "message": "Tab"
+    },
+    "backups-000093": {
+        "message": "Mendeteksi tanda kutip yang tidak dikecualikan"
+    },
+    "backups-000094": {
+        "message": "Lewati baris pertama"
+    },
+    "backups-000095": {
+        "message": "Menginterpolasi bidang yang hilang"
+    },
+    "backups-000096": {
+        "message": "Pemetaan Bidang CSV"
+    },
+    "backups-000097": {
+        "message": "Garis Pratinjau"
+    },
+    "backups-000098": {
+        "message": "Garis $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(tidak ada nilai)"
+    },
+    "backups-000100": {
+        "message": "Abaikan"
+    },
+    "backups-000101": {
+        "message": "Jalankan Impor"
+    },
+    "backups-000102": {
+        "message": "Impor"
+    },
+    "backups-000103": {
+        "message": "Mengurai berkas masukan"
+    },
+    "backups-000104": {
+        "message": "Menganalisis tag"
+    },
+    "backups-000105": {
+        "message": "Menganalisis folder"
+    },
+    "backups-000106": {
+        "message": "Tag bacaan"
+    },
+    "backups-000107": {
+        "message": "Mengimpor tag"
+    },
+    "backups-000108": {
+        "message": "Folder bacaan"
+    },
+    "backups-000109": {
+        "message": "Mengimpor folder"
+    },
+    "backups-000110": {
+        "message": "Membaca kata sandi"
+    },
+    "backups-000111": {
+        "message": "Mengimpor kata sandi"
+    },
+    "backups-000112": {
+        "message": "Impor gagal"
+    },
+    "backups-000113": {
+        "message": "Impor sebagian gagal"
+    },
+    "backups-000114": {
+        "message": "Impor berhasil"
+    },
+    "backups-000115": {
+        "message": "Kesalahan impor"
+    },
+    "backups-000116": {
+        "message": "Beberapa objek mengalami kesalahan:"
+    },
+    "backups-000117": {
+        "message": "Jenis file tidak valid \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Diperlukan kata sandi"
+    },
+    "backups-000119": {
+        "message": "Kata sandi tidak valid"
+    },
+    "backups-000120": {
+        "message": "Gagal mendekripsi kata sandi"
+    },
+    "backups-000121": {
+        "message": "Gagal mendekripsi folder"
+    },
+    "backups-000122": {
+        "message": "Gagal mendekripsi tag"
+    },
+    "backups-000123": {
+        "message": "File impor kosong"
+    },
+    "backups-000124": {
+        "message": "File CSV tidak dapat dipetakan"
+    },
+    "backups-000125": {
+        "message": "Login"
+    },
+    "backups-000126": {
+        "message": "Catatan"
+    },
+    "backups-000127": {
+        "message": "Kartu Kredit"
+    },
+    "backups-000128": {
+        "message": "Identitas"
+    },
+    "backups-000129": {
+        "message": "Keuangan"
+    },
+    "backups-000130": {
+        "message": "Lisensi"
+    },
+    "backups-000131": {
+        "message": "Perjalanan"
+    },
+    "backups-000132": {
+        "message": "Komputer"
+    },
+    "backups-000133": {
+        "message": "Lain-lain"
+    },
+    "backups-000134": {
+        "message": "Kutipan tidak valid di bidang yang dikutip"
+    },
+    "backups-000135": {
+        "message": "Berkas tidak dapat diurai: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ di baris $LINE$ karakter $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" memiliki file yang dilampirkan yang tidak dapat diimpor.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "Jenis \"$FIELD$\" dalam \"$LABEL$\" tidak diketahui dan tidak dapat diimpor.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "Label \"$FIELD$\" dalam \"$LABEL$\" melebihi 48 karakter dan dipotong.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "Nilai \"$FIELD$\" dalam \"$LABEL$\" melebihi 320 karakter dan telah dipotong.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Informasi lebih lanjut bisa ditemukan dalam log. (Tekan F12)"
+    },
+    "backups-000142": {
+        "message": "File memiliki tipe \"$ACTUAL$\" tetapi yang diharapkan adalah \"$EXPECTED$\". Anda mungkin telah memilih file atau importir yang salah.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ diketahui menghasilkan file ekspor yang salah. Konsultasikan manual untuk bantuan jika file tidak dapat diurai.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": "Map"
+    },
+    "backups-000145": {
+        "message": "Tags"
+    },
+    "frontend-000148": {
+        "message": "Kata sandi"
+    },
+    "frontend-000149": {
+        "message": "Semua"
+    },
+    "frontend-000150": {
+        "message": "Folder"
+    },
+    "frontend-000151": {
+        "message": "Terbaru"
+    },
+    "frontend-000152": {
+        "message": "Favorit"
+    },
+    "frontend-000153": {
+        "message": "Bersama"
+    },
+    "frontend-000154": {
+        "message": "Keamanan"
+    },
+    "frontend-000155": {
+        "message": "Sampah"
+    },
+    "frontend-000156": {
+        "message": "Detail"
+    },
+    "frontend-000157": {
+        "message": "Edit"
+    },
+    "frontend-000158": {
+        "message": "Ganti nama"
+    },
+    "frontend-000159": {
+        "message": "Hapus"
+    },
+    "frontend-000160": {
+        "message": "Kembalikan"
+    },
+    "frontend-000161": {
+        "message": "Kata Sandi Baru"
+    },
+    "frontend-000162": {
+        "message": "Folder Baru"
+    },
+    "frontend-000163": {
+        "message": "Tag Baru"
+    },
+    "frontend-000164": {
+        "message": "Aman"
+    },
+    "frontend-000165": {
+        "message": "Status"
+    },
+    "frontend-000166": {
+        "message": "Lemah"
+    },
+    "frontend-000167": {
+        "message": "Lemah (Duplikat)"
+    },
+    "frontend-000168": {
+        "message": "Lemah (ketinggalan zaman)"
+    },
+    "frontend-000169": {
+        "message": "Dilanggar"
+    },
+    "frontend-000170": {
+        "message": "Berbagi"
+    },
+    "frontend-000171": {
+        "message": "Revisi"
+    },
+    "frontend-000172": {
+        "message": "Kode QR"
+    },
+    "frontend-000173": {
+        "message": "Kata sandi"
+    },
+    "frontend-000174": {
+        "message": "Nama pengguna"
+    },
+    "frontend-000175": {
+        "message": "Situs web"
+    },
+    "frontend-000176": {
+        "message": "Tambahkan Tag…"
+    },
+    "frontend-000177": {
+        "message": "Warna"
+    },
+    "frontend-000178": {
+        "message": "Nama"
+    },
+    "frontend-000179": {
+        "message": "Label"
+    },
+    "frontend-000180": {
+        "message": "Umum"
+    },
+    "frontend-000181": {
+        "message": "Properti"
+    },
+    "frontend-000182": {
+        "message": "Angka"
+    },
+    "frontend-000183": {
+        "message": "Karakter Khusus"
+    },
+    "frontend-000184": {
+        "message": "Lebih Banyak Pilihan"
+    },
+    "frontend-000185": {
+        "message": "Favorit"
+    },
+    "frontend-000186": {
+        "message": "Enkripsi"
+    },
+    "frontend-000187": {
+        "message": "Di server"
+    },
+    "frontend-000188": {
+        "message": "Bidang Khusus"
+    },
+    "frontend-000189": {
+        "message": "Rahasia"
+    },
+    "frontend-000190": {
+        "message": "Teks"
+    },
+    "frontend-000191": {
+        "message": "Berkas"
+    },
+    "frontend-000192": {
+        "message": "Nilai"
+    },
+    "frontend-000193": {
+        "message": "Mengalihkan visibilitas"
+    },
+    "frontend-000194": {
+        "message": "Hasilkan kata sandi"
+    },
+    "frontend-000195": {
+        "message": "Enkripsi Sisi Server Sederhana V1"
+    },
+    "frontend-000196": {
+        "message": "Buatlah beberapa catatan"
+    },
+    "frontend-000197": {
+        "message": "Simpan"
+    },
+    "frontend-000198": {
+        "message": "Buat folder"
+    },
+    "frontend-000199": {
+        "message": "Folder yang dibuat"
+    },
+    "frontend-000200": {
+        "message": "Membuat folder gagal"
+    },
+    "frontend-000201": {
+        "message": "Ganti nama folder"
+    },
+    "frontend-000202": {
+        "message": "Folder diganti namanya"
+    },
+    "frontend-000203": {
+        "message": "Mengganti nama folder gagal"
+    },
+    "frontend-000204": {
+        "message": "Folder dipindahkan"
+    },
+    "frontend-000205": {
+        "message": "Memindahkan folder gagal"
+    },
+    "frontend-000206": {
+        "message": "Hapus folder"
+    },
+    "frontend-000207": {
+        "message": "Apakah Anda ingin menghapus folder dan isinya?"
+    },
+    "frontend-000208": {
+        "message": "Folder dihapus"
+    },
+    "frontend-000209": {
+        "message": "Menghapus folder gagal"
+    },
+    "frontend-000210": {
+        "message": "Folder dipulihkan"
+    },
+    "frontend-000211": {
+        "message": "Memulihkan folder gagal"
+    },
+    "frontend-000212": {
+        "message": "Buat tag"
+    },
+    "frontend-000213": {
+        "message": "Tag dibuat"
+    },
+    "frontend-000214": {
+        "message": "Membuat tag gagal"
+    },
+    "frontend-000215": {
+        "message": "Edit tag"
+    },
+    "frontend-000216": {
+        "message": "Menghasilkan warna acak"
+    },
+    "frontend-000217": {
+        "message": "Tag disimpan"
+    },
+    "frontend-000218": {
+        "message": "Menyimpan tag gagal"
+    },
+    "frontend-000219": {
+        "message": "Hapus tag"
+    },
+    "frontend-000220": {
+        "message": "Apakah Anda ingin menghapus tag?"
+    },
+    "frontend-000221": {
+        "message": "Tag dihapus"
+    },
+    "frontend-000222": {
+        "message": "Menghapus tag gagal"
+    },
+    "frontend-000223": {
+        "message": "Tag dipulihkan"
+    },
+    "frontend-000224": {
+        "message": "Memulihkan tag gagal"
+    },
+    "frontend-000225": {
+        "message": "Buat kata sandi"
+    },
+    "frontend-000226": {
+        "message": "Kata sandi dibuat"
+    },
+    "frontend-000227": {
+        "message": "Membuat kata sandi gagal"
+    },
+    "frontend-000228": {
+        "message": "Edit kata sandi"
+    },
+    "frontend-000229": {
+        "message": "Kata sandi disimpan"
+    },
+    "frontend-000230": {
+        "message": "Menyimpan kata sandi gagal"
+    },
+    "frontend-000231": {
+        "message": "Kata sandi dipindahkan"
+    },
+    "frontend-000232": {
+        "message": "Memindahkan kata sandi gagal"
+    },
+    "frontend-000233": {
+        "message": "Hapus kata sandi"
+    },
+    "frontend-000234": {
+        "message": "Apakah Anda ingin menghapus kata sandi?"
+    },
+    "frontend-000235": {
+        "message": "Kata sandi dihapus"
+    },
+    "frontend-000236": {
+        "message": "Kata sandi dipulihkan"
+    },
+    "frontend-000237": {
+        "message": "Memulihkan kata sandi gagal"
+    },
+    "frontend-000238": {
+        "message": "Buka Url"
+    },
+    "frontend-000239": {
+        "message": "Salin Url"
+    },
+    "frontend-000240": {
+        "message": "Salin Pengguna"
+    },
+    "frontend-000241": {
+        "message": "Salin Kata Sandi"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ disalin ke clipboard",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "Kesalahan menyalin $ELEMENT$ ke clipboard",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Terakhir dimodifikasi pada $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Kembalikan revisi"
+    },
+    "frontend-000246": {
+        "message": "Revisi dipulihkan"
+    },
+    "frontend-000247": {
+        "message": "Memulihkan revisi gagal"
+    },
+    "frontend-000248": {
+        "message": "Apakah Anda ingin memulihkan revisi?"
+    },
+    "frontend-000249": {
+        "message": "Berbagi dengan Anda"
+    },
+    "frontend-000250": {
+        "message": "Dibagikan oleh Anda"
+    },
+    "frontend-000251": {
+        "message": "Statistik"
+    },
+    "frontend-000252": {
+        "message": "Dibuat pada"
+    },
+    "frontend-000253": {
+        "message": "Terakhir diperbarui"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ revisi",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Saham"
+    },
+    "frontend-000256": {
+        "message": "Dibagikan $COUNT$ kali",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": "Enkripsi yang diterapkan pada server"
+    },
+    "frontend-000258": {
+        "message": "Enkripsi yang diterapkan pada klien"
+    },
+    "frontend-000259": {
+        "message": "Tidak ada enkripsi"
+    },
+    "frontend-000260": {
+        "message": "Enkripsi sederhana (Gen. 1)"
+    },
+    "frontend-000261": {
+        "message": "Enkripsi sederhana (Gen. 2)"
+    },
+    "frontend-000262": {
+        "message": "Enkripsi lanjutan (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Enkripsi dengan libsodium"
+    },
+    "frontend-000264": {
+        "message": "Lebih"
+    },
+    "frontend-000265": {
+        "message": "Pencadangan dan Pemulihan"
+    },
+    "frontend-000266": {
+        "message": "Pengaturan"
+    },
+    "frontend-000267": {
+        "message": "Buku Pegangan"
+    },
+    "frontend-000268": {
+        "message": "Aplikasi dan Ekstensi"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ dan $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Pengeditan diperbolehkan"
+    },
+    "frontend-000271": {
+        "message": "Pengeditan tidak diizinkan"
+    },
+    "frontend-000272": {
+        "message": "berbagi diperbolehkan"
+    },
+    "frontend-000273": {
+        "message": "berbagi tidak diizinkan"
+    },
+    "frontend-000274": {
+        "message": "Cari pengguna"
+    },
+    "frontend-000275": {
+        "message": "Tetapkan tanggal kedaluwarsa"
+    },
+    "frontend-000276": {
+        "message": "Kedaluwarsa $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Pilih tanggal kedaluwarsa atau biarkan kosong untuk berbagi selamanya"
+    },
+    "frontend-000278": {
+        "message": "Pilih tanggal di masa mendatang"
+    },
+    "frontend-000279": {
+        "message": "Tanggal tidak valid"
+    },
+    "frontend-000280": {
+        "message": "Pengguna $UID$ tidak ada",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Tidak dapat berbagi kata sandi: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Mengalihkan izin tulis"
+    },
+    "frontend-000283": {
+        "message": "Mengalihkan izin berbagi"
+    },
+    "frontend-000284": {
+        "message": "Berhenti berbagi"
+    },
+    "frontend-000285": {
+        "message": "Tanggal"
+    },
+    "frontend-000286": {
+        "message": "Cache Default (0 file, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Tembolok Avatar (0 berkas, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Cache Favicon (0 file, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Pratinjau Cache (0 file, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Cache Kata Sandi (0 file, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "Berubah"
+    },
+    "frontend-000292": {
+        "message": "Dimodifikasi"
+    },
+    "frontend-000293": {
+        "message": "Diedit"
+    },
+    "frontend-000294": {
+        "message": "Dibuat"
+    },
+    "frontend-000295": {
+        "message": "Revisi"
+    },
+    "frontend-000296": {
+        "message": "Url"
+    },
+    "frontend-000297": {
+        "message": "Orang tua"
+    },
+    "frontend-000298": {
+        "message": "Hapus Semua Item"
+    },
+    "frontend-000299": {
+        "message": "Kembalikan Semua Item"
+    },
+    "frontend-000300": {
+        "message": "Kembalikan Barang"
+    },
+    "frontend-000301": {
+        "message": "Mengembalikan semua item di tempat sampah?"
+    },
+    "frontend-000302": {
+        "message": "Kembalikan item ini"
+    },
+    "frontend-000303": {
+        "message": "Barang-barang yang dipulihkan"
+    },
+    "frontend-000304": {
+        "message": "Sampah Kosong"
+    },
+    "frontend-000305": {
+        "message": "Menghapus semua item di tempat sampah?"
+    },
+    "frontend-000306": {
+        "message": "Sampah dikosongkan"
+    },
+    "frontend-000307": {
+        "message": "Pencarian"
+    },
+    "frontend-000308": {
+        "message": "Gunakan kotak pencarian untuk mencari"
+    },
+    "frontend-000309": {
+        "message": "Cari di mana-mana untuk \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000310": {
+        "message": "Tidak ada apa pun di sini"
+    },
+    "frontend-000311": {
+        "message": "Klik \"+\" untuk menambahkan sesuatu"
+    },
+    "frontend-000313": {
+        "message": "Tidak ada kata sandi yang dibagikan kepada Anda"
+    },
+    "frontend-000314": {
+        "message": "Anda tidak berbagi kata sandi apa pun"
+    },
+    "frontend-000315": {
+        "message": "Favorit Anda akan muncul di sini"
+    },
+    "frontend-000316": {
+        "message": "Lebih baik periksa bagian lain"
+    },
+    "frontend-000317": {
+        "message": "Itu mungkin pertanda baik"
+    },
+    "frontend-000318": {
+        "message": "Pergi ke $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": "Isi"
+    },
+    "frontend-000320": {
+        "message": "Gambar $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Tidak dapat mengambil halaman: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "Jenis konten tidak valid $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Tidak ada konten yang tersedia"
+    },
+    "frontend-000324": {
+        "message": "Tidak ditemukan"
+    },
+    "frontend-000325": {
+        "message": "Masih membutuhkan bantuan?"
+    },
+    "frontend-000326": {
+        "message": "Tanyakan di forum kami!"
+    },
+    "frontend-000327": {
+        "message": "Menemukan kesalahan?"
+    },
+    "frontend-000328": {
+        "message": "Beritahu kami!"
+    },
+    "frontend-000329": {
+        "message": "Sesi telah berakhir"
+    },
+    "frontend-000330": {
+        "message": "Token Sesi API telah kedaluwarsa"
+    },
+    "frontend-000331": {
+        "message": "Kesalahan jaringan"
+    },
+    "frontend-000332": {
+        "message": "Tidak dapat memuat $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Urutkan berdasarkan nama"
+    },
+    "frontend-000334": {
+        "message": "Urutkan berdasarkan tanggal modifikasi"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ kata sandi",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 kata sandi"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ folder",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 folder"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ tag",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 tag"
+    },
+    "frontend-000341": {
+        "message": "Tidak ada"
+    },
+    "frontend-000342": {
+        "message": " dan "
+    },
+    "frontend-000343": {
+        "message": "cocok"
+    },
+    "frontend-000344": {
+        "message": "cocok"
+    },
+    "frontend-000345": {
+        "message": "Dibuat oleh"
+    },
+    "frontend-000346": {
+        "message": "Anda masuk sebagai $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Masuk"
+    },
+    "frontend-000348": {
+        "message": "Minta token lagi"
+    },
+    "frontend-000349": {
+        "message": "Terlalu banyak upaya"
+    },
+    "frontend-000350": {
+        "message": "Kata sandi terlalu pendek"
+    },
+    "frontend-000351": {
+        "message": "Kesalahan yang Tidak Diketahui"
+    },
+    "frontend-000352": {
+        "message": "Permintaan token gagal"
+    },
+    "frontend-000353": {
+        "message": "Pemeliharaan Sistem"
+    },
+    "frontend-000354": {
+        "message": "Tidak tersedia"
+    },
+    "frontend-000355": {
+        "message": "Sistem"
+    },
+    "frontend-000356": {
+        "message": "Akses Publik"
+    },
+    "frontend-000357": {
+        "message": "Tugas Latar Belakang Otomatis"
+    },
+    "frontend-000358": {
+        "message": "Baris Perintah Server"
+    },
+    "frontend-000359": {
+        "message": "Harap perbaiki masukan Anda"
+    },
+    "frontend-000360": {
+        "message": "Tampilkan nilai"
+    },
+    "frontend-000361": {
+        "message": "Batal"
+    },
+    "frontend-000362": {
+        "message": "Baiklah"
+    },
+    "frontend-000363": {
+        "message": "benar"
+    },
+    "frontend-000364": {
+        "message": "salah"
+    },
+    "frontend-000365": {
+        "message": "ya"
+    },
+    "frontend-000366": {
+        "message": "tidak"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ telah berbagi kata sandi ini dengan Anda.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": "Anda telah mencapai panjang maksimum 4096 karakter"
+    },
+    "frontend-000369": {
+        "message": "Kami tidak dapat menemukan apa pun untuk \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "Halaman \"$PAGE$\" tidak dapat diambil dari server buku pegangan.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Beberapa data sedang menunggu untuk disinkronkan"
+    },
+    "frontend-000372": {
+        "message": "Anda akan log keluar dalam $TIME$ detik",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Anda mungkin telah meminta terlalu banyak token. Silakan coba lagi nanti."
+    },
+    "frontend-000374": {
+        "message": "Enkripsi End-to-End akan dinonaktifkan untuk kata sandi ini jika Anda membagikannya."
+    },
+    "frontend-000375": {
+        "message": "Token sesi tidak lagi valid. Aplikasi sekarang akan dimuat ulang."
+    },
+    "frontend-000376": {
+        "message": "Hari ini di tahun 2018, versi pertama kata sandi diterbitkan. Terima kasih telah menggunakan aplikasi ini."
+    },
+    "frontend-Tags": {
+        "message": "Tags"
+    },
+    "frontend-Folder": {
+        "message": "Map"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Menyimpan kata sandi tersembunyi dalam folder yang tidak disembunyikan itu sendiri akan membuat kata sandi tidak dapat diakses. Kata sandi ini tidak akan ditampilkan lagi di mana pun. Apakah Anda ingin melanjutkan?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Sembunyikan kata sandi ini?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000378": {
+        "message": "muat ulang halaman ini"
+    },
+    "backend-000379": {
+        "message": "forum"
+    },
+    "backend-000380": {
+        "message": "dokumentasi"
+    },
+    "backend-000381": {
+        "message": "Anda dapat mencoba $STR_1$ halaman dengan HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "Aplikasi ini memerlukan $STR_1$ agar dapat bekerja dengan aman.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "Ini BUKAN bug. Kunjungi $STR_1$ kami jika Anda memerlukan bantuan.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Tinjau laporan HTTPS di bawah ini untuk men-debug masalah tersebut."
+    },
+    "backend-000385": {
+        "message": "Baca $STR_1$ ini untuk mengonfigurasi server Anda untuk menggunakan HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Baca $STR_1$ ini jika Anda menggunakan proxy apa pun.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "Buka $STR_1$ untuk mendapatkan sertifikat HTTPS gratis jika Anda membutuhkannya.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Jika masalah ini berlanjut, Anda harus menghubungi administrator Anda."
+    },
+    "backend-000389": {
+        "message": "Sesi Kata Sandi $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Dokumentasi terbuka"
+    },
+    "backend-000391": {
+        "message": "tidak pernah"
+    },
+    "backend-000392": {
+        "message": "Pemrosesan Data Internal"
+    },
+    "backend-000393": {
+        "message": "Rendering Gambar"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (direkomendasikan)"
+    },
+    "backend-000395": {
+        "message": "Layanan Eksternal"
+    },
+    "backend-000396": {
+        "message": "Pemeriksaan Keamanan Kata Sandi"
+    },
+    "backend-000397": {
+        "message": "Apakah saya telah dikalahkan? (direkomendasikan)"
+    },
+    "backend-000398": {
+        "message": "Basis data lokal yang besar (25 juta kata sandi)"
+    },
+    "backend-000399": {
+        "message": "Basis data lokal kecil (5M kata sandi)"
+    },
+    "backend-000400": {
+        "message": "Basis data lokal yang besar & Hibp?"
+    },
+    "backend-000401": {
+        "message": "Layanan Penghasil Kata Sandi"
+    },
+    "backend-000402": {
+        "message": "Kamus lokal"
+    },
+    "backend-000403": {
+        "message": "Karakter Acak"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Koleksi Leipzig Corpora (direkomendasikan)"
+    },
+    "backend-000406": {
+        "message": "Layanan Favicon"
+    },
+    "backend-000407": {
+        "message": "Penganalisis lokal"
+    },
+    "backend-000408": {
+        "message": "Besticon (direkomendasikan)"
+    },
+    "backend-000409": {
+        "message": "Tidak ada"
+    },
+    "backend-000410": {
+        "message": "Layanan Pratinjau Situs Web"
+    },
+    "backend-000411": {
+        "message": "Kunci API Pratinjau Situs Web"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (Lokal)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (Lokal)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "Pengaturan Email Default"
+    },
+    "backend-000416": {
+        "message": "Mengirim email untuk peristiwa keamanan"
+    },
+    "backend-000417": {
+        "message": "Kirim email untuk berbagi acara"
+    },
+    "backend-000418": {
+        "message": "Pengaturan Lain"
+    },
+    "backend-000419": {
+        "message": "Menghapus objek yang dihapus dari basis data"
+    },
+    "backend-000420": {
+        "message": "Tampilkan Pembaruan Malam Hari di \"Aplikasi\""
+    },
+    "backend-000421": {
+        "message": "Tidak pernah"
+    },
+    "backend-000422": {
+        "message": "Segera"
+    },
+    "backend-000423": {
+        "message": "Setelah dua jam"
+    },
+    "backend-000424": {
+        "message": "Setelah satu hari"
+    },
+    "backend-000425": {
+        "message": "Setelah dua minggu"
+    },
+    "backend-000426": {
+        "message": "Setelah satu bulan"
+    },
+    "backend-000427": {
+        "message": "Setelah satu tahun"
+    },
+    "backend-000428": {
+        "message": "Pengaturan Cadangan"
+    },
+    "backend-000429": {
+        "message": "Interval Pencadangan"
+    },
+    "backend-000430": {
+        "message": "Setiap jam"
+    },
+    "backend-000431": {
+        "message": "Setiap enam jam"
+    },
+    "backend-000432": {
+        "message": "Setiap hari"
+    },
+    "backend-000433": {
+        "message": "Setiap dua hari"
+    },
+    "backend-000434": {
+        "message": "Setiap minggu"
+    },
+    "backend-000435": {
+        "message": "Setiap dua minggu"
+    },
+    "backend-000436": {
+        "message": "Jumlah cadangan yang harus disimpan"
+    },
+    "backend-000437": {
+        "message": "Cache"
+    },
+    "backend-000438": {
+        "message": "Cache Default ($STR_1$ file, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatar Cache ($STR_1$ file, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ file, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Pratinjau Cache ($STR_1$ file, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Cache Kata Sandi ($STR_1$ file, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "jelas"
+    },
+    "backend-000444": {
+        "message": "Bersihkan cache ini"
+    },
+    "backend-000445": {
+        "message": "Anda tidak bisa menghapus cache menggunakan layanan bersama"
+    },
+    "backend-000446": {
+        "message": "Tersimpan"
+    },
+    "backend-000447": {
+        "message": "Dibersihkan"
+    },
+    "backend-000448": {
+        "message": "Gagal"
+    },
+    "backend-000449": {
+        "message": "Butuh bantuan"
+    },
+    "backend-000450": {
+        "message": "menemukan bug"
+    },
+    "backend-000451": {
+        "message": "mencari dokumentasi"
+    },
+    "backend-000452": {
+        "message": "$STR_1$ $STR_1$ atau ? Kami siap membantu Anda! $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ tidak lagi didukung.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "Kata sandi memerlukan HTTPS."
+    },
+    "backend-000455": {
+        "message": "Menggunakan $STR_1$ untuk mengeksekusi pekerjaan latar belakang dapat menyebabkan penundaan. Kami merekomendasikan menggunakan Cron.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Harap periksa persyaratan sistem."
+    },
+    "backend-000457": {
+        "message": "Kata sandi tidak dibagikan"
+    },
+    "backend-000459": {
+        "message": "Anda memiliki kata sandi yang tidak aman"
+    },
+    "backend-000460": {
+        "message": "Anda memiliki kata sandi yang tidak aman"
+    },
+    "backend-000461": {
+        "message": "Salah satu kata sandi Anda tidak lagi aman."
+    },
+    "backend-000462": {
+        "message": "Beberapa kata sandi Anda tidak lagi aman."
+    },
+    "backend-000463": {
+        "message": "Passwords secara teratur memeriksa apakah kata sandi Anda telah disusupi oleh pelanggaran data."
+    },
+    "backend-000464": {
+        "message": "Pemeriksaan keamanan ini menemukan bahwa salah satu kata sandi Anda tidak aman."
+    },
+    "backend-000465": {
+        "message": "Pemeriksaan keamanan ini telah menemukan bahwa $STR_1$ kata sandi Anda tidak aman.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Itu berarti bahwa kata sandi tersebut tersebar di internet dan membahayakan akun Anda."
+    },
+    "backend-000467": {
+        "message": "Itu berarti bahwa kata sandi tersebut tersebar di internet dan membuat akun Anda berisiko."
+    },
+    "backend-000468": {
+        "message": "Oleh karena itu, kata sandi telah ditandai sebagai tidak aman dan harus diubah sekarang."
+    },
+    "backend-000469": {
+        "message": "Oleh karena itu, kata sandi telah ditandai sebagai tidak aman dan harus diubah sekarang."
+    },
+    "backend-000470": {
+        "message": "Anda bisa membuat kata sandi baru yang aman di aplikasi kata sandi."
+    },
+    "backend-000471": {
+        "message": "Anda bisa membuat kata sandi baru yang aman di aplikasi kata sandi."
+    },
+    "backend-000472": {
+        "message": "Ubah kata sandi sekarang"
+    },
+    "backend-000473": {
+        "message": "Ubah kata sandi sekarang"
+    },
+    "backend-000474": {
+        "message": "Buka aplikasi kata sandi untuk mengubahnya."
+    },
+    "backend-000475": {
+        "message": "Buka aplikasi kata sandi untuk mengubahnya."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ berbagi kata sandi dengan Anda.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ berbagi kata sandi $STR_1$ dengan Anda.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ dan $STRING_3$ berbagi kata sandi $STRING_1$ dengan Anda.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ dan $STRING_3$ berbagi kata sandi $STRING_1$ dengan Anda.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ dan $STRING_2$ orang lain berbagi kata sandi $STRING_1$ dengan Anda.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Buka aplikasi kata sandi untuk melihatnya."
+    },
+    "backend-000482": {
+        "message": "Buka aplikasi kata sandi untuk melihatnya."
+    },
+    "backend-000483": {
+        "message": "Kata sandi dibagikan kepada Anda pada $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Beberapa kata sandi dibagikan kepada Anda pada $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Melihat kata sandi yang dibagikan dengan saya"
+    },
+    "backend-000486": {
+        "message": "Salah satu kata sandi Anda tidak dapat dibagikan karena penerima sudah memiliki akses ke kata sandi tersebut."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ kata sandi Anda tidak dapat dibagikan karena penerima sudah memiliki akses ke kata sandi tersebut.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Membagikan kata sandi yang telah dibagikan kepada Anda, kadang-kadang bisa menciptakan lingkaran."
+    },
+    "backend-000490": {
+        "message": "Untuk mencegah hal ini, kata sandi ini tidak akan dibagikan."
+    },
+    "backend-000491": {
+        "message": "Akses administratif ke akun Anda"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ mencoba masuk ke akun Anda di $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ masuk ke akun Anda di $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Karena Anda menggunakan kata sandi utama, ini tidak berarti bahwa akses ke data Anda diberikan."
+    },
+    "backend-000495": {
+        "message": "Untuk mencegah akses yang tidak diinginkan ke data Anda, Anda harus menyiapkan kata sandi utama."
+    },
+    "backend-000496": {
+        "message": "Pengguna yang Dihapus ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "Bantu kami untuk meningkatkan Kata Sandi"
+    },
+    "backend-000498": {
+        "message": "Anda dapat membantu kami meningkatkan aplikasi Passwords dengan berpartisipasi dalam survei server kami."
+    },
+    "backend-000499": {
+        "message": "Ini akan mengirimkan kepada kami beberapa data anonim tentang pengaturan Anda dan pengaturan yang dipilih."
+    },
+    "backend-000500": {
+        "message": "Anda bisa mengubah ini kapan saja dalam pengaturan aplikasi."
+    },
+    "backend-000501": {
+        "message": "Belum"
+    },
+    "backend-000502": {
+        "message": "Berpartisipasi"
+    },
+    "backend-000503": {
+        "message": "Partisipasi survei server"
+    },
+    "backend-000504": {
+        "message": "Dasar"
+    },
+    "backend-000505": {
+        "message": "Penuh"
+    },
+    "backend-000506": {
+        "message": "Tidak ditetapkan"
+    },
+    "backend-000507": {
+        "message": "Harap pertimbangkan untuk menghosting sendiri api favicon Anda"
+    },
+    "backend-000508": {
+        "message": "Nextcloud Anda menggunakan instance Besticon bersama kami untuk mengambil ikon situs web."
+    },
+    "backend-000509": {
+        "message": "Instance ini ditujukan untuk pengaturan Nextcloud kecil dengan lalu lintas yang sangat sedikit."
+    },
+    "backend-000510": {
+        "message": "Silakan klik tautannya dan ikuti tutorial mudah kami untuk menyelenggarakan Besticon sendiri."
+    },
+    "backend-000512": {
+        "message": "Konfigurasi layanan pratinjau Anda tidak valid"
+    },
+    "backend-000513": {
+        "message": "Layanan favicon yang Anda pilih memerlukan api key atau endpoint, tetapi tidak ada yang diberikan."
+    },
+    "backend-000514": {
+        "message": "Layanan pratinjau yang Anda pilih memerlukan api key atau endpoint, tetapi tidak ada yang diberikan."
+    },
+    "backend-000515": {
+        "message": "Buka pengaturan admin untuk memperbarui konfigurasi atau memilih layanan lain."
+    },
+    "backend-000516": {
+        "message": "Kami telah mendeteksi beberapa upaya yang gagal untuk membuka kunci basis data kata sandi Anda dengan \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Hal ini bisa mengindikasikan bahwa seseorang sedang mencoba membobol akun Anda."
+    },
+    "backend-000518": {
+        "message": "Untuk mencegah upaya lebih lanjut, kredensial API klien ini dicabut."
+    },
+    "backend-000519": {
+        "message": "Selain itu, autentikasi API berbasis kata sandi telah dinonaktifkan."
+    },
+    "backend-000520": {
+        "message": "Jika Anda ingin terus menggunakan klien ini, Anda perlu membuat token baru untuknya."
+    },
+    "backend-000521": {
+        "message": "Jika Anda tidak mengetahui klien ini, harap ubah kata sandi Anda dan tinjau daftar perangkat Anda."
+    },
+    "backend-000522": {
+        "message": "Untuk mencegah upaya lebih lanjut, autentikasi API berbasis kata sandi telah dinonaktifkan."
+    },
+    "backend-000523": {
+        "message": "Untuk mengaktifkannya lagi, masuk dengan webapp atau klien apa pun yang menggunakan autentikasi token."
+    },
+    "backend-000524": {
+        "message": "Jika Anda tidak mengetahui klien ini, harap ubah kata sandi master dan kata sandi Nextcloud Anda."
+    },
+    "backend-000525": {
+        "message": "Untuk meningkatkan keamanan, kami sarankan untuk menggunakan token khusus perangkat alih-alih kata sandi Anda."
+    },
+    "frontend-000526": {
+        "message": "Ekstensi Peramban"
+    },
+    "frontend-000528": {
+        "message": "Aturan Kata Sandi"
+    },
+    "frontend-000529": {
+        "message": "Tandai duplikat"
+    },
+    "frontend-000530": {
+        "message": "Usia maksimum dalam hari"
+    },
+    "frontend-000531": {
+        "message": "Penghasil Kata Sandi"
+    },
+    "frontend-000532": {
+        "message": "Kekuatan kata sandi"
+    },
+    "frontend-000533": {
+        "message": "Sertakan angka"
+    },
+    "frontend-000534": {
+        "message": "Sertakan karakter khusus"
+    },
+    "frontend-000535": {
+        "message": "Antarmuka Pengguna"
+    },
+    "frontend-000536": {
+        "message": "Bagian awal"
+    },
+    "frontend-000537": {
+        "message": "Semua Kata Sandi"
+    },
+    "frontend-000538": {
+        "message": "Tampilan Daftar Kata Sandi"
+    },
+    "frontend-000539": {
+        "message": "Tetapkan judul dari"
+    },
+    "frontend-000540": {
+        "message": "Urutkan berdasarkan"
+    },
+    "frontend-000541": {
+        "message": "Bidang judul"
+    },
+    "frontend-000542": {
+        "message": "Tindakan klik tunggal"
+    },
+    "frontend-000543": {
+        "message": "Tindakan klik ganda"
+    },
+    "frontend-000544": {
+        "message": "Salin kata sandi"
+    },
+    "frontend-000545": {
+        "message": "Salin nama pengguna"
+    },
+    "frontend-000546": {
+        "message": "Salin situs web"
+    },
+    "frontend-000547": {
+        "message": "Tampilkan detailnya"
+    },
+    "frontend-000548": {
+        "message": "Tambahkan opsi salin di menu"
+    },
+    "frontend-000549": {
+        "message": "Tampilkan nama pengguna dalam tampilan daftar"
+    },
+    "frontend-000550": {
+        "message": "Tampilkan tag dalam tampilan daftar"
+    },
+    "frontend-000551": {
+        "message": "Tampilkan bidang khusus yang tersembunyi"
+    },
+    "frontend-000552": {
+        "message": "Cari saat saya mengetik"
+    },
+    "frontend-000553": {
+        "message": "Cari di mana saja dengan Enter"
+    },
+    "frontend-000554": {
+        "message": "Selalu tampilkan bagian pencarian"
+    },
+    "frontend-000555": {
+        "message": "Pemberitahuan"
+    },
+    "frontend-000556": {
+        "message": "Kirim Email untuk"
+    },
+    "frontend-000557": {
+        "message": "Masalah keamanan"
+    },
+    "frontend-000558": {
+        "message": "Kata sandi yang dibagikan kepada saya"
+    },
+    "frontend-000559": {
+        "message": "Tampilkan Pemberitahuan untuk"
+    },
+    "frontend-000560": {
+        "message": "Kesalahan lainnya"
+    },
+    "frontend-000561": {
+        "message": "Zona Bahaya"
+    },
+    "frontend-000562": {
+        "message": "Atur ulang semua pengaturan"
+    },
+    "frontend-000563": {
+        "message": "Atur ulang"
+    },
+    "frontend-000564": {
+        "message": "Hapus semuanya"
+    },
+    "frontend-000565": {
+        "message": "HAPUS SEMUANYA"
+    },
+    "frontend-000566": {
+        "message": "Reset akun yang diminta"
+    },
+    "frontend-000567": {
+        "message": "Lihat"
+    },
+    "frontend-000568": {
+        "message": "Lanjutan"
+    },
+    "frontend-000569": {
+        "message": "Tandai kata sandi sebagai lemah jika digunakan untuk beberapa akun"
+    },
+    "frontend-000570": {
+        "message": "Tandai kata sandi sebagai lemah jika melampaui jumlah hari yang ditentukan"
+    },
+    "frontend-000571": {
+        "message": "Kekuatan yang lebih tinggi menghasilkan kata sandi yang lebih panjang dan lebih kompleks"
+    },
+    "frontend-000572": {
+        "message": "Menampilkan properti yang dipilih sebagai judul dalam tampilan daftar"
+    },
+    "frontend-000573": {
+        "message": "Mengurutkan kata sandi berdasarkan properti yang dipilih ketika pengurutan berdasarkan nama dipilih"
+    },
+    "frontend-000574": {
+        "message": "Tindakan yang akan dilakukan ketika mengklik kata sandi dalam tampilan daftar"
+    },
+    "frontend-000575": {
+        "message": "Tindakan yang akan dilakukan ketika mengklik dua kali pada kata sandi dalam tampilan daftar"
+    },
+    "frontend-000576": {
+        "message": "Menampilkan opsi untuk menyalin kata sandi dan nama pengguna di menu"
+    },
+    "frontend-000577": {
+        "message": "Bagian awal yang akan ditampilkan ketika aplikasi dibuka"
+    },
+    "frontend-000578": {
+        "message": "Selalu tampilkan nama pengguna yang terkait dengan kata sandi dalam tampilan daftar"
+    },
+    "frontend-000579": {
+        "message": "Tampilkan tag untuk setiap kata sandi dalam tampilan daftar. Meningkatkan waktu pemuatan"
+    },
+    "frontend-000580": {
+        "message": "Tampilkan bidang khusus tersembunyi di formulir edit dan bagian detail kata sandi"
+    },
+    "frontend-000581": {
+        "message": "Mengirimi Anda email tentang kata sandi yang disusupi dan masalah keamanan lainnya"
+    },
+    "frontend-000582": {
+        "message": "Mengirimkan Anda e-mail ketika orang lain berbagi kata sandi dengan Anda"
+    },
+    "frontend-000583": {
+        "message": "Selalu tampilkan bagian untuk pencarian global dalam navigasi"
+    },
+    "frontend-000584": {
+        "message": "Memberi tahu Anda tentang kata sandi yang disusupi dan masalah keamanan lainnya"
+    },
+    "frontend-000585": {
+        "message": "Memberi tahu Anda ketika orang lain berbagi kata sandi dengan Anda"
+    },
+    "frontend-000586": {
+        "message": "Memberi tahu Anda apabila operasi latar belakang gagal"
+    },
+    "frontend-000587": {
+        "message": "Atur ulang semua pengaturan pada halaman ini ke default-nya"
+    },
+    "frontend-000588": {
+        "message": "Ini akan mengatur ulang semua pengaturan ke default-nya. Apakah Anda ingin melanjutkan?"
+    },
+    "frontend-000589": {
+        "message": "Mulai dari awal dan hapus semua konfigurasi, kata sandi, folder dan tag"
+    },
+    "frontend-000590": {
+        "message": "Apakah Anda ingin menghapus semua pengaturan, kata sandi, folder dan tag Anda?\nHal ini TIDAK mungkin dibatalkan."
+    },
+    "frontend-000594": {
+        "message": "Pindah"
+    },
+    "frontend-000595": {
+        "message": "Terbuka $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Tidak diketahui (Tidak_dicentang)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "Apa yang Anda harapkan?"
+    },
+    "frontend-000599": {
+        "message": "Klik untuk menampilkan kode QR."
+    },
+    "frontend-000600": {
+        "message": "Jangan peringatkan saya lagi"
+    },
+    "frontend-000601": {
+        "message": "Kekuatan"
+    },
+    "frontend-000602": {
+        "message": "Tutup"
+    },
+    "frontend-000603": {
+        "message": "Hapus dari favorit"
+    },
+    "frontend-000604": {
+        "message": "Tandai sebagai favorit"
+    },
+    "frontend-000605": {
+        "message": "Kata sandi tersembunyi"
+    },
+    "frontend-000606": {
+        "message": "Jangan tampilkan kata sandi ini di mana pun"
+    },
+    "frontend-000607": {
+        "message": "Data"
+    },
+    "frontend-000608": {
+        "message": "Jenis"
+    },
+    "frontend-000609": {
+        "message": "Bidang baru"
+    },
+    "frontend-000610": {
+        "message": "Hapus bidang"
+    },
+    "frontend-000611": {
+        "message": "Buka Panduan Penurunan Harga"
+    },
+    "frontend-000612": {
+        "message": "Batalkan"
+    },
+    "frontend-000613": {
+        "message": "Ulangi"
+    },
+    "frontend-000614": {
+        "message": "Ini akan berakhir $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Atau dalam obrolan kami!"
+    },
+    "frontend-000616": {
+        "message": "Terlalu banyak upaya login yang gagal"
+    },
+    "frontend-000617": {
+        "message": "Pilih folder"
+    },
+    "frontend-000618": {
+        "message": "Pilih \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ tidak bisa digunakan",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Rumah"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" tidak berisi folder",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Kata sandi Enkripsi Aplikasi Frasa Sandi"
+    },
+    "frontend-000623": {
+        "message": "Tidak diketahui"
+    },
+    "frontend-000624": {
+        "message": "Bantuan"
+    },
+    "frontend-000625": {
+        "message": "Pilih jenis enkripsi untuk kata sandi ini"
+    },
+    "frontend-000626": {
+        "message": "Apakah Anda ingin menghapus bidang \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Pastikan kode QR ini hanya terlihat oleh orang yang Anda percayai."
+    },
+    "frontend-000628": {
+        "message": "Enkripsi yang diterapkan oleh server sebelum menyimpan data dalam database"
+    },
+    "frontend-000629": {
+        "message": "Enkripsi yang diterapkan oleh klien sebelum mengirim data ke server"
+    },
+    "frontend-000630": {
+        "message": "Kata sandi tidak valid. Sesi dicabut karena terlalu banyak percobaan login yang gagal."
+    },
+    "frontend-000631": {
+        "message": "Ini adalah salinan frasa sandi yang Anda pilih untuk enkripsi. Mengubah atau menghapus entri ini tidak mempengaruhi enkripsi. Passphrase hanya bisa diubah dalam pengaturan. Informasi selengkapnya bisa ditemukan dalam buku pegangan."
+    },
+    "backend-000632": {
+        "message": "Api Layanan Favicon"
+    },
+    "backend-000633": {
+        "message": "(opsional)"
+    },
+    "backend-000634": {
+        "message": "Nextcloud Anda meminta lebih banyak ikon secara signifikan daripada rata-rata."
+    },
+    "backend-000635": {
+        "message": "Tutorial terbuka"
+    },
+    "backend-000636": {
+        "message": "Terdeteksi jumlah upaya login gagal yang mencurigakan."
+    },
+    "backend-000637": {
+        "message": "Informasi lebih lanjut"
+    },
+    "backend-000638": {
+        "message": "Melihat kata sandi yang tidak aman"
+    },
+    "backend-000639": {
+        "message": "Pengaturan terbuka"
+    },
+    "backend-000640": {
+        "message": "Buka kata sandi"
+    },
+    "backend-000641": {
+        "message": "Lihat aplikasi"
+    },
+    "backend-000642": {
+        "message": "Lihat aplikasi & perangkat"
+    },
+    "backend-000643": {
+        "message": "Mengelola perangkat & aplikasi"
+    },
+    "backend-000644": {
+        "message": "Melihat kata sandi bersama"
+    },
+    "backend-000645": {
+        "message": "Peningkatan aplikasi direkomendasikan"
+    },
+    "backend-000646": {
+        "message": "Klien atau aplikasi baru terhubung ke akun Anda"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" diberikan akses ke akun $STR_1$ Passwords anda melalui PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Anda dapat mengelola semua perangkat dan aplikasi yang terhubung di $STR_1$ pengaturan di bagian keamanan.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Pekerjaan latar belakang terakhir dieksekusi dengan PHP $STRING_1$, tetapi webserver menggunakan PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "Menggunakan versi utama PHP yang berbeda dapat menyebabkan masalah."
+    },
+    "backend-000651": {
+        "message": "Pengaturan Keamanan Kata Sandi Default"
+    },
+    "backend-000652": {
+        "message": "Pemeriksaan Keamanan Hash"
+    },
+    "backend-000653": {
+        "message": "Jangan menyimpan hash"
+    },
+    "backend-000654": {
+        "message": "Menyimpan 50% dari hash"
+    },
+    "backend-000655": {
+        "message": "Menyimpan 75% dari hash"
+    },
+    "backend-000656": {
+        "message": "Menyimpan hash penuh"
+    },
+    "backend-000657": {
+        "message": "Cadangan secara otomatis dipulihkan"
+    },
+    "backend-000658": {
+        "message": "Aplikasi kata sandi tampaknya mengalami masalah database."
+    },
+    "backend-000659": {
+        "message": "Karena itu, cadangan aplikasi \"$STR_1$\" dipulihkan secara otomatis.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Jika ini adalah kesalahan, cadangan database dibuat sebelum memulihkannya."
+    },
+    "backend-000661": {
+        "message": "Anda dapat menonaktifkan pemulihan cadangan otomatis dalam pengaturan aplikasi."
+    },
+    "backend-000662": {
+        "message": "Memulihkan cadangan secara otomatis ketika basis data dihapus"
+    },
+    "backend-000663": {
+        "message": "Kata sandi mengakhiri pembaruan untuk Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Kata sandi $STR_1$ adalah pembaruan terakhir untuk Nextcloud $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Upgrade ke Nextcloud $STR_1$ dan PHP $STR_1$ (atau PHP $STR_1$ untuk LSR) untuk upgrade di masa depan.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Pilih secara otomatis"
+    },
+    "backend-Passwords": {
+        "message": "Kata sandi"
+    },
+    "frontend-000667": {
+        "message": "Tag CSV"
+    },
+    "frontend-000670": {
+        "message": "Memulai pencarian ketika tombol ditekan di mana saja pada halaman"
+    },
+    "frontend-000671": {
+        "message": "Mencari di mana saja ketika tombol enter ditekan di kotak pencarian"
+    },
+    "settings-000678": {
+        "message": "Login & Sesi"
+    },
+    "settings-000679": {
+        "message": "Biarkan saya tetap masuk"
+    },
+    "settings-000680": {
+        "message": "Selalu"
+    },
+    "settings-000681": {
+        "message": "Ketika saya bekerja"
+    },
+    "settings-000682": {
+        "message": "Ketika saya aktif"
+    },
+    "settings-000683": {
+        "message": "Akhiri sesi setelah"
+    },
+    "settings-000684": {
+        "message": "Satu menit"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ menit",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Enkripsi ujung ke ujung"
+    },
+    "settings-000687": {
+        "message": "Mode enkripsi server"
+    },
+    "settings-000688": {
+        "message": "Tidak ada jika CSE digunakan"
+    },
+    "settings-000689": {
+        "message": "Enkripsi sederhana"
+    },
+    "settings-000690": {
+        "message": "Enkripsi tingkat lanjut"
+    },
+    "settings-000691": {
+        "message": "Mode enkripsi klien"
+    },
+    "settings-000692": {
+        "message": "Aktifkan"
+    },
+    "settings-000693": {
+        "message": "Ubah Kata Sandi"
+    },
+    "settings-000694": {
+        "message": "Tampilan Detail Kata Sandi"
+    },
+    "settings-000695": {
+        "message": "Tampilkan pratinjau situs web"
+    },
+    "settings-000696": {
+        "message": "Kata sandi baru"
+    },
+    "settings-000697": {
+        "message": "Ulangi kata sandi"
+    },
+    "settings-000698": {
+        "message": "Kata sandi lama"
+    },
+    "settings-000699": {
+        "message": "Kata sandi diubah"
+    },
+    "settings-000700": {
+        "message": "Mengubah kata sandi gagal"
+    },
+    "settings-000701": {
+        "message": "Masalah Administrasi"
+    },
+    "settings-000702": {
+        "message": "Berbagi Kata Sandi"
+    },
+    "settings-000703": {
+        "message": "Bagikan sebagai dapat diedit secara default"
+    },
+    "settings-000704": {
+        "message": "Izinkan berbagi secara default"
+    },
+    "settings-000705": {
+        "message": "Kode"
+    },
+    "settings-000707": {
+        "message": "Menambahkan angka ke kata sandi yang dihasilkan"
+    },
+    "settings-000708": {
+        "message": "Menambahkan karakter khusus ke kata sandi yang dihasilkan"
+    },
+    "settings-000709": {
+        "message": "Menentukan jumlah waktu setelah permintaan sebelum sesi dibatalkan"
+    },
+    "settings-000710": {
+        "message": "Pilih jenis enkripsi yang digunakan untuk mengenkripsi data pada server"
+    },
+    "settings-000711": {
+        "message": "Jalankan wizard instalasi untuk menyiapkan enkripsi untuk kata sandi Anda"
+    },
+    "settings-000712": {
+        "message": "Mengubah kata sandi enkripsi"
+    },
+    "settings-000713": {
+        "message": "Tampilkan pratinjau situs web terkait dalam detail. (Tidak pada ponsel)"
+    },
+    "settings-000714": {
+        "message": "Memberi tahu Anda tentang kesalahan konfigurasi dan masalah administratif lainnya"
+    },
+    "settings-000715": {
+        "message": "Masukkan \"$CODE$\" untuk mengatur ulang akun Anda dan menghapus semuanya.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Anda dapat menggunakan dialog ini untuk mengubah kata sandi utama Anda."
+    },
+    "settings-000717": {
+        "message": "Kata sandi Anda harus lebih panjang dari 12 karakter dan bukan kata sandi lama"
+    },
+    "settings-000718": {
+        "message": "Harap konfirmasi kata sandi baru Anda"
+    },
+    "settings-000719": {
+        "message": "Anda harus memasukkan kata sandi lama Anda"
+    },
+    "settings-000720": {
+        "message": "Kata sandi Anda telah berhasil diubah."
+    },
+    "settings-000721": {
+        "message": "Mengaktifkan opsi untuk mengizinkan pengguna lain mengedit kata sandi bersama secara default"
+    },
+    "settings-000722": {
+        "message": "Mengaktifkan opsi untuk membiarkan pengguna lain berbagi kata sandi bersama secara default"
+    },
+    "settings-000723": {
+        "message": "Buka halaman pengaturan dalam buku pegangan"
+    },
+    "settings-000724": {
+        "message": "Kirim permintaan keep-alive ke server untuk mencegah sesi dibatalkan"
+    },
+    "settings-000725": {
+        "message": "Pilih jenis enkripsi yang digunakan untuk mengenkripsi data pada klien sebelum dikirim ke server"
+    },
+    "settings-000726": {
+        "message": "Hash SHA-1 digunakan untuk memeriksa kata sandi yang dibobol. Hash parsial dapat mencegah serangan brute force jika server diretas, tetapi juga dapat menyebabkan kata sandi yang aman dilaporkan sebagai kata sandi yang dibobol secara keliru."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Tindakan klik roda mouse",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Tindakan yang akan dilakukan ketika roda mouse diklik pada entri kata sandi",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Tampilkan tombol pintasan untuk",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Menambahkan tombol ekstra untuk tindakan tertentu dalam tampilan desktop",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Memulihkan item yang tersembunyi",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Memulihkan Barang",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Tindakan ini menghapus bendera \"tersembunyi\" dari item sehingga item-item ini muncul lagi di aplikasi.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Memulihkan item yang tersembunyi",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Pilih jenis item tersembunyi apa pun yang ingin Anda pulihkan.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Kata sandi yang tidak berada dalam folder tersembunyi",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Memulihkan kata sandi tersembunyi yang berada dalam folder yang tidak tersembunyi itu sendiri",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Semua kata sandi tersembunyi",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Memulihkan semua kata sandi tersembunyi terlepas dari status folder",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Semua folder tersembunyi",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Memulihkan semua folder tersembunyi",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Semua tag tersembunyi",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Memulihkan semua tag tersembunyi",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Memulihkan kata sandi $PASSWORDS$, folder $FOLDERS$ dan tag $TAGS$.",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Barang-barang yang ditemukan",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Terjadi kesalahan.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Setelah peluncuran, tunjukkan"
+    },
+    "tutorial-000731": {
+        "message": "folder"
+    },
+    "tutorial-000732": {
+        "message": "tag"
+    },
+    "tutorial-000733": {
+        "message": "favorit"
+    },
+    "tutorial-000734": {
+        "message": "kata sandi"
+    },
+    "tutorial-000735": {
+        "message": "baru-baru ini berubah"
+    },
+    "tutorial-000736": {
+        "message": "Tandai kata sandi saya jika…"
+    },
+    "tutorial-000737": {
+        "message": "mereka lebih tua dari"
+    },
+    "tutorial-000738": {
+        "message": "tiga bulan"
+    },
+    "tutorial-000739": {
+        "message": "enam bulan"
+    },
+    "tutorial-000740": {
+        "message": "satu tahun"
+    },
+    "tutorial-000741": {
+        "message": "dua tahun"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ hari",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "mereka adalah duplikat"
+    },
+    "tutorial-000744": {
+        "message": "Membuat kata sandi baru saya"
+    },
+    "tutorial-000745": {
+        "message": "kuat"
+    },
+    "tutorial-000746": {
+        "message": "lebih kuat"
+    },
+    "tutorial-000747": {
+        "message": "sangat kuat"
+    },
+    "tutorial-000748": {
+        "message": "sangat kuat"
+    },
+    "tutorial-000749": {
+        "message": "termasuk angka"
+    },
+    "tutorial-000750": {
+        "message": "menyertakan karakter khusus"
+    },
+    "tutorial-000751": {
+        "message": "Rumah yang aman untuk kata sandi Anda"
+    },
+    "tutorial-000752": {
+        "message": "Rahasiakan kata sandi Anda"
+    },
+    "tutorial-000753": {
+        "message": "Sesuaikan pengalaman Anda"
+    },
+    "tutorial-000754": {
+        "message": "Menertibkan kata sandi Anda"
+    },
+    "tutorial-000755": {
+        "message": "Terhubung"
+    },
+    "tutorial-000756": {
+        "message": "Mengenkripsi kata sandi saya yang sudah ada"
+    },
+    "tutorial-000757": {
+        "message": "Simpan kata sandi"
+    },
+    "tutorial-000758": {
+        "message": "Ulangi kata sandi Anda"
+    },
+    "tutorial-000759": {
+        "message": "Menginstal Enkripsi"
+    },
+    "tutorial-000760": {
+        "message": "Gantungan Kunci"
+    },
+    "tutorial-000761": {
+        "message": "Bersihkan"
+    },
+    "tutorial-000762": {
+        "message": "Sukses"
+    },
+    "tutorial-000763": {
+        "message": "Temukan bantuan saat Anda membutuhkannya"
+    },
+    "tutorial-000764": {
+        "message": "Buka Aplikasi dan Ekstensi"
+    },
+    "tutorial-000765": {
+        "message": "Lanjutkan"
+    },
+    "tutorial-000766": {
+        "message": "Loncat"
+    },
+    "tutorial-000767": {
+        "message": "Periksa keamanan kata sandi dengan"
+    },
+    "tutorial-000768": {
+        "message": "Hasilkan kata sandi menggunakan"
+    },
+    "tutorial-000769": {
+        "message": "Dapatkan favicon dari"
+    },
+    "tutorial-000770": {
+        "message": "Dapatkan pratinjau situs web dari"
+    },
+    "tutorial-000771": {
+        "message": "Membuat cadangan"
+    },
+    "tutorial-000772": {
+        "message": "Lihat semua pengaturan"
+    },
+    "tutorial-000773": {
+        "message": "Baca kiat kami untuk admin"
+    },
+    "tutorial-000774": {
+        "message": "Kata sandi (min. 12 karakter)"
+    },
+    "tutorial-000775": {
+        "message": "Enkripsi sedang berlangsung…"
+    },
+    "tutorial-000776": {
+        "message": "Terdapat banyak pengaturan sehingga Anda dapat menyesuaikan pengalaman Anda."
+    },
+    "tutorial-000777": {
+        "message": "Anda bisa menemukan semuanya di \"More\", tetapi kami menempatkan yang paling umum di sini:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords menawarkan enkripsi modern dan kuat untuk melindungi data Anda dari pengintaian."
+    },
+    "tutorial-000779": {
+        "message": "Pilih kata sandi yang aman di bawah ini untuk mengaktifkan perlindungan terbaik untuk kata sandi Anda."
+    },
+    "tutorial-000780": {
+        "message": "Akses kata sandi Anda dengan mudah dari mana saja, berkat aplikasi dan ekstensi kami."
+    },
+    "tutorial-000781": {
+        "message": "Anda bisa menemukan bagian Aplikasi dan Ekstensi kami di \"More\" atau klik saja tombol di bawah ini."
+    },
+    "tutorial-000782": {
+        "message": "Kata sandi bisa disesuaikan dalam banyak cara yang berbeda."
+    },
+    "tutorial-000783": {
+        "message": "Sebagai administrator, Anda mungkin ingin melihat pengaturan umum ini."
+    },
+    "tutorial-000784": {
+        "message": "Kapan pun Anda tidak tahu cara kerja sesuatu, memiliki pertanyaan, atau membutuhkan bantuan untuk suatu masalah:"
+    },
+    "tutorial-000785": {
+        "message": "Bantuan sudah dekat."
+    },
+    "tutorial-000786": {
+        "message": "Buku panduan bawaan kami dapat ditemukan dengan mengklik \"More\" dan menjelaskan aplikasi ini secara mendetail."
+    },
+    "tutorial-000787": {
+        "message": "Dalam kasus lain, komunitas kami adalah tempat yang tepat untuk mengajukan pertanyaan Anda."
+    },
+    "tutorial-000788": {
+        "message": "Buku pegangan akan dibuka setelah tutorial"
+    },
+    "tutorial-000789": {
+        "message": "Masukkan kata sandi dengan 12 karakter atau lebih"
+    },
+    "tutorial-000790": {
+        "message": "Kata sandi Anda memerlukan sekurang-kurangnya 12 karakter dan kata sandi konfirmasi harus sama"
+    }
+}
