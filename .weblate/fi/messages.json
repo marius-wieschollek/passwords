@@ -1,1 +1,2949 @@
-{}
+{
+    "frontend-000319": {
+        "message": "Sisältö"
+    },
+    "backend-000434": {
+        "message": "Joka viikko"
+    },
+    "backend-000644": {
+        "message": "Näytä jaetut salasanat"
+    },
+    "backend-000652": {
+        "message": "Turvallisuustarkistus Hash"
+    },
+    "settings-000718": {
+        "message": "Vahvista uusi salasanasi"
+    },
+    "tutorial-000731": {
+        "message": "kansiot"
+    },
+    "apps-000001": {
+        "message": "virallinen"
+    },
+    "apps-000002": {
+        "message": "by $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000003": {
+        "message": "lähdekoodi"
+    },
+    "apps-000004": {
+        "message": "Lue lisää"
+    },
+    "apps-000005": {
+        "message": "Yhteys PassLinkiin"
+    },
+    "apps-000006": {
+        "message": "Uuden laitteen liittäminen"
+    },
+    "apps-000007": {
+        "message": "Yhdistä linkin kautta"
+    },
+    "apps-000008": {
+        "message": "Valitse nimi:"
+    },
+    "apps-000009": {
+        "message": "Koodit eivät täsmää"
+    },
+    "apps-000010": {
+        "message": "Näyttää hyvältä"
+    },
+    "apps-000011": {
+        "message": "Yhteys onnistui"
+    },
+    "apps-000012": {
+        "message": "Olen valmis."
+    },
+    "apps-000013": {
+        "message": "Älä yritä uudelleen"
+    },
+    "apps-000014": {
+        "message": "Kytke jotain muuta"
+    },
+    "apps-000015": {
+        "message": "Yritä uudelleen"
+    },
+    "apps-000016": {
+        "message": "Vahva salaus"
+    },
+    "apps-000017": {
+        "message": "Sovellusten haku epäonnistui: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Peruutit yhteyden"
+    },
+    "apps-000019": {
+        "message": "Et vahvistanut yhteyttä ajoissa"
+    },
+    "apps-000020": {
+        "message": "Skannaa QR-koodi sovelluksella ja yhdistä se."
+    },
+    "apps-000021": {
+        "message": "Napsauta painiketta, kun olet valmis aloittamaan yhteyden."
+    },
+    "apps-000022": {
+        "message": "Tarkista, että alla olevat koodit vastaavat laitteen tai sovelluksen antamia koodeja:"
+    },
+    "apps-000023": {
+        "message": "Linkitä tämä asiakas Nextcloud-tiliin ilman ärsyttäviä salasanoja ja urleja."
+    },
+    "apps-000024": {
+        "message": "Tämä asiakas tukee virallisesti vahvaa päästä päähän -salausta."
+    },
+    "apps-000025": {
+        "message": "Tätä asiakasta ylläpitävät Passwords-sovelluksen tekijät."
+    },
+    "apps-000026": {
+        "message": "Napsauta painiketta yhdistääksesi tähän laitteeseen asennetun sovelluksen tai skannaa QR-koodi sovelluksen kanssa, jos se on asennettu toiseen laitteeseen."
+    },
+    "backups-000028": {
+        "message": "Varmuuskopiointi tai vienti"
+    },
+    "backups-000029": {
+        "message": "Valitse muoto"
+    },
+    "backups-000030": {
+        "message": "Valitse"
+    },
+    "backups-000031": {
+        "message": "Tietokannan varmuuskopiointi"
+    },
+    "backups-000032": {
+        "message": "Ennalta määritetty CSV"
+    },
+    "backups-000033": {
+        "message": "Lue tuontiopas $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "tai"
+    },
+    "backups-000035": {
+        "message": "tietokannan varmuuskopiointi"
+    },
+    "backups-000036": {
+        "message": "mukautettu CSV"
+    },
+    "backups-000037": {
+        "message": "kokeile yleistä CSV-tuontia"
+    },
+    "backups-000038": {
+        "message": "Ei tuontia CSV-tiedostollesi?"
+    },
+    "backups-000039": {
+        "message": "Varmuuskopiointisalasana"
+    },
+    "backups-000040": {
+        "message": "(Valinnainen) Salaa varmuuskopion"
+    },
+    "backups-000041": {
+        "message": "Tuonti tukee vain CSV"
+    },
+    "backups-000042": {
+        "message": "Vie salasanat"
+    },
+    "backups-000043": {
+        "message": "Vie kansioita"
+    },
+    "backups-000044": {
+        "message": "Vie tunnisteet"
+    },
+    "backups-000045": {
+        "message": "Mukautetut kentät"
+    },
+    "backups-000046": {
+        "message": "Kansio"
+    },
+    "backups-000047": {
+        "message": "Tunnisteet"
+    },
+    "backups-000048": {
+        "message": "ParentLabel"
+    },
+    "backups-000049": {
+        "message": "Kansio Id"
+    },
+    "backups-000050": {
+        "message": "Tag Id:t"
+    },
+    "backups-000051": {
+        "message": "ParentId"
+    },
+    "backups-CustomFields": {
+        "message": "Mukautetut kentät"
+    },
+    "backups-FolderLabel": {
+        "message": "Kansio"
+    },
+    "backups-TagLabels": {
+        "message": "Tunnisteet"
+    },
+    "backups-FolderId": {
+        "message": "Kansio Id"
+    },
+    "backups-TagIds": {
+        "message": "Tag Id:t"
+    },
+    "backups-000052": {
+        "message": "Tyhjä"
+    },
+    "backups-000053": {
+        "message": "Lisää otsikkorivi"
+    },
+    "backups-000054": {
+        "message": "Vie kanssani jaetut salasanat"
+    },
+    "backups-000055": {
+        "message": "Älä muokkaa kanssani jaettuja salasanoja"
+    },
+    "backups-000056": {
+        "message": "Älä tuo tyhjiä kenttiä"
+    },
+    "backups-000057": {
+        "message": "Suorita vienti"
+    },
+    "backups-000058": {
+        "message": "Vie"
+    },
+    "backups-000059": {
+        "message": "Odotan…"
+    },
+    "backups-000060": {
+        "message": "Vientivirhe"
+    },
+    "backups-000061": {
+        "message": "Lataa $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "Ei mitään vietävää"
+    },
+    "backups-000063": {
+        "message": "Vietäviä tietoja ei ole"
+    },
+    "backups-000064": {
+        "message": "Palauta tai tuo"
+    },
+    "backups-000065": {
+        "message": "Valitse tuontiformaatti"
+    },
+    "backups-000066": {
+        "message": "Salasanat CSV"
+    },
+    "backups-000067": {
+        "message": "Kansio CSV"
+    },
+    "backups-000068": {
+        "message": "Mukautettu CSV"
+    },
+    "backups-000069": {
+        "message": "Muut / Mukautettu CSV"
+    },
+    "backups-000070": {
+        "message": "Valitse Tiedosto"
+    },
+    "backups-000071": {
+        "message": "Valitse vaihtoehdot"
+    },
+    "backups-000072": {
+        "message": "Konfliktien käsittely"
+    },
+    "backups-000073": {
+        "message": "Ohita, jos sama tarkistus"
+    },
+    "backups-000074": {
+        "message": "Ohita aina"
+    },
+    "backups-000075": {
+        "message": "Korvaa olemassa oleva"
+    },
+    "backups-000076": {
+        "message": "Yhdistetään olemassa olevaan"
+    },
+    "backups-000077": {
+        "message": "Luo uusi merkintä"
+    },
+    "backups-000078": {
+        "message": "Salattuja varmuuskopioita varten"
+    },
+    "backups-000079": {
+        "message": "CSV-vaihtoehdot"
+    },
+    "backups-000080": {
+        "message": "Tietokanta"
+    },
+    "backups-000081": {
+        "message": "Lainausmerkki"
+    },
+    "backups-000082": {
+        "message": "Pakohahmo"
+    },
+    "backups-000083": {
+        "message": "Kentän rajaaja"
+    },
+    "backups-000084": {
+        "message": "Rivinvaihto"
+    },
+    "backups-000085": {
+        "message": "Lainaus"
+    },
+    "backups-000086": {
+        "message": "Yksittäinen lainaus"
+    },
+    "backups-000087": {
+        "message": "Backslash"
+    },
+    "backups-000088": {
+        "message": "Havaitse"
+    },
+    "backups-000089": {
+        "message": "Pilkku"
+    },
+    "backups-000090": {
+        "message": "Puolipiste"
+    },
+    "backups-000091": {
+        "message": "Avaruus"
+    },
+    "backups-000092": {
+        "message": "Välilehti"
+    },
+    "backups-000093": {
+        "message": "Havaitse sulkeutumattomat lainausmerkit"
+    },
+    "backups-000094": {
+        "message": "Ohita ensimmäinen rivi"
+    },
+    "backups-000095": {
+        "message": "Interpoloi puuttuvat kentät"
+    },
+    "backups-000096": {
+        "message": "CSV-kenttien kartoitus"
+    },
+    "backups-000097": {
+        "message": "Esikatselulinja"
+    },
+    "backups-000098": {
+        "message": "Linja $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(ei arvoa)"
+    },
+    "backups-000100": {
+        "message": "Älä välitä"
+    },
+    "backups-000101": {
+        "message": "Suorita tuonti"
+    },
+    "backups-000102": {
+        "message": "Tuo"
+    },
+    "backups-000103": {
+        "message": "Syöttötiedoston jäsentäminen"
+    },
+    "backups-000104": {
+        "message": "Tunnisteiden analysointi"
+    },
+    "backups-000105": {
+        "message": "Kansioiden analysointi"
+    },
+    "backups-000106": {
+        "message": "Tunnisteiden lukeminen"
+    },
+    "backups-000107": {
+        "message": "Tunnisteiden tuominen"
+    },
+    "backups-000108": {
+        "message": "Lukukansiot"
+    },
+    "backups-000109": {
+        "message": "Kansioiden tuominen"
+    },
+    "backups-000110": {
+        "message": "Salasanojen lukeminen"
+    },
+    "backups-000111": {
+        "message": "Salasanojen tuominen"
+    },
+    "backups-000112": {
+        "message": "Tuonti epäonnistui"
+    },
+    "backups-000113": {
+        "message": "Tuonti epäonnistui osittain"
+    },
+    "backups-000114": {
+        "message": "Tuonti onnistui"
+    },
+    "backups-000115": {
+        "message": "Tuontivirhe"
+    },
+    "backups-000116": {
+        "message": "Joissakin kohteissa oli virheitä:"
+    },
+    "backups-000117": {
+        "message": "Virheellinen tiedostotyyppi \"$TYPE$\"",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Salasana vaaditaan"
+    },
+    "backups-000119": {
+        "message": "Salasana on virheellinen"
+    },
+    "backups-000120": {
+        "message": "Salasanojen purkaminen epäonnistui"
+    },
+    "backups-000121": {
+        "message": "Kansioiden salauksen purkaminen epäonnistui"
+    },
+    "backups-000122": {
+        "message": "Tunnisteiden purkaminen epäonnistui"
+    },
+    "backups-000123": {
+        "message": "Tuontitiedosto on tyhjä"
+    },
+    "backups-000124": {
+        "message": "CSV-tiedostoa ei voi yhdistää"
+    },
+    "backups-000125": {
+        "message": "Kirjautumiset"
+    },
+    "backups-000126": {
+        "message": "Huomautukset"
+    },
+    "backups-000127": {
+        "message": "Luottokortit"
+    },
+    "backups-000128": {
+        "message": "Identiteetit"
+    },
+    "backups-000129": {
+        "message": "Rahoitus"
+    },
+    "backups-000130": {
+        "message": "Lisenssit"
+    },
+    "backups-000131": {
+        "message": "Matkailu"
+    },
+    "backups-000132": {
+        "message": "Tietokoneet"
+    },
+    "backups-000133": {
+        "message": "Sekalaiset"
+    },
+    "backups-000134": {
+        "message": "Virheellinen peräkkäinen lainausmerkki lainausmerkkikentässä"
+    },
+    "backups-000135": {
+        "message": "Tiedostoa ei voitu analysoida: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ rivillä $LINE$ merkki $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" on liitetty tiedostoja, joita ei voi tuoda.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "Tyyppi \"$FIELD$\" kohdassa \"$LABEL$\" on tuntematon, eikä sitä voida tuoda.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "Merkin \"$FIELD$\" merkintä kohdassa \"$LABEL$\" on yli 48 merkkiä, ja se on leikattu.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "\"$FIELD$\" arvo kohdassa \"$LABEL$\" ylittää 320 merkkiä ja se on leikattu.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Lisätietoja on lokissa. (Paina F12)"
+    },
+    "backups-000142": {
+        "message": "Tiedoston tyyppi on \"$ACTUAL$\", mutta odotetaan \"$EXPECTED$\". Olet ehkä valinnut väärän tiedoston tai maahantuojan.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ tiedetään tuottavan virheellisiä vientitiedostoja. Jos tiedostoa ei voida analysoida, katso apua käsikirjasta.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": "Kansio"
+    },
+    "backups-000145": {
+        "message": "Tunnisteet"
+    },
+    "frontend-000148": {
+        "message": "Salasanat"
+    },
+    "frontend-000149": {
+        "message": "Kaikki"
+    },
+    "frontend-000150": {
+        "message": "Kansiot"
+    },
+    "frontend-000151": {
+        "message": "Viimeisimmät"
+    },
+    "frontend-000152": {
+        "message": "Suosikit"
+    },
+    "frontend-000153": {
+        "message": "Jaettu"
+    },
+    "frontend-000154": {
+        "message": "Turvallisuus"
+    },
+    "frontend-000155": {
+        "message": "Roskat"
+    },
+    "frontend-000156": {
+        "message": "Yksityiskohdat"
+    },
+    "frontend-000157": {
+        "message": "Muokkaa"
+    },
+    "frontend-000158": {
+        "message": "Nimeä uudelleen"
+    },
+    "frontend-000159": {
+        "message": "Poista"
+    },
+    "frontend-000160": {
+        "message": "Palauta"
+    },
+    "frontend-000161": {
+        "message": "Uusi salasana"
+    },
+    "frontend-000162": {
+        "message": "Uusi kansio"
+    },
+    "frontend-000163": {
+        "message": "Uusi merkki"
+    },
+    "frontend-000164": {
+        "message": "Turvallinen"
+    },
+    "frontend-000165": {
+        "message": "Tila"
+    },
+    "frontend-000166": {
+        "message": "Heikko"
+    },
+    "frontend-000167": {
+        "message": "Heikko (kaksoiskappale)"
+    },
+    "frontend-000168": {
+        "message": "Heikko (vanhentunut)"
+    },
+    "frontend-000169": {
+        "message": "Rikottu"
+    },
+    "frontend-000170": {
+        "message": "Jaa"
+    },
+    "frontend-000171": {
+        "message": "Tarkistukset"
+    },
+    "frontend-000172": {
+        "message": "QR-koodi"
+    },
+    "frontend-000173": {
+        "message": "Salasana"
+    },
+    "frontend-000174": {
+        "message": "Käyttäjätunnus"
+    },
+    "frontend-000175": {
+        "message": "Verkkosivusto"
+    },
+    "frontend-000176": {
+        "message": "Lisää tunnisteet…"
+    },
+    "frontend-000177": {
+        "message": "Väri"
+    },
+    "frontend-000178": {
+        "message": "Nimi"
+    },
+    "frontend-000179": {
+        "message": "Tarra"
+    },
+    "frontend-000180": {
+        "message": "Yleistä"
+    },
+    "frontend-000181": {
+        "message": "Ominaisuudet"
+    },
+    "frontend-000182": {
+        "message": "Numerot"
+    },
+    "frontend-000183": {
+        "message": "Erikoismerkit"
+    },
+    "frontend-000184": {
+        "message": "Lisää vaihtoehtoja"
+    },
+    "frontend-000185": {
+        "message": "Suosikki"
+    },
+    "frontend-000186": {
+        "message": "Salaus"
+    },
+    "frontend-000187": {
+        "message": "Palvelimella"
+    },
+    "frontend-000188": {
+        "message": "Mukautetut kentät"
+    },
+    "frontend-000189": {
+        "message": "Salainen"
+    },
+    "frontend-000190": {
+        "message": "Teksti"
+    },
+    "frontend-000191": {
+        "message": "Tiedosto"
+    },
+    "frontend-000192": {
+        "message": "Arvo"
+    },
+    "frontend-000193": {
+        "message": "Näkyvyyden vaihtaminen"
+    },
+    "frontend-000194": {
+        "message": "Luo salasana"
+    },
+    "frontend-000195": {
+        "message": "Yksinkertainen palvelinpuolen salaus V1"
+    },
+    "frontend-000196": {
+        "message": "Tee muistiinpanoja"
+    },
+    "frontend-000197": {
+        "message": "Tallenna"
+    },
+    "frontend-000198": {
+        "message": "Luo kansio"
+    },
+    "frontend-000199": {
+        "message": "Kansio luotu"
+    },
+    "frontend-000200": {
+        "message": "Kansion luominen epäonnistui"
+    },
+    "frontend-000201": {
+        "message": "Nimeä kansio uudelleen"
+    },
+    "frontend-000202": {
+        "message": "Kansio nimetty uudelleen"
+    },
+    "frontend-000203": {
+        "message": "Kansion uudelleennimeäminen epäonnistui"
+    },
+    "frontend-000204": {
+        "message": "Kansio siirretty"
+    },
+    "frontend-000205": {
+        "message": "Kansion siirtäminen epäonnistui"
+    },
+    "frontend-000206": {
+        "message": "Poista kansio"
+    },
+    "frontend-000207": {
+        "message": "Haluatko poistaa kansion ja sen sisällön?"
+    },
+    "frontend-000208": {
+        "message": "Kansio poistettu"
+    },
+    "frontend-000209": {
+        "message": "Kansion poistaminen epäonnistui"
+    },
+    "frontend-000210": {
+        "message": "Kansio palautettu"
+    },
+    "frontend-000211": {
+        "message": "Kansion palauttaminen epäonnistui"
+    },
+    "frontend-000212": {
+        "message": "Luo tunniste"
+    },
+    "frontend-000213": {
+        "message": "Tag luotu"
+    },
+    "frontend-000214": {
+        "message": "Tunnisteen luominen epäonnistui"
+    },
+    "frontend-000215": {
+        "message": "Muokkaa tagia"
+    },
+    "frontend-000216": {
+        "message": "Luo satunnainen väri"
+    },
+    "frontend-000217": {
+        "message": "Tag tallennettu"
+    },
+    "frontend-000218": {
+        "message": "Tagin tallentaminen epäonnistui"
+    },
+    "frontend-000219": {
+        "message": "Poista tagi"
+    },
+    "frontend-000220": {
+        "message": "Haluatko poistaa tunnisteen?"
+    },
+    "frontend-000221": {
+        "message": "Tag poistettu"
+    },
+    "frontend-000222": {
+        "message": "Tagin poistaminen epäonnistui"
+    },
+    "frontend-000223": {
+        "message": "Tag palautettu"
+    },
+    "frontend-000224": {
+        "message": "Tagin palauttaminen epäonnistui"
+    },
+    "frontend-000225": {
+        "message": "Luo salasana"
+    },
+    "frontend-000226": {
+        "message": "Salasana luotu"
+    },
+    "frontend-000227": {
+        "message": "Salasanan luominen epäonnistui"
+    },
+    "frontend-000228": {
+        "message": "Muokkaa salasanaa"
+    },
+    "frontend-000229": {
+        "message": "Salasana tallennettu"
+    },
+    "frontend-000230": {
+        "message": "Salasanan tallentaminen epäonnistui"
+    },
+    "frontend-000231": {
+        "message": "Salasana siirretty"
+    },
+    "frontend-000232": {
+        "message": "Salasanan siirtäminen epäonnistui"
+    },
+    "frontend-000233": {
+        "message": "Poista salasana"
+    },
+    "frontend-000234": {
+        "message": "Haluatko poistaa salasanan?"
+    },
+    "frontend-000235": {
+        "message": "Salasana poistettu"
+    },
+    "frontend-000236": {
+        "message": "Salasana palautettu"
+    },
+    "frontend-000237": {
+        "message": "Salasanan palauttaminen epäonnistui"
+    },
+    "frontend-000238": {
+        "message": "Avaa Url"
+    },
+    "frontend-000239": {
+        "message": "Kopioi Url"
+    },
+    "frontend-000240": {
+        "message": "Kopioi käyttäjä"
+    },
+    "frontend-000241": {
+        "message": "Kopioi salasana"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ kopioitiin leikepöydälle",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "Virhe kopioimalla $ELEMENT$ leikepöydälle",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Viimeksi muokattu $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Palauta tarkistus"
+    },
+    "frontend-000246": {
+        "message": "Tarkistaminen palautettu"
+    },
+    "frontend-000247": {
+        "message": "Uudistuksen palauttaminen epäonnistui"
+    },
+    "frontend-000248": {
+        "message": "Haluatko palauttaa tarkistuksen?"
+    },
+    "frontend-000249": {
+        "message": "Jaettu kanssasi"
+    },
+    "frontend-000250": {
+        "message": "Sinun jakamasi"
+    },
+    "frontend-000251": {
+        "message": "Tilastot"
+    },
+    "frontend-000252": {
+        "message": "Luotu"
+    },
+    "frontend-000253": {
+        "message": "Viimeksi päivitetty"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ tarkistukset",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "Osakkeet"
+    },
+    "frontend-000256": {
+        "message": "Jaettu $COUNT$ kertaa",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": "Salaus palvelimella"
+    },
+    "frontend-000258": {
+        "message": "Salaus sovellettu asiakkaassa"
+    },
+    "frontend-000259": {
+        "message": "Ei salausta"
+    },
+    "frontend-000260": {
+        "message": "Yksinkertainen salaus (Gen. 1)"
+    },
+    "frontend-000261": {
+        "message": "Yksinkertainen salaus (Gen. 2)"
+    },
+    "frontend-000262": {
+        "message": "Kehittynyt salaus (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Salaus libsodiumilla"
+    },
+    "frontend-000264": {
+        "message": "Lisää"
+    },
+    "frontend-000265": {
+        "message": "Varmuuskopiointi ja palautus"
+    },
+    "frontend-000266": {
+        "message": "Asetukset"
+    },
+    "frontend-000267": {
+        "message": "Käsikirja"
+    },
+    "frontend-000268": {
+        "message": "Sovellukset ja laajennukset"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ ja $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "Muokkaus sallittu"
+    },
+    "frontend-000271": {
+        "message": "Muokkaus kielletty"
+    },
+    "frontend-000272": {
+        "message": "jakaminen sallittu"
+    },
+    "frontend-000273": {
+        "message": "jakaminen kielletty"
+    },
+    "frontend-000274": {
+        "message": "Etsi käyttäjä"
+    },
+    "frontend-000275": {
+        "message": "Aseta viimeinen käyttöpäivä"
+    },
+    "frontend-000276": {
+        "message": "Vanhentuu $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "Valitse päättymispäivä tai jätä tyhjäksi, jos haluat jakaa ikuisesti."
+    },
+    "frontend-000278": {
+        "message": "Valitse päivämäärä tulevaisuudessa"
+    },
+    "frontend-000279": {
+        "message": "Virheellinen päivämäärä"
+    },
+    "frontend-000280": {
+        "message": "Käyttäjää $UID$ ei ole olemassa",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "Salasanaa ei voida jakaa: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Kirjoitusoikeuksien vaihtaminen"
+    },
+    "frontend-000283": {
+        "message": "Vaihda jako-oikeuksia"
+    },
+    "frontend-000284": {
+        "message": "Lopeta jakaminen"
+    },
+    "frontend-000285": {
+        "message": "Päivämäärä"
+    },
+    "frontend-000286": {
+        "message": "Oletusvälimuisti (0 tiedostoa, 0 B)"
+    },
+    "frontend-000287": {
+        "message": "Avatars Cache (0 tiedostoa, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Favicon Cache (0 tiedostoa, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Esikatseluvälimuisti (0 tiedostoa, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "Salasanojen välimuisti (0 tiedostoa, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "Muutettu"
+    },
+    "frontend-000292": {
+        "message": "Muutettu"
+    },
+    "frontend-000293": {
+        "message": "Muokattu"
+    },
+    "frontend-000294": {
+        "message": "Luotu"
+    },
+    "frontend-000295": {
+        "message": "Tarkistus"
+    },
+    "frontend-000296": {
+        "message": "Url"
+    },
+    "frontend-000297": {
+        "message": "Vanhempi"
+    },
+    "frontend-000298": {
+        "message": "Poista kaikki kohteet"
+    },
+    "frontend-000299": {
+        "message": "Palauta kaikki kohteet"
+    },
+    "frontend-000300": {
+        "message": "Palauta kohteet"
+    },
+    "frontend-000301": {
+        "message": "Palauta kaikki kohteet roskakoriin?"
+    },
+    "frontend-000302": {
+        "message": "Palauta tämä kohde"
+    },
+    "frontend-000303": {
+        "message": "Kunnostetut kohteet"
+    },
+    "frontend-000304": {
+        "message": "Tyhjä roskakori"
+    },
+    "frontend-000305": {
+        "message": "Poista kaikki kohteet roskakorista?"
+    },
+    "frontend-000306": {
+        "message": "Roskat tyhjennetty"
+    },
+    "frontend-000307": {
+        "message": "Etsi"
+    },
+    "frontend-000308": {
+        "message": "Käytä hakukenttää hakuun"
+    },
+    "frontend-000309": {
+        "message": "Etsi kaikkialla \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000310": {
+        "message": "Täällä ei ole mitään"
+    },
+    "frontend-000311": {
+        "message": "Klikkaa \"+\" lisätäksesi jotain"
+    },
+    "frontend-000312": {
+        "message": "Poistetut kohteet näkyvät tässä"
+    },
+    "frontend-000313": {
+        "message": "Sinulle ei jaettu salasanoja"
+    },
+    "frontend-000314": {
+        "message": "Et jakanut salasanoja"
+    },
+    "frontend-000315": {
+        "message": "Suosikkisi näkyvät täällä"
+    },
+    "frontend-000316": {
+        "message": "Parempi tarkistaa muut kohdat"
+    },
+    "frontend-000317": {
+        "message": "Se on luultavasti hyvä merkki"
+    },
+    "frontend-000318": {
+        "message": "Siirry osoitteeseen $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000320": {
+        "message": "Kuva $COUNT$: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Sivua ei pystytä noutamaan: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "Virheellinen sisältötyyppi $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Sisältöä ei ole saatavilla"
+    },
+    "frontend-000324": {
+        "message": "Ei löydy"
+    },
+    "frontend-000325": {
+        "message": "Tarvitsetko vielä apua?"
+    },
+    "frontend-000326": {
+        "message": "Kysy foorumillamme!"
+    },
+    "frontend-000327": {
+        "message": "Löysitkö virheen?"
+    },
+    "frontend-000328": {
+        "message": "Kerro meille!"
+    },
+    "frontend-000329": {
+        "message": "Istunto on päättynyt"
+    },
+    "frontend-000330": {
+        "message": "API-istunnon tunniste vanhentunut"
+    },
+    "frontend-000331": {
+        "message": "Verkkovirhe"
+    },
+    "frontend-000332": {
+        "message": "Ei pysty lataamaan $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Lajittele nimen mukaan"
+    },
+    "frontend-000334": {
+        "message": "Lajittele muokatun päivämäärän mukaan"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ salasanat",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 salasana"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ kansiot",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 kansio"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ tagit",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "1 merkki"
+    },
+    "frontend-000341": {
+        "message": "Ei mitään"
+    },
+    "frontend-000342": {
+        "message": " ja "
+    },
+    "frontend-000343": {
+        "message": "ottelu"
+    },
+    "frontend-000344": {
+        "message": "vastaa"
+    },
+    "frontend-000345": {
+        "message": "Luonut"
+    },
+    "frontend-000346": {
+        "message": "Kirjaudut sisään nimellä $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Kirjaudu sisään"
+    },
+    "frontend-000348": {
+        "message": "Pyydä merkki uudelleen"
+    },
+    "frontend-000349": {
+        "message": "Liian monta yritystä"
+    },
+    "frontend-000350": {
+        "message": "Salasana on liian lyhyt"
+    },
+    "frontend-000351": {
+        "message": "Tuntematon virhe"
+    },
+    "frontend-000352": {
+        "message": "Token-pyyntö epäonnistui"
+    },
+    "frontend-000353": {
+        "message": "Järjestelmän ylläpito"
+    },
+    "frontend-000354": {
+        "message": "Ei saatavilla"
+    },
+    "frontend-000355": {
+        "message": "Järjestelmä"
+    },
+    "frontend-000356": {
+        "message": "Julkinen pääsy"
+    },
+    "frontend-000357": {
+        "message": "Automaattinen taustatehtävä"
+    },
+    "frontend-000358": {
+        "message": "Palvelimen komentorivi"
+    },
+    "frontend-000359": {
+        "message": "Korjatkaa syöttämänne tiedot"
+    },
+    "frontend-000360": {
+        "message": "Näytä arvo"
+    },
+    "frontend-000361": {
+        "message": "Peruuta"
+    },
+    "frontend-000362": {
+        "message": "Ok"
+    },
+    "frontend-000363": {
+        "message": "true"
+    },
+    "frontend-000364": {
+        "message": "väärä"
+    },
+    "frontend-000365": {
+        "message": "kyllä"
+    },
+    "frontend-000366": {
+        "message": "ei"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ on jakanut tämän salasanan kanssasi.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": "Olet saavuttanut 4096 merkin enimmäispituuden."
+    },
+    "frontend-000369": {
+        "message": "Emme voineet löytää mitään \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "Sivua \"$PAGE$\" ei voitu hakea käsikirjapalvelimelta.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Jotkin tiedot odottavat synkronointia"
+    },
+    "frontend-000372": {
+        "message": "Sinut kirjaudutaan ulos $TIME$ sekunnin kuluttua.",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "Olet ehkä pyytänyt liikaa poletteja. Yritä myöhemmin uudelleen."
+    },
+    "frontend-000374": {
+        "message": "End-to-End-salaus poistetaan käytöstä tämän salasanan osalta, jos jaat sen."
+    },
+    "frontend-000375": {
+        "message": "Istuntotunnus ei ole enää voimassa. Sovellus latautuu nyt uudelleen."
+    },
+    "frontend-000376": {
+        "message": "Tänään vuonna 2018 julkaistiin ensimmäinen versio salasanoista. Kiitos sovelluksen käytöstä."
+    },
+    "frontend-Tags": {
+        "message": "Tunnisteet"
+    },
+    "frontend-Folder": {
+        "message": "Kansio"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Jos tallennat piilotetun salasanan kansioon, joka ei ole itse piilotettu, salasanaa ei voi käyttää. Tätä salasanaa ei enää näytetä missään. Haluatko jatkaa?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Piilota tämä salasana?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "backend-000377": {
+        "message": "HTTPS vaaditaan"
+    },
+    "backend-000378": {
+        "message": "lataa tämä sivu uudelleen"
+    },
+    "backend-000379": {
+        "message": "foorumi"
+    },
+    "backend-000380": {
+        "message": "dokumentaatio"
+    },
+    "backend-000381": {
+        "message": "Voit kokeilla $STR_1$ sivua HTTPS:llä.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "Tämä sovellus vaatii $STR_1$, jotta se toimii turvallisesti.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "Tämä EI ole vika. Käy osoitteessa $STR_1$, jos tarvitset apua.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Tarkastele alla olevaa HTTPS-raporttia ongelman korjaamiseksi."
+    },
+    "backend-000385": {
+        "message": "Lue tämä $STR_1$ määrittääksesi palvelimesi käyttämään HTTPS:ää.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Lue tämä $STR_1$, jos käytät mitä tahansa välityspalvelinta.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "Mene osoitteeseen $STR_1$ saadaksesi ilmaisen HTTPS-sertifikaatin, jos tarvitset sellaisen.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "Jos ongelma jatkuu, ota yhteys järjestelmänvalvojaan."
+    },
+    "backend-000389": {
+        "message": "Salasanat Istunto $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Avoin dokumentaatio"
+    },
+    "backend-000391": {
+        "message": "ei koskaan"
+    },
+    "backend-000392": {
+        "message": "Sisäinen tietojenkäsittely"
+    },
+    "backend-000393": {
+        "message": "Kuvan renderöinti"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick (suositellaan)"
+    },
+    "backend-000395": {
+        "message": "Ulkoiset palvelut"
+    },
+    "backend-000396": {
+        "message": "Salasanan turvatarkastukset"
+    },
+    "backend-000397": {
+        "message": "Onko minut huijattu? (suositellaan)"
+    },
+    "backend-000398": {
+        "message": "Suuri paikallinen tietokanta (25M salasanaa)"
+    },
+    "backend-000399": {
+        "message": "Pieni paikallinen tietokanta (5M salasanaa)"
+    },
+    "backend-000400": {
+        "message": "Suuri paikallinen tietokanta & Hibp?"
+    },
+    "backend-000401": {
+        "message": "Salasanageneraattoripalvelu"
+    },
+    "backend-000402": {
+        "message": "Paikallinen sanakirja"
+    },
+    "backend-000403": {
+        "message": "Satunnaisia merkkejä"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Collection (suositellaan)"
+    },
+    "backend-000406": {
+        "message": "Favicon-palvelu"
+    },
+    "backend-000407": {
+        "message": "Paikallinen analysaattori"
+    },
+    "backend-000408": {
+        "message": "Besticon (suositellaan)"
+    },
+    "backend-000409": {
+        "message": "Ei ole"
+    },
+    "backend-000410": {
+        "message": "Verkkosivuston esikatselupalvelu"
+    },
+    "backend-000411": {
+        "message": "Verkkosivuston esikatselun API-avain"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (paikallinen)"
+    },
+    "backend-000413": {
+        "message": "WKHTML (paikallinen)"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000415": {
+        "message": "Sähköpostin oletusasetukset"
+    },
+    "backend-000416": {
+        "message": "Lähetä sähköpostiviestejä tietoturvatapahtumista"
+    },
+    "backend-000417": {
+        "message": "Lähetä sähköposteja tapahtumien jakamista varten"
+    },
+    "backend-000418": {
+        "message": "Muut asetukset"
+    },
+    "backend-000419": {
+        "message": "Poistaa poistetut kohteet tietokannasta"
+    },
+    "backend-000420": {
+        "message": "Näytä yölliset päivitykset kohdassa \"Sovellukset\""
+    },
+    "backend-000421": {
+        "message": "Ei koskaan"
+    },
+    "backend-000422": {
+        "message": "Välittömästi"
+    },
+    "backend-000423": {
+        "message": "Kahden tunnin kuluttua"
+    },
+    "backend-000424": {
+        "message": "Yhden päivän kuluttua"
+    },
+    "backend-000425": {
+        "message": "Kahden viikon kuluttua"
+    },
+    "backend-000426": {
+        "message": "Yhden kuukauden kuluttua"
+    },
+    "backend-000427": {
+        "message": "Vuoden kuluttua"
+    },
+    "backend-000428": {
+        "message": "Varmuuskopiointiasetukset"
+    },
+    "backend-000429": {
+        "message": "Varmuuskopiointiväli"
+    },
+    "backend-000430": {
+        "message": "Joka tunti"
+    },
+    "backend-000431": {
+        "message": "Joka kuudes tunti"
+    },
+    "backend-000432": {
+        "message": "Joka päivä"
+    },
+    "backend-000433": {
+        "message": "Joka toinen päivä"
+    },
+    "backend-000435": {
+        "message": "Joka toinen viikko"
+    },
+    "backend-000436": {
+        "message": "Säilytettävien varmuuskopioiden määrä"
+    },
+    "backend-000437": {
+        "message": "Kätköt"
+    },
+    "backend-000438": {
+        "message": "Oletusvälimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatars Cache ($STR_1$ tiedostot, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ tiedostot, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Esikatseluvälimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Salasanojen välimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "selkeä"
+    },
+    "backend-000444": {
+        "message": "Tyhjennä tämä välimuisti"
+    },
+    "backend-000445": {
+        "message": "Et voi tyhjentää välimuistia käyttämällä jaettua palvelua."
+    },
+    "backend-000446": {
+        "message": "Tallennettu"
+    },
+    "backend-000447": {
+        "message": "Selvä"
+    },
+    "backend-000448": {
+        "message": "Epäonnistunut"
+    },
+    "backend-000449": {
+        "message": "Tarvitsen apua"
+    },
+    "backend-000450": {
+        "message": "löysin bugin"
+    },
+    "backend-000451": {
+        "message": "etsitään dokumentaatiota"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ tai $STR_1$? Me hoidamme sinut!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ ei enää tueta.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "Salasanat edellyttää HTTPS:ää."
+    },
+    "backend-000455": {
+        "message": "$STR_1$:n käyttäminen taustatehtävien suorittamiseen voi aiheuttaa viiveitä. Suosittelemme Cronin käyttöä.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Tarkista järjestelmävaatimukset."
+    },
+    "backend-000457": {
+        "message": "Salasanaa ei ole jaettu"
+    },
+    "backend-000459": {
+        "message": "Sinulla on epävarma salasana"
+    },
+    "backend-000460": {
+        "message": "Sinulla on epävarmat salasanat"
+    },
+    "backend-000461": {
+        "message": "Yksi salasanasi ei ole enää turvallinen."
+    },
+    "backend-000462": {
+        "message": "Jotkin salasanasi eivät ole enää turvallisia."
+    },
+    "backend-000463": {
+        "message": "Passwords tarkistaa säännöllisesti, onko salasanasi vaarantuneet tietomurron vuoksi."
+    },
+    "backend-000464": {
+        "message": "Tämä tietoturvatarkistus on havainnut, että yksi salasanasi on epävarma."
+    },
+    "backend-000465": {
+        "message": "Tämä tietoturvatarkastus on osoittanut, että $STR_1$ salasanasi ovat turvattomia.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "Tämä tarkoittaa, että salasana on internetissä ja että tilisi on vaarassa."
+    },
+    "backend-000467": {
+        "message": "Tämä tarkoittaa, että salasanat ovat internetissä ja että tilisi ovat vaarassa."
+    },
+    "backend-000468": {
+        "message": "Siksi salasana on merkitty turvattomaksi, ja se on vaihdettava nyt."
+    },
+    "backend-000469": {
+        "message": "Siksi salasanat on merkitty turvattomiksi, ja ne on vaihdettava nyt."
+    },
+    "backend-000470": {
+        "message": "Voit luoda uuden turvallisen salasanan salasanat-sovelluksessa."
+    },
+    "backend-000471": {
+        "message": "Voit luoda uusia turvallisia salasanoja salasanat-sovelluksessa."
+    },
+    "backend-000472": {
+        "message": "Vaihda salasana nyt"
+    },
+    "backend-000473": {
+        "message": "Vaihda salasanat nyt"
+    },
+    "backend-000474": {
+        "message": "Avaa salasanat-sovellus vaihtaaksesi sen."
+    },
+    "backend-000475": {
+        "message": "Avaa salasanat-sovellus vaihtaaksesi ne."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ jakanut salasanan kanssasi.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ jaettu $STR_1$ salasanat kanssasi.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ ja $STRING_3$ jaettu $STRING_1$ salasana kanssasi.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ ja $STRING_3$ jakoivat kanssasi $STRING_1$ -salasanat.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ ja $STRING_2$ muut jakoivat $STRING_1$ salasanat kanssasi.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Avaa salasanat-sovellus nähdäksesi sen."
+    },
+    "backend-000482": {
+        "message": "Avaa salasanat-sovellus nähdäksesi ne."
+    },
+    "backend-000483": {
+        "message": "Salasana jaettiin sinulle osoitteessa $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "Sinulle jaettiin useita salasanoja $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Näytä minulle jaetut salasanat"
+    },
+    "backend-000486": {
+        "message": "Yhtä salasanaasi ei voitu jakaa, koska vastaanottajalla on jo pääsy siihen."
+    },
+    "backend-000487": {
+        "message": "$STR_1$ salasanojasi ei voi jakaa, koska vastaanottajalla on jo pääsy niihin.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "Sinulle jaetun salasanan jakaminen voi joskus luoda silmukan."
+    },
+    "backend-000490": {
+        "message": "Tämän estämiseksi näitä salasanoja ei jaeta."
+    },
+    "backend-000491": {
+        "message": "Hallinnollinen pääsy tiliisi"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ Yritin kirjautua tilillesi osoitteessa $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ kirjautunut tilillesi osoitteessa $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "Koska käytät pääsalasanaa, tämä ei tarkoita, että pääsy tietoihin olisi myönnetty."
+    },
+    "backend-000495": {
+        "message": "Jotta tietoihin ei päästäisi käsiksi ei-toivotulla tavalla, sinun on otettava käyttöön pääsalasana."
+    },
+    "backend-000496": {
+        "message": "Poistettu käyttäjä ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "Auta meitä parantamaan salasanoja"
+    },
+    "backend-000498": {
+        "message": "Voit auttaa meitä parantamaan Passwords-sovellusta osallistumalla palvelinkyselyyn."
+    },
+    "backend-000499": {
+        "message": "Tämä lähettää meille nimettömiä tietoja asetuksistasi ja valituista asetuksista."
+    },
+    "backend-000500": {
+        "message": "Voit muuttaa tämän milloin tahansa sovelluksen asetuksissa."
+    },
+    "backend-000501": {
+        "message": "Ei vielä"
+    },
+    "backend-000502": {
+        "message": "Osallistu"
+    },
+    "backend-000503": {
+        "message": "Palvelinkyselyyn osallistuminen"
+    },
+    "backend-000504": {
+        "message": "Basic"
+    },
+    "backend-000505": {
+        "message": "Täysi"
+    },
+    "backend-000506": {
+        "message": "Ei asetettu"
+    },
+    "backend-000507": {
+        "message": "Harkitse favicon api:n itsehostamista."
+    },
+    "backend-000508": {
+        "message": "Nextcloud käyttää jaettuja Besticon-instanssejamme verkkosivujen kuvakkeiden hakemiseen."
+    },
+    "backend-000509": {
+        "message": "Nämä instanssit on tarkoitettu pieniin Nextcloud-asetuksiin, joissa on hyvin vähän liikennettä."
+    },
+    "backend-000510": {
+        "message": "Klikkaa linkkiä ja seuraa helppoa ohjettamme isännöidäksesi Besticonia itse."
+    },
+    "backend-000512": {
+        "message": "Esikatselupalvelun kokoonpano on virheellinen"
+    },
+    "backend-000513": {
+        "message": "Valitsemasi favicon-palvelu vaatii api-avaimen tai päätepisteen, mutta sellaista ei ole annettu."
+    },
+    "backend-000514": {
+        "message": "Valitsemasi esikatselupalvelu vaatii api-avaimen tai päätepisteen, mutta sellaista ei ole annettu."
+    },
+    "backend-000515": {
+        "message": "Avaa järjestelmänvalvojan asetukset päivittääksesi kokoonpanon tai valitaksesi toisen palvelun."
+    },
+    "backend-000516": {
+        "message": "Olemme havainneet useita epäonnistuneita yrityksiä avata salasanatietokantasi \"$STR_1$\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "Tämä voi olla merkki siitä, että joku yrittää murtautua tilillesi."
+    },
+    "backend-000518": {
+        "message": "Uusien yritysten estämiseksi tämän asiakkaan API-tunnukset on peruutettu."
+    },
+    "backend-000519": {
+        "message": "Myös salasanapohjainen API-todennus on poistettu käytöstä."
+    },
+    "backend-000520": {
+        "message": "Jos haluat jatkaa tämän asiakkaan käyttöä, sinun on luotava sille uusi tunniste."
+    },
+    "backend-000521": {
+        "message": "Jos et tunne tätä asiakasta, vaihda salasanasi ja tarkista laiteluettelosi."
+    },
+    "backend-000522": {
+        "message": "Salasanapohjainen API-todennus on poistettu käytöstä uusien yritysten estämiseksi."
+    },
+    "backend-000523": {
+        "message": "Jos haluat ottaa sen uudelleen käyttöön, kirjaudu sisään verkkosovelluksella tai millä tahansa asiakkaalla, joka käyttää tunnisteen todennusta."
+    },
+    "backend-000524": {
+        "message": "Jos et tunne tätä asiakasta, vaihda pääsalasana ja Nextcloud-salasana."
+    },
+    "backend-000525": {
+        "message": "Turvallisuuden lisäämiseksi suosittelemme käyttämään laitekohtaisia tunnuksia salasanan sijasta."
+    },
+    "frontend-000526": {
+        "message": "Selaimen laajennus"
+    },
+    "frontend-000528": {
+        "message": "Salasanasäännöt"
+    },
+    "frontend-000529": {
+        "message": "Merkitse kaksoiskappaleet"
+    },
+    "frontend-000530": {
+        "message": "Enimmäisikä päivinä"
+    },
+    "frontend-000531": {
+        "message": "Salasanageneraattori"
+    },
+    "frontend-000532": {
+        "message": "Salasanan vahvuus"
+    },
+    "frontend-000533": {
+        "message": "Sisällytä numerot"
+    },
+    "frontend-000534": {
+        "message": "Sisällytä erikoismerkit"
+    },
+    "frontend-000535": {
+        "message": "Käyttöliittymä"
+    },
+    "frontend-000536": {
+        "message": "Alkuperäinen osa"
+    },
+    "frontend-000537": {
+        "message": "Kaikki salasanat"
+    },
+    "frontend-000538": {
+        "message": "Salasanojen luettelonäkymä"
+    },
+    "frontend-000539": {
+        "message": "Aseta otsikko alkaen"
+    },
+    "frontend-000540": {
+        "message": "Lajittelu"
+    },
+    "frontend-000541": {
+        "message": "Otsikkokenttä"
+    },
+    "frontend-000542": {
+        "message": "Yhden napsautuksen toiminto"
+    },
+    "frontend-000543": {
+        "message": "Kaksoisnapsautustoiminto"
+    },
+    "frontend-000544": {
+        "message": "Kopioi salasana"
+    },
+    "frontend-000545": {
+        "message": "Kopioi käyttäjänimi"
+    },
+    "frontend-000546": {
+        "message": "Kopioi verkkosivusto"
+    },
+    "frontend-000547": {
+        "message": "Näytä tiedot"
+    },
+    "frontend-000548": {
+        "message": "Lisää kopiointivaihtoehtoja valikkoon"
+    },
+    "frontend-000549": {
+        "message": "Näytä käyttäjänimi luettelonäkymässä"
+    },
+    "frontend-000550": {
+        "message": "Näytä tunnisteet luettelonäkymässä"
+    },
+    "frontend-000551": {
+        "message": "Näytä piilotetut mukautetut kentät"
+    },
+    "frontend-000552": {
+        "message": "Etsi kirjoittaessani"
+    },
+    "frontend-000553": {
+        "message": "Etsi kaikkialta Enterillä"
+    },
+    "frontend-000554": {
+        "message": "Näytä aina hakuosio"
+    },
+    "frontend-000555": {
+        "message": "Ilmoitukset"
+    },
+    "frontend-000556": {
+        "message": "Lähetä sähköposteja"
+    },
+    "frontend-000557": {
+        "message": "Turvallisuuskysymykset"
+    },
+    "frontend-000558": {
+        "message": "Minun kanssani jaetut salasanat"
+    },
+    "frontend-000559": {
+        "message": "Näytä ilmoitukset"
+    },
+    "frontend-000560": {
+        "message": "Muut virheet"
+    },
+    "frontend-000561": {
+        "message": "Vaaravyöhyke"
+    },
+    "frontend-000562": {
+        "message": "Nollaa kaikki asetukset"
+    },
+    "frontend-000563": {
+        "message": "Nollaa"
+    },
+    "frontend-000564": {
+        "message": "Poista kaikki"
+    },
+    "frontend-000565": {
+        "message": "POISTA KAIKKI"
+    },
+    "frontend-000566": {
+        "message": "Tilin nollausta pyydetty"
+    },
+    "frontend-000567": {
+        "message": "Näytä"
+    },
+    "frontend-000568": {
+        "message": "Edistynyt"
+    },
+    "frontend-000569": {
+        "message": "Merkitse salasanat heikoiksi, jos niitä käytetään useilla tileillä."
+    },
+    "frontend-000570": {
+        "message": "Merkitse salasanat heikoiksi, jos ne ylittävät määritellyn määrän päiviä."
+    },
+    "frontend-000571": {
+        "message": "Korkeampi vahvuus johtaa pidempiin ja monimutkaisempiin salasanoihin."
+    },
+    "frontend-000572": {
+        "message": "Näytä valittu ominaisuus otsikkona luettelonäkymässä."
+    },
+    "frontend-000573": {
+        "message": "Lajittelee salasanat valitun ominaisuuden mukaan, kun lajittelu nimen mukaan on valittu."
+    },
+    "frontend-000574": {
+        "message": "Toiminto, joka suoritetaan, kun salasanaa napsautetaan luettelonäkymässä."
+    },
+    "frontend-000575": {
+        "message": "Toiminto, joka suoritetaan kaksoisnapsautettaessa salasanaa luettelonäkymässä."
+    },
+    "frontend-000576": {
+        "message": "Näyttää vaihtoehdot salasanan ja käyttäjätunnuksen kopioimiseksi valikossa."
+    },
+    "frontend-000577": {
+        "message": "Sovelluksen avaamisen yhteydessä näytettävä alkuosa."
+    },
+    "frontend-000578": {
+        "message": "Näytä aina salasanaan liittyvä käyttäjänimi luettelonäkymässä."
+    },
+    "frontend-000579": {
+        "message": "Näytä kunkin salasanan tunnisteet luettelonäkymässä. Lisää latausaikoja"
+    },
+    "frontend-000580": {
+        "message": "Näytä piilotetut mukautetut kentät muokkauslomakkeessa ja salasanan yksityiskohdat-osiossa."
+    },
+    "frontend-000581": {
+        "message": "lähettää sinulle sähköpostiviestejä vaarantuneista salasanoista ja muista tietoturvaongelmista."
+    },
+    "frontend-000582": {
+        "message": "Lähettää sinulle sähköpostiviestejä, kun muut ihmiset jakavat salasanoja kanssasi."
+    },
+    "frontend-000583": {
+        "message": "Näytä aina maailmanlaajuisen haun osio navigoinnissa."
+    },
+    "frontend-000584": {
+        "message": "Ilmoittaa sinulle vaarantuneista salasanoista ja muista tietoturvaongelmista."
+    },
+    "frontend-000585": {
+        "message": "Ilmoittaa sinulle, kun muut ihmiset jakavat salasanoja kanssasi."
+    },
+    "frontend-000586": {
+        "message": "Ilmoittaa, kun taustatoiminto epäonnistuu"
+    },
+    "frontend-000587": {
+        "message": "Nollaa kaikki tämän sivun asetukset oletusasetuksiinsa."
+    },
+    "frontend-000588": {
+        "message": "Tämä palauttaa kaikki asetukset oletusasetuksiin. Haluatko jatkaa?"
+    },
+    "frontend-000589": {
+        "message": "Aloita alusta ja poista kaikki asetukset, salasanat, kansiot ja tunnisteet."
+    },
+    "frontend-000590": {
+        "message": "Haluatko poistaa kaikki asetukset, salasanat, kansiot ja tunnisteet?\nTätä EI voi perua."
+    },
+    "frontend-000593": {
+        "message": "Muokkaa uutena"
+    },
+    "frontend-000594": {
+        "message": "Siirrä"
+    },
+    "frontend-000595": {
+        "message": "Avaa $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Tuntematon (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "Mitä odotit?"
+    },
+    "frontend-000599": {
+        "message": "Näytä QR-koodi napsauttamalla sitä."
+    },
+    "frontend-000600": {
+        "message": "Älä varoita minua enää"
+    },
+    "frontend-000601": {
+        "message": "Vahvuus"
+    },
+    "frontend-000602": {
+        "message": "Sulje"
+    },
+    "frontend-000603": {
+        "message": "Poista suosikeista"
+    },
+    "frontend-000604": {
+        "message": "Merkitse suosikiksi"
+    },
+    "frontend-000605": {
+        "message": "Piilotettu salasana"
+    },
+    "frontend-000606": {
+        "message": "Älä näytä tätä salasanaa missään"
+    },
+    "frontend-000607": {
+        "message": "Tiedot"
+    },
+    "frontend-000608": {
+        "message": "Tyyppi"
+    },
+    "frontend-000609": {
+        "message": "Uusi kenttä"
+    },
+    "frontend-000610": {
+        "message": "Poista kenttä"
+    },
+    "frontend-000611": {
+        "message": "Avoin Markdown-opas"
+    },
+    "frontend-000612": {
+        "message": "Kumoa"
+    },
+    "frontend-000613": {
+        "message": "Redo"
+    },
+    "frontend-000614": {
+        "message": "Se päättyy $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000615": {
+        "message": "Tai chatissamme!"
+    },
+    "frontend-000616": {
+        "message": "Liian monta epäonnistunutta kirjautumisyritystä"
+    },
+    "frontend-000617": {
+        "message": "Valitse kansio"
+    },
+    "frontend-000618": {
+        "message": "Valitse \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ ei voi käyttää",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "Etusivu"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" ei sisällä kansioita",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "Salasanat Sovelluksen salaus Salasana"
+    },
+    "frontend-000623": {
+        "message": "Tuntematon"
+    },
+    "frontend-000624": {
+        "message": "Apua"
+    },
+    "frontend-000625": {
+        "message": "Valitse salasanan salaustyyppi"
+    },
+    "frontend-000626": {
+        "message": "Haluatko poistaa kentän \"$FIELD$\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Varmista, että tämä QR-koodi näkyy vain luotetuille henkilöille."
+    },
+    "frontend-000628": {
+        "message": "Salaus, jota palvelin käyttää ennen tietojen tallentamista tietokantaan."
+    },
+    "frontend-000629": {
+        "message": "Salaus, jota asiakas käyttää ennen tietojen lähettämistä palvelimelle."
+    },
+    "frontend-000630": {
+        "message": "Salasana on virheellinen. Istunto peruutettu liian monen epäonnistuneen kirjautumisyrityksen vuoksi."
+    },
+    "frontend-000631": {
+        "message": "Tämä on kopio salausta varten valitsemastasi salasanasta. Tämän merkinnän muuttaminen tai poistaminen ei vaikuta salaukseen. Tunnuslauseen voi muuttaa vain asetuksissa. Lisätietoja on käsikirjassa."
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "backend-000633": {
+        "message": "(valinnainen)"
+    },
+    "backend-000634": {
+        "message": "Nextcloud pyytää huomattavasti enemmän kuvakkeita kuin keskimäärin."
+    },
+    "backend-000635": {
+        "message": "Avoin opetusohjelma"
+    },
+    "backend-000636": {
+        "message": "Epäilyttävä määrä epäonnistuneita kirjautumisyrityksiä havaittu."
+    },
+    "backend-000637": {
+        "message": "Lisätietoja"
+    },
+    "backend-000638": {
+        "message": "Näytä turvattomat salasanat"
+    },
+    "backend-000639": {
+        "message": "Avaa asetukset"
+    },
+    "backend-000640": {
+        "message": "Avoimet salasanat"
+    },
+    "backend-000641": {
+        "message": "Näytä sovellukset"
+    },
+    "backend-000642": {
+        "message": "Näytä sovellukset ja laitteet"
+    },
+    "backend-000643": {
+        "message": "Hallitse laitteita ja sovelluksia"
+    },
+    "backend-000645": {
+        "message": "App päivitys suositellaan"
+    },
+    "backend-000646": {
+        "message": "Uusi asiakas tai sovellus on yhdistetty tiliisi."
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" on saanut pääsyn $STR_1$ Passwords -tilillesi PassLinkin kautta.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "Voit hallita kaikkia liitettyjä laitteita ja sovelluksia osoitteessa $STR_1$ asetuksissa kohdassa turvallisuus.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "Viimeisin taustatyö suoritettiin PHP:llä $STRING_1$, mutta verkkopalvelin käyttää PHP:tä $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "PHP:n eri pääversioiden käyttäminen voi aiheuttaa ongelmia."
+    },
+    "backend-000651": {
+        "message": "Oletussalasanan suojausasetukset"
+    },
+    "backend-000653": {
+        "message": "Älä säilytä hasheja"
+    },
+    "backend-000654": {
+        "message": "Säilytä 50 % hashista"
+    },
+    "backend-000655": {
+        "message": "Säilytä 75 % hashista"
+    },
+    "backend-000656": {
+        "message": "Tallenna koko hash"
+    },
+    "backend-000657": {
+        "message": "Varmuuskopio palautetaan automaattisesti"
+    },
+    "backend-000658": {
+        "message": "Salasanat-sovelluksessa näyttää ilmenneen tietokantaongelma."
+    },
+    "backend-000659": {
+        "message": "Tämän vuoksi sovelluksen varmuuskopio \"$STR_1$\" palautettiin automaattisesti.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Jos kyseessä oli virhe, tietokannasta tehtiin varmuuskopio ennen sen palauttamista."
+    },
+    "backend-000661": {
+        "message": "Voit poistaa automaattisen varmuuskopion palauttamisen käytöstä sovelluksen asetuksista."
+    },
+    "backend-000662": {
+        "message": "Palauta varmuuskopiot automaattisesti, kun tietokanta pyyhitään."
+    },
+    "backend-000663": {
+        "message": "Salasanat päättyy Nextcloudin päivitykset $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000664": {
+        "message": "Salasanat $STR_1$ on viimeinen päivitys Nextcloudille $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000665": {
+        "message": "Päivitä Nextcloud $STR_1$ ja PHP $STR_1$ (tai PHP $STR_1$ LSR:lle) tulevia päivityksiä varten.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000666": {
+        "message": "Valitse automaattisesti"
+    },
+    "backend-Passwords": {
+        "message": "Salasanat"
+    },
+    "frontend-000667": {
+        "message": "Tunnisteet CSV"
+    },
+    "frontend-000669": {
+        "message": "Oletusarvo"
+    },
+    "frontend-000670": {
+        "message": "Aloita haku, kun näppäintä painetaan missä tahansa sivulla"
+    },
+    "frontend-000671": {
+        "message": "Haku kaikkialla, kun hakukentässä painetaan enter-näppäintä."
+    },
+    "settings-000678": {
+        "message": "Sisäänkirjautuminen & istunto"
+    },
+    "settings-000679": {
+        "message": "Pidä minut kirjautuneena sisään"
+    },
+    "settings-000680": {
+        "message": "Aina"
+    },
+    "settings-000681": {
+        "message": "Kun työskentelen"
+    },
+    "settings-000682": {
+        "message": "Kun olen aktiivinen"
+    },
+    "settings-000683": {
+        "message": "Lopeta istunto sen jälkeen, kun"
+    },
+    "settings-000684": {
+        "message": "Yksi minuutti"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ minuuttia",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "End-to-end-salaus"
+    },
+    "settings-000687": {
+        "message": "Palvelimen salaustila"
+    },
+    "settings-000688": {
+        "message": "Ei ole, jos käytetään CSE:tä"
+    },
+    "settings-000689": {
+        "message": "Yksinkertainen salaus"
+    },
+    "settings-000690": {
+        "message": "Kehittynyt salaus"
+    },
+    "settings-000691": {
+        "message": "Asiakkaan salaustila"
+    },
+    "settings-000692": {
+        "message": "Ota käyttöön"
+    },
+    "settings-000693": {
+        "message": "Vaihda salasana"
+    },
+    "settings-000694": {
+        "message": "Salasanojen yksityiskohtainen näkymä"
+    },
+    "settings-000695": {
+        "message": "Näytä verkkosivuston esikatselu"
+    },
+    "settings-000696": {
+        "message": "Uusi salasana"
+    },
+    "settings-000697": {
+        "message": "Toista salasana"
+    },
+    "settings-000698": {
+        "message": "Vanha salasana"
+    },
+    "settings-000699": {
+        "message": "Salasana vaihdettu"
+    },
+    "settings-000700": {
+        "message": "Salasanan vaihtaminen epäonnistui"
+    },
+    "settings-000701": {
+        "message": "Hallinnolliset kysymykset"
+    },
+    "settings-000702": {
+        "message": "Salasanan jakaminen"
+    },
+    "settings-000703": {
+        "message": "Jaa muokattavaksi oletusarvoisesti"
+    },
+    "settings-000704": {
+        "message": "Salli jakaminen oletusarvoisesti"
+    },
+    "settings-000705": {
+        "message": "Koodi"
+    },
+    "settings-000706": {
+        "message": "Virheellinen nollauskoodi"
+    },
+    "settings-000707": {
+        "message": "Lisää numeroita luotuihin salasanoihin"
+    },
+    "settings-000708": {
+        "message": "Lisää erikoismerkkejä luotuihin salasanoihin"
+    },
+    "settings-000709": {
+        "message": "Määritä, kuinka kauan pyynnön jälkeen istunto peruutetaan."
+    },
+    "settings-000710": {
+        "message": "Valitse palvelimella olevien tietojen salaukseen käytettävä salaustyyppi."
+    },
+    "settings-000711": {
+        "message": "Suorita ohjatun asennuksen asennusohjelma salasanojen salauksen määrittämiseksi."
+    },
+    "settings-000712": {
+        "message": "Muuta salaussalasana"
+    },
+    "settings-000713": {
+        "message": "Näyttää liitetyn verkkosivuston esikatselun yksityiskohdissa. (Ei matkapuhelimissa)"
+    },
+    "settings-000714": {
+        "message": "Ilmoittaa konfigurointivirheistä ja muista hallinnollisista ongelmista."
+    },
+    "settings-000715": {
+        "message": "Kirjoita \"$CODE$\" nollataksesi tilisi ja poistaaksesi kaiken.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Voit käyttää tätä valintaikkunaa pääsalasanan vaihtamiseen."
+    },
+    "settings-000717": {
+        "message": "Salasanan on oltava yli 12 merkkiä pitkä, eikä se saa olla vanha salasana."
+    },
+    "settings-000719": {
+        "message": "Sinun on annettava vanha salasanasi"
+    },
+    "settings-000720": {
+        "message": "Salasanasi on vaihdettu onnistuneesti."
+    },
+    "settings-000721": {
+        "message": "Ota käyttöön vaihtoehto, jonka mukaan muut käyttäjät voivat oletusarvoisesti muokata jaettua salasanaa."
+    },
+    "settings-000722": {
+        "message": "Ota käyttöön vaihtoehto, jonka mukaan muut käyttäjät voivat jakaa jaetun salasanan oletusarvoisesti."
+    },
+    "settings-000723": {
+        "message": "Avaa käsikirjan asetussivu"
+    },
+    "settings-000724": {
+        "message": "Lähetä keep-alive-pyyntöjä palvelimelle, jotta istuntoa ei voida peruuttaa."
+    },
+    "settings-000725": {
+        "message": "Valitse salaustyyppi, jolla tiedot salataan asiakkaalla ennen niiden lähettämistä palvelimelle."
+    },
+    "settings-000726": {
+        "message": "SHA-1-hashia käytetään salasanojen tarkistamiseen. Osittainen hash voi estää raa'an voiman hyökkäykset, jos palvelimeen murtaudutaan, mutta se voi myös aiheuttaa sen, että turvalliset salasanat ilmoitetaan virheellisesti murretuiksi."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Hiirenpyörän napsautustoiminto",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Toiminto, joka suoritetaan, kun hiiren pyörää napsautetaan salasanamerkinnän päällä.",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Näytä pikavalintapainike",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Lisää työpöytänäkymään ylimääräisen painikkeen määritettyä toimintoa varten.",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Näytä Jaa-välilehti",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Palauta piilotetut kohteet",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Palauta kohteita",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Tämä toiminto poistaa kohteiden \"piilotettu\"-merkinnän, jolloin nämä kohteet näkyvät sovelluksessa uudelleen.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Palauta piilotetut kohteet",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Valitse minkä tyyppisiä piilotettuja kohteita haluat palauttaa.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Salasanat, jotka eivät ole piilotetussa kansiossa",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Palauta piilotetut salasanat, jotka ovat kansiossa, joka ei ole itse piilotettu.",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Kaikki piilotetut salasanat",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Palauta kaikki piilotetut salasanat kansion tilasta riippumatta",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Kaikki piilotetut kansiot",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Palauta kaikki piilotetut kansiot",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Kaikki piilotetut tunnisteet",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Palauta kaikki piilotetut tunnisteet",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Takaisin $PASSWORDS$ salasana(t), $FOLDERS$ kansio(t) ja $TAGS$ tunniste(et).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Talteen otetut tuotteet",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Tapahtui virhe.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "tutorial-000730": {
+        "message": "Käynnistyksen jälkeen näytä"
+    },
+    "tutorial-000732": {
+        "message": "tagit"
+    },
+    "tutorial-000733": {
+        "message": "suosikit"
+    },
+    "tutorial-000734": {
+        "message": "salasanat"
+    },
+    "tutorial-000735": {
+        "message": "äskettäin muutettu"
+    },
+    "tutorial-000736": {
+        "message": "Merkitse salasanani, jos…"
+    },
+    "tutorial-000737": {
+        "message": "ne ovat vanhempia kuin"
+    },
+    "tutorial-000738": {
+        "message": "kolme kuukautta"
+    },
+    "tutorial-000739": {
+        "message": "kuusi kuukautta"
+    },
+    "tutorial-000740": {
+        "message": "yksi vuosi"
+    },
+    "tutorial-000741": {
+        "message": "kaksi vuotta"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ päivät",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "ne ovat kaksoiskappaleita"
+    },
+    "tutorial-000744": {
+        "message": "Tee uudet salasanani"
+    },
+    "tutorial-000745": {
+        "message": "vahva"
+    },
+    "tutorial-000746": {
+        "message": "vahvempi"
+    },
+    "tutorial-000747": {
+        "message": "erittäin vahva"
+    },
+    "tutorial-000748": {
+        "message": "erittäin vahva"
+    },
+    "tutorial-000749": {
+        "message": "sisältää numeroita"
+    },
+    "tutorial-000750": {
+        "message": "sisältää erikoismerkkejä"
+    },
+    "tutorial-000751": {
+        "message": "Turvallinen koti salasanoillesi"
+    },
+    "tutorial-000752": {
+        "message": "Pidä salasanasi salassa"
+    },
+    "tutorial-000753": {
+        "message": "Mukauta kokemuksesi"
+    },
+    "tutorial-000754": {
+        "message": "Järjestä salasanasi"
+    },
+    "tutorial-000755": {
+        "message": "Ota yhteys"
+    },
+    "tutorial-000756": {
+        "message": "Salaa nykyiset salasanani"
+    },
+    "tutorial-000757": {
+        "message": "Tallenna salasana"
+    },
+    "tutorial-000758": {
+        "message": "Toista salasanasi"
+    },
+    "tutorial-000759": {
+        "message": "Salauksen asentaminen"
+    },
+    "tutorial-000760": {
+        "message": "Avaimenperä"
+    },
+    "tutorial-000761": {
+        "message": "Siivoa"
+    },
+    "tutorial-000762": {
+        "message": "Menestys"
+    },
+    "tutorial-000763": {
+        "message": "Löydä apua, kun tarvitset sitä"
+    },
+    "tutorial-000764": {
+        "message": "Siirry kohtaan Sovellukset ja laajennukset"
+    },
+    "tutorial-000765": {
+        "message": "Jatka"
+    },
+    "tutorial-000766": {
+        "message": "Ohita"
+    },
+    "tutorial-000767": {
+        "message": "Tarkista salasanan turvallisuus"
+    },
+    "tutorial-000768": {
+        "message": "Luo salasanoja käyttämällä"
+    },
+    "tutorial-000769": {
+        "message": "Hanki suosikkikuvakkeet osoitteesta"
+    },
+    "tutorial-000770": {
+        "message": "Hanki verkkosivujen esikatselu osoitteesta"
+    },
+    "tutorial-000771": {
+        "message": "Tee varmuuskopiot"
+    },
+    "tutorial-000772": {
+        "message": "Näytä kaikki asetukset"
+    },
+    "tutorial-000773": {
+        "message": "Lue vinkit ylläpitäjille"
+    },
+    "tutorial-000774": {
+        "message": "Salasana (vähintään 12 merkkiä)"
+    },
+    "tutorial-000775": {
+        "message": "Salaus käynnissä…"
+    },
+    "tutorial-000776": {
+        "message": "Asetuksia on monia, joten voit mukauttaa käyttökokemustasi."
+    },
+    "tutorial-000777": {
+        "message": "Löydät ne kaikki kohdasta \"Lisää\", mutta laitamme yleisimmät tähän:"
+    },
+    "tutorial-000778": {
+        "message": "Passwords tarjoaa nykyaikaisen ja vahvan salauksen, joka suojaa tietojasi uteliailta katseilta."
+    },
+    "tutorial-000779": {
+        "message": "Valitse alla oleva turvallinen salasana aktivoidaksesi salasanojesi parhaan mahdollisen suojan."
+    },
+    "tutorial-000780": {
+        "message": "Pääset käsiksi salasanoihisi helposti mistä tahansa sovellusten ja laajennusten ansiosta."
+    },
+    "tutorial-000781": {
+        "message": "Löydät Sovellukset ja laajennukset -osion kohdasta \"Lisää\" tai klikkaa alla olevaa painiketta."
+    },
+    "tutorial-000782": {
+        "message": "Salasanoja voidaan muokata monin eri tavoin."
+    },
+    "tutorial-000783": {
+        "message": "Ylläpitäjänä sinun kannattaa vilkaista näitä yleisiä asetuksia."
+    },
+    "tutorial-000784": {
+        "message": "Aina kun et tiedä, miten jokin asia toimii, sinulla on kysyttävää tai tarvitset apua ongelmaan:"
+    },
+    "tutorial-000785": {
+        "message": "Apu on aivan nurkan takana."
+    },
+    "tutorial-000786": {
+        "message": "Sisäänrakennettu käsikirjamme löytyy napsauttamalla \"Lisää\", ja siinä selitetään sovelluksen kaikki yksityiskohdat."
+    },
+    "tutorial-000787": {
+        "message": "Muissa tapauksissa yhteisömme on oikea paikka esittää kysymyksesi."
+    },
+    "tutorial-000788": {
+        "message": "Käsikirja avataan opetusohjelman jälkeen"
+    },
+    "tutorial-000789": {
+        "message": "Syötä vähintään 12 merkkiä pitkä salasana"
+    },
+    "tutorial-000790": {
+        "message": "Salasanan on oltava vähintään 12 merkkiä ja vahvistussalasanan on oltava sama."
+    }
+}
