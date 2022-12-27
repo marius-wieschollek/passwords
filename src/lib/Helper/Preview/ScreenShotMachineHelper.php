@@ -34,9 +34,9 @@ class ScreenShotMachineHelper extends AbstractPreviewHelper {
         $apiKey = $this->config->getAppValue(self::SSM_API_CONFIG_KEY);
 
         if($view === WebsitePreviewService::VIEWPORT_DESKTOP) {
-            return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_DESKTOP."xfull&device=desktop&format=jpg&url={$domain}";
+            return "https://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_DESKTOP."xfull&device=desktop&format=jpg&url={$domain}&delay=600";
         }
 
-        return "http://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_MOBILE."xfull&device=phone&format=jpg&url={$domain}";
+        return "https://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_MOBILE."xfull&device=phone&format=jpg&url={$domain}&delay=600";
     }
 }

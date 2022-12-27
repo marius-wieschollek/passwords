@@ -45,7 +45,7 @@ class PageresCliHelper extends AbstractPreviewHelper {
         $cmd = "cd {$tempDir} && {$command} {$url} ".
                ($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::VIEWPORT_DESKTOP:self::VIEWPORT_MOBILE).
                ' --user-agent='.escapeshellarg($view === WebsitePreviewService::VIEWPORT_DESKTOP ? self::USER_AGENT_DESKTOP:self::USER_AGENT_MOBILE).
-               ' --delay=4 --filename='.escapeshellarg($tempFile).' --overwrite 2>&1';
+               ' --delay=2 --filename='.escapeshellarg($tempFile).' --overwrite 2>&1';
 
         $retries = 0;
         $output  = [];

@@ -76,7 +76,7 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
      * @throws ApiException
      */
     protected function getCreateUrl(string $apiKey, string $domain, string $view): string {
-        $createUrl = "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&size=page&instance_id=";
+        $createUrl = "https://api.browshot.com/api/v1/screenshot/create?key={$apiKey}&url={$domain}&size=page&delay=2&instance_id=";
         $info      = $this->sendApiRequest("https://api.browshot.com/api/v1/account/info?key={$apiKey}");
 
         if(intval($info->free_screenshots_left) > 0) {
