@@ -44,7 +44,7 @@ class BackupExportCommand extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:backup:export')
-             ->addArgument('backup', InputArgument::REQUIRED, 'The name of the backup')
+             ->addArgument('name', InputArgument::REQUIRED, 'The name of the backup')
              ->addArgument('file', InputArgument::OPTIONAL, 'The path of the export file')
              ->setDescription('Export a backup to a file');
     }
@@ -58,7 +58,7 @@ class BackupExportCommand extends Command {
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int {
-        $backup     = $this->getBackup($input->getArgument('backup'));
+        $backup     = $this->getBackup($input->getArgument('name'));
         $exportPath = $this->getFilePath($input, $backup);
 
         file_put_contents($exportPath, $backup->getContent());

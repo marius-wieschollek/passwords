@@ -44,7 +44,7 @@ class BackupDeleteCommand extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:backup:delete')
-             ->addArgument('backup', InputArgument::REQUIRED, 'The backup to delete')
+             ->addArgument('name', InputArgument::REQUIRED, 'The backup to delete')
              ->setDescription('Delete a manually created backup file');
     }
 
@@ -57,7 +57,7 @@ class BackupDeleteCommand extends Command {
      * @throws Exception
      */
     protected function execute(InputInterface $input, OutputInterface $output): int {
-        $backup  = $input->getArgument('backup');
+        $backup  = $input->getArgument('name');
         $backups = $this->backupService->getBackups('backups');
 
         if(isset($backups[ $backup ])) {

@@ -44,7 +44,7 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
     protected function configure() {
         $this->setName('passwords:backup:restore')
              ->setDescription('Restores a backup')
-             ->addArgument('backup', InputArgument::REQUIRED, 'The name of the backup')
+             ->addArgument('name', InputArgument::REQUIRED, 'The name of the backup')
              ->addOption('user', 'u', InputOption::VALUE_OPTIONAL, 'Restore data only for this user')
              ->addOption('no-data', null, InputOption::VALUE_NONE, 'Do not restore user data and encryption keys')
              ->addOption('no-user-settings', null, InputOption::VALUE_NONE, 'Do not restore user settings')
@@ -62,7 +62,7 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
     protected function execute(InputInterface $input, OutputInterface $output): int {
         parent::execute($input, $output);
         $options = $this->getOptions($input);
-        $backup  = $this->getBackup($input->getArgument('backup'));
+        $backup  = $this->getBackup($input->getArgument('name'));
 
         $this->printRestoringInformation($output, $backup, $options);
         if(!$options['data'] && !$options['settings']['application'] && !$options['settings']['user'] && !$options['settings']['client']) {
@@ -131,8 +131,8 @@ class BackupRestoreCommand extends AbstractInteractiveCommand {
 
     /**
      * @param OutputInterface $output
-     * @param                 $backup
-     * @param                 $options
+     * @param string          $backup
+     * @param array           $options
      */
     protected function printRestoringInformation(OutputInterface $output, string $backup, array $options): void {
         $output->writeln('This backup file will be used: '.$backup);

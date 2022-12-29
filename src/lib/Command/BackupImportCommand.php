@@ -53,7 +53,7 @@ class BackupImportCommand extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:backup:import')
-             ->addArgument('file', InputArgument::REQUIRED, 'The name of the backup')
+             ->addArgument('file', InputArgument::REQUIRED, 'The location of the backup file')
              ->setDescription('Import a backup from a file');
     }
 
