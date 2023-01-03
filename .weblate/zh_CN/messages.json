@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "密码"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "解密的密码数据库，包括密码、文件夹、标签和设置。(不包括与您共享的密码。 在启用E2E的情况下不工作)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "密码不能被导出",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "因为你启用了端到端加密，所以你的密码不能自动添加到导出中。作为一个替代方案，你可以使用应用程序内的导出功能来导出你的数据。",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
