@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "Senhas"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Banco de dados de senhas descriptografadas com senhas, pastas, tags e configurações. (Não inclui senhas compartilhadas com você. Não funciona com E2E habilitado)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "As senhas não podem ser exportadas",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Como você tem a criptografia End-to-End habilitada, suas senhas não podem ser adicionadas à exportação automaticamente. Como alternativa, você pode usar a função de exportação dentro do aplicativo para exportar seus dados.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
