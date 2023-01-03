@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "Adgangskoder"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Dekrypteret adgangskode-database med adgangskoder, mapper, tags og indstillinger. (Indeholder ikke adgangskoder, der er delt med dig. Virker ikke med E2E aktiveret)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Adgangskoder kan ikke eksporteres",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Fordi du har aktiveret End-to-End-kryptering, kan dine adgangskoder ikke tilføjes til eksporten automatisk. Som et alternativ kan du bruge eksportfunktionen i appen til at eksportere dine data.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
