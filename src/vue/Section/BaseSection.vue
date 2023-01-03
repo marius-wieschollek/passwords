@@ -193,7 +193,7 @@
 
 <style lang="scss">
 #app-content {
-    height                     : calc(100vh - 50px);
+    height                     : calc(100vh - var(--header-height));
     overflow-y                 : initial;
     overflow-x                 : initial;
     border-top-right-radius    : var(--body-container-radius);

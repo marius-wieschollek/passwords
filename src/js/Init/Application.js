@@ -164,7 +164,7 @@ class Application {
         );
 
         router.beforeEach((to, from, next) => {
-            if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize') {
+            if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize' && to.name !== 'Help') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});

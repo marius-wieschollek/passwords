@@ -1,6 +1,6 @@
 <template>
     <div id="app-content" :class="{loading: loading}">
-        <div class="app-content-left help">
+        <div class="app-content-left help" :class="{global: !isAuthorized}">
             <breadcrumb :items="getBreadcrumbIcons" :showAddNew="false"/>
             <article v-if="!loading">
                 <header>
@@ -36,7 +36,7 @@
     import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
-    import SettingsService from '@js/Services/SettingsService';
+    import API from "@js/Helper/api";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -107,6 +107,9 @@
             },
             showNavigation() {
                 return this.$route.params.page !== undefined && this.navigation.length > 0;
+            },
+            isAuthorized() {
+                return API.isAuthorized;
             }
         },
 
@@ -226,6 +229,14 @@
     padding    : 0 10px 10px;
     position   : relative;
     min-height : 100%;
+
+    &.global {
+        position          : fixed;
+        top               : var(--header-height);
+        left              : 0;
+        bottom            : 0;
+        right             : 0;
+    }
 
     #controls {
         margin : 0 -10px;
