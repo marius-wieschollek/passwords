@@ -2945,5 +2945,17 @@
     },
     "tutorial-000790": {
         "message": "Jūsų slaptažodis turi turėti bent 12 simbolių, o patvirtinimo slaptažodis turi būti toks pat."
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Iššifruota slaptažodžių duomenų bazė su slaptažodžiais, aplankais, žymomis ir nustatymais. (Neapima su jumis bendrinamų slaptažodžių. Neveikia, jei įjungta E2E funkcija)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Slaptažodžių negalima eksportuoti",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Kadangi įjungtas \"End-to-End\" šifravimas, slaptažodžių negalima automatiškai įtraukti į eksportą. Kaip alternatyvą galite naudoti programėlėje esančią eksporto funkciją, kad eksportuotumėte savo duomenis.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
