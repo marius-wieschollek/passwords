@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "Wachtwoorden"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Ontcijferde wachtwoorden database met wachtwoorden, mappen, tags en instellingen. (Bevat geen wachtwoorden die met u zijn gedeeld. Werkt niet met E2E ingeschakeld)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Wachtwoorden kunnen niet worden geëxporteerd",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Omdat je End-to-End-codering hebt ingeschakeld, kunnen je wachtwoorden niet automatisch aan de export worden toegevoegd. Als alternatief kunt u de exportfunctie binnen de app gebruiken om uw gegevens te exporteren.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
