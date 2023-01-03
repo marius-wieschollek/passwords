@@ -2945,15 +2945,15 @@
         "message": "Passwörter"
     },
     "backend-UserMigrationDescription": {
-        "message": "Entschlüsselte Kennwortdatenbank mit Kennwörtern, Ordnern, Tags und Einstellungen. (Enthält keine Passwörter, die mit Ihnen geteilt wurden. Funktioniert nicht mit aktiviertem E2E)",
+        "message": "Entschlüsselte Datenbank mit Passwörtern, Ordnern, Tags und Einstellungen. (Enthält keine mit Ihnen geteilten Passwörter. Nicht bei aktiver E2E verfügbar)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
-        "message": "Passwörter können nicht exportiert werden",
+        "message": "Passwörter konnten nicht exportiert werden",
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Da Sie die Ende-zu-Ende-Verschlüsselung aktiviert haben, können Ihre Kennwörter nicht automatisch zum Export hinzugefügt werden. Als Alternative können Sie die Exportfunktion in der App verwenden, um Ihre Daten zu exportieren.",
+        "message": "Da Sie die Ende-zu-Ende-Verschlüsselung aktiviert haben, können Ihre Passwörter nicht automatisch zum Export hinzugefügt werden. Als Alternative können Sie die Exportfunktion in der App verwenden, um Ihre Daten zu exportieren.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
