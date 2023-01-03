@@ -2945,5 +2945,17 @@
     },
     "tutorial-000790": {
         "message": "Salasanan on oltava vähintään 12 merkkiä ja vahvistussalasanan on oltava sama."
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Salasanatietokanta, jossa on salasanat, kansiot, tunnisteet ja asetukset. (Ei sisällä kanssasi jaettuja salasanoja. Ei toimi, kun E2E on käytössä).",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Salasanoja ei voi viedä",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Koska käytössäsi on End-to-End-salaus, salasanojasi ei voida lisätä vientiin automaattisesti. Vaihtoehtoisesti voit viedä tietosi sovelluksen vientitoiminnolla.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
