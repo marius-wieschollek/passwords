@@ -2945,11 +2945,11 @@
         "description": "Generic error message if the recover hidden items action fails"
     },
     "backend-UserMigrationDescription": {
-        "message": "Entschlüsselte Kennwortdatenbank mit Kennwörtern, Ordnern, Tags und Einstellungen. (Enthält keine Passwörter, die mit dir geteilt wurden. Funktioniert nicht mit aktiviertem E2E)",
+        "message": "Entschlüsselte Datenbank mit Passwörtern, Ordnern, Tags und Einstellungen. (Enthält keine mit dir geteilten Passwörter. Nicht verfügbar wenn E2E aktiviert ist)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
-        "message": "Passwörter können nicht exportiert werden",
+        "message": "Passwörter konnten nicht exportiert werden",
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
