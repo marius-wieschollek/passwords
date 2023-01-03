@@ -2945,5 +2945,17 @@
     },
     "tutorial-000790": {
         "message": "Vaše geslo mora imeti vsaj 12 znakov, potrditveno geslo pa mora biti enako."
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Dešifrirana podatkovna zbirka gesel z gesli, mapami, oznakami in nastavitvami. (Ne vključuje gesel, ki so vam bila posredovana. Ne deluje z omogočenim E2E)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Gesel ni mogoče izvoziti",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Ker imate omogočeno šifriranje od konca do konca, gesel ni mogoče samodejno dodati v izvoz. Druga možnost je, da za izvoz podatkov uporabite funkcijo izvoza v aplikaciji.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
