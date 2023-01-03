@@ -39,7 +39,7 @@
                     },
                     json    : {
                         label: Localisation.translate('database backup'),
-                        link : '#/help/Import%2FImport-from-backup'
+                        link : '#/help/Import%2FImport-from-Backup'
                     },
                     chrome  : {
                         label: 'Chrome',
