@@ -2945,5 +2945,17 @@
     },
     "tutorial-000790": {
         "message": "Kata sandi Anda memerlukan sekurang-kurangnya 12 karakter dan kata sandi konfirmasi harus sama"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Basis data kata sandi yang didekripsi dengan kata sandi, folder, tag, dan pengaturan. (Tidak termasuk kata sandi yang dibagikan dengan Anda. Tidak bekerja dengan E2E diaktifkan)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Kata sandi tidak bisa diekspor",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Karena Anda telah mengaktifkan enkripsi End-to-End, kata sandi Anda tidak dapat ditambahkan ke ekspor secara otomatis. Sebagai alternatif, Anda bisa menggunakan fungsi ekspor dalam aplikasi untuk mengekspor data Anda.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
