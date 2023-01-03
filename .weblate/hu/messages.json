@@ -2945,5 +2945,17 @@
     },
     "tutorial-000782": {
         "message": "A jelszavak sokféleképpen testre szabhatók."
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Feltört jelszó adatbázis jelszavakkal, mappákkal, címkékkel és beállításokkal. (Nem tartalmazza az Önnel megosztott jelszavakat. Nem működik az E2E engedélyezésével)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "A jelszavak nem exportálhatók",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Mivel engedélyezve van a végponttól-végpontig titkosítás, a jelszavakat nem lehet automatikusan hozzáadni az exportáláshoz. Alternatív megoldásként az alkalmazáson belül az exportálás funkciót használhatja az adatok exportálásához.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
