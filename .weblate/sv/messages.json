@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "Lösenord"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Dekrypterad lösenordsdatabas med lösenord, mappar, taggar och inställningar. (Inkluderar inte lösenord som delas med dig. Fungerar inte när E2E är aktiverat).",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Lösenord kan inte exporteras",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Eftersom du har kryptering från slut till slut aktiverad kan dina lösenord inte läggas till i exporten automatiskt. Som ett alternativ kan du använda exportfunktionen i appen för att exportera dina data.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
