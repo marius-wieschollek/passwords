@@ -138,7 +138,7 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
      * @throws Exception
      */
     public function tryDecryptKeychainWithoutServerSecret(Keychain $keychain): Keychain {
-        $userSecret   = $this->sessionService->get(SessionService::VALUE_USER_SECRET);
+        $userSecret    = $this->sessionService->get(SessionService::VALUE_USER_SECRET);
         $decryptedData = $this->crypto->decrypt($keychain->getData(), $userSecret);
         $keychain->setData($decryptedData);
 

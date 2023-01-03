@@ -73,14 +73,28 @@ abstract class AbstractRevisionService extends AbstractService {
     }
 
     /**
+     * Cunt all revisions
+     *
+     * @return int
+     */
+    public function count() {
+        return $this->mapper->count();
+    }
+
+    /**
      * @param bool $decrypt
      *
      * @return RevisionInterface[]
      * @throws Exception
      */
-    public function findAll(bool $decrypt = false): array {
+    public function findAll(bool $decrypt = false, ?string $userId = null): array {
         /** @var RevisionInterface[] $revisions */
-        $revisions = $this->mapper->findAll();
+        if($userId === null) {
+            $revisions = $this->mapper->findAll();
+        } else {
+            $revisions = $this->mapper->findAllByUserId($userId);
+        }
+
         if(!$decrypt) return $revisions;
 
         foreach($revisions as $revision) {

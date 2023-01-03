@@ -68,6 +68,7 @@ use OCA\Passwords\Middleware\ApiSessionMiddleware;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\UserMigration\PasswordsMigrator;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -110,6 +111,7 @@ class Application extends App implements IBootstrap {
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
+        $context->registerUserMigrator(PasswordsMigrator::class);
     }
 
     /**

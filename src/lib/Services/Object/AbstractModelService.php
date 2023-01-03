@@ -41,10 +41,23 @@ abstract class AbstractModelService extends AbstractService {
     }
 
     /**
+     * Cunt all revisions
+     *
+     * @return int
+     */
+    public function count() {
+        return $this->mapper->count();
+    }
+
+    /**
      * @return ModelInterface[]
      */
-    public function findAll(): array {
-        return $this->mapper->findAll();
+    public function findAll(?string $userId = null): array {
+        if($userId === null) {
+            return $this->mapper->findAll();
+        } else {
+            return $this->mapper->findAllByUserId($userId);
+        }
     }
 
     /**

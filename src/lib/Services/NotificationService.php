@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -16,6 +20,7 @@ use OCA\Passwords\Notification\BackupRestoredNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
 use OCA\Passwords\Notification\BesticonApiNotification;
 use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
+use OCA\Passwords\Notification\ExportNotPossibleNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
 use OCA\Passwords\Notification\LoginAttemptNotification;
 use OCA\Passwords\Notification\NewClientNotification;
@@ -35,82 +40,12 @@ use OCP\Notification\INotifier;
 class NotificationService implements INotifier {
 
     /**
-     * @var UserSettingsService
-     */
-    protected UserSettingsService $settings;
-
-    /**
-     * @var IFactory
-     */
-    protected IFactory $l10NFactory;
-
-    /**
-     * @var SurveyNotification
-     */
-    protected SurveyNotification $surveyNotification;
-
-    /**
-     * @var NewClientNotification
-     */
-    protected NewClientNotification $newClientNotification;
-
-    /**
-     * @var ShareLoopNotification
-     */
-    protected ShareLoopNotification $shareLoopNotification;
-
-    /**
-     * @var BadPasswordNotification
-     */
-    protected BadPasswordNotification $badPasswordNotification;
-
-    /**
-     * @var BesticonApiNotification
-     */
-    protected BesticonApiNotification $besticonApiNotification;
-
-    /**
-     * @var ShareCreatedNotification
-     */
-    protected ShareCreatedNotification $shareCreatedNotification;
-
-    /**
-     * @var LoginAttemptNotification
-     */
-    protected LoginAttemptNotification $loginAttemptNotification;
-
-    /**
-     * @var ImpersonationNotification
-     */
-    protected ImpersonationNotification $impersonationNotification;
-
-    /**
-     * @var UpgradeRequiredNotification
-     */
-    protected UpgradeRequiredNotification $upgradeRequiredNotification;
-
-    /**
-     * @var EmptyRequiredSettingNotification
-     */
-    protected EmptyRequiredSettingNotification $emptyRequiredSettingNotification;
-
-    /**
-     * @var BackupFailedNotification
-     */
-    protected BackupFailedNotification $backupFailedNotification;
-
-    /**
-     * @var BackupRestoredNotification
-     */
-    protected BackupRestoredNotification $backupRestoredNotification;
-    protected ConfigurationService       $configurationService;
-
-    /**
      * NotificationService constructor.
      *
-     * @param IFactory                         $l10nFactory
+     * @param IFactory                         $l10NFactory
      * @param UserSettingsService              $settings
      * @param SurveyNotification               $surveyNotification
+     * @param ConfigurationService             $configurationService
      * @param NewClientNotification            $newClientNotification
      * @param ShareLoopNotification            $shareLoopNotification
      * @param BadPasswordNotification          $badPasswordNotification
@@ -122,39 +57,26 @@ class NotificationService implements INotifier {
      * @param BackupRestoredNotification       $backupRestoredNotification
      * @param UpgradeRequiredNotification      $upgradeRequiredNotification
      * @param EmptyRequiredSettingNotification $emptyRequiredSettingNotification
+     * @param ExportNotPossibleNotification    $exportNotPossibleNotification
      */
     public function __construct(
-        IFactory                         $l10nFactory,
-        UserSettingsService              $settings,
-        SurveyNotification               $surveyNotification,
-        ConfigurationService             $configurationService,
-        NewClientNotification            $newClientNotification,
-        ShareLoopNotification            $shareLoopNotification,
-        BadPasswordNotification          $badPasswordNotification,
-        BesticonApiNotification          $besticonApiNotification,
-        ShareCreatedNotification         $shareCreatedNotification,
-        LoginAttemptNotification         $loginAttemptNotification,
-        BackupFailedNotification         $backupFailedNotification,
-        ImpersonationNotification        $impersonationNotification,
-        BackupRestoredNotification       $backupRestoredNotification,
-        UpgradeRequiredNotification      $upgradeRequiredNotification,
-        EmptyRequiredSettingNotification $emptyRequiredSettingNotification
+        protected IFactory                         $l10NFactory,
+        protected UserSettingsService              $settings,
+        protected SurveyNotification               $surveyNotification,
+        protected ConfigurationService             $configurationService,
+        protected NewClientNotification            $newClientNotification,
+        protected ShareLoopNotification            $shareLoopNotification,
+        protected BadPasswordNotification          $badPasswordNotification,
+        protected BesticonApiNotification          $besticonApiNotification,
+        protected ShareCreatedNotification         $shareCreatedNotification,
+        protected LoginAttemptNotification         $loginAttemptNotification,
+        protected BackupFailedNotification         $backupFailedNotification,
+        protected ImpersonationNotification        $impersonationNotification,
+        protected BackupRestoredNotification       $backupRestoredNotification,
+        protected UpgradeRequiredNotification      $upgradeRequiredNotification,
+        protected EmptyRequiredSettingNotification $emptyRequiredSettingNotification,
+        protected ExportNotPossibleNotification    $exportNotPossibleNotification
     ) {
-        $this->settings                         = $settings;
-        $this->l10NFactory                      = $l10nFactory;
-        $this->configurationService             = $configurationService;
-        $this->surveyNotification               = $surveyNotification;
-        $this->newClientNotification            = $newClientNotification;
-        $this->shareLoopNotification            = $shareLoopNotification;
-        $this->badPasswordNotification          = $badPasswordNotification;
-        $this->besticonApiNotification          = $besticonApiNotification;
-        $this->shareCreatedNotification         = $shareCreatedNotification;
-        $this->loginAttemptNotification         = $loginAttemptNotification;
-        $this->backupFailedNotification         = $backupFailedNotification;
-        $this->impersonationNotification        = $impersonationNotification;
-        $this->backupRestoredNotification       = $backupRestoredNotification;
-        $this->upgradeRequiredNotification      = $upgradeRequiredNotification;
-        $this->emptyRequiredSettingNotification = $emptyRequiredSettingNotification;
     }
 
     /**
@@ -326,6 +248,14 @@ class NotificationService implements INotifier {
         );
     }
 
+    public function sendUserExportNotPossibleNotification(string $userId, string $reason) {
+        $this->sendNotification(
+            $this->exportNotPossibleNotification,
+            $userId,
+            ['reason' => $reason]
+        );
+    }
+
     /**
      * @param AbstractNotification $notification
      * @param string               $userId
@@ -351,6 +281,8 @@ class NotificationService implements INotifier {
         switch($notification->getSubject()) {
             case EmptyRequiredSettingNotification::NAME:
                 return $this->emptyRequiredSettingNotification->process($notification, $localisation);
+            case ExportNotPossibleNotification::NAME:
+                return $this->exportNotPossibleNotification->process($notification, $localisation);
             case UpgradeRequiredNotification::NAME:
                 return $this->upgradeRequiredNotification->process($notification, $localisation);
             case BackupRestoredNotification::NAME:

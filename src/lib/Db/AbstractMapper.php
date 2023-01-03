@@ -121,7 +121,7 @@ abstract class AbstractMapper extends QBMapper {
      * @return EntityInterface[]
      * @throws \OCP\DB\Exception
      */
-    public function findAllDeleted(): array {
+    public function findAllDeleted(string $userId = null): array {
         $qb = $this->db->getQueryBuilder();
 
         $qb->select('*')
@@ -133,6 +133,10 @@ abstract class AbstractMapper extends QBMapper {
         if($this->userId !== null) {
             $qb->andWhere(
                 $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
+            );
+        } else if($userId !== null) {
+            $qb->andWhere(
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
             );
         }
 
@@ -200,6 +204,18 @@ abstract class AbstractMapper extends QBMapper {
         $sql = $this->buildQuery($fields);
 
         return $this->findEntities($sql);
+    }
+
+    /**
+     * Count all available items
+     * Respects user limitations
+     *
+     * @return int
+     */
+    public function count(): int {
+        $query = $this->getStatement();
+        $query->selectAlias($query->func()->count('id'), 'count');
+        return $query->executeQuery()->fetch()['count'] ?? 0;
     }
 
     /**
