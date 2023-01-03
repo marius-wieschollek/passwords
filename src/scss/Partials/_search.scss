@@ -1,0 +1,46 @@
+/*!
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
+
+#header .header-right form.searchbox.pw-searchbox {
+    display : flex;
+
+    input#searchbox {
+        display          : block;
+        background-color : transparent;
+        border           : none;
+        width            : 50px;
+        height           : 44px;
+        line-height      : var(--default-line-height);
+        color            : transparent;
+
+
+        &:focus {
+            width               : 10rem;
+            background-position : 1rem center;
+            padding-left        : 2.25rem;
+            background-color    : var(--color-main-background-blur);
+            border-radius       : var(--border-radius-pill);
+            color               : var(--color-main-text);
+        }
+    }
+
+    .icon-close-dark {
+        position         : absolute;
+        right            : .5rem;
+        height           : 44px;
+        background-color : transparent;
+        border           : none;
+        display          : none;
+    }
+
+    input#searchbox:focus + .icon-close-dark {
+        display : block;
+    }
+}

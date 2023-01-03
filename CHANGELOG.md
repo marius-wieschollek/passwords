@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+- User migration support
+### Fixed
+- Broken help link in import section
 ### Removed
 - NC 23 & 24 support
 
