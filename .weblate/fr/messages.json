@@ -2945,5 +2945,17 @@
     },
     "backend-Passwords": {
         "message": "Mots de passe"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Base de données décryptée des mots de passe avec les mots de passe, les dossiers, les étiquettes et les paramètres. (N'inclut pas les mots de passe partagés avec vous. Ne fonctionne pas avec E2E activé)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Les mots de passe ne peuvent pas être exportés",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Le cryptage de bout en bout étant activé, vos mots de passe ne peuvent pas être ajoutés automatiquement à l'exportation. Vous pouvez également utiliser la fonction d'exportation de l'application pour exporter vos données.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     }
 }
