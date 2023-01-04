@@ -1,6 +1,6 @@
 import API from '@js/Helper/api';
 import Utility from '@js/Classes/Utility';
-import { loadState } from '@nextcloud/initial-state';
+import {loadState} from '@nextcloud/initial-state';
 
 /**
  *
@@ -22,6 +22,7 @@ class SettingsService {
             'client.ui.password.menu.copy'       : false,
             'client.ui.password.user.show'       : false,
             'client.ui.password.details.preview' : true,
+            'client.ui.password.print'           : false,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
             'client.setup.initialized'           : false,

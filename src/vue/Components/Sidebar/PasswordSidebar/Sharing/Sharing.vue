@@ -37,7 +37,7 @@
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import Share from '@vue/Details/Password/Sharing/Share';
+    import Share from '@vc/Sidebar/PasswordSidebar/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
 

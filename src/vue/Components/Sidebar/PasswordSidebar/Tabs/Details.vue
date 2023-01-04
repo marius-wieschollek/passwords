@@ -1,5 +1,5 @@
 <template>
-    <div slot="details" class="details">
+    <div slot="details" class="details passwords-password-info">
         <detail-field v-for="(field, index) in getCustomFields"
                       :key="index"
                       :label="field.label"
@@ -45,7 +45,7 @@
     import Translate from '@vc/Translate';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
-    import DetailField from '@vue/Details/Password/DetailField';
+    import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
 
     export default {
         components: {
@@ -168,7 +168,7 @@
 </script>
 
 <style lang="scss">
-    .item-details .details {
+    .passwords-password-info {
         padding-top : 10px;
 
         div:not(.header) {

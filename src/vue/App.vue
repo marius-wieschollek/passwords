@@ -1,92 +1,67 @@
 <template>
-    <div id="app" class="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
-        <div id="app-navigation">
-            <ul class="menu-main">
-                <li>
-                    <router-link :to="{ name: 'All'}" active-class="active" :exact="true">
-                        <translate say="All" icon="globe"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Folders'}" active-class="active">
-                        <translate say="Folders" icon="folder"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Recent'}" active-class="active">
-                        <translate say="Recent" icon="clock-o"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Favorites'}" active-class="active">
-                        <translate say="Favorites" icon="star"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Shares'}" active-class="active">
-                        <translate say="Shares" icon="share-alt"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Tags'}" active-class="active">
-                        <translate say="Tags" icon="tag"/>
-                    </router-link>
-                </li>
-                <li v-if="isSecurityVisible">
-                    <router-link :to="{ name: 'Security'}" active-class="active">
-                        <translate say="Security" icon="shield"/>
-                    </router-link>
-                </li>
-                <li v-if="isSearchVisible">
-                    <router-link :to="{ name: 'Search'}"
-                                 active-class="active">
-                        <translate say="Search" icon="search"/>
-                    </router-link>
-                </li>
-            </ul>
-            <ul class="menu-secondary">
-                <session-timeout v-if="!isMobile"/>
-                <li>
-                    <router-link :to="{ name: 'Trash'}" active-class="active" data-drop-type="trash">
-                        <translate say="Trash" icon="trash"/>
-                    </router-link>
-                </li>
-            </ul>
-            <ul id="app-settings" :class="{open: showMore}">
-                <li class="more">
-                    <translate @click="showMore = !showMore" say="More" :icon="showMore ? 'minus':'plus'" :class="{active:showMore}" tag="a"/>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Settings'}" active-class="active">
-                        <translate say="Settings" icon="cog"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Backup'}" active-class="active">
-                        <translate say="Backup and Restore" icon="archive"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Help'}" active-class="active">
-                        <translate say="Handbook" icon="question-circle"/>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link :to="{ name: 'Apps and Extensions'}" active-class="active">
-                        <translate say="Apps and Extensions" icon="puzzle-piece"/>
-                    </router-link>
-                </li>
-            </ul>
-        </div>
+    <nc-content app-name="passwords">
+        <nc-app-navigation>
+            <template id="app-passwords-navigation" #list>
+                <nc-app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
+                    <earth-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Folders')" :to="{ name: 'Folders'}">
+                    <folder-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
+                    <history-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
+                    <star-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Shares')" :to="{ name: 'Shares'}">
+                    <share-variant-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
+                    <tag-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Security')" :to="{ name: 'Security'}" v-if="isSecurityVisible">
+                    <shield-half-full-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
+                    <magnify-icon slot="icon"/>
+                </nc-app-navigation-item>
 
-        <router-view name="main"/>
+                <session-timeout v-if="!isMobile"/>
+                <nc-app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash">
+                    <delete-icon slot="icon"/>
+                </nc-app-navigation-item>
+            </template>
+
+            <nc-app-navigation-settings slot="footer" :title="t('More')">
+                <nc-app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
+                    <cog-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
+                    <archive-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
+                    <help-circle-icon slot="icon"/>
+                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
+                    <puzzle-icon slot="icon"/>
+                </nc-app-navigation-item>
+            </nc-app-navigation-settings>
+        </nc-app-navigation>
+
+        <nc-app-content>
+            <router-view name="main"/>
+        </nc-app-content>
+
+        <password-sidebar v-if="sidebar && sidebar.type === 'password'" :sidebar="sidebar"/>
+
         <div id="app-popup">
             <div></div>
         </div>
         <session-timeout scope="global" v-if="isMobile"/>
         <star-chaser v-if="starChaser"/>
         <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
-    </div>
+    </nc-content>
 </template>
 
 <script>
@@ -96,13 +71,55 @@
     import Messages from '@js/Classes/Messages';
     import SettingsService from '@js/Services/SettingsService';
     import SessionTimeout from '@vue/Components/SessionTimeout';
+    import NcContent from '@nc/NcContent';
+    import NcAppContent from '@nc/NcAppContent';
+    import NcAppNavigation from '@nc/NcAppNavigation';
+    import NcAppNavigationItem from '@nc/NcAppNavigationItem';
+    import NcAppNavigationNew from '@nc/NcAppNavigationNew';
+    import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
+    import NcAppSidebar from '@nc/NcAppSidebar';
+    import DeleteIcon from "@icon/Delete.vue";
+    import EarthIcon from "@icon/Earth.vue";
+    import FolderIcon from "@icon/Folder.vue";
+    import HistoryIcon from "@icon/History.vue";
+    import StarIcon from "@icon/Star.vue";
+    import TagIcon from "@icon/Tag.vue";
+    import ShareVariantIcon from "@icon/ShareVariant.vue";
+    import ShieldHalfFullIcon from "@icon/ShieldHalfFull.vue";
+    import MagnifyIcon from "@icon/Magnify.vue";
+    import PuzzleIcon from "@icon/Puzzle.vue";
+    import HelpCircleIcon from "@icon/HelpCircle.vue";
+    import ArchiveIcon from "@icon/Archive.vue";
+    import CogIcon from "@icon/Cog.vue";
+    import PasswordSidebar from "@vc/Sidebar/PasswordSidebar.vue";
 
     export default {
-        el        : '#main',
+        el        : '#content',
         router,
         components: {
+            PasswordSidebar,
+            CogIcon,
+            ArchiveIcon,
+            HelpCircleIcon,
+            PuzzleIcon,
+            MagnifyIcon,
+            ShieldHalfFullIcon,
+            ShareVariantIcon,
+            TagIcon,
+            StarIcon,
+            HistoryIcon,
+            FolderIcon,
+            EarthIcon,
+            DeleteIcon,
             SessionTimeout,
             Translate,
+            NcContent,
+            NcAppContent,
+            NcAppNavigation,
+            NcAppNavigationItem,
+            NcAppNavigationNew,
+            NcAppNavigationSettings,
+            NcAppSidebar,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
@@ -117,7 +134,8 @@
                 starChaser         : false,
                 APP_MAIN_VERSION   : APP_MAIN_VERSION,
                 APP_FEATURE_VERSION: APP_FEATURE_VERSION,
-                isMobile           : window.innerWidth <= 768
+                isMobile           : window.innerWidth <= 768,
+                sidebar            : null
             };
         },
 

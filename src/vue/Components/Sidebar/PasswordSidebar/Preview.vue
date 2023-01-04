@@ -119,7 +119,7 @@
 
 <style lang="scss">
     .preview-container {
-        max-height: 274px;
+        max-height: 250px;
         overflow: hidden;
         position: relative;
 
@@ -160,7 +160,7 @@
 
                 &.loading-hidden {
                     opacity: 0;
-                    min-height: 274px;
+                    min-height: 250px;
                     transition: min-height 0.15s ease-in-out, opacity 0.15s ease-in-out;
 
                     img {

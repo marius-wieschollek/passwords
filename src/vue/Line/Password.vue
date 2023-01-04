@@ -6,7 +6,8 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: password.favorite }" @click="favoriteAction($event)"></i>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent="favoriteAction" v-if="password.favorite"/>
+        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent="favoriteAction" v-else/>
         <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
@@ -27,30 +28,41 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="details" @click="detailsAction()" icon="info" say="Details"/>
-                        <translate tag="li" data-item-action="share" @click="detailsAction('share')" icon="share-alt" say="Share"/>
-                        <translate tag="li" data-item-action="edit" @click="editAction()" icon="pencil" v-if="password.editable" say="Edit"/>
-                        <translate tag="li" data-item-action="edit-new" @click="cloneAction()" icon="files-o" v-if="password.editable" say="Edit as new"/>
-                        <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" v-if="password.editable" say="Move"/>
-                        <translate tag="li"
-                                   v-if="showCopyOptions"
-                                   @click="copyAction('password')"
-                                   icon="clipboard"
-                                   say="Copy Password"/>
-                        <translate tag="li"
-                                   v-if="showCopyOptions"
-                                   @click="copyAction('username')"
-                                   icon="clipboard"
-                                   say="Copy User"/>
-                        <translate tag="li"
-                                   v-if="password.url"
-                                   @click="copyAction('url')"
-                                   icon="clipboard"
-                                   say="Copy Url"/>
+                        <translate tag="li" data-item-action="details" @click="detailsAction()" say="Details">
+                            <information-variant-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" data-item-action="share" @click="detailsAction('share')" say="Share">
+                            <share-variant-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" data-item-action="edit" @click="editAction()" v-if="password.editable" say="Edit">
+                            <pencil-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" data-item-action="edit-new" @click="cloneAction()" v-if="password.editable" say="Edit as new">
+                            <content-copy-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" data-item-action="move" @click="moveAction" v-if="password.editable" say="Move">
+                            <folder-move-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" say="Copy Password">
+                            <clipboard-arrow-left-outline-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" say="Copy User">
+                            <clipboard-arrow-left-outline-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" v-if="password.url" @click="copyAction('url')" say="Copy Url">
+                            <clipboard-arrow-left-outline-icon slot="icon"/>
+                        </translate>
                         <li v-if="password.url">
-                            <translate tag="a" data-item-action="open-url" :href="password.url" target="_blank" icon="link" say="Open Url"/>
+                            <translate tag="a" data-item-action="open-url" :href="password.url" target="_blank" say="Open Url">
+                                <open-in-new-icon slot="icon"/>
+                            </translate>
                         </li>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
+                        <translate tag="li" v-if="isPrintEnabled" @click="printAction()" data-item-action="print" say="PasswordActionPrint">
+                            <printer-icon slot="icon"/>
+                        </translate>
+                        <translate tag="li" data-item-action="delete" @click="deleteAction()" say="Delete">
+                            <trash-can-icon slot="icon"/>
+                        </translate>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -70,12 +82,37 @@
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import Favicon from "@vc/Favicon";
-    import Events from "@js/Classes/Events";
     import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from "@js/Services/ContextMenuService";
+    import TrashCanIcon from "@icon/TrashCan";
+    import PrinterIcon from "@icon/Printer";
+    import OpenInNewIcon from "@icon/OpenInNew";
+    import FolderMoveIcon from "@icon/FolderMove";
+    import ContentCopyIcon from "@icon/ContentCopy";
+    import PencilIcon from "@icon/Pencil";
+    import ShareVariantIcon from "@icon/ShareVariant";
+    import InformationVariantIcon from "@icon/InformationVariant";
+    import ClipboardArrowLeftOutlineIcon from "@icon/ClipboardArrowLeftOutline";
+    import StarIcon from "@icon/Star.vue";
+    import PasswordSidebar from "@js/Models/Sidebar/PasswordSidebar";
+    import Application from "@js/Init/Application";
+    import StarOutlineIcon from "@icon/StarOutline.vue";
+    import PasswordActions from "@js/Actions/Password/PasswordActions";
+    import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 
     export default {
         components: {
+            StarOutlineIcon,
+            StarIcon,
+            ClipboardArrowLeftOutlineIcon,
+            InformationVariantIcon,
+            ShareVariantIcon,
+            PencilIcon,
+            ContentCopyIcon,
+            FolderMoveIcon,
+            OpenInNewIcon,
+            PrinterIcon,
+            TrashCanIcon,
             Favicon,
             Translate
         },
@@ -90,7 +127,8 @@
             return {
                 clickTimeout : null,
                 showMenu     : false,
-                detailsActive: false
+                detailsActive: false,
+                actions: new PasswordActions(this.password)
             };
         },
 
@@ -175,11 +213,27 @@
 
                 return classNames;
             },
+            isPrintEnabled() {
+                return SettingsService.get('client.ui.password.print');
+            },
             hasCustomAction() {
                 return SettingsService.get('client.ui.password.custom.action') !== 'none';
             },
             customActionClass() {
-                return SettingsService.get('client.ui.password.custom.action') === 'details' ? 'fa-info':'fa-share-alt';
+                switch(SettingsService.get('client.ui.password.custom.action')) {
+                    case 'details':
+                        return 'fa-info';
+                    case 'share':
+                        return 'fa-share-alt';
+                    case 'edit':
+                        return 'fa-pencil';
+                    case 'print':
+                        return 'fa-print';
+                    case 'open-url':
+                        return 'fa-link';
+                    default:
+                        return 'fa-cliboard';
+                }
             }
         },
 
@@ -189,7 +243,10 @@
 
         methods: {
             clickAction($event) {
-                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate') || $event.target.classList.contains('action-button'))) return;
+                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate') || $event.target.classList.contains(
+                    'action-button'))) {
+                    return;
+                }
                 if(this.clickTimeout) clearTimeout(this.clickTimeout);
 
                 let action = SettingsService.get('client.ui.password.click.action');
@@ -209,14 +266,14 @@
                 }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details' && action !== 'edit' && action !== 'open-url') {
+                if(action !== 'details' && action !== 'edit' && action !== 'open-url' && action !== 'print') {
                     this.copyAction(action, delay);
                 } else if(action === 'edit') {
                     this.clickTimeout = setTimeout(this.editAction, delay);
                 } else if(action === 'details') {
                     this.clickTimeout = setTimeout(this.detailsAction, delay);
                 } else if(action === 'open-url' && this.password.url) {
-                    this.clickTimeout = setTimeout(() => {Utility.openLink(this.password.url)}, delay);
+                    this.clickTimeout = setTimeout(() => {Utility.openLink(this.password.url);}, delay);
                 }
             },
             copyAction(attribute, delay = 0) {
@@ -228,14 +285,20 @@
                 }, delay);
             },
             runCustomAction() {
-                this.detailsAction(SettingsService.get('client.ui.password.custom.action'));
+                let action = SettingsService.get('client.ui.password.custom.action');
+                if(action === 'share' || action === 'details') {
+                    this.detailsAction(action);
+                } else if(action === 'print') {
+                    this.printAction();
+                } else {
+                    this.runClickAction(action);
+                }
             },
-            favoriteAction($event) {
-                $event.stopPropagation();
-                this.password.favorite = !this.password.favorite;
-                PasswordManager
-                    .updatePassword(this.password)
-                    .catch(() => { this.password.favorite = !this.password.favorite; });
+            favoriteAction() {
+                this.actions.favorite();
+            },
+            printAction() {
+                this.actions.print();
             },
             toggleMenu() {
                 this.showMenu = !this.showMenu;
@@ -246,25 +309,30 @@
                 this.showMenu = false;
                 $(document).off('click', this.menuEvent);
             },
-            detailsAction(section = 'details') {
+            detailsAction(section = null) {
                 this.detailsActive = true;
-                this.$parent.detail = {type: 'password', element: this.password, section};
+                let sidebar = new PasswordSidebar(this.password, section);
+                Application.sidebar = sidebar;
 
-                let appClasses = document.getElementById('app').classList;
-                if(appClasses.contains('mobile-open')) appClasses.remove('mobile-open');
-
-                let listener = (item) => {
-                    if(item.object.id === this.password.id) {
-                        Events.off('details.close', listener);
-                        this.detailsActive = false;
+                let updateListener = (sidebar) => {
+                    if(sidebar.item.id !== this.password.id) {
+                        closeListener();
                     }
                 };
+                let closeListener = () => {
+                    unsubscribe('passwords:sidebar:opened', updateListener);
+                    unsubscribe('passwords:sidebar:updated', updateListener);
+                    unsubscribe('passwords:sidebar:closed', closeListener);
+                    this.detailsActive = false;
+                };
 
-                Events.on('details.close', listener);
+                subscribe('passwords:sidebar:opened', updateListener);
+                subscribe('passwords:sidebar:updated', updateListener);
+                subscribe('passwords:sidebar:closed', closeListener);
             },
             editAction() {
-                PasswordManager
-                    .editPassword(this.password)
+                this.actions
+                    .edit()
                     .then((p) => {this.password = p;});
             },
             cloneAction() {
@@ -326,15 +394,8 @@
             .favorite {
                 line-height : 50px;
                 width       : 40px;
-                text-align  : center;
-                color       : $color-grey-light;
-                font-size   : 1rem;
                 flex-shrink : 0;
-
-                &:hover,
-                &.active {
-                    color : var(--color-warning);
-                }
+                cursor      : pointer;
             }
 
             .favicon {
@@ -469,9 +530,14 @@
                             opacity       : 1 !important;
                             line-height   : inherit;
                             font-weight   : 300;
+
+                            .material-design-icon {
+                                margin-left : 0;
+                            }
                         }
 
-                        i {
+                        i,
+                        .material-design-icon {
                             line-height  : 40px;
                             margin-right : 10px;
                             font-size    : 1rem;
@@ -511,15 +577,6 @@
             &:active,
             &.details-open {
                 background-color : var(--color-background-hover);
-
-                .favorite {
-                    color : darken($color-grey-light, 3);
-
-                    &:hover,
-                    &.active {
-                        color : var(--color-warning);
-                    }
-                }
             }
 
             &.details-open {

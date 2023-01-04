@@ -244,6 +244,12 @@
                     <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']" v-if="advancedSettings">
                         <translate tag="option" value="details" say="Show details"/>
                         <translate tag="option" value="share" say="SettingsShowShareTab"/>
+                        <translate tag="option" value="edit" say="Edit password"/>
+                        <translate tag="option" value="password" say="Copy password"/>
+                        <translate tag="option" value="username" say="Copy username"/>
+                        <translate tag="option" value="url" say="Copy website"/>
+                        <translate tag="option" value="open-url" say="Open Url"/>
+                        <translate tag="option" value="print" say="PasswordActionPrint"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
                     <settings-help text="SettingsCustomActionHelp" v-if="advancedSettings"/>
@@ -253,6 +259,12 @@
                            id="setting-password-menu"
                            v-model="settings['client.ui.password.menu.copy']">
                     <settings-help text="Shows options to copy the password and user name in the menu"/>
+
+                    <translate tag="label" for="setting-password-print" say="SettingsPasswordPrint" v-if="advancedSettings"/>
+                    <input type="checkbox"
+                           id="setting-password-print"
+                           v-model="settings['client.ui.password.print']" v-if="advancedSettings">
+                    <settings-help text="SettingsPasswordPrintHelp" v-if="advancedSettings"/>
 
                     <translate tag="label"
                                for="setting-password-username"

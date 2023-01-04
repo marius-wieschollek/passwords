@@ -1,20 +1,38 @@
 import Vue from 'vue';
 import App from '@vue/App';
 import API from '@js/Helper/api';
-import { loadState } from '@nextcloud/initial-state'
-import router           from '@js/Helper/router';
-import EventEmitter     from 'eventemitter3';
-import SectionAll       from '@vue/Section/All';
-import Utility          from '@js/Classes/Utility';
-import Messages         from '@js/Classes/Messages';
-import EventManager     from '@js/Manager/EventManager';
-import SearchManager    from '@js/Manager/SearchManager';
-import SettingsService  from '@js/Services/SettingsService';
+import {loadState} from '@nextcloud/initial-state';
+import router from '@js/Helper/router';
+import EventEmitter from 'eventemitter3';
+import SectionAll from '@vue/Section/All';
+import Utility from '@js/Classes/Utility';
+import Messages from '@js/Classes/Messages';
+import EventManager from '@js/Manager/EventManager';
+import SearchManager from '@js/Manager/SearchManager';
+import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
-import SetupManager     from "@js/Manager/SetupManager";
-
+import SetupManager from "@js/Manager/SetupManager";
+import Localisation from "@js/Classes/Localisation";
 
 class Application {
+
+    /**
+     * @returns {(null|Sidebar)}
+     */
+    get sidebar() {
+        return this._sidebar;
+    }
+
+    /**
+     *
+     * @param {(null|Sidebar)} value
+     */
+    set sidebar(value) {
+        if(this._app) {
+            this._sidebar = value;
+            this._app.sidebar = value;
+        }
+    }
 
     /**
      * @return {Vue}
@@ -51,6 +69,7 @@ class Application {
         this._app = null;
         this._loginRequired = true;
         this._events = new EventEmitter();
+        this._sidebar = null;
     }
 
     /**
@@ -98,7 +117,7 @@ class Application {
         document.body.style.setProperty('--pw-image-login-background', `url(${SettingsService.get('server.theme.background')})`);
         document.body.style.setProperty('--pw-image-logo-themed', `url(${SettingsService.get('server.theme.app.icon')})`);
 
-        let appIcon = SettingsService.get('server.theme.color.text') === '#ffffff' ? 'app':'app-dark';
+        let appIcon = SettingsService.get('server.theme.color.text') === '#fff' ? 'app':'app-dark';
         document.body.style.setProperty('--pw-image-logo', `url(${OC.appswebroots.passwords}/img/${appIcon}.svg)`);
     }
 
@@ -117,7 +136,7 @@ class Application {
 
         if(!user || !token) {
             Messages.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
-                .then(() => { location.reload(); });
+                    .then(() => { location.reload(); });
             return false;
         }
 
@@ -170,11 +189,22 @@ class Application {
                 next({name: 'Authorize', params: {target}});
             }
             next();
-            if(to.name !== from.name && window.innerWidth < 768) {
-                let app = document.getElementById('app');
-                if(app) app.classList.remove('mobile-open');
+            if(to.name !== from.name) {
+                this.sidebar = null;
+                if(window.innerWidth < 768) {
+                    let app = document.getElementById('app');
+                    if(app) app.classList.remove('mobile-open');
+                }
             }
         });
+
+        Vue.mixin(
+            {
+                methods: {
+                    t: (t, v) => { return Localisation.translate(t, v); }
+                }
+            }
+        );
 
         this._app = new Vue(App);
     }

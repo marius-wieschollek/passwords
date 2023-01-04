@@ -24,9 +24,6 @@
                 <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
-        <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
-        </div>
     </div>
 </template>
 
@@ -40,7 +37,6 @@
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
-    import PasswordDetails from '@vue/Details/Password';
     import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
     import SettingsService from '@js/Services/SettingsService';
@@ -53,8 +49,7 @@
             FolderLine,
             HeaderLine,
             FooterLine,
-            PasswordLine,
-            PasswordDetails
+            PasswordLine
         },
 
         data() {
@@ -198,97 +193,5 @@
     overflow-x                 : initial;
     border-top-right-radius    : var(--body-container-radius);
     border-bottom-right-radius : var(--body-container-radius);
-
-    .app-content-left {
-        width                      : 100%;
-        transition                 : width 300ms;
-        transform                  : translate3d(0, 0, 0);
-        background                 : var(--color-main-background);
-        overflow-y                 : auto;
-        max-height                 : 100%;
-        height                     : 100%;
-        border-top-right-radius    : var(--body-container-radius);
-        border-bottom-right-radius : var(--body-container-radius);
-    }
-
-    .app-content-right {
-        background  : var(--color-main-background);
-        border-left : 1px solid var(--color-border);
-        width       : 27vw;
-        position    : fixed;
-        top         : 50px;
-        right                      : calc(0px - var(--body-container-margin));
-        overflow-y  : auto;
-        overflow-x  : hidden;
-        z-index     : 1500;
-        height                     : var(--body-height);
-        transform   : translate3d(27vw, 0, 0);
-        transition  : transform 300ms;
-        border-top-right-radius    : var(--body-container-radius);
-        border-bottom-right-radius : var(--body-container-radius);
-        margin-right               : var(--body-container-margin);
-
-    }
-
-    &.show-details {
-        .app-content-left {
-            width : calc(100% - 27vw);
-            border-top-right-radius    : 0;
-            border-bottom-right-radius : 0;
-        }
-
-        .app-content-right {
-            transform : translate3d(calc(0px - var(--body-container-margin)), 0px, 0);
-        }
-    }
-
-    > #app-navigation-toggle {
-        display : none !important;
-    }
-
-    @media(max-width : $width-large) {
-        .app-content-right {
-            width     : 360px;
-            transform : translate3d(360px, 0, 0);
-        }
-
-        &.show-details {
-            .app-content-left {
-                width : calc(100% - 360px);
-            }
-        }
-    }
-
-    @media(max-width : $width-medium) {
-        .app-content-right {
-            width     : calc(50% - 150px);
-            transform : translate3d(100%, 0, 0);
-        }
-
-        &.show-details {
-            .app-content-left {
-                width : 50%;
-            }
-        }
-    }
-
-    @media(max-width : $width-small) {
-        .app-content-right {
-            width : 50%;
-        }
-
-        &.show-details {
-            .app-content-left {
-                width     : 50%;
-                transform : none;
-            }
-        }
-    }
-
-    @media(max-width : $width-extra-small) {
-        .app-content-right {
-            width : 100%;
-        }
-    }
 }
 </style>

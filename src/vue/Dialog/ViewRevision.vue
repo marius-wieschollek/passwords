@@ -19,7 +19,7 @@
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import DetailField from '@vue/Details/Password/DetailField';
+    import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
     import DialogWindow from "@vue/Dialog/DialogWindow";
 
     export default {

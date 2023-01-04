@@ -79,7 +79,9 @@ module.exports = (env, argv) => {
                 '@js'  : `${__dirname}/src/js`,
                 '@vue' : `${__dirname}/src/vue`,
                 '@scss': `${__dirname}/src/scss`,
-                '@vc'  : `${__dirname}/src/vue/Components`
+                '@vc'  : `${__dirname}/src/vue/Components`,
+                '@icon': `${__dirname}/node_modules/vue-material-design-icons`,
+                '@nc': `@nextcloud/vue/dist/Components`
             }
         },
         module      : {
@@ -89,7 +91,7 @@ module.exports = (env, argv) => {
                     loader: 'vue-loader'
                 },
                 {
-                    test: /\.scss$/,
+                    test: /\.s?css$/,
                     use : [
                         {loader: 'vue-style-loader'},
                         {

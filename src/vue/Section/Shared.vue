@@ -23,9 +23,6 @@
                 <empty v-if="isEmpty" :text="getEmptyText"/>
             </div>
         </div>
-        <div class="app-content-right">
-            <password-details v-if="showPasswordDetails" :password="detail.element" :section="detail.section"/>
-        </div>
     </div>
 </template>
 
@@ -39,7 +36,6 @@
     import GenericLine from '@vue/Line/Generic';
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
-    import PasswordDetails from '@vue/Details/Password';
     import Localisation from '@js/Classes/Localisation';
 
     export default {
@@ -51,8 +47,7 @@
             HeaderLine,
             FooterLine,
             GenericLine,
-            PasswordLine,
-            PasswordDetails
+            PasswordLine
         },
         data() {
             return {

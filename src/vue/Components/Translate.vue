@@ -1,5 +1,6 @@
 <template>
     <component :is="tag" @click="fireEvent($event)" :title="getTitle" :value="getValue">
+        <slot name="icon" v-if="!icon"></slot>
         <icon v-if="icon" :icon="icon" :class="iconClass" />
         {{ getText }}
         <slot name="default" v-if="say"></slot>

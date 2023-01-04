@@ -13,6 +13,7 @@ export default new class ContextMenuService {
             'move'    : 'external',
             'open-url': 'link',
             'delete'  : 'delete',
+            'print'   : 'category-office',
             'restore' : 'history'
         };
     }
@@ -115,7 +116,7 @@ export default new class ContextMenuService {
                 icon   = '';
 
             if(action === 'favorite') {
-                if(actionElement.classList.contains('active')) {
+                if(actionElement.classList.contains('star-icon')) {
                     label = Localisation.translate('Remove from favorites');
                     icon = 'star-dark';
                 } else {

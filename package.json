@@ -39,12 +39,13 @@
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
     "devDependencies": {
-        "@nextcloud/auth": "^1.3.0",
+        "@nextcloud/auth": "^2.0.0",
         "@nextcloud/dialogs": "^3.2.0",
         "@nextcloud/initial-state": "^2.0.0",
         "@nextcloud/l10n": "^1.6.0",
         "@nextcloud/moment": "^1.2.1",
-        "@nextcloud/router": "^2.0.0",
+        "@nextcloud/router": "^2.0.1",
+        "@nextcloud/vue": "^7.3.0",
         "@toast-ui/editor": "^3.2.1",
         "blueimp-gallery": "^3.4.0",
         "clean-webpack-plugin": "^1.0.1",
@@ -74,8 +75,9 @@
         "sass-resources-loader": "^2.2.5",
         "uglify-js": "3.17.4",
         "url-loader": "^4.1.1",
-        "vue": "^2.7.13",
+        "vue": "^2.7.14",
         "vue-loader": "^15.10.0",
+        "vue-material-design-icons": "^5.1.2",
         "vue-qrcode-component": "^2.1.1",
         "vue-router": "^3.5.3",
         "vue-style-loader": "4.1.3",
@@ -120,5 +122,8 @@
     },
     "author": "Marius Wieschollek",
     "license": "SEE LICENSE IN LICENSE",
-    "_id": "ncpasswords@2021.12.0"
+    "_id": "ncpasswords@2021.12.0",
+    "dependencies": {
+        "@nextcloud/event-bus": "^3.0.2"
+    }
 }
