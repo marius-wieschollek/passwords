@@ -1,6 +1,6 @@
 <template>
-    <nc-content app-name="passwords">
-        <nc-app-navigation>
+    <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
+        <nc-app-navigation tog>
             <template id="app-passwords-navigation" #list>
                 <nc-app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
                     <earth-icon slot="icon"/>
@@ -77,21 +77,22 @@
     import NcAppNavigationItem from '@nc/NcAppNavigationItem';
     import NcAppNavigationNew from '@nc/NcAppNavigationNew';
     import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
+    import NcAppNavigationToggle from '@nc/NcAppNavigationToggle';
     import NcAppSidebar from '@nc/NcAppSidebar';
-    import DeleteIcon from "@icon/Delete.vue";
-    import EarthIcon from "@icon/Earth.vue";
-    import FolderIcon from "@icon/Folder.vue";
-    import HistoryIcon from "@icon/History.vue";
-    import StarIcon from "@icon/Star.vue";
-    import TagIcon from "@icon/Tag.vue";
-    import ShareVariantIcon from "@icon/ShareVariant.vue";
-    import ShieldHalfFullIcon from "@icon/ShieldHalfFull.vue";
-    import MagnifyIcon from "@icon/Magnify.vue";
-    import PuzzleIcon from "@icon/Puzzle.vue";
-    import HelpCircleIcon from "@icon/HelpCircle.vue";
-    import ArchiveIcon from "@icon/Archive.vue";
-    import CogIcon from "@icon/Cog.vue";
-    import PasswordSidebar from "@vc/Sidebar/PasswordSidebar.vue";
+    import DeleteIcon from "@icon/Delete";
+    import EarthIcon from "@icon/Earth";
+    import FolderIcon from "@icon/Folder";
+    import HistoryIcon from "@icon/History";
+    import StarIcon from "@icon/Star";
+    import TagIcon from "@icon/Tag";
+    import ShareVariantIcon from "@icon/ShareVariant";
+    import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
+    import MagnifyIcon from "@icon/Magnify";
+    import PuzzleIcon from "@icon/Puzzle";
+    import HelpCircleIcon from "@icon/HelpCircle";
+    import ArchiveIcon from "@icon/Archive";
+    import CogIcon from "@icon/Cog";
+    import PasswordSidebar from "@vc/Sidebar/PasswordSidebar";
 
     export default {
         el        : '#content',
@@ -120,6 +121,7 @@
             NcAppNavigationNew,
             NcAppNavigationSettings,
             NcAppSidebar,
+            NcAppNavigationToggle,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
@@ -180,157 +182,17 @@
 </script>
 
 <style lang="scss">
-#app {
-    width   : 100%;
-    display : flex;
-
+#content-vue {
     &.blocking {
-        #app-content {
-            position  : static;
-            transform : none;
-
-            .app-content-left {
-                transition : none;
-                transform  : none;
-            }
-        }
-
         #app-navigation {
             z-index : 1000;
         }
     }
-
-    @media(max-width : $width-small) {
-        #app-content {
-            margin-right : 0;
-            width        : 100%;
-            transition   : width 300ms, margin-left 300ms;
+    
+    @media all and (min-width: $width-1024-above) {
+        button.app-navigation-toggle {
+            display: none !important;
         }
-
-        &.mobile-open {
-            #app-navigation {
-                transform : translateX(0);
-                z-index   : 1001;
-            }
-
-            #app-content {
-                background-color : var(--color-main-background);
-                border-left      : 1px solid var(--color-border);
-                width            : calc(100% - 299px);
-                margin-left      : 299px;
-
-                .item-list .row .date {
-                    display : none;
-                }
-            }
-        }
-    }
-
-    @media(max-width : $width-extra-small) {
-        &.mobile-open #app-content {
-            width       : 360px;
-            margin-left : 299px;
-        }
-    }
-
-    @media (min-width : $width-small) and (max-width : $width-medium) {
-        #app-content {
-            transition : margin-left 0.25s ease-in-out;
-
-            &.show-details {
-                .app-content-left {
-                    width : calc(100% - 360px);
-                }
-
-                .app-content-right {
-                    width : 360px;
-                }
-            }
-        }
-
-        &.mobile-open {
-            #app-content {
-                margin-left : 300px;
-            }
-        }
-    }
-}
-
-#app-navigation {
-    transition : transform 300ms;
-
-    ul {
-        li {
-            line-height   : 44px;
-            white-space   : nowrap;
-            text-overflow : ellipsis;
-            color         : var(--color-main-text);
-
-            i {
-                font-size  : 1rem;
-                width      : 1rem;
-                box-sizing : content-box !important;
-                padding    : 0 10px 0 16px;
-            }
-
-            a {
-                cursor     : pointer;
-                transition : box-shadow .1s ease-in-out, opacity .1s ease-in-out;
-
-                i {
-                    margin-left : -1rem;
-                }
-            }
-        }
-
-        &.menu-main {
-            height : 100%;
-        }
-
-        &.menu-secondary {
-            height      : auto;
-            flex-shrink : 0;
-        }
-
-        &#app-settings {
-            position         : relative;
-            overflow         : hidden;
-            max-height       : 60px;
-            height           : auto;
-            z-index          : 100;
-            border-right     : 1px solid var(--color-border);
-            transition       : max-height 0.25s ease-in-out;
-            background-color : transparent;
-            padding-bottom   : 4px;
-
-            .more {
-
-                a,
-                a.active {
-                    box-shadow : none;
-                }
-            }
-
-            &.open {
-                max-height  : 288px;
-                flex-shrink : 0;
-
-                @media (max-height : 360px) {
-                    position : fixed;
-                    bottom   : 0;
-                }
-            }
-
-            &:not(.open) {
-                li:nth-child(2) {
-                    opacity : 0;
-                }
-            }
-        }
-    }
-
-    @media(min-width : $width-small) {
-        z-index : 1001;
     }
 }
 

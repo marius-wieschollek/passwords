@@ -191,10 +191,6 @@ class Application {
             next();
             if(to.name !== from.name) {
                 this.sidebar = null;
-                if(window.innerWidth < 768) {
-                    let app = document.getElementById('app');
-                    if(app) app.classList.remove('mobile-open');
-                }
             }
         });
 

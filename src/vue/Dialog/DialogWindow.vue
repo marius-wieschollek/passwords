@@ -53,11 +53,11 @@
         },
 
         mounted() {
-            document.getElementById('content').style.zIndex = '2001';
+            document.getElementById('content-vue').style.zIndex = '2001';
         },
 
         destroyed() {
-            document.getElementById('content').style.zIndex = 'auto';
+            document.getElementById('content-vue').style.zIndex = 'auto';
         },
 
         methods: {

@@ -58,7 +58,7 @@
                     this.open(value);
                 } else {
                     if(this.instance) this.instance.close();
-                    document.getElementById('content').style.zIndex = 'auto';
+                    document.getElementById('content-vue').style.zIndex = 'auto';
                     this.$emit('close');
                 }
             }
@@ -68,13 +68,13 @@
             if(this.instance !== null) {
                 this.instance.close();
                 this.instance = null;
-                document.getElementById('content').style.zIndex = 'auto';
+                document.getElementById('content-vue').style.zIndex = 'auto';
             }
         },
 
         methods: {
             open(index = 0) {
-                document.getElementById('app').classList.add('blocking');
+                document.getElementById('content-vue').classList.add('blocking');
                 const instance = typeof BlueImp.Gallery !== 'undefined' ? BlueImp.Gallery:BlueImp,
                       options  = Object.assign(
                           {
@@ -95,7 +95,7 @@
                           this.options
                       );
 
-                document.getElementById('content').style.zIndex = 2001;
+                document.getElementById('content-vue').style.zIndex = 2001;
                 this.instance = instance(this.images, options);
             },
             onSlideCustom(index, slide) {
@@ -149,8 +149,8 @@
                 slide.querySelector('video').appendChild(track);
             },
             close() {
-                document.getElementById('app').classList.remove('blocking');
-                document.getElementById('content').style.zIndex = 'auto';
+                document.getElementById('content-vue').classList.remove('blocking');
+                document.getElementById('content-vue').style.zIndex = 'auto';
                 this.$emit('close');
             }
         }

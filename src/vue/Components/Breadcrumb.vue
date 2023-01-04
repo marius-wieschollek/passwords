@@ -1,6 +1,5 @@
 <template>
     <div id="controls">
-        <div id="app-navigation-toggle" class="icon-menu" @click="showNavigation()"></div>
         <div class="breadcrumb">
             <div class="crumb svg" data-dir="/">
                 <router-link :to="getBaseRoute" class="home icon-home">&nbsp;</router-link>
@@ -192,13 +191,6 @@
             createPassword() {
                 PasswordManager.createPassword(this.folder, this.tag);
             },
-            showNavigation() {
-                let appClasses = document.getElementById('app').classList;
-                if(!appClasses.contains('mobile-open') && this.$parent.detail) {
-                    this.$parent.detail.type = 'none';
-                }
-                appClasses.toggle('mobile-open');
-            },
             deleteAllEvent() {
                 this.$emit('deleteAll');
             },
@@ -320,14 +312,6 @@
         }
     }
 
-    #app-navigation-toggle {
-        display : none !important;
-
-        @media(max-width : $width-medium) {
-            display : block !important;
-        }
-    }
-
     @keyframes delay-overflow {
         0% { overflow : hidden; }
         99% { overflow : hidden; }
@@ -350,15 +334,6 @@
                     position : absolute;
                 }
             }
-        }
-
-        #app-navigation-toggle {
-            display   : block !important;
-            position  : static;
-            min-width : 44px;
-            top       : 0;
-            opacity   : 1;
-            z-index   : 1;
         }
     }
 
