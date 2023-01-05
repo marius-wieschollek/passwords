@@ -2957,5 +2957,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Fordi du har aktiveret End-to-End-kryptering, kan dine adgangskoder ikke tilføjes til eksporten automatisk. Som et alternativ kan du bruge eksportfunktionen i appen til at eksportere dine data.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Udskriv adgangskode",
+        "description": "Label of the print password action"
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Vis udskriftsmulighed",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Viser en mulighed for at udskrive adgangskoden i menuen og detaljerne",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Indlæsning af mapper",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }
