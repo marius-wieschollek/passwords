@@ -24,6 +24,8 @@
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
     import NcLoadingIcon from "@nc/NcLoadingIcon";
     import TagIcon from "@icon/Tag";
+    import Events from "@js/Classes/Events";
+    import Utility from '@js/Classes/Utility';
 
     export default {
         components: {AppNavigationItem, TagIcon, NcLoadingIcon},
@@ -39,18 +41,24 @@
             if(this.open) {
                 this.loadTags();
             }
+            Events.on('tag.changed', () => {
+                if(this.tags.length !== 0) {
+                    this.refreshTags();
+                }
+            });
         },
         methods: {
             loadTags() {
                 if(this.tags.length !== 0) {
                     return;
                 }
-
+                this.refreshTags();
+            },
+            refreshTags() {
                 this.loading = true;
-
                 API.listTags()
                    .then((d) => {
-                       this.tags = d;
+                       this.tags = Utility.sortApiObjectArray(d, 'label');
                        this.loading = false;
                    });
             }
