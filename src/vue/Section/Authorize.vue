@@ -73,6 +73,7 @@
         },
 
         created() {
+            emit('toggle-navigation', {open: false});
             document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
             document.body.classList.add('pw-auth-visible');
             API.requestSession()

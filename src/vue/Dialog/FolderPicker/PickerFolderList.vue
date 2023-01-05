@@ -12,16 +12,20 @@
     <ul class="folder-picker-list" v-if="folders.length" :style="style">
         <li v-for="item in items" :key="item.id" @click="navigate(item)" :class="{disabled: !item.enabled}" :title="item.title">{{ item.label }}</li>
     </ul>
-    <translate class="folder-picker-empty" say="&quot;{folder}&quot; contains no folders" :variables="{folder: current.label}" v-else/>
+
+    <nc-empty-content class="folder-picker-empty" :title="t('&quot;{folder}&quot; contains no folders', {folder: current.label})" :description="t(text)" v-else>
+        <folder-open-outline-icon slot="icon"/>
+    </nc-empty-content>
 </template>
 
 <script>
-    import Translate from '@vc/Translate';
     import SettingsService from '@js/Services/SettingsService';
     import Localisation from '@js/Classes/Localisation';
+    import NcEmptyContent from '@nc/NcEmptyContent';
+    import FolderOpenOutlineIcon from "@icon/FolderOpenOutline.vue";
 
     export default {
-        components: {Translate},
+        components: {FolderOpenOutlineIcon, NcEmptyContent},
         props     : {
             current       : Object,
             folders       : Array,
@@ -113,6 +117,6 @@
     display     : block;
     line-height : 3rem;
     color       : var(--color-text-lighter);
-    min-height  : 360px;
+    min-height  : calc(360px - 10vh);
 }
 </style>

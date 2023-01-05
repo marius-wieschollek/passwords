@@ -2969,5 +2969,9 @@
     "frontend-PasswordActionPrint"     : {
         "message"    : "Print password",
         "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading"     : {
+        "message"    : "Loading folders",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }

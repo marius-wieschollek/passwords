@@ -1,24 +1,28 @@
 <template>
     <div class="empty-section">
-        <img :src="icon" alt="">
-        <translate tag="h2" say="There is nothing here"/>
-        <translate :say="text"/>
-        <div v-if="showSearchLink">
-            <router-link :to="searchRoute" id="global-search-link">
-                <translate say="Search everywhere for &quot;{query}&quot;" :variables="{query: search.query}"/>
-            </router-link>
-        </div>
+        <nc-empty-content :title="t('There is nothing here')" :description="t(text)">
+            <key-variant-icon slot="icon" fill-color="var(--color-primary-text)" :size="64"/>
+            <div v-if="showSearchLink" slot="action">
+                <nc-button :to="searchRoute" id="global-search-link">
+                    {{ t('Search everywhere for "{query}"', {query: search.query}) }}
+                </nc-button>
+            </div>
+        </nc-empty-content>
     </div>
 </template>
 
 <script>
     import API from '@js/Helper/api';
-    import Translate from '@vue/Components/Translate';
     import SearchManager from '@js/Manager/SearchManager';
+    import NcEmptyContent from '@nc/NcEmptyContent';
+    import NcButton from '@nc/NcButton';
+    import KeyVariantIcon from "@icon/KeyVariant";
 
     export default {
         components: {
-            Translate
+            KeyVariantIcon,
+            NcButton,
+            NcEmptyContent
         },
         props     : {
             text: {
@@ -28,11 +32,10 @@
         },
         data() {
             return {
-                search: SearchManager.status,
-                icon  : OC.appswebroots.passwords + '/img/app-themed.svg'
+                search: SearchManager.status
             };
         },
-        computed  : {
+        computed: {
             showSearchLink() {
                 return this.search.active && this.$route.name !== 'Search';
             },
@@ -42,26 +45,22 @@
         },
         created() {
             API.getSetting('server.theme.app.icon')
-                .then((d) => {this.icon = d;});
+               .then((d) => {this.icon = d;});
         }
     };
 </script>
 
 <style lang="scss">
-    #app.passwords {
-        .empty-section {
-            color      : #878787;
-            text-align : center;
-            margin-top : 30vh;
-            width      : 100%;
+#app.passwords {
+    .empty-section {
+        text-align : center;
+        margin-top : 30vh;
+        width      : 100%;
 
-            img {
-                width   : 64px;
-                height  : 64px;
-                display : inline-block;
-                margin  : 0 auto 15px;
-                opacity : 0.4;
-            }
+        img {
+            display : inline-block;
+            margin  : 0 auto 15px;
         }
     }
+}
 </style>
