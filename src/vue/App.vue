@@ -9,7 +9,7 @@
                     <folder-icon slot="icon"/>
                 </nc-app-navigation-item>
                 <nc-app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
-                    <history-icon slot="icon"/>
+                    <clock-icon slot="icon"/>
                 </nc-app-navigation-item>
                 <nc-app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
                     <star-icon slot="icon"/>
@@ -28,9 +28,7 @@
                 </nc-app-navigation-item>
 
                 <session-timeout v-if="!isMobile"/>
-                <nc-app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash">
-                    <delete-icon slot="icon"/>
-                </nc-app-navigation-item>
+                <nc-app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
             </template>
 
             <nc-app-navigation-settings slot="footer" :title="t('More')">
@@ -79,10 +77,8 @@
     import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
     import NcAppNavigationToggle from '@nc/NcAppNavigationToggle';
     import NcAppSidebar from '@nc/NcAppSidebar';
-    import DeleteIcon from "@icon/Delete";
     import EarthIcon from "@icon/Earth";
     import FolderIcon from "@icon/Folder";
-    import HistoryIcon from "@icon/History";
     import StarIcon from "@icon/Star";
     import TagIcon from "@icon/Tag";
     import ShareVariantIcon from "@icon/ShareVariant";
@@ -93,11 +89,13 @@
     import ArchiveIcon from "@icon/Archive";
     import CogIcon from "@icon/Cog";
     import PasswordSidebar from "@vc/Sidebar/PasswordSidebar";
+    import ClockIcon from "@icon/Clock.vue";
 
     export default {
         el        : '#content',
         router,
         components: {
+            ClockIcon,
             PasswordSidebar,
             CogIcon,
             ArchiveIcon,
@@ -108,10 +106,8 @@
             ShareVariantIcon,
             TagIcon,
             StarIcon,
-            HistoryIcon,
             FolderIcon,
             EarthIcon,
-            DeleteIcon,
             SessionTimeout,
             Translate,
             NcContent,

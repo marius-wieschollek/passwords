@@ -1,83 +1,56 @@
 <template>
-    <div id="controls">
-        <div class="breadcrumb">
-            <div class="crumb svg" data-dir="/">
-                <router-link :to="getBaseRoute" class="home icon-home">&nbsp;</router-link>
-            </div>
-            <div class="crumb svg"
-                 v-for="(item, index) in getItems"
-                 :class="{first:index===0,current:index === getItems.length - 1}">
-                <router-link :to="item.path" :data-folder-id="item.folderId" :data-drop-type="item.dropType">{{ item.label }}</router-link>
-            </div>
-            <div class="crumb svg crumbmenu" :class="{active: showCrumbMenu}" v-if="getCrumbMenuItems.length !== 0">
-                <span class="icon icon-more" @click="toggleCrumbMenu"></span>
-                <div class="popovermenu menu menu-center" @click="toggleCrumbMenu" :style="getCrumbMenuStyle">
-                    <ul>
-                        <li v-for="item in getCrumbMenuItems" class="crumblist">
-                            <router-link :to="item.path"
-                                         :data-folder-id="item.folderId"
-                                         :data-drop-type="item.dropType"
-                                         :title="item.label">
-                                <span :class="getCrumbItemIcon"></span>
-                                {{ item.label }}
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="passwords-more-menu actions" v-if="showAddNew" :class="{active: showMoreMenu}">
-                <span class="button new" @click="toggleMoreMenu"><span class="icon icon-add"></span></span>
-                <div class="popovermenu menu menu-center" @click="toggleMoreMenu">
-                    <ul>
-                        <li>
-                        <span class="menuitem" v-if="newFolder" @click="createFolder">
-                            <span class="icon icon-folder svg"></span>
-                            <translate class="displayname" say="New Folder"/>
-                        </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" v-if="newTag" @click="createTag">
-                            <span class="icon icon-tag svg"></span>
-                            <translate class="displayname" say="New Tag"/>
-                        </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" v-if="newPassword" @click="createPassword()">
-                            <span class="icon icon-filetype-text svg"></span>
-                            <translate class="displayname" say="New Password"/>
-                        </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" v-if="restoreAll" @click="restoreAllEvent">
-                            <span class="icon icon-history svg"></span>
-                            <translate class="displayname" say="Restore All Items"/>
-                        </span>
-                        </li>
-                        <li>
-                        <span class="menuitem" v-if="deleteAll" @click="deleteAllEvent">
-                            <span class="icon icon-delete svg"></span>
-                            <translate class="displayname" say="Delete All Items"/>
-                        </span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <slot></slot>
-        </div>
-    </div>
+    <nc-breadcrumbs class="passwords-breadcrumbs">
+        <NcBreadcrumb :to="getBaseRoute" title="Home" />
+        <NcBreadcrumb v-for="(item, index) in getItems"
+                       :to="item.path"
+                       :data-folder-id="item.folderId"
+                       :data-drop-type="item.dropType"
+                       :title="item.label"
+                      :key="index"
+        />
+        <template v-if="showAddNew" #actions>
+            <nc-actions>
+                <nc-action-button icon="icon-folder" v-if="newFolder" @click="createFolder">
+                    {{t('New Folder')}}
+                </nc-action-button>
+                <nc-action-button icon="icon-tag" v-if="newTag" @click="createTag">
+                    {{t('New Tag')}}
+                </nc-action-button>
+                <nc-action-button icon="icon-folder" v-if="newPassword" @click="createPassword">
+                    <key-icon slot="icon" :size="16" />
+                    {{t('New Password')}}
+                </nc-action-button>
+                <nc-action-button icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
+                    {{t('Restore All Items')}}
+                </nc-action-button>
+                <nc-action-button icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent">
+                    {{t('Delete All Items')}}
+                </nc-action-button>
+            </nc-actions>
+        </template>
+    </nc-breadcrumbs>
 </template>
 
 <script>
-    import $ from "jquery";
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
     import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import NcBreadcrumbs from '@nc/NcBreadcrumbs';
+    import NcBreadcrumb from '@nc/NcBreadcrumb';
+    import NcActions from '@nc/NcActions';
+    import NcActionButton from '@nc/NcActionButton';
+    import KeyIcon from "@icon/Key";
 
     export default {
         components: {
-            Translate
+            KeyIcon,
+            Translate,
+            NcActions,
+            NcBreadcrumb,
+            NcBreadcrumbs,
+            NcActionButton
         },
 
         props: {
@@ -118,12 +91,6 @@
                 'default': null
             }
         },
-        data() {
-            return {
-                showMoreMenu : false,
-                showCrumbMenu: false
-            };
-        },
 
         computed: {
             getBaseRoute() {
@@ -139,49 +106,10 @@
                 }
 
                 return this.items;
-            },
-            getCrumbMenuItems() {
-                let items = this.getItems;
-                if(items.length > 1) return items.slice(1);
-                return [];
-            },
-            getCrumbMenuStyle() {
-                let height = '0px';
-                if(this.showCrumbMenu) {
-                    height = `${this.getCrumbMenuItems.length * 44}px`;
-                }
-                return {height};
-            },
-            getCrumbItemIcon() {
-                if(this.$route.name === 'Folders') return 'icon icon-folder';
-                if(this.$route.name === 'Tags') return 'icon icon-tag';
-                if(this.$route.name === 'Shares') return 'icon icon-shared';
-                if(this.$route.name === 'Security') return 'fa fa-shield';
-                if(this.$route.name === 'Trash') return 'fa fa-trash';
-                if(this.$route.name === 'Help') return 'fa fa-book';
-                if(this.$route.name === 'Backup') return 'icon icon-category-app-bundles';
-
-                return 'icon icon-menu';
             }
         },
 
         methods: {
-            toggleMoreMenu() {
-                this.showMoreMenu = !this.showMoreMenu;
-                this.showMoreMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
-                if(this.showMoreMenu && this.showCrumbMenu) this.showCrumbMenu = false;
-            },
-            toggleCrumbMenu() {
-                this.showCrumbMenu = !this.showCrumbMenu;
-                this.showCrumbMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
-                if(this.showCrumbMenu && this.showMoreMenu) this.showMoreMenu = false;
-            },
-            menuEvent($e) {
-                if($($e.target).closest('.passwords-more-menu, .crumbmenu').length !== 0) return;
-                this.showCrumbMenu = false;
-                this.showMoreMenu = false;
-                $(document).off('click', this.menuEvent);
-            },
             createFolder() {
                 FolderManager.createFolder(this.folder);
             },
@@ -202,147 +130,11 @@
 </script>
 
 <style lang="scss">
-#controls {
-    position         : sticky;
-    top              : 0;
-    width            : 100%;
-    margin-top       : 4px;
-    z-index          : 1;
-    background-color : var(--color-main-background);
+.passwords-breadcrumbs {
+    margin: .5rem;
 
-    .crumbmenu,
-    .passwords-more-menu {
-        position : relative;
-        order    : 2;
-
-        &.passwords-more-menu {
-            margin-left : 10px;
-            display     : inline-block;
-
-            .button.new {
-                display : inline-block;
-
-                .icon.icon-add {
-                    min-width : 14px;
-                }
-            }
-        }
-
-        &.crumbmenu {
-            display : none;
-
-            .icon-more {
-                cursor  : pointer;
-                padding : 12px 1rem;
-            }
-
-            .fa {
-                padding   : 10px;
-                font-size : 1rem;
-                margin    : 0;
-            }
-
-            .menu {
-                left       : auto;
-                right      : 58%;
-                max-height : 90px;
-            }
-        }
-
-        .menu {
-            max-height : 0;
-            margin     : 0;
-            overflow   : hidden;
-            transition : max-height 0.25s ease-in-out;
-            display    : block;
-            position   : relative;
-            left       : -200px;
-            width      : 220px;
-
-            ul {
-                padding-right : 0;
-            }
-
-            a {
-                overflow      : hidden;
-                white-space   : nowrap;
-                text-overflow : ellipsis;
-                display       : block;
-            }
-        }
-
-        &:not(.active) .menu {
-            filter       : none;
-            border-color : transparent;
-        }
-
-        &.active .menu {
-            overflow   : visible;
-            max-height : 90px;
-            animation  : 0.25s delay-overflow;
-            position   : absolute;
-            top        : 108%;
-            padding    : 0;
-
-            .menuitem {
-                width : 100%;
-            }
-        }
-    }
-
-    .breadcrumb {
-        display : flex;
-
-        .crumb {
-            white-space : nowrap;
-            max-height  : 54px;
-            height      : 54px;
-
-            a {
-                padding : 16px;
-            }
-
-            .home {
-                width : 40px;
-            }
-
-            &.current {
-                font-weight : 600;
-            }
-        }
-    }
-
-    @keyframes delay-overflow {
-        0% { overflow : hidden; }
-        99% { overflow : hidden; }
-        100% { overflow : visible; }
-    }
-
-    @media(max-width : $width-small) {
-        padding-left : 0 !important;
-
-        .breadcrumb {
-            .crumb:not(.first):not(.crumbmenu) {
-                display : none;
-            }
-
-            .crumbmenu {
-                background-image : none;
-                display          : inline-flex;
-
-                .menu.menu-center {
-                    position : absolute;
-                }
-            }
-        }
-    }
-
-    @media(max-width : $width-extra-small) {
-        .crumbmenu {
-            &.active .menu.menu-center {
-                z-index : 111;
-            }
-        }
+    .breadcrumb__crumbs {
+        min-width: auto !important;
     }
 }
 </style>
