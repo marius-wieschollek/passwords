@@ -15,9 +15,7 @@
                 <app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
                     <earth-icon slot="icon"/>
                 </app-navigation-item>
-                <app-navigation-item :title="t('Folders')" :to="{ name: 'Folders'}">
-                    <folder-icon slot="icon"/>
-                </app-navigation-item>
+                <app-navigation-item-folders/>
                 <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
                     <clock-icon slot="icon"/>
                 </app-navigation-item>
@@ -32,7 +30,7 @@
                 </app-navigation-item>
 
                 <session-timeout v-if="!isMobile"/>
-                <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
+                <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete"/>
             </template>
 
             <nc-app-navigation-settings slot="footer" :title="t('More')">
@@ -78,7 +76,6 @@
     import NcAppNavigation from '@nc/NcAppNavigation';
     import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
     import EarthIcon from "@icon/Earth";
-    import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
     import MagnifyIcon from "@icon/Magnify";
     import PuzzleIcon from "@icon/Puzzle";
@@ -92,11 +89,13 @@
     import AppNavigationItemShared from "@vc/Navigation/AppNavigationItemShared";
     import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity";
     import AppNavigationItemTags from "@vc/Navigation/AppNavigationItemTags";
+    import AppNavigationItemFolders from "@vc/Navigation/AppNavigationItemFolders";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItemFolders,
             AppNavigationItemTags,
             AppNavigationItemSecurity,
             AppNavigationItemShared,
@@ -109,7 +108,6 @@
             PuzzleIcon,
             MagnifyIcon,
             StarIcon,
-            FolderIcon,
             EarthIcon,
             SessionTimeout,
             Translate,
@@ -121,7 +119,7 @@
         },
 
         data() {
-            let showSearch   = SettingsService.get('client.search.show');
+            let showSearch = SettingsService.get('client.search.show');
 
             return {
                 showSearch,
@@ -178,10 +176,10 @@
             z-index : 1000;
         }
     }
-    
-    @media all and (min-width: $width-1024-above) {
+
+    @media all and (min-width : $width-1024-above) {
         button.app-navigation-toggle {
-            display: none !important;
+            display : none !important;
         }
     }
 }
