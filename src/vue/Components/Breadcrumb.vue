@@ -8,8 +8,8 @@
                       :title="item.label"
                       :key="index"
         />
-        <template v-if="showAddNew" #actions>
-            <nc-actions>
+        <template #actions>
+            <nc-actions v-if="showAddNew">
                 <nc-action-button icon="icon-folder" v-if="newFolder" @click="createFolder">
                     {{ t('New Folder') }}
                 </nc-action-button>
@@ -27,6 +27,7 @@
                     {{ t('Delete All Items') }}
                 </nc-action-button>
             </nc-actions>
+            <slot/>
         </template>
     </nc-breadcrumbs>
 </template>
@@ -131,7 +132,10 @@
 
 <style lang="scss">
 .passwords-breadcrumbs {
-    margin : .5rem;
+    padding          : .5rem;
+    position         : sticky;
+    top              : 0;
+    background-color : var(--color-main-background);
 
     .breadcrumb__crumbs {
         min-width : auto !important;

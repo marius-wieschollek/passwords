@@ -2,48 +2,48 @@
     <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
         <nc-app-navigation open>
             <template id="app-passwords-navigation" #list>
-                <nc-app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
+                <app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
                     <earth-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Folders')" :to="{ name: 'Folders'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Folders')" :to="{ name: 'Folders'}">
                     <folder-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
                     <clock-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
                     <star-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Shares')" :to="{ name: 'Shares'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Shares')" :to="{ name: 'Shares'}">
                     <share-variant-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
                     <tag-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Security')" :to="{ name: 'Security'}" v-if="isSecurityVisible">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Security')" :to="{ name: 'Security'}" v-if="isSecurityVisible">
                     <shield-half-full-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
                     <magnify-icon slot="icon"/>
-                </nc-app-navigation-item>
+                </app-navigation-item>
 
                 <session-timeout v-if="!isMobile"/>
-                <nc-app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
+                <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
             </template>
 
             <nc-app-navigation-settings slot="footer" :title="t('More')">
-                <nc-app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
+                <app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
                     <cog-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
                     <archive-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
                     <help-circle-icon slot="icon"/>
-                </nc-app-navigation-item>
-                <nc-app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
+                </app-navigation-item>
+                <app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
                     <puzzle-icon slot="icon"/>
-                </nc-app-navigation-item>
+                </app-navigation-item>
             </nc-app-navigation-settings>
         </nc-app-navigation>
 
@@ -91,11 +91,13 @@
     import PasswordSidebar from "@vc/Sidebar/PasswordSidebar";
     import ClockIcon from "@icon/Clock";
     import Application from "@js/Init/Application";
+    import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItem,
             ClockIcon,
             PasswordSidebar,
             CogIcon,
