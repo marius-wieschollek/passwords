@@ -6,8 +6,8 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent="favoriteAction" v-if="password.favorite"/>
-        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent="favoriteAction" v-else/>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent.stop="favoriteAction" v-if="password.favorite"/>
+        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <ul slot="middle" class="tags" v-if="showTags" :style="tagStyle">
@@ -93,10 +93,10 @@
     import ShareVariantIcon from "@icon/ShareVariant";
     import InformationVariantIcon from "@icon/InformationVariant";
     import ClipboardArrowLeftOutlineIcon from "@icon/ClipboardArrowLeftOutline";
-    import StarIcon from "@icon/Star.vue";
     import PasswordSidebar from "@js/Models/Sidebar/PasswordSidebar";
     import Application from "@js/Init/Application";
-    import StarOutlineIcon from "@icon/StarOutline.vue";
+    import StarIcon from "@icon/Star";
+    import StarOutlineIcon from "@icon/StarOutline";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import { subscribe, unsubscribe } from '@nextcloud/event-bus'
 

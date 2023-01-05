@@ -5,7 +5,8 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
-        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: folder.favorite }" @click="favoriteAction($event)"></i>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent.stop="favoriteAction" v-if="folder.favorite"/>
+        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
@@ -36,10 +37,14 @@
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
+    import StarIcon from "vue-material-design-icons/Star.vue";
+    import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
 
     export default {
         components: {
-            Translate
+            Translate,
+            StarIcon,
+            StarOutlineIcon
         },
 
         props: {
@@ -82,7 +87,6 @@
 
         methods: {
             favoriteAction($event) {
-                $event.stopPropagation();
                 this.folder.favorite = !this.folder.favorite;
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });

@@ -1,6 +1,7 @@
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <i data-item-action="favorite" class="fa fa-star favorite" :class="{ active: tag.favorite }" @click="favoriteAction($event)"></i>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
+        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
@@ -29,10 +30,14 @@
     import Localisation       from "@js/Classes/Localisation";
     import SearchManager      from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
+    import StarIcon from "@icon/Star";
+    import StarOutlineIcon from "@icon/StarOutline";
 
     export default {
         components: {
-            Translate
+            Translate,
+            StarIcon,
+            StarOutlineIcon
         },
 
         props: {
@@ -74,13 +79,12 @@
         },
 
         methods: {
-            favoriteAction($event) {
-                $event.stopPropagation();
+            favoriteAction() {
                 this.tag.favorite = !this.tag.favorite;
                 TagManager.updateTag(this.tag)
                           .catch(() => { this.tag.favorite = !this.tag.favorite; });
             },
-            toggleMenu($event) {
+            toggleMenu() {
                 this.showMenu = !this.showMenu;
                 this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
             },
