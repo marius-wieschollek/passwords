@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2023 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -9,29 +9,40 @@
   -->
 
 <template>
-    <dialog-window class="pw-folder-picker-dialog" ref="window" v-on:close="close" title="Select a folder">
-        <div class="pw-folder-picker" slot="content" v-if="currentFolder !== null">
-            <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder" />
-            <picker-folder-list :current="currentFolder" :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder" />
-        </div>
-        <div class="pw-folder-picker loading" slot="content" v-else />
-        <div class="buttons" slot="controls" v-if="currentFolder !== null">
-            <translate class="button primary" @click="select" say="Select &quot;{folder}&quot;" :variables="{folder: currentFolder.label}" />
-        </div>
-    </dialog-window>
+    <nc-modal
+            class="pw-folder-picker-dialog"
+            ref="window"
+            :inlineActions="0"
+            v-on:close="close"
+            :title="t('Select a folder')">
+        <template #default>
+            <div class="pw-folder-picker" v-if="currentFolder !== null">
+                <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
+                <picker-folder-list :current="currentFolder" :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder"/>
+                <div class="buttons">
+                    <nc-button @click="select" type="primary">
+                        {{ t('Select "{folder}"', {folder: currentFolder.label}) }}
+                    </nc-button>
+                </div>
+            </div>
+            <nc-loading-icon class="pw-folder-picker-loading" :title="t('FolderPickerLoading')" :size="40" v-else/>
+        </template>
+    </nc-modal>
 </template>
 
 <script>
-    import DialogWindow     from '@vue/Dialog/DialogWindow';
-    import Translate        from '@vc/Translate';
-    import API              from '@js/Helper/api';
-    import Utility          from '@js/Classes/Utility';
+    import Translate from '@vc/Translate';
+    import API from '@js/Helper/api';
+    import Utility from '@js/Classes/Utility';
     import PickerBreadcrumb from '@vue/Dialog/FolderPicker/PickerBreadcrumb';
     import PickerFolderList from '@vue/Dialog/FolderPicker/PickerFolderList';
-    import Localisation     from '@js/Classes/Localisation';
+    import Localisation from '@js/Classes/Localisation';
+    import NcModal from '@nc/NcModal';
+    import NcButton from '@nc/NcButton';
+    import NcLoadingIcon from '@nc/NcLoadingIcon'
 
     export default {
-        components: {PickerFolderList, PickerBreadcrumb, Translate, DialogWindow},
+        components: {PickerFolderList, PickerBreadcrumb, Translate, NcModal, NcButton, NcLoadingIcon},
         props     : {
             folder        : {
                 type   : String,
@@ -69,6 +80,8 @@
         methods : {
             close() {
                 this.reject();
+                this.$destroy();
+                this.$el.parentNode.removeChild(this.$el);
             },
             select() {
                 this.resolve(this.currentFolder);
@@ -94,17 +107,23 @@
 
 <style lang="scss">
 .pw-folder-picker-dialog {
+
     .pw-folder-picker {
-        width      : calc(100vw - 1rem);
-        max-width  : 525px;
-        min-height : 360px;
-        max-height : 360px;
+        overflow-x : hidden;;
+
+        .buttons {
+            position : absolute;
+            bottom   : .5rem;
+            right    : .5rem
+        }
     }
 
-    .buttons {
-        display         : flex;
-        width           : 100%;
-        justify-content : flex-end;
+    .pw-folder-picker-loading {
+        height: 360px;
+    }
+
+    .button-vue.modal-container__close {
+        z-index : 1;
     }
 }
 </style>

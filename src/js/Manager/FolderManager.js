@@ -81,7 +81,12 @@ class FolderManager {
     moveFolder(folder, parent = null) {
         return new Promise(async (resolve, reject) => {
             if(parent === null) {
-                let parentModel = await this.selectFolder(folder.parent, [folder.id]);
+                let parentModel
+                try {
+                    parentModel = await this.selectFolder(folder.parent, [folder.id]);
+                } catch(e) {
+                    reject(folder);
+                }
                 parent = parentModel.id;
                 if(folder.hidden && !parentModel.hidden) folder.hidden = false;
             }

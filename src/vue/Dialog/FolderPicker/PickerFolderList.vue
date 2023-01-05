@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2023 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -12,18 +12,18 @@
     <ul class="folder-picker-list" v-if="folders.length" :style="style">
         <li v-for="item in items" :key="item.id" @click="navigate(item)" :class="{disabled: !item.enabled}" :title="item.title">{{ item.label }}</li>
     </ul>
-    <translate class="folder-picker-empty" say="&quot;{folder}&quot; contains no folders" :variables="{folder: current.label}" v-else />
+    <translate class="folder-picker-empty" say="&quot;{folder}&quot; contains no folders" :variables="{folder: current.label}" v-else/>
 </template>
 
 <script>
-    import Translate       from '@vc/Translate';
+    import Translate from '@vc/Translate';
     import SettingsService from '@js/Services/SettingsService';
-    import Localisation    from '@js/Classes/Localisation';
+    import Localisation from '@js/Classes/Localisation';
 
     export default {
         components: {Translate},
         props     : {
-            current: Object,
+            current       : Object,
             folders       : Array,
             ignoredFolders: Array
         },
@@ -70,6 +70,10 @@
 
 <style lang="scss">
 .folder-picker-list {
+    min-height : 360px;
+    max-height : 360px;
+    overflow-y : auto;
+
     li {
         background-image    : var(--pw-folder-image);
         background-repeat   : no-repeat;
@@ -98,6 +102,10 @@
             }
         }
     }
+
+    @media all and (max-width : $width-512) {
+        max-height : calc(100vh - var(--header-height) - var(--header-height) - 5);
+    }
 }
 
 .folder-picker-empty {
@@ -105,5 +113,6 @@
     display     : block;
     line-height : 3rem;
     color       : var(--color-text-lighter);
+    min-height  : 360px;
 }
 </style>
