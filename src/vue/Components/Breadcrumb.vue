@@ -1,15 +1,31 @@
 <template>
     <nc-breadcrumbs class="passwords-breadcrumbs">
-        <NcBreadcrumb :to="getBaseRoute" title="Home"/>
-        <NcBreadcrumb v-for="(item, index) in getItems"
+        <NcBreadcrumb :to="getBaseRoute" title="Home">
+            <template #icon>
+                <earth-icon v-if="$route.name === 'All'"/>
+                <folder-icon v-if="$route.name === 'Folders'"/>
+                <clock-icon v-if="$route.name === 'Recent'"/>
+                <star-icon v-if="$route.name === 'Favorites'"/>
+                <share-variant-icon v-if="$route.name === 'Shares'"/>
+                <tag-icon v-if="$route.name === 'Tags'"/>
+                <shield-half-full-icon v-if="$route.name === 'Security'"/>
+                <magnify-icon v-if="$route.name === 'Search'"/>
+                <delete-icon v-if="$route.name === 'Trash'"/>
+                <cog-icon v-if="$route.name === 'Settings'"/>
+                <archive-icon v-if="$route.name === 'Backup'"/>
+                <help-circle-icon v-if="$route.name === 'Help'"/>
+                <puzzle-icon v-if="$route.name === 'Apps and Extensions'"/>
+            </template>
+        </NcBreadcrumb>
+        <NcBreadcrumb v-for="(item) in breadcrumbs"
                       :to="item.path"
                       :data-folder-id="item.folderId"
                       :data-drop-type="item.dropType"
                       :title="item.label"
-                      :key="index"
+                      :key="item.id"
         />
         <template #actions>
-            <nc-actions v-if="showAddNew">
+            <nc-actions v-if="showAddNew" :force-menu="true">
                 <nc-action-button icon="icon-folder" v-if="newFolder" @click="createFolder">
                     {{ t('New Folder') }}
                 </nc-action-button>
@@ -43,9 +59,36 @@
     import NcActions from '@nc/NcActions';
     import NcActionButton from '@nc/NcActionButton';
     import KeyIcon from "@icon/Key";
+    import API from "@js/Helper/api";
+    import FolderIcon from "@icon/Folder";
+    import PuzzleIcon from "@icon/Puzzle";
+    import HelpCircleIcon from "@icon/HelpCircle";
+    import ArchiveIcon from "@icon/Archive";
+    import CogIcon from "@icon/Cog";
+    import DeleteIcon from "@icon/Delete";
+    import MagnifyIcon from "@icon/Magnify";
+    import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
+    import TagIcon from "@icon/Tag";
+    import ShareVariantIcon from "@icon/ShareVariant";
+    import StarIcon from "@icon/Star";
+    import ClockIcon from "@icon/Clock";
+    import EarthIcon from "@icon/Earth";
 
     export default {
         components: {
+            EarthIcon,
+            ClockIcon,
+            StarIcon,
+            ShareVariantIcon,
+            TagIcon,
+            ShieldHalfFullIcon,
+            MagnifyIcon,
+            DeleteIcon,
+            CogIcon,
+            ArchiveIcon,
+            HelpCircleIcon,
+            PuzzleIcon,
+            FolderIcon,
             KeyIcon,
             Translate,
             NcActions,
@@ -93,20 +136,22 @@
             }
         },
 
+        data() {
+            return {
+                breadcrumbs: [],
+                folders    : {}
+            };
+        },
+
+        mounted() {
+            this.processItems();
+        },
+
         computed: {
             getBaseRoute() {
-                let route = this.$route.path;
-
-                return route.substr(0, route.indexOf('/', 1));
-            },
-            getItems() {
-                if(this.items.length === 0) {
-                    return [
-                        {path: this.$route.path, label: Localisation.translate(this.$route.name)}
-                    ];
+                return {
+                    name: this.$route.name,
                 }
-
-                return this.items;
             }
         },
 
@@ -125,6 +170,59 @@
             },
             restoreAllEvent() {
                 this.$emit('restoreAll');
+            },
+            async processItems() {
+                if(this.items.length === 0) {
+                    this.breadcrumbs = [
+                        {path: this.$route.path, label: Localisation.translate(this.$route.name)}
+                    ];
+                    return;
+                }
+
+                if(this.items.length === 1 || this.items[0].dropType !== 'folder' || this.$route.name === 'Trash') {
+                    this.breadcrumbs = this.items;
+                    return;
+                } else {
+                    this.breadcrumbs = this.items.slice(1);
+                }
+
+                if(this.items[2] && this.items[2].dropType === 'folder') {
+                    let baseId      = this.items[0].folderId,
+                        breadcrumbs = [];
+
+                    let folder = await this.getFolder(this.items[2].folderId);
+                    while(folder.id !== baseId) {
+                        breadcrumbs.unshift(
+                            {
+                                path    : {name: 'Folders', params: {folder: folder.id}},
+                                label   : folder.label,
+                                dropType: 'folder',
+                                folderId: folder.id
+                            }
+                        );
+                        if(folder.parent === baseId) {
+                            break;
+                        }
+                        folder = await this.getFolder(folder.parent);
+                    }
+
+                    this.breadcrumbs = breadcrumbs;
+                }
+            },
+            async getFolder(id) {
+                if(this.folders.hasOwnProperty(id)) {
+                    return this.folders[id];
+                }
+                let folder = await API.showFolder(id);
+                this.folders[folder.id] = folder;
+
+                return folder;
+            }
+        },
+
+        watch: {
+            items() {
+                this.processItems();
             }
         }
     };
