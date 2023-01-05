@@ -2969,7 +2969,7 @@
         "description": "Label of the print password action"
     },
     "frontend-FolderPickerLoading": {
-        "message": "Laden von Ordnern",
+        "message": "Lade Ordner",
         "description": "Text of the loading animation while folders are being loaded"
     }
 }
