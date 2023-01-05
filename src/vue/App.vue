@@ -25,9 +25,7 @@
                     <star-icon slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item-shared/>
-                <app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
-                    <tag-icon slot="icon"/>
-                </app-navigation-item>
+                <app-navigation-item-tags/>
                 <app-navigation-item-security/>
                 <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
                     <magnify-icon slot="icon"/>
@@ -82,7 +80,6 @@
     import EarthIcon from "@icon/Earth";
     import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
-    import TagIcon from "@icon/Tag";
     import MagnifyIcon from "@icon/Magnify";
     import PuzzleIcon from "@icon/Puzzle";
     import HelpCircleIcon from "@icon/HelpCircle";
@@ -92,13 +89,15 @@
     import ClockIcon from "@icon/Clock";
     import Application from "@js/Init/Application";
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import AppNavigationItemShared from "@vc/Navigation/AppNavigationItemShared.vue";
-    import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity.vue";
+    import AppNavigationItemShared from "@vc/Navigation/AppNavigationItemShared";
+    import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity";
+    import AppNavigationItemTags from "@vc/Navigation/AppNavigationItemTags";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItemTags,
             AppNavigationItemSecurity,
             AppNavigationItemShared,
             AppNavigationItem,
@@ -109,7 +108,6 @@
             HelpCircleIcon,
             PuzzleIcon,
             MagnifyIcon,
-            TagIcon,
             StarIcon,
             FolderIcon,
             EarthIcon,

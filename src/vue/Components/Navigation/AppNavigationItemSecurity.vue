@@ -30,7 +30,6 @@
     import SettingsService from "@js/Services/SettingsService";
 
     export default {
-        name      : 'app-navigation-item-security',
         components: {AppNavigationItem, ShieldHalfFullIcon},
         data() {
             let isHashEnabled = SettingsService.get('user.password.security.hash') > 0;

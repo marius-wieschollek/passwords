@@ -24,3 +24,11 @@
         }
     };
 </script>
+
+<style lang="scss">
+.app-navigation-entry__children {
+    .loading-icon {
+        margin: .5rem 0;
+    }
+}
+</style>
