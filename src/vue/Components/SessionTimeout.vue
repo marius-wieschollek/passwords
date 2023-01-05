@@ -1,10 +1,11 @@
 <template>
     <translate :tag="tag"
-               class="session-timeout"
-               icon="hourglass-half"
+               :class="cssClass"
                say="You will be logged out in {time} seconds"
                :variables="{time}"
-               v-if="showTimer"/>
+               v-if="showTimer">
+        <timer-sand-icon slot="icon"/>
+    </translate>
 </template>
 <script>
     import SettingsService from '@js/Services/SettingsService';
@@ -12,9 +13,10 @@
     import Translate from "@/vue/Components/Translate";
     import Application from '@js/Init/Application';
     import API from '@js/Helper/api';
+    import TimerSandIcon from "@icon/TimerSand.vue";
 
     export default {
-        components: {Translate},
+        components: {TimerSandIcon, Translate},
         props     : {
             scope: {
                 type   : String,
@@ -28,7 +30,7 @@
                 lifeTime   : SettingsService.get('user.session.lifetime') * 1000,
                 timer      : null,
                 time       : 100
-            }
+            };
         },
         created() {
             if(this.hasTimeout) this.startInterval();
@@ -40,17 +42,20 @@
             });
             SettingsService.observe('user.session.lifetime', (s) => {
                 this.lifeTime = s.value * 1000;
-            })
+            });
         },
-        computed  : {
+        computed: {
             showTimer() {
                 return this.hasTimeout && this.time <= 45 && API.isAuthorized;
             },
             tag() {
                 return this.scope === 'global' ? 'div':'li';
+            },
+            cssClass() {
+                return `session-timeout ${this.scope === 'global' ? 'session-timer-global':'app-navigation-entry--pinned'}`;
             }
         },
-        methods   : {
+        methods : {
             startInterval() {
                 this.timer = setInterval(() => {
                     let time = this.lastRequest + this.lifeTime - Date.now();
@@ -59,45 +64,39 @@
                 }, 1000);
             }
         },
-        watch     : {
+        watch   : {
             hasTimeout(value) {
                 clearInterval(this.timer);
                 if(value) this.startInterval();
             }
         }
-    }
+    };
 </script>
 
 <style lang="scss">
-    div.session-timeout,
-    #app-navigation li.session-timeout {
-        background-color : var(--color-primary-element);
-        opacity          : 1;
-        color            : var(--color-primary-text);
-        font-weight      : bold;
+li.session-timeout,
+div.session-timeout {
+    background-color : var(--color-primary-element);
+    opacity          : 1;
+    color            : var(--color-primary-text);
+    border-radius    : var(--border-radius-pill);
+    padding          : 0 1rem;
+    font-size        : .85rem;
+    display          : flex;
+    height           : 44px;
+    align-items      : center;
 
-        i {
-            line-height : 44px;
-            text-align  : center;
-        }
+    .material-design-icon {
+        display      : inline-flex;
+        margin-right : .5rem;
     }
 
-    div.session-timeout {
-        &:before {
-            font-family  : var(--pw-icon-font-face);
-            margin-right : 0.25rem;
-        }
-
-        i {
-            width : 44px;
-        }
-
-        line-height : 3rem;
-        position    : fixed;
-        bottom      : 0;
-        right       : 0;
-        left        : 0;
-        text-align  : center;
-        z-index     : 1001;
+    &.session-timer-global {
+        position : fixed;
+        bottom   : .5rem;
+        left     : .5rem;
+        right    : .5rem;
+        z-index  : 1000;
     }
+}
 </style>

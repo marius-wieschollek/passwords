@@ -1,6 +1,6 @@
 <template>
     <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
-        <nc-app-navigation tog>
+        <nc-app-navigation open>
             <template id="app-passwords-navigation" #list>
                 <nc-app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
                     <earth-icon slot="icon"/>
@@ -89,7 +89,8 @@
     import ArchiveIcon from "@icon/Archive";
     import CogIcon from "@icon/Cog";
     import PasswordSidebar from "@vc/Sidebar/PasswordSidebar";
-    import ClockIcon from "@icon/Clock.vue";
+    import ClockIcon from "@icon/Clock";
+    import Application from "@js/Init/Application";
 
     export default {
         el        : '#content',
@@ -132,7 +133,7 @@
                 starChaser         : false,
                 APP_MAIN_VERSION   : APP_MAIN_VERSION,
                 APP_FEATURE_VERSION: APP_FEATURE_VERSION,
-                isMobile           : window.innerWidth <= 768,
+                isMobile           : Application.isMobile,
                 sidebar            : null
             };
         },

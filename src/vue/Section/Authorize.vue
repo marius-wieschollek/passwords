@@ -43,6 +43,8 @@
     import Translate from '@vc/Translate';
     import Messages from '@js/Classes/Messages';
     import SetupManager from '@js/Manager/SetupManager';
+    import Application from "@js/Init/Application";
+    import { emit } from '@nextcloud/event-bus';
 
     export default {
         components: {Field, Translate},
@@ -75,6 +77,7 @@
             document.body.classList.add('pw-auth-visible');
             API.requestSession()
                .then((d) => {
+                   emit('toggle-navigation', {open: false});
                    if(d.hasOwnProperty('challenge')) {
                        this.hasPassword = true;
                        this.salts = d.challenge.salts;
@@ -176,6 +179,9 @@
 
                 setTimeout(() => {
                     this.$router.push(route);
+                    if(!Application.isMobile) {
+                        emit('toggle-navigation', {open: true});
+                    }
                 }, 250);
 
                 setTimeout(() => {
@@ -224,36 +230,14 @@ body#body-user {
         }
     }
 
-    #appmenu li a::before {
-        display : none;
-    }
+    &.pw-auth-visible {
+        #app-content {
+            height: 100vh;
+        }
 
-    #content-wrapper {
-        padding-top : 0;
-    }
-
-    #app-navigation {
-        transform  : translateX(-100%);
-        transition : transform ease-in-out 300ms;
-    }
-
-    &.pw-auth-visible:not(.pw-auth-passed) #app #app-content {
-        background-image    : linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
-        background-size     : cover;
-        background-position : 50% 50%;
-    }
-
-    &[data-custom-background="false"][data-custom-color="false"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
-        background-repeat          : no-repeat;
-        background-size            : cover;
-        height                     : 100vh;
-        border-bottom-right-radius : 0;
-        background-image           : var(--pw-image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
-        background-attachment      : fixed;
-    }
-
-    &[data-custom-background="true"].pw-auth-visible:not(.pw-auth-passed) #app #app-content {
-        background-image : var(--pw-image-login-background), linear-gradient(40deg, var(--color-primary-element) 0%, var(--color-primary-element-light) 100%);
+        .button-vue.app-navigation-toggle {
+            display: none !important;
+        }
     }
 }
 

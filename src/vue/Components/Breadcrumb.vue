@@ -1,30 +1,30 @@
 <template>
     <nc-breadcrumbs class="passwords-breadcrumbs">
-        <NcBreadcrumb :to="getBaseRoute" title="Home" />
+        <NcBreadcrumb :to="getBaseRoute" title="Home"/>
         <NcBreadcrumb v-for="(item, index) in getItems"
-                       :to="item.path"
-                       :data-folder-id="item.folderId"
-                       :data-drop-type="item.dropType"
-                       :title="item.label"
+                      :to="item.path"
+                      :data-folder-id="item.folderId"
+                      :data-drop-type="item.dropType"
+                      :title="item.label"
                       :key="index"
         />
         <template v-if="showAddNew" #actions>
             <nc-actions>
                 <nc-action-button icon="icon-folder" v-if="newFolder" @click="createFolder">
-                    {{t('New Folder')}}
+                    {{ t('New Folder') }}
                 </nc-action-button>
                 <nc-action-button icon="icon-tag" v-if="newTag" @click="createTag">
-                    {{t('New Tag')}}
+                    {{ t('New Tag') }}
                 </nc-action-button>
                 <nc-action-button icon="icon-folder" v-if="newPassword" @click="createPassword">
-                    <key-icon slot="icon" :size="16" />
-                    {{t('New Password')}}
+                    <key-icon slot="icon" :size="16"/>
+                    {{ t('New Password') }}
                 </nc-action-button>
                 <nc-action-button icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
-                    {{t('Restore All Items')}}
+                    {{ t('Restore All Items') }}
                 </nc-action-button>
                 <nc-action-button icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent">
-                    {{t('Delete All Items')}}
+                    {{ t('Delete All Items') }}
                 </nc-action-button>
             </nc-actions>
         </template>
@@ -131,10 +131,14 @@
 
 <style lang="scss">
 .passwords-breadcrumbs {
-    margin: .5rem;
+    margin : .5rem;
 
     .breadcrumb__crumbs {
-        min-width: auto !important;
+        min-width : auto !important;
+    }
+
+    @media all and (max-width : $width-1024) {
+        padding-left : 2.5rem;
     }
 }
 </style>

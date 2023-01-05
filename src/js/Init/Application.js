@@ -63,6 +63,10 @@ class Application {
         this._loginRequired = value;
     }
 
+    get isMobile() {
+        return window.innerWidth <= 768;
+    }
+
     constructor() {
         this._loaded = false;
         this._timer = null;
