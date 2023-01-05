@@ -2957,5 +2957,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Poiché è stata attivata la crittografia End-to-End, le password non possono essere aggiunte automaticamente all'esportazione. In alternativa, è possibile utilizzare la funzione di esportazione all'interno dell'applicazione per esportare i dati.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Mostra l'opzione di stampa",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Mostra un'opzione per stampare la password nel menu e nei dettagli.",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Stampa password",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Caricamento delle cartelle",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }
