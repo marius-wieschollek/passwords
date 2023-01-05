@@ -464,7 +464,6 @@
 
             .more,
             .icon,
-            .security,
             .action-button {
                 line-height : 50px;
                 width       : 50px;
@@ -487,21 +486,8 @@
                     }
                 }
 
-                &.icon,
-                &.security {
+                &.icon {
                     font-size : 1.25rem;
-                }
-
-                &.ok {
-                    color : var(--color-success);
-                }
-
-                &.warn {
-                    color : var(--color-warning);
-                }
-
-                &.fail {
-                    color : var(--color-error);
                 }
             }
 
@@ -605,7 +591,6 @@
         &.show-details .item-list .row {
             .tags,
             .date,
-            .security,
             .action-button {
                 display : none;
             }

@@ -28,9 +28,7 @@
                 <app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
                     <tag-icon slot="icon"/>
                 </app-navigation-item>
-                <app-navigation-item :title="t('Security')" :to="{ name: 'Security'}" v-if="isSecurityVisible">
-                    <shield-half-full-icon slot="icon"/>
-                </app-navigation-item>
+                <app-navigation-item-security/>
                 <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
                     <magnify-icon slot="icon"/>
                 </app-navigation-item>
@@ -85,7 +83,6 @@
     import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
     import TagIcon from "@icon/Tag";
-    import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import MagnifyIcon from "@icon/Magnify";
     import PuzzleIcon from "@icon/Puzzle";
     import HelpCircleIcon from "@icon/HelpCircle";
@@ -95,12 +92,14 @@
     import ClockIcon from "@icon/Clock";
     import Application from "@js/Init/Application";
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import AppNavigationItemShared from "@vue/AppNavigationItemShared.vue";
+    import AppNavigationItemShared from "@vc/Navigation/AppNavigationItemShared.vue";
+    import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity.vue";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItemSecurity,
             AppNavigationItemShared,
             AppNavigationItem,
             ClockIcon,
@@ -110,7 +109,6 @@
             HelpCircleIcon,
             PuzzleIcon,
             MagnifyIcon,
-            ShieldHalfFullIcon,
             TagIcon,
             StarIcon,
             FolderIcon,
@@ -125,12 +123,10 @@
         },
 
         data() {
-            let showSearch   = SettingsService.get('client.search.show'),
-                showSecurity = SettingsService.get('user.password.security.hash') > 0;
+            let showSearch   = SettingsService.get('client.search.show');
 
             return {
                 showSearch,
-                showSecurity,
                 showMore           : false,
                 starChaser         : false,
                 APP_MAIN_VERSION   : APP_MAIN_VERSION,
@@ -159,9 +155,6 @@
         computed: {
             isSearchVisible() {
                 return this.$route.name === 'Search' || this.showSearch;
-            },
-            isSecurityVisible() {
-                return this.$route.name === 'Security' || this.showSecurity;
             },
             isBirthDay() {
                 let today = new Date(),
