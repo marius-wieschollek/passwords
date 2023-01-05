@@ -2954,5 +2954,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Protože máte povoleno šifrování End-to-End, nelze hesla do exportu přidávat automaticky. Jako alternativu můžete k exportu dat použít funkci exportu v aplikaci.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Zobrazit možnost tisku",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Zobrazí možnost tisku hesla v nabídce a podrobnostech.",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Heslo pro tisk",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Načítání složek",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }
