@@ -32,6 +32,7 @@
     import NcLoadingIcon from "@nc/NcLoadingIcon";
     import FolderIcon from "@icon/Folder";
     import Utility from '@js/Classes/Utility';
+    import Events from "@js/Classes/Events";
 
     export default {
         components: {AppNavigationItem, FolderIcon, NcLoadingIcon},
@@ -39,7 +40,8 @@
             return {
                 open   : false,
                 loading: false,
-                folders: []
+                folders: [],
+                baseId : '00000000-0000-0000-0000-000000000000'
             };
         },
         mounted() {
@@ -47,18 +49,32 @@
             if(this.open) {
                 this.loadFolders();
             }
+            Events.on('folder.changed', (event) => {
+                let folder = event.object;
+                if(this.folders.length !== 0 &&
+                   (
+                       folder.id === this.baseId ||
+                       folder.parent === this.baseId ||
+                       (folder.parent.hasOwnProperty('id') && folder.parent.id === this.baseId)
+                   )
+                ) {
+                    this.refreshFolders();
+                }
+            });
         },
         methods: {
             loadFolders() {
                 if(this.folders.length !== 0) {
                     return;
                 }
-
+                this.refreshFolders();
+            },
+            refreshFolders() {
                 this.loading = true;
 
-                API.showFolder('00000000-0000-0000-0000-000000000000', 'model+folders')
+                API.showFolder(this.baseId, 'model+folders')
                    .then((d) => {
-                       this.folders = Utility.objectToArray(d.folders);
+                       this.folders = Utility.sortApiObjectArray(Utility.objectToArray(d.folders), 'label');
                        this.loading = false;
                    });
             }
