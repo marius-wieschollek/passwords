@@ -2956,16 +2956,20 @@
         "message": "Da du die Ende-zu-Ende-Verschlüsselung aktiviert hast, können deine Passwörter nicht automatisch zum Export hinzugefügt werden. Als Alternative kannst du die Exportfunktion in der App nutzen, um deine Daten zu exportieren.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
-    "settings-SettingsPasswordPrint"     : {
-        "message"    : "Zeige \"Drucken\"-Menüeintrag",
+    "settings-SettingsPasswordPrint": {
+        "message": "Zeige \"Drucken\"-Menüeintrag",
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
-    "settings-SettingsPasswordPrintHelp"     : {
-        "message"    : "Zeigt einen Menüeintrag zum ausdrucken des Passwortes an",
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Zeigt einen Menüeintrag zum ausdrucken des Passwortes an",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
-    "frontend-PasswordActionPrint"     : {
-        "message"    : "Passwort drucken",
+    "frontend-PasswordActionPrint": {
+        "message": "Passwort drucken",
         "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Lade Ordner",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }

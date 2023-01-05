@@ -2541,5 +2541,9 @@
     },
     "backend-Passwords": {
         "message": "Contrasenyes"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Carregant les carpetes",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }

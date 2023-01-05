@@ -2957,5 +2957,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Koska käytössäsi on End-to-End-salaus, salasanojasi ei voida lisätä vientiin automaattisesti. Vaihtoehtoisesti voit viedä tietosi sovelluksen vientitoiminnolla.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Näytä tulostusvaihtoehto",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Näyttää vaihtoehdon salasanan tulostamiseen valikossa ja yksityiskohdissa.",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Tulosta salasana",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Kansioiden lataaminen",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }

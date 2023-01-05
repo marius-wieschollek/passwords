@@ -2957,5 +2957,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Omdat je End-to-End-codering hebt ingeschakeld, kunnen je wachtwoorden niet automatisch aan de export worden toegevoegd. Als alternatief kunt u de exportfunctie binnen de app gebruiken om uw gegevens te exporteren.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Afdrukoptie tonen",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Toont een optie om het wachtwoord af te drukken in het menu en de details",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Wachtwoord afdrukken",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Laden van mappen",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }

@@ -2957,5 +2957,21 @@
     "backend-ExportNotPossibleText": {
         "message": "Como tienes activado el cifrado de extremo a extremo, tus contraseñas no se pueden añadir a la exportación automáticamente. Como alternativa, puedes utilizar la función de exportación de la aplicación para exportar tus datos.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Mostrar opción de impresión",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Muestra una opción para imprimir la contraseña en el menú y los detalles",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Imprimir contraseña",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Cargar carpetas",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }
