@@ -2945,5 +2945,9 @@
     },
     "backend-Passwords": {
         "message": "Senhas"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Lendo pastas",
+        "description": "Text of the loading animation while folders are being loaded"
     }
 }
