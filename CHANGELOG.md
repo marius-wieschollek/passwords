@@ -1,6 +1,11 @@
 ## [Unreleased]
 ### Added
 - User migration support
+- Print password option
+- Navigation quick access for favorites, folders, tags, shared and security
+### Changed
+- Breadcrumb now shows full path
+- Migrated to Nextcloud Vue components for better integration
 ### Fixed
 - Broken help link in import section
 ### Removed

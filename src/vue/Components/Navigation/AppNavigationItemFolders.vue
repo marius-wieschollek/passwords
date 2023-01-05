@@ -15,6 +15,7 @@
             <app-navigation-item
                     v-for="folder in folders"
                     :title="folder.label"
+                    :key="folder.id"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"
                     :data-folder-id="folder.id"
