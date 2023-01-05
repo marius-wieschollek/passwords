@@ -1,5 +1,6 @@
 import router from '@js/Helper/router';
 import SettingsService from '@js/Services/SettingsService';
+import {subscribe} from '@nextcloud/event-bus';
 
 class SearchManager {
 
@@ -35,34 +36,19 @@ class SearchManager {
     }
 
     init() {
-        document.querySelector('.unified-search, #searchbox').remove();
-        this._createSearchBox();
+        subscribe('nextcloud:unified-search.search', ({query}) => {
+            if(query) {
+                this.search(query);
+            } else {
+                this.search();
+            }
+        });
+
+        subscribe('nextcloud:unified-search.reset', () => {
+            this.search();
+        });
         this._status.available = false;
         this._initializeSearchFeatures();
-        let searchBox = document.getElementById('searchbox');
-
-        if(searchBox) {
-            document.getElementById('searchbox')
-                    .addEventListener('keyup', (e) => {
-                        if(e.target.value) {
-                            this.search(e.target.value);
-                        } else {
-                            this.search();
-                        }
-                    });
-            document.addEventListener('keyup', (e) => {
-                if(e.key === 'f' && e.ctrlKey) {
-                    if(document.activeElement !== searchBox) searchBox.focus();
-                }
-            });
-        }
-
-        let reset = document.querySelector('form.searchbox button[type="reset"]');
-        if(reset) {
-            reset.addEventListener('click', (e) => {
-                this.search();
-            });
-        }
     }
 
     search(query) {
@@ -142,11 +128,6 @@ class SearchManager {
         this._index = null;
         this._status.query = '';
         this._resetSearch();
-
-        let searchForm = document.querySelector('form.searchbox');
-        if(searchForm) document.querySelector('form.searchbox').style.opacity = '0';
-        let searchBox = document.getElementById('searchbox');
-        if(searchBox) searchBox.value = '';
     }
 
     /**
@@ -159,13 +140,11 @@ class SearchManager {
         this._index = null;
 
         if(database.passwords.length || database.folders.length || database.tags.length) {
-            document.querySelector('form.searchbox').style.opacity = '1';
             this._status.available = true;
 
             if(this._status.active) {
                 setTimeout(() => {this.search(this._status.query);}, 1);
             } else {
-                document.getElementById('searchbox').value = '';
                 this._resetSearch();
             }
         } else {
@@ -302,7 +281,7 @@ class SearchManager {
      * @private
      */
     _globalSearch() {
-        let searchbox = document.getElementById('searchbox');
+        let searchbox = document.getElementById('unified-search__input');
         searchbox.addEventListener('keyup', (e) => {
             if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsService.get('client.search.global')) {
                 router.push({name: 'Search', params: {query: btoa(searchbox.value)}});
@@ -316,7 +295,7 @@ class SearchManager {
      * @private
      */
     _initLiveSearch() {
-        let searchbox = document.getElementById('searchbox');
+        let searchbox = document.getElementById('unified-search__input');
 
         document.addEventListener('keypress', (e) => {
             if(!this._status.available) return;
@@ -326,15 +305,22 @@ class SearchManager {
             if(!SettingsService.get('client.search.live')) return;
 
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
-                searchbox.value += e.key;
-                searchbox.focus();
-                e.preventDefault();
-                this.search(searchbox.value);
+                let searchIcon = document.getElementById('unified-search');
+                if(searchIcon && !searchIcon.classList.contains('header-menu--opened')) {
+                    searchIcon.querySelector('.header-menu__trigger').click();
+                }
+
+                setTimeout(() => {
+                    searchbox.value = e.key;
+                    searchbox.focus();
+                    e.preventDefault();
+                    this.search(searchbox.value);
+                }, 150);
             }
         });
         document.addEventListener('keyup', (e) => {
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
-            if(e.key !== 'Escape' || e.target.id !== 'searchbox') return;
+            if(e.key !== 'Escape' || e.target.id !== 'unified-search__input') return;
             if(!SettingsService.get('client.search.live')) return;
             e.preventDefault();
             searchbox.value = '';
@@ -347,7 +333,7 @@ class SearchManager {
      * @private
      */
     _createSearchBox() {
-        let icon = SettingsService.get('server.version') === '25' ? 'dark':'white'
+        let icon = SettingsService.get('server.version') === '25' ? 'dark':'white';
         let form = document.createElement('form');
         form.className = 'searchbox pw-searchbox';
         form.style.opacity = '0';
