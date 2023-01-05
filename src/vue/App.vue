@@ -19,9 +19,7 @@
                 <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
                     <clock-icon slot="icon"/>
                 </app-navigation-item>
-                <app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
-                    <star-icon slot="icon"/>
-                </app-navigation-item>
+                <app-navigation-item-favorites/>
                 <app-navigation-item-shared/>
                 <app-navigation-item-tags/>
                 <app-navigation-item-security/>
@@ -76,7 +74,6 @@
     import NcAppNavigation from '@nc/NcAppNavigation';
     import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
     import EarthIcon from "@icon/Earth";
-    import StarIcon from "@icon/Star";
     import MagnifyIcon from "@icon/Magnify";
     import PuzzleIcon from "@icon/Puzzle";
     import HelpCircleIcon from "@icon/HelpCircle";
@@ -90,11 +87,13 @@
     import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity";
     import AppNavigationItemTags from "@vc/Navigation/AppNavigationItemTags";
     import AppNavigationItemFolders from "@vc/Navigation/AppNavigationItemFolders";
+    import AppNavigationItemFavorites from "@vc/Navigation/AppNavigationItemFavorites";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItemFavorites,
             AppNavigationItemFolders,
             AppNavigationItemTags,
             AppNavigationItemSecurity,
@@ -107,7 +106,6 @@
             HelpCircleIcon,
             PuzzleIcon,
             MagnifyIcon,
-            StarIcon,
             EarthIcon,
             SessionTimeout,
             Translate,

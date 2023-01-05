@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <app-navigation-item :title="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
+    <app-navigation-item ref="navigation-item" :title="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
         <folder-icon slot="icon"/>
         <template>
             <app-navigation-item
@@ -22,7 +22,7 @@
             >
                 <folder-icon fill-color="var(--color-primary-default)" slot="icon"/>
             </app-navigation-item>
-            <nc-loading-icon v-if="folders.length === 0"/>
+            <nc-loading-icon v-if="!hasLoaded"/>
         </template>
     </app-navigation-item>
 </template>
@@ -38,10 +38,11 @@
         components: {AppNavigationItem, FolderIcon, NcLoadingIcon},
         data() {
             return {
-                open   : false,
-                loading: false,
-                folders: [],
-                baseId : '00000000-0000-0000-0000-000000000000'
+                open     : false,
+                loading  : false,
+                folders  : [],
+                baseId   : '00000000-0000-0000-0000-000000000000',
+                hasLoaded: false
             };
         },
         mounted() {
@@ -51,7 +52,7 @@
             }
             Events.on('folder.changed', (event) => {
                 let folder = event.object;
-                if(this.folders.length !== 0 &&
+                if((this.$refs['navigation-item'].opened || this.folders.length !== 0) &&
                    (
                        folder.id === this.baseId ||
                        folder.parent === this.baseId ||
@@ -76,6 +77,7 @@
                    .then((d) => {
                        this.folders = Utility.sortApiObjectArray(Utility.objectToArray(d.folders), 'label');
                        this.loading = false;
+                       this.hasLoaded = true;
                    });
             }
         }

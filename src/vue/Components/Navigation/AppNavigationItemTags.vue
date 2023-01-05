@@ -9,13 +9,13 @@
   -->
 
 <template>
-    <app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadTags">
+    <app-navigation-item ref="navigation-item" :title="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadTags">
         <tag-icon slot="icon"/>
         <template>
             <app-navigation-item v-for="tag in tags" :title="tag.label" :to="{ name: 'Tags', params: {tag: tag.id}}" :exact="true">
                 <tag-icon slot="icon" :fill-color="tag.color"/>
             </app-navigation-item>
-            <nc-loading-icon v-if="tags.length === 0"/>
+            <nc-loading-icon v-if="!hasLoaded"/>
         </template>
     </app-navigation-item>
 </template>
@@ -31,9 +31,10 @@
         components: {AppNavigationItem, TagIcon, NcLoadingIcon},
         data() {
             return {
-                open   : false,
-                loading: false,
-                tags   : []
+                open     : false,
+                loading  : false,
+                tags     : [],
+                hasLoaded: false
             };
         },
         mounted() {
@@ -42,7 +43,7 @@
                 this.loadTags();
             }
             Events.on('tag.changed', () => {
-                if(this.tags.length !== 0) {
+                if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
                     this.refreshTags();
                 }
             });
@@ -59,6 +60,7 @@
                 API.listTags()
                    .then((d) => {
                        this.tags = Utility.sortApiObjectArray(d, 'label');
+                       this.hasLoaded = true;
                        this.loading = false;
                    });
             }
