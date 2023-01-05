@@ -1,3 +1,13 @@
+<!--
+  - @copyright 2023 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
         <nc-app-navigation open>
@@ -14,9 +24,7 @@
                 <app-navigation-item :title="t('Favorites')" :to="{ name: 'Favorites'}">
                     <star-icon slot="icon"/>
                 </app-navigation-item>
-                <app-navigation-item :title="t('Shares')" :to="{ name: 'Shares'}">
-                    <share-variant-icon slot="icon"/>
-                </app-navigation-item>
+                <app-navigation-item-shared/>
                 <app-navigation-item :title="t('Tags')" :to="{ name: 'Tags'}">
                     <tag-icon slot="icon"/>
                 </app-navigation-item>
@@ -72,16 +80,11 @@
     import NcContent from '@nc/NcContent';
     import NcAppContent from '@nc/NcAppContent';
     import NcAppNavigation from '@nc/NcAppNavigation';
-    import NcAppNavigationItem from '@nc/NcAppNavigationItem';
-    import NcAppNavigationNew from '@nc/NcAppNavigationNew';
     import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
-    import NcAppNavigationToggle from '@nc/NcAppNavigationToggle';
-    import NcAppSidebar from '@nc/NcAppSidebar';
     import EarthIcon from "@icon/Earth";
     import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
     import TagIcon from "@icon/Tag";
-    import ShareVariantIcon from "@icon/ShareVariant";
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import MagnifyIcon from "@icon/Magnify";
     import PuzzleIcon from "@icon/Puzzle";
@@ -92,11 +95,13 @@
     import ClockIcon from "@icon/Clock";
     import Application from "@js/Init/Application";
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
+    import AppNavigationItemShared from "@vue/AppNavigationItemShared.vue";
 
     export default {
         el        : '#content',
         router,
         components: {
+            AppNavigationItemShared,
             AppNavigationItem,
             ClockIcon,
             PasswordSidebar,
@@ -106,7 +111,6 @@
             PuzzleIcon,
             MagnifyIcon,
             ShieldHalfFullIcon,
-            ShareVariantIcon,
             TagIcon,
             StarIcon,
             FolderIcon,
@@ -116,11 +120,7 @@
             NcContent,
             NcAppContent,
             NcAppNavigation,
-            NcAppNavigationItem,
-            NcAppNavigationNew,
             NcAppNavigationSettings,
-            NcAppSidebar,
-            NcAppNavigationToggle,
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 

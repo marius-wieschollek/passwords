@@ -15,6 +15,10 @@
         extends: NcAppNavigationItem,
         computed: {
             isActive() {
+                if(this.exact) {
+                    return this.to && this.$route.name === this.to.name && JSON.stringify(this.$route.params) === JSON.stringify(this.to.params)
+                }
+
                 return this.to && this.$route.name === this.to.name
             },
         }

@@ -10,7 +10,7 @@
                         :key="title"
                         :label="title"
                         icon="share-alt"
-                        :params="{type: index}"/>
+                        :params="{type: index.toString()}"/>
                 <password-line :password="password" v-for="password in passwords" :key="password.id">
                     <ul slot="middle" class="line-share-icons">
                         <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
