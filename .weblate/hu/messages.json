@@ -2973,5 +2973,48 @@
     "frontend-FolderPickerLoading": {
         "message": "Mappák betöltése",
         "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "QrCode",
+        "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "A jelszó már a $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "A jelszó a következő címkével volt ellátva $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "A jelszót nem lehetett megjelölni a $TAG$ címmel: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
     }
 }
