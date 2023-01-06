@@ -10,13 +10,13 @@
 
 <template>
     <app-navigation-item :title="t('Shares')" :to="{ name: 'Shares'}" :allowCollapse="true" :open="open">
-        <share-variant-icon slot="icon"/>
+        <share-variant-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item :title="t('Shared with you')" :to="{ name: 'Shares', params: {type: '0'}}" :exact="true">
-                <share-variant-icon slot="icon"/>
+                <share-variant-icon :size="20" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item :title="t('Shared by you')" :to="{ name: 'Shares', params: {type: '1'}}" :exact="true">
-                <share-variant-icon slot="icon"/>
+                <share-variant-icon :size="20" slot="icon"/>
             </app-navigation-item>
         </template>
     </app-navigation-item>

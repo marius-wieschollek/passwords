@@ -10,7 +10,7 @@
 
 <template>
     <app-navigation-item ref="navigation-item" :title="t('Favorites')" :to="{ name: 'Favorites'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFavorites">
-        <star-icon slot="icon"/>
+        <star-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
@@ -21,7 +21,7 @@
                     :data-folder-id="folder.id"
                     data-drop-type="folder"
             >
-                <folder-icon fill-color="var(--color-primary-default)" slot="icon"/>
+                <folder-icon :size="20" fill-color="var(--color-primary-default)" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item
                     v-for="tag in tags"
@@ -32,7 +32,7 @@
                     :data-tag-id="tag.id"
                     data-drop-type="tag"
             >
-                <tag-icon slot="icon" :fill-color="tag.color"/>
+                <tag-icon :size="20" slot="icon" :fill-color="tag.color"/>
             </app-navigation-item>
             <nc-loading-icon v-if="foldersLoaded === 0 || tagsLoaded === 0"/>
         </template>

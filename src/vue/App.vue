@@ -13,18 +13,18 @@
         <nc-app-navigation open>
             <template id="app-passwords-navigation" #list>
                 <app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
-                    <earth-icon slot="icon"/>
+                    <earth-icon :size=20 slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item-folders/>
                 <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
-                    <clock-icon slot="icon"/>
+                    <clock-icon :size=20 slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item-favorites/>
                 <app-navigation-item-shared/>
                 <app-navigation-item-tags/>
                 <app-navigation-item-security/>
                 <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
-                    <magnify-icon slot="icon"/>
+                    <magnify-icon :size=20 slot="icon"/>
                 </app-navigation-item>
 
                 <session-timeout v-if="!isMobile"/>
@@ -33,16 +33,16 @@
 
             <nc-app-navigation-settings slot="footer" :title="t('More')">
                 <app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
-                    <cog-icon slot="icon"/>
+                    <cog-icon :size=20 slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
-                    <archive-icon slot="icon"/>
+                    <archive-icon :size=20 slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
-                    <help-circle-icon slot="icon"/>
+                    <help-circle-icon :size=20 slot="icon"/>
                 </app-navigation-item>
                 <app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
-                    <puzzle-icon slot="icon"/>
+                    <puzzle-icon :size=20 slot="icon"/>
                 </app-navigation-item>
             </nc-app-navigation-settings>
         </nc-app-navigation>

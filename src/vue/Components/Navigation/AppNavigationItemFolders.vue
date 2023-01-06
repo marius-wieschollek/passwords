@@ -10,7 +10,7 @@
 
 <template>
     <app-navigation-item ref="navigation-item" :title="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
-        <folder-icon slot="icon"/>
+        <folder-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
@@ -21,7 +21,7 @@
                     :data-folder-id="folder.id"
                     data-drop-type="folder"
             >
-                <folder-icon fill-color="var(--color-primary-default)" slot="icon"/>
+                <folder-icon :size="20" fill-color="var(--color-primary-default)" slot="icon"/>
             </app-navigation-item>
             <nc-loading-icon v-if="!hasLoaded"/>
         </template>
