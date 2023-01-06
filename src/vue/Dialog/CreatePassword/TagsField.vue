@@ -14,10 +14,18 @@
         <nc-select id="password-tags" :no-wrap="true"
                    class="area-input"
                    :multiple="true"
+                   :taggable="true"
+                   :closeOnSelect="false"
                    :options="options"
                    :loading="loading"
                    :placeholder="t('Add Tags...')"
-                   v-model="model"/>
+                   v-model="model"
+                   v-on:option:created="createTag($event)"
+        >
+            <template #selected-option-container="{ option, deselect, multiple, disabled }">
+                <div class="vs__selected" :class="tagCssClass(option)" @click="deselect(option)" :style="{backgroundColor: option.color}">{{ option.label }}</div>
+            </template>
+        </nc-select>
     </div>
 </template>
 
@@ -26,6 +34,7 @@
     import {NcSelect} from "@nextcloud/vue";
     import API from '@js/Helper/api';
     import Utility from "@js/Classes/Utility";
+    import TagManager from "@js/Manager/TagManager";
 
     export default {
         components: {Translate, NcSelect},
@@ -86,6 +95,30 @@
                         }
                     }
                 }
+            },
+            createTag(data) {
+                TagManager.createTagFromData(data)
+                          .then((d) => {
+                              this.tags[d.id] = d;
+                              for(let i = 0; i < this.model.length; i++) {
+                                  if(!this.model[i].hasOwnProperty('id') && this.model[i].label === d.label) {
+                                      this.model.splice(i, 1, d);
+                                  }
+                              }
+                          });
+            },
+            tagCssClass(option) {
+                if(!option.color) {
+                    return 'is-dark';
+                }
+                let rgb  = parseInt(option.color.substring(1), 16),
+                    r    = (rgb >> 16) & 0xff,
+                    g    = (rgb >> 8) & 0xff,
+                    b    = (rgb >> 0) & 0xff,
+                    luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
+
+                console.log(option.label, luma);
+                return luma < 96 ? 'is-dark':'is-bright';
             }
         },
 
@@ -151,18 +184,18 @@
 
         .vs__selected-options {
             .vs__selected {
-                height     : 28px;
-                min-height : 28px;
-                max-height : 28px;
-                margin     : 2px 2px 0;
+                height      : 28px;
+                min-height  : 28px;
+                max-height  : 28px;
+                margin      : 2px 2px 0;
+                white-space : nowrap;
 
-                .vs__deselect {
-                    margin     : 0 -.5em 0 0;
-                    padding    : 0;
-                    border     : none;
-                    background : none;
-                    max-height : 28px;
-                    min-height : 28px;
+                &.is-bright {
+                    color : #000
+                }
+
+                &.is-dark {
+                    color : #fff
                 }
             }
         }
