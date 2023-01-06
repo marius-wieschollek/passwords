@@ -22,15 +22,15 @@
         <template #secondary-actions>
             <nc-action-button @click.prevent="actions.edit()">
                 <pencil-icon slot="icon" :size="20"/>
-                {{t('Edit password')}}
+                {{ t('Edit password') }}
             </nc-action-button>
             <nc-action-button @click.prevent="actions.qrcode()">
                 <qrcode-icon slot="icon" :size="20"/>
-                {{t('PasswordActionQrcode')}}
+                {{ t('PasswordActionQrcode') }}
             </nc-action-button>
             <nc-action-button @click.prevent="actions.print()">
                 <printer-icon slot="icon" :size="20"/>
-                {{t('PasswordActionPrint')}}
+                {{ t('PasswordActionPrint') }}
             </nc-action-button>
         </template>
         <template #tertiary-actions>
@@ -43,9 +43,7 @@
         <div slot="header" v-if="!compact">
             <preview :image="password.preview" :icon="password.icon" :link="password.url" :host="password.website"/>
         </div>
-        <div slot="description">
-            <tags :password="password"/>
-        </div>
+        <tags :password="password" slot="description"/>
 
         <nc-app-sidebar-tab icon="icon-info" :name="t('Details')" id="details-tab">
             <pw-details :password="password"/>
@@ -69,7 +67,7 @@
     import NcAppSidebarTab from '@nc/NcAppSidebarTab';
     import Localisation from "@js/Classes/Localisation";
     import Preview from "@vc/Sidebar/PasswordSidebar/Preview";
-    import Tags from '@vc/Sidebar/PasswordSidebar/Tags';
+    import Tags from '@vc/Tags';
     import Revisions from "@vc/Sidebar/PasswordSidebar/Tabs/Revisions";
     import Notes from "@vc/Sidebar/PasswordSidebar/Tabs/Notes";
     import PwDetails from '@vc/Sidebar/PasswordSidebar/Tabs/Details';
@@ -85,7 +83,7 @@
     import StarOutlineIcon from "vue-material-design-icons/StarOutline";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import Application from "@js/Init/Application";
-    import { emit } from '@nextcloud/event-bus'
+    import {emit} from '@nextcloud/event-bus';
     import QrcodeIcon from "vue-material-design-icons/Qrcode.vue";
 
     export default {
@@ -173,7 +171,7 @@
 </script>
 
 <style lang="scss">
-.passwords-sidebar-password {
+.passwords-sidebar-password.app-sidebar {
     .app-sidebar-header__tertiary-actions {
         position : relative;
 
@@ -181,6 +179,23 @@
             position : absolute !important;
             right    : -15px;
             bottom   : -10px;
+        }
+    }
+
+    .app-sidebar-header__description {
+        margin-bottom : .5rem !important;
+
+        div.passwords-tags-field.select {
+            border-color : transparent;
+
+            &:focus,
+            &:active, {
+                border-color : var(--color-border-dark);
+            }
+
+            &:hover {
+                border-color : var(--color-primary-element);
+            }
         }
     }
 }
