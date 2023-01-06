@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2021 Passwords App
+  - @copyright 2023 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -9,25 +9,27 @@
   -->
 
 <template>
-    <icon class="password-form-favorite" :icon="icon" :title="title" @click="model = !model" />
+    <nc-button class="password-form-favorite" :title="t(title)" type="tertiary" @click="model = !model">
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" slot="icon" v-if="model"/>
+        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" slot="icon" v-else/>
+    </nc-button>
 </template>
 
 <script>
-    import Icon          from '@vc/Icon';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
+    import NcButton from '@nc/NcButton';
+    import StarIcon from '@icon/Star';
+    import StarOutlineIcon from '@icon/StarOutline';
 
     export default {
         extends   : AbstractField,
-        components: {Icon},
+        components: {StarOutlineIcon, StarIcon, NcButton},
         props     : {
             value: Boolean
         },
-        computed: {
+        computed  : {
             title() {
                 return this.model ? 'Remove from favorites':'Mark as favorite';
-            },
-            icon() {
-                return this.model ? 'star':'star-o';
             }
         }
     };
@@ -36,8 +38,8 @@
 <style lang="scss">
 .password-form-favorite {
     flex-grow : 0;
-    margin    : 0 1rem 0 auto;
-    color     : var(--color-warning);
-    cursor    : pointer;
+    margin    : .25rem 3rem 0 auto;
+    position  : absolute;
+    height    : 44px;
 }
 </style>

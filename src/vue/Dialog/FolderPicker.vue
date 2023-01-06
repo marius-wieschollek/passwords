@@ -12,12 +12,14 @@
     <nc-modal
             class="pw-folder-picker-dialog"
             ref="window"
+            size="small"
             :inlineActions="0"
             v-on:close="close"
+            :container="container"
             :title="t('Select a folder')">
         <template #default>
             <div class="pw-folder-picker" v-if="currentFolder !== null">
-                <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder"/>
+                <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder" />
                 <picker-folder-list :current="currentFolder" :folders="currentFolders" :ignored-folders="ignoredFolders" v-on:navigate="openFolder"/>
                 <div class="buttons">
                     <nc-button @click="select" type="primary">
@@ -58,7 +60,8 @@
         data() {
             return {
                 folderList   : [],
-                currentFolder: null
+                currentFolder: null,
+                container   : Utility.popupContainer()
             };
         },
         mounted() {

@@ -1,32 +1,46 @@
+<!--
+  - @copyright 2023 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
-    <dialog-window ref="window" id="passwords-edit-dialog" :title="title" @drop.stop.prevent="dragDrop">
-        <div slot="window-controls">
+    <nc-modal id="passwords-edit-dialog" :container="container" size="large" @drop.stop.prevent="dragDrop" v-on:close="closeWindow">
+        <div class="header">
+            <translate tag="h1" :say="title"/>
             <favorite-field v-model="password.favorite"/>
         </div>
-        <form class="password-form" id="password-edit-form" slot="content" v-on:submit.prevent="submitAction()">
-            <div class="password-form-fields">
-                <password-field v-model="password.password"/>
-                <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
-                <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
-                <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
-                <folder-field v-model="password.folder" v-on:folder="updateFolder" />
-                <tags-field v-model="password.tags" v-if="false"/>
-                <checkbox-field v-model="password.hidden" id="hidden" label="Hidden password" checkbox-label="Don't show this password anywhere" icon="eye-slash" v-if="showHidden"/>
+        <div class="content">
+            <form class="password-form" id="password-edit-form" v-on:submit.prevent="submitAction()">
+                <div class="password-form-fields">
+                    <password-field v-model="password.password"/>
+                    <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
+                    <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
+                    <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
+                    <folder-field v-model="password.folder" v-on:folder="updateFolder"/>
+                    <tags-field v-model="password.tags" v-if="false"/>
+                    <checkbox-field v-model="password.hidden" id="hidden" label="Hidden password" checkbox-label="Don't show this password anywhere" icon="eye-slash" v-if="showHidden"/>
 
-                <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
-                <new-custom-field @create="addCustomField" v-if="canAddField"/>
-            </div>
-            <notes-field v-model="password.notes"/>
-            <encryption-options class="encryption-options" :password="password"/>
-        </form>
-        <div slot="controls" class="buttons">
+                    <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
+                    <new-custom-field @create="addCustomField" v-if="canAddField"/>
+                </div>
+                <notes-field v-model="password.notes"/>
+                <encryption-options class="encryption-options" :password="password"/>
+            </form>
+        </div>
+        <div class="buttons">
             <div class="advanced-options">
                 <encryption-options :password="password"/>
             </div>
-            <translate class="btn primary btn-save" tag="input" type="submit" form="password-edit-form" localized-value="Save"/>
+            <nc-button class="password-form-favorite btn-save" type="primary" form="password-edit-form" :wide="true">
+                {{ t('Save') }}
+            </nc-button>
         </div>
-    </dialog-window>
-
+    </nc-modal>
 </template>
 
 <script>
@@ -45,16 +59,16 @@
     import UrlField from "@vue/Dialog/CreatePassword/UrlField";
     import CustomFieldsDragService from "@js/PasswordDialog/CustomFieldsDragService";
     import FolderField from "@vue/Dialog/CreatePassword/FolderField";
-    import DialogWindow from "@vue/Dialog/DialogWindow";
     import TagsField from "@vue/Dialog/CreatePassword/TagsField";
     import CheckboxField from "@vue/Dialog/CreatePassword/CheckboxField";
     import Messages from "@js/Classes/Messages";
+    import NcModal from '@nc/NcModal';
+    import NcButton from '@nc/NcButton';
 
     export default {
         components: {
             CheckboxField,
             TagsField,
-            DialogWindow,
             FolderField,
             UrlField,
             CustomField,
@@ -65,7 +79,9 @@
             NotesField,
             TextField,
             PasswordField,
-            Translate
+            Translate,
+            NcModal,
+            NcButton
         },
 
         provide() {
@@ -89,10 +105,11 @@
 
         data() {
             let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-                password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden:false}, this.properties),
-                dragService = new CustomFieldsDragService(password);
+                password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden: false}, this.properties),
+                dragService = new CustomFieldsDragService(password),
+                container   = Utility.popupContainer();
 
-            return {password, dragService, isFolderHidden: false};
+            return {password, dragService, isFolderHidden: false, container};
         },
 
         computed: {
@@ -118,8 +135,8 @@
 
                 if(
                     password.hidden &&
-                   !this.isFolderHidden &&
-                   !await Messages.confirm('PwdSaveHiddenMessage', 'PwdSaveHiddenTitle', true)
+                    !this.isFolderHidden &&
+                    !await Messages.confirm('PwdSaveHiddenMessage', 'PwdSaveHiddenTitle', true)
                 ) {
                     return;
                 }
@@ -127,7 +144,7 @@
                 if(this._success) {
                     try {
                         this._success(password);
-                        this.$refs.window.closeWindow();
+                        this.closeWindow();
                     } catch(e) {
                         console.error(e);
                     }
@@ -138,6 +155,10 @@
             },
             updateFolder($event) {
                 this.isFolderHidden = $event.hidden;
+            },
+            closeWindow() {
+                this.$destroy();
+                this.$el.parentNode.removeChild(this.$el);
             }
         },
 
@@ -153,23 +174,41 @@
 
 <style lang="scss">
 
-#app-popup #passwords-edit-dialog {
-    .window {
-        height    : 88%;
-        max-width : 76vw;
+#passwords-edit-dialog {
+    box-sizing : border-box;
 
-        .title .close {
-            margin-left : 0;
+    .modal-container {
+        display        : flex;
+        flex-direction : column;
+
+        @media (min-width : $width-1366-above) {
+            height    : 88%;
+            max-width : 76vw;
+            width     : auto;
         }
+    }
 
-        @media (max-width : $width-1366) {
-            height    : 100%;
-            max-width : 100vw;
-            width     : 100vw;
+    .header {
+        background-image : linear-gradient(40deg, #0082c9, #30b6ff);
+        background-color : var(--color-primary);
+        color            : var(--color-primary-text);
+        display          : flex;
+        flex-grow        : 0;
+        flex-shrink      : 0;
+        font-size        : 1.25rem;
+        position         : sticky;
+        top              : 0;
+
+        h1 {
+            flex-grow : 1;
+            padding   : 1rem;
         }
     }
 
     .content {
+        margin    : 1rem .5rem .5rem;
+        flex-grow : 1;
+
         .password-form {
             display        : flex;
             flex-direction : column;
@@ -229,6 +268,7 @@
 
     .buttons {
         display : flex;
+        margin  : 0 .5rem .5rem;
 
         .advanced-options {
             display     : flex;
@@ -241,8 +281,9 @@
         }
 
         .btn-save {
-            font-size : 1.1rem;
-            width     : 40%;
+            font-size    : 1.1rem;
+            width        : 40%;
+            margin-right : 0;
 
             @media (max-width : $width-extra-small) {
                 width : 100%;

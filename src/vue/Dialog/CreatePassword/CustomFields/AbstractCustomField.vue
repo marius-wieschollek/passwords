@@ -86,7 +86,7 @@
 </script>
 
 <style lang="scss">
-#content.app-passwords .password-form-custom-field {
+.password-form-custom-field {
     display               : grid;
     grid-template-columns : 3fr 1fr;
 

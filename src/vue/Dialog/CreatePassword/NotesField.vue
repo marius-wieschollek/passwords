@@ -1,5 +1,5 @@
 <!--
-  - @copyright 2022 Passwords App
+  - @copyright 2023 Passwords App
   -
   - @author Marius David Wieschollek
   - @license AGPL-3.0
@@ -206,6 +206,10 @@
                                 margin      : 0 7.5rem 0 -1rem;
                                 line-height : 2rem;
                                 white-space : nowrap;
+
+                                @media all and (max-width : 1390px) {
+                                    margin : 0 .5rem 0 -1rem;
+                                }
                             }
                         }
                     }
@@ -246,17 +250,21 @@
 
             .toastui-editor-contents {
                 font-family : inherit;
+                color       : var(--color-primary-text);
 
                 p {
                     margin-bottom : 1em;
+                    color         : var(--color-primary-text);
                 }
 
                 ol li {
                     list-style-type : decimal;
+                    color           : var(--color-primary-text);
                 }
 
                 h1, h2 {
                     border-bottom : none;
+                    color         : var(--color-primary-text);
                 }
             }
         }

@@ -11,21 +11,24 @@
 <template>
     <nc-breadcrumbs class="folder-picker-breadcrumbs">
         <NcBreadcrumb
-                v-for="folder in hierarchy"
+                v-for="(folder, index) in hierarchy"
                 :key="folder.id"
                 :title="folder.label"
                 v-on:click.native="$emit('navigate', folder)"
                 :disableDrop="true"
-        />
+        >
+            <folder-icon v-if="index === 0" slot="icon"/>
+        </NcBreadcrumb>
     </nc-breadcrumbs>
 </template>
 
 <script>
     import NcBreadcrumbs from '@nc/NcBreadcrumbs';
     import NcBreadcrumb from '@nc/NcBreadcrumb';
+    import FolderIcon from "@icon/Folder";
 
     export default {
-        components: {NcBreadcrumb, NcBreadcrumbs},
+        components: {FolderIcon, NcBreadcrumb, NcBreadcrumbs},
         props   : {
             current: Object,
             folders: Array
