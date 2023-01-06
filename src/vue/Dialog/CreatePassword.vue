@@ -100,6 +100,10 @@
             },
             _success  : {
                 type: Function
+            },
+            _fail  : {
+                type: Function,
+                default: null
             }
         },
 
@@ -107,7 +111,7 @@
             let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden: false}, this.properties),
                 dragService = new CustomFieldsDragService(password),
-                container   = Utility.popupContainer();
+                container   = Utility.popupContainer(true);
 
             return {password, dragService, isFolderHidden: false, container};
         },
@@ -144,7 +148,7 @@
                 if(this._success) {
                     try {
                         this._success(password);
-                        this.closeWindow();
+                        this.closeWindow(false);
                     } catch(e) {
                         console.error(e);
                     }
@@ -156,9 +160,13 @@
             updateFolder($event) {
                 this.isFolderHidden = $event.hidden;
             },
-            closeWindow() {
+            closeWindow(fail = true) {
                 this.$destroy();
-                this.$el.parentNode.removeChild(this.$el);
+                if(this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
+
+                if(fail && this._fail) {
+                    this._fail();
+                }
             }
         },
 

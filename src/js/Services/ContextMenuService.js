@@ -13,8 +13,9 @@ export default new class ContextMenuService {
             'move'    : 'external',
             'open-url': 'link',
             'delete'  : 'delete',
-            'print'   : 'category-office',
-            'restore' : 'history'
+            'print'   : 'edit',
+            'restore' : 'history',
+            'qrcode'  : 'edit'
         };
     }
 

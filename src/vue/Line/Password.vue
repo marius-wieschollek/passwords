@@ -57,6 +57,9 @@
                                 <open-in-new-icon slot="icon"/>
                             </translate>
                         </li>
+                        <translate tag="li" @click="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
+                            <qrcode-icon slot="icon" />
+                        </translate>
                         <translate tag="li" v-if="isPrintEnabled" @click="printAction()" data-item-action="print" say="PasswordActionPrint">
                             <printer-icon slot="icon"/>
                         </translate>
@@ -99,9 +102,11 @@
     import StarOutlineIcon from "@icon/StarOutline";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import { subscribe, unsubscribe } from '@nextcloud/event-bus'
+    import QrcodeIcon from "@icon/Qrcode";
 
     export default {
         components: {
+            QrcodeIcon,
             StarOutlineIcon,
             StarIcon,
             ClipboardArrowLeftOutlineIcon,

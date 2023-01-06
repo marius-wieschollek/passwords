@@ -2971,5 +2971,9 @@
     "frontend-FolderPickerLoading": {
         "message": "Lade Ordner",
         "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "QrCode",
+        "description": "Label of the action to show a qrcode for the password"
     }
 }

@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <nc-button class="password-form-favorite" :title="t(title)" type="tertiary" @click="model = !model">
+    <nc-button class="password-form-favorite" :title="t(title)" :aria-label="t(title)" type="tertiary" @click="model = !model">
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" slot="icon" v-if="model"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" slot="icon" v-else/>
     </nc-button>

@@ -10,6 +10,8 @@
 
 import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
+import Vue from "vue";
+import Utility from "@js/Classes/Utility";
 
 export default class PasswordActions {
     get password() {
@@ -42,12 +44,17 @@ export default class PasswordActions {
 
         return this._password;
     }
-
     async edit() {
         return await PasswordManager.editPassword(this._password);
     }
-
     async clone() {
         return await PasswordManager.clonePassword(this._password);
+    }
+
+    async qrcode() {
+        let PasswordQrCode = await import(/* webpackChunkName: "QrCode" */ '@vue/Dialog/QrCode.vue'),
+            PwQrCodeDialog = Vue.extend(PasswordQrCode.default);
+
+        new PwQrCodeDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
     }
 }

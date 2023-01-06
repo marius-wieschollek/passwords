@@ -20,18 +20,22 @@
             v-on:closed="closed"
     >
         <template #secondary-actions>
-            <nc-action-button @click.prevent="edit">
+            <nc-action-button @click.prevent="actions.edit()">
                 <pencil-icon slot="icon" :size="20"/>
                 {{t('Edit password')}}
             </nc-action-button>
-            <nc-action-button @click.prevent="print">
+            <nc-action-button @click.prevent="actions.qrcode()">
+                <qrcode-icon slot="icon" :size="20"/>
+                {{t('PasswordActionQrcode')}}
+            </nc-action-button>
+            <nc-action-button @click.prevent="actions.print()">
                 <printer-icon slot="icon" :size="20"/>
                 {{t('PasswordActionPrint')}}
             </nc-action-button>
         </template>
         <template #tertiary-actions>
             <favicon class="icon" :domain="password.website"/>
-            <nc-button class="password-details-favorite" :aria-label="t(password.favorite ? 'Remove from favorites':'Mark as favorite')" type="tertiary" @click.prevent="favorite">
+            <nc-button class="password-details-favorite" :aria-label="t(password.favorite ? 'Remove from favorites':'Mark as favorite')" type="tertiary" @click.prevent="actions.favorite()">
                 <star-icon slot="icon" fill-color="var(--color-warning)" v-if="password.favorite" :size="20"/>
                 <star-outline-icon slot="icon" v-else :size="20"/>
             </nc-button>
@@ -49,7 +53,7 @@
         <nc-app-sidebar-tab icon="icon-comment" :name="t('Notes')" id="notes-tab" v-if="password.notes">
             <notes :password="password"/>
         </nc-app-sidebar-tab>
-        <nc-app-sidebar-tab icon="icon-share" :name="t('Share')" id="share-tab">
+        <nc-app-sidebar-tab icon="icon-share" :name="t('Share')" id="share-tab" v-if="hasSharing">
             <share :password="password"/>
         </nc-app-sidebar-tab>
         <nc-app-sidebar-tab icon="icon-history" :name="t('Revisions')" id="revisions-tab">
@@ -82,9 +86,11 @@
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import Application from "@js/Init/Application";
     import { emit } from '@nextcloud/event-bus'
+    import QrcodeIcon from "vue-material-design-icons/Qrcode.vue";
 
     export default {
         components: {
+            QrcodeIcon,
             StarOutlineIcon,
             StarIcon,
             Favicon,
@@ -128,6 +134,9 @@
             },
             compact() {
                 return window.innerWidth <= 640 || !SettingsService.get('client.ui.password.details.preview');
+            },
+            hasSharing() {
+                return SettingsService.get('server.sharing.enabled');
             }
         },
 
@@ -136,15 +145,6 @@
                 this.password = await API.showPassword(this.sidebar.item.id, 'model+folder+shares+tags+revisions');
                 this.actions = new PasswordActions(this.password);
                 emit('passwords:sidebar:updated', this.sidebar);
-            },
-            favorite() {
-                this.actions.favorite();
-            },
-            print() {
-                this.actions.print();
-            },
-            edit() {
-                this.actions.edit();
             },
             close() {
                 Application.sidebar = null;

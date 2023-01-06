@@ -61,7 +61,7 @@
             return {
                 folderList   : [],
                 currentFolder: null,
-                container   : Utility.popupContainer()
+                container   : Utility.popupContainer(true)
             };
         },
         mounted() {
@@ -84,11 +84,12 @@
             close() {
                 this.reject();
                 this.$destroy();
-                this.$el.parentNode.removeChild(this.$el);
+                if(this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
             },
             select() {
                 this.resolve(this.currentFolder);
-                this.$refs.window.closeWindow();
+                this.$destroy();
+                if(this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
             },
             async loadFolders() {
                 let current = await API.showFolder(this.folder, 'model+folders');

@@ -1,6 +1,8 @@
-import {generateUrl}     from '@nextcloud/router';
+import {generateUrl} from '@nextcloud/router';
 
 export default class Utility {
+
+    static popupCounter = 0;
 
     /**
      *
@@ -281,12 +283,15 @@ export default class Utility {
 
     /**
      *
-     * @returns {HTMLDivElement}
+     * @returns {(HTMLDivElement|String)}
      */
-    static popupContainer() {
+    static popupContainer(selector = false) {
         let container = document.getElementById('app-popup'),
             div       = document.createElement('div');
+
+        Utility.popupCounter++;
+        div.id = `passwords-popup-${Utility.popupCounter}${Math.round(Math.random() * 10)}`;
         container.appendChild(div);
-        return div;
+        return selector ? `#app-popup div#${div.id}`:div;
     }
 }

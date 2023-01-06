@@ -1,22 +1,34 @@
-<template>
-    <div class="password-share-qrcode">
-        <select id="password-details-qrcode" v-model="property">
-            <translate tag="option" value="username" v-if="password.username" say="Username"/>
-            <translate tag="option" value="password" say="Password"/>
-            <translate tag="option" value="url" v-if="password.url" say="Website"/>
-            <translate tag="option" value="hash" say="SHA-1"/>
-        </select>
-        <div class="password-share-qrcode-box" :class="{'has-warning':showWarning}">
-            <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="Q"/>
-            <div class="password-share-qrcode-warning" v-if="showWarning" @click="hideWarning">
-                <icon icon="eye-slash"/>
-                <translate say="Make sure this QR code is only visible to people you trust."/>
-                <translate say="Click to show the QR code."/>
+<!--
+  - @copyright 2023 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
 
-                <translate class="disable-warning" say="Don't warn me again" @click.stop="disableWarning"/>
+<template>
+    <nc-modal :container="container" size="small" v-on:close="close">
+        <div class="password-share-qrcode">
+            <select id="password-details-qrcode" v-model="property">
+                <translate tag="option" value="username" v-if="password.username" say="Username"/>
+                <translate tag="option" value="password" say="Password"/>
+                <translate tag="option" value="url" v-if="password.url" say="Website"/>
+                <translate tag="option" value="hash" say="SHA-1"/>
+            </select>
+            <div class="password-share-qrcode-box" :class="{'has-warning':showWarning}">
+                <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="Q"/>
+                <div class="password-share-qrcode-warning" v-if="showWarning" @click="hideWarning">
+                    <eye-off-icon :size="64"/>
+                    <translate say="Make sure this QR code is only visible to people you trust."/>
+                    <translate say="Click to show the QR code."/>
+
+                    <translate class="disable-warning" say="Don't warn me again" @click.stop="disableWarning"/>
+                </div>
             </div>
         </div>
-    </div>
+    </nc-modal>
 </template>
 
 <script>
@@ -25,12 +37,17 @@
     import SettingsService from '@js/Services/SettingsService';
     import Icon from "@vc/Icon";
     import Localisation from "@js/Classes/Localisation";
+    import NcModal from '@nc/NcModal';
+    import Utility from "@js/Classes/Utility";
+    import EyeOffIcon from "vue-material-design-icons/EyeOff.vue";
 
     export default {
         components: {
+            EyeOffIcon,
             Icon,
             QrCode,
-            Translate
+            Translate,
+            NcModal
         },
 
         props: {
@@ -43,9 +60,10 @@
             let warning = SettingsService.get('local.sharing.qrcode.warning', true);
 
             return {
-                color   : SettingsService.get('server.theme.color.primary'),
-                text    : warning ? Localisation.translate('What did you expect?'):this.password.password,
-                property: 'password',
+                color    : SettingsService.get('server.theme.color.primary'),
+                text     : warning ? Localisation.translate('What did you expect?'):this.password.password,
+                property : 'password',
+                container: Utility.popupContainer(true),
                 warning
             };
         },
@@ -66,6 +84,10 @@
             disableWarning() {
                 SettingsService.set('local.sharing.qrcode.warning', false);
                 this.hideWarning();
+            },
+            close() {
+                this.$destroy();
+                if(this.$el.parentNode) this.$el.parentNode.removeChild(this.$el);
             }
         },
 
@@ -82,9 +104,12 @@
 
 <style lang="scss">
 .password-share-qrcode {
+    padding : 1rem 1rem 2rem;
+
     select {
-        width         : 100%;
+        width         : calc(100% - 2rem);
         margin-bottom : 15px;
+        cursor        : pointer;
     }
 
     .password-share-qrcode-box {
@@ -101,10 +126,14 @@
             flex-direction  : column;
             justify-content : center;
 
-            i {
-                font-size : 5rem;
-                margin    : 0 auto 1.25rem;
-                display   : block;
+            .material-design-icon {
+                margin  : 0 auto 0;
+                display : block;
+
+                svg {
+                    width  : 96px;
+                    height : 96px;
+                }
             }
 
             span {
