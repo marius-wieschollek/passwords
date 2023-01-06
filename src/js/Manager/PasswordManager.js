@@ -82,6 +82,11 @@ class PasswordManager {
      */
     editPassword(password) {
         return new Promise(async (resolve, reject) => {
+            if(!password.tags) {
+                let tagData = await API.showPassword(password.id, 'model+tags');
+                password.tags = tagData.tags;
+            }
+
             let propsData      = {properties: Utility.cloneObject(password), title: 'Edit password'},
                 PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default),

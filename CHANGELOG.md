@@ -3,6 +3,7 @@
 - User migration support
 - Print password option
 - Navigation quick access for favorites, folders, tags, shared and security
+- Adding tags in password create and edit dialogs
 ### Changed
 - Breadcrumb now shows full path
 - Migrated to Nextcloud Vue components for better integration

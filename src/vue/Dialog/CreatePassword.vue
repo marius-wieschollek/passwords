@@ -22,7 +22,7 @@
                     <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
                     <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
                     <folder-field v-model="password.folder" v-on:folder="updateFolder"/>
-                    <tags-field v-model="password.tags" v-if="false"/>
+                    <tags-field v-model="password.tags"/>
                     <checkbox-field v-model="password.hidden" id="hidden" label="Hidden password" checkbox-label="Don't show this password anywhere" icon="eye-slash" v-if="showHidden"/>
 
                     <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
@@ -101,15 +101,15 @@
             _success  : {
                 type: Function
             },
-            _fail  : {
-                type: Function,
+            _fail     : {
+                type   : Function,
                 default: null
             }
         },
 
         data() {
             let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-                password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], hidden: false}, this.properties),
+                password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], tags: [], hidden: false}, this.properties),
                 dragService = new CustomFieldsDragService(password),
                 container   = Utility.popupContainer(true);
 
