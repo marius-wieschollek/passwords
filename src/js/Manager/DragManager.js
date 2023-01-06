@@ -56,6 +56,7 @@ export default new class DragManager {
         }
 
         let types = ['folder'];
+        if(this._state.model.type === 'password') types.push('tag');
         if(!this._state.model.trashed) types.push('trash');
 
         if(types.indexOf(data.dropType) !== -1) {

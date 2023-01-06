@@ -12,6 +12,9 @@ import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Vue from "vue";
 import Utility from "@js/Classes/Utility";
+import API from '@js/Helper/api';
+import Messages from "@js/Classes/Messages";
+import AddTagAction from "@js/Actions/Password/AddTagAction";
 
 export default class PasswordActions {
     get password() {
@@ -38,17 +41,33 @@ export default class PasswordActions {
         try {
             await PasswordManager.updatePassword(this._password);
         } catch(e) {
-            this._password.favorite = oldStatus
+            this._password.favorite = oldStatus;
             console.error(e);
         }
 
         return this._password;
     }
-    async edit() {
-        return await PasswordManager.editPassword(this._password);
+
+    edit() {
+        return PasswordManager.editPassword(this._password);
     }
-    async clone() {
-        return await PasswordManager.clonePassword(this._password);
+
+    clone() {
+        return PasswordManager.clonePassword(this._password);
+    }
+
+    delete() {
+        return PasswordManager.deletePassword(this._password);
+    }
+
+    move(folder = null) {
+        return PasswordManager.movePassword(this._password, folder);
+    }
+
+    async addTag(tag) {
+        let action = new AddTagAction(this._password);
+        this._password = await action.addTag(tag);
+        return this._password;
     }
 
     async qrcode() {

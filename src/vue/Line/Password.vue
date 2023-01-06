@@ -58,7 +58,7 @@
                             </translate>
                         </li>
                         <translate tag="li" @click="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
-                            <qrcode-icon slot="icon" />
+                            <qrcode-icon slot="icon"/>
                         </translate>
                         <translate tag="li" v-if="isPrintEnabled" @click="printAction()" data-item-action="print" say="PasswordActionPrint">
                             <printer-icon slot="icon"/>
@@ -101,7 +101,7 @@
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
-    import { subscribe, unsubscribe } from '@nextcloud/event-bus'
+    import {subscribe, unsubscribe} from '@nextcloud/event-bus';
     import QrcodeIcon from "@icon/Qrcode";
 
     export default {
@@ -133,7 +133,7 @@
                 clickTimeout : null,
                 showMenu     : false,
                 detailsActive: false,
-                actions: new PasswordActions(this.password)
+                actions      : new PasswordActions(this.password)
             };
         },
 
@@ -353,11 +353,11 @@
             dragStartAction($e) {
                 DragManager
                     .start($e, this.password)
-                    .then((data) => {
+                    .then(async (data) => {
                         if(data.dropType === 'folder') {
-                            PasswordManager
-                                .movePassword(this.password, data.folderId)
-                                .then((p) => {this.password = p;});
+                            this.password = await this.actions.move(data.folderId);
+                        } else if(data.dropType === 'tag') {
+                            this.password = await this.actions.addTag(data.tagId);
                         } else if(data.dropType === 'trash') {
                             PasswordManager.deletePassword(this.password);
                         }
@@ -385,6 +385,8 @@
     background-size : 32px;
     line-height     : 32px;
     display         : inline-block;
+    position        : absolute;
+    left            : -500px;
 }
 
 #app-content {

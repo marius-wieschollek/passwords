@@ -14,8 +14,8 @@
         <template>
             <app-navigation-item
                     v-for="folder in folders"
-                    :title="folder.label"
                     :key="folder.id"
+                    :title="folder.label"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"
                     :data-folder-id="folder.id"
@@ -23,7 +23,15 @@
             >
                 <folder-icon fill-color="var(--color-primary-default)" slot="icon"/>
             </app-navigation-item>
-            <app-navigation-item v-for="tag in tags" :title="tag.label" :key="tag.id" :to="{ name: 'Tags', params: {tag: tag.id}}" :exact="true">
+            <app-navigation-item
+                    v-for="tag in tags"
+                    :key="tag.id"
+                    :title="tag.label"
+                    :to="{ name: 'Tags', params: {tag: tag.id}}"
+                    :exact="true"
+                    :data-tag-id="tag.id"
+                    data-drop-type="tag"
+            >
                 <tag-icon slot="icon" :fill-color="tag.color"/>
             </app-navigation-item>
             <nc-loading-icon v-if="foldersLoaded === 0 || tagsLoaded === 0"/>

@@ -2958,24 +2958,63 @@
         "message"    : "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
-    "settings-SettingsPasswordPrint"     : {
+    "settings-SettingsPasswordPrint"        : {
         "message"    : "Show print option",
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
-    "settings-SettingsPasswordPrintHelp"     : {
+    "settings-SettingsPasswordPrintHelp"    : {
         "message"    : "Shows an option to print the password in the menu and details",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
-    "frontend-PasswordActionPrint"     : {
+    "frontend-PasswordActionPrint"          : {
         "message"    : "Print password",
         "description": "Label of the print password action"
     },
-    "frontend-FolderPickerLoading"     : {
+    "frontend-FolderPickerLoading"          : {
         "message"    : "Loading folders",
         "description": "Text of the loading animation while folders are being loaded"
     },
-    "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+    "frontend-PasswordActionQrcode"         : {
+        "message"    : "QrCode",
         "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-PasswordTagAddExists"         : {
+        "message"    : "The password is already tagged with $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess"         : {
+        "message"    : "The password was tagged with $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail"         : {
+        "message"    : "The password could not be tagged with $TAG$: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
     }
 }
