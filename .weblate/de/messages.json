@@ -2977,7 +2977,7 @@
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "Das Kennwort ist bereits mit einem Tag versehen $TAG$",
+        "message": "Das Passwort ist bereits mit $TAG$ markiert",
         "description": "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
@@ -2989,7 +2989,7 @@
         }
     },
     "frontend-PasswordTagAddSuccess": {
-        "message": "Das Passwort wurde getaggt mit $TAG$",
+        "message": "Das Passwort wurde mit $TAG$ markiert",
         "description": "Notification text when the a tag was successfully added to a password",
         "placeholders": {
             "password": {
