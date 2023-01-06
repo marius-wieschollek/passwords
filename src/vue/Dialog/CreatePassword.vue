@@ -36,7 +36,7 @@
             <div class="advanced-options">
                 <encryption-options :password="password"/>
             </div>
-            <nc-button class="password-form-favorite btn-save" type="primary" form="password-edit-form" :wide="true">
+            <nc-button class="password-form-favorite btn-save" type="primary" form="password-edit-form" nativeType="submit" :wide="true">
                 {{ t('Save') }}
             </nc-button>
         </div>
