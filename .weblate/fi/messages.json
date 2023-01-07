@@ -2129,9 +2129,6 @@
     "frontend-000566": {
         "message": "Tilin nollausta pyydetty"
     },
-    "frontend-000568": {
-        "message": "Edistynyt"
-    },
     "frontend-000569": {
         "message": "Merkitse salasanat heikoiksi, jos niitä käytetään useilla tileillä."
     },
@@ -3013,5 +3010,33 @@
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Asiantuntija-asetukset",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Näytä tekniset tiedot",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Salausmenetelmä",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Salasana lähetetään palvelimelle suojatun HTTPS-yhteyden kautta ja salataan siellä ennen kuin se tallennetaan tietokantaan.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Salasana salataan laitteessasi ennen kuin se lähetetään palvelimelle. Kukaan ei voi lukea tätä salasanaa tietämättä salaus-salasanaasi.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "End-to-End-salaus",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Palvelinpuolen salaus",
+        "description": "Label for the server side encryption method"
     }
 }
