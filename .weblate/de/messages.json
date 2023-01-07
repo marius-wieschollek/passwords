@@ -3008,5 +3008,21 @@
                 "content": "$3"
             }
         }
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Dieses Passwort wird über eine sichere HTTPS-Verbindung an den Server gesendet und dort verschlüsselt, bevor es in der Datenbank gespeichert wird.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Dieses Passwort wird auf deinem Gerät verschlüsselt, bevor es an den Server gesendet wird. Niemand kann dieses Passwort lesen, ohne dein Verschlüsselungspasswort zu kennen.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Serverseitige Verschlüsselung",
+        "description": "Label for the server side encryption method"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Ende-zu-Ende Verschlüsselung",
+        "description": "Label for the client side / end-to-end encryption method"
     }
 }
