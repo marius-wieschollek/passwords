@@ -2149,9 +2149,6 @@
     "frontend-000566": {
         "message": "Żądanie zresetowania konta"
     },
-    "frontend-000568": {
-        "message": "Zaawansowane"
-    },
     "frontend-000569": {
         "message": "Oznaczaj hasła jako słabe, jeśli są one używane do wielu kont"
     },
@@ -3013,5 +3010,33 @@
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Ustawienia eksperckie",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Pokaż szczegóły techniczne",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Metoda szyfrowania",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "To hasło jest wysyłane do serwera przez bezpieczne połączenie HTTPS i tam szyfrowane, zanim zostanie zapisane w bazie danych.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Hasło to jest szyfrowane na Twoim urządzeniu przed wysłaniem go na serwer. Nikt nie może odczytać tego hasła bez znajomości Twojego hasła szyfrującego.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Szyfrowanie \"od końca do końca",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Szyfrowanie po stronie serwera",
+        "description": "Label for the server side encryption method"
     }
 }
