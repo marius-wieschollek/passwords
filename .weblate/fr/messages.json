@@ -2973,5 +2973,48 @@
     "frontend-FolderPickerLoading": {
         "message": "Chargement des dossiers",
         "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "QrCode",
+        "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "Le mot de passe est déjà étiqueté avec $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "Le mot de passe a été étiqueté avec $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "Le mot de passe n'a pas pu être étiqueté avec $TAG$: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
     }
 }
