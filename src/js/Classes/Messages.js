@@ -1,5 +1,4 @@
-import $            from 'jquery';
-import Vue          from 'vue';
+import Vue from 'vue';
 import Localisation from '@js/Classes/Localisation';
 import ToastService from '@js/Services/ToastService';
 
@@ -61,9 +60,9 @@ class Messages {
             title = Localisation.translateArray(title);
             let callback = function(success) {
                 if(booleanResponse) {
-                    resolve(success===true);
+                    resolve(success === true);
                 } else {
-                    success ? resolve({}) : reject({});
+                    success ? resolve({}):reject({});
                 }
             };
 
@@ -83,7 +82,7 @@ class Messages {
      */
     prompt(label, title = 'Prompt', message = null, placeholder = null, value = null, isPassword = false) {
         return new Promise((resolve, reject) => {
-            let callback = function(success, value) { success ? resolve(value) : reject(value); };
+            let callback = function(success, value) { success ? resolve(value):reject(value); };
             title = Localisation.translateArray(title);
             label = Localisation.translateArray(label);
 
@@ -120,7 +119,11 @@ class Messages {
                     let data = Form.getFormData();
                     if(!data) throw new Error('Invalid Form Data');
 
-                    $('.oc-dialog, .oc-dialog-dim').remove();
+                    document
+                        .querySelectorAll('.oc-dialog, .oc-dialog-dim')
+                        .forEach((element) => {
+                            element.remove();
+                        });
                     resolve(data);
                 } else {
                     reject({});
@@ -167,11 +170,13 @@ class Messages {
      * @private
      */
     _setDialogValue(value) {
-        let $el = $('.oc-dialog-content input');
+        let $el = document.querySelectorAll('.oc-dialog-content input');
         if($el.length === 0) {
             setTimeout(() => { this._setDialogValue(value); }, 10);
         } else {
-            $el.val(value);
+            $el.forEach((element) => {
+                element.value = value;
+            });
         }
     }
 
@@ -182,11 +187,13 @@ class Messages {
      * @private
      */
     _setDialogPlaceholder(value) {
-        let $el = $('.oc-dialog-content input');
+        let $el = document.querySelectorAll('.oc-dialog-content input');
         if($el.length === 0) {
             setTimeout(() => { this._setDialogPlaceholder(value); }, 10);
         } else {
-            $el.attr('placeholder', value);
+            $el.forEach((element) => {
+                element.setAttribute('placeholder', value);
+            });
         }
     }
 

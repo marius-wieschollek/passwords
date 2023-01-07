@@ -14,20 +14,18 @@
 <script>
     import API from '@js/Helper/api';
     import SearchManager from '@js/Manager/SearchManager';
-    import NcEmptyContent from '@nc/NcEmptyContent';
     import NcButton from '@nc/NcButton';
-    import KeyVariantIcon from "@icon/KeyVariant";
 
     export default {
         components: {
-            KeyVariantIcon,
             NcButton,
-            NcEmptyContent
+            'key-variant-icon': () => import(/* webpackChunkName: "KeyVariantIcon" */ '@icon/KeyVariant'),
+            'nc-empty-content': () => import(/* webpackChunkName: "NcEmptyContent" */ '@nc/NcEmptyContent'),
         },
         props     : {
             text: {
                 type     : String,
-                'default': 'Click on "+" to add something'
+                'default': 'Click on "⋯" to add something'
             }
         },
         data() {

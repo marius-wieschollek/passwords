@@ -2553,7 +2553,7 @@
         "message": "There is nothing here"
     },
     "frontend-000311": {
-        "message": "Click on \"+\" to add something"
+        "message": "Click on \"⋯\" to add something"
     },
     "frontend-000312": {
         "message": "Deleted items will appear here"

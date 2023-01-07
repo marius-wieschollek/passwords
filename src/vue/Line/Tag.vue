@@ -11,7 +11,6 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info">Details</translate> -->
                         <translate tag="li" data-item-action="edit" @click="editAction()" icon="edit">Edit</translate>
                         <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash">Delete</translate>
                         <slot name="menu-bottom"/>
@@ -24,7 +23,6 @@
 </template>
 
 <script>
-    import $                  from "jquery";
     import Translate          from '@vc/Translate';
     import TagManager         from '@js/Manager/TagManager';
     import Localisation       from "@js/Classes/Localisation";
@@ -86,24 +84,22 @@
             },
             toggleMenu() {
                 this.showMenu = !this.showMenu;
-                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+                if(this.showMenu) {
+                    document.addEventListener('click', this.menuEvent);
+                } else {
+                    document.removeEventListener('click', this.menuEvent);
+                }
             },
             menuEvent($e) {
-                if($($e.target).closest('[data-tag-id=' + this.tag.id + '] .more').length !== 0) return;
+                if($e.target.closest('[data-tag-id="' + this.tag.id + '"] .more') !== null) return;
                 this.showMenu = false;
-                $(document).off('click', this.menuEvent);
+                document.removeEventListener('click', this.menuEvent);
             },
             openAction($event) {
-                if($($event.target).closest('.more').length !== 0) return;
+                if($event.target.closest('.more') !== null) return;
                 this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
             },
-            detailsAction($event, section = null) {
-                this.$parent.detail = {
-                    type   : 'tag',
-                    element: this.tag
-                };
-            },
-            deleteAction(skipConfirm = false) {
+            deleteAction() {
                 TagManager.deleteTag(this.tag);
             },
             editAction() {

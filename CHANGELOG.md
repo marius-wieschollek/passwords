@@ -4,6 +4,7 @@
 - Print password option
 - Navigation quick access for favorites, folders, tags, shared and security
 - Adding tags in password create and edit dialogs
+- Simple view for password details
 ### Changed
 - Breadcrumb now shows full path
 - Migrated to Nextcloud Vue components for better integration

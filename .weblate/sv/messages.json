@@ -1005,7 +1005,7 @@
         "message": "Det finns inget här"
     },
     "frontend-000311": {
-        "message": "Tryck på \"+\" för att lägga till något"
+        "message": "Tryck på \"⋯\" för att lägga till något"
     },
     "frontend-000312": {
         "message": "Raderade objekt kommer att visas här"

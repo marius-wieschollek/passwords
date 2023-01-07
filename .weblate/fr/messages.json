@@ -933,7 +933,7 @@
         "message": "Il n’y a rien ici"
     },
     "frontend-000311": {
-        "message": "Cliquez sur le symbole \"+\" pour ajouter un nouvel élément"
+        "message": "Cliquez sur le symbole \"⋯\" pour ajouter un nouvel élément"
     },
     "frontend-000312": {
         "message": "Les éléments supprimés apparaîtront ici"

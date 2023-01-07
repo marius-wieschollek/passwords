@@ -80,16 +80,12 @@
     import Localisation from "@js/Classes/Localisation";
     import Preview from "@vc/Sidebar/PasswordSidebar/Preview";
     import Tags from '@vc/Tags';
-    import Revisions from "@vc/Sidebar/PasswordSidebar/Tabs/Revisions";
-    import Notes from "@vc/Sidebar/PasswordSidebar/Tabs/Notes";
     import PwDetails from '@vc/Sidebar/PasswordSidebar/Tabs/Details';
-    import Share from "@vc/Sidebar/PasswordSidebar/Tabs/Share";
     import API from "@js/Helper/api";
     import SettingsService from "@js/Services/SettingsService";
     import NcButton from '@nc/NcButton';
     import NcActionButton from '@nc/NcActionButton';
     import PencilIcon from "@icon/Pencil";
-    import PrinterIcon from "@icon/Printer.vue";
     import Favicon from "@vc/Favicon.vue";
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
@@ -110,11 +106,11 @@
             StarOutlineIcon,
             StarIcon,
             Favicon,
-            PrinterIcon,
             PencilIcon,
-            Share,
-            Notes,
-            Revisions,
+            'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
+            'share': () => import(/* webpackChunkName: "PasswordShare" */ '@vc/Sidebar/PasswordSidebar/Tabs/Share'),
+            'notes': () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
+            'revisions': () => import(/* webpackChunkName: "PasswordRevisions" */ '@vc/Sidebar/PasswordSidebar/Tabs/Revisions'),
             Tags,
             Preview,
             PwDetails,

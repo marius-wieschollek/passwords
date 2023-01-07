@@ -68,7 +68,6 @@
     import router from '@js/Helper/router';
     import Messages from '@js/Classes/Messages';
     import SettingsService from '@js/Services/SettingsService';
-    import SessionTimeout from '@vue/Components/SessionTimeout';
     import NcContent from '@nc/NcContent';
     import NcAppContent from '@nc/NcAppContent';
     import NcAppNavigation from '@nc/NcAppNavigation';
@@ -79,7 +78,6 @@
     import HelpCircleIcon from "@icon/HelpCircle";
     import ArchiveIcon from "@icon/Archive";
     import CogIcon from "@icon/Cog";
-    import PasswordSidebar from "@vc/Sidebar/PasswordSidebar";
     import ClockIcon from "@icon/Clock";
     import Application from "@js/Init/Application";
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
@@ -100,19 +98,19 @@
             AppNavigationItemShared,
             AppNavigationItem,
             ClockIcon,
-            PasswordSidebar,
             CogIcon,
             ArchiveIcon,
             HelpCircleIcon,
             PuzzleIcon,
             MagnifyIcon,
             EarthIcon,
-            SessionTimeout,
             Translate,
             NcContent,
             NcAppContent,
             NcAppNavigation,
             NcAppNavigationSettings,
+            'session-timeout': () => import(/* webpackChunkName: "SessionTimeout" */ '@vc/SessionTimeout'),
+            'password-sidebar': () => import(/* webpackChunkName: "PasswordSidebar" */ '@vc/Sidebar/PasswordSidebar'),
             'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 

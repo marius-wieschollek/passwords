@@ -13,7 +13,6 @@
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
-
     export default {
         extends: BaseSection,
 

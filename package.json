@@ -63,7 +63,6 @@
         "eventemitter3": "^4.0.7",
         "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
-        "jquery": "^3.6.1",
         "jszip": "^3.10.1",
         "libsodium-wrappers": "^0.7.10",
         "marked": "^4.2.2",

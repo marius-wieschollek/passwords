@@ -16,7 +16,6 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <!-- <translate tag="li" @click="detailsAction($event)" icon="info" say="Details"/> -->
                         <translate tag="li" data-item-action="edit" @click="renameAction()" icon="pencil" say="Rename"/>
                         <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" say="Move"/>
                         <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
@@ -30,7 +29,6 @@
 </template>
 
 <script>
-    import $ from "jquery";
     import Translate from '@vc/Translate';
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
@@ -86,29 +84,27 @@
         },
 
         methods: {
-            favoriteAction($event) {
+            favoriteAction() {
                 this.folder.favorite = !this.folder.favorite;
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });
             },
-            toggleMenu($event) {
+            toggleMenu() {
                 this.showMenu = !this.showMenu;
-                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+                if(this.showMenu) {
+                    document.addEventListener('click', this.menuEvent);
+                } else {
+                    document.removeEventListener('click', this.menuEvent);
+                }
             },
             menuEvent($e) {
-                if($($e.target).closest('[data-folder-id=' + this.folder.id + '] .more').length !== 0) return;
+                if($e.target.closest('[data-folder-id="' + this.folder.id + '"] .more') !== null) return;
                 this.showMenu = false;
-                $(document).off('click', this.menuEvent);
+                document.removeEventListener('click', this.menuEvent);
             },
             openAction($event) {
-                if($($event.target).closest('.more').length !== 0) return;
+                if($event.target.closest('.more') !== null) return;
                 this.$router.push({name: 'Folders', params: {folder: this.folder.id}});
-            },
-            detailsAction($event, section = null) {
-                this.$parent.detail = {
-                    type   : 'folder',
-                    element: this.folder
-                };
             },
             deleteAction() {
                 FolderManager.deleteFolder(this.folder);

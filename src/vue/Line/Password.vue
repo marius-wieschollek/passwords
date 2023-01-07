@@ -76,7 +76,6 @@
 </template>
 
 <script>
-    import $ from "jquery";
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
     import Messages from '@js/Classes/Messages';
@@ -88,7 +87,6 @@
     import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from "@js/Services/ContextMenuService";
     import TrashCanIcon from "@icon/TrashCan";
-    import PrinterIcon from "@icon/Printer";
     import OpenInNewIcon from "@icon/OpenInNew";
     import FolderMoveIcon from "@icon/FolderMove";
     import ContentCopyIcon from "@icon/ContentCopy";
@@ -116,7 +114,7 @@
             ContentCopyIcon,
             FolderMoveIcon,
             OpenInNewIcon,
-            PrinterIcon,
+            'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
             TrashCanIcon,
             Favicon,
             Translate
@@ -248,7 +246,7 @@
 
         methods: {
             clickAction($event) {
-                if($event && ($event.detail !== 1 || $($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate') || $event.target.classList.contains(
+                if($event && ($event.detail !== 1 || $event.target.closest('.more') !== null || $event.target.classList.contains('duplicate') || $event.target.classList.contains(
                     'action-button'))) {
                     return;
                 }
@@ -257,12 +255,12 @@
                 let action = SettingsService.get('client.ui.password.click.action');
                 if(action !== 'none') this.runClickAction(action, 300);
             },
-            wheelClickAction($event) {
+            wheelClickAction() {
                 let action = SettingsService.get('client.ui.password.wheel.action');
                 if(action !== 'none') this.runClickAction(action);
             },
             doubleClickAction($event) {
-                if($event && ($($event.target).closest('.more').length !== 0 || $event.target.classList.contains('duplicate'))) return;
+                if($event && ($event.target.closest('.more') !== null || $event.target.classList.contains('duplicate'))) return;
                 let action = SettingsService.get('client.ui.password.dblClick.action');
 
                 if(action !== 'none') {
@@ -307,12 +305,16 @@
             },
             toggleMenu() {
                 this.showMenu = !this.showMenu;
-                this.showMenu ? $(document).click(this.menuEvent):$(document).off('click', this.menuEvent);
+                if(this.showMenu) {
+                    document.addEventListener('click', this.menuEvent);
+                } else {
+                    document.removeEventListener('click', this.menuEvent);
+                }
             },
             menuEvent($e) {
-                if($($e.target).closest('[data-password-id=' + this.password.id + '] .more').length !== 0) return;
+                if($e.target.closest('[data-password-id="' + this.password.id + '"] .more') !== null) return;
                 this.showMenu = false;
-                $(document).off('click', this.menuEvent);
+                document.removeEventListener('click', this.menuEvent);
             },
             detailsAction(section = null) {
                 this.detailsActive = true;
