@@ -14,7 +14,7 @@
             <breadcrumb :show-add-new="false" :actions-on-right="true">
                 <div class="settings-level">
                     <nc-checkbox-radio-switch :checked.sync="advanced">
-                        {{ t('Expert Settings') }}
+                        {{ t('ExpertSettingsLabel') }}
                     </nc-checkbox-radio-switch>
                     <nc-button :to="{ name: 'Help', params: { page: 'Settings' }}" :title="t('Open the settings page in the handbook')">
                         <help-circle-icon slot="icon"/>

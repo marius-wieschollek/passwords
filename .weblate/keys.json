@@ -560,8 +560,6 @@
     "frontend-000564": "Delete everything",
     "frontend-000565": "DELETE EVERYTHING",
     "frontend-000566": "Account reset requested",
-    "frontend-000567": "View",
-    "frontend-000568": "Advanced",
     "frontend-000569": "Mark passwords as weak if they are being used for multiple accounts",
     "frontend-000570": "Mark passwords as weak if they surpass the specified amount of days",
     "frontend-000571": "A higher strength results in longer, more complex passwords",

@@ -149,7 +149,7 @@
                 return Localisation.formatDateTime(this.password.edited);
             },
             compact() {
-                return window.innerWidth <= 640 || !SettingsService.get('client.ui.password.details.preview');
+                return window.innerWidth <= 640 || window.innerHeight <= 640 || !SettingsService.get('client.ui.password.details.preview');
             },
             hasSharing() {
                 return SettingsService.get('server.sharing.enabled');

@@ -2117,12 +2117,6 @@
     "frontend-000566"                       : {
         "message": "Account reset requested"
     },
-    "frontend-000567"                       : {
-        "message": "View"
-    },
-    "frontend-000568"                       : {
-        "message": "Advanced"
-    },
     "frontend-000569"                       : {
         "message": "Mark passwords as weak if they are being used for multiple accounts"
     },
@@ -2979,42 +2973,70 @@
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists"         : {
-        "message"    : "The password is already tagged with $TAG$",
-        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "message"     : "The password is already tagged with $TAG$",
+        "description" : "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
                 "content": "$1"
             },
-            "tag": {
+            "tag"     : {
                 "content": "$2"
             }
         }
     },
-    "frontend-PasswordTagAddSuccess"         : {
-        "message"    : "The password was tagged with $TAG$",
-        "description": "Notification text when the a tag was successfully added to a password",
+    "frontend-PasswordTagAddSuccess"        : {
+        "message"     : "The password was tagged with $TAG$",
+        "description" : "Notification text when the a tag was successfully added to a password",
         "placeholders": {
             "password": {
                 "content": "$1"
             },
-            "tag": {
+            "tag"     : {
                 "content": "$2"
             }
         }
     },
-    "frontend-PasswordTagAddFail"         : {
-        "message"    : "The password could not be tagged with $TAG$: $ERROR$",
-        "description": "Notification text when the a tag could not be added to a password",
+    "frontend-PasswordTagAddFail"           : {
+        "message"     : "The password could not be tagged with $TAG$: $ERROR$",
+        "description" : "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
                 "content": "$1"
             },
-            "tag": {
+            "tag"     : {
                 "content": "$2"
             },
-            "error": {
+            "error"   : {
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel"          : {
+        "message"    : "Expert Settings",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView"  : {
+        "message"    : "Show technical details",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel"     : {
+        "message"    : "Encryption method",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE"  : {
+        "message"    : "This password is sent to the server over a secure HTTPS connection and encrypted there before it's stored in the database.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE"  : {
+        "message"    : "This password is encrypted on your device before it's sent to the server. No on can read this password without knowing your encryption password.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE"        : {
+        "message"    : "End-to-End Encryption",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE"        : {
+        "message"    : "Server Side Encryption",
+        "description": "Label for the server side encryption method"
     }
 }

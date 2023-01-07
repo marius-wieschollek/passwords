@@ -124,7 +124,7 @@
             },
             actionsOnRight: {
                 type     : Boolean,
-                'default': true
+                'default': false
             },
             items         : {
                 type     : Array,

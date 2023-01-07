@@ -22,6 +22,7 @@ class SettingsService {
             'client.ui.password.menu.copy'       : false,
             'client.ui.password.user.show'       : false,
             'client.ui.password.details.preview' : true,
+            'client.ui.password.details.advanced': false,
             'client.ui.password.print'           : false,
             'client.ui.custom.fields.show.hidden': false,
             'client.ui.list.tags.show'           : false,
