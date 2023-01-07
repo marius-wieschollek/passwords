@@ -2943,5 +2943,100 @@
     "frontend-FolderPickerLoading": {
         "message": "Lendo pastas",
         "description": "Text of the loading animation while folders are being loaded"
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Configurações especializadas",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Esta senha é enviada ao servidor através de uma conexão HTTPS segura e criptografada lá antes de ser armazenada no banco de dados.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Banco de dados de senhas descriptografadas com senhas, pastas, tags e configurações. (Não inclui senhas compartilhadas com você. Não funciona com E2E habilitado)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "As senhas não podem ser exportadas",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Como você tem a criptografia End-to-End habilitada, suas senhas não podem ser adicionadas à exportação automaticamente. Como alternativa, você pode usar a função de exportação dentro do aplicativo para exportar seus dados.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Mostrar opção de impressão",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Mostra uma opção para imprimir a senha no menu e detalhes",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Imprimir senha",
+        "description": "Label of the print password action"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "QrCode",
+        "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "A senha já está etiquetada com $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "A senha foi etiquetada com $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "A senha não pôde ser etiquetada com $TAG$: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Mostrar detalhes técnicos",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Método de encriptação",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Esta senha é criptografada em seu dispositivo antes de ser enviada para o servidor. No on pode ler esta senha sem conhecer sua senha de criptografia.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Criptografia de ponta-a-ponta",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Criptografia do lado do servidor",
+        "description": "Label for the server side encryption method"
     }
 }
