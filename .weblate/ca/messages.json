@@ -2539,5 +2539,9 @@
     "frontend-FolderPickerLoading": {
         "message": "Carregant les carpetes",
         "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Xifratge d'extrem a extrem",
+        "description": "Label for the client side / end-to-end encryption method"
     }
 }
