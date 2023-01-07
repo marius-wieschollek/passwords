@@ -3010,5 +3010,33 @@
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Ajustes expertos",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Mostrar detalles técnicos",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Método de cifrado",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Esta contraseña se envía al servidor a través de una conexión segura HTTPS y allí se cifra antes de almacenarse en la base de datos.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Esta contraseña se cifra en tu dispositivo antes de ser enviada al servidor. Nadie puede leer esta contraseña sin conocer tu contraseña de cifrado.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Encriptado de punto-a-punto",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Cifrado del lado del servidor",
+        "description": "Label for the server side encryption method"
     }
 }
