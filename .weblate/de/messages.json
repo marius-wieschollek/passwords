@@ -3024,5 +3024,17 @@
     "frontend-PasswordEncryptionCSE": {
         "message": "Ende-zu-Ende Verschlüsselung",
         "description": "Label for the client side / end-to-end encryption method"
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Experteneinstellungen",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Zeige technische Informationen",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Verschlüsselungsmethode",
+        "description": "Label of the encryption method info in the password details sidebar"
     }
 }
