@@ -2153,9 +2153,6 @@
     "frontend-000566": {
         "message": "Запитано скидання облікового запису"
     },
-    "frontend-000568": {
-        "message": "Просунутий"
-    },
     "frontend-000569": {
         "message": "Позначати паролі як слабкі, якщо вони використовуються для декількох облікових записів"
     },
@@ -3013,5 +3010,33 @@
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Налаштування експерта",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Метод шифрування",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Показати технічні деталі",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Цей пароль надсилається на сервер через захищене з'єднання HTTPS і шифрується там, перш ніж він буде збережений у базі даних.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Цей пароль шифрується на вашому пристрої перед відправкою на сервер. Ніхто не може прочитати цей пароль, не знаючи вашого пароля шифрування.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Наскрізне шифрування",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Шифрування на стороні сервера",
+        "description": "Label for the server side encryption method"
     }
 }
