@@ -68,11 +68,6 @@
                 folders  : [],
                 tags     : [],
                 loading  : true,
-                detail   : {
-                    type   : 'none',
-                    element: null,
-                    section: 'default'
-                },
                 sorting  : {
                     field    : SettingsService.get('local.ui.sorting.field', 'label'),
                     ascending: SettingsService.get('local.ui.sorting.ascending', true)
@@ -98,16 +93,12 @@
         computed: {
             getContentClass() {
                 let classes = {
-                        'show-details': this.detail.type !== 'none',
-                        'loading'     : this.loading
+                        'loading': this.loading
                     },
                     section = `section-${this.$route.name.toLowerCase()}`;
                 classes[section] = true;
 
                 return classes;
-            },
-            showPasswordDetails() {
-                return this.detail.type === 'password';
             },
             isNotEmpty() {
                 return !this.loading && !this.isEmpty;

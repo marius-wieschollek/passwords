@@ -47,6 +47,7 @@
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
+    import Application from "@js/Init/Application";
 
     export default {
         extends: BaseSection,
@@ -101,7 +102,7 @@
 
         methods: {
             refreshView      : function() {
-                this.detail.type = 'none';
+                Application.sidebar = null;
 
                 if(this.$route.params.type !== undefined) {
                     let status = Number.parseInt(this.$route.params.type);

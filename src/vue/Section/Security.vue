@@ -34,6 +34,7 @@
     import SecurityLine from '@vue/Line/Security';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
+    import Application from "@js/Init/Application";
 
     export default {
         extends   : BaseSection,
@@ -88,7 +89,7 @@
 
         methods: {
             refreshView       : function() {
-                this.detail.type = 'none';
+                Application.sidebar = null;
 
                 if(this.$route.params.status !== undefined) {
                     let status = parseInt(this.$route.params.status),

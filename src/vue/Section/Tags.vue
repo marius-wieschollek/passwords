@@ -14,6 +14,7 @@
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
+    import Application from "@js/Init/Application";
 
     export default {
         extends: BaseSection,
@@ -77,7 +78,7 @@
         watch  : {
             $route: function() {
                 this.refreshView();
-                this.detail.type = 'none';
+                Application.sidebar = null;
             }
         }
     };
