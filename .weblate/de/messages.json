@@ -2066,7 +2066,7 @@
         "message": "Diese Instanzen sind für kleine Nextcloud-Installationen mit wenigen Anfragen gedacht."
     },
     "backend-000634": {
-        "message": "Deine Nextcloud fordert deutlich mehr Icons als der Durchschnitt an."
+        "message": "Deine Nextcloud fordert überdurchschnittlich viele Favicons an."
     },
     "backend-000510": {
         "message": "Bitte folge dem Link zu unserer einfachen Anleitung zum selbsthosten von Besticon."
