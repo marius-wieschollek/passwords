@@ -34,6 +34,7 @@
     import FolderIcon from "@icon/Folder";
     import Utility from '@js/Classes/Utility';
     import Events from "@js/Classes/Events";
+    import {subscribe} from "@nextcloud/event-bus";
 
     export default {
         components: {AppNavigationItem, FolderIcon, NcLoadingIcon},
@@ -60,6 +61,11 @@
                        (folder.parent.hasOwnProperty('id') && folder.parent.id === this.baseId)
                    )
                 ) {
+                    this.refreshFolders();
+                }
+            });
+            subscribe('passwords:encryption:installed', () => {
+                if(this.$refs['navigation-item'].opened || this.folders.length !== 0) {
                     this.refreshFolders();
                 }
             });

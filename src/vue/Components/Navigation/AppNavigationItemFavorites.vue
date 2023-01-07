@@ -47,6 +47,7 @@
     import Events from "@js/Classes/Events";
     import API from "@js/Helper/api";
     import Utility from "@js/Classes/Utility";
+    import {subscribe} from "@nextcloud/event-bus";
 
     export default {
         name      : 'app-navigation-item-favorites',
@@ -73,6 +74,12 @@
             });
             Events.on('folder.changed', () => {
                 if(this.$refs['navigation-item'].opened || this.folders.length !== 0) {
+                    this.refreshFolders();
+                }
+            });
+            subscribe('passwords:encryption:installed', () => {
+                if(this.$refs['navigation-item'].opened || this.folders.length !== 0 || this.tags.length !== 0) {
+                    this.refreshTags();
                     this.refreshFolders();
                 }
             });

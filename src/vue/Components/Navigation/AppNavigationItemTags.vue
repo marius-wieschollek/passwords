@@ -34,6 +34,7 @@
     import TagIcon from "@icon/Tag";
     import Events from "@js/Classes/Events";
     import Utility from '@js/Classes/Utility';
+    import {subscribe} from "@nextcloud/event-bus";
 
     export default {
         components: {AppNavigationItem, TagIcon, NcLoadingIcon},
@@ -51,6 +52,11 @@
                 this.loadTags();
             }
             Events.on('tag.changed', () => {
+                if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
+                    this.refreshTags();
+                }
+            });
+            subscribe('passwords:encryption:installed', () => {
                 if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
                     this.refreshTags();
                 }

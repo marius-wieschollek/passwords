@@ -6,6 +6,7 @@ import Localisation from '@js/Classes/Localisation';
 import EventManager from '@js/Manager/EventManager';
 import SettingsService from "@js/Services/SettingsService";
 import {loadState} from "@nextcloud/initial-state";
+import {emit} from '@nextcloud/event-bus';
 
 class EncryptionManager {
 
@@ -42,6 +43,7 @@ class EncryptionManager {
 
         if(save) await this._saveMasterPassword(password);
         Application.loginRequired = true;
+        emit('passwords:encryption:installed', {});
     }
 
     /**
