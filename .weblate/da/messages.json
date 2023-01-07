@@ -2141,9 +2141,6 @@
     "frontend-000566": {
         "message": "Anmodning om nulstilling af konto"
     },
-    "frontend-000568": {
-        "message": "Avanceret"
-    },
     "frontend-000569": {
         "message": "Markér adgangskoder som svage, hvis de bruges til flere konti"
     },
@@ -3013,5 +3010,33 @@
                 "content": "$3"
             }
         }
+    },
+    "settigns-ExpertSettingsLabel": {
+        "message": "Ekspertindstillinger",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Vis tekniske detaljer",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Krypteringsmetode",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Denne adgangskode sendes til serveren via en sikker HTTPS-forbindelse og krypteres der, før den gemmes i databasen.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Denne adgangskode krypteres på din enhed, før den sendes til serveren. Ingen kan læse denne adgangskode uden at kende din krypteringsadgangskode.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "End-to-End-kryptering",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Kryptering på serversiden",
+        "description": "Label for the server side encryption method"
     }
 }
