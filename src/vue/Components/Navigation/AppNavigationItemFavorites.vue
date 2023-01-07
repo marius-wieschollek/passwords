@@ -68,19 +68,30 @@
                 this.loadFavorites();
             }
             Events.on('tag.changed', () => {
-                if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
+                if(this.$refs['navigation-item'].opened) {
                     this.refreshTags();
+                } else if(this.tags.length !== 0) {
+                    this.tags = [];
+                    this.tagsLoaded = false;
                 }
             });
             Events.on('folder.changed', () => {
-                if(this.$refs['navigation-item'].opened || this.folders.length !== 0) {
+                if(this.$refs['navigation-item'].opened) {
                     this.refreshFolders();
+                } else if(this.folders.length !== 0) {
+                    this.folders = [];
+                    this.foldersLoaded = false;
                 }
             });
             subscribe('passwords:encryption:installed', () => {
-                if(this.$refs['navigation-item'].opened || this.folders.length !== 0 || this.tags.length !== 0) {
+                if(this.$refs['navigation-item'].opened) {
                     this.refreshTags();
                     this.refreshFolders();
+                } else if(this.folders.length !== 0 || this.tags.length !== 0) {
+                    this.folders = [];
+                    this.foldersLoaded = false;
+                    this.tags = [];
+                    this.tagsLoaded = false;
                 }
             });
         },

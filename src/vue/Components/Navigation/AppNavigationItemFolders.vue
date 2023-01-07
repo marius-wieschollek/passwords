@@ -54,7 +54,7 @@
             }
             Events.on('folder.changed', (event) => {
                 let folder = event.object;
-                if((this.$refs['navigation-item'].opened || this.folders.length !== 0) &&
+                if((this.$refs['navigation-item'].opened) &&
                    (
                        folder.id === this.baseId ||
                        folder.parent === this.baseId ||
@@ -62,11 +62,17 @@
                    )
                 ) {
                     this.refreshFolders();
+                } else if(this.folders.length !== 0) {
+                    this.folders = [];
+                    this.hasLoaded = false;
                 }
             });
             subscribe('passwords:encryption:installed', () => {
-                if(this.$refs['navigation-item'].opened || this.folders.length !== 0) {
+                if(this.$refs['navigation-item'].opened) {
                     this.refreshFolders();
+                } else if(this.folders.length !== 0) {
+                    this.folders = [];
+                    this.hasLoaded = false;
                 }
             });
         },

@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import Localisation from '@js/Classes/Localisation';
 import ToastService from '@js/Services/ToastService';
-
-
 class Messages {
 
     /**

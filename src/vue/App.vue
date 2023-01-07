@@ -27,7 +27,7 @@
                     <magnify-icon :size=20 slot="icon"/>
                 </app-navigation-item>
 
-                <session-timeout v-if="!isMobile"/>
+                <session-timeout v-if="!isMobile && hasTimeout"/>
                 <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete"/>
             </template>
 
@@ -56,7 +56,7 @@
         <div id="app-popup">
             <div></div>
         </div>
-        <session-timeout scope="global" v-if="isMobile"/>
+        <session-timeout scope="global" v-if="isMobile && hasTimeout"/>
         <star-chaser v-if="starChaser"/>
         <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
     </nc-content>
@@ -86,6 +86,7 @@
     import AppNavigationItemTags from "@vc/Navigation/AppNavigationItemTags";
     import AppNavigationItemFolders from "@vc/Navigation/AppNavigationItemFolders";
     import AppNavigationItemFavorites from "@vc/Navigation/AppNavigationItemFavorites";
+    import KeepAliveManager from "@js/Manager/KeepAliveManager";
 
     export default {
         el        : '#content',
@@ -109,9 +110,9 @@
             NcAppContent,
             NcAppNavigation,
             NcAppNavigationSettings,
-            'session-timeout': () => import(/* webpackChunkName: "SessionTimeout" */ '@vc/SessionTimeout'),
+            'session-timeout' : () => import(/* webpackChunkName: "SessionTimeout" */ '@vc/SessionTimeout'),
             'password-sidebar': () => import(/* webpackChunkName: "PasswordSidebar" */ '@vc/Sidebar/PasswordSidebar'),
-            'star-chaser': () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
+            'star-chaser'     : () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')
         },
 
         data() {
@@ -119,25 +120,17 @@
 
             return {
                 showSearch,
-                showMore           : false,
                 starChaser         : false,
                 APP_MAIN_VERSION   : APP_MAIN_VERSION,
                 APP_FEATURE_VERSION: APP_FEATURE_VERSION,
                 isMobile           : Application.isMobile,
+                hasTimeout         : KeepAliveManager.hasTimeout,
                 sidebar            : null
             };
         },
 
         created() {
             SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
-
-            router.afterEach(async (to, from) => {
-                let moreRoutes = ['Settings', 'Backup', 'Help', 'Apps and Extensions'];
-
-                if(moreRoutes.indexOf(from.name) === -1 && moreRoutes.indexOf(to.name) !== -1) {
-                    return this.showMore = true;
-                }
-            });
 
             window.addEventListener('resize', () => {
                 this.isMobile = window.innerWidth <= 768;
@@ -167,10 +160,8 @@
 
 <style lang="scss">
 #content-vue {
-    &.blocking {
-        #app-navigation {
-            z-index : 1000;
-        }
+    .app-navigation-entry__children {
+        margin-top : .25rem;
     }
 
     @media all and (min-width : $width-1024-above) {

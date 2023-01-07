@@ -59,6 +59,9 @@
 
         created() {
             this.logic.start(this.game);
+            document.getElementById('content-vue').style.zIndex = '2001';
+            document.getElementById('unified-search__input').value = '';
+            document.getElementById('header-menu-unified-search').dispatchEvent(new Event('focusout'));
         },
 
         computed: {
@@ -114,6 +117,7 @@
             endGame() {
                 this.logic.end();
                 this.$root.starChaser = false;
+                document.getElementById('content-vue').style.zIndex = 'auto';
             }
         }
     };

@@ -1,6 +1,6 @@
 <template>
     <nc-breadcrumbs class="passwords-breadcrumbs" :class="{'actions-pull-right': actionsOnRight}">
-        <NcBreadcrumb :to="getBaseRoute" title="Home">
+        <NcBreadcrumb :to="getBaseRoute" :title="t('Home')">
             <template #icon>
                 <earth-icon v-if="$route.name === 'All'"/>
                 <folder-icon v-if="$route.name === 'Folders'"/>
@@ -65,7 +65,6 @@
     import HelpCircleIcon from "@icon/HelpCircle";
     import ArchiveIcon from "@icon/Archive";
     import CogIcon from "@icon/Cog";
-    import DeleteIcon from "@icon/Delete";
     import MagnifyIcon from "@icon/Magnify";
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import TagIcon from "@icon/Tag";
@@ -83,7 +82,6 @@
             TagIcon,
             ShieldHalfFullIcon,
             MagnifyIcon,
-            DeleteIcon,
             CogIcon,
             ArchiveIcon,
             HelpCircleIcon,
@@ -94,7 +92,8 @@
             NcActions,
             NcBreadcrumb,
             NcBreadcrumbs,
-            NcActionButton
+            NcActionButton,
+            'delete-icon': () => import(/* webpackChunkName: "DeleteIcon" */ '@icon/Delete')
         },
 
         props: {

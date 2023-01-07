@@ -29,7 +29,7 @@ export default class StarChaser {
 
         for(let i = 0; i < this._game.asteroids.length; i++) {
             let asteroid = this._game.asteroids[i];
-            setTimeout(() => {this._destroyAsteroid(asteroid);}, i * 40);
+            setTimeout(() => {this._destroyAsteroid(asteroid, false, false);}, i * 40);
         }
         for(let i = 0; i < this._game.powerups.length; i++) {
             let powerup = this._game.powerups[i];
@@ -175,6 +175,7 @@ export default class StarChaser {
             asteroid.top += this._game.status.isSlowMotion ? 0.5:asteroid.speed;
             if(asteroid.top >= window.innerHeight + asteroid.size) {
                 this._game.asteroids.splice(i, 1);
+                this._removePoints(this._game.status.hitPoints / 4);
                 continue;
             }
             if(!this._checkForShotHit(asteroid)) this._checkForAsteroidCollision(asteroid);
@@ -308,7 +309,7 @@ export default class StarChaser {
         let offset = this._game.ship.shield ? 20:0;
 
         if(this._checkForCollision(asteroid, offset)) {
-            this._destroyAsteroid(asteroid, this._game.ship.shield);
+            this._destroyAsteroid(asteroid, this._game.ship.shield, true);
 
             if(!this._game.ship.shield) {
                 this._game.stats.lives--;
@@ -357,7 +358,7 @@ export default class StarChaser {
         return object.top > tMin && object.top < tMax && pos >= lSMin && pos <= lSMax;
     }
 
-    _destroyAsteroid(asteroid, addPoints = false) {
+    _destroyAsteroid(asteroid, addPoints = false, removePoints = false) {
         asteroid.hit = true;
         asteroid.speed = 2;
         asteroid.timer = setTimeout(() => {
@@ -366,6 +367,8 @@ export default class StarChaser {
         if(addPoints) {
             this._game.stats.asteroids++;
             this._addPoints(this._game.status.hitPoints);
+        } else if(removePoints) {
+            this._removePoints(this._game.status.hitPoints / 4);
         }
     }
 
@@ -406,6 +409,14 @@ export default class StarChaser {
         }
     }
 
+    _removePoints(points) {
+        this._game.stats.points -= Math.round(points);
+        if(this._game.stats.points < 0) {
+            this._game.stats.points = 0;
+            this.end();
+        }
+    }
+
     _checkHighScore() {
         let current = SettingsService.get('client.starchaser.highscore');
 
@@ -438,7 +449,7 @@ export default class StarChaser {
             this._stopShield();
             let ship = document.getElementById('ship');
             ship.classList.remove('shield');
-            this.shieldTimeout = setTimeout(() => { ship.classList.add('shield') }, 10);
+            this.shieldTimeout = setTimeout(() => { ship.classList.add('shield'); }, 10);
         }
         this._addPoints(this._game.status.shieldPoints);
         this._game.ship.shield = true;

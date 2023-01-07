@@ -42,7 +42,7 @@ class EventManager {
      */
     _registerSettingsObserver() {
         SettingsService.observe('user.encryption.cse', (setting) => {
-            API.config.cseMode = setting.value === 1 ? 'CSEv1r1':'none'
+            API.config.cseMode = setting.value === 1 ? 'CSEv1r1':'none';
         });
     }
 
@@ -62,8 +62,8 @@ class EventManager {
 
         this._pointer++;
         if(this._pointer === code.length) {
-            document.getElementById('searchbox').value = '';
             App.app.starChaser = true;
+            this._pointer = 0;
         }
     }
 

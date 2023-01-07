@@ -51,16 +51,17 @@
             if(this.open) {
                 this.loadTags();
             }
-            Events.on('tag.changed', () => {
-                if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
+            let refreshEvent = () => {
+                if(this.$refs['navigation-item'].opened) {
                     this.refreshTags();
+                } else if(this.tags.length !== 0) {
+                    this.tags = [];
+                    this.tagsLoaded = false;
                 }
-            });
-            subscribe('passwords:encryption:installed', () => {
-                if(this.$refs['navigation-item'].opened || this.tags.length !== 0) {
-                    this.refreshTags();
-                }
-            });
+            };
+
+            Events.on('tag.changed', refreshEvent);
+            subscribe('passwords:encryption:installed', refreshEvent);
         },
         methods: {
             loadTags() {
