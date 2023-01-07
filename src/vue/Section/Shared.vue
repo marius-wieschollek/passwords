@@ -25,7 +25,7 @@
                     <ul slot="middle" class="line-share-icons">
                         <li v-for="user in getShareUsers(password.id)" :key="user.id" :title="user.name">
                             <img :src="user.icon" :title="user.name" :alt="user.name" loading="lazy" width="24" height="24"/>
-                            {{user.name}}
+                            {{ user.name }}
                         </li>
                     </ul>
                 </password-line>
@@ -62,9 +62,9 @@
         },
         data() {
             return {
-                loading   : false,
-                shareType : ['Shared with you', 'Shared by you'],
-                shareUsers: []
+                loading    : false,
+                shareType  : ['Shared with you', 'Shared by you'],
+                shareUsers : []
             };
         },
 
@@ -102,8 +102,6 @@
 
         methods: {
             refreshView      : function() {
-                Application.sidebar = null;
-
                 if(this.$route.params.type !== undefined) {
                     let status = Number.parseInt(this.$route.params.type);
 
@@ -158,40 +156,41 @@
         watch  : {
             $route: function() {
                 this.refreshView();
+                Application.sidebar = null;
             }
         }
     };
 </script>
 
 <style lang="scss">
-    .line-share-icons {
-        height      : 50px;
-        flex-shrink : 0;
-        line-height : 50px;
+.line-share-icons {
+    height      : 50px;
+    flex-shrink : 0;
+    line-height : 50px;
 
+    li {
+        display     : inline-block;
+        margin-left : -12px;
+        transition  : margin-left 0.25s ease-in-out;
+
+        img {
+            height        : 24px;
+            width         : 24px;
+            border-radius : 12px;
+            margin        : 13px 0;
+        }
+    }
+
+    &:hover {
         li {
-            display     : inline-block;
-            margin-left : -12px;
-            transition  : margin-left 0.25s ease-in-out;
-
-            img {
-                height        : 24px;
-                width         : 24px;
-                border-radius : 12px;
-                margin        : 13px 0;
-            }
-        }
-
-        &:hover {
-            li {
-                margin-left : 3px;
-            }
+            margin-left : 3px;
         }
     }
+}
 
-    @media (max-width : $mobile-width) {
-        .line-share-icons {
-            display : none;
-        }
+@media (max-width : $mobile-width) {
+    .line-share-icons {
+        display : none;
     }
+}
 </style>

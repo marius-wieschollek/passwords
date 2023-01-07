@@ -67,7 +67,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});
+                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return this.$route.params.status.toString() === '0' ? 'Better check the other sections':'That\'s probably a good sign';
@@ -89,15 +89,14 @@
 
         methods: {
             refreshView       : function() {
-                Application.sidebar = null;
 
                 if(this.$route.params.status !== undefined) {
                     let status = parseInt(this.$route.params.status),
-                        model = this.ui.showTags ? 'model+tags':'model';
+                        model  = this.ui.showTags ? 'model+tags':'model';
 
                     API.findPasswords({status: status}, model)
-                        .then((d) => {this.updatePasswordList(d, status);})
-                        .catch(console.error);
+                       .then((d) => {this.updatePasswordList(d, status);})
+                       .catch(console.error);
                     if(!this.passwords.length) this.loading = true;
                 } else {
                     this.loading = false;
@@ -114,6 +113,7 @@
         watch  : {
             $route: function() {
                 this.refreshView();
+                Application.sidebar = null;
             }
         }
     };
