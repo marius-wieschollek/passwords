@@ -18,7 +18,7 @@
                 <translate tag="option" value="hash" say="SHA-1"/>
             </select>
             <div class="password-share-qrcode-box" :class="{'has-warning':showWarning}">
-                <qr-code :text="text" :color="color" :size="256" bgColor="#fff0" errorLevel="Q"/>
+                <qr-code :text="text"/>
                 <div class="password-share-qrcode-warning" v-if="showWarning" @click="hideWarning">
                     <eye-off-icon :size="64"/>
                     <translate say="Make sure this QR code is only visible to people you trust."/>
@@ -33,7 +33,7 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import QrCode from 'vue-qrcode-component';
+    import QrCode from '@vc/QrCode';
     import SettingsService from '@js/Services/SettingsService';
     import Icon from "@vc/Icon";
     import Localisation from "@js/Classes/Localisation";
@@ -60,7 +60,6 @@
             let warning = SettingsService.get('local.sharing.qrcode.warning', true);
 
             return {
-                color    : SettingsService.get('server.theme.color.primary'),
                 text     : warning ? Localisation.translate('What did you expect?'):this.password.password,
                 property : 'password',
                 container: Utility.popupContainer(true),
@@ -155,16 +154,14 @@
             }
         }
 
-        img,
-        canvas {
+        .passwords-qr-code {
             display    : block;
             margin     : 0 auto;
             transition : opacity .25s ease-in-out, filter .25s ease-in-out;
         }
 
         &.has-warning {
-            img,
-            canvas {
+            .passwords-qr-code {
                 opacity : .25;
                 filter  : blur(5px);
             }

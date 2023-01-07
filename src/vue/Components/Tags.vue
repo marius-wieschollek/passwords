@@ -122,13 +122,8 @@
                 if(!option.color) {
                     return 'is-dark';
                 }
-                let rgb  = parseInt(option.color.substring(1), 16),
-                    r    = (rgb >> 16) & 0xff,
-                    g    = (rgb >> 8) & 0xff,
-                    b    = (rgb >> 0) & 0xff,
-                    luma = 0.2126 * r + 0.7152 * g + 0.0722 * b; // per ITU-R BT.709
 
-                return luma < 96 ? 'is-dark':'is-bright';
+                return Utility.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
             }
         },
 

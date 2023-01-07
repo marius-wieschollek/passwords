@@ -294,4 +294,18 @@ export default class Utility {
         container.appendChild(div);
         return selector ? `#app-popup div#${div.id}`:div;
     }
+
+    /**
+     *
+     * @param {String} hexColor
+     * @returns {number}
+     */
+    static getColorLuma(hexColor) {
+        let rgb  = parseInt(hexColor.substring(1), 16),
+            r    = (rgb >> 16) & 0xff,
+            g    = (rgb >> 8) & 0xff,
+            b    = (rgb >> 0) & 0xff;
+
+        return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+    }
 }
