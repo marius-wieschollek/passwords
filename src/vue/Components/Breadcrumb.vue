@@ -1,5 +1,5 @@
 <template>
-    <nc-breadcrumbs class="passwords-breadcrumbs">
+    <nc-breadcrumbs class="passwords-breadcrumbs" :class="{'actions-pull-right': actionsOnRight}">
         <NcBreadcrumb :to="getBaseRoute" title="Home">
             <template #icon>
                 <earth-icon v-if="$route.name === 'All'"/>
@@ -98,39 +98,43 @@
         },
 
         props: {
-            newPassword: {
+            newPassword   : {
                 type     : Boolean,
                 'default': true
             },
-            newFolder  : {
+            newFolder     : {
                 type     : Boolean,
                 'default': false
             },
-            newTag     : {
+            newTag        : {
                 type     : Boolean,
                 'default': false
             },
-            deleteAll  : {
+            deleteAll     : {
                 type     : Boolean,
                 'default': false
             },
-            restoreAll : {
+            restoreAll    : {
                 type     : Boolean,
                 'default': false
             },
-            showAddNew : {
+            showAddNew    : {
                 type     : Boolean,
                 'default': true
             },
-            items      : {
+            actionsOnRight: {
+                type     : Boolean,
+                'default': true
+            },
+            items         : {
                 type     : Array,
                 'default': () => { return []; }
             },
-            folder     : {
+            folder        : {
                 type     : String,
                 'default': null
             },
-            tag        : {
+            tag           : {
                 type     : String,
                 'default': null
             }
@@ -150,8 +154,8 @@
         computed: {
             getBaseRoute() {
                 return {
-                    name: this.$route.name,
-                }
+                    name: this.$route.name
+                };
             }
         },
 
@@ -229,7 +233,7 @@
 </script>
 
 <style lang="scss">
-.passwords-breadcrumbs {
+div.passwords-breadcrumbs {
     padding          : .5rem;
     position         : sticky;
     top              : 0;
@@ -237,6 +241,10 @@
 
     .breadcrumb__crumbs {
         min-width : auto !important;
+    }
+
+    &.actions-pull-right div.breadcrumb__actions {
+        margin-left : auto;
     }
 
     @media all and (max-width : $width-1024) {

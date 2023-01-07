@@ -11,20 +11,18 @@
 <template>
     <div id="app-content">
         <div class="app-content-left settings">
-            <breadcrumb :show-add-new="false">
+            <breadcrumb :show-add-new="false" :actions-on-right="true">
                 <div class="settings-level">
-                    <translate tag="label" for="setting-settings-advanced" say="View"/>
-                    <select id="setting-settings-advanced" v-model.number="advanced">
-                        <translate tag="option" value="0" say="Default"/>
-                        <translate tag="option" value="1" say="Advanced"/>
-                    </select>
-                    <router-link class="button button-help" :to="{ name: 'Help', params: { page: 'Settings' }}">
-                        <translate icon="question" say="Help" title="Open the settings page in the handbook" />
-                    </router-link>
+                    <nc-checkbox-radio-switch :checked.sync="advanced">
+                        {{ t('Expert Settings') }}
+                    </nc-checkbox-radio-switch>
+                    <nc-button :to="{ name: 'Help', params: { page: 'Settings' }}" :title="t('Open the settings page in the handbook')">
+                        <help-circle-icon slot="icon"/>
+                    </nc-button>
                 </div>
             </breadcrumb>
 
-            <div class="settings-container" :class="{advanced: advanced==='1'}">
+            <div class="settings-container" :class="{advanced: advanced}">
                 <section class="security">
                     <translate tag="h1" say="Security"/>
 
@@ -42,14 +40,15 @@
                            v-model="settings['user.password.security.age']">
                     <settings-help text="Mark passwords as weak if they surpass the specified amount of days"/>
 
-                    <translate tag="label" for="setting-hash-length" say="Security Check Hash" v-if="advancedSettings"/>
-                    <select id="setting-hash-length" v-model.number="settings['user.password.security.hash']" v-if="advancedSettings">
+                    <translate tag="label" for="setting-hash-length" say="Security Check Hash" v-if="advanced"/>
+                    <select id="setting-hash-length" v-model.number="settings['user.password.security.hash']" v-if="advanced">
                         <translate tag="option" value="0" say="Don't store hashes"></translate>
                         <translate tag="option" value="20" say="Store 50% of the hash"></translate>
                         <translate tag="option" value="30" say="Store 75% of the hash"></translate>
                         <translate tag="option" value="40" say="Store the full hash"></translate>
                     </select>
-                    <settings-help text="The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached." v-if="advancedSettings"/>
+                    <settings-help text="The SHA-1 hash is used to check for breached passwords. A partial hash can prevent brute force attacks in case the server is hacked but may also cause safe passwords to be mistakenly reported as breached."
+                                   v-if="advanced"/>
 
                     <translate tag="h3" say="Password Generator"/>
                     <translate tag="label" for="setting-security-level" say="Password strength"/>
@@ -92,10 +91,10 @@
                     <translate tag="label"
                                for="setting-session-lifetime"
                                say="End session after"
-                               v-if="advancedSettings && hasEncryption"/>
+                               v-if="advanced && hasEncryption"/>
                     <select id="setting-session-lifetime"
                             v-model.number="settings['user.session.lifetime']"
-                            v-if="advancedSettings && hasEncryption">
+                            v-if="advanced && hasEncryption">
                         <translate tag="option" say="One minute" value="60"/>
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:2}" value="120"/>
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:5}" value="300"/>
@@ -104,35 +103,35 @@
                         <translate tag="option" say="{minutes} minutes" :variables="{minutes:60}" value="3600"/>
                     </select>
                     <settings-help text="Specify the amount of time after a request before the session is cancelled"
-                                   v-if="advancedSettings && hasEncryption"/>
+                                   v-if="advanced && hasEncryption"/>
 
                     <translate tag="h3" say="Encryption" v-if="hasEncryption"/>
                     <translate tag="label"
                                for="setting-encryption-sse"
                                say="Server encryption mode"
-                               v-if="hasEncryption && advancedSettings"/>
+                               v-if="hasEncryption && advanced"/>
                     <select id="setting-encryption-sse"
                             v-model.number="settings['user.encryption.sse']"
-                            v-if="hasEncryption && advancedSettings">
+                            v-if="hasEncryption && advanced">
                         <translate tag="option" value="0" say="None if CSE used"/>
                         <translate tag="option" value="1" say="Simple encryption"/>
                         <translate tag="option" value="2" say="Advanced encryption"/>
                     </select>
                     <settings-help text="Choose the type of encryption used to encrypt data on the server"
-                                   v-if="hasEncryption && advancedSettings"/>
+                                   v-if="hasEncryption && advanced"/>
 
                     <translate tag="label"
                                for="setting-encryption-cse"
                                say="Client encryption mode"
-                               v-if="hasEncryption && advancedSettings"/>
+                               v-if="hasEncryption && advanced"/>
                     <select id="setting-encryption-cse"
                             v-model.number="settings['user.encryption.cse']"
-                            v-if="hasEncryption && advancedSettings">
+                            v-if="hasEncryption && advanced">
                         <translate tag="option" value="0" say="No encryption"/>
                         <translate tag="option" value="1" say="Libsodium"/>
                     </select>
                     <settings-help text="Choose the type of encryption used to encrypt data on the client before it's sent to the server"
-                                   v-if="hasEncryption && advancedSettings"/>
+                                   v-if="hasEncryption && advanced"/>
 
                     <translate tag="label"
                                for="setting-encryption-setup"
@@ -177,13 +176,13 @@
                     <translate tag="label"
                                for="setting-password-hidden"
                                say="Show hidden custom fields"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-password-hidden"
                            v-model="settings['client.ui.custom.fields.show.hidden']"
-                           v-if="advancedSettings">
+                           v-if="advanced">
                     <settings-help text="Show hidden custom fields in the edit form and detail section of a password"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="h3" say="Passwords List View"/>
                     <translate tag="label" for="setting-password-title" say="Set title from"/>
@@ -193,24 +192,24 @@
                     </select>
                     <settings-help text="Show the selected property as title in the list view"/>
 
-                    <translate tag="label" for="setting-password-sorting" say="Sort by" v-if="advancedSettings"/>
+                    <translate tag="label" for="setting-password-sorting" say="Sort by" v-if="advanced"/>
                     <select id="setting-password-sorting"
                             v-model="settings['client.ui.password.field.sorting']"
-                            v-if="advancedSettings">
+                            v-if="advanced">
                         <translate tag="option" value="byTitle" say="Title field"/>
                         <translate tag="option" value="label" say="Name"/>
                         <translate tag="option" value="website" say="Website"/>
                     </select>
                     <settings-help text="Sorts passwords by the selected property when sorting by name is selected"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="label"
                                for="setting-password-click"
                                say="Single click action"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <select id="setting-password-click"
                             v-model="settings['client.ui.password.click.action']"
-                            v-if="advancedSettings">
+                            v-if="advanced">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
@@ -219,15 +218,15 @@
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
                     <settings-help text="Action to perform when clicking on a password in the list view"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="label"
                                for="setting-password-dblClick"
                                say="Double click action"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <select id="setting-password-dblClick"
                             v-model="settings['client.ui.password.dblClick.action']"
-                            v-if="advancedSettings">
+                            v-if="advanced">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
@@ -236,10 +235,10 @@
                         <translate tag="option" value="open-url" say="Open Url"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advancedSettings"/>
+                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advanced"/>
 
-                    <translate tag="label" for="setting-password-wheel" say="SettingsMouseWheelAction" v-if="advancedSettings"/>
-                    <select id="setting-password-wheel" v-model="settings['client.ui.password.wheel.action']" v-if="advancedSettings">
+                    <translate tag="label" for="setting-password-wheel" say="SettingsMouseWheelAction" v-if="advanced"/>
+                    <select id="setting-password-wheel" v-model="settings['client.ui.password.wheel.action']" v-if="advanced">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
@@ -248,10 +247,10 @@
                         <translate tag="option" value="open-url" say="Open Url"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="SettingsMouseWheelActionHelp" v-if="advancedSettings"/>
+                    <settings-help text="SettingsMouseWheelActionHelp" v-if="advanced"/>
 
-                    <translate tag="label" for="setting-password-custom-action" say="SettingsCustomAction" v-if="advancedSettings"/>
-                    <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']" v-if="advancedSettings">
+                    <translate tag="label" for="setting-password-custom-action" say="SettingsCustomAction" v-if="advanced"/>
+                    <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']" v-if="advanced">
                         <translate tag="option" value="details" say="Show details"/>
                         <translate tag="option" value="share" say="SettingsShowShareTab"/>
                         <translate tag="option" value="edit" say="Edit password"/>
@@ -262,7 +261,7 @@
                         <translate tag="option" value="print" say="PasswordActionPrint"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="SettingsCustomActionHelp" v-if="advancedSettings"/>
+                    <settings-help text="SettingsCustomActionHelp" v-if="advanced"/>
 
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox"
@@ -270,22 +269,22 @@
                            v-model="settings['client.ui.password.menu.copy']">
                     <settings-help text="Shows options to copy the password and user name in the menu"/>
 
-                    <translate tag="label" for="setting-password-print" say="SettingsPasswordPrint" v-if="advancedSettings"/>
+                    <translate tag="label" for="setting-password-print" say="SettingsPasswordPrint" v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-password-print"
-                           v-model="settings['client.ui.password.print']" v-if="advancedSettings">
-                    <settings-help text="SettingsPasswordPrintHelp" v-if="advancedSettings"/>
+                           v-model="settings['client.ui.password.print']" v-if="advanced">
+                    <settings-help text="SettingsPasswordPrintHelp" v-if="advanced"/>
 
                     <translate tag="label"
                                for="setting-password-username"
                                say="Show username in list view"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-password-username"
                            v-model="settings['client.ui.password.user.show']"
-                           v-if="advancedSettings">
+                           v-if="advanced">
                     <settings-help text="Always show the username related to the password in the list view"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="label" for="setting-password-tags" say="Show tags in list view"/>
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
@@ -310,36 +309,36 @@
                            v-model="settings['user.sharing.resharing']" v-if="hasSharing && hasResharing">
                     <settings-help text="Enable the option to let other users share a shared password by default" v-if="hasSharing && hasResharing"/>
 
-                    <translate tag="h3" say="Search" v-if="advancedSettings"/>
-                    <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advancedSettings"/>
+                    <translate tag="h3" say="Search" v-if="advanced"/>
+                    <translate tag="label" for="setting-search-live" say="Search as i type" v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-search-live"
                            v-model="settings['client.search.live']"
-                           v-if="advancedSettings">
+                           v-if="advanced">
                     <settings-help text="Start search when a key is pressed anywhere on the page"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="label"
                                for="setting-search-global"
                                say="Search everywhere with Enter"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-search-global"
                            v-model="settings['client.search.global']"
-                           v-if="advancedSettings">
+                           v-if="advanced">
                     <settings-help text="Search everywhere when the enter key is pressed in the search box"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
 
                     <translate tag="label"
                                for="setting-search-show"
                                say="Always show search section"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-search-show"
                            v-model="settings['client.search.show']"
-                           v-if="advancedSettings">
+                           v-if="advanced">
                     <settings-help text="Always show the section for global search in the navigation"
-                                   v-if="advancedSettings"/>
+                                   v-if="advanced"/>
                 </section>
                 <section class="notifications">
                     <translate tag="h1" say="Notifications"/>
@@ -377,12 +376,12 @@
                     <translate tag="label"
                                for="setting-notification-errors"
                                say="Other errors"
-                               v-if="advancedSettings"/>
+                               v-if="advanced"/>
                     <input type="checkbox"
                            id="setting-notification-errors"
                            v-model="settings['user.notification.errors']"
-                           v-if="advancedSettings">
-                    <settings-help text="Notifies you when a background operation fails" v-if="advancedSettings"/>
+                           v-if="advanced">
+                    <settings-help text="Notifies you when a background operation fails" v-if="advanced"/>
                 </section>
                 <section class="danger">
                     <translate tag="h1" say="Danger Zone"/>
@@ -423,23 +422,29 @@
     import Messages from '@js/Classes/Messages';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
-    import SettingsHelp from '@vue/Components/SettingsHelp';
+    import SettingsHelp from '@vue/Components/Settings/SettingsHelp';
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
     import {getCurrentUser} from '@nextcloud/auth';
     import RecoverHiddenItemsAction from "@js/Actions/RecoverHiddenItemsAction";
+    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch';
+    import NcButton from '@nc/NcButton';
+    import HelpCircleIcon from "@icon/HelpCircle";
 
     export default {
         components: {
+            HelpCircleIcon,
             Breadcrumb,
             SettingsHelp,
-            Translate
+            Translate,
+            NcButton,
+            NcCheckboxRadioSwitch
         },
         data() {
-            let advancedSettings = SettingsService.get('client.settings.advanced'),
-                hasEncryption    = API.hasEncryption,
-                settings         = SettingsService.getAll(),
-                observer         = (data) => {
+            let advanced      = SettingsService.get('client.settings.advanced') === true,
+                hasEncryption = API.hasEncryption,
+                settings      = SettingsService.getAll(),
+                observer      = (data) => {
                     if(!settings.hasOwnProperty(data.setting) || settings[data.setting] !== data.value) {
                         settings[data.setting] = data.value;
                     }
@@ -451,10 +456,9 @@
                 settings,
                 hasSharing  : SettingsService.get('server.sharing.enabled'),
                 hasResharing: SettingsService.get('server.sharing.resharing'),
-                advancedSettings,
+                advanced,
                 hasEncryption,
                 isAdmin     : getCurrentUser().isAdmin,
-                advanced    : advancedSettings ? '1':'0',
                 nightly     : APP_NIGHTLY,
                 noSave      : false,
                 locked      : false
@@ -506,8 +510,7 @@
                 for(let i in this.settings) {
                     if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
                 }
-                this.advancedSettings = false;
-                this.advanced = '0';
+                this.advanced = false;
                 this.noSave = false;
                 this.locked = false;
             },
@@ -564,11 +567,11 @@
                 },
                 deep: true
             },
-            advanced(value) {
-                this.advancedSettings = this.settings['client.settings.advanced'] = value === 1;
-            },
-            locked(value) {
+            locked() {
                 document.getElementById('app').classList.toggle('blocking');
+            },
+            advanced(value) {
+                SettingsService.set('client.settings.advanced', value);
             }
         }
     };
@@ -577,16 +580,12 @@
 <style lang="scss">
 .app-content-left.settings {
     .settings-level {
-        color    : $color-grey-dark;
-        position : absolute;
-        right    : 5px;
+        display : flex;
+        gap     : 1rem;
 
-        label {
-            margin-right : 5px
-        }
-
-        .button-help {
-            border-radius: var(--border-radius);
+        button,
+        span.material-design-icon {
+            cursor : pointer;
         }
     }
 
@@ -689,10 +688,6 @@
                 grid-row-end      : initial;
                 grid-column-start : initial;
             }
-        }
-
-        .settings-level label {
-            display : none;
         }
     }
 
