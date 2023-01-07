@@ -144,9 +144,11 @@ h2 {
 th {
     font-weight: bold;
     padding-right: 2rem;
+    text-align: left;
 }
 td.value {
-    font-family: 'Ubuntu Mono', Consolas, "Liberation Mono", Menlo, Courier, monospace
+    font-family: 'Ubuntu Mono', Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    text-align: left;
 }
 div.notes-label {
     margin-top: 2rem;
