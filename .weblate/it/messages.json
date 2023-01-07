@@ -2112,14 +2112,8 @@
     "frontend-000566": {
         "message": "Reset account richiesto"
     },
-    "frontend-000567": {
-        "message": "Mostra"
-    },
     "frontend-000669": {
         "message": "Predefinito"
-    },
-    "frontend-000568": {
-        "message": "Avanzate"
     },
     "settings-000696": {
         "message": "Nuova password"

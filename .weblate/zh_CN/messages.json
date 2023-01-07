@@ -589,14 +589,8 @@
     "frontend-000566": {
         "message": "请求账户重置"
     },
-    "frontend-000567": {
-        "message": "视图"
-    },
     "frontend-000669": {
         "message": "默认"
-    },
-    "frontend-000568": {
-        "message": "高级"
     },
     "settings-000696": {
         "message": "新密码"

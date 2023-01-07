@@ -20,9 +20,6 @@
     "backend-000501": {
         "message": "Henüz değil"
     },
-    "frontend-000567": {
-        "message": "Görünüm"
-    },
     "frontend-000615": {
         "message": "Ya da Sohbetimizde!"
     },
@@ -2159,9 +2156,6 @@
     },
     "frontend-000566": {
         "message": "Hesap sıfırlama talep edildi"
-    },
-    "frontend-000568": {
-        "message": "Gelişmiş"
     },
     "frontend-000569": {
         "message": "Birden fazla hesap için kullanılıyorsa parolaları zayıf olarak işaretleyin"

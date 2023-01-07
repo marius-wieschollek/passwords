@@ -926,14 +926,8 @@
     "frontend-000566": {
         "message": "Réinitialisation du compte requis"
     },
-    "frontend-000567": {
-        "message": "Vue"
-    },
     "frontend-000669": {
         "message": "Standard"
-    },
-    "frontend-000568": {
-        "message": "Avancée"
     },
     "frontend-000310": {
         "message": "Il n’y a rien ici"

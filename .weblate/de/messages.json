@@ -2443,14 +2443,8 @@
     "frontend-000566": {
         "message": "Benutzerkonto zurücksetzen"
     },
-    "frontend-000567": {
-        "message": "Ansicht"
-    },
     "frontend-000669": {
         "message": "Standard"
-    },
-    "frontend-000568": {
-        "message": "Erweitert"
     },
     "settings-000696": {
         "message": "Neues Passwort"

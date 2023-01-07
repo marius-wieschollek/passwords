@@ -2141,14 +2141,8 @@
     "frontend-000566": {
         "message": "Restablecer la cuenta de usuario"
     },
-    "frontend-000567": {
-        "message": "Vista"
-    },
     "frontend-000669": {
         "message": "Básica"
-    },
-    "frontend-000568": {
-        "message": "Completa"
     },
     "settings-000696": {
         "message": "Nueva contraseña"

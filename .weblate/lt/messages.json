@@ -1,7 +1,4 @@
 {
-    "frontend-000567": {
-        "message": "Peržiūrėti"
-    },
     "backups-TagIds": {
         "message": "Žymos Ids"
     },
@@ -141,9 +138,6 @@
     },
     "backups-000072": {
         "message": "Konfliktų sprendimas"
-    },
-    "frontend-000568": {
-        "message": "Išplėstinė"
     },
     "frontend-000153": {
         "message": "Bendras"

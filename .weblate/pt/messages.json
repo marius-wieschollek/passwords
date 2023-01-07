@@ -1949,9 +1949,6 @@
     "frontend-000565": {
         "message": "APAGAR TUDO"
     },
-    "frontend-000568": {
-        "message": "Avançado"
-    },
     "backups-000030": {
         "message": "Por favor, escolha"
     },
@@ -2267,9 +2264,6 @@
     },
     "frontend-000562": {
         "message": "Repor todas as definições"
-    },
-    "frontend-000567": {
-        "message": "Ver"
     },
     "frontend-000569": {
         "message": "Marcar palavras-passe como fracas se estiverem a ser usadas para múltiplas contas"
