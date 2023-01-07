@@ -15,6 +15,7 @@
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
+    import Application from "@js/Init/Application";
 
     export default {
         extends: BaseSection,
@@ -91,13 +92,13 @@
                     this.loading = true;
                     this.folders = [];
                     this.passwords = [];
-                    this.detail.type = 'none';
+                    Application.sidebar = null;
                     API.showFolder(this.$route.params.folder, this.model.folder).then(this.updateContentList);
                 } else if(this.$route.params.folder === undefined && this.defaultFolder !== this.currentFolder.id) {
                     this.loading = true;
                     this.folders = [];
                     this.passwords = [];
-                    this.detail.type = 'none';
+                    Application.sidebar = null;
                     API.showFolder(this.defaultFolder, this.model.base).then(this.updateContentList);
                 }
             },

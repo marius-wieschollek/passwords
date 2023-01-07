@@ -20,17 +20,29 @@
             v-on:closed="closed"
     >
         <template #secondary-actions>
-            <nc-action-button @click.prevent="actions.edit()">
+            <nc-action-button close-after-click @click="actions.edit()">
                 <pencil-icon slot="icon" :size="20"/>
                 {{ t('Edit password') }}
             </nc-action-button>
-            <nc-action-button @click.prevent="actions.qrcode()">
+            <nc-action-button close-after-click @click="actions.clone()">
+                <content-copy-icon slot="icon" :size="20"/>
+                {{ t('Edit as new') }}
+            </nc-action-button>
+            <nc-action-button close-after-click @click="actions.move()">
+                <folder-move-icon slot="icon" :size="20"/>
+                {{ t('Move') }}
+            </nc-action-button>
+            <nc-action-button close-after-click @click="actions.qrcode()">
                 <qrcode-icon slot="icon" :size="20"/>
                 {{ t('PasswordActionQrcode') }}
             </nc-action-button>
-            <nc-action-button @click.prevent="actions.print()">
+            <nc-action-button close-after-click @click="actions.print()" v-if="hasPrinting">
                 <printer-icon slot="icon" :size="20"/>
                 {{ t('PasswordActionPrint') }}
+            </nc-action-button>
+            <nc-action-button close-after-click @click="deleteAction">
+                <trash-can-icon slot="icon" :size="20"/>
+                {{ t('Delete') }}
             </nc-action-button>
         </template>
         <template #tertiary-actions>
@@ -79,15 +91,21 @@
     import PencilIcon from "@icon/Pencil";
     import PrinterIcon from "@icon/Printer.vue";
     import Favicon from "@vc/Favicon.vue";
-    import StarIcon from "vue-material-design-icons/Star";
-    import StarOutlineIcon from "vue-material-design-icons/StarOutline";
+    import StarIcon from "@icon/Star";
+    import StarOutlineIcon from "@icon/StarOutline";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import Application from "@js/Init/Application";
     import {emit} from '@nextcloud/event-bus';
-    import QrcodeIcon from "vue-material-design-icons/Qrcode.vue";
+    import QrcodeIcon from "@icon/Qrcode";
+    import TrashCanIcon from "@icon/TrashCan";
+    import FolderMoveIcon from "@icon/FolderMove";
+    import ContentCopyIcon from "@icon/ContentCopy";
 
     export default {
         components: {
+            ContentCopyIcon,
+            FolderMoveIcon,
+            TrashCanIcon,
             QrcodeIcon,
             StarOutlineIcon,
             StarIcon,
@@ -135,6 +153,9 @@
             },
             hasSharing() {
                 return SettingsService.get('server.sharing.enabled');
+            },
+            hasPrinting() {
+                return SettingsService.get('client.ui.password.print');
             }
         },
 
@@ -152,6 +173,12 @@
             },
             closed() {
                 emit('passwords:sidebar:closed', this.sidebar);
+            },
+            deleteAction() {
+                this.actions.delete()
+                    .then(() => {
+                        this.close();
+                    });
             }
         },
 

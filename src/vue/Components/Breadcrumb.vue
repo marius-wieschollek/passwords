@@ -26,20 +26,20 @@
         />
         <template #actions>
             <nc-actions v-if="showAddNew" :force-menu="true">
-                <nc-action-button icon="icon-folder" v-if="newFolder" @click="createFolder">
+                <nc-action-button close-after-click icon="icon-folder" v-if="newFolder" @click="createFolder">
                     {{ t('New Folder') }}
                 </nc-action-button>
-                <nc-action-button icon="icon-tag" v-if="newTag" @click="createTag">
+                <nc-action-button close-after-click icon="icon-tag" v-if="newTag" @click="createTag">
                     {{ t('New Tag') }}
                 </nc-action-button>
-                <nc-action-button icon="icon-folder" v-if="newPassword" @click="createPassword">
+                <nc-action-button close-after-click v-if="newPassword" @click="createPassword">
                     <key-icon slot="icon" :size="16"/>
                     {{ t('New Password') }}
                 </nc-action-button>
-                <nc-action-button icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
+                <nc-action-button close-after-click icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
                     {{ t('Restore All Items') }}
                 </nc-action-button>
-                <nc-action-button icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent">
+                <nc-action-button close-after-click icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent">
                     {{ t('Delete All Items') }}
                 </nc-action-button>
             </nc-actions>

@@ -28,7 +28,7 @@ class Application {
      * @param {(null|Sidebar)} value
      */
     set sidebar(value) {
-        if(this._app) {
+        if(this._app && !(value === null && this._sidebar === null)) {
             this._sidebar = value;
             this._app.sidebar = value;
         }

@@ -316,8 +316,7 @@
             },
             detailsAction(section = null) {
                 this.detailsActive = true;
-                let sidebar = new PasswordSidebar(this.password, section);
-                Application.sidebar = sidebar;
+                Application.sidebar = new PasswordSidebar(this.password, section);
 
                 let updateListener = (sidebar) => {
                     if(sidebar.item.id !== this.password.id) {
