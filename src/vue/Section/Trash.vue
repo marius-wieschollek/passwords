@@ -35,13 +35,11 @@
 
 <script>
     import API from '@js/Helper/api';
-    import TagLine from '@vue/Line/Tag';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
     import FolderLine from '@vue/Line/Folder';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
-    import Empty from '@vue/Components/Empty';
     import Messages from '@js/Classes/Messages';
     import PasswordLine from '@vue/Line/Password';
     import TagManager from '@js/Manager/TagManager';
@@ -54,14 +52,14 @@
         extends: BaseSection,
 
         components: {
-            Empty,
-            TagLine,
             Translate,
             Breadcrumb,
             FolderLine,
             HeaderLine,
             FooterLine,
-            PasswordLine
+            PasswordLine,
+            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Line/Tag'),
         },
 
         computed: {

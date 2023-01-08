@@ -15,12 +15,14 @@
     import API from '@js/Helper/api';
     import SearchManager from '@js/Manager/SearchManager';
     import NcButton from '@nc/NcButton';
+    import KeyVariant from '@icon/KeyVariant';
+    import NcEmptyContent from '@nc/NcEmptyContent';
 
     export default {
         components: {
             NcButton,
-            'key-variant-icon': () => import(/* webpackChunkName: "KeyVariantIcon" */ '@icon/KeyVariant'),
-            'nc-empty-content': () => import(/* webpackChunkName: "NcEmptyContent" */ '@nc/NcEmptyContent'),
+            KeyVariant,
+            NcEmptyContent,
         },
         props     : {
             text: {

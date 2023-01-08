@@ -42,23 +42,22 @@
     import Utility from '@js/Classes/Utility';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
-    import Empty from '@vue/Components/Empty';
     import GenericLine from '@vue/Line/Generic';
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
-    import Application from "@js/Init/Application";
+    import Application from '@js/Init/Application';
 
     export default {
         extends: BaseSection,
 
         components: {
-            Empty,
             Breadcrumb,
             HeaderLine,
             FooterLine,
             GenericLine,
-            PasswordLine
+            PasswordLine,
+            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty')
         },
         data() {
             return {

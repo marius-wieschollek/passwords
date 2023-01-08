@@ -38,12 +38,10 @@
 </template>
 
 <script>
-    import TagLine from '@vue/Line/Tag';
     import Breadcrumb from '@vc/Breadcrumb';
     import Events from '@js/Classes/Events';
     import Utility from '@js/Classes/Utility';
     import FolderLine from '@vue/Line/Folder';
-    import Empty from '@vue/Components/Empty';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
@@ -53,13 +51,13 @@
 
     export default {
         components: {
-            Empty,
-            TagLine,
             Breadcrumb,
             FolderLine,
             HeaderLine,
             FooterLine,
-            PasswordLine
+            PasswordLine,
+            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Line/Tag'),
         },
 
         data() {

@@ -26,25 +26,24 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from "@js/Classes/Utility";
-    import Empty from '@vue/Components/Empty';
-    import HeaderLine from "@vue/Line/Header";
+    import Utility from '@js/Classes/Utility';
+    import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
     import SecurityLine from '@vue/Line/Security';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
-    import Application from "@js/Init/Application";
+    import Application from '@js/Init/Application';
 
     export default {
         extends   : BaseSection,
         components: {
-            Empty,
             Breadcrumb,
             HeaderLine,
             FooterLine,
             PasswordLine,
-            SecurityLine
+            SecurityLine,
+            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty')
         },
         data() {
             return {

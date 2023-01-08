@@ -81,7 +81,7 @@ module.exports = (env, argv) => {
                 '@scss': `${__dirname}/src/scss`,
                 '@vc'  : `${__dirname}/src/vue/Components`,
                 '@icon': `${__dirname}/node_modules/vue-material-design-icons`,
-                '@nc': `@nextcloud/vue/dist/Components`
+                '@nc'  : `@nextcloud/vue/dist/Components`
             }
         },
         module      : {

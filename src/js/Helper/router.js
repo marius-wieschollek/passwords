@@ -2,21 +2,60 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import Messages from '@js/Classes/Messages';
 import SectionTags from '@vue/Section/Tags';
-import SectionTrash from '@vue/Section/Trash';
 import SectionRecent from '@vue/Section/Recent';
-import SectionShared from '@vue/Section/Shared';
-import SectionSearch from '@vue/Section/Search';
 import SectionFolders from '@vue/Section/Folders';
 import Localisation from '@js/Classes/Localisation';
-import SectionSecurity from '@vue/Section/Security';
-import SectionAuthorize from '@vue/Section/Authorize';
 import SectionFavorites from '@vue/Section/Favorites';
 
 function handleChunkLoadingError(e, module) {
     console.error(e);
-    Messages.alert(['Unable to load {module}', {module}], 'Network error');
+    Messages
+        .alert(['Unable to load {module}', {module}], 'Network error')
+        .finally(() => {
+            router.push('/');
+        });
     throw e;
 }
+
+const SectionTrash = async () => {
+    try {
+        return await import(/* webpackChunkName: "TrashSection" */ '@vue/Section/Trash');
+    } catch(e) {
+        handleChunkLoadingError(e, 'TrashSection');
+    }
+};
+
+const SectionSecurity = async () => {
+    try {
+        return await import(/* webpackChunkName: "SecuritySection" */ '@vue/Section/Security');
+    } catch(e) {
+        handleChunkLoadingError(e, 'SecuritySection');
+    }
+};
+
+const SectionSearch = async () => {
+    try {
+        return await import(/* webpackChunkName: "SearchSection" */ '@vue/Section/Search');
+    } catch(e) {
+        handleChunkLoadingError(e, 'SearchSection');
+    }
+};
+
+const SectionShared = async () => {
+    try {
+        return await import(/* webpackChunkName: "SharedSection" */ '@vue/Section/Shared');
+    } catch(e) {
+        handleChunkLoadingError(e, 'SharedSection');
+    }
+};
+
+const SectionAuthorize = async () => {
+    try {
+        return await import(/* webpackChunkName: "AuthorizeSection" */ '@vue/Section/Authorize');
+    } catch(e) {
+        handleChunkLoadingError(e, 'AuthorizeSection');
+    }
+};
 
 const SectionHelp = async () => {
     try {
