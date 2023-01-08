@@ -26,7 +26,9 @@ module.exports = (env, argv) => {
                     APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
                     APP_ENVIRONMENT    : production ? '"production"':'"development"',
-                    APP_NIGHTLY        : !!(env && env.features === 'true')
+                    APP_NIGHTLY        : !!(env && env.features === 'true'),
+                    appName            : 'passwords',
+                    appVersion         : `"${config.version}"`
                 }
             ),
             new CopyWebpackPlugin(
