@@ -14,6 +14,7 @@
             :subtitle="subtitle"
             :subtitleTooltip="subtitleTooltip"
             :compact="compact"
+            :active="activeTab"
             v-on:close="close()"
             class="passwords-sidebar-password"
             v-on:opened="opened"
@@ -66,7 +67,7 @@
         <nc-app-sidebar-tab icon="icon-share" :name="t('Share')" id="share-tab" v-if="hasSharing">
             <share :password="password"/>
         </nc-app-sidebar-tab>
-        <nc-app-sidebar-tab icon="icon-history" :name="t('Revisions')" id="revisions-tab">
+        <nc-app-sidebar-tab icon="icon-history" :name="t('Revisions')" id="revisions-tab" v-if="password.revisions">
             <revisions :password="password"/>
         </nc-app-sidebar-tab>
     </nc-app-sidebar>
@@ -115,8 +116,8 @@
             Preview,
             PwDetails,
             NcAppSidebar,
-            NcAppSidebarTab,
             NcActionButton,
+            NcAppSidebarTab,
             NcButton
         },
 
@@ -152,6 +153,9 @@
             },
             hasPrinting() {
                 return SettingsService.get('client.ui.password.print');
+            },
+            activeTab() {
+                return `${this.sidebar.tab}-tab`;
             }
         },
 
