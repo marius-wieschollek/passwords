@@ -24,12 +24,12 @@
 </template>
 
 <script>
-    import Translate from "@vc/Translate";
-    import {NcSelect} from "@nextcloud/vue";
+    import Translate from '@vc/Translate';
+    import NcSelect from '@nc/NcSelect';
     import API from '@js/Helper/api';
-    import Utility from "@js/Classes/Utility";
-    import TagManager from "@js/Manager/TagManager";
-    import PasswordManager from "@js/Manager/PasswordManager";
+    import Utility from '@js/Classes/Utility';
+    import TagManager from '@js/Manager/TagManager';
+    import PasswordManager from '@js/Manager/PasswordManager';
 
     export default {
         components: {Translate, NcSelect},
