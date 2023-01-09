@@ -10,106 +10,47 @@
 
 <template>
     <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
-        <nc-app-navigation open>
-            <template id="app-passwords-navigation" #list>
-                <app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
-                    <earth-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-                <app-navigation-item-folders/>
-                <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
-                    <clock-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-                <app-navigation-item-favorites/>
-                <app-navigation-item-shared/>
-                <app-navigation-item-tags/>
-                <app-navigation-item-security/>
-                <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
-                    <magnify-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-
-                <session-timeout v-if="!isMobile && hasTimeout"/>
-                <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete"/>
-            </template>
-
-            <nc-app-navigation-settings slot="footer" :title="t('More')">
-                <app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
-                    <cog-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-                <app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
-                    <archive-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-                <app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
-                    <help-circle-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-                <app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
-                    <puzzle-icon :size=20 slot="icon"/>
-                </app-navigation-item>
-            </nc-app-navigation-settings>
-        </nc-app-navigation>
+        <app-navigation :has-timeout="hasTimeout" :is-mobile="isMobile" :is-search-visible="isSearchVisible" />
 
         <nc-app-content>
-            <router-view name="main"/>
+            <router-view name="main" />
         </nc-app-content>
 
-        <password-sidebar v-if="sidebar && sidebar.type === 'password'" :sidebar="sidebar"/>
+        <password-sidebar v-if="sidebar && sidebar.type === 'password'" :sidebar="sidebar" />
 
         <div id="app-popup">
             <div></div>
         </div>
-        <session-timeout scope="global" v-if="isMobile && hasTimeout"/>
-        <star-chaser v-if="starChaser"/>
-        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup"/>
+        <session-timeout scope="global" v-if="isMobile && hasTimeout" />
+        <star-chaser v-if="starChaser" />
+        <translate v-if="isBirthDay" icon="birthday-cake" id="birthday" @click="birthDayPopup" />
     </nc-content>
 </template>
 
 <script>
     import '@scss/app';
-    import Translate from '@vc/Translate';
-    import router from '@js/Helper/router';
-    import Messages from '@js/Classes/Messages';
-    import SettingsService from '@js/Services/SettingsService';
-    import NcContent from '@nc/NcContent';
-    import NcAppContent from '@nc/NcAppContent';
-    import NcAppNavigation from '@nc/NcAppNavigation';
-    import NcAppNavigationSettings from '@nc/NcAppNavigationSettings';
-    import EarthIcon from "@icon/Earth";
-    import MagnifyIcon from "@icon/Magnify";
-    import PuzzleIcon from "@icon/Puzzle";
-    import HelpCircleIcon from "@icon/HelpCircle";
-    import ArchiveIcon from "@icon/Archive";
-    import CogIcon from "@icon/Cog";
-    import ClockIcon from "@icon/Clock";
-    import Application from "@js/Init/Application";
-    import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import AppNavigationItemShared from "@vc/Navigation/AppNavigationItemShared";
-    import AppNavigationItemSecurity from "@vc/Navigation/AppNavigationItemSecurity";
-    import AppNavigationItemTags from "@vc/Navigation/AppNavigationItemTags";
-    import AppNavigationItemFolders from "@vc/Navigation/AppNavigationItemFolders";
-    import AppNavigationItemFavorites from "@vc/Navigation/AppNavigationItemFavorites";
-    import KeepAliveManager from "@js/Manager/KeepAliveManager";
+    import Translate            from '@vc/Translate';
+    import router               from '@js/Helper/router';
+    import Messages             from '@js/Classes/Messages';
+    import SettingsService      from '@js/Services/SettingsService';
+    import NcContent            from '@nc/NcContent';
+    import NcAppContent         from '@nc/NcAppContent';
+    import AppNavigationLoading from '@vc/Navigation/AppNavigationLoading';
+    import Application          from '@js/Init/Application';
+    import KeepAliveManager     from '@js/Manager/KeepAliveManager';
 
     export default {
         el        : '#content',
         router,
         components: {
-            AppNavigationItemFavorites,
-            AppNavigationItemFolders,
-            AppNavigationItemTags,
-            AppNavigationItemSecurity,
-            AppNavigationItemShared,
-            AppNavigationItem,
-            ClockIcon,
-            CogIcon,
-            ArchiveIcon,
-            HelpCircleIcon,
-            PuzzleIcon,
-            MagnifyIcon,
-            EarthIcon,
             Translate,
             NcContent,
             NcAppContent,
-            NcAppNavigation,
-            NcAppNavigationSettings,
+            'app-navigation'  : () => ({
+                component: import(/* webpackChunkName: "AppNavigation" */ '@vc/Navigation/AppNavigation'),
+                loading  : AppNavigationLoading,
+                delay    : 0
+            }),
             'session-timeout' : () => import(/* webpackChunkName: "SessionTimeout" */ '@vc/SessionTimeout'),
             'password-sidebar': () => import(/* webpackChunkName: "PasswordSidebar" */ '@vc/Sidebar/PasswordSidebar'),
             'star-chaser'     : () => import(/* webpackChunkName: "StarChaser" */ '@vue/Components/StarChaser')

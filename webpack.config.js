@@ -6,7 +6,8 @@ let webpack                    = require('webpack'),
     VueLoaderPlugin            = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin       = require('mini-css-extract-plugin'),
     CssMinimizerPlugin         = require('css-minimizer-webpack-plugin'),
-    CompileLanguageFilesPlugin = require("./scripts/compile-language-files.js");
+    CompileLanguageFilesPlugin = require('./scripts/compile-language-files.js'),
+    BundleAnalyzerPlugin       = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = (env, argv) => {
     let production = argv.mode === 'production';
@@ -25,7 +26,7 @@ module.exports = (env, argv) => {
                     APP_VERSION        : `"${config.version}"`,
                     APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
-                    APP_ENVIRONMENT    : production ? '"production"':'"development"',
+                    APP_ENVIRONMENT    : production ? '"production"' : '"development"',
                     APP_NIGHTLY        : !!(env && env.features === 'true'),
                     appName            : 'passwords',
                     appVersion         : `"${config.version}"`
@@ -46,8 +47,22 @@ module.exports = (env, argv) => {
             new CompileLanguageFilesPlugin()
         ];
 
+    if(!!(env && env.debuginfo === 'true')) {
+        plugins.push(
+            new BundleAnalyzerPlugin(
+                {
+                    analyzerMode     : 'static',
+                    reportFilename   : 'bundle-report.html',
+                    openAnalyzer     : false,
+                    generateStatsFile: true,
+                    statsFilename    : 'report-stats.json'
+                }
+            )
+        );
+    }
+
     return {
-        mode        : production ? 'production':'development',
+        mode        : production ? 'production' : 'development',
         entry       : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`
@@ -58,15 +73,16 @@ module.exports = (env, argv) => {
             chunkFilename: 'js/Static/[name].[chunkhash].js'
         },
         optimization: {
-            minimize : production,
-            minimizer: [
+            minimize   : production,
+            minimizer  : [
                 `...`,
                 new CssMinimizerPlugin(
                     {
                         parallel: true
                     }
                 )
-            ]
+            ],
+            usedExports: true
         },
         resolve     : {
             modules   : ['node_modules', 'src'],
@@ -119,7 +135,7 @@ module.exports = (env, argv) => {
                             options: {
                                 sassOptions: {
                                     sourceMap  : !production,
-                                    outputStyle: production ? 'compressed':null
+                                    outputStyle: production ? 'compressed' : null
                                 }
                             }
                         },

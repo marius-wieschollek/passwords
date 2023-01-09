@@ -2,19 +2,19 @@
     <nc-breadcrumbs class="passwords-breadcrumbs" :class="{'actions-pull-right': actionsOnRight}">
         <NcBreadcrumb :to="getBaseRoute" :title="t('Home')">
             <template #icon>
-                <earth-icon v-if="$route.name === 'All'"/>
-                <folder-icon v-if="$route.name === 'Folders'"/>
-                <clock-icon v-if="$route.name === 'Recent'"/>
-                <star-icon v-if="$route.name === 'Favorites'"/>
-                <share-variant-icon v-if="$route.name === 'Shares'"/>
-                <tag-icon v-if="$route.name === 'Tags'"/>
-                <shield-half-full-icon v-if="$route.name === 'Security'"/>
-                <magnify-icon v-if="$route.name === 'Search'"/>
-                <delete-icon v-if="$route.name === 'Trash'"/>
-                <cog-icon v-if="$route.name === 'Settings'"/>
-                <archive-icon v-if="$route.name === 'Backup'"/>
-                <help-circle-icon v-if="$route.name === 'Help'"/>
-                <puzzle-icon v-if="$route.name === 'Apps and Extensions'"/>
+                <earth-icon v-if="$route.name === 'All'" />
+                <folder-icon v-if="$route.name === 'Folders'" />
+                <clock-icon v-if="$route.name === 'Recent'" />
+                <star-icon v-if="$route.name === 'Favorites'" />
+                <share-variant-icon v-if="$route.name === 'Shares'" />
+                <tag-icon v-if="$route.name === 'Tags'" />
+                <shield-half-full-icon v-if="$route.name === 'Security'" />
+                <magnify-icon v-if="$route.name === 'Search'" />
+                <delete-icon v-if="$route.name === 'Trash'" />
+                <cog-icon v-if="$route.name === 'Settings'" />
+                <archive-icon v-if="$route.name === 'Backup'" />
+                <help-circle-icon v-if="$route.name === 'Help'" />
+                <puzzle-icon v-if="$route.name === 'Apps and Extensions'" />
             </template>
         </NcBreadcrumb>
         <NcBreadcrumb v-for="(item) in breadcrumbs"
@@ -33,7 +33,7 @@
                     {{ t('New Tag') }}
                 </nc-action-button>
                 <nc-action-button close-after-click v-if="newPassword" @click="createPassword">
-                    <key-icon slot="icon" :size="16"/>
+                    <key-icon slot="icon" :size="16" />
                     {{ t('New Password') }}
                 </nc-action-button>
                 <nc-action-button close-after-click icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
@@ -43,35 +43,32 @@
                     {{ t('Delete All Items') }}
                 </nc-action-button>
             </nc-actions>
-            <slot/>
+            <slot />
         </template>
     </nc-breadcrumbs>
 </template>
 
 <script>
-    import Translate from '@vc/Translate';
-    import TagManager from '@js/Manager/TagManager';
-    import Localisation from '@js/Classes/Localisation';
-    import FolderManager from '@js/Manager/FolderManager';
-    import PasswordManager from '@js/Manager/PasswordManager';
-    import NcBreadcrumbs from '@nc/NcBreadcrumbs';
-    import NcBreadcrumb from '@nc/NcBreadcrumb';
-    import NcActions from '@nc/NcActions';
-    import NcActionButton from '@nc/NcActionButton';
-    import KeyIcon from "@icon/Key";
-    import API from "@js/Helper/api";
-    import FolderIcon from "@icon/Folder";
-    import PuzzleIcon from "@icon/Puzzle";
-    import HelpCircleIcon from "@icon/HelpCircle";
-    import ArchiveIcon from "@icon/Archive";
-    import CogIcon from "@icon/Cog";
-    import MagnifyIcon from "@icon/Magnify";
-    import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
-    import TagIcon from "@icon/Tag";
-    import ShareVariantIcon from "@icon/ShareVariant";
-    import StarIcon from "@icon/Star";
-    import ClockIcon from "@icon/Clock";
-    import EarthIcon from "@icon/Earth";
+    import Translate          from '@vc/Translate';
+    import TagManager         from '@js/Manager/TagManager';
+    import Localisation       from '@js/Classes/Localisation';
+    import FolderManager      from '@js/Manager/FolderManager';
+    import PasswordManager    from '@js/Manager/PasswordManager';
+    import KeyIcon            from '@icon/Key';
+    import API                from '@js/Helper/api';
+    import FolderIcon         from '@icon/Folder';
+    import PuzzleIcon         from '@icon/Puzzle';
+    import HelpCircleIcon     from '@icon/HelpCircle';
+    import ArchiveIcon        from '@icon/Archive';
+    import CogIcon            from '@icon/Cog';
+    import MagnifyIcon        from '@icon/Magnify';
+    import ShieldHalfFullIcon from '@icon/ShieldHalfFull';
+    import TagIcon            from '@icon/Tag';
+    import ShareVariantIcon   from '@icon/ShareVariant';
+    import StarIcon           from '@icon/Star';
+    import ClockIcon          from '@icon/Clock';
+    import EarthIcon          from '@icon/Earth';
+    import BreadcrumbLoading  from '@vc/Breadcrumb/BreadcrumbLoading';
 
     export default {
         components: {
@@ -89,11 +86,16 @@
             FolderIcon,
             KeyIcon,
             Translate,
-            NcActions,
-            NcBreadcrumb,
-            NcBreadcrumbs,
-            NcActionButton,
-            'delete-icon': () => import(/* webpackChunkName: "DeleteIcon" */ '@icon/Delete')
+            BreadcrumbLoading,
+            'nc-actions'      : () => import(/* webpackChunkName: "NcActions" */ '@nc/NcActions'),
+            'NcBreadcrumb'    : () => import(/* webpackChunkName: "NcBreadcrumb" */ '@nc/NcBreadcrumb'),
+            'nc-action-button': () => import(/* webpackChunkName: "NcActionButton" */ '@nc/NcActionButton'),
+            'delete-icon'     : () => import(/* webpackChunkName: "DeleteIcon" */ '@icon/Delete'),
+            'nc-breadcrumbs'  : () => ({
+                component: import(/* webpackChunkName: "NcBreadcrumbs" */ '@nc/NcBreadcrumbs'),
+                loading  : BreadcrumbLoading,
+                delay    : 0
+            })
         },
 
         props: {
