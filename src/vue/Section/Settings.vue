@@ -205,11 +205,9 @@
 
                     <translate tag="label"
                                for="setting-password-click"
-                               say="Single click action"
-                               v-if="advanced"/>
+                               say="Single click action"/>
                     <select id="setting-password-click"
-                            v-model="settings['client.ui.password.click.action']"
-                            v-if="advanced">
+                            v-model="settings['client.ui.password.click.action']">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
@@ -217,16 +215,13 @@
                         <translate tag="option" value="edit" say="Edit password"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="Action to perform when clicking on a password in the list view"
-                                   v-if="advanced"/>
+                    <settings-help text="Action to perform when clicking on a password in the list view"/>
 
                     <translate tag="label"
                                for="setting-password-dblClick"
-                               say="Double click action"
-                               v-if="advanced"/>
+                               say="Double click action"/>
                     <select id="setting-password-dblClick"
-                            v-model="settings['client.ui.password.dblClick.action']"
-                            v-if="advanced">
+                            v-model="settings['client.ui.password.dblClick.action']">
                         <translate tag="option" value="password" say="Copy password"/>
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
@@ -235,7 +230,7 @@
                         <translate tag="option" value="open-url" say="Open Url"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="Action to perform when double clicking on a password in the list view" v-if="advanced"/>
+                    <settings-help text="Action to perform when double clicking on a password in the list view"/>
 
                     <translate tag="label" for="setting-password-wheel" say="SettingsMouseWheelAction" v-if="advanced"/>
                     <select id="setting-password-wheel" v-model="settings['client.ui.password.wheel.action']" v-if="advanced">
@@ -249,8 +244,8 @@
                     </select>
                     <settings-help text="SettingsMouseWheelActionHelp" v-if="advanced"/>
 
-                    <translate tag="label" for="setting-password-custom-action" say="SettingsCustomAction" v-if="advanced"/>
-                    <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']" v-if="advanced">
+                    <translate tag="label" for="setting-password-custom-action" say="SettingsCustomAction"/>
+                    <select id="setting-password-custom-action" v-model="settings['client.ui.password.custom.action']">
                         <translate tag="option" value="details" say="Show details"/>
                         <translate tag="option" value="share" say="SettingsShowShareTab"/>
                         <translate tag="option" value="edit" say="Edit password"/>
@@ -258,10 +253,11 @@
                         <translate tag="option" value="username" say="Copy username"/>
                         <translate tag="option" value="url" say="Copy website"/>
                         <translate tag="option" value="open-url" say="Open Url"/>
-                        <translate tag="option" value="print" say="PasswordActionPrint"/>
+                        <translate tag="option" value="qrcode" say="PasswordActionQrcode"/>
+                        <translate tag="option" value="print" say="PasswordActionPrint" v-if="settings['client.ui.password.print']"/>
                         <translate tag="option" value="none" say="Nothing"/>
                     </select>
-                    <settings-help text="SettingsCustomActionHelp" v-if="advanced"/>
+                    <settings-help text="SettingsCustomActionHelp"/>
 
                     <translate tag="label" for="setting-password-menu" say="Add copy options in menu"/>
                     <input type="checkbox"

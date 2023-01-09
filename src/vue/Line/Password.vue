@@ -234,6 +234,8 @@
                         return 'fa-print';
                     case 'open-url':
                         return 'fa-link';
+                    case 'qrcode':
+                        return 'fa-qrcode';
                     default:
                         return 'fa-cliboard';
                 }
@@ -293,6 +295,8 @@
                     this.detailsAction(action);
                 } else if(action === 'print') {
                     this.printAction();
+                } else if(action === 'qrcode') {
+                    this.actions.qrcode();
                 } else {
                     this.runClickAction(action);
                 }
