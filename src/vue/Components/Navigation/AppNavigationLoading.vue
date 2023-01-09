@@ -20,7 +20,7 @@
             this.timeout = setTimeout(() => {
                 this.loading = true;
                 this.timeout = null;
-            }, 50);
+            }, 100);
         },
 
         destroyed() {
