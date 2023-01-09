@@ -14,6 +14,16 @@ const {readFile, writeFile} = require("fs/promises");
 
 class CompileLanguageFilesPlugin {
 
+    get ALIASES() {
+        return {
+            "backend-000652": [{section: 'settings'}],
+            "backend-000653": [{section: 'settings'}],
+            "backend-000654": [{section: 'settings'}],
+            "backend-000655": [{section: 'settings'}],
+            "backend-000656": [{section: 'settings'}]
+        };
+    }
+
     get FORCE_KEYS() {
         return this._keys;
     }
@@ -144,6 +154,20 @@ class CompileLanguageFilesPlugin {
             }
 
             translations[section][baseString] = value;
+
+            if(this.ALIASES.hasOwnProperty(key)) {
+                for(let alias of this.ALIASES[key]) {
+                    if(!translations.hasOwnProperty(alias.section)) {
+                        translations[alias.section] = {};
+                    }
+
+                    if(alias.hasOwnProperty('name')) {
+                        translations[alias.section][alias.name] = value;
+                    } else {
+                        translations[alias.section][baseString] = value;
+                    }
+                }
+            }
         }
         return translations;
     }

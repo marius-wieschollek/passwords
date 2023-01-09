@@ -2969,7 +2969,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode"         : {
-        "message"    : "QrCode",
+        "message"    : "Show QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists"         : {
@@ -3011,7 +3011,7 @@
             }
         }
     },
-    "settigns-ExpertSettingsLabel"          : {
+    "settings-ExpertSettingsLabel"          : {
         "message"    : "Expert Settings",
         "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
     },

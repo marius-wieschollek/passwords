@@ -2405,7 +2405,7 @@
         "message": "Suche überall mit \"Enter\""
     },
     "frontend-000554": {
-        "message": "Zeige die Suche-Sektion immer an"
+        "message": "Zeige den Suchbereich immer an"
     },
     "frontend-000555": {
         "message": "Benachrichtigungen"
@@ -2967,7 +2967,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "QrCode anzeigen",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3025,7 +3025,7 @@
         "message": "Ende-zu-Ende Verschlüsselung",
         "description": "Label for the client side / end-to-end encryption method"
     },
-    "settigns-ExpertSettingsLabel": {
+    "settings-ExpertSettingsLabel": {
         "message": "Experteneinstellungen",
         "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
     },

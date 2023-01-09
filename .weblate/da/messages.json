@@ -3011,7 +3011,7 @@
             }
         }
     },
-    "settigns-ExpertSettingsLabel": {
+    "settings-ExpertSettingsLabel": {
         "message": "Ekspertindstillinger",
         "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
     },
