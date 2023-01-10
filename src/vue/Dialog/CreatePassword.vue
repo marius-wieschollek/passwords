@@ -194,6 +194,10 @@
         display        : flex;
         flex-direction : column;
 
+        .button-vue.modal-container__close {
+            z-index: 2;
+        }
+
         @media (min-width : $width-1366-above) {
             height    : 88%;
             max-width : 76vw;
