@@ -105,7 +105,7 @@
 </script>
 
 <style lang="scss">
-#content.app-passwords .password-form-custom-field-wrapper {
+#content-vue.app-passwords .password-form-custom-field-wrapper {
     background-color : var(--color-main-background);
     border-radius    : var(--border-radius);
 

@@ -11,18 +11,18 @@
 <template>
     <div class="password-form-custom-field password-form-file-field" v-if="isVisible">
         <div class="file-field" @click="chooseFile">
-            <input :type="inputType" :id="id" v-model="data" v-bind="inputAttributes" required/>
-            <span class="button" :style="style"/>
+            <input :type="inputType" :id="id" v-model="data" v-bind="inputAttributes" required />
+            <span class="button" :style="style" />
         </div>
-        <custom-field-type v-model="type"/>
+        <custom-field-type v-model="type" />
     </div>
 </template>
 
 <script>
-    import AbstractCustomField from "@vue/Dialog/CreatePassword/CustomFields/AbstractCustomField";
-    import Icon from "@vc/Icon";
-    import SettingsService from "@js/Services/SettingsService";
-    import Messages from "@js/Classes/Messages";
+    import AbstractCustomField from '@vue/Dialog/CreatePassword/CustomFields/AbstractCustomField';
+    import Icon                from '@vc/Icon';
+    import SettingsService     from '@js/Services/SettingsService';
+    import Messages            from '@js/Classes/Messages';
 
     export default {
         components: {Icon},
@@ -52,16 +52,16 @@
 </script>
 
 <style lang="scss">
-.password-form-file-field {
+#content-vue.app-passwords div.password-form-file-field {
 
     .file-field {
         display : flex;
-    }
 
-    input {
-        cursor       : pointer;
-        margin-right : 0;
-        color        : var(--color-text-lighter);
+        input {
+            cursor                     : pointer;
+            margin-right               : 0;
+            color                      : var(--color-text-lighter);
+        }
     }
 
     .button {
