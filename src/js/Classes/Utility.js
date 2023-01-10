@@ -1,7 +1,16 @@
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
+
 import {generateUrl} from '@nextcloud/router';
 
 export default class Utility {
-
     static popupCounter = 0;
 
     /**
@@ -39,7 +48,7 @@ export default class Utility {
     static createDownload(content, name = null, mime = 'text/plain') {
         if(name === null) name = `${new Date().toISOString()}.txt`;
 
-        let blob    = content instanceof Blob ? content:new Blob([content], {type: mime}),
+        let blob    = content instanceof Blob ? content : new Blob([content], {type: mime}),
             element = document.createElement('a'),
             url     = window.URL.createObjectURL(blob);
 
@@ -116,8 +125,8 @@ export default class Utility {
                     if(ascending) return aP.localeCompare(bP, undefined, {numeric: true, sensitivity: 'base'});
                     return bP.localeCompare(aP, undefined, {numeric: true, sensitivity: 'base'});
                 }
-                if(ascending) return aP < bP ? -1:1;
-                return aP > bP ? -1:1;
+                if(ascending) return aP < bP ? -1 : 1;
+                return aP > bP ? -1 : 1;
             };
         }
 
@@ -292,7 +301,7 @@ export default class Utility {
         Utility.popupCounter++;
         div.id = `passwords-popup-${Utility.popupCounter}${Math.round(Math.random() * 10)}`;
         container.appendChild(div);
-        return selector ? `#app-popup div#${div.id}`:div;
+        return selector ? `#app-popup div#${div.id}` : div;
     }
 
     /**
@@ -301,10 +310,10 @@ export default class Utility {
      * @returns {number}
      */
     static getColorLuma(hexColor) {
-        let rgb  = parseInt(hexColor.substring(1), 16),
-            r    = (rgb >> 16) & 0xff,
-            g    = (rgb >> 8) & 0xff,
-            b    = (rgb >> 0) & 0xff;
+        let rgb = parseInt(hexColor.substring(1), 16),
+            r   = (rgb >> 16) & 0xff,
+            g   = (rgb >> 8) & 0xff,
+            b   = (rgb >> 0) & 0xff;
 
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
