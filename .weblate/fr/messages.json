@@ -1,6 +1,6 @@
 {
     "backups-000028": {
-        "message": "Sauvegarde/Export"
+        "message": "Sauvegarde ou export"
     },
     "backups-000029": {
         "message": "Choisissez un format"
@@ -18,7 +18,7 @@
         "message": "Mot de passe de la sauvegarde"
     },
     "backups-000040": {
-        "message": "(Optionnel) Chiffrer le ficher de sauvegarde"
+        "message": "(Optionnel) Crypter le fichier de sauvegarde"
     },
     "backups-000041": {
         "message": "Seul un CSV peut être utilisé pour l’import"
@@ -27,7 +27,7 @@
         "message": "Exporter les mots de passe"
     },
     "backups-000043": {
-        "message": "Exporter les fichiers"
+        "message": "Exporter les dossiers"
     },
     "backups-000044": {
         "message": "Exporter les étiquettes"
@@ -39,16 +39,16 @@
         "message": "Étiquettes"
     },
     "backups-000048": {
-        "message": "Parent"
+        "message": "Label parent"
     },
     "backups-000051": {
-        "message": "Id du parent"
+        "message": "ID parent"
     },
     "backups-000052": {
         "message": "Vide"
     },
     "backups-000053": {
-        "message": "Ajouter un en-tête"
+        "message": "Ajouter une ligne d'en-tête"
     },
     "backups-000054": {
         "message": "Exporter les mots de passe partagés avec moi"
@@ -60,13 +60,13 @@
         "message": "Lancer l’export"
     },
     "backups-000059": {
-        "message": "Attendre…"
+        "message": "En attente…"
     },
     "backups-000060": {
         "message": "Erreur lors de l’export"
     },
     "backups-000061": {
-        "message": "Télécharger le ficher $FORMAT$",
+        "message": "Télécharger le fichier $FORMAT$",
         "placeholders": {
             "format": {
                 "content": "$1"
@@ -80,10 +80,10 @@
         "message": "Il n’y a aucune donnée à exporter"
     },
     "backups-000064": {
-        "message": "Restauration/Import"
+        "message": "Restauration ou importation"
     },
     "backups-000066": {
-        "message": "CSV des mots de passe"
+        "message": "CSV Passwords"
     },
     "backups-000067": {
         "message": "CSV des dossiers"
@@ -95,7 +95,7 @@
         "message": "CSV personnalisé"
     },
     "backups-000070": {
-        "message": "Sélectionner un ficher"
+        "message": "Sélectionner un fichier"
     },
     "backups-000071": {
         "message": "Choisissez les options"
@@ -727,13 +727,13 @@
         "message": "Dossier"
     },
     "backups-000047": {
-        "message": "Étiquette"
+        "message": "Étiquettes"
     },
     "backups-000049": {
-        "message": "Id du dossier"
+        "message": "ID du dossier"
     },
     "backups-000050": {
-        "message": "Ids des étiquettes"
+        "message": "IDs de l'étiquette"
     },
     "backups-000058": {
         "message": "Export"
@@ -1683,7 +1683,7 @@
         "message": "Dossier"
     },
     "backups-TagLabels": {
-        "message": "Étiquette"
+        "message": "Étiquettes"
     },
     "backups-000033": {
         "message": "Lire le guide d'importation $LABEL$",
@@ -1697,10 +1697,10 @@
         "message": "ou"
     },
     "backups-000035": {
-        "message": "sauvegarde de données"
+        "message": "sauvegarde de la base de données"
     },
     "backups-000056": {
-        "message": "N'importez pas les champs vides"
+        "message": "Ne pas importer les champs vides"
     },
     "backups-000065": {
         "message": "Choisir le format d'importation"
@@ -1872,7 +1872,7 @@
         "message": "Les codes ne correspondent pas"
     },
     "apps-000010": {
-        "message": "Il a l'air bien"
+        "message": "Semble bien"
     },
     "apps-000011": {
         "message": "Connexion réussie"
@@ -1907,7 +1907,7 @@
         "message": "Vous n'avez pas confirmé la connexion à temps"
     },
     "apps-000020": {
-        "message": "Il suffit de scanner le code QR avec l'application pour le connecter."
+        "message": "Scannez simplement le code QR avec l'application pour le connecter."
     },
     "apps-000021": {
         "message": "Cliquez sur le bouton lorsque vous êtes prêt à démarrer la connexion."
@@ -1916,7 +1916,7 @@
         "message": "Vérifiez si les codes ci-dessous correspondent à ceux fournis par l'appareil ou l'application :"
     },
     "apps-000023": {
-        "message": "Liez ce client à votre compte Nextcloud sans mots de passe et urls ennuyeux."
+        "message": "Liez ce client à votre compte Nextcloud sans mots de passe et URLs fastidieux."
     },
     "apps-000024": {
         "message": "Ce client prend officiellement en charge notre système de cryptage de bout en bout."
@@ -2896,10 +2896,10 @@
         "message": "Champs personnalisés"
     },
     "backups-FolderId": {
-        "message": "Id du dossier"
+        "message": "ID du dossier"
     },
     "backups-TagIds": {
-        "message": "Ids des étiquettes"
+        "message": "ID de l'étiquette"
     },
     "backups-000116": {
         "message": "Certains objets avaient des erreurs :"
