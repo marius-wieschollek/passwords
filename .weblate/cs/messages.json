@@ -2946,7 +2946,7 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Protože máte povoleno šifrování End-to-End, nelze hesla do exportu přidávat automaticky. Jako alternativu můžete k exportu dat použít funkci exportu v aplikaci.",
+        "message": "Protože máte povoleno šifrování mezi koncovými body, nelze hesla do exportu přidávat automaticky. Jako alternativu můžete k exportu dat použít funkci exportu v aplikaci.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -2954,11 +2954,11 @@
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "Zobrazí možnost tisku hesla v nabídce a podrobnostech.",
+        "message": "Zobrazí možnost tisku hesla v nabídce a podrobnostech",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
     "frontend-PasswordActionPrint": {
-        "message": "Heslo pro tisk",
+        "message": "Vytisknout heslo",
         "description": "Label of the print password action"
     },
     "frontend-FolderPickerLoading": {
@@ -2970,7 +2970,7 @@
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "Heslo je již označeno $TAG$",
+        "message": "Heslo už je označeno $TAG$",
         "description": "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
@@ -3013,7 +3013,7 @@
         "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
     },
     "frontend-PasswordDetailsAdvancedView": {
-        "message": "Zobrazit technické detaily",
+        "message": "Zobrazit technické podrobnosti",
         "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
     },
     "frontend-PwDetailsEncryptionLabel": {
