@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2023.1.0 - Feature release
 ### Added
 - User migration support
 - Print password option
