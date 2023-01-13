@@ -89,7 +89,9 @@ module.exports = (env, argv) => {
             extensions: ['.js', '.vue', '.scss'],
             fallback  : {
                 path  : false,
-                crypto: false
+                crypto: false,
+                assert: false,
+                util  : false
             },
             alias     : {
                 'vue$' : 'vue/dist/vue.esm.js',
