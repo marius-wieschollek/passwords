@@ -61,11 +61,7 @@
                 let classNames = 'row tag';
 
                 if(SearchManager.status.active) {
-                    if(SearchManager.status.ids.indexOf(this.tag.id) !== -1) {
-                        classNames += ' search-visible';
-                    } else {
-                        classNames += ' search-hidden';
-                    }
+                    classNames += SearchManager.status.ids.indexOf(this.tag.id) !== -1 ? ' search-visible':' search-hidden';
                 }
 
                 return classNames;

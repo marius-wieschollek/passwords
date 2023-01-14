@@ -15,13 +15,13 @@
     import API from '@js/Helper/api';
     import SearchManager from '@js/Manager/SearchManager';
     import NcButton from '@nc/NcButton';
-    import KeyVariant from '@icon/KeyVariant';
+    import KeyVariantIcon from '@icon/KeyVariant';
     import NcEmptyContent from '@nc/NcEmptyContent';
 
     export default {
         components: {
             NcButton,
-            KeyVariant,
+            KeyVariantIcon,
             NcEmptyContent,
         },
         props     : {

@@ -310,12 +310,15 @@ class SearchManager {
                     searchIcon.querySelector('.header-menu__trigger').click();
                 }
 
+                e.preventDefault();
+                this.search(this.status.query + e.key);
                 setTimeout(() => {
-                    searchbox.value = e.key;
                     searchbox.focus();
-                    e.preventDefault();
-                    this.search(searchbox.value);
-                }, 150);
+                    setTimeout(() => {
+                        searchbox.value = this.status.query;
+                        searchbox.selectionStart = searchbox.selectionEnd = 10000;
+                    }, 50);
+                }, 50);
             }
         });
         document.addEventListener('keyup', (e) => {
@@ -326,26 +329,6 @@ class SearchManager {
             searchbox.value = '';
             this.search('');
         });
-    }
-
-    /**
-     *
-     * @private
-     */
-    _createSearchBox() {
-        let icon = SettingsService.get('server.version') === '25' ? 'dark':'white';
-        let form = document.createElement('form');
-        form.className = 'searchbox pw-searchbox';
-        form.style.opacity = '0';
-        form.setAttribute('action', '#');
-        form.setAttribute('method', 'post');
-        form.setAttribute('role', 'search');
-        form.setAttribute('novalidate', 'novalidate');
-        form.innerHTML = `<label for="searchbox" class="hidden-visually">Search</label>
-                <input id="searchbox" type="search" name="query" value="" required="" class="hidden icon-search-${icon}" autocomplete="off" style="display: block;">
-                    <button class="icon-close-${icon}" type="reset"><span class="hidden-visually"></span></button>`;
-        form.addEventListener('submit', (e) => {e.preventDefault();});
-        document.querySelector('.header-right').prepend(form);
     }
 }
 

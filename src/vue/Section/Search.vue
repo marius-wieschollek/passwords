@@ -65,12 +65,10 @@
                     let el    = document.getElementById('unified-search__input'),
                         query = this.$route.params.query;
 
-                    if(el.value === '' && query !== '' && query !== undefined) {
-                        let value = atob(query);
-                        el.value = value;
-                        SearchManager.search(value);
-                    }
-                }, 1);
+                    let value = atob(query);
+                    el.value = value;
+                    SearchManager.search(value);
+                }, 10);
             }
         },
         watch  : {

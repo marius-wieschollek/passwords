@@ -101,7 +101,6 @@
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import {subscribe, unsubscribe} from '@nextcloud/event-bus';
     import QrcodeIcon from "@icon/Qrcode";
-
     export default {
         components: {
             QrcodeIcon,
@@ -198,20 +197,14 @@
                 );
             },
             isVisible() {
-                if(SearchManager.status.active) {
-                    if(SearchManager.status.ids.indexOf(this.password.id) === -1) return false;
-                }
-
-                return true;
+                return !SearchManager.status.active || SearchManager.status.ids.indexOf(this.password.id) !== -1;
             },
             className() {
                 let classNames = 'row password';
 
                 if(this.detailsActive) classNames += ' details-open';
-                if(this.isVisible) {
-                    classNames += ' search-visible';
-                } else if(SearchManager.status.active) {
-                    classNames += ' search-hidden';
+                if(SearchManager.status.active) {
+                    classNames += SearchManager.status.ids.indexOf(this.password.id) !== -1 ? ' search-visible':' search-hidden';
                 }
 
                 return classNames;
@@ -579,6 +572,10 @@
 
             &.details-open {
                 background-color : var(--color-primary-light);
+            }
+
+            &.search-hidden {
+                display: none;
             }
 
             @media(max-width : $width-extra-small) {
