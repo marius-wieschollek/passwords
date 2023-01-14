@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+- Search not showing results
 
 ## 2023.1.0 - Feature release
 ### Added
