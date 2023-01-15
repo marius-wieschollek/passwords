@@ -3038,5 +3038,9 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Kiszolgáló oldali titkosítás",
         "description": "Label for the server side encryption method"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Titkosítás harmadik fél kulcsával",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
