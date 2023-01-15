@@ -3038,5 +3038,9 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Κρυπτογράφηση από την πλευρά του διακομιστή",
         "description": "Label for the server side encryption method"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Κρυπτογράφηση με κλειδί τρίτου μέρους",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
