@@ -3038,5 +3038,9 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Šifriranje na strani strežnika",
         "description": "Label for the server side encryption method"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Šifriranje s ključem tretje osebe",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
