@@ -3038,5 +3038,9 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Cifrado del lado del servidor",
         "description": "Label for the server side encryption method"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Cifrado con clave de terceros",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
