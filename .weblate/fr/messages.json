@@ -3038,5 +3038,9 @@
     "frontend-PwDetailsEncryptionLabel": {
         "message": "Méthode de cryptage",
         "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Cryptage avec la clé d'un tiers",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
