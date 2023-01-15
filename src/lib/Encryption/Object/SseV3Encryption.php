@@ -12,7 +12,12 @@
 namespace OCA\Passwords\Encryption\Object;
 
 use Exception;
+use OCA\Passwords\Exception\Encryption\SSEv3InvalidKeyException;
+use OCA\Passwords\Exception\Encryption\SSEv3ProviderInvalidException;
+use OCA\Passwords\Exception\Encryption\SSEv3ProviderNotAvailableException;
+use OCA\Passwords\Exception\Encryption\SSEv3ProviderNotFoundException;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\IAppContainer;
 use OCP\Security\ICrypto;
@@ -32,6 +37,13 @@ class SseV3Encryption extends SseV1Encryption {
     public function __construct(ICrypto $crypto, ISecureRandom $secureRandom, ConfigurationService $config, EnvironmentService $environment, IAppContainer $container) {
         parent::__construct($crypto, $secureRandom, $config, $environment);
         $this->container = $container;
+    }
+
+    /**
+     * @return string
+     */
+    public function getType(): string {
+        return EncryptionService::SSE_ENCRYPTION_V3R1;
     }
 
     /**
@@ -57,6 +69,8 @@ class SseV3Encryption extends SseV1Encryption {
     }
 
     /**
+     * Get the key for the current user from the third party key provider
+     *
      * @param string $userId
      *
      * @return string
@@ -67,33 +81,67 @@ class SseV3Encryption extends SseV1Encryption {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
 
-        $provider = $this->getKeyProvider();
-        if(!$provider->isAvailable()) {
-            throw new Exception('User key provider not ready');
-        }
-
-        $userKey = $provider->getKey($userId);
-        if(strlen($userKey) < 32) {
-            throw new Exception('User key provider returned invalid key');
-        }
-
-        return $userKey;
+        return $this->validateKey($this->getKeyProvider()->getUserKey($userId));
     }
 
     /**
-     * @return SseV3UserKeyProviderInterface|null
+     * Load the third party key provider
+     *
+     * @return SseV3KeyProviderInterface|null
      * @throws Exception
      */
-    protected function getKeyProvider(): ?SseV3UserKeyProviderInterface {
-        if(!$this->container->has(SseV3UserKeyProviderInterface::class)) {
-            return null;
+    protected function getKeyProvider(): ?SseV3KeyProviderInterface {
+        if(!$this->container->has(SseV3KeyProviderInterface::class)) {
+            throw new SSEv3ProviderNotFoundException();
         }
 
-        $class = $this->container->get(SseV3UserKeyProviderInterface::class);
-        if($class instanceof SseV3UserKeyProviderInterface) {
-            return $class;
+        $provider = $this->container->get(SseV3KeyProviderInterface::class);
+        if($provider instanceof SseV3KeyProviderInterface) {
+
+            if(!$provider->isAvailable()) {
+                throw new SSEv3ProviderNotAvailableException();
+            }
+
+            return $provider;
         }
 
-        throw new Exception('Invalid SSEv3 User Key Provider');
+        throw new SSEv3ProviderInvalidException();
+    }
+
+    /**
+     * Get a key for an individual object from the third party key provider if supported
+     *
+     * @param string $userId
+     * @param string $objectUuid
+     *
+     * @return string
+     * @throws SSEv3InvalidKeyException
+     */
+    protected function createObjectEncryptionKey(string $userId, string $objectUuid): string {
+        $provider = $this->getKeyProvider();
+        if($provider->providesObjectKey()) {
+            return $this->validateKey($provider->getObjectKey($userId, $objectUuid));
+        }
+
+        return $this->getSecureRandom();
+    }
+
+    /**
+     * Check if the key provided by the third party provider is somewhat useful
+     *
+     * @param string $key
+     *
+     * @return string
+     * @throws SSEv3InvalidKeyException
+     */
+    protected function validateKey(string $key) {
+        if(strlen($key) < 32) {
+            throw new SSEv3InvalidKeyException();
+        }
+        if(strlen(count_chars($key, 3)) < 8) {
+            throw new SSEv3InvalidKeyException();
+        }
+
+        return $key;
     }
 }

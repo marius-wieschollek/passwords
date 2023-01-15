@@ -122,7 +122,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @throws Exception
      */
     public function encryptObject(RevisionInterface $object): RevisionInterface {
-        $sseKey        = $this->getSecureRandom();
+        $sseKey        = $this->createObjectEncryptionKey($object->getUserId(), $object->getUuid());
         $encryptionKey = $this->getEncryptionKey($sseKey, $object->getUserId());
 
         $fields = $this->getFieldsToProcess($object);
@@ -335,5 +335,15 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         if($length < self::MINIMUM_KEY_LENGTH) $length = self::MINIMUM_KEY_LENGTH;
 
         return $this->secureRandom->generate($length);
+    }
+
+    /**
+     * @param string $userId
+     * @param string $objectUuid
+     *
+     * @return string
+     */
+    protected function createObjectEncryptionKey(string $userId, string $objectUuid): string {
+        return $this->getSecureRandom();
     }
 }
