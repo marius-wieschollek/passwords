@@ -294,7 +294,7 @@ class ServerReportHelper {
         $data = [];
         $best = [0, 'none'];
 
-        foreach(['SSEv1r1', 'SSEv1r2', 'SSEv2r1', 'none'] as $encryption) {
+        foreach(['SSEv1r1', 'SSEv1r2', 'SSEv2r1', 'SSEv3r1', 'none'] as $encryption) {
             $count               = $this->countEntitiesByField($encryption);
             $data[ $encryption ] = $count > 0;
             if($count > $best[0]) $best = [$count, $encryption];
