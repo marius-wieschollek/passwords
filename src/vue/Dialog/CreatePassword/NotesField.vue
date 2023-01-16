@@ -196,7 +196,7 @@
 
                                 &:hover {
                                     padding-bottom : 2px;
-                                    color          : var(--color-primary-default);
+                                    color          : var(--color-primary);
                                 }
                             }
                         }
