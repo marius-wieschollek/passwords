@@ -109,24 +109,6 @@ class SseV3Encryption extends SseV1Encryption {
     }
 
     /**
-     * Get a key for an individual object from the third party key provider if supported
-     *
-     * @param string $userId
-     * @param string $objectUuid
-     *
-     * @return string
-     * @throws SSEv3InvalidKeyException
-     */
-    protected function createObjectEncryptionKey(string $userId, string $objectUuid): string {
-        $provider = $this->getKeyProvider();
-        if($provider->providesObjectKey()) {
-            return $this->validateKey($provider->getObjectKey($userId, $objectUuid));
-        }
-
-        return $this->getSecureRandom();
-    }
-
-    /**
      * Check if the key provided by the third party provider is somewhat useful
      *
      * @param string $key

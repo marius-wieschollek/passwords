@@ -1360,7 +1360,7 @@
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "frontend-EncryptionSSEv3r1"           : {
-        "message": "Encryption with third party key",
+        "message": "Third party server side encryption",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "backend-000377"                        : {
