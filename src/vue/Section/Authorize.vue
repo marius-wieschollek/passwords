@@ -429,10 +429,6 @@ body#body-user {
             }
         }
 
-        #app-navigation {
-            z-index : 1001;
-        }
-
         &.pw-auth-passed,
         &.pw-auth-skipped {
             #app-content {
@@ -446,29 +442,10 @@ body#body-user {
         }
     }
 
-    &.pw-auth-passed {
-        #header {
-            transition       : background-color ease-in-out 0.25s 0.25s;
-            background-color : var(--color-primary);
-        }
-
-        @media (min-width : $width-small) {
-            #app-navigation {
-                transform : translateX(0);
-            }
-        }
-    }
-
     &.pw-auth-skipped {
         #app-content {
             > * {
                 transition : opacity ease-in-out 0.25s;
-            }
-        }
-
-        @media (min-width : $width-small) {
-            #app-navigation {
-                transform : translateX(0);
             }
         }
     }
