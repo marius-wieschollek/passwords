@@ -141,7 +141,6 @@ class ThemeSettingsHelper {
             }
         }
 
-        $themingBackground = $this->config->getAppValue('backgroundMime', '', 'theming');
         if (method_exists($this->theming, 'getBackground') && !($this->theming instanceof ThemingDefaults)) {
             return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
         }

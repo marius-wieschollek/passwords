@@ -7,6 +7,16 @@ namespace {
         public function getEntity() {return '';}
         public function getColorPrimary() {return '';}
     }
+
+    class OC {
+        public static $server;
+    }
+}
+
+namespace OC {
+    class Server {
+        function get($id) { return (object) []; }
+    }
 }
 
 namespace OCP\AppFramework {
@@ -197,5 +207,20 @@ namespace OCP\Http\Client {
         public function getStatusCode(): int  { return 0; }
         public function getHeader(string $key): string { return ''; }
         public function getHeaders(): array { return []; }
+    }
+}
+
+namespace OCA\Unsplash\Services {
+    class SettingsService {
+        public function headerbackgroundLink($size): string { return ''; }
+    }
+}
+
+namespace OCA\Unsplash\ProviderHandler {
+    class Provider {
+        const SIZE_SMALL = 0;
+        const SIZE_NORMAL = 1;
+        const SIZE_HIGH = 2;
+        const SIZE_ULTRA = 3;
     }
 }
