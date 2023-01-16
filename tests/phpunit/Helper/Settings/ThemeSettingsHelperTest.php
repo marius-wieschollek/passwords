@@ -159,16 +159,17 @@ class ThemeSettingsHelperTest extends TestCase {
      * Test if the default background image is returned correctly
      */
     public function testGetBackgroundImage() {
-        $this->urlGenerator->method('imagePath')->with('core', 'background.png')->willReturn('/core/img/background.png');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/background.png')->willReturn('https://cloud.com/core/img/background.png');
-        $this->urlGenerator->expects($this->once())->method('imagePath')->with('core', 'background.png');
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/core/img/background.png');
+        $this->urlGenerator->method('imagePath')->with('core', 'app-background.jpg')->willReturn('/core/img/app-background.jpg');
+        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/app-background.jpg')->willReturn('https://cloud.com/core/img/app-background.jpg');
+
+        $this->urlGenerator->expects($this->once())->method('imagePath')->with('core', 'app-background.jpg');
+        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/core/img/app-background.jpg');
 
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/core/img/background.png', $result);
+        self::assertEquals('https://cloud.com/core/img/app-background.jpg', $result);
     }
 
     /**
@@ -197,6 +198,12 @@ class ThemeSettingsHelperTest extends TestCase {
      * Test if unspash image is returned when the app is enabled
      */
     public function testGetSplashBackgroundImage() {
+        $usSettings = $this->createMock(\OCA\Unsplash\Services\SettingsService::class);
+        $usSettings->method('headerbackgroundLink')->willReturn('https://source.unsplash.com/random/featured/?nature');
+
+        \OC::$server = $this->createMock(\OC\Server::class);
+        \OC::$server->method('get')->willReturn($usSettings);
+
         $this->urlGenerator->method('imagePath')->with('core', 'background.png')->willReturn('/core/img/background.png');
         $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/background.png')->willReturn('https://cloud.com/core/img/background.png');
 
@@ -308,7 +315,7 @@ class ThemeSettingsHelperTest extends TestCase {
             'server.theme.color.primary'    => '#0082c9',
             'server.theme.color.text'       => '#ffffff',
             'server.theme.color.background' => '#ffffff',
-            'server.theme.background'       => 'https://cloud.com/core/img/background.png',
+            'server.theme.background'       => 'https://cloud.com/core/img/app-background.jpg',
             'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
             'server.theme.label'            => 'Nextcloud',
             'server.theme.app.icon'         => 'https://cloud.com/apps/passwords/app-themed.svg',
@@ -325,7 +332,7 @@ class ThemeSettingsHelperTest extends TestCase {
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
-                ['core', 'background.png', '/core/img/background.png'],
+                ['core', 'app-background.jpg', '/core/img/app-background.jpg'],
                 [Application::APP_NAME, 'app-themed.svg', '/apps/passwords/app-themed.svg'],
                 ['core', 'filetypes/folder.svg', '/core/img/filetypes/folder.svg']
             ]
@@ -333,7 +340,7 @@ class ThemeSettingsHelperTest extends TestCase {
 
         $this->urlGenerator->method('getAbsoluteURL')->willReturnMap(
             [
-                ['/core/img/background.png', 'https://cloud.com/core/img/background.png'],
+                ['/core/img/app-background.jpg', 'https://cloud.com/core/img/app-background.jpg'],
                 ['/core/img/logo.svg', 'https://cloud.com/core/img/logo.svg'],
                 ['/apps/passwords/app-themed.svg', 'https://cloud.com/apps/passwords/app-themed.svg'],
                 ['/core/img/filetypes/folder.svg', 'https://cloud.com/core/img/filetypes/folder.svg'],
