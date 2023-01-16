@@ -8,10 +8,10 @@
 namespace OCA\Passwords\Db;
 
 use Exception;
-use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
-use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\DB\QueryBuilder\IQueryBuilder;
+use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 
 /**
  * Class PasswordMapper
@@ -56,7 +56,7 @@ class PasswordMapper extends AbstractMapper {
                 )
             );
 
-        if($this->userId !== null) {
+        if ($this->userId !== null) {
             $sql->andWhere(
                 $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId)),
                 $sql->expr()->eq('b.receiver', $sql->createNamedParameter($this->userId))
@@ -75,12 +75,12 @@ class PasswordMapper extends AbstractMapper {
         $sql->select('a.*')
             ->from(static::TABLE_NAME, 'a')
             ->innerJoin('a', ShareMapper::TABLE_NAME, 'b', 'a.`uuid` = b.`target_password`')
+            ->where(
+                $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->eq('b.deleted', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
+            )
             ->orWhere(
-                $sql->where(
-                    $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL)),
-                    $sql->expr()->eq('b.deleted', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
-                ),
-                $sql->where($sql->expr()->isNull('b.uuid'))
+                $sql->expr()->isNull('b.uuid')
             );
 
         return $this->findEntities($sql);
@@ -116,7 +116,7 @@ class PasswordMapper extends AbstractMapper {
             $sql->expr()->eq('b.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
         );
 
-        if(!$includeHidden) {
+        if (!$includeHidden) {
             $sql->andWhere(
                 $sql->expr()->eq('b.hidden', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
             );
