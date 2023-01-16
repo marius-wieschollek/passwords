@@ -7,12 +7,15 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OC_Defaults;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Theming\ThemingDefaults;
-use OCP\IURLGenerator;
+use OC;
 use Throwable;
+use OC_Defaults;
+use OCP\IURLGenerator;
+use OCA\Theming\ThemingDefaults;
+use OCA\Passwords\AppInfo\Application;
+use OCA\Unsplash\ProviderHandler\Provider;
+use OCA\Unsplash\Services\SettingsService;
+use OCA\Passwords\Services\ConfigurationService;
 
 /**
  * Class ThemeSettingsHelper
@@ -21,20 +24,6 @@ use Throwable;
  */
 class ThemeSettingsHelper {
 
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var OC_Defaults
-     */
-    protected OC_Defaults $theming;
-
-    /**
-     * @var IURLGenerator
-     */
-    protected IURLGenerator $urlGenerator;
 
     /**
      * ThemeSettingsHelper constructor.
@@ -43,10 +32,11 @@ class ThemeSettingsHelper {
      * @param OC_Defaults          $theming
      * @param IURLGenerator        $urlGenerator
      */
-    public function __construct(ConfigurationService $config, OC_Defaults $theming, IURLGenerator $urlGenerator) {
-        $this->config       = $config;
-        $this->theming      = $theming;
-        $this->urlGenerator = $urlGenerator;
+    public function __construct(
+        protected ConfigurationService $config,
+        protected OC_Defaults          $theming,
+        protected IURLGenerator        $urlGenerator
+    ) {
     }
 
     /**
@@ -55,7 +45,7 @@ class ThemeSettingsHelper {
      * @return null|string
      */
     public function get(string $key) {
-        switch($key) {
+        switch ($key) {
             case 'color':
             case 'color.primary':
                 return $this->getColorPrimary();
@@ -99,8 +89,8 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getFolderIcon(): string {
-        if($this->config->isAppEnabled('theming')) {
-            $version = $this->config->getAppValue('cachebuster', '0', 'theming');
+        if ($this->config->isAppEnabled('theming')) {
+            $version = $this->getCacheBuster();
 
             return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => $version]);
         }
@@ -114,8 +104,8 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getThemedAppIcon(): string {
-        if($this->config->isAppEnabled('theming')) {
-            $version = $this->config->getAppValue('cachebuster', '0', 'theming');
+        if ($this->config->isAppEnabled('theming')) {
+            $version = $this->getCacheBuster();
 
             return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => $version]);
         }
@@ -129,21 +119,34 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getBackgroundImage(): string {
-        $themingBackground = $this->config->getAppValue('backgroundMime', '', 'theming');
-        if(method_exists($this->theming, 'getBackground') && (!($this->theming instanceof ThemingDefaults) || (!empty($themingBackground) && $themingBackground !== 'backgroundColor'))) {
-            $url = $this->theming->getBackground();
-        } else {
-            if(str_starts_with($this->config->getSystemValue('version'), '25')) {
-                $url = $this->urlGenerator->imagePath('core', 'app-background.jpg');
-            } else {
-                $url = $this->urlGenerator->imagePath('core', 'background.png');
+        try {
+            if (method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
+                $userBackground = $this->config->getUserValue('background', '', null, 'theming');
+                if (!empty($userBackground) && !str_starts_with($userBackground, '#')) {
+                    if ($userBackground === 'custom') {
+                        return $this->urlGenerator->linkToRouteAbsolute('theming.userTheme.getBackground', ['v' => $this->getCacheBuster()]);
+                    } else {
+                        return $this->urlGenerator->linkTo('theming', "/img/background/{$userBackground}", ['v' => $this->getCacheBuster()]);
+                    }
+                }
             }
-        }
-        if($this->config->isAppEnabled('unsplash')) {
-            return 'https://source.unsplash.com/random/featured/?nature';
+        } catch (\Throwable $e) {
         }
 
-        return $this->urlGenerator->getAbsoluteURL($url);
+        if ($this->config->isAppEnabled('unsplash') && class_exists(SettingsService::class)) {
+            try {
+                $settings = OC::$server->get(SettingsService::class);
+                return $settings->headerbackgroundLink(Provider::SIZE_NORMAL);
+            } catch (\Throwable $e) {
+            }
+        }
+
+        $themingBackground = $this->config->getAppValue('backgroundMime', '', 'theming');
+        if (method_exists($this->theming, 'getBackground') && !($this->theming instanceof ThemingDefaults)) {
+            return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
+        }
+
+        return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
     }
 
     /**
@@ -151,13 +154,13 @@ class ThemeSettingsHelper {
      */
     protected function getBackgroundColor(): string {
         try {
-            if(in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
+            if (in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
                 return '#181818';
             }
-        } catch(Throwable $e) {
+        } catch (Throwable $e) {
         }
 
-        if($this->config->isAppEnabled('breezedark')) {
+        if ($this->config->isAppEnabled('breezedark')) {
             return '#31363b';
         }
 
@@ -168,10 +171,26 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getColorPrimary(): string {
-        if($this->config->isAppEnabled('breezedark')) {
+        if ($this->config->isAppEnabled('breezedark')) {
             return '#3daee9';
         }
 
         return $this->theming->getColorPrimary();
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCacheBuster(): ?string {
+        $version = $this->config->getAppValue('cachebuster', '0', 'theming');
+
+        if (method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
+            try {
+                return $version.'_'.$this->config->getUserValue('userCacheBuster', '0', null, 'theming');
+            } catch (\Throwable $e) {
+            }
+        }
+
+        return $version;
     }
 }

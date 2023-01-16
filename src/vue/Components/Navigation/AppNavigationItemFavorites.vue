@@ -21,7 +21,7 @@
                     :data-folder-id="folder.id"
                     data-drop-type="folder"
             >
-                <folder-icon :size="20" fill-color="var(--color-primary-default)" slot="icon"/>
+                <folder-icon :size="20" fill-color="var(--color-primary)" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item
                     v-for="tag in tags"
