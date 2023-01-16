@@ -6,6 +6,7 @@ namespace {
         public function getLogo() {return '';}
         public function getEntity() {return '';}
         public function getColorPrimary() {return '';}
+        public function isUserThemingDisabled(): bool {return true;}
     }
 
     class OC {
@@ -62,6 +63,7 @@ namespace OCP {
     }
 
     class IURLGenerator {
+        public function linkTo(string $appName, string $file, array $args = []): string {return '';}
         public function getAbsoluteURL(string $url): string {return '';}
         public function imagePath(string $appName, string $file): string {return '';}
         public function linkToRouteAbsolute(string $routeName, array $arguments = []): string {return '';}

@@ -8,11 +8,11 @@
 namespace OCA\Passwords\Helper\Settings;
 
 use OC_Defaults;
-use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use OCA\Passwords\AppInfo\Application;
+use PHPUnit\Framework\MockObject\MockObject;
+use OCA\Passwords\Services\ConfigurationService;
 
 /**
  * Class ThemeSettingsHelperTest
@@ -159,6 +159,8 @@ class ThemeSettingsHelperTest extends TestCase {
      * Test if the default background image is returned correctly
      */
     public function testGetBackgroundImage() {
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+
         $this->urlGenerator->method('imagePath')->with('core', 'app-background.jpg')->willReturn('/core/img/app-background.jpg');
         $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/app-background.jpg')->willReturn('https://cloud.com/core/img/app-background.jpg');
 
@@ -210,8 +212,76 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(true);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+
         $result = $this->themeSettingsHelper->get('background');
         self::assertEquals('https://source.unsplash.com/random/featured/?nature', $result);
+    }
+
+    /**
+     * Test if user image is returned if user has image selected
+     */
+    public function testGetUserBackgroundImage() {
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
+
+        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getUserValue')->willReturnMap(
+            [
+                ['background', '', null, 'theming', 'user-background.jpg'],
+                ['userCacheBuster', '0', null, 'theming', '1']
+            ]
+        );
+
+        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/user-background.jpg', ['v' => '1_1'])->willReturn(
+            'https://clod.com/theming/img/user-background.jpg?v=1_1'
+        );
+
+        $result = $this->themeSettingsHelper->get('background');
+        self::assertEquals('https://clod.com/theming/img/user-background.jpg?v=1_1', $result);
+    }
+
+    /**
+     * Test if user image is returned if user has custom image selected
+     */
+    public function testGetUserCustomBackgroundImage() {
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
+
+        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getUserValue')->willReturnMap(
+            [
+                ['background', '', null, 'theming', 'custom'],
+                ['userCacheBuster', '0', null, 'theming', '1']
+            ]
+        );
+
+        $this->urlGenerator->method('linkToRouteAbsolute')->with('theming.userTheme.getBackground', ['v' => '1_1'])->willReturn(
+            'https://clod.com/theming/img/user-custom-background.jpg?v=1_1'
+        );
+
+        $result = $this->themeSettingsHelper->get('background');
+        self::assertEquals('https://clod.com/theming/img/user-custom-background.jpg?v=1_1', $result);
+    }
+
+    /**
+     * Test if user image is returned if user has custom image selected
+     */
+    public function testGetUserNoBackgroundImage() {
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
+
+        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getUserValue')->willReturnMap(
+            [
+                ['background', '', null, 'theming', ''],
+                ['userCacheBuster', '0', null, 'theming', '1']
+            ]
+        );
+        $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
+
+        $this->urlGenerator->method('imagePath')->with('core', 'app-background.jpg')->willReturn('/core/img/app-background.jpg');
+        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/app-background.jpg')->willReturn('https://cloud.com/core/img/app-background.jpg');
+
+        $result = $this->themeSettingsHelper->get('background');
+        self::assertEquals('https://cloud.com/core/img/app-background.jpg', $result);
     }
 
     /**
@@ -263,6 +333,8 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->urlGenerator->expects($this->never())->method('imagePath');
         $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
 
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+
         $result = $this->themeSettingsHelper->get('app.icon');
         self::assertEquals('https://cloud.com/apps/theming/passwords/app-themed.svg', $result);
     }
@@ -303,6 +375,8 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->urlGenerator->expects($this->never())->method('imagePath');
         $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
 
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+
         $result = $this->themeSettingsHelper->get('folder.icon');
         self::assertEquals('https://cloud.com/apps/theming/filetypes/folder.svg', $result);
     }
@@ -329,6 +403,7 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('getTextColorPrimary')->willReturn('#ffffff');
         $this->themingDefaults->method('getLogo')->willReturn('/core/img/logo.svg');
         $this->themingDefaults->method('getEntity')->willReturn('Nextcloud');
+        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
