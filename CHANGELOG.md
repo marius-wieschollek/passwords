@@ -1,4 +1,11 @@
 ## [Unreleased]
+## 2023.1.2 - Bugfix release
+### Fixed
+- PHP 8.1 warning for PHP 8 users
+- Nextcloud header navigation background color
+- SQL error in sharing job
+
+## 2023.1.1 - Bugfix release
 ### Fixed
 - Search not showing results
 
