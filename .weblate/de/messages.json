@@ -3038,7 +3038,7 @@
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Verschlüsselung mit Schlüssel eines Drittanbieters",
+        "message": "Serverseitige Verschlüsselung durch Drittanbietermodul",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
