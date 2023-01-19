@@ -110,6 +110,10 @@
             display : none !important;
         }
     }
+
+    &.blocking {
+        z-index: 2001;
+    }
 }
 
 #birthday {
