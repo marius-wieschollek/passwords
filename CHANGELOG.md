@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2023.1.3 - Bugfix release
+### Fixed
+- Change encryption password doesn't save
+
 ## 2023.1.2 - Bugfix release
 ### Fixed
 - PHP 8.1 warning for PHP 8 users
