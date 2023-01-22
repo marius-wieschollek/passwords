@@ -32,8 +32,7 @@
         "build:stable": "webpack --mode=production",
         "build:testing": "webpack --mode=production --env features=true",
         "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
-        "handbook": "codeceptjs run --steps",
-        "selenium": "docker run --net=host selenium/standalone-firefox",
+        "cypress": "npx cypress open",
         "rector": "node scripts/generate-nc-shells.mjs && rector --version && rector process --clear-cache",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
@@ -41,6 +40,7 @@
     "devDependencies": {
         "@nextcloud/auth": "^2.0.0",
         "@nextcloud/dialogs": "^3.2.0",
+        "@nextcloud/event-bus": "^3.0.2",
         "@nextcloud/initial-state": "^2.0.0",
         "@nextcloud/l10n": "^1.6.0",
         "@nextcloud/router": "^2.0.1",
@@ -48,14 +48,14 @@
         "@toast-ui/editor": "^3.2.1",
         "blueimp-gallery": "^3.4.0",
         "clean-webpack-plugin": "^1.0.1",
-        "codeceptjs": "^3.3.7",
         "copy-webpack-plugin": "^10.2.4",
         "css-loader": "^6.7.1",
         "css-minimizer-webpack-plugin": "^3.4.1",
         "csv-hero": "^0.0.4",
+        "cypress": "^12.3.0",
+        "cypress-browser-permissions": "^1.1.0",
         "dayjs": "^1.11.7",
         "dompurify": "^2.4.0",
-        "download": "^8.0.0",
         "easyimage": "^3.1.1",
         "es-abstract": "1.20.4",
         "eventemitter3": "^4.0.7",
@@ -97,31 +97,7 @@
         "nextcloud",
         "security"
     ],
-    "prettier": {
-        "parser": "babylon"
-    },
-    "eslintConfig": {
-        "brace-style": [
-            "1tbs",
-            "stroustrup",
-            {
-                "allowSingleLine": true
-            }
-        ],
-        "globals": {
-            "OC": true,
-            "OCA": true,
-            "actor": true,
-            "window": true,
-            "Scenario": true,
-            "oc_appswebroots": true,
-            "__webpack_public_path__": true
-        }
-    },
     "author": "Marius Wieschollek",
     "license": "SEE LICENSE IN LICENSE",
-    "_id": "ncpasswords@2021.12.0",
-    "dependencies": {
-        "@nextcloud/event-bus": "^3.0.2"
-    }
+    "_id": "ncpasswords@2021.12.0"
 }
