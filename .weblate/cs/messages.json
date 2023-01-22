@@ -2966,7 +2966,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Zobrazit QR kód",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3037,7 +3037,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Šifrování pomocí klíče třetí strany",
+        "message": "Šifrování na straně serveru třetí strany",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
