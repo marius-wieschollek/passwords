@@ -23,6 +23,8 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends nodejs
 
 RUN apt-get install -y --no-install-recommends \
+        chromium \
+        chromium-l10n \
         libnss3 \
         libxrandr2 \
         libatk1.0-0 \
@@ -47,6 +49,8 @@ RUN apt-get clean; \
 RUN npm install --global pageres-cli --unsafe-perm
 RUN mkdir -p /var/www/.config
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
+RUN mkdir -p /var/www/.cache/puppeteer
+RUN chown -R "www-data:$(id -gn www-data)" /var/www/.cache/puppeteer
 
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 COPY files/pool.conf /usr/local/etc/php-fpm.d/zz-passwords.conf
@@ -69,6 +73,8 @@ RUN chmod +x /usr/local/bin/entrypoint
 COPY files/setup.sh /usr/local/bin/apache
 COPY files/502.html /var/www/502.html
 RUN chmod +x /usr/local/bin/apache
+
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium
 
 ENTRYPOINT ["/usr/local/bin/entrypoint"]
 CMD ["php-fpm"]
