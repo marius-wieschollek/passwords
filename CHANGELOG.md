@@ -2,6 +2,9 @@
 ## 2023.1.3 - Bugfix release
 ### Fixed
 - Change encryption password doesn't save
+- Security status missing in list view
+- Help section may be misaligned
+- User theme colors not applied in navigation
 
 ## 2023.1.2 - Bugfix release
 ### Fixed
