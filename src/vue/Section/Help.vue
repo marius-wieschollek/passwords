@@ -46,7 +46,7 @@
     import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
-    import API from "@js/Helper/api";
+    import Application from "@js/Init/Application";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -119,7 +119,7 @@
                 return this.$route.params.page !== undefined && this.navigation.length > 0;
             },
             isAuthorized() {
-                return API.isAuthorized;
+                return Application.isAuthorized;
             }
         },
 
