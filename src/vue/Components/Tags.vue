@@ -5,7 +5,7 @@
                :multiple="true"
                :taggable="true"
                :closeOnSelect="false"
-               :options="options"
+               :options="dropdownOptions"
                :loading="loading"
                :placeholder="t('Add Tags...')"
                v-model="model"
@@ -20,19 +20,26 @@
                 {{ option.label }}
             </div>
         </template>
+        <template #option="{label, color}">
+            <div class="passwords-tag-option">
+                <tag-icon :fill-color="color" />
+                {{ label }}
+            </div>
+        </template>
     </nc-select>
 </template>
 
 <script>
-    import Translate from '@vc/Translate';
-    import NcSelect from '@nc/NcSelect';
-    import API from '@js/Helper/api';
-    import Utility from '@js/Classes/Utility';
-    import TagManager from '@js/Manager/TagManager';
+    import Translate       from '@vc/Translate';
+    import NcSelect        from '@nc/NcSelect';
+    import API             from '@js/Helper/api';
+    import Utility         from '@js/Classes/Utility';
+    import TagManager      from '@js/Manager/TagManager';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import TagIcon         from '@icon/Tag';
 
     export default {
-        components: {Translate, NcSelect},
+        components: {TagIcon, Translate, NcSelect},
         props     : {
             noWrap  : {
                 type   : Boolean,
@@ -57,13 +64,33 @@
                 tags           : {},
                 model          : [],
                 loading        : true,
-                fullTagsInValue: this.password === null ? !Array.isArray(this.value):true,
+                fullTagsInValue: this.password === null ? !Array.isArray(this.value) : true,
                 timeout        : null
             };
         },
         computed: {
             internalValue() {
-                return this.password === null ? this.value:this.password.tags;
+                return this.password === null ? this.value : this.password.tags;
+            },
+            dropdownOptions() {
+                let options = [],
+                    usedIds = this.internalValue;
+
+                if(this.fullTagsInValue) {
+                    usedIds = [];
+                    for(let key in this.internalValue) {
+                        if(!this.internalValue.hasOwnProperty(key)) continue;
+                        usedIds.push(this.internalValue[key].id);
+                    }
+                }
+
+                for(let option of this.options) {
+                    if(usedIds.indexOf(option.id) === -1) {
+                        options.push(option);
+                    }
+                }
+
+                return options;
             }
         },
         mounted() {
@@ -123,7 +150,7 @@
                     return 'is-dark';
                 }
 
-                return Utility.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
+                return Utility.getColorLuma(option.color) < 96 ? 'is-dark' : 'is-bright';
             }
         },
 
@@ -141,7 +168,7 @@
             model(value) {
                 let model = [];
                 for(let tag of value) {
-                    model.push(this.fullTagsInValue ? tag:tag.id);
+                    model.push(this.fullTagsInValue ? tag : tag.id);
                 }
 
                 if(JSON.stringify(this.internalValue) !== JSON.stringify(model)) {
@@ -224,6 +251,18 @@ div.passwords-tags-field.select {
 
             &.is-dark {
                 color : #fff
+            }
+        }
+    }
+
+    .vs__dropdown-menu {
+        .vs__dropdown-option {
+            .passwords-tag-option {
+                display : flex;
+
+                .tag-icon {
+                    margin-right : .5rem;
+                }
             }
         }
     }
