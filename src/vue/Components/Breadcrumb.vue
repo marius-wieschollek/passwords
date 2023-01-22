@@ -26,20 +26,20 @@
         />
         <template #actions>
             <nc-actions v-if="showAddNew" :force-menu="true">
-                <nc-action-button close-after-click icon="icon-folder" v-if="newFolder" @click="createFolder">
+                <nc-action-button close-after-click icon="icon-folder" v-if="newFolder" @click="createFolder" class="passwords-folder-create">
                     {{ t('New Folder') }}
                 </nc-action-button>
-                <nc-action-button close-after-click icon="icon-tag" v-if="newTag" @click="createTag">
+                <nc-action-button close-after-click icon="icon-tag" v-if="newTag" @click="createTag" class="passwords-tag-create">
                     {{ t('New Tag') }}
                 </nc-action-button>
-                <nc-action-button close-after-click v-if="newPassword" @click="createPassword">
+                <nc-action-button close-after-click v-if="newPassword" @click="createPassword" class="passwords-password-create">
                     <key-icon slot="icon" :size="16" />
                     {{ t('New Password') }}
                 </nc-action-button>
-                <nc-action-button close-after-click icon="icon-history" v-if="restoreAll" @click="restoreAllEvent">
+                <nc-action-button close-after-click icon="icon-history" v-if="restoreAll" @click="restoreAllEvent" class="passwords-trash-restore">
                     {{ t('Restore All Items') }}
                 </nc-action-button>
-                <nc-action-button close-after-click icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent">
+                <nc-action-button close-after-click icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent" class="passwords-trash-delete">
                     {{ t('Delete All Items') }}
                 </nc-action-button>
             </nc-actions>

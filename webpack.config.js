@@ -67,7 +67,11 @@ module.exports = (env, argv) => {
                 compiler.hooks.done.tap(this.constructor.name, stats => {
                     exec(
                         'docker exec -u www-data passwords-php php ./occ config:app:set passwords dev/app/hash --value='+stats.compilation.hash,
-                         (error, stdout, stderr) => {}
+                         (error, stdout, stderr) => {
+                            if(error) {
+                                console.error(`Could not set app hash: ${error}`);
+                            }
+                         }
                     )
                 });
             }

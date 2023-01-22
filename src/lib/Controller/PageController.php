@@ -20,7 +20,6 @@ use OCA\Passwords\Services\UserSettingsService;
 use OCA\Passwords\Helper\Http\SetupReportHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\UserChallengeService;
-use OCA\Passwords\Helper\Upgrade\UpgradeCheckHelper;
 use OCA\Passwords\Services\DeferredActivationService;
 
 /**
@@ -211,6 +210,9 @@ class PageController extends Controller {
 
         if(!$isSecure) {
             $variables['report'] = $this->setupReportHelper->getHttpsSetupReport();
+        }
+        if($this->config->hasAppValue('dev/app/hash')) {
+            $variables['hash'] = $this->config->getAppValue('dev/app/hash');
         }
 
         return $variables;

@@ -21,27 +21,27 @@
             v-on:closed="closed"
     >
         <template #secondary-actions>
-            <nc-action-button close-after-click @click="actions.edit()">
+            <nc-action-button close-after-click @click="actions.edit()" class="passwords-password-edit">
                 <pencil-icon slot="icon" :size="20"/>
                 {{ t('Edit password') }}
             </nc-action-button>
-            <nc-action-button close-after-click @click="actions.clone()">
+            <nc-action-button close-after-click @click="actions.clone()" class="passwords-password-clone">
                 <content-copy-icon slot="icon" :size="20"/>
                 {{ t('Edit as new') }}
             </nc-action-button>
-            <nc-action-button close-after-click @click="actions.move()">
+            <nc-action-button close-after-click @click="actions.move()" class="passwords-password-move">
                 <folder-move-icon slot="icon" :size="20"/>
                 {{ t('Move') }}
             </nc-action-button>
-            <nc-action-button close-after-click @click="actions.qrcode()">
+            <nc-action-button close-after-click @click="actions.qrcode()" class="passwords-password-qrcode">
                 <qrcode-icon slot="icon" :size="20"/>
                 {{ t('PasswordActionQrcode') }}
             </nc-action-button>
-            <nc-action-button close-after-click @click="actions.print()" v-if="hasPrinting">
+            <nc-action-button close-after-click @click="actions.print()" v-if="hasPrinting" class="passwords-password-print">
                 <printer-icon slot="icon" :size="20"/>
                 {{ t('PasswordActionPrint') }}
             </nc-action-button>
-            <nc-action-button close-after-click @click="deleteAction">
+            <nc-action-button close-after-click @click="deleteAction" class="passwords-password-delete">
                 <trash-can-icon slot="icon" :size="20"/>
                 {{ t('Delete') }}
             </nc-action-button>
