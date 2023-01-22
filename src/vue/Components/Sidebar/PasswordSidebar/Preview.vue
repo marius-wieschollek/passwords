@@ -67,15 +67,15 @@
 
                 if(margin > 0) {
                     if(margin < 500) {
-                        this.imgClass = 's1';
+                        this.imgClass = 'image-loaded s1';
                     } else if(margin < 1000) {
-                        this.imgClass = 's5';
+                        this.imgClass = 'image-loaded s5';
                     } else if(margin < 2500) {
-                        this.imgClass = 's10';
+                        this.imgClass = 'image-loaded s10';
                     } else if(margin < 4000) {
-                        this.imgClass = 's15';
+                        this.imgClass = 'image-loaded s15';
                     } else {
-                        this.imgClass = 's20';
+                        this.imgClass = 'image-loaded s20';
                     }
                     this.style.marginTop = '-' + margin + 'px';
                 }
@@ -86,7 +86,7 @@
             imageLoaded(event) {
                 if(event.target.src === this.image) {
                     this.loading = false;
-                    this.imgClass = '';
+                    this.imgClass = 'image-loaded';
                 }
             },
             loadFavicon() {
