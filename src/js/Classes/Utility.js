@@ -317,4 +317,22 @@ export default class Utility {
 
         return 0.2126 * r + 0.7152 * g + 0.0722 * b;
     }
+
+    static lockApp() {
+        Utility.unlockApp();
+        document.getElementById('content-vue').classList.add('blocking');
+        let el = document.createElement('div');
+        el.setAttribute('id', 'app-blocked');
+        el.classList.add('loading');
+        document.getElementById('content-vue').appendChild(el);
+    }
+
+    static unlockApp() {
+        if(document.getElementById('app-blocked')) {
+            document.getElementById('app-blocked').remove();
+        }
+        if(document.getElementById('content-vue')) {
+            document.getElementById('content-vue').classList.remove('blocking');
+        }
+    }
 }

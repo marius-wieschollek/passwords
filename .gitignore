@@ -19,3 +19,4 @@ rector-shells.php
 /.phpunit.result.cache
 /src/bundle-report.html
 /src/report-stats.json
+/cypress/screenshots/

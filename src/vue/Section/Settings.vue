@@ -408,7 +408,6 @@
                 </section>
             </div>
         </div>
-        <div id="settings-reset" class="loading" v-if="locked"></div>
     </div>
 </template>
 
@@ -425,7 +424,8 @@
     import RecoverHiddenItemsAction from "@js/Actions/RecoverHiddenItemsAction";
     import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch';
     import NcButton from '@nc/NcButton';
-    import HelpCircleIcon from "@icon/HelpCircle";
+    import HelpCircleIcon from '@icon/HelpCircle';
+    import Utility from '@js/Classes/Utility';
 
     export default {
         components: {
@@ -563,8 +563,12 @@
                 },
                 deep: true
             },
-            locked() {
-                document.getElementById('app').classList.toggle('blocking');
+            locked(value) {
+                if(value) {
+                    Utility.lockApp()
+                } else {
+                    Utility.unlockApp()
+                }
             },
             advanced(value) {
                 SettingsService.set('client.settings.advanced', value);
@@ -692,17 +696,5 @@
             padding : 10px;
         }
     }
-}
-
-#settings-reset {
-    position         : fixed;
-    top              : 0;
-    right            : 0;
-    bottom           : 0;
-    left             : 0;
-    background-color : transparentize($color-black, 0.9);
-    cursor           : wait;
-    z-index          : 2000;
-    backdrop-filter  : blur(3px);
 }
 </style>

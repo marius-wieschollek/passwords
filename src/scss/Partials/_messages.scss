@@ -29,3 +29,15 @@ form.passwords-form[data-form="item-recovery-form"] {
         grid-template-columns: 4fr 1fr;
     }
 }
+
+body #app-blocked {
+    position         : fixed;
+    top              : 0;
+    right            : 0;
+    bottom           : 0;
+    left             : 0;
+    background-color : transparentize($color-black, 0.9);
+    cursor           : wait;
+    z-index          : 2000;
+    backdrop-filter  : blur(3px);
+}

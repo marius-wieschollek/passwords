@@ -19,8 +19,10 @@
             </li>
         </ul>
         <slot name="middle"/>
-        <router-link :to="securityRoute" tag="i" :class="securityCheck" class="fa fa-shield security duplicate" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'"/>
-        <i :class="securityCheck" class="fa fa-shield security" :title="securityTitle" v-else></i>
+        <router-link :to="securityRoute" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'" @click.prevent.stop @dblclick.prevent.stop>
+            <shield-half-full-icon :size="20" fill-color="var(--color-warning)"/>
+        </router-link>
+        <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
         <div class="more" @click="toggleMenu($event)">
             <i class="fa fa-ellipsis-h"></i>
@@ -101,8 +103,11 @@
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import {subscribe, unsubscribe} from '@nextcloud/event-bus';
     import QrcodeIcon from "@icon/Qrcode";
+    import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
+
     export default {
         components: {
+            ShieldHalfFullIcon,
             QrcodeIcon,
             StarOutlineIcon,
             StarIcon,
@@ -135,16 +140,16 @@
         },
 
         computed: {
-            securityCheck() {
+            securityColor() {
                 switch(this.password.status) {
                     case 0:
-                        return 'ok';
+                        return 'var(--color-success)';
                     case 1:
-                        return 'warn';
+                        return 'var(--color-warning)';
                     case 2:
-                        return 'fail';
+                        return 'var(--color-error)';
                     case 3:
-                        return 'unknown';
+                        return 'var(--color-main-text)';
                 }
             },
             securityTitle() {
@@ -467,6 +472,12 @@
                 }
             }
 
+            .shield-half-full-icon {
+                margin      : 1rem;
+                flex-grow   : 0;
+                flex-shrink : 0;
+            }
+
             .more,
             .icon,
             .action-button {
@@ -575,7 +586,7 @@
             }
 
             &.search-hidden {
-                display: none;
+                display : none;
             }
 
             @media(max-width : $width-extra-small) {

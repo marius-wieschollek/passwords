@@ -63,6 +63,10 @@ class Application {
         this._loginRequired = value;
     }
 
+    get isAuthorized() {
+        return API.isAuthorized || !this._loginRequired
+    }
+
     get isMobile() {
         return window.innerWidth <= 768;
     }

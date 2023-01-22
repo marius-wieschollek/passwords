@@ -1,6 +1,7 @@
 let webpack                    = require('webpack'),
     config                     = require('./package.json'),
     UglifyJS                   = require('uglify-js'),
+    {exec}                     = require("child_process"),
     CopyWebpackPlugin          = require('copy-webpack-plugin'),
     CleanWebpackPlugin         = require('clean-webpack-plugin'),
     VueLoaderPlugin            = require('vue-loader/lib/plugin'),
@@ -26,7 +27,7 @@ module.exports = (env, argv) => {
                     APP_VERSION        : `"${config.version}"`,
                     APP_MAIN_VERSION   : `"${config.version.substr(0, config.version.indexOf('.'))}"`,
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
-                    APP_ENVIRONMENT    : production ? '"production"' : '"development"',
+                    APP_ENVIRONMENT    : production ? '"production"':'"development"',
                     APP_NIGHTLY        : !!(env && env.features === 'true'),
                     appName            : 'passwords',
                     appVersion         : `"${config.version}"`
@@ -60,16 +61,34 @@ module.exports = (env, argv) => {
             )
         );
     }
+    if(!production || !!(env && env.debuginfo === 'true')) {
+        class MetaInfoPlugin {
+            apply(compiler) {
+                compiler.hooks.done.tap(this.constructor.name, stats => {
+                    exec(
+                        'docker exec -u www-data passwords-php php ./occ config:app:set passwords dev/app/hash --value='+stats.compilation.hash,
+                         (error, stdout, stderr) => {
+                            if(error) {
+                                console.error(`Could not set app hash: ${error}`);
+                            }
+                         }
+                    )
+                });
+            }
+        }
+
+        plugins.push(new MetaInfoPlugin());
+    }
 
     return {
-        mode        : production ? 'production' : 'development',
+        mode        : production ? 'production':'development',
         entry       : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`
         },
         output      : {
             path         : `${__dirname}/src/`,
-            filename     : 'js/Static/[name].js',
+            filename     : (!production || !!(env && env.debuginfo === 'true')) ? `js/Static/[name].[fullhash].js`:`js/Static/[name].js`,
             chunkFilename: 'js/Static/[name].[chunkhash].js'
         },
         optimization: {
@@ -137,7 +156,7 @@ module.exports = (env, argv) => {
                             options: {
                                 sassOptions: {
                                     sourceMap  : !production,
-                                    outputStyle: production ? 'compressed' : null
+                                    outputStyle: production ? 'compressed':null
                                 }
                             }
                         },

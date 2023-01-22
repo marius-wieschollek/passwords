@@ -110,6 +110,14 @@
             display : none !important;
         }
     }
+
+    &.blocking {
+        z-index: 2001;
+
+        #app-content-vue {
+            z-index: 1800;
+        }
+    }
 }
 
 #birthday {

@@ -25,7 +25,7 @@
                     <translate tag="option" value="firefox" say="Firefox Lockwise CSV"/>
                     <translate tag="option" value="csv" say="Other / Custom CSV"/>
                 </select>
-                <custom-csv-help v-on:trigger="source = 'csv'" :current="source" />
+                <custom-csv-help v-on:trigger="source = 'csv'" :current="source"/>
             </div>
         </div>
 
@@ -45,42 +45,47 @@
 
                 <div v-if="source === 'csv'">
                     <translate tag="h3" say="CSV Options"/>
-                    <translate tag="label" for="passwords-import-csv-line" say="Line Break"/>
-                    <select id="passwords-import-csv-line" @change="setNewLine($event)" :disabled="importing">
-                        <translate tag="option" value="auto" say="Detect"/>
-                        <translate tag="option" value="rn" say="Windows (CRLF, \r\n)"/>
-                        <translate tag="option" value="n" say="Linux (LF, \n)"/>
-                        <translate tag="option" value="r" say="Mac (CR, \r)"/>
-                    </select>
-                    <br>
-                    <translate tag="label" for="passwords-import-csv-delimiter" say="Field Delimiter"/>
-                    <select id="passwords-import-csv-delimiter" v-model="csv.delimiter" :disabled="importing">
-                        <translate tag="option" value="auto" say="Detect"/>
-                        <translate tag="option" value="," say="Comma"/>
-                        <translate tag="option" value=";" say="Semicolon"/>
-                        <translate tag="option" value=" " say="Space"/>
-                        <translate tag="option" value="	" say="Tab"/>
-                    </select>
-                    <br>
-                    <translate tag="label" for="passwords-import-csv-quote" say="Quote Character"/>
-                    <select id="passwords-import-csv-quote" v-model="csv.quotes" :disabled="importing">
-                        <translate tag="option" value='"' say="Quote"/>
-                        <translate tag="option" value="'" say="Single Quote"/>
-                    </select>
-                    <br>
-                    <translate tag="label" for="passwords-import-csv-escape" say="Escape Character"/>
-                    <select id="passwords-import-csv-escape" v-model="csv.escape" :disabled="importing">
-                        <translate tag="option" value='"' say="Quote"/>
-                        <translate tag="option" value="'" say="Single Quote"/>
-                        <translate tag="option" value="\" say="Backslash"/>
-                    </select>
-                    <br>
-                    <input type="checkbox"
-                           id="passwords-import-csv-badQuotes"
-                           v-model="csv.badQuotes"
-                           :disabled="importing"/>
-                    <translate tag="label" for="passwords-import-csv-badQuotes" say="Detect unescaped quotes"/>
-                    <br><br>
+                    <div class="passwords-import-option-row">
+                        <translate tag="label" for="passwords-import-csv-line" say="Line Break"/>
+                        <select id="passwords-import-csv-line" @change="setNewLine($event)" :disabled="importing">
+                            <translate tag="option" value="auto" say="Detect"/>
+                            <translate tag="option" value="rn" say="Windows (CRLF, \r\n)"/>
+                            <translate tag="option" value="n" say="Linux (LF, \n)"/>
+                            <translate tag="option" value="r" say="Mac (CR, \r)"/>
+                        </select>
+                    </div>
+                    <div class="passwords-import-option-row">
+                        <translate tag="label" for="passwords-import-csv-delimiter" say="Field Delimiter"/>
+                        <select id="passwords-import-csv-delimiter" v-model="csv.delimiter" :disabled="importing">
+                            <translate tag="option" value="auto" say="Detect"/>
+                            <translate tag="option" value="," say="Comma"/>
+                            <translate tag="option" value=";" say="Semicolon"/>
+                            <translate tag="option" value=" " say="Space"/>
+                            <translate tag="option" value="	" say="Tab"/>
+                        </select>
+                    </div>
+                    <div class="passwords-import-option-row">
+                        <translate tag="label" for="passwords-import-csv-quote" say="Quote Character"/>
+                        <select id="passwords-import-csv-quote" v-model="csv.quotes" :disabled="importing">
+                            <translate tag="option" value='"' say="Quote"/>
+                            <translate tag="option" value="'" say="Single Quote"/>
+                        </select>
+                    </div>
+                    <div class="passwords-import-option-row">
+                        <translate tag="label" for="passwords-import-csv-escape" say="Escape Character"/>
+                        <select id="passwords-import-csv-escape" v-model="csv.escape" :disabled="importing">
+                            <translate tag="option" value='"' say="Quote"/>
+                            <translate tag="option" value="'" say="Single Quote"/>
+                            <translate tag="option" value="\" say="Backslash"/>
+                        </select>
+                    </div>
+                    <div class="passwords-import-option-row">
+                        <input type="checkbox"
+                               id="passwords-import-csv-badQuotes"
+                               v-model="csv.badQuotes"
+                               :disabled="importing"/>
+                        <translate tag="label" for="passwords-import-csv-badQuotes" say="Detect unescaped quotes"/>
+                    </div>
                 </div>
                 <input type="file"
                        :accept="mime"
@@ -136,28 +141,31 @@
                         </select>
                         <br>
                         <br>
-                        <input type="checkbox"
-                               id="passwords-import-csv-skip"
-                               v-model="options.firstLine"
-                               :disabled="importing"/>
-                        <translate tag="label" for="passwords-import-csv-skip" say="Skip first line"/>
-                        <br>
-                        <input type="checkbox"
-                               id="passwords-import-csv-repair"
-                               v-model="options.repair"
-                               :disabled="importing"/>
-                        <translate tag="label" for="passwords-import-csv-repair" say="Interpolate missing fields"/>
-                        <br>
-                        <input type="checkbox"
-                               id="passwords-import-csv-shared"
-                               v-model="options.skipShared"
-                               :disabled="importing"
-                               v-if="options.mode !== '4' && options.db === 'passwords'"/>
-                        <translate tag="label"
-                                   for="passwords-import-csv-shared"
-                                   say="Don't edit passwords shared with me"
+                        <div class="passwords-import-option-row">
+                            <input type="checkbox"
+                                   id="passwords-import-csv-skip"
+                                   v-model="options.firstLine"
+                                   :disabled="importing"/>
+                            <translate tag="label" for="passwords-import-csv-skip" say="Skip first line"/>
+                        </div>
+                        <div class="passwords-import-option-row">
+                            <input type="checkbox"
+                                   id="passwords-import-csv-repair"
+                                   v-model="options.repair"
+                                   :disabled="importing"/>
+                            <translate tag="label" for="passwords-import-csv-repair" say="Interpolate missing fields"/>
+                        </div>
+                        <div class="passwords-import-option-row">
+                            <input type="checkbox"
+                                   id="passwords-import-csv-shared"
+                                   v-model="options.skipShared"
+                                   :disabled="importing"
                                    v-if="options.mode !== '4' && options.db === 'passwords'"/>
-                        <br>
+                            <translate tag="label"
+                                       for="passwords-import-csv-shared"
+                                       say="Don't edit passwords shared with me"
+                                       v-if="options.mode !== '4' && options.db === 'passwords'"/>
+                        </div>
                         <br>
 
                         <translate tag="h3" say="CSV Field Mapping"/>
@@ -443,7 +451,7 @@
                     mapping = {n: '\n', r: '\r', rn: '\r\n'};
 
                 if(!mapping.hasOwnProperty(value)) {
-                    this.csv.newLine = 'auto'
+                    this.csv.newLine = 'auto';
                 } else {
                     this.csv.newLine = mapping[value];
                 }
@@ -585,100 +593,108 @@
 </script>
 
 <style lang="scss">
-    .import-container {
-        .step-2,
-        .step-3 {
-            .step-content {
-                .file.warning {
-                    margin: 3px 0 !important;
-                }
-
-                label {
-                    margin-right: 5px;
-                    min-width: 105px;
-                    display: inline-block;
-                }
-
-                label[for=passwords-import-csv-preview-line] {
-                    padding-left: 5px;
-                }
-
-                .no-options {
-                    margin: 10px;
-                    color: $color-grey-darker;
-                }
-            }
-        }
-
-        .import-progress {
-            position: relative;
-
-            progress {
-                width: 100%;
-                height: 34px;
-                border-radius: var(--border-radius);
-                border: none;
-                -webkit-appearance: none;
-                background-color: $color-grey-lighter;
-
-                &::-moz-progress-bar {
-                    background-color: var(--color-primary);
-                    border-radius: var(--border-radius);
-                    transition: background-color 0.25s ease-in-out;
-                }
-
-                &::-webkit-progress-value {
-                    background-color: var(--color-primary);
-                    border-radius: var(--border-radius);
-                    transition: background-color 0.25s ease-in-out;
-                }
-
-                &.success {
-                    &::-moz-progress-bar {
-                        background-color: var(--color-success);
-                    }
-
-                    &::-webkit-progress-value {
-                        background-color: var(--color-success);
-                    }
-                }
-
-                &.warn {
-                    &::-moz-progress-bar {
-                        background-color: var(--color-warning);
-                    }
-
-                    &::-webkit-progress-value {
-                        background-color: var(--color-warning);
-                    }
-                }
-
-                &.error {
-                    &::-moz-progress-bar {
-                        background-color: var(--color-error)
-                    }
-
-                    &::-webkit-progress-value {
-                        background-color: var(--color-error)
-                    }
-                }
+.import-container {
+    .step-2,
+    .step-3 {
+        .step-content {
+            .file.warning {
+                margin : 3px 0 !important;
             }
 
-            span {
-                position: absolute;
-                left: 5px;
-                top: 0;
-                line-height: 32px;
-                font-size: 1.2em;
-                color: $color-black-light;
+            label {
+                margin-right : 5px;
+                min-width    : 105px;
+                display      : inline-block;
             }
-        }
 
-        @media(max-width: $width-extra-small) {
-            .csv-mapping-field .value {
-                padding: 1em 0 .25em;
-                font-weight: bold;
+            label[for=passwords-import-csv-preview-line] {
+                padding-left : 5px;
+            }
+
+            .no-options {
+                margin : 10px;
+                color  : $color-grey-darker;
+            }
+
+            .passwords-import-option-row {
+                min-height: 36px;
+
+                input[type="checkbox"] {
+                    margin: 0 3px 0 0 !important;
+                }
             }
         }
     }
+
+    .import-progress {
+        position : relative;
+
+        progress {
+            width              : 100%;
+            height             : 34px;
+            border-radius      : var(--border-radius);
+            border             : none;
+            -webkit-appearance : none;
+            background-color   : $color-grey-lighter;
+
+            &::-moz-progress-bar {
+                background-color : var(--color-primary);
+                border-radius    : var(--border-radius);
+                transition       : background-color 0.25s ease-in-out;
+            }
+
+            &::-webkit-progress-value {
+                background-color : var(--color-primary);
+                border-radius    : var(--border-radius);
+                transition       : background-color 0.25s ease-in-out;
+            }
+
+            &.success {
+                &::-moz-progress-bar {
+                    background-color : var(--color-success);
+                }
+
+                &::-webkit-progress-value {
+                    background-color : var(--color-success);
+                }
+            }
+
+            &.warn {
+                &::-moz-progress-bar {
+                    background-color : var(--color-warning);
+                }
+
+                &::-webkit-progress-value {
+                    background-color : var(--color-warning);
+                }
+            }
+
+            &.error {
+                &::-moz-progress-bar {
+                    background-color : var(--color-error)
+                }
+
+                &::-webkit-progress-value {
+                    background-color : var(--color-error)
+                }
+            }
+        }
+
+        span {
+            position    : absolute;
+            left        : 5px;
+            top         : 0;
+            line-height : 32px;
+            font-size   : 1.2em;
+            color       : $color-black-light;
+        }
+    }
+
+    @media(max-width : $width-extra-small) {
+        .csv-mapping-field .value {
+            padding     : 1em 0 .25em;
+            font-weight : bold;
+        }
+    }
+}
 </style>
