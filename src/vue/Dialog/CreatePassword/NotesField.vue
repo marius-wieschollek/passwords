@@ -246,6 +246,17 @@
                 .placeholder {
                     color : var(--color-placeholder-dark);
                 }
+
+                &.toastui-editor-md-code,
+                &.toastui-editor-md-code-block,
+                &.toastui-editor-md-code-block-line-background {
+                    background-color : var(--color-background-dark);
+                    color            : var(--color-text-lighter);
+
+                    &.toastui-editor-md-marked-text {
+                        color : var(--color-text-lighter);
+                    }
+                }
             }
 
             .toastui-editor-contents {
@@ -265,6 +276,14 @@
                 h1, h2 {
                     border-bottom : none;
                     color         : var(--color-primary-text);
+                }
+
+                pre,
+                code {
+                    font-family      : var(--pw-mono-font-face);
+                    background-color : var(--color-background-dark);
+                    color            : var(--color-text-lighter);
+                    border-radius    : var(--border-radius);
                 }
             }
         }

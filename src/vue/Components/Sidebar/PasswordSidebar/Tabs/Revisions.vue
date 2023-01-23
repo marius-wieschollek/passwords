@@ -1,7 +1,7 @@
 <template>
     <ul class="revision-list">
         <li class="revision" v-for="revision in getRevisions" :key="revision.id" @click="viewAction(revision)" :title="getRevisionLabel(revision)">
-            <favicon class="icon" :domain="revision.website" />
+            <favicon class="icon" :domain="revision.website"/>
             <span class="label">{{ revision.label }}</span>
             <span class="time">{{ getDateTime(revision.created) }}</span>
             <translate class="restore"
@@ -42,7 +42,7 @@
             restoreAction(revision, $event) {
                 $event.stopPropagation();
                 PasswordManager.restoreRevision(this.password, revision)
-                    .catch(console.error);
+                               .catch(console.error);
             },
             viewAction(revision) {
                 PasswordManager.viewRevision(this.password, revision);
@@ -58,57 +58,57 @@
 </script>
 
 <style lang="scss">
-    .revision-list {
-        .revision {
-            position              : relative;
-            padding               : 5px;
-            font-size             : 1.1em;
-            cursor                : pointer;
-            border-bottom         : 1px solid var(--color-border);
-            display               : grid;
-            grid-template         : "icon label restore" "icon time restore";
-            grid-template-columns : 32px auto 1rem;
-            grid-column-gap       : 5px;
-            grid-row-gap          : 3px;
+.revision-list {
+    .revision {
+        position              : relative;
+        padding               : 5px;
+        font-size             : 1.1em;
+        cursor                : pointer;
+        border-bottom         : 1px solid var(--color-border);
+        display               : grid;
+        grid-template         : "icon label restore" "icon time restore";
+        grid-template-columns : 32px auto 1rem;
+        grid-column-gap       : 5px;
+        grid-row-gap          : 3px;
 
-            &:last-child {
-                border-bottom : none;
-            }
+        &:last-child {
+            border-bottom : none;
+        }
 
-            span {
-                cursor : pointer;
-            }
+        span {
+            cursor : pointer;
+        }
 
-            .time {
-                color       : var(--color-text-maxcontrast);
-                font-size   : 0.9em;
-                font-style  : italic;
-                line-height : 0.9em;
-                grid-area   : time;
-            }
+        .time {
+            color       : var(--color-text-maxcontrast);
+            font-size   : 0.9em;
+            font-style  : italic;
+            line-height : 0.9em;
+            grid-area   : time;
+        }
 
-            .label {
-                grid-area : label;
-            }
+        .label {
+            grid-area : label;
+        }
 
-            .icon {
-                grid-area     : icon;
-                border-radius : var(--border-radius);
-                align-self    : center;
-                width         : 32px;
-                height        : 32px;
-            }
+        .icon {
+            grid-area     : icon;
+            border-radius : var(--border-radius);
+            align-self    : center;
+            width         : 32px;
+            height        : 32px;
+        }
 
-            .restore {
-                grid-area  : restore;
-                align-self : center;
-                font-size  : 1rem;
-                text-align : right;
-            }
+        .restore {
+            grid-area  : restore;
+            align-self : center;
+            font-size  : 1rem;
+            text-align : right;
+        }
 
-            &:hover {
-                background-color : var(--color-background-dark);
-            }
+        &:hover {
+            background-color : var(--color-background-dark);
         }
     }
+}
 </style>

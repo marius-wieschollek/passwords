@@ -236,16 +236,16 @@
 
 <style lang="scss">
 #app-content .help {
-    padding    : 0 10px 10px;
+    padding    : 0 0 10px;
     position   : relative;
     min-height : 100%;
 
     &.global {
-        position          : fixed;
-        top               : var(--header-height);
-        left              : 0;
-        bottom            : 0;
-        right             : 0;
+        position : fixed;
+        top      : var(--header-height);
+        left     : 0;
+        bottom   : 0;
+        right    : 0;
     }
 
     #controls {

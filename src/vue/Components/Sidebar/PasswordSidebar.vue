@@ -216,11 +216,12 @@
             border-color : transparent;
 
             &:focus,
-            &:active, {
+            &:active {
                 border-color : var(--color-border-dark);
             }
 
-            &:hover {
+            &:hover,
+            &.vs--open {
                 border-color : var(--color-primary-element);
             }
         }

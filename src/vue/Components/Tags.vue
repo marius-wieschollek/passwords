@@ -22,7 +22,7 @@
         </template>
         <template #option="{label, color}">
             <div class="passwords-tag-option">
-                <tag-icon :fill-color="color" />
+                <tag-icon :fill-color="color"/>
                 {{ label }}
             </div>
         </template>
@@ -30,13 +30,13 @@
 </template>
 
 <script>
-    import Translate       from '@vc/Translate';
-    import NcSelect        from '@nc/NcSelect';
-    import API             from '@js/Helper/api';
-    import Utility         from '@js/Classes/Utility';
-    import TagManager      from '@js/Manager/TagManager';
+    import Translate from '@vc/Translate';
+    import NcSelect from '@nc/NcSelect';
+    import API from '@js/Helper/api';
+    import Utility from '@js/Classes/Utility';
+    import TagManager from '@js/Manager/TagManager';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import TagIcon         from '@icon/Tag';
+    import TagIcon from '@icon/Tag';
 
     export default {
         components: {TagIcon, Translate, NcSelect},
@@ -64,13 +64,13 @@
                 tags           : {},
                 model          : [],
                 loading        : true,
-                fullTagsInValue: this.password === null ? !Array.isArray(this.value) : true,
+                fullTagsInValue: this.password === null ? !Array.isArray(this.value):true,
                 timeout        : null
             };
         },
         computed: {
             internalValue() {
-                return this.password === null ? this.value : this.password.tags;
+                return this.password === null ? this.value:this.password.tags;
             },
             dropdownOptions() {
                 let options = [],
@@ -150,7 +150,7 @@
                     return 'is-dark';
                 }
 
-                return Utility.getColorLuma(option.color) < 96 ? 'is-dark' : 'is-bright';
+                return Utility.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
             }
         },
 
@@ -168,7 +168,7 @@
             model(value) {
                 let model = [];
                 for(let tag of value) {
-                    model.push(this.fullTagsInValue ? tag : tag.id);
+                    model.push(this.fullTagsInValue ? tag:tag.id);
                 }
 
                 if(JSON.stringify(this.internalValue) !== JSON.stringify(model)) {
@@ -195,7 +195,7 @@
 
 <style lang="scss">
 div.passwords-tags-field.select {
-    border        : 2px solid var(--color-border-dark);
+    border        : 2px solid var(--color-border-maxcontrast);
     margin        : 3px 3px 3px 0;
     border-radius : var(--border-radius-large);
     cursor        : pointer;
@@ -207,12 +207,21 @@ div.passwords-tags-field.select {
         height : 36px;
     }
 
-    &:hover {
+    &:focus,
+    &:active {
+        border-color : var(--color-border-dark);
+    }
+
+    &:hover,
+    &.vs--open {
         border-color : var(--color-primary-element);
     }
 
     .vs__dropdown-toggle {
-        padding : 0;
+        padding          : 0;
+        background-color : var(--color-main-background);
+        border           : none;
+        border-radius    : calc(var(--border-radius) + 4px);
     }
 
     input.vs__search {
@@ -244,6 +253,7 @@ div.passwords-tags-field.select {
             max-height  : 28px;
             margin      : 2px 2px 0;
             white-space : nowrap;
+            border      : none;
 
             &.is-bright {
                 color : #000
@@ -254,16 +264,25 @@ div.passwords-tags-field.select {
             }
         }
     }
+}
 
-    .vs__dropdown-menu {
-        .vs__dropdown-option {
-            .passwords-tag-option {
-                display : flex;
+.vs__dropdown-menu {
+    background-color : var(--color-main-background);
 
-                .tag-icon {
-                    margin-right : .5rem;
-                }
+    .vs__dropdown-option {
+        .passwords-tag-option {
+            display : flex;
+            color   : var(--color-main-text);
+            padding : .5rem 0;
+
+            .tag-icon {
+                margin-right : .5rem;
             }
+        }
+
+        &:hover,
+        &.vs__dropdown-option--highlight {
+            background-color : var(--color-background-hover);
         }
     }
 }
