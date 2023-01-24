@@ -213,9 +213,21 @@ abstract class AbstractMapper extends QBMapper {
      * @return int
      */
     public function count(): int {
-        $query = $this->getStatement();
-        $query->selectAlias($query->func()->count('id'), 'count');
-        return $query->executeQuery()->fetch()['count'] ?? 0;
+        $qb = $this->db->getQueryBuilder();
+
+        $qb->selectAlias($qb->func()->count('id'), 'count')
+           ->from(static::TABLE_NAME)
+           ->where(
+               $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
+           );
+
+        if($this->userId !== null) {
+            $qb->andWhere(
+                $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
+            );
+        }
+
+        return $qb->executeQuery()->fetch()['count'] ?? 0;
     }
 
     /**
