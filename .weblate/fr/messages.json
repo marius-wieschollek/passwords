@@ -1709,7 +1709,7 @@
         "message": "Le fichier d'importation est vide"
     },
     "backups-000125": {
-        "message": "Logins"
+        "message": "Identifiants"
     },
     "backups-000127": {
         "message": "Cartes de crédit"
@@ -1733,7 +1733,7 @@
         "message": "Divers"
     },
     "backups-000138": {
-        "message": "Le type de \"$FIELD$\" dans \"$LABEL$\" est inconnu et ne peut être importé.",
+        "message": "Le type de \"$FIELD$\" dans \"$LABEL$\" est inconnu et ne peut pas être importé.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -1772,7 +1772,7 @@
         "message": "Veuillez cliquer sur le lien et suivre notre tutoriel facile pour héberger vous-même Besticon."
     },
     "backend-000492": {
-        "message": "$STR_1$ J'ai essayé de me connecter à votre compte sur $STR_1$.",
+        "message": "$STR_1$ a essayé de se connecter à votre compte sur $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1786,7 +1786,7 @@
         "message": "Comme vous utilisez un mot de passe principal, cela ne signifie pas que l'accès à vos données a été accordé."
     },
     "backend-000497": {
-        "message": "Aidez-nous à améliorer les mots de passe"
+        "message": "Aidez-nous à améliorer Mots de passe"
     },
     "backend-000498": {
         "message": "Vous pouvez nous aider à améliorer l'application Passwords en participant à notre enquête sur les serveurs."
@@ -1807,22 +1807,22 @@
         "message": "Participation à l'enquête sur les serveurs"
     },
     "backend-000504": {
-        "message": "Base"
+        "message": "Basic"
     },
     "backend-000505": {
-        "message": "Full"
+        "message": "Complet"
     },
     "backend-000506": {
         "message": "Non défini"
     },
     "backend-000507": {
-        "message": "Veuillez envisager d'héberger vous-même votre api favicon."
+        "message": "Veuillez envisager d'héberger vous-même votre API favicon."
     },
     "backend-000508": {
-        "message": "Votre Nextcloud utilise nos instances partagées de Besticon pour récupérer les icônes des sites web."
+        "message": "Votre Nextcloud utilise nos instances Besticon partagées pour récupérer les icônes des sites web."
     },
     "backend-000517": {
-        "message": "Cela pourrait indiquer que quelqu'un essaie de s'introduire dans votre compte."
+        "message": "Cela pourrait indiquer qu'une personne essaie de s'introduire dans votre compte."
     },
     "frontend-000345": {
         "message": "Créé par"
@@ -1884,7 +1884,7 @@
         "message": "N'essayez pas de nouveau"
     },
     "apps-000014": {
-        "message": "Connecter quelque chose d'autre"
+        "message": "Connecter un autre client"
     },
     "apps-000015": {
         "message": "Essayez à nouveau"
@@ -1938,7 +1938,7 @@
         "message": "Examinez le rapport HTTPS ci-dessous pour déboguer le problème."
     },
     "frontend-000594": {
-        "message": "Déplacements"
+        "message": "Déplacer"
     },
     "tutorial-000743": {
         "message": "il s'agit de doublons"
@@ -1962,7 +1962,7 @@
         "message": "essayez l'importation CSV générique"
     },
     "backups-000038": {
-        "message": "Pas d'importation pour votre CSV ?"
+        "message": "Pas d'import pour votre fichier CSV ?"
     },
     "backups-000045": {
         "message": "Champs personnalisés"
@@ -1971,10 +1971,10 @@
         "message": "Saut de ligne"
     },
     "backups-000099": {
-        "message": "(sans valeur)"
+        "message": "(pas de valeur)"
     },
     "backend-000493": {
-        "message": "$STR_1$ connecté à votre compte sur $STR_1$.",
+        "message": "$STR_1$ s'est connecté à votre compte sur $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1985,13 +1985,13 @@
         }
     },
     "backend-000509": {
-        "message": "Ces instances sont destinées aux petites installations Nextcloud avec un trafic très faible."
+        "message": "Ces instances sont destinées aux petites installations Nextcloud avec un très faible trafic."
     },
     "frontend-000329": {
         "message": "La session a expiré"
     },
     "frontend-000330": {
-        "message": "Token de session API expiré"
+        "message": "Jeton de session API expiré"
     },
     "frontend-000346": {
         "message": "Vous vous connectez en tant que $USER$",
@@ -2017,7 +2017,7 @@
         "message": "Erreur inconnue"
     },
     "frontend-000352": {
-        "message": "La requête du jeton a échoué"
+        "message": "La demande de jeton a échoué"
     },
     "frontend-000353": {
         "message": "Maintenance du système"
@@ -2066,13 +2066,13 @@
         "message": "Vous avez peut-être demandé trop de jetons. Veuillez réessayer plus tard."
     },
     "frontend-000374": {
-        "message": "Le cryptage de bout en bout sera désactivé pour ce mot de passe si vous le partagez."
+        "message": "Le chiffrage de bout en bout sera désactivé pour ce mot de passe si vous le partagez."
     },
     "frontend-000375": {
         "message": "Le jeton de session n'est plus valide. L'application va maintenant se recharger."
     },
     "frontend-000376": {
-        "message": "Aujourd'hui en 2018, la première version de mots de passe a été publiée. Nous vous remercions d'avoir utilisé l'application."
+        "message": "Aujourd'hui, en 2018, la première version de Mots de passe a été publiée. Nous vous remercions d'avoir utilisé l'application."
     },
     "frontend-Folder": {
         "message": "Dossier"
@@ -2088,7 +2088,7 @@
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "backend-000383": {
-        "message": "Il ne s'agit PAS d'un bogue. Visitez notre site $STR_1$ si vous avez besoin d'aide.",
+        "message": "Il ne s'agit PAS d'un bogue. Visitez notre $STR_1$ si vous avez besoin d'aide.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2096,7 +2096,7 @@
         }
     },
     "backend-000385": {
-        "message": "Lisez ce site $STR_1$ pour configurer votre serveur afin d'utiliser HTTPS.",
+        "message": "Lisez ceci $STR_1$ pour configurer votre serveur afin d'utiliser HTTPS.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2123,10 +2123,10 @@
         "message": "La configuration de votre service de prévisualisation n'est pas valide"
     },
     "backend-000513": {
-        "message": "Le service favicon que vous avez choisi nécessite une clé d'api ou un point de terminaison, mais aucune n'est fournie."
+        "message": "Le service favicon que vous avez choisi nécessite une clé d'API ou un point de terminaison, mais aucun n'est fourni."
     },
     "backend-000514": {
-        "message": "Le service de prévisualisation que vous avez choisi nécessite une clé API ou un point de terminaison, mais aucune n'est fournie."
+        "message": "Le service de prévisualisation que vous avez choisi nécessite une clé d'API ou un point de terminaison, mais aucun n'est fourni."
     },
     "backend-000515": {
         "message": "Ouvrez les paramètres d'administration pour mettre à jour la configuration ou choisir un autre service."
@@ -2146,22 +2146,22 @@
         "message": "De plus, l'authentification API basée sur un mot de passe a été désactivée."
     },
     "backend-000520": {
-        "message": "Si vous voulez continuer à utiliser ce client, vous devez créer un nouveau jeton pour lui."
+        "message": "Si vous voulez continuer d'utiliser ce client, vous devez créer un nouveau jeton pour celui-ci."
     },
     "backend-000521": {
-        "message": "Si vous ne connaissez pas ce client, veuillez changer votre mot de passe et revoir la liste de vos appareils."
+        "message": "Si vous ne connaissez pas ce client, veuillez changer votre mot de passe et passer en revue la liste de vos appareils."
     },
     "backend-000522": {
         "message": "Pour éviter toute nouvelle tentative, l'authentification API par mot de passe a été désactivée."
     },
     "backend-000523": {
-        "message": "Pour l'activer à nouveau, connectez-vous avec la webapp ou tout client utilisant l'authentification par jeton."
+        "message": "Pour la réactiver, connectez-vous avec l'application Web ou tout client utilisant l'authentification par jeton."
     },
     "backend-000524": {
         "message": "Si vous ne connaissez pas ce client, veuillez changer votre mot de passe principal et votre mot de passe Nextcloud."
     },
     "backend-000525": {
-        "message": "Pour renforcer la sécurité, nous vous recommandons d'utiliser des jetons spécifiques aux appareils au lieu de votre mot de passe."
+        "message": "Pour renforcer la sécurité, nous vous recommandons d'utiliser des jetons spécifiques par appareil au lieu de votre mot de passe."
     },
     "frontend-000595": {
         "message": "Ouvrir $LABEL$",
@@ -2178,7 +2178,7 @@
         "message": "SHA-1"
     },
     "frontend-000598": {
-        "message": "A quoi vous attendiez-vous ?"
+        "message": "À quoi vous attendiez-vous ?"
     },
     "frontend-000601": {
         "message": "Force"
@@ -2208,7 +2208,7 @@
         "message": "Supprimer le champ"
     },
     "frontend-000611": {
-        "message": "Guide Open Markdown"
+        "message": "Ouvrir le guide Markdown"
     },
     "frontend-000612": {
         "message": "Annuler"
@@ -2217,7 +2217,7 @@
         "message": "Refaire"
     },
     "frontend-000614": {
-        "message": "Il expirera à l'adresse $DATE$.",
+        "message": "Il expirera le $DATE$.",
         "placeholders": {
             "date": {
                 "content": "$1"
@@ -2231,10 +2231,10 @@
         "message": "Trop de tentatives de connexion échouées"
     },
     "frontend-000617": {
-        "message": "Sélectionnez un dossier"
+        "message": "Sélectionner un dossier"
     },
     "frontend-000618": {
-        "message": "Sélectionnez \"$FOLDER$\"",
+        "message": "Sélectionner \"$FOLDER$\"",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -2846,7 +2846,7 @@
         "message": "Notre manuel intégré peut être consulté en cliquant sur \"Plus\" et explique l'application dans tous ses détails."
     },
     "backend-000495": {
-        "message": "Pour éviter tout accès indésirable à vos données, vous devez définir un mot de passe principal."
+        "message": "Pour éviter tout accès indésirable à vos données, vous devriez définir un mot de passe principal."
     },
     "settings-000690": {
         "message": "Cryptage avancé"
@@ -2867,7 +2867,7 @@
         "message": "Générer une couleur aléatoire"
     },
     "frontend-000263": {
-        "message": "Cryptage avec libsodium"
+        "message": "Chiffrage avec libsodium"
     },
     "frontend-000269": {
         "message": "$EDITABLE$ et $SHAREABLE$.",
@@ -2881,7 +2881,7 @@
         }
     },
     "frontend-000270": {
-        "message": "Édition autorisée"
+        "message": "Modification autorisée"
     },
     "frontend-000271": {
         "message": "Modification non autorisée"
@@ -2902,10 +2902,10 @@
         "message": "ID de l'étiquette"
     },
     "backups-000116": {
-        "message": "Certains objets avaient des erreurs :"
+        "message": "Certains objets en erreur :"
     },
     "backups-000137": {
-        "message": "Le site \"$LABEL$\" contient des fichiers attachés qui ne peuvent pas être importés.",
+        "message": "\"$LABEL$\" contient des fichiers attachés qui ne peuvent pas être importés.",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2921,7 +2921,7 @@
         }
     },
     "frontend-000262": {
-        "message": "Cryptage avancé (SSE V2)"
+        "message": "Chiffrage avancé (SSE V2)"
     },
     "frontend-000319": {
         "message": "Contenu"
@@ -3040,7 +3040,7 @@
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Cryptage avec la clé d'un tiers",
+        "message": "Chiffrage côté serveur par un tiers",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
