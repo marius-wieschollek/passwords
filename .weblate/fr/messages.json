@@ -775,7 +775,7 @@
         "message": "Restaure les éléments"
     },
     "frontend-000301": {
-        "message": "Restaurer les éléments contenus dans la corbeille"
+        "message": "Restaurer tous les éléments contenus dans la corbeille ?"
     },
     "frontend-000302": {
         "message": "Restaurer cet élément"
@@ -1150,7 +1150,7 @@
         }
     },
     "frontend-000370": {
-        "message": "La page \"$PAGE$\" n’a pas pu être extraite du  serveur hébergeant le manuel.",
+        "message": "La page \"$PAGE$\" n’a pas pu être récupérée depuis le serveur hébergeant le manuel.",
         "placeholders": {
             "page": {
                 "content": "$1"
@@ -1192,7 +1192,7 @@
         "message": "Si ce problème persiste, vous devriez contacter votre administrateur."
     },
     "backend-000389": {
-        "message": "Mots de passe Session $STR_1$ - $STR_1$",
+        "message": "Session Mots de passe $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1429,7 +1429,7 @@
         "message": "vous cherchez la documentation (anglais uniquement)"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Toute l’aide est par ici.",
+        "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Nous avons la solution pour vous !",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1512,7 +1512,7 @@
         "message": "Vous pouvez créer un nouveau mot de passe sécurisé dans l’application."
     },
     "backend-000471": {
-        "message": "Vous pouvez créer des nouveaux mots de passe sécurisés dans l’application"
+        "message": "Vous pouvez créer de nouveaux mots de passe sécurisés dans l’application Mots de passe"
     },
     "backend-000472": {
         "message": "Changer le mot de passe maintenant"
@@ -1535,7 +1535,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ à partagé $STR_1$ mots de passe avec vous ",
+        "message": "$STR_1$ à partagé $STR_1$ mot(s) de passe avec vous.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1619,7 +1619,7 @@
         "message": "Voir les mots de passe partagés avec moi"
     },
     "backend-000486": {
-        "message": "Un ou plusieurs mots de passes ne peuvent être partagé, car le destinataire y  déjà accès."
+        "message": "Un ou plusieurs mots de passes n'a pu être partagé car le destinataire y a déjà accès."
     },
     "backend-000487": {
         "message": "$STR_1$ mots de passes ne peuvent être partagé, car le destinataire y a déjà accès.",
@@ -1633,7 +1633,7 @@
         "message": "Partager un mot de passe qui a déjà été partagé avec vous peut créer un boucle."
     },
     "backend-000490": {
-        "message": "Pour éviter cela, ces mots de passe ne devraient pas être partagé"
+        "message": "Pour éviter cela, ces mots de passe ne seront pas être partagés."
     },
     "backend-000496": {
         "message": "Utilisateur effacé ($STR_1$)",
@@ -1919,7 +1919,7 @@
         "message": "Liez ce client à votre compte Nextcloud sans mots de passe et URLs fastidieux."
     },
     "apps-000024": {
-        "message": "Ce client prend officiellement en charge notre système de cryptage de bout en bout."
+        "message": "Ce client prend officiellement en charge notre système de chiffrage de bout en bout."
     },
     "apps-000025": {
         "message": "Ce client est maintenu par les auteurs de l'application Passwords."
@@ -2258,7 +2258,7 @@
         }
     },
     "frontend-000622": {
-        "message": "Mots de passe App Encryption Passphrase"
+        "message": "Phrase secrète de chiffrage pour l'application Mots de passe"
     },
     "frontend-000623": {
         "message": "Inconnu"
@@ -2267,7 +2267,7 @@
         "message": "Aide"
     },
     "frontend-000625": {
-        "message": "Choisissez le type de cryptage pour ce mot de passe"
+        "message": "Choisissez le type de chiffrage pour ce mot de passe"
     },
     "frontend-000626": {
         "message": "Voulez-vous supprimer le champ \"$FIELD$\" ?",
@@ -2278,28 +2278,28 @@
         }
     },
     "frontend-000628": {
-        "message": "Le cryptage appliqué par le serveur avant de stocker les données dans la base de données."
+        "message": "Le chiffrage appliqué par le serveur avant de stocker les données dans la base de données"
     },
     "frontend-000629": {
-        "message": "Le cryptage appliqué par le client avant d'envoyer les données au serveur."
+        "message": "Le chiffrage appliqué par le serveur avant de stocker les données dans la base de données"
     },
     "frontend-000630": {
-        "message": "Mot de passe invalide. Session révoquée pour trop de tentatives de connexion infructueuses."
+        "message": "Mot de passe invalide. Session révoquée en raison d'un trop grand nombre de tentatives de connexion infructueuses."
     },
     "frontend-000631": {
-        "message": "Il s'agit d'une copie de la phrase de passe que vous avez choisie pour le cryptage. La modification ou la suppression de cette entrée n'affecte pas le cryptage. La phrase de passe ne peut être modifiée que dans les paramètres. Vous trouverez de plus amples informations dans le manuel."
+        "message": "Ceci est une copie de la phrase secrète que vous avez choisie pour le chiffrage. La modification ou la suppression de cette entrée n'affecte pas le chiffrage. La phrase secrète ne peut être modifiée que dans les paramètres. Vous trouverez de plus amples informations dans le manuel."
     },
     "backend-000632": {
-        "message": "Api de service Favicon"
+        "message": "API de service Favicon"
     },
     "backend-000633": {
         "message": "(facultatif)"
     },
     "backend-000634": {
-        "message": "Votre Nextcloud demande beaucoup plus d'icônes que la moyenne."
+        "message": "Votre instance Nextcloud demande beaucoup plus d'icônes que la moyenne."
     },
     "backend-000635": {
-        "message": "Tutoriel ouvert"
+        "message": "Ouvrir le tutoriel"
     },
     "backend-000636": {
         "message": "Un nombre suspect de tentatives de connexion échouées a été détecté."
@@ -2308,13 +2308,13 @@
         "message": "Plus d'informations"
     },
     "backend-000638": {
-        "message": "Afficher les mots de passe non sécurisés"
+        "message": "Afficher les mots de passe non sûrs"
     },
     "backend-000639": {
-        "message": "Paramètres ouverts"
+        "message": "Ouvrir les paramètres"
     },
     "backend-000640": {
-        "message": "Mots de passe ouverts"
+        "message": "Ouvrir les mots de passe"
     },
     "backend-000641": {
         "message": "Voir les applications"
@@ -2323,7 +2323,7 @@
         "message": "Voir les applications et les appareils"
     },
     "backend-000643": {
-        "message": "Gérer les appareils et les applications"
+        "message": "Gérer les applications et les appareils"
     },
     "backend-000645": {
         "message": "Mise à jour de l'application recommandée"
@@ -2362,16 +2362,16 @@
         }
     },
     "backend-000650": {
-        "message": "L'utilisation de différentes versions majeures de PHP peut causer des problèmes."
+        "message": "L'utilisation de versions majeures de PHP différentes peut causer des problèmes."
     },
     "backend-000651": {
         "message": "Paramètres de sécurité du mot de passe par défaut"
     },
     "backend-000652": {
-        "message": "Contrôle de sécurité Hash"
+        "message": "Hachage de contrôle de sécurité"
     },
     "backend-000653": {
-        "message": "Ne pas stocker les hashs"
+        "message": "Ne pas stocker les hachages"
     },
     "backend-000655": {
         "message": "Stocker 75% du hachage"
@@ -2383,7 +2383,7 @@
         "message": "Sauvegarde automatiquement restaurée"
     },
     "backend-000658": {
-        "message": "L'application mots de passe semble avoir rencontré un problème de base de données."
+        "message": "L'application Mots de passe semble avoir rencontré un problème de base de données."
     },
     "backend-000659": {
         "message": "Pour cette raison, la sauvegarde de l'application \"$STR_1$\" a été restaurée automatiquement.",
@@ -2411,7 +2411,7 @@
         }
     },
     "backend-000664": {
-        "message": "Passwords $STR_1$ est la dernière mise à jour de Nextcloud $STR_1$.",
+        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2465,19 +2465,19 @@
         }
     },
     "settings-000686": {
-        "message": "Cryptage de bout en bout"
+        "message": "Chiffrage de bout en bout"
     },
     "settings-000687": {
-        "message": "Mode de cryptage du serveur"
+        "message": "Mode de chiffrage du serveur"
     },
     "settings-000688": {
         "message": "Aucun si le CSE est utilisé"
     },
     "settings-000689": {
-        "message": "Cryptage simple"
+        "message": "Chiffrage simple"
     },
     "settings-000691": {
-        "message": "Mode de cryptage du client"
+        "message": "Mode de chiffrage du client"
     },
     "settings-000692": {
         "message": "Activer"
@@ -2489,7 +2489,7 @@
         "message": "Vue détaillée des mots de passe"
     },
     "settings-000695": {
-        "message": "Aperçu du site web de l'exposition"
+        "message": "Aperçu du site web"
     },
     "settings-000696": {
         "message": "Nouveau mot de passe"
@@ -2504,10 +2504,10 @@
         "message": "Mot de passe modifié"
     },
     "settings-000700": {
-        "message": "Le changement de mot de passe a échoué"
+        "message": "Échec du changement de mot de passe"
     },
     "settings-000701": {
-        "message": "Questions administratives"
+        "message": "Problèmes administratifs"
     },
     "settings-000702": {
         "message": "Partage de mot de passe"
@@ -2522,7 +2522,7 @@
         "message": "Code"
     },
     "settings-000706": {
-        "message": "Code de réinitialisation non valide"
+        "message": "Code de réinitialisation invalide"
     },
     "settings-000707": {
         "message": "Ajouter des chiffres aux mots de passe générés"
@@ -2534,13 +2534,13 @@
         "message": "Spécifiez le délai après une demande avant que la session ne soit annulée."
     },
     "settings-000710": {
-        "message": "Choisissez le type de cryptage utilisé pour chiffrer les données sur le serveur"
+        "message": "Choisissez le type de chiffrage utilisé pour chiffrer les données sur le serveur"
     },
     "settings-000711": {
-        "message": "Exécutez l'assistant d'installation pour configurer le cryptage de vos mots de passe."
+        "message": "Exécutez l'assistant d'installation pour configurer le chiffrage de vos mots de passe."
     },
     "settings-000712": {
-        "message": "Modifier le mot de passe de cryptage"
+        "message": "Modifier le mot de passe de chiffrage"
     },
     "settings-000713": {
         "message": "Afficher un aperçu du site web associé dans les détails. (Pas sur les mobiles)"
@@ -2581,10 +2581,10 @@
         "message": "Ouvrez la page des paramètres dans le manuel"
     },
     "settings-000724": {
-        "message": "Envoyer des requêtes keep-alive au serveur pour empêcher l'annulation de la session."
+        "message": "Envoyer des requêtes de maintien de connexion au serveur pour empêcher l'annulation de la session."
     },
     "settings-000725": {
-        "message": "Choisissez le type de cryptage utilisé pour chiffrer les données sur le client avant qu'elles ne soient envoyées au serveur."
+        "message": "Choisissez le type de chiffrage utilisé pour chiffrer les données sur le client avant qu'elles ne soient envoyées au serveur."
     },
     "settings-000726": {
         "message": "Le hachage SHA-1 est utilisé pour vérifier les mots de passe violés. Un hachage partiel permet d'éviter les attaques par force brute en cas de piratage du serveur, mais peut également entraîner la déclaration par erreur de mots de passe sûrs comme étant violés."
@@ -2602,7 +2602,7 @@
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsCustomActionHelp": {
-        "message": "Ajoute un bouton supplémentaire pour l'action spécifiée dans la vue du bureau.",
+        "message": "Ajoute un bouton supplémentaire pour l'action spécifiée dans la vue bureau.",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
@@ -2626,7 +2626,7 @@
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "Veuillez sélectionner le type d'objets cachés que vous souhaitez récupérer.",
+        "message": "Veuillez sélectionner un type d'objets cachés que vous souhaitez récupérer.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
@@ -2654,15 +2654,15 @@
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
-        "message": "Tous les tags cachés",
+        "message": "Toutes les étiquettes cachées",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTagsTitle": {
-        "message": "Récupérer tous les tags cachés",
+        "message": "Récupérer toutes les étiquettes cachées",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
-        "message": "Récupéré le(s) mot(s) de passe $PASSWORDS$, le(s) dossier(s) $FOLDERS$ et le(s) tag(s) $TAGS$.",
+        "message": "Récupéré le(s) mot(s) de passe $PASSWORDS$, le(s) dossier(s) $FOLDERS$ et le(s) étiquette(s) $TAGS$.",
         "description": "Success message after the recover hidden items action was executed",
         "placeholders": {
             "passwords": {
@@ -2677,7 +2677,7 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "Articles récupérés",
+        "message": "Éléments récupérés",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
@@ -2691,7 +2691,7 @@
         "message": "dossiers"
     },
     "tutorial-000732": {
-        "message": "tags"
+        "message": "étiquettes"
     },
     "tutorial-000733": {
         "message": "favoris"
@@ -2700,7 +2700,7 @@
         "message": "mots de passe"
     },
     "tutorial-000735": {
-        "message": "récemment changé"
+        "message": "récemment modifié"
     },
     "tutorial-000737": {
         "message": "ils sont plus âgés que"
@@ -2726,7 +2726,7 @@
         }
     },
     "tutorial-000747": {
-        "message": "très forte"
+        "message": "très fort"
     },
     "tutorial-000748": {
         "message": "extrêmement fort"
@@ -2738,7 +2738,7 @@
         "message": "Inclure des caractères spéciaux"
     },
     "tutorial-000751": {
-        "message": "Une maison sûre pour vos mots de passe"
+        "message": "Une lieu sûr pour vos mots de passe"
     },
     "tutorial-000752": {
         "message": "Gardez vos mots de passe secrets"
@@ -2750,10 +2750,10 @@
         "message": "Mettez de l'ordre dans vos mots de passe"
     },
     "tutorial-000755": {
-        "message": "Se connecter"
+        "message": "Connectez-vous"
     },
     "tutorial-000756": {
-        "message": "Crypter mes mots de passe existants"
+        "message": "Chiffrer mes mots de passe existants"
     },
     "tutorial-000757": {
         "message": "Sauvegarder le mot de passe"
@@ -2762,7 +2762,7 @@
         "message": "Répétez votre mot de passe"
     },
     "tutorial-000759": {
-        "message": "Installation du cryptage"
+        "message": "Installation du chiffrage"
     },
     "tutorial-000760": {
         "message": "Porte-clés"
@@ -2783,7 +2783,7 @@
         "message": "Continuer"
     },
     "tutorial-000766": {
-        "message": "Skip"
+        "message": "Passer"
     },
     "tutorial-000767": {
         "message": "Vérifiez la sécurité des mots de passe avec"
@@ -2810,16 +2810,16 @@
         "message": "Mot de passe (12 caractères minimum)"
     },
     "tutorial-000775": {
-        "message": "Cryptage en cours…"
+        "message": "Chiffrage en cours…"
     },
     "tutorial-000776": {
-        "message": "Il existe de nombreux paramètres qui vous permettent de personnaliser votre expérience."
+        "message": "Il existe de nombreux paramètres vous permettant de personnaliser votre expérience."
     },
     "tutorial-000777": {
         "message": "Vous pouvez les trouver tous dans \"Plus\", mais nous avons mis les plus courants ici :"
     },
     "tutorial-000778": {
-        "message": "Passwords offre un cryptage moderne et puissant pour protéger vos données des regards indiscrets."
+        "message": "Passwords offre un chiffrage moderne et puissant pour protéger vos données des regards indiscrets."
     },
     "tutorial-000779": {
         "message": "Choisissez un mot de passe sécurisé ci-dessous pour activer la protection ultime de vos mots de passe."
@@ -2840,7 +2840,7 @@
         "message": "Chaque fois que vous ne savez pas comment quelque chose fonctionne, que vous avez des questions ou que vous avez besoin d'aide pour résoudre un problème :"
     },
     "tutorial-000785": {
-        "message": "L'aide est juste au coin de la rue."
+        "message": "L'aide est juste à portée de clic."
     },
     "tutorial-000786": {
         "message": "Notre manuel intégré peut être consulté en cliquant sur \"Plus\" et explique l'application dans tous ses détails."
@@ -2849,19 +2849,19 @@
         "message": "Pour éviter tout accès indésirable à vos données, vous devriez définir un mot de passe principal."
     },
     "settings-000690": {
-        "message": "Cryptage avancé"
+        "message": "Chiffrage avancé"
     },
     "tutorial-000736": {
         "message": "Marquez mes mots de passe si…"
     },
     "tutorial-000787": {
-        "message": "Dans tous les autres cas, notre communauté est le bon endroit pour poser vos questions."
+        "message": "Dans tous les autres cas, notre communauté est le parfait endroit pour poser vos questions."
     },
     "tutorial-000789": {
         "message": "Entrez un mot de passe de 12 caractères ou plus"
     },
     "tutorial-000790": {
-        "message": "Votre mot de passe doit comporter au moins 12 caractères et le mot de passe de confirmation doit être le même."
+        "message": "Votre mot de passe doit comporter au moins 12 caractères et le mot de passe de confirmation doit être identique."
     },
     "frontend-000216": {
         "message": "Générer une couleur aléatoire"
@@ -2941,7 +2941,7 @@
         "message": "Mots de passe"
     },
     "backend-UserMigrationDescription": {
-        "message": "Base de données décryptée des mots de passe avec les mots de passe, les dossiers, les étiquettes et les paramètres. (N'inclut pas les mots de passe partagés avec vous. Ne fonctionne pas avec E2E activé)",
+        "message": "Base de données de Mots de passe déchiffrée avec les mots de passe, les dossiers, les étiquettes et les paramètres. (N'inclut pas les mots de passe partagés avec vous. Ne fonctionne pas avec E2E activé)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
@@ -2949,7 +2949,7 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Le cryptage de bout en bout étant activé, vos mots de passe ne peuvent pas être ajoutés automatiquement à l'exportation. Vous pouvez également utiliser la fonction d'exportation de l'application pour exporter vos données.",
+        "message": "Le chiffrage de bout en bout étant activé, vos mots de passe ne peuvent pas être ajoutés automatiquement à l'exportation. Comme alternative, vous pouvez également utiliser la fonction d'exportation de l'application pour exporter vos données.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -2969,7 +2969,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Afficher le QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3024,19 +3024,19 @@
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "Ce mot de passe est crypté sur votre appareil avant d'être envoyé au serveur. Personne ne peut lire ce mot de passe sans connaître votre mot de passe de cryptage.",
+        "message": "Ce mot de passe est chiffré sur votre appareil avant d'être envoyé au serveur. Personne ne peut lire ce mot de passe sans connaître votre mot de passe de chiffrage.",
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Cryptage de bout en bout",
+        "message": "Chiffrage de bout en bout",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
-        "message": "Cryptage côté serveur",
+        "message": "Chiffrage côté serveur",
         "description": "Label for the server side encryption method"
     },
     "frontend-PwDetailsEncryptionLabel": {
-        "message": "Méthode de cryptage",
+        "message": "Méthode de chiffrage",
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-EncryptionSSEv3r1": {
