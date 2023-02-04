@@ -123,7 +123,8 @@
         "message": "try the generic CSV import"
     },
     "backups-000038": {
-        "message": "No import for your CSV?"
+        "message": "No import for your CSV?",
+        "description": "Label for the button next to the input format selection which opens the help page for the custom CSV import"
     },
     "backups-000039": {
         "message": "Backup password"
