@@ -3042,5 +3042,14 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "Enkripsi dengan kunci pihak ketiga",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Tidak ada yang perlu disalin, $ELEMENT$ kosong",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }

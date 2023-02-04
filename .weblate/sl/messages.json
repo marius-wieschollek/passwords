@@ -3042,5 +3042,14 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "Šifriranje s ključem tretje osebe",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Nič za kopiranje, $ELEMENT$ je prazen",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }

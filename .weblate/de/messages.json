@@ -3040,5 +3040,14 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "Serverseitige Verschlüsselung durch Drittanbietermodul",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Nichts zu kopieren, $ELEMENT$ ist leer",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }
