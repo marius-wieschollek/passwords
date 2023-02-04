@@ -46,6 +46,7 @@
 
 <style lang="scss">
 #app-sidebar-vue .notes {
+
     blockquote {
         font-family : var(--pw-mono-font-face);
         margin      : 5px 0;
@@ -59,6 +60,7 @@
         color            : var(--color-text-lighter);
         padding          : 1rem;
         border-radius    : var(--border-radius);
+        white-space      : pre-wrap;
     }
 
     h1, h2, h3, h4, h5, h6 {

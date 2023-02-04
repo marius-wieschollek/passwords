@@ -175,6 +175,9 @@ div.notes-container h5 {
 div.notes-container h6 {
     font-size: 1.1rem;
 }
+div.notes-container pre {
+    white-space: pre-wrap;
+}
 </style>`;
     }
 }
