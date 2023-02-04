@@ -3042,5 +3042,14 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "用第三方密钥加密",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "没有什么可复制的，$ELEMENT$ 是空的",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }
