@@ -3039,5 +3039,14 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "Šifrování na straně serveru třetí strany",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Není co kopírovat, $ELEMENT$ je prázdný",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }
