@@ -280,11 +280,8 @@
                 }
             },
             copyAction(attribute, delay = 0) {
-                let message = 'Error copying {element} to clipboard';
-                if(Utility.copyToClipboard(this.password[attribute])) message = '{element} was copied to clipboard';
-
                 this.clickTimeout = setTimeout(() => {
-                    Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
+                    this.actions.clipboard(attribute);
                 }, delay);
             },
             runCustomAction() {

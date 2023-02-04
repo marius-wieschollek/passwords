@@ -15,6 +15,7 @@ import Utility from "@js/Classes/Utility";
 import API from '@js/Helper/api';
 import Messages from "@js/Classes/Messages";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
+import Localisation from "@js/Classes/Localisation";
 
 export default class PasswordActions {
     get password() {
@@ -75,5 +76,16 @@ export default class PasswordActions {
             PwQrCodeDialog = Vue.extend(PasswordQrCode.default);
 
         new PwQrCodeDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
+    }
+
+    clipboard(attribute) {
+        let message = 'Error copying {element} to clipboard';
+        if(!this._password.hasOwnProperty(attribute) || this._password[attribute].length === 0) {
+            message = 'ClipboardCopyEmpty';
+        } else {
+            if(Utility.copyToClipboard(this._password[attribute])) message = '{element} was copied to clipboard';
+        }
+
+        Messages.notification([message, {element: Localisation.translate(attribute.capitalize())}]);
     }
 }

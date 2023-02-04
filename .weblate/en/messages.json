@@ -3042,5 +3042,14 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Server Side Encryption",
         "description": "Label for the server side encryption method"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Nothing to copy, $ELEMENT$ is empty",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
     }
 }
