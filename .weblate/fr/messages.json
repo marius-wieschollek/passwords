@@ -3051,5 +3051,21 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "STOP !",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Cette fonctionnalité est destinée aux développeurs, et non aux utilisateurs.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Voir {lien} pour plus d'informations",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Si quelqu'un vous a dit de copier et coller quoi que ce soit ici, il est probable qu'il aura accès à vos mots de passe ou prendra le contrôle de votre compte.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     }
 }
