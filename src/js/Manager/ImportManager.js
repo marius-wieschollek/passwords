@@ -6,6 +6,7 @@ import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
 import BitwardenConversionHelper from '@js/Helper/Import/BitwardenConversionHelper';
+import Logger from '@js/Classes/Logger';
 
 /**
  *
@@ -94,7 +95,7 @@ export class ImportManager {
         try {
             if(data.tags) tagMapping = await this._importTags(data.tags, options.mode, options.cseType);
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
             throw new Error('Unable to create tags');
         }
         return tagMapping;
@@ -112,7 +113,7 @@ export class ImportManager {
         try {
             if(data.folders) folderMapping = await this._importFolders(data.folders, options.mode, options.cseType);
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
             throw new Error('Unable to create folders');
         }
         return folderMapping;
@@ -135,7 +136,7 @@ export class ImportManager {
             try {
                 await this._importPasswords(data.passwords, options.mode, options.skipShared, options.cseType, tagMapping, folderMapping);
             } catch(e) {
-                console.error(e);
+                Logger.error(e);
                 throw new Error('Unable to create passwords');
             }
         }
@@ -200,14 +201,8 @@ export class ImportManager {
         }
 
         this._countProgress('Importing tags');
-        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < tags.length; i++) {
             queue.push(this._importTag(tags[i], mode, cseType, db, idMap));
-
-            if(queue.length >= maxQueueLength) {
-                await Promise.all(queue);
-                queue = [];
-            }
         }
 
         if(queue.length !== 0) await Promise.all(queue);
@@ -235,7 +230,7 @@ export class ImportManager {
                 idMap[tag.id] = info.id;
             }
         } catch(e) {
-            console.error(e, tag);
+            Logger.error(e, tag);
             this.errors.push(Localisation.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
         }
 
@@ -265,7 +260,6 @@ export class ImportManager {
         let folders = ImportManager._sortFoldersForImport(folderDb, idMap);
 
         this._countProgress('Importing folders');
-        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < folders.length; i++) {
             let folder = folders[i];
 
@@ -274,7 +268,7 @@ export class ImportManager {
                 continue;
             }
 
-            if(!idMap.hasOwnProperty(folder.parent) || queue.length >= maxQueueLength) {
+            if(!idMap.hasOwnProperty(folder.parent)) {
                 await Promise.all(queue);
                 queue = [];
             }
@@ -314,7 +308,7 @@ export class ImportManager {
                 idMap[folder.id] = info.id;
             }
         } catch(e) {
-            console.error(e, folder);
+            Logger.error(e, folder);
             this.errors.push(Localisation.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
         }
 
@@ -380,14 +374,8 @@ export class ImportManager {
         }
 
         this._countProgress('Importing passwords');
-        let maxQueueLength = this._getMaxRequests();
         for(let i = 0; i < passwords.length; i++) {
             queue.push(this._importPassword(mode, passwords[i], db, skipShared, cseType, idMap, folderMapping, tagMapping));
-
-            if(queue.length >= maxQueueLength) {
-                await Promise.all(queue);
-                queue = [];
-            }
         }
 
         if(queue.length !== 0) await Promise.all(queue);
@@ -439,7 +427,6 @@ export class ImportManager {
                 if(mode === 3) {
                     password = Object.assign(db[password.id], password);
                 } else if(!current.shared && current.share === null) {
-                    console.log(current.shared, current.share);
                     password.cseType = cseType;
                 } else {
                     password.cseType = 'none';
@@ -454,7 +441,7 @@ export class ImportManager {
             }
         } catch(e) {
             let message = e.hasOwnProperty('message') ? e.message:e.statusText;
-            console.error(e, password);
+            Logger.error(e, password);
             this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
         }
 
@@ -496,20 +483,8 @@ export class ImportManager {
         if(status === null) {
             this.processed++;
         } else {
-            console.info(`Passwords Import: ${status}`);
+            Logger.info(`Passwords Import: ${status}`);
         }
         this.progress(this.processed, this.total, status);
-    }
-
-    /**
-     *
-     * @return {Number}
-     * @private
-     */
-    _getMaxRequests() {
-        let performance = SettingsService.get('server.performance');
-        if(performance !== 0 && performance < 6) return performance * 3;
-        if(performance === 6) return 32;
-        return 1;
     }
 }

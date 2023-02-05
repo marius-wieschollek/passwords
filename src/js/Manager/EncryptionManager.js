@@ -7,6 +7,7 @@ import EventManager from '@js/Manager/EventManager';
 import SettingsService from "@js/Services/SettingsService";
 import {loadState} from "@nextcloud/initial-state";
 import {emit} from '@nextcloud/event-bus';
+import Logger from "@js/Classes/Logger";
 
 class EncryptionManager {
 
@@ -112,7 +113,7 @@ class EncryptionManager {
         } catch(e) {
             Utility.unlockApp();
             Messages.alert(e.message, 'Changing password failed');
-            console.error(e);
+            Logger.error(e);
         }
     }
 
@@ -147,17 +148,11 @@ class EncryptionManager {
             queue     = [];
 
         this._sendStatus('passwords', 'processing', Object.keys(passwords).length);
-        let maxQueueLength = this._getMaxRequests();
         for(let id in passwords) {
             if(!passwords.hasOwnProperty(id)) continue;
             let password = passwords[id];
 
             queue.push(this._encryptPassword(password, folderMap, tagMap));
-
-            if(queue.length >= maxQueueLength) {
-                await Promise.all(queue);
-                queue = [];
-            }
         }
 
         if(queue.length !== 0) await Promise.all(queue);
@@ -190,7 +185,7 @@ class EncryptionManager {
 
             try {
                 await API.createPassword(password);
-                console.log(`Encrypted password ${password.id}`);
+                Logger.success(`Encrypted password ${password.id}`);
                 this._sendStatus('passwords');
             } catch(e) {
                 this._sendStatus('passwords', 'error', e);
@@ -199,7 +194,7 @@ class EncryptionManager {
         } else {
             try {
                 await API.updatePassword(password);
-                console.log(`Updated password ${password.id}`);
+                Logger.success(`Updated password ${password.id}`);
                 this._sendStatus('passwords');
             } catch(e) {
                 this._sendStatus('passwords', 'error', e);
@@ -251,7 +246,7 @@ class EncryptionManager {
             idMap[tag.id] = result.id;
 
             this._sendStatus('tags');
-            console.log(`Encrypted tag ${tag.id}`);
+            Logger.success(`Encrypted tag ${tag.id}`);
         } catch(e) {
             this._sendStatus('tags', 'error', e);
             throw e;
@@ -306,7 +301,7 @@ class EncryptionManager {
             idMap[folder.id] = result.id;
 
             this._sendStatus('folders');
-            console.log(`Encrypted folder ${folder.id}`);
+            Logger.success(`Encrypted folder ${folder.id}`);
         } catch(e) {
             this._sendStatus('folders', 'error', e);
             throw e;
@@ -473,31 +468,12 @@ class EncryptionManager {
             object.status = object.errors.length === 0 ? 'success':'failed';
             if(object.status === 'success') object.current = object.total;
         } else if(status === 'error') {
-            console.error(data);
+            Logger.error(data);
             object.errors.push(data);
             if(section !== 'cleanup') object.status = 'failed';
         }
 
         this._statusFunc(this.status);
-    }
-
-    // noinspection JSMethodCanBeStatic
-    /**
-     * @private
-     */
-    _lockApp() {
-    }
-
-    /**
-     *
-     * @return {Number}
-     * @private
-     */
-    _getMaxRequests() {
-        let performance = SettingsService.get('server.performance');
-        if(performance !== 0 && performance < 6) return performance * 3;
-        if(performance === 6) return 32;
-        return 1;
     }
 }
 

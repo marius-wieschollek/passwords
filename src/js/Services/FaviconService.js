@@ -9,8 +9,6 @@ export default new class FaviconService {
     constructor() {
         this._favicons = {};
         this._requests = {};
-        this._queue = [];
-        this._workers = [];
     }
 
     /**
@@ -57,10 +55,7 @@ export default new class FaviconService {
      * @private
      */
     async _queueApiRequest(domain, size) {
-        let promise = new Promise((resolve) => {
-            this._queue.push({domain, size, resolve});
-            this._triggerWorkers();
-        });
+        let promise = this._fetchFromApi(domain, size);
 
         this._requests[`${domain}_${size}`] = promise;
 
@@ -78,13 +73,14 @@ export default new class FaviconService {
         try {
             /** @type {Blob} favicon **/
             let favicon = await API.getFavicon(domain, size);
-            delete this._requests[`${domain}_${size}`];
 
             if(favicon.type.substr(0, 6) !== 'image/' || favicon.size < 1) {
+                delete this._requests[`${domain}_${size}`];
                 return SettingsService.get('server.theme.app.icon');
             }
 
             this._favicons[`${domain}_${size}`] = window.URL.createObjectURL(favicon);
+            delete this._requests[`${domain}_${size}`];
 
             return this._favicons[`${domain}_${size}`];
         } catch(e) {
@@ -93,50 +89,5 @@ export default new class FaviconService {
             }
             return SettingsService.get('server.theme.app.icon');
         }
-    }
-
-    /**
-     *
-     * @private
-     */
-    _triggerWorkers() {
-        for(let worker of this._workers) {
-            if(!worker.active) {
-                worker.worker(worker);
-                return;
-            }
-        }
-
-        let maxWorkers = this._getMaxWorkers();
-        if(maxWorkers === 0 || this._workers.length < maxWorkers) {
-            let worker = {
-                active: true,
-                worker: async (self) => {
-                    while(this._queue.length > 0) {
-                        let job    = this._queue.shift(),
-                            result = await this._fetchFromApi(job.domain, job.size);
-
-                        job.resolve(result);
-                    }
-
-                    self.active = false;
-                }
-            };
-
-            this._workers.push(worker);
-            worker.worker(worker);
-        }
-    }
-
-    /**
-     *
-     * @return {Number}
-     * @private
-     */
-    _getMaxWorkers() {
-        let performance = SettingsService.get('server.performance');
-        if(performance !== 0 && performance < 6) return performance * 3;
-        if(performance === 6) return 0;
-        return 1;
     }
 };
