@@ -19,7 +19,6 @@ class PasswordsApi extends EnhancedApi {
         let performance = SettingsService.get('server.performance');
         if(performance !== 0 && performance < 6) this._maxRequests = performance * 3;
         if(performance === 6) this._maxRequests = 32;
-        Logger.debug('Max Requests is ' + this._maxRequests);
     }
 
     _sendRequest(path, data = null, method = null, dataType = 'application/json', requestOptions = {}) {
