@@ -9,13 +9,13 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :title="t('Favorites')" :to="{ name: 'Favorites'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFavorites">
+    <app-navigation-item ref="navigation-item" :name="t('Favorites')" :to="{ name: 'Favorites'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFavorites">
         <star-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
                     :key="folder.id"
-                    :title="folder.label"
+                    :name="folder.label"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"
                     :data-folder-id="folder.id"
@@ -26,7 +26,7 @@
             <app-navigation-item
                     v-for="tag in tags"
                     :key="tag.id"
-                    :title="tag.label"
+                    :name="tag.label"
                     :to="{ name: 'Tags', params: {tag: tag.id}}"
                     :exact="true"
                     :data-tag-id="tag.id"

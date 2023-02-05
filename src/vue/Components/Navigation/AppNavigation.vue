@@ -1,36 +1,36 @@
 <template>
     <nc-app-navigation open>
         <template id="app-passwords-navigation" #list>
-            <app-navigation-item :title="t('All')" :to="{ name: 'All'}" :exact="true">
+            <app-navigation-item :name="t('All')" :to="{ name: 'All'}" :exact="true">
                 <earth-icon :size=20 slot="icon" />
             </app-navigation-item>
             <app-navigation-item-folders />
-            <app-navigation-item :title="t('Recent')" :to="{ name: 'Recent'}">
+            <app-navigation-item :name="t('Recent')" :to="{ name: 'Recent'}">
                 <clock-icon :size=20 slot="icon" />
             </app-navigation-item>
             <app-navigation-item-favorites />
             <app-navigation-item-shared />
             <app-navigation-item-tags />
             <app-navigation-item-security />
-            <app-navigation-item :title="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
+            <app-navigation-item :name="t('Search')" :to="{ name: 'Search'}" v-if="isSearchVisible">
                 <magnify-icon :size=20 slot="icon" />
             </app-navigation-item>
 
             <session-timeout v-if="!isMobile && hasTimeout" />
-            <app-navigation-item :title="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
+            <app-navigation-item :name="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
         </template>
 
         <nc-app-navigation-settings slot="footer" :title="t('More')">
-            <app-navigation-item :title="t('Settings')" :to="{ name: 'Settings'}">
+            <app-navigation-item :name="t('Settings')" :to="{ name: 'Settings'}">
                 <cog-icon :size=20 slot="icon" />
             </app-navigation-item>
-            <app-navigation-item :title="t('Backup and Restore')" :to="{ name: 'Backup'}">
+            <app-navigation-item :name="t('Backup and Restore')" :to="{ name: 'Backup'}">
                 <archive-icon :size=20 slot="icon" />
             </app-navigation-item>
-            <app-navigation-item :title="t('Handbook')" :to="{ name: 'Help'}">
+            <app-navigation-item :name="t('Handbook')" :to="{ name: 'Help'}">
                 <help-circle-icon :size=20 slot="icon" />
             </app-navigation-item>
-            <app-navigation-item :title="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
+            <app-navigation-item :name="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
                 <puzzle-icon :size=20 slot="icon" />
             </app-navigation-item>
         </nc-app-navigation-settings>

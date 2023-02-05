@@ -9,12 +9,12 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :title="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
+    <app-navigation-item ref="navigation-item" :name="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
         <folder-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
-                    :title="folder.label"
+                    :name="folder.label"
                     :key="folder.id"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"

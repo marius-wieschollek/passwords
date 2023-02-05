@@ -9,13 +9,13 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :title="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadTags">
+    <app-navigation-item ref="navigation-item" :name="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadTags">
         <tag-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
                     v-for="tag in tags"
                     :key="tag.id"
-                    :title="tag.label"
+                    :name="tag.label"
                     :to="{ name: 'Tags', params: {tag: tag.id}}"
                     :exact="true"
                     :data-tag-id="tag.id"
