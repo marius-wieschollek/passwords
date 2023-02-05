@@ -20,7 +20,7 @@
                     <translate tag="h2" say="Contents"/>
                     <ol class="help-navigation">
                         <li v-for="entry in navigation" :class="{active:section===entry.id}">
-                            <a :href="entry.href">{{ entry.label }}</a>
+                            <a :href="entry.href" v-html="entry.label"></a>
                         </li>
                     </ol>
                 </nav>
@@ -481,7 +481,7 @@
         }
 
         blockquote {
-            border-left : 4px solid var(--color-box-shadow);
+            border-left : 4px solid var(--color-main-background-blur);
             background  : var(--color-background-dark);
             padding     : 1em 1em 0 1em;
             margin      : 0 0 1em 0;
@@ -490,10 +490,10 @@
             &.warning,
             &.important,
             &.recommended {
-                border-color     : var(--color-box-shadow);
+                border-color     : var(--color-main-background-blur);
                 background-color : var(--color-primary-element);
                 color            : var(--color-primary-text);
-                border-radius    : 3px;
+                border-radius    : 0 3px 3px 0;
                 padding-left     : .75rem;
 
                 > p {
