@@ -3051,5 +3051,21 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "STOP!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Αυτή η λειτουργία προορίζεται για προγραμματιστές, όχι για χρήστες.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Δείτε {link} για περισσότερες πληροφορίες",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Αν κάποιος σας είπε να αντιγράψετε και να επικολλήσετε οτιδήποτε εδώ, είναι πιθανό να αποκτήσει πρόσβαση στους κωδικούς σας ή να καταλάβει το λογαριασμό σας.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     }
 }
