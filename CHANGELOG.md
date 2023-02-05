@@ -1,4 +1,12 @@
 ## [Unreleased]
+### Added
+- SSEv3 with third party encryption key
+### Changed
+- Copy to clipboard notification informs if copied property is empty
+- API request behaviour changed to improve responsiveness
+### Fixed
+- Some UI glitches
+
 ## 2023.1.3 - Bugfix release
 ### Fixed
 - Change encryption password doesn't save

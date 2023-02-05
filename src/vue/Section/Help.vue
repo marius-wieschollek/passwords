@@ -171,7 +171,7 @@
                 this.loading = false;
             },
             jumpToAnchor(behavior = 'smooth') {
-                let scrollTarget = document.querySelector('#app-content .app-content-left');
+                let scrollTarget = document.getElementById('app-content-vue');
 
                 if(!this.$route.hash) {
                     Utility.scrollTo(0, 0, behavior, scrollTarget);
@@ -180,7 +180,8 @@
 
                 let $el = document.querySelector(`#app-content ${this.$route.hash}`);
                 if($el) {
-                    let top = $el.offsetTop - document.getElementById('controls').offsetHeight;
+                    let breadcrumb = document.querySelector('.breadcrumb.passwords-breadcrumbs'),
+                        top        = $el.offsetTop - (breadcrumb ? breadcrumb.offsetHeight:0);
 
                     Utility.scrollTo(top, 0, behavior, scrollTarget);
                     $el.classList.add('highlight');
@@ -287,6 +288,7 @@
             top          : 110px;
             height       : 1px;
             margin-right : 1rem;
+            margin-left  : 1rem;
 
             ol {
                 list-style  : decimal;
