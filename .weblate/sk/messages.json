@@ -3051,5 +3051,21 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "STOP!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Táto funkcia je určená pre vývojárov, nie pre používateľov.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Ak vám niekto povedal, aby ste sem niečo skopírovali a vložili, je pravdepodobné, že získa prístup k vašim heslám alebo prevezme vaše konto.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Viac informácií nájdete na {link}",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     }
 }
