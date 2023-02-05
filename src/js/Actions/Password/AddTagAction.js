@@ -12,6 +12,7 @@ import API from "@js/Helper/api";
 import Utility from "@js/Classes/Utility";
 import Messages from "@js/Classes/Messages";
 import PasswordManager from "@js/Manager/PasswordManager";
+import Logger from "@js/Classes/Logger";
 
 export default class AddTagAction {
 
@@ -37,7 +38,7 @@ export default class AddTagAction {
             for(let pwTag of Utility.objectToArray(this._password.tags)) {
                 if(pwTag.id === tag.id) {
                     Messages.notification(['PasswordTagAddExists', {password: this._password.label, tag: tag.label}])
-                            .catch(console.error);
+                            .catch(Logger.exception);
                     return;
                 }
             }
@@ -45,11 +46,11 @@ export default class AddTagAction {
             this._password.tags[tag.id] = tag;
             this._password = await PasswordManager.updatePassword(this._password);
             Messages.notification(['PasswordTagAddSuccess', {password: this._password.label, tag: tag.label}])
-                    .catch(console.error);
+                    .catch(Logger.exception);
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
             Messages.notification(['PasswordTagAddFail', {password: this._password.label, tag: tag.label, error: e.hasOwnProperty('message') ? e.message:''}])
-                    .catch(console.error);
+                    .catch(Logger.exception);
         }
 
         return this._password;

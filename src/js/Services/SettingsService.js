@@ -1,6 +1,7 @@
 import API from '@js/Helper/api';
 import Utility from '@js/Classes/Utility';
 import {loadState} from '@nextcloud/initial-state';
+import Logger from "@js/Classes/Logger";
 
 /**
  *
@@ -83,7 +84,7 @@ class SettingsService {
         }
 
         this._triggerObservers(setting, this._settings[setting])
-            .catch(console.error);
+            .catch(Logger.exception);
         return this._settings[setting];
     }
 

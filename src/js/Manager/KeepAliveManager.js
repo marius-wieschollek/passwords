@@ -2,6 +2,7 @@ import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import Application from '@js/Init/Application';
 import SettingsService from '@js/Services/SettingsService';
+import Logger from '@js/Classes/Logger';
 
 
 class KeepAliveManager {
@@ -163,7 +164,7 @@ class KeepAliveManager {
             try {
                 await API.closeSession();
             } catch(e) {
-                console.error(e);
+                Logger.error(e);
             }
 
             target = btoa(JSON.stringify(target));

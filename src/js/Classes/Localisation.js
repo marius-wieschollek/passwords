@@ -19,6 +19,7 @@ import 'dayjs/locale/fr';
 import 'dayjs/locale/it';
 import 'dayjs/locale/es';
 import 'dayjs/locale/nl';
+import Logger from "@js/Classes/Logger";
 
 dayjs.extend(relativeTime);
 dayjs.extend(localizedFormat);
@@ -153,7 +154,7 @@ class Localisation {
                 return this._processTranslations(data);
             }
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
         }
 
         return false;

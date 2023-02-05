@@ -3,6 +3,7 @@ import Localisation from "@js/Classes/Localisation";
 import SettingsService from '@js/Services/SettingsService';
 import DeferredActivationService from '@js/Services/DeferredActivationService';
 import Utility from "@js/Classes/Utility";
+import Logger from "@js/Classes/Logger";
 
 class SetupManager {
 
@@ -36,7 +37,7 @@ class SetupManager {
         try {
             return this._runWizard(['start', 'encryption'], true, false);
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
         }
     }
 

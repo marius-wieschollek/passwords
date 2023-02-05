@@ -10,6 +10,7 @@
 
 import Localisation    from "@js/Classes/Localisation";
 import SettingsService from "@js/Services/SettingsService";
+import Logger from "@js/Classes/Logger";
 
 export default new class AppStoreService {
 
@@ -113,7 +114,7 @@ export default new class AppStoreService {
             this._storeData = await response.json();
             return this._storeData;
         } else {
-            console.error(response);
+            Logger.error(response);
             throw new Error(`${response.status} - ${response.statusText}`);
         }
     }

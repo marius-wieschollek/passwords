@@ -1,4 +1,5 @@
 import Utility from '@js/Classes/Utility';
+import Logger from "@js/Classes/Logger";
 
 export default class AdminSettingsService {
 
@@ -85,7 +86,7 @@ export default class AdminSettingsService {
                 response = await fetch(new Request(url, options));
             return await AdminSettingsService._processResponse(response);
         } catch(e) {
-            console.error('Request failed', e);
+            Logger.error('Request failed', e);
             throw e;
         }
     }
@@ -98,7 +99,7 @@ export default class AdminSettingsService {
      */
     static async _processResponse(response) {
         if(!response.ok) {
-            console.error(response);
+            Logger.error(response);
             throw new Error('Api request failed');
         }
 
@@ -106,7 +107,7 @@ export default class AdminSettingsService {
         if(contentType && contentType.indexOf('application/json') !== -1) {
             return await response.json();
         } else {
-            console.error('Invalid response format', response);
+            Logger.error('Invalid response format', response);
             throw new Error('Invalid response format');
         }
     }

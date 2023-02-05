@@ -16,6 +16,7 @@ import API from '@js/Helper/api';
 import Messages from "@js/Classes/Messages";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
 import Localisation from "@js/Classes/Localisation";
+import Logger from "@js/Classes/Logger";
 
 export default class PasswordActions {
     get password() {
@@ -28,7 +29,7 @@ export default class PasswordActions {
 
     print() {
         let printer = new PrintPasswordAction(this._password);
-        printer.print().catch(console.error);
+        printer.print().catch(Logger.exception);
     }
 
     async favorite(status = null) {
@@ -43,7 +44,7 @@ export default class PasswordActions {
             await PasswordManager.updatePassword(this._password);
         } catch(e) {
             this._password.favorite = oldStatus;
-            console.error(e);
+            Logger.error(e);
         }
 
         return this._password;

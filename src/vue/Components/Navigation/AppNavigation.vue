@@ -44,6 +44,7 @@
     import AppNavigationItemSecurity  from '@vc/Navigation/AppNavigationItemSecurity.vue';
     import AppNavigationItemShared    from '@vc/Navigation/AppNavigationItemShared.vue';
     import AppNavigationItemTags      from '@vc/Navigation/AppNavigationItemTags.vue';
+    import SessionTimeout             from '@vc/SessionTimeout';
     import ArchiveIcon                from '@icon/Archive';
     import ClockIcon                  from '@icon/Clock';
     import CogIcon                    from '@icon/Cog';
@@ -55,6 +56,7 @@
 
     export default {
         components: {
+            SessionTimeout,
             AppNavigationItem,
             AppNavigationItemFavorites,
             AppNavigationItemFolders,

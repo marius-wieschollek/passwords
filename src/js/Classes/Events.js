@@ -1,3 +1,5 @@
+import Logger from "@js/Classes/Logger";
+
 class Events {
 
     /**
@@ -80,7 +82,7 @@ class Events {
                 try {
                     callbacks[j](data);
                 } catch(e) {
-                    console.error(e);
+                    Logger.error(e);
                 }
             }
         }

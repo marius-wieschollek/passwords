@@ -16,7 +16,7 @@
                     <nc-checkbox-radio-switch :checked.sync="advanced">
                         {{ t('ExpertSettingsLabel') }}
                     </nc-checkbox-radio-switch>
-                    <nc-button :to="{ name: 'Help', params: { page: 'Settings' }}" :title="t('Open the settings page in the handbook')">
+                    <nc-button :to="{ name: 'Help', params: { page: 'Settings' }}" :title="t('Open the settings page in the handbook')" :aria-label="t('Handbook')">
                         <help-circle-icon slot="icon"/>
                     </nc-button>
                 </div>

@@ -2,6 +2,7 @@ import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
+import Logger from "@js/Classes/Logger";
 
 export default class EnpassConversionHelper {
 
@@ -256,6 +257,6 @@ export default class EnpassConversionHelper {
     static _logConversionError(text, vars, errors) {
         let message = Localisation.translate(text, vars);
         errors.push(message);
-        console.error(message, vars);
+        Logger.error(message, vars);
     }
 }

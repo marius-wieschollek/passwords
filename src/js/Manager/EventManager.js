@@ -3,6 +3,7 @@ import API from '@js/Helper/api';
 import router from '@js/Helper/router';
 import Messages from '@js/Classes/Messages';
 import SettingsService from '@js/Services/SettingsService';
+import Logger from '@js/Classes/Logger';
 
 class EventManager {
 
@@ -91,12 +92,12 @@ class EventManager {
             location.reload();
         } else if(e.message) {
             Messages.notification(e.message);
-            console.error(e);
+            Logger.error(e);
         } else if(e.response && (!e.response.url || e.response.url.indexOf('service/favicon') === -1)) {
             Messages.notification(`${e.response.status} - ${e.response.statusText}`);
-            console.error(e);
+            Logger.error(e);
         } else {
-            console.error(e);
+            Logger.error(e);
         }
     }
 }

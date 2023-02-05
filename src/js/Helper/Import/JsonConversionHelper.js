@@ -1,4 +1,5 @@
 import {Encryption} from 'passwords-client';
+import Logger from "@js/Classes/Logger";
 
 export default class ImportJsonConversionHelper {
 
@@ -100,7 +101,7 @@ export default class ImportJsonConversionHelper {
         try {
             encryption.decryptWithPassword(json.challenge, `${options.password}challenge`);
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
             throw new Error('Password invalid');
         }
 
@@ -110,7 +111,7 @@ export default class ImportJsonConversionHelper {
             try {
                 json[i] = JSON.parse(encryption.decryptWithPassword(json[i], options.password + i));
             } catch(e) {
-                console.error(e);
+                Logger.error(e);
                 throw new Error(`Failed to decrypt ${i}`);
             }
         }

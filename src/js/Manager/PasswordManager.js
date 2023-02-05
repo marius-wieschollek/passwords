@@ -4,6 +4,7 @@ import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
 import Messages from '@js/Classes/Messages';
 import FolderManager from "@js/Manager/FolderManager";
+import Logger from "@js/Classes/Logger";
 
 /**
  *
@@ -68,7 +69,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   console.error(e);
+                   Logger.error(e);
                    Messages.notification('Creating password failed');
                    reject(password);
                });
@@ -118,7 +119,7 @@ class PasswordManager {
                        resolve(p);
                    })
                    .catch((e) => {
-                       console.error(e);
+                       Logger.error(e);
                        Messages.notification('Saving password failed');
                        reject(password);
                    });
@@ -198,7 +199,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   console.error(e);
+                   Logger.error(e);
                    Messages.notification('Moving password failed');
                    password.folder = originalFolder;
                    reject(password);
@@ -221,7 +222,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   console.error(e);
+                   Logger.error(e);
                    reject(password);
                });
         });

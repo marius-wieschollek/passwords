@@ -4,6 +4,7 @@ import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 import mermaid from "mermaid";
 import DOMPurify from 'dompurify';
+import Logger from "@js/Classes/Logger";
 
 /**
  *
@@ -46,7 +47,7 @@ class HandbookRenderer {
                 return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
         } catch(e) {
-            if(APP_ENVIRONMENT === 'development') console.error('Request failed', e);
+            if(APP_ENVIRONMENT === 'development') Logger.error('Request failed', e);
 
             return HandbookRenderer._generateErrorPage(e.message);
         }

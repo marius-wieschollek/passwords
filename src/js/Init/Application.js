@@ -13,6 +13,7 @@ import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
 import SetupManager from "@js/Manager/SetupManager";
 import Localisation from "@js/Classes/Localisation";
+import Logger from "@js/Classes/Logger";
 
 class Application {
 
@@ -64,7 +65,7 @@ class Application {
     }
 
     get isAuthorized() {
-        return API.isAuthorized || !this._loginRequired
+        return API.isAuthorized || !this._loginRequired;
     }
 
     get isMobile() {
@@ -105,6 +106,9 @@ class Application {
             EventManager.init();
             KeepAliveManager.init();
         }
+        setTimeout(() => {
+            Logger.printXssWarning();
+        }, 3000);
     }
 
     // noinspection JSMethodCanBeStatic

@@ -1,6 +1,7 @@
 import API from '@js/Helper/api';
 import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
+import Logger from "@js/Classes/Logger";
 
 export default class ImportCsvConversionHelper {
 
@@ -471,6 +472,6 @@ export default class ImportCsvConversionHelper {
     static _logConversionError(text, vars, errors) {
         let message = Localisation.translate(text, vars);
         errors.push(message);
-        console.error(message, vars);
+        Logger.error(message, vars);
     }
 }

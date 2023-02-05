@@ -1,5 +1,6 @@
 import SettingsService from '@js/Services/SettingsService';
 import { loadState } from '@nextcloud/initial-state'
+import Logger from "@js/Classes/Logger";
 
 class DeferredActivationService {
 
@@ -48,7 +49,7 @@ class DeferredActivationService {
                 this._processFeatures(data);
             }
         } catch(e) {
-            console.error(e);
+            Logger.error(e);
         }
 
         return this._features;
