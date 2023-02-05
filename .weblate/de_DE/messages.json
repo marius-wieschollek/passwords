@@ -3049,5 +3049,21 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "STOPP!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Diese Funktion ist für Entwickler gedacht, nicht für Benutzer.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Wenn Ihnen jemand gesagt hat, dass Sie hier etwas kopieren und einfügen sollen, ist es wahrscheinlich, dass er sich Zugang zu Ihren Passwörtern verschafft oder Ihr Konto übernimmt.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Siehe {link} für weitere Informationen",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     }
 }
