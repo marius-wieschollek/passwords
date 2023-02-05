@@ -33,8 +33,8 @@ export default new class Logger {
     error(...args) {
         if(Array.isArray(args)) {
             for(let arg of args) {
-                if(arg[0].hasOwnProperty('message')) {
-                    args = args.unshift(arg.message);
+                if(arg.hasOwnProperty('message')) {
+                    args.unshift(arg.message);
                     this._write('error', args);
                     return;
                 }
