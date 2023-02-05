@@ -3064,5 +3064,9 @@
     "frontend-BrowserConsoleWarningLine2": {
         "message": "If anyone told you to copy and paste anything here, it is likely that they will gain access to your passwords or take over your account.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "See {link} for more information",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     }
 }
