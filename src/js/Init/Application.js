@@ -187,12 +187,8 @@ class Application {
     _initVue() {
         let section = SettingsService.get('client.ui.section.default');
 
-        router.addRoutes(
-            [
-                {name: 'All', path: section === 'all' ? '/':'/all', param: [], components: {main: SectionAll}},
-                {path: '*', redirect: {name: section.capitalize()}}
-            ]
-        );
+        router.addRoute({name: 'All', path: section === 'all' ? '/':'/all', param: [], components: {main: SectionAll}});
+        router.addRoute({path: '*', redirect: {name: section.capitalize()}});
 
         router.beforeEach((to, from, next) => {
             if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize' && to.name !== 'Help') {
