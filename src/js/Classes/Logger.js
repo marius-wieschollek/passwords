@@ -77,14 +77,15 @@ export default new class Logger {
     }
 
     printXssWarning() {
-        let link = Utility.generateUrl('/apps/passwords/#/help/Browser-Console');
+        let link = Utility.generateUrl('/apps/passwords/#/help/Browser-Console'),
+            color = navigator.userAgent.indexOf('Firefox') !== -1 ? 'color:#fff;background-color:#EA2027;':'color:#EA2027;';
 
         console.warn(
             `%c${translate('passwords', 'BrowserConsoleWarningTitle')} %c${translate('passwords', 'BrowserConsoleWarningLine1')} %c${translate('passwords', 'BrowserConsoleWarningLine2')} %c${translate('passwords', 'BrowserConsoleWarningLine3', {link})}`,
-            `color:#fff;background-color:#EA2027;padding:10rem 2rem 1rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:12rem;`,
-            `color:#fff;background-color:#EA2027;padding:1rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`,
-            `color:#fff;background-color:#EA2027;padding:1rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`,
-            `color:#fff;background-color:#EA2027;padding:1rem 2rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`
+            `${color}padding:10rem 2rem 1rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:12rem;`,
+            `${color}padding:1rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`,
+            `${color}padding:1rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`,
+            `${color}padding:1rem 2rem 2rem;display:block;font-weight:bold;font-family:'Ubuntu Mono',monospace;font-size:1.5rem;`
         );
     }
 };
