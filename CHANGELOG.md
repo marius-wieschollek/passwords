@@ -1,6 +1,8 @@
 ## [Unreleased]
 ### Added
 - SSEv3 with third party encryption key
+- Initial NC 26 Support
+- Initial PHP 8.2 Support
 ### Changed
 - Copy to clipboard notification informs if copied property is empty
 - API request behaviour changed to improve responsiveness

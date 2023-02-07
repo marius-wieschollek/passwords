@@ -116,8 +116,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="7.4" max-version="8.1" />
-        <nextcloud min-version="25" max-version="25" />
+        <php min-version="7.4" max-version="8.2" />
+        <nextcloud min-version="25" max-version="26" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
