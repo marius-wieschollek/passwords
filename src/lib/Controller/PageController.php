@@ -111,11 +111,14 @@ class PageController extends Controller {
     }
 
     /**
+     * @TODO remove "@UseSession" in 2024.1.0
+     *
      * @NoAdminRequired
      * @NoCSRFRequired
      * @UseSession
      * @throws Exception
      */
+    #[UseSession]
     public function index(): TemplateResponse {
         $isSecure = $this->checkIfHttpsUsed();
 
