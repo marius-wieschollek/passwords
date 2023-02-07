@@ -161,17 +161,19 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetBackgroundImage() {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
-        $this->urlGenerator->method('imagePath')->with('core', 'app-background.jpg')->willReturn('/core/img/app-background.jpg');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/app-background.jpg')->willReturn('https://cloud.com/core/img/app-background.jpg');
+        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1']);
 
-        $this->urlGenerator->expects($this->once())->method('imagePath')->with('core', 'app-background.jpg');
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/core/img/app-background.jpg');
-
+        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
+        // @TODO remove in 2024.1.0
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
+        $this->configurationService->expects($this->once())->method('getSystemValue')->with('version');
+
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/core/img/app-background.jpg', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);
     }
 
     /**
@@ -277,11 +279,15 @@ class ThemeSettingsHelperTest extends TestCase {
         );
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
 
-        $this->urlGenerator->method('imagePath')->with('core', 'app-background.jpg')->willReturn('/core/img/app-background.jpg');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/app-background.jpg')->willReturn('https://cloud.com/core/img/app-background.jpg');
+        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1']);
+
+        // @TODO remove in 2024.1.0
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
+        $this->configurationService->expects($this->once())->method('getSystemValue')->with('version');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/core/img/app-background.jpg', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);
     }
 
     /**
@@ -389,7 +395,7 @@ class ThemeSettingsHelperTest extends TestCase {
             'server.theme.color.primary'    => '#0082c9',
             'server.theme.color.text'       => '#ffffff',
             'server.theme.color.background' => '#ffffff',
-            'server.theme.background'       => 'https://cloud.com/core/img/app-background.jpg',
+            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg',
             'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
             'server.theme.label'            => 'Nextcloud',
             'server.theme.app.icon'         => 'https://cloud.com/apps/passwords/app-themed.svg',
@@ -397,6 +403,7 @@ class ThemeSettingsHelperTest extends TestCase {
         ];
 
         $this->configurationService->method('isAppEnabled')->willReturn(false);
+        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
 
         $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
@@ -405,9 +412,10 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('getEntity')->willReturn('Nextcloud');
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
+        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
+
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
-                ['core', 'app-background.jpg', '/core/img/app-background.jpg'],
                 [Application::APP_NAME, 'app-themed.svg', '/apps/passwords/app-themed.svg'],
                 ['core', 'filetypes/folder.svg', '/core/img/filetypes/folder.svg']
             ]
@@ -415,12 +423,14 @@ class ThemeSettingsHelperTest extends TestCase {
 
         $this->urlGenerator->method('getAbsoluteURL')->willReturnMap(
             [
-                ['/core/img/app-background.jpg', 'https://cloud.com/core/img/app-background.jpg'],
                 ['/core/img/logo.svg', 'https://cloud.com/core/img/logo.svg'],
                 ['/apps/passwords/app-themed.svg', 'https://cloud.com/apps/passwords/app-themed.svg'],
                 ['/core/img/filetypes/folder.svg', 'https://cloud.com/core/img/filetypes/folder.svg'],
             ]
         );
+
+        // @TODO remove in 2024.1.0
+        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
 
         $result = $this->themeSettingsHelper->list();
         self::assertEquals($expected, $result);

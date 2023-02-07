@@ -149,7 +149,7 @@ class ThemeSettingsHelper {
             return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
         }
 
-        return $this->urlGenerator->linkTo('theming', "/img/background/kamil-porembinski-clouds.jpg", ['v' => $this->getCacheBuster()]);
+        return $this->urlGenerator->linkTo('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => $this->getCacheBuster()]);
     }
 
     /**
