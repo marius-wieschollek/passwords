@@ -67,8 +67,9 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
     /**
      * @param string $name
      * @param array  $args
+     * @TODO Temporary fix for NC25/26 cross compatibility. Rename to "setter" in 2024.1.0
      */
-    protected function setter($name, $args) {
+    protected function _setter(string $name, array $args): void {
         if(property_exists($this, $name)) {
             if(isset($this->{$name}) && $this->{$name} === $args[0]) {
                 return;
@@ -91,12 +92,33 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * @param string $name
      *
      * @return mixed
+     * @TODO Temporary fix for NC25/26 cross compatibility. Rename to "getter" in 2024.1.0
      */
-    protected function getter($name) {
+    protected function _getter(string $name): mixed {
         if(property_exists($this, $name)) {
             return isset($this->{$name}) ? $this->{$name}:null;
         } else {
             throw new BadFunctionCallException($name.' is not a valid attribute');
+        }
+    }
+
+    /**
+     * Each time a setter is called, push the part after set
+     * into an array: for instance setId will save Id in the
+     * updated fields array so it can be easily used to create the
+     * getter method
+     * @since 7.0.0
+     * @TODO Remove in 2024.1.0
+     */
+    public function __call(string $methodName, array $args) {
+        if (strpos($methodName, 'set') === 0) {
+            $this->_setter(lcfirst(substr($methodName, 3)), $args);
+        } elseif (strpos($methodName, 'get') === 0) {
+            return $this->_getter(lcfirst(substr($methodName, 3)));
+        } elseif ($this->isGetterForBoolProperty($methodName)) {
+            return $this->_getter(lcfirst(substr($methodName, 2)));
+        } else {
+            throw new \BadFunctionCallException($methodName .' does not exist');
         }
     }
 
@@ -113,7 +135,8 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * @return mixed
      */
     public function getProperty(string $property) {
-        return $this->getter($property);
+        // @TODO Change to "getter" in 2024.1.0
+        return $this->_getter($property);
     }
 
     /**
@@ -121,7 +144,8 @@ abstract class AbstractEntity extends Entity implements EntityInterface {
      * @param        $value
      */
     public function setProperty(string $property, $value): void {
-        $this->setter($property, [$value]);
+        // @TODO Change to "setter" in 2024.1.0
+        $this->_setter($property, [$value]);
     }
 
     /**

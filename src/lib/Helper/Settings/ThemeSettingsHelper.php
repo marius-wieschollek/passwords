@@ -145,7 +145,11 @@ class ThemeSettingsHelper {
             return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
         }
 
-        return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
+        if(str_starts_with($this->config->getSystemValue('version'), '25')) {
+            return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
+        }
+
+        return $this->urlGenerator->linkTo('theming', "/img/background/kamil-porembinski-clouds.jpg", ['v' => $this->getCacheBuster()]);
     }
 
     /**
