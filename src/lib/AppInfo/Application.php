@@ -11,80 +11,81 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCA\Passwords\Controller\Actions\RecoverHiddenController;
-use OCA\Passwords\Controller\Admin\CacheController;
-use OCA\Passwords\Controller\Admin\SettingsController;
-use OCA\Passwords\Controller\Api\AccountApiController;
-use OCA\Passwords\Controller\Api\FolderApiController;
-use OCA\Passwords\Controller\Api\KeychainApiController;
-use OCA\Passwords\Controller\Api\PasswordApiController;
-use OCA\Passwords\Controller\Api\ServiceApiController;
-use OCA\Passwords\Controller\Api\SessionApiController;
-use OCA\Passwords\Controller\Api\SettingsApiController;
-use OCA\Passwords\Controller\Api\ShareApiController;
-use OCA\Passwords\Controller\Api\TagApiController;
-use OCA\Passwords\Controller\Link\ConnectController;
-use OCA\Passwords\EventListener\Challenge\ChallengeActivatedListener;
-use OCA\Passwords\EventListener\Folder\BeforeFolderDeletedListener;
-use OCA\Passwords\EventListener\Folder\BeforeFolderSetRevisionListener;
-use OCA\Passwords\EventListener\Folder\FolderClonedListener;
-use OCA\Passwords\EventListener\Folder\FolderDeletedListener;
-use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
-use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
-use OCA\Passwords\EventListener\Password\PasswordClonedListener;
-use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
-use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEventListener;
-use OCA\Passwords\EventListener\Share\ShareDeletedListener;
-use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
-use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
-use OCA\Passwords\EventListener\Tag\TagClonedListener;
-use OCA\Passwords\EventListener\Tag\TagDeletedListener;
-use OCA\Passwords\EventListener\User\BeforeUserCreatedListener;
-use OCA\Passwords\EventListener\User\UserDeletedListener;
-use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
-use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
-use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
-use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
-use OCA\Passwords\Events\Folder\FolderClonedEvent;
-use OCA\Passwords\Events\Folder\FolderDeletedEvent;
-use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
-use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
-use OCA\Passwords\Events\Password\PasswordClonedEvent;
-use OCA\Passwords\Events\Password\PasswordDeletedEvent;
-use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
-use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
-use OCA\Passwords\Events\Share\ShareDeletedEvent;
-use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
-use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
-use OCA\Passwords\Events\Tag\TagClonedEvent;
-use OCA\Passwords\Events\Tag\TagDeletedEvent;
-use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
-use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\RandomCharactersHelper;
-use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
-use OCA\Passwords\Middleware\ApiSecurityMiddleware;
-use OCA\Passwords\Middleware\ApiSessionMiddleware;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\NotificationService;
-use OCA\Passwords\UserMigration\PasswordsMigrator;
-use OCP\AppFramework\App;
-use OCP\AppFramework\Bootstrap\IBootContext;
-use OCP\AppFramework\Bootstrap\IBootstrap;
-use OCP\AppFramework\Bootstrap\IRegistrationContext;
-use OCP\AppFramework\IAppContainer;
-use OCP\EventDispatcher\IEventDispatcher;
-use OCP\Http\Client\IClientService;
 use OCP\IConfig;
-use OCP\IGroupManager;
 use OCP\IUserManager;
+use OCP\IGroupManager;
 use OCP\L10N\IFactory;
+use OCP\App\IAppManager;
+use OCP\AppFramework\App;
 use OCP\Notification\IManager;
-use OCP\Share\IManager as ShareManager;
-use OCP\User\Events\BeforeUserCreatedEvent;
+use OCP\AppFramework\IAppContainer;
+use OCP\Http\Client\IClientService;
 use OCP\User\Events\CreateUserEvent;
 use OCP\User\Events\UserDeletedEvent;
+use OCP\Share\IManager as ShareManager;
+use OCP\EventDispatcher\IEventDispatcher;
+use OCP\AppFramework\Bootstrap\IBootstrap;
+use OCP\User\Events\BeforeUserCreatedEvent;
+use OCA\Passwords\Events\Tag\TagClonedEvent;
+use OCP\AppFramework\Bootstrap\IBootContext;
+use OCA\Passwords\Events\Tag\TagDeletedEvent;
+use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Helper\Words\LocalWordsHelper;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Events\Share\ShareDeletedEvent;
+use OCA\Passwords\Controller\Api\TagApiController;
+use OCA\Passwords\Events\Folder\FolderClonedEvent;
+use OCA\Passwords\Middleware\ApiSessionMiddleware;
+use OCA\Passwords\UserMigration\PasswordsMigrator;
+use OCA\Passwords\Controller\Admin\CacheController;
+use OCA\Passwords\Events\Folder\FolderDeletedEvent;
+use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
+use OCA\Passwords\Middleware\ApiSecurityMiddleware;
+use OCA\Passwords\Controller\Api\ShareApiController;
+use OCA\Passwords\Controller\Link\ConnectController;
+use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
+use OCP\AppFramework\Bootstrap\IRegistrationContext;
+use OCA\Passwords\Controller\Api\FolderApiController;
+use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
+use OCA\Passwords\Controller\Admin\SettingsController;
+use OCA\Passwords\Controller\Api\AccountApiController;
+use OCA\Passwords\Controller\Api\ServiceApiController;
+use OCA\Passwords\Controller\Api\SessionApiController;
+use OCA\Passwords\EventListener\Tag\TagClonedListener;
+use OCA\Passwords\Events\Password\PasswordClonedEvent;
+use OCA\Passwords\Helper\Words\RandomCharactersHelper;
+use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
+use OCA\Passwords\Controller\Api\KeychainApiController;
+use OCA\Passwords\Controller\Api\PasswordApiController;
+use OCA\Passwords\Controller\Api\SettingsApiController;
+use OCA\Passwords\EventListener\Tag\TagDeletedListener;
+use OCA\Passwords\Events\Password\PasswordDeletedEvent;
+use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
+use OCA\Passwords\EventListener\User\UserDeletedListener;
+use OCA\Passwords\Events\Folder\BeforeFolderDeletedEvent;
+use OCA\Passwords\EventListener\Share\ShareDeletedListener;
+use OCA\Passwords\Events\Challenge\ChallengeActivatedEvent;
+use OCA\Passwords\EventListener\Folder\FolderClonedListener;
+use OCA\Passwords\Controller\Actions\RecoverHiddenController;
+use OCA\Passwords\EventListener\Folder\FolderDeletedListener;
+use OCA\Passwords\EventListener\Tag\BeforeTagDeletedListener;
+use OCA\Passwords\Events\Folder\BeforeFolderSetRevisionEvent;
+use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
+use OCA\Passwords\EventListener\User\BeforeUserCreatedListener;
+use OCA\Passwords\EventListener\Password\PasswordClonedListener;
+use OCA\Passwords\EventListener\Password\PasswordDeletedListener;
+use OCA\Passwords\EventListener\Tag\BeforeTagSetRevisionListener;
+use OCA\Passwords\Events\Challenge\BeforeChallengeActivatedEvent;
+use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
+use OCA\Passwords\EventListener\Folder\BeforeFolderDeletedListener;
+use OCA\Passwords\EventListener\Challenge\ChallengeActivatedListener;
+use OCA\Passwords\EventListener\Folder\BeforeFolderSetRevisionListener;
+use OCA\Passwords\EventListener\Password\BeforePasswordDeletedListener;
+use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
+use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
+use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
+use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEventListener;
 
 /**
  * Class Application
@@ -108,6 +109,7 @@ class Application extends App implements IBootstrap {
      * @param IRegistrationContext $context
      */
     public function register(IRegistrationContext $context): void {
+        $this->registerNC25Patches($context);
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
@@ -134,29 +136,35 @@ class Application extends App implements IBootstrap {
         /**
          * Helper
          */
-        $context->registerService(LocalWordsHelper::class,
-            function (IAppContainer $c) {
+        $context->registerService(
+            LocalWordsHelper::class,
+            function(IAppContainer $c) {
                 return new LocalWordsHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
-            });
+            }
+        );
 
-        $context->registerService(RandomCharactersHelper::class,
-            function (IAppContainer $c) {
+        $context->registerService(
+            RandomCharactersHelper::class,
+            function(IAppContainer $c) {
                 return new RandomCharactersHelper(
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
-            });
+            }
+        );
 
-        $context->registerService(LeipzigCorporaHelper::class,
-            function (IAppContainer $c) {
+        $context->registerService(
+            LeipzigCorporaHelper::class,
+            function(IAppContainer $c) {
                 return new LeipzigCorporaHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IClientService::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
-            });
+            }
+        );
     }
 
     /**
@@ -188,8 +196,9 @@ class Application extends App implements IBootstrap {
         $context->registerServiceAlias('TagApiController', TagApiController::class);
         $context->registerServiceAlias('RecoverHiddenController', RecoverHiddenController::class);
 
-        $context->registerService(ShareUserListHelper::class,
-            function (IAppContainer $c) {
+        $context->registerService(
+            ShareUserListHelper::class,
+            function(IAppContainer $c) {
                 return new ShareUserListHelper(
                     $c->get(ShareManager::class),
                     $c->get(IUserManager::class),
@@ -197,7 +206,8 @@ class Application extends App implements IBootstrap {
                     $c->get(ConfigurationService::class),
                     $c->get(EnvironmentService::class)
                 );
-            });
+            }
+        );
     }
 
     /**
@@ -246,5 +256,14 @@ class Application extends App implements IBootstrap {
      */
     protected function registerNotificationNotifier(): void {
         $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
+    }
+
+    protected function registerNC25Patches(IRegistrationContext $context) {
+        if (!str_starts_with($this->getContainer()->get(IConfig::class)->getSystemValue('version'), '25')) {
+            return;
+        }
+
+        $basePath = $this->getContainer()->get(IAppManager::class)->getAppPath('passwords');
+        require_once implode(DIRECTORY_SEPARATOR, [$basePath, 'appinfo', 'overrides', 'nc-25.php']);
     }
 }
