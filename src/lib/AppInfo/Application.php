@@ -109,7 +109,6 @@ class Application extends App implements IBootstrap {
      * @param IRegistrationContext $context
      */
     public function register(IRegistrationContext $context): void {
-        $this->registerNC25Patches($context);
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
@@ -256,14 +255,5 @@ class Application extends App implements IBootstrap {
      */
     protected function registerNotificationNotifier(): void {
         $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
-    }
-
-    protected function registerNC25Patches(IRegistrationContext $context) {
-        if (!str_starts_with($this->getContainer()->get(IConfig::class)->getSystemValue('version'), '25')) {
-            return;
-        }
-
-        $basePath = $this->getContainer()->get(IAppManager::class)->getAppPath('passwords');
-        require_once implode(DIRECTORY_SEPARATOR, [$basePath, 'appinfo', 'overrides', 'nc-25.php']);
     }
 }

@@ -12,7 +12,8 @@
 $config = [
     'basedir' => dirname(__DIR__),
     'nightly' => in_array('--nightly', $argv),
-    'lsr'     => in_array('--lsr', $argv)
+    'lsr'     => in_array('--lsr', $argv),
+    'nc25'    => in_array('--nc25', $argv)
 ];
 
 function getBaseVersion() {
@@ -37,9 +38,9 @@ function getFullVersion() {
     $parts = explode('.', getBaseVersion());
 
     if($config['lsr']) {
-        $parts[2] = '1'.$parts[2];
+        $parts[2] = ($config['nc25'] ? '1':'3').$parts[2];
     } else {
-        $parts[2] = '2'.$parts[2];
+        $parts[2] = ($config['nc25'] ? '2':'4').$parts[2];
     }
 
     $version = implode('.', $parts);
@@ -66,6 +67,11 @@ function updateInfoXml() {
 
     $version    = $xml->xpath('version')[0];
     $version[0] = getFullVersion();
+
+    if($config['nc25']) {
+        $ncMaxVersion    = $xml->xpath('dependencies/nextcloud')[0];
+        $ncMaxVersion['max-version'] = '25';
+    }
 
     $xml->asXML($appInfoPath);
 }

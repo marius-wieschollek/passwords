@@ -9,12 +9,10 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Db\Traits;
 
 use BadFunctionCallException;
 
 trait GetterSetterTrait {
-
 
     /**
      * @param string $name

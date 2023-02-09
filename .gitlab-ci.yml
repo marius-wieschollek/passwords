@@ -25,7 +25,6 @@ Assemble:
   stage: assembling
   script:
     - mkdir passwords
-    - rm src/appinfo/info-lsr.xml src/lib/AppInfo/SystemRequirementsLSR.php
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --nightly --build "${CI_PIPELINE_ID}" ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
@@ -34,13 +33,26 @@ Assemble:
   artifacts:
     paths:
       - ./passwords
+
+Assemble Nextcloud 25:
+  stage: assembling
+  script:
+    - mkdir passwords
+    - rsync -r .patches/nc-25/* src
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --nc25 ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --nightly --nc25 --build "${CI_PIPELINE_ID}" ; fi
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-nc25
+    - rsync -r src/js/Static passwords-nc25/js/
+    - cp CHANGELOG.md passwords-nc25/
+  artifacts:
+    paths:
+      - ./passwords-nc25
       
 Assemble Legacy Support Release:
   stage: assembling
   script:
     - mkdir passwords-lsr
-    - mv src/appinfo/info-lsr.xml src/appinfo/info.xml
-    - mv src/lib/AppInfo/SystemRequirementsLSR.php src/lib/AppInfo/SystemRequirements.php
+    - rsync -r .patches/lsr/* src
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr --nightly --build "${CI_PIPELINE_ID}" ; fi
@@ -51,6 +63,22 @@ Assemble Legacy Support Release:
     paths:
       - ./passwords-lsr
 
+Assemble Nextcloud 25 Legacy Support Release:
+  stage: assembling
+  script:
+    - mkdir passwords-lsr
+    - rsync -r .patches/nc-25/* src
+    - rsync -r .patches/lsr/* src
+    - npm run rector
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr --nc25 ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr --nightly --nc25 --build "${CI_PIPELINE_ID}" ; fi
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-nc25-lsr
+    - rsync -r src/js/Static passwords-nc25-lsr/js/
+    - cp CHANGELOG.md passwords-nc25-lsr/
+  artifacts:
+    paths:
+      - ./passwords-nc25-lsr
+
 PHPUnit:
   stage: testing
   script:
@@ -58,17 +86,23 @@ PHPUnit:
   artifacts:
     paths:
       - ./passwords
+      - ./passwords-nc25
       - ./passwords-lsr
+      - ./passwords-nc25-lsr
 
 Sign:
   stage: signing
   script:
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-nc25 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-nc25-lsr --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
   artifacts:
     paths:
       - ./passwords
+      - ./passwords-nc25
       - ./passwords-lsr
+      - ./passwords-nc25-lsr
   only:
     - testing
     - stable
@@ -77,12 +111,16 @@ Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
+    - tar -zcf passwords-nc25.tar.gz passwords-nc25 --transform s/passwords-nc25/passwords/
     - tar -zcf passwords-lsr.tar.gz passwords-lsr --transform s/passwords-lsr/passwords/
+    - tar -zcf passwords-nc25-lsr.tar.gz passwords-nc25-lsr --transform s/passwords-nc25-lsr/passwords/
     - echo "export JOB_ID=\"${CI_JOB_ID}\"" > job.id
   artifacts:
     paths:
       - ./passwords.tar.gz
+      - ./passwords-nc25.tar.gz
       - ./passwords-lsr.tar.gz
+      - ./passwords-nc25-lsr.tar.gz
       - job.id
   only:
   - testing
@@ -104,7 +142,11 @@ Publish Stable:
   script:
     - source job.id
     - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - NC25_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-nc25.tar.gz | openssl base64 | tr -d "\n")
     - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr.tar.gz | openssl base64 | tr -d "\n")
+    - NC25_LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-nc25-lsr.tar.gz | openssl base64 | tr -d "\n")
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-nc25-lsr.tar.gz\",\"signature\":\"${NC25_LSR_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-nc25.tar.gz\",\"signature\":\"${NC25_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
