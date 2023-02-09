@@ -70,6 +70,7 @@ function updateInfoXml() {
 
     if($config['nc25']) {
         $ncMaxVersion    = $xml->xpath('dependencies/nextcloud')[0];
+        $ncMaxVersion['min-version'] = '26';
         $ncMaxVersion['max-version'] = '25';
     }
 
