@@ -22,7 +22,7 @@ trait GetterSetterTrait {
      *
      * @throws Exception
      */
-    protected function setter(string $name, array $args): void {
+    protected function setter($name, $args) {
         if(property_exists($this, $name)) {
             if(isset($this->{$name}) && $this->{$name} === $args[0]) {
                 return;
@@ -30,6 +30,7 @@ trait GetterSetterTrait {
 
             $this->markFieldUpdated($name);
 
+            // if type definition exists, cast to correct type
             if($args[0] !== null && array_key_exists($name, $this->getFieldTypes())) {
                 $type = $this->getFieldTypes()[ $name ];
                 if($type === 'blob') {
@@ -63,7 +64,7 @@ trait GetterSetterTrait {
      *
      * @return mixed
      */
-    protected function getter(string $name): mixed {
+    protected function getter($name) {
         if(property_exists($this, $name)) {
             return $this->{$name} ?? null;
         } else {
