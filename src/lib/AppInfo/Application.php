@@ -109,6 +109,7 @@ class Application extends App implements IBootstrap {
      * @param IRegistrationContext $context
      */
     public function register(IRegistrationContext $context): void {
+        $this->registerNextcloudVersionSpecificClassLoader();
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
@@ -137,7 +138,7 @@ class Application extends App implements IBootstrap {
          */
         $context->registerService(
             LocalWordsHelper::class,
-            function(IAppContainer $c) {
+            function (IAppContainer $c) {
                 return new LocalWordsHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
@@ -147,7 +148,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             RandomCharactersHelper::class,
-            function(IAppContainer $c) {
+            function (IAppContainer $c) {
                 return new RandomCharactersHelper(
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
@@ -156,7 +157,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             LeipzigCorporaHelper::class,
-            function(IAppContainer $c) {
+            function (IAppContainer $c) {
                 return new LeipzigCorporaHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IClientService::class),
@@ -197,7 +198,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             ShareUserListHelper::class,
-            function(IAppContainer $c) {
+            function (IAppContainer $c) {
                 return new ShareUserListHelper(
                     $c->get(ShareManager::class),
                     $c->get(IUserManager::class),
@@ -255,5 +256,24 @@ class Application extends App implements IBootstrap {
      */
     protected function registerNotificationNotifier(): void {
         $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
+    }
+
+    protected function registerNextcloudVersionSpecificClassLoader() {
+        if(str_starts_with($this->getContainer()->get(\OCP\IConfig::class)->getSystemValue('version'), '25')) {
+            spl_autoload_register(
+                function (string $class_name) {
+                    if(str_starts_with($class_name, 'OCA\\Passwords')) {
+                        $baseDir  = dirname(__FILE__, 2);
+                        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
+                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc25', $fileName]));
+                        if($path && str_starts_with($path, $baseDir)) {
+                            require_once $path;
+                        }
+                    }
+                },
+                true,
+                true
+            );
+        }
     }
 }
