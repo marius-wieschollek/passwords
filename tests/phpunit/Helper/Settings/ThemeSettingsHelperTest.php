@@ -168,10 +168,6 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
-        // @TODO remove in 2024.1.0
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
-        $this->configurationService->expects($this->once())->method('getSystemValue')->with('version');
-
         $result = $this->themeSettingsHelper->get('background');
         self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);
     }
@@ -281,10 +277,6 @@ class ThemeSettingsHelperTest extends TestCase {
 
         $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
         $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1']);
-
-        // @TODO remove in 2024.1.0
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
-        $this->configurationService->expects($this->once())->method('getSystemValue')->with('version');
 
         $result = $this->themeSettingsHelper->get('background');
         self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);

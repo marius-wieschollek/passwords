@@ -218,12 +218,14 @@ class CheckAppSettingsTest extends TestCase {
                 ['nightly/enabled', null, Application::APP_NAME, '0'],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn('0.0.0.0');
+
+        \OC_Util::$ncVersion =  [0,0,0,0];
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
+        \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
     }
 
     /**
