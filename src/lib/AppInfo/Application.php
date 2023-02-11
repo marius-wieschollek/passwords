@@ -259,14 +259,14 @@ class Application extends App implements IBootstrap {
     }
 
     protected function registerNextcloudVersionSpecificClassLoader() {
-        if(str_starts_with($this->getContainer()->get(\OCP\IConfig::class)->getSystemValue('version'), '25')) {
+        if(\OC_Util::getVersion()[0] === 25) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
                         $baseDir  = dirname(__FILE__, 2);
                         $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
                         $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc25', $fileName]));
-                        if($path && str_starts_with($path, $baseDir)) {
+                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] === 25) {
                             require_once $path;
                         }
                     }

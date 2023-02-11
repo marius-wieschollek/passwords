@@ -145,7 +145,7 @@ class ThemeSettingsHelper {
             return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
         }
 
-        if(str_starts_with($this->config->getSystemValue('version'), '25')) {
+        if(\OC_Util::getVersion()[0] === 25) {
             return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
         }
 

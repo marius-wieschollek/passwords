@@ -112,7 +112,7 @@ class CheckAppSettings implements IRepairStep {
             $this->sendEmptySettingNotification('preview');
         }
 
-        $ncVersion = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $ncVersion = \OC_Util::getVersion()[0];
         if($ncVersion < SystemRequirements::NC_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_NOTIFICATION_ID) {
             $this->sendDeprecatedPlatformNotification($ncVersion);
         }

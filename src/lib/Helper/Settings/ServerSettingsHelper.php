@@ -122,9 +122,7 @@ class ServerSettingsHelper {
      * @return string
      */
     protected function getServerVersion(): string {
-        $version = $this->config->getSystemValue('version');
-
-        return explode('.', $version, 2)[0];
+        return \OC_Util::getVersion()[0];
     }
 
     /**

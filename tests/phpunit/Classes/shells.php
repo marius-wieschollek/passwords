@@ -12,6 +12,12 @@ namespace {
     class OC {
         public static $server;
     }
+
+    class OC_Util {
+        public static $ncDefaultVersion = [26,0,0,0];
+        public static $ncVersion = [26,0,0,0];
+        public static function getVersion(): array {return self::$ncVersion;}
+    }
 }
 
 namespace OC {
