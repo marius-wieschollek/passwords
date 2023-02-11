@@ -407,7 +407,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion     = intval(explode('.', $this->config->getSystemValue('version'), 2)[0]);
+        $ncVersion     = \OC_Util::getVersion()[0];
         $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
         $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
         $cronPhpString = $this->config->getAppValue('cron/php/version/string', phpversion());

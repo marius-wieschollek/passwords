@@ -71,7 +71,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $ncVersion = explode('.', $this->config->getSystemValue('version'), 2)[0];
+        $ncVersion = \OC_Util::getVersion()[0];
         $parameters = $notification->getSubjectParameters();
         if(!isset($parameters['ncVersion']) || $parameters['ncVersion'] < intval($ncVersion)) {
             if(intval($ncVersion) >= SystemRequirements::NC_NOTIFICATION_ID) {
