@@ -127,6 +127,15 @@ export default class PrintPasswordAction {
 body, table, td, th, div {
     font-family: Lato, Ubuntu, Calibri, Verdana, Arial, sans-serif;
     font-size: 16pt;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    word-break: break-word;
+}
+body {
+    width: 600px;
+    max-width: 600px;
+    overflow: hidden;
 }
 h1 {
     margin: 0;
@@ -142,14 +151,21 @@ h2 {
     font-size: 1.5rem;
     margin: 0;
 }
+table {
+    width: 600px;
+}
 th {
     font-weight: bold;
-    padding-right: 2rem;
     text-align: left;
+    vertical-align: top;
+    max-width: 25%;
+    min-width: 16%;
 }
 td.value {
     font-family: 'Ubuntu Mono', Consolas, "Liberation Mono", Menlo, Courier, monospace;
     text-align: left;
+    vertical-align: top;
+    padding-left: 1rem;
 }
 div.notes-label {
     margin-top: 2rem;
