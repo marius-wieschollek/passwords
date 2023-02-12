@@ -93,33 +93,38 @@ class AdminSettings implements ISettings {
      * @return TemplateResponse returns the instance with all parameters set, ready to be rendered
      */
     public function getForm(): TemplateResponse {
-        return new TemplateResponse(
-            'passwords', 'admin/index', [
-                           'imageServices'    => $this->getImageServices(),
-                           'wordsServices'    => $this->getWordsServices(),
-                           'faviconServices'  => $this->getFaviconServices(),
-                           'previewServices'  => $this->getWebsitePreviewServices(),
-                           'securityServices' => $this->getSecurityServices(),
-                           'purgeTimeout'     => $this->getPurgeTimeout(),
-                           'backupInterval'   => $this->getBackupInterval(),
-                           'securityHash'     => $this->getSecurityHash(),
-                           'backupFiles'      => intval($this->config->getAppValue('backup/files/maximum', 14)),
-                           'backupRestore'    => $this->config->getAppValue('backup/update/autorestore', true),
-                           'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
-                           'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
-                           'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
-                           'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
-                           'caches'           => $this->getFileCaches(),
-                           'support'          => $this->getPlatformSupport(),
-                           'links'            => [
-                               'documentation' => self::LINK_DOCUMENTATION,
-                               'requirements'  => self::LINK_REQUIREMENTS,
-                               'issues'        => self::LINK_ISSUES,
-                               'forum'         => self::LINK_FORUM,
-                               'help'          => self::LINK_HELP
-                           ]
-                       ]
-        );
+        $variables = [
+            'imageServices'    => $this->getImageServices(),
+            'wordsServices'    => $this->getWordsServices(),
+            'faviconServices'  => $this->getFaviconServices(),
+            'previewServices'  => $this->getWebsitePreviewServices(),
+            'securityServices' => $this->getSecurityServices(),
+            'purgeTimeout'     => $this->getPurgeTimeout(),
+            'backupInterval'   => $this->getBackupInterval(),
+            'securityHash'     => $this->getSecurityHash(),
+            'backupFiles'      => intval($this->config->getAppValue('backup/files/maximum', 14)),
+            'backupRestore'    => $this->config->getAppValue('backup/update/autorestore', true),
+            'serverSurvey'     => intval($this->config->getAppValue('survey/server/mode', -1)),
+            'mailSecurity'     => $this->config->getAppValue('settings/mail/security', true),
+            'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
+            'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
+            'encryptionSSEv3'  => $this->config->getAppValue('encryption/SSEv3/enabled', false),
+            'caches'           => $this->getFileCaches(),
+            'support'          => $this->getPlatformSupport(),
+            'links'            => [
+                'documentation' => self::LINK_DOCUMENTATION,
+                'requirements'  => self::LINK_REQUIREMENTS,
+                'issues'        => self::LINK_ISSUES,
+                'forum'         => self::LINK_FORUM,
+                'help'          => self::LINK_HELP
+            ]
+        ];
+
+        if($this->config->hasAppValue('dev/app/hash')) {
+            $variables['hash'] = $this->config->getAppValue('dev/app/hash');
+        }
+
+        return new TemplateResponse('passwords', 'admin/index', $variables);
     }
 
     /**

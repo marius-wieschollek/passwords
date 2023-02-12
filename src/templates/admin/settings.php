@@ -144,6 +144,19 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
 
     <form>
         <h3>
+            <?php p($l->t('Encryption Settings')); ?>
+            <span class="response success saved"><?php p($l->t('Saved')); ?></span>
+            <span class="response error"><?php p($l->t('Failed')); ?></span>
+        </h3>
+
+        <div class="area encryption">
+            <label for="passwords-encryption-ssev3"><?php p($l->t('Allow third party encryption')); ?></label>
+            <input id="passwords-encryption-ssev3" name="encryption-ssev3" data-setting="encryption.ssev3.enabled" type="checkbox" <?=$_['encryptionSSEv3'] ? 'checked':''?>>
+        </div>
+    </form>
+
+    <form>
+        <h3>
             <?php p($l->t('Default Email Settings')); ?>
             <span class="response success saved"><?php p($l->t('Saved')); ?></span>
             <span class="response error"><?php p($l->t('Failed')); ?></span>

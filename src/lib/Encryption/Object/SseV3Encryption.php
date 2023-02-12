@@ -16,27 +16,33 @@ use OCA\Passwords\Exception\Encryption\SSEv3InvalidKeyException;
 use OCA\Passwords\Exception\Encryption\SSEv3ProviderInvalidException;
 use OCA\Passwords\Exception\Encryption\SSEv3ProviderNotAvailableException;
 use OCA\Passwords\Exception\Encryption\SSEv3ProviderNotFoundException;
+use OCA\Passwords\Helper\AppSettings\EncryptionSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\IAppContainer;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
+use Psr\Container\ContainerInterface;
 
 class SseV3Encryption extends SseV1Encryption {
-
-    protected IAppContainer $container;
 
     /**
      * @param ICrypto              $crypto
      * @param ISecureRandom        $secureRandom
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
-     * @param IAppContainer        $container
+     * @param ContainerInterface   $container
      */
-    public function __construct(ICrypto $crypto, ISecureRandom $secureRandom, ConfigurationService $config, EnvironmentService $environment, IAppContainer $container) {
+    public function __construct(
+        ICrypto $crypto,
+        ISecureRandom $secureRandom,
+        ConfigurationService $config,
+        EnvironmentService $environment,
+        protected ContainerInterface $container,
+        protected EncryptionSettingsHelper $encryptionSettings
+    ) {
         parent::__construct($crypto, $secureRandom, $config, $environment);
-        $this->container = $container;
     }
 
     /**
@@ -51,7 +57,7 @@ class SseV3Encryption extends SseV1Encryption {
      */
     public function isAvailable(): bool {
         try {
-            return $this->getKeyProvider()?->isAvailable() === true;
+            return $this->encryptionSettings->get('ssev3.enabled') && $this->getKeyProvider()?->isAvailable() === true;
         } catch(\Throwable $e) {
             return false;
         }

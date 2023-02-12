@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\BackupSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\DefaultSettingsHelper;
+use OCA\Passwords\Helper\AppSettings\EncryptionSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\EntitySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\NightlySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
@@ -23,59 +24,25 @@ use OCA\Passwords\Helper\AppSettings\SurveySettingsHelper;
 class AppSettingsService {
 
     /**
-     * @var EntitySettingsHelper
-     */
-    protected EntitySettingsHelper $entitySettings;
-
-    /**
-     * @var BackupSettingsHelper
-     */
-    protected BackupSettingsHelper $backupSettings;
-
-    /**
-     * @var SurveySettingsHelper
-     */
-    protected SurveySettingsHelper $surveySettings;
-
-    /**
-     * @var ServiceSettingsHelper
-     */
-    protected ServiceSettingsHelper $serviceSettings;
-
-    /**
-     * @var DefaultSettingsHelper
-     */
-    protected DefaultSettingsHelper $defaultSettings;
-
-    /**
-     * @var NightlySettingsHelper
-     */
-    protected NightlySettingsHelper $nightlySettings;
-
-    /**
      * AppSettingsService constructor.
      *
-     * @param EntitySettingsHelper    $entitySettingsHelper
-     * @param BackupSettingsHelper    $backupSettingsHelper
-     * @param SurveySettingsHelper    $surveySettingsHelper
-     * @param ServiceSettingsHelper   $serviceSettingsHelper
-     * @param NightlySettingsHelper   $nightlySettingsHelper
-     * @param DefaultSettingsHelper   $defaultSettingsHelper
+     * @param EntitySettingsHelper     $entitySettings
+     * @param BackupSettingsHelper     $backupSettings
+     * @param SurveySettingsHelper     $surveySettings
+     * @param ServiceSettingsHelper    $serviceSettings
+     * @param NightlySettingsHelper    $nightlySettings
+     * @param DefaultSettingsHelper    $defaultSettings
+     * @param EncryptionSettingsHelper $encryptionSettings
      */
     public function __construct(
-        EntitySettingsHelper $entitySettingsHelper,
-        BackupSettingsHelper $backupSettingsHelper,
-        SurveySettingsHelper $surveySettingsHelper,
-        ServiceSettingsHelper $serviceSettingsHelper,
-        NightlySettingsHelper $nightlySettingsHelper,
-        DefaultSettingsHelper $defaultSettingsHelper
+        protected EntitySettingsHelper $entitySettings,
+        protected BackupSettingsHelper $backupSettings,
+        protected SurveySettingsHelper $surveySettings,
+        protected ServiceSettingsHelper $serviceSettings,
+        protected NightlySettingsHelper $nightlySettings,
+        protected DefaultSettingsHelper $defaultSettings,
+        protected EncryptionSettingsHelper $encryptionSettings
     ) {
-        $this->entitySettings    = $entitySettingsHelper;
-        $this->backupSettings    = $backupSettingsHelper;
-        $this->surveySettings    = $surveySettingsHelper;
-        $this->serviceSettings   = $serviceSettingsHelper;
-        $this->defaultSettings   = $defaultSettingsHelper;
-        $this->nightlySettings   = $nightlySettingsHelper;
     }
 
     /**
@@ -100,6 +67,8 @@ class AppSettingsService {
                 return $this->defaultSettings->get($subKey);
             case 'nightly':
                 return $this->nightlySettings->get($subKey);
+            case 'encryption':
+                return $this->encryptionSettings->get($subKey);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -109,10 +78,10 @@ class AppSettingsService {
      * @param string      $key
      * @param             $value
      *
-     * @return bool|float|int|mixed|null|string
+     * @return array
      * @throws ApiException
      */
-    public function set(string $key, $value) {
+    public function set(string $key, $value): array {
         [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
@@ -128,6 +97,8 @@ class AppSettingsService {
                 return $this->defaultSettings->set($subKey, $value);
             case 'nightly':
                 return $this->nightlySettings->set($subKey, $value);
+            case 'encryption':
+                return $this->encryptionSettings->set($subKey, $value);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -155,6 +126,8 @@ class AppSettingsService {
                 return $this->defaultSettings->reset($subKey);
             case 'nightly':
                 return $this->nightlySettings->reset($subKey);
+            case 'encryption':
+                return $this->encryptionSettings->reset($subKey);
         }
 
         throw new ApiException('Unknown setting identifier', 400);
@@ -190,6 +163,10 @@ class AppSettingsService {
 
         if($scope === null || in_array('nightly', $scope)) {
             $settings = array_merge($settings, $this->nightlySettings->list());
+        }
+
+        if($scope === null || in_array('encryption', $scope)) {
+            $settings = array_merge($settings, $this->encryptionSettings->list());
         }
 
         return $settings;

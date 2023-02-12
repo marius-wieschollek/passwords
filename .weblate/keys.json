@@ -772,5 +772,7 @@
     "tutorial-000790": "Your password needs at least 12 characters and the confirmation password must be the same",
     "backend-UserMigrationDescription": "Decrypted passwords database with passwords, folders, tags and settings. (Does not include passwords shared with you. Does not work with E2E enabled)",
     "backend-ExportNotPossibleTitle": "Passwords can't be exported",
-    "backend-ExportNotPossibleText": "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data."
+    "backend-ExportNotPossibleText": "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data.",
+    "backend-SettingsEncryptionSection": "Encryption Settings",
+    "backend-SettingsEncryptionSSEv3": "Allow third party encryption"
 }
