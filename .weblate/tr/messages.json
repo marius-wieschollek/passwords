@@ -3067,5 +3067,13 @@
     "frontend-BrowserConsoleWarningTitle": {
         "message": "DUR!",
         "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Şifreleme Ayarları",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Üçüncü taraf şifrelemesine izin ver",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     }
 }
