@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2023.2.0 - Feature release
 ### Added
 - SSEv3 with third party encryption key
 - Initial NC 26 Support
