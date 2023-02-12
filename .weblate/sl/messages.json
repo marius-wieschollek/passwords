@@ -2449,7 +2449,7 @@
     "backend-000662": {
         "message": "samodejno obnavljanje varnostnih kopij ob brisanju podatkovne baze"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Gesla konča posodobitve za Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2457,8 +2457,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Gesla $STR_1$ je zadnja posodobitev za Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Gesla $STR_1$ je zadnja posodobitev za Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2468,8 +2468,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Nadgradite na Nextcloud $STR_1$ in PHP $STR_1$ (ali PHP $STR_1$ za LSR) za prihodnje nadgradnje.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Nadgradite na Nextcloud $STR_1$ in PHP $STR_2$ (ali PHP $STR_3$ za LSR) za prihodnje nadgradnje.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningLine3": {
         "message": "Za več informacij glejte {link}",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Nastavitve šifriranja",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Omogočanje šifriranja tretjih oseb",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLPHPText2": {
+        "message": "Nadgradite na PHP $STR_2$ (ali PHP $STR_3$ za LSR) za prihodnje nadgradnje.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Gesla konča posodobitve za Nextcloud $STR_1$ in PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Nadgradite na Nextcloud $STR_1$ za prihodnje nadgradnje.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Gesla konča posodobitve za PHP $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Gesla $STR_1$ je zadnja posodobitev za PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Gesla $STR_1$ je zadnja posodobitev za Nextcloud $STR_2$ in PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "To obvestilo lahko izbrišete.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }

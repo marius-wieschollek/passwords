@@ -2432,7 +2432,7 @@
     "backend-000662": {
         "message": "Restauração automática de cópias de segurança quando a base de dados é apagada"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "As palavras-passe terminam as actualizações para Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2440,8 +2440,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwords $STR_1$ é a última actualização para Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwords $STR_1$ é a última actualização para Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2451,8 +2451,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Actualização para Nextcloud $STR_1$ e PHP $STR_1$ (ou PHP $STR_1$ para LSR) para futuras actualizações.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Actualização para Nextcloud $STR_1$ e PHP $STR_2$ (ou PHP $STR_3$ para LSR) para futuras actualizações.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3038,5 +3038,20 @@
     "frontend-PasswordEncryptionSSE": {
         "message": "Criptografia do lado do servidor",
         "description": "Label for the server side encryption method"
+    },
+    "backend-EOLPHPText1": {
+        "message": "Passwords $STR_1$ é a última actualização para Nextcloud $STR_2$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
     }
 }

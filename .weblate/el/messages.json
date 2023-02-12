@@ -2512,7 +2512,7 @@
     "backend-000662": {
         "message": "Επαναφορά αντιγράφων ασφαλείας αυτόματα όταν η βάση δεδομένων σβηστεί"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Οι κωδικοί πρόσβασης τελειώνουν τις ενημερώσεις για το Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2520,8 +2520,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για το Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για το Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2531,8 +2531,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Αναβαθμίστε σε Nextcloud $STR_1$ και PHP $STR_1$ (ή PHP $STR_1$ για LSR) για μελλοντικές αναβαθμίσεις.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Αναβαθμίστε σε Nextcloud $STR_1$ και PHP $STR_2$ (ή PHP $STR_3$ για LSR) για μελλοντικές αναβαθμίσεις.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningLine2": {
         "message": "Αν κάποιος σας είπε να αντιγράψετε και να επικολλήσετε οτιδήποτε εδώ, είναι πιθανό να αποκτήσει πρόσβαση στους κωδικούς σας ή να καταλάβει το λογαριασμό σας.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Ρυθμίσεις κρυπτογράφησης",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Επιτρέψτε την κρυπτογράφηση από τρίτους",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Αναβάθμιση σε Nextcloud $STR_1$ για μελλοντικές αναβαθμίσεις.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Οι κωδικοί πρόσβασης τελειώνουν τις ενημερώσεις για την PHP $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για την PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Αναβαθμίστε σε PHP $STR_2$ (ή PHP $STR_3$ για LSR) για μελλοντικές αναβαθμίσεις.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Οι κωδικοί πρόσβασης τελειώνουν τις ενημερώσεις για το Nextcloud $STR_1$ και την PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για το Nextcloud $STR_2$ και το PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Αυτή η ειδοποίηση μπορεί να διαγραφεί.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }

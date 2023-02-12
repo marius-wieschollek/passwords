@@ -71,19 +71,22 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $ncVersion = \OC_Util::getVersion()[0];
-        $parameters = $notification->getSubjectParameters();
-        if(!isset($parameters['ncVersion']) || $parameters['ncVersion'] < intval($ncVersion)) {
-            if(intval($ncVersion) >= SystemRequirements::NC_NOTIFICATION_ID) {
-                return $notification
-                    ->setParsedSubject($localisation->t('This notification can be deleted.'))
-                    ->setParsedMessage('');
-            }
+        $ncVersion     = \OC_Util::getVersion()[0];
+        $phpVersion    = PHP_VERSION_ID;
+        $parameters    = $notification->getSubjectParameters();
+        $isNcOutdated  = isset($parameters['ncVersion']) && $parameters['ncVersion'] < $ncVersion && $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;
+        $isPhpOutdated = isset($parameters['phpVersion']) && $parameters['phpVersion'] < $phpVersion && $phpVersion < SystemRequirements::PHP_NOTIFICATION_ID;
+
+        if(!$isNcOutdated && !$isPhpOutdated) {
+            return $notification
+                ->setParsedSubject($localisation->t('This notification can be deleted.'))
+                ->setParsedMessage('');
         }
 
+        $phpVersionString = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;
 
-        $title   = $this->getTitle($localisation, $ncVersion);
-        $message = $this->getMessage($localisation, $ncVersion, $parameters['appVersion']);
+        $title   = $this->getTitle($localisation, $ncVersion, $phpVersionString, $isNcOutdated, $isPhpOutdated);
+        $message = $this->getMessage($localisation, $ncVersion, $phpVersionString, $parameters['appVersion'], $isNcOutdated, $isPhpOutdated);
         $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
@@ -95,37 +98,54 @@ class UpgradeRequiredNotification extends AbstractNotification {
     /**
      * @param IL10N  $localisation
      * @param string $ncVersion
+     * @param string $phpVersionString
+     * @param bool   $isNcOutdated
+     * @param bool   $isPhpOutdated
      *
      * @return string
      */
-    protected function getTitle(IL10N $localisation, string $ncVersion): string {
+    protected function getTitle(IL10N $localisation, string $ncVersion, string $phpVersionString, bool $isNcOutdated, bool $isPhpOutdated): string {
+        if($isNcOutdated && $isPhpOutdated) {
+            return $localisation->t('Passwords ends updates for Nextcloud %1$s and PHP %2$s', [$ncVersion, $phpVersionString]);
+        }
+        if($isPhpOutdated) {
+            return $localisation->t('Passwords ends updates for PHP %s', [$phpVersionString]);
+        }
+
         return $localisation->t('Passwords ends updates for Nextcloud %s', [$ncVersion]);
     }
 
     /**
      * @param IL10N  $localisation
      * @param string $ncVersion
+     * @param string $phpVersionString
      * @param string $appVersion
+     * @param bool   $isNcOutdated
+     * @param bool   $isPhpOutdated
      *
      * @return string
      */
-    protected function getMessage(IL10N $localisation, string $ncVersion, string $appVersion): string {
+    protected function getMessage(IL10N $localisation, string $ncVersion, string $phpVersionString, string $appVersion, bool $isNcOutdated, bool $isPhpOutdated): string {
+        $text1 = 'Passwords %1$s is the last update for Nextcloud %2$s.';
+        $text2 = 'Upgrade to Nextcloud %1$s for future upgrades.';
+
+        if($isNcOutdated && $isPhpOutdated) {
+            $text1 = 'Passwords %1$s is the last update for Nextcloud %2$s and PHP %3$s.';
+            $text2 = 'Upgrade to Nextcloud %1$s and PHP %2$s (or PHP %3$s for LSR) for future upgrades.';
+        } else if($isPhpOutdated) {
+            $text1 = 'Passwords %1$s is the last update for PHP %3$s.';
+            $text2 = 'Upgrade to PHP %2$s (or PHP %3$s for LSR) for future upgrades.';
+        }
+
         return
             $localisation->t(
-                'Passwords %s is the last update for Nextcloud %s.',
-                [
-                    $appVersion,
-                    $ncVersion,
-                ]
+                $text1,
+                [$appVersion, $ncVersion, $phpVersionString]
             ).
             ' '.
             $localisation->t(
-                'Upgrade to Nextcloud %s and PHP %s (or PHP %s for LSR) for future upgrades.',
-                [
-                    SystemRequirements::NC_UPGRADE_MINIMUM,
-                    SystemRequirements::PHP_UPGRADE_MINIMUM,
-                    SystemRequirements::PHP_UPGRADE_MINIMUM_LSR,
-                ]
+                $text2,
+                [SystemRequirements::NC_UPGRADE_MINIMUM, SystemRequirements::PHP_UPGRADE_MINIMUM, SystemRequirements::PHP_UPGRADE_MINIMUM_LSR,]
             );
     }
 }

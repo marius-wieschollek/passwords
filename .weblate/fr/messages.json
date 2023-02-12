@@ -2402,7 +2402,7 @@
     "backend-000662": {
         "message": "Restauration automatique des sauvegardes lorsque la base de données est effacée"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Fin des mises à jour des mots de passe pour Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2410,8 +2410,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2421,8 +2421,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Passez à Nextcloud $STR_1$ et PHP $STR_1$ (ou PHP $STR_1$ pour LSR) pour les futures mises à niveau.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Passez à Nextcloud $STR_1$ et PHP $STR_2$ (ou PHP $STR_3$ pour LSR) pour les futures mises à niveau.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningLine2": {
         "message": "Si quelqu'un vous a dit de copier et coller quoi que ce soit ici, il est probable qu'il aura accès à vos mots de passe ou prendra le contrôle de votre compte.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Paramètres de cryptage",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Autoriser le cryptage par des tiers",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Passez à Nextcloud $STR_1$ pour les mises à niveau futures.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Fin des mises à jour des mots de passe pour PHP $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Mots de passe $STR_1$ est la dernière mise à jour de PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Passez à PHP $STR_2$ (ou PHP $STR_3$ pour LSR) pour les futures mises à jour.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Les mots de passe mettent fin aux mises à jour pour Nextcloud $STR_1$ et PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_2$ et PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Cette notification peut être supprimée.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }

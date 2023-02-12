@@ -2476,7 +2476,7 @@
     "backend-000662": {
         "message": "Biztonsági mentések automatikus visszaállítása az adatbázis törlése esetén"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "A jelszavak véget érnek a Nextcloud frissítései $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2484,8 +2484,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Jelszavak $STR_1$ a Nextcloud $STR_1$ utolsó frissítése.",
+    "backend-EOLNextcloudText1": {
+        "message": "Jelszavak $STR_1$ a Nextcloud $STR_2$ utolsó frissítése.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2495,8 +2495,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Frissítsen a Nextcloud $STR_1$ és a PHP $STR_1$ (vagy PHP $STR_1$ for LSR) verzióra a jövőbeli frissítésekhez.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Frissítsen a Nextcloud $STR_1$ és a PHP $STR_2$ (vagy PHP $STR_3$ for LSR) verzióra a jövőbeli frissítésekhez.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningLine3": {
         "message": "További információért lásd {link}",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Titkosítási beállítások",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Harmadik fél általi titkosítás engedélyezése",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Frissítsen a Nextcloudra $STR_1$ a jövőbeli frissítésekhez.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "A jelszavak véget érnek a PHP frissítései $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "A jelszavak $STR_1$ a PHP $STR_3$ utolsó frissítése.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Frissítsen a PHP $STR_2$ (vagy a PHP $STR_3$ for LSR) verzióra a jövőbeli frissítésekhez.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "A jelszavak véget érnek a Nextcloud $STR_1$ és a PHP frissítéseihez. $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Jelszavak $STR_1$ az utolsó frissítés a Nextcloud $STR_2$ és a PHP $STR_3$ számára.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Ez az értesítés törölhető.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }

@@ -652,9 +652,16 @@
     "backend-000660" : "If this was an error, a backup of the database was made before restoring it.",
     "backend-000661" : "You can disable automatic backup restoring in the app settings.",
     "backend-000662" : "Restore backups automatically when database wiped",
-    "backend-000663" : "Passwords ends updates for Nextcloud %s",
-    "backend-000664" : "Passwords %s is the last update for Nextcloud %s.",
-    "backend-000665" : "Upgrade to Nextcloud %s and PHP %s (or PHP %s for LSR) for future upgrades.",
+    "backend-EOLNextcloudTitle" : "Passwords ends updates for Nextcloud %s",
+    "backend-EOLNextcloudText1" : "Passwords %1$s is the last update for Nextcloud %2$s.",
+    "backend-EOLNextcloudText2" : "Upgrade to Nextcloud %1$s for future upgrades.",
+    "backend-EOLPHPTitle" : "Passwords ends updates for PHP %s",
+    "backend-EOLPHPText1" : "Passwords %1$s is the last update for PHP %3$s.",
+    "backend-EOLPHPText2" : "Upgrade to PHP %2$s (or PHP %3$s for LSR) for future upgrades.",
+    "backend-EOLNextcloudPHPTitle" : "Passwords ends updates for Nextcloud %1$s and PHP %2$s",
+    "backend-EOLNextcloudPHPText1" : "Passwords %1$s is the last update for Nextcloud %2$s and PHP %3$s.",
+    "backend-EOLNextcloudPHPText2" : "Upgrade to Nextcloud %1$s and PHP %2$s (or PHP %3$s for LSR) for future upgrades.",
+    "backend-NotificationInvalid" : "This notification can be deleted.",
     "backend-000666" : "Select automatically",
     "frontend-000667": "Tags CSV",
     "frontend-000669": "Default",
@@ -772,5 +779,7 @@
     "tutorial-000790": "Your password needs at least 12 characters and the confirmation password must be the same",
     "backend-UserMigrationDescription": "Decrypted passwords database with passwords, folders, tags and settings. (Does not include passwords shared with you. Does not work with E2E enabled)",
     "backend-ExportNotPossibleTitle": "Passwords can't be exported",
-    "backend-ExportNotPossibleText": "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data."
+    "backend-ExportNotPossibleText": "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data.",
+    "backend-SettingsEncryptionSection": "Encryption Settings",
+    "backend-SettingsEncryptionSSEv3": "Allow third party encryption"
 }

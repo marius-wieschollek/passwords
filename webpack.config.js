@@ -82,6 +82,7 @@ module.exports = (env, argv) => {
 
     return {
         mode        : production ? 'production':'development',
+        devtool     : false,
         entry       : {
             app  : `${__dirname}/src/js/app.js`,
             admin: `${__dirname}/src/js/admin.js`

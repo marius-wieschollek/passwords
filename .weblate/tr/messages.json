@@ -2486,7 +2486,7 @@
     "backend-000662": {
         "message": "Veritabanı silindiğinde yedekleri otomatik olarak geri yükleme"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Şifreler Nextcloud için güncellemeleri sonlandırır $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2494,8 +2494,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Parolalar $STR_1$ Nextcloud $STR_1$ için son güncellemedir.",
+    "backend-EOLNextcloudText1": {
+        "message": "Parolalar $STR_1$ Nextcloud $STR_2$ için son güncellemedir.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2505,8 +2505,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ ve PHP $STR_1$ (veya LSR için PHP $STR_1$ ) sürümlerine yükseltin.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ ve PHP $STR_2$ (veya LSR için PHP $STR_3$ ) sürümlerine yükseltin.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningTitle": {
         "message": "DUR!",
         "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Şifreleme Ayarları",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Üçüncü taraf şifrelemesine izin ver",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ adresine yükseltin.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Şifreler PHP için güncellemeleri sonlandırır $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Passwords $STR_1$, PHP $STR_3$ için son güncellemedir.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Gelecekteki yükseltmeler için PHP $STR_2$ (veya LSR için PHP $STR_3$ ) sürümüne yükseltin.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Şifreler Nextcloud $STR_1$ ve PHP için güncellemeleri sonlandırır $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Şifreler $STR_1$, Nextcloud $STR_2$ ve PHP $STR_3$ için son güncellemedir.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Bu bildirim silinebilir.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }

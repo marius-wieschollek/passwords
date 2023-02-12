@@ -2571,7 +2571,7 @@
     "backend-000662": {
         "message": "当数据库被擦除时自动恢复备份"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "密码结束了Nextcloud的更新$STR_1$",
         "placeholders": {
             "str_1": {
@@ -2670,8 +2670,8 @@
         "message": "发生了一个错误。",
         "description": "Generic error message if the recover hidden items action fails"
     },
-    "backend-000664": {
-        "message": "密码$STR_1$ 是Nextcloud$STR_1$ 的最后一次更新。",
+    "backend-EOLNextcloudText1": {
+        "message": "密码$STR_1$ 是Nextcloud$STR_2$ 的最后一次更新。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2681,8 +2681,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "升级到Nextcloud$STR_1$ 和PHP$STR_1$ （或LSR的PHP$STR_1$ ），以便将来升级。",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "升级到Nextcloud$STR_1$ 和PHP$STR_2$ （或LSR的PHP$STR_3$ ），以便将来升级。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3067,5 +3067,98 @@
     "frontend-BrowserConsoleWarningLine3": {
         "message": "更多信息见{链接}。",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "加密设置",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "允许第三方加密",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLPHPTitle": {
+        "message": "PHP的密码结束更新$STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "密码结束后，Nextcloud$STR_1$ 和 PHP 的更新。$STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "密码$STR_1$ 是Nextcloud$STR_2$ 和 PHP$STR_3$ 的最后一次更新。",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "这个通知可以被删除。",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "升级到Nextcloud$STR_1$ ，以便将来升级。",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "密码$STR_1$ 是PHP的最后一次更新$STR_3$ 。",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "升级到PHP$STR_2$ （或LSR的PHP$STR_3$ ），以便将来升级。",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
     }
 }
