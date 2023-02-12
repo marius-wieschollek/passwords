@@ -44,7 +44,7 @@
         "message": "Nezkoušet znovu"
     },
     "apps-000014": {
-        "message": "Připojit něco jiného"
+        "message": "Připojit jiného klienta"
     },
     "apps-000015": {
         "message": "Zkusit znovu"
@@ -3062,7 +3062,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Další informace naleznete na {link}",
+        "message": "Další informace naleznete na {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     }
 }
