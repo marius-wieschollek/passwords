@@ -57,7 +57,7 @@ class SseV3Encryption extends SseV1Encryption {
      */
     public function isAvailable(): bool {
         try {
-            return $this->encryptionSettings->get('ssev3.enabled') && $this->getKeyProvider()?->isAvailable() === true;
+            return $this->encryptionSettings->get('ssev3.enabled') && $this->getKeyProvider(true)?->isAvailable() === true;
         } catch(\Throwable $e) {
             return false;
         }
@@ -96,13 +96,15 @@ class SseV3Encryption extends SseV1Encryption {
      * @return SseV3KeyProviderInterface|null
      * @throws Exception
      */
-    protected function getKeyProvider(): ?SseV3KeyProviderInterface {
+    protected function getKeyProvider(bool $noException = false): ?SseV3KeyProviderInterface {
         if(!$this->container->has(SseV3KeyProviderInterface::class)) {
+            if($noException) return null;
             throw new SSEv3ProviderNotFoundException();
         }
 
         $provider = $this->container->get(SseV3KeyProviderInterface::class);
         if($provider instanceof SseV3KeyProviderInterface) {
+            if($noException) return $provider;
 
             if(!$provider->isAvailable()) {
                 throw new SSEv3ProviderNotAvailableException();
@@ -111,6 +113,7 @@ class SseV3Encryption extends SseV1Encryption {
             return $provider;
         }
 
+        if($noException) return null;
         throw new SSEv3ProviderInvalidException();
     }
 

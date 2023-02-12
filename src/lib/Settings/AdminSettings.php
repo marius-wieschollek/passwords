@@ -14,6 +14,7 @@ namespace OCA\Passwords\Settings;
 use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
@@ -109,6 +110,7 @@ class AdminSettings implements ISettings {
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
             'encryptionSSEv3'  => $this->config->getAppValue('encryption/SSEv3/enabled', false),
+            'hasSSEv3'         => \OC::$server->has(SseV3KeyProviderInterface::class),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [

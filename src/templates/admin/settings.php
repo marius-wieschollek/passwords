@@ -142,6 +142,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
         </div>
     </form>
 
+    <?php if($_['hasSSEv3']): ?>
     <form>
         <h3>
             <?php p($l->t('Encryption Settings')); ?>
@@ -154,6 +155,7 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
             <input id="passwords-encryption-ssev3" name="encryption-ssev3" data-setting="encryption.ssev3.enabled" type="checkbox" <?=$_['encryptionSSEv3'] ? 'checked':''?>>
         </div>
     </form>
+    <?php endif; ?>
 
     <form>
         <h3>
