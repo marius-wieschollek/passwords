@@ -1,5 +1,5 @@
 import '@scss/admin';
-import AppSettingsService from '@js/Services/AppSettingsService'
+import AppSettingsService from '@js/Services/AppSettingsService';
 
 class PasswordsAdminSettings {
 
@@ -9,52 +9,61 @@ class PasswordsAdminSettings {
     }
 
     initialize() {
-        $('[data-setting]').on(
-            'change',
-            (e) => {
-                let $target = $(e.target),
-                    key     = $target.data('setting'),
-                    value   = $target.val();
+        document.querySelectorAll('[data-setting]')
+                .forEach((el) => {
+                    el.addEventListener(
+                        'change',
+                        (e) => {
+                            let target = e.target,
+                                key    = target.dataset.setting,
+                                value  = target.value;
 
-                if($target.attr('type') === 'checkbox') {
-                    value = $target[0].checked ? 'true':'false';
-                }
+                            if(target.getAttribute('type') === 'checkbox') {
+                                value = target.checked ? 'true':'false';
+                            }
 
-                this.api.set(key, value)
-                    .then((d) => {
-                        this._showMessage('saved', `[data-setting="${key}"]`);
-                    })
-                    .catch((d) => {
-                        this._showMessage('error', `[data-setting="${key}"]`);
-                        if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
-                    });
-            }
-        );
-        $('[data-clear-cache]').click(
-            (e) => {
-                let $target = $(e.target),
-                    cache   = $target.data('clear-cache'),
-                    label   = PasswordsAdminSettings._translate(`${cache.capitalize()} Cache (0 files, 0 B)`);
+                            this.api.set(key, value)
+                                .then((d) => {
+                                    this._showMessage('saved', `[data-setting="${key}"]`);
+                                })
+                                .catch((d) => {
+                                    this._showMessage('error', `[data-setting="${key}"]`);
+                                    if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+                                });
+                        }
+                    );
+                });
 
-                $target.parent().find('label').text(label);
 
-                this.api.clearCache(cache)
-                    .then((d) => {
-                        this._showMessage('cleared', '.area.cache');
-                    })
-                    .catch((d) => {
-                        this._showMessage('error', '.area.cache');
-                        if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
-                    });
-            }
-        );
+        document.querySelectorAll('[data-clear-cache]')
+                .forEach((el) => {
+                    el.addEventListener(
+                        'click',
+                        (e) => {
+                            let target = e.target,
+                                cache  = target.dataset.clearCache,
+                                label  = PasswordsAdminSettings._translate(`${cache.capitalize()} Cache (0 files, 0 B)`);
 
-        $('#passwords-favicon').on(
+                            target.parentNode.querySelector('label').innerText = label;
+
+                            this.api.clearCache(cache)
+                                .then((d) => {
+                                    this._showMessage('cleared', '.area.cache');
+                                })
+                                .catch((d) => {
+                                    this._showMessage('error', '.area.cache');
+                                    if(d.message) OC.Notification.show(PasswordsAdminSettings._translate(d.message));
+                                });
+                        }
+                    );
+                });
+
+        document.getElementById('passwords-favicon').addEventListener(
             'change',
             () => { PasswordsAdminSettings._updateApiField('favicon'); }
         );
 
-        $('#passwords-preview').on(
+        document.getElementById('passwords-preview').addEventListener(
             'change',
             () => { PasswordsAdminSettings._updateApiField('preview'); }
         );
@@ -71,14 +80,15 @@ class PasswordsAdminSettings {
      * @private
      */
     _showMessage(type, target) {
-        let $el = $('section.passwords').find(target).parents('form').eq(0).find(`h3 .response.${type}`);
-        $el.removeClass('active').addClass('active');
+        let element = document.querySelector('section.passwords').querySelector(target).closest('form').querySelector(`h3 .response.${type}`);
+        element.classList.remove('active');
+        element.classList.add('active');
 
         clearTimeout(this._timer[type]);
         this._timer[type] = setTimeout(
             () => {
-                $el.removeClass('active');
-                if(type === 'error') location.reload(true);
+                element.classList.remove('active');
+                if(type === 'error') location.reload();
             },
             1000);
     }
@@ -94,26 +104,25 @@ class PasswordsAdminSettings {
      * @private
      */
     static _updateApiField(type) {
-        let $target   = $(`#passwords-${type}`),
-            value     = $target.val(),
-            $option   = $target.find(`[value=${value}]`),
-            data      = $option.data('api'),
-            $apiInput = $(`#passwords-${type}-api`);
-
+        let target   = document.getElementById(`passwords-${type}`),
+            value    = target.value,
+            option   = target.querySelector(`[value=${value}]`),
+            data     = JSON.parse(option.dataset.api),
+            apiInput = document.getElementById(`passwords-${type}-api`);
 
         if(data === null) {
-            $apiInput.parent().hide();
+            apiInput.parentNode.style.display = 'none';
         } else {
-            $apiInput.parent().show();
+            apiInput.parentNode.style.display = '';
 
-            $apiInput.data('setting', data.key);
-            $apiInput.attr('data-setting', data.key);
-            $apiInput.val(data.value);
+            apiInput.dataset.setting = data.key;
+            apiInput.setAttribute('data-setting', data.key);
+            apiInput.value = data.value;
         }
     }
 }
 
-$(window).on('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', () => {
     let PwSettings = new PasswordsAdminSettings();
     PwSettings.initialize();
 });
