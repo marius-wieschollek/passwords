@@ -3067,5 +3067,13 @@
     "frontend-BrowserConsoleWarningLine3": {
         "message": "Viac informácií nájdete na {link}",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Nastavenia šifrovania",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Povolenie šifrovania tretej strany",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     }
 }
