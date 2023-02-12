@@ -3065,5 +3065,13 @@
     "frontend-BrowserConsoleWarningLine3": {
         "message": "Weitere Informationen finden Sie unter {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Verschlüsselungseinstellungen",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Verschlüsselung durch Drittanbieter erlauben",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     }
 }

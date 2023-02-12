@@ -3067,5 +3067,13 @@
     "frontend-BrowserConsoleWarningLine2": {
         "message": "Αν κάποιος σας είπε να αντιγράψετε και να επικολλήσετε οτιδήποτε εδώ, είναι πιθανό να αποκτήσει πρόσβαση στους κωδικούς σας ή να καταλάβει το λογαριασμό σας.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Ρυθμίσεις κρυπτογράφησης",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Επιτρέψτε την κρυπτογράφηση από τρίτους",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     }
 }
