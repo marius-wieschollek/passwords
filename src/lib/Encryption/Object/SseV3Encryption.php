@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -20,7 +20,6 @@ use OCA\Passwords\Helper\AppSettings\EncryptionSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCP\AppFramework\IAppContainer;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 use Psr\Container\ContainerInterface;
@@ -28,18 +27,19 @@ use Psr\Container\ContainerInterface;
 class SseV3Encryption extends SseV1Encryption {
 
     /**
-     * @param ICrypto              $crypto
-     * @param ISecureRandom        $secureRandom
-     * @param ConfigurationService $config
-     * @param EnvironmentService   $environment
-     * @param ContainerInterface   $container
+     * @param ICrypto                  $crypto
+     * @param ISecureRandom            $secureRandom
+     * @param ConfigurationService     $config
+     * @param EnvironmentService       $environment
+     * @param ContainerInterface       $container
+     * @param EncryptionSettingsHelper $encryptionSettings
      */
     public function __construct(
-        ICrypto $crypto,
-        ISecureRandom $secureRandom,
-        ConfigurationService $config,
-        EnvironmentService $environment,
-        protected ContainerInterface $container,
+        ICrypto                            $crypto,
+        ISecureRandom                      $secureRandom,
+        ConfigurationService               $config,
+        EnvironmentService                 $environment,
+        protected ContainerInterface       $container,
         protected EncryptionSettingsHelper $encryptionSettings
     ) {
         parent::__construct($crypto, $secureRandom, $config, $environment);
@@ -93,8 +93,12 @@ class SseV3Encryption extends SseV1Encryption {
     /**
      * Load the third party key provider
      *
+     * @param bool $noException
+     *
      * @return SseV3KeyProviderInterface|null
-     * @throws Exception
+     * @throws SSEv3ProviderInvalidException
+     * @throws SSEv3ProviderNotAvailableException
+     * @throws SSEv3ProviderNotFoundException
      */
     protected function getKeyProvider(bool $noException = false): ?SseV3KeyProviderInterface {
         if(!$this->container->has(SseV3KeyProviderInterface::class)) {
@@ -125,7 +129,7 @@ class SseV3Encryption extends SseV1Encryption {
      * @return string
      * @throws SSEv3InvalidKeyException
      */
-    protected function validateKey(string $key) {
+    protected function validateKey(string $key): string {
         if(strlen($key) < 32) {
             throw new SSEv3InvalidKeyException();
         }
