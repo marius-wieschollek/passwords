@@ -202,7 +202,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->notificationService
             ->expects($this->once())
             ->method('sendUpgradeRequiredNotification')
-            ->with('admin', 0, '2022.1.0');
+            ->with('admin', 0, PHP_VERSION_ID, '2022.1.0');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
@@ -223,6 +223,7 @@ class CheckAppSettingsTest extends TestCase {
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
+            \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
             $this->fail($e->getMessage());
         }
         \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
