@@ -3075,5 +3075,90 @@
     "backend-SettingsEncryptionSSEv3": {
         "message": "Leidimas šifruoti trečiosioms šalims",
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Slaptažodžiai baigiasi PHP atnaujinimai $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Slaptažodžiai baigiasi Nextcloud $STR_1$ ir PHP atnaujinimais $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Atnaujinkite \"Nextcloud\" $STR_1$, kad galėtumėte atnaujinti ateityje.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Slaptažodžiai $STR_1$ yra paskutinis PHP atnaujinimas $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Atnaujinkite PHP $STR_2$ (arba PHP $STR_3$ LSR), kad galėtumėte atnaujinti ateityje.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Slaptažodžiai $STR_1$ yra paskutinis \"Nextcloud\" $STR_2$ ir PHP $STR_3$ atnaujinimas.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Šį pranešimą galima ištrinti.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     }
 }
