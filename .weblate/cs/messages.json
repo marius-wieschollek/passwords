@@ -2261,8 +2261,8 @@
     "backend-000660": {
         "message": "Pro případ, že by se jednalo o nedopatření, byla také provedena záloha stávající databáze před jejím přepsáním obnovou."
     },
-    "backend-000664": {
-        "message": "Hesla $STR_1$ je poslední aktualizace pro Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Hesla $STR_1$ je poslední aktualizace pro Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2811,7 +2811,7 @@
     "backend-000662": {
         "message": "V případě, že byla databáze vymazána obnovit automaticky ze zálohy"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Hesla končí aktualizace pro Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2819,8 +2819,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Abyste dostávali i budoucí aktualizace, přejděte na Nextcloud $STR_1$ a PHP $STR_1$ (nebo PHP $STR_1$ v případě LSR).",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Abyste dostávali i budoucí aktualizace, přejděte na Nextcloud $STR_1$ a PHP $STR_2$ (nebo PHP $STR_3$ v případě LSR).",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -2145,7 +2145,7 @@
     "backend-000662": {
         "message": "Back-ups automatisch herstellen wanneer database wordt gewist"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Wachtwoorden beëindigen updates voor Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2153,8 +2153,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Wachtwoorden $STR_1$ is de laatste update voor Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Wachtwoorden $STR_1$ is de laatste update voor Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2164,8 +2164,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Upgrade naar Nextcloud $STR_1$ en PHP $STR_1$ (of PHP $STR_1$ voor LSR) voor toekomstige upgrades.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Upgrade naar Nextcloud $STR_1$ en PHP $STR_2$ (of PHP $STR_3$ voor LSR) voor toekomstige upgrades.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

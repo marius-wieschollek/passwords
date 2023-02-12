@@ -2455,7 +2455,7 @@
     "backend-000662": {
         "message": "Palauta varmuuskopiot automaattisesti, kun tietokanta pyyhitään."
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Salasanat päättyy Nextcloudin päivitykset $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2463,8 +2463,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Salasanat $STR_1$ on viimeinen päivitys Nextcloudille $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Salasanat $STR_1$ on viimeinen päivitys Nextcloudille $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2474,8 +2474,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Päivitä Nextcloud $STR_1$ ja PHP $STR_1$ (tai PHP $STR_1$ LSR:lle) tulevia päivityksiä varten.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Päivitä Nextcloud $STR_1$ ja PHP $STR_2$ (tai PHP $STR_3$ LSR:lle) tulevia päivityksiä varten.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

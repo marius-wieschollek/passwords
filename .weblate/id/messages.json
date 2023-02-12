@@ -2459,7 +2459,7 @@
     "backend-000662": {
         "message": "Memulihkan cadangan secara otomatis ketika basis data dihapus"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Kata sandi mengakhiri pembaruan untuk Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2467,8 +2467,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Kata sandi $STR_1$ adalah pembaruan terakhir untuk Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Kata sandi $STR_1$ adalah pembaruan terakhir untuk Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2478,8 +2478,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Upgrade ke Nextcloud $STR_1$ dan PHP $STR_1$ (atau PHP $STR_1$ untuk LSR) untuk upgrade di masa depan.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Upgrade ke Nextcloud $STR_1$ dan PHP $STR_2$ (atau PHP $STR_3$ untuk LSR) untuk upgrade di masa depan.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -1673,7 +1673,7 @@
     "backend-000662": {
         "message": "Restore backups automatically when database wiped"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Passwords ends updates for Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -1681,8 +1681,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwords $STR_1$ is the last update for Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwords $STR_1$ is the last update for Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1692,8 +1692,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Upgrade to Nextcloud $STR_1$ and PHP $STR_1$ (or PHP $STR_1$ for LSR) for future upgrades.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Upgrade to Nextcloud $STR_1$ and PHP $STR_2$ (or PHP $STR_3$ for LSR) for future upgrades.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

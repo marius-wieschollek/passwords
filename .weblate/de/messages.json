@@ -2228,7 +2228,7 @@
     "backend-000662": {
         "message": "Backups automatisch wiederherstellen wenn die Datenbank gelöscht wurde"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Passwörter beendet Updates für Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2236,8 +2236,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwörter $STR_1$ ist das letzte Update für Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwörter $STR_1$ ist das letzte Update für Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2247,8 +2247,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Aktualisiere auf Nextcloud $STR_1$ und PHP $STR_1$ (oder PHP $STR_1$ für die LSR-Version) um zukünftige Updates zu erhalten.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Aktualisiere auf Nextcloud $STR_1$ und PHP $STR_2$ (oder PHP $STR_3$ für die LSR-Version) um zukünftige Updates zu erhalten.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

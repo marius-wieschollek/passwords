@@ -2815,7 +2815,7 @@
     "backend-000662": {
         "message": "Restaurar las copias de seguridad automáticamente cuando se borra la base de datos"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Las contraseñas terminan las actualizaciones de Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2823,8 +2823,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Contraseñas $STR_1$ es la última actualización de Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Contraseñas $STR_1$ es la última actualización de Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2834,8 +2834,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Actualice a Nextcloud $STR_1$ y PHP $STR_1$ (o PHP $STR_1$ para LSR) para futuras actualizaciones.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Actualice a Nextcloud $STR_1$ y PHP $STR_2$ (o PHP $STR_3$ para LSR) para futuras actualizaciones.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

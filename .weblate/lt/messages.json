@@ -2476,7 +2476,7 @@
     "settings-000719": {
         "message": "Turite įvesti senąjį slaptažodį"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Slaptažodžiai baigiasi \"Nextcloud\" atnaujinimais $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2484,8 +2484,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Slaptažodžiai $STR_1$ yra paskutinis \"Nextcloud\" atnaujinimas $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Slaptažodžiai $STR_1$ yra paskutinis \"Nextcloud\" atnaujinimas $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2495,8 +2495,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Atnaujinkite \"Nextcloud\" $STR_1$ ir PHP $STR_1$ (arba PHP $STR_1$ LSR), kad galėtumėte atnaujinti ateityje.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Atnaujinkite \"Nextcloud\" $STR_1$ ir PHP $STR_2$ (arba PHP $STR_3$ LSR), kad galėtumėte atnaujinti ateityje.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

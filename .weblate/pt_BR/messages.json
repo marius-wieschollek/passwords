@@ -2580,7 +2580,7 @@
             }
         }
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "As senhas terminam com atualizações para Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2588,8 +2588,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Senhas $STR_1$ é a última atualização para Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Senhas $STR_1$ é a última atualização para Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2599,8 +2599,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Atualização para Nextcloud $STR_1$ e PHP $STR_1$ (ou PHP $STR_1$ para LSR) para futuras atualizações.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Atualização para Nextcloud $STR_1$ e PHP $STR_2$ (ou PHP $STR_3$ para LSR) para futuras atualizações.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

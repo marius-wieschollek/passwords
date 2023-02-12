@@ -2252,8 +2252,8 @@
     "backend-000660": {
         "message": "Om detta var ett fel gjordes en säkerhetskopia av databasen innan den återställdes."
     },
-    "backend-000665": {
-        "message": "Uppgradera till Nextcloud $STR_1$ och PHP $STR_1$ (eller PHP $STR_1$ för LSR) för framtida uppgraderingar.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Uppgradera till Nextcloud $STR_1$ och PHP $STR_2$ (eller PHP $STR_3$ för LSR) för framtida uppgraderingar.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2778,7 +2778,7 @@
     "backend-000662": {
         "message": "Återställa säkerhetskopior automatiskt när databasen torkas bort"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Lösenord avslutar uppdateringar för Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2786,8 +2786,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Lösenord $STR_1$ är den sista uppdateringen för Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Lösenord $STR_1$ är den sista uppdateringen för Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

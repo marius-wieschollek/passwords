@@ -2571,7 +2571,7 @@
     "backend-000662": {
         "message": "当数据库被擦除时自动恢复备份"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "密码结束了Nextcloud的更新$STR_1$",
         "placeholders": {
             "str_1": {
@@ -2670,8 +2670,8 @@
         "message": "发生了一个错误。",
         "description": "Generic error message if the recover hidden items action fails"
     },
-    "backend-000664": {
-        "message": "密码$STR_1$ 是Nextcloud$STR_1$ 的最后一次更新。",
+    "backend-EOLNextcloudText1": {
+        "message": "密码$STR_1$ 是Nextcloud$STR_2$ 的最后一次更新。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2681,8 +2681,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "升级到Nextcloud$STR_1$ 和PHP$STR_1$ （或LSR的PHP$STR_1$ ），以便将来升级。",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "升级到Nextcloud$STR_1$ 和PHP$STR_2$ （或LSR的PHP$STR_3$ ），以便将来升级。",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -2449,7 +2449,7 @@
     "backend-000662": {
         "message": "Automatické obnovenie záloh pri vymazaní databázy"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Heslá končia aktualizácie pre Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2457,8 +2457,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Heslá $STR_1$ je posledná aktualizácia pre Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Heslá $STR_1$ je posledná aktualizácia pre Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2468,8 +2468,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Aktualizujte na Nextcloud $STR_1$ a PHP $STR_1$ (alebo PHP $STR_1$ pre LSR) pre budúce aktualizácie.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Aktualizujte na Nextcloud $STR_1$ a PHP $STR_2$ (alebo PHP $STR_3$ pre LSR) pre budúce aktualizácie.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

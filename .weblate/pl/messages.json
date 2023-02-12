@@ -2481,7 +2481,7 @@
     "backend-000662": {
         "message": "Automatyczne przywracanie kopii zapasowych po wyczyszczeniu bazy danych"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Hasła kończą aktualizacje dla Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2489,8 +2489,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Hasła $STR_1$ to ostatnia aktualizacja dla Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Hasła $STR_1$ to ostatnia aktualizacja dla Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2500,8 +2500,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Aktualizacja do Nextcloud $STR_1$ i PHP $STR_1$ (lub PHP $STR_1$ dla LSR) dla przyszłych aktualizacji.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Aktualizacja do Nextcloud $STR_1$ i PHP $STR_2$ (lub PHP $STR_3$ dla LSR) dla przyszłych aktualizacji.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

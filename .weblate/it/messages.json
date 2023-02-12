@@ -2729,7 +2729,7 @@
     "backend-000662": {
         "message": "Ripristino automatico dei backup in caso di cancellazione del database"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Le password terminano gli aggiornamenti per Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2737,8 +2737,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwords $STR_1$ è l'ultimo aggiornamento per Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwords $STR_1$ è l'ultimo aggiornamento per Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2748,8 +2748,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Aggiornare a Nextcloud $STR_1$ e PHP $STR_1$ (o PHP $STR_1$ per LSR) per gli aggiornamenti futuri.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Aggiornare a Nextcloud $STR_1$ e PHP $STR_2$ (o PHP $STR_3$ per LSR) per gli aggiornamenti futuri.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

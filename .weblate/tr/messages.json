@@ -2486,7 +2486,7 @@
     "backend-000662": {
         "message": "Veritabanı silindiğinde yedekleri otomatik olarak geri yükleme"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Şifreler Nextcloud için güncellemeleri sonlandırır $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2494,8 +2494,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Parolalar $STR_1$ Nextcloud $STR_1$ için son güncellemedir.",
+    "backend-EOLNextcloudText1": {
+        "message": "Parolalar $STR_1$ Nextcloud $STR_2$ için son güncellemedir.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2505,8 +2505,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ ve PHP $STR_1$ (veya LSR için PHP $STR_1$ ) sürümlerine yükseltin.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Gelecekteki yükseltmeler için Nextcloud $STR_1$ ve PHP $STR_2$ (veya LSR için PHP $STR_3$ ) sürümlerine yükseltin.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

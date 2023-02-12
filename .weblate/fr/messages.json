@@ -2402,7 +2402,7 @@
     "backend-000662": {
         "message": "Restauration automatique des sauvegardes lorsque la base de données est effacée"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Fin des mises à jour des mots de passe pour Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2410,8 +2410,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Passwords $STR_1$ est la dernière mise à jour pour Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2421,8 +2421,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Passez à Nextcloud $STR_1$ et PHP $STR_1$ (ou PHP $STR_1$ pour LSR) pour les futures mises à niveau.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Passez à Nextcloud $STR_1$ et PHP $STR_2$ (ou PHP $STR_3$ pour LSR) pour les futures mises à niveau.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

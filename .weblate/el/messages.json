@@ -2512,7 +2512,7 @@
     "backend-000662": {
         "message": "Επαναφορά αντιγράφων ασφαλείας αυτόματα όταν η βάση δεδομένων σβηστεί"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Οι κωδικοί πρόσβασης τελειώνουν τις ενημερώσεις για το Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2520,8 +2520,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για το Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Οι κωδικοί πρόσβασης $STR_1$ είναι η τελευταία ενημέρωση για το Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2531,8 +2531,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Αναβαθμίστε σε Nextcloud $STR_1$ και PHP $STR_1$ (ή PHP $STR_1$ για LSR) για μελλοντικές αναβαθμίσεις.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Αναβαθμίστε σε Nextcloud $STR_1$ και PHP $STR_2$ (ή PHP $STR_3$ για LSR) για μελλοντικές αναβαθμίσεις.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

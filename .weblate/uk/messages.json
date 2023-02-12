@@ -2485,7 +2485,7 @@
     "backend-000662": {
         "message": "Автоматичне відновлення резервних копій при знищенні бази даних"
     },
-    "backend-000663": {
+    "backend-EOLNextcloudTitle": {
         "message": "Паролі завершують оновлення для Nextcloud $STR_1$",
         "placeholders": {
             "str_1": {
@@ -2493,8 +2493,8 @@
             }
         }
     },
-    "backend-000664": {
-        "message": "Паролі $STR_1$ є останнім оновленням для Nextcloud $STR_1$.",
+    "backend-EOLNextcloudText1": {
+        "message": "Паролі $STR_1$ є останнім оновленням для Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2504,8 +2504,8 @@
             }
         }
     },
-    "backend-000665": {
-        "message": "Оновлення до Nextcloud $STR_1$ та PHP $STR_1$ (або PHP $STR_1$ для LSR) для майбутніх оновлень.",
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Оновлення до Nextcloud $STR_1$ та PHP $STR_2$ (або PHP $STR_3$ для LSR) для майбутніх оновлень.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
