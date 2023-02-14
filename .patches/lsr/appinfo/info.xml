@@ -128,6 +128,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </background-jobs>
     <repair-steps>
         <pre-migration>
+            <step>OCA\Passwords\Migration\RegisterClassLoader</step>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
         <post-migration>

@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- Autoloader not registered during update
+- Hidden passwords not unhidden when moved
 
 ## 2023.2.0 - Feature release
 ### Added
