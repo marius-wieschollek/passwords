@@ -178,14 +178,24 @@ class PasswordManager {
      */
     movePassword(password, folder = null) {
         return new Promise(async (resolve, reject) => {
+            let folderModel = null;
             if(folder === null) {
-                let folderModel = await FolderManager.selectFolder(password.folder);
+                folderModel = await FolderManager.selectFolder(password.folder);
                 folder = folderModel.id;
-                if(password.hidden && !folderModel.hidden) password.hidden = false;
             }
             if(password.id === folder || password.folder === folder) {
                 reject(password);
                 return;
+            }
+
+            if(password.hidden) {
+                if(folderModel === null) {
+                    folderModel = await API.showFolder(folder);
+                }
+
+                if(!folderModel.hidden) {
+                    password.hidden = false;
+                }
             }
 
             let originalFolder = password.folder;
