@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Exception\SecurityCheck;
@@ -30,7 +34,7 @@ class PasswordDatabaseDownloadException extends Exception {
         if($previous instanceof ClientException) {
             $message .= " HTTP {$previous->getResponse()->getStatusCode()}";
         } else if($previous instanceof Throwable) {
-            $message .= $previous->getMessage();
+            $message .= ' '.$previous->getMessage();
         }
 
         parent::__construct($message, static::EXCEPTION_CODE, $previous);

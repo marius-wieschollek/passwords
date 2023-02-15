@@ -781,5 +781,7 @@
     "backend-ExportNotPossibleTitle": "Passwords can't be exported",
     "backend-ExportNotPossibleText": "Because you have End-to-End encryption enabled, your passwords can't be added to the export automatically. As an alternative, you can use the export function within the app to export your data.",
     "backend-SettingsEncryptionSection": "Encryption Settings",
-    "backend-SettingsEncryptionSSEv3": "Allow third party encryption"
+    "backend-SettingsEncryptionSSEv3": "Allow third party encryption",
+    "backend-PassDbDlFailedTitle": "Could not update breached passwords database",
+    "backend-PassDbDlFailedText": "The breached passwords database update failed three times. Please consult the manual and check your logs. Reason: %1$s"
 }

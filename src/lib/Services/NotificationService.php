@@ -19,6 +19,7 @@ use OCA\Passwords\Notification\BackupFailedNotification;
 use OCA\Passwords\Notification\BackupRestoredNotification;
 use OCA\Passwords\Notification\BadPasswordNotification;
 use OCA\Passwords\Notification\BesticonApiNotification;
+use OCA\Passwords\Notification\BreachedPasswordsUpdateFailedNotification;
 use OCA\Passwords\Notification\EmptyRequiredSettingNotification;
 use OCA\Passwords\Notification\ExportNotPossibleNotification;
 use OCA\Passwords\Notification\ImpersonationNotification;
@@ -60,22 +61,23 @@ class NotificationService implements INotifier {
      * @param ExportNotPossibleNotification    $exportNotPossibleNotification
      */
     public function __construct(
-        protected IFactory                         $l10NFactory,
-        protected UserSettingsService              $settings,
-        protected SurveyNotification               $surveyNotification,
-        protected ConfigurationService             $configurationService,
-        protected NewClientNotification            $newClientNotification,
-        protected ShareLoopNotification            $shareLoopNotification,
-        protected BadPasswordNotification          $badPasswordNotification,
-        protected BesticonApiNotification          $besticonApiNotification,
-        protected ShareCreatedNotification         $shareCreatedNotification,
-        protected LoginAttemptNotification         $loginAttemptNotification,
-        protected BackupFailedNotification         $backupFailedNotification,
-        protected ImpersonationNotification        $impersonationNotification,
-        protected BackupRestoredNotification       $backupRestoredNotification,
-        protected UpgradeRequiredNotification      $upgradeRequiredNotification,
-        protected EmptyRequiredSettingNotification $emptyRequiredSettingNotification,
-        protected ExportNotPossibleNotification    $exportNotPossibleNotification
+        protected IFactory                                  $l10NFactory,
+        protected UserSettingsService                       $settings,
+        protected SurveyNotification                        $surveyNotification,
+        protected ConfigurationService                      $configurationService,
+        protected NewClientNotification                     $newClientNotification,
+        protected ShareLoopNotification                     $shareLoopNotification,
+        protected BadPasswordNotification                   $badPasswordNotification,
+        protected BesticonApiNotification                   $besticonApiNotification,
+        protected ShareCreatedNotification                  $shareCreatedNotification,
+        protected LoginAttemptNotification                  $loginAttemptNotification,
+        protected BackupFailedNotification                  $backupFailedNotification,
+        protected ImpersonationNotification                 $impersonationNotification,
+        protected BackupRestoredNotification                $backupRestoredNotification,
+        protected UpgradeRequiredNotification               $upgradeRequiredNotification,
+        protected EmptyRequiredSettingNotification          $emptyRequiredSettingNotification,
+        protected ExportNotPossibleNotification             $exportNotPossibleNotification,
+        protected BreachedPasswordsUpdateFailedNotification $breachedPasswordsUpdateFailedNotification
     ) {
     }
 
@@ -257,6 +259,14 @@ class NotificationService implements INotifier {
         );
     }
 
+    public function sendBreachedPasswordsUpdateFailedNotification(string $userId, string $reason) {
+        $this->sendNotification(
+            $this->breachedPasswordsUpdateFailedNotification,
+            $userId,
+            ['reason' => $reason]
+        );
+    }
+
     /**
      * @param AbstractNotification $notification
      * @param string               $userId
@@ -279,36 +289,24 @@ class NotificationService implements INotifier {
         if($notification->getApp() !== Application::APP_NAME) throw new InvalidArgumentException();
 
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $languageCode);
-        switch($notification->getSubject()) {
-            case EmptyRequiredSettingNotification::NAME:
-                return $this->emptyRequiredSettingNotification->process($notification, $localisation);
-            case ExportNotPossibleNotification::NAME:
-                return $this->exportNotPossibleNotification->process($notification, $localisation);
-            case UpgradeRequiredNotification::NAME:
-                return $this->upgradeRequiredNotification->process($notification, $localisation);
-            case BackupRestoredNotification::NAME:
-                return $this->backupRestoredNotification->process($notification, $localisation);
-            case BackupFailedNotification::NAME:
-                return $this->backupFailedNotification->process($notification, $localisation);
-            case BadPasswordNotification::NAME:
-                return $this->badPasswordNotification->process($notification, $localisation);
-            case ShareCreatedNotification::NAME:
-                return $this->shareCreatedNotification->process($notification, $localisation);
-            case ImpersonationNotification::NAME:
-                return $this->impersonationNotification->process($notification, $localisation);
-            case BesticonApiNotification::NAME:
-                return $this->besticonApiNotification->process($notification, $localisation);
-            case LoginAttemptNotification::NAME:
-                return $this->loginAttemptNotification->process($notification, $localisation);
-            case NewClientNotification::NAME:
-                return $this->newClientNotification->process($notification, $localisation);
-            case ShareLoopNotification::NAME:
-                return $this->shareLoopNotification->process($notification, $localisation);
-            case SurveyNotification::NAME:
-                return $this->surveyNotification->process($notification, $localisation);
-        }
 
-        return $notification;
+        return match ($notification->getSubject()) {
+            BreachedPasswordsUpdateFailedNotification::NAME => $this->breachedPasswordsUpdateFailedNotification->process($notification, $localisation),
+            EmptyRequiredSettingNotification::NAME => $this->emptyRequiredSettingNotification->process($notification, $localisation),
+            ExportNotPossibleNotification::NAME => $this->exportNotPossibleNotification->process($notification, $localisation),
+            UpgradeRequiredNotification::NAME => $this->upgradeRequiredNotification->process($notification, $localisation),
+            BackupRestoredNotification::NAME => $this->backupRestoredNotification->process($notification, $localisation),
+            BackupFailedNotification::NAME => $this->backupFailedNotification->process($notification, $localisation),
+            BadPasswordNotification::NAME => $this->badPasswordNotification->process($notification, $localisation),
+            ShareCreatedNotification::NAME => $this->shareCreatedNotification->process($notification, $localisation),
+            ImpersonationNotification::NAME => $this->impersonationNotification->process($notification, $localisation),
+            BesticonApiNotification::NAME => $this->besticonApiNotification->process($notification, $localisation),
+            LoginAttemptNotification::NAME => $this->loginAttemptNotification->process($notification, $localisation),
+            NewClientNotification::NAME => $this->newClientNotification->process($notification, $localisation),
+            ShareLoopNotification::NAME => $this->shareLoopNotification->process($notification, $localisation),
+            SurveyNotification::NAME => $this->surveyNotification->process($notification, $localisation),
+            default => $notification,
+        };
     }
 
     /**

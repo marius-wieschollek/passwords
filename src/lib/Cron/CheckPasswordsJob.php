@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -14,8 +14,10 @@ namespace OCA\Passwords\Cron;
 use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
+use OCA\Passwords\Exception\Database\DecryptedDataException;
 use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\HelperService;
@@ -31,30 +33,7 @@ use Throwable;
  */
 class CheckPasswordsJob extends AbstractTimedJob {
 
-    /**
-     * @var MailService
-     */
-    protected MailService $mailService;
-
-    /**
-     * @var HelperService
-     */
-    protected HelperService $helperService;
-
-    /**
-     * @var PasswordRevisionMapper
-     */
-    protected PasswordRevisionMapper $revisionMapper;
-
-    /**
-     * @var NotificationService
-     */
-    protected NotificationService $notificationService;
-
-    /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $userSettingsHelper;
+    const CONFIG_UPDATE_ERRORS = 'passwords/pwcheck/errors';
 
     /**
      * @var array
@@ -82,34 +61,39 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @param UserSettingsHelper     $userSettingsHelper
      * @param PasswordRevisionMapper $revisionMapper
      * @param NotificationService    $notificationService
+     * @param AdminUserHelper        $adminHelper
      */
     public function __construct(
-        LoggingService         $logger,
-        MailService            $mailService,
-        ConfigurationService   $config,
-        HelperService          $helperService,
-        EnvironmentService     $environment,
-        UserSettingsHelper     $userSettingsHelper,
-        PasswordRevisionMapper $revisionMapper,
-        NotificationService    $notificationService
+        LoggingService                   $logger,
+        protected MailService            $mailService,
+        ConfigurationService             $config,
+        protected HelperService          $helperService,
+        EnvironmentService               $environment,
+        protected UserSettingsHelper     $userSettingsHelper,
+        protected PasswordRevisionMapper $revisionMapper,
+        protected NotificationService    $notificationService,
+        protected AdminUserHelper        $adminHelper
     ) {
-        $this->mailService         = $mailService;
-        $this->helperService       = $helperService;
-        $this->revisionMapper      = $revisionMapper;
-        $this->userSettingsHelper  = $userSettingsHelper;
-        $this->notificationService = $notificationService;
         parent::__construct($logger, $config, $environment);
     }
 
     /**
      * @param $argument
      *
-     * @throws Exception
+     * @throws Throwable
      */
     protected function runJob($argument): void {
         $securityHelper = $this->helperService->getSecurityHelper();
 
-        if($securityHelper->dbUpdateRequired()) $securityHelper->updateDb();
+        if($securityHelper->dbUpdateRequired()) {
+            try {
+                $securityHelper->updateDb();
+                $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+            } catch(Throwable $e) {
+                $this->sendUpdateFailedNotification($e);
+                throw $e;
+            }
+        }
         $this->checkRevisionStatus($securityHelper);
     }
 
@@ -197,6 +181,9 @@ class CheckPasswordsJob extends AbstractTimedJob {
 
     /**
      * @param PasswordRevision $revision
+     *
+     * @throws DecryptedDataException
+     * @throws \OCP\DB\Exception
      */
     protected function checkHashLength(PasswordRevision $revision): void {
         $hashLength = $this->getUserHashLength($revision->getUserId());
@@ -207,6 +194,23 @@ class CheckPasswordsJob extends AbstractTimedJob {
                 $revision->setHash('');
             }
             $this->revisionMapper->update($revision);
+        }
+    }
+
+    /**
+     * @param Throwable $e
+     *
+     * @return void
+     */
+    protected function sendUpdateFailedNotification(Throwable $e): void {
+        $errors = intval($this->config->getAppValue(self::CONFIG_UPDATE_ERRORS, 0));
+        $errors++;
+        $this->config->setAppValue(self::CONFIG_UPDATE_ERRORS, $errors);
+        if($errors >= 3) {
+            foreach($this->adminHelper->getAdmins() as $admin) {
+                $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $e->getMessage());
+            }
+            $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
         }
     }
 }
