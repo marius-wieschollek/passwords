@@ -43,7 +43,7 @@ class RegisterClassLoader implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output) {
-        if(\OC_Util::getVersion()[0] === 25) {
+        if(\OC_Util::getVersion()[0] < 26) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
@@ -58,7 +58,7 @@ class RegisterClassLoader implements IRepairStep {
                 true,
                 true
             );
-            if(method_exists('opcache_reset')) {
+            if(function_exists('opcache_reset')) {
                 opcache_reset();
             }
         }

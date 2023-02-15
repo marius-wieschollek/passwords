@@ -259,7 +259,7 @@ class Application extends App implements IBootstrap {
     }
 
     protected function registerNextcloudVersionSpecificClassLoader() {
-        if(\OC_Util::getVersion()[0] === 25) {
+        if(\OC_Util::getVersion()[0] < 26) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
