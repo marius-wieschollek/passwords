@@ -3160,5 +3160,18 @@
     "backend-NotificationInvalid": {
         "message": "Denne meddelelse kan slettes.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Kunne ikke opdatere databasen over krænkede adgangskoder",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "Opdateringen af databasen med de krænkede adgangskoder mislykkedes tre gange. Se venligst manualen og tjek dine logfiler. Årsag: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
