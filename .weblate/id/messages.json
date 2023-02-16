@@ -3160,5 +3160,18 @@
                 "content": "$3"
             }
         }
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Tidak dapat memperbarui basis data kata sandi yang dibobol",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "Pembaruan basis data kata sandi yang dibobol gagal tiga kali. Silakan baca buku panduan dan periksa log Anda. Alasan: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
