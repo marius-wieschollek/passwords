@@ -3160,5 +3160,18 @@
     "backend-NotificationInvalid": {
         "message": "Αυτή η ειδοποίηση μπορεί να διαγραφεί.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Δεν ήταν δυνατή η ενημέρωση της βάσης δεδομένων παραβιασμένων κωδικών πρόσβασης",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "Η ενημέρωση της βάσης δεδομένων των παραβιασμένων κωδικών πρόσβασης απέτυχε τρεις φορές. Συμβουλευτείτε το εγχειρίδιο και ελέγξτε τα αρχεία καταγραφής. Αιτία: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
