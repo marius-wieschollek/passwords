@@ -3160,5 +3160,18 @@
     "backend-NotificationInvalid": {
         "message": "Esta notificación puede suprimirse.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "No se pudo actualizar la base de datos de contraseñas violadas",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "La actualización de la base de datos de contraseñas violadas falló tres veces. Por favor, consulte el manual y compruebe sus registros. Razón: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
