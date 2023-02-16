@@ -3157,5 +3157,18 @@
                 "content": "$3"
             }
         }
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Nelze aktualizovat databázi porušených hesel",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "Aktualizace databáze prolomených hesel se třikrát nezdařila. Podívejte se prosím do příručky a zkontrolujte protokoly. Důvod: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
