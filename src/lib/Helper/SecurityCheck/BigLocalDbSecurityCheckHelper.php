@@ -54,7 +54,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      */
     public function updateDb(): void {
         ini_set('max_execution_time', 0);
-        if(!$this->isAvailable()) {
+        if(!$this->isAvailable() || (intval(ini_get('max_execution_time')) !== 0 && intval(ini_get('max_execution_time')) < 7200)) {
             throw new \Exception('Password security check service not available. Consult manual.');
         }
 
@@ -70,8 +70,7 @@ class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
      * @inheritdoc
      */
     public function isAvailable(): bool {
-        ini_set('max_execution_time', 0);
-        return extension_loaded('zip') && (intval(ini_get('max_execution_time')) === 0 || intval(ini_get('max_execution_time')) > 10800);
+        return extension_loaded('zip');
     }
 
     /**

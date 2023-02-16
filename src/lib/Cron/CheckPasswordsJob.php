@@ -86,13 +86,15 @@ class CheckPasswordsJob extends AbstractTimedJob {
         $securityHelper = $this->helperService->getSecurityHelper();
 
         if($securityHelper->dbUpdateRequired()) {
+            $this->registerUpdateAttempt();
             try {
                 $securityHelper->updateDb();
                 $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
             } catch(Throwable $e) {
-                $this->sendUpdateFailedNotification($e);
+                $this->registerUpdateFailure($e);
                 throw $e;
             }
+            $this->registerUpdateSuccess();
         }
         $this->checkRevisionStatus($securityHelper);
     }
@@ -197,20 +199,39 @@ class CheckPasswordsJob extends AbstractTimedJob {
         }
     }
 
+    protected function registerUpdateAttempt() {
+        $errors = intval($this->config->getAppValue(self::CONFIG_UPDATE_ERRORS, 0));
+        $errors++;
+        if($errors >= 3) {
+            $this->sendUpdateFailureNotification('none');
+            throw new \Exception('Breached password database update failed');
+        }
+        $this->config->setAppValue(self::CONFIG_UPDATE_ERRORS, $errors);
+    }
+
     /**
      * @param Throwable $e
      *
      * @return void
      */
-    protected function sendUpdateFailedNotification(Throwable $e): void {
+    protected function registerUpdateFailure(Throwable $e): void {
         $errors = intval($this->config->getAppValue(self::CONFIG_UPDATE_ERRORS, 0));
-        $errors++;
-        $this->config->setAppValue(self::CONFIG_UPDATE_ERRORS, $errors);
-        if($errors >= 3) {
-            foreach($this->adminHelper->getAdmins() as $admin) {
-                $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $e->getMessage());
-            }
-            $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+        if($errors >= 3) $this->sendUpdateFailureNotification($e->getMessage());
+    }
+
+    protected function registerUpdateSuccess() {
+        $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+    }
+
+    /**
+     * @param string $message
+     *
+     * @return void
+     */
+    protected function sendUpdateFailureNotification(string $message): void {
+        foreach($this->adminHelper->getAdmins() as $admin) {
+            $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $message);
         }
+        $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
     }
 }
