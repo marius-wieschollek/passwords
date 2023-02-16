@@ -3158,5 +3158,18 @@
     "backend-NotificationInvalid": {
         "message": "Diese Benachrichtigung kann gelöscht werden.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Datenbank mit verletzten Passwörtern konnte nicht aktualisiert werden",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "Die Aktualisierung der Datenbank für verletzte Passwörter ist dreimal fehlgeschlagen. Bitte konsultieren Sie das Handbuch und überprüfen Sie Ihre Protokolle. Grund: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
