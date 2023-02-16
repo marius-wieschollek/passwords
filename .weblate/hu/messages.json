@@ -3160,5 +3160,18 @@
     "backend-NotificationInvalid": {
         "message": "Ez az értesítés törölhető.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Nem tudta frissíteni a feltört jelszavak adatbázisát",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "A feltört jelszavak adatbázisának frissítése háromszor is sikertelen volt. Kérjük, olvassa el a kézikönyvet és ellenőrizze a naplófájlokat. Ok: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
