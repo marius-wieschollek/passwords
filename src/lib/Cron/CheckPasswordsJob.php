@@ -33,7 +33,7 @@ use Throwable;
  */
 class CheckPasswordsJob extends AbstractTimedJob {
 
-    const CONFIG_UPDATE_ERRORS = 'passwords/pwcheck/errors';
+    const CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
 
     /**
      * @var array
@@ -89,13 +89,14 @@ class CheckPasswordsJob extends AbstractTimedJob {
             $this->registerUpdateAttempt();
             try {
                 $securityHelper->updateDb();
-                $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+                $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
             } catch(Throwable $e) {
                 $this->registerUpdateFailure($e);
                 throw $e;
             }
             $this->registerUpdateSuccess();
         }
+
         $this->checkRevisionStatus($securityHelper);
     }
 
@@ -200,13 +201,13 @@ class CheckPasswordsJob extends AbstractTimedJob {
     }
 
     protected function registerUpdateAttempt() {
-        $errors = intval($this->config->getAppValue(self::CONFIG_UPDATE_ERRORS, 0));
-        $errors++;
-        if($errors >= 3) {
+        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
+        $attempts++;
+        if($attempts >= 3) {
             $this->sendUpdateFailureNotification('none');
             throw new \Exception('Breached password database update failed');
         }
-        $this->config->setAppValue(self::CONFIG_UPDATE_ERRORS, $errors);
+        $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
     }
 
     /**
@@ -215,12 +216,12 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @return void
      */
     protected function registerUpdateFailure(Throwable $e): void {
-        $errors = intval($this->config->getAppValue(self::CONFIG_UPDATE_ERRORS, 0));
-        if($errors >= 3) $this->sendUpdateFailureNotification($e->getMessage());
+        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
+        if($attempts >= 3) $this->sendUpdateFailureNotification($e->getMessage());
     }
 
     protected function registerUpdateSuccess() {
-        $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+        $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
     }
 
     /**
@@ -232,6 +233,6 @@ class CheckPasswordsJob extends AbstractTimedJob {
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $message);
         }
-        $this->config->deleteAppValue(self::CONFIG_UPDATE_ERRORS);
+        $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
     }
 }
