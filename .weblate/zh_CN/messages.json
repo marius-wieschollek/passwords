@@ -3160,5 +3160,18 @@
                 "content": "$3"
             }
         }
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "无法更新被破坏的密码数据库",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "被突破的密码数据库更新失败了三次。请查阅手册并检查你的日志。原因是。$STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
