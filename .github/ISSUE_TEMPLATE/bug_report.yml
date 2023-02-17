@@ -1,0 +1,95 @@
+name: "Bug Report"
+description: "Report a functional error in the app"
+title: "[BUG]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 👍 Thank you for contributing to our project!
+        Please note this is a **free and open-source** project. Most people take on their own time to help you, so please, be patient.
+  - type: checkboxes
+    id: before-posting
+    attributes:
+      label: "⚠️ This issue respects the following points: ⚠️"
+      description: All conditions are **required**. Your issue can be closed if these are checked incorrectly.
+      options:
+        - label: This is a _single_ **bug**, not a question or a configuration/webserver/proxy issue.
+          required: true
+        - label: This is about the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
+          required: true
+        - label: This issue is **not** already reported on Github _(I've searched it)_.
+          required: true
+        - label: Nextcloud Server and the Passwords App **is** up to date. See [Nextcloud Apps](https://apps.nextcloud.com/apps/passwords).
+          required: true
+        - label: There are no warnings and errors reported in the Passwords App settings in the admin area
+          required: true
+  - type: textarea
+    id: server-information
+    attributes:
+      label: Server Information
+      description: |
+        Run "php ./occ passwords:system:report debug" in your Nextcloud install directory and put the output here.
+        If that is not possible, provide Nextcloud version, PHP version, Database and version, Server OS and version.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: client-information
+    attributes:
+      label: Client Information
+      description: |
+        Provide us with information about the client you're using
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: bug-description
+    attributes:
+      label: Bug description
+      description: |
+        Provide a description of the bug you're experiencing.
+        Don't just expect someone will guess what your specific problem is and provide full details.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: |
+        Describe the steps to reproduce the bug.
+        The better your description is _(go 'here', click 'there'...)_ the fastest you'll get an _(accurate)_ answer.
+        Include relevant user settings and app settings if not standard  and provide sample data if necessary.
+      value: |
+        Browser and Version:
+        Client OS and Version:
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: Describe what you expected to happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: nextcloud-log
+    attributes:
+      label: Nextcloud Logs
+      description: |
+        Provide related Nextcloud logs entries.
+        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
+        > NOTE: This will be automatically formatted into code for better readability.
+      render: shell
+  - type: textarea
+    id: browser-log
+    attributes:
+      label: Browser Logs
+      description: |
+        Provide related log entries from your Browser or Client
+        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
+        > NOTE: This will be automatically formatted into code for better readability.
+      render: shell

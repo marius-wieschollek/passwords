@@ -1,0 +1,53 @@
+name: "Feature Request"
+description: "Suggest a change or something new"
+title: "[FEATURE]: "
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 👍 Thank you for contributing to our project!
+        Please note this is a **free and open-source** project. Most people take on their own time to review new feature requests, so please, be patient.
+  - type: checkboxes
+    id: before-posting
+    attributes:
+      label: "⚠️ This issue respects the following points: ⚠️"
+      description: All conditions are **required**. Your issue can be closed if these are checked incorrectly.
+      options:
+        - label: This is a **feature request** for _one_ feature, not a question, discussion or multiple features.
+          required: true
+        - label: This is about the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
+          required: true
+        - label: This feature is **not** already requested on Github _(I've searched it)_.
+          required: true
+        - label: This feature does not already exist _(I checked the [wiki](https://git.mdns.eu/nextcloud/passwords/-/wikis/home))_.
+          required: true
+  - type: textarea
+    id: current-status
+    attributes:
+      label: Current Status
+      description: |
+        Describe the current situation and resulting problems.
+    validations:
+      required: true
+  - type: textarea
+    id: feature-description
+    attributes:
+      label: Feature Description
+      description: |
+        Describe your feature and how it should work.
+        Be as detailed as possible and try to give a step-by-step example of how the feature is used and what happens when.
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Add any other context or screenshots about the feature request here.
+    validations:
+      required: true

@@ -1,0 +1,83 @@
+name: "App Submission"
+description: "Suggest a change or something new"
+title: "[FEATURE]: "
+labels: ["feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### 👍 Thank you for contributing to our project!
+        Please note this is a **free and open-source** project. Most people take on their own time to review new feature requests, so please, be patient.
+  - type: checkboxes
+    id: before-posting
+    attributes:
+      label: "⚠️ This issue respects the following points: ⚠️"
+      description: All conditions are **required**. Your issue can be closed if these are checked incorrectly.
+      options:
+        - label: My app is open source
+          required: true
+        - label: My app does not contain ads
+          required: true
+        - label: Any third party service in my app is optional
+          required: true
+        - label: My app is not branded as an "official" app
+          required: true
+        - label: My app supports [client side encryption](https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/Encryption)
+          required: true
+  - type: input
+    id: app-name
+    attributes:
+      label: App Name
+      description: |
+        The name of your app
+    validations:
+      required: true
+  - type: textarea
+    id: app-description
+    attributes:
+      label: App description
+      description: |
+        Short description of your app (max ~160 characters, optionally in multiple languages)
+    validations:
+      required: true
+  - type: checkboxes
+    id: app-logo
+    attributes:
+      label: App Logo
+      description: |
+        Logo of your app (SVG, PNG or JPG, ca 400x400px) (only apps, not libraries)
+      options:
+        - label: I have attached my app logo
+          required: false
+  - type: input
+    id: app-url
+    attributes:
+      label: Download URL
+      description: |
+        Link to the website/store where users can get your app
+    validations:
+      required: true
+  - type: input
+    id: app-repository
+    attributes:
+      label: App Sources
+      description: |
+        Link to the source code of your app
+    validations:
+      required: true
+  - type: textarea
+    id: app-requirements
+    attributes:
+      label: Supported Platforms
+      description: |
+        List supported operating systems, browsers etc.
+    validations:
+      required: true
+  - type: textarea
+    id: app-testing
+    attributes:
+      label: Test instructions
+      description: |
+        Information how we can test your app
+    validations:
+      required: true
