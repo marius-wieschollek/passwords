@@ -24,6 +24,8 @@ body:
           required: true
         - label: There are no warnings and errors reported in the Passwords App settings in the admin area
           required: true
+        - label: "The following apps are not installed: Rainloop"
+          required: true
   - type: textarea
     id: server-information
     attributes:
@@ -31,6 +33,7 @@ body:
       description: |
         Run "php ./occ passwords:system:report debug" in your Nextcloud install directory and put the output here.
         If that is not possible, provide Nextcloud version, PHP version, Database and version, Server OS and version.
+        > NOTE: This will be automatically formatted into code for better readability.
       render: shell
     validations:
       required: true
@@ -41,9 +44,8 @@ body:
       description: |
         Provide us with information about the client you're using
       value: |
-        1.
-        2.
-        3.
+        Browser and Version:
+        Client OS and Version:
     validations:
       required: true
   - type: textarea
@@ -52,7 +54,6 @@ body:
       label: Bug description
       description: |
         Provide a description of the bug you're experiencing.
-        Don't just expect someone will guess what your specific problem is and provide full details.
     validations:
       required: true
   - type: textarea
@@ -63,9 +64,10 @@ body:
         Describe the steps to reproduce the bug.
         The better your description is _(go 'here', click 'there'...)_ the fastest you'll get an _(accurate)_ answer.
         Include relevant user settings and app settings if not standard  and provide sample data if necessary.
-      value: |
-        Browser and Version:
-        Client OS and Version:
+      placeholder: |
+        1. I open the app
+        2. I click on X
+        3. An error message appears
     validations:
       required: true
   - type: textarea
@@ -73,6 +75,10 @@ body:
     attributes:
       label: Expected behavior
       description: Describe what you expected to happen instead.
+      placeholder: |
+        1. I open the app
+        2. I click on X
+        3. Y happens
     validations:
       required: true
   - type: textarea

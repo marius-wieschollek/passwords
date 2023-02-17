@@ -37,10 +37,10 @@ body:
       description: |
         Describe your feature and how it should work.
         Be as detailed as possible and try to give a step-by-step example of how the feature is used and what happens when.
-      value: |
-        1.
-        2.
-        3.
+      placeholder: |
+        1. I open the app
+        2. I do X
+        3. Now Y happens
     validations:
       required: true
   - type: textarea
@@ -50,4 +50,4 @@ body:
       description: |
         Add any other context or screenshots about the feature request here.
     validations:
-      required: true
+      required: false
