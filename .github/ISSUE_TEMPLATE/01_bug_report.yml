@@ -16,7 +16,7 @@ body:
       options:
         - label: This is a _single_ **bug**, not a question or a configuration/webserver/proxy issue.
           required: true
-        - label: This is about the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
+        - label: This is not a bug in the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
           required: true
         - label: This issue is **not** already reported on Github _(I've searched it)_.
           required: true

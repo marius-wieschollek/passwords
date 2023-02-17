@@ -16,7 +16,7 @@ body:
       options:
         - label: This is a **feature request** for _one_ feature, not a question, discussion or multiple features.
           required: true
-        - label: This is about the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
+        - label: This is not a feature request for the [browser extension](https://github.com/marius-wieschollek/passwords-webextension) or another client.
           required: true
         - label: This feature is **not** already requested on Github _(I've searched it)_.
           required: true
