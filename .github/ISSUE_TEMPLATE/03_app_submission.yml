@@ -40,15 +40,12 @@ body:
         Short description of your app (max ~160 characters, optionally in multiple languages)
     validations:
       required: true
-  - type: checkboxes
+  - type: textarea
     id: app-logo
     attributes:
       label: App Logo
       description: |
         Logo of your app (SVG, PNG or JPG, ca 400x400px) (only apps, not libraries)
-      options:
-        - label: I have attached my app logo
-          required: false
   - type: input
     id: app-url
     attributes:
