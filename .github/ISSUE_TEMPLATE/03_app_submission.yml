@@ -1,7 +1,6 @@
 name: "App Submission"
 description: "Suggest a change or something new"
-title: "[FEATURE]: "
-labels: ["feature"]
+title: "[NEW APP]: "
 body:
   - type: markdown
     attributes:
