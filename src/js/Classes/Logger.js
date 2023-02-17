@@ -22,7 +22,7 @@ export default new class Logger {
     constructor() {
         this._colors = {
             error  : '#b33939',
-            warning: '#ffa502',
+            warn   : '#ffa502',
             success: '#20bf6b',
             info   : '#3867d6',
             log    : '#778ca3',
@@ -67,7 +67,7 @@ export default new class Logger {
 
     _write(level, args) {
         let func  = level === 'success' ? 'info':level,
-            label = level.charAt(0).toUpperCase() + level.slice(1);
+            label = level === 'warn' ? 'Warning':level.charAt(0).toUpperCase() + level.slice(1);
 
         console[func](
             `%cPasswords ${label}`,

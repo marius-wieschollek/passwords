@@ -1,4 +1,7 @@
 ## [Unreleased]
+## 2023.2.2 - Bugfix release
+### Fixed
+- E2EE broken by libsodium update
 
 ## 2023.2.1 - Bugfix release
 ### Fixed
