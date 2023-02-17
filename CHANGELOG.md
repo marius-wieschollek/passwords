@@ -1,7 +1,10 @@
 ## [Unreleased]
+
+## 2023.2.1 - Bugfix release
 ### Fixed
 - Autoloader not registered during update
 - Hidden passwords not unhidden when moved
+- Big local password database is downloaded every day
 
 ## 2023.2.0 - Feature release
 ### Added
