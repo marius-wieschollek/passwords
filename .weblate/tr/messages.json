@@ -3173,5 +3173,37 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "Şifre değiştirme sayfasını açın",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "Aşağıdaki url'yi \"{label}\" için şifre değiştirme sayfası olarak tespit ettik. Açmak için butona tıklayın",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "Şifre değiştirme sayfasını açın",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "\"{host}\" şifre değiştirme sayfasını duyurmuyor. Şifre değiştirme işlevini web sitesinde bulabilirsiniz.",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
     }
 }
