@@ -31,8 +31,8 @@ body:
     attributes:
       label: Server Information
       description: |
-        Run "php ./occ passwords:system:report debug" in your Nextcloud install directory and put the output here.
-        _Only if the command doesn't work:_ provide Nextcloud version, PHP version, Database and version, Server OS and version and the output of `php -v`.
+        Run `php ./occ passwords:system:report debug` in your Nextcloud install directory and put the output here.
+        _Only if the command doesn't work:_ Try `php ./occ support:report` or provide at least Nextcloud & PHP version, Database & Server OS name and version, your cron settings and the output of `php -v`.
         > NOTE: This will be automatically formatted into code for better readability.
       render: shell
     validations:
