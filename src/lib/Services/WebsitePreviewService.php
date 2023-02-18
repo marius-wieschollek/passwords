@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
+use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -22,6 +23,8 @@ use Throwable;
  * @package OCA\Passwords\Services
  */
 class WebsitePreviewService {
+
+    use ValidatesDomainTrait;
 
     const VIEWPORT_DESKTOP = 'desktop';
     const VIEWPORT_MOBILE  = 'mobile';
@@ -191,8 +194,7 @@ class WebsitePreviewService {
      * @return array
      */
     protected function validateInputData(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): array {
-        if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
-        $domain = idn_to_ascii($domain);
+        $domain = $this->validateDomain($domain);
 
         $minWidth = $this->validateMinimum($minWidth);
         $maxWidth = $this->validateMaximum($minWidth, $maxWidth);

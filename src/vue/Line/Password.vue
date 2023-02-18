@@ -59,6 +59,9 @@
                                 <open-in-new-icon slot="icon"/>
                             </translate>
                         </li>
+                        <translate tag="li" v-if="password.url" @click="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
+                            <lock-reset-icon slot="icon"/>
+                        </translate>
                         <translate tag="li" @click="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
                             <qrcode-icon slot="icon"/>
                         </translate>
@@ -80,7 +83,6 @@
 <script>
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
@@ -104,9 +106,11 @@
     import {subscribe, unsubscribe} from '@nextcloud/event-bus';
     import QrcodeIcon from "@icon/Qrcode";
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
+    import LockResetIcon from "@icon/LockReset";
 
     export default {
         components: {
+            LockResetIcon,
             ShieldHalfFullIcon,
             QrcodeIcon,
             StarOutlineIcon,

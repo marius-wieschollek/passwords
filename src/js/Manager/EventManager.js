@@ -93,7 +93,7 @@ class EventManager {
         } else if(e.message) {
             Messages.notification(e.message);
             Logger.error(e);
-        } else if(e.response && (!e.response.url || e.response.url.indexOf('service/favicon') === -1)) {
+        } else if(e.response && (!e.response.url || (e.response.url.indexOf('service/favicon') === -1 && e.response.url.indexOf('service/password-change') === -1))) {
             Messages.notification(`${e.response.status} - ${e.response.statusText}`);
             Logger.error(e);
         } else {

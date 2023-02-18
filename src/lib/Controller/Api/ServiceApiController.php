@@ -12,11 +12,11 @@ use Exception;
 use DateTimeInterface;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCA\Passwords\Helper\User\DeleteUserDataHelper;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\FaviconService;
+use OCA\Passwords\Services\PasswordChangeUrlService;
 use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
@@ -45,84 +45,34 @@ class ServiceApiController extends AbstractApiController {
     protected ?string $userLogin;
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var WordsService
-     */
-    protected WordsService $wordsService;
-
-    /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $userSettings;
-
-    /**
-     * @var AvatarService
-     */
-    protected AvatarService $avatarService;
-
-    /**
-     * @var WebsitePreviewService
-     */
-    protected WebsitePreviewService $previewService;
-
-    /**
-     * @var FaviconService
-     */
-    protected FaviconService $faviconService;
-
-    /**
-     * @var DeleteUserDataHelper
-     */
-    protected DeleteUserDataHelper $deleteUserDataHelper;
-
-    /**
      * ServiceApiController constructor.
      *
-     * @param IRequest              $request
-     * @param IUserManager          $userManager
-     * @param WordsService          $wordsService
-     * @param AvatarService         $avatarService
-     * @param ConfigurationService  $config
-     * @param FaviconService        $faviconService
-     * @param UserSettingsHelper    $userSettings
-     * @param WebsitePreviewService $previewService
-     * @param EnvironmentService    $environmentService
-     * @param DeleteUserDataHelper  $deleteUserDataHelper
-     *
-     * @throws Exception
+     * @param IRequest                 $request
+     * @param IUserManager             $userManager
+     * @param WordsService             $wordsService
+     * @param AvatarService            $avatarService
+     * @param ConfigurationService     $config
+     * @param FaviconService           $faviconService
+     * @param UserSettingsHelper       $userSettings
+     * @param WebsitePreviewService    $previewService
+     * @param EnvironmentService       $environmentService
+     * @param PasswordChangeUrlService $passwordChangeUrlService
      */
     public function __construct(
         IRequest $request,
-        IUserManager $userManager,
-        WordsService $wordsService,
-        AvatarService $avatarService,
-        ConfigurationService $config,
-        FaviconService $faviconService,
-        UserSettingsHelper $userSettings,
-        WebsitePreviewService $previewService,
+        protected IUserManager $userManager,
+        protected WordsService $wordsService,
+        protected AvatarService $avatarService,
+        protected ConfigurationService $config,
+        protected FaviconService $faviconService,
+        protected UserSettingsHelper $userSettings,
+        protected WebsitePreviewService $previewService,
         EnvironmentService $environmentService,
-        DeleteUserDataHelper $deleteUserDataHelper
+        protected PasswordChangeUrlService $passwordChangeUrlService
     ) {
         parent::__construct($request);
-        $this->config               = $config;
         $this->userId               = $environmentService->getUserId();
         $this->userLogin            = $environmentService->getUserLogin();
-        $this->userManager          = $userManager;
-        $this->userSettings         = $userSettings;
-        $this->wordsService         = $wordsService;
-        $this->avatarService        = $avatarService;
-        $this->previewService       = $previewService;
-        $this->faviconService       = $faviconService;
-        $this->deleteUserDataHelper = $deleteUserDataHelper;
     }
 
     /**
@@ -208,6 +158,24 @@ class ServiceApiController extends AbstractApiController {
         $file = $this->previewService->getPreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
         return $this->createFileDisplayResponse($file);
+    }
+
+    /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $domain
+     *
+     * @return JSONResponse
+     */
+    public function passwordChangeUrl(string $domain): JSONResponse {
+        $url = $this->passwordChangeUrlService->getPasswordChangeUrl($domain);
+
+        return $this->createJsonResponse(
+            ['url' => $url],
+            $url === null ? Http::STATUS_NOT_FOUND:Http::STATUS_OK
+        );
     }
 
     /**

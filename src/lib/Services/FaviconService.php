@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -19,6 +20,8 @@ use Throwable;
  * @package OCA\Passwords\Services
  */
 class FaviconService {
+
+    use ValidatesDomainTrait;
 
     /**
      * @var HelperService
@@ -133,8 +136,7 @@ class FaviconService {
      * @return array
      */
     protected function validateInput(string $domain, int $size): array {
-        if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
-        $domain = idn_to_ascii($domain);
+        $domain = $this->validateDomain($domain);
 
         $size = round($size / 8) * 8;
         if($size > 256) {

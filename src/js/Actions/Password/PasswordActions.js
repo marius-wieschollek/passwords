@@ -79,6 +79,13 @@ export default class PasswordActions {
         new PwQrCodeDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
     }
 
+    async openChangePasswordPage() {
+        let ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue'),
+            ChangePasswordPageDialog = Vue.extend(ChangePasswordPage.default);
+
+        new ChangePasswordPageDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
+    }
+
     clipboard(attribute) {
         let message = 'Error copying {element} to clipboard';
         if(!this._password.hasOwnProperty(attribute) || this._password[attribute].length === 0) {

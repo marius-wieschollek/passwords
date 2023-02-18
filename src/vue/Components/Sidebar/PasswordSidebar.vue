@@ -33,6 +33,10 @@
                 <folder-move-icon slot="icon" :size="20"/>
                 {{ t('Move') }}
             </nc-action-button>
+            <nc-action-button close-after-click @click="actions.openChangePasswordPage()" class="passwords-password-change-page">
+                <lock-reset-icon slot="icon" :size="20"/>
+                {{ t('PasswordActionChangePwPage') }}
+            </nc-action-button>
             <nc-action-button close-after-click @click="actions.qrcode()" class="passwords-password-qrcode">
                 <qrcode-icon slot="icon" :size="20"/>
                 {{ t('PasswordActionQrcode') }}
@@ -75,28 +79,29 @@
 
 
 <script>
+    import API from '@js/Helper/api';
+    import PasswordActions from '@js/Actions/Password/PasswordActions';
+    import Application from '@js/Init/Application';
+    import SettingsService from '@js/Services/SettingsService';
+    import Localisation from '@js/Classes/Localisation';
+    import {emit} from '@nextcloud/event-bus';
     import Sidebar from "@js/Models/Sidebar/Sidebar";
     import NcAppSidebar from '@nc/NcAppSidebar';
     import NcAppSidebarTab from '@nc/NcAppSidebarTab';
-    import Localisation from "@js/Classes/Localisation";
-    import Preview from "@vc/Sidebar/PasswordSidebar/Preview";
+    import Preview from '@vc/Sidebar/PasswordSidebar/Preview';
     import Tags from '@vc/Tags';
     import PwDetails from '@vc/Sidebar/PasswordSidebar/Tabs/Details';
-    import API from "@js/Helper/api";
-    import SettingsService from "@js/Services/SettingsService";
     import NcButton from '@nc/NcButton';
     import NcActionButton from '@nc/NcActionButton';
-    import PencilIcon from "@icon/Pencil";
-    import Favicon from "@vc/Favicon.vue";
-    import StarIcon from "@icon/Star";
-    import StarOutlineIcon from "@icon/StarOutline";
-    import PasswordActions from "@js/Actions/Password/PasswordActions";
-    import Application from "@js/Init/Application";
-    import {emit} from '@nextcloud/event-bus';
-    import QrcodeIcon from "@icon/Qrcode";
-    import TrashCanIcon from "@icon/TrashCan";
-    import FolderMoveIcon from "@icon/FolderMove";
-    import ContentCopyIcon from "@icon/ContentCopy";
+    import PencilIcon from '@icon/Pencil';
+    import Favicon from '@vc/Favicon';
+    import StarIcon from '@icon/Star';
+    import StarOutlineIcon from '@icon/StarOutline';
+    import QrcodeIcon from '@icon/Qrcode';
+    import TrashCanIcon from '@icon/TrashCan';
+    import FolderMoveIcon from '@icon/FolderMove';
+    import ContentCopyIcon from '@icon/ContentCopy';
+    import LockResetIcon from '@icon/LockReset';
 
     export default {
         components: {
@@ -108,6 +113,7 @@
             StarIcon,
             Favicon,
             PencilIcon,
+            LockResetIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
             'share': () => import(/* webpackChunkName: "PasswordShare" */ '@vc/Sidebar/PasswordSidebar/Tabs/Share'),
             'notes': () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
