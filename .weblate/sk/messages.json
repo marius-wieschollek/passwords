@@ -3173,5 +3173,37 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "Otvorenie stránky na zmenu hesla",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "Otvorenie stránky na zmenu hesla",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "Nižšie uvedenú url adresu sme zistili ako stránku na zmenu hesla pre \"{značka}\". Kliknutím na tlačidlo ju otvoríte",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "\"{hostiteľ}\" neoznamuje svoju stránku na zmenu hesla. Funkciu na zmenu hesla môžete nájsť na webovej stránke.",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
     }
 }
