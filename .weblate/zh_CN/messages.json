@@ -3173,5 +3173,37 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "打开更改密码页面",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "我们已经检测到下面的网址是\"{label}\"的密码修改页面。点击该按钮打开它",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "打开更改密码页面",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "\"{host}\"并没有公布他们的密码修改页面。你可以在网站上找到更改密码的功能。",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
     }
 }
