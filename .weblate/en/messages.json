@@ -3186,7 +3186,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "We have detected the url below as the password change page for \"{label}\". Click the button to open it",
+        "message": "We have detected the url below as the password change page for \"{label}\". Click the button to open it.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
