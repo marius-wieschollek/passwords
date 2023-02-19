@@ -3173,11 +3173,11 @@
         }
     },
     "frontend-PasswordActionChangePwPage": {
-        "message": "Seite Passwort ändern öffnen",
+        "message": "Passwort-Ändern Seite öffnen",
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Wir haben die unten stehende URL als die Seite zur Passwortänderung für \"{label}\" erkannt. Klicken Sie auf die Schaltfläche, um sie zu öffnen",
+        "message": "Die unten stehende URL ist als die Seite zur Passwortänderung für \"{label}\" hinterlegt. Klicken Sie auf die Schaltfläche, um sie zu öffnen.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3189,11 +3189,11 @@
         }
     },
     "frontend-ChangePasswordPageLink": {
-        "message": "Seite Passwort ändern öffnen",
+        "message": "Passwort-Ändern Seite öffnen",
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" kündigt seine Seite zur Passwortänderung nicht an. Sie können die Funktion zum Ändern des Passworts auf der Website finden.",
+        "message": "\"{host}\" hat keine Seite zur Passwortänderung mitgeteilt. Sie können die Funktion zum Ändern des Passworts möglicherweise auf der Website finden.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
