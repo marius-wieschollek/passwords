@@ -33,7 +33,16 @@ class PasswordChangeUrlService {
             '/^.+\.ebay\.[a-z]{2,3}$/'                                => 'https://accounts.ebay.com/acctsec/security-center/chngpwd',
             '/^.+\.steampowered\.com$/'                               => 'https://store.steampowered.com/account/',
             '/^.+\.epicgames\.com$/'                                  => 'https://www.epicgames.com/account/password',
-            '/^.+\.(ubisoftconnect|uplay|ubisoft)\.com$/'             => 'https://account.ubisoft.com/security-settings'
+            '/^.+\.(ubisoftconnect|uplay|ubisoft)\.com$/'             => 'https://account.ubisoft.com/security-settings',
+            '/^.+\.alternate\.de$/'                                   => 'https://www.alternate.de/Mein-Konto/Pers%C3%B6nliche-Daten',
+            '/^.+\.conrad\.de$/'                                      => 'https://www.conrad.de/de/account.html#/profile/change-password',
+            '/^.+\.(mediamarkt|saturn)\.de$/'                         => 'https://www.mediamarkt.de/de/myaccount/profile',
+            '/^.+\.digitalo\.de$/'                                    => 'https://www.digitalo.de/my/user_data.html',
+            '/^.+\.mindfactory\.de$/'                                 => 'https://www.mindfactory.de/account_password_change.php',
+            '/^.+\.paypal\.[a-z]{2,3}$/'                              => 'https://www.paypal.com/myaccount/security/password/change',
+            '/^.+\.patreon\.com$/'                                    => 'https://www.patreon.com/settings/account',
+            '/^.+\.plex\.tv$/'                                        => 'https://app.plex.tv/desktop/#!/settings/account',
+            '/^.+\.booking\.com$/'                                    => 'https://account.booking.com/mysettings/security'
         ];
 
     public function __construct(protected IClientService $httpClientService, protected LoggingService $logger) {

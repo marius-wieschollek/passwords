@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2023.3.0 - Feature release
+### Added
+- Open change password page directly
+
 ## 2023.2.2 - Bugfix release
 ### Fixed
 - E2EE broken by libsodium update
