@@ -24,6 +24,7 @@ class PasswordChangeUrlService {
             '/^.+\.reddit\.[a-z]{2,3}$/'                              => 'https://www.reddit.com/change_password/',
             '/^.+\.(microsoft|live|outlook|xbox|skype)\.[a-z]{2,3}$/' => 'https://account.live.com/password/change?refd=account.microsoft.com&fref=home.banner.changepwd',
             '/^.+\.(office|onenote)\.com$/'                           => 'https://account.live.com/password/change?refd=account.microsoft.com&fref=home.banner.changepwd',
+            '/^.+\.twitter\.com$/'                                    => 'https://twitter.com/settings/password',
             '/^.+\.tumblr\.[a-z]{2,3}$/'                              => 'https://www.tumblr.com/settings/account',
             '/^.+\.adobe\.[a-z]{2,3}$/'                               => 'https://account.adobe.com/security?changePassword=true',
             '/^.+\.linkedin\.com$/'                                   => 'https://www.linkedin.com/mypreferences/d/change-password',
