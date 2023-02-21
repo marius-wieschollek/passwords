@@ -14,6 +14,10 @@ namespace OCA\Passwords\Db;
 use OCP\AppFramework\Db\Entity;
 use OCA\Passwords\Db\Traits\GetterSetterTrait;
 
+if(\OC_Util::getVersion()[0] < 26) {
+    require_once dirname(__FILE__, 2).'/.overrides/nc25/Db/Traits/GetterSetterTrait.php';
+}
+
 /**
  * Class AbstractEntity
  *
