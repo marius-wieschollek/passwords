@@ -74,6 +74,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
         protected NotificationService    $notificationService,
         protected AdminUserHelper        $adminHelper
     ) {
+        $this->setTimeSensitivity(self::TIME_INSENSITIVE);
         parent::__construct($logger, $config, $environment);
     }
 
