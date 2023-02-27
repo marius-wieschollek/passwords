@@ -35,6 +35,7 @@ class BackupJob extends AbstractTimedJob {
 
         $interval = (int) $this->config->getAppValue('backup/interval', 86400);
         $this->setInterval($interval);
+        $this->setTimeSensitivity(self::TIME_INSENSITIVE);
     }
 
     /**
