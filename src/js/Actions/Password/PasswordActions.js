@@ -12,11 +12,11 @@ import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Vue from "vue";
 import Utility from "@js/Classes/Utility";
-import API from '@js/Helper/api';
 import Messages from "@js/Classes/Messages";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
 import Localisation from "@js/Classes/Localisation";
 import Logger from "@js/Classes/Logger";
+import Events from "@js/Classes/Events";
 
 export default class PasswordActions {
     get password() {
@@ -25,6 +25,11 @@ export default class PasswordActions {
 
     constructor(password) {
         this._password = password;
+        Events.on('password.changed', (event) => {
+            if(this._password.id === event.object.id) {
+                this._password = event.object;
+            }
+        })
     }
 
     print() {
