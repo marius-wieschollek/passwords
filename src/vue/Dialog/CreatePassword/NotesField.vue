@@ -78,6 +78,7 @@
                     this.editor = new Editor(
                         {
                             el             : this.$refs.textarea,
+                            autofocus      : false,
                             height         : '100%',
                             initialValue   : this.model,
                             previewStyle   : window.innerWidth <= 640 ? 'tab':'vertical',

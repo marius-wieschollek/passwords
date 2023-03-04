@@ -25,6 +25,7 @@ export default new class Logger {
             warn   : '#ffa502',
             success: '#20bf6b',
             info   : '#3867d6',
+            trace  : '#778ca3',
             log    : '#778ca3',
             debug  : '#a55eea'
         };
@@ -47,6 +48,10 @@ export default new class Logger {
 
     warn(...args) {
         this._write('warn', args);
+    }
+
+    trace(...args) {
+        this._write('trace', args);
     }
 
     log(...args) {

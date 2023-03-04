@@ -15,9 +15,9 @@
             <favorite-field v-model="password.favorite" />
         </div>
         <div class="content">
-            <form class="password-form" id="password-edit-form" v-on:submit.prevent="submitAction()">
+            <form class="password-form" id="password-edit-form" v-on:keydown.enter.prevent="submitAction()" v-on:submit.prevent="submitAction()" ref="form">
                 <div class="password-form-fields">
-                    <password-field v-model="password.password" />
+                    <password-field v-model="password.password" :autofocus="true"/>
                     <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64" />
                     <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64" />
                     <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048" />
@@ -69,6 +69,7 @@
     import Messages                from '@js/Classes/Messages';
     import NcModal                 from '@nc/NcModal';
     import NcButton                from '@nc/NcButton';
+    import Logger from "@js/Classes/Logger";
 
     export default {
         components: {
@@ -138,6 +139,10 @@
                 this.password.customFields.splice(index, 1);
             },
             async submitAction() {
+                if(!this.$refs.form.checkValidity()) {
+                    return;
+                }
+
                 let password = Utility.cloneObject(this.password);
                 password = API.flattenPassword(password);
                 password = API.validatePassword(password);

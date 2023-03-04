@@ -19,6 +19,7 @@
                v-model="model"
                :readonly="readonly"
                class="area-input"
+               ref="input"
                required>
     </div>
 </template>
@@ -31,6 +32,11 @@
     export default {
         components: {PasswordControls, Translate},
         extends   : AbstractField,
+        props: {
+            value: [String, Number, Boolean],
+            autofocus: Boolean
+        },
+
         data() {
             return {
                 visible : false,
@@ -41,6 +47,9 @@
         mounted() {
             this.$nextTick(() => {
                 this.readonly = false;
+                if(this.autofocus) {
+                    this.$refs.input.focus();
+                }
             });
         },
 
