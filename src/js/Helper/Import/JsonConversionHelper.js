@@ -68,7 +68,11 @@ export default class ImportJsonConversionHelper {
                     newFields = [];
 
                 for(let j=0; j<oldFields.length; j++) {
-                    if(oldFields[j].type === null) {
+                    if(oldFields[j] === null) {
+                        continue;
+                    }
+
+                    if(!oldFields[j].hasOwnProperty('type') || oldFields[j].type === null) {
                         if(oldFields[j].value === null) continue;
                         oldFields[j].type = 'text';
                     }
