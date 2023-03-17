@@ -33,6 +33,7 @@ module.exports = (env, argv) => {
                     appVersion         : `"${config.version}"`
                 }
             ),
+            new webpack.ProvidePlugin({process: 'process/browser.js'}),
             new CopyWebpackPlugin(
                 {
                     patterns: [

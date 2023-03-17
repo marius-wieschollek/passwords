@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- App not loading with NC26
+
 ## 2023.3.0 - Feature release
 ### Added
 - Open change password page directly
