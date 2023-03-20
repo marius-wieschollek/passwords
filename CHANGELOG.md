@@ -1,6 +1,8 @@
 ## [Unreleased]
+## 2023.3.1 - Bugfix release
 ### Fixed
 - App not loading with NC26
+- Invalid custom fields cause database import to fail
 
 ## 2023.3.0 - Feature release
 ### Added
