@@ -3070,11 +3070,11 @@
         "description": "Label of the encryption settings section in the app settings in the admin area"
     },
     "backend-SettingsEncryptionSSEv3": {
-        "message": "Povolení šifrování třetí stranou",
+        "message": "Povolit šifrování třetí stranou",
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLPHPTitle": {
-        "message": "Hesla končí aktualizace pro PHP $STR_1$",
+        "message": "V případě PHP $STR_1$ už aplikace Hesla nebude aktualizována",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3083,11 +3083,11 @@
         }
     },
     "backend-NotificationInvalid": {
-        "message": "Toto oznámení lze vymazat.",
+        "message": "Toto upozornění lze vymazat.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     },
     "backend-EOLNextcloudText2": {
-        "message": "Upgrade na Nextcloud $STR_1$ pro budoucí aktualizace.",
+        "message": "Pro zachování aktualizací i v budoucnu přejděte na Nextcloud $STR_1$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3102,7 +3102,7 @@
         }
     },
     "backend-EOLPHPText1": {
-        "message": "Hesla $STR_1$ je poslední aktualizace pro PHP $STR_3$.",
+        "message": "Hesla $STR_1$ je poslední aktualizací pro PHP $STR_3$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3117,7 +3117,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "Upgrade na PHP $STR_2$ (nebo PHP $STR_3$ pro LSR) pro budoucí aktualizace.",
+        "message": "Pro zachování aktualizací i v budoucnu přejděte na PHP $STR_2$ (nebo PHP $STR_3$ pro LSR).",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3132,7 +3132,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "Hesla končí aktualizace pro Nextcloud $STR_1$ a PHP $STR_2$",
+        "message": "V případě Nextcloud $STR_1$ a PHP $STR_2$ aplikace Hesla už nadále nebude aktualizována",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3144,7 +3144,7 @@
         }
     },
     "backend-EOLNextcloudPHPText1": {
-        "message": "Hesla $STR_1$ je poslední aktualizace pro Nextcloud $STR_2$ a PHP $STR_3$.",
+        "message": "Hesla $STR_1$ je poslední aktualizací pro Nextcloud $STR_2$ a PHP $STR_3$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3159,11 +3159,11 @@
         }
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "Nelze aktualizovat databázi porušených hesel",
+        "message": "Nedaří se zaktualizovat databázi prolomených hesel",
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "Aktualizace databáze prolomených hesel se třikrát nezdařila. Podívejte se prosím do příručky a zkontrolujte protokoly. Důvod: $STR_1$",
+        "message": "Aktualizace databáze prolomených hesel se třikrát nezdařila. Podívejte se do příručky a zkontrolujte záznamy událostí. Důvod: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3172,11 +3172,11 @@
         }
     },
     "frontend-PasswordActionChangePwPage": {
-        "message": "Otevření stránky pro změnu hesla",
+        "message": "Otevřít stránku pro změnu hesla",
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Níže uvedenou adresu url jsme zjistili jako stránku pro změnu hesla pro \"{značka}\". Kliknutím na tlačítko ji otevřete",
+        "message": "Níže uvedená URL adresa byla rozpoznána jako stránka pro změnu hesla pro „{label}“. Kliknutím na tlačítko ji otevřete.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3188,11 +3188,11 @@
         }
     },
     "frontend-ChangePasswordPageLink": {
-        "message": "Otevření stránky pro změnu hesla",
+        "message": "Otevřít stránku pro změnu hesla",
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{hostitel}\" neoznamuje svou stránku pro změnu hesla. Funkci pro změnu hesla můžete najít na webových stránkách.",
+        "message": "„{hostitel}“ neoznamuje svou stránku pro změnu hesla. Funkci pro změnu hesla můžete najít na webových stránkách.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
