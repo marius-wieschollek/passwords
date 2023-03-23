@@ -203,7 +203,7 @@ class EnvironmentService {
      * @return null|IUser
      */
     public function getUser(): ?IUser {
-        return isset($this->user) ? $this->user:null;
+        return $this->user ?? null;
     }
 
     /**
@@ -217,14 +217,14 @@ class EnvironmentService {
      * @return null|string
      */
     public function getUserLogin(): ?string {
-        return isset($this->userLogin) ? $this->userLogin:null;
+        return $this->userLogin ?? null;
     }
 
     /**
      * @return null|string
      */
     public function getUserPassword(): ?string {
-        return isset($this->password) ? $this->password:null;
+        return $this->password ?? null;
     }
 
     /**
@@ -238,7 +238,7 @@ class EnvironmentService {
      * @return IToken|null
      */
     public function getLoginToken(): ?IToken {
-        return isset($this->loginToken) ? $this->loginToken:null;
+        return $this->loginToken ?? null;
     }
 
     /**
@@ -303,7 +303,7 @@ class EnvironmentService {
      */
     protected function isCronJob(IRequest $request): bool {
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
-        $cronScript = substr($request->getScriptName(), -8) === 'cron.php';
+        $cronScript = str_ends_with($request->getScriptName(), 'cron.php');
 
         if($cronScript && (in_array($cronMode, ['ajax', 'webcron']) || (PHP_SAPI === 'cli' && $cronMode === 'cron'))) {
             return true;
@@ -405,8 +405,8 @@ class EnvironmentService {
      * @return bool
      */
     protected function loadUserFromBasicAuth(?string $userId, IRequest $request): bool {
-        if(!isset($_SERVER['PHP_AUTH_USER']) || empty($_SERVER['PHP_AUTH_USER'])) return false;
-        if(!isset($_SERVER['PHP_AUTH_PW']) || empty($_SERVER['PHP_AUTH_PW'])) return false;
+        if(empty($_SERVER['PHP_AUTH_USER'])) return false;
+        if(empty($_SERVER['PHP_AUTH_PW'])) return false;
 
         $loginName = $_SERVER['PHP_AUTH_USER'];
         try {
@@ -499,10 +499,10 @@ class EnvironmentService {
             if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin && $this->session->exists('app_password') && !empty($this->session->get('app_password'))) {
                 $tokenId = $this->session->get('app_password');
 
-                return $this->getUserInfoFromToken($tokenId, $loginName, $userId);
+                return $this->getUserInfoFromToken($tokenId, $loginName, $userId, $loginCredentials->password ?? null);
             } else if(isset($loginCredentials->password) && !empty($loginCredentials->password)) {
                 return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
-            } else if(!isset($loginCredentials->password) || empty($loginCredentials->password)) {
+            } else if(empty($loginCredentials->password)) {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
         } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {
@@ -516,10 +516,11 @@ class EnvironmentService {
      * @param string      $tokenId
      * @param string      $loginName
      * @param string|null $userId
+     * @param string|null $password
      *
      * @return bool
      */
-    protected function getUserInfoFromToken(string $tokenId, string $loginName, ?string $userId): bool {
+    protected function getUserInfoFromToken(string $tokenId, string $loginName, ?string $userId, ?string $password = null): bool {
         try {
             $token     = $this->tokenProvider->getToken($tokenId);
             $loginUser = $this->userManager->get($token->getUID());
@@ -527,6 +528,7 @@ class EnvironmentService {
             if($loginUser !== null && $token->getLoginName() === $loginName && ($userId === null || $loginUser->getUID() === $userId)) {
                 $this->user       = $loginUser;
                 $this->userLogin  = $loginName;
+                $this->password   = $token->getPassword() ? $this->tokenProvider->getPassword($token, $tokenId):$password;
                 $this->client     = $this->getClientFromToken($token);
                 $this->loginToken = $token;
                 $this->loginType  = self::LOGIN_TOKEN;

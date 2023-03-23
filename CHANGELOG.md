@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Fixed
+- Fix 404 error in passlink connect dialog
+
 ## 2023.3.1 - Bugfix release
 ### Fixed
 - App not loading with NC26
