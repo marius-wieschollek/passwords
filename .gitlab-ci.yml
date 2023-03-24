@@ -53,7 +53,7 @@ Assemble Legacy PHP 8.0 Support Release:
   stage: assembling
   script:
     - mkdir passwords-lsr-80
-    - rsync -r .patches/lsr-7.4/* src
+    - rsync -r .patches/lsr-8.0/* src
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 2 --nightly --build "${CI_PIPELINE_ID}" ; fi
