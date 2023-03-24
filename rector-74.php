@@ -22,11 +22,12 @@ return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->sets(
         [
             DowngradeSetList::PHP_81,
-            DowngradeSetList::PHP_80
+            DowngradeSetList::PHP_80,
+            DowngradeSetList::PHP_74
         ]
     );
 
-    $rectorConfig->phpVersion(PhpVersion::PHP_80);
+    $rectorConfig->phpVersion(PhpVersion::PHP_74);
     $rectorConfig->bootstrapFiles([__DIR__.'/rector-shells.php',]);
 
     $rectorConfig->rule(\Utils\Rector\Rector\RemovePureAnnotation::class);

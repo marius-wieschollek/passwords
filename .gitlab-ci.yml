@@ -34,20 +34,35 @@ Assemble:
     paths:
       - ./passwords
 
-Assemble Legacy Support Release:
+Assemble Legacy PHP 7.4 Support Release:
   stage: assembling
   script:
-    - mkdir passwords-lsr
-    - rsync -r .patches/lsr/* src
-    - npm run rector
+    - mkdir passwords-lsr-74
+    - rsync -r .patches/lsr-7.4/* src
+    - npm run rector --config rector-74.php
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr --nightly --build "${CI_PIPELINE_ID}" ; fi
-    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr
-    - rsync -r src/js/Static passwords-lsr/js/
-    - cp CHANGELOG.md passwords-lsr/
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-74
+    - rsync -r src/js/Static passwords-lsr-74/js/
+    - cp CHANGELOG.md passwords-lsr-74/
   artifacts:
     paths:
-      - ./passwords-lsr
+      - ./passwords-lsr-74
+
+Assemble Legacy PHP 8.0 Support Release:
+  stage: assembling
+  script:
+    - mkdir passwords-lsr-80
+    - rsync -r .patches/lsr-7.4/* src
+    - npm run rector
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 2 --nightly --build "${CI_PIPELINE_ID}" ; fi
+    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-80
+    - rsync -r src/js/Static passwords-lsr-80/js/
+    - cp CHANGELOG.md passwords-lsr-80/
+  artifacts:
+    paths:
+      - ./passwords-lsr-80
 
 PHPUnit:
   stage: testing
@@ -56,17 +71,20 @@ PHPUnit:
   artifacts:
     paths:
       - ./passwords
-      - ./passwords-lsr
+      - ./passwords-lsr-74
+      - ./passwords-lsr-80
 
 Sign:
   stage: signing
   script:
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-80 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
   artifacts:
     paths:
       - ./passwords
-      - ./passwords-lsr
+      - ./passwords-lsr-74
+      - ./passwords-lsr-80
   only:
     - testing
     - stable
@@ -75,12 +93,14 @@ Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
-    - tar -zcf passwords-lsr.tar.gz passwords-lsr --transform s/passwords-lsr/passwords/
+    - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
+    - tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/
     - echo "export JOB_ID=\"${CI_JOB_ID}\"" > job.id
   artifacts:
     paths:
       - ./passwords.tar.gz
-      - ./passwords-lsr.tar.gz
+      - ./passwords-lsr-74.tar.gz
+      - ./passwords-lsr-80.tar.gz
       - job.id
   only:
   - testing
@@ -102,8 +122,10 @@ Publish Stable:
   script:
     - source job.id
     - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr.tar.gz | openssl base64 | tr -d "\n")
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
+    - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
+    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-80.tar.gz | openssl base64 | tr -d "\n")
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
     name: Stable

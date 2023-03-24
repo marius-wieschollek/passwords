@@ -32,14 +32,24 @@ function getBuildNumber() {
     return $argv[ $key + 1 ];
 }
 
+function getLsrMode() {
+    global $argv;
+    $key = array_search('--lsr', $argv);
+    if($key === false || !isset($argv[ $key + 1 ])) {
+        return null;
+    }
+
+    return $argv[ $key + 1 ];
+}
+
 function getFullVersion() {
     global $config;
     $parts = explode('.', getBaseVersion());
 
     if($config['lsr']) {
-        $parts[2] = '1'.$parts[2];
+        $parts[2] = getLsrMode().$parts[2];
     } else {
-        $parts[2] = '2'.$parts[2];
+        $parts[2] = '3'.$parts[2];
     }
 
     $version = implode('.', $parts);
