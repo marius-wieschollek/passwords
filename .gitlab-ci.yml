@@ -39,7 +39,7 @@ Assemble Legacy PHP 7.4 Support Release:
   script:
     - mkdir passwords-lsr-74
     - rsync -r .patches/lsr-7.4/* src
-    - npm run rector --config rector-74.php
+    - npm run rector:74
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-74

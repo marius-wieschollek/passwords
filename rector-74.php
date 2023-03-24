@@ -21,9 +21,9 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->sets(
         [
+            DowngradeSetList::PHP_82,
             DowngradeSetList::PHP_81,
-            DowngradeSetList::PHP_80,
-            DowngradeSetList::PHP_74
+            DowngradeSetList::PHP_80
         ]
     );
 
