@@ -133,7 +133,7 @@ class ApiTokenHelper {
     public function createToken(string $name, bool $permanent = false): array {
         $userLogin = $this->environment->getUserLogin();
         $token     = $this->generateRandomDeviceToken();
-        $password  = $this->getUserPassword();
+        $password  = $this->getUserPassword() ?? '';
         $type      = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
 
         $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
