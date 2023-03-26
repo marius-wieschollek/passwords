@@ -48,6 +48,8 @@ Assemble Legacy PHP 7.4 Support Release:
   artifacts:
     paths:
       - ./passwords-lsr-74
+  only:
+  - stable
 
 Assemble Legacy PHP 8.0 Support Release:
   stage: assembling
@@ -63,6 +65,8 @@ Assemble Legacy PHP 8.0 Support Release:
   artifacts:
     paths:
       - ./passwords-lsr-80
+  only:
+  - stable
 
 PHPUnit:
   stage: testing
@@ -78,8 +82,8 @@ Sign:
   stage: signing
   script:
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-80 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - if [ -d "$(pwd)/passwords-lsr-74" ]; then /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT} ; fi
+    - if [ -d "$(pwd)/passwords-lsr-80" ]; then /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-80 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT} ; fi
   artifacts:
     paths:
       - ./passwords
@@ -93,8 +97,8 @@ Pack:
   stage: packaging
   script:
     - tar -zcf passwords.tar.gz passwords
-    - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
-    - tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/
+    - if [ -d "$(pwd)/passwords-lsr-74" ]; then tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/ ; fi
+    - if [ -d "$(pwd)/passwords-lsr-80" ]; then tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/ ; fi
     - echo "export JOB_ID=\"${CI_JOB_ID}\"" > job.id
   artifacts:
     paths:
