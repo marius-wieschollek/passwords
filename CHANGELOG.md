@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Fixed
-- Fix 404 error in passlink connect dialog
+- 404 error in passlink connect dialog
+- PHP 8 incompatibility when using NC 26
 
 ## 2023.3.1 - Bugfix release
 ### Fixed
