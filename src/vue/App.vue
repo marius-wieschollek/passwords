@@ -105,12 +105,6 @@
         margin-top : .25rem;
     }
 
-    @media all and (min-width : $width-1024-above) {
-        button.app-navigation-toggle {
-            display : none !important;
-        }
-    }
-
     &.blocking {
         z-index: 2001;
 

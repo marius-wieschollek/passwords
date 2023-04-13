@@ -1,3 +1,13 @@
+<!--
+  - @copyright 2023 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <nc-breadcrumbs class="passwords-breadcrumbs" :class="{'actions-pull-right': actionsOnRight}">
         <NcBreadcrumb :to="getBaseRoute" :title="t('Home')">
@@ -235,7 +245,7 @@
 
 <style lang="scss">
 div.passwords-breadcrumbs {
-    padding          : .5rem;
+    padding          : 4px .5rem 4px calc(var(--default-clickable-area) + 4px);
     position         : sticky;
     top              : 0;
     background-color : var(--color-main-background);

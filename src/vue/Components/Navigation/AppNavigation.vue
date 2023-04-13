@@ -1,5 +1,15 @@
+<!--
+  - @copyright 2023 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
-    <nc-app-navigation open>
+    <nc-app-navigation>
         <template id="app-passwords-navigation" #list>
             <app-navigation-item :name="t('All')" :to="{ name: 'All'}" :exact="true">
                 <earth-icon :size=20 slot="icon" />
@@ -38,12 +48,12 @@
 </template>
 <script>
     import NcAppNavigation            from '@nc/NcAppNavigation';
-    import AppNavigationItem          from '@vc/Navigation/AppNavigationItem.vue';
-    import AppNavigationItemFavorites from '@vc/Navigation/AppNavigationItemFavorites.vue';
-    import AppNavigationItemFolders   from '@vc/Navigation/AppNavigationItemFolders.vue';
-    import AppNavigationItemSecurity  from '@vc/Navigation/AppNavigationItemSecurity.vue';
-    import AppNavigationItemShared    from '@vc/Navigation/AppNavigationItemShared.vue';
-    import AppNavigationItemTags      from '@vc/Navigation/AppNavigationItemTags.vue';
+    import AppNavigationItem          from '@vc/Navigation/AppNavigationItem';
+    import AppNavigationItemFavorites from '@vc/Navigation/AppNavigationItemFavorites';
+    import AppNavigationItemFolders   from '@vc/Navigation/AppNavigationItemFolders';
+    import AppNavigationItemSecurity  from '@vc/Navigation/AppNavigationItemSecurity';
+    import AppNavigationItemShared    from '@vc/Navigation/AppNavigationItemShared';
+    import AppNavigationItemTags      from '@vc/Navigation/AppNavigationItemTags';
     import SessionTimeout             from '@vc/SessionTimeout';
     import ArchiveIcon                from '@icon/Archive';
     import ClockIcon                  from '@icon/Clock';
