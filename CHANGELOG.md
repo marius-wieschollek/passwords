@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Changed
+- Navigation toggle always visible
+
 ## 2023.4.0 - Feature release
 ### Fixed
 - 404 error in passlink connect dialog

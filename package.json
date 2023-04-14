@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2023.4.0",
+    "version": "2023.5.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -45,7 +45,7 @@
         "@nextcloud/initial-state": "^2.0.0",
         "@nextcloud/l10n": "^1.6.0",
         "@nextcloud/router": "^2.0.1",
-        "@nextcloud/vue": "^7.3.0",
+        "@nextcloud/vue": "^7.9.0",
         "@toast-ui/editor": "^3.2.1",
         "blueimp-gallery": "^3.4.0",
         "clean-webpack-plugin": "^1.0.1",
