@@ -135,11 +135,15 @@
                 }
             },
             createTag(data) {
+                if(typeof data === 'string') {
+                    data = {label: data};
+                }
+
                 TagManager.createTagFromData(data)
                           .then((d) => {
                               this.tags[d.id] = d;
                               for(let i = 0; i < this.model.length; i++) {
-                                  if(!this.model[i].hasOwnProperty('id') && this.model[i].label === d.label) {
+                                  if((!this.model[i].hasOwnProperty('id') && this.model[i].label === d.label) || this.model[i] === d.label) {
                                       this.model.splice(i, 1, d);
                                   }
                               }
