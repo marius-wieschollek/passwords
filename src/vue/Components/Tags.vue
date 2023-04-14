@@ -251,6 +251,8 @@ div.passwords-tags-field.select {
     }
 
     .vs__selected-options {
+        min-height: 0 !important;
+
         .vs__selected {
             height      : 28px;
             min-height  : 28px;
