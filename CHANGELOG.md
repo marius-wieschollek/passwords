@@ -1,6 +1,8 @@
 ## [Unreleased]
 ### Changed
 - Navigation toggle always visible
+### Fixed
+- Creating tag in password edit dialog fails when no tags exist
 
 ## 2023.4.0 - Feature release
 ### Fixed
