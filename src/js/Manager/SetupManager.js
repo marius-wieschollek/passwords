@@ -35,7 +35,7 @@ class SetupManager {
      */
     runEncryptionSetup() {
         try {
-            return this._runWizard(['start', 'encryption'], true, false);
+            return this._runWizard(['encryption'], true, false);
         } catch(e) {
             Logger.error(e);
         }

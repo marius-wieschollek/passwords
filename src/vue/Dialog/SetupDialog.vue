@@ -6,7 +6,6 @@
                 <translate tag="h1" :say="current.title"/>
             </div>
             <ul class="setup-content" :style="getStyle">
-                <start id="setup-slide-start" class="slide" v-if="hasSlide('start')"/>
                 <encryption id="setup-slide-encryption"
                             class="slide"
                             :is-current="currentId === 1"
@@ -60,7 +59,7 @@
             enableSlides: {
                 type: Array,
                 default() {
-                    let slides = ['start', 'user-settings', 'get-help', 'integrations'];
+                    let slides = ['user-settings', 'get-help', 'integrations'];
                     if(!API.hasEncryption) {
                         slides.splice(1, 0, 'encryption');
                     }
@@ -231,7 +230,7 @@
 
     .setup-header {
         padding         : 1.25rem;
-        background      : var(--color-primary) var(--image-login-background) no-repeat 50% 50%;
+        background      : var(--color-primary) var(--image-background-default) no-repeat 50% 50%;
         background-size : cover;
         color           : var(--color-primary-text);
         text-align      : center;
@@ -335,7 +334,7 @@
 
 body {
     &[data-custom-color="false"] #passwords-setup .setup-header {
-        background-image      : var(--image-login-background), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
+        background-image      : var(--image-background-default), linear-gradient(40deg, #0082c9 0%, #30b6ff 100%);
         background-repeat     : repeat;
         background-size       : contain;
         background-attachment : fixed;

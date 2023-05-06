@@ -38,7 +38,7 @@ $desktop-width       : $width-1366;
     --pw-icon-font-face         : FontAwesome, sans-serif;
     --pw-game-font-face         : "Ani", "Purisa", "TSCu_Comic", "Comic Sans MS", sans-serif;
     --pw-mono-font-face         : "Monaco", "Menlo", "Ubuntu Mono", "Consolas", "DejaVu Sans Mono", "source-code-pro", monospace;
-    --pw-image-login-background : var(--image-login-background);
+    --pw-image-login-background : var(--image-background-default);
     --pw-image-logo             : url(/apps/passwords/img/app.svg);
     --pw-image-logo-themed      : url(/apps/passwords/img/app-themed.svg);
 }

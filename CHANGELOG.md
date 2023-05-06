@@ -1,8 +1,10 @@
 ## [Unreleased]
 ### Changed
 - Navigation toggle always visible
+- Removed start page of setup wizard
 ### Fixed
 - Creating tag in password edit dialog fails when no tags exist
+- Incorrect link to broken passwords section in navigation
 
 ## 2023.4.0 - Feature release
 ### Fixed
