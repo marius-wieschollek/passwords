@@ -18,7 +18,7 @@
             <app-navigation-item :name="t('Weak')" :to="{ name: 'Security', params: {status: '1'}}" :exact="true">
                 <shield-half-full-icon :size="20" fill-color="var(--color-warning)" slot="icon"/>
             </app-navigation-item>
-            <app-navigation-item :name="t('Breached')" :to="{ name: 'Security', params: {status: '3'}}" :exact="true">
+            <app-navigation-item :name="t('Breached')" :to="{ name: 'Security', params: {status: '2'}}" :exact="true">
                 <shield-half-full-icon :size="20" fill-color="var(--color-error)" slot="icon"/>
             </app-navigation-item>
         </template>
