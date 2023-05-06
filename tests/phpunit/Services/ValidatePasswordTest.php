@@ -769,7 +769,7 @@ class ValidatePasswordTest extends TestCase {
     protected function getPasswordModelMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\Password')
-            ->setMethods([
+            ->addMethods([
                              'getUuid',
                              'setUuid',
                              'getUserId',
@@ -786,13 +786,15 @@ class ValidatePasswordTest extends TestCase {
                              'setShareId',
                              'getEditable',
                              'setEditable',
-                             'isEditable',
                              'getSuspended',
                              'setSuspended',
-                             'isSuspended',
                              'getHasShares',
-                             'setHasShares'
+                             'setHasShares',
                          ])
+            ->onlyMethods([
+                              'isEditable',
+                              'isSuspended'
+                          ])
             ->getMock();
 
         return $mock;

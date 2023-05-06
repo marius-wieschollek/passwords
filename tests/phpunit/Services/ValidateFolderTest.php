@@ -302,7 +302,7 @@ class ValidateFolderTest extends TestCase {
     protected function getFolderMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'getModel', 'setParent', 'getEdited', 'setEdited'])
+            ->addMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'getModel', 'setParent', 'getEdited', 'setEdited'])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

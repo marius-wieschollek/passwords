@@ -5,6 +5,7 @@
 ### Fixed
 - Creating tag in password edit dialog fails when no tags exist
 - Incorrect link to broken passwords section in navigation
+- Incorrect links to user background images in NC 26
 
 ## 2023.4.0 - Feature release
 ### Fixed

@@ -8,11 +8,11 @@
 namespace OCA\Passwords\Helper\Settings;
 
 use OC_Defaults;
-use OCP\IURLGenerator;
-use PHPUnit\Framework\TestCase;
 use OCA\Passwords\AppInfo\Application;
-use PHPUnit\Framework\MockObject\MockObject;
 use OCA\Passwords\Services\ConfigurationService;
+use OCP\IURLGenerator;
+use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class ThemeSettingsHelperTest
@@ -89,6 +89,19 @@ class ThemeSettingsHelperTest extends TestCase {
     }
 
     /**
+     * Test if breezedark primary color is returned correctly when the app is enabled
+     */
+    public function testGetUserPrimaryColor() {
+        $this->configurationService->method('getUserValue')->with('background_color', '', null, 'theming')->willReturn('#ff00ff');
+        $this->configurationService->expects($this->once())->method('getUserValue');
+        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
+        $this->themingDefaults->expects($this->never())->method('getColorPrimary');
+
+        $result = $this->themeSettingsHelper->get('color.primary');
+        self::assertEquals('#ff00ff', $result);
+    }
+
+    /**
      * Test if default background color is returned correctly
      */
     public function testGetBackgroundColor() {
@@ -161,15 +174,21 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetBackgroundImage() {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
-        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1']);
+        $this->urlGenerator->method('linkTo')
+                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])
+                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
+        $this->urlGenerator->method('getAbsoluteURL')
+                           ->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1')
+                           ->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1']);
+        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
 
         $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1', $result);
     }
 
     /**
@@ -177,7 +196,7 @@ class ThemeSettingsHelperTest extends TestCase {
      */
     public function testGetThemedBackgroundImage() {
         $themingDefaults = $this->getMockBuilder(OC_Defaults::class)
-                                ->setMethods(['getBackground'])
+                                ->addMethods(['getBackground'])
                                 ->getMock();
         $themingDefaults->method('getBackground')->willReturn('/theming/img/background.png');
 
@@ -225,17 +244,16 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['background', '', null, 'theming', 'user-background.jpg'],
+                ['background_image', '', null, 'theming', 'user-background.jpg'],
                 ['userCacheBuster', '0', null, 'theming', '1']
             ]
         );
 
-        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/user-background.jpg', ['v' => '1_1'])->willReturn(
-            'https://clod.com/theming/img/user-background.jpg?v=1_1'
-        );
+        $this->urlGenerator->method('linkTo')->with('theming', 'img/background/user-background.jpg', ['v' => '1_1'])->willReturn('/apps/theming/img/user-background.jpg?v=1_1');
+        $this->urlGenerator->method('getAbsoluteURL')->with('/apps/theming/img/user-background.jpg?v=1_1')->willReturn('https://cloud.com/apps/theming/img/user-background.jpg?v=1_1');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://clod.com/theming/img/user-background.jpg?v=1_1', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/user-background.jpg?v=1_1', $result);
     }
 
     /**
@@ -247,17 +265,17 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
-                ['background', '', null, 'theming', 'custom'],
+                ['background_image', '', null, 'theming', 'custom'],
                 ['userCacheBuster', '0', null, 'theming', '1']
             ]
         );
 
         $this->urlGenerator->method('linkToRouteAbsolute')->with('theming.userTheme.getBackground', ['v' => '1_1'])->willReturn(
-            'https://clod.com/theming/img/user-custom-background.jpg?v=1_1'
+            'https://cloud.com/theming/img/user-custom-background.jpg?v=1_1'
         );
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://clod.com/theming/img/user-custom-background.jpg?v=1_1', $result);
+        self::assertEquals('https://cloud.com/theming/img/user-custom-background.jpg?v=1_1', $result);
     }
 
     /**
@@ -275,11 +293,17 @@ class ThemeSettingsHelperTest extends TestCase {
         );
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
 
-        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1']);
+        $this->urlGenerator->method('linkTo')
+                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1'])
+                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
+        $this->urlGenerator->method('getAbsoluteURL')
+                           ->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1')
+                           ->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1']);
+        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1', $result);
     }
 
     /**
@@ -404,7 +428,9 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('getEntity')->willReturn('Nextcloud');
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
-        $this->urlGenerator->method('linkTo')->with('theming', '/img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg');
+        $this->urlGenerator->method('linkTo')
+                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])
+                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg');
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
@@ -418,11 +444,9 @@ class ThemeSettingsHelperTest extends TestCase {
                 ['/core/img/logo.svg', 'https://cloud.com/core/img/logo.svg'],
                 ['/apps/passwords/app-themed.svg', 'https://cloud.com/apps/passwords/app-themed.svg'],
                 ['/core/img/filetypes/folder.svg', 'https://cloud.com/core/img/filetypes/folder.svg'],
+                ['/apps/theming/img/background/kamil-porembinski-clouds.jpg', 'https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg'],
             ]
         );
-
-        // @TODO remove in 2024.1.0
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn('26.0.0');
 
         $result = $this->themeSettingsHelper->list();
         self::assertEquals($expected, $result);

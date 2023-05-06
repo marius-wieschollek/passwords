@@ -284,7 +284,7 @@ class ValidateTagTest extends TestCase {
     protected function getTagMock() {
         $mock = $this
             ->getMockBuilder('\OCA\Passwords\Db\TagRevision')
-            ->setMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
+            ->addMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getColor', 'getEdited', 'setEdited'])
             ->getMock();
 
         $mock->method('getHidden')->willReturn(false);

@@ -241,7 +241,7 @@ class DeferredActivationServiceTest extends TestCase {
     protected function getFileMock(): MockObject {
         $fakeFile = $this
             ->getMockBuilder(ISimpleFile::class)
-            ->setMethods(['getMTime', 'getContent'])
+            ->addMethods(['getMTime', 'getContent'])
             ->getMock();
         $this->fileCacheService->method('getFile')->willReturn($fakeFile);
 
