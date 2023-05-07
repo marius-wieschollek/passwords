@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -14,6 +18,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\AppFramework\Utility\ITimeFactory;
 
 /**
  * Class SendServerSurvey
@@ -23,33 +28,9 @@ use OCA\Passwords\Services\NotificationService;
 class SendServerSurvey extends AbstractTimedJob {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var AdminUserHelper
-     */
-    protected AdminUserHelper $adminHelper;
-
-    /**
-     * @var ServerReportHelper
-     */
-    protected ServerReportHelper $serverReport;
-
-    /**
-     * @var NotificationService
-     */
-    protected NotificationService $notifications;
-
-    /**
-     * @var float|int
-     */
-    protected $interval = 259200;
-
-    /**
      * SendServerSurvey constructor.
      *
+     * @param ITimeFactory         $time
      * @param LoggingService       $logger
      * @param ConfigurationService $config
      * @param AdminUserHelper      $adminHelper
@@ -58,18 +39,17 @@ class SendServerSurvey extends AbstractTimedJob {
      * @param NotificationService  $notifications
      */
     public function __construct(
+        ITimeFactory $time,
         LoggingService $logger,
         ConfigurationService $config,
-        AdminUserHelper $adminHelper,
+        protected AdminUserHelper $adminHelper,
         EnvironmentService $environment,
-        ServerReportHelper $serverReport,
-        NotificationService $notifications
+        protected ServerReportHelper $serverReport,
+        protected NotificationService $notifications
     ) {
-        parent::__construct($logger, $config, $environment);
-        $this->serverReport  = $serverReport;
-        $this->config        = $config;
-        $this->adminHelper   = $adminHelper;
-        $this->notifications = $notifications;
+        parent::__construct($time, $logger, $config, $environment);
+        $this->setInterval(3 * 24 * 60 * 60);
+        $this->setTimeSensitivity(self::TIME_INSENSITIVE);
     }
 
     /**

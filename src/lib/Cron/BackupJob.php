@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\Cron;
 
@@ -7,6 +16,7 @@ use OCA\Passwords\Services\BackupService;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Util;
 
 /**
@@ -17,21 +27,22 @@ use OCP\Util;
 class BackupJob extends AbstractTimedJob {
 
     /**
-     * @var BackupService
-     */
-    protected BackupService $backupService;
-
-    /**
      * BackupJob constructor.
      *
+     * @param ITimeFactory         $time
      * @param LoggingService       $logger
      * @param EnvironmentService   $environment
      * @param BackupService        $backupService
      * @param ConfigurationService $config
      */
-    public function __construct(LoggingService $logger, EnvironmentService $environment, BackupService $backupService, ConfigurationService $config) {
-        parent::__construct($logger, $config, $environment);
-        $this->backupService = $backupService;
+    public function __construct(
+        ITimeFactory            $time,
+        LoggingService          $logger,
+        EnvironmentService      $environment,
+        protected BackupService $backupService,
+        ConfigurationService    $config
+    ) {
+        parent::__construct($time, $logger, $config, $environment);
 
         $interval = (int) $this->config->getAppValue('backup/interval', 86400);
         $this->setInterval($interval);

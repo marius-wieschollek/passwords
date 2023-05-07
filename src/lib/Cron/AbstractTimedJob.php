@@ -1,14 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
 
 use Exception;
-use OC\BackgroundJob\TimedJob;
+use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\BackgroundJob\TimedJob;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -21,40 +26,20 @@ use OCA\Passwords\Services\LoggingService;
 abstract class AbstractTimedJob extends TimedJob {
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected EnvironmentService $environment;
-
-    /**
-     * @var float|int
-     */
-    protected $interval = 1;
-
-    /**
-     * AbstractCronJob constructor.
+     * AbstractTimedJob constructor.
      *
+     * @param ITimeFactory         $time
      * @param LoggingService       $logger
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
      */
     public function __construct(
-        LoggingService $logger,
-        ConfigurationService $config,
-        EnvironmentService $environment
+        ITimeFactory $time,
+        protected LoggingService $logger,
+        protected ConfigurationService $config,
+        protected EnvironmentService $environment
     ) {
-        $this->logger      = $logger;
-        $this->config      = $config;
-        $this->environment = $environment;
+        parent::__construct($time);
     }
 
     /**

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -22,21 +26,6 @@ use OCP\BackgroundJob\QueuedJob;
 abstract class AbstractQueuedJob extends QueuedJob {
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected EnvironmentService $environment;
-
-    /**
-     * @var BackgroundJobService
-     */
-    protected BackgroundJobService $backgroundJobService;
-
-    /**
      * AbstractCronJob constructor.
      *
      * @param ITimeFactory         $time
@@ -46,14 +35,10 @@ abstract class AbstractQueuedJob extends QueuedJob {
      */
     public function __construct(
         ITimeFactory $time,
-        LoggingService $logger,
-        EnvironmentService $environment,
-        BackgroundJobService $backgroundJobService
+        protected LoggingService $logger,
+        protected EnvironmentService $environment,
+        protected BackgroundJobService $backgroundJobService
     ) {
-        $this->logger               = $logger;
-        $this->environment          = $environment;
-        $this->backgroundJobService = $backgroundJobService;
-
         parent::__construct($time);
     }
 

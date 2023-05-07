@@ -24,6 +24,7 @@ use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\AppFramework\Utility\ITimeFactory;
 use Throwable;
 
 /**
@@ -46,13 +47,9 @@ class CheckPasswordsJob extends AbstractTimedJob {
     protected array $badPasswords = [];
 
     /**
-     * @var float|int
-     */
-    protected $interval = 24 * 60 * 60;
-
-    /**
      * CheckPasswordsJob constructor.
      *
+     * @param ITimeFactory           $time
      * @param LoggingService         $logger
      * @param MailService            $mailService
      * @param ConfigurationService   $config
@@ -64,6 +61,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @param AdminUserHelper        $adminHelper
      */
     public function __construct(
+        ITimeFactory $time,
         LoggingService                   $logger,
         protected MailService            $mailService,
         ConfigurationService             $config,
@@ -74,7 +72,9 @@ class CheckPasswordsJob extends AbstractTimedJob {
         protected NotificationService    $notificationService,
         protected AdminUserHelper        $adminHelper
     ) {
-        parent::__construct($logger, $config, $environment);
+        parent::__construct($time, $logger, $config, $environment);
+        $this->setInterval(24 * 60 * 60);
+        $this->setTimeSensitivity(self::TIME_INSENSITIVE);
     }
 
     /**

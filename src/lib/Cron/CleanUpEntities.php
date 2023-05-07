@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -13,6 +17,7 @@ use OCA\Passwords\Helper\CleanUp\CleanSessionsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Utility\ITimeFactory;
 use Throwable;
 
 /**
@@ -23,23 +28,9 @@ use Throwable;
 class CleanUpEntities extends AbstractTimedJob {
 
     /**
-     * @var CleanSessionsHelper
-     */
-    protected CleanSessionsHelper $sessionsHelper;
-
-    /**
-     * @var CleanRegistrationsHelper
-     */
-    protected CleanRegistrationsHelper $registrationsHelper;
-
-    /**
-     * @var CleanDeletedEntitiesHelper
-     */
-    protected CleanDeletedEntitiesHelper $deletedEntitiesHelper;
-
-    /**
      * CleanUpEntities constructor.
      *
+     * @param ITimeFactory               $time
      * @param LoggingService             $logger
      * @param ConfigurationService       $config
      * @param EnvironmentService         $environment
@@ -48,17 +39,16 @@ class CleanUpEntities extends AbstractTimedJob {
      * @param CleanDeletedEntitiesHelper $deletedEntitiesHelper
      */
     public function __construct(
-        LoggingService $logger,
-        ConfigurationService $config,
-        EnvironmentService $environment,
-        CleanSessionsHelper $sessionsHelper,
-        CleanRegistrationsHelper $registrationsHelper,
-        CleanDeletedEntitiesHelper $deletedEntitiesHelper
+        ITimeFactory                         $time,
+        LoggingService                       $logger,
+        ConfigurationService                 $config,
+        EnvironmentService                   $environment,
+        protected CleanSessionsHelper        $sessionsHelper,
+        protected CleanRegistrationsHelper   $registrationsHelper,
+        protected CleanDeletedEntitiesHelper $deletedEntitiesHelper
     ) {
-        parent::__construct($logger, $config, $environment);
-        $this->sessionsHelper        = $sessionsHelper;
-        $this->registrationsHelper   = $registrationsHelper;
-        $this->deletedEntitiesHelper = $deletedEntitiesHelper;
+        parent::__construct($time, $logger, $config, $environment);
+        $this->setInterval(15 * 60);
     }
 
     /**

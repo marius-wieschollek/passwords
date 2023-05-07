@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -22,11 +26,6 @@ use OCP\AppFramework\Utility\ITimeFactory;
 class ProcessDeletedUser extends AbstractQueuedJob {
 
     /**
-     * @var DeleteUserDataHelper
-     */
-    protected DeleteUserDataHelper $deleteUserDataHelper;
-
-    /**
      * ProcessDeletedUsers constructor.
      *
      * @param ITimeFactory         $time
@@ -39,10 +38,9 @@ class ProcessDeletedUser extends AbstractQueuedJob {
         ITimeFactory $time,
         LoggingService $logger,
         EnvironmentService $environment,
-        DeleteUserDataHelper $deleteUserDataHelper,
+        protected DeleteUserDataHelper $deleteUserDataHelper,
         BackgroundJobService $backgroundJobService
     ) {
-        $this->deleteUserDataHelper = $deleteUserDataHelper;
         parent::__construct($time, $logger, $environment, $backgroundJobService);
     }
 

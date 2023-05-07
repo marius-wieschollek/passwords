@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\Cron;
 
@@ -7,6 +16,7 @@ use OCA\Passwords\Fetcher\NightlyAppFetcher;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Utility\ITimeFactory;
 
 /**
  * Class CheckNightlyUpdates
@@ -16,26 +26,22 @@ use OCA\Passwords\Services\LoggingService;
 class CheckNightlyUpdates extends AbstractTimedJob {
 
     /**
-     * @var NightlyAppFetcher
-     */
-    protected NightlyAppFetcher $nightlyAppFetcher;
-
-    /**
-     * @var float|int
-     */
-    protected $interval = 600;
-
-    /**
      * CheckNightlyUpdates constructor.
      *
-     * @param NightlyAppFetcher    $nightlyAppFetcher
+     * @param ITimeFactory         $time
      * @param ConfigurationService $config
      * @param LoggingService       $logger
      * @param EnvironmentService   $environment
+     * @param NightlyAppFetcher    $nightlyAppFetcher
      */
-    public function __construct(NightlyAppFetcher $nightlyAppFetcher, ConfigurationService $config, LoggingService $logger, EnvironmentService $environment) {
-        parent::__construct($logger, $config, $environment);
-        $this->nightlyAppFetcher = $nightlyAppFetcher;
+    public function __construct(
+        ITimeFactory                $time,
+        ConfigurationService        $config,
+        LoggingService              $logger,
+        EnvironmentService          $environment,
+        protected NightlyAppFetcher $nightlyAppFetcher
+    ) {
+        parent::__construct($time, $logger, $config, $environment);
         $this->setInterval(0);
     }
 

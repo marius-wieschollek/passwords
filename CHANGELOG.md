@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- Initial NC 27 Support
+
 ## 2023.5.0 - Feature release
 ### Changed
 - Navigation toggle always visible

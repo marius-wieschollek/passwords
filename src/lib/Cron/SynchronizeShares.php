@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Cron;
@@ -22,6 +26,7 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Utility\ITimeFactory;
 
 /**
  * Class SynchronizeShares
@@ -33,36 +38,6 @@ class SynchronizeShares extends AbstractTimedJob {
     const EXECUTION_TIMESTAMP = 'cron/sharing/time';
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var MailService
-     */
-    protected MailService $mailService;
-
-    /**
-     * @var ShareService
-     */
-    protected ShareService $shareService;
-
-    /**
-     * @var PasswordService
-     */
-    protected PasswordService $passwordService;
-
-    /**
-     * @var NotificationService
-     */
-    protected NotificationService $notificationService;
-
-    /**
-     * @var PasswordRevisionService
-     */
-    protected PasswordRevisionService $passwordRevisionService;
-
-    /**
      * @var array
      */
     protected array $notifications = ['created' => [], 'deleted' => [], 'loop' => []];
@@ -70,6 +45,7 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * SynchronizeShares constructor.
      *
+     * @param ITimeFactory            $time
      * @param LoggingService          $logger
      * @param MailService             $mailService
      * @param ShareService            $shareService
@@ -80,22 +56,17 @@ class SynchronizeShares extends AbstractTimedJob {
      * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
+        ITimeFactory $time,
         LoggingService $logger,
-        MailService $mailService,
-        ShareService $shareService,
+        protected MailService $mailService,
+        protected ShareService $shareService,
         ConfigurationService $config,
         EnvironmentService $environment,
-        PasswordService $passwordService,
-        NotificationService $notificationService,
-        PasswordRevisionService $passwordRevisionService
+        protected PasswordService $passwordService,
+        protected NotificationService $notificationService,
+        protected PasswordRevisionService $passwordRevisionService
     ) {
-        $this->config                  = $config;
-        $this->mailService             = $mailService;
-        $this->shareService            = $shareService;
-        $this->passwordService         = $passwordService;
-        $this->notificationService     = $notificationService;
-        $this->passwordRevisionService = $passwordRevisionService;
-        parent::__construct($logger, $config, $environment);
+        parent::__construct($time, $logger, $config, $environment);
     }
 
     /**
