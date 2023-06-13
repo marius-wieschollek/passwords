@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Preview;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -34,10 +35,6 @@ abstract class AbstractPreviewHelper {
      */
     protected string $prefix = 'af';
 
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
 
     /**
      * @var AbstractImageHelper
@@ -50,16 +47,6 @@ abstract class AbstractPreviewHelper {
     protected FileCacheService $fileCacheService;
 
     /**
-     * @var IClientService
-     */
-    protected IClientService $httpClientService;
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
      * AbstractPreviewHelper constructor.
      *
      * @param HelperService        $helperService
@@ -70,14 +57,11 @@ abstract class AbstractPreviewHelper {
      */
     public function __construct(
         HelperService $helperService,
-        ConfigurationService $config,
         FileCacheService $fileCacheService,
-        IClientService $httpClientService,
-        LoggingService $loggingService
+        protected ConfigurationService $config,
+        protected IClientService $httpClientService,
+        protected LoggingService $loggingService
     ) {
-        $this->config            = $config;
-        $this->logger            = $loggingService;
-        $this->httpClientService = $httpClientService;
         $this->imageHelper       = $helperService->getImageHelper();
         $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
     }
@@ -116,7 +100,7 @@ abstract class AbstractPreviewHelper {
             return $this->fileCacheService->getFile($fileName);
         }
 
-        $path    = __DIR__.'/../../../img/preview/preview_'.rand(1, 5).'.jpg';
+        $path    = __DIR__.'/../../../img/preview/preview.jpg';
         $content = file_get_contents($path);
 
         return $this->fileCacheService->putFile($fileName, $content);
@@ -162,7 +146,7 @@ abstract class AbstractPreviewHelper {
             throw new ApiException('API Request Failed', 502, $e);
         }
 
-        if(substr($response->getHeader('content-type'), 0, 5) !== 'image') {
+        if(!str_starts_with($response->getHeader('content-type'), 'image')) {
             $this->logger->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
             throw new ApiException('API Request Failed', 502);
         }

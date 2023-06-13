@@ -19,6 +19,11 @@ export default class Utility {
      * @returns {boolean}
      */
     static copyToClipboard(text) {
+        if(navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text);
+            return true;
+        }
+
         let element   = document.createElement('textarea'),
             range     = document.createRange(),
             selection = window.getSelection();
