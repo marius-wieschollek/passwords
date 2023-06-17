@@ -56,14 +56,14 @@ class SynchronizeShares extends AbstractTimedJob {
      * @param PasswordRevisionService $passwordRevisionService
      */
     public function __construct(
-        ITimeFactory $time,
-        LoggingService $logger,
-        protected MailService $mailService,
-        protected ShareService $shareService,
-        ConfigurationService $config,
-        EnvironmentService $environment,
-        protected PasswordService $passwordService,
-        protected NotificationService $notificationService,
+        ITimeFactory                      $time,
+        LoggingService                    $logger,
+        protected MailService             $mailService,
+        protected ShareService            $shareService,
+        ConfigurationService              $config,
+        EnvironmentService                $environment,
+        protected PasswordService         $passwordService,
+        protected NotificationService     $notificationService,
         protected PasswordRevisionService $passwordRevisionService
     ) {
         parent::__construct($time, $logger, $config, $environment);
@@ -157,47 +157,55 @@ class SynchronizeShares extends AbstractTimedJob {
         $shares = $this->shareService->findNew();
 
         foreach($shares as $share) {
-            if($this->shareLineageHasLoop($share)) continue;
-            $receiverId = $share->getReceiver();
-            $userId     = $share->getUserId();
+            try {
+                if($this->shareLineageHasLoop($share)) continue;
+                $receiverId = $share->getReceiver();
+                $userId     = $share->getUserId();
 
-            /** @var Password $model */
-            $model = $this->passwordService->create();
-            $model->setUserId($receiverId);
-            $model->setShareId($share->getUuid());
-            $model->setEditable($share->getEditable());
+                /** @var Password $model */
+                $model = $this->passwordService->create();
+                $model->setUserId($receiverId);
+                $model->setShareId($share->getUuid());
+                $model->setEditable($share->getEditable());
 
-            /** @var PasswordRevision $sourceRevision */
-            $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
-            $revision       = $this->passwordRevisionService->create(
-                $model->getUuid(),
-                $sourceRevision->getPassword(),
-                $sourceRevision->getUsername(),
-                '',
-                $sourceRevision->getCseType(),
-                $sourceRevision->getHash(),
-                $sourceRevision->getLabel(),
-                $sourceRevision->getUrl(),
-                $sourceRevision->getNotes(),
-                $sourceRevision->getCustomFields(),
-                FolderService::BASE_FOLDER_UUID,
-                time(),
-                false,
-                false,
-                false
-            );
-            $revision->setUserId($receiverId);
+                /** @var PasswordRevision $sourceRevision */
+                $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
+                $revision       = $this->passwordRevisionService->create(
+                    $model->getUuid(),
+                    $sourceRevision->getPassword(),
+                    $sourceRevision->getUsername(),
+                    '',
+                    $sourceRevision->getCseType(),
+                    $sourceRevision->getHash(),
+                    $sourceRevision->getLabel(),
+                    $sourceRevision->getUrl(),
+                    $sourceRevision->getNotes(),
+                    $sourceRevision->getCustomFields(),
+                    FolderService::BASE_FOLDER_UUID,
+                    time(),
+                    false,
+                    false,
+                    false
+                );
+                $revision->setUserId($receiverId);
 
-            $this->passwordRevisionService->save($revision);
-            $this->passwordService->setRevision($model, $revision);
+                $this->passwordRevisionService->save($revision);
+                $this->passwordService->setRevision($model, $revision);
 
-            $share->setTargetPassword($model->getUuid());
-            $share->setSourceUpdated(false);
-            $this->shareService->save($share);
+                $share->setTargetPassword($model->getUuid());
+                $share->setSourceUpdated(false);
+                $this->shareService->save($share);
 
-            if(!isset($this->notifications['created'][ $receiverId ])) $this->notifications['created'][ $receiverId ] = [];
-            if(!isset($this->notifications['created'][ $receiverId ][ $userId ])) $this->notifications['created'][ $receiverId ][ $userId ] = 0;
-            $this->notifications['created'][ $receiverId ][ $userId ]++;
+                if(!isset($this->notifications['created'][ $receiverId ])) $this->notifications['created'][ $receiverId ] = [];
+                if(!isset($this->notifications['created'][ $receiverId ][ $userId ])) $this->notifications['created'][ $receiverId ][ $userId ] = 0;
+                $this->notifications['created'][ $receiverId ][ $userId ]++;
+            } catch(\Throwable $e) {
+                $this->logger->logException(
+                    $e,
+                    [],
+                    "Could not create target password from {$share->getSourcePassword()} for share {$share->getUuid()}: {$e->getMessage()}"
+                );
+            }
         }
 
         $total = count($shares);
@@ -293,35 +301,43 @@ class SynchronizeShares extends AbstractTimedJob {
 
             foreach($shares as $share) {
                 if($share->getTargetPassword() === null) continue;
-                $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
+                try {
+                    $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
-                /** @var Password $password */
-                $password = $this->passwordService->findByUuid($share->getTargetPassword());
-                $password->setEditable($share->isEditable());
-                $this->passwordService->setRevision($password, $revision);
+                    /** @var Password $password */
+                    $password = $this->passwordService->findByUuid($share->getTargetPassword());
+                    $password->setEditable($share->isEditable());
+                    $this->passwordService->setRevision($password, $revision);
 
-                $share->setTargetUpdated(false);
-                $share->setSourceUpdated(false);
-                $this->shareService->save($share);
+                    $share->setTargetUpdated(false);
+                    $share->setSourceUpdated(false);
+                    $this->shareService->save($share);
 
-                if(!$share->isShareable() && $password->hasShares()) {
-                    $subShares = $this->shareService->findBySourcePassword($password->getUuid());
-                    foreach($subShares as $subShare) {
-                        $this->shareService->delete($subShare);
+                    if(!$share->isShareable() && $password->hasShares()) {
+                        $subShares = $this->shareService->findBySourcePassword($password->getUuid());
+                        foreach($subShares as $subShare) {
+                            $this->shareService->delete($subShare);
+                        }
+                        $this->deleteOrphanedTargetPasswords();
+                        break;
                     }
-                    $this->deleteOrphanedTargetPasswords();
-                    break;
-                }
 
-                if(!$share->isEditable()) {
-                    $subShares = $this->shareService->findBySourcePassword($password->getUuid());
-                    foreach($subShares as $subShare) {
-                        if($subShare->isEditable()) {
-                            $subShare->setEditable(false);
-                            $subShare->setSourceUpdated(true);
-                            $this->shareService->save($subShare);
+                    if(!$share->isEditable()) {
+                        $subShares = $this->shareService->findBySourcePassword($password->getUuid());
+                        foreach($subShares as $subShare) {
+                            if($subShare->isEditable()) {
+                                $subShare->setEditable(false);
+                                $subShare->setSourceUpdated(true);
+                                $this->shareService->save($subShare);
+                            }
                         }
                     }
+                } catch(\Throwable $e) {
+                    $this->logger->logException(
+                        $e,
+                        [],
+                        "Could not sync {$share->getSourcePassword()} to target {$share->getTargetPassword()} for share {$share->getUuid()}: {$e->getMessage()}"
+                    );
                 }
             }
         } while($count !== 0);
@@ -343,16 +359,24 @@ class SynchronizeShares extends AbstractTimedJob {
             $total  += $count;
 
             foreach($shares as $share) {
-                if($share->isEditable()) {
-                    $revision = $this->createNewPasswordRevision($share->getTargetPassword(), $share->getSourcePassword());
+                try {
+                    if($share->isEditable()) {
+                        $revision = $this->createNewPasswordRevision($share->getTargetPassword(), $share->getSourcePassword());
 
-                    $password = $this->passwordService->findByUuid($share->getSourcePassword());
-                    $this->passwordService->setRevision($password, $revision);
+                        $password = $this->passwordService->findByUuid($share->getSourcePassword());
+                        $this->passwordService->setRevision($password, $revision);
+                    }
+
+                    $share->setTargetUpdated(false);
+                    $share->setSourceUpdated(false);
+                    $this->shareService->save($share);
+                } catch(\Throwable $e) {
+                    $this->logger->logException(
+                        $e,
+                        [],
+                        "Could not sync {$share->getTargetPassword()} to source {$share->getSourcePassword()} for share {$share->getUuid()}: {$e->getMessage()}"
+                    );
                 }
-
-                $share->setTargetUpdated(false);
-                $share->setSourceUpdated(false);
-                $this->shareService->save($share);
             }
         } while($count !== 0);
 

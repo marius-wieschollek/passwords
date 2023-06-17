@@ -180,10 +180,10 @@ class LoggingService {
      *
      * @return LoggingService
      */
-    public function logException(Throwable $exception, array $context = []): LoggingService {
+    public function logException(Throwable $exception, array $context = [], string $message = null): LoggingService {
         $context['app'] = Application::APP_NAME;
         $context['exception'] = $exception;
-        $this->logger->emergency($exception->getMessage(), $context);
+        $this->logger->emergency($message ?? $exception->getMessage(), $context);
 
         return $this;
     }
