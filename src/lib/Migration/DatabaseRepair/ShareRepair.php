@@ -62,6 +62,6 @@ class ShareRepair {
             }
         }
 
-        return true;
+        return false;
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -17,6 +17,7 @@ use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordTagRelationRepair;
+use OCA\Passwords\Migration\DatabaseRepair\ShareRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagRevisionRepair;
 use OCA\Passwords\Services\ConfigurationService;
@@ -25,10 +26,9 @@ use OCP\Migration\IOutput;
 
 class CliDatabaseObjectRepair extends DatabaseObjectRepair {
 
-    protected EnvironmentService $environmentService;
-
     /**
      * @param ConfigurationService      $config
+     * @param ShareRepair               $shareRepair
      * @param TagModelRepair            $tagModelRepair
      * @param FolderModelRepair         $folderModelRepair
      * @param TagRevisionRepair         $tagRevisionRepair
@@ -40,17 +40,17 @@ class CliDatabaseObjectRepair extends DatabaseObjectRepair {
      */
     #[Pure] public function __construct(
         ConfigurationService      $config,
+        ShareRepair               $shareRepair,
         TagModelRepair            $tagModelRepair,
         FolderModelRepair         $folderModelRepair,
         TagRevisionRepair         $tagRevisionRepair,
-        EnvironmentService        $environmentService,
+        protected EnvironmentService        $environmentService,
         PasswordModelRepair       $passwordModelRepair,
         FolderRevisionRepair      $folderRevisionRepair,
         PasswordRevisionRepair    $passwordRevisionRepair,
         PasswordTagRelationRepair $passwordTagRelationRepair
     ) {
-        parent::__construct($config, $tagModelRepair, $folderModelRepair, $tagRevisionRepair, $passwordModelRepair, $folderRevisionRepair, $passwordRevisionRepair, $passwordTagRelationRepair);
-        $this->environmentService = $environmentService;
+        parent::__construct($config, $shareRepair, $tagModelRepair, $folderModelRepair, $tagRevisionRepair, $passwordModelRepair, $folderRevisionRepair, $passwordRevisionRepair, $passwordTagRelationRepair);
     }
 
     /**
