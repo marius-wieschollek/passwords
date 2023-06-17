@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -17,6 +17,7 @@ use OCA\Passwords\Migration\DatabaseRepair\FolderRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordRevisionRepair;
 use OCA\Passwords\Migration\DatabaseRepair\PasswordTagRelationRepair;
+use OCA\Passwords\Migration\DatabaseRepair\ShareRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagModelRepair;
 use OCA\Passwords\Migration\DatabaseRepair\TagRevisionRepair;
 use OCA\Passwords\Services\ConfigurationService;
@@ -31,49 +32,10 @@ use OCP\Migration\IRepairStep;
 class DatabaseObjectRepair implements IRepairStep {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var TagModelRepair
-     */
-    protected TagModelRepair $tagModelRepair;
-
-    /**
-     * @var FolderModelRepair
-     */
-    protected FolderModelRepair $folderModelRepair;
-
-    /**
-     * @var TagRevisionRepair
-     */
-    protected TagRevisionRepair $tagRevisionRepair;
-
-    /**
-     * @var PasswordModelRepair
-     */
-    protected PasswordModelRepair $passwordModelRepair;
-
-    /**
-     * @var FolderRevisionRepair
-     */
-    protected FolderRevisionRepair $folderRevisionRepair;
-
-    /**
-     * @var PasswordRevisionRepair
-     */
-    protected PasswordRevisionRepair $passwordRevisionRepair;
-
-    /**
-     * @var PasswordTagRelationRepair
-     */
-    protected PasswordTagRelationRepair $passwordTagRelationRepair;
-
-    /**
      * DatabaseObjectRepair constructor.
      *
      * @param ConfigurationService      $config
+     * @param ShareRepair               $shareRepair
      * @param TagModelRepair            $tagModelRepair
      * @param FolderModelRepair         $folderModelRepair
      * @param TagRevisionRepair         $tagRevisionRepair
@@ -83,23 +45,16 @@ class DatabaseObjectRepair implements IRepairStep {
      * @param PasswordTagRelationRepair $passwordTagRelationRepair
      */
     public function __construct(
-        ConfigurationService $config,
-        TagModelRepair $tagModelRepair,
-        FolderModelRepair $folderModelRepair,
-        TagRevisionRepair $tagRevisionRepair,
-        PasswordModelRepair $passwordModelRepair,
-        FolderRevisionRepair $folderRevisionRepair,
-        PasswordRevisionRepair $passwordRevisionRepair,
-        PasswordTagRelationRepair $passwordTagRelationRepair
+        protected ConfigurationService      $config,
+        protected ShareRepair               $shareRepair,
+        protected TagModelRepair            $tagModelRepair,
+        protected FolderModelRepair         $folderModelRepair,
+        protected TagRevisionRepair         $tagRevisionRepair,
+        protected PasswordModelRepair       $passwordModelRepair,
+        protected FolderRevisionRepair      $folderRevisionRepair,
+        protected PasswordRevisionRepair    $passwordRevisionRepair,
+        protected PasswordTagRelationRepair $passwordTagRelationRepair
     ) {
-        $this->config                    = $config;
-        $this->tagModelRepair            = $tagModelRepair;
-        $this->folderModelRepair         = $folderModelRepair;
-        $this->tagRevisionRepair         = $tagRevisionRepair;
-        $this->passwordModelRepair       = $passwordModelRepair;
-        $this->folderRevisionRepair      = $folderRevisionRepair;
-        $this->passwordRevisionRepair    = $passwordRevisionRepair;
-        $this->passwordTagRelationRepair = $passwordTagRelationRepair;
     }
 
     /**
@@ -129,5 +84,6 @@ class DatabaseObjectRepair implements IRepairStep {
         $this->folderModelRepair->run($output);
         $this->passwordModelRepair->run($output);
         $this->passwordTagRelationRepair->run($output);
+        $this->shareRepair->run($output);
     }
 }
