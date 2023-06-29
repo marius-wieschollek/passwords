@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Fixed
+- Sharing not working if defective share entry exists
+- Pressing enter in password dialog saves and closes dialog
+
 ## 2023.6.0 - Feature release
 ### Added
 - Initial NC 27 Support
