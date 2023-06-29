@@ -10,19 +10,19 @@
 
 <template>
     <div class="password-form-field-wrapper password-form-add-field">
-        <translate tag="label" :for="getId" say="New field" icon="plus" class="area-label"/>
+        <translate tag="label" :for="getId" say="New field" icon="plus" class="area-label" />
         <div class="area-input">
-            <input type="text" :placeholder="placeholder" :id="getId" v-model="label" maxlength="48"/>
-            <custom-field-type v-model="type" :empty="true" :disabled="!hasLabel"/>
+            <input type="text" :placeholder="placeholder" :id="getId" v-model="label" maxlength="48" />
+            <custom-field-type v-model="type" :empty="true" :disabled="!hasLabel" />
         </div>
     </div>
 </template>
 
 <script>
-    import Translate from "@vc/Translate";
-    import AbstractField from "@vue/Dialog/CreatePassword/AbstractField";
-    import CustomFieldType from "@vue/Dialog/CreatePassword/CustomFields/CustomFieldType";
-    import Localisation from "@js/Classes/Localisation";
+    import Translate       from '@vc/Translate';
+    import AbstractField   from '@vue/Dialog/CreatePassword/AbstractField';
+    import CustomFieldType from '@vue/Dialog/CreatePassword/CustomFields/CustomFieldType';
+    import Localisation    from '@js/Classes/Localisation';
 
     export default {
         components: {CustomFieldType, Translate},
@@ -61,6 +61,8 @@
 
 <style lang="scss">
 .password-form-add-field {
+    opacity               : .25;
+    transition            : opacity .25s ease-in-out;
     .area-input {
         display               : grid;
         grid-template-columns : 3fr 1fr;
@@ -76,6 +78,22 @@
             border-bottom-left-radius : 0;
             border-left               : 0;
         }
+    }
+
+    &:hover,
+    &:focus,
+    &:active {
+        opacity : 1;
+    }
+}
+
+[data-theme-light] .password-form-add-field {
+    opacity : .5;
+
+    &:hover,
+    &:focus,
+    &:active {
+        opacity : 1;
     }
 }
 </style>
