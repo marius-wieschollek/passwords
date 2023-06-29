@@ -15,7 +15,7 @@
             <favorite-field v-model="password.favorite" />
         </div>
         <div class="content">
-            <form class="password-form" id="password-edit-form" v-on:keydown.enter.prevent="submitAction()" v-on:submit.prevent="submitAction()" ref="form">
+            <form class="password-form" id="password-edit-form" v-on:keydown.enter.prevent="false" v-on:submit.prevent="submitAction()" v-on:keydown.ctrl.83.prevent.stop="submitAction()" ref="form">
                 <div class="password-form-fields">
                     <password-field v-model="password.password" :autofocus="true"/>
                     <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64" />
