@@ -36,7 +36,7 @@ function getLsrMode() {
     global $argv;
     $key = array_search('--lsr', $argv);
     if($key === false || !isset($argv[ $key + 1 ])) {
-        return null;
+        throw new \Exception('Missing LSR Mode');
     }
 
     return $argv[ $key + 1 ];

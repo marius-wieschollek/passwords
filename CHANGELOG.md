@@ -1,5 +1,6 @@
 ## [Unreleased]
 ### Fixed
+- Invalid version for LSR release
 - Sharing not working if defective share entry exists
 - Pressing enter in password dialog saves and closes dialog
 
