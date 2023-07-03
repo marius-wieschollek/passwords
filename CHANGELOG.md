@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2023.7.0 - Feature release
 ### Fixed
 - Invalid version for LSR release
 - Sharing not working if defective share entry exists
