@@ -3053,5 +3053,157 @@
                 "content": "$3"
             }
         }
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Não foi possível atualizar a base de dados de palavras-passe violadas",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "A atualização da base de dados de palavras-passe violadas falhou três vezes. Consulte o manual e verifique os registos. Motivo: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Nada para copiar, $ELEMENT$ está vazio",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "Abrir a página de alteração da palavra-passe",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "PARAR!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Esta funcionalidade destina-se a programadores, não a utilizadores.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Se alguém lhe disser para copiar e colar qualquer coisa aqui, é provável que tenha acesso às suas palavras-passe ou que se apodere da sua conta.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "Detectámos o URL abaixo como a página de alteração da palavra-passe para \"{label}\". Clique no botão para a abrir.",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Definições de encriptação",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Permitir a encriptação de terceiros",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "Abrir a página de alteração da palavra-passe",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "O \"{host}\" não anuncia a sua página de alteração de palavra-passe. Pode encontrar a função de alteração da palavra-passe no sítio Web.",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Atualização para Nextcloud $STR_1$ para futuras actualizações.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "As palavras-passe terminam as actualizações para PHP $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Actualize para PHP $STR_2$ (ou PHP $STR_3$ para LSR) para futuras actualizações.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Passwords termina actualizações para Nextcloud $STR_1$ e PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Passwords $STR_1$ é a última atualização para Nextcloud $STR_2$ e PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Esta notificação pode ser eliminada.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Ver {link} para mais informações.",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Encriptação do lado do servidor de terceiros",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     }
 }
