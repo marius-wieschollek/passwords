@@ -40,6 +40,7 @@ Compile:
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then npm run build:stable ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then npm run build:testing ; fi
   artifacts:
+    expire_in: 1 week
     paths:
       - ./src/js/Static/*
       - ./src/l10n/*
