@@ -12,10 +12,9 @@ image: passwords-builder
 Prepare:
   stage: prepare
   script:
-    - APP_VERSION=$(node -e "console.log(require('./package.json').version);")
+    - APP_VERSION=$(node -p "require('./package.json').version")
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then APP_VERSION="${APP_VERSION}-build${CI_PIPELINE_ID}" ; fi
     - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/passwords/${APP_VERSION}"
-    - echo "JOB_ID=${CI_JOB_ID}" >> variables.env
     - echo "APP_VERSION=${APP_VERSION}" >> variables.env
     - echo "PACKAGE_REGISTRY_URL=${PACKAGE_REGISTRY_URL}" >> variables.env
   artifacts:
@@ -61,8 +60,10 @@ Assemble:
     - tar -zcf passwords.tar.gz passwords
     - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - echo "SIGNATURE=\"${SIGNATURE}\"" >> variables.env
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords.tar.gz" ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz" ; fi
     - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"
   artifacts:
     reports:
       dotenv: variables.env
@@ -139,15 +140,15 @@ Release Nightly Package:
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "Passwords Nightly Release ${APP_VERSION}" \
-        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
-    - echo "Nightly version available at ${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
+        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\"}"
+    - echo "Nightly version available at ${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz"
   only:
   - testing
 
 Publish Nightly:
   stage: publishing
   script:
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
   only:
