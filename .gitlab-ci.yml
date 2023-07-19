@@ -124,7 +124,8 @@ Publish Package:
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
     - |
-      release-cli create --name "Passwords ${APP_VERSION}" \
+      release-cli create --name "Passwords ${APP_VERSION}" --tag-name "${APP_VERSION}.${CI_PIPELINE_ID}" \
+        --description "Passwords Nightly Release"
         --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
   only:
   - testing
