@@ -8,7 +8,6 @@ stages:
 
 image: passwords-builder
 
-
 Prepare:
   stage: prepare
   script:
@@ -31,6 +30,9 @@ PHPUnit:
   stage: testing
   script:
     - npm run phpunit
+  only:
+    - testing
+    - stable
 
 Compile:
   stage: compiling
@@ -43,6 +45,9 @@ Compile:
       - ./src/js/Static/*
       - ./src/l10n/*
       - ./src/css/*
+  only:
+    - testing
+    - stable
 
 Assemble:
   stage: assembling
@@ -62,6 +67,9 @@ Assemble:
   artifacts:
     reports:
       dotenv: variables.env
+  only:
+    - testing
+    - stable
 
 Assemble Legacy PHP 7.4 Support Release:
   stage: assembling
@@ -116,7 +124,8 @@ Publish Nightly Package:
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "Passwords Nightly Release ${APP_VERSION}" \
-        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+    - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
   only:
   - testing
 
@@ -127,9 +136,9 @@ Publish Package:
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "Passwords Release ${APP_VERSION}" \
-        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}" \
-        --assets-link "{\"name\":\"passwords-lsr-74.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\"}" \
-        --assets-link "{\"name\":\"passwords-lsr-80.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\"}"
+        --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}" \
+        --assets-link "{\"name\":\"LSR build for PHP 7.4 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\"}" \
+        --assets-link "{\"name\":\"LSR build for PHP 8.0 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\"}"
   only:
   - stable
 
