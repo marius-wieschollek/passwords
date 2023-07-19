@@ -148,6 +148,7 @@ Release Nightly Package:
 Publish Nightly:
   stage: publishing
   script:
+    - 'echo curl -f -X POST ${API_URL} -H "Authorization: Token API_TOKEN" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
