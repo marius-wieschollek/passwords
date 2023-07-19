@@ -3,6 +3,7 @@ stages:
   - testing
   - compiling
   - assembling
+  - releasing
   - publishing
   - hooks
 
@@ -18,8 +19,6 @@ Prepare:
     - echo "APP_VERSION=${APP_VERSION}" >> variables.env
     - echo "PACKAGE_REGISTRY_URL=${PACKAGE_REGISTRY_URL}" >> variables.env
   artifacts:
-    paths:
-      - ./variables.env
     reports:
       dotenv: variables.env
   only:
@@ -117,20 +116,8 @@ Assemble Legacy PHP 8.0 Support Release:
   only:
   - stable
 
-Publish Nightly Package:
-  stage: publishing
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  script:
-    - |
-      release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
-        --description "Passwords Nightly Release ${APP_VERSION}" \
-        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
-    - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
-  only:
-  - testing
-
-Publish Package:
-  stage: publishing
+Release Package:
+  stage: releasing
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
     - |
@@ -139,8 +126,23 @@ Publish Package:
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}" \
         --assets-link "{\"name\":\"LSR build for PHP 7.4 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\"}" \
         --assets-link "{\"name\":\"LSR build for PHP 8.0 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\"}"
+    - echo "Stable version available at ${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
+    - echo "LSR PHP 7.4 version available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"
+    - echo "LSR PHP 8.0 version available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"
   only:
-  - stable
+    - stable
+
+Release Nightly Package:
+  stage: releasing
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - |
+      release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
+        --description "Passwords Nightly Release ${APP_VERSION}" \
+        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+    - echo "Nightly version available at ${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
+  only:
+  - testing
 
 Publish Nightly:
   stage: publishing
