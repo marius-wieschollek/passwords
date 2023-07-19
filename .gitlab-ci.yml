@@ -9,6 +9,8 @@ stages:
 
 image: passwords-builder
 
+variables:
+
 Compile:
   stage: compiling
   script:
@@ -99,8 +101,13 @@ Pack:
     - tar -zcf passwords.tar.gz passwords
     - if [ -d "$(pwd)/passwords-lsr-74" ]; then tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/ ; fi
     - if [ -d "$(pwd)/passwords-lsr-80" ]; then tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/ ; fi
+    - APP_VERSION=$(node -e "console.log(require('./package.json').version);")
+    - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/passwords/${APP_VERSION}"
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
     - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
-    - echo "APP_VERSION=\"$(node -e "console.log(require('./package.json').version);")\"" >> variables.env
+    - echo "APP_VERSION=\"${APP_VERSION}\"" >> variables.env
+    - echo "PACKAGE_REGISTRY_URL=\"${PACKAGE_REGISTRY_URL}\"" >> variables.env
   artifacts:
     paths:
       - ./passwords.tar.gz
@@ -112,11 +119,19 @@ Pack:
   - testing
   - stable
 
+Publish Package:
+  stage: publishing
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - |
+      release-cli create --name "Passwords ${APP_VERSION}" \
+        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+  only:
+  - testing
+
 Publish Nightly:
   stage: publishing
   script:
-    - echo ${JOB_ID}
-    - echo ${APP_VERSION}
     - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
