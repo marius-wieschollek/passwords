@@ -1,15 +1,35 @@
 stages:
+  - prepare
+  - testing
   - compiling
   - assembling
-  - testing
-  - signing
-  - packaging
   - publishing
   - hooks
 
 image: passwords-builder
 
-variables:
+
+Prepare:
+  stage: prepare
+  script:
+    - APP_VERSION=$(node -e "console.log(require('./package.json').version);")
+    - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/passwords/${APP_VERSION}"
+    - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
+    - echo "APP_VERSION=\"${APP_VERSION}\"" >> variables.env
+    - echo "PACKAGE_REGISTRY_URL=\"${PACKAGE_REGISTRY_URL}\"" >> variables.env
+  artifacts:
+    paths:
+      - ./variables.env
+    reports:
+      dotenv: variables.env
+  only:
+    - testing
+    - stable
+
+PHPUnit:
+  stage: testing
+  script:
+    - npm run phpunit
 
 Compile:
   stage: compiling
@@ -32,9 +52,17 @@ Assemble:
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - tar -zcf passwords.tar.gz passwords
+    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - echo "SIGNATURE=\"${SIGNATURE}\"" >> variables.env
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
   artifacts:
     paths:
-      - ./passwords
+      - ./passwords.tar.gz
+    reports:
+      dotenv: variables.env
 
 Assemble Legacy PHP 7.4 Support Release:
   stage: assembling
@@ -47,9 +75,15 @@ Assemble Legacy PHP 7.4 Support Release:
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-74
     - rsync -r src/js/Static passwords-lsr-74/js/
     - cp CHANGELOG.md passwords-lsr-74/
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
+    - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
+    - echo "LSR_74_SIGNATURE=\"${LSR_74_SIGNATURE}\"" >> variables.env
   artifacts:
     paths:
-      - ./passwords-lsr-74
+      - ./passwords-lsr-74.tar.gz
+    reports:
+      dotenv: variables.env
   only:
   - stable
 
@@ -64,59 +98,16 @@ Assemble Legacy PHP 8.0 Support Release:
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-80
     - rsync -r src/js/Static passwords-lsr-80/js/
     - cp CHANGELOG.md passwords-lsr-80/
+    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-80 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
+    - tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/
+    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-80.tar.gz | openssl base64 | tr -d "\n")
+    - echo "LSR_SIGNATURE=\"${LSR_SIGNATURE}\"" >> variables.env
   artifacts:
     paths:
-      - ./passwords-lsr-80
-  only:
-  - stable
-
-PHPUnit:
-  stage: testing
-  script:
-    - npm run phpunit
-  artifacts:
-    paths:
-      - ./passwords
-      - ./passwords-lsr-74
-      - ./passwords-lsr-80
-
-Sign:
-  stage: signing
-  script:
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - if [ -d "$(pwd)/passwords-lsr-74" ]; then /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT} ; fi
-    - if [ -d "$(pwd)/passwords-lsr-80" ]; then /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-80 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT} ; fi
-  artifacts:
-    paths:
-      - ./passwords
-      - ./passwords-lsr-74
-      - ./passwords-lsr-80
-  only:
-    - testing
-    - stable
-
-Pack:
-  stage: packaging
-  script:
-    - tar -zcf passwords.tar.gz passwords
-    - if [ -d "$(pwd)/passwords-lsr-74" ]; then tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/ ; fi
-    - if [ -d "$(pwd)/passwords-lsr-80" ]; then tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/ ; fi
-    - APP_VERSION=$(node -e "console.log(require('./package.json').version);")
-    - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/passwords/${APP_VERSION}"
-    - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
-    - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
-    - echo "APP_VERSION=\"${APP_VERSION}\"" >> variables.env
-    - echo "PACKAGE_REGISTRY_URL=\"${PACKAGE_REGISTRY_URL}\"" >> variables.env
-  artifacts:
-    paths:
-      - ./passwords.tar.gz
-      - ./passwords-lsr-74.tar.gz
       - ./passwords-lsr-80.tar.gz
     reports:
       dotenv: variables.env
   only:
-  - testing
   - stable
 
 Publish Package:
@@ -125,7 +116,7 @@ Publish Package:
   script:
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name "${APP_VERSION}.${CI_PIPELINE_ID}" \
-        --description "Passwords Nightly Release"
+        --description "Passwords Nightly Release" \
         --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
   only:
   - testing
@@ -133,7 +124,6 @@ Publish Package:
 Publish Nightly:
   stage: publishing
   script:
-    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
@@ -143,9 +133,6 @@ Publish Nightly:
 Publish Stable:
   stage: publishing
   script:
-    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
-    - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
-    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-80.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
