@@ -100,7 +100,7 @@ Pack:
     - if [ -d "$(pwd)/passwords-lsr-74" ]; then tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/ ; fi
     - if [ -d "$(pwd)/passwords-lsr-80" ]; then tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/ ; fi
     - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
-    - echo "APP_VERSION=\"$(node -e "console.log(require('./package.json').version);""')\""
+    - echo "APP_VERSION=\"$(node -e "console.log(require('./package.json').version);")\""
   artifacts:
     paths:
       - ./passwords.tar.gz
