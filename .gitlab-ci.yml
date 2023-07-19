@@ -100,7 +100,7 @@ Pack:
     - if [ -d "$(pwd)/passwords-lsr-74" ]; then tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/ ; fi
     - if [ -d "$(pwd)/passwords-lsr-80" ]; then tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/ ; fi
     - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
-    - echo "APP_VERSION=\"$(node -e "console.log(require('./package.json').version);")\""
+    - echo "APP_VERSION=\"$(node -e "console.log(require('./package.json').version);")\"" >> variables.env
   artifacts:
     paths:
       - ./passwords.tar.gz
@@ -115,6 +115,8 @@ Pack:
 Publish Nightly:
   stage: publishing
   script:
+    - echo ${JOB_ID}
+    - echo ${APP_VERSION}
     - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
     - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
