@@ -29,9 +29,6 @@ PHPUnit:
   stage: testing
   script:
     - npm run phpunit
-  only:
-    - testing
-    - stable
 
 Compile:
   stage: compiling
