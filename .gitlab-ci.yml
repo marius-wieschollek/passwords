@@ -13,10 +13,11 @@ Prepare:
   stage: prepare
   script:
     - APP_VERSION=$(node -e "console.log(require('./package.json').version);")
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then APP_VERSION="${APP_VERSION}-build${CI_PIPELINE_ID}" ; fi
     - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/passwords/${APP_VERSION}"
-    - echo "JOB_ID=\"${CI_JOB_ID}\"" >> variables.env
-    - echo "APP_VERSION=\"${APP_VERSION}\"" >> variables.env
-    - echo "PACKAGE_REGISTRY_URL=\"${PACKAGE_REGISTRY_URL}\"" >> variables.env
+    - echo "JOB_ID=${CI_JOB_ID}" >> variables.env
+    - echo "APP_VERSION=${APP_VERSION}" >> variables.env
+    - echo "PACKAGE_REGISTRY_URL=${PACKAGE_REGISTRY_URL}" >> variables.env
   artifacts:
     paths:
       - ./variables.env
@@ -59,8 +60,6 @@ Assemble:
     - |
       curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"
   artifacts:
-    paths:
-      - ./passwords.tar.gz
     reports:
       dotenv: variables.env
 
@@ -79,9 +78,9 @@ Assemble Legacy PHP 7.4 Support Release:
     - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
     - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
     - echo "LSR_74_SIGNATURE=\"${LSR_74_SIGNATURE}\"" >> variables.env
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-74.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"
   artifacts:
-    paths:
-      - ./passwords-lsr-74.tar.gz
     reports:
       dotenv: variables.env
   only:
@@ -102,29 +101,42 @@ Assemble Legacy PHP 8.0 Support Release:
     - tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/
     - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-80.tar.gz | openssl base64 | tr -d "\n")
     - echo "LSR_SIGNATURE=\"${LSR_SIGNATURE}\"" >> variables.env
+    - |
+      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-80.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"
   artifacts:
-    paths:
-      - ./passwords-lsr-80.tar.gz
     reports:
       dotenv: variables.env
   only:
   - stable
+
+Publish Nightly Package:
+  stage: publishing
+  image: registry.gitlab.com/gitlab-org/release-cli:latest
+  script:
+    - |
+      release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
+        --description "Passwords Nightly Release ${APP_VERSION}" \
+        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+  only:
+  - testing
 
 Publish Package:
   stage: publishing
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
     - |
-      release-cli create --name "Passwords ${APP_VERSION}" --tag-name "${APP_VERSION}.${CI_PIPELINE_ID}" \
-        --description "Passwords Nightly Release" \
-        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}"
+      release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
+        --description "Passwords Release ${APP_VERSION}" \
+        --assets-link "{\"name\":\"passwords.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}" \
+        --assets-link "{\"name\":\"passwords-lsr-74.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\"}" \
+        --assets-link "{\"name\":\"passwords-lsr-80.tar.gz\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\"}"
   only:
-  - testing
+  - stable
 
 Publish Nightly:
   stage: publishing
   script:
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
   only:
@@ -133,9 +145,9 @@ Publish Nightly:
 Publish Stable:
   stage: publishing
   script:
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
-    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${CI_PROJECT_URL}/-/jobs/${JOB_ID}/artifacts/raw/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
     name: Stable
   only:
