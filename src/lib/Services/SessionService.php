@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -11,6 +15,7 @@ use Exception;
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\Object\SimpleEncryption;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -26,48 +31,8 @@ use Throwable;
 class SessionService {
 
     const VALUE_USER_SECRET  = 'userSecret';
-    const API_SESSION_KEY    = 'passwordsSessionId';
     const API_SESSION_HEADER = 'X-API-SESSION';
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var IRequest
-     */
-    protected IRequest $request;
-
-    /**
-     * @var SessionMapper
-     */
-    protected SessionMapper $mapper;
-
-    /**
-     * @var UuidHelper
-     */
-    protected UuidHelper $uuidHelper;
-
-    /**
-     * @var SimpleEncryption
-     */
-    protected SimpleEncryption $encryption;
-
-    /**
-     * @var ISession
-     */
-    protected ISession $userSession;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected EnvironmentService $environment;
-
-    /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $userSettings;
+    const API_SESSION_COOKIE = 'nc_passwords';
 
     /**
      * @var array
@@ -82,7 +47,7 @@ class SessionService {
     /**
      * @var Session|null
      */
-    protected ?Session $session = null;
+    private ?Session $session = null;
 
     /**
      * @var bool
@@ -90,10 +55,20 @@ class SessionService {
     protected bool $modified = false;
 
     /**
+     * @var string|null
+     */
+    private ?string $encryptedId = null;
+
+    /**
+     * @var string|null
+     */
+    private ?string $passphrase = null;
+
+    /**
      * SessionService constructor.
      *
      * @param IRequest           $request
-     * @param ISession           $session
+     * @param ISession           $userSession
      * @param SessionMapper      $mapper
      * @param UuidHelper         $uuidHelper
      * @param LoggingService     $logger
@@ -102,23 +77,15 @@ class SessionService {
      * @param UserSettingsHelper $userSettings
      */
     public function __construct(
-        IRequest $request,
-        ISession $session,
-        SessionMapper $mapper,
-        UuidHelper $uuidHelper,
-        LoggingService $logger,
-        EnvironmentService $environment,
-        SimpleEncryption $encryption,
-        UserSettingsHelper $userSettings
+        protected IRequest           $request,
+        protected ISession           $userSession,
+        protected SessionMapper      $mapper,
+        protected UuidHelper         $uuidHelper,
+        protected LoggingService     $logger,
+        protected EnvironmentService $environment,
+        protected SimpleEncryption   $encryption,
+        protected UserSettingsHelper $userSettings
     ) {
-        $this->mapper       = $mapper;
-        $this->environment  = $environment;
-        $this->request      = $request;
-        $this->logger       = $logger;
-        $this->userSession  = $session;
-        $this->encryption   = $encryption;
-        $this->userSettings = $userSettings;
-        $this->uuidHelper   = $uuidHelper;
     }
 
     /**
@@ -131,8 +98,21 @@ class SessionService {
     /**
      * @return string|null
      */
-    public function getId(): ?string {
-        return $this->session === null ? null:$this->session->getUuid();
+    public function getEncryptedId(): ?string {
+        if($this->encryptedId !== null) {
+            return $this->encryptedId;
+        }
+
+        if($this->session !== null) {
+            $id = $this->session->getUuid().':'.$this->getPassphrase();
+
+            try {
+                return $this->encryption->encrypt($id);
+            } catch(Exception $e) {
+            }
+        }
+
+        return null;
     }
 
     /**
@@ -243,7 +223,6 @@ class SessionService {
             $this->session->setUpdated(time());
             $this->session = $this->mapper->update($this->session);
         }
-        $this->userSession->set(self::API_SESSION_KEY, $this->session->getUuid());
         $this->modified = false;
     }
 
@@ -254,9 +233,10 @@ class SessionService {
         if(!empty($this->session->getId())) {
             $this->mapper->delete($this->session);
         }
-        $this->data       = [];
-        $this->shadowVars = [];
-        $this->session    = $this->create();
+        $this->data        = [];
+        $this->shadowVars  = [];
+        $this->session     = $this->create();
+        $this->encryptedId = null;
     }
 
     /**
@@ -264,11 +244,7 @@ class SessionService {
      */
     public function load() {
         if($this->session !== null) return;
-        if($this->userSession->exists(self::API_SESSION_KEY)) {
-            $sessionId = $this->userSession->get(self::API_SESSION_KEY);
-        } else {
-            $sessionId = $this->request->getHeader(self::API_SESSION_HEADER);
-        }
+        [$sessionId, $passphrase] = $this->getSessionIdFromRequest();
 
         if(!empty($sessionId)) {
             try {
@@ -281,8 +257,9 @@ class SessionService {
                     $this->mapper->delete($session);
                     $this->logger->info(['Cancelled expired session %s for %s', $session->getUuid(), $session->getUserId()]);
                 } else {
-                    $this->session = $session;
-                    $this->data    = $this->decryptSessionData();
+                    $this->session    = $session;
+                    $this->passphrase = $passphrase;
+                    $this->data       = $this->decryptSessionData();
 
                     $shadow = $this->decryptSessionData('shadowData');
                     foreach($shadow as $name => $value) {
@@ -294,8 +271,10 @@ class SessionService {
                 }
             } catch(DoesNotExistException $e) {
                 $this->logger->info(['Attempt to access expired or nonexistent session %s by %s', $sessionId, $this->environment->getUserId()]);
+                $this->passphrase = null;
             } catch(Throwable $e) {
                 $this->logger->logException($e);
+                $this->passphrase = null;
             }
         }
 
@@ -308,7 +287,7 @@ class SessionService {
      */
     protected function encryptSessionData(array $data, string $property = 'data'): void {
         try {
-            $value = $this->encryption->encrypt(json_encode($data));
+            $value = $this->encryption->encrypt(json_encode($data), $this->getPassphrase());
             $this->session->setProperty($property, $value);
         } catch(Exception $e) {
             $this->session->setProperty($property, '[]');
@@ -324,7 +303,8 @@ class SessionService {
         try {
             return json_decode(
                 $this->encryption->decrypt(
-                    $this->session->getProperty($property)
+                    $this->session->getProperty($property),
+                    $this->passphrase
                 ),
                 true);
         } catch(Exception $e) {
@@ -346,8 +326,47 @@ class SessionService {
         $model->setDeleted(false);
         $model->setCreated(time());
         $model->setUpdated(time());
-        $this->modified = true;
+        $this->modified    = true;
+        $this->encryptedId = null;
+        $this->passphrase  = null;
 
         return $model;
+    }
+
+    /**
+     * @return string[]|null
+     */
+    protected function getSessionIdFromRequest(): ?array {
+        $encryptedId = null;
+        if($this->request->getCookie(SessionService::API_SESSION_COOKIE)) {
+            $encryptedId = $this->request->getCookie(SessionService::API_SESSION_COOKIE);
+        } else if(!empty($this->request->getHeader(self::API_SESSION_HEADER))) {
+            $encryptedId = $this->request->getHeader(self::API_SESSION_HEADER);
+        }
+
+        try {
+            if(!empty($encryptedId)) {
+                $sessionId = $this->encryption->decrypt($encryptedId);
+                if(!empty($sessionId) && str_contains($sessionId, ':')) {
+                    $this->encryptedId = $encryptedId;
+
+                    return explode(':', $sessionId, 2);
+                }
+            }
+        } catch(Exception $e) {
+        }
+
+        return null;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getPassphrase(): string {
+        if($this->passphrase === null) {
+            $this->passphrase = $this->uuidHelper->generateUuid();
+        }
+
+        return $this->passphrase;
     }
 }

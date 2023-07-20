@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Fixed
+- Cookie based api session not working
+### Changed
+- Improved SSEv2 security
 
 ## 2023.7.0 - Feature release
 ### Fixed

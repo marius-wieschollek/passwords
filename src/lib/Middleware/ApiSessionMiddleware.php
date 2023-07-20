@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Middleware;
@@ -11,6 +15,7 @@ use OCA\Passwords\Controller\Api\ServiceApiController;
 use OCA\Passwords\Controller\Api\SessionApiController;
 use OCA\Passwords\Controller\Api\SettingsApiController;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Controller;
@@ -28,35 +33,15 @@ use OCP\ISession;
 class ApiSessionMiddleware extends Middleware {
 
     /**
-     * @var ISession
-     */
-    protected ISession $session;
-
-    /**
-     * @var SessionService
-     */
-    protected SessionService $sessionService;
-
-    /**
-     * @var UserChallengeService
-     */
-    protected UserChallengeService $challengeService;
-
-    /**
      * ApiSessionMiddleware constructor.
      *
-     * @param ISession             $session
      * @param SessionService       $sessionService
      * @param UserChallengeService $challengeService
      */
     public function __construct(
-        ISession $session,
-        SessionService $sessionService,
-        UserChallengeService $challengeService
+        protected SessionService $sessionService,
+        protected UserChallengeService $challengeService
     ) {
-        $this->session          = $session;
-        $this->sessionService   = $sessionService;
-        $this->challengeService = $challengeService;
     }
 
     /**
@@ -65,15 +50,10 @@ class ApiSessionMiddleware extends Middleware {
      *
      * @throws ApiException
      */
-    public function beforeController($controller, $methodName): void {
+    public function beforeController(Controller $controller, string $methodName): void {
         if(!$this->isApiRequest($controller)) return;
 
         $this->sessionService->load();
-        $id = $this->sessionService->getId();
-        if($id !== $this->session->get(SessionService::API_SESSION_KEY)) {
-            $this->session->set(SessionService::API_SESSION_KEY, $id);
-        }
-
         if(!$this->sessionService->isAuthorized() && $this->requiresAuthorization($controller, $methodName)) {
             throw new ApiException('Authorized session required', Http::STATUS_PRECONDITION_FAILED);
         }
@@ -88,11 +68,15 @@ class ApiSessionMiddleware extends Middleware {
      *
      * @return Response
      */
-    public function afterController($controller, $methodName, Response $response): Response {
+    public function afterController(Controller $controller, string $methodName, Response $response): Response {
         if(!$this->isApiRequest($controller) || $response instanceof FileDisplayResponse) return $response;
 
         $this->sessionService->save();
-        $response->addHeader(SessionService::API_SESSION_HEADER, $this->sessionService->getId());
+        $sessionId = $this->sessionService->getEncryptedId();
+        if($sessionId) {
+            $response->addHeader(SessionService::API_SESSION_HEADER, $sessionId);
+            $response->addCookie(SessionService::API_SESSION_COOKIE, $sessionId);
+        }
 
         return parent::afterController($controller, $methodName, $response);
     }

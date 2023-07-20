@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -136,7 +140,12 @@ class SessionApiController extends AbstractApiController {
         }
         $this->loginAttempts->registerSuccessfulAttempt();
 
-        return new JSONResponse(['success' => true, 'keys' => $this->keychainService->getClientKeychainArray()], Http::STATUS_OK);
+        try {
+            return new JSONResponse(['success' => true, 'keys' => $this->keychainService->getClientKeychainArray()], Http::STATUS_OK);
+        } catch(\Throwable $e) {
+            $this->session->delete();
+            throw new ApiException('Authorized session required', Http::STATUS_PRECONDITION_FAILED, $e);
+        }
     }
 
     /**

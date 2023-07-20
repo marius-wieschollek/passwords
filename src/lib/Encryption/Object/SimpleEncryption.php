@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -29,13 +29,15 @@ class SimpleEncryption extends SseV1Encryption {
     }
 
     /**
-     * @param $string
+     * @param             $string
+     * @param string|null $passphrase
      *
      * @return string
+     * @throws InvalidEncryptionResultException
      * @throws Exception
      */
-    public function encrypt($string): string {
-        $encryptionKey  = $this->getSimpleEncryptionKey($this->userId);
+    public function encrypt($string, ?string $passphrase = null): string {
+        $encryptionKey  = $this->getSimpleEncryptionKey($this->userId).($passphrase ?? '');
         $encryptedValue = $this->crypto->encrypt($string, $encryptionKey);
 
         if($string === $encryptedValue) {
@@ -46,13 +48,14 @@ class SimpleEncryption extends SseV1Encryption {
     }
 
     /**
-     * @param $string
+     * @param             $string
+     * @param string|null $passphrase
      *
      * @return string
      * @throws Exception
      */
-    public function decrypt($string): string {
-        $encryptionKey = $this->getSimpleEncryptionKey($this->userId);
+    public function decrypt($string, ?string $passphrase = null): string {
+        $encryptionKey = $this->getSimpleEncryptionKey($this->userId).($passphrase ?? '');
 
         return $this->crypto->decrypt($string, $encryptionKey);
     }
