@@ -135,9 +135,10 @@ Publish Nightly Package:
   stage: publishing
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
+    - echo -e "Passwords Nightly Release ${APP_VERSION}\\n${CHANGELOG}" > description.txt
     - |
       release-cli create --name "Passwords Nightly ${APP_VERSION}" --tag-name ${APP_VERSION} \
-        --description "Passwords Nightly Release ${APP_VERSION}\\n${CHANGELOG}" \
+        --description "description.txt" \
         --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\"}"
   only:
   - testing
