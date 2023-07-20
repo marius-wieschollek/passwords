@@ -15,6 +15,9 @@ use Exception;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
+/**
+ * @TODO remove in 2024.1.0
+ */
 class RegisterClassLoader implements IRepairStep {
 
     /**
@@ -43,14 +46,14 @@ class RegisterClassLoader implements IRepairStep {
      * @since 9.1.0
      */
     public function run(IOutput $output) {
-        if(\OC_Util::getVersion()[0] < 26) {
+        if(\OC_Util::getVersion()[0] < 27) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
                         $baseDir  = dirname(__FILE__, 2);
                         $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
-                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc25', $fileName]));
-                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] === 25) {
+                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc'.\OC_Util::getVersion()[0], $fileName]));
+                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] < 27) {
                             require_once $path;
                         }
                     }

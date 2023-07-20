@@ -88,6 +88,13 @@ use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
 use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEventListener;
 
 /**
+ * @TODO remove in 2024.1.0
+ */
+if(\OC_Util::getVersion()[0] < 27) {
+    require_once dirname(__FILE__, 2).'/.overrides/nc'.\OC_Util::getVersion()[0].'/Middleware/ApiSessionMiddleware.php';
+}
+
+/**
  * Class Application
  *
  * @package OCA\Passwords\AppInfo
@@ -258,15 +265,18 @@ class Application extends App implements IBootstrap {
         $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
     }
 
+    /**
+     * @TODO remove in 2024.1.0
+     */
     protected function registerNextcloudVersionSpecificClassLoader() {
-        if(\OC_Util::getVersion()[0] < 26) {
+        if(\OC_Util::getVersion()[0] < 27) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
                         $baseDir  = dirname(__FILE__, 2);
                         $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
-                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc25', $fileName]));
-                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] === 25) {
+                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc'.\OC_Util::getVersion()[0], $fileName]));
+                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] < 27) {
                             require_once $path;
                         }
                     }

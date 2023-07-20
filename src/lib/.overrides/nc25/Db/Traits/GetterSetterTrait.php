@@ -14,6 +14,9 @@ namespace OCA\Passwords\Db\Traits;
 use BadFunctionCallException;
 use Exception;
 
+/**
+ * @TODO remove in 2024.1.0
+ */
 trait GetterSetterTrait {
 
     /**

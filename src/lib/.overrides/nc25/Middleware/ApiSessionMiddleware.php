@@ -24,9 +24,7 @@ use OCP\AppFramework\Http\Response;
 use OCP\AppFramework\Middleware;
 
 /**
- * Class ApiSessionMiddleware
- *
- * @package OCA\Passwords\Middleware
+ * @TODO remove in 2024.1.0
  */
 class ApiSessionMiddleware extends Middleware {
 
@@ -37,7 +35,7 @@ class ApiSessionMiddleware extends Middleware {
      * @param UserChallengeService $challengeService
      */
     public function __construct(
-        protected SessionService       $sessionService,
+        protected SessionService $sessionService,
         protected UserChallengeService $challengeService
     ) {
     }
@@ -48,7 +46,7 @@ class ApiSessionMiddleware extends Middleware {
      *
      * @throws ApiException
      */
-    public function beforeController(Controller $controller, string $methodName): void {
+    public function beforeController($controller, $methodName): void {
         if(!$this->isApiRequest($controller)) return;
 
         $this->sessionService->load();
@@ -66,7 +64,7 @@ class ApiSessionMiddleware extends Middleware {
      *
      * @return Response
      */
-    public function afterController(Controller $controller, string $methodName, Response $response): Response {
+    public function afterController($controller, $methodName, Response $response): Response {
         if(!$this->isApiRequest($controller) || $response instanceof FileDisplayResponse) return $response;
 
         $this->sessionService->save();
