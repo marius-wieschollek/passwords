@@ -63,8 +63,8 @@ Assemble:
     - echo "SIGNATURE=${SIGNATURE}" >> variables.env
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords.tar.gz" ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz" ; fi
-    - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"
+    - 'curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"'
+    - echo "Package available at ${UPLOAD_URL}"
   artifacts:
     reports:
       dotenv: variables.env
@@ -87,8 +87,8 @@ Assemble Legacy PHP 7.4 Support Release:
     - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
     - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
     - echo "LSR_74_SIGNATURE=${LSR_74_SIGNATURE}" >> variables.env
-    - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-74.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"
+    - 'curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-74.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"'
+    - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"
   artifacts:
     reports:
       dotenv: variables.env
@@ -110,8 +110,8 @@ Assemble Legacy PHP 8.0 Support Release:
     - tar -zcf passwords-lsr-80.tar.gz passwords-lsr-80 --transform s/passwords-lsr-80/passwords/
     - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-80.tar.gz | openssl base64 | tr -d "\n")
     - echo "LSR_SIGNATURE=${LSR_SIGNATURE}" >> variables.env
-    - |
-      curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-80.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"
+    - 'curl --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-80.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"'
+    - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"
   artifacts:
     reports:
       dotenv: variables.env
