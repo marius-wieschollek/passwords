@@ -16,8 +16,10 @@ Prepare:
     - APP_VERSION=$(node -p "require('./package.json').version")
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then APP_VERSION="${APP_VERSION}-build${CI_PIPELINE_ID}"; PACKAGE_NAME=passwords-nightly ; fi
     - PACKAGE_REGISTRY_URL="${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${APP_VERSION}"
+    - CHANGELOG=$(node --no-warnings scripts/extract-changelog.mjs)
     - echo "APP_VERSION=${APP_VERSION}" >> variables.env
     - echo "PACKAGE_REGISTRY_URL=${PACKAGE_REGISTRY_URL}" >> variables.env
+    - echo "CHANGELOG=${CHANGELOG}" >> variables.env
   artifacts:
     reports:
       dotenv: variables.env
@@ -135,7 +137,7 @@ Publish Nightly Package:
   script:
     - |
       release-cli create --name "Passwords Nightly ${APP_VERSION}" --tag-name ${APP_VERSION} \
-        --description "Passwords Nightly Release ${APP_VERSION}" \
+        --description "Passwords Nightly Release ${APP_VERSION}\\n${CHANGELOG}" \
         --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\"}"
   only:
   - testing

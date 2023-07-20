@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2023.8.0 - Feature release
+### Changed
+- Updated packages
+
 ## 2023.7.0 - Feature release
 ### Fixed
 - Invalid version for LSR release
