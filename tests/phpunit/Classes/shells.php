@@ -14,8 +14,8 @@ namespace {
     }
 
     class OC_Util {
-        public static $ncDefaultVersion = [26,0,0,0];
-        public static $ncVersion = [26,0,0,0];
+        public static $ncDefaultVersion = [27,0,0,0];
+        public static $ncVersion = [27,0,0,0];
         public static function getVersion(): array {return self::$ncVersion;}
     }
 }
