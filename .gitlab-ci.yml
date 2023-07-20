@@ -122,26 +122,15 @@ Publish Package:
   stage: publishing
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
+    - echo -e "Passwords Release ${APP_VERSION}\\n${CHANGELOG}" > description.txt
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
-        --description "Passwords Release ${APP_VERSION}" \
+        --description "description.txt" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\"}" \
         --assets-link "{\"name\":\"LSR build for PHP 7.4 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\"}" \
         --assets-link "{\"name\":\"LSR build for PHP 8.0 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\"}"
   only:
     - stable
-
-Publish Nightly Package:
-  stage: publishing
-  image: registry.gitlab.com/gitlab-org/release-cli:latest
-  script:
-    - echo -e "Passwords Nightly Release ${APP_VERSION}\\n${CHANGELOG}" > description.txt
-    - |
-      release-cli create --name "Passwords Nightly ${APP_VERSION}" --tag-name ${APP_VERSION} \
-        --description "description.txt" \
-        --assets-link "{\"name\":\"Passwords Nightly Release (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\"}"
-  only:
-  - testing
 
 Publish Nightly:
   stage: publishing
