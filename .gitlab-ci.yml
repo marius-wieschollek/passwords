@@ -157,7 +157,6 @@ Update Handbook:
   script:
     - mkdir -p ~/.ssh/ && cp ${HANDBOOK_PUBLISH_KEY} ~/.ssh/id_ed25519 && chmod 600 ~/.ssh/id_ed25519
     - export GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no"
-    - APP_VERSION=$(node -p "require('./package.json').version")
     - git clone --branch ${CI_COMMIT_REF_NAME} ${HANDBOOK_REPOSITORY} passwords-handbook
     - cd passwords-handbook
     - CURRENT_VERSION=$(node -p "require('./package.json').version")
@@ -165,7 +164,7 @@ Update Handbook:
     - 'sed -i -e "s|${CURRENT_VERSION}|${APP_VERSION}|g" ./package.json'
     - git config --global user.name "Gitlab CI"
     - git config --global user.email "gitlab@git.mdns.eu"
-    - git commit -am "Raise version"
+    - git commit -am "Raise version to ${APP_VERSION}"
     - git tag "${APP_VERSION}"
     - git push origin
     - git push origin ${APP_VERSION}
