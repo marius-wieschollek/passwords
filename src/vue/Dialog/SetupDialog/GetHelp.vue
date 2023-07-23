@@ -9,7 +9,7 @@
         <div class="help-options">
             <translate tag="a" say="Handbook" icon="book" @click.prevent="openHelp"/>
             <web text="Forum" icon="users" target="_blank" href="https://help.nextcloud.com/c/apps/passwords"/>
-            <web text="Chat" icon="telegram" href="https://t.me/nc_passwords"/>
+            <web text="Chat" icon="telegram" href="https://t.me/nc_passwords/1"/>
         </div>
     </li>
 </template>

@@ -4,7 +4,7 @@ contact_links:
     url: https://help.nextcloud.com/c/apps/passwords
     about: Get support with problems you have
   - name: Telegram Chat
-    url: https://t.me/nc_passwords
+    url: https://t.me/nc_passwords/1
     about: Ask questions and discuss with other users
   - name: User Handbook
     url: https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index
