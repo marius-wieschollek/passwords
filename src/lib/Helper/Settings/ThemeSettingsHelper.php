@@ -148,7 +148,7 @@ class ThemeSettingsHelper {
             }
         }
 
-        if(method_exists($this->theming, 'getBackground') && !($this->theming instanceof ThemingDefaults)) {
+        if(method_exists($this->theming, 'getBackground')) {
             return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
         }
 

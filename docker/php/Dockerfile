@@ -18,7 +18,7 @@ RUN pecl uninstall imagick; \
     pecl install xdebug; \
     pecl install imagick;
 
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends nodejs
 
