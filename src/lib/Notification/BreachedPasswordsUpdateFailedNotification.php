@@ -20,7 +20,7 @@ class BreachedPasswordsUpdateFailedNotification extends AbstractNotification {
 
     const NAME = 'breached_passwords_update_failed';
     const TYPE = 'errors';
-    const MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
+    const MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Breached-Passwords-Update-Failure-Notification';
 
     /**
      * Send the notification
