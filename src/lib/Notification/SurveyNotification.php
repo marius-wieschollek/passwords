@@ -34,17 +34,17 @@ class SurveyNotification extends AbstractNotification {
                              ->setSubject(self::NAME, $parameters)
                              ->setObject('admin', 'survey');
 
-        $actionNoUrl  = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'yes']);
+        $actionYesUrl  = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'yes']);
         $enableAction = $notification->createAction();
         $enableAction->setLabel('enable')
-                     ->setLink($actionNoUrl, 'GET')
+                     ->setLink($actionYesUrl, 'GET')
                      ->setPrimary(true);
         $notification->addAction($enableAction);
 
-        $actionYesUrl  = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'no']);
+        $actionNoUrl  = $this->urlGenerator->linkToRouteAbsolute('passwords.notification.survey', ['answer' => 'no']);
         $disableAction = $notification->createAction();
         $disableAction->setLabel('disable')
-                      ->setLink($actionYesUrl, 'GET')
+                      ->setLink($actionNoUrl, 'GET')
                       ->setPrimary(false);
         $notification->addAction($disableAction);
 
@@ -89,7 +89,7 @@ class SurveyNotification extends AbstractNotification {
     protected function getMessage(IL10N $localisation): string {
         return $localisation->t('You can help us to improve the Passwords app by participating in our server survey.')
                .' '.
-               $localisation->t('This will send us some anonymised data about your setup and selected settings.')
+               $localisation->t('This will send us some anonymized data about your setup and selected settings.')
                .' '.
                $localisation->t('You can change this at any time in the app settings.');
     }

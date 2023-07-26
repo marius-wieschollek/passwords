@@ -58,7 +58,7 @@
                    class="cta-admin-settings"
                    say="View all settings"/>
         <translate tag="a"
-                   href="https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Administrator-Notes"
+                   href="https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/F.A.Q"
                    target="_blank"
                    class="admin-notes"
                    say="Read our tips for admins"/>

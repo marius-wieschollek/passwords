@@ -204,8 +204,8 @@ class CheckPasswordsJob extends AbstractTimedJob {
         $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
         $attempts++;
         if($attempts >= 3) {
-            $this->sendUpdateFailureNotification('none');
-            throw new \Exception('Breached password database update failed');
+            $this->sendUpdateFailureNotification('Too many failed attempts');
+            throw new \Exception('Breached password database update: Too many failed attempts');
         }
         $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
     }
@@ -216,6 +216,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @return void
      */
     protected function registerUpdateFailure(Throwable $e): void {
+        $this->logger->logException($e, [], 'Could not update breached passwords database: '.$e->getMessage());
         $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
         if($attempts >= 3) $this->sendUpdateFailureNotification($e->getMessage());
     }

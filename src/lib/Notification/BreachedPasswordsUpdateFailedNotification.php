@@ -20,6 +20,7 @@ class BreachedPasswordsUpdateFailedNotification extends AbstractNotification {
 
     const NAME = 'breached_passwords_update_failed';
     const TYPE = 'errors';
+    const MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
      * Send the notification
@@ -35,6 +36,8 @@ class BreachedPasswordsUpdateFailedNotification extends AbstractNotification {
                    ->setSubject(self::NAME, $parameters)
                    ->setObject('error', 'exception');
 
+        $this->addRawLink($notification, self::MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED);
+
         $this->notificationManager->notify($notification);
     }
 
@@ -49,9 +52,14 @@ class BreachedPasswordsUpdateFailedNotification extends AbstractNotification {
     public function process(INotification $notification, IL10N $localisation): INotification {
         $parameters = $notification->getSubjectParameters();
 
+        $this->processLink($notification, self::MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED, $localisation->t('More information'));
+
         return $notification
             ->setParsedSubject($localisation->t('Could not update breached passwords database'))
-            ->setParsedMessage($localisation->t('The breached passwords database update failed three times. Please consult the manual and check your logs. Reason: %1$s',
-                                                [$parameters['reason'] ?? '?']));
+            ->setParsedMessage($localisation->t(
+                'The breached passwords database update failed three times. Please consult the manual and check your logs. Reason: %1$s',
+                [$parameters['reason'] ?? '?']
+            ))
+            ->setLink(self::MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED);
     }
 }
