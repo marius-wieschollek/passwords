@@ -135,7 +135,7 @@ Publish Package:
 Publish Nightly:
   stage: publishing
   script:
-    - 'curl --retry 3 --retry-all-errors -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
+    - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":true}"'
   environment:
     name: Testing
   only:
@@ -144,9 +144,9 @@ Publish Nightly:
 Publish Stable:
   stage: publishing
   script:
-    - 'curl --retry 3 --retry-all-errors -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
-    - 'curl --retry 3 --retry-all-errors -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
-    - 'curl --retry 3 --retry-all-errors -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
+    - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
+    - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
     name: Stable
   only:
