@@ -1,6 +1,7 @@
-## [Unreleased]
+## 2023.8.0 - Feature release
 ### Fixed
 - Cookie based api session not working
+- Wrong background image in login screens
 ### Changed
 - Improved SSEv2 security
 
