@@ -1,3 +1,7 @@
+## [Unreleased]
+### Fixed
+- Language level error in NC25 PHP 7.4 LSR
+
 ## 2023.8.0 - Feature release
 ### Fixed
 - Cookie based api session not working
