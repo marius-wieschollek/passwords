@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2023.8.1 - Bugfix release
 ### Fixed
 - Language level error in NC25 PHP 7.4 LSR
 

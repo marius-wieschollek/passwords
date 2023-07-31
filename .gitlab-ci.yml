@@ -122,7 +122,7 @@ Publish Package:
   stage: publishing
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   script:
-    - echo -e "Passwords Release ${APP_VERSION}\\n${CHANGELOG}" > description.txt
+    - echo -e "## This is new in Passwords ${APP_VERSION}\\n${CHANGELOG}" > description.txt
     - |
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "description.txt" \
