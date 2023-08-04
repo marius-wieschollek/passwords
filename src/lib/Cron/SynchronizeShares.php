@@ -162,14 +162,24 @@ class SynchronizeShares extends AbstractTimedJob {
                 $receiverId = $share->getReceiver();
                 $userId     = $share->getUserId();
 
+                /** @var PasswordRevision $sourceRevision */
+                try {
+                    $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
+                } catch (DoesNotExistException $e) {
+                    $this->logger->error("Could not complete share {$share->getUuid()}, source password {$share->getSourcePassword()} does not exist");
+                    $this->shareService->delete($share);
+                    /**
+                     * @TODO Notification to original user with source password id and target user
+                     */
+                    continue;
+                }
+
                 /** @var Password $model */
                 $model = $this->passwordService->create();
                 $model->setUserId($receiverId);
                 $model->setShareId($share->getUuid());
                 $model->setEditable($share->getEditable());
 
-                /** @var PasswordRevision $sourceRevision */
-                $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
                 $revision       = $this->passwordRevisionService->create(
                     $model->getUuid(),
                     $sourceRevision->getPassword(),
