@@ -76,13 +76,13 @@
         "message": "Sjekk om kodene nedenfor stemmer overens med kodene fra enheten eller appen:"
     },
     "apps-000023": {
-        "message": "Koble denne klienten til Nextcloud-kontoen din uten irriterende passord og nettadresser."
+        "message": "Koble denne klienten til Nextcloud-kontoen din uten irriterende passord og nettadresser"
     },
     "apps-000024": {
-        "message": "Denne klienten støtter offisielt vår sterke ende-til-ende-kryptering."
+        "message": "Denne klienten støtter offisielt vår sterke ende-til-ende-kryptering"
     },
     "apps-000025": {
-        "message": "Denne klienten vedlikeholdes av de som har utviklet Passwords appen."
+        "message": "Denne klienten vedlikeholdes av de som har utviklet Passwords appen"
     },
     "apps-000026": {
         "message": "Klikk på knappen for å koble til en app som er installert på denne enheten, eller skann QR-koden med appen hvis den er installert på en annen enhet."
@@ -97,7 +97,7 @@
         "message": "Vennligst velg"
     },
     "backups-000031": {
-        "message": "Sikkerhetskopiering av databaser"
+        "message": "Sikkerhetskopi av database"
     },
     "backups-000032": {
         "message": "Forhåndsdefinert CSV"
@@ -120,7 +120,7 @@
         "message": "tilpasset CSV"
     },
     "backups-000037": {
-        "message": "prøv den generiske CSV-importen"
+        "message": "prøv den generiske CSV-import"
     },
     "backups-000038": {
         "message": "Ingen import for CSV-filen din?",
@@ -130,22 +130,22 @@
         "message": "Passord for sikkerhetskopiering"
     },
     "backups-000040": {
-        "message": "(Valgfritt) Krypterer sikkerhetskopien"
+        "message": "(Valgfritt) Kryptere sikkerhetskopien"
     },
     "backups-000041": {
         "message": "Importen støtter bare CSV"
     },
     "backups-000042": {
-        "message": "Eksporter passord"
+        "message": "Eksporter Passord"
     },
     "backups-000043": {
-        "message": "Eksporter mapper"
+        "message": "Eksporter Mapper"
     },
     "backups-000044": {
-        "message": "Eksport-tagger"
+        "message": "Eksporter Tagger"
     },
     "backups-000045": {
-        "message": "Egendefinerte felt"
+        "message": "Egendefinerte Felt"
     },
     "frontend-000149": {
         "message": "Alle"
@@ -154,13 +154,13 @@
         "message": "Mapper"
     },
     "frontend-000151": {
-        "message": "Nyere"
+        "message": "Nylig"
     },
     "frontend-000152": {
         "message": "Favoritter"
     },
     "frontend-000153": {
-        "message": "Felles"
+        "message": "Delt"
     },
     "frontend-000154": {
         "message": "Sikkerhet"
@@ -172,13 +172,13 @@
         "message": "Ta noen notater"
     },
     "frontend-000239": {
-        "message": "Kopier URL"
+        "message": "Kopier Link"
     },
     "frontend-000240": {
         "message": "Kopier bruker"
     },
     "frontend-000241": {
-        "message": "Kopier passord"
+        "message": "Kopier Passord"
     },
     "frontend-000242": {
         "message": "$ELEMENT$ ble kopiert til utklippstavlen",
@@ -212,7 +212,7 @@
         }
     },
     "frontend-000255": {
-        "message": "Aksjer"
+        "message": "Delinger"
     },
     "frontend-000256": {
         "message": "Delt $COUNT$ ganger",
@@ -238,13 +238,13 @@
         "message": "Enkel kryptering (Gen. 2)"
     },
     "frontend-000264": {
-        "message": "Mer om dette"
+        "message": "Mer"
     },
     "frontend-000267": {
         "message": "Håndbok"
     },
     "frontend-000277": {
-        "message": "Velg en utløpsdato eller la det stå tomt for å dele for alltid."
+        "message": "Velg en utløpsdato eller la det stå tomt for å dele for alltid"
     },
     "frontend-000293": {
         "message": "Redigert"
@@ -316,16 +316,16 @@
         "message": "Tagger"
     },
     "backups-000048": {
-        "message": "ParentLabel"
+        "message": "Overordnet etikett"
     },
     "backups-000049": {
-        "message": "Mappe-ID"
+        "message": "Mappe ID"
     },
     "backups-000050": {
-        "message": "Tagg-id'er"
+        "message": "Tagg ID"
     },
     "backups-000051": {
-        "message": "ParentId"
+        "message": "Overordnet ID"
     },
     "backups-CustomFields": {
         "message": "Egendefinerte felt"
@@ -337,10 +337,10 @@
         "message": "Tagger"
     },
     "backups-FolderId": {
-        "message": "Mappe-ID"
+        "message": "Mappe ID"
     },
     "backups-TagIds": {
-        "message": "Tagg-id'er"
+        "message": "Tagg ID"
     },
     "backups-000052": {
         "message": "Tom"
@@ -355,7 +355,7 @@
         "message": "Ikke rediger passord som er delt med meg"
     },
     "backups-000056": {
-        "message": "Importer ikke tomme felt"
+        "message": "Ikke importer tomme felt"
     },
     "backups-000057": {
         "message": "Kjør eksport"
@@ -367,7 +367,7 @@
         "message": "Venter…"
     },
     "backups-000060": {
-        "message": "Eksportfeil"
+        "message": "Eksport feil"
     },
     "backups-000061": {
         "message": "Last ned $FORMAT$",
@@ -387,7 +387,7 @@
         "message": "Gjenopprette eller importere"
     },
     "backups-000065": {
-        "message": "Velg importformat"
+        "message": "Velg import format"
     },
     "backups-000066": {
         "message": "Passord CSV"
@@ -429,7 +429,7 @@
         "message": "For krypterte sikkerhetskopier"
     },
     "backups-000079": {
-        "message": "CSV-alternativer"
+        "message": "CSV Alternativer"
     },
     "backups-000080": {
         "message": "Database"
@@ -438,7 +438,7 @@
         "message": "Sitat Karakter"
     },
     "backups-000082": {
-        "message": "Tegn for flukt"
+        "message": "Flukt-karakter"
     },
     "backups-000083": {
         "message": "Skilletegn for felt"
@@ -450,10 +450,10 @@
         "message": "Sitat"
     },
     "backups-000086": {
-        "message": "Enkelt tilbud"
+        "message": "Enkelt Sitat"
     },
     "backups-000087": {
-        "message": "Backslash"
+        "message": "Omvendt skråstrek"
     },
     "backups-000088": {
         "message": "Detektere"
@@ -465,13 +465,13 @@
         "message": "Semikolon"
     },
     "backups-000091": {
-        "message": "Romfart"
+        "message": "Mellomrom"
     },
     "backups-000092": {
         "message": "Fane"
     },
     "backups-000093": {
-        "message": "Oppdage anførselstegn som ikke er skrevet med store bokstaver"
+        "message": "Oppdag uunntatte sitater"
     },
     "backups-000094": {
         "message": "Hopp over første linje"
@@ -480,7 +480,7 @@
         "message": "Interpolere manglende felt"
     },
     "backups-000096": {
-        "message": "Tilordning av CSV-felt"
+        "message": "Tilordning av CSV felt"
     },
     "backups-000097": {
         "message": "Forhåndsvisning av linjen"
@@ -515,13 +515,13 @@
         "message": "Analyse av mapper"
     },
     "backups-000106": {
-        "message": "Lese-tagger"
+        "message": "Lese tagger"
     },
     "backups-000107": {
         "message": "Importere tagger"
     },
     "backups-000108": {
-        "message": "Lesemapper"
+        "message": "Lese mapper"
     },
     "backups-000109": {
         "message": "Importere mapper"
@@ -536,13 +536,13 @@
         "message": "Importen mislyktes"
     },
     "backups-000113": {
-        "message": "Importen mislyktes delvis"
+        "message": "Importen delvis mislyktes"
     },
     "backups-000114": {
         "message": "Importen er vellykket"
     },
     "backups-000115": {
-        "message": "Importfeil"
+        "message": "Importen feilet"
     },
     "backups-000116": {
         "message": "Noen objekter hadde feil:"
@@ -568,19 +568,19 @@
         "message": "Kunne ikke dekryptere mapper"
     },
     "backups-000122": {
-        "message": "Kunne ikke dekryptere koder"
+        "message": "Kunne ikke dekryptere tagger"
     },
     "backups-000123": {
-        "message": "Importfilen er tom"
+        "message": "Import filen er tom"
     },
     "backups-000124": {
-        "message": "CSV-filen kan ikke mappes"
+        "message": "CSV fil kan ikke tilordnes"
     },
     "backups-000125": {
         "message": "Pålogginger"
     },
     "backups-000126": {
-        "message": "Merknader"
+        "message": "Notater"
     },
     "backups-000127": {
         "message": "Kredittkort"
@@ -684,7 +684,7 @@
         }
     },
     "backups-000143": {
-        "message": "$SERVICE$ er kjent for å generere feilaktige eksportfiler. Se manualen for hjelp hvis filen ikke kan analyseres.",
+        "message": "$SERVICE$ er kjent for å generere feilaktige eksportfiler. Se bruksanvisningen for hjelp hvis filen ikke kan analyseres.",
         "placeholders": {
             "service": {
                 "content": "$1"
@@ -719,13 +719,13 @@
         "message": "Gjenopprett"
     },
     "frontend-000161": {
-        "message": "Nytt passord"
+        "message": "Nytt Passord"
     },
     "frontend-000162": {
-        "message": "Ny mappe"
+        "message": "Ny Mappe"
     },
     "frontend-000163": {
-        "message": "Nytt merke"
+        "message": "Ny Tagg"
     },
     "frontend-000164": {
         "message": "Sikker"
@@ -737,13 +737,13 @@
         "message": "Svak"
     },
     "frontend-000167": {
-        "message": "Svak (duplikat)"
+        "message": "Svak (Duplikat)"
     },
     "frontend-000168": {
-        "message": "Svak (utdatert)"
+        "message": "Svak (Utdatert)"
     },
     "frontend-000169": {
-        "message": "Brudd"
+        "message": "Brutt"
     },
     "frontend-000170": {
         "message": "Dele"
@@ -752,7 +752,7 @@
         "message": "Revisjoner"
     },
     "frontend-000172": {
-        "message": "QR-kode"
+        "message": "QR Kode"
     },
     "frontend-000173": {
         "message": "Passord"
@@ -800,7 +800,7 @@
         "message": "Egendefinerte felt"
     },
     "frontend-000189": {
-        "message": "Hemmelig"
+        "message": "Hemmelighet"
     },
     "frontend-000190": {
         "message": "Tekst"
@@ -860,34 +860,34 @@
         "message": "Sletting av mappe mislyktes"
     },
     "frontend-000210": {
-        "message": "Mappe restaurert"
+        "message": "Mappen gjenopprettet"
     },
     "frontend-000211": {
         "message": "Gjenoppretting av mappe mislyktes"
     },
     "frontend-000212": {
-        "message": "Opprett tagg"
+        "message": "Opprett tag"
     },
     "frontend-000213": {
         "message": "Tag opprettet"
     },
     "frontend-000214": {
-        "message": "Opprettelse av tagg mislyktes"
+        "message": "Opprettelse av tag mislyktes"
     },
     "frontend-000215": {
-        "message": "Rediger tagg"
+        "message": "Rediger tag"
     },
     "frontend-000216": {
         "message": "Generer tilfeldig farge"
     },
     "frontend-000217": {
-        "message": "Lagret tagg"
+        "message": "Tag lagret"
     },
     "frontend-000218": {
-        "message": "Lagring av tagg mislyktes"
+        "message": "Lagring av tag mislyktes"
     },
     "frontend-000219": {
-        "message": "Slett tagg"
+        "message": "Slett tag"
     },
     "frontend-000220": {
         "message": "Vil du slette taggen?"
@@ -896,13 +896,13 @@
         "message": "Tag slettet"
     },
     "frontend-000222": {
-        "message": "Sletting av tagg mislyktes"
+        "message": "Sletting av tag mislyktes"
     },
     "frontend-000223": {
-        "message": "Tag restaurert"
+        "message": "Tag gjenopprettet"
     },
     "frontend-000224": {
-        "message": "Gjenoppretting av taggen mislyktes"
+        "message": "Gjenoppretting av tagen mislyktes"
     },
     "frontend-000225": {
         "message": "Opprett passord"
@@ -938,13 +938,13 @@
         "message": "Passord slettet"
     },
     "frontend-000236": {
-        "message": "Gjenopprettet passord"
+        "message": "Passord gjenopprettet"
     },
     "frontend-000237": {
         "message": "Gjenoppretting av passord mislyktes"
     },
     "frontend-000238": {
-        "message": "Åpne URL"
+        "message": "Åpne Link"
     },
     "frontend-000243": {
         "message": "Feil ved kopiering av $ELEMENT$ til utklippstavlen",
@@ -987,7 +987,7 @@
         "message": "Innstillinger"
     },
     "frontend-000268": {
-        "message": "Apper og utvidelser"
+        "message": "Apper og Utvidelser"
     },
     "frontend-000269": {
         "message": "$EDITABLE$ og $SHAREABLE$.",
@@ -1052,7 +1052,7 @@
         "message": "Endre skrivetillatelser"
     },
     "frontend-000283": {
-        "message": "Veksle mellom delingstillatelser"
+        "message": "Endre delingstillatelser"
     },
     "frontend-000284": {
         "message": "Slutt å dele"
@@ -1064,16 +1064,16 @@
         "message": "Standard hurtigbuffer (0 filer, 0 B)"
     },
     "frontend-000287": {
-        "message": "Cache for avatarer (0 filer, 0 B)"
+        "message": "Mellomlagring for avatarer (0 filer, 0 B)"
     },
     "frontend-000288": {
-        "message": "Favicon Cache (0 filer, 0 B)"
+        "message": "Favicon mellomlagring (0 filer, 0 B)"
     },
     "frontend-000289": {
-        "message": "Forhåndsvisning Cache (0 filer, 0 B)"
+        "message": "Forhåndsvisning mellomlagring (0 filer, 0 B)"
     },
     "frontend-000290": {
-        "message": "Passordbuffer (0 filer, 0 B)"
+        "message": "Passord mellomlagring (0 filer, 0 B)"
     },
     "frontend-000291": {
         "message": "Endret"
@@ -1097,19 +1097,19 @@
         "message": "Gjenopprett elementer"
     },
     "frontend-000301": {
-        "message": "Gjenopprette alle elementer i papirkurven?"
+        "message": "Gjenopprette alle elementer i søpplekurven?"
     },
     "frontend-000302": {
         "message": "Gjenopprett dette elementet"
     },
     "frontend-000303": {
-        "message": "Gjenstander restaurert"
+        "message": "Gjenstander gjenopprettet"
     },
     "frontend-000304": {
-        "message": "Tøm papirkurven"
+        "message": "Tøm søppelkurven"
     },
     "frontend-000305": {
-        "message": "Slette alle elementer i papirkurven?"
+        "message": "Slette alle elementer i søppelkurven?"
     },
     "frontend-000306": {
         "message": "Søppel tømt"
@@ -1126,7 +1126,7 @@
         "message": "Det er ingenting her"
     },
     "frontend-000311": {
-        "message": "Klikk på \"⋯\" for å legge til noe."
+        "message": "Klikk på \"⋯\" for å legge til noe"
     },
     "frontend-000312": {
         "message": "Slettede elementer vises her"
@@ -1200,7 +1200,7 @@
         "message": "Økten er utløpt"
     },
     "frontend-000330": {
-        "message": "API Session Token utløpt"
+        "message": "API Sesjon Token utløpt"
     },
     "frontend-000331": {
         "message": "Nettverksfeil"
@@ -1228,7 +1228,7 @@
         "message": "1 passord"
     },
     "frontend-000337": {
-        "message": "$FOLDERS$ Mapper",
+        "message": "$FOLDERS$ mapper",
         "placeholders": {
             "folders": {
                 "content": "$1"
