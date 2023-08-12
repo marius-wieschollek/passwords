@@ -48,5 +48,100 @@
     },
     "apps-000013": {
         "message": "Ikke prøv igjen"
+    },
+    "apps-000016": {
+        "message": "Sterk kryptering"
+    },
+    "apps-000017": {
+        "message": "Kunne ikke hente apper: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Du avbrøt tilkoblingen"
+    },
+    "apps-000019": {
+        "message": "Du bekreftet ikke tilkoblingen i tide"
+    },
+    "apps-000020": {
+        "message": "Bare skann QR-koden med appen for å koble den til."
+    },
+    "apps-000021": {
+        "message": "Klikk på knappen når du er klar til å starte tilkoblingen."
+    },
+    "apps-000022": {
+        "message": "Sjekk om kodene nedenfor stemmer overens med kodene fra enheten eller appen:"
+    },
+    "apps-000023": {
+        "message": "Koble denne klienten til Nextcloud-kontoen din uten irriterende passord og nettadresser."
+    },
+    "apps-000024": {
+        "message": "Denne klienten støtter offisielt vår sterke ende-til-ende-kryptering."
+    },
+    "apps-000025": {
+        "message": "Denne klienten vedlikeholdes av de som har utviklet Passwords appen."
+    },
+    "apps-000026": {
+        "message": "Klikk på knappen for å koble til en app som er installert på denne enheten, eller skann QR-koden med appen hvis den er installert på en annen enhet."
+    },
+    "backups-000028": {
+        "message": "Sikkerhetskopiering eller eksport"
+    },
+    "backups-000029": {
+        "message": "Velg format"
+    },
+    "backups-000030": {
+        "message": "Vennligst velg"
+    },
+    "backups-000031": {
+        "message": "Sikkerhetskopiering av databaser"
+    },
+    "backups-000032": {
+        "message": "Forhåndsdefinert CSV"
+    },
+    "backups-000033": {
+        "message": "Les importveiledningen på $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "eller"
+    },
+    "backups-000035": {
+        "message": "sikkerhetskopiering av database"
+    },
+    "backups-000036": {
+        "message": "tilpasset CSV"
+    },
+    "backups-000037": {
+        "message": "prøv den generiske CSV-importen"
+    },
+    "backups-000038": {
+        "message": "Ingen import for CSV-filen din?",
+        "description": "Label for the button next to the input format selection which opens the help page for the custom CSV import"
+    },
+    "backups-000039": {
+        "message": "Passord for sikkerhetskopiering"
+    },
+    "backups-000040": {
+        "message": "(Valgfritt) Krypterer sikkerhetskopien"
+    },
+    "backups-000041": {
+        "message": "Importen støtter bare CSV"
+    },
+    "backups-000042": {
+        "message": "Eksporter passord"
+    },
+    "backups-000043": {
+        "message": "Eksporter mapper"
+    },
+    "backups-000044": {
+        "message": "Eksport-tagger"
     }
 }
