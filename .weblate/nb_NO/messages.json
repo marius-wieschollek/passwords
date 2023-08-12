@@ -1,1 +1,52 @@
-{}
+{
+    "apps-000003": {
+        "message": "kildekode"
+    },
+    "apps-000004": {
+        "message": "lær mer"
+    },
+    "apps-000005": {
+        "message": "Koble til med PassLink"
+    },
+    "apps-000006": {
+        "message": "Koble til en ny enhet"
+    },
+    "apps-000007": {
+        "message": "Koble til med link"
+    },
+    "apps-000008": {
+        "message": "Velg et navn:"
+    },
+    "apps-000009": {
+        "message": "Kodene samsvarer ikke"
+    },
+    "apps-000010": {
+        "message": "Ser bra ut"
+    },
+    "apps-000011": {
+        "message": "Tilkobling vellykket"
+    },
+    "apps-000012": {
+        "message": "Ferdig"
+    },
+    "apps-000014": {
+        "message": "Koble til en annen klient"
+    },
+    "apps-000015": {
+        "message": "Prøv igjen"
+    },
+    "apps-000001": {
+        "message": "offisiell"
+    },
+    "apps-000002": {
+        "message": "av $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000013": {
+        "message": "Ikke prøv igjen"
+    }
+}
