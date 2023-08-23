@@ -1919,7 +1919,7 @@
         "message": "Liez ce client à votre compte Nextcloud sans mots de passe et URLs fastidieux."
     },
     "apps-000024": {
-        "message": "Ce client prend officiellement en charge notre système de chiffrage de bout en bout."
+        "message": "Ce client prend officiellement en charge notre système de chiffrement de bout en bout."
     },
     "apps-000025": {
         "message": "Ce client est maintenu par les auteurs de l'application Passwords."
@@ -2066,7 +2066,7 @@
         "message": "Vous avez peut-être demandé trop de jetons. Veuillez réessayer plus tard."
     },
     "frontend-000374": {
-        "message": "Le chiffrage de bout en bout sera désactivé pour ce mot de passe si vous le partagez."
+        "message": "Le chiffrement de bout en bout sera désactivé pour ce mot de passe si vous le partagez."
     },
     "frontend-000375": {
         "message": "Le jeton de session n'est plus valide. L'application va maintenant se recharger."
@@ -2258,7 +2258,7 @@
         }
     },
     "frontend-000622": {
-        "message": "Phrase secrète de chiffrage pour l'application Mots de passe"
+        "message": "Phrase secrète de chiffrement pour l'application Mots de passe"
     },
     "frontend-000623": {
         "message": "Inconnu"
@@ -2267,7 +2267,7 @@
         "message": "Aide"
     },
     "frontend-000625": {
-        "message": "Choisissez le type de chiffrage pour ce mot de passe"
+        "message": "Choisissez le type de chiffrement pour ce mot de passe"
     },
     "frontend-000626": {
         "message": "Voulez-vous supprimer le champ \"$FIELD$\" ?",
@@ -2278,16 +2278,16 @@
         }
     },
     "frontend-000628": {
-        "message": "Le chiffrage appliqué par le serveur avant de stocker les données dans la base de données"
+        "message": "Le chiffrement appliqué par le serveur avant de stocker les données dans la base de données"
     },
     "frontend-000629": {
-        "message": "Le chiffrage appliqué par le serveur avant de stocker les données dans la base de données"
+        "message": "Le chiffrement appliqué par le serveur avant de stocker les données dans la base de données"
     },
     "frontend-000630": {
         "message": "Mot de passe invalide. Session révoquée en raison d'un trop grand nombre de tentatives de connexion infructueuses."
     },
     "frontend-000631": {
-        "message": "Ceci est une copie de la phrase secrète que vous avez choisie pour le chiffrage. La modification ou la suppression de cette entrée n'affecte pas le chiffrage. La phrase secrète ne peut être modifiée que dans les paramètres. Vous trouverez de plus amples informations dans le manuel."
+        "message": "Ceci est une copie de la phrase secrète que vous avez choisie pour le chiffrement. La modification ou la suppression de cette entrée n'affecte pas le chiffrement. La phrase secrète ne peut être modifiée que dans les paramètres. Vous trouverez de plus amples informations dans le manuel."
     },
     "backend-000632": {
         "message": "API de service Favicon"
@@ -2465,19 +2465,19 @@
         }
     },
     "settings-000686": {
-        "message": "Chiffrage de bout en bout"
+        "message": "Chiffrement de bout en bout"
     },
     "settings-000687": {
-        "message": "Mode de chiffrage du serveur"
+        "message": "Mode de chiffrement du serveur"
     },
     "settings-000688": {
         "message": "Aucun si le CSE est utilisé"
     },
     "settings-000689": {
-        "message": "Chiffrage simple"
+        "message": "Chiffrement simple"
     },
     "settings-000691": {
-        "message": "Mode de chiffrage du client"
+        "message": "Mode de chiffrement du client"
     },
     "settings-000692": {
         "message": "Activer"
@@ -2534,13 +2534,13 @@
         "message": "Spécifiez le délai après une demande avant que la session ne soit annulée."
     },
     "settings-000710": {
-        "message": "Choisissez le type de chiffrage utilisé pour chiffrer les données sur le serveur"
+        "message": "Choisissez le type de chiffrement utilisé pour chiffrer les données sur le serveur"
     },
     "settings-000711": {
-        "message": "Exécutez l'assistant d'installation pour configurer le chiffrage de vos mots de passe."
+        "message": "Exécutez l'assistant d'installation pour configurer le chiffrement de vos mots de passe."
     },
     "settings-000712": {
-        "message": "Modifier le mot de passe de chiffrage"
+        "message": "Modifier le mot de passe de chiffrement"
     },
     "settings-000713": {
         "message": "Afficher un aperçu du site web associé dans les détails. (Pas sur les mobiles)"
@@ -2584,7 +2584,7 @@
         "message": "Envoyer des requêtes de maintien de connexion au serveur pour empêcher l'annulation de la session."
     },
     "settings-000725": {
-        "message": "Choisissez le type de chiffrage utilisé pour chiffrer les données sur le client avant qu'elles ne soient envoyées au serveur."
+        "message": "Choisissez le type de chiffrement utilisé pour chiffrer les données sur le client avant qu'elles ne soient envoyées au serveur."
     },
     "settings-000726": {
         "message": "Le hachage SHA-1 est utilisé pour vérifier les mots de passe violés. Un hachage partiel permet d'éviter les attaques par force brute en cas de piratage du serveur, mais peut également entraîner la déclaration par erreur de mots de passe sûrs comme étant violés."
@@ -2762,7 +2762,7 @@
         "message": "Répétez votre mot de passe"
     },
     "tutorial-000759": {
-        "message": "Installation du chiffrage"
+        "message": "Installation du chiffrement"
     },
     "tutorial-000760": {
         "message": "Porte-clés"
@@ -2810,7 +2810,7 @@
         "message": "Mot de passe (12 caractères minimum)"
     },
     "tutorial-000775": {
-        "message": "Chiffrage en cours…"
+        "message": "Chiffrement en cours…"
     },
     "tutorial-000776": {
         "message": "Il existe de nombreux paramètres vous permettant de personnaliser votre expérience."
@@ -2819,7 +2819,7 @@
         "message": "Vous pouvez les trouver tous dans \"Plus\", mais nous avons mis les plus courants ici :"
     },
     "tutorial-000778": {
-        "message": "Passwords offre un chiffrage moderne et puissant pour protéger vos données des regards indiscrets."
+        "message": "Passwords offre un chiffrement moderne et puissant pour protéger vos données des regards indiscrets."
     },
     "tutorial-000779": {
         "message": "Choisissez un mot de passe sécurisé ci-dessous pour activer la protection ultime de vos mots de passe."
@@ -2849,7 +2849,7 @@
         "message": "Pour éviter tout accès indésirable à vos données, vous devriez définir un mot de passe principal."
     },
     "settings-000690": {
-        "message": "Chiffrage avancé"
+        "message": "Chiffrement avancé"
     },
     "tutorial-000736": {
         "message": "Marquez mes mots de passe si…"
@@ -2867,7 +2867,7 @@
         "message": "Générer une couleur aléatoire"
     },
     "frontend-000263": {
-        "message": "Chiffrage avec libsodium"
+        "message": "Chiffrement avec libsodium"
     },
     "frontend-000269": {
         "message": "$EDITABLE$ et $SHAREABLE$.",
@@ -2921,7 +2921,7 @@
         }
     },
     "frontend-000262": {
-        "message": "Chiffrage avancé (SSE V2)"
+        "message": "Chiffrement avancé (SSE V2)"
     },
     "frontend-000319": {
         "message": "Contenu"
@@ -2949,7 +2949,7 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Le chiffrage de bout en bout étant activé, vos mots de passe ne peuvent pas être ajoutés automatiquement à l'exportation. Comme alternative, vous pouvez également utiliser la fonction d'exportation de l'application pour exporter vos données.",
+        "message": "Le chiffrement de bout en bout étant activé, vos mots de passe ne peuvent pas être ajoutés automatiquement à l'exportation. Comme alternative, vous pouvez également utiliser la fonction d'exportation de l'application pour exporter vos données.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -3024,23 +3024,23 @@
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "Ce mot de passe est chiffré sur votre appareil avant d'être envoyé au serveur. Personne ne peut lire ce mot de passe sans connaître votre mot de passe de chiffrage.",
+        "message": "Ce mot de passe est chiffré sur votre appareil avant d'être envoyé au serveur. Personne ne peut lire ce mot de passe sans connaître votre mot de passe de chiffrement.",
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Chiffrage de bout en bout",
+        "message": "Chiffrement de bout en bout",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
-        "message": "Chiffrage côté serveur",
+        "message": "Chiffrement côté serveur",
         "description": "Label for the server side encryption method"
     },
     "frontend-PwDetailsEncryptionLabel": {
-        "message": "Méthode de chiffrage",
+        "message": "Méthode de chiffrement",
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Chiffrage côté serveur par un tiers",
+        "message": "Chiffrement côté serveur par un tiers",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
