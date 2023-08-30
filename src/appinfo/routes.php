@@ -89,7 +89,7 @@ $routes = [
         'name'     => 'service_api#get_preview',
         'url'      => '/api/1.0/service/preview/{domain}/{view}/{width}/{height}',
         'verb'     => 'GET',
-        'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => 640, 'height' => '360...']
+        'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => '640', 'height' => '360...']
     ],
     ['name' => 'service_api#passwordChangeUrl', 'url' => '/api/1.0/service/password-change', 'verb' => 'POST'],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
