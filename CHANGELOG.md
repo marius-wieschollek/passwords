@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2023.9.0 - Feature release
 ### Added
 - Added translation for Norwegian Bokmål
 ### Fixed
