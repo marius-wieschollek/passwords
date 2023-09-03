@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Added
+- Added translation for Norwegian Bokmål
+### Fixed
+- Endless loop in shared password synchronization
+- Error in website preview api
 
 ## 2023.8.1 - Bugfix release
 ### Fixed
