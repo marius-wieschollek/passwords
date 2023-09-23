@@ -88,8 +88,8 @@ class TagApiController extends AbstractObjectApiController {
      * @throws ApiException
      */
     public function create(
-        string $label,
-        string $color,
+        string $label = '',
+        string $color = '',
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
         int $edited = 0,

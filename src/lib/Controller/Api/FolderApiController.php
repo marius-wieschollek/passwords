@@ -88,7 +88,7 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws Exception
      */
     public function create(
-        string $label,
+        string $label = '',
         string $parent = FolderService::BASE_FOLDER_UUID,
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
