@@ -59,7 +59,7 @@
 
 <style lang="scss">
 .appstore-item-infos {
-    color         : var(--color-primary);
+    color         : var(--color-primary-text);
     margin-bottom : 1rem;
     font-style    : italic;
 
