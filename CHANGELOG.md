@@ -1,4 +1,6 @@
 ## [Unreleased]
+### Fixed
+- Server crashes instead of validation error
 
 ## 2023.9.0 - Feature release
 ### Added
