@@ -25,7 +25,7 @@ class RegistrationMapper extends AbstractMapper {
     public function findAllOlderThan(int $created): array {
         $sql = $this->getStatement();
 
-        $sql->where(
+        $sql->andWhere(
             $sql->expr()->lte('created', $sql->createNamedParameter($created, IQueryBuilder::PARAM_INT))
         );
 
