@@ -26,7 +26,7 @@ class SessionMapper extends AbstractMapper {
     public function findAllOlderThan(int $updated): array {
         $sql = $this->getStatement();
 
-        $sql->where(
+        $sql->andWhere(
             $sql->expr()->lte('updated', $sql->createNamedParameter($updated, IQueryBuilder::PARAM_INT))
         );
 
