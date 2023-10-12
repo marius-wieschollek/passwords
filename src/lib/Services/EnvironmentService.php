@@ -574,9 +574,8 @@ class EnvironmentService {
      * @return bool
      */
     protected function getUserInfoFromUserId(?string $userId, IRequest $request, string $loginName): bool {
-        /** @var false|IUser $loginUser */
         $loginUser = $this->userManager->get($loginName);
-        if($loginUser !== false && ($userId === null || $loginUser->getUID() === $userId)) {
+        if($loginUser !== null && ($userId === null || $loginUser->getUID() === $userId)) {
             $this->user      = $loginUser;
             $this->userLogin = $loginName;
             $this->client    = $this->getClientFromRequest($request, $loginName);
