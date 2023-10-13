@@ -10,7 +10,7 @@
 
 <template>
     <nc-breadcrumbs class="passwords-breadcrumbs" :class="{'actions-pull-right': actionsOnRight}">
-        <NcBreadcrumb :to="getBaseRoute" :title="t('Home')">
+        <NcBreadcrumb :to="getBaseRoute" :name="t('Home')" :[dataFolderId]="baseFolderId" :[dataDropType]="'folder'">
             <template #icon>
                 <earth-icon v-if="$route.name === 'All'"/>
                 <folder-icon v-if="$route.name === 'Folders'"/>
@@ -31,7 +31,7 @@
                       :to="item.path"
                       :data-folder-id="item.folderId"
                       :data-drop-type="item.dropType"
-                      :title="item.label"
+                      :name="item.label"
                       :key="item.id"
         />
         <template #actions>
@@ -154,7 +154,8 @@
         data() {
             return {
                 breadcrumbs: [],
-                folders    : {}
+                folders    : {},
+                baseFolderId   : '00000000-0000-0000-0000-000000000000',
             };
         },
 
@@ -167,6 +168,12 @@
                 return {
                     name: this.$route.name
                 };
+            },
+            dataFolderId() {
+                return this.$route.name === 'Folders' ? 'data-folder-id':null;
+            },
+            dataDropType() {
+                return this.$route.name === 'Folders' ? 'data-drop-type':null;
             }
         },
 
