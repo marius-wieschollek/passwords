@@ -42,7 +42,7 @@
                         <translate tag="li" data-item-action="edit-new" @click="cloneAction()" v-if="password.editable" say="Edit as new">
                             <content-copy-icon slot="icon"/>
                         </translate>
-                        <translate tag="li" data-item-action="move" @click="moveAction" v-if="password.editable" say="Move">
+                        <translate tag="li" data-item-action="move" @click="moveAction" say="Move">
                             <folder-move-icon slot="icon"/>
                         </translate>
                         <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" say="Copy Password">

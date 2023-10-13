@@ -21,7 +21,7 @@
             v-on:closed="closed"
     >
         <template #secondary-actions>
-            <nc-action-button close-after-click @click="actions.edit()" class="passwords-password-edit">
+            <nc-action-button close-after-click @click="actions.edit()" class="passwords-password-edit" v-if="isEditable">
                 <pencil-icon slot="icon" :size="20"/>
                 {{ t('Edit password') }}
             </nc-action-button>
@@ -162,6 +162,9 @@
             },
             activeTab() {
                 return `${this.sidebar.tab}-tab`;
+            },
+            isEditable() {
+                return this.password.editable;
             }
         },
 
