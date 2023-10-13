@@ -8,6 +8,7 @@
 * [Apps](#apps)
 * [API](#api)
 * [Installation](#installation)
+* [Demo](#demo)
 * [Development](#development)
 * [Licenses](Licenses.md)
 
@@ -82,6 +83,13 @@ You can also download the latest release from our [releases page](https://git.md
 * PHP (with [active support](https://www.php.net/supported-versions.php))
 * Database (MariaDB, MySQL, PostgreSQL, Sqlite)
 * [Complete list of requirements](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/System-Requirements)
+
+## Demo
+We do provide demo servers for testing and development purposes.
+The servers are reset every six hours.
+
+* [Demo of the current version](https://test.passwordsapp.org/info.html)
+* [Demo of the latest nightly build](https://next.passwordsapp.org/info.html)
 
 ## Development
 * Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
