@@ -1,6 +1,8 @@
 ## [Unreleased]
 ### Fixed
-- Server crashes instead of validation error
+- Shared passwords can't be moved if not editable
+- Server crash instead of validation error
+- Server crash when user id is invalid
 
 ## 2023.9.0 - Feature release
 ### Added
