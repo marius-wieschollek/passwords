@@ -1,4 +1,6 @@
 ## [Unreleased]
+
+## 2023.10.0 - Feature release
 ### Fixed
 - Shared passwords can't be moved if not editable
 - Server crash instead of validation error
