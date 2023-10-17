@@ -3205,5 +3205,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Itens ocultos na lixeira",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Recupere itens ocultos que estão atualmente na lixeira",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
