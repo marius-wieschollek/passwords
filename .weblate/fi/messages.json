@@ -3205,5 +3205,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Piilotettuja esineitä roskiksessa",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Palauta piilotetut kohteet, jotka ovat tällä hetkellä roskakorissa.",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
