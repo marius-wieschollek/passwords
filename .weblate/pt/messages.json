@@ -3205,5 +3205,13 @@
     "frontend-EncryptionSSEv3r1": {
         "message": "Encriptação do lado do servidor de terceiros",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Objectos escondidos no lixo",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Recuperar itens ocultos que estão atualmente no lixo",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
