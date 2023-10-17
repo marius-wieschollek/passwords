@@ -3205,5 +3205,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Приховані предмети у смітнику",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Відновлення прихованих елементів, які наразі перебувають у смітнику",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
