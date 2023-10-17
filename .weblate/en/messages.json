@@ -2677,6 +2677,14 @@
         "message": "Recover hidden passwords which are in a folder that is not hidden itself",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Hidden items in the trash",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Recover hidden items which are currently in the trash",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
     "settings-RecoverItemsPasswords": {
         "message": "All hidden passwords",
         "description": "Label of the option to recover all hidden passwords in the recover hidden items action"

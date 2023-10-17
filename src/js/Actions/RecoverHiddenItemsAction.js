@@ -42,6 +42,11 @@ export default class RecoverHiddenItemsAction {
                     type : 'checkbox',
                     title: 'RecoverItemsInvisiblePwdTitle'
                 },
+                invisibleInTrash: {
+                    label: 'RecoverItemsInvisibleTrash',
+                    type : 'checkbox',
+                    title: 'RecoverItemsInvisibleTrashTitle'
+                },
                 passwords                 : {
                     label: 'RecoverItemsPasswords',
                     type : 'checkbox',

@@ -57,23 +57,27 @@ class RecoverHiddenController extends Controller {
      * @param bool $tags
      * @param bool $passwords
      * @param bool $passwordsInvisibleInFolder
+     * @param bool $passwordsInvisibleInTrash
      *
      * @return JSONResponse
+     * @throws Exception
      */
-    public function execute(bool $folders, bool $tags, bool $passwords, bool $passwordsInvisibleInFolder): JSONResponse {
+    public function execute(bool $folders, bool $tags, bool $passwords, bool $passwordsInvisibleInFolder, bool $invisibleInTrash): JSONResponse {
 
-        $recoveredFolders   = $folders ? $this->recoverFolders():0;
-        $recoveredTags      = $tags ? $this->recoverTags():0;
-        $recoveredPasswords = $passwords || $passwordsInvisibleInFolder ? $this->recoverPasswords($passwords || $folders):0;
+        $recoveredFolders   = $folders || $invisibleInTrash ? $this->recoverFolders($folders):0;
+        $recoveredTags      = $tags || $invisibleInTrash ? $this->recoverTags($tags):0;
+        $recoveredPasswords = $passwords || $passwordsInvisibleInFolder || $invisibleInTrash ? $this->recoverPasswords($passwords || $folders, $invisibleInTrash):0;
 
         return new JSONResponse(['success' => true, 'folders' => $recoveredFolders, 'tags' => $recoveredTags, 'passwords' => $recoveredPasswords], Http::STATUS_OK);
     }
 
     /**
+     * @param bool $recoverAll
+     *
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
-    protected function recoverFolders(): int {
+    protected function recoverFolders(bool $recoverAll): int {
         $folderRevisions = $this->folderRevisionService->findAllHidden();
 
         $recoveredFolders     = 0;
@@ -85,6 +89,10 @@ class RecoverHiddenController extends Controller {
             }
 
             if($currentRevisionCache[ $modelUuid ] === $folderRevision->getId()) {
+                if(!$recoverAll && !$folderRevision->getTrashed()) {
+                    continue;
+                }
+
                 $folderRevision->setHidden(false);
                 $this->folderRevisionService->save($folderRevision);
                 $recoveredFolders++;
@@ -95,10 +103,12 @@ class RecoverHiddenController extends Controller {
     }
 
     /**
+     * @param bool $recoverAll
+     *
      * @return int
-     * @throws \Exception
+     * @throws Exception
      */
-    protected function recoverTags(): int {
+    protected function recoverTags(bool $recoverAll): int {
         $tagRevisions = $this->tagRevisionService->findAllHidden();
 
         $recoveredTags        = 0;
@@ -110,6 +120,10 @@ class RecoverHiddenController extends Controller {
             }
 
             if($currentRevisionCache[ $modelUuid ] === $tagRevision->getId()) {
+                if(!$recoverAll && !$tagRevision->getTrashed()) {
+                    continue;
+                }
+
                 $tagRevision->setHidden(false);
                 $this->tagRevisionService->save($tagRevision);
                 $recoveredTags++;
@@ -120,12 +134,13 @@ class RecoverHiddenController extends Controller {
     }
 
     /**
-     * @param $allPasswords
+     * @param bool $recoverAll
+     * @param bool $inTrash
      *
      * @return int
      * @throws Exception
      */
-    protected function recoverPasswords($allPasswords): int {
+    protected function recoverPasswords(bool $recoverAll, bool $inTrash): int {
         $passwordRevisions = $this->passwordRevisionService->findAllHidden();
 
         $recoveredPasswords   = 0;
@@ -138,7 +153,8 @@ class RecoverHiddenController extends Controller {
 
             if($currentRevisionCache[ $modelUuid ] === $passwordRevision->getId()) {
                 if(
-                    !$allPasswords &&
+                    !$recoverAll &&
+                    (!$inTrash || !$passwordRevision->getTrashed()) &&
                     $this->folderRevisionService->findCurrentRevisionByModel($passwordRevision->getFolder())->isHidden()
                 ) {
                     continue;

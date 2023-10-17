@@ -252,6 +252,7 @@ class PasswordManager {
                        password.trashed = true;
                        password.updated = new Date();
                        password.revision = d.revision;
+                       if(password.hidden) this.deletePassword(password, false);
                        Events.fire('password.deleted', password);
                        Messages.notification('Password deleted');
                        resolve(password);
@@ -260,6 +261,7 @@ class PasswordManager {
                        if(e.id && e.id === 'f281915e') {
                            password.trashed = true;
                            password.updated = new Date();
+                           if(password.hidden) this.deletePassword(password, false);
                            Events.fire('password.deleted', password);
                            resolve(password);
                        } else {
