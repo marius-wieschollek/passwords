@@ -3203,5 +3203,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Stellen Sie versteckte Objekte wieder her, die sich derzeit im Papierkorb befinden",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Versteckte Gegenstände im Mülleimer",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
