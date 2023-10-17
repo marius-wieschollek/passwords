@@ -3205,5 +3205,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Skjulte genstande i skraldespanden",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Gendan skjulte ting, som i øjeblikket er i papirkurven",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
