@@ -3205,5 +3205,13 @@
                 "content": "$2"
             }
         }
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Benda-benda tersembunyi di tempat sampah",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Memulihkan item tersembunyi yang saat ini berada di tempat sampah",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     }
 }
