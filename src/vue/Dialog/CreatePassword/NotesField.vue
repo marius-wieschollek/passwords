@@ -285,6 +285,7 @@
                     background-color : var(--color-background-dark);
                     color            : var(--color-text-lighter);
                     border-radius    : var(--border-radius);
+                    word-wrap        : break-word;
                 }
             }
         }

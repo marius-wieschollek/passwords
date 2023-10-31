@@ -160,6 +160,7 @@ th {
     vertical-align: top;
     max-width: 25%;
     min-width: 16%;
+    white-space: nowrap;
 }
 td.value {
     font-family: 'Ubuntu Mono', Consolas, "Liberation Mono", Menlo, Courier, monospace;

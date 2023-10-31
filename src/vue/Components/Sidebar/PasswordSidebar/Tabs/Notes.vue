@@ -61,6 +61,7 @@
         padding          : 1rem;
         border-radius    : var(--border-radius);
         white-space      : pre-wrap;
+        word-wrap        : break-word;
     }
 
     h1, h2, h3, h4, h5, h6 {
