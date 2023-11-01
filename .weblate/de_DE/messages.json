@@ -3243,5 +3243,9 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Mit WebAuthn anmelden",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn Anmeldung einrichten",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
