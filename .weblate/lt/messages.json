@@ -3245,5 +3245,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "WebAuthn Prisijungimas buvo išjungtas. Galite vėl jį įjungti nustatymuose.",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "\"WebAuthn\" prisijungimo sąranka",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
