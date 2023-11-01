@@ -2543,5 +2543,9 @@
     "frontend-PasswordEncryptionCSE": {
         "message": "Xifratge d'extrem a extrem",
         "description": "Label for the client side / end-to-end encryption method"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Activar",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
