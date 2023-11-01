@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Ανάκτηση κρυμμένων στοιχείων που βρίσκονται σήμερα στα σκουπίδια",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Επαναλάβετε τη φράση πρόσβασης",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Εισάγετε τη φράση πρόσβασης κρυπτογράφησης παρακάτω. Θα αποθηκευτεί στο πρόγραμμα περιήγησής σας και η εφαρμογή θα προσπαθήσει να τη χρησιμοποιήσει όταν την ανοίξετε την επόμενη φορά. Εάν η συνθηματική φράση είναι άκυρη, η σύνδεση θα αποτύχει μία φορά και το WebAuthn θα απενεργοποιηθεί.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "Το WebAuthn είναι τώρα ενεργοποιημένο. Η εφαρμογή θα προσπαθήσει να χρησιμοποιήσει την αποθηκευμένη συνθηματική φράση την επόμενη φορά που θα συνδεθείτε.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "Η σύνδεση WebAuthn ήταν απενεργοποιημένη. Μπορείτε να το ενεργοποιήσετε ξανά στις ρυθμίσεις",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Συνδεθείτε με το WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Ενεργοποίηση",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Αποθηκεύστε τη συνθηματική φράση κρυπτογράφησης σε αυτό το πρόγραμμα περιήγησης και συνδεθείτε αυτόματα όταν ανοίγετε την εφαρμογή.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Συνθηματική φράση κρυπτογράφησης",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     }
 }
