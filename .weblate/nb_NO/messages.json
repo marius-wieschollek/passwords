@@ -3252,5 +3252,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "WebAuthn-pålogging ble deaktivert. Du kan aktivere den igjen i innstillingene",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Oppsett av WebAuthn-pålogging",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
