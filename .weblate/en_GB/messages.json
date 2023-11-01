@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Recover hidden items which are currently in the trash",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Repeat the Passphrase",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Enter your Encryption Passphrase below. It will be saved in your browser and the app will attempt to use it when you open it the next time. If the passphrase is invalid, logging in will fail once and WebAuthn will be disabled.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn is now activated. The app will try to use the saved passphrase the next time you log in",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn Login was disabled. You can enable it again in the settings",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Log in with WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Enable",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Store your encryption passphrase in this browser and log in automatically when opening the app",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Encryption Passphrase",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     }
 }
