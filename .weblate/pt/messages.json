@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Recuperar itens ocultos que estão atualmente no lixo",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "O início de sessão WebAuthn foi desativado. Pode activá-lo novamente nas definições",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Ativar",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Guarde a sua frase-chave de encriptação neste navegador e inicie sessão automaticamente ao abrir a aplicação",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Senha de encriptação",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Repetir a frase-chave",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Introduza a sua frase-chave de encriptação abaixo. Esta será guardada no seu browser e a aplicação tentará utilizá-la quando a abrir da próxima vez. Se a frase-chave for inválida, o início de sessão falhará uma vez e o WebAuthn será desativado.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Iniciar sessão com o WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "O WebAuthn está agora ativado. A aplicação tentará utilizar a frase-chave guardada na próxima vez que iniciar sessão",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }
 }
