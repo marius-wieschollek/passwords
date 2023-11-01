@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Memulihkan item tersembunyi yang saat ini berada di tempat sampah",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Masuk dengan WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Simpan kata sandi enkripsi Anda di browser ini dan masuk secara otomatis saat membuka aplikasi",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Frasa Sandi Enkripsi",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Ulangi Frasa Sandi",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Masukkan Kata Sandi Enkripsi Anda di bawah ini. Kata sandi ini akan disimpan di browser Anda dan aplikasi akan mencoba menggunakannya saat Anda membukanya di lain waktu. Jika kata sandi tidak valid, proses masuk akan gagal satu kali dan WebAuthn akan dinonaktifkan.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "Login WebAuthn dinonaktifkan. Anda dapat mengaktifkannya lagi di pengaturan",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Aktifkan",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn sekarang telah diaktifkan. Aplikasi akan mencoba menggunakan kata sandi yang disimpan saat Anda masuk kembali",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }
 }
