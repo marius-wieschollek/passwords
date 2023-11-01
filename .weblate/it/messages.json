@@ -3241,5 +3241,9 @@
     "settings-WebauthnEncryptionPasswordSuccess": {
         "message": "WebAuthn è ora attivato. L'applicazione cercherà di utilizzare la passphrase salvata al prossimo accesso.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Attiva",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
