@@ -3242,7 +3242,7 @@
         "message": "Введіть пароль для шифрування нижче. Вона буде збережена у вашому браузері, і програма спробує використати її при наступному відкритті. Якщо парольна фраза буде невірною, вхід в систему буде невдалим, і WebAuthn буде вимкнено.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn активовано. Додаток спробує використати збережену фразу під час наступного входу",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

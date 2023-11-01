@@ -3242,7 +3242,7 @@
         "message": "Iniciar sessão com o WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "O WebAuthn está agora ativado. A aplicação tentará utilizar a frase-chave guardada na próxima vez que iniciar sessão",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

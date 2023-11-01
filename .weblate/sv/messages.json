@@ -3242,7 +3242,7 @@
         "message": "Ange din krypteringspassfras nedan. Den sparas i din webbläsare och appen kommer att försöka använda den när du öppnar den nästa gång. Om lösenfrasen är ogiltig kommer inloggningen att misslyckas en gång och WebAuthn kommer att inaktiveras.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn är nu aktiverat. Appen kommer att försöka använda den sparade lösenfrasen nästa gång du loggar in",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

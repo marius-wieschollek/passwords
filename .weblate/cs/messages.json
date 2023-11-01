@@ -3231,7 +3231,7 @@
         "message": "Níže zadejte svou šifrovací frázi. Uloží se do prohlížeče a aplikace se ji pokusí použít při příštím otevření. Pokud je heslová fráze neplatná, přihlášení se jednou nezdaří a WebAuthn bude deaktivován.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn je nyní aktivován. Při příštím přihlášení se aplikace pokusí použít uloženou přístupovou frázi.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

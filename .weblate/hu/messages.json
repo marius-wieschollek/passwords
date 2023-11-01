@@ -3242,7 +3242,7 @@
         "message": "Adja meg a titkosítási jelszót az alábbiakban. Ez elmentésre kerül a böngészőben, és az alkalmazás megpróbálja használni, amikor legközelebb megnyitja. Ha a jelszó érvénytelen, a bejelentkezés egyszer sikertelen lesz, és a WebAuthn le lesz tiltva.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "A WebAuthn mostantól aktiválva van. Az alkalmazás a következő bejelentkezéskor megpróbálja használni a mentett jelszót.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

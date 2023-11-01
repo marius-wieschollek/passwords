@@ -3232,7 +3232,7 @@
         "message": "Geben Sie unten Ihr Verschlüsselungspasswort ein. Es wird in Ihrem Browser gespeichert und die App es automatisch zum Anmelden verwenden. Wenn das Passwort ungültig ist, wird die Anmeldung einmalig fehlschlagen und WebAuthn wird deaktiviert.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn ist jetzt aktiviert. Die App wird versuchen, das gespeicherte Passwort zu verwenden, wenn Sie sich zukünftig anmelden",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

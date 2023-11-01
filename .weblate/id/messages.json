@@ -3242,7 +3242,7 @@
         "message": "Aktifkan",
         "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn sekarang telah diaktifkan. Aplikasi akan mencoba menggunakan kata sandi yang disimpan saat Anda masuk kembali",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

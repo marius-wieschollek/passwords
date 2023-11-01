@@ -3238,7 +3238,7 @@
         "message": "在下面输入您的加密口令。该密码将保存在浏览器中，下次打开应用程序时将尝试使用该密码。如果密码无效，登录将失败一次，WebAuthn 将被禁用。",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn 现已激活。下次登录时，应用程序将尝试使用保存的密码",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

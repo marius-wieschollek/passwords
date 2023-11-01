@@ -3218,7 +3218,7 @@
         "message": "Zaloguj się za pomocą WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn jest teraz aktywowany. Aplikacja spróbuje użyć zapisanego hasła przy następnym logowaniu",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

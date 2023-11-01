@@ -3226,7 +3226,7 @@
         "message": "Пассфраза шифрования",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "Теперь WebAuthn активирован. При следующем входе в систему приложение попытается использовать сохраненную кодовую фразу",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

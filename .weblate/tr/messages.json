@@ -3234,7 +3234,7 @@
         "message": "Şifreleme Parolanızı aşağıya girin. Bu parola tarayıcınıza kaydedilecek ve uygulama bir dahaki sefere açtığınızda bunu kullanmaya çalışacaktır. Parola geçersizse, oturum açma işlemi bir kez başarısız olur ve WebAuthn devre dışı bırakılır.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn şimdi etkinleştirildi. Uygulama, bir sonraki oturum açışınızda kaydedilen parolayı kullanmaya çalışacaktır",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

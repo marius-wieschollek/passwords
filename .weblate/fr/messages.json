@@ -3222,7 +3222,7 @@
         "message": "Saisissez votre phrase de chiffrement ci-dessous. Elle sera enregistrée dans votre navigateur et l'application tentera de l'utiliser lorsque vous l'ouvrirez la prochaine fois. Si la phrase de passe n'est pas valide, la connexion échouera une fois et WebAuthn sera désactivé.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn est maintenant activé. L'application essaiera d'utiliser la phrase de passe enregistrée lors de la prochaine connexion.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

@@ -3238,7 +3238,7 @@
         "message": "Voer hieronder uw coderingswachtzin in. Deze zal worden opgeslagen in uw browser en de app zal proberen deze te gebruiken wanneer u de app de volgende keer opent. Als de wachtwoordzin ongeldig is, zal het inloggen eenmaal mislukken en wordt WebAuthn uitgeschakeld.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn is nu geactiveerd. De app zal proberen de opgeslagen wachtwoordzin te gebruiken de volgende keer dat je inlogt.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

@@ -3245,7 +3245,7 @@
         "message": "Skriv inn krypteringsfrasen nedenfor. Den lagres i nettleseren din, og appen vil forsøke å bruke den neste gang du åpner den. Hvis passordfrasen er ugyldig, mislykkes påloggingen én gang, og WebAuthn deaktiveres.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn er nå aktivert. Appen vil forsøke å bruke den lagrede passordfrasen neste gang du logger inn.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

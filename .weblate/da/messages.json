@@ -3218,7 +3218,7 @@
         "message": "WebAuthn Login var deaktiveret. Du kan aktivere det igen i indstillingerne",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn er nu aktiveret. Appen vil forsøge at bruge den gemte adgangskode, næste gang du logger ind.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

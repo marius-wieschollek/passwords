@@ -3242,7 +3242,7 @@
         "message": "Spodaj vnesite šifrirno geslo. Shranjeno bo v brskalniku in aplikacija ga bo poskušala uporabiti, ko jo boste odprli naslednjič. Če je geslo neveljavno, prijava enkrat ne bo uspešna in program WebAuthn bo onemogočen.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn je zdaj aktiviran. Aplikacija bo ob naslednji prijavi poskusila uporabiti shranjeno geslo.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }

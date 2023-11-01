@@ -3222,7 +3222,7 @@
         "message": "Εισάγετε τη φράση πρόσβασης κρυπτογράφησης παρακάτω. Θα αποθηκευτεί στο πρόγραμμα περιήγησής σας και η εφαρμογή θα προσπαθήσει να τη χρησιμοποιήσει όταν την ανοίξετε την επόμενη φορά. Εάν η συνθηματική φράση είναι άκυρη, η σύνδεση θα αποτύχει μία φορά και το WebAuthn θα απενεργοποιηθεί.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "Το WebAuthn είναι τώρα ενεργοποιημένο. Η εφαρμογή θα προσπαθήσει να χρησιμοποιήσει την αποθηκευμένη συνθηματική φράση την επόμενη φορά που θα συνδεθείτε.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

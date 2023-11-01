@@ -3218,7 +3218,7 @@
         "message": "Toliau įveskite šifravimo slaptažodį. Ji bus išsaugota jūsų naršyklėje ir programa bandys ją naudoti, kai ją atidarysite kitą kartą. Jei slaptažodis negalioja, vieną kartą prisijungti nepavyks ir \"WebAuthn\" bus išjungta.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "Dabar \"WebAuthn\" yra aktyvuota. Programėlė bandys naudoti išsaugotą slaptažodį, kai kitą kartą prisijungsite.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

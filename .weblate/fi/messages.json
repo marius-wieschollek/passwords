@@ -3238,7 +3238,7 @@
         "message": "Kirjoita salauslauseke alla. Se tallennetaan selaimeesi ja sovellus yrittää käyttää sitä, kun avaat sen seuraavan kerran. Jos salasana on virheellinen, kirjautuminen epäonnistuu kerran ja WebAuthn poistetaan käytöstä.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn on nyt aktivoitu. Sovellus yrittää käyttää tallennettua salasanaa, kun kirjaudut sisään seuraavan kerran.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

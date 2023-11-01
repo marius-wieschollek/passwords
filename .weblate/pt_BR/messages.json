@@ -3238,7 +3238,7 @@
         "message": "Digite sua senha de criptografia abaixo. Ela será salva em seu navegador e o aplicativo tentará usá-la quando você abri-lo da próxima vez. Se a frase secreta for inválida, o login falhará uma vez e o WebAuthn será desativado.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "O WebAuthn agora está ativado. O aplicativo tentará usar a frase secreta salva na próxima vez que você fizer login",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

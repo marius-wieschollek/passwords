@@ -2760,7 +2760,7 @@
         "message": "Enter your Encryption Passphrase below. It will be saved in your browser and the app will attempt to use it when you open it the next time. If the passphrase is invalid, logging in will fail once and WebAuthn will be disabled.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn is now activated. The app will try to use the saved passphrase the next time you log in",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },

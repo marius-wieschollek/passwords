@@ -3242,7 +3242,7 @@
         "message": "Nižšie zadajte svoju šifrovaciu frázu. Uloží sa do prehliadača a aplikácia sa ju pokúsi použiť pri ďalšom otvorení. Ak je prístupová fráza neplatná, prihlásenie sa raz nepodarí a WebAuthn bude deaktivovaný.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
-    "settings-WebauthnEncryptionPasswordSuccess": {
+    "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn je teraz aktivovaný. Pri ďalšom prihlásení sa aplikácia pokúsi použiť uloženú prístupovú frázu.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }
