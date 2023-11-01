@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Atkurti paslėptus elementus, kurie šiuo metu yra šiukšliadėžėje",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Toliau įveskite šifravimo slaptažodį. Ji bus išsaugota jūsų naršyklėje ir programa bandys ją naudoti, kai ją atidarysite kitą kartą. Jei slaptažodis negalioja, vieną kartą prisijungti nepavyks ir \"WebAuthn\" bus išjungta.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "Dabar \"WebAuthn\" yra aktyvuota. Programėlė bandys naudoti išsaugotą slaptažodį, kai kitą kartą prisijungsite.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Prisijunkite su \"WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Įjungti",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Šioje naršyklėje išsaugokite šifravimo slaptažodį ir atidarę programėlę automatiškai prisijunkite.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Šifravimo slaptažodis",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Pakartokite slaptažodį",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn Prisijungimas buvo išjungtas. Galite vėl jį įjungti nustatymuose.",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
