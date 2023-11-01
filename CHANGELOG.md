@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Added
+- Log in with WebAuthn
+### Fixed
+- Layout issues on printouts
 
 ## 2023.10.0 - Feature release
 ### Fixed

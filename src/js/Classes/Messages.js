@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Localisation from '@js/Classes/Localisation';
 import ToastService from '@js/Services/ToastService';
-class Messages {
+export default new class Messages {
 
     /**
      *
@@ -214,7 +214,3 @@ class Messages {
         }
     }
 }
-
-let M = new Messages();
-
-export default M;

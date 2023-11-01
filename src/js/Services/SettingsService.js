@@ -8,11 +8,16 @@ import Logger from "@js/Classes/Logger";
  */
 class SettingsService {
 
+    get localSettingsKey() {
+        return 'passwords.settings.' + loadState('passwords', 'api-user', null);
+    }
+
     constructor() {
         this._defaults = {
             'local.ui.sort.ascending'            : true,
             'local.ui.sort.field'                : 'label',
             'local.sharing.qrcode.warning'       : true,
+            'local.encryption.webauthn.enabled'  : false,
             'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',
@@ -46,7 +51,7 @@ class SettingsService {
     set(setting, value) {
         this._settings[setting] = value;
         this._triggerObservers(setting, value);
-        SettingsService._setSetting(setting, value).then((realValue) => {
+        this._setSetting(setting, value).then((realValue) => {
             if(realValue !== value) {
                 this._settings[setting] = realValue;
                 this._triggerObservers(setting, realValue);
@@ -138,9 +143,20 @@ class SettingsService {
         if(settings) {
             this._addSettings(settings);
         }
+        this._migrateOldLocalSettings();
 
+        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
+            this._addSettings(JSON.parse(window.localStorage.getItem(this.localSettingsKey)));
+        }
+    }
+
+    _migrateOldLocalSettings() {
         if(window.localStorage.hasOwnProperty('passwords.settings')) {
-            this._addSettings(JSON.parse(window.localStorage.getItem('passwords.settings')));
+            window.localStorage.setItem(
+                this.localSettingsKey,
+                window.localStorage.getItem('passwords.settings')
+            );
+            window.localStorage.removeItem('passwords.settings');
         }
     }
 
@@ -151,11 +167,11 @@ class SettingsService {
      * @returns {Promise<*>}
      * @private
      */
-    static async _setSetting(setting, value) {
+    async _setSetting(setting, value) {
         let [scope] = setting.split('.', 2);
 
         if(scope === 'local') {
-            return SettingsService._setLocalSetting(setting, value);
+            return this._setLocalSetting(setting, value);
         } else if(scope === 'user' || scope === 'client') {
             return await API.setSetting(setting, value);
         }
@@ -167,14 +183,14 @@ class SettingsService {
      * @param value
      * @private
      */
-    static _setLocalSetting(setting, value) {
+    _setLocalSetting(setting, value) {
         let settings = {};
-        if(window.localStorage.hasOwnProperty('passwords.settings')) {
-            settings = JSON.parse(window.localStorage.getItem('passwords.settings'));
+        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
+            settings = JSON.parse(window.localStorage.getItem(this.localSettingsKey));
         }
 
         settings[setting] = value;
-        window.localStorage.setItem('passwords.settings', JSON.stringify(settings));
+        window.localStorage.setItem(this.localSettingsKey, JSON.stringify(settings));
     }
 
     /**
@@ -184,13 +200,13 @@ class SettingsService {
      */
     _resetLocalSetting(setting) {
         let settings = {};
-        if(window.localStorage.hasOwnProperty('passwords.settings')) {
-            settings = JSON.parse(window.localStorage.getItem('passwords.settings'));
+        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
+            settings = JSON.parse(window.localStorage.getItem(this.localSettingsKey));
         }
 
         if(settings.hasOwnProperty(setting)) {
             delete settings[setting];
-            window.localStorage.setItem('passwords.settings', JSON.stringify(settings));
+            window.localStorage.setItem(this.localSettingsKey, JSON.stringify(settings));
             return this._defaults[setting];
         }
 

@@ -55,6 +55,7 @@
     import SetupManager from '@js/Manager/SetupManager';
     import Application from "@js/Init/Application";
     import { emit } from '@nextcloud/event-bus';
+    import WebAuthnAuthorizeAction from "@js/Actions/WebAuthn/WebAuthnAuthorizeAction";
 
     export default {
         components: {Field, Translate},
@@ -63,6 +64,8 @@
                 impersonating = false;
 
             if(impersonateEl) impersonating = impersonateEl.getAttribute('content') === 'true';
+
+            let webAuthnAction = new WebAuthnAuthorizeAction();
 
             return {
                 password    : '',
@@ -78,6 +81,7 @@
                 errorMessage: '',
                 loggingIn   : false,
                 retryClass  : '',
+                webAuthnAction,
                 impersonating
             };
         },
@@ -116,10 +120,19 @@
                            this.provider = this.providers[0];
                        }
                    }
+
                    if(!this.hasPassword && !this.hasToken) {
                        API.openSession([])
                           .then(() => { this.goToTarget(); })
                           .catch((d) => { this.loginError(d); });
+                   } else if(this.webAuthnAction.isAvailable()) {
+                       this.webAuthnAction.run()
+                           .then((password) => {
+                               if(password) {
+                                   this.password = password;
+                                   this.submitLogin(null, true)
+                               }
+                           })
                    }
                });
         },
@@ -142,8 +155,8 @@
         },
 
         methods: {
-            submitLogin(e) {
-                e.preventDefault();
+            submitLogin(e, isWebAuthn = false) {
+                if(e) e.preventDefault();
                 if(this.loggingIn) return;
                 this.loggingIn = true;
                 let data = {};
@@ -161,10 +174,10 @@
                 this.$nextTick(() => {
                     API.openSession(data)
                        .then(() => { this.goToTarget(); })
-                       .catch((d) => { this.loginError(d); });
+                       .catch((d) => { this.loginError(d, isWebAuthn); });
                 });
             },
-            loginError(e) {
+            loginError(e, isWebAuthn = false) {
                 this.password = '';
                 if(this.hasToken && this.provider.type !== 'user-token') this.token = '';
                 this.hasError = true;
@@ -179,6 +192,11 @@
                 } else {
                     this.errorMessage = 'Unknown Error';
                 }
+
+                if(isWebAuthn) {
+                    this.webAuthnAction.disable();
+                }
+
                 this.loggingIn = false;
             },
             goToTarget() {

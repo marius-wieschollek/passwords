@@ -158,6 +158,14 @@
                                v-if="hasEncryption"/>
                     <settings-help text="Change the encryption password"
                                    v-if="hasEncryption"/>
+
+                    <translate tag="label" for="encryption-webauthn-enable" say="SettingsWebAuthnEnable" v-if="hasEncryption && hasWebAuthn"/>
+                    <translate tag="input"
+                               type="button"
+                               id="encryption-webauthn-enable"
+                               localized-value="SettingsWebAuthnEnableButton"
+                               @click="installWebAuthn" v-if="hasEncryption && hasWebAuthn"/>
+                    <settings-help text="SettingsWebAuthnEnableHelp" v-if="hasEncryption && hasWebAuthn"/>
                 </section>
                 <section class="ui">
                     <translate tag="h1" say="User Interface"/>
@@ -426,6 +434,7 @@
     import NcButton from '@nc/NcButton';
     import HelpCircleIcon from '@icon/HelpCircle';
     import Utility from '@js/Classes/Utility';
+    import InitializeWebAuthnAction from "@/js/Actions/WebAuthn/InitializeWebAuthnAction";
 
     export default {
         components: {
@@ -457,7 +466,8 @@
                 isAdmin     : getCurrentUser().isAdmin,
                 nightly     : APP_NIGHTLY,
                 noSave      : false,
-                locked      : false
+                locked      : false,
+                hasWebAuthn : InitializeWebAuthnAction.isWebauthnPasswordAvailable()
             };
         },
 
@@ -519,6 +529,10 @@
                 } catch(e) {
                     console.error(e);
                 }
+            },
+            async installWebAuthn() {
+                let action = new InitializeWebAuthnAction();
+                action.run();
             },
             async performUserAccountReset(code) {
                 try {

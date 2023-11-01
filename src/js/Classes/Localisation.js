@@ -56,7 +56,7 @@ if(['en', 'de', 'fr', 'it', 'es', 'nl'].indexOf(locale) !== -1) {
         });
 }
 
-class Localisation {
+export default new class Localisation {
 
     get baseLanguage() {
         let language = getLanguage();
@@ -181,5 +181,3 @@ class Localisation {
         return false;
     }
 }
-
-export default new Localisation();
