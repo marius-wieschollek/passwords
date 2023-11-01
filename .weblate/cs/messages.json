@@ -3210,5 +3210,33 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Obnovení skrytých položek, které jsou momentálně v koši",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Přihlášení pomocí WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Uložení šifrovací fráze do tohoto prohlížeče a automatické přihlášení při otevření aplikace.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Šifrovací heslo",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Opakování přístupové fráze",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Níže zadejte svou šifrovací frázi. Uloží se do prohlížeče a aplikace se ji pokusí použít při příštím otevření. Pokud je heslová fráze neplatná, přihlášení se jednou nezdaří a WebAuthn bude deaktivován.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn je nyní aktivován. Při příštím přihlášení se aplikace pokusí použít uloženou přístupovou frázi.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn Přihlášení bylo zakázáno. Můžete jej znovu povolit v nastavení",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
