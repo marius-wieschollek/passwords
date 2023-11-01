@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Palauta piilotetut kohteet, jotka ovat tällä hetkellä roskakorissa.",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn-kirjautuminen poistettiin käytöstä. Voit ottaa sen uudelleen käyttöön asetuksissa",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Ota käyttöön",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Tallenna salauslausekkeesi tähän selaimeen ja kirjaudu sisään automaattisesti sovelluksen avaamisen yhteydessä.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Salauslauseke",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Toista salasana",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Kirjoita salauslauseke alla. Se tallennetaan selaimeesi ja sovellus yrittää käyttää sitä, kun avaat sen seuraavan kerran. Jos salasana on virheellinen, kirjautuminen epäonnistuu kerran ja WebAuthn poistetaan käytöstä.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn on nyt aktivoitu. Sovellus yrittää käyttää tallennettua salasanaa, kun kirjaudut sisään seuraavan kerran.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Kirjaudu sisään WebAuthnin avulla",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     }
 }
