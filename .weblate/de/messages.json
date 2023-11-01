@@ -3239,5 +3239,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "Der WebAuthn Login wurde deaktiviert. Du kannst es in den Einstellungen wieder aktivieren",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Aktivieren",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
