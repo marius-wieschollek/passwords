@@ -3245,5 +3245,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "Logowanie WebAuthn zostało wyłączone. Możesz go ponownie włączyć w ustawieniach",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Konfiguracja logowania WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
