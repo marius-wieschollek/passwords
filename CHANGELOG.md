@@ -3,6 +3,7 @@
 - Log in with WebAuthn
 ### Fixed
 - Layout issues on printouts
+- Session timeout message not showing up
 
 ## 2023.10.0 - Feature release
 ### Fixed
