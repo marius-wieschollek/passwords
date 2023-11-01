@@ -38,6 +38,7 @@
     import AppNavigationLoading from '@vc/Navigation/AppNavigationLoading';
     import Application          from '@js/Init/Application';
     import KeepAliveManager     from '@js/Manager/KeepAliveManager';
+    import {subscribe}          from "@nextcloud/event-bus";
 
     export default {
         el        : '#content',
@@ -72,6 +73,7 @@
 
         created() {
             SettingsService.observe('client.search.show', (v) => { this.showSearch = v.value; });
+            subscribe('passwords:keepalive:updated', (e) => {this.hasTimeout = e.hasTimeout});
 
             window.addEventListener('resize', () => {
                 this.isMobile = window.innerWidth <= 768;

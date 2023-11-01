@@ -11,9 +11,9 @@
     import SettingsService from '@js/Services/SettingsService';
     import KeepAliveManager from '@js/Manager/KeepAliveManager';
     import Translate from "@/vue/Components/Translate";
-    import Application from '@js/Init/Application';
     import API from '@js/Helper/api';
     import TimerSandIcon from "@icon/TimerSand.vue";
+    import {subscribe} from "@nextcloud/event-bus";
 
     export default {
         components: {TimerSandIcon, Translate},
@@ -34,10 +34,10 @@
         },
         created() {
             if(this.hasTimeout) this.startInterval();
-            Application.events.on('keepalive.updated', (e) => {
+            subscribe('passwords:keepalive:updated', (e) => {
                 this.hasTimeout = e.hasTimeout;
             });
-            Application.events.on('keepalive.activity', (e) => {
+            subscribe('passwords:keepalive:activity', (e) => {
                 this.lastRequest = e.time;
             });
             SettingsService.observe('user.session.lifetime', (s) => {

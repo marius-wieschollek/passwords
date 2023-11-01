@@ -1,8 +1,8 @@
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
-import Application from '@js/Init/Application';
 import SettingsService from '@js/Services/SettingsService';
 import Logger from '@js/Classes/Logger';
+import {emit} from '@nextcloud/event-bus';
 
 
 class KeepAliveManager {
@@ -56,7 +56,7 @@ class KeepAliveManager {
         }
 
         this._mode = type;
-        Application.events.emit('keepalive.updated', {hasTimeout: this._hasTimeout})
+        emit('passwords:keepalive:updated', {hasTimeout: this._hasTimeout});
     }
 
     /**
@@ -101,7 +101,7 @@ class KeepAliveManager {
 
         this._event = () => {
             this._lastRequest = Date.now();
-            Application.events.emit('keepalive.activity', {time: this._lastRequest})
+            emit('passwords:keepalive:activity', {time: this._lastRequest});
         };
         API.events.on('api.request.before', this._event);
         this._event();
@@ -124,7 +124,7 @@ class KeepAliveManager {
             if((!e || !e.url) && Date.now() > this._lastRequest + 10000) API.keepaliveSession();
 
             this._lastRequest = Date.now();
-            Application.events.emit('keepalive.activity', {time: this._lastRequest})
+            emit('passwords:keepalive:activity', {time: this._lastRequest});
         };
         document.body.addEventListener('click', this._event, {passive: true});
         document.body.addEventListener('keypress', this._event, {passive: true});
