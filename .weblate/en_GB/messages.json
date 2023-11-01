@@ -3245,5 +3245,9 @@
     "settings-WebauthnEncryptionPassphrase": {
         "message": "Encryption Passphrase",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn Login Setup",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
