@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Visszaszerezze a jelenleg a szemétben lévő rejtett elemeket",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "A WebAuthn bejelentkezés le lett tiltva. A beállításokban újra engedélyezheti",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Bejelentkezés a WebAuthn segítségével",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Engedélyezze a",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Tárolja titkosítási jelszavát ebben a böngészőben, és az alkalmazás megnyitásakor automatikusan bejelentkezik.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Titkosítási jelszó",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Ismételje meg a jelszót",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Adja meg a titkosítási jelszót az alábbiakban. Ez elmentésre kerül a böngészőben, és az alkalmazás megpróbálja használni, amikor legközelebb megnyitja. Ha a jelszó érvénytelen, a bejelentkezés egyszer sikertelen lesz, és a WebAuthn le lesz tiltva.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "A WebAuthn mostantól aktiválva van. Az alkalmazás a következő bejelentkezéskor megpróbálja használni a mentett jelszót.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     }
 }
