@@ -3245,5 +3245,9 @@
     "settings-WebauthnEncryptionPassphraseText": {
         "message": "Indtast din krypteringspasfrase nedenfor. Den vil blive gemt i din browser, og appen vil forsøge at bruge den, når du åbner den næste gang. Hvis adgangssætningen er ugyldig, vil login mislykkes én gang, og WebAuthn vil blive deaktiveret.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Opsætning af WebAuthn-login",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
