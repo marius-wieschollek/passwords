@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn je teraz aktivovaný. Pri ďalšom prihlásení sa aplikácia pokúsi použiť uloženú prístupovú frázu.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Nastavenie prihlásenia WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
