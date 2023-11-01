@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn är nu aktiverat. Appen kommer att försöka använda den sparade lösenfrasen nästa gång du loggar in",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn Inställningar för inloggning",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
