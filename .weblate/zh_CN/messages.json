@@ -3241,5 +3241,9 @@
     "settings-WebauthnEncryptionPasswordSuccess": {
         "message": "WebAuthn 现已激活。下次登录时，应用程序将尝试使用保存的密码",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "启用",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
