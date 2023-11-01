@@ -3241,5 +3241,9 @@
     "settings-WebauthnEncryptionPassphraseRepeat": {
         "message": "Répéter la phrase d'authentification",
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Activer",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
