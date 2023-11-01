@@ -3245,5 +3245,9 @@
     "settings-WebauthnEncryptionPassphraseText": {
         "message": "Введите ниже свою кодовую фразу. Она будет сохранена в браузере, и приложение попытается использовать ее при следующем открытии. Если парольная фраза недействительна, вход в систему будет выполнен неудачно и WebAuthn будет отключен.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Настройка входа в систему WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
