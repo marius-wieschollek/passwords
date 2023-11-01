@@ -3213,5 +3213,33 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Récupérer les éléments cachés qui se trouvent actuellement dans la corbeille",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn Login a été désactivé. Vous pouvez l'activer à nouveau dans les paramètres",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Saisissez votre phrase de chiffrement ci-dessous. Elle sera enregistrée dans votre navigateur et l'application tentera de l'utiliser lorsque vous l'ouvrirez la prochaine fois. Si la phrase de passe n'est pas valide, la connexion échouera une fois et WebAuthn sera désactivé.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn est maintenant activé. L'application essaiera d'utiliser la phrase de passe enregistrée lors de la prochaine connexion.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Se connecter avec WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Enregistrez votre phrase de chiffrement dans ce navigateur et connectez-vous automatiquement à l'ouverture de l'application.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Phrase de chiffrement",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Répéter la phrase d'authentification",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     }
 }
