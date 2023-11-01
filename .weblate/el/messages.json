@@ -3245,5 +3245,9 @@
     "settings-WebauthnEncryptionPassphrase": {
         "message": "Συνθηματική φράση κρυπτογράφησης",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Εγκατάσταση σύνδεσης WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
