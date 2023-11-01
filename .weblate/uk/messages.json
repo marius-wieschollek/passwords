@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn активовано. Додаток спробує використати збережену фразу під час наступного входу",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Налаштування входу до WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
