@@ -3211,5 +3211,9 @@
     "settings-RecoverItemsInvisibleTrash": {
         "message": "Versteckte Gegenstände im Mülleimer",
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Aktivieren",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
