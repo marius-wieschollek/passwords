@@ -3238,5 +3238,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "WebAuthn Přihlášení bylo zakázáno. Můžete jej znovu povolit v nastavení",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Zapnout",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
