@@ -3245,5 +3245,9 @@
     "settings-SettingsWebAuthnEnableButton": {
         "message": "Activer",
         "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Configuration de la connexion à WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
