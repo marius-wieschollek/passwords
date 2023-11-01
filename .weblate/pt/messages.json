@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "O WebAuthn está agora ativado. A aplicação tentará utilizar a frase-chave guardada na próxima vez que iniciar sessão",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Configuração do início de sessão do WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
