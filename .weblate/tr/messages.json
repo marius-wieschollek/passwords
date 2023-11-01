@@ -3213,5 +3213,33 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Şu anda çöp kutusunda bulunan gizli öğeleri kurtarın",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "WebAuthn ile oturum açın",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Şifreleme parolanızı bu tarayıcıda saklayın ve uygulamayı açtığınızda otomatik olarak oturum açın",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Şifreleme Parolası",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Parolayı Tekrarla",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Şifreleme Parolanızı aşağıya girin. Bu parola tarayıcınıza kaydedilecek ve uygulama bir dahaki sefere açtığınızda bunu kullanmaya çalışacaktır. Parola geçersizse, oturum açma işlemi bir kez başarısız olur ve WebAuthn devre dışı bırakılır.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn şimdi etkinleştirildi. Uygulama, bir sonraki oturum açışınızda kaydedilen parolayı kullanmaya çalışacaktır",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn Girişi devre dışı bırakıldı. Ayarlardan tekrar etkinleştirebilirsiniz",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
