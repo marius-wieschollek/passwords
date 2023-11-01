@@ -3241,5 +3241,9 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "WebAuthn Girişi devre dışı bırakıldı. Ayarlardan tekrar etkinleştirebilirsiniz",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Etkinleştir",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     }
 }
