@@ -3213,5 +3213,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Odzyskaj ukryte przedmioty, które obecnie znajdują się w koszu",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Zaloguj się za pomocą WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn jest teraz aktywowany. Aplikacja spróbuje użyć zapisanego hasła przy następnym logowaniu",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Włącz",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Przechowuj hasło szyfrowania w tej przeglądarce i loguj się automatycznie podczas otwierania aplikacji.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Hasło szyfrowania",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Powtórz hasło",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Wprowadź poniżej swoje hasło szyfrowania. Zostanie ono zapisane w przeglądarce, a aplikacja spróbuje go użyć przy następnym otwarciu. Jeśli hasło jest nieprawidłowe, logowanie nie powiedzie się, a WebAuthn zostanie wyłączony.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "Logowanie WebAuthn zostało wyłączone. Możesz go ponownie włączyć w ustawieniach",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
