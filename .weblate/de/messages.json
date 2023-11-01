@@ -3211,5 +3211,33 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Versteckte Objekte wiederfinden, die sich im Papierkorb befinden",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Mit WebAuthn anmelden",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Speichere deine Verschlüsselungspassphrase in diesem Browser und logge dich automatisch ein, wenn du die App öffnest",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Verschlüsselungs-Passphrase",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Wiederhole die Passphrase",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Gib deine Verschlüsselungspassphrase unten ein. Sie wird in deinem Browser gespeichert und die App wird versuchen, sie zu verwenden, wenn du sie das nächste Mal öffnest. Wenn die Passphrase ungültig ist, schlägt die Anmeldung einmalig fehl und WebAuthn wird deaktiviert.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn ist jetzt aktiviert. Die App wird versuchen, die gespeicherte Passphrase zu verwenden, wenn du dich das nächste Mal anmeldest",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "Der WebAuthn Login wurde deaktiviert. Du kannst es in den Einstellungen wieder aktivieren",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
