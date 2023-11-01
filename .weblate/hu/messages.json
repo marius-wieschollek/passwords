@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "A WebAuthn mostantól aktiválva van. Az alkalmazás a következő bejelentkezéskor megpróbálja használni a mentett jelszót.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn bejelentkezés beállítása",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
