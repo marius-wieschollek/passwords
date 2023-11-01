@@ -72,6 +72,7 @@ export default class InitializeWebAuthnAction {
                     }
                 }
             },
+            'WebauthnEncryptionSetupTitle',
             'WebauthnEncryptionPassphraseText'
         );
     }

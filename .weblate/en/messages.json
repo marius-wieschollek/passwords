@@ -2756,6 +2756,10 @@
         "message": "Repeat the Passphrase",
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn Login Setup",
+        "description": "Title of the WebAuthn setup dialog."
+    },
     "settings-WebauthnEncryptionPassphraseText": {
         "message": "Enter your Encryption Passphrase below. It will be saved in your browser and the app will attempt to use it when you open it the next time. If the passphrase is invalid, logging in will fail once and WebAuthn will be disabled.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
