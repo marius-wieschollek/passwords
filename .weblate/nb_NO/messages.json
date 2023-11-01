@@ -3220,5 +3220,37 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Gjenopprette skjulte elementer som for øyeblikket ligger i papirkurven",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Logg inn med WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableButton": {
+        "message": "Aktivere",
+        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Lagre krypteringsfrasen din i denne nettleseren og logg inn automatisk når du åpner appen.",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Passord for kryptering",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Gjenta passordfrasen",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Skriv inn krypteringsfrasen nedenfor. Den lagres i nettleseren din, og appen vil forsøke å bruke den neste gang du åpner den. Hvis passordfrasen er ugyldig, mislykkes påloggingen én gang, og WebAuthn deaktiveres.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnEncryptionPasswordSuccess": {
+        "message": "WebAuthn er nå aktivert. Appen vil forsøke å bruke den lagrede passordfrasen neste gang du logger inn.",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "WebAuthn-pålogging ble deaktivert. Du kan aktivere den igjen i innstillingene",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     }
 }
