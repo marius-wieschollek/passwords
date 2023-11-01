@@ -3245,5 +3245,9 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn je zdaj aktiviran. Aplikacija bo ob naslednji prijavi poskusila uporabiti shranjeno geslo.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Nastavitev prijave WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
     }
 }
