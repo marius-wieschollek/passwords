@@ -3229,11 +3229,11 @@
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "Gib dein Verschlüsselungspasswort unten ein. Es wird in deinem Browser gespeichert und die App es beim öffnen automatisch verwenden. Wenn das Passwort ungültig ist, schlägt die Anmeldung einmalig fehl und WebAuthn wird deaktiviert.",
+        "message": "Gib dein Verschlüsselungspasswort unten ein. Es wird in deinem Browser gespeichert und die App wird es beim öffnen automatisch verwenden. Wenn das Passwort ungültig ist, schlägt die Anmeldung einmalig fehl und WebAuthn wird deaktiviert.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnLoginSetupSuccess": {
-        "message": "WebAuthn ist jetzt aktiviert. Die App wird versuchen, das gespeicherte Passwort zu verwenden, wenn du dich zukünftig anmeldest",
+        "message": "WebAuthn ist jetzt aktiviert. Die App wird das gespeicherte Passwort verwenden um du dich zukünftig anzumelden",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "frontend-WebAuthnLoginDisabled": {
