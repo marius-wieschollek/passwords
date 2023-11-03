@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2023.11.0 - Feature release
 ### Added
 - Log in with WebAuthn
 ### Fixed
