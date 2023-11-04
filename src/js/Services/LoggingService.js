@@ -9,10 +9,9 @@
  */
 
 import {translate} from "@nextcloud/l10n";
-import Utility from "@js/Classes/Utility";
+import UtilityService from "@js/Services/UtilityService";
 
-class LoggingService {
-
+export default new class LoggingService {
     get exception() {
         return (...args) => {
             this.error(...args);
@@ -86,7 +85,7 @@ class LoggingService {
     }
 
     printXssWarning() {
-        let link = Utility.generateUrl('/apps/passwords/#/help/Browser-Console'),
+        let link = UtilityService.generateUrl('/apps/passwords/#/help/Browser-Console'),
             color = navigator.userAgent.indexOf('Firefox') !== -1 ? 'color:#fff;background-color:#EA2027;':'color:#EA2027;';
 
         console.warn(
@@ -98,6 +97,3 @@ class LoggingService {
         );
     }
 }
-
-export { LoggingService };
-export default new LoggingService();

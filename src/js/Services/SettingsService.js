@@ -1,8 +1,8 @@
 import API from '@js/Helper/api';
-import Utility from '@js/Classes/Utility';
+import Utility from '@js/Services/UtilityService';
 import {loadState} from '@nextcloud/initial-state';
-import Logger from "@js/Classes/Logger";
-import DatabaseService from "./DatabaseService";
+import Logger from "@js/Services/LoggingService";
+import DatabaseService from "@js/Services/DatabaseService";
 
 /**
  *

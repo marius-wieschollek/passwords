@@ -8,7 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import {LoggingService} from "@js/Services/LoggingService";
+import LoggingService from "@js/Services/LoggingService";
 
-export default new class Logger extends LoggingService{
-};
+/**
+ * @deprecated
+ */
+export default LoggingService;

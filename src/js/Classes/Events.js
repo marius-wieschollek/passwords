@@ -1,5 +1,8 @@
 import Logger from "@js/Classes/Logger";
 
+/**
+ * @deprecated
+ */
 class Events {
 
     /**
@@ -89,6 +92,12 @@ class Events {
     }
 }
 
+/**
+ * @deprecated
+ */
 let E = new Events();
 
+/**
+ * @deprecated
+ */
 export default E;
