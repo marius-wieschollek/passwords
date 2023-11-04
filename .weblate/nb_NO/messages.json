@@ -3252,5 +3252,8 @@
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Oppsett av WebAuthn-pålogging",
         "description": "Title of the WebAuthn setup dialog."
+    },
+    "frontend-Disable": {
+        "message": "Deaktivere"
     }
 }
