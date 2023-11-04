@@ -3242,5 +3242,8 @@
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Nastavení přihlášení WebAuthn",
         "description": "Title of the WebAuthn setup dialog."
+    },
+    "frontend-Disable": {
+        "message": "Zakázat"
     }
 }
