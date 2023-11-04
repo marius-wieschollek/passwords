@@ -2339,6 +2339,12 @@
     "frontend-000631": {
         "message": "This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook."
     },
+    "frontend-Enable": {
+        "message": "Enable"
+    },
+    "frontend-Disable": {
+        "message": "Disable"
+    },
     "backend-000632": {
         "message": "Favicon Service Api"
     },
@@ -2522,9 +2528,6 @@
     },
     "settings-000691": {
         "message": "Client encryption mode"
-    },
-    "settings-000692": {
-        "message": "Enable"
     },
     "settings-000693": {
         "message": "Change Password"
@@ -2739,10 +2742,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Log in with WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Enable",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Store your encryption passphrase in this browser and log in automatically when opening the app",

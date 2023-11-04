@@ -67,8 +67,8 @@
                 tags     : [],
                 loading  : true,
                 sorting  : {
-                    field    : SettingsService.get('local.ui.sorting.field', 'label'),
-                    ascending: SettingsService.get('local.ui.sorting.ascending', true)
+                    field    : SettingsService.get('client.ui.sorting.field', 'label'),
+                    ascending: SettingsService.get('client.ui.sorting.ascending', true)
                 },
                 ui       : {
                     showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
@@ -128,8 +128,8 @@
         methods: {
             updateSorting($event) {
                 this.sorting = $event;
-                SettingsService.set('local.ui.sorting.field', $event.field);
-                SettingsService.set('local.ui.sorting.ascending', $event.ascending);
+                SettingsService.set('client.ui.sorting.field', $event.field);
+                SettingsService.set('client.ui.sorting.ascending', $event.ascending);
 
                 if(this.passwords) {
                     this.passwords =

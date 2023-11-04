@@ -163,7 +163,7 @@
                     <translate tag="input"
                                type="button"
                                id="encryption-webauthn-enable"
-                               localized-value="SettingsWebAuthnEnableButton"
+                               :localized-value="webAuthnButtonLabel"
                                @click="installWebAuthn" v-if="hasEncryption && hasWebAuthn"/>
                     <settings-help text="SettingsWebAuthnEnableHelp" v-if="hasEncryption && hasWebAuthn"/>
                 </section>
@@ -422,19 +422,23 @@
 <script>
     import API from '@js/Helper/api';
     import SUM from '@js/Manager/SetupManager';
-    import Messages from '@js/Classes/Messages';
+    import EncryptionManager from '@js/Manager/EncryptionManager';
+    import {getCurrentUser} from '@nextcloud/auth';
+    import NcButton from '@nc/NcButton';
+    import HelpCircleIcon from '@icon/HelpCircle';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/Settings/SettingsHelp';
-    import SettingsService from '@js/Services/SettingsService';
-    import EncryptionManager from '@js/Manager/EncryptionManager';
-    import {getCurrentUser} from '@nextcloud/auth';
-    import RecoverHiddenItemsAction from "@js/Actions/RecoverHiddenItemsAction";
     import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch';
-    import NcButton from '@nc/NcButton';
-    import HelpCircleIcon from '@icon/HelpCircle';
-    import Utility from '@js/Classes/Utility';
-    import InitializeWebAuthnAction from "@/js/Actions/WebAuthn/InitializeWebAuthnAction";
+    import MessageService from '@js/Services/MessageService';
+    import UtilityService from '@js/Services/UtilityService';
+    import LoggingService from "@js/Services/LoggingService";
+    import SettingsService from '@js/Services/SettingsService';
+    import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
+    import WebAuthnInitializeAction from "@js/Actions/WebAuthn/WebAuthnInitializeAction";
+    import UserAccountResetAction from "@js/Actions/User/UserAccountResetAction";
+    import UserSettingsResetAction from "@js/Actions/User/UserSettingsResetAction";
+    import RecoverHiddenItemsAction from "@js/Actions/User/RecoverHiddenItemsAction";
 
     export default {
         components: {
@@ -467,13 +471,16 @@
                 nightly     : APP_NIGHTLY,
                 noSave      : false,
                 locked      : false,
-                hasWebAuthn : InitializeWebAuthnAction.isWebauthnPasswordAvailable()
+                hasWebAuthn : WebAuthnInitializeAction.isWebauthnPasswordAvailable()
             };
         },
 
         computed: {
             showDuplicateSetting() {
                 return this.settings['user.password.security.hash'] > 0;
+            },
+            webAuthnButtonLabel() {
+                return this.settings['client.encryption.webauthn.enabled'] ? 'Disable':'Enable';
             }
         },
 
@@ -504,69 +511,39 @@
                     EncryptionManager.updateGui();
                 }
             },
-            resetSettingsAction() {
-                Messages.confirm(
-                    'This will reset all settings to their defaults. Do you want to continue?',
-                    'Reset all settings'
-                ).then(() => { this.resetSettings(); });
-            },
-            async resetSettings() {
-                this.locked = true;
-                this.noSave = true;
-                for(let i in this.settings) {
-                    if(this.settings.hasOwnProperty(i)) this.settings[i] = await SettingsService.reset(i);
+            async resetSettingsAction() {
+                if(await this.runAction(new UserSettingsResetAction(), false)) {
+                    this.advanced = false;
+                    this.settings = SettingsService.getAll();
+                    this.$nextTick(() => {this.noSave = false;});
                 }
-                this.advanced = false;
-                this.noSave = false;
-                this.locked = false;
             },
             async resetUserAccount() {
-                try {
-                    Messages.confirm(
-                        'Do you want to delete all your settings, passwords, folders and tags?\nIt will NOT be possible to undo this.',
-                        'DELETE EVERYTHING'
-                    ).then(() => {this.performUserAccountReset();});
-                } catch(e) {
-                    console.error(e);
-                }
+                await this.runAction(new UserAccountResetAction());
             },
             async installWebAuthn() {
-                let action = new InitializeWebAuthnAction();
-                action.run();
-            },
-            async performUserAccountReset(code) {
-                try {
-                    this.locked = true;
-                    let response = await API.resetUserAccount(code);
-
-                    if(response.status === 'accepted') {
-                        this.locked = false;
-                        let message = ['Enter "{code}" to reset your account and delete everything.', {code: response.code}];
-
-                        Messages.prompt('Code', 'Account reset requested', message, null, null, true)
-                                .then((code) => { this.performUserAccountReset(code); });
-                    } else if(response.status === 'ok') {
-                        window.localStorage.removeItem('passwords.settings');
-                        window.localStorage.removeItem('pwFolderIcon');
-                        location.href = location.href.replace(location.hash, '');
-                    }
-                } catch(e) {
-                    this.locked = false;
-                    console.error(e);
-                    Messages.alert(e.messsage ? e.message:'Invalid reset code');
+                if(!this.settings['client.encryption.webauthn.enabled']) {
+                    await this.runAction(new WebAuthnInitializeAction());
+                } else {
+                    await this.runAction(new WebAuthnDisableAction());
                 }
             },
             async recoverItemsAction() {
+                await this.runAction(new RecoverHiddenItemsAction());
+            },
+            async runAction(action, resetNoSave = true) {
                 this.locked = true;
+                this.noSave = true;
                 try {
-                    let action = new RecoverHiddenItemsAction();
-
-                    await action.run();
-                    this.locked = false;
+                    return await action.run();
                 } catch(e) {
+                    LoggingService.error(e);
+                    MessageService.alert(e && e.hasOwnProperty('message') ? e.message:'Error');
+                } finally {
                     this.locked = false;
-                    console.error(e);
-                    Messages.alert(e.messsage ? e.message:'RecoverItemsError');
+                    if(resetNoSave) {
+                        this.noSave = false;
+                    }
                 }
             }
         },
@@ -579,13 +556,15 @@
             },
             locked(value) {
                 if(value) {
-                    Utility.lockApp()
+                    UtilityService.lockApp();
                 } else {
-                    Utility.unlockApp()
+                    UtilityService.unlockApp();
                 }
             },
             advanced(value) {
-                SettingsService.set('client.settings.advanced', value);
+                if(!this.noSave) {
+                    SettingsService.set('client.settings.advanced', value);
+                }
             }
         }
     };

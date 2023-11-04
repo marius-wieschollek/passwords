@@ -2527,7 +2527,7 @@
     "settings-000691": {
         "message": "Modo de encriptação do cliente"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Habilitar"
     },
     "settings-000708": {
@@ -3217,10 +3217,6 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "O início de sessão WebAuthn foi desativado. Pode activá-lo novamente nas definições",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Ativar",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Guarde a sua frase-chave de encriptação neste navegador e inicie sessão automaticamente ao abrir a aplicação",

@@ -8,49 +8,51 @@
  * created by Marius David Wieschollek.
  */
 
-import Messages from "@js/Classes/Messages";
-import {loadState} from "@nextcloud/initial-state";
-import Localisation from "@js/Classes/Localisation";
+import MessageService from "@js/Services/MessageService";
+import LocalisationService from "@js/Services/LocalisationService";
 import SettingsService from "@js/Services/SettingsService";
 import ToastService from "@js/Services/ToastService";
+import {getCurrentUser} from "@nextcloud/auth";
+import LoggingService from "@js/Services/LoggingService";
 
-export default class InitializeWebAuthnAction {
+export default class WebAuthnInitializeAction {
 
     static isWebauthnPasswordAvailable() {
         return !!window.PasswordCredential;
     }
 
-    async run() {
-        if(!InitializeWebAuthnAction.isWebauthnPasswordAvailable()) {
+    async run(password = null) {
+        if(!WebAuthnInitializeAction.isWebauthnPasswordAvailable()) {
             return;
         }
 
-        let data = await this._showSetupDialog();
-        await this._storeEncryptionPassphrase(data);
+        if(password === null) {
+            let data = await this._showSetupDialog();
+            password = data.password;
+        }
 
-        SettingsService.set('local.encryption.webauthn.enabled', true);
-        await ToastService.success('WebauthnLoginSetupSuccess');
+        try {
+            await this._storeEncryptionPassphrase(password);
+
+            SettingsService.set('client.encryption.webauthn.enabled', true);
+            ToastService.success('WebauthnLoginSetupSuccess');
+        } catch(e) {
+            LoggingService.error(e);
+        }
     }
 
-    async _storeEncryptionPassphrase(data) {
-        let username = loadState('passwords', 'api-user', null),
-            label    = Localisation.translate('Passwords App Encryption Passphrase');
+    async _storeEncryptionPassphrase(password) {
+        let name    = LocalisationService.translate('Passwords App Encryption Passphrase'),
+            id      = `${getCurrentUser().uid}.passwordsapp@${location.host}`,
+            iconURL = SettingsService.get('server.theme.app.icon');
 
 
-        const passwordCredential = new PasswordCredential(
-            {
-                id      : username + '.passwordsapp@' + location.host,
-                password: data.password,
-                name    : label,
-                iconURL : SettingsService.get('server.theme.app.icon')
-            }
-        );
-
+        const passwordCredential = new PasswordCredential({id, password, name, iconURL});
         await navigator.credentials.store(passwordCredential);
     }
 
     _showSetupDialog() {
-        return Messages.form(
+        return MessageService.form(
             {
                 password      : {
                     label    : 'WebauthnEncryptionPassphrase',

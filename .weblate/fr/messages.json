@@ -2479,7 +2479,7 @@
     "settings-000691": {
         "message": "Mode de chiffrement du client"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Activer"
     },
     "settings-000693": {
@@ -3241,10 +3241,6 @@
     "settings-WebauthnEncryptionPassphraseRepeat": {
         "message": "Répéter la phrase d'authentification",
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Activer",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Configuration de la connexion à WebAuthn",

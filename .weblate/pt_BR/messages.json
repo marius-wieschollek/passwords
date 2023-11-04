@@ -2404,7 +2404,7 @@
     "settings-000691": {
         "message": "Modo de criptografia do cliente"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Habilitar"
     },
     "settings-000693": {
@@ -3213,10 +3213,6 @@
     "settings-RecoverItemsInvisibleTrashTitle": {
         "message": "Recupere itens ocultos que estão atualmente na lixeira",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Ativar",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Armazene sua frase secreta de criptografia neste navegador e faça login automaticamente ao abrir o aplicativo",

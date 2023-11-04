@@ -2228,7 +2228,7 @@
     "settings-000691": {
         "message": "Cliënt encryptie modus"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Schakel  in."
     },
     "settings-000693": {
@@ -3241,10 +3241,6 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn is nu geactiveerd. De app zal proberen de opgeslagen wachtwoordzin te gebruiken de volgende keer dat je inlogt.",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "inschakelen",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "WebAuthn Aanmelding instellen",

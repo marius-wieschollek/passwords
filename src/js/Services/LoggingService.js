@@ -37,7 +37,7 @@ export default new class LoggingService {
     error(...args) {
         if(Array.isArray(args)) {
             for(let arg of args) {
-                if(arg.hasOwnProperty('message')) {
+                if(arg && arg.hasOwnProperty('message')) {
                     args.unshift(arg.message);
                     this._write('error', args);
                     return;

@@ -2571,7 +2571,7 @@
     "settings-000691": {
         "message": "Ügyfél titkosítási mód"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Engedélyezze a"
     },
     "settings-000693": {
@@ -3221,10 +3221,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Bejelentkezés a WebAuthn segítségével",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Engedélyezze a",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Tárolja titkosítási jelszavát ebben a böngészőben, és az alkalmazás megnyitásakor automatikusan bejelentkezik.",

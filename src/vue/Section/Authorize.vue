@@ -56,6 +56,7 @@
     import Application from "@js/Init/Application";
     import { emit } from '@nextcloud/event-bus';
     import WebAuthnAuthorizeAction from "@js/Actions/WebAuthn/WebAuthnAuthorizeAction";
+    import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
 
     export default {
         components: {Field, Translate},
@@ -194,7 +195,7 @@
                 }
 
                 if(isWebAuthn) {
-                    this.webAuthnAction.disable();
+                    (new WebAuthnDisableAction()).run();
                 }
 
                 this.loggingIn = false;

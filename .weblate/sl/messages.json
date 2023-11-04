@@ -2550,7 +2550,7 @@
     "settings-000691": {
         "message": "Način šifriranja odjemalca"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Omogočite"
     },
     "settings-000693": {
@@ -3221,10 +3221,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Prijavite se s programom WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Omogočite",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "V tem brskalniku shranite geslo za šifriranje in se samodejno prijavite, ko odprete aplikacijo.",

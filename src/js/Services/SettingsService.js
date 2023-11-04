@@ -2,19 +2,17 @@ import API from '@js/Helper/api';
 import Utility from '@js/Services/UtilityService';
 import {loadState} from '@nextcloud/initial-state';
 import Logger from "@js/Services/LoggingService";
-import DatabaseService from "@js/Services/DatabaseService";
 
 /**
  *
  */
 class SettingsService {
-
     constructor() {
         this._defaults = {
-            'local.ui.sort.ascending'            : true,
-            'local.ui.sort.field'                : 'label',
-            'local.sharing.qrcode.warning'       : true,
-            'local.encryption.webauthn.enabled'  : false,
+            'client.ui.sort.ascending'           : true,
+            'client.ui.sort.field'               : 'label',
+            'client.sharing.qrcode.warning'      : true,
+            'client.encryption.webauthn.enabled' : false,
             'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',
@@ -76,9 +74,7 @@ class SettingsService {
     async reset(setting) {
         let [scope] = setting.split('.', 2);
 
-        if(scope === 'local') {
-            this._settings[setting] = await this._resetLocalSetting(setting);
-        } else if(scope === 'user' || scope === 'client') {
+        if(scope === 'user' || scope === 'client') {
             this._settings[setting] = await API.resetSetting(setting);
             if(this._defaults.hasOwnProperty(setting)) {
                 this._settings[setting] = this._defaults[setting];
@@ -140,28 +136,6 @@ class SettingsService {
         if(settings) {
             this._addSettings(settings);
         }
-        await this._migrateOldLocalSettings();
-        this._addSettings(
-            await DatabaseService.getAll(DatabaseService.SETTINGS_TABLE)
-        );
-    }
-
-    async _migrateOldLocalSettings() {
-        let localSettingsKey = 'passwords.settings.' + loadState('passwords', 'api-user', null);
-        if(window.localStorage.hasOwnProperty('passwords.settings')) {
-            window.localStorage.setItem(
-                localSettingsKey,
-                window.localStorage.getItem('passwords.settings')
-            );
-            window.localStorage.removeItem('passwords.settings');
-        }
-        if(window.localStorage.hasOwnProperty(localSettingsKey)) {
-            let data = JSON.parse(window.localStorage.getItem(localSettingsKey));
-            for(let key in data) {
-                await DatabaseService.set(DatabaseService.SETTINGS_TABLE, key, data[key]);
-            }
-            window.localStorage.removeItem('passwords.settings');
-        }
     }
 
     /**
@@ -174,30 +148,9 @@ class SettingsService {
     async _setSetting(setting, value) {
         let [scope] = setting.split('.', 2);
 
-        if(scope === 'local') {
-            return await this._setLocalSetting(setting, value);
-        } else if(scope === 'user' || scope === 'client') {
+        if(scope === 'user' || scope === 'client') {
             return await API.setSetting(setting, value);
         }
-    }
-
-    /**
-     *
-     * @param setting
-     * @param value
-     * @private
-     */
-    _setLocalSetting(setting, value) {
-        return DatabaseService.set(DatabaseService.SETTINGS_TABLE, setting, value);
-    }
-
-    /**
-     *
-     * @param setting
-     * @private
-     */
-    _resetLocalSetting(setting) {
-        return DatabaseService.remove(DatabaseService.SETTINGS_TABLE, setting);
     }
 
     /**

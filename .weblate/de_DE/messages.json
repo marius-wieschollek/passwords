@@ -2329,7 +2329,7 @@
     "settings-000691": {
         "message": "Verschlüsselung auf Endgerät"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Aktivieren"
     },
     "settings-000693": {
@@ -3211,10 +3211,6 @@
     "settings-RecoverItemsInvisibleTrash": {
         "message": "Versteckte Gegenstände im Papierkorb",
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Aktivieren",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Speichern Sie Ihr Verschlüsselungspasswort in diesem Browser und melden Sie sich automatisch an, wenn Sie die App öffnen",

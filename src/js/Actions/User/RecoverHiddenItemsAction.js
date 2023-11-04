@@ -8,8 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import Messages from "@js/Classes/Messages";
 import {generateUrl} from "@nextcloud/router";
+import MessageService from "@js/Services/MessageService";
+import LoggingService from "@js/Services/LoggingService";
 
 export default class RecoverHiddenItemsAction {
 
@@ -26,8 +27,16 @@ export default class RecoverHiddenItemsAction {
             return;
         }
 
-        let result = await this.sendRecoveryRequest(selection);
-        await this.showResultDialog(result);
+        try {
+            let result = await this.sendRecoveryRequest(selection);
+            if(!result.success) {
+                MessageService.alert('RecoverItemsError');
+            }
+            await this.showResultDialog(result);
+        } catch(e) {
+            LoggingService.error(e);
+            MessageService.alert(e.message ? e.message:'RecoverItemsError');
+        }
     }
 
     /**
@@ -35,14 +44,14 @@ export default class RecoverHiddenItemsAction {
      * @returns {Promise<*>}
      */
     async showRecoverItemsDialog() {
-        return Messages.form(
+        return MessageService.form(
             {
                 passwordsInvisibleInFolder: {
                     label: 'RecoverItemsInvisiblePwd',
                     type : 'checkbox',
                     title: 'RecoverItemsInvisiblePwdTitle'
                 },
-                invisibleInTrash: {
+                invisibleInTrash          : {
                     label: 'RecoverItemsInvisibleTrash',
                     type : 'checkbox',
                     title: 'RecoverItemsInvisibleTrashTitle'
@@ -97,10 +106,6 @@ export default class RecoverHiddenItemsAction {
      * @returns {Promise<void>}
      */
     async showResultDialog(result) {
-        if(!result.success) {
-            throw new Error('RecoverItemsError');
-        }
-
-        await Messages.alert(['RecoverItemsSuccessMessage', result], 'RecoverItemsSuccessTitle');
+        await MessageService.alert(['RecoverItemsSuccessMessage', result], 'RecoverItemsSuccessTitle');
     }
 }

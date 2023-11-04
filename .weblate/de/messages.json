@@ -2335,7 +2335,7 @@
     "settings-000691": {
         "message": "Verschlüsselung auf Endgerät"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Aktivieren"
     },
     "settings-000693": {
@@ -3239,10 +3239,6 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "Die Anmeldung mit WebAuthn wurde deaktiviert. Du kannst sie in den Einstellungen wieder aktivieren",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Aktivieren",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Anmeldung mit WebAuthn einrichten",

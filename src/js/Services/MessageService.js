@@ -22,8 +22,7 @@ export default new class MessageService {
         return new Promise((resolve) => {
             ToastService
                 .message(notification, {timeout: 10000})
-                .then(resolve)
-                .catch(resolve);
+                .then(resolve);
         });
     }
 

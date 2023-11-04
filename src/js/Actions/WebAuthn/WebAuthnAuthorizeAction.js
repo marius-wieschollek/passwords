@@ -9,42 +9,37 @@
  */
 
 import SettingsService from "@js/Services/SettingsService";
-import {loadState} from "@nextcloud/initial-state";
-import Logger from "@js/Classes/Logger";
-import ToastService from "../../Services/ToastService";
+import LoggingService from "@js/Services/LoggingService";
+import {getCurrentUser} from "@nextcloud/auth";
 
 export default class WebAuthnAuthorizeAction {
 
     static hasBeenAttempted = false;
 
     isAvailable() {
-        return !WebAuthnAuthorizeAction.hasBeenAttempted && !!window.PasswordCredential && SettingsService.get('local.encryption.webauthn.enabled');
+        return !WebAuthnAuthorizeAction.hasBeenAttempted && !!window.PasswordCredential && SettingsService.get('client.encryption.webauthn.enabled');
     }
 
     async run() {
-        WebAuthnAuthorizeAction.hasBeenAttempted = true;
-        let username = loadState('passwords', 'api-user', null) + '.passwordsapp@' + location.host;
+        if(!this.isAvailable() || WebAuthnAuthorizeAction.hasBeenAttempted) {
+            return null;
+        }
 
+        WebAuthnAuthorizeAction.hasBeenAttempted = true;
         try {
+            let username = `${getCurrentUser().uid}.passwordsapp@${location.host}`;
+
             let data = await navigator.credentials.get(
                 new PasswordCredential({password: true, id: username})
             );
 
-            if(!data) {
-                this.disable();
-                return null;
+            if(data && data.password) {
+                return data.password;
             }
-
-            return data.password;
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
         }
 
         return null;
-    }
-
-    disable() {
-        SettingsService.set('local.encryption.webauthn.enabled', false);
-        ToastService.info('WebAuthnLoginDisabled');
     }
 }

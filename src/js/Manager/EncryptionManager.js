@@ -1,13 +1,14 @@
 import API from "@js/Helper/api";
-import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
 import Application from '@js/Init/Application';
-import Localisation from '@js/Classes/Localisation';
 import EventManager from '@js/Manager/EventManager';
+import UtilityService from '@js/Services/UtilityService';
+import MessageService from '@js/Services/MessageService';
+import LoggingService from "@js/Services/LoggingService";
 import SettingsService from "@js/Services/SettingsService";
+import LocalisationService from '@js/Services/LocalisationService';
 import {loadState} from "@nextcloud/initial-state";
 import {emit} from '@nextcloud/event-bus';
-import Logger from "@js/Classes/Logger";
+import WebAuthnInitializeAction from "@js/Actions/WebAuthn/WebAuthnInitializeAction";
 
 class EncryptionManager {
 
@@ -56,6 +57,7 @@ class EncryptionManager {
     async update(password, oldPassword) {
         try {
             await API.setAccountChallenge(password, oldPassword);
+            await this._updateWebAuthn(password);
         } catch(e) {
             throw e;
         }
@@ -66,7 +68,7 @@ class EncryptionManager {
      * @returns {Promise<void>}
      */
     async updateGui() {
-        let data = await Messages.form(
+        let data = await MessageService.form(
             {
                 password      : {
                     label    : 'New password',
@@ -105,15 +107,15 @@ class EncryptionManager {
         );
 
         try {
-            Utility.lockApp();
+            UtilityService.lockApp();
             await this.update(data.password, data.oldPassword);
-            Utility.unlockApp();
+            UtilityService.unlockApp();
 
-            Messages.alert('Your password has been changed successfully.', 'Password changed');
+            MessageService.alert('Your password has been changed successfully.', 'Password changed');
         } catch(e) {
-            Utility.unlockApp();
-            Messages.alert(e.message, 'Changing password failed');
-            Logger.error(e);
+            UtilityService.unlockApp();
+            MessageService.alert(e.message, 'Changing password failed');
+            LoggingService.error(e);
         }
     }
 
@@ -185,7 +187,7 @@ class EncryptionManager {
 
             try {
                 await API.createPassword(password);
-                Logger.success(`Encrypted password ${password.id}`);
+                LoggingService.success(`Encrypted password ${password.id}`);
                 this._sendStatus('passwords');
             } catch(e) {
                 this._sendStatus('passwords', 'error', e);
@@ -194,7 +196,7 @@ class EncryptionManager {
         } else {
             try {
                 await API.updatePassword(password);
-                Logger.success(`Updated password ${password.id}`);
+                LoggingService.success(`Updated password ${password.id}`);
                 this._sendStatus('passwords');
             } catch(e) {
                 this._sendStatus('passwords', 'error', e);
@@ -246,7 +248,7 @@ class EncryptionManager {
             idMap[tag.id] = result.id;
 
             this._sendStatus('tags');
-            Logger.success(`Encrypted tag ${tag.id}`);
+            LoggingService.success(`Encrypted tag ${tag.id}`);
         } catch(e) {
             this._sendStatus('tags', 'error', e);
             throw e;
@@ -301,7 +303,7 @@ class EncryptionManager {
             idMap[folder.id] = result.id;
 
             this._sendStatus('folders');
-            Logger.success(`Encrypted folder ${folder.id}`);
+            LoggingService.success(`Encrypted folder ${folder.id}`);
         } catch(e) {
             this._sendStatus('folders', 'error', e);
             throw e;
@@ -319,7 +321,7 @@ class EncryptionManager {
         let folders = [],
             sortLog = ['00000000-0000-0000-0000-000000000000'];
 
-        folderDb = Utility.objectToArray(folderDb);
+        folderDb = UtilityService.objectToArray(folderDb);
         while(folderDb.length !== 0) {
             for(let i = 0; i < folderDb.length; i++) {
                 let folder = folderDb[i];
@@ -413,8 +415,8 @@ class EncryptionManager {
     async _saveMasterPassword(password) {
         this._sendStatus('password', 'processing', 1);
         let username = loadState('passwords', 'api-user', null),
-            label    = Localisation.translate('Passwords App Encryption Passphrase'),
-            notes    = Localisation.translate(
+            label    = LocalisationService.translate('Passwords App Encryption Passphrase'),
+            notes    = LocalisationService.translate(
                 'This is a copy of the passphrase you chose for encryption. Changing or deleting this entry does not affect the encryption. The passphrase can only be changed in the settings. More information can be found in the handbook.'),
             url      = location.href;
 
@@ -468,12 +470,22 @@ class EncryptionManager {
             object.status = object.errors.length === 0 ? 'success':'failed';
             if(object.status === 'success') object.current = object.total;
         } else if(status === 'error') {
-            Logger.error(data);
+            LoggingService.error(data);
             object.errors.push(data);
             if(section !== 'cleanup') object.status = 'failed';
         }
 
         this._statusFunc(this.status);
+    }
+
+    async _updateWebAuthn(password) {
+        if(SettingsService.get('client.encryption.webauthn.enabled')) {
+            try {
+                await (WebAuthnInitializeAction).run(password);
+            } catch(e) {
+                LoggingService.error(e);
+            }
+        }
     }
 }
 

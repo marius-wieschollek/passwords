@@ -2553,7 +2553,7 @@
     "settings-000691": {
         "message": "Asiakkaan salaustila"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Ota käyttöön"
     },
     "settings-000693": {
@@ -3217,10 +3217,6 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "WebAuthn-kirjautuminen poistettiin käytöstä. Voit ottaa sen uudelleen käyttöön asetuksissa",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Ota käyttöön",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Tallenna salauslausekkeesi tähän selaimeen ja kirjaudu sisään automaattisesti sovelluksen avaamisen yhteydessä.",

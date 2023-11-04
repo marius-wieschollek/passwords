@@ -2580,7 +2580,7 @@
     "settings-000691": {
         "message": "Клієнтський режим шифрування"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Увімкнути"
     },
     "settings-000693": {
@@ -3221,10 +3221,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Увійдіть за допомогою WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Увімкнути",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Збережіть пароль для шифрування в цьому браузері та входьте в систему автоматично при відкритті програми",

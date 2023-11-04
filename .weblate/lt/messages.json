@@ -2574,7 +2574,7 @@
     "settings-000691": {
         "message": "Kliento šifravimo režimas"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Įjungti"
     },
     "settings-000693": {
@@ -3225,10 +3225,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Prisijunkite su \"WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Įjungti",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Šioje naršyklėje išsaugokite šifravimo slaptažodį ir atidarę programėlę automatiškai prisijunkite.",

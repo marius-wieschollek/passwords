@@ -2531,7 +2531,7 @@
     "settings-000691": {
         "message": "Klientkrypteringsmodus"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Aktivere"
     },
     "settings-000693": {
@@ -3224,10 +3224,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Logg inn med WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Aktivere",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Lagre krypteringsfrasen din i denne nettleseren og logg inn automatisk når du åpner appen.",

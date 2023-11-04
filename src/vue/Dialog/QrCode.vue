@@ -57,7 +57,7 @@
         },
 
         data() {
-            let warning = SettingsService.get('local.sharing.qrcode.warning', true);
+            let warning = SettingsService.get('client.sharing.qrcode.warning', true);
 
             return {
                 text     : warning ? Localisation.translate('What did you expect?'):this.password.password,
@@ -81,7 +81,7 @@
                 });
             },
             disableWarning() {
-                SettingsService.set('local.sharing.qrcode.warning', false);
+                SettingsService.set('client.sharing.qrcode.warning', false);
                 this.hideWarning();
             },
             close() {

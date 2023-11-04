@@ -2430,7 +2430,7 @@
     "settings-000691": {
         "message": "Режим шифрования клиента"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Включить"
     },
     "settings-000708": {
@@ -3233,10 +3233,6 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "Функция WebAuthn Login была отключена. Вы можете снова включить его в настройках",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Включить",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-WebauthnEncryptionPassphraseRepeat": {
         "message": "Повторите парольную фразу",

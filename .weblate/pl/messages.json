@@ -49,7 +49,7 @@
     "frontend-000561": {
         "message": "Strefa zagrożenia"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Włącz"
     },
     "settings-000714": {
@@ -3221,10 +3221,6 @@
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn jest teraz aktywowany. Aplikacja spróbuje użyć zapisanego hasła przy następnym logowaniu",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Włącz",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Przechowuj hasło szyfrowania w tej przeglądarce i loguj się automatycznie podczas otwierania aplikacji.",

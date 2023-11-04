@@ -2554,7 +2554,7 @@
     "settings-000691": {
         "message": "Mode enkripsi klien"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Aktifkan"
     },
     "settings-000693": {
@@ -3237,10 +3237,6 @@
     "frontend-WebAuthnLoginDisabled": {
         "message": "Login WebAuthn dinonaktifkan. Anda dapat mengaktifkannya lagi di pengaturan",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Aktifkan",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-WebauthnLoginSetupSuccess": {
         "message": "WebAuthn sekarang telah diaktifkan. Aplikasi akan mencoba menggunakan kata sandi yang disimpan saat Anda masuk kembali",

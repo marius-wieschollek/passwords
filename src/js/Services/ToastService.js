@@ -14,46 +14,46 @@ import Localisation from '@js/Classes/Localisation';
 export default new class ToastService {
 
     info(title, options = {}) {
-        return new Promise((resolve, reject) => {
-            this._promisifyToast(options, resolve, reject);
+        return new Promise((resolve) => {
+            this._promisifyToast(options, resolve);
             this._runNextcloudDialog(title, options, 'showInfo');
         });
     }
 
     message(title, options = {}) {
-        return new Promise((resolve, reject) => {
-            this._promisifyToast(options, resolve, reject);
+        return new Promise((resolve) => {
+            this._promisifyToast(options, resolve);
             this._runNextcloudDialog(title, options, 'showMessage');
         });
     }
 
     success(title, options = {}) {
-        return new Promise((resolve, reject) => {
-            this._promisifyToast(options, resolve, reject);
+        return new Promise((resolve) => {
+            this._promisifyToast(options, resolve);
             this._runNextcloudDialog(title, options, 'showSuccess');
         });
     }
 
     warning(title, options = {}) {
-        return new Promise((resolve, reject) => {
-            this._promisifyToast(options, resolve, reject);
+        return new Promise((resolve) => {
+            this._promisifyToast(options, resolve);
             this._runNextcloudDialog(title, options, 'showWarning');
         });
     }
 
     error(title, options = {}) {
-        return new Promise((resolve, reject) => {
-            this._promisifyToast(options, resolve, reject);
+        return new Promise((resolve) => {
+            this._promisifyToast(options, resolve);
             this._runNextcloudDialog(title, options, 'showError');
         });
     }
 
-    _promisifyToast(options, resolve, reject) {
+    _promisifyToast(options, resolve) {
         options.onClick = () => {
             if(resolve) resolve(true);
         };
         options.onRemove = () => {
-            if(reject) reject();
+            if(resolve) resolve(false);
         };
     }
 

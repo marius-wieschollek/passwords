@@ -82,7 +82,7 @@
     "frontend-000265": {
         "message": "Backup and Restore"
     },
-    "settings-000692": {
+    "frontend-Enable": {
         "message": "Enable"
     },
     "backups-000125": {
@@ -3233,10 +3233,6 @@
     "settings-SettingsWebAuthnEnable": {
         "message": "Log in with WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
-    },
-    "settings-SettingsWebAuthnEnableButton": {
-        "message": "Enable",
-        "description": "Label of the button in the settings to start the set up process for the WebAuthn login."
     },
     "settings-SettingsWebAuthnEnableHelp": {
         "message": "Store your encryption passphrase in this browser and log in automatically when opening the app",
