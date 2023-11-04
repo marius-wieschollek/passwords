@@ -2,15 +2,12 @@ import API from '@js/Helper/api';
 import Utility from '@js/Classes/Utility';
 import {loadState} from '@nextcloud/initial-state';
 import Logger from "@js/Classes/Logger";
+import DatabaseService from "./DatabaseService";
 
 /**
  *
  */
 class SettingsService {
-
-    get localSettingsKey() {
-        return 'passwords.settings.' + loadState('passwords', 'api-user', null);
-    }
 
     constructor() {
         this._defaults = {
@@ -80,7 +77,7 @@ class SettingsService {
         let [scope] = setting.split('.', 2);
 
         if(scope === 'local') {
-            this._settings[setting] = this._resetLocalSetting(setting);
+            this._settings[setting] = await this._resetLocalSetting(setting);
         } else if(scope === 'user' || scope === 'client') {
             this._settings[setting] = await API.resetSetting(setting);
             if(this._defaults.hasOwnProperty(setting)) {
@@ -138,24 +135,31 @@ class SettingsService {
     /**
      *
      */
-    init() {
+    async init() {
         let settings = loadState('passwords', 'settings', null);
         if(settings) {
             this._addSettings(settings);
         }
-        this._migrateOldLocalSettings();
-
-        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
-            this._addSettings(JSON.parse(window.localStorage.getItem(this.localSettingsKey)));
-        }
+        await this._migrateOldLocalSettings();
+        this._addSettings(
+            await DatabaseService.getAll(DatabaseService.SETTINGS_TABLE)
+        );
     }
 
-    _migrateOldLocalSettings() {
+    async _migrateOldLocalSettings() {
+        let localSettingsKey = 'passwords.settings.' + loadState('passwords', 'api-user', null);
         if(window.localStorage.hasOwnProperty('passwords.settings')) {
             window.localStorage.setItem(
-                this.localSettingsKey,
+                localSettingsKey,
                 window.localStorage.getItem('passwords.settings')
             );
+            window.localStorage.removeItem('passwords.settings');
+        }
+        if(window.localStorage.hasOwnProperty(localSettingsKey)) {
+            let data = JSON.parse(window.localStorage.getItem(localSettingsKey));
+            for(let key in data) {
+                await DatabaseService.set(DatabaseService.SETTINGS_TABLE, key, data[key]);
+            }
             window.localStorage.removeItem('passwords.settings');
         }
     }
@@ -171,7 +175,7 @@ class SettingsService {
         let [scope] = setting.split('.', 2);
 
         if(scope === 'local') {
-            return this._setLocalSetting(setting, value);
+            return await this._setLocalSetting(setting, value);
         } else if(scope === 'user' || scope === 'client') {
             return await API.setSetting(setting, value);
         }
@@ -184,13 +188,7 @@ class SettingsService {
      * @private
      */
     _setLocalSetting(setting, value) {
-        let settings = {};
-        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
-            settings = JSON.parse(window.localStorage.getItem(this.localSettingsKey));
-        }
-
-        settings[setting] = value;
-        window.localStorage.setItem(this.localSettingsKey, JSON.stringify(settings));
+        return DatabaseService.set(DatabaseService.SETTINGS_TABLE, setting, value);
     }
 
     /**
@@ -199,18 +197,7 @@ class SettingsService {
      * @private
      */
     _resetLocalSetting(setting) {
-        let settings = {};
-        if(window.localStorage.hasOwnProperty(this.localSettingsKey)) {
-            settings = JSON.parse(window.localStorage.getItem(this.localSettingsKey));
-        }
-
-        if(settings.hasOwnProperty(setting)) {
-            delete settings[setting];
-            window.localStorage.setItem(this.localSettingsKey, JSON.stringify(settings));
-            return this._defaults[setting];
-        }
-
-        return null;
+        return DatabaseService.remove(DatabaseService.SETTINGS_TABLE, setting);
     }
 
     /**
