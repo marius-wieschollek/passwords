@@ -3245,6 +3245,6 @@
         "description": "Title of the WebAuthn setup dialog."
     },
     "frontend-Disable": {
-        "message": "Deaktivieren Sie"
+        "message": "Deaktivieren"
     }
 }
