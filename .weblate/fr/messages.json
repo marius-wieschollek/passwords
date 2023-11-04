@@ -3245,5 +3245,8 @@
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Configuration de la connexion à WebAuthn",
         "description": "Title of the WebAuthn setup dialog."
+    },
+    "frontend-Disable": {
+        "message": "Désactiver"
     }
 }
