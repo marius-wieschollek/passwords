@@ -450,10 +450,8 @@
             NcCheckboxRadioSwitch
         },
         data() {
-            let advanced      = SettingsService.get('client.settings.advanced') === true,
-                hasEncryption = API.hasEncryption,
-                settings      = SettingsService.getAll(),
-                observer      = (data) => {
+            let settings = SettingsService.getAll(),
+                observer = (data) => {
                     if(!settings.hasOwnProperty(data.setting) || settings[data.setting] !== data.value) {
                         settings[data.setting] = data.value;
                     }
@@ -463,15 +461,15 @@
             return {
                 observer,
                 settings,
-                hasSharing  : SettingsService.get('server.sharing.enabled'),
-                hasResharing: SettingsService.get('server.sharing.resharing'),
-                advanced,
-                hasEncryption,
-                isAdmin     : getCurrentUser().isAdmin,
-                nightly     : APP_NIGHTLY,
-                noSave      : false,
-                locked      : false,
-                hasWebAuthn : WebAuthnInitializeAction.isWebauthnPasswordAvailable()
+                hasSharing   : SettingsService.get('server.sharing.enabled'),
+                hasResharing : SettingsService.get('server.sharing.resharing'),
+                advanced     : SettingsService.get('client.settings.advanced') === true,
+                hasEncryption: API.hasEncryption === true,
+                isAdmin      : getCurrentUser().isAdmin,
+                nightly      : APP_NIGHTLY,
+                noSave       : false,
+                locked       : false,
+                hasWebAuthn  : WebAuthnInitializeAction.isWebauthnPasswordAvailable()
             };
         },
 
@@ -515,8 +513,8 @@
                 if(await this.runAction(new UserSettingsResetAction(), false)) {
                     this.advanced = false;
                     this.settings = SettingsService.getAll();
-                    this.$nextTick(() => {this.noSave = false;});
                 }
+                this.$nextTick(() => {this.noSave = false;});
             },
             async resetUserAccount() {
                 await this.runAction(new UserAccountResetAction());

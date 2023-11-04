@@ -54,7 +54,7 @@
     import Messages from '@js/Classes/Messages';
     import SetupManager from '@js/Manager/SetupManager';
     import Application from "@js/Init/Application";
-    import { emit } from '@nextcloud/event-bus';
+    import {emit} from '@nextcloud/event-bus';
     import WebAuthnAuthorizeAction from "@js/Actions/WebAuthn/WebAuthnAuthorizeAction";
     import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
 
@@ -78,7 +78,6 @@
                 hasPassword : false,
                 hasToken    : false,
                 hasError    : false,
-                pwAlgorithm : '',
                 errorMessage: '',
                 loggingIn   : false,
                 retryClass  : '',
@@ -131,9 +130,12 @@
                            .then((password) => {
                                if(password) {
                                    this.password = password;
-                                   this.submitLogin(null, true)
+
+                                   if(!this.hasToken) {
+                                       this.submitLogin(null, true);
+                                   }
                                }
-                           })
+                           });
                    }
                });
         },
@@ -262,11 +264,11 @@ body#body-user {
 
     &.pw-auth-visible {
         #app-content {
-            height: 100vh;
+            height : 100vh;
         }
 
         .button-vue.app-navigation-toggle {
-            display: none !important;
+            display : none !important;
         }
     }
 }
