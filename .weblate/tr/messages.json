@@ -3245,5 +3245,8 @@
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "WebAuthn Giriş Kurulumu",
         "description": "Title of the WebAuthn setup dialog."
+    },
+    "frontend-Disable": {
+        "message": "Devre dışı bırak"
     }
 }
