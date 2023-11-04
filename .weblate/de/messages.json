@@ -3243,5 +3243,8 @@
     "settings-WebauthnEncryptionSetupTitle": {
         "message": "Anmeldung mit WebAuthn einrichten",
         "description": "Title of the WebAuthn setup dialog."
+    },
+    "frontend-Disable": {
+        "message": "Deaktivieren"
     }
 }
