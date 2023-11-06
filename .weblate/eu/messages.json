@@ -1,1 +1,73 @@
-{}
+{
+    "apps-000010": {
+        "message": "Itxura ona du"
+    },
+    "apps-000013": {
+        "message": "Ez saiatu berriro"
+    },
+    "apps-000022": {
+        "message": "Egiaztatu ondorengo kodeak aplikazioak edo gailuak emandakoarekin bat egiten duten:"
+    },
+    "apps-000004": {
+        "message": "gehiago jakin"
+    },
+    "apps-000016": {
+        "message": "Zifratze zurruna"
+    },
+    "apps-000008": {
+        "message": "Izena aukeratu:"
+    },
+    "apps-000001": {
+        "message": "ofiziala"
+    },
+    "apps-000017": {
+        "message": "Ezin izan dira aplikazioak kargatu: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000015": {
+        "message": "Saiatu berriro"
+    },
+    "apps-000005": {
+        "message": "PassLink-ekin konektatu"
+    },
+    "apps-000009": {
+        "message": "Kodeak ez datoz bat"
+    },
+    "apps-000024": {
+        "message": "Bezero honek ofizialki onartzen du gure muturretik muturrerako zifratzea"
+    },
+    "apps-000006": {
+        "message": "Gailu berria konektatu"
+    },
+    "apps-000020": {
+        "message": "Konektatzeko, eskaneatu QR kodea aplikazioarekin"
+    },
+    "apps-000021": {
+        "message": "Sakatu botoia konektatzeko prest zaudenean."
+    },
+    "apps-000018": {
+        "message": "Konexioa ezeztatu duzu"
+    },
+    "apps-000019": {
+        "message": "Ez duzu konexioa garaiz baieztatu"
+    },
+    "apps-000012": {
+        "message": "Eginda"
+    },
+    "apps-000014": {
+        "message": "Konektatu beste bezero bat"
+    },
+    "apps-000011": {
+        "message": "Ongi konektatuta"
+    },
+    "apps-000007": {
+        "message": "Esteka bidez konektatu"
+    },
+    "apps-000023": {
+        "message": "Lotu bezero hau zure Nextcloud kontuarekin pasahitz eta url-ak idatzi gabe"
+    }
+}
