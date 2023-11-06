@@ -9,7 +9,7 @@
         "message": "poskusite s splošnim uvozom CSV"
     },
     "apps-000001": {
-        "message": "uradni"
+        "message": "uradno"
     },
     "apps-000002": {
         "message": "po $AUTHOR$",
@@ -23,7 +23,7 @@
         "message": "izvorna koda"
     },
     "apps-000004": {
-        "message": "izvedeti več"
+        "message": "Več o tem"
     },
     "apps-000005": {
         "message": "Povežite se s PassLinkom"
@@ -35,13 +35,13 @@
         "message": "Povežite se prek povezave"
     },
     "apps-000008": {
-        "message": "Izberite ime:"
+        "message": "Izbor imena:"
     },
     "apps-000009": {
-        "message": "Kode se ne ujemajo"
+        "message": "Kode niso skladne"
     },
     "apps-000010": {
-        "message": "Izgleda dobro"
+        "message": "Videti je v redu"
     },
     "apps-000011": {
         "message": "Povezava je bila uspešna"
@@ -240,7 +240,7 @@
         "message": "Kliknite gumb za povezavo aplikacije, nameščene v tej napravi, ali poskenirajte kodo QR z aplikacijo, če je ta nameščena v drugi napravi."
     },
     "backups-000028": {
-        "message": "Varnostno kopiranje ali izvoz"
+        "message": "Varnostna kopija ali izvoz"
     },
     "backups-000029": {
         "message": "Izberite format"
@@ -693,16 +693,16 @@
         "message": "Nedavno"
     },
     "frontend-000152": {
-        "message": "Priljubljene strani"
+        "message": "Priljubljeno"
     },
     "frontend-000153": {
-        "message": "Skupna spletna stran"
+        "message": "V skupni rabi"
     },
     "frontend-000154": {
         "message": "Varnost"
     },
     "frontend-000155": {
-        "message": "Odpadki"
+        "message": "Smeti"
     },
     "frontend-000156": {
         "message": "Podrobnosti"
@@ -711,13 +711,13 @@
         "message": "Uredi"
     },
     "frontend-000158": {
-        "message": "Preimenovanje"
+        "message": "Preimenuj"
     },
     "frontend-000159": {
         "message": "Izbriši"
     },
     "frontend-000160": {
-        "message": "Obnovitev"
+        "message": "Obnovi"
     },
     "frontend-000161": {
         "message": "Novo geslo"
@@ -729,28 +729,28 @@
         "message": "Nova oznaka"
     },
     "frontend-000164": {
-        "message": "Varni"
+        "message": "Varno"
     },
     "frontend-000165": {
-        "message": "Status"
+        "message": "Stanje"
     },
     "frontend-000166": {
-        "message": "Šibka"
+        "message": "Šibko"
     },
     "frontend-000167": {
         "message": "Šibko (podvojeno)"
     },
     "frontend-000168": {
-        "message": "Šibka (zastarela)"
+        "message": "Šibko (zastarelo)"
     },
     "frontend-000169": {
-        "message": "Vlomljeno"
+        "message": "Ogroženo"
     },
     "frontend-000170": {
-        "message": "Delite"
+        "message": "Souporaba"
     },
     "frontend-000171": {
-        "message": "Spremembe"
+        "message": "Predelave"
     },
     "frontend-000172": {
         "message": "Koda QR"
@@ -765,7 +765,7 @@
         "message": "Spletna stran"
     },
     "frontend-000176": {
-        "message": "Dodajte oznake…"
+        "message": "Dodaj oznake …"
     },
     "frontend-000177": {
         "message": "Barva"
@@ -774,7 +774,7 @@
         "message": "Ime"
     },
     "frontend-000179": {
-        "message": "Oznaka"
+        "message": "Naziv"
     },
     "frontend-000180": {
         "message": "Splošno"
@@ -792,13 +792,13 @@
         "message": "Več možnosti"
     },
     "frontend-000185": {
-        "message": "Najljubši"
+        "message": "Priljubljeno"
     },
     "frontend-000186": {
         "message": "Šifriranje"
     },
     "frontend-000187": {
-        "message": "V strežniku"
+        "message": "Na strežniku"
     },
     "frontend-000188": {
         "message": "Polja po meri"
@@ -816,10 +816,10 @@
         "message": "Vrednost"
     },
     "frontend-000193": {
-        "message": "Preklopite vidljivost"
+        "message": "Preklopi vidljivost"
     },
     "frontend-000194": {
-        "message": "Ustvarjanje gesla"
+        "message": "Ustvari geslo"
     },
     "frontend-000195": {
         "message": "Enostavno šifriranje na strani strežnika V1"
@@ -1022,7 +1022,7 @@
         }
     },
     "frontend-000255": {
-        "message": "Delnice"
+        "message": "Souporaba"
     },
     "frontend-000256": {
         "message": "V skupni rabi $COUNT$ krat",
@@ -1217,7 +1217,7 @@
         "message": "Tu ni ničesar"
     },
     "frontend-000311": {
-        "message": "Če želite nekaj dodati, kliknite \"⋯\"."
+        "message": "Za dodajanje kliknite »⋯«."
     },
     "frontend-000312": {
         "message": "Tu se bodo prikazali izbrisani predmeti."
