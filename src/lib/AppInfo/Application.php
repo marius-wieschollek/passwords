@@ -11,16 +11,16 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OCP\IConfig;
+use OCA\Passwords\EventListener\User\UserPasswordChangedListener;
 use OCP\IUserManager;
 use OCP\IGroupManager;
 use OCP\L10N\IFactory;
-use OCP\App\IAppManager;
 use OCP\AppFramework\App;
 use OCP\Notification\IManager;
 use OCP\AppFramework\IAppContainer;
 use OCP\Http\Client\IClientService;
 use OCP\User\Events\CreateUserEvent;
+use OCP\User\Events\PasswordUpdatedEvent;
 use OCP\User\Events\UserDeletedEvent;
 use OCP\Share\IManager as ShareManager;
 use OCP\EventDispatcher\IEventDispatcher;
@@ -256,6 +256,7 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(CreateUserEvent::class, BeforeUserCreatedListener::class);
         $dispatcher->addServiceListener(BeforeUserCreatedEvent::class, BeforeUserCreatedListener::class);
         $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
+        $dispatcher->addServiceListener(PasswordUpdatedEvent::class, UserPasswordChangedListener::class);
     }
 
     /**

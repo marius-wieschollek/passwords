@@ -164,14 +164,14 @@ class EnvironmentService {
      * @throws Exception
      */
     public function __construct(
-        ?string $userId,
-        IConfig $config,
-        IRequest $request,
-        ISession $session,
+        ?string        $userId,
+        IConfig        $config,
+        IRequest       $request,
+        ISession       $session,
         LoggingService $logger,
-        IProvider $tokenProvider,
-        IUserSession $userSession,
-        IUserManager $userManager
+        IProvider      $tokenProvider,
+        IUserSession   $userSession,
+        IUserManager   $userManager
     ) {
         $this->config        = $config;
         $this->logger        = $logger;
@@ -356,6 +356,8 @@ class EnvironmentService {
         if($this->runType !== self::TYPE_REQUEST) {
             $this->appMode = self::MODE_GLOBAL;
             $this->logger->info('Passwords runs '.($request->getRequestUri() ? $request->getRequestUri():$request->getScriptName()).' in global mode');
+        } else if($this->isPublicPage($userId, $request)) {
+            $this->appMode = self::MODE_USER;
         } else if($this->loadUserInformation($userId, $request)) {
             $this->appMode = self::MODE_USER;
         }
@@ -370,7 +372,7 @@ class EnvironmentService {
      */
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader   = $request->getHeader('Authorization');
-        $userIdString = $userId ? $userId:'invalid user id';
+        $userIdString = $userId ? :'invalid user id';
         if($this->session->exists('login_credentials')) {
             if($this->loadUserFromSession($userId, $request)) return true;
             $this->logger->warning('Login attempt with invalid session for '.$userIdString);
@@ -646,4 +648,15 @@ class EnvironmentService {
         return $client;
     }
 
+    protected function isPublicPage(?string $userId, IRequest $request): bool {
+        try {
+            return
+                $request->getMethod() === 'POST' &&
+                $request->getPathInfo() === '/settings/personal/changepassword';
+        } catch(Exception $e) {
+            $this->logger->logException($e);
+        }
+
+        return false;
+    }
 }
