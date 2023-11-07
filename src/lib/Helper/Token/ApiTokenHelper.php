@@ -137,7 +137,7 @@ class ApiTokenHelper {
         $type      = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
 
         $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
-        $deviceToken->setScope(['filesystem' => $this->config->isAppEnabled('encryption')]);
+        $deviceToken->setScope(['filesystem' => $this->mustHaveFileSystemPermission()]);
         $this->tokenProvider->updateToken($deviceToken);
 
         return [$token, $deviceToken];
@@ -262,5 +262,14 @@ class ApiTokenHelper {
                 $this->request->getRemoteAddress()
             ]
         );
+    }
+
+    /**
+     * @return bool
+     */
+    protected function mustHaveFileSystemPermission(): bool {
+        return $this->config->isAppEnabled('encryption') ||
+               $this->config->isAppEnabled('groupfolders') ||
+               $this->config->isAppEnabled('files_external');
     }
 }
