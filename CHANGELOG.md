@@ -1,8 +1,11 @@
 ## [Unreleased]
 ## 2023.11.0 - Feature release
 ### Added
+- NC 28 compatibility
 - Log in with WebAuthn
 ### Fixed
+- App crash after user password change
+- Token permissions trigger mount point error in files_external
 - Layout issues on printouts
 - Session timeout message not showing up
 

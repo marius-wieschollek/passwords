@@ -117,7 +117,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="8.1" max-version="8.2" />
+        <php min-version="8.1" max-version="8.3" />
         <nextcloud min-version="25" max-version="28" />
     </dependencies>
     <background-jobs>

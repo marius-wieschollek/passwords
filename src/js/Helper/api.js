@@ -77,6 +77,25 @@ class PasswordsApi extends EnhancedApi {
 
         this._queueCheckActive = false;
     }
+
+    async _executeRequest(url, options) {
+        try {
+            let request = new Request(url, options);
+            this._config.events.emit('api.request.before', request);
+
+            /**
+             * This fixes the NC 28 behaviour
+             * where window.fetch is overridden
+             * and will ignore the options from the request
+             */
+            return await fetch(request, options);
+        } catch(e) {
+            if(e.status === 401 && this._enabled) this._enabled = false;
+
+            this._config.events.emit('api.request.error', e);
+            throw e;
+        }
+    }
 }
 
 export default new PasswordsApi();
