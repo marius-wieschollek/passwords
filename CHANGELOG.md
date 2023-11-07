@@ -2,6 +2,7 @@
 ## 2023.11.0 - Feature release
 ### Added
 - NC 28 compatibility
+- PHP 8.3 compatibility
 - Log in with WebAuthn
 ### Fixed
 - App crash after user password change
