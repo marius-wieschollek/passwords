@@ -44,6 +44,11 @@
                 <translate class="login-error" :say="errorMessage" tag="div" v-if="hasError"/>
             </div>
         </form>
+        <nc-button class="authorize-help-button" type="primary" :to="{name: 'Help'}">
+            <template #icon>
+                <help-circle :size="20"/>
+            </template>
+        </nc-button>
     </div>
 </template>
 
@@ -59,7 +64,12 @@
     import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
 
     export default {
-        components: {Field, Translate},
+        components: {
+            Field,
+            Translate,
+            'help-circle': () => import(/* webpackChunkName: "HelpCircleIcon" */ '@icon/HelpCircle'),
+            'nc-button'  : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton')
+        },
         data() {
             let impersonateEl = document.querySelector('meta[name=pw-impersonate]'),
                 impersonating = false;
@@ -265,6 +275,17 @@ body#body-user {
     &.pw-auth-visible {
         #app-content {
             height : 100vh;
+
+            .authorize-help-button {
+                position : fixed;
+                right    : 1rem;
+                bottom   : 1rem;
+                cursor   : pointer;
+
+                svg {
+                    cursor   : pointer;
+                }
+            }
         }
 
         .button-vue.app-navigation-toggle {

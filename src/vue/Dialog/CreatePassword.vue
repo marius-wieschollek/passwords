@@ -69,7 +69,6 @@
     import Messages                from '@js/Classes/Messages';
     import NcModal                 from '@nc/NcModal';
     import NcButton                from '@nc/NcButton';
-    import Logger from "@js/Classes/Logger";
 
     export default {
         components: {

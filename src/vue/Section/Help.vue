@@ -33,6 +33,11 @@
                     <web text="Tell us!" :href="issuesPage"/>
                 </footer>
             </article>
+            <nc-button class="handbook-exit" type="primary" :to="{path: '/'}" v-if="!isAuthorized">
+                <template #icon>
+                    <arrow-left :size="20"/>
+                </template>
+            </nc-button>
             <gallery :images="gallery.images" :index="gallery.index" @close="gallery.index = null"/>
         </div>
     </div>
@@ -47,6 +52,7 @@
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
     import Application from "@js/Init/Application";
+    import {emit} from "@nextcloud/event-bus";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -54,7 +60,9 @@
             Web,
             Gallery,
             Translate,
-            Breadcrumb
+            Breadcrumb,
+            'arrow-left': () => import(/* webpackChunkName: "ArrowLeftIcon" */ '@icon/ArrowLeft'),
+            'nc-button' : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton')
         },
 
         data() {
@@ -76,6 +84,9 @@
         created() {
             this.refreshView();
             document.addEventListener('scroll', this.setActiveSection);
+            if(!this.isAuthorized) {
+                emit('toggle-navigation', {open: false});
+            }
         },
 
         beforeDestroy() {
@@ -242,11 +253,23 @@
     min-height : 100%;
 
     &.global {
-        position : fixed;
-        top      : var(--header-height);
-        left     : 0;
-        bottom   : 0;
-        right    : 0;
+        position         : fixed;
+        top              : var(--header-height);
+        left             : 0;
+        bottom           : 0;
+        right            : 0;
+        background-color : var(--color-main-background);
+
+        .handbook-exit {
+            position : fixed;
+            left     : 1rem;
+            bottom   : 1rem;
+            cursor   : pointer;
+
+            svg {
+                cursor : pointer;
+            }
+        }
     }
 
     #controls {
