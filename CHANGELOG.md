@@ -6,6 +6,7 @@
 - Log in with WebAuthn
 ### Fixed
 - App crash after user password change
+- Invalid tokens created SAML users which expire after 5 minutes
 - Token permissions trigger mount point error in files_external
 - Layout issues on printouts
 - Session timeout message not showing up

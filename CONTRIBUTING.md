@@ -81,7 +81,7 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
  - [https://localhost:9091](https://localhost:9091) is Keycloak (for SAML, optional, user `admin`, password `nextcloud`)
 
 ### LDAP Setup
- - Open [PhpLdapAdmin](https://localhost:9090) and log in
+ - Open [PhpLdapAdmin](https://localhost:9090) and log in with `cn=admin,dc=nextcloud` as User-DN and `nextcloud` as password
  - Create a new entry with the template "Generic: Posix Group"
  - Create a new Entry with the template "Generic: User Account" as child entry of the group
  - Enable "LDAP user and group backend" in Nextcloud
@@ -91,7 +91,7 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
  - Click on "Save Credentials"
  - Enter `dc=nextcloud` as Base DN
  - Click on "Continue"
-- Select "posixAccount" in "Object Classes"
+ - Select "posixAccount" in "Object Classes"
  - Click on "Continue"
  - Select "cn" in "other attributes"
  - Click on "Continue"
@@ -106,7 +106,10 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
 
 #### Keycloak SAML Setup
  - Open [Keycloak](https://localhost:9091) and log in
- - Follow [this guide](https://stackoverflow.com/a/48400813) ([internet archive link](https://web.archive.org/web/20200116192513/https://stackoverflow.com/questions/48400812/sso-with-saml-keycloak-and-nextcloud/48400813))
+ - Follow [this guide](https://janikvonrotz.ch/2020/04/21/configure-saml-authentication-for-nextcloud-with-keycloack/) ([internet archive link](https://web.archive.org/web/20231108192848/https://janikvonrotz.ch/2020/04/21/configure-saml-authentication-for-nextcloud-with-keycloack/))
+   - Instead of `example.com` use `localhost`
+   - Instead of `login.example.com` use `localhost:9091`
+   - Don't forget to set a password for any created user
 
 ## More information
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
