@@ -1177,16 +1177,16 @@
     "frontend-000324": {
         "message": "Nerastas"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Vis dar reikia pagalbos?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Klauskite mūsų forume!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Radote klaidą?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Papasakokite mums!"
     },
     "frontend-000329": {
@@ -2283,7 +2283,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Arba mūsų pokalbyje!"
     },
     "frontend-000616": {

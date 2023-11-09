@@ -983,16 +983,16 @@
     "frontend-000324": {
         "message": "Non trouvé"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Faites nous en part !"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Toujours besoin d’aide ?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Demandez sur le forum !"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Vous avez trouvé une erreur ?"
     },
     "frontend-000331": {
@@ -2224,7 +2224,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Ou dans notre Chat !"
     },
     "frontend-000616": {

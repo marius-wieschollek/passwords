@@ -1183,16 +1183,16 @@
     "frontend-000324": {
         "message": "Не знайдено"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Ще потрібна допомога?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Запитуйте на нашому форумі!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Знайшли помилку?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Скажи нам!"
     },
     "frontend-000329": {
@@ -2295,7 +2295,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Або в нашому чаті!"
     },
     "frontend-000616": {

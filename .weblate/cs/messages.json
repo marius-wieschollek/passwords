@@ -1171,7 +1171,7 @@
     "frontend-000324": {
         "message": "Nenalezeno"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Dejte nám vědět!"
     },
     "frontend-000331": {
@@ -2171,7 +2171,7 @@
             }
         }
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Narazili jste na chybu?"
     },
     "frontend-000330": {
@@ -2360,10 +2360,10 @@
     "frontend-000323": {
         "message": "Není k dispozici žádný obsah"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "I tak potřebujete pomoc?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Zeptejte se na diskuzním fóru!"
     },
     "frontend-000329": {
@@ -2654,7 +2654,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Nebo v našem chatu!"
     },
     "frontend-000617": {

@@ -96,10 +96,13 @@
             };
         },
 
-        created() {
+        beforeCreate() {
             emit('toggle-navigation', {open: false});
             document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
             document.body.classList.add('pw-auth-visible');
+        },
+
+        created() {
             API.requestSession()
                .then((d) => {
                    emit('toggle-navigation', {open: false});
@@ -290,6 +293,10 @@ body#body-user {
 
         .button-vue.app-navigation-toggle {
             display : none !important;
+        }
+
+        .app-navigation {
+            opacity: 0;
         }
     }
 }

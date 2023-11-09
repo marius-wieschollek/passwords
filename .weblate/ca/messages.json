@@ -1126,16 +1126,16 @@
     "frontend-000324": {
         "message": "No s'ha trobat"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Encara necessiteu ajuda?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Pregunteu al nostre fòrum!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Heu trobat cap error?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Explica'ns!"
     },
     "frontend-000329": {

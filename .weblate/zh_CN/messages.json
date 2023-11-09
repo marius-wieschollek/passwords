@@ -1501,16 +1501,16 @@
     "frontend-000324": {
         "message": "未找到"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "仍需要帮助？"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "在我们的论坛中询问！"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "发现一个错误？"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "告诉我们！"
     },
     "frontend-000329": {
@@ -2395,7 +2395,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "或者在我们的聊天中!"
     },
     "frontend-000616": {

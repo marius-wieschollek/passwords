@@ -1171,16 +1171,16 @@
     "frontend-000324": {
         "message": "Ikke fundet"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Har du stadig brug for hjælp?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Spørg i vores forum!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Har du fundet en fejl?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Fortæl os det!"
     },
     "frontend-000329": {
@@ -2283,7 +2283,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Eller i vores chat!"
     },
     "frontend-000616": {

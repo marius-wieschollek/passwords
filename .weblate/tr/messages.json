@@ -20,7 +20,7 @@
     "backend-000501": {
         "message": "Henüz değil"
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Ya da Sohbetimizde!"
     },
     "settings-000718": {
@@ -1207,16 +1207,16 @@
     "frontend-000324": {
         "message": "Bulunamadı"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Hala yardıma ihtiyacınız var mı?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Forumumuzda sorun!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Bir hata mı buldunuz?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Anlat bize!"
     },
     "frontend-000329": {

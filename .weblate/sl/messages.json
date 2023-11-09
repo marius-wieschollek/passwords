@@ -1281,16 +1281,16 @@
     "frontend-000324": {
         "message": "Ni bilo najdeno"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Še vedno potrebujete pomoč?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Vprašajte v našem forumu!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Našli ste napako?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Povejte nam!"
     },
     "frontend-000329": {
@@ -2259,7 +2259,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Ali v našem klepetu!"
     },
     "frontend-000616": {

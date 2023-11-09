@@ -974,7 +974,7 @@
     "frontend-000324": {
         "message": "Не найдено"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Свяжитесь с нами!"
     },
     "frontend-000331": {
@@ -2162,7 +2162,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Или в нашем чате!"
     },
     "frontend-000616": {
@@ -2551,7 +2551,7 @@
         "message": "Восстановление всех скрытых паролей независимо от состояния папки",
         "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Спрашивайте на нашем форуме!"
     },
     "settings-RecoverItemsFoldersTitle": {
@@ -2784,7 +2784,7 @@
     "tutorial-000786": {
         "message": "Наше встроенное руководство можно найти, нажав на кнопку \"Подробнее\", оно подробно объясняет работу приложения."
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Нашли ошибку?"
     },
     "tutorial-000787": {
@@ -2934,7 +2934,7 @@
     "frontend-000323": {
         "message": "Содержание недоступно"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Вам все еще нужна помощь?"
     },
     "backend-Passwords": {

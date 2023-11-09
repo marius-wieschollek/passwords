@@ -1162,16 +1162,16 @@
     "frontend-000324": {
         "message": "Nenájdené"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Stále potrebujete pomoc?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Spýtajte sa na našom fóre!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Našli ste chybu?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Povedzte nám to!"
     },
     "frontend-000329": {
@@ -2259,7 +2259,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Alebo v našom chate!"
     },
     "frontend-000616": {

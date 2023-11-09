@@ -1483,7 +1483,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Or in our Chat!"
     },
     "frontend-000616": {
@@ -2614,16 +2614,16 @@
     "frontend-000324": {
         "message": "Not Found"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Still need help?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Ask in our forum!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Found an error?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Tell us!"
     },
     "frontend-000329": {

@@ -1157,16 +1157,16 @@
     "frontend-000324": {
         "message": "Tidak ditemukan"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Masih membutuhkan bantuan?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Tanyakan di forum kami!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Menemukan kesalahan?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Beritahu kami!"
     },
     "frontend-000329": {
@@ -2269,7 +2269,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Atau dalam obrolan kami!"
     },
     "frontend-000616": {

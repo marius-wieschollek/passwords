@@ -1171,16 +1171,16 @@
     "frontend-000324": {
         "message": "Nem találták"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Még mindig segítségre van szüksége?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Kérdezz a fórumunkon!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Hibát talált?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Mondd el nekünk!"
     },
     "frontend-000329": {
@@ -2286,7 +2286,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Vagy a Chatben!"
     },
     "frontend-000616": {

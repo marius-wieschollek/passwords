@@ -1055,16 +1055,16 @@
     "frontend-000324": {
         "message": "Sidan hittades inte"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Några frågor?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Vi hjälper dig gärna!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Hittat ett fel?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Berätta!"
     },
     "frontend-000331": {
@@ -2074,7 +2074,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Eller i vår chatt!"
     },
     "frontend-000616": {

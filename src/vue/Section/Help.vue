@@ -25,13 +25,9 @@
                     </ol>
                 </nav>
                 <section class="handbook-page" v-html="source"></section>
-                <footer class="handbook-footer">
-                    <translate say="Still need help?"/>
-                    <web text="Ask in our forum!" :href="forumPage"/>
-                    <web text="Or in our Chat!" :href="chatPage"/>
-                    <br> &nbsp;<translate say="Found an error?"/>
-                    <web text="Tell us!" :href="issuesPage"/>
-                </footer>
+                <div class="handbook-sidebar">
+                    <community-resources/>
+                </div>
             </article>
             <nc-button class="handbook-exit" type="primary" :to="{path: '/'}" v-if="!isAuthorized">
                 <template #icon>
@@ -53,10 +49,12 @@
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
     import Application from "@js/Init/Application";
     import {emit} from "@nextcloud/event-bus";
+    import CommunityResources from "@vc/Handbook/CommunityResources.vue";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
         components: {
+            CommunityResources,
             Web,
             Gallery,
             Translate,
@@ -86,6 +84,8 @@
             document.addEventListener('scroll', this.setActiveSection);
             if(!this.isAuthorized) {
                 emit('toggle-navigation', {open: false});
+                document.body.classList.remove('pw-auth-visible');
+                document.body.classList.add('pw-auth-passed');
             }
         },
 
@@ -145,16 +145,8 @@
                 }
             },
             setActiveSection() {
-                let footer  = document.querySelector('footer.handbook-footer'),
-                    pos     = window.scrollY,
+                let pos     = window.scrollY,
                     section = '';
-
-                if(footer && footer.offsetTop < window.innerHeight + pos) {
-                    let item = this.navigation[this.navigation.length - 1];
-
-                    this.section = item.id;
-                    return;
-                }
 
                 for(let i = 0; i < this.navigation.length; i++) {
                     let item = this.navigation[i],
@@ -253,13 +245,6 @@
     min-height : 100%;
 
     &.global {
-        position         : fixed;
-        top              : var(--header-height);
-        left             : 0;
-        bottom           : 0;
-        right            : 0;
-        background-color : var(--color-main-background);
-
         .handbook-exit {
             position : fixed;
             left     : 1rem;
@@ -285,11 +270,11 @@
 
     article {
         display               : grid;
-        grid-template-areas   : ". header ." "nav page ." ". footer .";
+        grid-template-areas   : ". header ." "nav page extra";
         grid-template-columns : 1fr 975px 1fr;
 
         @media (max-width : $width-extra-large) {
-            grid-template-areas   : ". header" "nav page" ". footer";
+            grid-template-areas   : ". header" "nav page" "nav extra";
             grid-template-columns : 1fr 800px;
             max-width             : 1048px;
             margin                : 0 auto;
@@ -309,9 +294,9 @@
             grid-area    : nav;
             position     : sticky;
             top          : 110px;
-            height       : 1px;
             margin-right : 1rem;
             margin-left  : 1rem;
+            height       : 1px;
 
             ol {
                 list-style  : decimal;
@@ -326,6 +311,18 @@
 
             @media (max-width : $width-large) {
                 display : none;
+            }
+        }
+
+        .handbook-sidebar {
+            grid-area    : extra;
+            display      : flex;
+            align-items  : end;
+            margin : 0 1rem;
+
+            .handbook-community-resources {
+                position : sticky;
+                bottom   : 1rem;
             }
         }
     }
@@ -625,38 +622,6 @@
                 padding    : 2px;
                 color      : var(--color-main-text);
                 font-style : italic;
-            }
-        }
-    }
-
-    .handbook-footer {
-        grid-area  : footer;
-        position   : sticky;
-        bottom     : 0;
-        left       : 0;
-        right      : 0;
-        font-size  : 0.9rem;
-        max-width  : 975px;
-        margin     : 1em auto 0;
-        text-align : right;
-        width      : 100%;
-
-        br {
-            display : none;
-        }
-
-        a:hover,
-        a:focus,
-        a:active {
-            cursor          : pointer;
-            text-decoration : underline;
-        }
-
-        @media(max-width : $width-extra-small) {
-            padding : 0 1em;
-
-            br {
-                display : block;
             }
         }
     }

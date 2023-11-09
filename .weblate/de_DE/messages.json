@@ -1196,19 +1196,19 @@
     "frontend-000324": {
         "message": "Seite nicht gefunden"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Noch Fragen?"
     },
-    "frontend-000326": {
-        "message": "Wir helfen gerne!"
+    "frontend-HandbookMoreHelpForum": {
+        "message": "Fragen Sie im Forum!"
     },
-    "frontend-000615": {
-        "message": "Auch per Chat!"
+    "frontend-HandbookMoreHelpChat": {
+        "message": "Oder per Chat!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Fehler gefunden?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Informieren Sie uns!"
     },
     "frontend-000329": {

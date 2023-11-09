@@ -1156,16 +1156,16 @@
     "frontend-000324": {
         "message": "Ei löydy"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Tarvitsetko vielä apua?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Kysy foorumillamme!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Löysitkö virheen?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Kerro meille!"
     },
     "frontend-000329": {
@@ -2271,7 +2271,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Tai chatissamme!"
     },
     "frontend-000616": {

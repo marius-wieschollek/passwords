@@ -261,10 +261,10 @@
     "frontend-000308": {
         "message": "Bruk søkefeltet for å søke"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Fant du en feil?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Fortell oss!"
     },
     "frontend-000334": {
@@ -1190,10 +1190,10 @@
     "frontend-000324": {
         "message": "Ikke funnet"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Trenger du fortsatt hjelp?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Spør i forumet vårt!"
     },
     "frontend-000329": {
@@ -2276,7 +2276,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Eller i chatten vår!"
     },
     "frontend-000616": {

@@ -656,19 +656,19 @@
     "frontend-000324": {
         "message": "Não encontrado"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Ainda precisa de ajuda?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Pergunte em nosso fórum!"
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Ou no nosso chat!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Encontrou um erro?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Nos digam!"
     },
     "frontend-000329": {

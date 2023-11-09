@@ -1182,16 +1182,16 @@
     "frontend-000324": {
         "message": "Nie znaleziono"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Nadal potrzebujesz pomocy?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Zapytaj na naszym forum!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Znalazłeś błąd?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Powiedz nam!"
     },
     "frontend-000329": {
@@ -2291,7 +2291,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Albo na naszym czacie!"
     },
     "frontend-000616": {

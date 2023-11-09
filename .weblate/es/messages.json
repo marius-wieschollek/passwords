@@ -1126,16 +1126,16 @@
     "frontend-000324": {
         "message": "No encontrado"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "¿Todavía necesitas ayuda?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "¡Pregunta en nuestro foro!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "¿Has encontrado algún fallo?"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "¡Cuéntanos!"
     },
     "frontend-000329": {
@@ -2669,7 +2669,7 @@
     "frontend-000611": {
         "message": "Guía de Open Markdown"
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "¡O en nuestro Chat!"
     },
     "frontend-000616": {

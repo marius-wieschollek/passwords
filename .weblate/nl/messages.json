@@ -974,7 +974,7 @@
     "frontend-000324": {
         "message": "Pagina niet gevonden"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Meld het ons dan!"
     },
     "frontend-000331": {
@@ -1964,7 +1964,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Of in onze Chat!"
     },
     "frontend-000616": {
@@ -2753,13 +2753,13 @@
     "frontend-000323": {
         "message": "Geen inhoud beschikbaar"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Nog hulp nodig?"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Vraag het in ons forum!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Een fout gevonden?"
     },
     "frontend-000329": {

@@ -72,13 +72,13 @@
     "backups-000035": {
         "message": "δημιουργία αντιγράφων ασφαλείας της βάσης δεδομένων"
     },
-    "frontend-000326": {
+    "frontend-HandbookMoreHelpForum": {
         "message": "Ρωτήστε στο φόρουμ μας!"
     },
-    "frontend-000327": {
+    "frontend-HandbookBugs": {
         "message": "Βρήκατε κάποιο σφάλμα;"
     },
-    "frontend-000328": {
+    "frontend-HandbookBugsReport": {
         "message": "Πείτε μας!"
     },
     "frontend-000329": {
@@ -1620,7 +1620,7 @@
     "apps-000012": {
         "message": "Τελείωσα"
     },
-    "frontend-000325": {
+    "frontend-HandbookMoreHelp": {
         "message": "Χρειάζεστε ακόμα βοήθεια;"
     },
     "backend-000383": {
@@ -2322,7 +2322,7 @@
             }
         }
     },
-    "frontend-000615": {
+    "frontend-HandbookMoreHelpChat": {
         "message": "Ή στο Chat μας!"
     },
     "frontend-000616": {

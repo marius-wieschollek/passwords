@@ -1142,17 +1142,25 @@
     "frontend-000324": {
         "message": "Not Found"
     },
-    "frontend-000325": {
-        "message": "Still need help?"
+    "frontend-HandbookMoreHelp": {
+        "message": "Still need help?",
+        "description": "Title of the box on the right in the handbook where users can find links to the forum and chat."
     },
-    "frontend-000326": {
-        "message": "Ask in our forum!"
+    "frontend-HandbookMoreHelpForum": {
+        "message": "Ask in our forum!",
+        "description": "Label of the link to the forum in the box on the right in the handbook."
     },
-    "frontend-000327": {
-        "message": "Found an error?"
+    "frontend-HandbookMoreHelpChat": {
+        "message": "Or in our Chat!",
+        "description": "Label of the link to the chat in the box on the right in the handbook."
     },
-    "frontend-000328": {
-        "message": "Tell us!"
+    "frontend-HandbookBugs": {
+        "message": "Found an error?",
+        "description": "Title of the box on the right in the handbook where users can report bugs."
+    },
+    "frontend-HandbookBugsReport": {
+        "message": "Tell us!",
+        "description": "Label of the link to the bug report page in the box on the right in the handbook."
     },
     "frontend-000329": {
         "message": "The session has expired"
@@ -2267,9 +2275,6 @@
                 "content": "$1"
             }
         }
-    },
-    "frontend-000615": {
-        "message": "Or in our Chat!"
     },
     "frontend-000616": {
         "message": "Too many failed login attempts"
