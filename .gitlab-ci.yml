@@ -72,29 +72,6 @@ Assemble:
     - testing
     - stable
 
-Assemble Legacy PHP 7.4 Support Release:
-  stage: assembling
-  script:
-    - mkdir passwords-lsr-74
-    - rsync -r .patches/lsr-7.4/* src
-    - npm run rector:74
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr 1; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
-    - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-74
-    - rsync -r src/js/Static passwords-lsr-74/js/
-    - cp CHANGELOG.md passwords-lsr-74/
-    - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-74 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
-    - tar -zcf passwords-lsr-74.tar.gz passwords-lsr-74 --transform s/passwords-lsr-74/passwords/
-    - LSR_74_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-74.tar.gz | openssl base64 | tr -d "\n")
-    - echo "LSR_74_SIGNATURE=${LSR_74_SIGNATURE}" >> variables.env
-    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-74.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"'
-    - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz"
-  artifacts:
-    reports:
-      dotenv: variables.env
-  only:
-  - stable
-
 Assemble Legacy PHP 8.0 Support Release:
   stage: assembling
   script:
@@ -127,7 +104,6 @@ Publish Package:
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "description.txt" \
         --assets-link "{\"name\":\"Passwords Handbook ${APP_VERSION}\",\"url\":\"https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION}\",\"link_type\":\"other\"}" \
-        --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 7.4 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\",\"link_type\":\"package\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.0 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"link_type\":\"package\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"link_type\":\"package\"}"
   only:
@@ -145,7 +121,6 @@ Publish Nightly:
 Publish Stable:
   stage: publishing
   script:
-    - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-74.tar.gz\",\"signature\":\"${LSR_74_SIGNATURE}\",\"nightly\":false}"'
     - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"signature\":\"${LSR_SIGNATURE}\",\"nightly\":false}"'
     - 'curl --retry 3 --retry-all-errors -m 900 --connect-timeout 900 -f -X POST ${API_URL} -H "Authorization: Token ${API_TOKEN}" -H "Content-Type: application/json" -d "{\"download\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"signature\":\"${SIGNATURE}\",\"nightly\":false}"'
   environment:
