@@ -36,13 +36,13 @@ class SystemRequirements {
      * notification that this is the last version of passwords
      * for their version of Nextcloud
      */
-    const NC_NOTIFICATION_ID = 25;
+    const NC_NOTIFICATION_ID = 28;
 
     /**
      * Minimum version of NC that users must upgrade to in order
      * to get updates again.
      */
-    const NC_UPGRADE_MINIMUM = '25';
+    const NC_UPGRADE_MINIMUM = '28';
 
     /**
      * The PHP minimum version to be able to install this release
@@ -55,17 +55,17 @@ class SystemRequirements {
      * notification that this is the last version of passwords
      * for their version of Nextcloud
      */
-    const PHP_NOTIFICATION_ID = 80100;
+    const PHP_NOTIFICATION_ID = 80200;
 
     /**
-     * Minimum version of PHP that users must upgrade to in order
-     * to get regular updates again.
+     * Minimum version of PHP that users must upgrade to
+     * in order to get regular updates again.
      */
-    const PHP_UPGRADE_MINIMUM = '8.1';
+    const PHP_UPGRADE_MINIMUM = '8.2';
 
     /**
      * Minimum version of PHP that users must upgrade to in order
      * to get LSR updates again.
      */
-    const PHP_UPGRADE_MINIMUM_LSR = '7.4';
+    const PHP_UPGRADE_MINIMUM_LSR = '8.0';
 }
