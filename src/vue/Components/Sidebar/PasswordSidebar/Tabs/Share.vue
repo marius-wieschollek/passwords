@@ -3,7 +3,7 @@
 </template>
 <script>
     import Sharing from "@vc/Sidebar/PasswordSidebar/Sharing/Sharing";
-    import NcAppSidebarTab from '@nc/NcAppSidebarTab';
+    import NcAppSidebarTab from '@nc/NcAppSidebarTab.js';
 
     export default {
         components: {

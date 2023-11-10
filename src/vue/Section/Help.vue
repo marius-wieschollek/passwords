@@ -60,7 +60,7 @@
             Translate,
             Breadcrumb,
             'arrow-left': () => import(/* webpackChunkName: "ArrowLeftIcon" */ '@icon/ArrowLeft'),
-            'nc-button' : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton')
+            'nc-button' : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton.js')
         },
 
         data() {

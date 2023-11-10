@@ -9,7 +9,7 @@
   -->
 
 <script>
-    import NcAppNavigationItem from '@nc/NcAppNavigationItem';
+    import NcAppNavigationItem from '@nc/NcAppNavigationItem.js';
 
     export default {
         extends: NcAppNavigationItem,

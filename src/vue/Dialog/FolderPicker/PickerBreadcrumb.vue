@@ -23,8 +23,8 @@
 </template>
 
 <script>
-    import NcBreadcrumbs from '@nc/NcBreadcrumbs';
-    import NcBreadcrumb from '@nc/NcBreadcrumb';
+    import NcBreadcrumbs from '@nc/NcBreadcrumbs.js';
+    import NcBreadcrumb from '@nc/NcBreadcrumb.js';
     import FolderIcon from "@icon/Folder";
 
     export default {

@@ -21,8 +21,8 @@
 <script>
     import SettingsService from '@js/Services/SettingsService';
     import Localisation from '@js/Classes/Localisation';
-    import NcEmptyContent from '@nc/NcEmptyContent';
-    import FolderOpenOutlineIcon from "@icon/FolderOpenOutline.vue";
+    import NcEmptyContent from '@nc/NcEmptyContent.js';
+    import FolderOpenOutlineIcon from "@icon/FolderOpenOutline";
 
     export default {
         components: {FolderOpenOutlineIcon, NcEmptyContent},

@@ -108,7 +108,7 @@ module.exports = (env, argv) => {
         },
         resolve     : {
             modules   : ['node_modules', 'src'],
-            extensions: ['.js', '.vue', '.scss'],
+            extensions: ['.mjs', '.js', '.vue', '.scss'],
             fallback  : {
                 path  : false,
                 crypto: false,

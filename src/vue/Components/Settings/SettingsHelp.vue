@@ -16,8 +16,8 @@
 </template>
 
 <script>
-    import NcActions from '@nc/NcActions';
-    import NcActionText from '@nc/NcActionText';
+    import NcActions from '@nc/NcActions.js';
+    import NcActionText from '@nc/NcActionText.js';
     import HelpCircleIcon from "@icon/HelpCircle";
 
     export default {

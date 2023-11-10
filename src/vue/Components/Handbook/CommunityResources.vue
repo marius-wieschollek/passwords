@@ -25,10 +25,9 @@
 </template>
 
 <script>
-
-    import Translate from "@vc/Translate";
     import Web from "@vc/Web";
-    import NcButton from "@nc/NcButton";
+    import Translate from "@vc/Translate";
+    import NcButton from '@nc/NcButton.js';
 
     export default {
         components: {

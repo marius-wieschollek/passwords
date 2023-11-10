@@ -47,7 +47,7 @@
     </nc-app-navigation>
 </template>
 <script>
-    import NcAppNavigation            from '@nc/NcAppNavigation';
+    import NcAppNavigation            from '@nc/NcAppNavigation.js';
     import AppNavigationItem          from '@vc/Navigation/AppNavigationItem';
     import AppNavigationItemFavorites from '@vc/Navigation/AppNavigationItemFavorites';
     import AppNavigationItemFolders   from '@vc/Navigation/AppNavigationItemFolders';
@@ -61,8 +61,8 @@
     import EarthIcon                  from '@icon/Earth';
     import HelpCircleIcon             from '@icon/HelpCircle';
     import MagnifyIcon                from '@icon/Magnify';
-    import NcAppNavigationSettings    from '@nc/NcAppNavigationSettings';
     import PuzzleIcon                 from '@icon/Puzzle';
+    import NcAppNavigationSettings    from '@nc/NcAppNavigationSettings.js';
 
     export default {
         components: {

@@ -37,9 +37,9 @@
     import SettingsService from '@js/Services/SettingsService';
     import Icon from "@vc/Icon";
     import Localisation from "@js/Classes/Localisation";
-    import NcModal from '@nc/NcModal';
+    import NcModal from '@nc/NcModal.js';
     import Utility from "@js/Classes/Utility";
-    import EyeOffIcon from "vue-material-design-icons/EyeOff.vue";
+    import EyeOffIcon from "@icon/EyeOff";
 
     export default {
         components: {

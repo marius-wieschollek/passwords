@@ -97,12 +97,12 @@
             KeyIcon,
             Translate,
             BreadcrumbLoading,
-            'nc-actions'      : () => import(/* webpackChunkName: "NcActions" */ '@nc/NcActions'),
-            'NcBreadcrumb'    : () => import(/* webpackChunkName: "NcBreadcrumb" */ '@nc/NcBreadcrumb'),
-            'nc-action-button': () => import(/* webpackChunkName: "NcActionButton" */ '@nc/NcActionButton'),
+            'nc-actions'      : () => import(/* webpackChunkName: "NcActions" */ '@nc/NcActions.js'),
+            'NcBreadcrumb'    : () => import(/* webpackChunkName: "NcBreadcrumb" */ '@nc/NcBreadcrumb.js'),
+            'nc-action-button': () => import(/* webpackChunkName: "NcActionButton" */ '@nc/NcActionButton.js'),
             'delete-icon'     : () => import(/* webpackChunkName: "DeleteIcon" */ '@icon/Delete'),
             'nc-breadcrumbs'  : () => ({
-                component: import(/* webpackChunkName: "NcBreadcrumbs" */ '@nc/NcBreadcrumbs'),
+                component: import(/* webpackChunkName: "NcBreadcrumbs" */ '@nc/NcBreadcrumbs.js'),
                 loading  : BreadcrumbLoading,
                 delay    : 0
             })

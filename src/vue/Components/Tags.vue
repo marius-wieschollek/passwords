@@ -31,7 +31,7 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import NcSelect from '@nc/NcSelect';
+    import NcSelect from '@nc/NcSelect.js';
     import API from '@js/Helper/api';
     import Utility from '@js/Classes/Utility';
     import TagManager from '@js/Manager/TagManager';

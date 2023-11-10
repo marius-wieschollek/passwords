@@ -67,8 +67,8 @@
     import TagsField               from '@vue/Dialog/CreatePassword/TagsField';
     import CheckboxField           from '@vue/Dialog/CreatePassword/CheckboxField';
     import Messages                from '@js/Classes/Messages';
-    import NcModal                 from '@nc/NcModal';
-    import NcButton                from '@nc/NcButton';
+    import NcModal                 from '@nc/NcModal.js';
+    import NcButton                from '@nc/NcButton.js';
 
     export default {
         components: {

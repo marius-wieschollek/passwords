@@ -86,13 +86,13 @@
     import Localisation from '@js/Classes/Localisation';
     import {emit} from '@nextcloud/event-bus';
     import Sidebar from "@js/Models/Sidebar/Sidebar";
-    import NcAppSidebar from '@nc/NcAppSidebar';
-    import NcAppSidebarTab from '@nc/NcAppSidebarTab';
+    import NcAppSidebar from '@nc/NcAppSidebar.js';
+    import NcAppSidebarTab from '@nc/NcAppSidebarTab.js';
     import Preview from '@vc/Sidebar/PasswordSidebar/Preview';
     import Tags from '@vc/Tags';
     import PwDetails from '@vc/Sidebar/PasswordSidebar/Tabs/Details';
-    import NcButton from '@nc/NcButton';
-    import NcActionButton from '@nc/NcActionButton';
+    import NcButton from '@nc/NcButton.js';
+    import NcActionButton from '@nc/NcActionButton.js';
     import PencilIcon from '@icon/Pencil';
     import Favicon from '@vc/Favicon';
     import StarIcon from '@icon/Star';

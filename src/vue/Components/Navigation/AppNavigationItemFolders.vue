@@ -30,7 +30,7 @@
 <script>
     import API from '@js/Helper/api';
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import NcLoadingIcon from "@nc/NcLoadingIcon";
+    import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import FolderIcon from "@icon/Folder";
     import Utility from '@js/Classes/Utility';
     import Events from "@js/Classes/Events";

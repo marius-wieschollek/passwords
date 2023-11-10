@@ -52,7 +52,7 @@
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
-    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch';
+    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch.js';
 
     export default {
         components: {

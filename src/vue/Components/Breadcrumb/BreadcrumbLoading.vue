@@ -5,7 +5,7 @@
 </template>
 
 <script>
-    import NcLoadingIcon from '@nc/NcLoadingIcon';
+    import NcLoadingIcon from '@nc/NcLoadingIcon.js';
 
     export default {
         components: {NcLoadingIcon},

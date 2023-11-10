@@ -39,9 +39,9 @@
     import PickerBreadcrumb from '@vue/Dialog/FolderPicker/PickerBreadcrumb';
     import PickerFolderList from '@vue/Dialog/FolderPicker/PickerFolderList';
     import Localisation from '@js/Classes/Localisation';
-    import NcModal from '@nc/NcModal';
-    import NcButton from '@nc/NcButton';
-    import NcLoadingIcon from '@nc/NcLoadingIcon'
+    import NcModal from '@nc/NcModal.js';
+    import NcButton from '@nc/NcButton.js';
+    import NcLoadingIcon from '@nc/NcLoadingIcon.js'
 
     export default {
         components: {PickerFolderList, PickerBreadcrumb, Translate, NcModal, NcButton, NcLoadingIcon},

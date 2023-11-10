@@ -40,7 +40,7 @@
 </template>
 <script>
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import NcLoadingIcon from "@nc/NcLoadingIcon";
+    import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
     import TagIcon from "@icon/Tag";
