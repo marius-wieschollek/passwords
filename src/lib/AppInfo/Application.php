@@ -11,6 +11,7 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use OCA\Passwords\Dashboard\PasswordsWidget;
 use OCA\Passwords\EventListener\User\UserPasswordChangedListener;
 use OCP\IUserManager;
 use OCP\IGroupManager;
@@ -121,6 +122,7 @@ class Application extends App implements IBootstrap {
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
         $context->registerUserMigrator(PasswordsMigrator::class);
+        $context->registerDashboardWidget(PasswordsWidget::class);
     }
 
     /**
