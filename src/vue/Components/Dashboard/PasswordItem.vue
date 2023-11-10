@@ -11,14 +11,14 @@
 <template>
     <nc-list-item
             class="password-item"
-            :title="password.label"
+            :name="password.label"
             @click="clickAction"
             @dblclick="doubleClickAction()"
     >
         <template #icon>
             <favicon class="favicon" :domain="password.website" :size="44"/>
         </template>
-        <template #subtitle>
+        <template #subname>
             {{ password.username }}
         </template>
         <template #indicator>

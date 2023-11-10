@@ -1376,9 +1376,13 @@
         "message": "WebAuthn Login was disabled. You can enable it again in the settings",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
+    "frontend-DashboardLoginError": {
+        "message": "Error",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
     "frontend-DashboardNoFavorites": {
         "message": "Your favorite passwords will appear here",
-        "description": "Text in the Nextcloud Dashboard App widget if the user has no passwords which are favorites and the widget is therefore empty"
+        "description": "Text in the Nextcloud Dashboard Widget if the user has no passwords which are favorites and the widget is therefore empty"
     },
     "backend-000377": {
         "message": "HTTPS Required"

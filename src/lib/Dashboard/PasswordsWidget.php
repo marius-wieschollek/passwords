@@ -13,6 +13,7 @@ namespace OCA\Passwords\Dashboard;
 
 use OCA\Passwords\Helper\Token\ApiTokenHelper;
 use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserSettingsService;
 use OCP\AppFramework\Services\IInitialState;
@@ -34,6 +35,7 @@ class PasswordsWidget implements IWidget, IConditionalWidget {
         protected IURLGenerator        $urlGenerator,
         protected IInitialState        $initialState,
         protected UserChallengeService $challengeService,
+        protected EnvironmentService   $environmentService
     ) {
     }
 
@@ -62,6 +64,8 @@ class PasswordsWidget implements IWidget, IConditionalWidget {
         $this->initialState->provideInitialState('settings', $this->settings->list());
         $this->initialState->provideInitialState('api-user', $user);
         $this->initialState->provideInitialState('api-token', $token);
+        $this->initialState->provideInitialState('authenticate', $this->challengeService->hasChallenge());
+        $this->initialState->provideInitialState('impersonate', $this->environmentService->isImpersonating());
 
         Util::addStyle('passwords', 'dashboard');
         if($this->config->hasAppValue('dev/app/hash')) {
@@ -72,6 +76,7 @@ class PasswordsWidget implements IWidget, IConditionalWidget {
     }
 
     public function isEnabled(): bool {
-        return $this->request->getServerProtocol() === 'https' && !$this->challengeService->hasChallenge();
+        return $this->request->getServerProtocol() === 'https' &&
+               !$this->environmentService->isImpersonating() ;
     }
 }

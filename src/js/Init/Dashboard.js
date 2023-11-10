@@ -13,11 +13,16 @@ import {loadState} from "@nextcloud/initial-state";
 
 export default new class Dashboard {
 
+    get isAuthorized() {
+        return (this._api && this._api.isAuthorized) || !this._loginRequired;
+    }
+
     constructor() {
         this._loaded = false;
         this._timer = null;
         this._api = null;
         this._app = null;
+        this._loginRequired = true;
     }
 
     /**
@@ -73,12 +78,12 @@ export default new class Dashboard {
         }
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-        let module = await import( /* webpackChunkName: "PasswordsAPI" */ '@js/Helper/api'),
+        let module = await import( /* webpackChunkName: "PasswordsApi" */ '@js/Helper/api'),
             API    = module.default;
 
-        API.initialize({baseUrl, user, password: token, encryption: {enabled: true, ready: () => { return true;}, unsetKeychain: () => {}}});
-        API.openSession({});
+        API.initialize({baseUrl, user, password: token});
         this._api = API;
+        await this._checkLoginRequirement();
 
         return API;
     }
@@ -86,5 +91,20 @@ export default new class Dashboard {
     async _initSettings() {
         let module = await import( /* webpackChunkName: "SettingsService" */ '@js/Services/SettingsService');
         module.default.init();
+    }
+
+    /**
+     * Check if the user needs to authenticate
+     *
+     * @private
+     */
+    async _checkLoginRequirement() {
+        let impersonate  = loadState('passwords', 'impersonate', false),
+            authenticate = loadState('passwords', 'authenticate', true);
+        this._loginRequired = authenticate || impersonate;
+
+        if(!this._loginRequired) {
+            await this._api.openSession({});
+        }
     }
 };
