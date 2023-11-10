@@ -12,6 +12,7 @@
 namespace OCA\Passwords\AppInfo;
 
 use OCA\Passwords\Dashboard\PasswordsWidget;
+use OCA\Passwords\EventListener\CSP\AddCSPListener;
 use OCA\Passwords\EventListener\User\UserPasswordChangedListener;
 use OCP\IUserManager;
 use OCP\IGroupManager;
@@ -259,6 +260,7 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforeUserCreatedEvent::class, BeforeUserCreatedListener::class);
         $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
         $dispatcher->addServiceListener(PasswordUpdatedEvent::class, UserPasswordChangedListener::class);
+        $dispatcher->addServiceListener(\OCP\Security\CSP\AddContentSecurityPolicyEvent::class, AddCSPListener::class);
     }
 
     /**
