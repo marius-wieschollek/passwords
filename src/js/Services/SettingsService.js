@@ -131,7 +131,7 @@ class SettingsService {
     /**
      *
      */
-    async init() {
+    init() {
         let settings = loadState('passwords', 'settings', null);
         if(settings) {
             this._addSettings(settings);

@@ -98,21 +98,17 @@ class Application {
         if(document.readyState === 'loading' || this._loaded) return;
         clearInterval(this._timer);
         this._loaded = true;
-        this._initSettings()
-            .then(
-                () => {
-                    if(this._initApi()) {
-                        this._checkLoginRequirement();
-                        this._initVue();
-                        SearchManager.init();
-                        EventManager.init();
-                        KeepAliveManager.init();
-                    }
-                    setTimeout(() => {
-                        Logger.printXssWarning();
-                    }, 3000);
-                }
-            ).catch(Logger.catch);
+        this._initSettings();
+        if(this._initApi()) {
+            this._checkLoginRequirement();
+            this._initVue();
+            SearchManager.init();
+            EventManager.init();
+            KeepAliveManager.init();
+        }
+        setTimeout(() => {
+            Logger.printXssWarning();
+        }, 3000);
     }
 
     // noinspection JSMethodCanBeStatic
@@ -120,8 +116,8 @@ class Application {
      *
      * @private
      */
-    async _initSettings() {
-        await SettingsService.init();
+    _initSettings() {
+        SettingsService.init();
         document.body.setAttribute('data-server-version', SettingsService.get('server.version'));
 
         let customBackground = SettingsService.get('server.theme.background').indexOf('/core/') === -1 ? 'true':'false';
