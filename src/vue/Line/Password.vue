@@ -239,7 +239,7 @@
                     case 'qrcode':
                         return 'fa-qrcode';
                     default:
-                        return 'fa-cliboard';
+                        return 'fa-clipboard';
                 }
             }
         },
