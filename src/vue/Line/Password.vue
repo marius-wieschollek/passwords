@@ -273,7 +273,7 @@
                 }
             },
             runClickAction(action, delay = 0) {
-                if(action !== 'details' && action !== 'edit' && action !== 'open-url' && action !== 'print') {
+                if(action !== 'details' && action !== 'edit' && action !== 'open-url') {
                     this.copyAction(action, delay);
                 } else if(action === 'edit') {
                     this.clickTimeout = setTimeout(this.editAction, delay);
