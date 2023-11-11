@@ -11,17 +11,17 @@
 <template>
     <div class="passwords-widget" id="passwords-widget">
         <authentication-view v-if="!isAuthorized"/>
-        <favorites-view v-else/>
+        <passwords-view v-else/>
     </div>
 </template>
 
 <script>
     import Dashboard from '@js/Init/Dashboard';
-    import FavoritesView from '@vc/Dashboard/FavoritesView';
+    import PasswordsView from '@vc/Dashboard/PasswordsView';
     import AuthenticationView from '@vc/Dashboard/AuthenticationView';
 
     export default {
-        components: {FavoritesView, AuthenticationView},
+        components: {PasswordsView, AuthenticationView},
         props     : {
             api: {
                 type: Object
@@ -39,3 +39,9 @@
         }
     };
 </script>
+
+<style lang="scss">
+#passwords-widget {
+    height: 100%;
+}
+</style>

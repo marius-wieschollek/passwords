@@ -13,7 +13,7 @@
         <li v-for="item in items" :key="item.id" @click="navigate(item)" :class="{disabled: !item.enabled}" :title="item.title">{{ item.label }}</li>
     </ul>
 
-    <nc-empty-content class="folder-picker-empty" :title="t('&quot;{folder}&quot; contains no folders', {folder: current.label})" :description="t(text)" v-else>
+    <nc-empty-content class="folder-picker-empty" :name="t('&quot;{folder}&quot; contains no folders', {folder: current.label})" :description="t(text)" v-else>
         <folder-open-outline-icon slot="icon"/>
     </nc-empty-content>
 </template>

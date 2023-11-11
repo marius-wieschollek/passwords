@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- Added Dashboard widget
+
 ## 2023.11.0 - Feature release
 ### Added
 - NC 28 compatibility

@@ -10,21 +10,21 @@
 
 <template>
     <form class="passwords-widget-login" @submit.prevent.stop="submitLogin">
-        <nc-note-card type="error" :heading="errorLabel" v-if="error">
-            <p>{{ error }}</p>
+        <nc-note-card type="error" :heading="t('DashboardLoginError')" v-if="error">
+            <p>{{ t(error) }}</p>
         </nc-note-card>
         <nc-password-field
                 :value.sync="password"
                 :minlength="12"
                 :disabled="loggingIn"
-                :placeholder="passwordPlaceholder"
+                :placeholder="t('Password')"
         />
-        <nc-button alignment="center-reverse" type="primary" nativeType="submit" :disabled="loggingIn" wide>
+        <nc-button alignment="center-reverse" type="primary" nativeType="submit" :disabled="loggingIn || !ready" wide>
             <template #icon>
                 <arrow-right :size="20" v-if="!loggingIn"/>
                 <nc-loading-icon :size="20" v-else/>
             </template>
-            {{ loginLabel }}
+            {{ t('Login') }}
         </nc-button>
     </form>
 </template>
@@ -35,7 +35,6 @@
     import NcNoteCard from '@nc/NcNoteCard.js';
     import NcLoadingIcon from '@nc/NcLoadingIcon.js';
     import NcPasswordField from '@nc/NcPasswordField.js';
-    import LocalisationService from '@js/Services/LocalisationService';
     import WebAuthnDisableAction from '@js/Actions/WebAuthn/WebAuthnDisableAction';
     import WebAuthnAuthorizeAction from '@js/Actions/WebAuthn/WebAuthnAuthorizeAction';
 
@@ -48,6 +47,7 @@
                 password : '',
                 salts    : [],
                 loggingIn: false,
+                ready    : false,
                 error    : null,
                 webAuthnAction
             };
@@ -55,18 +55,6 @@
 
         created() {
             this.requestSession();
-        },
-
-        computed: {
-            loginLabel() {
-                return LocalisationService.translate('Login');
-            },
-            passwordPlaceholder() {
-                return LocalisationService.translate('Password');
-            },
-            errorLabel() {
-                return LocalisationService.translate('DashboardLoginError');
-            }
         },
 
         methods: {
@@ -80,6 +68,7 @@
                         this.tryLogin([]);
                         return;
                     }
+                    this.ready = true;
 
                     await this.tryWebAuthn();
                 } catch(e) {
@@ -100,7 +89,7 @@
                 this.tryLogin({password: this.password, salts: this.salts});
             },
             tryLogin(loginData, isWebAuthn = false) {
-                if(this.loggingIn) return;
+                if(this.loggingIn || !this.ready) return;
                 this.loggingIn = true;
                 this.error = null;
 
@@ -108,14 +97,13 @@
                     .catch((d) => { this.loginError(d, isWebAuthn); });
             },
             loginError(e, isWebAuthn = false) {
-                let message = 'Unknown Error';
                 if(e.response && e.response.status === 403) {
-                    message = 'Password invalid. Session revoked for too many failed login attempts.';
+                    this.error = 'Password invalid. Session revoked for too many failed login attempts.';
                 } else if(e.message) {
-                    message = e.message;
+                    this.error = e.message;
+                } else {
+                    this.error = 'Unknown Error';
                 }
-
-                this.error = LocalisationService.translate(message);
 
                 if(isWebAuthn) {
                     (new WebAuthnDisableAction()).run();

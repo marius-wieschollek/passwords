@@ -10,34 +10,24 @@
 
 import Utility from "@js/Classes/Utility";
 import {loadState} from "@nextcloud/initial-state";
+import Localisation from "@js/Classes/Localisation";
 
 export default new class Dashboard {
 
     get isAuthorized() {
-        return (this._api && this._api.isAuthorized) || !this._loginRequired;
+        return (this._dependencies && this._dependencies.api.isAuthorized) || !this._loginRequired;
     }
 
     constructor() {
-        this._loaded = false;
-        this._timer = null;
-        this._api = null;
         this._app = null;
         this._loginRequired = true;
+        this._dependencies = null;
     }
 
     /**
      *
      */
     init() {
-        window.addEventListener('DOMContentLoaded', () => { this._initApp(); }, {once: true, passive: true});
-        this._timer = setInterval(() => { this._initApp(); }, 10);
-    }
-
-    _initApp() {
-        if(this._loaded) return;
-        this._loaded = true;
-        clearInterval(this._timer);
-
         OCA.Dashboard.register(
             'passwords-widget',
             (el) => {
@@ -45,30 +35,32 @@ export default new class Dashboard {
             });
     }
 
-    _loadDashboardWidget(el) {
-        this._initApi()
-            .then(async (api) => {
-                await this._initSettings();
-                await this._initVue(api, el);
-            })
-            .catch((e) => {
-                el.innerText = e.message;
-            });
+
+    async _loadDashboardWidget(el) {
+        try {
+            await this._loadDependencies();
+            let api = await this._initApi();
+            await this._initSettings();
+            await this._initVue(api, el);
+        } catch(e) {
+            el.innerText = e.message;
+        }
     }
 
     async _initVue(api, el) {
-        let vue = await import( /* webpackChunkName: "Vue" */ "vue");
-        let dashboardWidget = await import( /* webpackChunkName: "DashboardWidget" */ "@vue/Dashboard/Dashboard");
+        this._dependencies.vue.mixin(
+            {
+                methods: {
+                    t: (t, v) => { return Localisation.translate(t, v); }
+                }
+            }
+        );
 
-        const View = vue.default.extend(dashboardWidget.default);
+        const View = this._dependencies.vue.extend(this._dependencies.dashboardWidget);
         this._app = new View({propsData: {api}}).$mount(el);
     }
 
     async _initApi() {
-        if(this._api !== null) {
-            return this._api;
-        }
-
         let baseUrl = Utility.generateUrl(),
             user    = loadState('passwords', 'api-user', null),
             token   = loadState('passwords', 'api-token', null);
@@ -78,19 +70,15 @@ export default new class Dashboard {
         }
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-        let module = await import( /* webpackChunkName: "PasswordsApi" */ '@js/Helper/api'),
-            API    = module.default;
 
-        API.initialize({baseUrl, user, password: token});
-        this._api = API;
+        this._dependencies.api.initialize({baseUrl, user, password: token});
         await this._checkLoginRequirement();
 
-        return API;
+        return this._dependencies.api;
     }
 
     async _initSettings() {
-        let module = await import( /* webpackChunkName: "SettingsService" */ '@js/Services/SettingsService');
-        module.default.init();
+        this._dependencies.settingsService.init();
     }
 
     /**
@@ -104,7 +92,16 @@ export default new class Dashboard {
         this._loginRequired = authenticate || impersonate;
 
         if(!this._loginRequired) {
-            await this._api.openSession({});
+            await this._dependencies.api.openSession({});
         }
+    }
+
+    async _loadDependencies() {
+        if(this._dependencies !== null) {
+            return;
+        }
+
+        let module = await import( /* webpackChunkName: "Dependencies" */ '@js/Helper/Dashboard/Dependencies');
+        this._dependencies = new module.default();
     }
 };
