@@ -72,7 +72,7 @@ export default class PasswordList {
                     this._updateSearchResults();
                     this._ready = true;
                 }
-            });
+            }).catch(console.error);
     }
 
     _loadFavorites() {
@@ -82,9 +82,9 @@ export default class PasswordList {
                 if(data.length > 0 && this._passwordList.length === 0) {
                     this._passwordList = data;
                     this._updateSearchResults();
-                    this._ready = true;
                 }
-            });
+                this._ready = true;
+            }).catch(console.error);
     }
 
     search(query) {
