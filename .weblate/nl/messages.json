@@ -3268,5 +3268,15 @@
     "frontend-DashboardLoginError": {
         "message": "Fout",
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "We konden niets vinden voor \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
