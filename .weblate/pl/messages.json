@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Wyłącz"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Błąd",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Brak haseł",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Twoje ulubione hasła pojawią się tutaj.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Brak wyników",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nie mogliśmy znaleźć niczego dla \"$QUERY$\".",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Wyszukaj wszystkie hasła",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
