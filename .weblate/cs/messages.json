@@ -3275,5 +3275,9 @@
     "frontend-DashboardNoResults": {
         "message": "Žádné výsledky",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Výsledky budou aktualizovány po načtení všech hesel.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
