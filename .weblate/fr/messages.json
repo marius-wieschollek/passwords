@@ -3268,5 +3268,15 @@
     "frontend-DashboardSearchPlaceholder": {
         "message": "Rechercher tous les mots de passe",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Rien n’à été trouvé pour la recherche \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
