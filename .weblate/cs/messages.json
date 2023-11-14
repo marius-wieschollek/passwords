@@ -3255,5 +3255,25 @@
                 "example": "my search query"
             }
         }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Vyhledat všechna hesla",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Chyba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Žádná hesla",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Zde se zobrazí vaše oblíbená hesla.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Žádné výsledky",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     }
 }
