@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Nonaktifkan"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Kesalahan",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Tidak ada kata sandi",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Kata sandi favorit Anda akan muncul di sini.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Tidak ada hasil",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Kami tidak dapat menemukan apa pun untuk \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Cari semua kata sandi",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
