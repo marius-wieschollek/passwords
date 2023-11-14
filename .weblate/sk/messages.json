@@ -3278,5 +3278,9 @@
     "frontend-DashboardLoginError": {
         "message": "Chyba",
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Výsledky budú aktualizované po načítaní všetkých hesiel",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
