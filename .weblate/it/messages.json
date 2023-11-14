@@ -3268,5 +3268,15 @@
     "frontend-DashboardNoResults": {
         "message": "Nessun risultato",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Non sono riuscito a trovare nulla per \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
