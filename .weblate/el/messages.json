@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Απενεργοποίηση"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Σφάλμα",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Δεν υπάρχουν κωδικοί πρόσβασης",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Οι αγαπημένοι σας κωδικοί πρόσβασης θα εμφανίζονται εδώ.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Δεν υπάρχουν αποτελέσματα",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Δεν μπορέσαμε να βρούμε τίποτα για το \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Αναζήτηση όλων των κωδικών πρόσβασης",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
