@@ -3248,5 +3248,25 @@
     },
     "frontend-Disable": {
         "message": "禁用"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "无密码",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "您最喜欢的密码将出现在这里。",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "无结果",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "搜索所有密码",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "错误",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     }
 }
