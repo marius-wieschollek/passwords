@@ -3278,5 +3278,9 @@
     "frontend-DashboardSearchLabel": {
         "message": "Søg i alle adgangskoder",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Resultaterne vil blive opdateret, når alle adgangskoder er indlæst.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
