@@ -3256,7 +3256,7 @@
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
     "frontend-DashboardNoPasswordsText": {
-        "message": "Ihre bevorzugten Passwörter werden hier angezeigt.",
+        "message": "Ihre Favoriten werden hier angezeigt werden.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
     "frontend-DashboardNoResults": {
@@ -3264,11 +3264,11 @@
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
     "frontend-DashboardSearchPlaceholder": {
-        "message": "Alle Passwörter suchen",
+        "message": "Alle Passwörter durchsuchen",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Die Suche nach \"$QUERY$\" erzielte keinen Treffer",
+        "message": "Die Suche nach \"$QUERY$\" ergab keine Treffer",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
