@@ -3278,5 +3278,9 @@
     "frontend-DashboardSearchLabel": {
         "message": "Iskanje vseh gesel",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Rezultati bodo posodobljeni, ko bodo naložena vsa gesla",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
