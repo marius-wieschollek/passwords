@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Zakázať"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Žiadne heslá",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Tu sa zobrazia vaše obľúbené heslá.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Žiadne výsledky",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nenašli sme nič pre \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Vyhľadávanie všetkých hesiel",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Chyba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     }
 }
