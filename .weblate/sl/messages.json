@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Onemogočite"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Napaka",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Brez gesel",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Tu bodo prikazana vaša priljubljena gesla.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Brez rezultatov",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Ničesar nismo našli za \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Iskanje vseh gesel",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
