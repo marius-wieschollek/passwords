@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Devre dışı bırak"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Favori şifreleriniz burada görünecektir.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Sonuç yok",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "\"$QUERY$\" için bir şey bulamadık",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Hata",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Şifre yok",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Tüm şifreleri ara",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
