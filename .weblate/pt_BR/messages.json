@@ -3268,5 +3268,15 @@
     "frontend-DashboardSearchPlaceholder": {
         "message": "Pesquisar todas as senhas",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Não conseguimos encontrar nada para \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
