@@ -3278,5 +3278,9 @@
                 "example": "my search query"
             }
         }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Resultaten kommer att uppdateras när alla lösenord har laddats",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
