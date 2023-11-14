@@ -3285,5 +3285,9 @@
     "frontend-DashboardNoResults": {
         "message": "Ingen resultater",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Resultatene oppdateres når alle passordene er lastet inn.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
