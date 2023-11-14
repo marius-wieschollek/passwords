@@ -3248,5 +3248,25 @@
     },
     "frontend-Disable": {
         "message": "Disattivare"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Errore",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Nessuna password",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Cerca tutte le password",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Le password preferite appariranno qui.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Nessun risultato",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     }
 }
