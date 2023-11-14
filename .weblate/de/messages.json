@@ -3246,5 +3246,25 @@
     },
     "frontend-Disable": {
         "message": "Deaktivieren"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Deine Lieblingspasswörter werden hier angezeigt.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Keine Ergebnisse",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Alle Passwörter suchen",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fehler",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Keine Passwörter",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     }
 }
