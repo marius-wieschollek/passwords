@@ -3255,5 +3255,35 @@
     },
     "frontend-Disable": {
         "message": "Deaktivere"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Feil",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Ingen passord",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Favorittpassordene dine vises her.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Vi kunne ikke finne noe for \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Søk i alle passord",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Ingen resultater",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     }
 }
