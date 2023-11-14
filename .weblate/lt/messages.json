@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "Išjungti"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Klaida",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Jokių slaptažodžių",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Čia bus rodomi jūsų mėgstami slaptažodžiai.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Rezultatų nėra",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Neradome nieko, kas būtų skirta \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Ieškoti visų slaptažodžių",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
