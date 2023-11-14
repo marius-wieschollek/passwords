@@ -3248,5 +3248,25 @@
     },
     "frontend-Disable": {
         "message": "Inaktivera"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Inga resultat",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Sök alla lösenord",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fel",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Inga lösenord",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Dina favoritlösenord visas här.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     }
 }
