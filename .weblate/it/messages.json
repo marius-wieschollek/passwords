@@ -3257,7 +3257,7 @@
         "message": "Nessuna password",
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Cerca tutte le password",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },

@@ -3261,7 +3261,7 @@
         "message": "无结果",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "搜索所有密码",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },

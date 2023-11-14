@@ -3275,7 +3275,7 @@
         "message": "Şifre yok",
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Tüm şifreleri ara",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }

@@ -17,6 +17,10 @@ export default class PasswordList {
         return this._ready;
     }
 
+    get searchReady() {
+        return this._searchReady;
+    }
+
     get mode() {
         return this._query === null ? 'favorites':'search';
     }
@@ -40,6 +44,7 @@ export default class PasswordList {
         this._oldQuery = null;
         this._interval = null;
         this._ready = false;
+        this._searchReady = false;
         this._api = api;
     }
 
@@ -61,6 +66,7 @@ export default class PasswordList {
         this._query = null;
         this._oldQuery = null;
         this._ready = false;
+        this._searchReady = false;
     }
 
     _loadAllPasswords() {
@@ -69,8 +75,9 @@ export default class PasswordList {
                 let data = Utility.objectToArray(Utility.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
                 if(data.length > 0) {
                     this._passwordList = data;
-                    this._updateSearchResults();
+                    this._updateSearchResults(true);
                     this._ready = true;
+                    this._searchReady = true;
                 }
             }).catch(console.error);
     }
@@ -81,7 +88,7 @@ export default class PasswordList {
                 let data = Utility.objectToArray(Utility.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
                 if(data.length > 0 && this._passwordList.length === 0) {
                     this._passwordList = data;
-                    this._updateSearchResults();
+                    this._updateSearchResults(true);
                 }
                 this._ready = true;
             }).catch(console.error);
@@ -99,13 +106,18 @@ export default class PasswordList {
         }
     }
 
-    _updateSearchResults() {
+    /**
+     *
+     * @param {boolean} forceUpdate
+     * @private
+     */
+    _updateSearchResults(forceUpdate = false) {
         if(this._query === null) {
             this._findFavorites();
             return;
         }
 
-        this._findQueryResults();
+        this._findQueryResults(forceUpdate);
     }
 
     _findFavorites() {
@@ -125,7 +137,11 @@ export default class PasswordList {
         }
     }
 
-    _findQueryResults() {
+    /**
+     * @param {boolean} forceUpdate
+     * @private
+     */
+    _findQueryResults(forceUpdate) {
         let results  = [],
             query    = this._query,
             database = this._passwordList;
@@ -135,7 +151,7 @@ export default class PasswordList {
          * we don't need to search everything.
          * just the results from last time.
          */
-        if(this._oldQuery !== null && query.indexOf(this._oldQuery) === 0) {
+        if(!forceUpdate && this._oldQuery !== null && query.indexOf(this._oldQuery) === 0) {
             database = this._passwords;
         }
 

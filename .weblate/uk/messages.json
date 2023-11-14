@@ -3271,7 +3271,7 @@
             }
         }
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Пошук всіх паролів",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },

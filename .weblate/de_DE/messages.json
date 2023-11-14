@@ -3263,7 +3263,7 @@
         "message": "Keine Ergebnisse",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Alle Passwörter durchsuchen",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },

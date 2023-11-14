@@ -3265,7 +3265,7 @@
         "message": "Sin resultados",
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Buscar todas las contraseñas",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },

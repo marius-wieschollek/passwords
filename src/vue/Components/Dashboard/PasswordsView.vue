@@ -41,7 +41,7 @@
         provide() {
             return {
                 helper: this.helper
-            }
+            };
         },
         mounted() {
             this.helper.init();
@@ -54,7 +54,11 @@
                 return this.helper.mode === 'search' ? this.t('DashboardNoResults'):this.t('DashboardNoPasswords');
             },
             emptyDescription() {
-                return this.helper.mode === 'search' ? this.t('DashboardNoResultsText', {query: this.helper.query}):this.t('DashboardNoPasswordsText');
+                if(this.helper.mode === 'search') {
+                    return this.helper.searchReady ? this.t('DashboardNoResultsText', {query: this.helper.query}):this.t('DashboardResultsLoading');
+                }
+
+                return this.t('DashboardNoPasswordsText');
             },
             hasPasswords() {
                 return this.helper.ready && this.helper.passwords.length > 0;

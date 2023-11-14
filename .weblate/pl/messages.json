@@ -3275,7 +3275,7 @@
             }
         }
     },
-    "frontend-DashboardSearchPlaceholder": {
+    "frontend-DashboardSearchLabel": {
         "message": "Wyszukaj wszystkie hasła",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }

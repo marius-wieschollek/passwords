@@ -12,7 +12,7 @@
     <nc-text-field
             class="passwords-widget-search"
             :value.sync="value"
-            :label="t('DashboardSearchPlaceholder')"
+            :label="t('DashboardSearchLabel')"
             trailing-button-icon="close"
             :show-trailing-button="value !== ''"
             @trailing-button-click="clearText">
