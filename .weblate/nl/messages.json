@@ -3248,5 +3248,25 @@
     },
     "frontend-Disable": {
         "message": "uitschakelen"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Geen wachtwoorden",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Je favoriete wachtwoorden verschijnen hier.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Geen resultaten",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Alle wachtwoorden zoeken",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fout",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     }
 }
