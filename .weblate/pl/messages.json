@@ -3278,5 +3278,9 @@
     "frontend-DashboardSearchLabel": {
         "message": "Wyszukaj wszystkie hasła",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Wyniki zostaną zaktualizowane po załadowaniu wszystkich haseł",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
