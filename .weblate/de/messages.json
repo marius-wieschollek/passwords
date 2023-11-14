@@ -3266,5 +3266,15 @@
     "frontend-DashboardNoPasswords": {
         "message": "Keine Passwörter",
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Wir konnten nichts zu \"$QUERY$\" finden",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
