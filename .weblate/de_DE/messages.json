@@ -3266,5 +3266,15 @@
     "frontend-DashboardSearchPlaceholder": {
         "message": "Alle Passwörter suchen",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Die Suche nach \"$QUERY$\" erzielte keinen Treffer",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
