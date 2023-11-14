@@ -3278,5 +3278,9 @@
     "frontend-DashboardSearchLabel": {
         "message": "Ieškoti visų slaptažodžių",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Rezultatai bus atnaujinti, kai bus įkelti visi slaptažodžiai",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
