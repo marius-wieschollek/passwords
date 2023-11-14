@@ -3245,5 +3245,15 @@
     },
     "frontend-Disable": {
         "message": "Zakázat"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nebyly nalezeny žádné výsledky pro dotaz „$QUERY$“",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
