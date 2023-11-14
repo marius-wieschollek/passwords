@@ -3278,5 +3278,9 @@
     "frontend-DashboardSearchLabel": {
         "message": "Etsi kaikki salasanat",
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Tulokset päivitetään, kun kaikki salasanat on ladattu.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     }
 }
