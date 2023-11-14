@@ -3248,5 +3248,35 @@
     },
     "frontend-Disable": {
         "message": "A  letiltása"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Hiba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Nincs jelszó",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "A kedvenc jelszavai itt fognak megjelenni.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Nincs eredmény",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nem találtunk semmit a \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchPlaceholder": {
+        "message": "Minden jelszó keresése",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     }
 }
