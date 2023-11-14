@@ -3268,5 +3268,15 @@
     "frontend-DashboardNoPasswordsText": {
         "message": "Dina favoritlösenord visas här.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Ingenting kunde hittas för \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
