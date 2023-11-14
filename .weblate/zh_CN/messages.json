@@ -3268,5 +3268,15 @@
     "frontend-DashboardLoginError": {
         "message": "错误",
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "我们找不到任何有关“$QUERY$”的内容。",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }
