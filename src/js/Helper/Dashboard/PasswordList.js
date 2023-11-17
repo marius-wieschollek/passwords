@@ -50,7 +50,7 @@ export default class PasswordList {
 
     init() {
         this._loadFavorites();
-        this._loadAllPasswords();
+        this._loadAllPasswords(true);
         this._interval = setInterval(
             () => {this._loadAllPasswords();},
             60000
@@ -69,7 +69,7 @@ export default class PasswordList {
         this._searchReady = false;
     }
 
-    _loadAllPasswords() {
+    _loadAllPasswords(initial = false) {
         this._api.findPasswords()
             .then((passwords) => {
                 let data = Utility.objectToArray(Utility.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
@@ -79,7 +79,13 @@ export default class PasswordList {
                     this._ready = true;
                     this._searchReady = true;
                 }
-            }).catch(console.error);
+            })
+            .catch((e) => {
+                console.error(e);
+                if(initial) {
+                    this._loadAllPasswords();
+                }
+            });
     }
 
     _loadFavorites() {
