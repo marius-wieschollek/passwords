@@ -13,7 +13,7 @@
         <NcBreadcrumb
                 v-for="(folder, index) in hierarchy"
                 :key="folder.id"
-                :title="folder.label"
+                :name="folder.label"
                 v-on:click.native="$emit('navigate', folder)"
                 :disableDrop="true"
         >
