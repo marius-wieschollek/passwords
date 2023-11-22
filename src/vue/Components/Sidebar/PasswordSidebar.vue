@@ -10,7 +10,7 @@
 
 <template>
     <nc-app-sidebar
-            :title="sidebar.title"
+            :name="sidebar.title"
             :subtitle="subtitle"
             :subtitleTooltip="subtitleTooltip"
             :compact="compact"
