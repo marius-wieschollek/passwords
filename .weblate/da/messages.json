@@ -1479,7 +1479,7 @@
         "message": "Billedgengivelse"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (anbefales)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Eksterne tjenester"
@@ -1512,7 +1512,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (anbefalet)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon-service"
@@ -2507,7 +2507,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vælg automatisk"
+        "message": "Vælg automatisk (anbefalet)"
     },
     "frontend-000667": {
         "message": "Tags CSV"

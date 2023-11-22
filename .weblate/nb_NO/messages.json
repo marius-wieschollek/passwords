@@ -1490,7 +1490,7 @@
         "message": "Gjengivelse av bilder"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (anbefalt)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Eksterne tjenester"
@@ -1508,7 +1508,7 @@
         "message": "Tjeneste for passordgenerering"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (anbefalt)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000407": {
         "message": "Lokal analysator"
@@ -2467,7 +2467,7 @@
         "message": "Gjenopprett sikkerhetskopier automatisk når databasen slettes"
     },
     "backend-000666": {
-        "message": "Velg automatisk"
+        "message": "Velg automatisk (anbefalt)"
     },
     "backend-Passwords": {
         "message": "Passord"

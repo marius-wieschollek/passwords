@@ -82,7 +82,7 @@ abstract class AbstractPreviewHelper {
 
         $previewData = $this->getPreviewData($domain, $view);
         if(empty($previewData)) throw new Exception('Website preview service returned no data');
-        if(!$this->imageHelper->supportsImage($previewData)) throw new Exception('Favicon service returned unsupported data type');
+        if(!$this->imageHelper->supportsImage($previewData)) throw new Exception('Preview service returned unsupported data type');
 
         return $this->fileCacheService->putFile($previewFile, $previewData);
     }

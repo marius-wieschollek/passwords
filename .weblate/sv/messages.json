@@ -1328,7 +1328,7 @@
         "message": "Bildbehandling"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (rekommenderas)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externa tjänster"
@@ -1361,7 +1361,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (rekommenderas)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon tjänst"
@@ -2267,7 +2267,7 @@
         }
     },
     "backend-000666": {
-        "message": "Välj automatiskt"
+        "message": "Välj automatiskt (rekommenderas)"
     },
     "frontend-000667": {
         "message": "Taggar CSV"

@@ -15,8 +15,10 @@ use OCA\Passwords\Helper\Favicon\FaviconGrabberHelper;
 use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
 use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
+use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Image\ImaginaryHelper;
 use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
@@ -35,7 +37,7 @@ use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
-use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class HelperService
@@ -69,8 +71,10 @@ class HelperService {
     const SECURITY_SMALL_LOCAL = 'smalldb';
     const SECURITY_HIBP        = 'hibp';
 
+    const IMAGES_AUTO = 'auto';
     const IMAGES_IMAGICK = 'imagick';
     const IMAGES_GDLIB   = 'gdlib';
+    const IMAGES_IMAGINARY   = 'imaginary';
 
     /**
      * @var ConfigurationService
@@ -78,17 +82,17 @@ class HelperService {
     protected ConfigurationService $config;
 
     /**
-     * @var IAppContainer
+     * @var ContainerInterface
      */
-    protected IAppContainer $container;
+    protected ContainerInterface $container;
 
     /**
      * FaviconService constructor.
      *
      * @param ConfigurationService $config
-     * @param IAppContainer        $container
+     * @param ContainerInterface        $container
      */
-    public function __construct(ConfigurationService $config, IAppContainer $container) {
+    public function __construct(ConfigurationService $config, ContainerInterface $container) {
         $this->config    = $config;
         $this->container = $container;
     }
@@ -99,10 +103,14 @@ class HelperService {
      * @return AbstractImageHelper
      */
     public function getImageHelper(string $service = null): AbstractImageHelper {
-        if($service === null) $service = self::getImageHelperName($this->config->getAppValue('service/images', self::IMAGES_IMAGICK));
-        $class = $service === self::IMAGES_IMAGICK ? ImagickHelper::class:GdHelper::class;
+        if($service === null) $service = $this->config->getAppValue('service/images', self::IMAGES_AUTO);
 
-        return $this->container->get($class);
+        return match ($service) {
+            self::IMAGES_IMAGICK => $this->container->get(ImagickHelper::class),
+            self::IMAGES_GDLIB => $this->container->get(GdHelper::class),
+            self::IMAGES_IMAGINARY => $this->container->get(ImaginaryHelper::class),
+            default => $this->container->get(AutoImageHelper::class),
+        };
     }
 
     /**
@@ -179,16 +187,5 @@ class HelperService {
      */
     public function getDefaultFaviconHelper(): DefaultFaviconHelper {
         return $this->container->get(DefaultFaviconHelper::class);
-    }
-
-    /**
-     * @param string $current
-     *
-     * @return string
-     */
-    public static function getImageHelperName(string $current = self::IMAGES_IMAGICK): string {
-        if($current === self::IMAGES_IMAGICK && ImagickHelper::isAvailable()) return self::IMAGES_IMAGICK;
-
-        return self::IMAGES_GDLIB;
     }
 }

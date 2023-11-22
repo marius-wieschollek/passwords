@@ -17,6 +17,7 @@ use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
+use OCA\Passwords\Helper\Image\ImaginaryHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
@@ -173,13 +174,13 @@ class AdminSettings implements ISettings {
         return [
             [
                 'id'      => HelperService::WORDS_AUTO,
-                'label'   => 'Select automatically',
+                'label'   => 'Select automatically (recommended)',
                 'current' => $current === HelperService::WORDS_AUTO,
                 'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_AUTO)->isAvailable()
             ],
             [
                 'id'      => HelperService::WORDS_LEIPZIG,
-                'label'   => 'Leipzig Corpora Collection (recommended)',
+                'label'   => 'Leipzig Corpora Collection',
                 'current' => $current === HelperService::WORDS_LEIPZIG,
                 'enabled' => $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
             ],
@@ -209,16 +210,26 @@ class AdminSettings implements ISettings {
      * @deprecated
      */
     protected function getImageServices(): array {
-        $current = HelperService::getImageHelperName(
-            $this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK)
-        );
+        $current = $this->config->getAppValue('service/images', HelperService::IMAGES_AUTO);
 
         return [
             [
+                'id'      => HelperService::IMAGES_AUTO,
+                'label'   => 'Select automatically (recommended)',
+                'current' => $current === HelperService::IMAGES_AUTO,
+                'enabled' => true,
+            ],
+            [
                 'id'      => HelperService::IMAGES_IMAGICK,
-                'label'   => 'Imagick/GMagick (recommended)',
+                'label'   => 'Imagick/GMagick',
                 'current' => $current === HelperService::IMAGES_IMAGICK,
-                'enabled' => ImagickHelper::isAvailable(),
+                'enabled' => $this->helperService->getImageHelper(HelperService::IMAGES_IMAGICK)->isAvailable(),
+            ],
+            [
+                'id'      => HelperService::IMAGES_IMAGINARY,
+                'label'   => 'Imaginary',
+                'current' => $current === HelperService::IMAGES_IMAGINARY,
+                'enabled' => $this->helperService->getImageHelper(HelperService::IMAGES_IMAGINARY)->isAvailable(),
             ],
             [
                 'id'      => HelperService::IMAGES_GDLIB,

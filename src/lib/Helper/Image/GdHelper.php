@@ -100,18 +100,6 @@ class GdHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param string $file
-     *
-     * @return Image
-     */
-    public function getImageFromFile(string $file) {
-        $image = $this->getNewImageObject();
-        $image->loadFromFile($file);
-
-        return $image;
-    }
-
-    /**
      * @param Image $image
      *
      * @return bool
@@ -194,7 +182,7 @@ class GdHelper extends AbstractImageHelper {
     /**
      * @inheritdoc
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         return true;
     }
 }

@@ -1197,7 +1197,7 @@
         "message": "Beeldverwerking"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (aanbevolen)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externe Diensten"
@@ -1230,7 +1230,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (aanbevolen)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon Service"
@@ -2179,7 +2179,7 @@
         }
     },
     "backend-000666": {
-        "message": "Selecteer automatisch"
+        "message": "Selecteer automatisch (aanbevolen)"
     },
     "settings-000678": {
         "message": "Inloggen & Sessie"

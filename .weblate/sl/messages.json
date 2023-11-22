@@ -1449,7 +1449,7 @@
         "message": "Upodabljanje slik"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (priporočljivo)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Zunanje storitve"
@@ -1482,7 +1482,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipziška zbirka korpusov (priporočljivo)"
+        "message": "Leipziška zbirka korpusov"
     },
     "backend-000406": {
         "message": "Storitev Favicon"
@@ -2483,7 +2483,7 @@
         }
     },
     "backend-000666": {
-        "message": "Izberite samodejno"
+        "message": "Izberite samodejno (priporočljivo)"
     },
     "backend-Passwords": {
         "message": "Gesla"

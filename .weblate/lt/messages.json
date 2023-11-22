@@ -1491,7 +1491,7 @@
         "message": "Vaizdų atvaizdavimas"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (rekomenduojama)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Išorės paslaugos"
@@ -1524,7 +1524,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipcigo korpusų rinkinys (rekomenduojama)"
+        "message": "Leipcigo korpusų rinkinys"
     },
     "backend-000406": {
         "message": "\"Favicon\" paslauga"
@@ -2510,7 +2510,7 @@
         }
     },
     "backend-000666": {
-        "message": "Pasirinkite automatiškai"
+        "message": "Pasirinkite automatiškai (rekomenduojama)"
     },
     "backend-Passwords": {
         "message": "Slaptažodžiai"

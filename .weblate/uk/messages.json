@@ -1488,7 +1488,7 @@
         "message": "Рендеринг зображень"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (рекомендовано)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Зовнішні служби"
@@ -2519,7 +2519,7 @@
         }
     },
     "backend-000666": {
-        "message": "Вибрати автоматично"
+        "message": "Вибрати автоматично (рекомендовано)"
     },
     "frontend-000667": {
         "message": "Теги CSV"

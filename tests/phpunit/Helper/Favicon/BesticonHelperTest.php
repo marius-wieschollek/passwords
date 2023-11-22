@@ -11,7 +11,6 @@ use Exception;
 use OC\Files\SimpleFS\SimpleFile;
 use OC\User\User;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
@@ -24,6 +23,7 @@ use OCP\Http\Client\IClientService;
 use OCP\Http\Client\IResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BesticonHelperTest
@@ -73,34 +73,34 @@ class BesticonHelperTest extends TestCase {
     private $configurationService;
 
     /**
-     * @var MockObject|FallbackIconGenerator
+     * @var MockObject|LoggerInterface
      */
-    private $fallbackIconGenerator;
+    private $logger;
 
     /**
      *
      */
     protected function setUp(): void {
-        $this->imageHelper           = $this->createMock(ImagickHelper::class);
-        $helperService               = $this->createMock(HelperService::class);
-        $this->httpClientService     = $this->createMock(IClientService::class);
-        $this->dateTimeHelper        = $this->createMock(DateTimeHelper::class);
-        $this->adminService          = $this->createMock(AdminUserHelper::class);
-        $this->fileCacheService      = $this->createMock(FileCacheService::class);
-        $this->notificationService   = $this->createMock(NotificationService::class);
-        $this->fallbackIconGenerator = $this->createMock(FallbackIconGenerator::class);
-        $this->configurationService  = $this->createMock(ConfigurationService::class);
+        $this->imageHelper          = $this->createMock(ImagickHelper::class);
+        $helperService              = $this->createMock(HelperService::class);
+        $this->httpClientService    = $this->createMock(IClientService::class);
+        $this->dateTimeHelper       = $this->createMock(DateTimeHelper::class);
+        $this->adminService         = $this->createMock(AdminUserHelper::class);
+        $this->fileCacheService     = $this->createMock(FileCacheService::class);
+        $this->notificationService  = $this->createMock(NotificationService::class);
+        $this->logger               = $this->createMock(LoggerInterface::class);
+        $this->configurationService = $this->createMock(ConfigurationService::class);
         $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
         $this->besticonHelper = new BestIconHelper(
             $this->dateTimeHelper,
             $this->configurationService,
+            $this->logger,
             $helperService,
             $this->adminService,
             $this->httpClientService,
             $this->fileCacheService,
-            $this->notificationService,
-            $this->fallbackIconGenerator
+            $this->notificationService
         );
     }
 

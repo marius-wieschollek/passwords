@@ -175,7 +175,6 @@ class WebsitePreviewService {
         int $maxWidth,
         int $maxHeight
     ): ?ISimpleFile {
-
         $image     = $this->imageService->getImageFromBlob($preview->getContent());
         $image     = $this->imageService->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
         $imageData = $this->imageService->exportJpeg($image);

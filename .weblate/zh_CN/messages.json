@@ -1792,7 +1792,7 @@
         "message": "影像渲染"
     },
     "backend-000394": {
-        "message": "Imagick / GMagick（推荐）"
+        "message": "Imagick / GMagick"
     },
     "backend-000395": {
         "message": "外部服务"
@@ -1825,7 +1825,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection（推荐）"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "网站图标服务"
@@ -2696,7 +2696,7 @@
         }
     },
     "backend-000666": {
-        "message": "自动选择"
+        "message": "自动选择（推荐）"
     },
     "frontend-000667": {
         "message": "标签 CSV"

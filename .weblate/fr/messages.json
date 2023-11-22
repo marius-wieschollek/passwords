@@ -1215,7 +1215,7 @@
         "message": "Génération des images"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (recommandé)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Services Externes"
@@ -1248,7 +1248,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (recommandé)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Service de Favicon"
@@ -2029,7 +2029,7 @@
         "message": "Stocker 50% du hachage"
     },
     "backend-000666": {
-        "message": "Sélectionnez automatiquement"
+        "message": "Sélectionnez automatiquement (recommandé)"
     },
     "frontend-000355": {
         "message": "Système"

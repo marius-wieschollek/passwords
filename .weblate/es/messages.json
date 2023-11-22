@@ -1417,7 +1417,7 @@
         "message": "Renderizado de imágenes"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (recomendado)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Servicios externos"
@@ -1450,7 +1450,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (recomendado)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Servicio de Faviconos"
@@ -2602,7 +2602,7 @@
         "message": "Datos"
     },
     "backend-000666": {
-        "message": "Seleccione automáticamente"
+        "message": "Seleccione automáticamente (recomendado)"
     },
     "settings-RecoverItemsSelectTitle": {
         "message": "Recuperar objetos ocultos",

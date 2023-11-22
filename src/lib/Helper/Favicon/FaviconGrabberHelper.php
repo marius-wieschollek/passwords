@@ -10,11 +10,11 @@ namespace OCA\Passwords\Helper\Favicon;
 use Exception;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -44,21 +44,21 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     /**
      * FaviconGrabberHelper constructor.
      *
-     * @param ConfigurationService  $config
-     * @param HelperService         $helperService
-     * @param IClientService        $requestService
-     * @param FileCacheService      $fileCacheService
-     * @param FallbackIconGenerator $fallbackIconGenerator
+     * @param LoggerInterface      $logger
+     * @param ConfigurationService $config
+     * @param HelperService        $helperService
+     * @param IClientService       $requestService
+     * @param FileCacheService     $fileCacheService
      */
     public function __construct(
+        LoggerInterface       $logger,
         ConfigurationService $config,
         HelperService $helperService,
         IClientService $requestService,
-        FileCacheService $fileCacheService,
-        FallbackIconGenerator $fallbackIconGenerator
+        FileCacheService $fileCacheService
     ) {
         $this->config = $config;
-        parent::__construct($helperService, $requestService, $fileCacheService, $fallbackIconGenerator);
+        parent::__construct($helperService, $logger, $fileCacheService, $requestService);
     }
 
     /**

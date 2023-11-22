@@ -1484,7 +1484,7 @@
         "message": "Rendering obrazu"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (zalecane)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Usługi zewnętrzne"
@@ -2515,7 +2515,7 @@
         }
     },
     "backend-000666": {
-        "message": "Wybierz automatycznie"
+        "message": "Wybierz automatycznie (zalecane)"
     },
     "backend-Passwords": {
         "message": "Hasła"

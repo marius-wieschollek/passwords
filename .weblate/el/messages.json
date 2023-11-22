@@ -1685,7 +1685,7 @@
         "message": "Απεικόνιση εικόνας"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (συνιστάται)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Εξωτερικές υπηρεσίες"
@@ -2546,7 +2546,7 @@
         }
     },
     "backend-000666": {
-        "message": "Επιλέξτε αυτόματα"
+        "message": "Επιλέξτε αυτόματα (συνιστάται)"
     },
     "backend-Passwords": {
         "message": "Κωδικοί πρόσβασης"

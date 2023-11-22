@@ -1382,7 +1382,7 @@
         "message": "Vykreslování obrázků"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (doporučeno)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externí služby"
@@ -1415,7 +1415,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (doporučeno)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Služba pro ikony webů"
@@ -2834,7 +2834,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vybrat automaticky"
+        "message": "Vybrat automaticky (doporučeno)"
     },
     "frontend-000667": {
         "message": "CSV se štítky"

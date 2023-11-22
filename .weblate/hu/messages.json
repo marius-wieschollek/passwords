@@ -3,7 +3,7 @@
         "message": "Címkék megjelenítése listanézetben"
     },
     "backend-000666": {
-        "message": "Válassza ki automatikusan"
+        "message": "Válassza ki automatikusan (ajánlott)"
     },
     "tutorial-000783": {
         "message": "Rendszergazdaként érdemes megnézni ezeket a közös beállításokat."
@@ -1479,7 +1479,7 @@
         "message": "Kép renderelés"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (ajánlott)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Külső szolgáltatások"

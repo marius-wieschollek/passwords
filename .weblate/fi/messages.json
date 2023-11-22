@@ -1464,7 +1464,7 @@
         "message": "Kuvan renderöinti"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (suositellaan)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Ulkoiset palvelut"
@@ -1497,7 +1497,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (suositellaan)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon-palvelu"
@@ -2489,7 +2489,7 @@
         }
     },
     "backend-000666": {
-        "message": "Valitse automaattisesti"
+        "message": "Valitse automaattisesti (suositellaan)"
     },
     "backend-Passwords": {
         "message": "Salasanat"

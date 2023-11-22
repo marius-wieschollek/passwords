@@ -1504,7 +1504,7 @@
         "message": "Görüntü Oluşturma"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (önerilir)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Dış Hizmetler"
@@ -1528,7 +1528,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Koleksiyonu (tavsiye edilir)"
+        "message": "Leipzig Corpora Koleksiyonu"
     },
     "backend-000406": {
         "message": "Favicon Hizmeti"
@@ -2520,7 +2520,7 @@
         }
     },
     "backend-000666": {
-        "message": "Otomatik olarak seçin"
+        "message": "Otomatik olarak seçin (önerilir)"
     },
     "frontend-000667": {
         "message": "Etiketler CSV"

@@ -1500,7 +1500,7 @@
         "message": "Image Rendering"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (recommended)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "External Services"
@@ -1533,7 +1533,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (recommended)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon Service"
@@ -2504,7 +2504,7 @@
         "message": "Restore backups automatically when database wiped"
     },
     "backend-000666": {
-        "message": "Select automatically"
+        "message": "Select automatically (recommended)"
     },
     "backend-Passwords": {
         "message": "Passwords"

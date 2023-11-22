@@ -1388,7 +1388,7 @@
         "message": "Renderizzazione delle immagini"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (raccomandato)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Servizi esterni"
@@ -1421,7 +1421,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (raccomandato)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Servizio Favicon"
@@ -2763,7 +2763,7 @@
         }
     },
     "backend-000666": {
-        "message": "Selezionare automaticamente"
+        "message": "Selezionare automaticamente (raccomandato)"
     },
     "frontend-000667": {
         "message": "Tag CSV"

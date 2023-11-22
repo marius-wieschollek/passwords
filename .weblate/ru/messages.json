@@ -1197,7 +1197,7 @@
         "message": "Отрисовка изображений"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (рекомендуется)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Внешние сервисы"
@@ -1230,7 +1230,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (рекомендуется)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Сервис иконок Favicon"
@@ -2381,7 +2381,7 @@
         }
     },
     "backend-000666": {
-        "message": "Выберите автоматически"
+        "message": "Выберите автоматически (рекомендуется)"
     },
     "frontend-000667": {
         "message": "Теги CSV"

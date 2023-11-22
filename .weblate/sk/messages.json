@@ -1473,7 +1473,7 @@
         "message": "Vykresľovanie obrázkov"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (odporúčané)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externé služby"
@@ -2483,7 +2483,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vyberte automaticky"
+        "message": "Vyberte automaticky (odporúčané)"
     },
     "backend-Passwords": {
         "message": "Heslá"
