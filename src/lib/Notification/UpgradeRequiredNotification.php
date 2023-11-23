@@ -74,8 +74,8 @@ class UpgradeRequiredNotification extends AbstractNotification {
         $ncVersion     = \OC_Util::getVersion()[0];
         $phpVersion    = PHP_VERSION_ID;
         $parameters    = $notification->getSubjectParameters();
-        $isNcOutdated  = isset($parameters['ncVersion']) && $parameters['ncVersion'] < $ncVersion && $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;
-        $isPhpOutdated = isset($parameters['phpVersion']) && $parameters['phpVersion'] < $phpVersion && $phpVersion < SystemRequirements::PHP_NOTIFICATION_ID;
+        $isNcOutdated  = $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;
+        $isPhpOutdated = $phpVersion < SystemRequirements::PHP_NOTIFICATION_ID;
 
         if(!$isNcOutdated && !$isPhpOutdated) {
             return $notification
