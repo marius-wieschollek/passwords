@@ -5,7 +5,7 @@
                :multiple="true"
                :taggable="true"
                :closeOnSelect="false"
-               :options="dropdownOptions"
+               :options="options"
                :loading="loading"
                :placeholder="t('Add Tags...')"
                v-model="model"
@@ -41,56 +41,55 @@
     export default {
         components: {TagIcon, Translate, NcSelect},
         props     : {
-            noWrap  : {
+            noWrap: {
                 type   : Boolean,
                 default: false
             },
-            value   : {
+            value : {
                 type   : [Array, Object],
                 default: () => {
                     return [];
-                }
-            },
-            password: {
-                type   : Object,
-                default: () => {
-                    return null;
                 }
             }
         },
         data() {
             return {
-                options        : [],
-                tags           : {},
-                model          : [],
-                loading        : true,
-                fullTagsInValue: this.password === null ? !Array.isArray(this.value):true,
-                timeout        : null
+                tags   : {},
+                model  : [],
+                loading: true,
+                timeout: null
             };
         },
         computed: {
-            internalValue() {
-                return this.password === null ? this.value:this.password.tags;
+            tagIdsInValue() {
+                let tagIds;
+                if(this.isPassword) {
+                    if(!this.value.hasOwnProperty('tags')) {
+                        return [];
+                    }
+                    tagIds = Array.isArray(this.value.tags) ? this.value.tags:Object.keys(this.value.tags);
+                } else {
+                    tagIds = Object.keys(this.value);
+                }
+
+                return tagIds;
             },
-            dropdownOptions() {
+            isPassword() {
+                return this.value.hasOwnProperty('type') && this.value.type === 'password';
+            },
+            options() {
                 let options = [],
-                    usedIds = this.internalValue;
+                    usedIds = Utility.arrayPluck(this.model, 'id');
 
-                if(this.fullTagsInValue) {
-                    usedIds = [];
-                    for(let key in this.internalValue) {
-                        if(!this.internalValue.hasOwnProperty(key)) continue;
-                        usedIds.push(this.internalValue[key].id);
+                for(let id in this.tags) {
+                    if(!this.tags.hasOwnProperty(id) || usedIds.indexOf(id) !== -1) {
+                        continue;
                     }
+
+                    options.push(this.tags[id]);
                 }
 
-                for(let option of this.options) {
-                    if(usedIds.indexOf(option.id) === -1) {
-                        options.push(option);
-                    }
-                }
-
-                return options;
+                return Utility.sortApiObjectArray(options, 'label');
             }
         },
         mounted() {
@@ -100,38 +99,25 @@
             loadTags() {
                 API.listTags()
                    .then((d) => {
-                       this.options = Utility.sortApiObjectArray(Utility.objectToArray(d), 'label');
                        this.tags = d;
-                       this.loadModel();
                        this.loading = false;
+                       this.$nextTick(() => {
+                           this.handleValueUpdate();
+                       });
                    });
             },
-            loadModel() {
-                let model = [],
-                    value = this.internalValue;
-
-                if(this.fullTagsInValue) {
-                    value = [];
-                    for(let key in this.internalValue) {
-                        if(!this.internalValue.hasOwnProperty(key)) continue;
-                        value.push(this.internalValue[key].id);
-                    }
+            handleValueUpdate() {
+                if(this.loading) {
+                    return;
                 }
 
-                for(let id of value) {
-                    if(this.tags.hasOwnProperty(id)) {
-                        model.push(this.tags[id]);
-                    }
+                let model = [];
+                for(let id of this.tagIdsInValue) {
+                    model.push(this.tags[id]);
                 }
 
-                if(JSON.stringify(this.model) !== JSON.stringify(model)) {
-                    for(let i = 0; i < model.length; i++) {
-                        if(!this.model[i]) {
-                            this.model.push(model[i]);
-                        } else {
-                            this.model.splice(i, 1, model[i]);
-                        }
-                    }
+                if(JSON.stringify(model) !== JSON.stringify(this.model)) {
+                    this.model.splice(0, this.model.length, ...model);
                 }
             },
             createTag(data) {
@@ -155,43 +141,59 @@
                 }
 
                 return Utility.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
+            },
+            handleModelUpdate(value) {
+                if(this.loading) return;
+                let modelIds = Utility.arrayPluck(value, 'id');
+
+                console.log(
+                    JSON.stringify(this.tagIdsInValue),
+                    JSON.stringify(modelIds),
+                    JSON.stringify(this.tagIdsInValue) !== JSON.stringify(modelIds)
+                );
+                if(JSON.stringify(this.tagIdsInValue) !== JSON.stringify(modelIds)) {
+                    let model = {};
+                    for(let id of modelIds) {
+                        model[id] = this.tags[id];
+                    }
+
+                    if(!this.isPassword) {
+                        this.$emit('input', model);
+                    } else {
+                        this.value.tags = model;
+                        this.updatePassword();
+                    }
+                }
+            },
+            updatePassword() {
+                if(this.timeout !== null) {
+                    clearTimeout(this.timeout);
+                }
+
+                this.timeout = setTimeout(() => {
+                    let data = Utility.cloneObject(this.value);
+                    if(Object.keys(data.tags).length === 0) {
+                        data.tags = [''];
+                    }
+
+                    PasswordManager
+                        .updatePassword(data)
+                        .finally(() => {
+                            this.timeout = null;
+                        });
+                }, 1000);
             }
         },
 
         watch: {
-            'password.tags'() {
-                this.fullTagsInValue = true;
-                this.loadModel();
-            },
-            value(value) {
-                if(this.password === null) {
-                    this.fullTagsInValue = !Array.isArray(value);
-                    this.loadModel();
+            value: {
+                deep: true,
+                handler() {
+                    this.handleValueUpdate();
                 }
             },
             model(value) {
-                let model = [];
-                for(let tag of value) {
-                    model.push(this.fullTagsInValue ? tag:tag.id);
-                }
-
-                if(JSON.stringify(this.internalValue) !== JSON.stringify(model)) {
-                    if(this.password === null) {
-                        this.$emit('input', model);
-                    } else {
-                        this.password.tags = model;
-                        if(this.timeout !== null) {
-                            clearTimeout(this.timeout);
-                        }
-                        this.timeout = setTimeout(() => {
-                            PasswordManager
-                                .updatePassword(this.password)
-                                .finally(() => {
-                                    this.timeout = null;
-                                });
-                        }, 1000);
-                    }
-                }
+                this.handleModelUpdate(value);
             }
         }
     };
@@ -199,9 +201,7 @@
 
 <style lang="scss">
 div.passwords-tags-field.select {
-    border        : 2px solid var(--color-border-maxcontrast);
     margin        : 3px 3px 3px 0;
-    border-radius : var(--border-radius-large);
     cursor        : pointer;
     min-height    : 36px;
     padding       : 0;
@@ -211,21 +211,9 @@ div.passwords-tags-field.select {
         height : 36px;
     }
 
-    &:focus,
-    &:active {
-        border-color : var(--color-border-dark);
-    }
-
-    &:hover,
-    &.vs--open {
-        border-color : var(--color-primary-element);
-    }
-
     .vs__dropdown-toggle {
         padding          : 0;
         background-color : var(--color-main-background);
-        border           : none;
-        border-radius    : calc(var(--border-radius) + 4px);
     }
 
     input.vs__search {
@@ -251,7 +239,7 @@ div.passwords-tags-field.select {
     }
 
     .vs__selected-options {
-        min-height: 0 !important;
+        min-height : 0 !important;
 
         .vs__selected {
             height      : 28px;

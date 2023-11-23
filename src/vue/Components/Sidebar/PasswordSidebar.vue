@@ -60,7 +60,7 @@
         <div slot="header" v-if="!compact">
             <preview :image="password.preview" :icon="password.icon" :link="password.url" :host="password.website"/>
         </div>
-        <tags :password="password" slot="description"/>
+        <tags :value="password" slot="description"/>
 
         <nc-app-sidebar-tab icon="icon-info" :name="t('Details')" id="details-tab">
             <pw-details :password="password"/>

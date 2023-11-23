@@ -11,35 +11,40 @@
 <template>
     <nc-modal id="passwords-edit-dialog" :container="container" size="large" @drop.stop.prevent="dragDrop" v-on:close="closeWindow">
         <div class="header">
-            <translate tag="h1" :say="title" />
-            <favorite-field v-model="password.favorite" />
+            <translate tag="h1" :say="title"/>
+            <favorite-field v-model="password.favorite"/>
         </div>
         <div class="content">
-            <form class="password-form" id="password-edit-form" v-on:keydown.enter.prevent="false" v-on:submit.prevent="submitAction()" v-on:keydown.ctrl.83.prevent.stop="submitAction()" ref="form">
+            <form class="password-form"
+                  id="password-edit-form"
+                  v-on:keydown.enter.prevent="false"
+                  v-on:submit.prevent="submitAction()"
+                  v-on:keydown.ctrl.83.prevent.stop="submitAction()"
+                  ref="form">
                 <div class="password-form-fields">
                     <password-field v-model="password.password" :autofocus="true"/>
-                    <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64" />
-                    <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64" />
-                    <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048" />
-                    <folder-field v-model="password.folder" v-on:folder="updateFolder" />
-                    <tags-field v-model="password.tags" />
+                    <text-field v-model="password.username" id="username" label="Username" icon="user" maxlength="64"/>
+                    <text-field v-model="password.label" id="label" label="Name" icon="book" maxlength="64"/>
+                    <url-field v-model="password.url" id="url" label="Website" icon="globe" maxlength="2048"/>
+                    <folder-field v-model="password.folder" v-on:folder="updateFolder"/>
+                    <tags-field v-model="password.tags"/>
                     <checkbox-field v-model="password.hidden"
                                     id="hidden"
                                     label="Hidden password"
                                     checkbox-label="Don't show this password anywhere"
                                     icon="eye-slash"
-                                    v-if="showHidden" />
+                                    v-if="showHidden"/>
 
-                    <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i" />
-                    <new-custom-field @create="addCustomField" v-if="canAddField" />
+                    <custom-field v-model="password.customFields[i]" v-on:delete="removeCustomField(i)" v-for="(customField, i) in password.customFields" :key="i"/>
+                    <new-custom-field @create="addCustomField" v-if="canAddField"/>
                 </div>
-                <notes-field v-model="password.notes" />
-                <encryption-options class="encryption-options" :password="password" />
+                <notes-field v-model="password.notes"/>
+                <encryption-options class="encryption-options" :password="password"/>
             </form>
         </div>
         <div class="buttons">
             <div class="advanced-options">
-                <encryption-options :password="password" />
+                <encryption-options :password="password"/>
             </div>
             <nc-button class="password-form-favorite btn-save" type="primary" form="password-edit-form" nativeType="submit" :wide="true">
                 {{ t('Save') }}
@@ -49,26 +54,26 @@
 </template>
 
 <script>
-    import API                     from '@js/Helper/api';
-    import Translate               from '@vc/Translate';
-    import Icon                    from '@vc/Icon';
-    import Utility                 from '@js/Classes/Utility';
-    import SettingsService         from '@js/Services/SettingsService';
-    import PasswordField           from '@vue/Dialog/CreatePassword/PasswordField';
-    import TextField               from '@vue/Dialog/CreatePassword/TextField';
-    import NotesField              from '@vue/Dialog/CreatePassword/NotesField';
-    import EncryptionOptions       from '@vue/Dialog/CreatePassword/EncryptionOptions';
-    import FavoriteField           from '@vue/Dialog/CreatePassword/FavoriteField';
-    import NewCustomField          from '@vue/Dialog/CreatePassword/NewCustomField';
-    import CustomField             from '@vue/Dialog/CreatePassword/CustomField';
-    import UrlField                from '@vue/Dialog/CreatePassword/UrlField';
+    import API from '@js/Helper/api';
+    import Translate from '@vc/Translate';
+    import Icon from '@vc/Icon';
+    import Utility from '@js/Classes/Utility';
+    import SettingsService from '@js/Services/SettingsService';
+    import PasswordField from '@vue/Dialog/CreatePassword/PasswordField';
+    import TextField from '@vue/Dialog/CreatePassword/TextField';
+    import NotesField from '@vue/Dialog/CreatePassword/NotesField';
+    import EncryptionOptions from '@vue/Dialog/CreatePassword/EncryptionOptions';
+    import FavoriteField from '@vue/Dialog/CreatePassword/FavoriteField';
+    import NewCustomField from '@vue/Dialog/CreatePassword/NewCustomField';
+    import CustomField from '@vue/Dialog/CreatePassword/CustomField';
+    import UrlField from '@vue/Dialog/CreatePassword/UrlField';
     import CustomFieldsDragService from '@js/PasswordDialog/CustomFieldsDragService';
-    import FolderField             from '@vue/Dialog/CreatePassword/FolderField';
-    import TagsField               from '@vue/Dialog/CreatePassword/TagsField';
-    import CheckboxField           from '@vue/Dialog/CreatePassword/CheckboxField';
-    import Messages                from '@js/Classes/Messages';
-    import NcModal                 from '@nc/NcModal.js';
-    import NcButton                from '@nc/NcButton.js';
+    import FolderField from '@vue/Dialog/CreatePassword/FolderField';
+    import TagsField from '@vue/Dialog/CreatePassword/TagsField';
+    import CheckboxField from '@vue/Dialog/CreatePassword/CheckboxField';
+    import Messages from '@js/Classes/Messages';
+    import NcModal from '@nc/NcModal.js';
+    import NcButton from '@nc/NcButton.js';
 
     export default {
         components: {
@@ -113,7 +118,7 @@
         },
 
         data() {
-            let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1' : 'none',
+            let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], tags: [], hidden: false}, this.properties),
                 dragService = new CustomFieldsDragService(password),
                 container   = Utility.popupContainer(true);
@@ -197,9 +202,16 @@
     .modal-container {
         display        : flex;
         flex-direction : column;
+        overflow       : hidden;
+
+        .modal-container__content {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
         .button-vue.modal-container__close {
-            z-index: 2;
+            z-index : 3;
         }
 
         @media (min-width : $width-1366-above) {
