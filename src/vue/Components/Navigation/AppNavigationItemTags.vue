@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :name="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadTags">
+    <app-navigation-item ref="navigation-item" :name="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :exact="requiresExact" :open="open" :loading="loading" v-on:update:open="loadTags">
         <tag-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
@@ -62,6 +62,11 @@
 
             Events.on('tag.changed', refreshEvent);
             subscribe('passwords:encryption:installed', refreshEvent);
+        },
+        computed: {
+            requiresExact() {
+                return this.tags.find((tags) => {return tags.id === this.$route.params?.tags;}) !== undefined
+            }
         },
         methods: {
             loadTags() {
