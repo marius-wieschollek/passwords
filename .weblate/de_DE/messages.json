@@ -2245,7 +2245,7 @@
         }
     },
     "backend-EOLNextcloudPHPText2": {
-        "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_2$ (oder PHP $STR_3$ für die LSR-Version) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_2$ (oder PHP $STR_3$ für die LSR-Version) um zukünftige Versionen zu erhalten.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3114,7 +3114,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "Aktualisieren Sie auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Aktualisieren Sie auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
