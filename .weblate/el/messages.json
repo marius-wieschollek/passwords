@@ -3279,5 +3279,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "Τα αποτελέσματα θα ενημερωθούν μόλις φορτωθούν όλοι οι κωδικοί πρόσβασης",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Άλλη τεκμηρίωση",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Εγχειρίδιο διαχειριστή",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Εγχειρίδιο προγραμματιστή",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
