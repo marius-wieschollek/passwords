@@ -1,6 +1,5 @@
 import EnhancedApi from 'passwords-client';
 import SettingsService from "@js/Services/SettingsService";
-import Logger from "@js/Classes/Logger";
 
 class PasswordsApi extends EnhancedApi {
 
@@ -10,15 +9,19 @@ class PasswordsApi extends EnhancedApi {
         this._requests = [];
         this._activeRequests = 0;
         this._queueCheckActive = false;
-        this._maxRequests = 1;
+        this._maxRequests = 2;
+        this._maxSlowRequests = 1;
     }
 
     initialize(config = {}) {
         super.initialize(config);
 
         let performance = SettingsService.get('server.performance');
-        if(performance !== 0 && performance < 6) this._maxRequests = performance * 3;
+        if(performance === 0) this._maxRequests = 2;
+        if(performance > 0 && performance < 6) this._maxRequests = performance * 3;
         if(performance === 6) this._maxRequests = 32;
+
+        this._maxSlowRequests = this._maxRequests === 2 ? 1:2;
     }
 
     _sendRequest(path, data = null, method = null, dataType = 'application/json', requestOptions = {}) {
@@ -27,6 +30,9 @@ class PasswordsApi extends EnhancedApi {
                 name     = (Array.isArray(path) ? path[0]:path).split('.');
             if(name[0] === 'service') {
                 priority = 3;
+                if(['favicon', 'preview'].indexOf(name[1]) !== -1) {
+                    priority = 4;
+                }
             } else if(['create', 'update', 'delete', 'set'].indexOf(name[name.length - 1]) !== -1) {
                 priority = 1;
             } else if(name[0] === 'session') {
@@ -60,8 +66,12 @@ class PasswordsApi extends EnhancedApi {
             return a.priority < b.priority ? -1:1;
         });
 
-        while((this._activeRequests < this._maxRequests || this._maxRequests === 0) && this._requests.length > 0) {
+        while(this._activeRequests < this._maxRequests && this._requests.length > 0) {
             let request = this._requests.shift();
+            if(request.priority > 3 && (this._activeRequests > this._maxSlowRequests)) {
+                this._requests.unshift(request);
+                break;
+            }
 
             this._activeRequests++;
             super._sendRequest(request.data.path, request.data.data, request.data.method, request.data.dataType, request.data.requestOptions)
