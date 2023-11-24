@@ -3075,7 +3075,7 @@
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLNextcloudText2": {
-        "message": "Wechsle auf Nextcloud $STR_1$ für zukünftige Aktualisierungen zu erhalten.",
+        "message": "Wechsle auf Nextcloud $STR_1$ um zukünftige Updates zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3114,7 +3114,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "Wechsle auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Wechsle auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Updates zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
