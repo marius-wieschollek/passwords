@@ -3279,5 +3279,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "I risultati saranno aggiornati una volta caricate tutte le password.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Altra documentazione",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Manuale dell'amministratore",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Manuale dello sviluppatore",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
