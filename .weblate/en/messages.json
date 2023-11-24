@@ -1143,24 +1143,32 @@
         "message": "Not Found"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Still need help?",
+        "message": "Do you need help?",
         "description": "Title of the box on the right in the handbook where users can find links to the forum and chat."
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Ask in our forum!",
+        "message": "Ask in our forum",
         "description": "Label of the link to the forum in the box on the right in the handbook."
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Or in our Chat!",
+        "message": "Ask in our Chat",
         "description": "Label of the link to the chat in the box on the right in the handbook."
     },
-    "frontend-HandbookBugs": {
-        "message": "Found an error?",
-        "description": "Title of the box on the right in the handbook where users can report bugs."
-    },
     "frontend-HandbookBugsReport": {
-        "message": "Tell us!",
+        "message": "Report a bug",
         "description": "Label of the link to the bug report page in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Other Documentation",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Administrator Handbook",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Developer Handbook",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     },
     "frontend-000329": {
         "message": "The session has expired"

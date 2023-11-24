@@ -1200,19 +1200,16 @@
         "message": "Seite nicht gefunden"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Noch Fragen?"
+        "message": "Brauchst du Hilfe?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Frage im Forum!"
+        "message": "Frag im Forum"
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Oder im Chat!"
-    },
-    "frontend-HandbookBugs": {
-        "message": "Fehler gefunden?"
+        "message": "Frag im Chat"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Sag uns bescheid!"
+        "message": "Melde Fehler"
     },
     "frontend-000329": {
         "message": "Die Sitzung ist abgelaufen"
