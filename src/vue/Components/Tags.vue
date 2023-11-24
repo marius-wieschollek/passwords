@@ -146,11 +146,6 @@
                 if(this.loading) return;
                 let modelIds = Utility.arrayPluck(value, 'id');
 
-                console.log(
-                    JSON.stringify(this.tagIdsInValue),
-                    JSON.stringify(modelIds),
-                    JSON.stringify(this.tagIdsInValue) !== JSON.stringify(modelIds)
-                );
                 if(JSON.stringify(this.tagIdsInValue) !== JSON.stringify(modelIds)) {
                     let model = {};
                     for(let id of modelIds) {

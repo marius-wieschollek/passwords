@@ -204,7 +204,6 @@
                     let image = this.media[i],
                         el    = document.getElementById(image.id);
                     if(!el) {
-                        console.log(image);
                         continue;
                     }
 
