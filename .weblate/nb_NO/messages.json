@@ -3286,5 +3286,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "Resultatene oppdateres når alle passordene er lastet inn.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Annen dokumentasjon",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Håndbok for administratorer",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Håndbok for utviklere",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
