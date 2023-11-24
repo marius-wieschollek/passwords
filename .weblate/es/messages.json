@@ -1132,9 +1132,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "¡Pregunta en nuestro foro!"
     },
-    "frontend-HandbookBugs": {
-        "message": "¿Has encontrado algún fallo?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "¡Cuéntanos!"
     },

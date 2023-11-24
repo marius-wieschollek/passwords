@@ -2171,9 +2171,6 @@
             }
         }
     },
-    "frontend-HandbookBugs": {
-        "message": "Narazili jste na chybu?"
-    },
     "frontend-000330": {
         "message": "Platnost tokenu relace s aplikačním program. rozhraním (API) skončila"
     },
