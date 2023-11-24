@@ -3279,5 +3279,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "所有密码加载完毕后，将更新结果",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "其他文件",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "管理员手册",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "开发人员手册",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
