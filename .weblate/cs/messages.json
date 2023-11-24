@@ -3276,5 +3276,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "Výsledky budou aktualizovány po načtení všech hesel.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Příručka pro vývojáře",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Další dokumentace",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Příručka pro správce",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
