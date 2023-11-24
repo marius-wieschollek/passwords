@@ -3279,5 +3279,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "Resultaten worden bijgewerkt zodra alle wachtwoorden zijn geladen",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Andere documentatie",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Handboek voor beheerders",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Handboek voor ontwikkelaars",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
