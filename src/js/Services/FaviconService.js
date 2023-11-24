@@ -70,13 +70,18 @@ export default new class FaviconService {
      * @private
      */
     async _fetchFromApi(domain, size) {
+        let fallbackIcon = SettingsService.get('server.theme.app.icon');
         try {
             /** @type {Blob} favicon **/
             let favicon = await API.getFavicon(domain, size);
 
             if(favicon.type.substr(0, 6) !== 'image/' || favicon.size < 1) {
                 delete this._requests[`${domain}_${size}`];
-                return SettingsService.get('server.theme.app.icon');
+
+                if(!this._favicons.hasOwnProperty(`${domain}_${size}`)) {
+                    this._favicons[`${domain}_${size}`] = fallbackIcon;
+                }
+                return fallbackIcon;
             }
 
             this._favicons[`${domain}_${size}`] = window.URL.createObjectURL(favicon);
@@ -87,7 +92,10 @@ export default new class FaviconService {
             if(this._requests.hasOwnProperty(`${domain}_${size}`)) {
                 delete this._requests[`${domain}_${size}`];
             }
-            return SettingsService.get('server.theme.app.icon');
+            if(!this._favicons.hasOwnProperty(`${domain}_${size}`)) {
+                this._favicons[`${domain}_${size}`] = fallbackIcon;
+            }
+            return fallbackIcon;
         }
     }
 };
