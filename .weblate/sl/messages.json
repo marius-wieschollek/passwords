@@ -3279,5 +3279,17 @@
     "frontend-DashboardResultsLoading": {
         "message": "Rezultati bodo posodobljeni, ko bodo naložena vsa gesla",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Druga dokumentacija",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Priročnik za administratorje",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Priročnik za razvijalce",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
