@@ -3279,15 +3279,15 @@
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     },
     "frontend-HandbookDevDocumentation": {
-        "message": "Handbuch für Entwickler",
+        "message": "Entwicklerhandbuch",
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     },
     "frontend-HandbookMore": {
-        "message": "Andere Dokumentation",
+        "message": "Weitere Dokumentationen",
         "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
     },
     "frontend-HandbookAdminDocumentation": {
-        "message": "Administrator-Handbuch",
+        "message": "Administratorhandbuch",
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }
