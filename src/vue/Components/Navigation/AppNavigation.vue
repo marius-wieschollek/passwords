@@ -30,7 +30,7 @@
             <app-navigation-item :name="t('Trash')" :pinned="true" :to="{ name: 'Trash'}" data-drop-type="trash" icon="icon-delete" />
         </template>
 
-        <nc-app-navigation-settings slot="footer" :title="t('More')">
+        <nc-app-navigation-settings slot="footer" :name="t('More')">
             <app-navigation-item :name="t('Settings')" :to="{ name: 'Settings'}">
                 <cog-icon :size=20 slot="icon" />
             </app-navigation-item>

@@ -27,7 +27,7 @@
                     </nc-button>
                 </div>
             </div>
-            <nc-loading-icon class="pw-folder-picker-loading" :title="t('FolderPickerLoading')" :size="40" v-else/>
+            <nc-loading-icon class="pw-folder-picker-loading" :name="t('FolderPickerLoading')" :size="40" v-else/>
         </template>
     </nc-modal>
 </template>
