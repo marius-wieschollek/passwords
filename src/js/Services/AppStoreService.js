@@ -8,7 +8,7 @@
  * created by Marius David Wieschollek.
  */
 
-import Localisation    from "@js/Classes/Localisation";
+import Localisation from "@js/Classes/Localisation";
 import SettingsService from "@js/Services/SettingsService";
 import Logger from "@js/Classes/Logger";
 
@@ -32,8 +32,9 @@ export default new class AppStoreService {
             for(let download of item.downloads) {
                 downloads.push(
                     {
-                        label: this._resolveTranslatableProperty(download.label),
-                        url  : download.url
+                        label  : this._resolveTranslatableProperty(download.label),
+                        url    : download.url,
+                        primary: download?.primary === true || item.downloads.length === 1
                     }
                 );
             }
@@ -43,7 +44,7 @@ export default new class AppStoreService {
                     id         : `${section}-${item.id}`,
                     label      : this._resolveTranslatableProperty(item.label),
                     description: this._resolveTranslatableProperty(item.description),
-                    logo       : item.hasOwnProperty('logo') ? new URL(item.logo, baseUrl) : null,
+                    logo       : item.hasOwnProperty('logo') ? new URL(item.logo, baseUrl):null,
                     official   : item.official,
                     author     : {
                         name    : item.author.name,
@@ -56,7 +57,7 @@ export default new class AppStoreService {
                         protocol: item.passlink.enabled ? item.passlink.protocol:null
                     },
                     links      : {
-                        homepage: item.links.hasOwnProperty('homepage') ? item.links.homepage : null,
+                        homepage: item.links.hasOwnProperty('homepage') ? item.links.homepage:null,
                         download: item.links.download,
                         sources : item.links.sources
                     },

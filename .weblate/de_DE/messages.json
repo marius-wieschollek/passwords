@@ -1197,19 +1197,16 @@
         "message": "Seite nicht gefunden"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Noch Fragen?"
+        "message": "Benötigen Sie Hilfe?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Fragen Sie im Forum!"
+        "message": "Forum öffnen"
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Oder per Chat!"
-    },
-    "frontend-HandbookBugs": {
-        "message": "Fehler gefunden?"
+        "message": "Chat öffnen"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Informieren Sie uns!"
+        "message": "Fehler Melden"
     },
     "frontend-000329": {
         "message": "Die Sitzung ist abgelaufen"
@@ -1558,7 +1555,7 @@
         "message": "Bildverarbeitung"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (empfohlen)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externe Dienste"
@@ -1591,7 +1588,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (empfohlen)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon Dienst"
@@ -2245,7 +2242,7 @@
         }
     },
     "backend-EOLNextcloudPHPText2": {
-        "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_2$ (oder PHP $STR_3$ für die LSR-Version) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Aktualisieren Sie auf Nextcloud $STR_1$ und PHP $STR_2$ (oder PHP $STR_3$ für die LSR-Version) um zukünftige Versionen zu erhalten.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2259,7 +2256,7 @@
         }
     },
     "backend-000666": {
-        "message": "Automatisch auswählen"
+        "message": "Automatisch auswählen (empfohlen)"
     },
     "frontend-000528": {
         "message": "Passwortvorgaben"
@@ -3114,7 +3111,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "Aktualisieren Sie auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Aktualisieren Sie auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3246,5 +3243,51 @@
     },
     "frontend-Disable": {
         "message": "Deaktivieren"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fehler",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Keine Passwörter",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Ihre Favoriten werden hier angezeigt werden.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Keine Ergebnisse",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Alle Passwörter durchsuchen",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Die Suche nach \"$QUERY$\" ergab keine Treffer",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Die Ergebnisse werden aktualisiert, sobald alle Passwörter geladen wurden",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Weitere Dokumentation",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Handbuch für Administratoren",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Handbuch für Entwickler",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

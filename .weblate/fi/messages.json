@@ -1162,9 +1162,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Kysy foorumillamme!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Löysitkö virheen?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Kerro meille!"
     },
@@ -1464,7 +1461,7 @@
         "message": "Kuvan renderöinti"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (suositellaan)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Ulkoiset palvelut"
@@ -1497,7 +1494,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (suositellaan)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon-palvelu"
@@ -2489,7 +2486,7 @@
         }
     },
     "backend-000666": {
-        "message": "Valitse automaattisesti"
+        "message": "Valitse automaattisesti (suositellaan)"
     },
     "backend-Passwords": {
         "message": "Salasanat"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Poista käytöstä"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Virhe",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Ei salasanoja",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Emme voineet löytää mitään \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Suosikkisalasanasi näkyvät tässä.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Ei tuloksia",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Etsi kaikki salasanat",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Tulokset päivitetään, kun kaikki salasanat on ladattu.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Kehittäjän käsikirja",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Muut asiakirjat",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Ylläpitäjän käsikirja",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

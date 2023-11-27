@@ -21,7 +21,7 @@
                     :data-folder-id="folder.id"
                     data-drop-type="folder"
             >
-                <folder-icon :size="20" fill-color="var(--color-primary)" slot="icon"/>
+                <folder-icon :size="20" :fill-color="folderIconColor(folder.id)" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item
                     v-for="tag in tags"
@@ -40,7 +40,7 @@
 </template>
 <script>
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import NcLoadingIcon from "@nc/NcLoadingIcon";
+    import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import FolderIcon from "@icon/Folder";
     import StarIcon from "@icon/Star";
     import TagIcon from "@icon/Tag";
@@ -119,6 +119,13 @@
                        this.folders = Utility.sortApiObjectArray(d, 'label');
                        this.loading = false;
                    });
+            },
+            folderIconColor(id) {
+                if(this.$route.params?.folder === id) {
+                    return 'var(--color-primary-element-text)';
+                }
+
+                return 'var(--color-primary)';
             }
         }
     };

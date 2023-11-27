@@ -60,7 +60,7 @@
             Translate,
             Breadcrumb,
             'arrow-left': () => import(/* webpackChunkName: "ArrowLeftIcon" */ '@icon/ArrowLeft'),
-            'nc-button' : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton')
+            'nc-button' : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton.js')
         },
 
         data() {
@@ -105,13 +105,13 @@
 
                 if(this.$route.params.page === undefined) return items;
                 let path    = this.$route.params.page.split('/'),
-                    current = '';
+                    current = [];
 
                 for(let i = 0; i < path.length; i++) {
-                    current += path[i];
+                    current.push(path[i]);
                     items.push(
                         {
-                            path : {name: 'Help', params: {page: current}},
+                            path : {name: 'Help', params: {page: current.join('/')}},
                             label: Localisation.translate(path[i].replace(/-{1}/g, ' '))
                         }
                     );
@@ -204,7 +204,6 @@
                     let image = this.media[i],
                         el    = document.getElementById(image.id);
                     if(!el) {
-                        console.log(image);
                         continue;
                     }
 
@@ -240,9 +239,15 @@
 
 <style lang="scss">
 #app-content .help {
-    padding    : 0 0 10px;
-    position   : relative;
-    min-height : 100%;
+    padding        : 0 0 10px;
+    position       : relative;
+    min-height     : 100%;
+    display        : flex;
+    flex-direction : column;
+
+    > .passwords-breadcrumbs {
+        flex-grow : 0 !important;
+    }
 
     &.global {
         .handbook-exit {
@@ -272,6 +277,8 @@
         display               : grid;
         grid-template-areas   : ". header ." "nav page extra";
         grid-template-columns : 1fr 975px 1fr;
+        grid-template-rows    : min-content auto;
+        flex-grow             : 1;
 
         @media (max-width : $width-extra-large) {
             grid-template-areas   : ". header" "nav page" "nav extra";
@@ -315,10 +322,10 @@
         }
 
         .handbook-sidebar {
-            grid-area    : extra;
-            display      : flex;
-            align-items  : end;
-            margin : 0 1rem;
+            grid-area   : extra;
+            display     : flex;
+            align-items : end;
+            margin      : 0 1rem;
 
             .handbook-community-resources {
                 position : sticky;

@@ -3,7 +3,7 @@
         "message": "Címkék megjelenítése listanézetben"
     },
     "backend-000666": {
-        "message": "Válassza ki automatikusan"
+        "message": "Válassza ki automatikusan (ajánlott)"
     },
     "tutorial-000783": {
         "message": "Rendszergazdaként érdemes megnézni ezeket a közös beállításokat."
@@ -1177,9 +1177,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Kérdezz a fórumunkon!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Hibát talált?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Mondd el nekünk!"
     },
@@ -1479,7 +1476,7 @@
         "message": "Kép renderelés"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (ajánlott)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Külső szolgáltatások"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "A  letiltása"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Hiba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Nincs jelszó",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "A kedvenc jelszavai itt fognak megjelenni.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Nincs eredmény",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nem találtunk semmit a \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Minden jelszó keresése",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Az eredmények frissülnek, amint az összes jelszó betöltődött.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Egyéb dokumentáció",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Adminisztrátori kézikönyv",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Fejlesztői kézikönyv",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

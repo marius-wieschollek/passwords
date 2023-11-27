@@ -9,7 +9,6 @@ namespace OCA\Passwords\Helper\Favicon;
 
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\ConfigurationService;
@@ -17,6 +16,7 @@ use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -55,33 +55,54 @@ class BestIconHelper extends AbstractFaviconHelper {
     protected string $prefix = HelperService::FAVICON_BESTICON;
 
     /**
+     * @var array
+     */
+    protected array $colors
+        = [
+            '1abc9c',
+            '16a085',
+            '2ecc71',
+            '27ae60',
+            '3498db',
+            '2980b9',
+            '9b59b6',
+            '8e44ad',
+            'f1c40f',
+            'f39c12',
+            'e67e22',
+            'd35400',
+            'e74c3c',
+            'c0392b'
+        ];
+
+    /**
      * BestIconHelper constructor.
      *
-     * @param DateTimeHelper        $dateTime
-     * @param ConfigurationService  $config
-     * @param HelperService         $helperService
-     * @param AdminUserHelper       $adminHelper
-     * @param IClientService        $requestService
-     * @param FileCacheService      $fileCacheService
-     * @param NotificationService   $notificationService
-     * @param FallbackIconGenerator $fallbackIconGenerator
+     * @param DateTimeHelper       $dateTime
+     * @param ConfigurationService $config
+     * @param LoggerInterface      $logger
+     * @param HelperService        $helperService
+     * @param AdminUserHelper      $adminHelper
+     * @param IClientService       $requestService
+     * @param FileCacheService     $fileCacheService
+     * @param NotificationService  $notificationService
      */
     public function __construct(
         DateTimeHelper        $dateTime,
         ConfigurationService  $config,
+        LoggerInterface       $logger,
         HelperService         $helperService,
         AdminUserHelper       $adminHelper,
         IClientService        $requestService,
         FileCacheService      $fileCacheService,
-        NotificationService   $notificationService,
-        FallbackIconGenerator $fallbackIconGenerator
+        NotificationService   $notificationService
     ) {
         $this->config        = $config;
         $this->dateTime      = $dateTime;
         $this->adminHelper   = $adminHelper;
         $this->notifications = $notificationService;
 
-        parent::__construct($helperService, $requestService, $fileCacheService, $fallbackIconGenerator);
+        parent::__construct($helperService, $logger, $fileCacheService, $requestService);
     }
 
     /**
@@ -91,7 +112,7 @@ class BestIconHelper extends AbstractFaviconHelper {
      * @return array
      */
     protected function getRequestData(string $domain, string $protocol = 'https'): array {
-        $fallbackColor = substr($this->fallbackIconGenerator->stringToColor($domain), 1);
+        $fallbackColor = substr($this->stringToColor($domain), 1);
         $serviceUrl    = $this->config->getAppValue(self::BESTICON_CONFIG_KEY, '');
         if(empty($serviceUrl)) $serviceUrl = $this->getSharedInstanceUrl();
 
@@ -141,7 +162,7 @@ class BestIconHelper extends AbstractFaviconHelper {
 
             [$week, $count, $notified] = explode(':', $this->config->getAppValue(self::BESTICON_COUNTER_KEY, '0:0:0'));
             if(intval($week) !== $currentWeek) {
-                $count = 0;
+                $count    = 0;
                 $notified = '0';
             }
 
@@ -155,5 +176,21 @@ class BestIconHelper extends AbstractFaviconHelper {
             $this->config->setAppValue(self::BESTICON_COUNTER_KEY, "{$currentWeek}:{$count}:{$notified}");
         } catch(Throwable $e) {
         }
+    }
+
+    /**
+     * @param string $string
+     *
+     * @return string
+     */
+    protected function stringToColor(string $string): string {
+        $max    = count($this->colors);
+        $number = array_sum(str_split(dechex(crc32($string)), 2));
+
+        while($number >= $max) {
+            $number -= $max;
+        }
+
+        return '#'.$this->colors[ $number ];
     }
 }

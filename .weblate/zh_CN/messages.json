@@ -1507,9 +1507,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "在我们的论坛中询问！"
     },
-    "frontend-HandbookBugs": {
-        "message": "发现一个错误？"
-    },
     "frontend-HandbookBugsReport": {
         "message": "告诉我们！"
     },
@@ -1792,7 +1789,7 @@
         "message": "影像渲染"
     },
     "backend-000394": {
-        "message": "Imagick / GMagick（推荐）"
+        "message": "Imagick / GMagick"
     },
     "backend-000395": {
         "message": "外部服务"
@@ -1825,7 +1822,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection（推荐）"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "网站图标服务"
@@ -2696,7 +2693,7 @@
         }
     },
     "backend-000666": {
-        "message": "自动选择"
+        "message": "自动选择（推荐）"
     },
     "frontend-000667": {
         "message": "标签 CSV"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "禁用"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "无密码",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "您最喜欢的密码将出现在这里。",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "无结果",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "搜索所有密码",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "错误",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "我们找不到任何有关“$QUERY$”的内容。",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "所有密码加载完毕后，将更新结果",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "其他文件",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "管理员手册",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "开发人员手册",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

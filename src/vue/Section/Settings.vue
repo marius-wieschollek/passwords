@@ -424,12 +424,12 @@
     import SUM from '@js/Manager/SetupManager';
     import EncryptionManager from '@js/Manager/EncryptionManager';
     import {getCurrentUser} from '@nextcloud/auth';
-    import NcButton from '@nc/NcButton';
+    import NcButton from '@nc/NcButton.js';
     import HelpCircleIcon from '@icon/HelpCircle';
     import Translate from '@vue/Components/Translate';
     import Breadcrumb from '@vue/Components/Breadcrumb';
     import SettingsHelp from '@vue/Components/Settings/SettingsHelp';
-    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch';
+    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch.js';
     import MessageService from '@js/Services/MessageService';
     import UtilityService from '@js/Services/UtilityService';
     import LoggingService from "@js/Services/LoggingService";

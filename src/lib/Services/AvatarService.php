@@ -7,11 +7,11 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
+use OC\Avatar\GuestAvatar;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IAvatarManager;
-use OCP\IImage;
 use OCP\IUserManager;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -22,43 +22,25 @@ use Throwable;
 class AvatarService {
 
     /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var IAvatarManager
-     */
-    protected IAvatarManager $avatarManager;
-
-    /**
      * @var FileCacheService
      */
     protected FileCacheService $fileCacheService;
 
     /**
-     * @var FallbackIconGenerator
-     */
-    protected FallbackIconGenerator $fallbackIconGenerator;
-
-    /**
      * AvatarService constructor.
      *
-     * @param IUserManager          $userManager
-     * @param IAvatarManager        $avatarManager
-     * @param FileCacheService      $fileCacheService
-     * @param FallbackIconGenerator $fallbackIconGenerator
+     * @param LoggerInterface  $logger
+     * @param IUserManager     $userManager
+     * @param IAvatarManager   $avatarManager
+     * @param FileCacheService $fileCacheService
      */
     public function __construct(
-        IUserManager $userManager,
-        IAvatarManager $avatarManager,
-        FileCacheService $fileCacheService,
-        FallbackIconGenerator $fallbackIconGenerator
+        protected LoggerInterface $logger,
+        protected IUserManager    $userManager,
+        protected IAvatarManager  $avatarManager,
+        FileCacheService          $fileCacheService
     ) {
-        $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::AVATAR_CACHE);
-        $this->fallbackIconGenerator = $fallbackIconGenerator;
-        $this->userManager           = $userManager;
-        $this->avatarManager         = $avatarManager;
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::AVATAR_CACHE);
     }
 
     /**
@@ -71,52 +53,20 @@ class AvatarService {
     public function getAvatar(string $userId, int $size = 32): ?ISimpleFile {
         $size = $this->validateSize($size);
 
-        $fileName = "{$userId}_{$size}.png";
-        if($this->fileCacheService->hasFile($fileName)) {
-            return $this->fileCacheService->getFile($fileName);
-        }
-
-        $user      = $this->userManager->get($userId);
-        $imageData = null;
+        $user = $this->userManager->get($userId);
         if($user !== null) {
             $avatar = $this->avatarManager->getAvatar($userId);
-            if($avatar->exists()) {
-                $image = $avatar->get($size);
-                if($image !== null && $image->valid()) $imageData = $this->getImage($image, $user->getDisplayName(), $size);
-            } else {
-                $imageData = $this->fallbackIconGenerator->createIcon($user->getDisplayName(), $size);
-            }
+
+            return $avatar->getFile($size);
         } else {
-            $imageData = $this->fallbackIconGenerator->createIcon(strtolower($user), $size);
+            return (new GuestAvatar($userId, $this->logger))->getFile($size);
         }
-
-        return $this->fileCacheService->putFile($fileName, $imageData);
-    }
-
-    /**
-     * @param IImage $image
-     * @param string $name
-     *
-     * @param int    $size
-     *
-     * @return string
-     * @throws Throwable
-     */
-    protected function getImage(IImage $image, string $name, int $size): string {
-        ob_start();
-        $resize = $image->resize($size);
-        $export = imagepng($image->resource());
-        $data   = ob_get_clean();
-
-        if(!$resize || !$export) return $this->fallbackIconGenerator->createIcon($name, $size);
-
-        return $data;
     }
 
     /**
      * @param int $size
      *
-     * @return float|int
+     * @return int
      */
     protected function validateSize(int $size): int {
         $size = round($size / 8) * 8;

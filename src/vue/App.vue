@@ -33,8 +33,8 @@
     import router               from '@js/Helper/router';
     import Messages             from '@js/Classes/Messages';
     import SettingsService      from '@js/Services/SettingsService';
-    import NcContent            from '@nc/NcContent';
-    import NcAppContent         from '@nc/NcAppContent';
+    import NcContent            from '@nc/NcContent.js';
+    import NcAppContent         from '@nc/NcAppContent.js';
     import AppNavigationLoading from '@vc/Navigation/AppNavigationLoading';
     import Application          from '@js/Init/Application';
     import KeepAliveManager     from '@js/Manager/KeepAliveManager';

@@ -665,9 +665,6 @@
     "frontend-HandbookMoreHelpChat": {
         "message": "Ou no nosso chat!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Encontrou um erro?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Nos digam!"
     },
@@ -989,7 +986,7 @@
         "message": "Renderização de imagem"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (recomendado)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Serviços externos"
@@ -1022,7 +1019,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Coleção Leipzig Corpora (recomendado)"
+        "message": "Coleção Leipzig Corpora"
     },
     "backend-000406": {
         "message": "Serviço Favicon"
@@ -2614,7 +2611,7 @@
         }
     },
     "backend-000666": {
-        "message": "Selecione automaticamente"
+        "message": "Selecione automaticamente (recomendado)"
     },
     "frontend-000667": {
         "message": "Tags CSV"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Desativar"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Erro",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Sem senhas",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Suas senhas favoritas aparecerão aqui.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Nenhum resultado",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Pesquisar todas as senhas",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Não conseguimos encontrar nada para \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Os resultados serão atualizados assim que todas as senhas forem carregadas",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Outra documentação",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Manual do Administrador",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Manual do desenvolvedor",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

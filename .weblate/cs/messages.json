@@ -1382,7 +1382,7 @@
         "message": "Vykreslování obrázků"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (doporučeno)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externí služby"
@@ -1415,7 +1415,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (doporučeno)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Služba pro ikony webů"
@@ -2171,9 +2171,6 @@
             }
         }
     },
-    "frontend-HandbookBugs": {
-        "message": "Narazili jste na chybu?"
-    },
     "frontend-000330": {
         "message": "Platnost tokenu relace s aplikačním program. rozhraním (API) skončila"
     },
@@ -2834,7 +2831,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vybrat automaticky"
+        "message": "Vybrat automaticky (doporučeno)"
     },
     "frontend-000667": {
         "message": "CSV se štítky"
@@ -3245,5 +3242,51 @@
     },
     "frontend-Disable": {
         "message": "Zakázat"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nebyly nalezeny žádné výsledky pro dotaz „$QUERY$“",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Vyhledat všechna hesla",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Chyba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Žádná hesla",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Zde se zobrazí vaše oblíbená hesla.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Žádné výsledky",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Výsledky budou aktualizovány po načtení všech hesel.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Příručka pro vývojáře",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Další dokumentace",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Příručka pro správce",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

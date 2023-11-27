@@ -1189,9 +1189,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Запитуйте на нашому форумі!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Знайшли помилку?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Скажи нам!"
     },
@@ -1488,7 +1485,7 @@
         "message": "Рендеринг зображень"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (рекомендовано)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Зовнішні служби"
@@ -2519,7 +2516,7 @@
         }
     },
     "backend-000666": {
-        "message": "Вибрати автоматично"
+        "message": "Вибрати автоматично (рекомендовано)"
     },
     "frontend-000667": {
         "message": "Теги CSV"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Вимкнути"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Без паролів",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Тут з'являться ваші улюблені паролі.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Немає результатів",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Ми не змогли знайти нічого для \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Пошук всіх паролів",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Помилка.",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Результати будуть оновлені після завантаження всіх паролів",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Інша документація",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Посібник адміністратора",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Посібник для розробника",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

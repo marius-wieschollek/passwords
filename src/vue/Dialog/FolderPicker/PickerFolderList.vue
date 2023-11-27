@@ -13,7 +13,7 @@
         <li v-for="item in items" :key="item.id" @click="navigate(item)" :class="{disabled: !item.enabled}" :title="item.title">{{ item.label }}</li>
     </ul>
 
-    <nc-empty-content class="folder-picker-empty" :title="t('&quot;{folder}&quot; contains no folders', {folder: current.label})" :description="t(text)" v-else>
+    <nc-empty-content class="folder-picker-empty" :name="t('&quot;{folder}&quot; contains no folders', {folder: current.label})" :description="t(text)" v-else>
         <folder-open-outline-icon slot="icon"/>
     </nc-empty-content>
 </template>
@@ -21,8 +21,8 @@
 <script>
     import SettingsService from '@js/Services/SettingsService';
     import Localisation from '@js/Classes/Localisation';
-    import NcEmptyContent from '@nc/NcEmptyContent';
-    import FolderOpenOutlineIcon from "@icon/FolderOpenOutline.vue";
+    import NcEmptyContent from '@nc/NcEmptyContent.js';
+    import FolderOpenOutlineIcon from "@icon/FolderOpenOutline";
 
     export default {
         components: {FolderOpenOutlineIcon, NcEmptyContent},

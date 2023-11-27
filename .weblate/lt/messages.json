@@ -1183,9 +1183,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Klauskite mūsų forume!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Radote klaidą?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Papasakokite mums!"
     },
@@ -1491,7 +1488,7 @@
         "message": "Vaizdų atvaizdavimas"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (rekomenduojama)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Išorės paslaugos"
@@ -1524,7 +1521,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipcigo korpusų rinkinys (rekomenduojama)"
+        "message": "Leipcigo korpusų rinkinys"
     },
     "backend-000406": {
         "message": "\"Favicon\" paslauga"
@@ -2510,7 +2507,7 @@
         }
     },
     "backend-000666": {
-        "message": "Pasirinkite automatiškai"
+        "message": "Pasirinkite automatiškai (rekomenduojama)"
     },
     "backend-Passwords": {
         "message": "Slaptažodžiai"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Išjungti"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Klaida",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Jokių slaptažodžių",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Čia bus rodomi jūsų mėgstami slaptažodžiai.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Rezultatų nėra",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Neradome nieko, kas būtų skirta \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Ieškoti visų slaptažodžių",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Rezultatai bus atnaujinti, kai bus įkelti visi slaptažodžiai",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Kiti dokumentai",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Administratoriaus vadovas",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Kūrėjo vadovas",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

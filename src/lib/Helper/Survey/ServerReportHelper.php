@@ -12,9 +12,11 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Http\Client\IClientService;
+use Throwable;
 
 /**
  * Class ServerReportHelper
@@ -176,7 +178,16 @@ class ServerReportHelper {
      * @return array
      */
     protected function getServices(): array {
-        $images = HelperService::getImageHelperName($this->config->getAppValue('service/images', HelperService::IMAGES_IMAGICK));
+        $images = $this->config->getAppValue('service/images', HelperService::IMAGES_AUTO);
+        if($images === HelperService::IMAGES_AUTO) {
+            try {
+                /** @var AutoImageHelper $helper */
+                $helper = $this->helperService->getImageHelper(HelperService::IMAGES_AUTO);
+                $images = $helper->getRealImageHelperName();
+            } catch(Throwable $e) {
+                $images = HelperService::IMAGES_GDLIB;
+            }
+        }
 
         $previewApi = false;
         $faviconApi = false;

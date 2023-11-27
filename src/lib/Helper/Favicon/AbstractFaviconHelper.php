@@ -8,17 +8,18 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use Exception;
+use OC\Avatar\GuestAvatar;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\InvalidFaviconDataException;
 use OCA\Passwords\Exception\Favicon\NoFaviconDataException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
@@ -40,37 +41,25 @@ abstract class AbstractFaviconHelper {
     protected AbstractImageHelper $imageHelper;
 
     /**
-     * @var IClientService
-     */
-    protected IClientService $requestService;
-
-    /**
      * @var FileCacheService
      */
     protected FileCacheService $fileCacheService;
 
     /**
-     * @var FallbackIconGenerator
-     */
-    protected FallbackIconGenerator $fallbackIconGenerator;
-
-    /**
      * AbstractFaviconHelper constructor.
      *
-     * @param HelperService         $helperService
-     * @param IClientService        $requestService
-     * @param FileCacheService      $fileCacheService
-     * @param FallbackIconGenerator $fallbackIconGenerator
+     * @param HelperService    $helperService
+     * @param LoggerInterface  $logger
+     * @param FileCacheService $fileCacheService
+     * @param IClientService   $requestService
      */
     public function __construct(
         HelperService $helperService,
-        IClientService $requestService,
+        protected LoggerInterface $logger,
         FileCacheService $fileCacheService,
-        FallbackIconGenerator $fallbackIconGenerator
+        protected IClientService $requestService
     ) {
-        $this->requestService        = $requestService;
         $this->imageHelper           = $helperService->getImageHelper();
-        $this->fallbackIconGenerator = $fallbackIconGenerator;
         $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
     }
 
@@ -114,7 +103,7 @@ abstract class AbstractFaviconHelper {
         }
 
         $domain  = preg_replace(self::COMMON_SUBDOMAIN_PATTERN, '', $domain);
-        $content = $this->fallbackIconGenerator->createIcon(idn_to_utf8($domain), $size);
+        $content = (new GuestAvatar(idn_to_utf8($domain), $this->logger))->get($size)->data();
 
         return $this->fileCacheService->putFile($fileName, $content);
     }

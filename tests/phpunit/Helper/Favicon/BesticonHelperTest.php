@@ -11,7 +11,6 @@ use Exception;
 use OC\Files\SimpleFS\SimpleFile;
 use OC\User\User;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Helper\Icon\FallbackIconGenerator;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
@@ -24,6 +23,7 @@ use OCP\Http\Client\IClientService;
 use OCP\Http\Client\IResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Log\LoggerInterface;
 
 /**
  * Class BesticonHelperTest
@@ -73,34 +73,34 @@ class BesticonHelperTest extends TestCase {
     private $configurationService;
 
     /**
-     * @var MockObject|FallbackIconGenerator
+     * @var MockObject|LoggerInterface
      */
-    private $fallbackIconGenerator;
+    private $logger;
 
     /**
      *
      */
     protected function setUp(): void {
-        $this->imageHelper           = $this->createMock(ImagickHelper::class);
-        $helperService               = $this->createMock(HelperService::class);
-        $this->httpClientService     = $this->createMock(IClientService::class);
-        $this->dateTimeHelper        = $this->createMock(DateTimeHelper::class);
-        $this->adminService          = $this->createMock(AdminUserHelper::class);
-        $this->fileCacheService      = $this->createMock(FileCacheService::class);
-        $this->notificationService   = $this->createMock(NotificationService::class);
-        $this->fallbackIconGenerator = $this->createMock(FallbackIconGenerator::class);
-        $this->configurationService  = $this->createMock(ConfigurationService::class);
+        $this->imageHelper          = $this->createMock(ImagickHelper::class);
+        $helperService              = $this->createMock(HelperService::class);
+        $this->httpClientService    = $this->createMock(IClientService::class);
+        $this->dateTimeHelper       = $this->createMock(DateTimeHelper::class);
+        $this->adminService         = $this->createMock(AdminUserHelper::class);
+        $this->fileCacheService     = $this->createMock(FileCacheService::class);
+        $this->notificationService  = $this->createMock(NotificationService::class);
+        $this->logger               = $this->createMock(LoggerInterface::class);
+        $this->configurationService = $this->createMock(ConfigurationService::class);
         $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
         $this->besticonHelper = new BestIconHelper(
             $this->dateTimeHelper,
             $this->configurationService,
+            $this->logger,
             $helperService,
             $this->adminService,
             $this->httpClientService,
             $this->fileCacheService,
-            $this->notificationService,
-            $this->fallbackIconGenerator
+            $this->notificationService
         );
     }
 
@@ -141,9 +141,8 @@ class BesticonHelperTest extends TestCase {
      */
     public function testCallsWithCustomApiUrl() {
         $serviceUrl    = 'https://www.example.com/icon';
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
@@ -151,7 +150,6 @@ class BesticonHelperTest extends TestCase {
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
@@ -166,9 +164,8 @@ class BesticonHelperTest extends TestCase {
      */
     public function testCallsWithSharedApi() {
         $serviceUrl    = $this->besticonHelper::BESTICON_SHARED_INSTANCE;
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $file          = new SimpleFile();
@@ -177,7 +174,6 @@ class BesticonHelperTest extends TestCase {
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->willReturnMap(
             [
                 [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
@@ -196,7 +192,6 @@ class BesticonHelperTest extends TestCase {
      * @throws Exception
      */
     public function testWeekAndCounterAreSet() {
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -206,7 +201,6 @@ class BesticonHelperTest extends TestCase {
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->willReturnMap(
             [
                 [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
@@ -225,7 +219,6 @@ class BesticonHelperTest extends TestCase {
      * @throws Exception
      */
     public function testWeekAndCounterAreReset() {
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -235,7 +228,6 @@ class BesticonHelperTest extends TestCase {
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->willReturnMap(
             [
                 [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
@@ -254,7 +246,6 @@ class BesticonHelperTest extends TestCase {
      * @throws Exception
      */
     public function testNotificationSentIfLimitReached() {
-        $fallbackColor = '#f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -265,7 +256,6 @@ class BesticonHelperTest extends TestCase {
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn($fallbackColor);
         $this->configurationService->method('getAppValue')->willReturnMap(
             [
                 [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
@@ -289,7 +279,6 @@ class BesticonHelperTest extends TestCase {
      * @throws Exception
      */
     public function testNoNotificationSentIfLimitReachedAndNotified() {
-        $fallbackColor = '#f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -301,7 +290,6 @@ class BesticonHelperTest extends TestCase {
         $this->dateTimeHelper->method('getInternationalHour')->willReturn(12);
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn($fallbackColor);
         $this->configurationService->method('getAppValue')->willReturnMap(
             [
                 [$this->besticonHelper::BESTICON_CONFIG_KEY, '', Application::APP_NAME, ''],
@@ -326,7 +314,6 @@ class BesticonHelperTest extends TestCase {
      */
     public function testReturnsApiImageData() {
         $serviceUrl    = 'https://www.example.com/icon';
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -334,7 +321,6 @@ class BesticonHelperTest extends TestCase {
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
@@ -349,10 +335,9 @@ class BesticonHelperTest extends TestCase {
      */
     public function testAttemptsHttpRequestIfHttpsFails() {
         $serviceUrl     = 'https://www.example.com/icon';
-        $fallbackColor  = 'f0f0f0';
         $domain         = 'www.example.com';
-        $apiRequestUrl1 = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=https://{$domain}&formats=png,ico,gif,jpg";
-        $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color={$fallbackColor}&url=http://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl1 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=http://{$domain}&formats=png,ico,gif,jpg";
         $faviconData    = 'data';
         $fileName       = $this->besticonHelper->getFaviconFilename($domain);
         $file           = new SimpleFile();
@@ -362,7 +347,6 @@ class BesticonHelperTest extends TestCase {
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturnOnConsecutiveCalls($client, $client2);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
@@ -378,13 +362,11 @@ class BesticonHelperTest extends TestCase {
      */
     public function testThrowsExceptionWhenNoData() {
         $serviceUrl    = 'https://www.example.com/icon';
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
 
         $client = $this->getHttpClientMock('');
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturn($client);
 
@@ -401,14 +383,12 @@ class BesticonHelperTest extends TestCase {
      */
     public function testThrowsExceptionWhenUnsupportedType() {
         $serviceUrl    = 'https://www.example.com/icon';
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(false);
@@ -427,7 +407,6 @@ class BesticonHelperTest extends TestCase {
      */
     public function testImageTypeValidated() {
         $serviceUrl    = 'https://www.example.com/icon';
-        $fallbackColor = 'f0f0f0';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = $this->besticonHelper->getFaviconFilename($domain);
@@ -436,7 +415,6 @@ class BesticonHelperTest extends TestCase {
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
         $this->fileCacheService->method('putFile')->with($fileName, $faviconData)->willReturn($file);
-        $this->fallbackIconGenerator->method('stringToColor')->with($domain)->willReturn('#'.$fallbackColor);
         $this->configurationService->method('getAppValue')->with($this->besticonHelper::BESTICON_CONFIG_KEY, '')->willReturn($serviceUrl);
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);

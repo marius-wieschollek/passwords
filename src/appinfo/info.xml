@@ -15,6 +15,7 @@ You can also share passwords with other Nextcloud users.
  * Secure encryption
  * Folders &amp; tags
  * Sharing
+ * Dashboard Widget
  * API for apps
  * Extensive handbook
  * Import &amp; Export
@@ -50,6 +51,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * Sichere Verschlüsselung
  * Ordner &amp; Tags
  * Teilen-Funktion
+ * Dashboard Widget
  * Umfangreiche API
  * Import &amp; Export
  * Detailliertes Handbuch
@@ -84,6 +86,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <developer>https://git.mdns.eu/nextcloud/passwords/-/wikis/developers/index</developer>
     </documentation>
     <category>security</category>
+    <category>dashboard</category>
+    <category>office</category>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
     <repository>https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/feature-overview.png">

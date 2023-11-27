@@ -1,6 +1,6 @@
 <template>
     <div class="empty-section">
-        <nc-empty-content :title="t('There is nothing here')" :description="t(text)">
+        <nc-empty-content :name="t('There is nothing here')" :description="t(text)">
             <key-variant-icon slot="icon" fill-color="var(--color-primary-text)" :size="64"/>
             <div v-if="showSearchLink" slot="action">
                 <nc-button :to="searchRoute" id="global-search-link">
@@ -14,9 +14,9 @@
 <script>
     import API from '@js/Helper/api';
     import SearchManager from '@js/Manager/SearchManager';
-    import NcButton from '@nc/NcButton';
+    import NcButton from '@nc/NcButton.js';
     import KeyVariantIcon from '@icon/KeyVariant';
-    import NcEmptyContent from '@nc/NcEmptyContent';
+    import NcEmptyContent from '@nc/NcEmptyContent.js';
 
     export default {
         components: {

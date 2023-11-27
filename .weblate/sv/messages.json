@@ -1061,9 +1061,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Vi hjälper dig gärna!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Hittat ett fel?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Berätta!"
     },
@@ -1328,7 +1325,7 @@
         "message": "Bildbehandling"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (rekommenderas)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externa tjänster"
@@ -1361,7 +1358,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (rekommenderas)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon tjänst"
@@ -2267,7 +2264,7 @@
         }
     },
     "backend-000666": {
-        "message": "Välj automatiskt"
+        "message": "Välj automatiskt (rekommenderas)"
     },
     "frontend-000667": {
         "message": "Taggar CSV"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Inaktivera"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Inga resultat",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Sök alla lösenord",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fel",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Inga lösenord",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Dina favoritlösenord visas här.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Ingenting kunde hittas för \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Resultaten kommer att uppdateras när alla lösenord har laddats",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Annan dokumentation",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Handbok för administratörer",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Handbok för utvecklare",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

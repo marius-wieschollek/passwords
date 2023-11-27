@@ -27,7 +27,7 @@
                     </nc-button>
                 </div>
             </div>
-            <nc-loading-icon class="pw-folder-picker-loading" :title="t('FolderPickerLoading')" :size="40" v-else/>
+            <nc-loading-icon class="pw-folder-picker-loading" :name="t('FolderPickerLoading')" :size="40" v-else/>
         </template>
     </nc-modal>
 </template>
@@ -39,9 +39,9 @@
     import PickerBreadcrumb from '@vue/Dialog/FolderPicker/PickerBreadcrumb';
     import PickerFolderList from '@vue/Dialog/FolderPicker/PickerFolderList';
     import Localisation from '@js/Classes/Localisation';
-    import NcModal from '@nc/NcModal';
-    import NcButton from '@nc/NcButton';
-    import NcLoadingIcon from '@nc/NcLoadingIcon'
+    import NcModal from '@nc/NcModal.js';
+    import NcButton from '@nc/NcButton.js';
+    import NcLoadingIcon from '@nc/NcLoadingIcon.js'
 
     export default {
         components: {PickerFolderList, PickerBreadcrumb, Translate, NcModal, NcButton, NcLoadingIcon},

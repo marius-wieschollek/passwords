@@ -1132,9 +1132,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Pregunteu al nostre fòrum!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Heu trobat cap error?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Explica'ns!"
     },
@@ -2543,5 +2540,15 @@
     "frontend-PasswordEncryptionCSE": {
         "message": "Xifratge d'extrem a extrem",
         "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "No s'ha trobat res per a \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
     }
 }

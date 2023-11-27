@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :name="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFolders">
+    <app-navigation-item ref="navigation-item" :name="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :exact="requiresExact" :open="open" :loading="loading" v-on:update:open="loadFolders">
         <folder-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item
@@ -21,7 +21,7 @@
                     :data-folder-id="folder.id"
                     data-drop-type="folder"
             >
-                <folder-icon :size="20" fill-color="var(--color-primary)" slot="icon"/>
+                <folder-icon :size="20" :fill-color="folderIconColor(folder.id)" slot="icon"/>
             </app-navigation-item>
             <nc-loading-icon v-if="!hasLoaded"/>
         </template>
@@ -30,7 +30,7 @@
 <script>
     import API from '@js/Helper/api';
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
-    import NcLoadingIcon from "@nc/NcLoadingIcon";
+    import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import FolderIcon from "@icon/Folder";
     import Utility from '@js/Classes/Utility';
     import Events from "@js/Classes/Events";
@@ -62,7 +62,7 @@
                    )
                 ) {
                     this.refreshFolders();
-                } else if(this.folders.length !== 0) {
+                } else if(!this.$refs['navigation-item'].opened && this.folders.length !== 0) {
                     this.folders = [];
                     this.hasLoaded = false;
                 }
@@ -75,6 +75,11 @@
                     this.hasLoaded = false;
                 }
             });
+        },
+        computed: {
+            requiresExact() {
+                return this.folders.find((folder) => {return folder.id === this.$route.params?.folder;}) !== undefined
+            }
         },
         methods: {
             loadFolders() {
@@ -92,6 +97,13 @@
                        this.loading = false;
                        this.hasLoaded = true;
                    });
+            },
+            folderIconColor(id) {
+                if(this.$route.params?.folder === id) {
+                    return 'var(--color-primary-element-text)';
+                }
+
+                return 'var(--color-primary)';
             }
         }
     };

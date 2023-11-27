@@ -1200,19 +1200,16 @@
         "message": "Seite nicht gefunden"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Noch Fragen?"
+        "message": "Brauchst du Hilfe?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Frage im Forum!"
+        "message": "Frag im Forum"
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Oder im Chat!"
-    },
-    "frontend-HandbookBugs": {
-        "message": "Fehler gefunden?"
+        "message": "Frag im Chat"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Sag uns bescheid!"
+        "message": "Melde Fehler"
     },
     "frontend-000329": {
         "message": "Die Sitzung ist abgelaufen"
@@ -1561,7 +1558,7 @@
         "message": "Bildverarbeitung"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (empfohlen)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externe Dienste"
@@ -1594,7 +1591,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (empfohlen)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon Dienst"
@@ -2262,7 +2259,7 @@
         }
     },
     "backend-000666": {
-        "message": "Automatisch auswählen"
+        "message": "Automatisch auswählen (empfohlen)"
     },
     "backend-Passwords": {
         "message": "Passwörter"
@@ -3075,7 +3072,7 @@
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLNextcloudText2": {
-        "message": "Wechsle auf Nextcloud $STR_1$ für zukünftige Aktualisierungen zu erhalten.",
+        "message": "Wechsle auf Nextcloud $STR_1$ um zukünftige Updates zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3114,7 +3111,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "Wechsle auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Versionen von Passwörter zu erhalten.",
+        "message": "Wechsle auf PHP $STR_2$ (oder PHP $STR_3$ für LSR) um zukünftige Updates zu erhalten.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3246,5 +3243,51 @@
     },
     "frontend-Disable": {
         "message": "Deaktivieren"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Deine Favoriten werden hier angezeigt werden.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Keine Ergebnisse",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Passwörter durchsuchen",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fehler",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Keine Passwörter",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Es wurde nichts zu \"$QUERY$\" gefunden",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Die Treffer werden aktualisiert, sobald alle Passwörter geladen wurden",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Entwicklerhandbuch",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Weitere Dokumentationen",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Administratorhandbuch",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

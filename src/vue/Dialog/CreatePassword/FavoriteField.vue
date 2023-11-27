@@ -17,7 +17,7 @@
 
 <script>
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
-    import NcButton from '@nc/NcButton';
+    import NcButton from '@nc/NcButton.js';
     import StarIcon from '@icon/Star';
     import StarOutlineIcon from '@icon/StarOutline';
 

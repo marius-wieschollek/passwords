@@ -1163,9 +1163,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Tanyakan di forum kami!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Menemukan kesalahan?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Beritahu kami!"
     },
@@ -1462,7 +1459,7 @@
         "message": "Rendering Gambar"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (direkomendasikan)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Layanan Eksternal"
@@ -1495,7 +1492,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Koleksi Leipzig Corpora (direkomendasikan)"
+        "message": "Koleksi Leipzig Corpora"
     },
     "backend-000406": {
         "message": "Layanan Favicon"
@@ -2493,7 +2490,7 @@
         }
     },
     "backend-000666": {
-        "message": "Pilih secara otomatis"
+        "message": "Pilih secara otomatis (direkomendasikan)"
     },
     "backend-Passwords": {
         "message": "Kata sandi"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Nonaktifkan"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Kesalahan",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Tidak ada kata sandi",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Kata sandi favorit Anda akan muncul di sini.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Tidak ada hasil",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Kami tidak dapat menemukan apa pun untuk \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Cari semua kata sandi",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Hasil akan diperbarui setelah semua kata sandi dimuat",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Dokumentasi Lainnya",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Buku Panduan Administrator",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Buku Panduan Pengembang",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

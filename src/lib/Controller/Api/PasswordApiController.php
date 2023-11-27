@@ -319,9 +319,13 @@ class PasswordApiController extends AbstractObjectApiController {
 
         foreach($tags as $tag) {
             if(in_array($tag, $skip) || empty($tag)) continue;
-            $tag = $this->tagService->findByUuid($tag);
-            /** @var TagRevision $revision */
-            $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
+            try {
+                $tag = $this->tagService->findByUuid($tag);
+                /** @var TagRevision $revision */
+                $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
+            } catch(DoesNotExistException $e) {
+                throw new ApiException('Tag does not exist', 400);
+            }
 
             $relation = $this->relationService->create($passwordRevision, $revision);
             $this->relationService->save($relation);

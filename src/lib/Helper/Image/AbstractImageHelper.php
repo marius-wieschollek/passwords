@@ -18,17 +18,11 @@ use OCA\Passwords\Services\ConfigurationService;
 abstract class AbstractImageHelper {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
      * AbstractImageHelper constructor.
      *
      * @param ConfigurationService $configurationService
      */
-    public function __construct(ConfigurationService $configurationService) {
-        $this->config = $configurationService;
+    public function __construct(protected ConfigurationService $config) {
     }
 
     /**
@@ -158,13 +152,6 @@ abstract class AbstractImageHelper {
     abstract public function getImageFromBlob($imageBlob);
 
     /**
-     * @param string $file
-     *
-     * @return mixed
-     */
-    abstract public function getImageFromFile(string $file);
-
-    /**
      * @param $image
      *
      * @return bool
@@ -200,11 +187,11 @@ abstract class AbstractImageHelper {
     abstract public function convertIcoToPng($data);
 
     /**
-     * Whether or not this service can be used in the current environment
+     * Whether this service can be used in the current environment
      *
      * @return bool
      */
-    abstract public static function isAvailable(): bool;
+    abstract public function isAvailable(): bool;
 
     /**
      * @return string

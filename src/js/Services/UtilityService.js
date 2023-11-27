@@ -221,6 +221,21 @@ export default new class UtilityService {
     }
 
     /**
+     * @param {array} array
+     * @param {String} property
+     */
+    arrayPluck(array, property) {
+        let values = [];
+        for(let item of array) {
+            if(item.hasOwnProperty(property)) {
+                values.push(item[property]);
+            }
+        }
+
+        return values;
+    }
+
+    /**
      *
      * @param a
      * @param b

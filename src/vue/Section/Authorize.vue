@@ -68,7 +68,7 @@
             Field,
             Translate,
             'help-circle': () => import(/* webpackChunkName: "HelpCircleIcon" */ '@icon/HelpCircle'),
-            'nc-button'  : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton')
+            'nc-button'  : () => import(/* webpackChunkName: "NcButton" */ '@nc/NcButton.js')
         },
         data() {
             let impersonateEl = document.querySelector('meta[name=pw-impersonate]'),

@@ -13,7 +13,7 @@
         <NcBreadcrumb
                 v-for="(folder, index) in hierarchy"
                 :key="folder.id"
-                :title="folder.label"
+                :name="folder.label"
                 v-on:click.native="$emit('navigate', folder)"
                 :disableDrop="true"
         >
@@ -23,8 +23,8 @@
 </template>
 
 <script>
-    import NcBreadcrumbs from '@nc/NcBreadcrumbs';
-    import NcBreadcrumb from '@nc/NcBreadcrumb';
+    import NcBreadcrumbs from '@nc/NcBreadcrumbs.js';
+    import NcBreadcrumb from '@nc/NcBreadcrumb.js';
     import FolderIcon from "@icon/Folder";
 
     export default {

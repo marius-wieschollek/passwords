@@ -1287,9 +1287,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Vprašajte v našem forumu!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Našli ste napako?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Povejte nam!"
     },
@@ -1449,7 +1446,7 @@
         "message": "Upodabljanje slik"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (priporočljivo)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Zunanje storitve"
@@ -1482,7 +1479,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipziška zbirka korpusov (priporočljivo)"
+        "message": "Leipziška zbirka korpusov"
     },
     "backend-000406": {
         "message": "Storitev Favicon"
@@ -2483,7 +2480,7 @@
         }
     },
     "backend-000666": {
-        "message": "Izberite samodejno"
+        "message": "Izberite samodejno (priporočljivo)"
     },
     "backend-Passwords": {
         "message": "Gesla"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Onemogočite"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Napaka",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Brez gesel",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Tu bodo prikazana vaša priljubljena gesla.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Brez rezultatov",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Ničesar nismo našli za \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Iskanje vseh gesel",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Rezultati bodo posodobljeni, ko bodo naložena vsa gesla",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Druga dokumentacija",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Priročnik za administratorje",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Priročnik za razvijalce",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

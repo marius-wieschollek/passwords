@@ -34,9 +34,9 @@
     import API from "@js/Helper/api";
     import Utility from "@js/Classes/Utility";
     import Translate from '@vc/Translate';
-    import NcModal from "@nc/NcModal";
-    import NcButton from '@nc/NcButton';
-    import NcLoadingIcon from '@nc/NcLoadingIcon';
+    import NcModal from '@nc/NcModal.js';
+    import NcButton from '@nc/NcButton.js';
+    import NcLoadingIcon from '@nc/NcLoadingIcon.js';
 
     export default {
         components: {

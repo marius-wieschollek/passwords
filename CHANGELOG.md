@@ -1,4 +1,12 @@
 ## [Unreleased]
+### Added
+- Added Dashboard widget
+- Imaginary support
+### Changed
+- Switched to NC 28 design components
+- Updated request scheduler to improve performance
+- Fallback icon handling
+
 ## 2023.11.0 - Feature release
 ### Added
 - NC 28 compatibility

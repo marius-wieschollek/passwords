@@ -1143,24 +1143,32 @@
         "message": "Not Found"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Still need help?",
+        "message": "Do you need help?",
         "description": "Title of the box on the right in the handbook where users can find links to the forum and chat."
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Ask in our forum!",
+        "message": "Ask in our forum",
         "description": "Label of the link to the forum in the box on the right in the handbook."
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Or in our Chat!",
+        "message": "Ask in our Chat",
         "description": "Label of the link to the chat in the box on the right in the handbook."
     },
-    "frontend-HandbookBugs": {
-        "message": "Found an error?",
-        "description": "Title of the box on the right in the handbook where users can report bugs."
-    },
     "frontend-HandbookBugsReport": {
-        "message": "Tell us!",
+        "message": "Report a bug",
         "description": "Label of the link to the bug report page in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Other Documentation",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Administrator Handbook",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Developer Handbook",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     },
     "frontend-000329": {
         "message": "The session has expired"
@@ -1376,6 +1384,40 @@
         "message": "WebAuthn Login was disabled. You can enable it again in the settings",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
+    "frontend-DashboardLoginError": {
+        "message": "Error",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "No passwords",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Your favorite passwords will appear here.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "No results",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "We couldn't find anything for \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Results will be updated once all passwords are loaded",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Search all passwords",
+        "description": "Label for the search query input field in the Nextcloud Dashboard Widget"
+    },
     "backend-000377": {
         "message": "HTTPS Required"
     },
@@ -1466,7 +1508,7 @@
         "message": "Image Rendering"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (recommended)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "External Services"
@@ -1499,7 +1541,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (recommended)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon Service"
@@ -2470,7 +2512,7 @@
         "message": "Restore backups automatically when database wiped"
     },
     "backend-000666": {
-        "message": "Select automatically"
+        "message": "Select automatically (recommended)"
     },
     "backend-Passwords": {
         "message": "Passwords"

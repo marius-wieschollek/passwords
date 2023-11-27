@@ -14,8 +14,8 @@ namespace {
     }
 
     class OC_Util {
-        public static $ncDefaultVersion = [27,0,0,0];
-        public static $ncVersion = [27,0,0,0];
+        public static $ncDefaultVersion = [29,0,0,0];
+        public static $ncVersion = [29,0,0,0];
         public static function getVersion(): array {return self::$ncVersion;}
     }
 }
@@ -230,5 +230,19 @@ namespace OCA\Unsplash\ProviderHandler {
         const SIZE_NORMAL = 1;
         const SIZE_HIGH = 2;
         const SIZE_ULTRA = 3;
+    }
+}
+
+namespace Psr\Log {
+    class LoggerInterface {
+        public function emergency($message, array $context = array()) {}
+        public function alert($message, array $context = array()) {}
+        public function critical($message, array $context = array()) {}
+        public function error($message, array $context = array()) {}
+        public function warning($message, array $context = array()) {}
+        public function notice($message, array $context = array()) {}
+        public function info($message, array $context = array()) {}
+        public function debug($message, array $context = array()) {}
+        public function log($level, $message, array $context = array()) {}
     }
 }

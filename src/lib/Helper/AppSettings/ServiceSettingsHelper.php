@@ -69,6 +69,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'preview'            => HelperService::PREVIEW_DEFAULT,
             'favicon'            => HelperService::FAVICON_DEFAULT,
             'words'              => HelperService::WORDS_AUTO,
+            'images'             => HelperService::IMAGES_AUTO,
             'preview.api'        => '',
             'favicon.api'        => '',
             'security.hibp.url'  => null,
@@ -179,20 +180,6 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     }
 
     /**
-     * @param string $setting
-     *
-     * @return string
-     * @throws ApiException
-     */
-    protected function getSettingDefault(string $setting): string {
-        if($setting == 'images') {
-            return HelperService::getImageHelperName();
-        }
-
-        return parent::getSettingDefault($setting);
-    }
-
-    /**
      * @return string
      * @noinspection PhpUnused
      */
@@ -268,12 +255,12 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         return [
             $this->generateOptionArray(
                 HelperService::WORDS_AUTO,
-                $this->localisation->t('Select automatically'),
+                $this->localisation->t('Select automatically (recommended)'),
                 $this->helperService->getWordsHelper(HelperService::WORDS_AUTO)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::WORDS_LEIPZIG,
-                $this->localisation->t('Leipzig Corpora Collection (recommended)'),
+                $this->localisation->t('Leipzig Corpora Collection'),
                 $this->helperService->getWordsHelper(HelperService::WORDS_LEIPZIG)->isAvailable()
             ),
             $this->generateOptionArray(
@@ -367,13 +354,24 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
     protected function getImagesOptions(): array {
         return [
             $this->generateOptionArray(
+                HelperService::IMAGES_AUTO,
+                $this->localisation->t('Select automatically (recommended)'),
+                $this->helperService->getWordsHelper(HelperService::IMAGES_AUTO)->isAvailable()
+            ),
+            $this->generateOptionArray(
                 HelperService::IMAGES_IMAGICK,
-                $this->localisation->t('Imagick/GMagick (recommended)'),
-                ImagickHelper::isAvailable()
+                $this->localisation->t('Imagick/GMagick'),
+                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGICK)->isAvailable()
+            ),
+            $this->generateOptionArray(
+                HelperService::IMAGES_IMAGINARY,
+                $this->localisation->t('Imaginary'),
+                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGINARY)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_GDLIB,
-                $this->localisation->t('PHP GDLib')
+                $this->localisation->t('PHP GDLib'),
+                $this->helperService->getWordsHelper(HelperService::IMAGES_GDLIB)->isAvailable()
             )
         ];
     }

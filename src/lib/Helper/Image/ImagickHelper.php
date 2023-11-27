@@ -99,22 +99,6 @@ class ImagickHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param string $file
-     *
-     * @return Gmagick|Imagick
-     * @throws ImagickException
-     * @throws GmagickException
-     */
-    public function getImageFromFile(string $file) {
-        $image = $this->getNewImageObject();
-        $image->setFont($this->getDefaultFont());
-        $image->readImage($file);
-        $image->stripImage();
-
-        return $image;
-    }
-
-    /**
      * @param Imagick|Gmagick $image
      *
      * @return bool
@@ -215,7 +199,7 @@ class ImagickHelper extends AbstractImageHelper {
     /**
      * @inheritdoc
      */
-    public static function isAvailable(): bool {
+    public function isAvailable(): bool {
         return class_exists(Imagick::class) || class_exists(Gmagick::class);
     }
 }

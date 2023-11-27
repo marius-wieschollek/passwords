@@ -1168,9 +1168,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Spýtajte sa na našom fóre!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Našli ste chybu?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Povedzte nám to!"
     },
@@ -1473,7 +1470,7 @@
         "message": "Vykresľovanie obrázkov"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (odporúčané)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Externé služby"
@@ -2483,7 +2480,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vyberte automaticky"
+        "message": "Vyberte automaticky (odporúčané)"
     },
     "backend-Passwords": {
         "message": "Heslá"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Zakázať"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Žiadne heslá",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Tu sa zobrazia vaše obľúbené heslá.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Žiadne výsledky",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Nenašli sme nič pre \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Vyhľadávanie všetkých hesiel",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Chyba",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Výsledky budú aktualizované po načítaní všetkých hesiel",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Ďalšia dokumentácia",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Príručka pre správcu",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Príručka pre vývojárov",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

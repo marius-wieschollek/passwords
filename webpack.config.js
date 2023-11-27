@@ -67,13 +67,13 @@ module.exports = (env, argv) => {
             apply(compiler) {
                 compiler.hooks.done.tap(this.constructor.name, stats => {
                     exec(
-                        'docker exec -u www-data passwords-php php ./occ config:app:set passwords dev/app/hash --value='+stats.compilation.hash,
-                         (error, stdout, stderr) => {
+                        'docker exec -u www-data passwords-php php ./occ config:app:set passwords dev/app/hash --value=' + stats.compilation.hash,
+                        (error, stdout, stderr) => {
                             if(error) {
                                 console.error(`Could not set app hash: ${error}`);
                             }
-                         }
-                    )
+                        }
+                    );
                 });
             }
         }
@@ -85,8 +85,9 @@ module.exports = (env, argv) => {
         mode        : production ? 'production':'development',
         devtool     : false,
         entry       : {
-            app  : `${__dirname}/src/js/app.js`,
-            admin: `${__dirname}/src/js/admin.js`
+            app      : `${__dirname}/src/js/app.js`,
+            admin    : `${__dirname}/src/js/admin.js`,
+            dashboard: `${__dirname}/src/js/dashboard.js`
         },
         output      : {
             path         : `${__dirname}/src/`,
@@ -107,7 +108,7 @@ module.exports = (env, argv) => {
         },
         resolve     : {
             modules   : ['node_modules', 'src'],
-            extensions: ['.js', '.vue', '.scss'],
+            extensions: ['.mjs', '.js', '.vue', '.scss'],
             fallback  : {
                 path  : false,
                 crypto: false,

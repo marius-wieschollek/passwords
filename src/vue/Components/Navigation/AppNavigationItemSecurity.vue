@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <app-navigation-item :name="t('Security')" :to="{ name: 'Security'}" v-if="isVisible" :allowCollapse="true" :open="open">
+    <app-navigation-item :name="t('Security')" :to="{ name: 'Security'}" v-if="isVisible" :allowCollapse="true" :exact="true" :open="open">
         <shield-half-full-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item :name="t('Secure')" :to="{ name: 'Security', params: {status: '0'}}" :exact="true">

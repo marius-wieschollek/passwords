@@ -75,9 +75,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Ρωτήστε στο φόρουμ μας!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Βρήκατε κάποιο σφάλμα;"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Πείτε μας!"
     },
@@ -1685,7 +1682,7 @@
         "message": "Απεικόνιση εικόνας"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (συνιστάται)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Εξωτερικές υπηρεσίες"
@@ -2546,7 +2543,7 @@
         }
     },
     "backend-000666": {
-        "message": "Επιλέξτε αυτόματα"
+        "message": "Επιλέξτε αυτόματα (συνιστάται)"
     },
     "backend-Passwords": {
         "message": "Κωδικοί πρόσβασης"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Απενεργοποίηση"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Σφάλμα",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Δεν υπάρχουν κωδικοί πρόσβασης",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Οι αγαπημένοι σας κωδικοί πρόσβασης θα εμφανίζονται εδώ.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Δεν υπάρχουν αποτελέσματα",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Δεν μπορέσαμε να βρούμε τίποτα για το \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Αναζήτηση όλων των κωδικών πρόσβασης",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Τα αποτελέσματα θα ενημερωθούν μόλις φορτωθούν όλοι οι κωδικοί πρόσβασης",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookMore": {
+        "message": "Άλλη τεκμηρίωση",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Εγχειρίδιο διαχειριστή",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Εγχειρίδιο προγραμματιστή",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     }
 }

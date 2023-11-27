@@ -1177,9 +1177,6 @@
     "frontend-HandbookMoreHelpForum": {
         "message": "Spørg i vores forum!"
     },
-    "frontend-HandbookBugs": {
-        "message": "Har du fundet en fejl?"
-    },
     "frontend-HandbookBugsReport": {
         "message": "Fortæl os det!"
     },
@@ -1479,7 +1476,7 @@
         "message": "Billedgengivelse"
     },
     "backend-000394": {
-        "message": "Imagick/GMagick (anbefales)"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
         "message": "Eksterne tjenester"
@@ -1512,7 +1509,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Leipzig Corpora Collection (anbefalet)"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
         "message": "Favicon-service"
@@ -2507,7 +2504,7 @@
         }
     },
     "backend-000666": {
-        "message": "Vælg automatisk"
+        "message": "Vælg automatisk (anbefalet)"
     },
     "frontend-000667": {
         "message": "Tags CSV"
@@ -3248,5 +3245,51 @@
     },
     "frontend-Disable": {
         "message": "Deaktiver"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Fejl",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Ingen adgangskoder",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Dine foretrukne adgangskoder vises her.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Ingen resultater",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Vi kunne ikke finde noget for \"$QUERY$\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Søg i alle adgangskoder",
+        "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Resultaterne vil blive opdateret, når alle adgangskoder er indlæst.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Håndbog for administratorer",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Håndbog for udviklere",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "Anden dokumentation",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
     }
 }
