@@ -10,9 +10,14 @@
 
 <template>
     <div class="buttons">
-        <translate say="Connect with PassLink" title="Link this client to your Nextcloud account without annoying passwords and urls" tag="button" @click="initPassLink()" v-if="item.passlink.enabled"/>
+        <translate say="Connect with PassLink"
+                   title="Link this client to your Nextcloud account without annoying passwords and urls"
+                   tag="button"
+                   @click="initPassLink()"
+                   v-if="item.passlink.enabled"/>
         <web target="_blank"
-             className="button primary"
+             className="button"
+             :class="{primary:download.primary, secondary:!download.primary}"
              :href="download.url"
              :text="download.label"
              v-for="download in item.downloads"
