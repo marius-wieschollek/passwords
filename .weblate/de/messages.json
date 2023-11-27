@@ -3289,5 +3289,8 @@
     "frontend-HandbookAdminDocumentation": {
         "message": "Administratorhandbuch",
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-Donate": {
+        "message": "Spende"
     }
 }
