@@ -34,14 +34,17 @@
             <app-navigation-item :name="t('Settings')" :to="{ name: 'Settings'}">
                 <cog-icon :size=20 slot="icon" />
             </app-navigation-item>
+            <app-navigation-item :name="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
+                <puzzle-icon :size=20 slot="icon" />
+            </app-navigation-item>
             <app-navigation-item :name="t('Backup and Restore')" :to="{ name: 'Backup'}">
                 <archive-icon :size=20 slot="icon" />
             </app-navigation-item>
             <app-navigation-item :name="t('Handbook')" :to="{ name: 'Help'}">
                 <help-circle-icon :size=20 slot="icon" />
             </app-navigation-item>
-            <app-navigation-item :name="t('Apps and Extensions')" :to="{ name: 'Apps and Extensions'}">
-                <puzzle-icon :size=20 slot="icon" />
+            <app-navigation-item :name="t('Donate')" :href="donateURL">
+                <cash-multiple :size=20 slot="icon" />
             </app-navigation-item>
         </nc-app-navigation-settings>
     </nc-app-navigation>
@@ -62,6 +65,7 @@
     import HelpCircleIcon             from '@icon/HelpCircle';
     import MagnifyIcon                from '@icon/Magnify';
     import PuzzleIcon                 from '@icon/Puzzle';
+    import CashMultiple               from '@icon/CashMultiple';
     import NcAppNavigationSettings    from '@nc/NcAppNavigationSettings.js';
 
     export default {
@@ -81,12 +85,18 @@
             MagnifyIcon,
             NcAppNavigation,
             NcAppNavigationSettings,
-            PuzzleIcon
+            PuzzleIcon,
+            CashMultiple
         },
         props     : {
             hasTimeout     : {},
             isMobile       : {},
             isSearchVisible: {}
+        },
+        data() {
+            return {
+                donateURL: 'https://github.com/marius-wieschollek/passwords/blob/master/Donate.md'
+            }
         }
     };
 </script>
