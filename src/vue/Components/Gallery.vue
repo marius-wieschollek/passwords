@@ -17,6 +17,8 @@
     import 'blueimp-gallery/js/blueimp-gallery-video.js';
     import 'blueimp-gallery/js/blueimp-gallery-youtube.js';
     import BlueImp from 'blueimp-gallery/js/blueimp-gallery.js';
+    import LocalisationService from "@js/Services/LocalisationService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {Web},
@@ -81,16 +83,16 @@
                               toggleControlsOnReturn    : false,
                               toggleControlsOnSlideClick: false,
                               closeOnSlideClick         : true,
+                              closeOnHashChange         : false,
                               container                 : `#${this.id}`,
                               index,
                               onopen                    : () => this.$emit('onopen'),
                               onopened                  : () => this.$emit('onopened'),
                               onslide                   : this.onSlideCustom,
                               onslideend                : (index, slide) => this.$emit('onslideend', {index, slide}),
-                              onslidecomplete           : (index, slide) => this.$emit('onslidecomplete',
-                                                                                       {index, slide}),
+                              onslidecomplete           : (index, slide) => this.$emit('onslidecomplete', {index, slide}),
                               onclose                   : () => this.close(),
-                              onclosed                  : () => this.$emit('onclosed')
+                              onclosed                  : () => this.onclosed()
                           },
                           this.options
                       );
@@ -104,7 +106,7 @@
                 let image = this.images[index];
                 if(image !== undefined) {
                     this.imageUrl = image.href;
-                    if(image.type.substr(0, 5) === 'video') {
+                    if(image.type.startsWith('video')) {
                         this.loadCaptions(slide, image.href);
                         slide.querySelector('a').click();
                     }
@@ -118,7 +120,7 @@
              */
             async loadCaptions(slide, videoUrl) {
                 let lastSlash = videoUrl.lastIndexOf('/') + 1,
-                    baseUrl   = `${videoUrl.substr(0, lastSlash)}subtitles/`,
+                    baseUrl   = `${videoUrl.substring(0, lastSlash)}subtitles/`,
                     fileName  = videoUrl.substring(lastSlash, videoUrl.lastIndexOf('.')),
                     languages = {en: 'English', de: 'Deutsch'};
 
@@ -126,7 +128,7 @@
                     if(languages.hasOwnProperty(language)) {
                         let url = `${baseUrl + fileName}-${language}.vtt`;
                         this.addCaption(slide, url, language, languages[language])
-                            .catch(console.error);
+                            .catch(LoggingService.catch);
                     }
                 }
             },
@@ -134,7 +136,7 @@
                 let response = await fetch(new Request(url, {redirect: 'error', referrerPolicy: 'no-referrer'})),
                     mime     = response.headers.get('content-type');
 
-                if(!response.ok || (mime.substr(0, 10) !== 'text/plain' && mime.substr(0, 8) !== 'text/vtt')) {
+                if(!response.ok || (!mime.startsWith('text/plain') && mime.startsWith('text/vtt'))) {
                     return;
                 }
 
@@ -144,14 +146,26 @@
                 track.kind = 'captions';
                 track.label = label;
                 track.srclang = language;
-                track.mode = 'showing';
+                track.mode = 'hidden';
                 track.src = window.URL.createObjectURL(data);
-                slide.querySelector('video').appendChild(track);
+
+                let video = slide.querySelector('video');
+                video.appendChild(track);
+
+                if(language !== 'en' && LocalisationService.language.startsWith(language)) {
+                    for (let i = 0; i < video.textTracks.length; i++) {
+                        video.textTracks[i].mode = video.textTracks[i].language === language ? 'showing':'hidden';
+                    }
+                }
             },
             close() {
                 document.getElementById('content-vue').classList.remove('blocking');
                 document.getElementById('content-vue').style.zIndex = 'auto';
                 this.$emit('close');
+            },
+            onclosed() {
+                this.instance = null;
+                this.$emit('onclosed');
             }
         }
     };

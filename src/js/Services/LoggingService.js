@@ -46,7 +46,6 @@ export default new class LoggingService {
         }
 
         this._write('error', args);
-
     }
 
     warn(...args) {
