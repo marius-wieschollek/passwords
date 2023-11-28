@@ -3291,5 +3291,8 @@
     "frontend-HandbookMore": {
         "message": "Anden dokumentation",
         "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-Donate": {
+        "message": "Donér"
     }
 }

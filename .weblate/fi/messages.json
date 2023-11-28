@@ -3291,5 +3291,8 @@
     "frontend-HandbookAdminDocumentation": {
         "message": "Ylläpitäjän käsikirja",
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-Donate": {
+        "message": "Lahjoita"
     }
 }
