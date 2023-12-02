@@ -237,5 +237,9 @@
             }
         }
     }
+
+    .app-sidebar-tabs__content {
+        min-height: 0;
+    }
 }
 </style>
