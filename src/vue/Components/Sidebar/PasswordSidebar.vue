@@ -208,6 +208,8 @@
 
 <style lang="scss">
 .passwords-sidebar-password.app-sidebar {
+    overflow-y: hidden;
+
     .app-sidebar-header__tertiary-actions {
         position : relative;
 

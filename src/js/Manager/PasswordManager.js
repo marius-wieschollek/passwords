@@ -26,8 +26,12 @@ class PasswordManager {
                         .catch(reject);
                 };
 
-            if(folder) properties.folder = folder;
-            if(tag) properties.tags = [{id: tag}];
+            if(folder) {
+                properties.folder = folder;
+            } else {
+                properties.folder = '00000000-0000-0000-0000-000000000000';
+            }
+            if(tag) properties.tags = [tag];
 
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
