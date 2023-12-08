@@ -38,6 +38,8 @@ export default new class Dashboard {
 
     async _loadDashboardWidget(el) {
         try {
+            el.classList.add('loading');
+            el.style.height = '100%';
             await this._loadDependencies();
             let api = await this._initApi();
             await this._initSettings();
