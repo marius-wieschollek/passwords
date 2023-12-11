@@ -22,6 +22,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\Response;
 use OCP\AppFramework\Middleware;
+use OCP\DB\Exception;
 
 /**
  * Class ApiSessionMiddleware
@@ -65,6 +66,7 @@ class ApiSessionMiddleware extends Middleware {
      * @param Response   $response
      *
      * @return Response
+     * @throws Exception
      */
     public function afterController(Controller $controller, string $methodName, Response $response): Response {
         if(!$this->isApiRequest($controller) || $response instanceof FileDisplayResponse) return $response;
@@ -87,7 +89,7 @@ class ApiSessionMiddleware extends Middleware {
     protected function isApiRequest(Controller $controller): bool {
         $class = get_class($controller);
 
-        return substr($class, 0, 28) === 'OCA\Passwords\Controller\Api';
+        return str_starts_with($class, 'OCA\Passwords\Controller\Api');
     }
 
     /**
