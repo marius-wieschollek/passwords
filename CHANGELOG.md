@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2023.12.0 - Feature release
 ### Added
 - Added Dashboard widget
 - Imaginary support
@@ -6,6 +7,9 @@
 - Switched to NC 28 design components
 - Updated request scheduler to improve performance
 - Fallback icon handling
+- Handbook & Appstore design update
+### Fixed
+- Leipzig Corpora API upgraded
 
 ## 2023.11.0 - Feature release
 ### Added
