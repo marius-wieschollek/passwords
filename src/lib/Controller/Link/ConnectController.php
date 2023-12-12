@@ -131,9 +131,7 @@ class ConnectController extends Controller {
         $this->session->set(self::SESSION_KEY, $registration->getUuid());
         $this->session->save();
 
-        $baseUrl = $this->serverSettings->get('baseUrl');
         $linkUrl = str_replace('https://', '', $this->serverSettings->get('baseUrl'));
-
         $links = [
             'web' => sprintf(self::PASSLINK_CONNECT_WEB, $linkUrl, $registration->getUuid()),
             'extension' => sprintf(self::PASSLINK_CONNECT_EXTENSION, $linkUrl, $registration->getUuid()),

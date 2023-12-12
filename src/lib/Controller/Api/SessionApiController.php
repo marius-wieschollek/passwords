@@ -96,7 +96,7 @@ class SessionApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws Exception
+     * @throws ApiException
      */
     public function request(): JSONResponse {
         if(!$this->loginAttempts->isAttemptAllowed()) {

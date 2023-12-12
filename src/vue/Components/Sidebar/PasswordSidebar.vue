@@ -208,6 +208,8 @@
 
 <style lang="scss">
 .passwords-sidebar-password.app-sidebar {
+    overflow-y: hidden;
+
     .app-sidebar-header__tertiary-actions {
         position : relative;
 
@@ -234,6 +236,10 @@
                 border-color : var(--color-primary-element);
             }
         }
+    }
+
+    .app-sidebar-tabs__content {
+        min-height: 0;
     }
 }
 </style>

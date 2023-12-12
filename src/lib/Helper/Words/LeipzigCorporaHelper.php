@@ -18,7 +18,7 @@ use OCP\Http\Client\IClientService;
  */
 class LeipzigCorporaHelper extends AbstractWordsHelper {
 
-    const SERVICE_URL = 'http://api.corpora.uni-leipzig.de/ws/';
+    const SERVICE_URL = 'http://api.wortschatz-leipzig.de/ws/';
 
     /**
      * @var bool
@@ -74,7 +74,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
      * @throws Exception
      */
     protected function selectCorpora(): string {
-        $data     = $this->fetchJsonFromApi('corpora/availableCorpora');
+        $data     = $this->fetchJsonFromApi('corpora');
         $prefixes = $this->mapLanguageCode();
 
         return $this->processCorpora($prefixes, $data);

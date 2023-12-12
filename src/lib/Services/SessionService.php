@@ -203,6 +203,7 @@ class SessionService {
 
     /**
      *
+     * @throws \OCP\DB\Exception
      */
     public function save(): void {
         if($this->session === null || (!$this->modified && empty($this->session->getId()))) return;
@@ -227,9 +228,10 @@ class SessionService {
     }
 
     /**
-     * @throws Exception
+     * @return void
+     * @throws \OCP\DB\Exception
      */
-    public function delete() {
+    public function delete(): void {
         if(!empty($this->session->getId())) {
             $this->mapper->delete($this->session);
         }
@@ -242,7 +244,7 @@ class SessionService {
     /**
      *
      */
-    public function load() {
+    public function load(): void {
         if($this->session !== null) return;
         [$sessionId, $passphrase] = $this->getSessionIdFromRequest();
 
@@ -299,7 +301,7 @@ class SessionService {
      *
      * @return array|mixed
      */
-    protected function decryptSessionData(string $property = 'data') {
+    protected function decryptSessionData(string $property = 'data'): mixed {
         try {
             return json_decode(
                 $this->encryption->decrypt(
@@ -314,7 +316,6 @@ class SessionService {
 
     /**
      * @return Session
-     * @throws Exception
      */
     protected function create(): Session {
         $model = new Session();

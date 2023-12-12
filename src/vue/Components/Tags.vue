@@ -69,7 +69,7 @@
                     }
                     tagIds = Array.isArray(this.value.tags) ? this.value.tags:Object.keys(this.value.tags);
                 } else {
-                    tagIds = Object.keys(this.value);
+                    tagIds =  Array.isArray(this.value) ? this.value:Object.keys(this.value);
                 }
 
                 return tagIds;

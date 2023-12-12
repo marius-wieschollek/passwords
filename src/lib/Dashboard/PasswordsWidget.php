@@ -67,7 +67,6 @@ class PasswordsWidget implements IWidget, IConditionalWidget {
         $this->initialState->provideInitialState('authenticate', $this->challengeService->hasChallenge());
         $this->initialState->provideInitialState('impersonate', $this->environmentService->isImpersonating());
 
-        Util::addStyle('passwords', 'dashboard');
         if($this->config->hasAppValue('dev/app/hash')) {
             Util::addScript('passwords', 'Static/dashboard.'.$this->config->getAppValue('dev/app/hash'));
         } else {

@@ -63,7 +63,7 @@
             };
         },
         mounted() {
-            this.open = this.$route.name === 'Tags';
+            this.open = this.$route.name === 'Favorites';
             if(this.open) {
                 this.loadFavorites();
             }

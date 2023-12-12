@@ -1097,7 +1097,7 @@
         "message": "Objekte wiederherstellen"
     },
     "frontend-000301": {
-        "message": "öchten Sie alle Objekte im Papierkorb wiederherstellen?"
+        "message": "Möchten Sie alle Objekte im Papierkorb wiederherstellen?"
     },
     "frontend-000302": {
         "message": "Dieses Objekt wiederherstellen"
@@ -1109,7 +1109,7 @@
         "message": "Papierkorb leeren"
     },
     "frontend-000305": {
-        "message": "öchten Sie alle Objekte im Papierkorb permanent löschen?"
+        "message": "Möchten Sie alle Objekte im Papierkorb permanent löschen?"
     },
     "frontend-000306": {
         "message": "Papierkorb geleert"
