@@ -1,7 +1,7 @@
 ## [Unreleased]
 ## 2023.12.0 - Feature release
 ### Added
-- Added Dashboard widget
+- Dashboard widget
 - Imaginary support
 ### Changed
 - Switched to NC 28 design components
