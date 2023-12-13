@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2023.12.1 - Bugfix release
+### Changed
+- EOL notification appears only once per month
+### Fixed
+- Dashboard widget crash in NC 25
+
 ## 2023.12.0 - Feature release
 ### Added
 - Added Dashboard widget

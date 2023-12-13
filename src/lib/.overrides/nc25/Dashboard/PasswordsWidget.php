@@ -59,6 +59,8 @@ class PasswordsWidget implements IWidget {
     }
 
     public function load(): void {
+        if(!$this->isEnabled()) return;
+
         [$token, $user] = $this->tokenHelper->getWebUiToken();
         $this->initialState->provideInitialState('settings', $this->settings->list());
         $this->initialState->provideInitialState('api-user', $user);

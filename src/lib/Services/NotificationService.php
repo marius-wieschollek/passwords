@@ -205,13 +205,14 @@ class NotificationService implements INotifier {
      * @throws Exception
      */
     public function sendUpgradeRequiredNotification(string $userId, int $ncVersion, int $phpVersion, string $appVersion): void {
-        if($this->configurationService->getUserValue('notification/eol/'.$appVersion, '0', $userId) !== '1') {
+        $date = date('Y-m');
+        if($this->configurationService->getUserValue('notification/eol', '0-0', $userId) !== $date) {
             $this->sendNotification(
                 $this->upgradeRequiredNotification,
                 $userId,
                 ['ncVersion' => $ncVersion, 'phpVersion' => $phpVersion, 'appVersion' => $appVersion]
             );
-            $this->configurationService->setUserValue('notification/eol/'.$appVersion, '1', $userId);
+            $this->configurationService->setUserValue('notification/eol', $date, $userId);
         }
     }
 
