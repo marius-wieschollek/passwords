@@ -11,6 +11,7 @@
 
 namespace OCA\Passwords\AppInfo;
 
+use OC_Util;
 use OCA\Passwords\Dashboard\PasswordsWidget;
 use OCA\Passwords\EventListener\CSP\AddCSPListener;
 use OCA\Passwords\EventListener\User\UserPasswordChangedListener;
@@ -21,6 +22,7 @@ use OCP\AppFramework\App;
 use OCP\Notification\IManager;
 use OCP\AppFramework\IAppContainer;
 use OCP\Http\Client\IClientService;
+use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 use OCP\User\Events\CreateUserEvent;
 use OCP\User\Events\PasswordUpdatedEvent;
 use OCP\User\Events\UserDeletedEvent;
@@ -88,12 +90,13 @@ use OCA\Passwords\EventListener\Password\BeforePasswordSetRevisionListener;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
 use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEventListener;
+use Psr\Container\ContainerInterface;
 
 /**
  * @TODO remove in 2024.1.0
  */
-if(\OC_Util::getVersion()[0] < 27) {
-    require_once dirname(__FILE__, 2).'/.overrides/nc'.\OC_Util::getVersion()[0].'/Middleware/ApiSessionMiddleware.php';
+if(OC_Util::getVersion()[0] < 27) {
+    require_once dirname(__FILE__, 2).'/.overrides/nc'.OC_Util::getVersion()[0].'/Middleware/ApiSessionMiddleware.php';
 }
 
 /**
@@ -148,7 +151,7 @@ class Application extends App implements IBootstrap {
          */
         $context->registerService(
             LocalWordsHelper::class,
-            function (IAppContainer $c) {
+            function (ContainerInterface $c) {
                 return new LocalWordsHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
@@ -158,7 +161,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             RandomCharactersHelper::class,
-            function (IAppContainer $c) {
+            function (ContainerInterface $c) {
                 return new RandomCharactersHelper(
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
@@ -167,7 +170,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             LeipzigCorporaHelper::class,
-            function (IAppContainer $c) {
+            function (ContainerInterface $c) {
                 return new LeipzigCorporaHelper(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IClientService::class),
@@ -208,7 +211,7 @@ class Application extends App implements IBootstrap {
 
         $context->registerService(
             ShareUserListHelper::class,
-            function (IAppContainer $c) {
+            function (ContainerInterface $c) {
                 return new ShareUserListHelper(
                     $c->get(ShareManager::class),
                     $c->get(IUserManager::class),
@@ -260,7 +263,7 @@ class Application extends App implements IBootstrap {
         $dispatcher->addServiceListener(BeforeUserCreatedEvent::class, BeforeUserCreatedListener::class);
         $dispatcher->addServiceListener(UserDeletedEvent::class, UserDeletedListener::class);
         $dispatcher->addServiceListener(PasswordUpdatedEvent::class, UserPasswordChangedListener::class);
-        $dispatcher->addServiceListener(\OCP\Security\CSP\AddContentSecurityPolicyEvent::class, AddCSPListener::class);
+        $dispatcher->addServiceListener(AddContentSecurityPolicyEvent::class, AddCSPListener::class);
     }
 
     /**
@@ -274,14 +277,14 @@ class Application extends App implements IBootstrap {
      * @TODO remove in 2024.1.0
      */
     protected function registerNextcloudVersionSpecificClassLoader() {
-        if(\OC_Util::getVersion()[0] < 27) {
+        if(OC_Util::getVersion()[0] < 27) {
             spl_autoload_register(
                 function (string $class_name) {
                     if(str_starts_with($class_name, 'OCA\\Passwords')) {
                         $baseDir  = dirname(__FILE__, 2);
                         $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
-                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc'.\OC_Util::getVersion()[0], $fileName]));
-                        if($path && str_starts_with($path, $baseDir) && \OC_Util::getVersion()[0] < 27) {
+                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc'.OC_Util::getVersion()[0], $fileName]));
+                        if($path && str_starts_with($path, $baseDir) && OC_Util::getVersion()[0] < 27) {
                             require_once $path;
                         }
                     }
