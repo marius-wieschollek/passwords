@@ -1864,7 +1864,7 @@
         "message": "从数据库中删除已删除的对象"
     },
     "backend-000420": {
-        "message": "设置此应用的更新通道为：每日更新（Unstable）"
+        "message": "设置此应用的更新通道为：Nightly (Unstable)"
     },
     "backend-000421": {
         "message": "永不"
