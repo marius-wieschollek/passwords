@@ -38,7 +38,7 @@
                            v-if="showTokenField"/>
                 </div>
             </div>
-            <div class="login-confirm" v-if="hasToken || hasPassword">
+            <div class="login-confirm" v-if="hasToken || hasPassword || hasError">
                 <translate tag="input" type="submit" localized-value="Login" :class="{'no-icon':loggingIn}"/>
                 <div class="login-icon fa fa-circle-o-notch fa-spin" v-if="loggingIn">&nbsp;</div>
                 <translate class="login-error" :say="errorMessage" tag="div" v-if="hasError"/>

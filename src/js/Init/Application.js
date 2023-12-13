@@ -5,15 +5,15 @@ import {loadState} from '@nextcloud/initial-state';
 import router from '@js/Helper/router';
 import EventEmitter from 'eventemitter3';
 import SectionAll from '@vue/Section/All';
-import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
 import EventManager from '@js/Manager/EventManager';
 import SearchManager from '@js/Manager/SearchManager';
 import SettingsService from '@js/Services/SettingsService';
 import KeepAliveManager from '@js/Manager/KeepAliveManager';
 import SetupManager from "@js/Manager/SetupManager";
-import Localisation from "@js/Classes/Localisation";
-import Logger from "@js/Classes/Logger";
+import MessageService from "@js/Services/MessageService";
+import LoggingService from "@js/Services/LoggingService";
+import LocalisationService from "@js/Services/LocalisationService";
+import UtilityService from "@js/Services/UtilityService";
 
 class Application {
 
@@ -107,7 +107,7 @@ class Application {
             KeepAliveManager.init();
         }
         setTimeout(() => {
-            Logger.printXssWarning();
+            LoggingService.printXssWarning();
         }, 3000);
     }
 
@@ -139,7 +139,7 @@ class Application {
      * @private
      */
     _initApi() {
-        let baseUrl    = Utility.generateUrl(),
+        let baseUrl    = UtilityService.generateUrl(),
             user       = loadState('passwords', 'api-user', null),
             token      = loadState('passwords', 'api-token', null),
             cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
@@ -147,8 +147,8 @@ class Application {
             hashLength = SettingsService.get('user.password.security.hash');
 
         if(!user || !token) {
-            Messages.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
-                    .then(() => { location.reload(); });
+            MessageService.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
+                          .then(() => { location.reload(); });
             return false;
         }
 
@@ -175,7 +175,8 @@ class Application {
         if(!this._loginRequired) {
             document.body.classList.remove('pw-auth-visible');
             document.body.classList.add('pw-auth-skipped');
-            API.openSession({});
+            API.openSession({})
+               .catch(() => {router.push({name: 'Authorize'});});
             SetupManager.runAutomatically();
         }
     }
@@ -205,7 +206,7 @@ class Application {
         Vue.mixin(
             {
                 methods: {
-                    t: (t, v) => { return Localisation.translate(t, v); }
+                    t: (t, v) => { return LocalisationService.translate(t, v); }
                 }
             }
         );

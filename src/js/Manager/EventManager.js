@@ -1,9 +1,10 @@
 import App from '@js/Init/Application';
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
-import Messages from '@js/Classes/Messages';
+import ToastService from "@js/Services/ToastService";
 import SettingsService from '@js/Services/SettingsService';
-import Logger from '@js/Classes/Logger';
+import MessageService from "@js/Services/MessageService";
+import LoggingService from "@js/Services/LoggingService";
 
 class EventManager {
 
@@ -86,18 +87,18 @@ class EventManager {
             target = btoa(JSON.stringify(target));
             router.push({name: 'Authorize', params: {target}});
 
-            Messages.notification('The session has expired');
+            ToastService.error('The session has expired');
         } else if(e.response && e.response.status === 401 && e.message === "CORS requires basic auth") {
-            await Messages.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
+            await MessageService.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
             location.reload();
         } else if(e.message) {
-            Messages.notification(e.message);
-            Logger.error(e);
+            ToastService.error(e.message);
+            LoggingService.error(e);
         } else if(e.response && (!e.response.url || (e.response.url.indexOf('service/favicon') === -1 && e.response.url.indexOf('service/password-change') === -1))) {
-            Messages.notification(`${e.response.status} - ${e.response.statusText}`);
-            Logger.error(e);
+            ToastService.error(`${e.response.status} - ${e.response.statusText}`);
+            LoggingService.error(e);
         } else {
-            Logger.error(e);
+            LoggingService.error(e);
         }
     }
 }
