@@ -60,12 +60,16 @@ class PasswordsWidget implements IWidget, IConditionalWidget {
     }
 
     public function load(): void {
+        if($this->request->urlParams['_route'] !== 'dashboard.dashboard.index') {
+            return;
+        }
+
         [$token, $user] = $this->tokenHelper->getWebUiToken();
         $this->initialState->provideInitialState('settings', $this->settings->list());
         $this->initialState->provideInitialState('api-user', $user);
         $this->initialState->provideInitialState('api-token', $token);
         $this->initialState->provideInitialState('authenticate', $this->challengeService->hasChallenge());
-        $this->initialState->provideInitialState('impersonate', $this->environmentService->isImpersonating());
+        $this->initialState->provideInitialState('impersonate', false);
 
         if($this->config->hasAppValue('dev/app/hash')) {
             Util::addScript('passwords', 'Static/dashboard.'.$this->config->getAppValue('dev/app/hash'));

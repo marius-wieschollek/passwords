@@ -34,6 +34,10 @@ class SessionService {
     const API_SESSION_HEADER = 'X-API-SESSION';
     const API_SESSION_COOKIE = 'nc_passwords';
 
+    const SESSION_KEY_ID = 'nc_pw_session';
+
+    const SESSION_KEY_PASSPHRASE = 'nc_pw_passphrase';
+
     /**
      * @var array
      */
@@ -225,6 +229,11 @@ class SessionService {
             $this->session = $this->mapper->update($this->session);
         }
         $this->modified = false;
+
+        if($this->environment->getLoginType() === EnvironmentService::LOGIN_SESSION || $this->environment->getLoginType() === EnvironmentService::LOGIN_PASSWORD) {
+            $this->userSession->set(self::SESSION_KEY_ID, $this->session->getUuid());
+            $this->userSession->set(self::SESSION_KEY_PASSPHRASE, $this->getPassphrase());
+        }
     }
 
     /**
@@ -343,6 +352,11 @@ class SessionService {
             $encryptedId = $this->request->getCookie(SessionService::API_SESSION_COOKIE);
         } else if(!empty($this->request->getHeader(self::API_SESSION_HEADER))) {
             $encryptedId = $this->request->getHeader(self::API_SESSION_HEADER);
+        } else if($this->userSession->exists(self::SESSION_KEY_ID)) {
+            return [
+                $this->userSession->get(self::SESSION_KEY_ID),
+                $this->userSession->get(self::SESSION_KEY_PASSPHRASE)
+            ];
         }
 
         try {
