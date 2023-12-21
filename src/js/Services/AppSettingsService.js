@@ -83,7 +83,7 @@ export default class AdminSettingsService {
 
         try {
             let url = Utility.generateUrl(`/apps/passwords/admin/${path}`),
-                response = await fetch(new Request(url, options));
+                response = await fetch(new Request(url, options), options);
             return await AdminSettingsService._processResponse(response);
         } catch(e) {
             Logger.error('Request failed', e);
