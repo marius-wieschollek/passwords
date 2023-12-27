@@ -42,24 +42,24 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
             $response = $client->post($serviceUrl, ['json' => $serviceParams]);
         } catch(Throwable $e) {
             $code = $e instanceof ClientException ? "HTTP {$e->getResponse()->getStatusCode()}":$e->getMessage();
-            $this->logger->error("Screeenly Request Failed, HTTP {$code}");
+            $this->loggingService->error("Screeenly Request Failed, HTTP {$code}");
             throw new ApiException('API Request Failed', 502, $e);
         }
 
         $data = $response->getBody();
         if($data === null) {
-            $this->logger->error("Screeenly Request Failed, HTTP {$response->getStatusCode()}");
+            $this->loggingService->error("Screeenly Request Failed, HTTP {$response->getStatusCode()}");
             throw new ApiException('API Request Failed', 502);
         }
 
         $json = json_decode($data);
         if(isset($json->message)) {
-            $this->logger->error("Screeenly {$json->title}: {$json->message}");
+            $this->loggingService->error("Screeenly {$json->title}: {$json->message}");
             throw new ApiException('API Request Failed', 502);
         }
 
         if(!isset($json->base64_raw)) {
-            $this->logger->error("Screeenly did not return an image body");
+            $this->loggingService->error("Screeenly did not return an image body");
             throw new ApiException('API Request Failed', 502);
         }
 
@@ -83,7 +83,7 @@ class ScreeenlyHelper extends AbstractPreviewHelper {
         }
 
         if(strlen($apiKey) !== 50) {
-            $this->logger->error("Screeenly API key is invalid");
+            $this->loggingService->error("Screeenly API key is invalid");
             throw new ApiException('API Request Failed', 502);
         }
 

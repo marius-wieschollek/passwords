@@ -142,12 +142,12 @@ abstract class AbstractPreviewHelper {
         try {
             $response = $client->get($url, ['timeout' => 60]);
         } catch(Exception $e) {
-            $this->logger->error("Invalid Preview Api Response, HTTP {$e->getCode()}");
+            $this->loggingService->error("Invalid Preview Api Response, HTTP {$e->getCode()}");
             throw new ApiException('API Request Failed', 502, $e);
         }
 
         if(!str_starts_with($response->getHeader('content-type'), 'image')) {
-            $this->logger->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
+            $this->loggingService->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
             throw new ApiException('API Request Failed', 502);
         }
 

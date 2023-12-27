@@ -60,7 +60,7 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
         }
 
         if($data->status === 'error') {
-            $this->logger->error("Browshot Request Failed, {$data->error}");
+            $this->loggingService->error("Browshot Request Failed, {$data->error}");
             throw new ApiException('API Request Failed', 502);
         }
 
@@ -96,7 +96,7 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
             return $createUrl.$instance;
         }
 
-        $this->logger->error("Insufficient Browshot Account Balance");
+        $this->loggingService->error("Insufficient Browshot Account Balance");
         throw new ApiException('API Request Failed', 502);
     }
 
@@ -124,7 +124,7 @@ class BrowshotPreviewHelper extends AbstractPreviewHelper {
 
             return json_decode($response->getBody());
         } catch(Exception $e) {
-            $this->logger->error("Browshot Request Failed, HTTP {$e->getCode()}");
+            $this->loggingService->error("Browshot Request Failed, HTTP {$e->getCode()}");
             throw new ApiException('API Request Failed', 502);
         }
     }
