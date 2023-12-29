@@ -1,4 +1,11 @@
 ## [Unreleased]
+## 2023.12.2 - Bugfix release
+### Fixed
+- Excessive session creation
+- Admin settings don't save in NC 28
+- Preview services crash on error
+- Bitwarden import crashes when no folders present
+
 ## 2023.12.1 - Bugfix release
 ### Changed
 - EOL notification appears only once per month
