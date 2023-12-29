@@ -15,7 +15,20 @@ export default class BitwardenConversionHelper {
         let data = JSON.parse(json);
 
         let {folders, folderMap} = await this._processFolders(data.items);
-        let {tags, tagMap} = await this._processTags(data.folders);
+
+        let tags = [], tagMap = {};
+        if(data.hasOwnProperty('folders') && Array.isArray(data.folders)) {
+            let result = await this._processTags(data.folders);
+            tags = result.tags;
+            tagMap = result.tagMap;
+        }
+
+        if(data.hasOwnProperty('collections') && Array.isArray(data.collections)) {
+            let result = await this._processTags(data.collections, tags, tagMap);
+            tags = result.tags;
+            tagMap = result.tagMap;
+        }
+
         let {passwords, errors} = await this._processPasswords(data.items, tagMap, folderMap);
 
         return {
@@ -26,14 +39,14 @@ export default class BitwardenConversionHelper {
 
     /**
      *
-     * @param folders
+     * @param {Object} folders
+     * @param {Object[]} tags
+     * @param {Object} tagMap
      * @returns {Promise<{tagMap: *, tags: *}>}
      * @private
      */
-    static async _processTags(folders) {
-        let tags     = [],
-            tagMap   = {},
-            labelMap = await ImportMappingHelper.getTagLabelMapping();
+    static async _processTags(folders, tags = [], tagMap = {}) {
+        let labelMap = await ImportMappingHelper.getTagLabelMapping();
 
         for(let folder of folders) {
             let labelId = folder.name.toLowerCase(),
@@ -106,8 +119,21 @@ export default class BitwardenConversionHelper {
                 folder = folderMap[item.type];
             }
 
-            if(tagMap.hasOwnProperty(item.folderId)) {
+            if(item.hasOwnProperty('folderId') && item.folderId !== null && tagMap.hasOwnProperty(item.folderId)) {
                 tags = [tagMap[item.folderId]];
+            }
+            if(item.hasOwnProperty('collectionIds') && item.collectionIds !== null) {
+                if(typeof item.collectionIds === 'string') {
+                    item.collectionIds = [item.collectionIds];
+                }
+
+                if(Array.isArray(item.collectionIds)) {
+                    for(let collectionId of item.collectionIds) {
+                        if(tagMap.hasOwnProperty(collectionId)) {
+                            tags.push(tagMap[collectionId]);
+                        }
+                    }
+                }
             }
 
             let username = null,
