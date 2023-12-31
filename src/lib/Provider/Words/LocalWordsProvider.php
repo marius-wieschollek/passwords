@@ -1,20 +1,25 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
 use Exception;
+use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 
 /**
- * Class LocalWordsHelper
+ * Class LocalWordsProvider
  *
  * @package OCA\Passwords\Helper\Words
  */
-class LocalWordsHelper extends AbstractWordsHelper {
+class LocalWordsProvider extends AbstractWordsProvider {
 
     const WORDS_DE      = '/usr/share/dict/ngerman';
     const WORDS_US      = '/usr/share/dict/american-english';
@@ -36,7 +41,7 @@ class LocalWordsHelper extends AbstractWordsHelper {
     protected SpecialCharacterHelper $specialCharacters;
 
     /**
-     * LocalWordsHelper constructor.
+     * LocalWordsProvider constructor.
      *
      * @param string                 $langCode
      * @param SpecialCharacterHelper $specialCharacters
@@ -161,6 +166,6 @@ class LocalWordsHelper extends AbstractWordsHelper {
      * @return bool
      */
     public function isAvailable(): bool {
-        return @is_readable(LocalWordsHelper::WORDS_DEFAULT) && @is_file(LocalWordsHelper::WORDS_DEFAULT);
+        return @is_readable(LocalWordsProvider::WORDS_DEFAULT) && @is_file(LocalWordsProvider::WORDS_DEFAULT);
     }
 }

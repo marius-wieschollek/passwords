@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -9,28 +9,28 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
 use OCA\Passwords\Services\LoggingService;
 
-class AutoWordsHelper extends AbstractWordsHelper {
+class AutoWordsProvider extends AbstractWordsProvider {
 
-    protected LeipzigCorporaHelper   $leipzigCorporaHelper;
-    protected LocalWordsHelper       $localWordsHelper;
-    protected RandomCharactersHelper $randomCharactersHelper;
-    protected LoggingService         $logger;
+    protected LeipzigCorporaProvider   $leipzigCorporaHelper;
+    protected LocalWordsProvider       $localWordsHelper;
+    protected RandomCharactersProvider $randomCharactersHelper;
+    protected LoggingService           $logger;
 
     /**
-     * @param LeipzigCorporaHelper   $leipzigCorporaHelper
-     * @param LocalWordsHelper       $localWordsHelper
-     * @param RandomCharactersHelper $randomCharactersHelper
-     * @param LoggingService         $logger
+     * @param LeipzigCorporaProvider   $leipzigCorporaHelper
+     * @param LocalWordsProvider       $localWordsHelper
+     * @param RandomCharactersProvider $randomCharactersHelper
+     * @param LoggingService           $logger
      */
     public function __construct(
-        LeipzigCorporaHelper $leipzigCorporaHelper,
-        LocalWordsHelper $localWordsHelper,
-        RandomCharactersHelper $randomCharactersHelper,
-        LoggingService $logger,
+        LeipzigCorporaProvider   $leipzigCorporaHelper,
+        LocalWordsProvider       $localWordsHelper,
+        RandomCharactersProvider $randomCharactersHelper,
+        LoggingService           $logger,
     ) {
         $this->leipzigCorporaHelper   = $leipzigCorporaHelper;
         $this->localWordsHelper       = $localWordsHelper;
@@ -39,7 +39,6 @@ class AutoWordsHelper extends AbstractWordsHelper {
     }
 
     public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
-
         try {
             $result = $this->leipzigCorporaHelper->getWords($strength, $addNumbers, $addSpecial);
             if($result !== null) {

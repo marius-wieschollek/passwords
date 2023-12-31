@@ -1,22 +1,27 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
-use GuzzleHttp\RequestOptions;
 use Exception;
+use GuzzleHttp\RequestOptions;
+use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCP\Http\Client\IClientService;
 
 /**
- * Class SnakesWordsHelper
+ * Class SnakesWordsProvider
  *
  * @package OCA\Passwords\Helper\Words
  */
-class SnakesWordsHelper extends AbstractWordsHelper {
+class SnakesWordsProvider extends AbstractWordsProvider {
 
     const SERVICE_URL = 'http://watchout4snakes.com/Random/RandomPhrase';
 
@@ -36,7 +41,7 @@ class SnakesWordsHelper extends AbstractWordsHelper {
     protected IClientService $httpClientService;
 
     /**
-     * SnakesWordsHelper constructor.
+     * SnakesWordsProvider constructor.
      *
      * @param SpecialCharacterHelper $specialCharacters
      * @param IClientService         $httpClientService
@@ -209,7 +214,7 @@ class SnakesWordsHelper extends AbstractWordsHelper {
 
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->head(SnakesWordsHelper::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
+            $response = $client->head(SnakesWordsProvider::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
 
             $this->isAvailable = $response->getStatusCode() === 200;
 

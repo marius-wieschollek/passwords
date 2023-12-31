@@ -12,7 +12,7 @@
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Provider\Words\WordsProviderInterface;
 use Throwable;
 
 /**
@@ -23,19 +23,17 @@ use Throwable;
 class WordsService {
 
     /**
-     * @var AbstractWordsHelper
-     */
-    protected AbstractWordsHelper $wordsHelper;
-
-    /**
      * WordsService constructor.
      *
-     * @param HelperService                $helperService
      * @param LoggingService               $logger
+     * @param WordsProviderInterface       $wordsProvider
      * @param PasswordSecurityCheckService $securityHelper
      */
-    public function __construct(HelperService $helperService, protected LoggingService $logger, protected PasswordSecurityCheckService $securityHelper) {
-        $this->wordsHelper    = $helperService->getWordsHelper();
+    public function __construct(
+        protected LoggingService               $logger,
+        protected WordsProviderInterface       $wordsProvider,
+        protected PasswordSecurityCheckService $securityHelper
+    ) {
     }
 
     /**
@@ -49,18 +47,18 @@ class WordsService {
      * @throws ApiException
      */
     public function getPassword(
-        int $strength = 1,
+        int  $strength = 1,
         bool $addNumbers = false,
         bool $addSpecialCharacters = false,
-        int $attempts = 0
+        int  $attempts = 0
     ) {
         $strength = $this->validateStrength($strength);
 
         try {
-            $result = $this->wordsHelper->getWords($strength, $addNumbers, $addSpecialCharacters);
+            $result = $this->wordsProvider->getWords($strength, $addNumbers, $addSpecialCharacters);
 
             if($result !== null) {
-                if($this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength +1 )) {
+                if($this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength + 1)) {
                     return [$result['password'], $result['words'], $strength];
                 } else {
                     $this->logger->warning('Words service delivered low quality result');

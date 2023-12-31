@@ -355,22 +355,22 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             $this->generateOptionArray(
                 HelperService::IMAGES_AUTO,
                 $this->localisation->t('Select automatically (recommended)'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_AUTO)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_AUTO)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_IMAGICK,
                 $this->localisation->t('Imagick/GMagick'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGICK)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_IMAGICK)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_IMAGINARY,
                 $this->localisation->t('Imaginary'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGINARY)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_IMAGINARY)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_GDLIB,
                 $this->localisation->t('PHP GDLib'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_GDLIB)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_GDLIB)->isAvailable()
             )
         ];
     }

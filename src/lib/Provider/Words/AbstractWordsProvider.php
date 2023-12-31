@@ -1,34 +1,22 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
 /**
- * Class AbstractWordsHelper
+ * Class AbstractWordsProvider
  *
  * @package OCA\Passwords\Helper\Words
  */
-abstract class AbstractWordsHelper {
-
-    /**
-     * @param int  $strength
-     * @param bool $addNumbers
-     * @param bool $addSpecial
-     *
-     * @return array|null
-     */
-    abstract public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array;
-
-    /**
-     * Whether or not this service can be used in the current environment
-     *
-     * @return bool
-     */
-    abstract public function isAvailable(): bool;
+abstract class AbstractWordsProvider implements WordsProviderInterface {
 
     /**
      * @param array $words

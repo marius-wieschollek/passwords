@@ -1,22 +1,27 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
-use GuzzleHttp\RequestOptions;
 use Exception;
+use GuzzleHttp\RequestOptions;
+use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCP\Http\Client\IClientService;
 
 /**
- * Class LeipzigCorporaHelper
+ * Class LeipzigCorporaProvider
  *
  * @package OCA\Passwords\Helper\Words
  */
-class LeipzigCorporaHelper extends AbstractWordsHelper {
+class LeipzigCorporaProvider extends AbstractWordsProvider {
 
     const SERVICE_URL = 'http://api.wortschatz-leipzig.de/ws/';
 
@@ -41,7 +46,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
     protected IClientService $httpClientService;
 
     /**
-     * LocalWordsHelper constructor.
+     * LocalWordsProvider constructor.
      *
      * @param SpecialCharacterHelper $specialCharacters
      * @param IClientService         $httpClientService
@@ -203,7 +208,7 @@ class LeipzigCorporaHelper extends AbstractWordsHelper {
 
         try {
             $client   = $this->httpClientService->newClient();
-            $response = $client->head(LeipzigCorporaHelper::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
+            $response = $client->head(LeipzigCorporaProvider::SERVICE_URL, [RequestOptions::TIMEOUT => 5]);
 
             $this->isAvailable = $response->getStatusCode() === 200;
 

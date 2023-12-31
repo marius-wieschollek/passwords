@@ -1,20 +1,24 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Words;
+namespace OCA\Passwords\Provider\Words;
 
 use Exception;
 
 /**
- * Class RandomCharactersHelper
+ * Class RandomCharactersProvider
  *
  * @package OCA\Passwords\Helper\Words
  */
-class RandomCharactersHelper extends AbstractWordsHelper {
+class RandomCharactersProvider extends AbstractWordsProvider {
 
     const CHARACTER_LIST = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
     const CHARACTERS_DE  = 'ÄäÖöÜüß';
@@ -31,7 +35,7 @@ class RandomCharactersHelper extends AbstractWordsHelper {
     protected string $langCode;
 
     /**
-     * LocalWordsHelper constructor.
+     * LocalWordsProvider constructor.
      *
      * @param string $langCode
      */

@@ -30,17 +30,17 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\Words\AbstractWordsHelper;
-use OCA\Passwords\Helper\Words\AutoWordsHelper;
-use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\RandomCharactersHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
-use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckHelper;
+use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\Words\AbstractWordsProvider;
+use OCA\Passwords\Provider\Words\AutoWordsProvider;
+use OCA\Passwords\Provider\Words\LeipzigCorporaProvider;
+use OCA\Passwords\Provider\Words\LocalWordsProvider;
+use OCA\Passwords\Provider\Words\RandomCharactersProvider;
+use OCA\Passwords\Provider\Words\SnakesWordsProvider;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -158,17 +158,17 @@ class HelperService {
     /**
      * @param string|null $service
      *
-     * @return AbstractWordsHelper
+     * @return AbstractWordsProvider
      */
-    public function getWordsHelper(string $service = null): AbstractWordsHelper {
+    public function getWordsHelper(string $service = null): AbstractWordsProvider {
         if($service === null) $service = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return match ($service) {
-            self::WORDS_LOCAL => $this->container->get(LocalWordsHelper::class),
-            self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaHelper::class),
-            self::WORDS_SNAKES => $this->container->get(SnakesWordsHelper::class),
-            self::WORDS_RANDOM => $this->container->get(RandomCharactersHelper::class),
-            default => $this->container->get(AutoWordsHelper::class),
+            self::WORDS_LOCAL => $this->container->get(LocalWordsProvider::class),
+            self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaProvider::class),
+            self::WORDS_SNAKES => $this->container->get(SnakesWordsProvider::class),
+            self::WORDS_RANDOM => $this->container->get(RandomCharactersProvider::class),
+            default => $this->container->get(AutoWordsProvider::class),
         };
     }
 
@@ -187,7 +187,7 @@ class HelperService {
 
         return match ($service) {
             self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckProvider::class),
-            self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckHelper::class),
+            self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckProvider::class),
             self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckProvider::class),
             default => $this->container->get(HaveIBeenPwnedProvider::class),
         };
