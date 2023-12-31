@@ -16,14 +16,13 @@ use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Image\ImaginaryHelper;
-use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
-use OCA\Passwords\Helper\Preview\PageresCliHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Provider\Favicon\DefaultFaviconProvider;
+use OCA\Passwords\Provider\Preview\AbstractPreviewProvider;
+use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
+use OCA\Passwords\Provider\Preview\DefaultPreviewProvider;
+use OCA\Passwords\Provider\Preview\PageresCliProvider;
+use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotLayerProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotMachineProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
@@ -110,24 +109,6 @@ class HelperService {
             self::IMAGES_GDLIB => $this->container->get(GdHelper::class),
             self::IMAGES_IMAGINARY => $this->container->get(ImaginaryHelper::class),
             default => $this->container->get(AutoImageHelper::class),
-        };
-    }
-
-    /**
-     * @param string|null $service
-     *
-     * @return AbstractPreviewHelper
-     */
-    public function getWebsitePreviewHelper(string $service = null): AbstractPreviewHelper {
-        if($service === null) $service = $this->config->getAppValue('service/preview', self::PREVIEW_DEFAULT);
-
-        return match ($service) {
-            self::PREVIEW_PAGERES => $this->container->get(PageresCliHelper::class),
-            self::PREVIEW_BROW_SHOT => $this->container->get(BrowshotPreviewHelper::class),
-            self::PREVIEW_SCREEN_SHOT_LAYER => $this->container->get(ScreenShotLayerHelper::class),
-            self::PREVIEW_SCREEN_SHOT_MACHINE => $this->container->get(ScreenShotMachineHelper::class),
-            self::PREVIEW_SCREEENLY => $this->container->get(ScreeenlyHelper::class),
-            default => $this->container->get(DefaultPreviewHelper::class),
         };
     }
 

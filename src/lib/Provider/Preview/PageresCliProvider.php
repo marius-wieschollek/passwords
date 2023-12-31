@@ -1,22 +1,26 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Preview;
+namespace OCA\Passwords\Provider\Preview;
 
 use Exception;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
- * Class PageresCliHelper
+ * Class PageresCliProvider
  *
  * @package OCA\Passwords\Helper\Preview
  */
-class PageresCliHelper extends AbstractPreviewHelper {
+class PageresCliProvider extends AbstractPreviewProvider {
 
     const CAPTURE_MAX_RETRIES = 3;
     const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0';

@@ -72,6 +72,13 @@ use OCA\Passwords\Provider\Favicon\FaviconGrabberProvider;
 use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
 use OCA\Passwords\Provider\Favicon\GoogleFaviconProvider;
 use OCA\Passwords\Provider\Favicon\LocalFaviconProvider;
+use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
+use OCA\Passwords\Provider\Preview\DefaultPreviewProvider;
+use OCA\Passwords\Provider\Preview\PageresCliProvider;
+use OCA\Passwords\Provider\Preview\PreviewProviderInterface;
+use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotLayerProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotMachineProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
@@ -340,6 +347,22 @@ class Application extends App implements IBootstrap {
                     HelperService::FAVICON_GOOGLE => $c->get(GoogleFaviconProvider::class),
                     HelperService::FAVICON_LOCAL => $c->get(LocalFaviconProvider::class),
                     default => $c->get(DefaultFaviconProvider::class),
+                };
+            }
+        );
+
+        $context->registerService(
+            PreviewProviderInterface::class,
+            function (ContainerInterface $c) {
+                $service = $c->get(ConfigurationService::class)->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
+
+                return match ($service) {
+                    HelperService::PREVIEW_PAGERES => $c->get(PageresCliProvider::class),
+                    HelperService::PREVIEW_BROW_SHOT => $c->get(BrowshotPreviewProvider::class),
+                    HelperService::PREVIEW_SCREEN_SHOT_LAYER => $c->get(ScreenShotLayerProvider::class),
+                    HelperService::PREVIEW_SCREEN_SHOT_MACHINE => $c->get(ScreenShotMachineProvider::class),
+                    HelperService::PREVIEW_SCREEENLY => $c->get(ScreeenlyProvider::class),
+                    default => $c->get(DefaultPreviewProvider::class),
                 };
             }
         );

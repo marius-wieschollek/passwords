@@ -16,7 +16,7 @@ use OCP\Files\SimpleFS\ISimpleFile;
 use Throwable;
 
 /**
- * Class DefaultPreviewHelper
+ * Class DefaultFaviconProvider
  *
  * @package OCA\Passwords\Helper\Favicon
  */

@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Preview;
+namespace OCA\Passwords\Provider\Preview;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
@@ -14,11 +18,11 @@ use OCA\Passwords\Services\WebsitePreviewService;
 use stdClass;
 
 /**
- * Class BrowshotPreviewHelper
+ * Class BrowshotPreviewProvider
  *
  * @package OCA\Passwords\Helper\Preview
  */
-class BrowshotPreviewHelper extends AbstractPreviewHelper {
+class BrowshotPreviewProvider extends AbstractPreviewProvider {
 
     const BWS_API_CONFIG_KEY   = 'service/preview/bws/key';
     const BWS_MOBILE_INSTANCE  = 'service/preview/bws/mobile';

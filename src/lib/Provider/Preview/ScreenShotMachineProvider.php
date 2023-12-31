@@ -1,21 +1,25 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Preview;
+namespace OCA\Passwords\Provider\Preview;
 
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
 
 /**
- * Class ScreenShotMachineHelper
+ * Class ScreenShotMachineProvider
  *
  * @package OCA\Passwords\Helper\Preview
  */
-class ScreenShotMachineHelper extends AbstractPreviewHelper {
+class ScreenShotMachineProvider extends AbstractPreviewProvider {
 
     const SSM_API_CONFIG_KEY = 'service/preview/ssm/key';
 

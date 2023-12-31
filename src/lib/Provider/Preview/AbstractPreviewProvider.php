@@ -1,15 +1,18 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Preview;
+namespace OCA\Passwords\Provider\Preview;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
@@ -19,11 +22,11 @@ use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClientService;
 
 /**
- * Class AbstractPreviewHelper
+ * Class AbstractPreviewProvider
  *
  * @package OCA\Passwords\Helper\Preview
  */
-abstract class AbstractPreviewHelper {
+abstract class AbstractPreviewProvider implements PreviewProviderInterface{
 
     const VIEWPORT_DESKTOP = '1366x768';
     const VIEWPORT_MOBILE  = '360x640';
@@ -47,7 +50,7 @@ abstract class AbstractPreviewHelper {
     protected FileCacheService $fileCacheService;
 
     /**
-     * AbstractPreviewHelper constructor.
+     * AbstractPreviewProvider constructor.
      *
      * @param HelperService        $helperService
      * @param ConfigurationService $config
@@ -116,7 +119,7 @@ abstract class AbstractPreviewHelper {
      *
      * @return string
      */
-    public function getPreviewFilename(
+    protected function getPreviewFilename(
         string $domain,
         string $view,
         int $minWidth = null,

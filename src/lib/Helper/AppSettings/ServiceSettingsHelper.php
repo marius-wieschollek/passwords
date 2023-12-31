@@ -12,11 +12,11 @@
 namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
+use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
+use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotLayerProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotMachineProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Services\ConfigurationService;
@@ -200,19 +200,19 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         $service = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_LAYER) {
-            return ScreenShotLayerHelper::SSL_API_CONFIG_KEY;
+            return ScreenShotLayerProvider::SSL_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_MACHINE) {
-            return ScreenShotMachineHelper::SSM_API_CONFIG_KEY;
+            return ScreenShotMachineProvider::SSM_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_BROW_SHOT) {
-            return BrowshotPreviewHelper::BWS_API_CONFIG_KEY;
+            return BrowshotPreviewProvider::BWS_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_SCREEENLY) {
-            return ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY;
+            return ScreeenlyProvider::SCREEENLY_API_CONFIG_KEY;
         }
 
         return 'service/preview/api';

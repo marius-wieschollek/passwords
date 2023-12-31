@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -10,7 +14,8 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
-use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
+use OCA\Passwords\Provider\Preview\AbstractPreviewProvider;
+use OCA\Passwords\Provider\Preview\PreviewProviderInterface;
 use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
@@ -30,19 +35,9 @@ class WebsitePreviewService {
     const VIEWPORT_MOBILE  = 'mobile';
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
      * @var AbstractImageHelper
      */
     protected AbstractImageHelper $imageService;
-
-    /**
-     * @var AbstractPreviewHelper
-     */
-    protected AbstractPreviewHelper $previewService;
 
     /**
      * @var FileCacheService
@@ -50,29 +45,23 @@ class WebsitePreviewService {
     protected FileCacheService $fileCacheService;
 
     /**
-     * @var ValidationService
-     */
-    protected ValidationService $validationService;
-
-    /**
      * FaviconService constructor.
      *
-     * @param HelperService     $helperService
-     * @param FileCacheService  $fileCacheService
-     * @param ValidationService $validationService
-     * @param LoggingService    $logger
+     * @param HelperService            $helperService
+     * @param FileCacheService         $fileCacheService
+     * @param ValidationService        $validationService
+     * @param LoggingService           $logger
+     * @param PreviewProviderInterface $previewProvider
      */
     public function __construct(
         HelperService $helperService,
         FileCacheService $fileCacheService,
-        ValidationService $validationService,
-        LoggingService $logger
+        protected ValidationService $validationService,
+        protected LoggingService $logger,
+        protected PreviewProviderInterface $previewProvider
     ) {
         $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
-        $this->validationService = $validationService;
-        $this->previewService    = $helperService->getWebsitePreviewHelper();
         $this->imageService      = $helperService->getImageHelper();
-        $this->logger            = $logger;
     }
 
     /**
@@ -97,13 +86,8 @@ class WebsitePreviewService {
         [$domain, $minWidth, $minHeight, $maxWidth, $maxHeight]
             = $this->validateInputData($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
 
-        $fileName = $this->previewService->getPreviewFilename($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
-        if($this->fileCacheService->hasFile($fileName)) {
-            return $this->fileCacheService->getFile($fileName);
-        }
-
         try {
-            return $this->getWebsitePreview($domain, $view, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
+            return $this->getWebsitePreview($domain, $view, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(Throwable $e) {
             $this->logger->logException($e);
 
@@ -114,7 +98,6 @@ class WebsitePreviewService {
     /**
      * @param string $domain
      * @param string $view
-     * @param string $fileName
      * @param int    $minWidth
      * @param int    $minHeight
      * @param int    $maxWidth
@@ -123,14 +106,14 @@ class WebsitePreviewService {
      * @return null|ISimpleFile
      * @throws Exception
      */
-    protected function getWebsitePreview(string $domain, string $view, string $fileName, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
+    protected function getWebsitePreview(string $domain, string $view, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
         if(!$this->validationService->isValidDomain($domain)) {
-            $websitePreview = $this->previewService->getDefaultPreview('default');
+            $websitePreview = $this->previewProvider->getDefaultPreview('default');
         } else {
-            $websitePreview = $this->previewService->getPreview($domain, $view);
+            $websitePreview = $this->previewProvider->getPreview($domain, $view);
         }
 
-        return $this->resizePreview($websitePreview, $fileName, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        return $this->resizePreview($websitePreview, $minWidth, $minHeight, $maxWidth, $maxHeight);
     }
 
     /**
@@ -145,7 +128,7 @@ class WebsitePreviewService {
      */
     protected function getDefaultPreview(string $domain, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ?ISimpleFile {
         try {
-            $websitePreview = $this->previewService->getDefaultPreview($domain);
+            $websitePreview = $this->previewProvider->getDefaultPreview($domain);
 
             return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(Throwable $e) {
@@ -157,7 +140,6 @@ class WebsitePreviewService {
 
     /**
      * @param ISimpleFile $preview
-     * @param string      $fileName
      * @param int         $minWidth
      * @param int         $minHeight
      * @param int         $maxWidth
@@ -169,7 +151,6 @@ class WebsitePreviewService {
      */
     protected function resizePreview(
         ISimpleFile $preview,
-        string $fileName,
         int $minWidth,
         int $minHeight,
         int $maxWidth,
@@ -180,7 +161,7 @@ class WebsitePreviewService {
         $imageData = $this->imageService->exportJpeg($image);
         $this->imageService->destroyImage($image);
 
-        return $this->fileCacheService->putFile($fileName, $imageData);
+        return $this->fileCacheService->putFile($preview->getName(), $imageData);
     }
 
     /**

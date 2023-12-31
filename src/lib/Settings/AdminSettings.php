@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -15,11 +15,11 @@ use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
+use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
+use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotLayerProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotMachineProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -308,7 +308,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_LAYER,
                 'api'     => [
                     'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(ScreenShotLayerHelper::SSL_API_CONFIG_KEY)
+                    'value' => $this->config->getAppValue(ScreenShotLayerProvider::SSL_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -317,7 +317,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::PREVIEW_SCREEN_SHOT_MACHINE,
                 'api'     => [
                     'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(ScreenShotMachineHelper::SSM_API_CONFIG_KEY)
+                    'value' => $this->config->getAppValue(ScreenShotMachineProvider::SSM_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -326,7 +326,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::PREVIEW_BROW_SHOT,
                 'api'     => [
                     'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(BrowshotPreviewHelper::BWS_API_CONFIG_KEY)
+                    'value' => $this->config->getAppValue(BrowshotPreviewProvider::BWS_API_CONFIG_KEY)
                 ]
             ],
             [
@@ -335,7 +335,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::PREVIEW_SCREEENLY,
                 'api'     => [
                     'key'   => 'service.preview.api',
-                    'value' => $this->config->getAppValue(ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY)
+                    'value' => $this->config->getAppValue(ScreeenlyProvider::SCREEENLY_API_CONFIG_KEY)
                 ]
             ],
             [
