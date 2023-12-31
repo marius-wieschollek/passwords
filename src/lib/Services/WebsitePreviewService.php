@@ -13,12 +13,9 @@ namespace OCA\Passwords\Services;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Image\AbstractImageHelper;
-use OCA\Passwords\Provider\Preview\AbstractPreviewProvider;
+use OCA\Passwords\Helper\Preview\ResizePreviewHelper;
 use OCA\Passwords\Provider\Preview\PreviewProviderInterface;
 use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
-use OCP\Files\NotFoundException;
-use OCP\Files\NotPermittedException;
 use OCP\Files\SimpleFS\ISimpleFile;
 use Throwable;
 
@@ -35,33 +32,19 @@ class WebsitePreviewService {
     const VIEWPORT_MOBILE  = 'mobile';
 
     /**
-     * @var AbstractImageHelper
-     */
-    protected AbstractImageHelper $imageService;
-
-    /**
-     * @var FileCacheService
-     */
-    protected FileCacheService $fileCacheService;
-
-    /**
-     * FaviconService constructor.
+     * WebsitePreviewService constructor.
      *
-     * @param HelperService            $helperService
-     * @param FileCacheService         $fileCacheService
      * @param ValidationService        $validationService
      * @param LoggingService           $logger
      * @param PreviewProviderInterface $previewProvider
+     * @param ResizePreviewHelper      $resizeHelper
      */
     public function __construct(
-        HelperService $helperService,
-        FileCacheService $fileCacheService,
-        protected ValidationService $validationService,
-        protected LoggingService $logger,
-        protected PreviewProviderInterface $previewProvider
+        protected ValidationService        $validationService,
+        protected LoggingService           $logger,
+        protected PreviewProviderInterface $previewProvider,
+        protected ResizePreviewHelper      $resizeHelper
     ) {
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
-        $this->imageService      = $helperService->getImageHelper();
     }
 
     /**
@@ -78,10 +61,10 @@ class WebsitePreviewService {
     public function getPreview(
         string $domain,
         string $view = self::VIEWPORT_DESKTOP,
-        int $minWidth = 640,
-        int $minHeight = 0,
-        int $maxWidth = 640,
-        int $maxHeight = 0
+        int    $minWidth = 640,
+        int    $minHeight = 0,
+        int    $maxWidth = 640,
+        int    $maxHeight = 0
     ): ISimpleFile {
         [$domain, $minWidth, $minHeight, $maxWidth, $maxHeight]
             = $this->validateInputData($domain, $minWidth, $minHeight, $maxWidth, $maxHeight);
@@ -113,7 +96,7 @@ class WebsitePreviewService {
             $websitePreview = $this->previewProvider->getPreview($domain, $view);
         }
 
-        return $this->resizePreview($websitePreview, $minWidth, $minHeight, $maxWidth, $maxHeight);
+        return $this->resizeHelper->resizePreview($websitePreview, $minWidth, $minHeight, $maxWidth, $maxHeight);
     }
 
     /**
@@ -130,38 +113,12 @@ class WebsitePreviewService {
         try {
             $websitePreview = $this->previewProvider->getDefaultPreview($domain);
 
-            return $this->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
+            return $this->resizeHelper->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(Throwable $e) {
             $this->logger->logException($e);
 
             throw new ApiException('Internal Website Preview API Error', 502, $e);
         }
-    }
-
-    /**
-     * @param ISimpleFile $preview
-     * @param int         $minWidth
-     * @param int         $minHeight
-     * @param int         $maxWidth
-     * @param int         $maxHeight
-     *
-     * @return ISimpleFile|null
-     * @throws NotFoundException
-     * @throws NotPermittedException
-     */
-    protected function resizePreview(
-        ISimpleFile $preview,
-        int $minWidth,
-        int $minHeight,
-        int $maxWidth,
-        int $maxHeight
-    ): ?ISimpleFile {
-        $image     = $this->imageService->getImageFromBlob($preview->getContent());
-        $image     = $this->imageService->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
-        $imageData = $this->imageService->exportJpeg($image);
-        $this->imageService->destroyImage($image);
-
-        return $this->fileCacheService->putFile($preview->getName(), $imageData);
     }
 
     /**
