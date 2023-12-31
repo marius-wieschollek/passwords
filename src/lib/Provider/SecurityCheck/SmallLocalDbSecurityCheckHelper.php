@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -9,14 +9,14 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\SecurityCheck;
+namespace OCA\Passwords\Provider\SecurityCheck;
 
 /**
  * Class SmallLocalDbSecurityCheckHelper
  *
  * @package OCA\Passwords\Helper\SecurityCheck
  */
-class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckHelper {
+class SmallLocalDbSecurityCheckHelper extends BigLocalDbSecurityCheckProvider {
     const ARCHIVE_URL = 'https://breached.passwordsapp.org/databases/5-million-v:version-:format.zip';
     const PASSWORD_DB = 'smalldb';
 }

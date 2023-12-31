@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Removed
+- Support for Nextcloud 25, 26, 27
+- Support for PHP 7.4, 8.0, 8.1
+
 ## 2023.12.2 - Bugfix release
 ### Fixed
 - Excessive session creation

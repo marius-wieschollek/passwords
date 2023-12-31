@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -13,13 +13,12 @@ namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCP\IL10N;
@@ -56,8 +55,8 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'images'             => 'service/images',
             'preview'            => 'service/preview',
             'favicon'            => 'service/favicon',
-            'security.hibp.url'  => HaveIBeenPwnedHelper::CONFIG_SERVICE_URL,
-            'security.local.url' => BigLocalDbSecurityCheckHelper::CONFIG_DB_SOURCE
+            'security.hibp.url'  => HaveIBeenPwnedProvider::CONFIG_SERVICE_URL,
+            'security.local.url' => BigLocalDbSecurityCheckProvider::CONFIG_DB_SOURCE
         ];
 
     /**

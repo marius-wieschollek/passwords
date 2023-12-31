@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -9,7 +9,7 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\SecurityCheck;
+namespace OCA\Passwords\Provider\SecurityCheck;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -17,11 +17,11 @@ use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
 
 /**
- * Class HaveIBeenPwnedHelper
+ * Class HaveIBeenPwnedProvider
  *
  * @package OCA\Passwords\Helper\SecurityCheck
  */
-class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
+class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
 
     const PASSWORD_DB        = 'hibp';
     const CONFIG_SERVICE_URL = 'passwords/hibp/url';
@@ -50,6 +50,29 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         }
 
         return $this->hashStatusCache[ $hash ];
+    }
+
+    /**
+     * @inheritdoc
+     * @throws Exception
+     */
+    public function getHashRange(string $range): array {
+        $hibpRange = $this->makeHibpRange($range);
+
+        if(!isset($this->checkedRanges[ $hibpRange ])) {
+            $hashes = $this->executeApiRequest($hibpRange);
+        } else {
+            $hashes = array_keys($this->hashStatusCache);
+        }
+
+        $matchingHashes = [];
+        foreach($hashes as $hash) {
+            if(str_starts_with($hash, $range)) {
+                $matchingHashes[] = $hash;
+            }
+        }
+
+        return $matchingHashes;
     }
 
     /**
@@ -85,23 +108,19 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      * @throws Exception
      */
     protected function isHashInHibpDb(string $hash): bool {
-        $range = substr($hash, 0, 5);
+        $range = $this->makeHibpRange($hash);
 
-        if(in_array($range, $this->checkedRanges)) {
-            if(!array_key_exists($hash, $this->hashStatusCache)) {
+        if(isset($this->checkedRanges[ $range ])) {
+            if(strlen($hash) !== 40 && !array_key_exists($hash, $this->hashStatusCache)) {
                 $hashes = array_keys($this->hashStatusCache);
 
                 return $this->checkForHashInHashes($hashes, $hash);
-            } else {
-                return !$this->hashStatusCache[ $hash ];
             }
+
+            return array_key_exists($hash, $this->hashStatusCache) && !$this->hashStatusCache[ $hash ];
         }
 
-        $responseData = $this->executeApiRequest($range);
-        $hashes       = $this->processResponse($responseData, $range);
-        $this->addHashToLocalDb($hash, $hashes);
-        $this->checkedRanges[] = $range;
-
+        $hashes = $this->executeApiRequest($range);
         return $this->checkForHashInHashes($hashes, $hash);
     }
 
@@ -141,16 +160,18 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      *
      * @param string $range
      *
-     * @return resource|string
+     * @return array
      * @throws Exception
      */
-    protected function executeApiRequest(string $range) {
+    protected function executeApiRequest(string $range): array {
         try {
             $client   = $this->httpClientService->newClient();
             $response = $client->get($this->getApiUrl($range), ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
         } catch(ClientException $e) {
             if($e->getResponse()->getStatusCode() === 404 || $e->getResponse()->getStatusCode() === 502) {
-                return '';
+                $this->checkedRanges[ $range ] = true;
+
+                return [];
             }
 
             throw new InvalidHibpApiResponseException(null, $e);
@@ -161,7 +182,11 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
         $responseData = $response->getBody();
         if(!$responseData) throw new InvalidHibpApiResponseException($response);
 
-        return $responseData;
+        $hashes = $this->processResponse($responseData, $range);
+        $this->addHashToLocalDb($range, $hashes);
+        $this->checkedRanges[ $range ] = true;
+
+        return $hashes;
     }
 
     /**
@@ -171,5 +196,16 @@ class HaveIBeenPwnedHelper extends AbstractSecurityCheckHelper {
      */
     protected function getApiUrl(string $range): string {
         return str_replace(':range', $range, $this->config->getAppValue(static::CONFIG_SERVICE_URL, static::SERVICE_URL));
+    }
+
+    /**
+     * @param string $hash
+     *
+     * @return string
+     */
+    protected function makeHibpRange(string $hash): string {
+        $range = substr($hash, 0, 5);
+
+        return $range;
     }
 }

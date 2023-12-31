@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -13,8 +13,8 @@ namespace OCA\Passwords\Command;
 
 use Exception;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
+use OCA\Passwords\Provider\SecurityCheck\AbstractSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCP\Files\NotFoundException;
@@ -65,8 +65,8 @@ class ProcessPwnedPasswordsList extends Command {
 
         if($import) {
             $output->writeln('Password database updated');
-            $this->config->setAppValue(AbstractSecurityCheckHelper::CONFIG_DB_TYPE, BigLocalDbSecurityCheckHelper::PASSWORD_DB);
-            $this->config->setAppValue(BigLocalDbSecurityCheckHelper::CONFIG_DB_VERSION, BigLocalDbSecurityCheckHelper::PASSWORD_VERSION);
+            $this->config->setAppValue(AbstractSecurityCheckProvider::CONFIG_DB_TYPE, BigLocalDbSecurityCheckProvider::PASSWORD_DB);
+            $this->config->setAppValue(BigLocalDbSecurityCheckProvider::CONFIG_DB_VERSION, BigLocalDbSecurityCheckProvider::PASSWORD_VERSION);
         }
         $output->writeln("Created {$file}");
 
@@ -140,7 +140,7 @@ class ProcessPwnedPasswordsList extends Command {
             }
 
             $sha1  = strtolower($sha1);
-            $start = substr($sha1, 0, AbstractSecurityCheckHelper::HASH_FILE_KEY_LENGTH);
+            $start = substr($sha1, 0, AbstractSecurityCheckProvider::HASH_FILE_KEY_LENGTH);
             if(!isset($hashes[ $start ])) $hashes[ $start ] = [];
             $hashes[ $start ][] = $sha1;
         }
@@ -157,7 +157,7 @@ class ProcessPwnedPasswordsList extends Command {
      * @return string
      */
     protected function writeZipFile(int $size, string $mode, array $hashes, bool $import): string {
-        $fileName = "{$size}-million-v".BigLocalDbSecurityCheckHelper::PASSWORD_VERSION."-{$mode}.zip";
+        $fileName = "{$size}-million-v".BigLocalDbSecurityCheckProvider::PASSWORD_VERSION."-{$mode}.zip";
         if(is_file($fileName)) {
             unlink($fileName);
         }

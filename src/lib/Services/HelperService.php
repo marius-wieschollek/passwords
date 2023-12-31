@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -26,18 +30,20 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
-use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
 use OCA\Passwords\Helper\Words\AutoWordsHelper;
 use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
 use OCA\Passwords\Helper\Words\LocalWordsHelper;
 use OCA\Passwords\Helper\Words\RandomCharactersHelper;
 use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
+use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
+use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckHelper;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Class HelperService
@@ -169,16 +175,21 @@ class HelperService {
     /**
      * @param string|null $service
      *
-     * @return AbstractSecurityCheckHelper
+     * @depreacted without replacement
+     *
+     * @return SecurityCheckProviderInterface
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function getSecurityHelper(string $service = null): AbstractSecurityCheckHelper {
+    public function getSecurityHelper(string $service = null): SecurityCheckProviderInterface {
         $service = $this->config->getAppValue('service/security', $service ?? self::SECURITY_HIBP);
 
         return match ($service) {
-            self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckHelper::class),
+            self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckProvider::class),
             self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckHelper::class),
-            self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckHelper::class),
-            default => $this->container->get(HaveIBeenPwnedHelper::class),
+            self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckProvider::class),
+            default => $this->container->get(HaveIBeenPwnedProvider::class),
         };
     }
 

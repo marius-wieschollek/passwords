@@ -15,15 +15,13 @@ use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\PasswordRevisionMapper;
 use OCA\Passwords\Exception\Database\DecryptedDataException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\AppFramework\Utility\ITimeFactory;
 use Throwable;
 
@@ -33,8 +31,6 @@ use Throwable;
  * @package OCA\Passwords\Cron
  */
 class CheckPasswordsJob extends AbstractTimedJob {
-
-    const CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
 
     /**
      * @var array
@@ -49,28 +45,26 @@ class CheckPasswordsJob extends AbstractTimedJob {
     /**
      * CheckPasswordsJob constructor.
      *
-     * @param ITimeFactory           $time
-     * @param LoggingService         $logger
-     * @param MailService            $mailService
-     * @param ConfigurationService   $config
-     * @param HelperService          $helperService
-     * @param EnvironmentService     $environment
-     * @param UserSettingsHelper     $userSettingsHelper
-     * @param PasswordRevisionMapper $revisionMapper
-     * @param NotificationService    $notificationService
-     * @param AdminUserHelper        $adminHelper
+     * @param ITimeFactory                 $time
+     * @param LoggingService               $logger
+     * @param MailService                  $mailService
+     * @param ConfigurationService         $config
+     * @param EnvironmentService           $environment
+     * @param UserSettingsHelper           $userSettingsHelper
+     * @param PasswordRevisionMapper       $revisionMapper
+     * @param NotificationService          $notificationService
+     * @param PasswordSecurityCheckService $securityCheckService
      */
     public function __construct(
         ITimeFactory $time,
         LoggingService                   $logger,
         protected MailService            $mailService,
         ConfigurationService             $config,
-        protected HelperService          $helperService,
         EnvironmentService               $environment,
         protected UserSettingsHelper     $userSettingsHelper,
         protected PasswordRevisionMapper $revisionMapper,
         protected NotificationService    $notificationService,
-        protected AdminUserHelper        $adminHelper
+        protected PasswordSecurityCheckService $securityCheckService
     ) {
         parent::__construct($time, $logger, $config, $environment);
         $this->setInterval(24 * 60 * 60);
@@ -83,29 +77,14 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @throws Throwable
      */
     protected function runJob($argument): void {
-        $securityHelper = $this->helperService->getSecurityHelper();
-
-        if($securityHelper->dbUpdateRequired()) {
-            $this->registerUpdateAttempt();
-            try {
-                $securityHelper->updateDb();
-                $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
-            } catch(Throwable $e) {
-                $this->registerUpdateFailure($e);
-                throw $e;
-            }
-            $this->registerUpdateSuccess();
-        }
-
-        $this->checkRevisionStatus($securityHelper);
+        $this->securityCheckService->updateDb();
+        $this->checkAllPasswordRevisions();
     }
 
     /**
-     * @param AbstractSecurityCheckHelper $securityHelper
-     *
      * @throws Exception
      */
-    protected function checkRevisionStatus(AbstractSecurityCheckHelper $securityHelper): void {
+    protected function checkAllPasswordRevisions(): void {
         /** @var PasswordRevision[] $revisions */
         $revisions = $this->revisionMapper->findAll();
 
@@ -113,10 +92,10 @@ class CheckPasswordsJob extends AbstractTimedJob {
         foreach($revisions as $revision) {
             $this->checkHashLength($revision);
 
-            if($revision->getStatus() === AbstractSecurityCheckHelper::LEVEL_BAD || $revision->getStatus() === AbstractSecurityCheckHelper::LEVEL_UNKNOWN) continue;
+            if($revision->getStatus() === PasswordSecurityCheckService::LEVEL_BAD || $revision->getStatus() === PasswordSecurityCheckService::LEVEL_UNKNOWN) continue;
 
             $oldStatusCode = $revision->getStatusCode();
-            [$statusLevel, $statusCode] = $securityHelper->getRevisionSecurityLevel($revision);
+            [$statusLevel, $statusCode] = $this->securityCheckService->getRevisionSecurityLevel($revision);
 
             if($oldStatusCode !== $statusCode) {
                 $revision->setStatus($statusLevel);
@@ -124,7 +103,7 @@ class CheckPasswordsJob extends AbstractTimedJob {
                 $revision->setUpdated(time());
                 $this->revisionMapper->update($revision);
 
-                if($statusLevel === AbstractSecurityCheckHelper::LEVEL_BAD) {
+                if($statusLevel === PasswordSecurityCheckService::LEVEL_BAD) {
                     $this->sendBadPasswordNotification($revision);
                     $badRevisionCounter++;
                 }
@@ -133,6 +112,16 @@ class CheckPasswordsJob extends AbstractTimedJob {
 
         $this->notifyUsers();
         $this->logger->debugOrInfo(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter], $badRevisionCounter);
+    }
+
+    /**
+     *
+     */
+    protected function notifyUsers(): void {
+        foreach($this->badPasswords as $user => $count) {
+            $this->notificationService->sendBadPasswordNotification($user, $count);
+            $this->mailService->sendBadPasswordMail($user, $count);
+        }
     }
 
     /**
@@ -155,12 +144,20 @@ class CheckPasswordsJob extends AbstractTimedJob {
     }
 
     /**
+     * @param PasswordRevision $revision
      *
+     * @throws DecryptedDataException
+     * @throws \OCP\DB\Exception
      */
-    protected function notifyUsers(): void {
-        foreach($this->badPasswords as $user => $count) {
-            $this->notificationService->sendBadPasswordNotification($user, $count);
-            $this->mailService->sendBadPasswordMail($user, $count);
+    protected function checkHashLength(PasswordRevision $revision): void {
+        $hashLength = $this->getUserHashLength($revision->getUserId());
+        if(strlen($revision->getHash()) > $hashLength) {
+            if($hashLength !== 0) {
+                $revision->setHash(substr($revision->getHash(), 0, $hashLength));
+            } else {
+                $revision->setHash('');
+            }
+            $this->revisionMapper->update($revision);
         }
     }
 
@@ -180,60 +177,5 @@ class CheckPasswordsJob extends AbstractTimedJob {
         }
 
         return $this->hashLengths[ $userId ];
-    }
-
-    /**
-     * @param PasswordRevision $revision
-     *
-     * @throws DecryptedDataException
-     * @throws \OCP\DB\Exception
-     */
-    protected function checkHashLength(PasswordRevision $revision): void {
-        $hashLength = $this->getUserHashLength($revision->getUserId());
-        if(strlen($revision->getHash()) > $hashLength) {
-            if($hashLength !== 0) {
-                $revision->setHash(substr($revision->getHash(), 0, $hashLength));
-            } else {
-                $revision->setHash('');
-            }
-            $this->revisionMapper->update($revision);
-        }
-    }
-
-    protected function registerUpdateAttempt() {
-        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
-        $attempts++;
-        if($attempts >= 3) {
-            $this->sendUpdateFailureNotification('Too many failed attempts');
-            throw new \Exception('Breached password database update: Too many failed attempts');
-        }
-        $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
-    }
-
-    /**
-     * @param Throwable $e
-     *
-     * @return void
-     */
-    protected function registerUpdateFailure(Throwable $e): void {
-        $this->logger->logException($e, [], 'Could not update breached passwords database: '.$e->getMessage());
-        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
-        if($attempts >= 3) $this->sendUpdateFailureNotification($e->getMessage());
-    }
-
-    protected function registerUpdateSuccess() {
-        $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
-    }
-
-    /**
-     * @param string $message
-     *
-     * @return void
-     */
-    protected function sendUpdateFailureNotification(string $message): void {
-        foreach($this->adminHelper->getAdmins() as $admin) {
-            $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $message);
-        }
-        $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
     }
 }

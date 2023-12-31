@@ -16,12 +16,13 @@ use OCA\Passwords\Db\FolderMapper;
 use OCA\Passwords\Db\PasswordMapper;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\RevisionInterface;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Provider\SecurityCheck\AbstractSecurityCheckProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\Migration\IOutput;
@@ -111,13 +112,13 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if($this->convertCustomFields($revision)) $fixed = true;
         if($this->cleanCustomFields($revision)) $fixed = true;
 
-        if($revision->getStatus() !== AbstractSecurityCheckHelper::LEVEL_OK && $revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_GOOD) {
-            $revision->setStatus(AbstractSecurityCheckHelper::LEVEL_OK);
+        if($revision->getStatus() !== PasswordSecurityCheckService::LEVEL_OK && $revision->getStatusCode() === PasswordSecurityCheckService::STATUS_GOOD) {
+            $revision->setStatus(PasswordSecurityCheckService::LEVEL_OK);
             $fixed = true;
         }
 
-        if(empty($revision->getHash()) && $revision->getStatus() !== AbstractSecurityCheckHelper::LEVEL_UNKNOWN) {
-            $revision->setStatus(AbstractSecurityCheckHelper::LEVEL_UNKNOWN);
+        if(empty($revision->getHash()) && $revision->getStatus() !== PasswordSecurityCheckService::LEVEL_UNKNOWN) {
+            $revision->setStatus(PasswordSecurityCheckService::LEVEL_UNKNOWN);
             $fixed = true;
         }
 

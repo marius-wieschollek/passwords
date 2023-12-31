@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -17,6 +21,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\FaviconService;
 use OCA\Passwords\Services\PasswordChangeUrlService;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
@@ -68,7 +73,8 @@ class ServiceApiController extends AbstractApiController {
         protected UserSettingsHelper $userSettings,
         protected WebsitePreviewService $previewService,
         EnvironmentService $environmentService,
-        protected PasswordChangeUrlService $passwordChangeUrlService
+        protected PasswordChangeUrlService $passwordChangeUrlService,
+        protected PasswordSecurityCheckService $securityCheckService
     ) {
         parent::__construct($request);
         $this->userId               = $environmentService->getUserId();
@@ -176,6 +182,26 @@ class ServiceApiController extends AbstractApiController {
             ['url' => $url],
             $url === null ? Http::STATUS_NOT_FOUND:Http::STATUS_OK
         );
+    }
+
+    /**
+     * @CORS
+     * @NoCSRFRequired
+     * @NoAdminRequired
+     *
+     * @param string $range
+     *
+     * @return JSONResponse
+     * @throws ApiException
+     */
+    public function getHashes(string $range): JSONResponse {
+        if(strlen($range) < 5 || strlen($range) > 40) {
+            throw new ApiException('Invalid range', Http::STATUS_BAD_REQUEST);
+        }
+
+        $hashes = $this->securityCheckService->getHashRange($range);
+
+        return new JSONResponse($hashes);
     }
 
     /**

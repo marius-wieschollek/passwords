@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -11,10 +11,15 @@
 
 namespace OCA\Passwords\AppInfo;
 
-use OC_Util;
 use OCA\Passwords\Dashboard\PasswordsWidget;
 use OCA\Passwords\EventListener\CSP\AddCSPListener;
 use OCA\Passwords\EventListener\User\UserPasswordChangedListener;
+use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
+use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
+use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckHelper;
+use OCA\Passwords\Services\HelperService;
 use OCP\IUserManager;
 use OCP\IGroupManager;
 use OCP\L10N\IFactory;
@@ -167,6 +172,23 @@ class Application extends App implements IBootstrap {
                     $c->get(IClientService::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
+            }
+        );
+
+        /**
+         * Providers
+         */
+        $context->registerService(
+            SecurityCheckProviderInterface::class,
+            function (ContainerInterface $c) {
+                $service = $c->get(ConfigurationService::class)->getAppValue('service/security', HelperService::SECURITY_HIBP);
+
+                return match ($service) {
+                    HelperService::SECURITY_BIG_LOCAL => $c->get(BigLocalDbSecurityCheckProvider::class),
+                    HelperService::SECURITY_SMALL_LOCAL => $c->get(SmallLocalDbSecurityCheckHelper::class),
+                    HelperService::SECURITY_BIGDB_HIBP => $c->get(BigDbPlusHibpSecurityCheckProvider::class),
+                    default => $c->get(HaveIBeenPwnedProvider::class),
+                };
             }
         );
     }

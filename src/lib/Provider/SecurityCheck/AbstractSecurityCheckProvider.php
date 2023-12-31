@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -9,10 +9,9 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\SecurityCheck;
+namespace OCA\Passwords\Provider\SecurityCheck;
 
-use Exception;
-use OCA\Passwords\Db\PasswordRevision;
+use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
@@ -20,25 +19,15 @@ use OCP\Http\Client\IClientService;
 use Throwable;
 
 /**
- * Class AbstractSecurityCheckHelper
+ * Class AbstractSecurityCheckProvider
  *
  * @package OCA\Passwords\Helper\SecurityCheck
  */
-abstract class AbstractSecurityCheckHelper {
+abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInterface {
 
     const PASSWORD_DB          = 'none';
     const HASH_FILE_KEY_LENGTH = 3;
     const CONFIG_DB_TYPE       = 'passwords/localdb/type';
-
-    const STATUS_BREACHED    = 'BREACHED';
-    const STATUS_OUTDATED    = 'OUTDATED';
-    const STATUS_DUPLICATE   = 'DUPLICATE';
-    const STATUS_GOOD        = 'GOOD';
-    const STATUS_NOT_CHECKED = 'NOT_CHECKED';
-    const LEVEL_OK           = 0;
-    const LEVEL_WEAK         = 1;
-    const LEVEL_BAD          = 2;
-    const LEVEL_UNKNOWN      = 3;
 
     /**
      * @var FileCacheService
@@ -71,7 +60,7 @@ abstract class AbstractSecurityCheckHelper {
     protected array $hashStatusCache = [];
 
     /**
-     * AbstractSecurityCheckHelper constructor.
+     * AbstractSecurityCheckProvider constructor.
      *
      * @param LoggingService         $logger
      * @param IClientService         $httpClientService
@@ -91,26 +80,6 @@ abstract class AbstractSecurityCheckHelper {
         $this->logger            = $logger;
         $this->userRulesCheck    = $userRulesCheck;
         $this->httpClientService = $httpClientService;
-    }
-
-    /**
-     * Checks if the given revision is secure and complies with the users individual password standards
-     * No all user password standards can be checked server side
-     * 0 = secure, 1 = user standard violation, 2 = compromised
-     *
-     * @param PasswordRevision $revision
-     *
-     * @return array
-     * @throws Exception
-     */
-    public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if(empty($revision->getHash())) return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
-        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
-
-        $userRules = $this->userRulesCheck->getRevisionSecurityLevel($revision);
-        if($userRules !== null) return $userRules;
-
-        return [self::LEVEL_OK, self::STATUS_GOOD];
     }
 
     /**
@@ -220,18 +189,4 @@ abstract class AbstractSecurityCheckHelper {
             return false;
         }
     }
-
-    /**
-     * Refresh the locally stored database with password hashes
-     *
-     * @return void
-     */
-    abstract function updateDb(): void;
-
-    /**
-     * Refresh the locally stored database with password hashes
-     *
-     * @return bool
-     */
-    abstract function isAvailable(): bool;
 }

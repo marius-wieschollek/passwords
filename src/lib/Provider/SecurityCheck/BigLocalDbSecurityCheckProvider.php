@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -9,7 +9,7 @@
  * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\SecurityCheck;
+namespace OCA\Passwords\Provider\SecurityCheck;
 
 use Exception;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
@@ -19,17 +19,30 @@ use Throwable;
 use ZipArchive;
 
 /**
- * Class BigLocalDbSecurityCheckHelper
+ * Class BigLocalDbSecurityCheckProvider
  *
  * @package OCA\Passwords\Helper\SecurityCheck
  */
-class BigLocalDbSecurityCheckHelper extends AbstractSecurityCheckHelper {
+class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
 
     const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-v:version-:format.zip';
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
     const PASSWORD_VERSION  = 8;
+
+    public function getHashRange(string $range): array {
+        $hashes = $this->readPasswordsFile($range);
+
+        $matchingHashes = [];
+        foreach($hashes as $hash) {
+            if(str_starts_with($hash, $range)) {
+                $matchingHashes[] = $hash;
+            }
+        }
+
+        return $matchingHashes;
+    }
 
     /**
      * @inheritdoc

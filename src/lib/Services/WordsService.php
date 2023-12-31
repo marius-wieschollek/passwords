@@ -1,14 +1,17 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
 use OCA\Passwords\Helper\Words\AbstractWordsHelper;
 use Throwable;
 
@@ -20,30 +23,19 @@ use Throwable;
 class WordsService {
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
      * @var AbstractWordsHelper
      */
     protected AbstractWordsHelper $wordsHelper;
 
     /**
-     * @var AbstractSecurityCheckHelper
-     */
-    protected AbstractSecurityCheckHelper $securityHelper;
-
-    /**
-     * FaviconService constructor.
+     * WordsService constructor.
      *
-     * @param HelperService  $helperService
-     * @param LoggingService $logger
+     * @param HelperService                $helperService
+     * @param LoggingService               $logger
+     * @param PasswordSecurityCheckService $securityHelper
      */
-    public function __construct(HelperService $helperService, LoggingService $logger) {
+    public function __construct(HelperService $helperService, protected LoggingService $logger, protected PasswordSecurityCheckService $securityHelper) {
         $this->wordsHelper    = $helperService->getWordsHelper();
-        $this->securityHelper = $helperService->getSecurityHelper();
-        $this->logger         = $logger;
     }
 
     /**
