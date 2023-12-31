@@ -27,11 +27,11 @@ use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
 
 /**
- * Class BesticonHelperTest
+ * Class BesticonProviderTest
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class BesticonHelperTest extends TestCase {
+class BesticonProviderTest extends TestCase {
 
     /**
      * @var BestIconProvider
@@ -106,28 +106,10 @@ class BesticonHelperTest extends TestCase {
     }
 
     /**
-     *
-     */
-    public function testFaviconFilename() {
-        $fileName = $this->besticonHelper->getFaviconFilename('www.example.com');
-
-        $this->assertEquals('bi_www.example.com.png', $fileName);
-    }
-
-    /**
-     *
-     */
-    public function testFaviconFilenameWithSize() {
-        $fileName = $this->besticonHelper->getFaviconFilename('www.example.com', 192);
-
-        $this->assertEquals('bi_www.example.com_192.png', $fileName);
-    }
-
-    /**
      * @throws Exception
      */
     public function testCachedFaviconReturned() {
-        $fileName = $this->besticonHelper->getFaviconFilename('www.example.com');
+        $fileName = 'bi_www.example.com.png';
         $file     = new SimpleFile();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(true);
@@ -145,7 +127,7 @@ class BesticonHelperTest extends TestCase {
         $domain        = 'www.example.com';
         $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
@@ -168,7 +150,7 @@ class BesticonHelperTest extends TestCase {
         $domain        = 'www.example.com';
         $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
@@ -195,7 +177,7 @@ class BesticonHelperTest extends TestCase {
     public function testWeekAndCounterAreSet() {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
@@ -222,7 +204,7 @@ class BesticonHelperTest extends TestCase {
     public function testWeekAndCounterAreReset() {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
@@ -249,7 +231,7 @@ class BesticonHelperTest extends TestCase {
     public function testNotificationSentIfLimitReached() {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
@@ -282,7 +264,7 @@ class BesticonHelperTest extends TestCase {
     public function testNoNotificationSentIfLimitReachedAndNotified() {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
@@ -317,7 +299,7 @@ class BesticonHelperTest extends TestCase {
         $serviceUrl    = 'https://www.example.com/icon';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
@@ -340,7 +322,7 @@ class BesticonHelperTest extends TestCase {
         $apiRequestUrl1 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
         $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=http://{$domain}&formats=png,ico,gif,jpg";
         $faviconData    = 'data';
-        $fileName       = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName       = 'bi_www.example.com.png';
         $file           = new SimpleFile();
 
         $client  = $this->getHttpClientMock($faviconData, 500);
@@ -364,7 +346,7 @@ class BesticonHelperTest extends TestCase {
     public function testThrowsExceptionWhenNoData() {
         $serviceUrl    = 'https://www.example.com/icon';
         $domain        = 'www.example.com';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
 
         $client = $this->getHttpClientMock('');
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
@@ -386,7 +368,7 @@ class BesticonHelperTest extends TestCase {
         $serviceUrl    = 'https://www.example.com/icon';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
@@ -410,7 +392,7 @@ class BesticonHelperTest extends TestCase {
         $serviceUrl    = 'https://www.example.com/icon';
         $domain        = 'www.example.com';
         $faviconData   = 'data';
-        $fileName      = $this->besticonHelper->getFaviconFilename($domain);
+        $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
         $client        = $this->getHttpClientMock();
 
