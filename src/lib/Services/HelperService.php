@@ -23,25 +23,18 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Provider\Favicon\AbstractFaviconProvider;
-use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\Favicon\DefaultFaviconProvider;
-use OCA\Passwords\Provider\Favicon\DuckDuckGoProvider;
-use OCA\Passwords\Provider\Favicon\FaviconGrabberProvider;
-use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
-use OCA\Passwords\Provider\Favicon\GoogleFaviconProvider;
-use OCA\Passwords\Provider\Favicon\LocalFaviconProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
 use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckProvider;
-use OCA\Passwords\Provider\Words\AbstractWordsProvider;
 use OCA\Passwords\Provider\Words\AutoWordsProvider;
 use OCA\Passwords\Provider\Words\LeipzigCorporaProvider;
 use OCA\Passwords\Provider\Words\LocalWordsProvider;
 use OCA\Passwords\Provider\Words\RandomCharactersProvider;
 use OCA\Passwords\Provider\Words\SnakesWordsProvider;
+use OCA\Passwords\Provider\Words\WordsProviderInterface;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
@@ -141,9 +134,9 @@ class HelperService {
     /**
      * @param string|null $service
      *
-     * @return AbstractWordsProvider
+     * @return WordsProviderInterface
      */
-    public function getWordsHelper(string $service = null): AbstractWordsProvider {
+    public function getWordsHelper(string $service = null): WordsProviderInterface {
         if($service === null) $service = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return match ($service) {
@@ -174,12 +167,5 @@ class HelperService {
             self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckProvider::class),
             default => $this->container->get(HaveIBeenPwnedProvider::class),
         };
-    }
-
-    /**
-     * @return DefaultFaviconProvider
-     */
-    public function getDefaultFaviconHelper(): DefaultFaviconProvider {
-        return $this->container->get(DefaultFaviconProvider::class);
     }
 }
