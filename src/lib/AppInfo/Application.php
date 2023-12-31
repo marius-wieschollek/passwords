@@ -20,7 +20,6 @@ use OCP\IGroupManager;
 use OCP\L10N\IFactory;
 use OCP\AppFramework\App;
 use OCP\Notification\IManager;
-use OCP\AppFramework\IAppContainer;
 use OCP\Http\Client\IClientService;
 use OCP\Security\CSP\AddContentSecurityPolicyEvent;
 use OCP\User\Events\CreateUserEvent;
@@ -93,13 +92,6 @@ use OCA\Passwords\EventListener\PasswordRevision\BeforePasswordRevisionSavedEven
 use Psr\Container\ContainerInterface;
 
 /**
- * @TODO remove in 2024.1.0
- */
-if(OC_Util::getVersion()[0] < 27) {
-    require_once dirname(__FILE__, 2).'/.overrides/nc'.OC_Util::getVersion()[0].'/Middleware/ApiSessionMiddleware.php';
-}
-
-/**
  * Class Application
  *
  * @package OCA\Passwords\AppInfo
@@ -121,7 +113,6 @@ class Application extends App implements IBootstrap {
      * @param IRegistrationContext $context
      */
     public function register(IRegistrationContext $context): void {
-        $this->registerNextcloudVersionSpecificClassLoader();
         $this->registerDiClasses($context);
         $this->registerSystemHooks();
         $this->registerMiddleware($context);
@@ -271,27 +262,5 @@ class Application extends App implements IBootstrap {
      */
     protected function registerNotificationNotifier(): void {
         $this->getContainer()->get(IManager::class)->registerNotifierService(NotificationService::class);
-    }
-
-    /**
-     * @TODO remove in 2024.1.0
-     */
-    protected function registerNextcloudVersionSpecificClassLoader() {
-        if(OC_Util::getVersion()[0] < 27) {
-            spl_autoload_register(
-                function (string $class_name) {
-                    if(str_starts_with($class_name, 'OCA\\Passwords')) {
-                        $baseDir  = dirname(__FILE__, 2);
-                        $fileName = str_replace('\\', DIRECTORY_SEPARATOR, substr($class_name, 14)).'.php';
-                        $path     = realpath(implode(DIRECTORY_SEPARATOR, [$baseDir, '.overrides', 'nc'.OC_Util::getVersion()[0], $fileName]));
-                        if($path && str_starts_with($path, $baseDir) && OC_Util::getVersion()[0] < 27) {
-                            require_once $path;
-                        }
-                    }
-                },
-                true,
-                true
-            );
-        }
     }
 }

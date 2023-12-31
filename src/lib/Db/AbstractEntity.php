@@ -15,13 +15,6 @@ use OCP\AppFramework\Db\Entity;
 use OCA\Passwords\Db\Traits\GetterSetterTrait;
 
 /**
- * @TODO remove in 2024.1.0
- */
-if(\OC_Util::getVersion()[0] < 26) {
-    require_once dirname(__FILE__, 2).'/.overrides/nc25/Db/Traits/GetterSetterTrait.php';
-}
-
-/**
  * Class AbstractEntity
  *
  * @method string getUuid()
