@@ -17,6 +17,12 @@ use OCA\Passwords\Helper\SecurityCheck\PasswordDatabaseUpdateHelper;
 use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
 
+/**
+ * Class PasswordSecurityCheckService
+ *
+ * Provides methods to check the security level of a password or password hash
+ * and update the local database of password hashes.
+ */
 class PasswordSecurityCheckService {
 
     const STATUS_BREACHED    = 'BREACHED';
@@ -29,6 +35,11 @@ class PasswordSecurityCheckService {
     const LEVEL_BAD          = 2;
     const LEVEL_UNKNOWN      = 3;
 
+    /**
+     * @param SecurityCheckProviderInterface $securityCheckProvider
+     * @param UserRulesSecurityCheck         $userRulesSecurityCheck
+     * @param PasswordDatabaseUpdateHelper   $databaseUpdateHelper
+     */
     public function __construct(
         protected SecurityCheckProviderInterface $securityCheckProvider,
         protected UserRulesSecurityCheck         $userRulesSecurityCheck,
