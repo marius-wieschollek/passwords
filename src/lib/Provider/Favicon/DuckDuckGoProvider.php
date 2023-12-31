@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Favicon;
+namespace OCA\Passwords\Provider\Favicon;
 
 use Exception;
 use GuzzleHttp\Exception\ClientException;
@@ -17,11 +21,11 @@ use OCP\Files\NotPermittedException;
 use Throwable;
 
 /**
- * Class DuckDuckGoHelper
+ * Class DuckDuckGoProvider
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class DuckDuckGoHelper extends AbstractFaviconHelper {
+class DuckDuckGoProvider extends AbstractFaviconProvider {
 
     /**
      * @var string

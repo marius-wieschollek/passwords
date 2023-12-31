@@ -8,10 +8,8 @@
 namespace OCA\Passwords\Controller\Admin;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\ApiController;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;

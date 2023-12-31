@@ -14,6 +14,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -33,7 +34,7 @@ use Psr\Log\LoggerInterface;
 class BesticonHelperTest extends TestCase {
 
     /**
-     * @var BestIconHelper
+     * @var BestIconProvider
      */
     private $besticonHelper;
 
@@ -92,7 +93,7 @@ class BesticonHelperTest extends TestCase {
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
-        $this->besticonHelper = new BestIconHelper(
+        $this->besticonHelper = new BestIconProvider(
             $this->dateTimeHelper,
             $this->configurationService,
             $this->logger,

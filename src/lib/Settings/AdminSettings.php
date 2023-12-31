@@ -15,13 +15,11 @@ use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\Image\ImaginaryHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
@@ -260,7 +258,7 @@ class AdminSettings implements ISettings {
                 'current' => $current === HelperService::FAVICON_BESTICON,
                 'api'     => [
                     'key'   => 'service.favicon.api',
-                    'value' => $this->config->getAppValue(BestIconHelper::BESTICON_CONFIG_KEY, '')
+                    'value' => $this->config->getAppValue(BestIconProvider::BESTICON_CONFIG_KEY, '')
                 ]
             ],
             [

@@ -1,13 +1,18 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
 use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
 use OCP\Files\NotFoundException;
 use OCP\Files\NotPermittedException;
@@ -24,43 +29,25 @@ class FaviconService {
     use ValidatesDomainTrait;
 
     /**
-     * @var HelperService
-     */
-    protected HelperService $helperService;
-
-    /**
      * @var FileCacheService
      */
     protected FileCacheService $fileCacheService;
 
     /**
-     * @var ValidationService
-     */
-    protected ValidationService $validationService;
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
      * FaviconService constructor.
      *
-     * @param HelperService     $helperService
-     * @param FileCacheService  $fileCacheService
-     * @param ValidationService $validationService
-     * @param LoggingService    $logger
+     * @param FileCacheService         $fileCacheService
+     * @param ValidationService        $validationService
+     * @param FaviconProviderInterface $faviconProvider
+     * @param LoggingService           $logger
      */
     public function __construct(
-        HelperService $helperService,
         FileCacheService $fileCacheService,
-        ValidationService $validationService,
-        LoggingService $logger
+        protected ValidationService $validationService,
+        protected FaviconProviderInterface $faviconProvider,
+        protected LoggingService $logger
     ) {
         $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
-        $this->validationService = $validationService;
-        $this->helperService     = $helperService;
-        $this->logger            = $logger;
     }
 
     /**
@@ -74,30 +61,24 @@ class FaviconService {
     public function getFavicon(string $domain, int $size = 32): ISimpleFile {
         [$domain, $size] = $this->validateInput($domain, $size);
 
-        $faviconService = $this->helperService->getFaviconHelper();
-        $fileName       = $faviconService->getFaviconFilename($domain, $size);
-        if($this->fileCacheService->hasFile($fileName)) {
-            return $this->fileCacheService->getFile($fileName);
-        }
-
         if(!$this->validationService->isValidDomain($domain)) {
             if($domain !== 'default') {
                 $domain = mb_substr($domain, 0, 1);
             } else {
                 $domain = ' ';
             }
-            $faviconService = $this->helperService->getDefaultFaviconHelper();
+            return $this->faviconProvider->getDefaultFavicon($domain, $size);
         }
 
         try {
-            $favicon = $faviconService->getFavicon($domain, $size);
+            $favicon = $this->faviconProvider->getFavicon($domain);
 
-            return $this->resizeFavicon($favicon, $fileName, $size);
+            return $this->resizeFavicon($favicon, $size);
         } catch(Throwable $e) {
             $this->logger->logException($e);
 
             try {
-                return $faviconService->getDefaultFavicon($domain, $size);
+                return $this->faviconProvider->getDefaultFavicon($domain, $size);
             } catch(Throwable $e) {
                 $this->logger->logException($e);
 
@@ -108,14 +89,13 @@ class FaviconService {
 
     /**
      * @param ISimpleFile $favicon
-     * @param string      $fileName
      * @param int         $size
      *
      * @return ISimpleFile|null
      * @throws NotFoundException
      * @throws NotPermittedException
      */
-    protected function resizeFavicon(ISimpleFile $favicon, string $fileName, int $size): ?ISimpleFile {
+    protected function resizeFavicon(ISimpleFile $favicon, int $size): ?ISimpleFile {
         $faviconData = $favicon->getContent();
         $imageHelper = $this->helperService->getImageHelper();
         if($imageHelper->supportsImage($faviconData)) {
@@ -126,7 +106,7 @@ class FaviconService {
             $imageHelper->destroyImage($image);
         }
 
-        return $this->fileCacheService->putFile($fileName, $faviconData);
+        return $this->fileCacheService->putFile($favicon->getName(), $faviconData);
     }
 
     /**

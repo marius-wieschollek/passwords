@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Favicon;
+namespace OCA\Passwords\Provider\Favicon;
 
 use Exception;
 use OC\Avatar\GuestAvatar;
@@ -23,11 +27,11 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * Class AbstractFaviconHelper
+ * Class AbstractFaviconProvider
  *
  * @package OCA\Passwords\Helper
  */
-abstract class AbstractFaviconHelper {
+abstract class AbstractFaviconProvider implements FaviconProviderInterface {
     const COMMON_SUBDOMAIN_PATTERN = '/^(m|de|web|www|www2|mail|email|login|signin)\./';
 
     /**
@@ -46,7 +50,7 @@ abstract class AbstractFaviconHelper {
     protected FileCacheService $fileCacheService;
 
     /**
-     * AbstractFaviconHelper constructor.
+     * AbstractFaviconProvider constructor.
      *
      * @param HelperService    $helperService
      * @param LoggerInterface  $logger
@@ -114,7 +118,7 @@ abstract class AbstractFaviconHelper {
      *
      * @return string
      */
-    public function getFaviconFilename(string $domain, int $size = null): string {
+    protected function getFaviconFilename(string $domain, int $size = null): string {
         $domain = idn_to_utf8($domain);
         if($size !== null) {
             return "{$this->prefix}_{$domain}_{$size}.png";

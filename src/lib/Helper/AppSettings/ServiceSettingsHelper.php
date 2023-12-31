@@ -12,11 +12,11 @@
 namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Services\ConfigurationService;
@@ -186,7 +186,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         $service = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
 
         if($service === HelperService::FAVICON_BESTICON) {
-            return BestIconHelper::BESTICON_CONFIG_KEY;
+            return BestIconProvider::BESTICON_CONFIG_KEY;
         }
 
         return 'service/favicon/api';

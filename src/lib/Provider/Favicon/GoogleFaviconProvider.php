@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Favicon;
+namespace OCA\Passwords\Provider\Favicon;
 
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
@@ -15,11 +19,11 @@ use OCP\Files\NotPermittedException;
 use Throwable;
 
 /**
- * Class GoogleFaviconHelper
+ * Class GoogleFaviconProvider
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class GoogleFaviconHelper extends AbstractFaviconHelper {
+class GoogleFaviconProvider extends AbstractFaviconProvider {
     const DEFAULT_ICON_MD5 = '3ca64f83fdcf25135d87e08af65e68c9';
 
     /**

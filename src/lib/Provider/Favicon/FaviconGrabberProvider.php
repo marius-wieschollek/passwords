@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Favicon;
+namespace OCA\Passwords\Provider\Favicon;
 
 use Exception;
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
@@ -18,11 +22,11 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * Class FaviconGrabberHelper
+ * Class FaviconGrabberProvider
  *
  * @package OCA\Passwords\Helper\Favicon
  */
-class FaviconGrabberHelper extends AbstractFaviconHelper {
+class FaviconGrabberProvider extends AbstractFaviconProvider {
 
     const FAVICON_GRABBER_URL = 'https://favicongrabber.com';
 
@@ -42,7 +46,7 @@ class FaviconGrabberHelper extends AbstractFaviconHelper {
     protected string $domain;
 
     /**
-     * FaviconGrabberHelper constructor.
+     * FaviconGrabberProvider constructor.
      *
      * @param LoggerInterface      $logger
      * @param ConfigurationService $config

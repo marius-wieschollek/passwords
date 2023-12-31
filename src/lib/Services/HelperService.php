@@ -11,13 +11,6 @@
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
-use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
-use OCA\Passwords\Helper\Favicon\FaviconGrabberHelper;
-use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
-use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
@@ -30,6 +23,14 @@ use OCA\Passwords\Helper\Preview\PageresCliHelper;
 use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
 use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
+use OCA\Passwords\Provider\Favicon\AbstractFaviconProvider;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
+use OCA\Passwords\Provider\Favicon\DefaultFaviconProvider;
+use OCA\Passwords\Provider\Favicon\DuckDuckGoProvider;
+use OCA\Passwords\Provider\Favicon\FaviconGrabberProvider;
+use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
+use OCA\Passwords\Provider\Favicon\GoogleFaviconProvider;
+use OCA\Passwords\Provider\Favicon\LocalFaviconProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
@@ -140,24 +141,6 @@ class HelperService {
     /**
      * @param string|null $service
      *
-     * @return AbstractFaviconHelper
-     */
-    public function getFaviconHelper(string $service = null): AbstractFaviconHelper {
-        if($service === null) $service = $this->config->getAppValue('service/favicon', self::FAVICON_DEFAULT);
-
-        return match ($service) {
-            self::FAVICON_BESTICON => $this->container->get(BestIconHelper::class),
-            self::FAVICON_FAVICON_GRABBER => $this->container->get(FaviconGrabberHelper::class),
-            self::FAVICON_DUCK_DUCK_GO => $this->container->get(DuckDuckGoHelper::class),
-            self::FAVICON_GOOGLE => $this->container->get(GoogleFaviconHelper::class),
-            self::FAVICON_LOCAL => $this->container->get(LocalFaviconHelper::class),
-            default => $this->container->get(DefaultFaviconHelper::class),
-        };
-    }
-
-    /**
-     * @param string|null $service
-     *
      * @return AbstractWordsProvider
      */
     public function getWordsHelper(string $service = null): AbstractWordsProvider {
@@ -194,9 +177,9 @@ class HelperService {
     }
 
     /**
-     * @return DefaultFaviconHelper
+     * @return DefaultFaviconProvider
      */
-    public function getDefaultFaviconHelper(): DefaultFaviconHelper {
-        return $this->container->get(DefaultFaviconHelper::class);
+    public function getDefaultFaviconHelper(): DefaultFaviconProvider {
+        return $this->container->get(DefaultFaviconProvider::class);
     }
 }

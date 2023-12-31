@@ -1,11 +1,15 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
-namespace OCA\Passwords\Helper\Favicon;
+namespace OCA\Passwords\Provider\Favicon;
 
 use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
@@ -22,7 +26,7 @@ use Throwable;
 /**
  * Class BetterIdeaHelper
  */
-class BestIconHelper extends AbstractFaviconHelper {
+class BestIconProvider extends AbstractFaviconProvider {
 
     const BESTICON_SHARED_INSTANCE = 'https://icons.passwordsapp.org/icon';
     const BESTICON_CONFIG_KEY      = 'service/favicon/bi/url';
@@ -76,7 +80,7 @@ class BestIconHelper extends AbstractFaviconHelper {
         ];
 
     /**
-     * BestIconHelper constructor.
+     * BestIconProvider constructor.
      *
      * @param DateTimeHelper       $dateTime
      * @param ConfigurationService $config

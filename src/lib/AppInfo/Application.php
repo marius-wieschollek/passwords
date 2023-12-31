@@ -65,6 +65,13 @@ use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
+use OCA\Passwords\Provider\Favicon\DefaultFaviconProvider;
+use OCA\Passwords\Provider\Favicon\DuckDuckGoProvider;
+use OCA\Passwords\Provider\Favicon\FaviconGrabberProvider;
+use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
+use OCA\Passwords\Provider\Favicon\GoogleFaviconProvider;
+use OCA\Passwords\Provider\Favicon\LocalFaviconProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
@@ -317,6 +324,22 @@ class Application extends App implements IBootstrap {
                     HelperService::WORDS_SNAKES => $c->get(SnakesWordsProvider::class),
                     HelperService::WORDS_RANDOM => $c->get(RandomCharactersProvider::class),
                     default => $c->get(AutoWordsProvider::class),
+                };
+            }
+        );
+
+        $context->registerService(
+            FaviconProviderInterface::class,
+            function (ContainerInterface $c) {
+                $service = $c->get(ConfigurationService::class)->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
+
+                return match ($service) {
+                    HelperService::FAVICON_BESTICON => $c->get(BestIconProvider::class),
+                    HelperService::FAVICON_FAVICON_GRABBER => $c->get(FaviconGrabberProvider::class),
+                    HelperService::FAVICON_DUCK_DUCK_GO => $c->get(DuckDuckGoProvider::class),
+                    HelperService::FAVICON_GOOGLE => $c->get(GoogleFaviconProvider::class),
+                    HelperService::FAVICON_LOCAL => $c->get(LocalFaviconProvider::class),
+                    default => $c->get(DefaultFaviconProvider::class),
                 };
             }
         );
