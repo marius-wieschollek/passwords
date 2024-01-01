@@ -29,7 +29,7 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
-    const PASSWORD_VERSION  = 8;
+    const PASSWORD_VERSION  = 9;
 
     public function getHashRange(string $range): array {
         $hashes = $this->readPasswordsFile($range);
@@ -53,7 +53,7 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
             if($installedVersion !== static::PASSWORD_VERSION) return true;
 
             $info = $this->fileCacheService->getCacheInfo();
-            if($info['files'] < 4096) return true;
+            if($info['files'] < 64) return true;
         } catch(Exception $e) {
             $this->logger->logException($e);
         }
