@@ -1,6 +1,5 @@
-import router from '@js/Helper/router';
 import SettingsService from '@js/Services/SettingsService';
-import {subscribe} from '@nextcloud/event-bus';
+import {emit, subscribe} from '@nextcloud/event-bus';
 
 class SearchManager {
 
@@ -48,7 +47,7 @@ class SearchManager {
             this.search();
         });
         this._status.available = false;
-        this._initializeSearchFeatures();
+        this._initLiveSearch();
     }
 
     search(query) {
@@ -91,6 +90,7 @@ class SearchManager {
         this._status.tags = stats.tags;
         this._status.ids = stats.ids;
         this._status.time = new Date().getTime() - stats.start;
+        emit('passwords:search:search', this._status);
     }
 
     /**
@@ -141,6 +141,7 @@ class SearchManager {
 
         if(database.passwords.length || database.folders.length || database.tags.length) {
             this._status.available = true;
+            emit('passwords:search:available', this._status);
 
             if(this._status.active) {
                 setTimeout(() => {this.search(this._status.query);}, 1);
@@ -158,6 +159,7 @@ class SearchManager {
      */
     _resetSearch() {
         this._status.active = false;
+        emit('passwords:search:reset', this._status);
     }
 
     /**
@@ -266,37 +268,11 @@ class SearchManager {
     }
 
     /**
-     * Initialize optional search features
-     *
-     * @private
-     */
-    _initializeSearchFeatures() {
-        this._globalSearch();
-        this._initLiveSearch();
-    }
-
-    /**
-     * Search globally when the user presses Enter
-     *
-     * @private
-     */
-    _globalSearch() {
-        let searchbox = document.getElementById('unified-search__input');
-        searchbox.addEventListener('keyup', (e) => {
-            if(e.key === 'Enter' && router.history.current.name !== 'Search' && SettingsService.get('client.search.global')) {
-                router.push({name: 'Search', params: {query: btoa(searchbox.value)}});
-            }
-        });
-    }
-
-    /**
      * Search when the user presses a key
      *
      * @private
      */
     _initLiveSearch() {
-        let searchbox = document.getElementById('unified-search__input');
-
         document.addEventListener('keypress', (e) => {
             if(!this._status.available) return;
             if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
@@ -305,29 +281,10 @@ class SearchManager {
             if(!SettingsService.get('client.search.live')) return;
 
             if(/^[a-zA-Z0-9-_ ]{1}$/.test(e.key)) {
-                let searchIcon = document.getElementById('unified-search');
-                if(searchIcon && !searchIcon.classList.contains('header-menu--opened')) {
-                    searchIcon.querySelector('.header-menu__trigger').click();
-                }
-
                 e.preventDefault();
+                emit('passwords:search:live', this._status);
                 this.search(this.status.query + e.key);
-                setTimeout(() => {
-                    searchbox.focus();
-                    setTimeout(() => {
-                        searchbox.value = this.status.query;
-                        searchbox.selectionStart = searchbox.selectionEnd = 10000;
-                    }, 50);
-                }, 50);
             }
-        });
-        document.addEventListener('keyup', (e) => {
-            if(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey || e.repeat) return;
-            if(e.key !== 'Escape' || e.target.id !== 'unified-search__input') return;
-            if(!SettingsService.get('client.search.live')) return;
-            e.preventDefault();
-            searchbox.value = '';
-            this.search('');
         });
     }
 }

@@ -10,6 +10,7 @@
 
 <template>
     <nc-app-navigation>
+        <app-navigation-search />
         <template id="app-passwords-navigation" #list>
             <app-navigation-item :name="t('All')" :to="{ name: 'All'}" :exact="true">
                 <earth-icon :size=20 slot="icon" />
@@ -67,9 +68,11 @@
     import PuzzleIcon                 from '@icon/Puzzle';
     import CashMultiple               from '@icon/CashMultiple';
     import NcAppNavigationSettings    from '@nc/NcAppNavigationSettings.js';
+    import AppNavigationSearch from "@vc/Navigation/AppNavigationSearch.vue";
 
     export default {
         components: {
+            AppNavigationSearch,
             SessionTimeout,
             AppNavigationItem,
             AppNavigationItemFavorites,

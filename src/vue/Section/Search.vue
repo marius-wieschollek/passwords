@@ -62,11 +62,9 @@
                 let db = {passwords: this.passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
                 setTimeout(() => {
-                    let el    = document.getElementById('unified-search__input'),
-                        query = this.$route.params.query;
+                    let query = this.$route.params.query;
 
                     let value = atob(query);
-                    el.value = value;
                     SearchManager.search(value);
                 }, 10);
             }
