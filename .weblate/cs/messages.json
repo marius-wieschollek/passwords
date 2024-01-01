@@ -3291,5 +3291,8 @@
     },
     "frontend-Donate": {
         "message": "Darovat"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Vyhledávání …"
     }
 }

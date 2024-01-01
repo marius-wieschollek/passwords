@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "Podarite"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Iskanje …"
     }
 }

@@ -3292,5 +3292,8 @@
     },
     "frontend-Donate": {
         "message": "Spenden"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Suche …"
     }
 }

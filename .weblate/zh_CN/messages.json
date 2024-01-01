@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "捐赠"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "搜索 …"
     }
 }

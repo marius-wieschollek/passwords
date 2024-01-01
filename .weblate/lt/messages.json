@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "Paaukoti"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Paieška…"
     }
 }
