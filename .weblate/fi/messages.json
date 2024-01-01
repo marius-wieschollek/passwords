@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "Lahjoita"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Haku …"
     }
 }
