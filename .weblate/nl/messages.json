@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "Doneer"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Zoeken …"
     }
 }
