@@ -3301,5 +3301,8 @@
     },
     "frontend-Donate": {
         "message": "Donere"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Søk …"
     }
 }
