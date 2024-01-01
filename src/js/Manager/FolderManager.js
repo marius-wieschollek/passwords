@@ -24,11 +24,14 @@ class FolderManager {
 
                     folder = API.validateFolder(folder);
                     API.createFolder(folder)
-                       .then((d) => {
+                       .then(async (d) => {
                            folder.id = d.id;
                            folder.revision = d.revision;
+                           folder._encrypted = folder.cseKey?.length > 0;
+                           folder.cseKey = d.cseKey;
+                           folder.cseType = d.cseType;
                            folder.edited = folder.created = folder.updated = Utility.getTimestamp();
-                           folder = API._processFolder(folder);
+                           folder = await API._processFolder(folder);
                            Events.fire('folder.created', folder);
                            Messages.notification('Folder created');
                            resolve(folder);

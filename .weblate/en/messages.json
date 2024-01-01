@@ -1077,6 +1077,9 @@
             }
         }
     },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Search …"
+    },
     "frontend-000310": {
         "message": "There is nothing here"
     },

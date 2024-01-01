@@ -57,13 +57,16 @@ class PasswordManager {
                    }
 
                    password.id = data.id;
+                   password._encrypted = password.cseKey?.length > 0;
+                   password.cseKey = data.cseKey;
+                   password.cseType = data.cseType;
                    password.status = 3;
                    password.statusCode = 'NOT_CHECKED';
                    password.editable = true;
                    password.revision = data.revision;
                    password.edited = password.created = password.updated = Utility.getTimestamp();
                    if(!password.label) API._generatePasswordTitle(password);
-                   password = API._processPassword(password);
+                   password = await API._processPassword(password);
                    Events.fire('password.created', password);
                    API.showPassword(password.id)
                       .then((data) => {

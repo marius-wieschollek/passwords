@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import App from '@vue/App';
-import API from '@js/Helper/api';
 import {loadState} from '@nextcloud/initial-state';
 import router from '@js/Helper/router';
 import EventEmitter from 'eventemitter3';
@@ -14,6 +13,7 @@ import MessageService from "@js/Services/MessageService";
 import LoggingService from "@js/Services/LoggingService";
 import LocalisationService from "@js/Services/LocalisationService";
 import UtilityService from "@js/Services/UtilityService";
+import ClientService from "@js/Services/ClientService";
 
 class Application {
 
@@ -65,7 +65,7 @@ class Application {
     }
 
     get isAuthorized() {
-        return API.isAuthorized || !this._loginRequired;
+        return ClientService.getLegacyClient().isAuthorized || !this._loginRequired;
     }
 
     get isMobile() {
@@ -141,10 +141,7 @@ class Application {
     _initApi() {
         let baseUrl    = UtilityService.generateUrl(),
             user       = loadState('passwords', 'api-user', null),
-            token      = loadState('passwords', 'api-token', null),
-            cseMode    = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
-            folderIcon = SettingsService.get('server.theme.folder.icon'),
-            hashLength = SettingsService.get('user.password.security.hash');
+            token      = loadState('passwords', 'api-token', null);
 
         if(!user || !token) {
             MessageService.alert('The app was unable to obtain the api access credentials.', 'Initialisation Error')
@@ -153,11 +150,7 @@ class Application {
         }
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
-
-        API.initialize({baseUrl, user, password: token, folderIcon, hashLength, cseMode, events: this._events});
-        SettingsService.observe('user.password.security.hash', function(setting) {
-            API.config.hashLength = setting.value;
-        });
+        ClientService.initialize(baseUrl, user, token, this._events);
 
         return true;
     }
@@ -175,7 +168,7 @@ class Application {
         if(!this._loginRequired) {
             document.body.classList.remove('pw-auth-visible');
             document.body.classList.add('pw-auth-skipped');
-            API.openSession({})
+            ClientService.getLegacyClient().openSession({})
                .catch(() => {router.push({name: 'Authorize'});});
             SetupManager.runAutomatically();
         }
@@ -192,7 +185,7 @@ class Application {
         router.addRoute({path: '*', redirect: {name: section.capitalize()}});
 
         router.beforeEach((to, from, next) => {
-            if(!API.isAuthorized && this._loginRequired && to.name !== 'Authorize' && to.name !== 'Help') {
+            if(!ClientService.getLegacyClient().isAuthorized && this._loginRequired && to.name !== 'Authorize' && to.name !== 'Help') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});

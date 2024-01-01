@@ -55,11 +55,14 @@ class TagManager {
 
         return new Promise((resolve, reject) => {
             API.createTag(tag)
-                .then((d) => {
+                .then(async (d) => {
                     tag.id = d.id;
                     tag.revision = d.revision;
+                    tag._encrypted = tag.cseKey?.length > 0;
+                    tag.cseKey = d.cseKey;
+                    tag.cseType = d.cseType;
                     tag.edited = tag.created = tag.updated = Utility.getTimestamp();
-                    tag = API._processTag(tag);
+                    tag = await API._processTag(tag);
                     Events.fire('tag.created', tag);
                     Messages.notification('Tag created');
                     resolve(tag);

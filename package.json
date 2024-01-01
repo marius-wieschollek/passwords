@@ -1,6 +1,6 @@
 {
     "name": "ncpasswords",
-    "version": "2023.12.2",
+    "version": "2024.1.0",
     "description": "Easy to use yet feature-rich and secure password manager for Nextcloud",
     "private": true,
     "scripts": {
@@ -63,12 +63,10 @@
         "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
         "jszip": "^3.10.1",
-        "libsodium": "0.7.10",
-        "libsodium-wrappers": "0.7.10",
         "marked": "^4.2.2",
         "mermaid": "^10.0.2",
         "mini-css-extract-plugin": "^2.7.2",
-        "passwords-client": "0.0.15",
+        "passwords-client": "1.0.0-alpha.5280",
         "sass": "^1.57.1",
         "sass-loader": "^12.6.0",
         "sass-resources-loader": "^2.2.5",
@@ -84,6 +82,7 @@
         "webpack": "^5.75.0",
         "webpack-bundle-analyzer": "^4.7.0",
         "webpack-cli": "^4.10.0",
+        "process": "^0.11.10",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
     },
     "browser": {
@@ -100,8 +99,5 @@
     ],
     "author": "Marius Wieschollek",
     "license": "SEE LICENSE IN LICENSE",
-    "_id": "ncpasswords@2021.12.0",
-    "dependencies": {
-        "process": "^0.11.10"
-    }
+    "_id": "ncpasswords@2021.12.0"
 }
