@@ -3294,5 +3294,8 @@
     },
     "frontend-Donate": {
         "message": "Doar"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Pesquisar …"
     }
 }
