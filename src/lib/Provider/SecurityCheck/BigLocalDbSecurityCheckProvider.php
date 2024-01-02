@@ -25,7 +25,7 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
 
-    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25-million-v:version-:format.zip';
+    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25m-v:version-:format.zip';
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';

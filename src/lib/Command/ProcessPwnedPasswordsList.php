@@ -45,10 +45,10 @@ class ProcessPwnedPasswordsList extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:pwned-list:process')
-             ->setDescription('Convert the haveibeenpwned passwords file for the passwords app')
-             ->addArgument('file', InputArgument::REQUIRED, 'The path to the file')
-             ->addOption('size', 's', InputOption::VALUE_REQUIRED, 'Amount of passwords to process in millions', '25')
-             ->addOption('mode', 'm', InputOption::VALUE_REQUIRED, 'Mode for packing the passwords (file|json|gzip|import)', 'import');
+             ->setDescription('Convert the haveibeenpwned pwned passwords list for the passwords app')
+             ->addArgument('file', InputArgument::OPTIONAL, 'The path to pwned passwords hash file', 'pwnedpasswords.txt')
+             ->addOption('size', 's', InputOption::VALUE_REQUIRED, 'Amount of hashes to import in millions', '25')
+             ->addOption('mode', 'm', InputOption::VALUE_REQUIRED, 'Mode for packing the hashes (file|json|gzip|import). Use import to import directly, otherwise a ZIP file will be created', 'import');
     }
 
     /**
@@ -135,7 +135,7 @@ class ProcessPwnedPasswordsList extends Command {
      */
     protected function writeZipFile(int $size, string $mode, array $hashes, OutputInterface $output): void {
         $output->writeln("Creating export file…");
-        $fileName = "{$size}-million-v".BigLocalDbSecurityCheckProvider::PASSWORD_VERSION."-{$mode}.zip";
+        $fileName = "{$size}m-v".BigLocalDbSecurityCheckProvider::PASSWORD_VERSION."-{$mode}.zip";
         if(is_file($fileName)) {
             unlink($fileName);
         }
