@@ -21,7 +21,7 @@ export default new class ClientService {
         this._client = null;
     }
 
-    initialize(baseUrl, user, token, events) {
+    initialize(baseUrl, user, token, events = null) {
         let server = {baseUrl, user, token};
         let config = {baseUrl, user, token};
 
@@ -60,7 +60,10 @@ export default new class ClientService {
             folderIcon = SettingsService.get('server.theme.folder.icon'),
             hashLength = SettingsService.get('user.password.security.hash');
 
-        let config = {folderIcon, hashLength, cseMode, events: this._events};
+        let config = {folderIcon, hashLength, cseMode};
+        if(this._events !== null) {
+            config.events = this._events;
+        }
 
         SettingsService.observe('user.password.security.hash', (setting) => {
             this.getLegacyClient().config.hashLength = setting.value;

@@ -73,7 +73,7 @@ export default new class Dashboard {
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
-        this._dependencies.api.initialize({baseUrl, user, password: token});
+        this._dependencies.clientService.initialize(baseUrl, user, token);
         await this._checkLoginRequirement();
 
         return this._dependencies.api;
