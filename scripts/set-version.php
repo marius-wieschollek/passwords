@@ -49,7 +49,7 @@ function getFullVersion() {
     if($config['lsr']) {
         $parts[2] = getLsrMode().$parts[2];
     } else {
-        $parts[2] = '3'.$parts[2];
+        $parts[2] = '2'.$parts[2];
     }
 
     $version = implode('.', $parts);
