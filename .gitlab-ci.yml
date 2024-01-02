@@ -21,6 +21,7 @@ Prepare:
     - echo "PACKAGE_REGISTRY_URL=${PACKAGE_REGISTRY_URL}" >> variables.env
     - echo "CHANGELOG=${CHANGELOG}" >> variables.env
   artifacts:
+    expire_in: 1 week
     reports:
       dotenv: variables.env
   only:
@@ -66,6 +67,7 @@ Assemble:
     - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"'
     - echo "Package available at ${UPLOAD_URL}"
   artifacts:
+    expire_in: 1 week
     reports:
       dotenv: variables.env
   only:
@@ -90,6 +92,7 @@ Assemble Legacy PHP 8.0 Support Release:
     - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-80.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"'
     - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz"
   artifacts:
+    expire_in: 1 week
     reports:
       dotenv: variables.env
   only:
