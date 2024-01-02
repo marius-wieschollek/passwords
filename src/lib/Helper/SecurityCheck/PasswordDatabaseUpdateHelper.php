@@ -64,6 +64,7 @@ class PasswordDatabaseUpdateHelper {
             return false;
         }
         $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
+        return true;
     }
 
     /**
@@ -93,6 +94,5 @@ class PasswordDatabaseUpdateHelper {
         foreach($this->adminHelper->getAdmins() as $admin) {
             $this->notificationService->sendBreachedPasswordsUpdateFailedNotification($admin->getUID(), $message);
         }
-        $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
     }
 }
