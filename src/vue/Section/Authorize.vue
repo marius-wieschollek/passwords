@@ -56,12 +56,14 @@
     import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Messages from '@js/Classes/Messages';
     import SetupManager from '@js/Manager/SetupManager';
     import Application from "@js/Init/Application";
     import {emit} from '@nextcloud/event-bus';
     import WebAuthnAuthorizeAction from "@js/Actions/WebAuthn/WebAuthnAuthorizeAction";
     import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
+    import CheckPassphrase from "@js/Actions/Encryption/CheckPassphrase";
+    import LoggingService from "@js/Services/LoggingService";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {
@@ -189,7 +191,12 @@
 
                 this.$nextTick(() => {
                     API.openSession(data)
-                       .then(() => { this.goToTarget(); })
+                       .then(() => {
+                           let check = new CheckPassphrase();
+                           check.run(data.password)
+                                .catch(LoggingService.catch)
+                           this.goToTarget();
+                       })
                        .catch((d) => { this.loginError(d, isWebAuthn); });
                 });
             },
@@ -242,7 +249,7 @@
                        setTimeout(() => {this.retryClass = '';}, 1500);
                    })
                    .catch(() => {
-                       Messages.alert(
+                       MessageService.alert(
                            'You may have requested too many tokens. Please try again later.',
                            'Token request failed'
                        );

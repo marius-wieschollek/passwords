@@ -1,6 +1,7 @@
 import API from "@js/Helper/api";
 import Application from '@js/Init/Application';
 import EventManager from '@js/Manager/EventManager';
+import ClientService from "@js/Services/ClientService";
 import UtilityService from '@js/Services/UtilityService';
 import MessageService from '@js/Services/MessageService';
 import LoggingService from "@js/Services/LoggingService";
@@ -25,6 +26,10 @@ class EncryptionManager {
      * @param statusFunc
      */
     async install(password, save = false, encrypt = false, statusFunc = null) {
+        if(!await this.isPassphraseSecure(password)) {
+            return;
+        }
+
         this._resetStatus(statusFunc);
         await this._updateKeychain(password);
 
@@ -56,6 +61,10 @@ class EncryptionManager {
      */
     async update(password, oldPassword) {
         try {
+            if(!await this.isPassphraseSecure(password)) {
+                return;
+            }
+
             await API.setAccountChallenge(password, oldPassword);
             await this._updateWebAuthn(password);
         } catch(e) {
@@ -65,58 +74,84 @@ class EncryptionManager {
 
     /**
      *
-     * @returns {Promise<void>}
+     * @returns {Promise<boolean>}
      */
     async updateGui() {
-        let data = await MessageService.form(
-            {
-                password      : {
-                    label    : 'New password',
-                    type     : 'password',
-                    button   : 'toggle',
-                    minlength: 12,
-                    required : true,
-                    title    : 'Your password must be longer than 12 characters and not the old password',
-                    validator: (value, fields) => {
-                        return value !== fields.oldPassword && value.length >= 12;
+        let data;
+        try {
+            data = await MessageService.form(
+                {
+                    password      : {
+                        label    : 'New password',
+                        type     : 'password',
+                        button   : 'toggle',
+                        minlength: 12,
+                        required : true,
+                        title    : 'Your password must be longer than 12 characters and not the old password',
+                        validator: (value, fields) => {
+                            return value !== fields.oldPassword && value.length >= 12;
+                        }
+                    },
+                    repeatPassword: {
+                        label    : 'Repeat password',
+                        type     : 'password',
+                        button   : 'toggle',
+                        required : true,
+                        title    : 'Please confirm your new password',
+                        validator: (value, fields) => {
+                            return value === fields.password;
+                        }
+                    },
+                    oldPassword   : {
+                        label    : 'Old password',
+                        type     : 'password',
+                        button   : 'toggle',
+                        title    : 'You must enter your old password',
+                        required : true,
+                        validator: (value) => {
+                            return value.length >= 12;
+                        }
                     }
                 },
-                repeatPassword: {
-                    label    : 'Repeat password',
-                    type     : 'password',
-                    button   : 'toggle',
-                    required : true,
-                    title    : 'Please confirm your new password',
-                    validator: (value, fields) => {
-                        return value === fields.password;
-                    }
-                },
-                oldPassword   : {
-                    label    : 'Old password',
-                    type     : 'password',
-                    button   : 'toggle',
-                    title    : 'You must enter your old password',
-                    required : true,
-                    validator: (value) => {
-                        return value.length >= 12;
-                    }
-                }
-            },
-            'Change Password',
-            'You can use this dialog to change your master password.'
-        );
+                'Change Password',
+                'You can use this dialog to change your master password.'
+            );
+        } catch(e) {
+            return false;
+        }
 
         try {
             UtilityService.lockApp();
             await this.update(data.password, data.oldPassword);
             UtilityService.unlockApp();
-
             MessageService.alert('Your password has been changed successfully.', 'Password changed');
         } catch(e) {
             UtilityService.unlockApp();
-            MessageService.alert(e.message, 'Changing password failed');
             LoggingService.error(e);
+            MessageService.alert(e.message, 'Changing password failed');
+            return false;
         }
+        return true;
+    }
+
+    async isPassphraseSecure(passphrase) {
+        let result = true;
+        if(passphrase.length < 12) {
+            result = false;
+        } else {
+            let hash           = await ClientService.getLegacyClient().getHash(passphrase),
+                breachedHashes = await ClientService.getLegacyClient().getHashes(hash.substring(0, 5));
+
+            result = breachedHashes.indexOf(hash) === -1;
+        }
+
+        if(!result) {
+            MessageService
+                .alert('CSENewPassphraseInsecureText', 'CSEPassphraseInsecureTitle')
+                .catch(LoggingService.catch);
+        }
+
+        return result;
     }
 
     /**
