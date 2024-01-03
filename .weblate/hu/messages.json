@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Keresés …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "A választott titkosítási jelszó nem biztonságos, ezért nem használható.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Bizonytalan titkosítási jelszó",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "A jelszavak alkalmazás rendszeresen ellenőrzi, hogy a titkosítási jelszó még mindig biztonságos-e. A jelenlegi jelszava nem biztonságos, és azonnal meg kell változtatni."
     }
 }
