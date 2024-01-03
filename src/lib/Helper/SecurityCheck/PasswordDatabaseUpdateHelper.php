@@ -58,12 +58,20 @@ class PasswordDatabaseUpdateHelper {
     protected function registerUpdateAttempt() {
         $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
         $attempts++;
-        if($attempts >= 3) {
-            $this->sendUpdateFailureNotification('Too many failed attempts');
+        $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
+        if($attempts > 3) {
+            if($attempts === 4) {
+                $this->sendUpdateFailureNotification('Too many failed attempts');
+            } else if ($attempts > 9) {
+                /**
+                 * Nearly a week has passed since the last attempt.
+                 * Let's try again tomorrow.
+                 */
+                $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
+            }
 
             return false;
         }
-        $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
         return true;
     }
 
@@ -75,7 +83,7 @@ class PasswordDatabaseUpdateHelper {
     protected function registerUpdateFailure(Throwable $e): void {
         $this->logger->logException($e, [], 'Could not update breached passwords database: '.$e->getMessage());
         $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
-        if($attempts >= 3) $this->sendUpdateFailureNotification($e->getMessage());
+        if($attempts >= 2) $this->sendUpdateFailureNotification($e->getMessage());
     }
 
     /**
