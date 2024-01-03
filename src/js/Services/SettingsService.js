@@ -13,6 +13,7 @@ class SettingsService {
             'client.ui.sort.field'               : 'label',
             'client.sharing.qrcode.warning'      : true,
             'client.encryption.webauthn.enabled' : false,
+            'client.encryption.passphrase.check' : 0,
             'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',

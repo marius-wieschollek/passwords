@@ -20,11 +20,11 @@
 <script>
     import Editor from '@toast-ui/editor';
     import Utility from "@js/Classes/Utility";
-    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import Icon from '@vc/Icon';
     import Translate from '@vc/Translate';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
+    import MessageService from "@js/Services/MessageService";
 
     const MaxNotesLength = 4096;
 
@@ -132,7 +132,7 @@
                     );
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
+                    MessageService.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
                 }
             }
         },

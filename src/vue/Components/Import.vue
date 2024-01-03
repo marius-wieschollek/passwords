@@ -237,10 +237,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import DAS from '@js/Services/DeferredActivationService';
     import CustomCsvHelp from '@vue/Import/CustomCsvHelp';
+    import MessageService from "@js/Services/MessageService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -322,7 +322,7 @@
                             this.importing = false;
                             this.progress.style = 'error';
                             this.progress.status = 'Import failed';
-                            Messages.alert(e.message, 'Import error');
+                            MessageService.alert(e.message, 'Import error');
                         })
                         .then((errors = []) => {
                             this.importing = false;
@@ -336,11 +336,11 @@
                                               + ' ' + errors.join(' ') + ' ' +
                                               Localisation.translate(
                                                   'More information can be found in the log. (Press F12)');
-                                Messages.alert(message, 'Import error');
+                                MessageService.alert(message, 'Import error');
                             }
                         });
                 } catch(e) {
-                    Messages.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
+                    MessageService.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
                 }
             },
             processFile(event) {
@@ -364,8 +364,8 @@
                 try {
                     Parser = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero');
                 } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'CsvHero'}], 'Network error');
+                    LoggingService.error(e);
+                    MessageService.alert(['Unable to load {module}', {module: 'CsvHero'}], 'Network error');
                 }
 
                 try {
@@ -411,8 +411,8 @@
                                 })
                         );
                     }
-                    console.error(result.errors);
-                    Messages.alert(
+                    LoggingService.error(result.errors);
+                    MessageService.alert(
                         ['The file could not be parsed: {errors}', {errors: errors.join(' ')}],
                         'Import error'
                     );

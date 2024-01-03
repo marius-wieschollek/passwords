@@ -15,9 +15,9 @@
 <script>
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from "@js/Services/SettingsService";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {
@@ -71,7 +71,7 @@
                         }
                     };
 
-                Messages.form(form, 'Set expiration date', 'Choose expiration date')
+                MessageService.form(form, 'Set expiration date', 'Choose expiration date')
                         .then((data) => {
                             let expires = data.expires;
                             if(expires.length === 0) {
@@ -79,7 +79,7 @@
                             } else {
                                 expires = new Date(data.expires.replace(/([0-9]+)\.([0-9]+)\.([0-9]+)/g, '$2/$1/$3'));
                                 if(expires < new Date()) {
-                                    Messages.alert('Please choose a date in the future', 'Invalid date');
+                                    MessageService.alert('Please choose a date in the future', 'Invalid date');
                                     return;
                                 }
                             }

@@ -71,9 +71,9 @@
     import FolderField from '@vue/Dialog/CreatePassword/FolderField';
     import TagsField from '@vue/Dialog/CreatePassword/TagsField';
     import CheckboxField from '@vue/Dialog/CreatePassword/CheckboxField';
-    import Messages from '@js/Classes/Messages';
     import NcModal from '@nc/NcModal.js';
     import NcButton from '@nc/NcButton.js';
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {
@@ -154,7 +154,7 @@
                 if(
                     password.hidden &&
                     !this.isFolderHidden &&
-                    !await Messages.confirm('PwdSaveHiddenMessage', 'PwdSaveHiddenTitle', true)
+                    !await MessageService.confirm('PwdSaveHiddenMessage', 'PwdSaveHiddenTitle', true)
                 ) {
                     return;
                 }

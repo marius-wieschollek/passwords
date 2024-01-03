@@ -3308,5 +3308,16 @@
                 "content": "$2"
             }
         }
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "The chosen encryption passphrase is insecure and therefore can not be used.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Insecure encryption passphrase",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "The passwords app regularly checks if your encryption passphrase is still secure. Your current passphrase is not secure and needs to be changed immediately."
     }
 }

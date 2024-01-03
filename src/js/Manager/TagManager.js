@@ -1,9 +1,10 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
 import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
+import MessageService from "@js/Services/MessageService";
+import ToastService from "@js/Services/ToastService";
 
 /**
  *
@@ -33,7 +34,7 @@ class TagManager {
         };
 
         return new Promise((resolve, reject) => {
-            Messages.form(form, 'Create tag')
+            MessageService.form(form, 'Create tag')
                 .then((tag) => {
                     this.createTagFromData(tag)
                         .then(resolve)
@@ -64,11 +65,11 @@ class TagManager {
                     tag.edited = tag.created = tag.updated = Utility.getTimestamp();
                     tag = await API._processTag(tag);
                     Events.fire('tag.created', tag);
-                    Messages.notification('Tag created');
+                    ToastService.success('Tag created');
                     resolve(tag);
                 })
                 .catch(() => {
-                    Messages.notification('Creating tag failed');
+                    ToastService.error('Creating tag failed');
                     reject(tag);
                 });
         });
@@ -99,7 +100,7 @@ class TagManager {
         };
 
         return new Promise((resolve, reject) => {
-            Messages.form(form, 'Edit tag')
+            MessageService.form(form, 'Edit tag')
                 .then((data) => {
                     tag.label = data.label;
                     tag.color = data.color;
@@ -110,11 +111,11 @@ class TagManager {
                             tag.updated = new Date();
                             tag.revision = d.revision;
                             Events.fire('tag.updated', tag);
-                            Messages.notification('Tag saved');
+                            ToastService.success('Tag saved');
                             resolve(tag);
                         })
                         .catch(() => {
-                            Messages.notification('Saving tag failed');
+                            ToastService.error('Saving tag failed');
                             reject(tag);
                         });
                 })
@@ -157,7 +158,7 @@ class TagManager {
                         tag.updated = new Date();
                         tag.revision = d.revision;
                         Events.fire('tag.deleted', tag);
-                        Messages.notification('Tag deleted');
+                        ToastService.info('Tag deleted');
                         resolve(tag);
                     })
                     .catch((e) => {
@@ -167,12 +168,12 @@ class TagManager {
                             Events.fire('tag.deleted', tag);
                             resolve(tag);
                         } else {
-                            Messages.notification('Deleting tag failed');
+                            ToastService.error('Deleting tag failed');
                             reject(tag);
                         }
                     });
             } else {
-                Messages.confirm('Do you want to delete the tag', 'Delete tag')
+                MessageService.confirm('Do you want to delete the tag', 'Delete tag')
                     .then(() => { this.deleteTag(tag, false); })
                     .catch(() => {reject(tag);});
             }
@@ -193,11 +194,11 @@ class TagManager {
                         tag.updated = new Date();
                         tag.revision = d.revision;
                         Events.fire('tag.restored', tag);
-                        Messages.notification('Tag restored');
+                        ToastService.info('Tag restored');
                         resolve(tag);
                     })
                     .catch(() => {
-                        Messages.notification('Restoring tag failed');
+                        ToastService.error('Restoring tag failed');
                         reject(tag);
                     });
             } else {
@@ -225,15 +226,15 @@ class TagManager {
                         tag.updated = new Date();
                         tag.revision = d.revision;
                         Events.fire('tag.restored', tag);
-                        Messages.notification('Revision restored');
+                        ToastService.info('Revision restored');
                         resolve(tag);
                     })
                     .catch(() => {
-                        Messages.notification('Restoring revision failed');
+                        ToastService.error('Restoring revision failed');
                         reject(tag);
                     });
             } else {
-                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                MessageService.confirm('Do you want to restore the revision?', 'Restore revision')
                     .then(() => { this.restoreRevision(tag, revision, false); })
                     .catch(() => {reject(tag);});
             }

@@ -3,8 +3,9 @@
 </template>
 
 <script>
-    import Messages from '@js/Classes/Messages';
     import DOMPurify from 'dompurify';
+    import MessageService from "@js/Services/MessageService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         props: {
@@ -30,8 +31,8 @@
                     marked.setOptions({breaks: true});
                     this.notes = DOMPurify.sanitize(marked.marked.parse(this.password.notes));
                 } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
+                    LoggingService.error(e);
+                    MessageService.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
                 }
             }
         },

@@ -37,9 +37,9 @@
     import UrlCustomField from "@vue/Dialog/CreatePassword/CustomFields/UrlCustomField";
     import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
     import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
-    import Messages from "@js/Classes/Messages";
     import Localisation from "@js/Classes/Localisation";
     import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
@@ -82,7 +82,7 @@
         },
         methods : {
             deleteField() {
-                Messages
+                MessageService
                     .confirm(['Do you want to delete the field "{field}"?', {field: this.model.label}], 'Delete field')
                     .then((success) => {
                         if(success) this.$emit('delete');

@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Messages from '@js/Classes/Messages';
 import SectionTags from '@vue/Section/Tags';
 import SectionRecent from '@vue/Section/Recent';
 import SectionFolders from '@vue/Section/Folders';
 import Localisation from '@js/Classes/Localisation';
 import SectionFavorites from '@vue/Section/Favorites';
 import Logger from "@js/Classes/Logger";
+import MessageService from "@js/Services/MessageService";
 
 function handleChunkLoadingError(e, module) {
     Logger.error(e);
-    Messages
+    MessageService
         .alert(['Unable to load {module}', {module}], 'Network error')
         .finally(() => {
             router.push('/');

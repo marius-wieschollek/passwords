@@ -22,7 +22,7 @@
     import AbstractCustomField from '@vue/Dialog/CreatePassword/CustomFields/AbstractCustomField';
     import Icon                from '@vc/Icon';
     import SettingsService     from '@js/Services/SettingsService';
-    import Messages            from '@js/Classes/Messages';
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {Icon},
@@ -45,7 +45,7 @@
         },
         methods : {
             async chooseFile() {
-                this.data = await Messages.ncFilePicker();
+                this.data = await MessageService.ncFilePicker();
             }
         }
     };

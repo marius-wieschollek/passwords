@@ -5,15 +5,15 @@ const handler = {
         let client = ClientService.getLegacyClient();
 
         const value = client[prop];
-        if (value instanceof Function) {
-            return function (...args) {
-                return value.apply(this === receiver ? client : this, args);
+        if(value instanceof Function) {
+            return function(...args) {
+                return value.apply(this === receiver ? client:this, args);
             };
         }
         return value;
     }
 };
 
-let API = new Proxy({}, handler)
+let API = new Proxy({}, handler);
 
 export default API;

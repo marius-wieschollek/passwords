@@ -16,15 +16,15 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import Messages from '@js/Classes/Messages';
     import Web from '@vc/Web';
+    import ToastService from "@js/Services/ToastService";
 
     export default {
         components: {Web, Translate},
         methods   : {
             openHelp() {
                 this.$emit('redirect', {path: '/help'});
-                Messages.notification('Handbook will be opened after the tutorial');
+                ToastService.info('Handbook will be opened after the tutorial');
             }
         }
     };

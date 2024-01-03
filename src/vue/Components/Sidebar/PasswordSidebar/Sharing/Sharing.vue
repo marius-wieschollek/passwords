@@ -35,11 +35,11 @@
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vc/Sidebar/PasswordSidebar/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
+    import ToastService from "@js/Services/ToastService";
 
     export default {
         components: {
@@ -211,10 +211,10 @@
                     this.refreshShares();
                 } catch(e) {
                     if(e.id === '65782183') {
-                        Messages.notification(['The user {uid} does not exist', {uid: receiver}]);
+                        ToastService.error(['The user {uid} does not exist', {uid: receiver}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
-                        Messages.notification(['Unable to share password: {message}', {message}]);
+                        ToastService.error(['Unable to share password: {message}', {message}]);
                     }
                 }
             },
@@ -233,7 +233,7 @@
                     if(this.idMap.hasOwnProperty(uid) || !this.autocomplete) {
                         this.addShare(uid);
                     } else {
-                        Messages.notification(['The user {uid} does not exist', {uid}]);
+                        ToastService.error(['The user {uid} does not exist', {uid}]);
                     }
                 }
             },

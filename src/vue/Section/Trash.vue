@@ -40,13 +40,14 @@
     import FolderLine from '@vue/Line/Folder';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
-    import Messages from '@js/Classes/Messages';
     import PasswordLine from '@vue/Line/Password';
     import TagManager from '@js/Manager/TagManager';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
+    import MessageService from "@js/Services/MessageService";
+    import ToastService from "@js/Services/ToastService";
 
     export default {
         extends: BaseSection,
@@ -98,7 +99,7 @@
                 API.findTags({trashed: true}).then(this.updateTagList);
             },
             restoreTrash() {
-                Messages.confirm('Restore all items in trash?', 'Restore Items')
+                MessageService.confirm('Restore all items in trash?', 'Restore Items')
                         .then(() => {
                             for(let i = 0; i < this.passwords.length; i++) {
                                 PasswordManager.restorePassword(this.passwords[i]);
@@ -110,11 +111,11 @@
                                 TagManager.restoreTag(this.tags[i]);
                             }
 
-                            Messages.notification('Items restored');
+                            ToastService.success('Items restored');
                         });
             },
             clearTrash() {
-                Messages.confirm('Delete all items in trash?', 'Empty Trash')
+                MessageService.confirm('Delete all items in trash?', 'Empty Trash')
                         .then(() => {
                             for(let i = 0; i < this.passwords.length; i++) {
                                 PasswordManager.deletePassword(this.passwords[i], false);
@@ -126,7 +127,7 @@
                                 TagManager.deleteTag(this.tags[i], false);
                             }
 
-                            Messages.notification('Trash emptied');
+                            ToastService.info('Trash emptied');
                         });
             }
         }

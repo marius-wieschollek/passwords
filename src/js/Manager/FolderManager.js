@@ -1,8 +1,9 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
 import Vue from "vue";
+import MessageService from "@js/Services/MessageService";
+import ToastService from "@js/Services/ToastService";
 
 /**
  *
@@ -16,7 +17,7 @@ class FolderManager {
      */
     createFolder(parent = null) {
         return new Promise((resolve, reject) => {
-            Messages
+            MessageService
                 .prompt('Name', 'Create folder')
                 .then((title) => {
                     let folder = {label: title};
@@ -33,11 +34,11 @@ class FolderManager {
                            folder.edited = folder.created = folder.updated = Utility.getTimestamp();
                            folder = await API._processFolder(folder);
                            Events.fire('folder.created', folder);
-                           Messages.notification('Folder created');
+                           ToastService.success('Folder created');
                            resolve(folder);
                        })
                        .catch(() => {
-                           Messages.notification('Creating folder failed');
+                           ToastService.error('Creating folder failed');
                            reject(folder);
                        });
                 }).catch(() => {reject();});
@@ -51,7 +52,7 @@ class FolderManager {
      */
     renameFolder(folder) {
         return new Promise((resolve, reject) => {
-            Messages
+            MessageService
                 .prompt('Name', 'Rename folder', null, null, folder.label)
                 .then((title) => {
                     let originalTitle = folder.label;
@@ -63,11 +64,11 @@ class FolderManager {
                            folder.updated = new Date();
                            folder.revision = d.revision;
                            Events.fire('folder.deleted', folder);
-                           Messages.notification('Folder renamed');
+                           ToastService.success('Folder renamed');
                            resolve(folder);
                        })
                        .catch(() => {
-                           Messages.notification('Renaming folder failed');
+                           ToastService.error('Renaming folder failed');
                            folder.label = originalTitle;
                            reject(folder);
                        });
@@ -105,11 +106,11 @@ class FolderManager {
                    folder.updated = new Date();
                    folder.revision = d.revision;
                    Events.fire('folder.updated', folder);
-                   Messages.notification('Folder moved');
+                   ToastService.info('Folder moved');
                    resolve(folder);
                })
                .catch(() => {
-                   Messages.notification('Moving folder failed');
+                   ToastService.error('Moving folder failed');
                    folder.parent = originalParent;
                    reject(folder);
                });
@@ -151,7 +152,7 @@ class FolderManager {
                        folder.updated = new Date();
                        folder.revision = d.revision;
                        Events.fire('folder.deleted', folder);
-                       Messages.notification('Folder deleted');
+                       ToastService.info('Folder deleted');
                        resolve(folder);
                    })
                    .catch((e) => {
@@ -161,12 +162,12 @@ class FolderManager {
                            Events.fire('folder.deleted', folder);
                            resolve(folder);
                        } else {
-                           Messages.notification('Deleting folder failed');
+                           ToastService.error('Deleting folder failed');
                            reject(folder);
                        }
                    });
             } else {
-                Messages.confirm('Do you want to delete the folder', 'Delete folder')
+                MessageService.confirm('Do you want to delete the folder', 'Delete folder')
                         .then(() => { this.deleteFolder(folder, false); })
                         .catch(() => {reject(folder);});
             }
@@ -187,11 +188,11 @@ class FolderManager {
                        folder.updated = new Date();
                        folder.revision = d.revision;
                        Events.fire('folder.restored', folder);
-                       Messages.notification('Folder restored');
+                       ToastService.info('Folder restored');
                        resolve(folder);
                    })
                    .catch(() => {
-                       Messages.notification('Restoring folder failed');
+                       ToastService.error('Restoring folder failed');
                        reject(folder);
                    });
             } else {
@@ -219,15 +220,15 @@ class FolderManager {
                        folder.updated = new Date();
                        folder.revision = d.revision;
                        Events.fire('folder.restored', folder);
-                       Messages.notification('Revision restored');
+                       ToastService.info('Revision restored');
                        resolve(folder);
                    })
                    .catch(() => {
-                       Messages.notification('Restoring revision failed');
+                       ToastService.error('Restoring revision failed');
                        reject(folder);
                    });
             } else {
-                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                MessageService.confirm('Do you want to restore the revision?', 'Restore revision')
                         .then(() => { this.restoreRevision(folder, revision, false); })
                         .catch(() => {reject(folder);});
             }

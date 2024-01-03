@@ -147,9 +147,8 @@
 <script>
     import Translate from '@vc/Translate';
     import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
     import Localisation from '@js/Classes/Localisation';
-    import DAS from "@js/Services/DeferredActivationService";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {
@@ -236,20 +235,20 @@
                         .catch((e) => {
                             this.exporting = false;
                             console.error(e);
-                            Messages.alert(e.message, 'Export error');
+                            MessageService.alert(e.message, 'Export error');
                         })
                         .then((d) => {
                             if(d) {
                                 this.data = d;
                                 this.buttonText = 'Download {format}';
                             } else if(this.exporting) {
-                                Messages.alert('There is no data to export', 'Nothing to export');
+                                MessageService.alert('There is no data to export', 'Nothing to export');
                             }
                             this.exporting = false;
                         });
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
+                    MessageService.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
                 }
             },
             setExportModel($e) {
