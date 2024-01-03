@@ -54,10 +54,9 @@
 </template>
 
 <script>
+    import Icon from '@vc/Icon';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Icon from '@vc/Icon';
-    import Utility from '@js/Classes/Utility';
     import SettingsService from '@js/Services/SettingsService';
     import PasswordField from '@vue/Dialog/CreatePassword/PasswordField';
     import TextField from '@vue/Dialog/CreatePassword/TextField';
@@ -74,6 +73,7 @@
     import NcModal from '@nc/NcModal.js';
     import NcButton from '@nc/NcButton.js';
     import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -121,7 +121,7 @@
             let cseType     = SettingsService.get('user.encryption.cse') === 1 ? 'CSEv1r1':'none',
                 password    = Object.assign({cseType, notes: '', favorite: false, customFields: [], tags: [], hidden: false}, this.properties),
                 dragService = new CustomFieldsDragService(password),
-                container   = Utility.popupContainer(true);
+                container   = UtilityService.popupContainer(true);
 
             return {password, dragService, isFolderHidden: false, container};
         },
@@ -147,7 +147,7 @@
                     return;
                 }
 
-                let password = Utility.cloneObject(this.password);
+                let password = UtilityService.cloneObject(this.password);
                 password = API.flattenPassword(password);
                 password = API.validatePassword(password);
 

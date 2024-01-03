@@ -31,10 +31,10 @@
     import NcListItem from '@nc/NcListItem.js';
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import SettingsService from "@js/Services/SettingsService";
-    import Utility from "@js/Classes/Utility";
     import Favicon from "@vc/Favicon";
     import Localisation from "@js/Classes/Localisation";
     import {showInfo} from "@nextcloud/dialogs";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {Favicon, NcListItem, ShieldHalfFullIcon},
@@ -93,7 +93,7 @@
                         let message = 'Error copying {element} to clipboard';
                         if(!this.password.hasOwnProperty(attribute) || this.password[attribute].length === 0) {
                             message = 'ClipboardCopyEmpty';
-                        } else if(Utility.copyToClipboard(this.password[attribute])) {
+                        } else if(UtilityService.copyToClipboard(this.password[attribute])) {
                             message = '{element} was copied to clipboard';
                         }
 
@@ -108,7 +108,7 @@
                 this.clickTimeout = setTimeout(
                     () => {
                         if(this.password.url) {
-                            Utility.openLink(this.password.url);
+                            UtilityService.openLink(this.password.url);
                         }
                         this.clickTimeout = null;
                     },

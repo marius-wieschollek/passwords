@@ -32,11 +32,11 @@
 
 <script>
     import API from "@js/Helper/api";
-    import Utility from "@js/Classes/Utility";
     import Translate from '@vc/Translate';
     import NcModal from '@nc/NcModal.js';
     import NcButton from '@nc/NcButton.js';
     import NcLoadingIcon from '@nc/NcLoadingIcon.js';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -56,7 +56,7 @@
             return {
                 loading        : true,
                 passwordPageUrl: null,
-                container      : Utility.popupContainer(true)
+                container      : UtilityService.popupContainer(true)
             };
         },
 

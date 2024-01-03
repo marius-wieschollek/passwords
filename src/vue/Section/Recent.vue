@@ -10,8 +10,8 @@
 
 <script>
     import API from '@js/Helper/api';
-    import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         extends: BaseSection,
@@ -32,9 +32,9 @@
             },
 
             updateContentList: function(passwords) {
-                let array = Utility.sortApiObjectArray(passwords, 'edited', false);
+                let array = UtilityService.sortApiObjectArray(passwords, 'edited', false);
                 this.loading = false;
-                this.passwords = Utility.sortApiObjectArray(array.slice(0, 15), this.getPasswordsSortingField(), this.sorting.ascending);
+                this.passwords = UtilityService.sortApiObjectArray(array.slice(0, 15), this.getPasswordsSortingField(), this.sorting.ascending);
             }
         }
     };

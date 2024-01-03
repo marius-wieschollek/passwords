@@ -82,7 +82,6 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import DragManager from '@js/Manager/DragManager';
     import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
@@ -107,6 +106,7 @@
     import QrcodeIcon from "@icon/Qrcode";
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import LockResetIcon from "@icon/LockReset";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -184,10 +184,10 @@
                 return title;
             },
             getTags() {
-                return Utility.sortApiObjectArray(this.password.tags, 'label');
+                return UtilityService.sortApiObjectArray(this.password.tags, 'label');
             },
             tagStyle() {
-                let length = Utility.objectToArray(this.password.tags).length;
+                let length = UtilityService.objectToArray(this.password.tags).length;
                 if(length) {
                     return {
                         'padding-left': (length + 18) + 'px'
@@ -280,7 +280,7 @@
                 } else if(action === 'details') {
                     this.clickTimeout = setTimeout(this.detailsAction, delay);
                 } else if(action === 'open-url' && this.password.url) {
-                    this.clickTimeout = setTimeout(() => {Utility.openLink(this.password.url);}, delay);
+                    this.clickTimeout = setTimeout(() => {UtilityService.openLink(this.password.url);}, delay);
                 }
             },
             copyAction(attribute, delay = 0) {

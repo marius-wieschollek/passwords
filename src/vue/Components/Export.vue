@@ -146,9 +146,9 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -284,7 +284,7 @@
                 if(this.format === 'xlsx') mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
                 let filename = this.generateFilename(this.models);
-                Utility.createDownload(this.data, filename, mime);
+                UtilityService.createDownload(this.data, filename, mime);
             },
             csvFieldMapping(event, id) {
                 let mapping = this.options.mapping.clone();

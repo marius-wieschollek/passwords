@@ -13,9 +13,9 @@
 
 <script>
     import Web from '@vc/Web';
-    import Utility from '@js/Classes/Utility';
     import SettingsService from '@js/Services/SettingsService';
     import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -62,7 +62,7 @@
         methods   : {
             copyValue() {
                 let message = 'Error copying {element} to clipboard';
-                if (Utility.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
+                if (UtilityService.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
                 MessageService.notification([message, {element: this.label}]);
             }
         }

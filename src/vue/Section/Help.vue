@@ -44,12 +44,12 @@
     import Gallery from '@vc/Gallery';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
     import Application from "@js/Init/Application";
     import {emit} from "@nextcloud/event-bus";
     import CommunityResources from "@vc/Handbook/CommunityResources.vue";
+    import UtilityService from "@js/Services/UtilityService";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -177,7 +177,7 @@
                 let scrollTarget = document.getElementById('app-content-vue');
 
                 if(!this.$route.hash) {
-                    Utility.scrollTo(0, 0, behavior, scrollTarget);
+                    UtilityService.scrollTo(0, 0, behavior, scrollTarget);
                     return;
                 }
 
@@ -186,7 +186,7 @@
                     let breadcrumb = document.querySelector('.breadcrumb.passwords-breadcrumbs'),
                         top        = $el.offsetTop - (breadcrumb ? breadcrumb.offsetHeight:0);
 
-                    Utility.scrollTo(top, 0, behavior, scrollTarget);
+                    UtilityService.scrollTo(top, 0, behavior, scrollTarget);
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                     this.anchor = this.$route.hash;

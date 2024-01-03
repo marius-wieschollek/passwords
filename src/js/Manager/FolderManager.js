@@ -1,9 +1,9 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from '@js/Classes/Utility';
 import Vue from "vue";
 import MessageService from "@js/Services/MessageService";
 import ToastService from "@js/Services/ToastService";
+import UtilityService from "@js/Services/UtilityService";
 
 /**
  *
@@ -31,7 +31,7 @@ class FolderManager {
                            folder._encrypted = folder.cseKey?.length > 0;
                            folder.cseKey = d.cseKey;
                            folder.cseType = d.cseType;
-                           folder.edited = folder.created = folder.updated = Utility.getTimestamp();
+                           folder.edited = folder.created = folder.updated = UtilityService.getTimestamp();
                            folder = await API._processFolder(folder);
                            Events.fire('folder.created', folder);
                            ToastService.success('Folder created');
@@ -215,7 +215,7 @@ class FolderManager {
             if(!confirm) {
                 API.restorePassword(folder.id, revision.id)
                    .then((d) => {
-                       folder = Utility.mergeObject(folder, revision);
+                       folder = UtilityService.mergeObject(folder, revision);
                        folder.id = d.id;
                        folder.updated = new Date();
                        folder.revision = d.revision;
@@ -248,7 +248,7 @@ class FolderManager {
             let FolderPicker       = await import(/* webpackChunkName: "FolderPicker" */ '@vue/Dialog/FolderPicker.vue'),
                 FolderPickerDialog = Vue.extend(FolderPicker.default);
 
-            new FolderPickerDialog({propsData: {folder, ignoredFolders, resolve, reject}}).$mount(Utility.popupContainer());
+            new FolderPickerDialog({propsData: {folder, ignoredFolders, resolve, reject}}).$mount(UtilityService.popupContainer());
         });
     }
 }

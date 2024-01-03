@@ -14,8 +14,8 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {Translate},
@@ -77,7 +77,7 @@
 
         methods: {
             openCsvHelp() {
-                Utility.openLink(this.guides.csv.link);
+                UtilityService.openLink(this.guides.csv.link);
                 if(!this.csvVisible) this.$emit('trigger');
             }
         }

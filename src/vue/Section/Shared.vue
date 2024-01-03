@@ -39,7 +39,6 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from '@js/Classes/Utility';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import GenericLine from '@vue/Line/Generic';
@@ -47,6 +46,7 @@
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import Application from '@js/Init/Application';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         extends: BaseSection,
@@ -142,11 +142,11 @@
                 }
 
                 for(let i in shareUsers) {
-                    if(shareUsers.hasOwnProperty(i)) shareUsers[i] = Utility.sortApiObjectArray(shareUsers[i], 'name');
+                    if(shareUsers.hasOwnProperty(i)) shareUsers[i] = UtilityService.sortApiObjectArray(shareUsers[i], 'name');
                 }
 
                 this.shareUsers = shareUsers;
-                this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                this.passwords = UtilityService.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             getShareUsers(id) {
                 return this.shareUsers[id];

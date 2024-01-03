@@ -11,11 +11,11 @@
 <script>
     import API from '@js/Helper/api';
     import Events from '@js/Classes/Events';
-    import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import Application from "@js/Init/Application";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         extends: BaseSection,
@@ -107,10 +107,10 @@
 
                 if(object.type === 'password' && (object.folder === this.currentFolder.id || object.folder.id === this.currentFolder.id)) {
                     if(object.trashed) {
-                        this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
+                        this.passwords = UtilityService.removeApiObjectFromArray(this.passwords, object);
                     } else {
-                        let passwords = Utility.replaceOrAppendApiObject(this.passwords, object);
-                        this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                        let passwords = UtilityService.replaceOrAppendApiObject(this.passwords, object);
+                        this.passwords = UtilityService.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                     }
                 } else if(object.type === 'folder' && object.id === this.currentFolder.id) {
                     if(object.trashed) {
@@ -124,15 +124,15 @@
                     }
                 } else if(object.type === 'folder' && object.parent === this.currentFolder.id) {
                     if(object.trashed) {
-                        this.folders = Utility.removeApiObjectFromArray(this.folders, object);
+                        this.folders = UtilityService.removeApiObjectFromArray(this.folders, object);
                     } else {
-                        let folders = Utility.replaceOrAppendApiObject(this.folders, object);
-                        this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
+                        let folders = UtilityService.replaceOrAppendApiObject(this.folders, object);
+                        this.folders = UtilityService.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
                     }
-                } else if(object.type === 'folder' && Utility.searchApiObjectInArray(this.folders, object) !== -1) {
-                    this.folders = Utility.removeApiObjectFromArray(this.folders, object);
-                } else if(object.type === 'password' && Utility.searchApiObjectInArray(this.passwords, object) !== -1) {
-                    this.passwords = Utility.removeApiObjectFromArray(this.passwords, object);
+                } else if(object.type === 'folder' && UtilityService.searchApiObjectInArray(this.folders, object) !== -1) {
+                    this.folders = UtilityService.removeApiObjectFromArray(this.folders, object);
+                } else if(object.type === 'password' && UtilityService.searchApiObjectInArray(this.passwords, object) !== -1) {
+                    this.passwords = UtilityService.removeApiObjectFromArray(this.passwords, object);
                 }
             },
             updateContentList    : function(folder) {
@@ -143,8 +143,8 @@
                     this.trashMode = false;
                 }
 
-                this.folders = Utility.sortApiObjectArray(folder.folders, this.sorting.field, this.sorting.ascending);
-                this.passwords = Utility.sortApiObjectArray(folder.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                this.folders = UtilityService.sortApiObjectArray(folder.folders, this.sorting.field, this.sorting.ascending);
+                this.passwords = UtilityService.sortApiObjectArray(folder.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 this.currentFolder = folder;
             }
         },

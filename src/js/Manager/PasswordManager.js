@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from '@js/Classes/Utility';
 import FolderManager from "@js/Manager/FolderManager";
 import Logger from "@js/Classes/Logger";
 import ToastService from "@js/Services/ToastService";
 import MessageService from "@js/Services/MessageService";
+import UtilityService from "@js/Services/UtilityService";
 
 /**
  *
@@ -37,7 +37,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(UtilityService.popupContainer());
         });
     }
 
@@ -65,7 +65,7 @@ class PasswordManager {
                    password.statusCode = 'NOT_CHECKED';
                    password.editable = true;
                    password.revision = data.revision;
-                   password.edited = password.created = password.updated = Utility.getTimestamp();
+                   password.edited = password.created = password.updated = UtilityService.getTimestamp();
                    if(!password.label) API._generatePasswordTitle(password);
                    password = await API._processPassword(password);
                    Events.fire('password.created', password);
@@ -96,13 +96,13 @@ class PasswordManager {
                 password.tags = tagData.tags;
             }
 
-            let propsData      = {properties: Utility.cloneObject(password), title: 'Edit password'},
+            let propsData      = {properties: UtilityService.cloneObject(password), title: 'Edit password'},
                 PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default),
-                DialogWindow   = new PwCreateDialog({propsData}).$mount(Utility.popupContainer());
+                DialogWindow   = new PwCreateDialog({propsData}).$mount(UtilityService.popupContainer());
 
             DialogWindow._success = (p) => {
-                p = Utility.mergeObject(password, p);
+                p = UtilityService.mergeObject(password, p);
                 if(!p.label) API._generatePasswordTitle(p);
                 if(password.password !== p.password) {
                     p.edited = new Date();
@@ -143,7 +143,7 @@ class PasswordManager {
      */
     clonePassword(password) {
         return new Promise(async (resolve, reject) => {
-            let properties = Utility.cloneObject(password);
+            let properties = UtilityService.cloneObject(password);
             properties.id = null;
             properties.status = null;
             properties.statusCode = null;
@@ -173,7 +173,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(UtilityService.popupContainer());
             PwCreateDialog._fail = reject;
         });
     }
@@ -325,7 +325,7 @@ class PasswordManager {
             if(!confirm) {
                 API.restorePassword(password.id, revision.id)
                    .then((d) => {
-                       password = Utility.mergeObject(password, revision);
+                       password = UtilityService.mergeObject(password, revision);
                        password.id = d.id;
                        password.updated = new Date();
                        password.revision = d.revision;
@@ -357,7 +357,7 @@ class PasswordManager {
         let RevisionDialog     = await import(/* webpackChunkName: "ViewRevision" */ '@vue/Dialog/ViewRevision.vue'),
             ViewRevisionDialog = Vue.extend(RevisionDialog.default);
 
-        new ViewRevisionDialog({propsData: {password, revision}}).$mount(Utility.popupContainer());
+        new ViewRevisionDialog({propsData: {password, revision}}).$mount(UtilityService.popupContainer());
     }
 }
 

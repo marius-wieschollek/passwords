@@ -19,12 +19,12 @@
 
 <script>
     import Editor from '@toast-ui/editor';
-    import Utility from "@js/Classes/Utility";
     import Localisation from '@js/Classes/Localisation';
     import Icon from '@vc/Icon';
     import Translate from '@vc/Translate';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
     import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
 
     const MaxNotesLength = 4096;
 
@@ -64,8 +64,8 @@
                 button.innerHTML = ' ';
                 button.className = 'toastui-editor-toolbar-icons last fa fa-question-circle';
                 button.addEventListener('click', () => {
-                    let url = Utility.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes');
-                    Utility.openLink(url);
+                    let url = UtilityService.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes');
+                    UtilityService.openLink(url);
                 });
                 return button;
             },

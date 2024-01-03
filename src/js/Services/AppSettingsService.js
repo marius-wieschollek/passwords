@@ -1,5 +1,5 @@
-import Utility from '@js/Classes/Utility';
 import Logger from "@js/Classes/Logger";
+import UtilityService from "@js/Services/UtilityService";
 
 export default class AdminSettingsService {
 
@@ -82,7 +82,7 @@ export default class AdminSettingsService {
         }
 
         try {
-            let url = Utility.generateUrl(`/apps/passwords/admin/${path}`),
+            let url = UtilityService.generateUrl(`/apps/passwords/admin/${path}`),
                 response = await fetch(new Request(url, options), options);
             return await AdminSettingsService._processResponse(response);
         } catch(e) {

@@ -9,10 +9,10 @@
  */
 
 import API from "@js/Helper/api";
-import Utility from "@js/Classes/Utility";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Logger from "@js/Classes/Logger";
 import ToastService from "@js/Services/ToastService";
+import UtilityService from "@js/Services/UtilityService";
 
 export default class AddTagAction {
 
@@ -35,7 +35,7 @@ export default class AddTagAction {
                 this._password.tags = tagData.tags;
             }
 
-            for(let pwTag of Utility.objectToArray(this._password.tags)) {
+            for(let pwTag of UtilityService.objectToArray(this._password.tags)) {
                 if(pwTag.id === tag.id) {
                     ToastService.warning(['PasswordTagAddExists', {password: this._password.label, tag: tag.label}]);
                     return;

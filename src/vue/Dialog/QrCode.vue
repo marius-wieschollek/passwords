@@ -34,12 +34,12 @@
 <script>
     import Translate from '@vc/Translate';
     import QrCode from '@vc/QrCode';
-    import SettingsService from '@js/Services/SettingsService';
     import Icon from "@vc/Icon";
     import Localisation from "@js/Classes/Localisation";
     import NcModal from '@nc/NcModal.js';
-    import Utility from "@js/Classes/Utility";
     import EyeOffIcon from "@icon/EyeOff";
+    import UtilityService from "@js/Services/UtilityService";
+    import SettingsService from '@js/Services/SettingsService';
 
     export default {
         components: {
@@ -62,7 +62,7 @@
             return {
                 text     : warning ? Localisation.translate('What did you expect?'):this.password.password,
                 property : 'password',
-                container: Utility.popupContainer(true),
+                container: UtilityService.popupContainer(true),
                 warning
             };
         },

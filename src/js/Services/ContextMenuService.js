@@ -1,7 +1,7 @@
-import Utility      from '@js/Classes/Utility';
 import Localisation from '@js/Classes/Localisation';
 import ToastService from '@js/Services/ToastService';
 import Logger from "@js/Classes/Logger";
+import UtilityService from "@js/Services/UtilityService";
 
 export default new class ContextMenuService {
 
@@ -96,7 +96,7 @@ export default new class ContextMenuService {
             'clippy',
             () => {
                 let message = 'Error copying {element} to clipboard';
-                if(Utility.copyToClipboard(item[property])) message = '{element} was copied to clipboard';
+                if(UtilityService.copyToClipboard(item[property])) message = '{element} was copied to clipboard';
 
                 ToastService.info([message, {element: Localisation.translate(property.capitalize())}]);
             }

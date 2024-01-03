@@ -26,7 +26,6 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from '@js/Classes/Utility';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
@@ -34,6 +33,7 @@
     import BaseSection from '@vue/Section/BaseSection';
     import Localisation from '@js/Classes/Localisation';
     import Application from '@js/Init/Application';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         extends   : BaseSection,
@@ -105,7 +105,7 @@
             updatePasswordList: function(passwords, status) {
                 if(parseInt(this.$route.params.status) === status) {
                     this.loading = false;
-                    this.passwords = Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                    this.passwords = UtilityService.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
                 }
             }
         },

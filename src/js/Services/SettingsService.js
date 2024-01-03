@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
-import Utility from '@js/Services/UtilityService';
 import {loadState} from '@nextcloud/initial-state';
 import Logger from "@js/Services/LoggingService";
+import UtilityService from "@js/Services/UtilityService";
 
 /**
  *
@@ -36,7 +36,7 @@ class SettingsService {
             'client.session.keepalive'           : 0,
             'client.help.more.open'              : false,
         };
-        this._settings = Utility.cloneObject(this._defaults);
+        this._settings = UtilityService.cloneObject(this._defaults);
         this._observers = {};
     }
 
@@ -127,7 +127,7 @@ class SettingsService {
      *
      */
     getAll() {
-        return Utility.cloneObject(this._settings);
+        return UtilityService.cloneObject(this._settings);
     }
 
     /**

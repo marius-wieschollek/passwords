@@ -34,12 +34,12 @@
     import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import Share from '@vc/Sidebar/PasswordSidebar/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import ToastService from "@js/Services/ToastService";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -177,7 +177,7 @@
                 }
             },
             async disableCse() {
-                let password = Utility.cloneObject(this.password);
+                let password = UtilityService.cloneObject(this.password);
                 password.shared = true;
 
                 await PasswordManager.updatePassword(password);

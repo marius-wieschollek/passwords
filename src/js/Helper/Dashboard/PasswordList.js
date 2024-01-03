@@ -8,8 +8,8 @@
  * created by Marius David Wieschollek.
  */
 
-import Utility from "@js/Classes/Utility";
 import SettingsService from "@js/Services/SettingsService";
+import UtilityService from "@js/Services/UtilityService";
 
 export default class PasswordList {
 
@@ -72,7 +72,7 @@ export default class PasswordList {
     _loadAllPasswords(initial = false) {
         this._api.findPasswords()
             .then((passwords) => {
-                let data = Utility.objectToArray(Utility.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
+                let data = UtilityService.objectToArray(UtilityService.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
                 if(data.length > 0) {
                     this._passwordList = data;
                     this._updateSearchResults(true);
@@ -91,7 +91,7 @@ export default class PasswordList {
     _loadFavorites() {
         this._api.findPasswords({favorite: true})
             .then((passwords) => {
-                let data = Utility.objectToArray(Utility.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
+                let data = UtilityService.objectToArray(UtilityService.sortApiObjectArray(passwords, this._getPasswordsSortingField()));
                 if(data.length > 0 && this._passwordList.length === 0) {
                     this._passwordList = data;
                     this._updateSearchResults(true);

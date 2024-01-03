@@ -33,8 +33,8 @@
     import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import TagIcon from "@icon/Tag";
     import Events from "@js/Classes/Events";
-    import Utility from '@js/Classes/Utility';
     import {subscribe} from "@nextcloud/event-bus";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {AppNavigationItem, TagIcon, NcLoadingIcon},
@@ -79,7 +79,7 @@
                 this.loading = true;
                 API.listTags()
                    .then((d) => {
-                       this.tags = Utility.sortApiObjectArray(d, 'label');
+                       this.tags = UtilityService.sortApiObjectArray(d, 'label');
                        this.hasLoaded = true;
                        this.loading = false;
                    });

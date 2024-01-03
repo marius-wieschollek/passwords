@@ -15,10 +15,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import Localisation from '@js/Classes/Localisation';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Favicon from "@vc/Favicon";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -34,7 +34,7 @@
 
         computed: {
             getRevisions() {
-                return Utility.sortApiObjectArray(this.password.revisions, 'created', false);
+                return UtilityService.sortApiObjectArray(this.password.revisions, 'created', false);
             }
         },
 

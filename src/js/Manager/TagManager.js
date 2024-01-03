@@ -1,10 +1,10 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from '@js/Classes/Utility';
 import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import MessageService from "@js/Services/MessageService";
 import ToastService from "@js/Services/ToastService";
+import UtilityService from "@js/Services/UtilityService";
 
 /**
  *
@@ -62,7 +62,7 @@ class TagManager {
                     tag._encrypted = tag.cseKey?.length > 0;
                     tag.cseKey = d.cseKey;
                     tag.cseType = d.cseType;
-                    tag.edited = tag.created = tag.updated = Utility.getTimestamp();
+                    tag.edited = tag.created = tag.updated = UtilityService.getTimestamp();
                     tag = await API._processTag(tag);
                     Events.fire('tag.created', tag);
                     ToastService.success('Tag created');
@@ -221,7 +221,7 @@ class TagManager {
             if(!confirm) {
                 API.restoreTag(tag.id, revision.id)
                     .then((d) => {
-                        tag = Utility.mergeObject(tag, revision);
+                        tag = UtilityService.mergeObject(tag, revision);
                         tag.id = d.id;
                         tag.updated = new Date();
                         tag.revision = d.revision;

@@ -32,9 +32,9 @@
     import AppNavigationItem from "@vc/Navigation/AppNavigationItem";
     import NcLoadingIcon from "@nc/NcLoadingIcon.js";
     import FolderIcon from "@icon/Folder";
-    import Utility from '@js/Classes/Utility';
     import Events from "@js/Classes/Events";
     import {subscribe} from "@nextcloud/event-bus";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {AppNavigationItem, FolderIcon, NcLoadingIcon},
@@ -93,7 +93,7 @@
 
                 API.showFolder(this.baseId, 'model+folders')
                    .then((d) => {
-                       this.folders = Utility.sortApiObjectArray(Utility.objectToArray(d.folders), 'label');
+                       this.folders = UtilityService.sortApiObjectArray(UtilityService.objectToArray(d.folders), 'label');
                        this.loading = false;
                        this.hasLoaded = true;
                    });

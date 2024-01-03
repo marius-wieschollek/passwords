@@ -66,8 +66,8 @@
 </template>
 
 <script>
-    import Utility from '@js/Classes/Utility';
     import Translate from '@vue/Components/Translate';
+    import UtilityService from "@js/Services/UtilityService";
     import AppSettingsService from '@js/Services/AppSettingsService';
 
     export default {
@@ -121,7 +121,7 @@
         },
         computed   : {
             getAppSettingsLink() {
-                return Utility.generateUrl('/settings/admin/passwords')
+                return UtilityService.generateUrl('/settings/admin/passwords')
             }
         },
         watch     : {

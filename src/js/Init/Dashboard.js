@@ -8,9 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import Utility from "@js/Classes/Utility";
 import {loadState} from "@nextcloud/initial-state";
 import Localisation from "@js/Classes/Localisation";
+import UtilityService from "@js/Services/UtilityService";
 
 export default new class Dashboard {
 
@@ -63,7 +63,7 @@ export default new class Dashboard {
     }
 
     async _initApi() {
-        let baseUrl = Utility.generateUrl(),
+        let baseUrl = UtilityService.generateUrl(),
             user    = loadState('passwords', 'api-user', null),
             token   = loadState('passwords', 'api-token', null);
 
