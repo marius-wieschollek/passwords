@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Buscar …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "La frase de contraseña de cifrado elegida es insegura y, por tanto, no puede utilizarse.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Frase de cifrado insegura",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "La aplicación contraseñas comprueba periódicamente si su frase de contraseña de cifrado sigue siendo segura. La frase de contraseña actual no es segura y debe cambiarse inmediatamente."
     }
 }
