@@ -237,10 +237,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import CustomCsvHelp from '@vue/Import/CustomCsvHelp';
     import MessageService from "@js/Services/MessageService";
     import LoggingService from "@js/Services/LoggingService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -299,7 +299,7 @@
                 return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length - 1];
             },
             backupPasswordTitle() {
-                return Localisation.translate('For encrypted backups');
+                return LocalisationService.translate('For encrypted backups');
             }
         },
 
@@ -332,10 +332,9 @@
                             } else if(errors.length) {
                                 this.progress.style = 'warn';
                                 this.progress.status = 'Import partially failed';
-                                let message = Localisation.translate('Some objects had errors:')
+                                let message = LocalisationService.translate('Some objects had errors:')
                                               + ' ' + errors.join(' ') + ' ' +
-                                              Localisation.translate(
-                                                  'More information can be found in the log. (Press F12)');
+                                              LocalisationService.translate('More information can be found in the log. (Press F12)');
                                 MessageService.alert(message, 'Import error');
                             }
                         });
@@ -399,10 +398,10 @@
                     let errors = [];
                     for(let i = 0; i < result.errors.length; i++) {
                         let error   = result.errors[i],
-                            message = Localisation.translate(error.message);
+                            message = LocalisationService.translate(error.message);
 
                         errors.push(
-                            Localisation.translate(
+                            LocalisationService.translate(
                                 '{message} in line {line} character {character}.',
                                 {
                                     message,

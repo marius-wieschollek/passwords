@@ -15,9 +15,9 @@
 <script>
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from "@js/Services/SettingsService";
     import MessageService from "@js/Services/MessageService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -42,13 +42,13 @@
         computed: {
             getTitle() {
                 if(this.share.updatePending) {
-                    return Localisation.translate('Some data is waiting to be synchronized');
+                    return LocalisationService.translate('Some data is waiting to be synchronized');
                 }
                 return undefined;
             },
             getExpirationDateTitle() {
                 if(!this.share.expires) return 'Set expiration date';
-                return Localisation.translate('Expires {datetime}', {datetime: Localisation.formatDateTime(this.share.expires)});
+                return LocalisationService.translate('Expires {datetime}', {datetime: LocalisationService.formatDateTime(this.share.expires)});
             }
         },
 

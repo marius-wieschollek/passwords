@@ -12,7 +12,7 @@
     <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter">
         <div class="area-label">
             <icon :icon="icon" @mouseenter="hover = true" @mouseleave="hover = false" @dragstart="dragStart" draggable="true"/>
-            <input class="field-label" :placeholder="placeholder" :maxlength="maxlength" v-model="model.label" required/>
+            <input class="field-label" :placeholder="t('Name')" :maxlength="maxlength" v-model="model.label" required/>
         </div>
         <div class="area-options">
             <icon icon="trash" class="delete" @click="deleteField"/>
@@ -40,6 +40,7 @@
     import Localisation from "@js/Classes/Localisation";
     import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
     import MessageService from "@js/Services/MessageService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
@@ -69,12 +70,6 @@
             },
             maxlength() {
                 return 368 - this.model.value.length;
-            },
-            placeholder() {
-                return Localisation.translate('Name');
-            },
-            deleteTitle() {
-                return Localisation.translate('Delete field');
             },
             drag() {
                 return this.dragService.isCurrent(this.model);

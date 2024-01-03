@@ -12,7 +12,7 @@
     <div class="password-form-field-wrapper password-form-add-field">
         <translate tag="label" :for="getId" say="New field" icon="plus" class="area-label" />
         <div class="area-input">
-            <input type="text" :placeholder="placeholder" :id="getId" v-model="label" maxlength="48" />
+            <input type="text" :placeholder="t('Name')" :id="getId" v-model="label" maxlength="48" />
             <custom-field-type v-model="type" :empty="true" :disabled="!hasLabel" />
         </div>
     </div>
@@ -40,9 +40,6 @@
             },
             hasLabel() {
                 return this.label.length > 0;
-            },
-            placeholder() {
-                return Localisation.translate('Name');
             }
         },
         watch   : {

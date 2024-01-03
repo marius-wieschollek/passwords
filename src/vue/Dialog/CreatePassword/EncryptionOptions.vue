@@ -13,7 +13,7 @@
         <translate tag="label" for="password-cse" say="Encryption" />
         <select id="password-cse"
                 name="cseType"
-                :title="title"
+                :title="t('Choose the encryption type for this password')"
                 v-model.number="password.cseType">
             <translate tag="option" value="none" say="On the server" />
             <translate tag="option" value="CSEv1r1" say="Libsodium" />
@@ -36,12 +36,6 @@
             return {
                 hasEncryption: API.hasEncryption
             };
-        },
-
-        computed: {
-            title() {
-                return Localisation.translate('Choose the encryption type for this password');
-            }
         }
     };
 </script>

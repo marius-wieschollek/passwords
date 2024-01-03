@@ -44,10 +44,10 @@
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
-    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
     import UtilityService from "@js/Services/UtilityService";
     import SettingsService from '@js/Services/SettingsService';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -109,7 +109,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate(
+                    return LocalisationService.translate(
                         'We could not find anything for "{query}"',
                         {query: this.search.query}
                     );

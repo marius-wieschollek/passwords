@@ -1,5 +1,4 @@
 import API from '@js/Helper/api';
-import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
@@ -7,6 +6,7 @@ import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
 import BitwardenConversionHelper from '@js/Helper/Import/BitwardenConversionHelper';
 import Logger from '@js/Classes/Logger';
+import LocalisationService from "@js/Services/LocalisationService";
 
 /**
  *
@@ -231,7 +231,7 @@ export class ImportManager {
             }
         } catch(e) {
             Logger.error(e, tag);
-            this.errors.push(Localisation.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
+            this.errors.push(LocalisationService.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
         }
 
         this._countProgress();
@@ -309,7 +309,7 @@ export class ImportManager {
             }
         } catch(e) {
             Logger.error(e, folder);
-            this.errors.push(Localisation.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
+            this.errors.push(LocalisationService.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
         }
 
         this._countProgress();
@@ -442,7 +442,7 @@ export class ImportManager {
         } catch(e) {
             let message = e.hasOwnProperty('message') ? e.message:e.statusText;
             Logger.error(e, password);
-            this.errors.push(Localisation.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
+            this.errors.push(LocalisationService.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
         }
 
         this._countProgress();

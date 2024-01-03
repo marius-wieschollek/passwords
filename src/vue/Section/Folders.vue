@@ -12,10 +12,10 @@
     import API from '@js/Helper/api';
     import Events from '@js/Classes/Events';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import Application from "@js/Init/Application";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         extends: BaseSection,
@@ -51,7 +51,7 @@
             getBreadcrumb() {
                 let route = this.trashMode ? 'Trash':'Folders',
                     items = [
-                        {path: {name: route}, label: Localisation.translate(route), dropType: 'folder', folderId: this.defaultFolder}
+                        {path: {name: route}, label: LocalisationService.translate(route), dropType: 'folder', folderId: this.defaultFolder}
                     ];
 
                 if(typeof this.currentFolder.parent !== 'string' && this.currentFolder.parent.id !== this.defaultFolder && !this.currentFolder.trashed) {

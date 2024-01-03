@@ -43,11 +43,11 @@
     import PasswordLine from '@vue/Line/Password';
     import TagManager from '@js/Manager/TagManager';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import MessageService from "@js/Services/MessageService";
     import ToastService from "@js/Services/ToastService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         extends: BaseSection,
@@ -65,11 +65,11 @@
 
         computed: {
             restoreTitle() {
-                return Localisation.translate('Restore this item');
+                return LocalisationService.translate('Restore this item');
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query:this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query:this.search.query});
                 }
 
                 return 'Deleted items will appear here';

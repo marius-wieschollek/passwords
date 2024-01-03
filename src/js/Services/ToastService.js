@@ -9,7 +9,7 @@
  */
 
 import '@nextcloud/dialogs/style.css'
-import Localisation from '@js/Classes/Localisation';
+import LocalisationService from "@js/Services/LocalisationService";
 export default new class ToastService {
 
     info(title, options = {}) {
@@ -59,7 +59,7 @@ export default new class ToastService {
     _runNextcloudDialog(title, options, method) {
         import(/* webpackChunkName: "NcDialogs" */  `@nextcloud/dialogs`)
             .then((module) => {
-                module[method](Localisation.translateArray(title), options);
+                module[method](LocalisationService.translateArray(title), options);
             });
     }
 };

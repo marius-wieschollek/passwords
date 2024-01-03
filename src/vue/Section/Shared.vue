@@ -44,9 +44,9 @@
     import GenericLine from '@vue/Line/Generic';
     import PasswordLine from '@vue/Line/Password';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import Application from '@js/Init/Application';
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         extends: BaseSection,
@@ -79,7 +79,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return this.$route.params.type.toString() === '0' ? 'No passwords were shared with you':'You did not share any passwords';
@@ -90,8 +90,8 @@
                         label  = this.shareType[status];
 
                     return [
-                        {path: {name: 'Shares'}, label: Localisation.translate('Shares')},
-                        {path: this.$route.path, label: Localisation.translate(label)}
+                        {path: {name: 'Shares'}, label: LocalisationService.translate('Shares')},
+                        {path: this.$route.path, label: LocalisationService.translate(label)}
                     ];
                 }
 

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-    import Localisation from '@js/Classes/Localisation';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         props   : {
@@ -48,10 +48,10 @@
         },
         computed: {
             getPlaceholder() {
-                return this.placeholder ? Localisation.translate(this.placeholder, this.variables):false;
+                return this.placeholder ? LocalisationService.translate(this.placeholder, this.variables):false;
             },
             getTitle() {
-                return this.title ? Localisation.translate(this.title, this.variables):false;
+                return this.title ? LocalisationService.translate(this.title, this.variables):false;
             }
         },
         methods : {

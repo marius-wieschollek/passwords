@@ -34,12 +34,12 @@
     import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import Share from '@vc/Sidebar/PasswordSidebar/Sharing/Share';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import ToastService from "@js/Services/ToastService";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -111,8 +111,8 @@
             getExpirationDate() {
                 if(this.password.share !== null && typeof this.password.share !== 'string') {
                     return {
-                        'date': Localisation.formatDate(this.password.share.expires),
-                        'dateTime': Localisation.formatDateTime(this.password.share.expires),
+                        'date': LocalisationService.formatDate(this.password.share.expires),
+                        'dateTime': LocalisationService.formatDateTime(this.password.share.expires),
                     }
                 }
 
@@ -134,12 +134,12 @@
                 return users;
             },
             getShareTitle() {
-                let editable  = Localisation.translate(this.password.share.editable ? 'Editing allowed':'Editing disallowed'),
-                    shareable = Localisation.translate(this.password.share.shareable ? 'sharing allowed':'sharing disallowed'),
-                    text      = Localisation.translate('{editable} and {shareable}.', {shareable, editable});
+                let editable  = LocalisationService.translate(this.password.share.editable ? 'Editing allowed':'Editing disallowed'),
+                    shareable = LocalisationService.translate(this.password.share.shareable ? 'sharing allowed':'sharing disallowed'),
+                    text      = LocalisationService.translate('{editable} and {shareable}.', {shareable, editable});
 
                 if(this.password.share.expires) {
-                    text += ' ' + Localisation.translate(
+                    text += ' ' + LocalisationService.translate(
                         'Expires {datetime}',
                         this.getExpirationDate
                     );

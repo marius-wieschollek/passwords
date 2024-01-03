@@ -8,8 +8,8 @@
 </template>
 
 <script>
-    import Localisation from '@js/Classes/Localisation';
     import Icon from "@vc/Icon";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Icon},
@@ -50,18 +50,18 @@
         computed: {
             getText() {
                 if (this.say) {
-                    return Localisation.translate(this.say, this.variables);
+                    return LocalisationService.translate(this.say, this.variables);
                 }
                 if (this.$slots.default) {
-                    return Localisation.translate(this.$slots.default[0].text.trim(), this.variables);
+                    return LocalisationService.translate(this.$slots.default[0].text.trim(), this.variables);
                 }
                 return '';
             },
             getTitle() {
-                return this.title ? Localisation.translate(this.title, this.variables):false;
+                return this.title ? LocalisationService.translate(this.title, this.variables):false;
             },
             getValue() {
-                if(this.localizedValue !== null) return Localisation.translate(this.localizedValue, this.variables);
+                if(this.localizedValue !== null) return LocalisationService.translate(this.localizedValue, this.variables);
                 return this.value;
             }
         },

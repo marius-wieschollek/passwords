@@ -8,11 +8,11 @@
  * created by Marius David Wieschollek.
  */
 
-import Localisation from "@js/Classes/Localisation";
 import DOMPurify from "dompurify";
 import SettingsService from "@js/Services/SettingsService";
 import FaviconService from "@js/Services/FaviconService";
 import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class PrintPasswordAction {
 
@@ -62,7 +62,7 @@ export default class PrintPasswordAction {
             marked.setOptions({breaks: true});
             let notes = DOMPurify.sanitize(marked.marked.parse(this._password.notes));
 
-            return `<div class="notes-label">${Localisation.translate('Notes')}</div><div class="notes-container">${notes}</div>`;
+            return `<div class="notes-label">${LocalisationService.translate('Notes')}</div><div class="notes-container">${notes}</div>`;
         }
         return '';
     }
@@ -70,11 +70,11 @@ export default class PrintPasswordAction {
     _getPasswordFields() {
         let fields = [];
         if(this._password.username) {
-            fields.push({label: Localisation.translate('Username'), type: 'text', value: this._password.username});
+            fields.push({label: LocalisationService.translate('Username'), type: 'text', value: this._password.username});
         }
-        fields.push({label: Localisation.translate('Password'), type: 'secret', value: this._password.password});
+        fields.push({label: LocalisationService.translate('Password'), type: 'secret', value: this._password.password});
         if(this._password.url) {
-            fields.push({label: Localisation.translate('Website'), type: 'url', value: this._password.url});
+            fields.push({label: LocalisationService.translate('Website'), type: 'url', value: this._password.url});
         }
 
         let showHiddenFields = SettingsService.get('client.ui.custom.fields.show.hidden');

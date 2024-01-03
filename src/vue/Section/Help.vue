@@ -44,12 +44,12 @@
     import Gallery from '@vc/Gallery';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Localisation from '@js/Classes/Localisation';
     import HandbookRenderer from '@js/Helper/HandbookRenderer';
     import Application from "@js/Init/Application";
     import {emit} from "@nextcloud/event-bus";
     import CommunityResources from "@vc/Handbook/CommunityResources.vue";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -100,7 +100,7 @@
         computed: {
             getBreadcrumbIcons() {
                 let items = [
-                    {path: {name: 'Help'}, label: Localisation.translate('Handbook')}
+                    {path: {name: 'Help'}, label: LocalisationService.translate('Handbook')}
                 ];
 
                 if(this.$route.params.page === undefined) return items;
@@ -112,7 +112,7 @@
                     items.push(
                         {
                             path : {name: 'Help', params: {page: current.join('/')}},
-                            label: Localisation.translate(path[i].replace(/-{1}/g, ' '))
+                            label: LocalisationService.translate(path[i].replace(/-{1}/g, ' '))
                         }
                     );
                 }

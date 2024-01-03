@@ -11,8 +11,8 @@
 <script>
     import API from '@js/Helper/api';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
+    import LocalisationService from "@js/Services/LocalisationService";
     export default {
         extends: BaseSection,
 
@@ -41,7 +41,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return 'Use the search box to search';

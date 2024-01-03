@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
-import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class ImportCsvConversionHelper {
 
@@ -60,7 +60,7 @@ export default class ImportCsvConversionHelper {
             customFields = [];
 
         if(line[3] !== '') {
-            customFields.push(Localisation.translate('Email') + ',email:' + line[3]);
+            customFields.push(LocalisationService.translate('Email') + ',email:' + line[3]);
         }
 
         for(let i = 0; i < rawFields.length; i++) {
@@ -128,8 +128,8 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static _processCsvValue(value, field, errors) {
-        let boolYes = Localisation.translate('true'),
-            boolNo  = Localisation.translate('false');
+        let boolYes = LocalisationService.translate('true'),
+            boolNo  = LocalisationService.translate('false');
 
         if([boolYes, 'yes', 'true', '1'].indexOf(value) !== -1) {
             return true;
@@ -470,7 +470,7 @@ export default class ImportCsvConversionHelper {
      * @private
      */
     static _logConversionError(text, vars, errors) {
-        let message = Localisation.translate(text, vars);
+        let message = LocalisationService.translate(text, vars);
         errors.push(message);
         Logger.error(message, vars);
     }

@@ -1,7 +1,7 @@
-import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class PassmanConversionHelper {
 
@@ -121,7 +121,7 @@ export default class PassmanConversionHelper {
             if(!object.username || object.username.length === 0) {
                 object.username = element.email;
             } else {
-                let label = Localisation.translate('Email'),
+                let label = LocalisationService.translate('Email'),
                     value = element.email,
                     type  = value.match(/^[\w._-]+@.+$/) ? 'email':'text';
 
@@ -219,7 +219,7 @@ export default class PassmanConversionHelper {
      * @private
      */
     static _logConversionError(text, element, field, errors) {
-        let message = Localisation.translate(text, {label: element.label, field: field.label});
+        let message = LocalisationService.translate(text, {label: element.label, field: field.label});
         errors.push(message);
         Logger.error(message, element, field);
     }

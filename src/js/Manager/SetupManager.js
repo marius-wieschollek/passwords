@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import Localisation from "@js/Classes/Localisation";
 import SettingsService from '@js/Services/SettingsService';
 import DeferredActivationService from '@js/Services/DeferredActivationService';
 import Logger from "@js/Classes/Logger";
 import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 class SetupManager {
 
@@ -52,7 +52,7 @@ class SetupManager {
      */
     _runWizard(enableSlides, closable, redirect) {
         return new Promise(async (resolve) => {
-            await Localisation.loadSection('tutorial');
+            await LocalisationService.loadSection('tutorial');
 
             let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
                 SetupWizard = Vue.extend(SetupDialog.default);

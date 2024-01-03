@@ -31,12 +31,12 @@
 <script>
     import Translate from '@vc/Translate';
     import DragManager from '@js/Manager/DragManager';
-    import Localisation from "@js/Classes/Localisation";
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "vue-material-design-icons/Star.vue";
     import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -59,10 +59,10 @@
 
         computed: {
             getDate() {
-                return Localisation.formatDate(this.folder.edited);
+                return LocalisationService.formatDate(this.folder.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDate(this.folder.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDate(this.folder.edited, 'long')});
             },
             className() {
                 let classNames = 'row folder';

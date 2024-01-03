@@ -19,12 +19,12 @@
 
 <script>
     import Editor from '@toast-ui/editor';
-    import Localisation from '@js/Classes/Localisation';
     import Icon from '@vc/Icon';
     import Translate from '@vc/Translate';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
     import MessageService from "@js/Services/MessageService";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     const MaxNotesLength = 4096;
 
@@ -44,7 +44,7 @@
                 if(!this.isOverMaxlength) {
                     return `${this.model.length}/${MaxNotesLength}`;
                 } else {
-                    return Localisation.translate('You have reached the maximum length of 4096 characters');
+                    return LocalisationService.translate('You have reached the maximum length of 4096 characters');
                 }
             },
             isOverMaxlength() {
@@ -83,8 +83,8 @@
                             initialValue   : this.model,
                             previewStyle   : window.innerWidth <= 640 ? 'tab':'vertical',
                             usageStatistics: false,
-                            language       : Localisation.locale,
-                            placeholder    : Localisation.translate('Take some notes'),
+                            language       : LocalisationService.locale,
+                            placeholder    : LocalisationService.translate('Take some notes'),
                             hideModeSwitch : true,
                             toolbarItems   : [
                                 [
@@ -102,18 +102,18 @@
                                         name     : 'undo',
                                         command  : 'undo',
                                         className: 'toastui-editor-toolbar-icons fa fa-undo',
-                                        tooltip  : Localisation.translate('Undo')
+                                        tooltip  : LocalisationService.translate('Undo')
                                     },
                                     {
                                         name     : 'redo',
                                         command  : 'redo',
                                         className: 'toastui-editor-toolbar-icons fa fa-repeat',
-                                        tooltip  : Localisation.translate('Redo')
+                                        tooltip  : LocalisationService.translate('Redo')
                                     },
                                     {
                                         el     : this.getHelpButton(),
                                         command: '',
-                                        tooltip: Localisation.translate('Open Markdown Guide')
+                                        tooltip: LocalisationService.translate('Open Markdown Guide')
                                     }
                                 ]
                             ],

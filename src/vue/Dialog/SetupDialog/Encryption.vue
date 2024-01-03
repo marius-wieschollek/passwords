@@ -7,12 +7,12 @@
         <form @submit="setPassword" v-if="!processing">
             <div class="password-setup">
                 <input type="password"
-                       :placeholder="getPasswordPlaceholder"
-                       :title="getPasswordTitle"
+                       :placeholder="t('Password (min. 12 characters)')"
+                       :title="t('Enter a password with 12 characters or more')"
                        pattern=".{12,}"
                        v-model="password"
                        readonly>
-                <input type="password" :placeholder="getPasswordRepeatPlaceholder" :title="getPasswordRepeatTitle" v-model="confirm">
+                <input type="password" :placeholder="t('Repeat your password')" :title="t('Repeat your password')" v-model="confirm">
                 <div class="advanced" v-if="advanced">
                     <div>
                         <input type="checkbox" id="encrypt-all" v-model="encryptDb"/>
@@ -55,7 +55,6 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
 
@@ -114,18 +113,6 @@
             }, 250);
         },
         computed: {
-            getPasswordPlaceholder() {
-                return Localisation.translate('Password (min. 12 characters)');
-            },
-            getPasswordTitle() {
-                return Localisation.translate('Enter a password with 12 characters or more');
-            },
-            getPasswordRepeatPlaceholder() {
-                return Localisation.translate('Repeat your password');
-            },
-            getPasswordRepeatTitle() {
-                return Localisation.translate('Repeat your password');
-            },
             getKeychainClass() {
                 return this.getStatusClass('keychain');
             },

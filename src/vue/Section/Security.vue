@@ -31,9 +31,9 @@
     import PasswordLine from '@vue/Line/Password';
     import SecurityLine from '@vue/Line/Security';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import Application from '@js/Init/Application';
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         extends   : BaseSection,
@@ -66,7 +66,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return this.$route.params.status.toString() === '0' ? 'Better check the other sections':'That\'s probably a good sign';
@@ -77,8 +77,8 @@
                         label  = this.securityStatus[status];
 
                     return [
-                        {path: {name: 'Security'}, label: Localisation.translate('Security')},
-                        {path: this.$route.path, label: Localisation.translate(label)}
+                        {path: {name: 'Security'}, label: LocalisationService.translate('Security')},
+                        {path: this.$route.path, label: LocalisationService.translate(label)}
                     ];
                 }
 

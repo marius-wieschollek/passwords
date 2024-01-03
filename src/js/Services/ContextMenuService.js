@@ -1,7 +1,7 @@
-import Localisation from '@js/Classes/Localisation';
 import ToastService from '@js/Services/ToastService';
 import Logger from "@js/Classes/Logger";
 import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class ContextMenuService {
 
@@ -69,7 +69,7 @@ export default new class ContextMenuService {
                     .append(
                         this._createOption(
                             'open',
-                            Localisation.translate('Open {label}', {label: item.label}),
+                            LocalisationService.translate('Open {label}', {label: item.label}),
                             item.type,
                             () => {element.click();}
                         )
@@ -92,13 +92,13 @@ export default new class ContextMenuService {
     _passwordCopyOption(item, property) {
         return this._createOption(
             'copy-' + property,
-            Localisation.translate(`Copy ${property === 'username' ? 'User' : property.capitalize()}`),
+            LocalisationService.translate(`Copy ${property === 'username' ? 'User' : property.capitalize()}`),
             'clippy',
             () => {
                 let message = 'Error copying {element} to clipboard';
                 if(UtilityService.copyToClipboard(item[property])) message = '{element} was copied to clipboard';
 
-                ToastService.info([message, {element: Localisation.translate(property.capitalize())}]);
+                ToastService.info([message, {element: LocalisationService.translate(property.capitalize())}]);
             }
         );
     }
@@ -119,10 +119,10 @@ export default new class ContextMenuService {
 
             if(action === 'favorite') {
                 if(actionElement.classList.contains('star-icon')) {
-                    label = Localisation.translate('Remove from favorites');
+                    label = LocalisationService.translate('Remove from favorites');
                     icon = 'star-dark';
                 } else {
-                    label = Localisation.translate('Mark as favorite');
+                    label = LocalisationService.translate('Mark as favorite');
                     icon = 'starred';
                 }
             } else if(this.ICON_MAPPING.hasOwnProperty(action)) {

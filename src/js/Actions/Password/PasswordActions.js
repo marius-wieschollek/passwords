@@ -12,11 +12,11 @@ import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Vue from "vue";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
-import Localisation from "@js/Classes/Localisation";
 import Logger from "@js/Classes/Logger";
 import Events from "@js/Classes/Events";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class PasswordActions {
     get password() {
@@ -99,6 +99,6 @@ export default class PasswordActions {
             if(UtilityService.copyToClipboard(this._password[attribute])) message = '{element} was copied to clipboard';
         }
 
-        ToastService.info([message, {element: Localisation.translate(attribute.capitalize())}]);
+        ToastService.info([message, {element: LocalisationService.translate(attribute.capitalize())}]);
     }
 }

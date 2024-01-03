@@ -14,8 +14,8 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Translate},
@@ -38,7 +38,7 @@
                         link : '#/help/Import%2FImport-from-Enpass'
                     },
                     json    : {
-                        label: Localisation.translate('database backup'),
+                        label: LocalisationService.translate('database backup'),
                         link : '#/help/Import%2FImport-from-Backup'
                     },
                     chrome  : {
@@ -50,7 +50,7 @@
                         link : '#/help/Import%2FImport-from-Firefox'
                     },
                     csv     : {
-                        label: Localisation.translate('custom CSV'),
+                        label: LocalisationService.translate('custom CSV'),
                         link : '#/help/Import%2FImport-from-custom-CSV'
                     }
                 }

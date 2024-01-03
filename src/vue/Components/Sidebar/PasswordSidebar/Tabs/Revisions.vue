@@ -15,10 +15,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import PasswordManager from '@js/Manager/PasswordManager';
     import Favicon from "@vc/Favicon";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -48,7 +48,7 @@
                 PasswordManager.viewRevision(this.password, revision);
             },
             getDateTime(date) {
-                return Localisation.formatDateTime(date);
+                return LocalisationService.formatDateTime(date);
             },
             getRevisionLabel(revision) {
                 return `${revision.label} – ${this.getDateTime(revision.created)}`;

@@ -1,10 +1,10 @@
 import { marked, Renderer as MarkedRenderer} from 'marked';
 import VueRouter from '@js/Helper/router';
-import Localisation from '@js/Classes/Localisation';
 import SettingsService from '@js/Services/SettingsService';
 import mermaid from "mermaid";
 import DOMPurify from 'dompurify';
 import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 /**
  *
@@ -33,12 +33,12 @@ class HandbookRenderer {
             if(response.ok) {
                 if(mime.substr(0, 10) !== 'text/plain' && mime.substr(0, 13) !== 'text/markdown') {
                     return HandbookRenderer._generateErrorPage(
-                        Localisation.translate('Invalid content type {mime}', {mime})
+                        LocalisationService.translate('Invalid content type {mime}', {mime})
                     );
                 }
 
                 let data = await response.text();
-                if(!data) return HandbookRenderer._generateErrorPage(Localisation.translate('No content available'));
+                if(!data) return HandbookRenderer._generateErrorPage(LocalisationService.translate('No content available'));
 
                 let content = this.render(data, baseUrl, url);
                 this.pages[page] = content;
@@ -86,7 +86,7 @@ class HandbookRenderer {
      */
     static _generateErrorPage(message) {
         return {
-            source    : '\u{1F480} ' + Localisation.translate('Unable to fetch page: {message}.', {message}),
+            source    : '\u{1F480} ' + LocalisationService.translate('Unable to fetch page: {message}.', {message}),
             media     : [],
             navigation: []
         };
@@ -124,7 +124,7 @@ class HandbookRenderer {
             return HandbookRenderer._renderMediaElement(element);
         }
 
-        if(title === null) title = Localisation.translate('Go to {href}', {href});
+        if(title === null) title = LocalisationService.translate('Go to {href}', {href});
         let rel = target === '_blank' ? 'rel="noreferrer noopener"':'';
 
         return `<a href="${href}" title="${decodeURI(title)}" target="${target}" ${rel}>${content}</a>`;
@@ -140,7 +140,7 @@ class HandbookRenderer {
     static _processAnchorLink(href, title) {
         let hash  = HandbookRenderer._getLinkAnchor(href),
             route = VueRouter.resolve({name: 'Help', params: {page: VueRouter.currentRoute.params.page}, hash});
-        if(title === null) title = Localisation.translate('Go to {href}', {href: href.substr(1).replace(/-{1}/g, ' ')});
+        if(title === null) title = LocalisationService.translate('Go to {href}', {href: href.substr(1).replace(/-{1}/g, ' ')});
 
         return [route.href, title, '_self'];
     }
@@ -161,7 +161,7 @@ class HandbookRenderer {
         }
 
         let route = VueRouter.resolve({name: 'Help', params: {page: href}, hash});
-        if(title === null) title = Localisation.translate('Go to {href}', {href: href.replace(/-{1}/g, ' ')});
+        if(title === null) title = LocalisationService.translate('Go to {href}', {href: href.replace(/-{1}/g, ' ')});
 
         return [route.href, title, '_self'];
     }
@@ -273,7 +273,7 @@ class HandbookRenderer {
      * @private
      */
     static _renderMediaElement(element) {
-        let caption = Localisation.translate('Figure {count}: {title}', {count: element.index, title: element.title}),
+        let caption = LocalisationService.translate('Figure {count}: {title}', {count: element.index, title: element.title}),
             mime    = element.url.substr(element.url.lastIndexOf('.') + 1);
 
         if(['mp4', 'm4v', 'ogg', 'webm'].indexOf(mime) !== -1) {

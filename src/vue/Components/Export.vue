@@ -23,7 +23,7 @@
                        type="password"
                        id="passwords-export-encrypt"
                        minlength="10"
-                       :title="backupPasswordTitle"
+                       :title="t('(Optional) Encrypts the backup')"
                        v-model="options.password"
                        :disabled="exporting"
                        autocomplete="new-password"
@@ -146,9 +146,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import MessageService from "@js/Services/MessageService";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -203,9 +204,6 @@
             csvFieldOptions() {
                 return this.fieldMap[this.options.db];
             },
-            backupPasswordTitle() {
-                return Localisation.translate('(Optional) Encrypts the backup');
-            },
             csvMappedFieldsSize() {
                 return this.options.mapping.length + 1;
             }
@@ -247,7 +245,7 @@
                             this.exporting = false;
                         });
                 } catch(e) {
-                    console.error(e);
+                    LoggingService.error(e);
                     MessageService.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
                 }
             },
@@ -272,7 +270,7 @@
 
                 if(models.length > 1 && fileExt === 'csv') fileExt = 'zip';
                 for(let i = 0; i < models.length; i++) {
-                    exports.push(Localisation.translate(models[i].capitalize()));
+                    exports.push(LocalisationService.translate(models[i].capitalize()));
                 }
 
                 return `${exports.join('+')}_${date.toLocaleDateString()}.${fileExt}`;

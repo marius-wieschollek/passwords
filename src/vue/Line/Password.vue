@@ -83,7 +83,6 @@
 <script>
     import Translate from '@vc/Translate';
     import DragManager from '@js/Manager/DragManager';
-    import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import Favicon from "@vc/Favicon";
@@ -107,6 +106,7 @@
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import LockResetIcon from "@icon/LockReset";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -162,7 +162,7 @@
                 if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
                 if(this.password.status === 2) label = 'Breached';
 
-                return Localisation.translate(label);
+                return LocalisationService.translate(label);
             },
             securityRoute() {
                 return {name: 'Search', params: {query: btoa('hash:' + this.password.hash)}};
@@ -197,12 +197,12 @@
                 return {};
             },
             getDate() {
-                return Localisation.formatDate(this.password.edited);
+                return LocalisationService.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate(
+                return LocalisationService.translate(
                     'Last modified on {date}',
-                    {date: Localisation.formatDateTime(this.password.edited)}
+                    {date: LocalisationService.formatDateTime(this.password.edited)}
                 );
             },
             isVisible() {

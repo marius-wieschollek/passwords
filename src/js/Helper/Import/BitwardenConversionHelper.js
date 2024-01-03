@@ -1,7 +1,7 @@
-import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class BitwardenConversionHelper {
 
@@ -84,7 +84,7 @@ export default class BitwardenConversionHelper {
         let objectTypes = [null, 'Logins', 'Notes', 'Credit Cards', 'Identities'];
         for(let i = 0; i < objectTypes.length; i++) {
             if(!active[i]) continue;
-            let label   = Localisation.translate(objectTypes[i]),
+            let label   = LocalisationService.translate(objectTypes[i]),
                 labelId = label.toLowerCase();
 
             if(labelMap.hasOwnProperty(labelId)) {
@@ -197,7 +197,7 @@ export default class BitwardenConversionHelper {
      */
     static _processLoginFields(item, password, errors) {
         if(item.login.hasOwnProperty('uris')) {
-            let label = Localisation.translate('Url'),
+            let label = LocalisationService.translate('Url'),
                 uris  = item.login.uris;
 
             for(let i = 0; i < uris.length; i++) {
@@ -226,11 +226,11 @@ export default class BitwardenConversionHelper {
     static _processCreditCartFields(item, password, errors) {
         let card = item.card;
         if(card.hasOwnProperty('cardholderName') && card.cardholderName) password.username = card.cardholderName;
-        if(card.hasOwnProperty('brand') && card.brand) CustomFieldsHelper.createCustomField(password, errors, card.brand, Localisation.translate('Brand'), 'text');
-        if(card.hasOwnProperty('number') && card.number) CustomFieldsHelper.createCustomField(password, errors, card.number, Localisation.translate('Number'), 'text');
-        if(card.hasOwnProperty('code') && card.code) CustomFieldsHelper.createCustomField(password, errors, card.code, Localisation.translate('Code'), 'secret');
+        if(card.hasOwnProperty('brand') && card.brand) CustomFieldsHelper.createCustomField(password, errors, card.brand, LocalisationService.translate('Brand'), 'text');
+        if(card.hasOwnProperty('number') && card.number) CustomFieldsHelper.createCustomField(password, errors, card.number, LocalisationService.translate('Number'), 'text');
+        if(card.hasOwnProperty('code') && card.code) CustomFieldsHelper.createCustomField(password, errors, card.code, LocalisationService.translate('Code'), 'secret');
         if(card.hasOwnProperty('expMonth') && card.expMonth && card.hasOwnProperty('expYear') && card.expYear) {
-            CustomFieldsHelper.createCustomField(password, errors, `${card.expMonth}/${card.expYear}`, Localisation.translate('Expires'), 'text');
+            CustomFieldsHelper.createCustomField(password, errors, `${card.expMonth}/${card.expYear}`, LocalisationService.translate('Expires'), 'text');
         }
     }
 
@@ -265,7 +265,7 @@ export default class BitwardenConversionHelper {
                 value = field.value;
 
             if(field.type === 1) type = 'secret';
-            if(field.type === 2) value = Localisation.translate(value === 'true' ? 'yes':'no');
+            if(field.type === 2) value = LocalisationService.translate(value === 'true' ? 'yes':'no');
 
             CustomFieldsHelper.createCustomField(password, errors, value, field.name, type);
         }

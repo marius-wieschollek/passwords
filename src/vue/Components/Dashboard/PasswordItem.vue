@@ -32,9 +32,9 @@
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import SettingsService from "@js/Services/SettingsService";
     import Favicon from "@vc/Favicon";
-    import Localisation from "@js/Classes/Localisation";
     import {showInfo} from "@nextcloud/dialogs";
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Favicon, NcListItem, ShieldHalfFullIcon},
@@ -97,8 +97,8 @@
                             message = '{element} was copied to clipboard';
                         }
 
-                        let element = Localisation.translate(attribute.charAt(0).toUpperCase() + attribute.slice(1));
-                        showInfo(Localisation.translate(message, {element}), {});
+                        let element = LocalisationService.translate(attribute.charAt(0).toUpperCase() + attribute.slice(1));
+                        showInfo(LocalisationService.translate(message, {element}), {});
                         this.clickTimeout = null;
                     },
                     delay

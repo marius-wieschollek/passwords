@@ -27,7 +27,7 @@
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
     import GenericLine from '@vue/Line/Generic';
-    import Localisation from '@js/Classes/Localisation';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -57,11 +57,11 @@
                     let data = this.options[this.$route.params.action];
 
                     this.breadcrumb = [
-                        {path: {name: 'Backup'}, label: Localisation.translate('Backup and Restore')},
-                        {path: this.$route.path, label: Localisation.translate(data[0])}
+                        {path: {name: 'Backup'}, label: LocalisationService.translate('Backup and Restore')},
+                        {path: this.$route.path, label: LocalisationService.translate(data[0])}
                     ];
                 } else {
-                    this.breadcrumb = [{path: {name: 'Backup'}, label: Localisation.translate('Backup and Restore')}];
+                    this.breadcrumb = [{path: {name: 'Backup'}, label: LocalisationService.translate('Backup and Restore')}];
                 }
             }
         },

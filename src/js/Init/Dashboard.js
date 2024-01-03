@@ -9,8 +9,8 @@
  */
 
 import {loadState} from "@nextcloud/initial-state";
-import Localisation from "@js/Classes/Localisation";
 import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class Dashboard {
 
@@ -53,7 +53,7 @@ export default new class Dashboard {
         this._dependencies.vue.mixin(
             {
                 methods: {
-                    t: (t, v) => { return Localisation.translate(t, v); }
+                    t: (t, v) => { return LocalisationService.translate(t, v); }
                 }
             }
         );

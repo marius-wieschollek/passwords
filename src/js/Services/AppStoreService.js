@@ -8,9 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import Localisation from "@js/Classes/Localisation";
 import SettingsService from "@js/Services/SettingsService";
 import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class AppStoreService {
 
@@ -95,11 +95,11 @@ export default new class AppStoreService {
     }
 
     _resolveTranslatableProperty(property) {
-        if(property.hasOwnProperty(Localisation.language)) {
-            return property[Localisation.language];
+        if(property.hasOwnProperty(LocalisationService.language)) {
+            return property[LocalisationService.language];
         }
-        if(property.hasOwnProperty(Localisation.baseLanguage)) {
-            return property[Localisation.baseLanguage];
+        if(property.hasOwnProperty(LocalisationService.baseLanguage)) {
+            return property[LocalisationService.baseLanguage];
         }
         if(property.hasOwnProperty('en')) {
             return property.en;

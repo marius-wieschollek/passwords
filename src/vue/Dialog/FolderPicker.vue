@@ -37,11 +37,11 @@
     import Translate from '@vc/Translate';
     import PickerBreadcrumb from '@vue/Dialog/FolderPicker/PickerBreadcrumb';
     import PickerFolderList from '@vue/Dialog/FolderPicker/PickerFolderList';
-    import Localisation from '@js/Classes/Localisation';
     import NcModal from '@nc/NcModal.js';
     import NcButton from '@nc/NcButton.js';
     import NcLoadingIcon from '@nc/NcLoadingIcon.js'
     import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {PickerFolderList, PickerBreadcrumb, Translate, NcModal, NcButton, NcLoadingIcon},
@@ -99,7 +99,7 @@
                 this.folderList.push({
                                          id    : '00000000-0000-0000-0000-000000000000',
                                          parent: '00000000-0000-0000-0000-000000000000',
-                                         label : Localisation.translate('Home')
+                                         label : LocalisationService.translate('Home')
                                      });
             },
             openFolder(folder) {

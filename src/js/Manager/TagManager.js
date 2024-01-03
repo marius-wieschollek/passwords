@@ -1,10 +1,10 @@
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Localisation from '@js/Classes/Localisation';
 import RandomColorService from '@js/Services/RandomColorService';
 import MessageService from "@js/Services/MessageService";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 /**
  *
@@ -50,7 +50,7 @@ class TagManager {
      * @returns {Promise<any>}
      */
     createTagFromData(tag) {
-        if(!tag.label) tag.label = Localisation.translate('New Tag');
+        if(!tag.label) tag.label = LocalisationService.translate('New Tag');
         if(!tag.color) tag.color = RandomColorService.color();
         tag = API.validateTag(tag);
 

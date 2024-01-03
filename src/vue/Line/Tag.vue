@@ -25,11 +25,11 @@
 <script>
     import Translate          from '@vc/Translate';
     import TagManager         from '@js/Manager/TagManager';
-    import Localisation       from "@js/Classes/Localisation";
     import SearchManager      from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -52,10 +52,10 @@
 
         computed: {
             getDate() {
-                return Localisation.formatDate(this.tag.edited);
+                return LocalisationService.formatDate(this.tag.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.tag.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDate(this.tag.edited, 'long')});
             },
             className() {
                 let classNames = 'row tag';

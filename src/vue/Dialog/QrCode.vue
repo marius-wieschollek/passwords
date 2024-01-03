@@ -35,11 +35,11 @@
     import Translate from '@vc/Translate';
     import QrCode from '@vc/QrCode';
     import Icon from "@vc/Icon";
-    import Localisation from "@js/Classes/Localisation";
     import NcModal from '@nc/NcModal.js';
     import EyeOffIcon from "@icon/EyeOff";
     import UtilityService from "@js/Services/UtilityService";
     import SettingsService from '@js/Services/SettingsService';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -60,7 +60,7 @@
             let warning = SettingsService.get('client.sharing.qrcode.warning', true);
 
             return {
-                text     : warning ? Localisation.translate('What did you expect?'):this.password.password,
+                text     : warning ? LocalisationService.translate('What did you expect?'):this.password.password,
                 property : 'password',
                 container: UtilityService.popupContainer(true),
                 warning

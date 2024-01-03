@@ -10,7 +10,7 @@
 
 <template>
     <div class="password-form-custom-field" v-if="isVisible">
-        <input :type="inputType" :placeholder="inputPlaceholder" :id="id" v-model="data" v-bind="inputAttributes" v-on="inputEvents" required />
+        <input :type="inputType" :placeholder="t('Value')" :id="id" v-model="data" v-bind="inputAttributes" v-on="inputEvents" required />
         <custom-field-type v-model="type" />
     </div>
 </template>
@@ -39,9 +39,6 @@
             },
             inputType() {
                 return 'text';
-            },
-            inputPlaceholder() {
-                return Localisation.translate('Value');
             },
             inputAttributes() {
                 return {
