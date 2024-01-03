@@ -1,4 +1,4 @@
-import Logger from "@js/Classes/Logger";
+import LoggingService from "@js/Services/LoggingService";
 
 /**
  * @deprecated
@@ -85,7 +85,7 @@ class Events {
                 try {
                     callbacks[j](data);
                 } catch(e) {
-                    Logger.error(e);
+                    LoggingService.error(e);
                 }
             }
         }

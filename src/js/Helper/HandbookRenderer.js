@@ -3,8 +3,8 @@ import VueRouter from '@js/Helper/router';
 import SettingsService from '@js/Services/SettingsService';
 import mermaid from "mermaid";
 import DOMPurify from 'dompurify';
-import Logger from "@js/Classes/Logger";
 import LocalisationService from "@js/Services/LocalisationService";
+import LoggingService from "@js/Services/LoggingService";
 
 /**
  *
@@ -47,7 +47,7 @@ class HandbookRenderer {
                 return HandbookRenderer._generateErrorPage(response.status + ' – ' + response.statusText);
             }
         } catch(e) {
-            if(APP_ENVIRONMENT === 'development') Logger.error('Request failed', e);
+            if(APP_ENVIRONMENT === 'development') LoggingService.error('Request failed', e);
 
             return HandbookRenderer._generateErrorPage(e.message);
         }

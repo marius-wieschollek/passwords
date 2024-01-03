@@ -12,11 +12,11 @@ import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Vue from "vue";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
-import Logger from "@js/Classes/Logger";
 import Events from "@js/Classes/Events";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
 import LocalisationService from "@js/Services/LocalisationService";
+import LoggingService from "@js/Services/LoggingService";
 
 export default class PasswordActions {
     get password() {
@@ -34,7 +34,7 @@ export default class PasswordActions {
 
     print() {
         let printer = new PrintPasswordAction(this._password);
-        printer.print().catch(Logger.exception);
+        printer.print().catch(LoggingService.exception);
     }
 
     async favorite(status = null) {
@@ -49,7 +49,7 @@ export default class PasswordActions {
             await PasswordManager.updatePassword(this._password);
         } catch(e) {
             this._password.favorite = oldStatus;
-            Logger.error(e);
+            LoggingService.error(e);
         }
 
         return this._password;

@@ -1,7 +1,7 @@
+import LoggingService from "@js/Services/LoggingService";
 import RandomColorService from '@js/Services/RandomColorService';
-import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
-import Logger from "@js/Classes/Logger";
 import LocalisationService from "@js/Services/LocalisationService";
+import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
 
 export default class PassmanConversionHelper {
 
@@ -221,6 +221,6 @@ export default class PassmanConversionHelper {
     static _logConversionError(text, element, field, errors) {
         let message = LocalisationService.translate(text, {label: element.label, field: field.label});
         errors.push(message);
-        Logger.error(message, element, field);
+        LoggingService.error(message, element, field);
     }
 }

@@ -22,7 +22,6 @@
     import Translate       from '@vc/Translate';
     import AbstractField   from '@vue/Dialog/CreatePassword/AbstractField';
     import CustomFieldType from '@vue/Dialog/CreatePassword/CustomFields/CustomFieldType';
-    import Localisation    from '@js/Classes/Localisation';
 
     export default {
         components: {CustomFieldType, Translate},

@@ -11,8 +11,8 @@
 import DOMPurify from "dompurify";
 import SettingsService from "@js/Services/SettingsService";
 import FaviconService from "@js/Services/FaviconService";
-import Logger from "@js/Classes/Logger";
 import LocalisationService from "@js/Services/LocalisationService";
+import LoggingService from "@js/Services/LoggingService";
 
 export default class PrintPasswordAction {
 
@@ -116,7 +116,7 @@ export default class PrintPasswordAction {
                     resolve(`<img src="${icon}" alt="" />`);
                 }
             } catch(e) {
-                Logger.debug(e);
+                LoggingService.debug(e);
                 resolve('');
             }
         });

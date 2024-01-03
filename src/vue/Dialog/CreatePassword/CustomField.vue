@@ -30,6 +30,7 @@
 <script>
     import Icon from "@vc/Icon";
     import Translate from "@vc/Translate";
+    import MessageService from "@js/Services/MessageService";
     import AbstractField from "@vue/Dialog/CreatePassword/AbstractField";
     import TextCustomField from "@vue/Dialog/CreatePassword/CustomFields/TextCustomField";
     import EmailCustomField from "@vue/Dialog/CreatePassword/CustomFields/EmailCustomField";
@@ -37,10 +38,7 @@
     import UrlCustomField from "@vue/Dialog/CreatePassword/CustomFields/UrlCustomField";
     import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
     import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
-    import Localisation from "@js/Classes/Localisation";
     import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
-    import MessageService from "@js/Services/MessageService";
-    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},

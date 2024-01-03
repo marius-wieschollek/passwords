@@ -4,12 +4,12 @@ import SectionTags from '@vue/Section/Tags';
 import SectionRecent from '@vue/Section/Recent';
 import SectionFolders from '@vue/Section/Folders';
 import SectionFavorites from '@vue/Section/Favorites';
-import Logger from "@js/Classes/Logger";
+import LoggingService from "@js/Services/LoggingService";
 import MessageService from "@js/Services/MessageService";
 import LocalisationService from "@js/Services/LocalisationService";
 
 function handleChunkLoadingError(e, module) {
-    Logger.error(e);
+    LoggingService.error(e);
     MessageService
         .alert(['Unable to load {module}', {module}], 'Network error')
         .finally(() => {

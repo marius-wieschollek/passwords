@@ -10,7 +10,6 @@
 
 import API from "@js/Helper/api";
 import PasswordManager from "@js/Manager/PasswordManager";
-import Logger from "@js/Classes/Logger";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
 
@@ -46,7 +45,7 @@ export default class AddTagAction {
             this._password = await PasswordManager.updatePassword(this._password);
             ToastService.success(['PasswordTagAddSuccess', {password: this._password.label, tag: tag.label}]);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
             ToastService.error(['PasswordTagAddFail', {password: this._password.label, tag: tag.label, error: e.hasOwnProperty('message') ? e.message:''}]);
         }
 

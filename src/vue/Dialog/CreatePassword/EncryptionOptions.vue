@@ -24,7 +24,6 @@
 <script>
     import API       from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
 
     export default {
         components: {Translate},

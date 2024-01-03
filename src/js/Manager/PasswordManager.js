@@ -1,11 +1,11 @@
 import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import FolderManager from "@js/Manager/FolderManager";
-import Logger from "@js/Classes/Logger";
 import ToastService from "@js/Services/ToastService";
+import FolderManager from "@js/Manager/FolderManager";
 import MessageService from "@js/Services/MessageService";
 import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
 
 /**
  *
@@ -77,7 +77,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
+                   LoggingService.error(e);
                    ToastService.error('Creating password failed');
                    reject(password);
                });
@@ -127,7 +127,7 @@ class PasswordManager {
                        resolve(p);
                    })
                    .catch((e) => {
-                       Logger.error(e);
+                       LoggingService.error(e);
                        ToastService.error('Saving password failed');
                        reject(password);
                    });
@@ -217,7 +217,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
+                   LoggingService.error(e);
                    ToastService.error('Moving password failed');
                    password.folder = originalFolder;
                    reject(password);
@@ -240,7 +240,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
+                   LoggingService.error(e);
                    reject(password);
                });
         });

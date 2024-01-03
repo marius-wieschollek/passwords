@@ -1,8 +1,8 @@
 import Vue from 'vue';
 import SettingsService from '@js/Services/SettingsService';
 import DeferredActivationService from '@js/Services/DeferredActivationService';
-import Logger from "@js/Classes/Logger";
 import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
 import LocalisationService from "@js/Services/LocalisationService";
 
 class SetupManager {
@@ -37,7 +37,7 @@ class SetupManager {
         try {
             return this._runWizard(['encryption'], true, false);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
         }
     }
 

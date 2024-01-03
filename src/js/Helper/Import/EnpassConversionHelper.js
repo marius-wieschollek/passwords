@@ -1,8 +1,8 @@
+import LoggingService from "@js/Services/LoggingService";
 import RandomColorService from '@js/Services/RandomColorService';
+import LocalisationService from "@js/Services/LocalisationService";
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
-import Logger from "@js/Classes/Logger";
-import LocalisationService from "@js/Services/LocalisationService";
 
 export default class EnpassConversionHelper {
 
@@ -257,6 +257,6 @@ export default class EnpassConversionHelper {
     static _logConversionError(text, vars, errors) {
         let message = LocalisationService.translate(text, vars);
         errors.push(message);
-        Logger.error(message, vars);
+        LoggingService.error(message, vars);
     }
 }

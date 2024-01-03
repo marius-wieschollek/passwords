@@ -1,6 +1,6 @@
 import ToastService from '@js/Services/ToastService';
-import Logger from "@js/Classes/Logger";
 import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
 import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class ContextMenuService {
@@ -163,7 +163,7 @@ export default new class ContextMenuService {
             try {
                 if(callback) callback();
             } catch(e) {
-                Logger.error(e);
+                LoggingService.error(e);
             }
         });
     }

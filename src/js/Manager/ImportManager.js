@@ -1,12 +1,12 @@
 import API from '@js/Helper/api';
+import LoggingService from "@js/Services/LoggingService";
 import SettingsService from '@js/Services/SettingsService';
+import LocalisationService from "@js/Services/LocalisationService";
 import ImportCsvConversionHelper from '@js/Helper/Import/CsvConversionHelper';
 import EnpassConversionHelper from '@js/Helper/Import/EnpassConversionHelper';
 import ImportJsonConversionHelper from '@js/Helper/Import/JsonConversionHelper';
 import PassmanConversionHelper from '@js/Helper/Import/PassmanConversionHelper';
 import BitwardenConversionHelper from '@js/Helper/Import/BitwardenConversionHelper';
-import Logger from '@js/Classes/Logger';
-import LocalisationService from "@js/Services/LocalisationService";
 
 /**
  *
@@ -95,7 +95,7 @@ export class ImportManager {
         try {
             if(data.tags) tagMapping = await this._importTags(data.tags, options.mode, options.cseType);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
             throw new Error('Unable to create tags');
         }
         return tagMapping;
@@ -113,7 +113,7 @@ export class ImportManager {
         try {
             if(data.folders) folderMapping = await this._importFolders(data.folders, options.mode, options.cseType);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
             throw new Error('Unable to create folders');
         }
         return folderMapping;
@@ -136,7 +136,7 @@ export class ImportManager {
             try {
                 await this._importPasswords(data.passwords, options.mode, options.skipShared, options.cseType, tagMapping, folderMapping);
             } catch(e) {
-                Logger.error(e);
+                LoggingService.error(e);
                 throw new Error('Unable to create passwords');
             }
         }
@@ -230,7 +230,7 @@ export class ImportManager {
                 idMap[tag.id] = info.id;
             }
         } catch(e) {
-            Logger.error(e, tag);
+            LoggingService.error(e, tag);
             this.errors.push(LocalisationService.translate('"{error}" in tag "{label}".', {label: tag.label, error: e.message}));
         }
 
@@ -308,7 +308,7 @@ export class ImportManager {
                 idMap[folder.id] = info.id;
             }
         } catch(e) {
-            Logger.error(e, folder);
+            LoggingService.error(e, folder);
             this.errors.push(LocalisationService.translate('"{error}" in folder "{label}".', {label: folder.label, error: e.message}));
         }
 
@@ -441,7 +441,7 @@ export class ImportManager {
             }
         } catch(e) {
             let message = e.hasOwnProperty('message') ? e.message:e.statusText;
-            Logger.error(e, password);
+            LoggingService.error(e, password);
             this.errors.push(LocalisationService.translate('"{error}" in password "{label}".', {label: password.label, error: message}));
         }
 
@@ -483,7 +483,7 @@ export class ImportManager {
         if(status === null) {
             this.processed++;
         } else {
-            Logger.info(`Passwords Import: ${status}`);
+            LoggingService.info(`Passwords Import: ${status}`);
         }
         this.progress(this.processed, this.total, status);
     }

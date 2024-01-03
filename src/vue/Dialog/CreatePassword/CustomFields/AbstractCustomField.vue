@@ -17,7 +17,6 @@
 
 <script>
     import CustomFieldType from '@vue/Dialog/CreatePassword/CustomFields/CustomFieldType';
-    import Localisation    from '@js/Classes/Localisation';
 
     export default {
         components: {CustomFieldType},

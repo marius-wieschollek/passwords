@@ -8,8 +8,8 @@
  * created by Marius David Wieschollek.
  */
 
+import LoggingService from "@js/Services/LoggingService";
 import SettingsService from "@js/Services/SettingsService";
-import Logger from "@js/Classes/Logger";
 import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class AppStoreService {
@@ -115,7 +115,7 @@ export default new class AppStoreService {
             this._storeData = await response.json();
             return this._storeData;
         } else {
-            Logger.error(response);
+            LoggingService.error(response);
             throw new Error(`${response.status} - ${response.statusText}`);
         }
     }

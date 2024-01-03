@@ -1,8 +1,8 @@
 import API from '@js/Helper/api';
 import router from '@js/Helper/router';
-import SettingsService from '@js/Services/SettingsService';
-import Logger from '@js/Classes/Logger';
 import {emit} from '@nextcloud/event-bus';
+import LoggingService from "@js/Services/LoggingService";
+import SettingsService from '@js/Services/SettingsService';
 
 
 class KeepAliveManager {
@@ -164,7 +164,7 @@ class KeepAliveManager {
             try {
                 await API.closeSession();
             } catch(e) {
-                Logger.error(e);
+                LoggingService.error(e);
             }
 
             target = btoa(JSON.stringify(target));
