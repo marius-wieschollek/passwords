@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Ricerca …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "La passphrase di crittografia scelta non è sicura e quindi non può essere utilizzata.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Passphrase di crittografia non sicura",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "L'app Password controlla regolarmente se la passphrase di crittografia è ancora sicura. La passphrase attuale non è sicura e deve essere cambiata immediatamente."
     }
 }
