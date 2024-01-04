@@ -9,7 +9,7 @@
         "message": "Kies Format"
     },
     "backups-000030": {
-        "message": "Alstublieft kiezen"
+        "message": "Maak een keuze"
     },
     "backups-000032": {
         "message": "Voorgedefinieerde CSV"
@@ -1658,7 +1658,7 @@
         "message": "De codes komen niet overeen"
     },
     "apps-000010": {
-        "message": "Ziet er goed uit."
+        "message": "Ziet er goed uit"
     },
     "apps-000011": {
         "message": "Verbinding geslaagd"
@@ -1801,16 +1801,16 @@
         "message": "Meer informatie is te vinden in het logboek. (Druk op F12)"
     },
     "apps-000012": {
-        "message": "Ik ben klaar."
+        "message": "Ik ben klaar"
     },
     "apps-000013": {
-        "message": "Probeer het niet opnieuw."
+        "message": "Probeer het niet opnieuw"
     },
     "apps-000014": {
         "message": "Sluit iets anders aan"
     },
     "apps-000015": {
-        "message": "Probeer het nog eens."
+        "message": "Probeer het nog eens"
     },
     "apps-000016": {
         "message": "Sterke encryptie"
