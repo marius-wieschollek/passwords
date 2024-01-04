@@ -102,10 +102,10 @@ export default class ImportJsonConversionHelper {
         if(!options.password) throw new Error('Password required');
 
         try {
-            ClientService
+            await ClientService
                 .getClient()
                 .getInstance('encryption.expv1')
-                .decryptWithPassword(json.challenge, `${options.password}challenge`);
+                .decrypt(json.challenge, `${options.password}challenge`);
         } catch(e) {
             LoggingService.error(e);
             throw new Error('Password invalid');
@@ -115,10 +115,10 @@ export default class ImportJsonConversionHelper {
             if(!json.hasOwnProperty(i) || ['version', 'encrypted', 'challenge'].indexOf(i) !== -1) continue;
 
             try {
-                let decryptedData = ClientService
+                let decryptedData = await ClientService
                     .getClient()
                     .getInstance('encryption.expv1')
-                    .decryptWithPassword(json[i], options.password + i);
+                    .decrypt(json[i], options.password + i);
 
                 json[i] = JSON.parse(decryptedData);
             } catch(e) {

@@ -66,16 +66,16 @@ export class ExportManager {
                 let data = JSON.stringify(json[i]),
                     key  = options.password + i;
 
-                json[i] = ClientService
+                json[i] = await ClientService
                     .getClient()
                     .getInstance('encryption.expv1')
-                    .encryptWithPassword(data, key);
+                    .encrypt(data, key);
             }
             json.encrypted = true;
-            json.challenge = ClientService
+            json.challenge = await ClientService
                 .getClient()
                 .getInstance('encryption.expv1')
-                .encryptWithPassword('challenge', `${options.password}challenge`);
+                .encrypt('challenge', `${options.password}challenge`);
         }
 
         return JSON.stringify(json);
