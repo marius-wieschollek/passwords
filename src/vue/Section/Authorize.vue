@@ -105,6 +105,9 @@
         },
 
         created() {
+            document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
+            document.body.classList.add('pw-auth-visible');
+
             API.requestSession()
                .then((d) => {
                    emit('toggle-navigation', {open: false});
@@ -140,17 +143,22 @@
                        API.openSession([])
                           .then(() => { this.goToTarget(); })
                           .catch((d) => { this.loginError(d); });
-                   } else if(this.webAuthnAction.isAvailable()) {
-                       this.webAuthnAction.run()
-                           .then((password) => {
-                               if(password) {
-                                   this.password = password;
+                   } else{
+                       document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
+                       document.body.classList.add('pw-auth-visible');
 
-                                   if(!this.hasToken) {
-                                       this.submitLogin(null, true);
+                       if(this.webAuthnAction.isAvailable()) {
+                           this.webAuthnAction.run()
+                               .then((password) => {
+                                   if(password) {
+                                       this.password = password;
+
+                                       if(!this.hasToken) {
+                                           this.submitLogin(null, true);
+                                       }
                                    }
-                               }
-                           });
+                               });
+                       }
                    }
                });
         },
