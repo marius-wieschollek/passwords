@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Paieška…"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Pasirinkta šifravimo slaptoji frazė yra nesaugi, todėl jos naudoti negalima.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Nesaugi šifravimo slaptažodžių frazė",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Slaptažodžių programa reguliariai tikrina, ar šifravimo slaptažodis vis dar saugus. Dabartinė slaptažodžio frazė nėra saugi ir ją reikia nedelsiant pakeisti."
     }
 }

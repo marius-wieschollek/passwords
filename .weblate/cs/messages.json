@@ -3294,5 +3294,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Vyhledávání …"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Aplikace Hesla pravidelně kontroluje, zda je vaše šifrovací heslo stále bezpečné. Vaše aktuální heslová fráze není bezpečná a je třeba ji okamžitě změnit."
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Zvolená šifrovací fráze není bezpečná, a proto ji nelze použít.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Nezabezpečená šifrovací fráze",
+        "description": "Label in the dialog to open the change password of the button to open that page"
     }
 }

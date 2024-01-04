@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Szukaj …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Wybrane hasło szyfrowania jest niezabezpieczone i dlatego nie może być używane.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Niezabezpieczone hasło szyfrowania",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Aplikacja Hasła regularnie sprawdza, czy hasło szyfrowania jest nadal bezpieczne. Obecne hasło nie jest bezpieczne i należy je natychmiast zmienić."
     }
 }

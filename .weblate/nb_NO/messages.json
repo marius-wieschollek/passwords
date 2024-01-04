@@ -3304,5 +3304,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Søk …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Den valgte krypteringsfrasen er usikker og kan derfor ikke brukes.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Usikker passordfrase for kryptering",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Passord-appen sjekker regelmessig om passordfrasen din fortsatt er sikker. Den nåværende passordfrasen er ikke sikker og må endres umiddelbart."
     }
 }

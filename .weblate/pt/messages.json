@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Pesquisar …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "A frase-chave de encriptação escolhida é insegura e, por isso, não pode ser utilizada.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Palavra-passe de encriptação insegura",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "A aplicação de palavras-passe verifica regularmente se a sua frase-passe de encriptação ainda é segura. A sua frase-chave atual não é segura e tem de ser alterada imediatamente."
     }
 }

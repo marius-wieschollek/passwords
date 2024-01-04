@@ -3297,5 +3297,16 @@
     },
     "frontend-SearchInputPlaceholder": {
         "message": "Zoeken …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "De gekozen coderingswachtzin is onveilig en kan daarom niet worden gebruikt.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Onveilige coderingswachtzin",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "De wachtwoorden-app controleert regelmatig of je coderingswachtzin nog steeds veilig is. Je huidige wachtwoordzin is niet veilig en moet onmiddellijk worden gewijzigd."
     }
 }
