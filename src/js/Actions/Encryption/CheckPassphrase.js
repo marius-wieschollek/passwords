@@ -48,8 +48,9 @@ export default class CheckPassphrase {
             return true;
         }
 
-        let hash           = await ClientService.getLegacyClient().getHash(passphrase),
-            breachedHashes = await ClientService.getLegacyClient().getHashes(hash.substring(0, 5));
+        let hashService    = /** @type {HashService} **/ await ClientService.getClient().getInstance('service.hash'),
+            hash           = await hashService.getHash(passphrase),
+            breachedHashes = await hashService.getBreachedHashes(hash.substring(0, 5));
 
         return breachedHashes.indexOf(hash) === -1;
     }

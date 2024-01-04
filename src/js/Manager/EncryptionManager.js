@@ -139,8 +139,9 @@ class EncryptionManager {
         if(passphrase.length < 12) {
             result = false;
         } else {
-            let hash           = await ClientService.getLegacyClient().getHash(passphrase),
-                breachedHashes = await ClientService.getLegacyClient().getHashes(hash.substring(0, 5));
+            let hashService    = /** @type {HashService} **/ await ClientService.getClient().getInstance('service.hash'),
+                hash           = await hashService.getHash(passphrase),
+                breachedHashes = await hashService.getBreachedHashes(hash.substring(0, 5));
 
             result = breachedHashes.indexOf(hash) === -1;
         }
