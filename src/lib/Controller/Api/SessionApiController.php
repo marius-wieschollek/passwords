@@ -144,7 +144,7 @@ class SessionApiController extends AbstractApiController {
             return new JSONResponse(['success' => true, 'keys' => $this->keychainService->getClientKeychainArray()], Http::STATUS_OK);
         } catch(\Throwable $e) {
             $this->session->delete();
-            throw new ApiException('Authorized session required', Http::STATUS_PRECONDITION_FAILED, $e);
+            throw new ApiException('Reading user keychain failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
         }
     }
 
@@ -213,14 +213,14 @@ class SessionApiController extends AbstractApiController {
         if($this->challengeService->hasChallenge()) {
             if(!isset($parameters['challenge'])) {
                 $this->loginAttempts->registerFailedAttempt();
-                throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+                throw new ApiException('Passphrase invalid', Http::STATUS_UNAUTHORIZED);
             }
             try {
                 if(!$this->challengeService->validateChallenge($parameters['challenge'])) {
-                    throw new ApiException('Password verification failed');
+                    throw new ApiException('Passphrase verification failed');
                 }
             } catch(ApiException $e) {
-                if($e->getId() === 'a361c427') $this->loginAttempts->registerFailedAttempt();
+                if($e->getId() === 'ab6e13ba') $this->loginAttempts->registerFailedAttempt();
                 throw $e;
             }
         }

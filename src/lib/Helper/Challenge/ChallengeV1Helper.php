@@ -49,7 +49,7 @@ class ChallengeV1Helper {
      */
     public function solveChallenge(Challenge $challenge, string $secret): string {
         if(strlen($secret) !== 64) {
-            throw new ApiException('Secret length invalid', HTTP::STATUS_BAD_REQUEST);
+            throw new ApiException('Secret invalid', HTTP::STATUS_BAD_REQUEST);
         }
 
         $serverData   = json_decode($challenge->getServerData());
@@ -58,7 +58,7 @@ class ChallengeV1Helper {
         try {
             return $this->crypto->decrypt($encryptedKey, $serverData->salt.$secret);
         } catch(Exception $e) {
-            throw new ApiException('Password invalid', HTTP::STATUS_UNAUTHORIZED);
+            throw new ApiException('Passphrase invalid', HTTP::STATUS_UNAUTHORIZED, $e);
         }
     }
 
@@ -71,7 +71,7 @@ class ChallengeV1Helper {
      */
     public function createChallenge(string $secret, array $salts): array {
         if(strlen($secret) !== 64) {
-            throw new ApiException('Secret length invalid', HTTP::STATUS_BAD_REQUEST);
+            throw new ApiException('Secret invalid', HTTP::STATUS_BAD_REQUEST);
         }
 
         if(strlen($salts[0]) < 512 || strlen($salts[1]) !== 128 || strlen($salts[2]) !== 32) {

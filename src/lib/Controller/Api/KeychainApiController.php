@@ -14,6 +14,7 @@ use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -53,10 +54,14 @@ class KeychainApiController extends AbstractApiController {
      * @NoAdminRequired
      *
      * @return JSONResponse
-     * @throws Exception
+     * @throws ApiException
      */
     public function list(): JSONResponse {
-        $results = $this->keychainService->getClientKeychainArray();
+        try {
+            $results = $this->keychainService->getClientKeychainArray();
+        } catch(Exception $e) {
+            throw new ApiException('Reading user keychain failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
+        }
 
         return $this->createJsonResponse($results);
     }

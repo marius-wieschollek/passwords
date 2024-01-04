@@ -186,7 +186,7 @@ class UserChallengeService {
         } catch(Exception $e) {
             $this->logger->logException($e);
 
-            throw new ApiException('Loading challenge failed');
+            throw new ApiException('Loading challenge failed', $e);
         }
     }
 
@@ -205,7 +205,7 @@ class UserChallengeService {
             } catch(Exception $e) {
                 $this->logger->logException($e);
 
-                throw new ApiException('Password update failed');
+                throw new ApiException('Challenge update failed', $e);
             }
         }
 

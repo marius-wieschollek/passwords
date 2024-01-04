@@ -150,9 +150,9 @@ class AccountApiController extends AbstractApiController {
      */
     public function setChallenge(string $secret, array $data, $oldSecret = null): JSONResponse {
         if($this->challengeService->hasChallenge()) {
-            if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+            if($oldSecret === null) throw new ApiException('Passphrase invalid', Http::STATUS_UNAUTHORIZED);
             if(!$this->challengeService->validateChallenge($oldSecret)) {
-                throw new ApiException('Password verification failed');
+                throw new ApiException('Passphrase verification failed');
             }
         }
 
@@ -162,6 +162,6 @@ class AccountApiController extends AbstractApiController {
             return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
         }
 
-        throw new ApiException('Password update failed');
+        throw new ApiException('Challenge update failed');
     }
 }
