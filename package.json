@@ -66,7 +66,7 @@
         "marked": "^4.2.2",
         "mermaid": "^10.0.2",
         "mini-css-extract-plugin": "^2.7.2",
-        "passwords-client": "1.0.0-alpha.5280",
+        "passwords-client": "1.0.0-alpha.5294",
         "sass": "^1.57.1",
         "sass-loader": "^12.6.0",
         "sass-resources-loader": "^2.2.5",
