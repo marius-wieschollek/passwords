@@ -3295,7 +3295,7 @@
     },
     "frontend-ChangePasswordPageLink": {
         "message": "Open change password page",
-        "description": "Label in the dialog to open the change password of the button to open that page"
+        "description": "Label in the dialog to open the change password page of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
         "message": "\"{host}\" does not announce their password change page. You may find the change password function on the website.",
@@ -3311,13 +3311,14 @@
     },
     "frontend-CSENewPassphraseInsecureText": {
         "message": "The chosen encryption passphrase is insecure and therefore can not be used.",
-        "description": "Label in the dialog to open the change password of the button to open that page"
+        "description": "Text of the alert dialog when the user wants to set up encryption with an insecure/breached passphrase"
     },
     "frontend-CSEPassphraseInsecureTitle": {
         "message": "Insecure encryption passphrase",
-        "description": "Label in the dialog to open the change password of the button to open that page"
+        "description": "Title of the alert dialog when the users passphrase is insecure/breached"
     },
     "frontend-CSEPassphraseInsecureText": {
-        "message": "The passwords app regularly checks if your encryption passphrase is still secure. Your current passphrase is not secure and needs to be changed immediately."
+        "message": "The passwords app regularly checks if your encryption passphrase is still secure. Your current passphrase is not secure and needs to be changed immediately.",
+        "description": "Text of the alert dialog when the users passphrase has been checked by the app and was found to be insecure/breached"
     }
 }
