@@ -76,6 +76,34 @@ Cypress.Commands.add('openSections', (...sections) => {
     }
 });
 
+Cypress.Commands.add('waitForRequestsToFinish', () => {
+    let isDone = false;
+
+    while(!isDone) {
+        cy.window() // get a handle for the document
+          .then((window) => {
+              return new Cypress.Promise((resolve) => {
+                  let interval = null;
+                  let counter = 0;
+                  const isAppActiveFunction = () => {
+                      counter++;
+                      if(window.hasOwnProperty('pwAppActive') && window.pwAppActive === false) {
+                          if(interval) clearInterval(interval);
+                          isDone = true;
+                          resolve();
+                      } else if(counter > 35) {
+                          if(interval) clearInterval(interval);
+                          resolve();
+                      }
+                  };
+
+                  interval = setInterval(isAppActiveFunction, 100);
+                  isAppActiveFunction();
+              });
+          });
+    }
+});
+
 Cypress.Commands.add(
     'screenshotWithPreview',
     {prevSubject: 'optional'},

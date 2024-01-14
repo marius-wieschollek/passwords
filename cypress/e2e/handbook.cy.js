@@ -1,5 +1,3 @@
-const FAVICON_WAIT_TIME = 1250;
-
 describe('Handbook', () => {
     it('Set the language to english', () => {
         cy.login();
@@ -35,6 +33,7 @@ describe('Handbook', () => {
         cy.visit('https://localhost/apps/passwords/#/backup/import');
         cy.get('#passwords-import-source').select('json');
         cy.get('#passwords-import-file').selectFile('./cypress/fixtures/SamplePasswords.json');
+        cy.get('#passwords-import-execute', {timeout: 1000});
         cy.screenshotWithPreview('import-section');
         cy.get('#passwords-import-execute').click();
         cy.get('progress.success', {timeout: 60000});
@@ -59,7 +58,7 @@ describe('Handbook', () => {
         cy.get('div[data-password-title=Nextcloud]')
           .scrollIntoView({offset: {top: -60}});
         /** Wait for Favicons to load **/
-        cy.wait(FAVICON_WAIT_TIME * 2);
+        cy.waitForRequestsToFinish();
         cy.get('div[data-password-title=Nextcloud]')
           .screenshotWithPreview('password-single');
         cy.screenshotWithPreview('main-section');
@@ -72,7 +71,7 @@ describe('Handbook', () => {
         cy.get('div[data-folder-title=Work]').click();
         cy.get('div[data-folder-title=Development]');
         /** Wait for Favicons to load **/
-        cy.wait(FAVICON_WAIT_TIME);
+        cy.waitForRequestsToFinish();
         cy.screenshotWithPreview('folder-section');
     });
 
@@ -90,7 +89,7 @@ describe('Handbook', () => {
         cy.visit('https://localhost/apps/passwords/#/recent');
         cy.get('div.row', {timeout: 10000});
         /** Wait for Favicons to load **/
-        cy.wait(FAVICON_WAIT_TIME);
+        cy.waitForRequestsToFinish();
         cy.screenshotWithPreview('recent-section');
     });
 
@@ -100,7 +99,7 @@ describe('Handbook', () => {
         cy.get('div.row');
         cy.openSections('Favorites');
         /** Wait for Favicons to load **/
-        cy.wait(FAVICON_WAIT_TIME);
+        cy.waitForRequestsToFinish();
         cy.screenshotWithPreview('favorites-section');
     });
 
@@ -147,13 +146,12 @@ describe('Handbook', () => {
         cy.login();
         cy.visit('https://localhost/apps/passwords/#/search/c2hvcA==');
         cy.get('div.row');
-        cy.get('#unified-search .header-menu__trigger').click();
-        cy.get('#unified-search__input').type('shop');
+        cy.get('.passwords-search-box input').type('shop');
         cy.get('[data-folder-title="Shopping"]');
         cy.get('[data-tag-title="Shopping"]');
         cy.get('[data-password-title="Steam"]');
         /** Wait for Favicons to load **/
-        cy.wait(FAVICON_WAIT_TIME);
+        cy.waitForRequestsToFinish();
         cy.screenshotWithPreview('search-section');
     });
 
@@ -213,6 +211,7 @@ describe('Handbook', () => {
         cy.get('div[data-folder-title="Hosting"] > div.more').click();
         cy.get('div[data-folder-title="Hosting"] > div.more [data-item-action="delete"]').click();
         cy.visit('https://localhost/apps/passwords/#/trash');
+        cy.get('#app-content.section-trash');
         cy.get('div[data-folder-title="Hosting"]');
         cy.get('div[data-password-title="Nextcloud"]');
         cy.get('div[data-tag-title="Communication"]');

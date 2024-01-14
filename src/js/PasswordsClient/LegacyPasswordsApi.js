@@ -21,6 +21,7 @@ export default class LegacyPasswordsApi extends EnhancedApi {
         this._queueCheckActive = false;
         this._maxRequests = 2;
         this._maxSlowRequests = 1;
+        window.pwAppActive = true;
     }
 
     initialize(client, config = {}) {
@@ -68,9 +69,11 @@ export default class LegacyPasswordsApi extends EnhancedApi {
      */
     _checkRequestQueue() {
         if(this._queueCheckActive || this._requests.length === 0) {
+            window.pwAppActive = this._requests.length === 0;
             return;
         }
         this._queueCheckActive = true;
+        window.pwAppActive = true;
         this._requests.sort(function(a, b) {
             if(a.priority === b.priority) return 0;
             return a.priority < b.priority ? -1:1;
