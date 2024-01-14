@@ -23,8 +23,8 @@ use OCA\Passwords\Services\WebsitePreviewService;
 class PageresCliProvider extends AbstractPreviewProvider {
 
     const CAPTURE_MAX_RETRIES = 3;
-    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:80.0) Gecko/20100101 Firefox/80.0';
-    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 10; Mobile; rv:80.0) Gecko/80.0 Firefox/80.0';
+    const USER_AGENT_DESKTOP  = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:120.0) Gecko/20100101 Firefox/120.0';
+    const USER_AGENT_MOBILE   = 'Mozilla/5.0 (Android 10; Mobile; rv:120.0) Gecko/120.0 Firefox/120.0';
 
     /**
      * @var string
@@ -36,7 +36,7 @@ class PageresCliProvider extends AbstractPreviewProvider {
      * @param string $view
      * @param string $protocol
      *
-     * @return bool|string
+     * @return string
      * @throws Exception
      */
     protected function getPreviewData(string $domain, string $view, string $protocol = 'https'): string {

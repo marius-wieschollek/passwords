@@ -16,6 +16,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Preview\ResizePreviewHelper;
 use OCA\Passwords\Provider\Preview\PreviewProviderInterface;
 use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
+use OCP\AppFramework\Http;
 use OCP\Files\SimpleFS\ISimpleFile;
 use Throwable;
 
@@ -113,11 +114,11 @@ class WebsitePreviewService {
         try {
             $websitePreview = $this->previewProvider->getDefaultPreview($domain);
 
-            return $this->resizeHelper->resizePreview($websitePreview, 'error.jpg', $minWidth, $minHeight, $maxWidth, $maxHeight);
+            return $this->resizeHelper->resizePreview($websitePreview, $minWidth, $minHeight, $maxWidth, $maxHeight);
         } catch(Throwable $e) {
             $this->logger->logException($e);
 
-            throw new ApiException('Internal Website Preview API Error', 502, $e);
+            throw new ApiException('Internal Website Preview API Error', Http::STATUS_BAD_GATEWAY, $e);
         }
     }
 
