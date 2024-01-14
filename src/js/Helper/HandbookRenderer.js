@@ -1,4 +1,4 @@
-import { marked, Renderer as MarkedRenderer} from 'marked';
+import {marked, Renderer as MarkedRenderer} from 'marked';
 import VueRouter from '@js/Helper/router';
 import SettingsService from '@js/Services/SettingsService';
 import mermaid from "mermaid";
@@ -31,7 +31,7 @@ class HandbookRenderer {
                 mime     = response.headers.get('content-type');
 
             if(response.ok) {
-                if(mime.substr(0, 10) !== 'text/plain' && mime.substr(0, 13) !== 'text/markdown') {
+                if(mime.substring(0, 10) !== 'text/plain' && mime.substr(0, 13) !== 'text/markdown') {
                     return HandbookRenderer._generateErrorPage(
                         LocalisationService.translate('Invalid content type {mime}', {mime})
                     );
@@ -40,7 +40,7 @@ class HandbookRenderer {
                 let data = await response.text();
                 if(!data) return HandbookRenderer._generateErrorPage(LocalisationService.translate('No content available'));
 
-                let content = this.render(data, baseUrl, url);
+                let content = await this.render(data, baseUrl, url);
                 this.pages[page] = content;
                 return content;
             } else {
@@ -60,22 +60,51 @@ class HandbookRenderer {
      * @param documentUrl
      * @returns {*}
      */
-    render(markdown, baseUrl, documentUrl) {
+    async render(markdown, baseUrl, documentUrl) {
         let navigation    = [],
             media         = [],
             blankRenderer = new MarkedRenderer(),
-            renderer      = new MarkedRenderer();
+            renderer      = new MarkedRenderer(),
+            mermaidCharts = {length: 0};
 
         renderer.link = (href, title, text, wrap) => { return this._renderLink(href, title, text, wrap, baseUrl, documentUrl, media);};
         renderer.image = (href, title, text, nowrap) => { return HandbookRenderer._renderImage(href, title, text, nowrap, baseUrl, media);};
         renderer.heading = (text, level) => { return HandbookRenderer._renderHeader(text, level, navigation);};
-        renderer.code = (code, infostring, escaped) => { return HandbookRenderer._renderCode(code, infostring, escaped, blankRenderer); };
+        renderer.code = (code, infostring, escaped) => { return HandbookRenderer._renderCode(code, infostring, escaped, blankRenderer, mermaidCharts); };
         renderer.blockquote = (quote) => { return HandbookRenderer._renderBlockquote(quote, blankRenderer); };
 
         marked.use({renderer});
-        let source = DOMPurify.sanitize(marked.parse(markdown));
+        let unsanitizedSource = marked.parse(markdown);
+        if(mermaidCharts.length > 0) {
+            unsanitizedSource = await this.renderMermaid(unsanitizedSource, mermaidCharts);
+        }
+        let source = DOMPurify.sanitize(unsanitizedSource);
 
         return {source, media, navigation};
+    }
+
+    /**
+     *
+     * @param {String} source
+     * @param {Object<String>} charts
+     * @return {Promise<String>}
+     */
+    async renderMermaid(source, charts) {
+        let themeVariables = {
+            primaryColor: SettingsService.get('server.theme.color.primary'),
+            background  : SettingsService.get('server.theme.color.background')
+        };
+        mermaid.mermaidAPI.initialize({startOnLoad: false, theme: 'base', themeVariables});
+
+        for(let id in charts) {
+            if(id === 'length' || !charts.hasOwnProperty(id)) continue;
+            let code   = charts[id],
+                result = await mermaid.mermaidAPI.render(id, code);
+
+            source = source.replace(`###${id}###`, result.svg);
+        }
+
+        return source;
     }
 
     /**
@@ -117,7 +146,7 @@ class HandbookRenderer {
                 [href, title, target] = this._processInternalLink(url, title);
             }
         }
-        let matches = content.match(/data-image-id="(\d+)"/)
+        let matches = content.match(/data-image-id="(\d+)"/);
         if(matches && matches.length > 1) {
             let element = media[matches[1] * 1 - 1];
             element.url = href;
@@ -322,18 +351,14 @@ class HandbookRenderer {
      * @return {*}
      * @private
      */
-    static _renderCode(code, infostring, escaped, blankRenderer) {
+    static _renderCode(code, infostring, escaped, blankRenderer, mermaidCharts) {
         if(infostring === 'mermaid') {
-            let id             = 'help-graph-' + Math.round(Math.random() * 100000),
-                themeVariables = {
-                    primaryColor    : SettingsService.get('server.theme.color.primary'),
-                    background      : SettingsService.get('server.theme.color.background')
-                };
+            mermaidCharts.length++;
+            let id = 'help-graph-' + mermaidCharts.length;
 
-            mermaid.mermaidAPI.initialize({startOnLoad: false, theme: 'base', themeVariables});
-            let graph = mermaid.mermaidAPI.render(id, code);
+            mermaidCharts[id] = code;
 
-            return `<div class="handbook-graph">${graph}</div>`;
+            return `<div class="handbook-graph" id="${id}-container">###${id}###</div>`;
         }
 
         let content = blankRenderer.code(code, infostring, escaped);

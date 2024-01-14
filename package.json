@@ -36,8 +36,8 @@
         "build:stable": "webpack --mode=production",
         "build:testing": "webpack --mode=production --env features=true",
         "cron": "docker exec -u www-data passwords-php php /var/www/html/cron.php",
+        "cypress": "npx cypress open",
         "rector": "node scripts/generate-nc-shells.mjs && rector --version && rector process --clear-cache",
-        "rector:74": "node scripts/generate-nc-shells.mjs && rector --version && rector process --config rector-74.php --clear-cache",
         "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
@@ -64,9 +64,10 @@
         "font-awesome": "^4.7.0",
         "jszip": "^3.10.1",
         "marked": "^4.2.2",
-        "mermaid": "^10.0.2",
+        "mermaid": "^10.6.1",
         "mini-css-extract-plugin": "^2.7.2",
         "passwords-client": "1.0.0-alpha.5294",
+        "process": "^0.11.10",
         "sass": "^1.57.1",
         "sass-loader": "^12.6.0",
         "sass-resources-loader": "^2.2.5",
@@ -82,7 +83,6 @@
         "webpack": "^5.75.0",
         "webpack-bundle-analyzer": "^4.7.0",
         "webpack-cli": "^4.10.0",
-        "process": "^0.11.10",
         "xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
     },
     "browser": {
@@ -99,5 +99,8 @@
     ],
     "author": "Marius Wieschollek",
     "license": "SEE LICENSE IN LICENSE",
-    "_id": "ncpasswords@2021.12.0"
+    "_id": "ncpasswords@2021.12.0",
+    "dependencies": {
+        "cypress": "^13.6.2"
+    }
 }
