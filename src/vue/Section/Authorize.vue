@@ -161,7 +161,7 @@
                        }
 
                        this.$nextTick(() => {
-                           this.$refs.passwordField.focus();
+                           this.$refs.passwordField.$el.focus()
                        })
                    }
                });
