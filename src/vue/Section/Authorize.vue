@@ -24,7 +24,7 @@
                            @click="requestToken()"
                            v-if="retryVisible"/>
                 <div>
-                    <field type="password" placeholder="Password" v-model="password" :disabled="loggingIn" required v-if="hasPassword"/>
+                    <field type="password" placeholder="Password" v-model="password" :disabled="loggingIn" required ref="passwordField" v-if="hasPassword"/>
                     <select v-model="providerId" :disabled="loggingIn" v-if="hasToken && providers.length > 0">
                         <option v-for="(option, id) in providers" :value="id" :title="option.description">
                             {{ option.label }}
@@ -159,6 +159,10 @@
                                    }
                                });
                        }
+
+                       this.$nextTick(() => {
+                           this.$refs.passwordField.focus();
+                       })
                    }
                });
         },
