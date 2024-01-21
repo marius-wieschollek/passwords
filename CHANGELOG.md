@@ -4,11 +4,13 @@
 - Breached password hashes API
 - Encryption passphrase security check
 ### Changed
-- Breached passwords database updated to v9
+- Breached passwords database updated to v10
 - "pwned-list:process" command now uses new HIPB format
+- Authentication page now automatically focuses password field
 ### Removed
 - Support for Nextcloud 25, 26, 27
 - Support for PHP 7.4, 8.0, 8.1
+- Diagrams missing in handbook
 
 ## 2023.12.2 - Bugfix release
 ### Fixed
