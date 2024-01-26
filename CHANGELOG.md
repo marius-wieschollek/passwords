@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2024.1.1 - Bugfix release
+### Fixed
+- PassLink not working
+- Sharing takes longer than usual
+
+## 2024.1.0 - Feature release
 ### Added
 - In-App search
 - Breached password hashes API
