@@ -24,8 +24,10 @@
         </router-link>
         <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
+        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')" :title="t('More')">
+            <i class="fa fa-ellipsis-h" :aria-label="t('More')" :title="t('More')">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+            </i>
             <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
