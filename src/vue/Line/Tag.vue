@@ -14,10 +14,10 @@
                     <ul>
                         <slot name="menu-top"/>
                         <li>
-                            <translate tag="li" data-item-action="edit" @click.stop.prevent="editAction()" icon="edit" say="Edit"/>
+                            <translate tag="li" href="#" data-item-action="edit" @click.stop.prevent="editAction()" icon="edit" say="Edit"/>
                         </li>
                         <li>
-                            <translate tag="li" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
+                            <translate tag="li" href="#" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
                         </li>
                         <slot name="menu-bottom"/>
                     </ul>

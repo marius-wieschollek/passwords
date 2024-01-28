@@ -19,13 +19,13 @@
                     <ul>
                         <slot name="menu-top"/>
                         <li>
-                            <translate tag="a" data-item-action="edit" @click.stop.prevent="renameAction()" icon="pencil" say="Rename"/>
+                            <translate tag="a" href="#" data-item-action="edit" @click.stop.prevent="renameAction()" icon="pencil" say="Rename"/>
                         </li>
                         <li>
-                            <translate tag="a" data-item-action="move" @click.stop.prevent="moveAction" icon="external-link" say="Move"/>
+                            <translate tag="a" href="#" data-item-action="move" @click.stop.prevent="moveAction" icon="external-link" say="Move"/>
                         </li>
                         <li>
-                            <translate tag="a" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
+                            <translate tag="a" href="#" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
                         </li>
                         <slot name="menu-bottom"/>
                     </ul>

@@ -17,19 +17,19 @@
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restoreFolderAction(folder, $event)" :title="restoreTitle"></i>
                     <li slot="menu-top">
-                        <translate tag="a" data-item-action="restore" icon="undo" @click="restoreFolderAction(folder)" say="Restore"/>
+                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click="restoreFolderAction(folder)" say="Restore"/>
                     </li>
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restoreTagAction(tag, $event)" :title="restoreTitle"></i>
                     <li slot="menu-top">
-                        <translate tag="a" data-item-action="restore" icon="undo" @click="restoreTagAction(tag)" say="Restore"/>
+                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click="restoreTagAction(tag)" say="Restore"/>
                     </li>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password, $event)" :title="restoreTitle"></i>
                     <li slot="menu-top">
-                        <translate tag="a" data-item-action="restore" icon="undo" @click="restorePasswordAction(password)" say="Restore"/>
+                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click="restorePasswordAction(password)" say="Restore"/>
                     </li>
                 </password-line>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>

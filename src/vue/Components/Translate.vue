@@ -67,7 +67,7 @@
             getAriaLabel() {
                 let text = this.getText,
                     title = this.getTitle;
-                return `${text ? this.getValue:text}${title ? ` (${title})`:''}`
+                return `${text ? text:this.getValue}${title ? ` (${title})`:''}`
             }
         },
         methods : {
