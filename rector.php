@@ -15,7 +15,6 @@ return static function (RectorConfig $rectorConfig): void {
         [
             __DIR__.'/src/appinfo',
             __DIR__.'/src/lib',
-            __DIR__.'/src/lib/.overrides',
             __DIR__.'/src/templates'
         ]
     );
