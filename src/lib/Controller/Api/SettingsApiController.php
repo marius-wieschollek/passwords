@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -10,6 +14,9 @@ namespace OCA\Passwords\Controller\Api;
 use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\UserSettingsService;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -37,13 +44,12 @@ class SettingsApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function get(): JSONResponse {
         $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);
@@ -57,13 +63,12 @@ class SettingsApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function set(): JSONResponse {
         $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);
@@ -77,15 +82,14 @@ class SettingsApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param array|null $scopes
      *
      * @return JSONResponse
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function list(array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
             $this->settings->list($scopes)
@@ -93,13 +97,12 @@ class SettingsApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function reset(): JSONResponse {
         $params = $this->getParameterArray();
         if(empty($params)) return $this->createJsonResponse([]);

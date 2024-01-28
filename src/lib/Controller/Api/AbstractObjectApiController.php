@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -17,6 +21,9 @@ use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -76,14 +83,13 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $details
      *
      * @return JSONResponse
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         /** @var AbstractModel[] $models */
         $models  = $this->modelService->findAll();
@@ -100,16 +106,15 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param array  $criteria
      * @param string $details
      *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $filters = $this->processSearchCriteria($criteria);
         if(!isset($filters['trashed'])) $filters['trashed'] = false;
@@ -129,10 +134,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param string $details
      *
@@ -140,6 +141,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $model  = $this->modelService->findByUuid($id);
         $object = $this->objectHelper->getApiObject($model, $details);
@@ -148,10 +152,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string      $id
      * @param null|string $revision
      *
@@ -161,6 +161,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function delete(string $id, ?string $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         /** @var AbstractRevision $oldRevision */
@@ -185,10 +188,6 @@ abstract class AbstractObjectApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param null   $revision
      *
@@ -198,6 +197,9 @@ abstract class AbstractObjectApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function restore(string $id, $revision = null): JSONResponse {
         $model = $this->modelService->findByUuid($id);
 

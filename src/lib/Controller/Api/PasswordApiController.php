@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -27,6 +31,9 @@ use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -102,10 +109,6 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $password
      * @param string $username
      * @param string $cseKey
@@ -125,6 +128,9 @@ class PasswordApiController extends AbstractObjectApiController {
      * @throws ApiException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function create(
         string $password,
         string $username = '',
@@ -161,10 +167,6 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string      $id
      * @param string      $password
      * @param string|null $revision
@@ -187,6 +189,9 @@ class PasswordApiController extends AbstractObjectApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function update(
         string $id,
         string $password,
@@ -261,10 +266,6 @@ class PasswordApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param null   $revision
      *
@@ -274,6 +275,9 @@ class PasswordApiController extends AbstractObjectApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function restore(string $id, $revision = null): JSONResponse {
         if($revision !== null) {
             /** @var Password $model */
@@ -304,7 +308,7 @@ class PasswordApiController extends AbstractObjectApiController {
      *
      * @throws Exception
      */
-    protected function updateTags($tags, PasswordRevision $passwordRevision) {
+    protected function updateTags($tags, PasswordRevision $passwordRevision): void {
         $skip         = [];
         $tagRelations = $this->relationService->findByPassword($passwordRevision->getModel());
 

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
@@ -97,20 +101,6 @@ class DeferredActivationService {
         if($this->isServiceDisabled()) return [];
 
         return $this->getFeatures('webapp');
-    }
-
-    /**
-     * @return array|null
-     */
-    public function getUpdateInfo(): ?array {
-        if($this->isServiceDisabled()) return null;
-
-        $features = $this->fetchFeatures();
-        if(isset($features['server']['current'])) {
-            return $features['server']['current'];
-        }
-
-        return null;
     }
 
     /**

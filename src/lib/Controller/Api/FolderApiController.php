@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -21,6 +25,9 @@ use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -71,10 +78,6 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $label
      * @param string $parent
      * @param string $cseKey
@@ -87,6 +90,9 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws ApiException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function create(
         string $label = '',
         string $parent = FolderService::BASE_FOLDER_UUID,
@@ -113,10 +119,6 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param string $label
      * @param string|null $revision
@@ -133,6 +135,9 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function update(
         string $id,
         string $label,
@@ -166,10 +171,6 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string      $id
      * @param string|null $revision
      *
@@ -178,6 +179,9 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function delete(string $id, ?string $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
             throw new ApiException('Can not edit base folder', 422);
@@ -187,10 +191,6 @@ class FolderApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param null   $revision
      *
@@ -200,6 +200,9 @@ class FolderApiController extends AbstractObjectApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function restore(string $id, $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID || $revision === $this->revisionService::BASE_REVISION_UUID) {
             throw new ApiException('Can not edit base folder', 422);

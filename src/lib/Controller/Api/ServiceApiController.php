@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2023 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -25,6 +25,9 @@ use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCA\Passwords\Services\WebsitePreviewService;
 use OCA\Passwords\Services\WordsService;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -82,10 +85,6 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param int|null $strength
      * @param bool     $numbers
      * @param bool     $special
@@ -94,6 +93,9 @@ class ServiceApiController extends AbstractApiController {
      * @throws ApiException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function generatePassword(?int $strength = null, ?bool $numbers = null, ?bool $special = null): JSONResponse {
         if($strength === null) $strength = $this->userSettings->get('password.generator.strength');
         if($numbers === null) $numbers = $this->userSettings->get('password.generator.numbers');
@@ -114,15 +116,14 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $user
      * @param int    $size
      *
      * @return FileDisplayResponse
      * @throws Throwable
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getAvatar(string $user, int $size = 32): FileDisplayResponse {
         $file = $this->avatarService->getAvatar($user, $size);
 
@@ -130,15 +131,14 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $domain
      * @param int    $size
      *
      * @return FileDisplayResponse
      * @throws Throwable
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
         $file = $this->faviconService->getFavicon($domain, $size);
 
@@ -146,9 +146,6 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $domain
      * @param string $view
      * @param string $width
@@ -157,6 +154,8 @@ class ServiceApiController extends AbstractApiController {
      * @return FileDisplayResponse
      * @throws ApiException
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...'): FileDisplayResponse {
         [$minWidth, $maxWidth] = $this->validatePreviewSize($width);
         [$minHeight, $maxHeight] = $this->validatePreviewSize($height);
@@ -167,14 +166,13 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $domain
      *
      * @return JSONResponse
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function passwordChangeUrl(string $domain): JSONResponse {
         $url = $this->passwordChangeUrlService->getPasswordChangeUrl($domain);
 
@@ -185,15 +183,14 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $range
      *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getHashes(string $range): JSONResponse {
         if(strlen($range) < 5 || strlen($range) > 40) {
             throw new ApiException('Invalid range', Http::STATUS_BAD_REQUEST);
@@ -205,13 +202,12 @@ class ServiceApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function coffee(): JSONResponse {
         throw new ApiException('I’m a password manager', 418);
     }

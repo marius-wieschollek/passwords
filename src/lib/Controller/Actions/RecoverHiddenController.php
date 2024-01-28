@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -13,13 +13,12 @@ namespace OCA\Passwords\Controller\Actions;
 
 use Exception;
 use OCA\Passwords\Services\Object\FolderRevisionService;
-use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
-use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\TagRevisionService;
-use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -50,18 +49,17 @@ class RecoverHiddenController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param bool $folders
      * @param bool $tags
      * @param bool $passwords
      * @param bool $passwordsInvisibleInFolder
-     * @param bool $passwordsInvisibleInTrash
+     * @param bool $invisibleInTrash
      *
      * @return JSONResponse
      * @throws Exception
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function execute(bool $folders, bool $tags, bool $passwords, bool $passwordsInvisibleInFolder, bool $invisibleInTrash): JSONResponse {
 
         $recoveredFolders   = $folders || $invisibleInTrash ? $this->recoverFolders($folders):0;

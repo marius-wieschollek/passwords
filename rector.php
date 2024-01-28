@@ -29,7 +29,4 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
     $rectorConfig->bootstrapFiles([__DIR__.'/rector-shells.php',]);
-
-    $rectorConfig->rule(\Utils\Rector\Rector\RemovePureAnnotation::class);
-    $rectorConfig->rule(\Utils\Rector\Rector\FixReturnTypeExtension::class);
 };

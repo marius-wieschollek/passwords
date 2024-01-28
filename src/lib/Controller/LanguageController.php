@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -21,6 +21,8 @@ use OCA\Passwords\Services\LoggingService;
 use OCP\App\AppPathNotFoundException;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Http\NotFoundResponse;
 use OCP\AppFramework\Http\Response;
@@ -66,14 +68,13 @@ class LanguageController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $section
      * @param string $language
      *
      * @return Response
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getFile(string $section, string $language): Response {
         if(!in_array($section, ['apps', 'backups', 'settings', 'tutorial'])) {
             return new NotFoundResponse();

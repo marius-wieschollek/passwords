@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -20,6 +24,10 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\UserRateLimit;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -104,10 +112,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $details
      *
      * @return JSONResponse
@@ -115,6 +119,9 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function list(string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         /** @var Share[] $models */
         $models = $this->modelService->findAll();
@@ -128,10 +135,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param array  $criteria
      * @param string $details
      *
@@ -141,7 +144,10 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    public function find($criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    public function find(array $criteria = [], string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $filters = $this->processSearchCriteria($criteria);
         /** @var Share[] $models */
         $models = $this->modelService->findAll();
@@ -157,10 +163,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param string $details
      *
@@ -169,6 +171,9 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function show(string $id, string $details = AbstractObjectHelper::LEVEL_MODEL): JSONResponse {
         $model  = $this->modelService->findByUuid($id);
         $object = $this->objectHelper->getApiObject($model, $details);
@@ -177,10 +182,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string   $password
      * @param string   $receiver
      * @param string   $type
@@ -194,6 +195,9 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function create(
         string $password,
         string $receiver,
@@ -220,10 +224,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string   $id
      * @param int|null $expires
      * @param bool     $editable
@@ -234,6 +234,9 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function update(string $id, int $expires = null, bool $editable = false, bool $shareable = true): JSONResponse {
         $this->checkAccessPermissions();
 
@@ -253,10 +256,6 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      *
      * @return JSONResponse
@@ -265,6 +264,9 @@ class ShareApiController extends AbstractApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function delete(string $id): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         if($model->getUserId() !== $this->userId) {
@@ -277,18 +279,16 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @UserRateThrottle(limit=45, period=60)
-     *
      * @param string $search
      * @param int    $limit
      *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 20, period: 30)]
     public function partners(string $search = '', int $limit = 5): JSONResponse {
         $this->checkAccessPermissions();
 
@@ -306,7 +306,7 @@ class ShareApiController extends AbstractApiController {
      * @return array
      * @throws ApiException
      */
-    protected function processSearchCriteria($criteria = []): array {
+    protected function processSearchCriteria(array $criteria = []): array {
         if(isset($criteria['owner'])) {
             $criteria['userId'] = $criteria['owner'];
             unset($criteria['owner']);

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -60,7 +64,7 @@ abstract class AbstractApiController extends ApiController {
      * @return array
      * @throws ApiException
      */
-    protected function processSearchCriteria($criteria = []): array {
+    protected function processSearchCriteria(array $criteria = []): array {
         $filters = [];
         foreach($criteria as $key => $value) {
             if(!in_array($key, $this->allowedFilterFields)) {

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Link;
@@ -20,6 +24,12 @@ use OCA\Passwords\Services\Object\RegistrationService;
 use OCA\Passwords\Services\SessionService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\AnonRateLimit;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\PublicPage;
+use OCP\AppFramework\Http\Attribute\UserRateLimit;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use Throwable;
@@ -115,14 +125,14 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @UserRateThrottle(limit=4, period=60)
-     *
      * @param string|null $link
+     *
      * @return JSONResponse
+     * @throws \OCP\DB\Exception
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 4, period: 60)]
     public function request(?string $link = 'protocol'): JSONResponse {
         $this->destroyCurrentRegistration();
 
@@ -148,11 +158,10 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function await(): JSONResponse {
         $time  = 0;
         $limit = $this->getTimeLimit() * 4;
@@ -183,11 +192,11 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
+     * @throws \OCP\DB\Exception
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function reject(): JSONResponse {
         $registration = $this->getRegistrationFromSession();
         if($registration === null || $registration->getStatus() !== 1) {
@@ -203,13 +212,12 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string|null $label
      *
      * @return JSONResponse
      */
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function confirm(string $label = null): JSONResponse {
         $registration = $this->getRegistrationFromSession();
         if($registration === null || $registration->getStatus() !== 1) {
@@ -238,12 +246,6 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @PublicPage
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @UserRateThrottle(limit=3, period=60)
-     *
      * @param string      $id
      * @param array       $codes
      * @param string|null $label
@@ -251,6 +253,10 @@ class ConnectController extends Controller {
      * @return JSONResponse
      * @throws Exception
      */
+    #[PublicPage]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[AnonRateLimit(limit: 3, period: 60)]
     public function apply(string $id, array $codes, string $label = null): JSONResponse {
         try {
             /** @var Registration $registration */
@@ -287,16 +293,14 @@ class ConnectController extends Controller {
     }
 
     /**
-     * @PublicPage
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
-     * @UserRateThrottle(limit=6, period=60)
-     *
      * @param string $id
      *
      * @return JSONResponse
      */
+    #[PublicPage]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[AnonRateLimit(limit: 3, period: 60)]
     public function theme(string $id): JSONResponse {
         try {
             /** @var Registration $registration */
