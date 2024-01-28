@@ -16,15 +16,21 @@
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restoreFolderAction(folder, $event)" :title="restoreTitle"></i>
-                    <translate tag="li" data-item-action="restore" icon="undo" slot="menu-top" @click="restoreFolderAction(folder)" say="Restore"/>
+                    <li slot="menu-top">
+                        <translate tag="a" data-item-action="restore" icon="undo" @click="restoreFolderAction(folder)" say="Restore"/>
+                    </li>
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restoreTagAction(tag, $event)" :title="restoreTitle"></i>
-                    <translate tag="li" data-item-action="restore" icon="undo" slot="menu-top" @click="restoreTagAction(tag)" say="Restore"/>
+                    <li slot="menu-top">
+                        <translate tag="a" data-item-action="restore" icon="undo" @click="restoreTagAction(tag)" say="Restore"/>
+                    </li>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
                     <i class="icon fa fa-undo" slot="middle" @click="restorePasswordAction(password, $event)" :title="restoreTitle"></i>
-                    <translate tag="li" data-item-action="restore" icon="undo" slot="menu-top" @click="restorePasswordAction(password)" say="Restore"/>
+                    <li slot="menu-top">
+                        <translate tag="a" data-item-action="restore" icon="undo" @click="restorePasswordAction(password)" say="Restore"/>
+                    </li>
                 </password-line>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
                 <empty v-if="isEmpty" :text="getEmptyText"/>

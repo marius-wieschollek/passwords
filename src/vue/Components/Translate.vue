@@ -1,5 +1,5 @@
 <template>
-    <component :is="tag" @click="fireEvent($event)" :title="getTitle" :value="getValue">
+    <component :is="tag" @click="fireEvent($event)" :title="getTitle" :aria-label="getAriaLabel" :value="getValue">
         <slot name="icon" v-if="!icon"></slot>
         <icon v-if="icon" :icon="icon" :class="iconClass" />
         {{ getText }}
@@ -63,6 +63,11 @@
             getValue() {
                 if(this.localizedValue !== null) return LocalisationService.translate(this.localizedValue, this.variables);
                 return this.value;
+            },
+            getAriaLabel() {
+                let text = this.getText,
+                    title = this.getTitle;
+                return `${text ? this.getValue:text}${title ? ` (${title})`:''}`
             }
         },
         methods : {

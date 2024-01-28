@@ -5,14 +5,20 @@
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
+        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
+            <i class="fa fa-ellipsis-h">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+            </i>
             <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="edit" @click="editAction()" icon="edit">Edit</translate>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash">Delete</translate>
+                        <li>
+                            <translate tag="li" data-item-action="edit" @click.stop.prevent="editAction()" icon="edit" say="Edit"/>
+                        </li>
+                        <li>
+                            <translate tag="li" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -23,9 +29,9 @@
 </template>
 
 <script>
-    import Translate          from '@vc/Translate';
-    import TagManager         from '@js/Manager/TagManager';
-    import SearchManager      from "@js/Manager/SearchManager";
+    import Translate from '@vc/Translate';
+    import TagManager from '@js/Manager/TagManager';
+    import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
@@ -55,7 +61,7 @@
                 return LocalisationService.formatDate(this.tag.edited);
             },
             dateTitle() {
-                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDate(this.tag.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.tag.edited)});
             },
             className() {
                 let classNames = 'row tag';
@@ -114,16 +120,16 @@
 
 <style lang="scss">
 
-    #app-content {
-        .item-list {
-            .row.tag {
-                .favicon {
-                    text-align     : center;
-                    font-size      : 2.25rem;
-                    vertical-align : top;
-                }
+#app-content {
+    .item-list {
+        .row.tag {
+            .favicon {
+                text-align     : center;
+                font-size      : 2.25rem;
+                vertical-align : top;
             }
         }
     }
+}
 
 </style>

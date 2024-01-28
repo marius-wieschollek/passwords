@@ -10,15 +10,23 @@
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
+        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
+            <i class="fa fa-ellipsis-h">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+            </i>
             <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="edit" @click="renameAction()" icon="pencil" say="Rename"/>
-                        <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" say="Move"/>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
+                        <li>
+                            <translate tag="a" data-item-action="edit" @click.stop.prevent="renameAction()" icon="pencil" say="Rename"/>
+                        </li>
+                        <li>
+                            <translate tag="a" data-item-action="move" @click.stop.prevent="moveAction" icon="external-link" say="Move"/>
+                        </li>
+                        <li>
+                            <translate tag="a" data-item-action="delete" @click.stop.prevent="deleteAction()" icon="trash" say="Delete"/>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -62,7 +70,7 @@
                 return LocalisationService.formatDate(this.folder.edited);
             },
             dateTitle() {
-                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDate(this.folder.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.folder.edited)});
             },
             className() {
                 let classNames = 'row folder';

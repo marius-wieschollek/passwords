@@ -24,7 +24,7 @@
         </router-link>
         <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
-        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')" :title="t('More')">
+        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
             <i class="fa fa-ellipsis-h" :aria-label="t('More')" :title="t('More')">
                 <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
             </i>
@@ -32,47 +32,71 @@
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="details" @click="detailsAction()" say="Details">
-                            <information-variant-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="share" @click="detailsAction('share')" say="Share">
-                            <share-variant-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="edit" @click="editAction()" v-if="password.editable" say="Edit">
-                            <pencil-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="edit-new" @click="cloneAction()" v-if="password.editable" say="Edit as new">
-                            <content-copy-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="move" @click="moveAction" say="Move">
-                            <folder-move-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" say="Copy Password">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" say="Copy User">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="password.url" @click="copyAction('url')" say="Copy Url">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
+                        <li>
+                            <translate tag="a" data-item-action="details" @click.stop.prevent="detailsAction()" say="Details">
+                                <information-variant-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" data-item-action="share" @click.stop.prevent="detailsAction('share')" say="Share">
+                                <share-variant-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.editable">
+                            <translate tag="a" data-item-action="edit" @click.stop.prevent="editAction()" say="Edit">
+                                <pencil-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.editable">
+                            <translate tag="a" data-item-action="edit-new" @click.stop.prevent="cloneAction()" say="Edit as new">
+                                <content-copy-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" data-item-action="move" @click.stop.prevent="moveAction" say="Move">
+                                <folder-move-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="showCopyOptions">
+                            <translate tag="a" @click.stop.prevent="copyAction('password')" say="Copy Password">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="showCopyOptions">
+                            <translate tag="a" @click.stop.prevent="copyAction('username')" say="Copy User">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.url">
+                            <translate tag="a" @click.stop.prevent="copyAction('url')" say="Copy Url">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
                         <li v-if="password.url">
                             <translate tag="a" data-item-action="open-url" :href="password.url" target="_blank" say="Open Url">
                                 <open-in-new-icon slot="icon"/>
                             </translate>
                         </li>
-                        <translate tag="li" v-if="password.url" @click="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
-                            <lock-reset-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" @click="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
-                            <qrcode-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="isPrintEnabled" @click="printAction()" data-item-action="print" say="PasswordActionPrint">
-                            <printer-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" say="Delete">
-                            <trash-can-icon slot="icon"/>
-                        </translate>
+                        <li v-if="password.url">
+                            <translate tag="a" @click.stop.prevent="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
+                                <lock-reset-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" @click.stop.prevent="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
+                                <qrcode-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="isPrintEnabled">
+                            <translate tag="a" @click.stop.prevent="printAction()" data-item-action="print" say="PasswordActionPrint">
+                                <printer-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" data-item-action="delete" @click.stop.prevent="deleteAction()" say="Delete">
+                                <trash-can-icon slot="icon"/>
+                            </translate>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
