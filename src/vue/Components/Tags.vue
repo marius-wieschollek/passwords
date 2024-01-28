@@ -8,6 +8,7 @@
                :options="options"
                :loading="loading"
                :placeholder="t('Add Tags...')"
+               :aria-label-combobox="t('Tags')"
                v-model="model"
                v-on:option:created="createTag($event)"
     >

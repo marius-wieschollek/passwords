@@ -5,11 +5,11 @@
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
             <i class="fa fa-ellipsis-h">
-                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
             </i>
-            <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+            <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
@@ -84,8 +84,13 @@
                 TagManager.updateTag(this.tag)
                           .catch(() => { this.tag.favorite = !this.tag.favorite; });
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {

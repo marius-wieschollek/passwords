@@ -24,11 +24,11 @@
         </router-link>
         <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
-        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
             <i class="fa fa-ellipsis-h" :aria-label="t('More')" :title="t('More')">
-                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
             </i>
-            <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+            <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
@@ -332,8 +332,13 @@
             printAction() {
                 this.actions.print();
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {
