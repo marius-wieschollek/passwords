@@ -10,11 +10,11 @@
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)" :aria-label="t('More')">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
             <i class="fa fa-ellipsis-h">
-                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu($event)"></a>
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
             </i>
-            <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+            <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
@@ -93,8 +93,13 @@
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {

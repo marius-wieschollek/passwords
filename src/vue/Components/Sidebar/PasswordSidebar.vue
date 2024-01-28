@@ -102,6 +102,8 @@
     import ContentCopyIcon from '@icon/ContentCopy';
     import LockResetIcon from '@icon/LockReset';
     import LocalisationService from "@js/Services/LocalisationService";
+    import Revisions from '@vc/Sidebar/PasswordSidebar/Tabs/Revisions';
+    import Share from '@vc/Sidebar/PasswordSidebar/Tabs/Share';
 
     export default {
         components: {
@@ -115,9 +117,9 @@
             PencilIcon,
             LockResetIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
-            'share': () => import(/* webpackChunkName: "PasswordShare" */ '@vc/Sidebar/PasswordSidebar/Tabs/Share'),
+            Share,
             'notes': () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
-            'revisions': () => import(/* webpackChunkName: "PasswordRevisions" */ '@vc/Sidebar/PasswordSidebar/Tabs/Revisions'),
+            Revisions,
             Tags,
             Preview,
             PwDetails,
