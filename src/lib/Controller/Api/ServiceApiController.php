@@ -28,6 +28,7 @@ use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\CORS;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\UserRateLimit;
 use OCP\AppFramework\Http\FileDisplayResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\Files\SimpleFS\ISimpleFile;
@@ -191,6 +192,7 @@ class ServiceApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 10, period: 10)]
     public function getHashes(string $range): JSONResponse {
         if(strlen($range) < 5 || strlen($range) > 40) {
             throw new ApiException('Invalid range', Http::STATUS_BAD_REQUEST);
@@ -198,7 +200,7 @@ class ServiceApiController extends AbstractApiController {
 
         $hashes = $this->securityCheckService->getHashRange($range);
 
-        return new JSONResponse($hashes);
+        return new JSONResponse($hashes, empty($hashes) ? Http::STATUS_OK:Http::STATUS_NOT_FOUND);
     }
 
     /**
