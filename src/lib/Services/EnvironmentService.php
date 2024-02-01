@@ -508,7 +508,7 @@ class EnvironmentService {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
         } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {
-            return $this->impersonateByUid($userId, $loginName, self::LOGIN_PASSWORD);
+            return $this->impersonateByUid($userId, $uid, self::LOGIN_PASSWORD);
         }
 
         return false;
