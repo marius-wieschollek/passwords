@@ -7,9 +7,6 @@ use Rector\Core\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Config\RectorConfig;
 
-require_once ".rector/RemovePureAnnotation.php";
-require_once ".rector/FixReturnTypeExtension.php";
-
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths(
         [
