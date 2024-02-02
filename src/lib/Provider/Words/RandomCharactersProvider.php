@@ -12,6 +12,7 @@
 namespace OCA\Passwords\Provider\Words;
 
 use Exception;
+use Random\Randomizer;
 
 /**
  * Class RandomCharactersProvider
@@ -39,7 +40,7 @@ class RandomCharactersProvider extends AbstractWordsProvider {
      *
      * @param string $langCode
      */
-    public function __construct(string $langCode) {
+    public function __construct(protected Randomizer $randomizer, string $langCode) {
         $this->langCode = substr($langCode, 0, 2);
     }
 
@@ -61,7 +62,7 @@ class RandomCharactersProvider extends AbstractWordsProvider {
             $string = '';
             for($j = 0; $j < $strength; $j++) {
                 try {
-                    $pos    = random_int(0, mb_strlen($characters) - 1);
+                    $pos    = $this->randomizer->getInt(0, mb_strlen($characters) - 1);
                     $string .= mb_substr($characters, $pos, 1);
                 } catch(Exception $e) {
                     $j--;
@@ -102,7 +103,7 @@ class RandomCharactersProvider extends AbstractWordsProvider {
      */
     public function isAvailable(): bool {
         try {
-            random_int(1, 10);
+            $this->randomizer->getInt(1, 10);
 
             return extension_loaded('mbstring');
         } catch(Exception $e) {
@@ -144,9 +145,9 @@ class RandomCharactersProvider extends AbstractWordsProvider {
 
         for($i = 0; $i < $amount; $i++) {
             try {
-                $charPos       = random_int(0, mb_strlen($characters) - 1);
+                $charPos       = $this->randomizer->getInt(0, mb_strlen($characters) - 1);
                 $character     = mb_substr($characters, $charPos, 1);
-                $pos           = random_int(0, count($parts) - 1);
+                $pos           = $this->randomizer->getInt(0, count($parts) - 1);
                 $parts[ $pos ] = $character;
             } catch(Exception $e) {
                 $i--;

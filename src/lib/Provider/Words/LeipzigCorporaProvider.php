@@ -15,6 +15,7 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCP\Http\Client\IClientService;
+use Random\Randomizer;
 
 /**
  * Class LeipzigCorporaProvider
@@ -31,31 +32,14 @@ class LeipzigCorporaProvider extends AbstractWordsProvider {
     protected bool $isAvailable = false;
 
     /**
-     * @var string
-     */
-    protected string $langCode;
-
-    /**
-     * @var SpecialCharacterHelper
-     */
-    protected SpecialCharacterHelper $specialCharacters;
-
-    /**
-     * @var IClientService
-     */
-    protected IClientService $httpClientService;
-
-    /**
      * LocalWordsProvider constructor.
      *
      * @param SpecialCharacterHelper $specialCharacters
      * @param IClientService         $httpClientService
+     * @param Randomizer             $randomizer
      * @param string                 $langCode
      */
-    public function __construct(SpecialCharacterHelper $specialCharacters, IClientService $httpClientService, string $langCode) {
-        $this->langCode          = $langCode;
-        $this->specialCharacters = $specialCharacters;
-        $this->httpClientService = $httpClientService;
+    public function __construct(protected SpecialCharacterHelper $specialCharacters, protected IClientService $httpClientService, protected Randomizer $randomizer, protected string $langCode) {
     }
 
     /**
@@ -177,7 +161,7 @@ class LeipzigCorporaProvider extends AbstractWordsProvider {
 
             $matches = count($corpora);
             if($matches > 0) {
-                $selectedCorpora = random_int(0, $matches - 1);
+                $selectedCorpora = $this->randomizer->getInt(0, $matches - 1);
 
                 return $corpora[ $selectedCorpora ];
             }

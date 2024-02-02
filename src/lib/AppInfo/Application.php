@@ -112,6 +112,7 @@ use OCP\User\Events\CreateUserEvent;
 use OCP\User\Events\PasswordUpdatedEvent;
 use OCP\User\Events\UserDeletedEvent;
 use Psr\Container\ContainerInterface;
+use Random\Randomizer;
 
 /**
  * Class Application
@@ -270,6 +271,7 @@ class Application extends App implements IBootstrap {
             RandomCharactersProvider::class,
             function (ContainerInterface $c) {
                 return new RandomCharactersProvider(
+                    $c->get(Randomizer::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             }
@@ -281,6 +283,7 @@ class Application extends App implements IBootstrap {
                 return new LeipzigCorporaProvider(
                     $c->get(SpecialCharacterHelper::class),
                     $c->get(IClientService::class),
+                    $c->get(Randomizer::class),
                     $c->get(IFactory::class)->get('core')->getLanguageCode()
                 );
             }

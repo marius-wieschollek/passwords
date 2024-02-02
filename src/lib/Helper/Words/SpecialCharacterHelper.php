@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Helper\Words;
 
 use Exception;
+use Random\Randomizer;
 
 /**
  * Class SpecialCharacterHelper
@@ -47,6 +48,12 @@ class SpecialCharacterHelper {
 
     const ADD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
     const ADD_SPECIAL = ['!', '$', '%', '&', '?', '#', '='];
+
+    /**
+     * @param Randomizer $randomizer
+     */
+    public function __construct(protected Randomizer $randomizer) {
+    }
 
     /**
      * @param string $string
@@ -139,7 +146,7 @@ class SpecialCharacterHelper {
         $characters = preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY);
 
         for($i = 0; $i < $amount; $i++) {
-            $random = random_int(0, count($positions) - 1);
+            $random = $this->randomizer->getInt(0, count($positions) - 1);
             [$replacement, $position] = array_splice($positions, $random, 1)[0];
             if(!is_numeric($characters[ $position ])) {
                 $characters[ $position ] = $replacement;
@@ -161,7 +168,7 @@ class SpecialCharacterHelper {
         $length = count($additions) - 1;
 
         for($i = 0; $i < $total; $i++) {
-            $position  = random_int(0, $length);
+            $position  = $this->randomizer->getInt(0, $length);
             $character = $additions[ $position ];
 
             if($i % 2 === 0) {

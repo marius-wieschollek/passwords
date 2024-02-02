@@ -6,6 +6,8 @@ use Rector\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Config\RectorConfig;
 
+require_once '.rector/RemoveRandomizerClassInstantiation.php';
+
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths(
         [
@@ -24,4 +26,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
     $rectorConfig->bootstrapFiles([__DIR__.'/rector-shells.php',]);
+    $rectorConfig->removeUnusedImports(true);
+
+    $rectorConfig->rule(\Utils\Rector\Rector\PhpRandomizerFallback::class);
 };
