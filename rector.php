@@ -6,7 +6,7 @@ use Rector\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Config\RectorConfig;
 
-require_once '.rector/RemoveRandomizerClassInstantiation.php';
+require_once '.rector/PhpRandomizerFallback.php';
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths(
