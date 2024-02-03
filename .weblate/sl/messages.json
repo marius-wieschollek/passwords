@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Aplikacija Gesla redno preverja, ali je geslo za šifriranje še vedno varno. Vaša trenutna geselska fraza ni varna in jo je treba takoj spremeniti."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Preverjanje, ali strežnik izvaja opravila v ozadju s programom cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Naloge v ozadju se izvajajo s programom cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Preverjanje, ali strežnik izvaja naloge v ozadju z isto različico PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Naloge v ozadju se izvajajo z isto različico PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
