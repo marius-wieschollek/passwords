@@ -13,6 +13,7 @@ namespace Utils\Rector\Rector;
 
 use PhpParser\Node;
 use PhpParser\Node\Name;
+use PhpParser\Node\Stmt\Use_;
 use PhpParser\Node\Stmt\UseUse;
 use Rector\Rector\AbstractRector;
 use Symplify\RuleDocGenerator\ValueObject\CodeSample\CodeSample;
@@ -35,8 +36,9 @@ class PhpRandomizerFallback extends AbstractRector {
     public function refactor(Node $node): ?Node {
         $name = $node->name->getParts();
         if($name == ['Random', 'Randomizer']) {
-            return new UseUse(new Name('OCA\Passwords\Helper\Random\Randomizer', $node->getAttributes()));
+            return new UseUse(new Name('OCA\Passwords\Helper\Random\Randomizer'), null, Use_::TYPE_NORMAL, $node->getAttributes());
         }
+
         return null;
     }
 
