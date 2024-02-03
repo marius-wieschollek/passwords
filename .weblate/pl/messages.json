@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Aplikacja Hasła regularnie sprawdza, czy hasło szyfrowania jest nadal bezpieczne. Obecne hasło nie jest bezpieczne i należy je natychmiast zmienić."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Sprawdzenie, czy serwer uruchamia zadania w tle za pomocą crona.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Zadania w tle są wykonywane za pomocą crona.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Sprawdzanie, czy serwer uruchamia zadania w tle z tą samą wersją PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Zadania w tle są wykonywane z tą samą wersją PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
