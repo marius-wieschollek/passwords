@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Η εφαρμογή κωδικών πρόσβασης ελέγχει τακτικά αν η φράση πρόσβασης κρυπτογράφησης εξακολουθεί να είναι ασφαλής. Η τρέχουσα συνθηματική φράση σας δεν είναι ασφαλής και πρέπει να αλλάξει αμέσως."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Έλεγχος αν ο διακομιστής εκτελεί εργασίες παρασκηνίου με cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Οι εργασίες στο παρασκήνιο εκτελούνται με το cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Έλεγχος αν ο διακομιστής εκτελεί εργασίες παρασκηνίου με την ίδια έκδοση PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Οι εργασίες στο παρασκήνιο εκτελούνται με την ίδια έκδοση PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
