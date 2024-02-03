@@ -46,9 +46,18 @@ class PasswordChangeUrlService {
             '/^.+\.booking\.com$/'                                    => 'https://account.booking.com/mysettings/security'
         ];
 
+    /**
+     * @param IClientService $httpClientService
+     * @param LoggingService $logger
+     */
     public function __construct(protected IClientService $httpClientService, protected LoggingService $logger) {
     }
 
+    /**
+     * @param string $domain
+     *
+     * @return string|null
+     */
     public function getPasswordChangeUrl(string $domain): ?string {
         $domain = $this->validateDomain($domain);
 
@@ -74,6 +83,11 @@ class PasswordChangeUrlService {
         return null;
     }
 
+    /**
+     * @param string $domain
+     *
+     * @return string|null
+     */
     protected function getPasswordChangeUrlFromInternal(string $domain): ?string {
         foreach($this->passwordChangeUrls as $pattern => $url) {
             if(preg_match($pattern, $domain) === 1) {
@@ -84,6 +98,11 @@ class PasswordChangeUrlService {
         return null;
     }
 
+    /**
+     * @param string $domain
+     *
+     * @return bool
+     */
     protected function isWellKnownReliable(string $domain): bool {
         $wellKnownUrl = "https://$domain/.well-known/resource-that-should-not-exist-whose-status-code-should-not-be-200";
         $request      = $this->createCurlRequest($wellKnownUrl, [CURLOPT_NOBODY => true, CURLOPT_HEADER => true]);
@@ -93,6 +112,11 @@ class PasswordChangeUrlService {
         return $statusCode !== 200;
     }
 
+    /**
+     * @param string $domain
+     *
+     * @return string|null
+     */
     protected function getUrlFromWellKnown(string $domain): ?string {
         $wellKnownUrl = "https://$domain/.well-known/change-password";
         $request      = $this->createCurlRequest($wellKnownUrl);
@@ -125,6 +149,12 @@ class PasswordChangeUrlService {
         return null;
     }
 
+    /**
+     * @param string $url
+     * @param string $baseUrl
+     *
+     * @return string|null
+     */
     protected function validateUrl(string $url, string $baseUrl): ?string {
         if(str_starts_with($url, 'http://') || str_starts_with($url, 'https://')) {
             return $url;
@@ -166,6 +196,12 @@ class PasswordChangeUrlService {
         return null;
     }
 
+    /**
+     * @param string     $url
+     * @param array|null $opts
+     *
+     * @return \CurlHandle
+     */
     protected function createCurlRequest(string $url, array $opts = null): \CurlHandle {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_URL, $url);
