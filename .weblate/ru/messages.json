@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Приложение \"Пароли\" регулярно проверяет, надежна ли ваша кодовая фраза. Ваша текущая кодовая фраза небезопасна и должна быть немедленно изменена."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Проверка того, выполняет ли сервер фоновые задания с помощью cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Фоновые задания выполняются с помощью cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Проверка, запускает ли сервер фоновые задания с той же версией PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Фоновые задания выполняются с одной и той же версией PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
