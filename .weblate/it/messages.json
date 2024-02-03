@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "L'app Password controlla regolarmente se la passphrase di crittografia è ancora sicura. La passphrase attuale non è sicura e deve essere cambiata immediatamente."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Verifica se il server esegue lavori in background con cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "I lavori in background vengono eseguiti con cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Verifica se il server esegue attività in background con la stessa versione di PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "I lavori in background vengono eseguiti con la stessa versione di PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
