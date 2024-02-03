@@ -1,4 +1,11 @@
 ## [Unreleased]
+## 2024.2.0 - Feature release
+### Added
+- Improved accessibility features
+### Fixed
+- Impersonate not working with LDAP users
+
+
 ## 2024.1.1 - Bugfix release
 ### Fixed
 - PassLink not working
