@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "A jelszavak alkalmazás rendszeresen ellenőrzi, hogy a titkosítási jelszó még mindig biztonságos-e. A jelenlegi jelszava nem biztonságos, és azonnal meg kell változtatni."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Annak ellenőrzése, hogy a kiszolgáló háttérmunkákat futtat-e a cron segítségével.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "A háttérmunkák a cron segítségével kerülnek végrehajtásra.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Annak ellenőrzése, hogy a kiszolgáló ugyanazzal a PHP-verzióval futtatja-e a háttérfeladatokat.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "A háttérmunkák ugyanazzal a PHP-verzióval kerülnek végrehajtásra.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
