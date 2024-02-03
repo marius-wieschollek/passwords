@@ -3320,5 +3320,21 @@
     "frontend-CSEPassphraseInsecureText": {
         "message": "The passwords app regularly checks if your encryption passphrase is still secure. Your current passphrase is not secure and needs to be changed immediately.",
         "description": "Text of the alert dialog when the users passphrase has been checked by the app and was found to be insecure/breached"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Checking if the server runs background jobs with cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Background jobs are executed with cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Checking if the server runs background tasks with the same PHP version.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Background jobs are executed with the same PHP version.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }

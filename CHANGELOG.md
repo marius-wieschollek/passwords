@@ -2,6 +2,7 @@
 ## 2024.2.0 - Feature release
 ### Added
 - Improved accessibility features
+- Setup checks for common issues
 ### Fixed
 - Impersonate not working with LDAP users
 

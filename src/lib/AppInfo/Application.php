@@ -94,6 +94,8 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
+use OCA\Passwords\SetupChecks\BackgroundJobsExecutedWithCronSetupCheck;
+use OCA\Passwords\SetupChecks\BackgroundJobsPhpVersionSetupCheck;
 use OCA\Passwords\UserMigration\PasswordsMigrator;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
@@ -169,6 +171,11 @@ class Application extends App implements IBootstrap {
          * Providers
          */
         $this->registerProviders($context);
+
+        /**
+         * Setup Checks
+         */
+        $this->registerSetupChecks($context);
     }
 
     /**
@@ -369,5 +376,15 @@ class Application extends App implements IBootstrap {
                 };
             }
         );
+    }
+
+    /**
+     * @param IRegistrationContext $context
+     *
+     * @return void
+     */
+    protected function registerSetupChecks(IRegistrationContext $context): void {
+        $context->registerSetupCheck(BackgroundJobsPhpVersionSetupCheck::class);
+        $context->registerSetupCheck(BackgroundJobsExecutedWithCronSetupCheck::class);
     }
 }

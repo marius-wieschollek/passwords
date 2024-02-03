@@ -777,5 +777,9 @@
     "backend-SettingsEncryptionSection": "Encryption Settings",
     "backend-SettingsEncryptionSSEv3": "Allow third party encryption",
     "backend-PassDbDlFailedTitle": "Could not update breached passwords database",
-    "backend-PassDbDlFailedText": "The breached passwords database update failed three times. Please consult the manual and check your logs. Reason: %1$s"
+    "backend-PassDbDlFailedText": "The breached passwords database update failed three times. Please consult the manual and check your logs. Reason: %1$s",
+    "backend-CronSetupCheckName": "Checking if the server runs background jobs with cron.",
+    "backend-CronSetupCheckSuccess": "Background jobs are executed with cron.",
+    "backend-CronPhpVersionSetupCheckName": "Checking if the server runs background tasks with the same PHP version.",
+    "backend-CronPhpVersionSetupCheckSuccess": "Background jobs are executed with the same PHP version."
 }
