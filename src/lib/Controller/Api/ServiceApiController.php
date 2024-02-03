@@ -174,6 +174,7 @@ class ServiceApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 2, period: 8)]
     public function passwordChangeUrl(string $domain): JSONResponse {
         $url = $this->passwordChangeUrlService->getPasswordChangeUrl($domain);
 
