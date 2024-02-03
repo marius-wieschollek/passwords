@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "A aplicação de palavras-passe verifica regularmente se a sua frase-passe de encriptação ainda é segura. A sua frase-chave atual não é segura e tem de ser alterada imediatamente."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Verificar se o servidor executa tarefas em segundo plano com o cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Os trabalhos em segundo plano são executados com o cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Verificar se o servidor executa tarefas em segundo plano com a mesma versão do PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Os trabalhos em segundo plano são executados com a mesma versão do PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
