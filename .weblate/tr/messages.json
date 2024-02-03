@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Parolalar uygulaması, şifreleme parolanızın hala güvenli olup olmadığını düzenli olarak kontrol eder. Mevcut parolanız güvenli değil ve derhal değiştirilmesi gerekiyor."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Sunucunun cron ile arka plan işleri çalıştırıp çalıştırmadığını kontrol etme.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Arka plan işleri cron ile yürütülür.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Sunucunun arka plan görevlerini aynı PHP sürümüyle çalıştırıp çalıştırmadığını kontrol eder.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Arka plan işleri aynı PHP sürümü ile yürütülür.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
