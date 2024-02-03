@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Aplikasi kata sandi secara teratur memeriksa apakah kata sandi enkripsi Anda masih aman. Kata sandi Anda saat ini tidak aman dan perlu segera diubah."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Memeriksa apakah server menjalankan pekerjaan latar belakang dengan cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Pekerjaan latar belakang dieksekusi dengan cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Memeriksa apakah server menjalankan tugas latar belakang dengan versi PHP yang sama.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Pekerjaan latar belakang dijalankan dengan versi PHP yang sama.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
