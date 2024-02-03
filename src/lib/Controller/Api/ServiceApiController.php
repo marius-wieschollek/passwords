@@ -200,7 +200,7 @@ class ServiceApiController extends AbstractApiController {
 
         $hashes = $this->securityCheckService->getHashRange($range);
 
-        return new JSONResponse($hashes, empty($hashes) ? Http::STATUS_OK:Http::STATUS_NOT_FOUND);
+        return new JSONResponse($hashes, empty($hashes) ? Http::STATUS_NOT_FOUND:Http::STATUS_OK);
     }
 
     /**
