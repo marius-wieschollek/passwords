@@ -3306,5 +3306,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Die Passwörter-App überprüft regelmäßig, ob dein Verschlüsselungspasswort noch sicher ist. Dein aktuelles Passwort ist unsicher und muss sofort geändert werden."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Prüfen, ob der Server Hintergrundjobs mit Cron ausführt.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Hintergrundaufträge werden mit cron ausgeführt.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Prüfen, ob der Server Hintergrundaufgaben mit der gleichen PHP-Version ausführt.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Hintergrundaufträge werden mit der gleichen PHP-Version ausgeführt.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
