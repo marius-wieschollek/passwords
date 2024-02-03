@@ -19,7 +19,7 @@
 - Encryption passphrase security check
 ### Changed
 - Breached passwords database updated to v10
-- "pwned-list:process" command now uses new HIPB format
+- "pwned-list:process" command now uses the new HIPB format
 - Authentication page now automatically focuses password field
 ### Removed
 - Support for Nextcloud 25, 26, 27
