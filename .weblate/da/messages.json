@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Adgangskode-appen tjekker regelmæssigt, om din krypteringspassphrase stadig er sikker. Din nuværende passphrase er ikke sikker og skal ændres med det samme."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Kontrollerer, om serveren kører baggrundsjobs med cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Baggrundsjob udføres med cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrollerer, om serveren kører baggrundsopgaver med den samme PHP-version.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Baggrundsjob udføres med den samme PHP-version.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
