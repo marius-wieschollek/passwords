@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "De wachtwoorden-app controleert regelmatig of je coderingswachtzin nog steeds veilig is. Je huidige wachtwoordzin is niet veilig en moet onmiddellijk worden gewijzigd."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Controleren of de server achtergrondtaken uitvoert met cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Achtergrondtaken worden uitgevoerd met cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Controleren of de server achtergrondtaken uitvoert met dezelfde PHP-versie.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Achtergrondtaken worden uitgevoerd met dezelfde PHP-versie.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
