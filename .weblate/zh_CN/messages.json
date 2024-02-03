@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "密码应用程序会定期检查您的加密口令是否仍然安全。您当前的密码不安全，需要立即更改。"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "检查服务器是否使用 cron 运行后台作业。",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "后台作业通过 cron 执行。",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "检查服务器是否以相同的 PHP 版本运行后台任务。",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "后台任务使用相同的 PHP 版本执行。",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
