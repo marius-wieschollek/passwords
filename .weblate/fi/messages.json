@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Salasanat-sovellus tarkistaa säännöllisesti, onko salauslausekkeesi edelleen turvallinen. Nykyinen salasanasi ei ole turvallinen, ja se on vaihdettava välittömästi."
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Tarkistetaan, että palvelin suorittaa taustatehtäviä samalla PHP-versiolla.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Tarkistetaan, ajaako palvelin taustatöitä cronin avulla.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Taustatyöt suoritetaan cronilla.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Taustatyöt suoritetaan samalla PHP-versiolla.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
