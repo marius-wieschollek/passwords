@@ -21,7 +21,7 @@ class BackgroundJobsExecutedWithCronSetupCheck implements ISetupCheck {
 
     public function __construct(
         protected IL10N                $l10n,
-        protected IURLGenerator $urlGenerator,
+        protected IURLGenerator        $urlGenerator,
         protected ConfigurationService $config
     ) {
     }
@@ -44,7 +44,7 @@ class BackgroundJobsExecutedWithCronSetupCheck implements ISetupCheck {
      * @inheritDoc
      */
     public function run(): SetupResult {
-        $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
+        $cronType = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
 
         if($cronType !== 'cron') {
             $text = $this->l10n->t('Using %s to execute background jobs may cause delays. We recommend using Cron.', [ucfirst($cronType)]);

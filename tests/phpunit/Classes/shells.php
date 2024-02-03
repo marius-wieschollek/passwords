@@ -73,6 +73,11 @@ namespace OCP {
         public function getAbsoluteURL(string $url): string {return '';}
         public function imagePath(string $appName, string $file): string {return '';}
         public function linkToRouteAbsolute(string $routeName, array $arguments = []): string {return '';}
+        public function linkToDocs(string $key): string {return '';}
+    }
+
+    interface IL10N{
+        public function t(string $text, $parameters = []): string;
     }
 }
 
@@ -244,5 +249,18 @@ namespace Psr\Log {
         public function info($message, array $context = array()) {}
         public function debug($message, array $context = array()) {}
         public function log($level, $message, array $context = array()) {}
+    }
+}
+namespace OCP\SetupCheck {
+    interface ISetupCheck {
+        public function getCategory(): string;
+        public function getName(): string;
+        public function run(): SetupResult;
+    }
+
+    class SetupResult {
+        public static function warning(?string $description = null, ?string $linkToDoc = null): self {return new self();}
+        public static function error(?string $description = null, ?string $linkToDoc = null): self {return new self();}
+        public static function success(?string $description = null, ?string $linkToDoc = null): self {return new self();}
     }
 }

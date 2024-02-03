@@ -189,7 +189,7 @@ class BestIconProvider extends AbstractFaviconProvider {
      */
     protected function stringToColor(string $string): string {
         $max    = count($this->colors);
-        $number = array_sum(str_split(dechex(crc32($string)), 2));
+        $number = array_sum(str_split(hexdec(crc32($string)), 2));
 
         while($number >= $max) {
             $number -= $max;

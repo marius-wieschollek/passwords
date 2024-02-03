@@ -125,7 +125,7 @@ class BesticonProviderTest extends TestCase {
     public function testCallsWithCustomApiUrl() {
         $serviceUrl    = 'https://www.example.com/icon';
         $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
@@ -148,7 +148,7 @@ class BesticonProviderTest extends TestCase {
     public function testCallsWithSharedApi() {
         $serviceUrl    = $this->besticonHelper::BESTICON_SHARED_INSTANCE;
         $domain        = 'www.example.com';
-        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
         $file          = new SimpleFile();
@@ -319,8 +319,8 @@ class BesticonProviderTest extends TestCase {
     public function testAttemptsHttpRequestIfHttpsFails() {
         $serviceUrl     = 'https://www.example.com/icon';
         $domain         = 'www.example.com';
-        $apiRequestUrl1 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=https://{$domain}&formats=png,ico,gif,jpg";
-        $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=2ecc71&url=http://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl1 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=https://{$domain}&formats=png,ico,gif,jpg";
+        $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=http://{$domain}&formats=png,ico,gif,jpg";
         $faviconData    = 'data';
         $fileName       = 'bi_www.example.com.png';
         $file           = new SimpleFile();
