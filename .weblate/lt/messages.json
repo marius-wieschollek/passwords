@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Slaptažodžių programa reguliariai tikrina, ar šifravimo slaptažodis vis dar saugus. Dabartinė slaptažodžio frazė nėra saugi ir ją reikia nedelsiant pakeisti."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Tikrinama, ar serveris vykdo fonines užduotis su \"cron\".",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Foninės užduotys vykdomos naudojant cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Tikrinama, ar serveryje vykdomos foninės užduotys su ta pačia PHP versija.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Fono užduotys vykdomos naudojant tą pačią PHP versiją.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
