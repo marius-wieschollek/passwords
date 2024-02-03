@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Aplikácia Heslá pravidelne kontroluje, či je vaša šifrovacia fráza stále bezpečná. Vaša aktuálna prístupová fráza nie je bezpečná a je potrebné ju okamžite zmeniť."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Kontrola, či server spúšťa úlohy na pozadí pomocou cronu.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Úlohy na pozadí sa vykonávajú pomocou cronu.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrola, či server spúšťa úlohy na pozadí s rovnakou verziou PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Úlohy na pozadí sa vykonávajú s rovnakou verziou PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
