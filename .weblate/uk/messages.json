@@ -3308,5 +3308,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Додаток Паролі регулярно перевіряє, чи ваша парольна фраза шифрування все ще безпечна. Ваша поточна парольна фраза не є безпечною і потребує негайної зміни."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Перевірка, чи виконує сервер фонові завдання за допомогою cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Фонові завдання виконуються за допомогою cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Перевірка, чи на сервері виконуються фонові завдання з тією ж версією PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Фонові завдання виконуються з тією ж версією PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
