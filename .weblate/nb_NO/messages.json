@@ -3315,5 +3315,21 @@
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Passord-appen sjekker regelmessig om passordfrasen din fortsatt er sikker. Den nåværende passordfrasen er ikke sikker og må endres umiddelbart."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Sjekker om serveren kjører bakgrunnsjobber med cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Bakgrunnsjobber utføres med cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrollerer om serveren kjører bakgrunnsoppgaver med samme PHP-versjon.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Bakgrunnsjobber utføres med samme PHP-versjon.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }
