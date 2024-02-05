@@ -502,9 +502,9 @@ class EnvironmentService {
                 $tokenId = $this->session->get('app_password');
 
                 return $this->getUserInfoFromToken($tokenId, $loginName, $userId, $loginCredentials->password ?? null);
-            } else if(isset($loginCredentials->password) && !empty($loginCredentials->password)) {
+            } else if(!empty($loginCredentials->password)) {
                 return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
-            } else if(empty($loginCredentials->password)) {
+            } else {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
         } else if($this->session->get('oldUserId') === $uid && OC_User::isAdminUser($uid)) {
