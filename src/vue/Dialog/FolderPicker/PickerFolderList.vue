@@ -116,7 +116,7 @@
     text-align  : center;
     display     : block;
     line-height : 3rem;
-    color       : var(--color-text-lighter);
+    color       : var(--color-text-maxcontrast);
     min-height  : calc(360px - 10vh);
 }
 </style>

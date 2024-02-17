@@ -58,7 +58,7 @@
     pre {
         font-family      : var(--pw-mono-font-face);
         background-color : var(--color-background-dark);
-        color            : var(--color-text-lighter);
+        color            : var(--color-text-maxcontrast);
         padding          : 1rem;
         border-radius    : var(--border-radius);
         white-space      : pre-wrap;
@@ -115,7 +115,7 @@
             font-family      : var(--pw-mono-font-face);
             padding          : .25rem .5rem;
             background-color : var(--color-background-dark);
-            color            : var(--color-text-lighter);
+            color            : var(--color-text-maxcontrast);
             border-radius    : var(--border-radius);
         }
     }

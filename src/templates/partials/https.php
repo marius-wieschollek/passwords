@@ -1,11 +1,12 @@
 <?php
-/**
- * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+/*
+ * @copyright 2024 Passwords App
  *
- * @var $l \OCP\IL10N
- * @var $_ array
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
  */
 
 use OCA\Passwords\AppInfo\Application;

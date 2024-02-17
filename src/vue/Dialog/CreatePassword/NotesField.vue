@@ -193,7 +193,7 @@
 
                             &.fa {
                                 background-image : none;
-                                color            : var(--color-text-lighter);
+                                color            : var(--color-text-maxcontrast);
 
                                 &:hover {
                                     padding-bottom : 2px;
@@ -252,10 +252,10 @@
                 &.toastui-editor-md-code-block,
                 &.toastui-editor-md-code-block-line-background {
                     background-color : var(--color-background-dark);
-                    color            : var(--color-text-lighter);
+                    color            : var(--color-text-maxcontrast);
 
                     &.toastui-editor-md-marked-text {
-                        color : var(--color-text-lighter);
+                        color : var(--color-text-maxcontrast);
                     }
                 }
             }
@@ -283,7 +283,7 @@
                 code {
                     font-family      : var(--pw-mono-font-face);
                     background-color : var(--color-background-dark);
-                    color            : var(--color-text-lighter);
+                    color            : var(--color-text-maxcontrast);
                     border-radius    : var(--border-radius);
                     word-wrap        : break-word;
                 }

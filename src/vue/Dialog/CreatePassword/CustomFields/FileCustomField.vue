@@ -60,7 +60,7 @@
         input {
             cursor                     : pointer;
             margin-right               : 0;
-            color                      : var(--color-text-lighter);
+            color                      : var(--color-text-maxcontrast);
         }
     }
 

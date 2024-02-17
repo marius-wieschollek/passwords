@@ -213,7 +213,7 @@
             display    : block;
             font-style : normal;
             font-size  : 1rem;
-            color      : var(--color-text-lighter);
+            color      : var(--color-text-maxcontrast);
             text-align : right;
             cursor     : text;
             word-wrap  : break-word;
@@ -256,7 +256,7 @@
         margin-top  : 20px;
         font-size   : 1rem;
         font-weight : bold;
-        color       : var(--color-text-light);
+        color       : var(--color-main-text);
     }
 
     .password-details-options {

@@ -151,7 +151,7 @@
                 span {
                     display    : block;
                     font-style : normal;
-                    color      : var(--color-text-lighter);
+                    color      : var(--color-text-maxcontrast);
                     text-align : right;
                     cursor     : text;
                     word-wrap  : break-word;

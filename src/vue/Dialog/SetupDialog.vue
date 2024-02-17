@@ -293,7 +293,7 @@
 
             &.skip {
                 background-color : rgba(0, 0, 0, 0);
-                color            : var(--color-text-lighter);
+                color            : var(--color-text-maxcontrast);
                 right            : auto;
                 left             : .5rem;
             }

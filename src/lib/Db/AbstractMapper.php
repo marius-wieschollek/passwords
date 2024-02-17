@@ -163,7 +163,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    public function findOneByField(string $field, string $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
+    public function findOneByField(string $field, string $value, int $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
         return $this->findOneByFields([$field, $value, $type, $operator]);
     }
 
@@ -176,7 +176,7 @@ abstract class AbstractMapper extends QBMapper {
      * @return EntityInterface[]
      * @throws Exception
      */
-    public function findAllByField(string $field, $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
+    public function findAllByField(string $field, mixed $value, int $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
         return $this->findAllByFields([$field, $value, $type, $operator]);
     }
 
@@ -297,9 +297,9 @@ abstract class AbstractMapper extends QBMapper {
         foreach($fields as $field) {
             if(!isset($field[0])) throw new Exception('Field name is required but not set');
             $name  = $field[0];
-            $value = isset($field[1]) ? $field[1]:'';
-            $type  = isset($field[2]) ? $field[2]:IQueryBuilder::PARAM_STR;
-            $op    = isset($field[3]) ? $field[3]:'eq';
+            $value = $field[1] ?? '';
+            $type  = $field[2] ?? IQueryBuilder::PARAM_STR;
+            $op    = $field[3] ?? 'eq';
 
             if(in_array($name, static::FORBIDDEN_FIELDS)) throw new Exception('Forbidden field in database query');
             if(!in_array($op, self::ALLOWED_OPERATORS)) throw new Exception('Forbidden operator in database query');

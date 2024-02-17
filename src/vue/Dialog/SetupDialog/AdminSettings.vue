@@ -213,7 +213,7 @@
 
         .admin-notes {
             font-size : .8rem;
-            color     : var(--color-text-lighter);
+            color     : var(--color-text-maxcontrast);
             position  : absolute;
             left      : 1rem;
             bottom    : 1rem;
