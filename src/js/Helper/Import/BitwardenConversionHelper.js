@@ -202,13 +202,17 @@ export default class BitwardenConversionHelper {
 
             for(let i = 0; i < uris.length; i++) {
                 if(!uris[i].hasOwnProperty('uri')) continue;
+                let url = uris[i].uri;
+                if(url.indexOf('://') === -1) {
+                    url = `https://${url}`;
+                }
 
                 if(i === 0) {
-                    password.url = uris[i].uri;
+                    password.url = url;
                     continue;
                 }
 
-                CustomFieldsHelper.createCustomField(password, errors, uris[i].uri, label, 'url');
+                CustomFieldsHelper.createCustomField(password, errors, url, label, 'url');
             }
         }
         if(item.login.hasOwnProperty('totp') && item.login.totp !== null) {
