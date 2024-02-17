@@ -196,19 +196,19 @@ export default class StarChaser {
                 }
             );
         }
-        if(this._game.powerups.length < this._game.status.maxPowerUps && Math.random() < 0.003) {
+        if(this._game.powerups.length < this._game.status.maxPowerUps && Math.random() < 0.005) {
             let rand = Math.random(),
                 type = 'star';
 
-            if(rand > 0.35 && rand <= 0.55) {
+            if(rand > 0.35 && rand <= 0.5) {
                 type = 'lightning';
-            } else if(rand > 0.15 && rand <= 0.35) {
+            } else if(rand > 0.2 && rand <= 0.35) {
                 type = 'shield';
-            } else if(rand > 0.05 && rand <= 0.15) {
+            } else if(rand > 0.06 && rand <= 0.2) {
                 type = 'clock';
-            } else if(rand > 0.01 && rand <= 0.05) {
+            } else if(rand > 0.02 && rand <= 0.06) {
                 type = 'bomb';
-            } else if(rand <= 0.01) {
+            } else if(rand <= 0.02) {
                 type = 'life';
             }
 

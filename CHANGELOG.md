@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Fixed
+- Handling of custom data fields in the editor
+- First run wizard style
+- Tags missing on edit as new
+
 ## 2024.2.0 - Feature release
 ### Added
 - Improved accessibility features
