@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "后台任务使用相同的 PHP 版本执行。",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "欢迎使用 Nextcloud 的密码应用程序，它是安全、有序地保存密码的理想场所。",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "让我们开始吧",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }
