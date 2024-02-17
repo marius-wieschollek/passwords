@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Arka plan işleri aynı PHP sürümü ile yürütülür.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Şifrelerinizi güvende ve düzenli tutmak için mükemmel bir yer olan Nextcloud için Şifre Uygulamasına hoş geldiniz.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Hadi başlayalım",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

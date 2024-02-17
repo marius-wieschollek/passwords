@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Pekerjaan latar belakang dijalankan dengan versi PHP yang sama.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText2": {
+        "message": "Mari kita mulai",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText1": {
+        "message": "Selamat datang di Aplikasi Kata Sandi untuk Nextcloud, tempat yang tepat untuk menyimpan kata sandi Anda dengan aman dan teratur.",
+        "description": "Initial welcome text on the first page of the first run wizard"
     }
 }

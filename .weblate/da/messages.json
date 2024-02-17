@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Baggrundsjob udføres med den samme PHP-version.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Velkommen til Password-appen til Nextcloud, det perfekte sted at holde dine adgangskoder sikre og organiserede.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Lad os få dig i gang",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }
