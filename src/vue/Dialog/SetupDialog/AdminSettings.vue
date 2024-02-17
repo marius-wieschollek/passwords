@@ -4,7 +4,7 @@
             <translate say="Passwords can be customized in a lot of different ways."/>
             <translate say="As administrator you might want to take a look at these common settings."/>
         </p>
-        <div class="apdmin-settings-container">
+        <div class="admin-settings-container">
             <translate tag="label" say="Check password security with"/>
             <select v-model="settings.security.value">
                 <translate tag="option"
@@ -167,10 +167,10 @@
             }
         }
 
-        .apdmin-settings-container {
+        .admin-settings-container {
             display               : grid;
             grid-template-columns : 2fr 1fr;
-            width                 : 60%;
+            width                 : 75%;
             margin                : 1rem auto;
             grid-row-gap          : .5rem;
 

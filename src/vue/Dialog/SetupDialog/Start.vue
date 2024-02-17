@@ -1,22 +1,31 @@
 <template>
-    <li :style="getStyle"></li>
+    <li>
+        <div>
+            {{ t('StartText1') }}
+            <div class="spacer"></div>
+            {{ t("StartText2") }}
+        </div>
+    </li>
 </template>
 
 <script>
-    export default {
-        computed: {
-            getStyle() {
-                return {
-                    'background-image': 'url(' + OC.appswebroots.firstrunwizard + '/img/intro.png)'
-                }
-            }
-        }
-    };
+    export default {};
 </script>
 
 <style lang="scss">
-    #setup-slide-start {
-        background     : no-repeat center;
-        background-size: cover;
+#setup-slide-start > div {
+    height          : 100%;
+    display         : flex;
+    justify-content : center;
+    align-items     : center;
+    font-size       : 2rem;
+    line-height     : initial;
+    text-align      : center;
+    padding         : 2rem 10%;
+    flex-direction  : column;
+
+    .spacer {
+        min-height : 2rem;
     }
+}
 </style>

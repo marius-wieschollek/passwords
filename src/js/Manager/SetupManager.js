@@ -1,9 +1,9 @@
 import Vue from 'vue';
 import SettingsService from '@js/Services/SettingsService';
-import DeferredActivationService from '@js/Services/DeferredActivationService';
 import UtilityService from "@js/Services/UtilityService";
 import LoggingService from "@js/Services/LoggingService";
 import LocalisationService from "@js/Services/LocalisationService";
+import DeferredActivationService from "@js/Services/DeferredActivationService";
 
 class SetupManager {
 
@@ -57,7 +57,7 @@ class SetupManager {
             let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
                 SetupWizard = Vue.extend(SetupDialog.default);
 
-            new SetupWizard({propsData: {enableSlides, closable, redirect, _close:resolve}}).$mount(UtilityService.popupContainer());
+            new SetupWizard({propsData: {enableSlides, closable, redirect, _close: resolve}}).$mount(UtilityService.popupContainer());
         });
     }
 }

@@ -2897,9 +2897,6 @@
     "tutorial-000753": {
         "message": "Customize your experience"
     },
-    "tutorial-000754": {
-        "message": "Bring order to your passwords"
-    },
     "tutorial-000755": {
         "message": "Get connected"
     },
@@ -3007,6 +3004,14 @@
     },
     "tutorial-000790": {
         "message": "Your password needs at least 12 characters and the confirmation password must be the same"
+    },
+    "tutorial-StartText1": {
+        "message": "Welcome to the  Password App for Nextcloud, the perfect place to keep your passwords safe and organized.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Let's get you started",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     },
     "backend-UserMigrationDescription": {
         "message": "Decrypted passwords database with passwords, folders, tags and settings. (Does not include passwords shared with you. Does not work with E2E enabled)",

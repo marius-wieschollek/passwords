@@ -2,10 +2,10 @@
     <div class="background" id="passwords-setup" @click="closeAction($event)">
         <div id="setup-container">
             <div class="setup-header">
-                <div class="logo"></div>
                 <translate tag="h1" :say="current.title"/>
             </div>
             <ul class="setup-content" :style="getStyle">
+                <start id="setup-slide-start" class="slide" v-if="hasSlide('start')"/>
                 <encryption id="setup-slide-encryption"
                             class="slide"
                             :is-current="currentId === 1"
@@ -18,7 +18,6 @@
                           class="slide"
                           v-on:redirect="openSection($event, false)"
                           v-if="hasSlide('get-help')"/>
-                <keep-order id="setup-slide-keep-order" class="slide" v-if="hasSlide('keep-order')"/>
                 <integrations id="setup-slide-integrations"
                               class="slide"
                               v-on:redirect="openSection"
@@ -45,7 +44,6 @@
     import Translate from '@vue/Components/Translate';
     import Start from '@vue/Dialog/SetupDialog/Start';
     import GetHelp from '@vue/Dialog/SetupDialog/GetHelp';
-    import KeepOrder from '@vue/Dialog/SetupDialog/KeepOrder';
     import SettingsService from '@js/Services/SettingsService';
     import Encryption from '@vue/Dialog/SetupDialog/Encryption';
     import Integrations from '@vue/Dialog/SetupDialog/Integrations';
@@ -53,13 +51,13 @@
     import AdminSettings from '@vue/Dialog/SetupDialog/AdminSettings';
 
     export default {
-        components: {UserSettings, Integrations, Encryption, Translate, KeepOrder, GetHelp, Start, AdminSettings},
+        components: {UserSettings, Integrations, Encryption, Translate, GetHelp, Start, AdminSettings},
 
         props: {
             enableSlides: {
                 type: Array,
                 default() {
-                    let slides = ['user-settings', 'get-help', 'integrations'];
+                    let slides = ['start', 'user-settings', 'get-help', 'integrations'];
                     if(!API.hasEncryption) {
                         slides.splice(1, 0, 'encryption');
                     }
@@ -102,10 +100,6 @@
                 {
                     title: 'Customize your experience',
                     id   : 'user-settings'
-                },
-                {
-                    title: 'Bring order to your passwords',
-                    id   : 'keep-order'
                 },
                 {
                     title: 'Find help when you need it',
@@ -236,12 +230,6 @@
         text-align      : center;
         width           : 100%;
 
-        .logo {
-            height          : 120px;
-            background      : var(--pw-image-logo) no-repeat center;
-            background-size : contain;
-        }
-
         h1 {
             font-size   : 3rem;
             line-height : 3rem;
@@ -254,18 +242,9 @@
             display         : flex;
             flex-direction  : column;
             justify-content : center;
-
-            .logo {
-                width : 120px;
-            }
         }
 
         @media (max-width : $width-extra-small) {
-            .logo {
-                height : 60px;
-                width  : 60px;
-            }
-
             h1 {
                 font-size   : 2rem;
                 line-height : 2rem;
@@ -282,7 +261,7 @@
 
         .slide {
             width      : 900px;
-            min-height : 450px;
+            min-height : 500px;
         }
 
         @media (max-width : 900px) {
