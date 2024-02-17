@@ -3321,11 +3321,11 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText2": {
-        "message": "So fangen Sie an",
+        "message": "Beginnen Sie mit der Einrichtung",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText1": {
-        "message": "Willkommen bei der Passwort-App für Nextcloud, dem perfekten Ort, um Ihre Passwörter sicher und organisiert aufzubewahren.",
+        "message": "Willkommen bei der Passwörter-App für Nextcloud, dem perfekten Ort, um Ihre Passwörter sicher und organisiert aufzubewahren.",
         "description": "Initial welcome text on the first page of the first run wizard"
     }
 }
