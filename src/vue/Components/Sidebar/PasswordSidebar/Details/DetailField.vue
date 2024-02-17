@@ -7,7 +7,7 @@
               :class="getSecretClass"
               v-if="type === 'secret'"
               @click="copyValue">{{ getSecretValue }}</span>
-        <span v-if="type === 'text'" @click="copyValue">{{ value }}</span>
+        <span v-if="type === 'text' || type === 'data'" @click="copyValue">{{ value }}</span>
     </div>
 </template>
 

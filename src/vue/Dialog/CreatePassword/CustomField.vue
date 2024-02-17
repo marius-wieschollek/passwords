@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter">
+    <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter" v-if="isVisible">
         <div class="area-label">
             <icon :icon="icon" @mouseenter="hover = true" @mouseleave="hover = false" @dragstart="dragStart" draggable="true"/>
             <input class="field-label" :placeholder="t('Name')" :maxlength="maxlength" v-model="model.label" required/>
@@ -39,6 +39,7 @@
     import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
     import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
     import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
@@ -71,6 +72,10 @@
             },
             drag() {
                 return this.dragService.isCurrent(this.model);
+            },
+            isVisible() {
+                return this.model.type !== 'data' ||
+                       SettingsService.get('client.ui.custom.fields.show.hidden', false);
             }
         },
         methods : {
