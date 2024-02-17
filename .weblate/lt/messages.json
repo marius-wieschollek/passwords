@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Fono užduotys vykdomos naudojant tą pačią PHP versiją.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText2": {
+        "message": "Pradėkime",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText1": {
+        "message": "Sveiki atvykę į \"Nextcloud\" skirtą slaptažodžių programėlę - puikią vietą slaptažodžiams saugoti ir tvarkyti.",
+        "description": "Initial welcome text on the first page of the first run wizard"
     }
 }
