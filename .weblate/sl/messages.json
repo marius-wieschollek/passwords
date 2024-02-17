@@ -3321,5 +3321,13 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Naloge v ozadju se izvajajo z isto različico PHP.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText2": {
+        "message": "Začnimo",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText1": {
+        "message": "Dobrodošli v aplikaciji Gesla za Nextcloud, ki je odličen prostor za varno in urejeno shranjevanje gesel.",
+        "description": "Initial welcome text on the first page of the first run wizard"
     }
 }
