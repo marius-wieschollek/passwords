@@ -3006,7 +3006,7 @@
         "message": "Your password needs at least 12 characters and the confirmation password must be the same"
     },
     "tutorial-StartText1": {
-        "message": "Welcome to the  Password App for Nextcloud, the perfect place to keep your passwords safe and organized.",
+        "message": "Welcome to the Passwords App for Nextcloud, the perfect place to keep your passwords safe and organized.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
