@@ -257,7 +257,7 @@
         }
     },
     "backups-000062": {
-        "message": "Експортувати нічого"
+        "message": "Відсутні дані для експорту"
     },
     "backups-000063": {
         "message": "Дані для експорту відсутні"
@@ -643,10 +643,10 @@
         "message": "Зламаний"
     },
     "frontend-000170": {
-        "message": "Поділитися"
+        "message": "Спільне"
     },
     "frontend-000171": {
-        "message": "Зміни"
+        "message": "Версії"
     },
     "frontend-000172": {
         "message": "QR-код"
@@ -910,7 +910,7 @@
         "message": "Останні оновлення"
     },
     "frontend-000254": {
-        "message": "$COUNT$ зміни",
+        "message": "$COUNT$ версія(й)",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -947,7 +947,7 @@
         "message": "Розширене шифрування (SSE V2)"
     },
     "frontend-000263": {
-        "message": "Шифрування за допомогою лібсодію"
+        "message": "Зашифровано за допомогою Libsodium"
     },
     "frontend-000264": {
         "message": "Більше"
@@ -1033,7 +1033,7 @@
         "message": "Перемикання дозволів надання у спільний доступ"
     },
     "frontend-000284": {
-        "message": "Припиніть ділитися"
+        "message": "Скасувати спільний доступ"
     },
     "frontend-000285": {
         "message": "Дата"
@@ -1255,7 +1255,7 @@
         "message": "збіг"
     },
     "frontend-000344": {
-        "message": "сірники"
+        "message": "збігів"
     },
     "frontend-000345": {
         "message": "Створено"
@@ -2704,7 +2704,7 @@
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
-        "message": "Показати вкладку \"Поділитися",
+        "message": "Показати вкладку \"Спільне\"",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "settings-SettingsRecoverItems": {
@@ -3038,7 +3038,7 @@
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "Нічого копіювати, $ELEMENT$ порожній",
+        "message": "Відсутні дані для копіювання, $ELEMENT$ порожній",
         "description": "Message when the user wants to copy an empty attribute",
         "placeholders": {
             "element": {
