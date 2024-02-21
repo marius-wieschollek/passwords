@@ -391,7 +391,7 @@
         "message": "Аналіз міток"
     },
     "backups-000105": {
-        "message": "Аналіз папок"
+        "message": "Аналіз каталогів"
     },
     "backups-000106": {
         "message": "Зчитування міток"
@@ -403,7 +403,7 @@
         "message": "Каталоги для читання"
     },
     "backups-000109": {
-        "message": "Імпорт папок"
+        "message": "Імпорт каталогів"
     },
     "backups-000110": {
         "message": "Зчитування паролів"
@@ -2321,7 +2321,7 @@
         "message": "Головна сторінка"
     },
     "frontend-000621": {
-        "message": "\"$FOLDER$\" не містить папок",
+        "message": "\"$FOLDER$\" не містить каталогів",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -2748,7 +2748,7 @@
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsFoldersTitle": {
-        "message": "Відновлення всіх прихованих папок",
+        "message": "Відновлення всіх прихованих каталогів",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
@@ -2959,7 +2959,7 @@
         "description": "Label of the print password action"
     },
     "frontend-FolderPickerLoading": {
-        "message": "Завантаження папок",
+        "message": "Завантаження каталогів",
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
