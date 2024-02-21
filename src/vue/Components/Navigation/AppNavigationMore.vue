@@ -54,7 +54,10 @@
         <NcButton
                 :aria-label="t('Donate')"
                 :title="t('Donate')"
-                :href="donateURL">
+                :href="donateURL"
+                target="_blank"
+                rel="noreferrer noopener"
+        >
             <template #icon>
                 <cash-multiple :size="20"/>
             </template>
@@ -84,7 +87,7 @@
 <style lang="scss">
 .app-navigation-entry-more {
     display : flex;
-    padding : .25rem .5rem;
+    padding : .5rem .5rem;
     gap     : .25rem;
 
     .button-vue--vue-secondary {

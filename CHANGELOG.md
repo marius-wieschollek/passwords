@@ -1,8 +1,11 @@
 ## [Unreleased]
+### Changed
+- "More" menu layout
 ### Fixed
 - Handling of custom data fields in the editor
-- First run wizard style
 - Tags missing on edit as new
+- Invalid URLs from Bitwarden import
+- First run wizard style
 
 ## 2024.2.0 - Feature release
 ### Added

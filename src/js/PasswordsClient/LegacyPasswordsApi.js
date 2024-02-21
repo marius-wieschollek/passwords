@@ -21,7 +21,15 @@ export default class LegacyPasswordsApi extends EnhancedApi {
         this._queueCheckActive = false;
         this._maxRequests = 2;
         this._maxSlowRequests = 1;
-        window.pwAppActive = true;
+
+        if(APP_NIGHTLY) {
+            this._debug();
+            window.debugPwRequestLimit = (limit = 32) => {
+                this._maxRequests = limit;
+                this._maxSlowRequests = limit;
+                this._checkRequestQueue();
+            };
+        }
     }
 
     initialize(client, config = {}) {
@@ -68,12 +76,11 @@ export default class LegacyPasswordsApi extends EnhancedApi {
      * @private
      */
     _checkRequestQueue() {
+        this._debug();
         if(this._queueCheckActive || this._requests.length === 0) {
-            window.pwAppActive = this._requests.length === 0;
             return;
         }
         this._queueCheckActive = true;
-        window.pwAppActive = true;
         this._requests.sort(function(a, b) {
             if(a.priority === b.priority) return 0;
             return a.priority < b.priority ? -1:1;
@@ -117,6 +124,12 @@ export default class LegacyPasswordsApi extends EnhancedApi {
 
             this._config.events.emit('api.request.error', e);
             throw e;
+        }
+    }
+
+    _debug() {
+        if(APP_NIGHTLY) {
+            document.body.dataset.debugLoading = this._requests.length > 0;
         }
     }
 }
