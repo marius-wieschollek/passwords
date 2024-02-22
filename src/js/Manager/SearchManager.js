@@ -286,6 +286,17 @@ class SearchManager {
                 this.search(this.status.query + e.key);
             }
         });
+        document.addEventListener('keydown', (e) => {
+            if(!this._status.available) return;
+            if(!e.ctrlKey || e.key !== 'f' || (e.altKey || e.shiftKey || e.metaKey || e.repeat)) return;
+            if(['INPUT', 'TEXTAREA'].indexOf(e.target.nodeName) !== -1) return;
+            if(['true', '1', 'on'].indexOf(e.target.contentEditable) !== -1) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+            emit('passwords:search:live', this._status);
+            this.search(this.status.query);
+        });
     }
 }
 
