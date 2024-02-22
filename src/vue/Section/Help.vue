@@ -44,7 +44,7 @@
     import Gallery from '@vc/Gallery';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import HandbookRenderer from '@js/Helper/HandbookRenderer';
+    import HandbookRenderer from '@js/Handbook/HandbookRenderer';
     import Application from "@js/Init/Application";
     import {emit} from "@nextcloud/event-bus";
     import CommunityResources from "@vc/Handbook/CommunityResources.vue";

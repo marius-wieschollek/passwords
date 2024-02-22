@@ -67,7 +67,6 @@ describe('Handbook', () => {
 
     it('Capture Folder Section', () => {
         cy.login();
-        cy.wait(500);
         cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('div[data-folder-title="Work"]').screenshotWithPreview('folder-single');
         cy.get('div[data-folder-title="Work"]').click();
@@ -212,7 +211,7 @@ describe('Handbook', () => {
         cy.get('div[data-folder-title="Work"]').click();
         cy.get('div[data-folder-title="Hosting"] > div.more').click();
         cy.get('div[data-folder-title="Hosting"] > div.more [data-item-action="delete"]').click();
-        cy.contains('Folder deleted');
+        cy.contains('Folder deleted', {timeout: 30000});
         cy.visit('https://localhost/apps/passwords/#/trash', {retryOnNetworkFailure: true});
         cy.get('#app-content.section-trash');
         cy.get('div[data-folder-title="Hosting"]', {timeout: 10000});

@@ -1,3 +1,13 @@
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
+
 import {marked, Renderer as MarkedRenderer} from 'marked';
 import VueRouter from '@js/Helper/router';
 import SettingsService from '@js/Services/SettingsService';
@@ -5,6 +15,7 @@ import mermaid from "mermaid";
 import DOMPurify from 'dompurify';
 import LocalisationService from "@js/Services/LocalisationService";
 import LoggingService from "@js/Services/LoggingService";
+import HandbookIcons from "@js/Handbook/HandbookIcons";
 
 /**
  *
@@ -13,6 +24,7 @@ class HandbookRenderer {
 
     constructor() {
         this.handbookUrl = SettingsService.get('server.handbook.url');
+        this.icons = new HandbookIcons();
         this.pages = [];
     }
 
@@ -79,6 +91,7 @@ class HandbookRenderer {
             unsanitizedSource = await this.renderMermaid(unsanitizedSource, mermaidCharts);
         }
         let source = DOMPurify.sanitize(unsanitizedSource);
+        source = this.icons.replace(source);
 
         return {source, media, navigation};
     }
@@ -140,12 +153,17 @@ class HandbookRenderer {
         href = url.href;
         if(url.hash.length && url.href.indexOf(`${documentUrl}#`) !== -1) {
             [href, title, target] = HandbookRenderer._processAnchorLink(url.hash, title);
+        } else if(url.href.substring(0, 20) === 'web+passlink://goto/') {
+            href = '#/' + url.href.substring(20);
+            title = LocalisationService.translate('Go to {href}', {href: url.href.substring(20)});
+            target = '_self';
         } else if(url.href.indexOf(this.handbookUrl) !== -1) {
             let mime = url.href.substr(url.href.lastIndexOf('.') + 1);
             if(['png', 'jpg', 'jpeg', 'gif', 'mp4', 'm4v', 'ogg', 'webm', 'txt', 'html', 'json', 'js'].indexOf(mime) === -1) {
                 [href, title, target] = this._processInternalLink(url, title);
             }
         }
+
         let matches = content.match(/data-image-id="(\d+)"/);
         if(matches && matches.length > 1) {
             let element = media[matches[1] * 1 - 1];

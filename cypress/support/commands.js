@@ -84,6 +84,7 @@ Cypress.Commands.add('waitForRequestsToFinish', () => {
           window.debugPwRequestLimit();
       });
 
+    cy.wait(2500);
     cy.get('body[data-debug-loading="false"]', {timeout: 60000});
 });
 

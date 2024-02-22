@@ -42,6 +42,7 @@
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
     "devDependencies": {
+        "@mdi/js": "^7.4.47",
         "@nextcloud/auth": "^2.2.1",
         "@nextcloud/dialogs": "^5.0.3",
         "@nextcloud/event-bus": "^3.1.0",
