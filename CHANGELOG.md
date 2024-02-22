@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Changed
 - "More" menu layout
+- Added Ctrl + F to search again
 ### Fixed
 - Handling of custom data fields in the editor
 - Tags missing on edit as new

@@ -8,7 +8,7 @@
  * created by Marius David Wieschollek.
  */
 
-import {mdiAccountPlus, mdiArchive, mdiClipboardOutline, mdiContentSave, mdiDelete, mdiPuzzle, mdiSync} from "@mdi/js";
+import {mdiAccountPlus, mdiArchive, mdiClipboardOutline, mdiContentSave, mdiDelete, mdiDotsHorizontal, mdiPuzzle, mdiSync} from "@mdi/js";
 
 export default class HandbookIcons {
 
@@ -20,7 +20,8 @@ export default class HandbookIcons {
             "📋": mdiClipboardOutline,
             "💾": mdiContentSave,
             "🗑": mdiDelete,
-            "👤": mdiAccountPlus
+            "👤": mdiAccountPlus,
+            "⋯": mdiDotsHorizontal
         };
     }
 
