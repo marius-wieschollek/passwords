@@ -81,7 +81,8 @@
 
         created() {
             this.refreshView();
-            document.addEventListener('scroll', this.setActiveSection);
+            document.getElementById('app-content-vue')
+                    .addEventListener('scroll', this.setActiveSection);
             if(!this.isAuthorized) {
                 emit('toggle-navigation', {open: false});
                 document.body.classList.remove('pw-auth-visible');
@@ -90,7 +91,8 @@
         },
 
         beforeDestroy() {
-            document.removeEventListener('scroll', this.setActiveSection);
+            document.getElementById('app-content-vue')
+                    .removeEventListener('scroll', this.setActiveSection);
         },
 
         updated() {
@@ -145,7 +147,7 @@
                 }
             },
             setActiveSection() {
-                let pos     = window.scrollY,
+                let pos     = document.getElementById('app-content-vue').scrollTop,
                     section = '';
 
                 for(let i = 0; i < this.navigation.length; i++) {
