@@ -1524,7 +1524,7 @@
         "message": "Ouvrez l’application pour changer les mots de passe."
     },
     "backend-000476": {
-        "message": "$STR_1$ à partagé un mot de passe avec vous.",
+        "message": "$STR_1$ a partagé un mot de passe avec vous.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1532,7 +1532,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ à partagé $STR_1$ mot(s) de passe avec vous.",
+        "message": "$STR_1$ a partagé $STR_1$ mot(s) de passe avec vous.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
