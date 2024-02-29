@@ -7,6 +7,7 @@
 - Tags missing on edit as new
 - Invalid URLs from Bitwarden import
 - First run wizard style
+- Sharing E2EE passwords fails
 
 ## 2024.2.0 - Feature release
 ### Added

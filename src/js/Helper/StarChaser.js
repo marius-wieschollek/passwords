@@ -200,9 +200,9 @@ export default class StarChaser {
             let rand = Math.random(),
                 type = 'star';
 
-            if(rand > 0.35 && rand <= 0.5) {
+            if(rand > 0.33 && rand <= 0.5) {
                 type = 'lightning';
-            } else if(rand > 0.2 && rand <= 0.35) {
+            } else if(rand > 0.2 && rand <= 0.33) {
                 type = 'shield';
             } else if(rand > 0.06 && rand <= 0.2) {
                 type = 'clock';
@@ -210,6 +210,15 @@ export default class StarChaser {
                 type = 'bomb';
             } else if(rand <= 0.02) {
                 type = 'life';
+            }
+
+            if(type !== 'star') {
+                for(let powerup of this._game.powerups) {
+                    if(powerup.type === type && !powerup.hit) {
+                        type = 'star';
+                        break;
+                    }
+                }
             }
 
             this._game.powerups.push(
