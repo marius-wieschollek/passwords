@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2024.3.0 - Feature release
 ### Changed
 - "More" menu layout
 - Added Ctrl + F to search again
