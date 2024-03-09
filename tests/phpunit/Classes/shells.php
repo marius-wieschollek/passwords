@@ -183,21 +183,37 @@ namespace OC\Migration {
 
 namespace OCP\Files\SimpleFS {
     interface ISimpleFile {}
+
+    interface ISimpleFolder {}
 }
 
 namespace OC\Files\SimpleFS {
+
+    use OCP\Files\NotFoundException;
+    use OCP\Files\NotPermittedException;
     use OCP\Files\SimpleFS\ISimpleFile;
+    use OCP\Files\SimpleFS\ISimpleFolder;
     class SimpleFile implements ISimpleFile{
-        public function getName() {}
-        public function getSize() {}
-        public function getETag() {}
-        public function getMTime() {}
-        public function getContent() {}
-        public function putContent($data) {}
-        public function delete() {}
-        public function getMimeType() {}
+        public function getName(): string {return '';}
+        public function getSize(): int {return 0;}
+        public function getETag(): string {return '';}
+        public function getMTime(): int {return 0;}
+        public function getContent(): string {return '';}
+        public function putContent($data): void {}
+        public function delete(): void {}
+        public function getMimeType(): string {return '';}
         public function read() {}
         public function write() {}
+    }
+    class SimpleFolder implements ISimpleFolder {
+        public function getDirectoryListing(): array {return [];}
+        public function fileExists(string $name): bool {return false;}
+        public function getFile(string $name): ISimpleFile {return new SimpleFile(); }
+        public function newFile(string $name, $content = null): ISimpleFile {return new SimpleFile(); }
+        public function delete(): void {}
+        public function getName(): string {return '';}
+        public function getFolder(string $name): ISimpleFolder  {return new SimpleFolder(); }
+        public function newFolder(string $path): ISimpleFolder {return new SimpleFolder(); }
     }
 }
 
