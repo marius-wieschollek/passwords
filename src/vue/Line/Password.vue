@@ -33,42 +33,42 @@
                     <ul>
                         <slot name="menu-top"/>
                         <li>
-                            <translate tag="a" href="#" data-item-action="details" @click.stop.prevent="detailsAction()" say="Details">
+                            <translate tag="a" href="#" data-item-action="details" @click.prevent="detailsAction()" say="Details">
                                 <information-variant-icon slot="icon"/>
                             </translate>
                         </li>
                         <li>
-                            <translate tag="a" href="#" data-item-action="share" @click.stop.prevent="detailsAction('share')" say="Share">
+                            <translate tag="a" href="#" data-item-action="share" @click.prevent="detailsAction('share')" say="Share">
                                 <share-variant-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="password.editable">
-                            <translate tag="a" href="#" data-item-action="edit" @click.stop.prevent="editAction()" say="Edit">
+                            <translate tag="a" href="#" data-item-action="edit" @click.prevent="editAction()" say="Edit">
                                 <pencil-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="password.editable">
-                            <translate tag="a" href="#" data-item-action="edit-new" @click.stop.prevent="cloneAction()" say="Edit as new">
+                            <translate tag="a" href="#" data-item-action="edit-new" @click.prevent="cloneAction()" say="Edit as new">
                                 <content-copy-icon slot="icon"/>
                             </translate>
                         </li>
                         <li>
-                            <translate tag="a" href="#" data-item-action="move" @click.stop.prevent="moveAction" say="Move">
+                            <translate tag="a" href="#" data-item-action="move" @click.prevent="moveAction" say="Move">
                                 <folder-move-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="showCopyOptions">
-                            <translate tag="a" href="#" @click.stop.prevent="copyAction('password')" say="Copy Password">
+                            <translate tag="a" href="#" @click.prevent="copyAction('password')" say="Copy Password">
                                 <clipboard-arrow-left-outline-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="showCopyOptions">
-                            <translate tag="a" href="#" @click.stop.prevent="copyAction('username')" say="Copy User">
+                            <translate tag="a" href="#" @click.prevent="copyAction('username')" say="Copy User">
                                 <clipboard-arrow-left-outline-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="password.url">
-                            <translate tag="a" href="#" @click.stop.prevent="copyAction('url')" say="Copy Url">
+                            <translate tag="a" href="#" @click.prevent="copyAction('url')" say="Copy Url">
                                 <clipboard-arrow-left-outline-icon slot="icon"/>
                             </translate>
                         </li>
@@ -78,22 +78,22 @@
                             </translate>
                         </li>
                         <li v-if="password.url">
-                            <translate tag="a" href="#" @click.stop.prevent="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
+                            <translate tag="a" href="#" @click.prevent="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
                                 <lock-reset-icon slot="icon"/>
                             </translate>
                         </li>
                         <li>
-                            <translate tag="a" href="#" @click.stop.prevent="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
+                            <translate tag="a" href="#" @click.prevent="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
                                 <qrcode-icon slot="icon"/>
                             </translate>
                         </li>
                         <li v-if="isPrintEnabled">
-                            <translate tag="a" href="#" @click.stop.prevent="printAction()" data-item-action="print" say="PasswordActionPrint">
+                            <translate tag="a" href="#" @click.prevent="printAction()" data-item-action="print" say="PasswordActionPrint">
                                 <printer-icon slot="icon"/>
                             </translate>
                         </li>
                         <li>
-                            <translate tag="a" href="#" data-item-action="delete" @click.stop.prevent="deleteAction()" say="Delete">
+                            <translate tag="a" href="#" data-item-action="delete" @click.prevent="deleteAction()" say="Delete">
                                 <trash-can-icon slot="icon"/>
                             </translate>
                         </li>
