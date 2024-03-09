@@ -49,6 +49,12 @@ class ResizeFaviconHelper {
      * @throws NotPermittedException
      */
     public function resizeFavicon(ISimpleFile $favicon, int $size): ?ISimpleFile {
+        $fileName = $favicon->getName().'.'.$size.'.png';
+
+        if($this->fileCacheService->hasFile($fileName)) {
+            return $this->fileCacheService->getFile($fileName);
+        }
+
         $faviconData = $favicon->getContent();
         $imageHelper = $this->helperService->getImageHelper();
         if($imageHelper->supportsImage($faviconData)) {
@@ -59,6 +65,6 @@ class ResizeFaviconHelper {
             $imageHelper->destroyImage($image);
         }
 
-        return $this->fileCacheService->putFile($favicon->getName(), $faviconData);
+        return $this->fileCacheService->putFile($fileName, $faviconData);
     }
 }

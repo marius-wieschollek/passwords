@@ -101,7 +101,7 @@ abstract class AbstractFaviconProvider implements FaviconProviderInterface {
      * @throws Throwable
      */
     public function getDefaultFavicon(string $domain, int $size = 256): ?ISimpleFile {
-        $fileName = $this->getFaviconFilename($domain.'_default');
+        $fileName = $this->getFaviconFilename("{$domain}_default", $size);
         if($this->fileCacheService->hasFile($fileName)) {
             return $this->fileCacheService->getFile($fileName);
         }
