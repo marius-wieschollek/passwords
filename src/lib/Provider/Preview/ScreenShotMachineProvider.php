@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2023 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -11,6 +11,7 @@
 
 namespace OCA\Passwords\Provider\Preview;
 
+use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
 
@@ -22,6 +23,12 @@ use OCA\Passwords\Services\WebsitePreviewService;
 class ScreenShotMachineProvider extends AbstractPreviewProvider {
 
     const SSM_API_CONFIG_KEY = 'service/preview/ssm/key';
+
+    const SSM_ERROR_IMAGES
+        = [
+            'de2b58db567799c57939e7c037ac5c7177b7d000' => 'Invalid URL',
+            '15fbaa9ab38c202d88f6d154cd3406323cfffb0b' => 'Invalid key'
+        ];
 
     /**
      * @var string
@@ -42,5 +49,23 @@ class ScreenShotMachineProvider extends AbstractPreviewProvider {
         }
 
         return "https://api.screenshotmachine.com/?key={$apiKey}&dimension=".self::WIDTH_MOBILE."xfull&device=phone&format=jpg&url={$domain}&delay=600";
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return string
+     * @throws ApiException
+     */
+    protected function executeHttpRequest(string $url): string {
+        $result = parent::executeHttpRequest($url);
+
+        $sha1 = sha1($result);
+        if(isset(self::SSM_ERROR_IMAGES[ $sha1 ])) {
+            $this->loggingService->error('Screenshotmachine: '.self::SSM_ERROR_IMAGES[ $sha1 ], ['requestUrl' => $url]);
+            throw new ApiException('API Request Failed', 502);
+        }
+
+        return $result;
     }
 }
