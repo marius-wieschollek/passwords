@@ -11,6 +11,8 @@ use Gmagick;
 use GmagickException;
 use Imagick;
 use ImagickException;
+use OCA\Passwords\Exception\Image\ImageConversionException;
+use OCA\Passwords\Exception\Image\ImageExportException;
 use Throwable;
 
 /**
@@ -114,33 +116,39 @@ class ImagickHelper extends AbstractImageHelper {
      * @param Imagick|Gmagick $image
      *
      * @return string
-     * @throws GmagickException
+     * @throws ImageExportException
      */
-    public function exportJpeg($image) {
+    public function exportJpeg($image): string {
+        try {
+            $image->setImageFormat('jpg');
+            $image->setImageCompression($image::COMPRESSION_JPEG);
+            if($image instanceof Imagick) $image->setImageCompressionQuality(90);
+            $image->setCompressionQuality(100);
+            $image->stripImage();
 
-        $image->setImageFormat('jpg');
-        $image->setImageCompression($image::COMPRESSION_JPEG);
-        if($image instanceof Imagick) $image->setImageCompressionQuality(90);
-        $image->setCompressionQuality(100);
-        $image->stripImage();
-
-        return $image->getImageBlob();
+            return $image->getImageBlob();
+        } catch(\Throwable $e) {
+            throw new ImageExportException('jpg', $e);
+        }
     }
 
     /**
      * @param Imagick|Gmagick $image
      *
      * @return string
-     * @throws GmagickException
+     * @throws ImageExportException
      */
-    public function exportPng($image) {
+    public function exportPng($image): string {
+        try {
+            $image->setImageFormat('png');
+            if($image instanceof Imagick) $image->setImageCompressionQuality(9);
+            $image->setCompressionQuality(100);
+            $image->stripImage();
 
-        $image->setImageFormat('png');
-        if($image instanceof Imagick) $image->setImageCompressionQuality(9);
-        $image->setCompressionQuality(100);
-        $image->stripImage();
-
-        return $image->getImageBlob();
+            return $image->getImageBlob();
+        } catch(\Throwable $e) {
+            throw new ImageExportException('png', $e);
+        }
     }
 
     /**
@@ -166,9 +174,9 @@ class ImagickHelper extends AbstractImageHelper {
      * @param string $data
      *
      * @return string
-     * @throws Throwable
+     * @throws ImageConversionException
      */
-    public function convertIcoToPng($data) {
+    public function convertIcoToPng($data): string {
         $tempFile = $this->config->getTempDir().uniqid().'.ico';
 
         try {
@@ -183,7 +191,7 @@ class ImagickHelper extends AbstractImageHelper {
             unlink($tempFile);
         } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
-            throw $e;
+            throw new ImageConversionException($e);
         }
 
         return $content;
@@ -192,7 +200,7 @@ class ImagickHelper extends AbstractImageHelper {
     /**
      * @return Imagick|Gmagick
      */
-    protected function getNewImageObject() {
+    protected function getNewImageObject(): Imagick|Gmagick {
         return class_exists(Imagick::class) ? new Imagick():new Gmagick();
     }
 

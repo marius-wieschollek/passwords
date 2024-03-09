@@ -53,6 +53,7 @@ RUN mkdir -p /var/www/.cache/puppeteer
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.cache/puppeteer
 
 COPY files/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+COPY files/php.ini /usr/local/etc/php/conf.d/zz-passwords.conf
 COPY files/pool.conf /usr/local/etc/php-fpm.d/zz-passwords.conf
 
 COPY files/create-user.sh /usr/local/bin/pw-create-user

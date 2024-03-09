@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Image;
 
+use OCA\Passwords\Exception\Image\ImageExportException;
 use OCP\Image;
 use Throwable;
 
@@ -114,9 +115,9 @@ class GdHelper extends AbstractImageHelper {
      * @param Image $image
      *
      * @return string
-     * @throws Throwable
+     * @throws ImageExportException
      */
-    public function exportJpeg($image) {
+    public function exportJpeg($image): string {
         $tempFile = $this->config->getTempDir().uniqid();
 
         try {
@@ -125,7 +126,7 @@ class GdHelper extends AbstractImageHelper {
             unlink($tempFile);
         } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
-            throw $e;
+            throw new ImageExportException('jpg', $e);
         }
 
         return $content;
@@ -135,9 +136,9 @@ class GdHelper extends AbstractImageHelper {
      * @param Image $image
      *
      * @return string
-     * @throws Throwable
+     * @throws ImageExportException
      */
-    public function exportPng($image) {
+    public function exportPng($image): string {
         $tempFile = $this->config->getTempDir().uniqid();
 
         try {
@@ -146,7 +147,7 @@ class GdHelper extends AbstractImageHelper {
             unlink($tempFile);
         } catch(Throwable $e) {
             if(is_file($tempFile)) @unlink($tempFile);
-            throw $e;
+            throw new ImageExportException('png', $e);
         }
 
         return $content;
@@ -168,7 +169,7 @@ class GdHelper extends AbstractImageHelper {
      *
      * @return string
      */
-    public function convertIcoToPng($data) {
+    public function convertIcoToPng($data): string {
         return $data;
     }
 

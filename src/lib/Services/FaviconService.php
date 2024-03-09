@@ -57,13 +57,18 @@ class FaviconService {
         if(!$this->validationService->isValidDomain($domain)) {
             return $this->handleInvalidDomain($domain, $size);
         }
+
         try {
             $favicon = $this->faviconProvider->getFavicon($domain);
-
-            return $this->resizeHelper->resizeFavicon($favicon, $size);
+            if($favicon) {
+                $file = $this->resizeHelper->resizeFavicon($favicon, $size);
+                if($file) return $file;
+            }
         } catch(Throwable $e) {
             return $this->handleFaviconFetchFailure($domain, $size, $e);
         }
+
+        return $this->getDefaultFavicon($domain, $size);
     }
 
     /**
@@ -71,15 +76,20 @@ class FaviconService {
      * @param int    $size
      *
      * @return ISimpleFile
+     * @throws ApiException
      */
-    protected function handleInvalidDomain(string $domain, int $size): ISimpleFile {
+    protected function
+    handleInvalidDomain(
+        string $domain,
+        int    $size
+    ): ISimpleFile {
         if($domain !== 'default') {
             $domain = mb_substr($domain, 0, 1);
         } else {
             $domain = ' ';
         }
 
-        return $this->faviconProvider->getDefaultFavicon($domain, $size);
+        return $this->getDefaultFavicon($domain, $size);
     }
 
     /**
@@ -93,12 +103,7 @@ class FaviconService {
     protected function handleFaviconFetchFailure(string $domain, int $size, Throwable $e): ISimpleFile {
         $this->logger->logException($e);
 
-        try {
-            return $this->faviconProvider->getDefaultFavicon($domain, $size);
-        } catch(Throwable $ex) {
-            $this->logger->logException($ex);
-            throw new ApiException('Internal Favicon API Error', 502, $ex);
-        }
+        return $this->getDefaultFavicon($domain, $size);
     }
 
     /**
@@ -118,5 +123,21 @@ class FaviconService {
         }
 
         return [$domain, $size];
+    }
+
+    /**
+     * @param string $domain
+     * @param int    $size
+     *
+     * @return ISimpleFile|null
+     * @throws ApiException
+     */
+    protected function getDefaultFavicon(string $domain, int $size): ?ISimpleFile {
+        try {
+            return $this->faviconProvider->getDefaultFavicon($domain, $size);
+        } catch(Throwable $ex) {
+            $this->logger->logException($ex);
+            throw new ApiException('Internal Favicon API Error', 502, $ex);
+        }
     }
 }

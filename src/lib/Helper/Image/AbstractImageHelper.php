@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Helper\Image;
 
 use OC;
+use OCA\Passwords\Exception\Image\ImageConversionException;
+use OCA\Passwords\Exception\Image\ImageExportException;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -97,9 +99,9 @@ abstract class AbstractImageHelper {
      *
      * @return string
      */
-    public function getImageMime($blob) {
-        $size = getimagesizefromstring($blob);
-        if(!$size || !isset($size['mime']) || empty($size['mime'])) return 'application/octet-stream';
+    public function getImageMime($blob): string {
+        $size = @getimagesizefromstring($blob);
+        if(!$size || empty($size['mime'])) return 'application/octet-stream';
 
         return $size['mime'];
     }
@@ -161,16 +163,18 @@ abstract class AbstractImageHelper {
     /**
      * @param $image
      *
-     * @return mixed
+     * @return string
+     * @trows ImageExportException
      */
-    abstract public function exportJpeg($image);
+    abstract public function exportJpeg($image): string;
 
     /**
      * @param $image
      *
-     * @return mixed
+     * @return string
+     * @trows ImageExportException
      */
-    abstract public function exportPng($image);
+    abstract public function exportPng($image): string;
 
     /**
      * @param string $format
@@ -182,9 +186,10 @@ abstract class AbstractImageHelper {
     /**
      * @param $data
      *
-     * @return mixed
+     * @return string
+     * @throws ImageConversionException
      */
-    abstract public function convertIcoToPng($data);
+    abstract public function convertIcoToPng($data): string;
 
     /**
      * Whether this service can be used in the current environment

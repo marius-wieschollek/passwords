@@ -12,6 +12,9 @@
 namespace OCA\Passwords\Helper\Image;
 
 use Exception;
+use OCA\Passwords\Exception\Image\ImageConversionException;
+use OCA\Passwords\Exception\Image\Imaginary\ImaginaryCommunicationException;
+use OCA\Passwords\Exception\Image\Imaginary\NotConfiguredException;
 use OCA\Passwords\Helper\Image\Imaginary\ImaginaryImage;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\Http\Client\IClientService;
@@ -36,7 +39,7 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @return ImaginaryImage
      * @throws Exception
      */
-    public function advancedResizeImage($image, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight) {
+    public function advancedResizeImage($image, int $minWidth, int $minHeight, int $maxWidth, int $maxHeight): ImaginaryImage {
         $info = $this->sendRequest($image, 'info');
 
         $size = $this->getBestImageFit($info['width'], $info['height'], $minWidth, $minHeight, $maxWidth, $maxHeight);
@@ -67,7 +70,7 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @return ImaginaryImage
      * @throws Exception
      */
-    public function cropImageRectangular($image) {
+    public function cropImageRectangular($image): ImaginaryImage {
         $info = $this->sendRequest($image, 'info');
         if($info['width'] === $info['height'] || $info['width'] < $info['height']) {
             $size = $info['width'];
@@ -82,6 +85,7 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @param string $imageBlob
      *
      * @return ImaginaryImage
+     * @throws ImageConversionException
      */
     public function getImageFromBlob($imageBlob) {
         $tempFile = $this->config->getTempDir().uniqid();
@@ -113,18 +117,29 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @return mixed
      * @throws Exception
      */
-    public function exportJpeg($image) {
+    public function exportJpeg($image): string {
         $image = $this->sendRequest($image, 'convert', ['type' => 'jpeg', 'quality' => 90]);
 
         return $image->getData();
     }
 
-    public function exportPng($image) {
+    /**
+     * @param $image
+     *
+     * @return string
+     * @throws Exception
+     */
+    public function exportPng($image): string {
         $image = $this->sendRequest($image, 'convert', ['type' => 'png', 'compression' => 9]);
 
         return $image->getData();
     }
 
+    /**
+     * @param string $format
+     *
+     * @return bool
+     */
     public function supportsFormat(string $format): bool {
         $format           = strtolower($format);
         $supportedFormats = ['bmp', 'x-bitmap', 'png', 'jpeg', 'gif', 'heic', 'heif', 'svg+xml', 'tiff', 'webp'];
@@ -141,9 +156,9 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @param string $data
      *
      * @return string
-     * @throws Exception
+     * @throws ImageConversionException
      */
-    public function convertIcoToPng($data) {
+    public function convertIcoToPng($data): string {
         if($this->imagickHelper->isAvailable()) {
             return $this->imagickHelper->convertIcoToPng($data);
         }
@@ -151,6 +166,9 @@ class ImaginaryHelper extends AbstractImageHelper {
         return $data;
     }
 
+    /**
+     * @return bool
+     */
     public function isAvailable(): bool {
         $imaginaryUrl = $this->config->getSystemValue('preview_imaginary_url', 'invalid');
 
@@ -163,9 +181,9 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @param array          $params
      *
      * @return ImaginaryImage|array
-     * @throws Exception
+     * @throws ImaginaryCommunicationException|NotConfiguredException
      */
-    protected function sendRequest($image, string $operation, array $params = []) {
+    protected function sendRequest(ImaginaryImage $image, string $operation, array $params = []): ImaginaryImage|array {
         $imaginaryEndpointUrl = $this->getImaginaryUrl($operation);
 
         $httpClient = $this->httpClientService->newClient();
@@ -185,11 +203,11 @@ class ImaginaryHelper extends AbstractImageHelper {
                 'connect_timeout' => 3,
             ]);
         } catch(\Exception $e) {
-            throw new Exception('Imaginary request failed', $e);
+            throw new ImaginaryCommunicationException('Imaginary request failed', $e);
         }
 
         if($response->getStatusCode() !== 200) {
-            throw new Exception('Imaginary request failed: '.json_decode($response->getBody())['message']);
+            throw new ImaginaryCommunicationException('Imaginary request failed: '.json_decode($response->getBody())['message']);
         }
 
         $body = stream_get_contents($response->getBody());
@@ -206,12 +224,12 @@ class ImaginaryHelper extends AbstractImageHelper {
      * @param string $operation
      *
      * @return string
-     * @throws Exception
+     * @throws NotConfiguredException
      */
     protected function getImaginaryUrl(string $operation): string {
         $imaginaryUrl = $this->config->getSystemValue('preview_imaginary_url', 'invalid');
         if($imaginaryUrl === 'invalid' || !is_string($imaginaryUrl)) {
-            throw new Exception('Imaginary image provider is enabled but not configured');
+            throw new NotConfiguredException();
         }
         $imaginaryUrl = rtrim($imaginaryUrl, '/');
 

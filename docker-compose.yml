@@ -5,7 +5,6 @@ services:
     image: mariadb
     container_name: "passwords-mysql"
     command: --transaction-isolation=READ-COMMITTED --skip-innodb-read-only-compressed
-    restart: on-failure
     volumes:
       - mysql:/var/lib/mysql
     environment:
@@ -17,7 +16,6 @@ services:
   app:
     build: ./docker/php/
     container_name: "passwords-php"
-    restart: on-failure
     links:
       - mysql
     volumes:
@@ -42,7 +40,6 @@ services:
   web:
     build: ./docker/nginx/
     container_name: "passwords-nginx"
-    restart: on-failure
     ports:
       - 80:80
       - 443:443
@@ -77,6 +74,12 @@ services:
     container_name: "passwords-iconserver"
     environment:
       PORT: 7070
+
+  imaginary:
+    image: h2non/imaginary:latest
+    container_name: "passwords-imaginary"
+    environment:
+      PORT: 9000
 
 volumes:
   mysql:
