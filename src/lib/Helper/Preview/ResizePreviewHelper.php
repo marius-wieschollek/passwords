@@ -67,11 +67,17 @@ class ResizePreviewHelper {
         int         $maxWidth,
         int         $maxHeight
     ): ?ISimpleFile {
+        $fileName = $preview->getName().'.'.hash('crc32', $minWidth.$minHeight.$maxWidth.$maxHeight).'.jpg';
+
+        if($this->fileCacheService->hasFile($fileName)) {
+            return $this->fileCacheService->getFile($fileName);
+        }
+
         $image     = $this->imageService->getImageFromBlob($preview->getContent());
         $image     = $this->imageService->advancedResizeImage($image, $minWidth, $minHeight, $maxWidth, $maxHeight);
         $imageData = $this->imageService->exportJpeg($image);
         $this->imageService->destroyImage($image);
 
-        return $this->fileCacheService->putFile($preview->getName(), $imageData);
+        return $this->fileCacheService->putFile($fileName, $imageData);
     }
 }
