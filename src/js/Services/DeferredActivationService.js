@@ -1,4 +1,4 @@
-import { loadState } from '@nextcloud/initial-state'
+import {loadState} from '@nextcloud/initial-state';
 import LoggingService from "@js/Services/LoggingService";
 import SettingsService from '@js/Services/SettingsService';
 
@@ -9,41 +9,52 @@ class DeferredActivationService {
      */
     constructor() {
         this._features = null;
+        this.loadFeatures()
+            .catch(LoggingService.catch);
     }
 
     /**
      *
-     * @param id
-     * @param ignoreNightly
-     * @returns {Promise<boolean>}
+     * @param {string} id
+     * @param {boolean} ignoreNightly
+     * @param {boolean} defaultValue
+     * @returns {boolean}
      */
-    async check(id, ignoreNightly = false) {
+    check(id, ignoreNightly = false, defaultValue = false) {
         if(!ignoreNightly && APP_NIGHTLY) return true;
 
-        let features = await this.getFeatures();
+        let features = this.getFeatures();
         if(features.hasOwnProperty(id)) return features[id] === true;
 
-        return false;
+        return defaultValue;
     }
 
     /**
      *
-     * @returns {Promise<object>}
+     * @returns {Object}
      */
-    async getFeatures() {
+    getFeatures() {
         if(this._features !== null) return this._features;
+        return {};
+    }
 
+    /**
+     *
+     * @return {null}
+     */
+    async loadFeatures() {
         this._features = {};
         let features = loadState('passwords', 'features', null);
         if(features) {
             this._features = features;
-            return this._features;
+            return;
         }
 
-        let url = SettingsService.get('server.handbook.url') + '_features/features-v1.json';
-
         try {
-            let response = await fetch(new Request(url, {credentials: 'omit', referrerPolicy: 'no-referrer'}));
+            let url      = SettingsService.get('server.handbook.url') + '_features/features-v1.json',
+                options  = {credentials: 'omit', referrerPolicy: 'no-referrer'},
+                response = await fetch(new Request(url, options), options);
+
             if(response.ok) {
                 let data = await response.json();
                 this._processFeatures(data);
@@ -51,8 +62,6 @@ class DeferredActivationService {
         } catch(e) {
             LoggingService.error(e);
         }
-
-        return this._features;
     }
 
     /**

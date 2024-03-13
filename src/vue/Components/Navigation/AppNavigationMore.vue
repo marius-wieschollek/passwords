@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <div class="app-navigation-entry-more">
+    <div class="app-navigation-entry-more" :class="{'large-gap': !hasDonate}">
         <NcButton
                 :aria-label="t('Settings')"
                 :title="t('Settings')"
@@ -57,6 +57,7 @@
                 :href="donateURL"
                 target="_blank"
                 rel="noreferrer noopener"
+                v-if="hasDonate"
         >
             <template #icon>
                 <cash-multiple :size="20"/>
@@ -73,12 +74,14 @@
     import CashMultiple from '@icon/CashMultiple';
     import DeleteIcon from '@icon/Delete';
     import NcButton from '@nc/NcButton.js';
+    import DeferredActivationService from '@js/Services/DeferredActivationService.js';
 
     export default {
         components: {CashMultiple, PuzzleIcon, ArchiveIcon, CogIcon, HelpCircleIcon, DeleteIcon, NcButton},
         data() {
             return {
-                donateURL: 'https://github.com/marius-wieschollek/passwords/blob/master/Donate.md'
+                donateURL: 'https://github.com/marius-wieschollek/passwords/blob/master/Donate.md',
+                hasDonate: DeferredActivationService.check('donate-button', true, true)
             };
         }
     };
@@ -86,9 +89,10 @@
 
 <style lang="scss">
 .app-navigation-entry-more {
-    display : flex;
-    padding : .5rem .5rem;
-    gap     : .25rem;
+    display         : flex;
+    padding         : .5rem .5rem;
+    gap             : .25rem;
+    justify-content : center;
 
     .button-vue--vue-secondary {
         background-color : rgba(0, 0, 0, 0);
@@ -104,6 +108,10 @@
         &:active {
             opacity : 1;
         }
+    }
+
+    &.large-gap {
+        gap : .75rem;
     }
 }
 </style>

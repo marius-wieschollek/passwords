@@ -91,7 +91,7 @@ export default class RecoverHiddenItemsAction {
 
         let options  = {method: 'POST', headers, credentials: 'include', redirect: 'error', body: JSON.stringify(selection)},
             request  = new Request(url, options),
-            response = await fetch(request);
+            response = await fetch(request, options);
 
         if(response.ok && response.status === 200) {
             return await response.json();

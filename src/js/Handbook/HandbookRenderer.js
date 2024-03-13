@@ -38,7 +38,8 @@ class HandbookRenderer {
 
         try {
             let url      = this.handbookUrl + page,
-                response = await fetch(new Request(`${url}.md`), {redirect: 'error', referrerPolicy: 'no-referrer'}),
+                options  = {redirect: 'error', referrerPolicy: 'no-referrer'},
+                response = await fetch(new Request(`${url}.md`, options), options),
                 baseUrl  = url.substr(url, url.lastIndexOf('/') + 1),
                 mime     = response.headers.get('content-type');
 
