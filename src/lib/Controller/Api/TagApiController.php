@@ -150,7 +150,7 @@ class TagApiController extends AbstractObjectApiController {
     ): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         if($revision !== null && $revision !== $model->getRevision()) {
-            throw new ApiException('Outdated revision id', 400);
+            throw new ApiException('Outdated revision id', Http::STATUS_CONFLICT);
         }
 
         /** @var TagRevision $oldRevision */

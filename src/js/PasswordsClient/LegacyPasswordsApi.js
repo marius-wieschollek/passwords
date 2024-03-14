@@ -16,6 +16,7 @@ export default class LegacyPasswordsApi extends EnhancedApi {
     constructor(props) {
         super(props);
 
+        this._enabled = true;
         this._requests = [];
         this._activeRequests = 0;
         this._queueCheckActive = false;
@@ -41,6 +42,15 @@ export default class LegacyPasswordsApi extends EnhancedApi {
         if(performance === 6) this._maxRequests = 32;
 
         this._maxSlowRequests = this._maxRequests === 2 ? 1:2;
+    }
+
+    disable() {
+        this._enabled = false;
+        this.clear();
+    }
+
+    clear() {
+        this._requests = [];
     }
 
     _sendRequest(path, data = null, method = null, dataType = 'application/json', requestOptions = {}) {
@@ -77,7 +87,7 @@ export default class LegacyPasswordsApi extends EnhancedApi {
      */
     _checkRequestQueue() {
         this._debug();
-        if(this._queueCheckActive || this._requests.length === 0) {
+        if(this._queueCheckActive || this._requests.length === 0 || !this._enabled) {
             return;
         }
         this._queueCheckActive = true;
@@ -88,7 +98,7 @@ export default class LegacyPasswordsApi extends EnhancedApi {
 
         while(this._activeRequests < this._maxRequests && this._requests.length > 0) {
             let request = this._requests.shift();
-            if(request.priority > 3 && (this._activeRequests > this._maxSlowRequests)) {
+            if((request.priority > 3 && (this._activeRequests > this._maxSlowRequests)) || !this._enabled) {
                 this._requests.unshift(request);
                 break;
             }

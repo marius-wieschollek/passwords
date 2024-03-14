@@ -21,6 +21,7 @@ use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
 use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\Http;
 use OCP\IL10N;
 
 /**
@@ -175,7 +176,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 return $this->getGenericSetting($key);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**

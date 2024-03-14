@@ -13,6 +13,7 @@ namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
+use OCP\AppFramework\Http;
 
 /**
  * Class AbstractSettingsHelper
@@ -82,7 +83,7 @@ abstract class AbstractSettingsHelper {
             return $this->getGenericSetting($key);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -97,7 +98,7 @@ abstract class AbstractSettingsHelper {
         $value   = $this->castSettingValue($setting, $value);
 
         if(!$this->validateSetting($setting, $value)) {
-            throw new ApiException('Invalid setting value', 400);
+            throw new ApiException('Invalid setting value', Http::STATUS_BAD_REQUEST);
         }
 
         $configKey = $this->getSettingKey($key);
@@ -132,7 +133,7 @@ abstract class AbstractSettingsHelper {
         }
 
         if($setting['type'] === 'select:number') {
-            if(!is_numeric($value)) throw new ApiException('Invalid setting value', 400);
+            if(!is_numeric($value)) throw new ApiException('Invalid setting value', Http::STATUS_BAD_REQUEST);
 
             return intval($value);
         }
@@ -142,7 +143,7 @@ abstract class AbstractSettingsHelper {
         }
 
         if($setting['type'] === 'number') {
-            if(!is_numeric($value)) throw new ApiException('Invalid setting value', 400);
+            if(!is_numeric($value)) throw new ApiException('Invalid setting value', Http::STATUS_BAD_REQUEST);
 
             return intval($value);
         }
@@ -152,7 +153,7 @@ abstract class AbstractSettingsHelper {
             if($value === 'true' || $value === '1') return true;
             if($value === 'false' || $value === '') return false;
 
-            throw new ApiException('Invalid setting value', 400);
+            throw new ApiException('Invalid setting value', Http::STATUS_BAD_REQUEST);
         }
 
         return null;
@@ -245,7 +246,7 @@ abstract class AbstractSettingsHelper {
             return $this->{$optionsFunc}($setting);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -264,7 +265,7 @@ abstract class AbstractSettingsHelper {
             return $this->{$optionsFunc}($setting);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**

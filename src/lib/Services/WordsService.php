@@ -13,6 +13,7 @@ namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Provider\Words\WordsProviderInterface;
+use OCP\AppFramework\Http;
 use Throwable;
 
 /**
@@ -75,7 +76,7 @@ class WordsService {
         }
 
         $this->logger->error("Words service failed {$attempts} times. Returning error to client.");
-        throw new ApiException('Internal Words API Error', 502);
+        throw new ApiException('Internal Words API Error', Http::STATUS_BAD_GATEWAY);
     }
 
     /**

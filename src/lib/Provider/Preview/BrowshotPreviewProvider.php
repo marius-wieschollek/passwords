@@ -15,6 +15,7 @@ use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
+use OCP\AppFramework\Http;
 use stdClass;
 
 /**
@@ -65,7 +66,7 @@ class BrowshotPreviewProvider extends AbstractPreviewProvider {
 
         if($data->status === 'error') {
             $this->loggingService->error("Browshot Request Failed, {$data->error}");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         return $data->screenshot_url;
@@ -101,7 +102,7 @@ class BrowshotPreviewProvider extends AbstractPreviewProvider {
         }
 
         $this->loggingService->error("Insufficient Browshot Account Balance");
-        throw new ApiException('API Request Failed', 502);
+        throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
     }
 
     /**
@@ -129,7 +130,7 @@ class BrowshotPreviewProvider extends AbstractPreviewProvider {
             return json_decode($response->getBody());
         } catch(Exception $e) {
             $this->loggingService->error("Browshot Request Failed, HTTP {$e->getCode()}");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
     }
 }

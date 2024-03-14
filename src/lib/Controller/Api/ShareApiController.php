@@ -209,7 +209,7 @@ class ShareApiController extends AbstractApiController {
         $this->checkAccessPermissions();
 
         $receiver = $this->shareUserList->mapReceiverToUid($receiver);
-        if(!$this->shareUserList->canShareWithUser($receiver)) throw new ApiException('Invalid receiver uid', 400);
+        if(!$this->shareUserList->canShareWithUser($receiver)) throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
 
         $share = $this->createPasswordShare->createPasswordShare(
             $password,
@@ -242,12 +242,12 @@ class ShareApiController extends AbstractApiController {
 
         if(empty($expires)) $expires = null;
         if($expires !== null && $expires < time()) {
-            throw new ApiException('Invalid expiration date', 400);
+            throw new ApiException('Invalid expiration date', Http::STATUS_BAD_REQUEST);
         }
 
         $share = $this->modelService->findByUuid($id);
         if($share->getUserId() !== $this->userId) {
-            throw new ApiException('Access denied', 403);
+            throw new ApiException('Access denied', Http::STATUS_FORBIDDEN);
         }
 
         $share = $this->updatePasswordShareHelper->updatePasswordShare($share, $expires, $editable, $shareable);
@@ -270,7 +270,7 @@ class ShareApiController extends AbstractApiController {
     public function delete(string $id): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         if($model->getUserId() !== $this->userId) {
-            throw new ApiException('Access denied', 403);
+            throw new ApiException('Access denied', Http::STATUS_FORBIDDEN);
         }
 
         $this->modelService->delete($model);
@@ -335,6 +335,6 @@ class ShareApiController extends AbstractApiController {
      * @throws ApiException
      */
     protected function checkAccessPermissions(): void {
-        if(!$this->shareSettings->get('enabled')) throw new ApiException('Sharing disabled', 403);
+        if(!$this->shareSettings->get('enabled')) throw new ApiException('Sharing disabled', Http::STATUS_FORBIDDEN);
     }
 }

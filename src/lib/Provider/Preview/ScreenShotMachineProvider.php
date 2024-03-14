@@ -14,6 +14,7 @@ namespace OCA\Passwords\Provider\Preview;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
+use OCP\AppFramework\Http;
 
 /**
  * Class ScreenShotMachineProvider
@@ -63,7 +64,7 @@ class ScreenShotMachineProvider extends AbstractPreviewProvider {
         $sha1 = sha1($result);
         if(isset(self::SSM_ERROR_IMAGES[ $sha1 ])) {
             $this->loggingService->error('Screenshotmachine: '.self::SSM_ERROR_IMAGES[ $sha1 ], ['requestUrl' => $url]);
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         return $result;

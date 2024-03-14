@@ -15,6 +15,7 @@ use GuzzleHttp\Exception\ClientException;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\WebsitePreviewService;
+use OCP\AppFramework\Http;
 use Throwable;
 
 /**
@@ -47,24 +48,24 @@ class ScreeenlyProvider extends AbstractPreviewProvider {
         } catch(Throwable $e) {
             $code = $e instanceof ClientException ? "HTTP {$e->getResponse()->getStatusCode()}":$e->getMessage();
             $this->loggingService->error("Screeenly Request Failed, HTTP {$code}");
-            throw new ApiException('API Request Failed', 502, $e);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY, $e);
         }
 
         $data = $response->getBody();
         if($data === null) {
             $this->loggingService->error("Screeenly Request Failed, HTTP {$response->getStatusCode()}");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         $json = json_decode($data);
         if(isset($json->message)) {
             $this->loggingService->error("Screeenly {$json->title}: {$json->message}");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         if(!isset($json->base64_raw)) {
             $this->loggingService->error("Screeenly did not return an image body");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         return base64_decode($json->base64_raw);
@@ -88,7 +89,7 @@ class ScreeenlyProvider extends AbstractPreviewProvider {
 
         if(strlen($apiKey) !== 50) {
             $this->loggingService->error("Screeenly API key is invalid");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         $serviceUrl    = "{$url}/fullsize";

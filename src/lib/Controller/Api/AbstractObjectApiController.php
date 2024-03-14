@@ -21,6 +21,7 @@ use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\Attribute\CORS;
 use OCP\AppFramework\Http\Attribute\NoAdminRequired;
 use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
@@ -171,7 +172,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
 
         if($oldRevision->isTrashed()) {
             if($revision !== null && $revision !== $model->getRevision()){
-                throw new ApiException('Outdated revision id', 400);
+                throw new ApiException('Outdated revision id', Http::STATUS_BAD_REQUEST);
             }
 
             $this->modelService->delete($model);
@@ -208,7 +209,7 @@ abstract class AbstractObjectApiController extends AbstractApiController {
         $oldRevision = $this->revisionService->findByUuid($revision, true);
 
         if($oldRevision->getModel() !== $model->getUuid()) {
-            throw new ApiException('Invalid revision id', 400);
+            throw new ApiException('Invalid revision id', Http::STATUS_BAD_REQUEST);
         }
 
         if(!$oldRevision->isTrashed() && $oldRevision->getUuid() === $model->getRevision()) {

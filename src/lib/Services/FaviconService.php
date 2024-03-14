@@ -15,6 +15,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Favicon\ResizeFaviconHelper;
 use OCA\Passwords\Provider\Favicon\FaviconProviderInterface;
 use OCA\Passwords\Services\Traits\ValidatesDomainTrait;
+use OCP\AppFramework\Http;
 use OCP\Files\SimpleFS\ISimpleFile;
 use Throwable;
 
@@ -137,7 +138,7 @@ class FaviconService {
             return $this->faviconProvider->getDefaultFavicon($domain, $size);
         } catch(Throwable $ex) {
             $this->logger->logException($ex);
-            throw new ApiException('Internal Favicon API Error', 502, $ex);
+            throw new ApiException('Internal Favicon API Error', Http::STATUS_BAD_GATEWAY, $ex);
         }
     }
 }

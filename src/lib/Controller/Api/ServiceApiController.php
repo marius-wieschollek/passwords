@@ -103,7 +103,7 @@ class ServiceApiController extends AbstractApiController {
         if($special === null) $special = $this->userSettings->get('password.generator.special');
 
         [$password, $words, $strength] = $this->wordsService->getPassword($strength, $numbers, $special);
-        if(empty($password)) throw new ApiException('Unable to generate password', 503);
+        if(empty($password)) throw new ApiException('Unable to generate password', Http::STATUS_SERVICE_UNAVAILABLE);
 
         return $this->createJsonResponse(
             [
@@ -212,7 +212,7 @@ class ServiceApiController extends AbstractApiController {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     public function coffee(): JSONResponse {
-        throw new ApiException('I’m a password manager', 418);
+        throw new ApiException('I’m a password manager', Http::STATUS_IM_A_TEAPOT);
     }
 
     /**
@@ -256,6 +256,6 @@ class ServiceApiController extends AbstractApiController {
             return [intval($matches[1]), intval($matches[2])];
         }
 
-        throw new ApiException('Invalid dimensions given', 400);
+        throw new ApiException('Invalid dimensions given', Http::STATUS_BAD_REQUEST);
     }
 }

@@ -19,6 +19,7 @@ use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\IAppContainer;
 use Throwable;
 
@@ -53,10 +54,10 @@ class ValidationService {
         $this->validateEncryptionSettings($password);
 
         if(empty($password->getLabel())) {
-            throw new ApiException('Field "label" can not be empty', 400);
+            throw new ApiException('Field "label" can not be empty', Http::STATUS_BAD_REQUEST);
         }
         if(empty($password->getPassword())) {
-            throw new ApiException('Field "password" can not be empty', 400);
+            throw new ApiException('Field "password" can not be empty', Http::STATUS_BAD_REQUEST);
         }
         $this->checkHash($password);
         if(empty($password->getEdited()) || $password->getEdited() > strtotime('+2 hour')) {
@@ -79,7 +80,7 @@ class ValidationService {
         $this->validateEncryptionSettings($folder);
 
         if(empty($folder->getLabel())) {
-            throw new ApiException('Field "label" can not be empty', 400);
+            throw new ApiException('Field "label" can not be empty', Http::STATUS_BAD_REQUEST);
         }
         if(empty($folder->getEdited()) || $folder->getEdited() > strtotime('+1 hour')) {
             $folder->setEdited(time());
@@ -105,10 +106,10 @@ class ValidationService {
         $this->validateEncryptionSettings($tag);
 
         if(empty($tag->getLabel())) {
-            throw new ApiException('Field "label" can not be empty', 400);
+            throw new ApiException('Field "label" can not be empty', Http::STATUS_BAD_REQUEST);
         }
         if(empty($tag->getColor())) {
-            throw new ApiException('Field "color" can not be empty', 400);
+            throw new ApiException('Field "color" can not be empty', Http::STATUS_BAD_REQUEST);
         }
         if(empty($tag->getEdited()) || $tag->getEdited() > strtotime('+1 hour')) {
             $tag->setEdited(time());
@@ -204,32 +205,32 @@ class ValidationService {
 
         $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2, EncryptionService::SSE_ENCRYPTION_V2R1, EncryptionService::SSE_ENCRYPTION_V3R1];
         if(!in_array($revision->getSseType(), $validSSE)) {
-            throw new ApiException('Invalid server side encryption type', 400);
+            throw new ApiException('Invalid server side encryption type', Http::STATUS_BAD_REQUEST);
         }
 
         $validCSE = [EncryptionService::CSE_ENCRYPTION_NONE, EncryptionService::CSE_ENCRYPTION_V1R1];
         if(!in_array($revision->getCseType(), $validCSE)) {
-            throw new ApiException('Invalid client side encryption type', 400);
+            throw new ApiException('Invalid client side encryption type', Http::STATUS_BAD_REQUEST);
         }
 
         if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && !empty($revision->getCseKey())) {
-            throw new ApiException('Invalid client side encryption type', 400);
+            throw new ApiException('Invalid client side encryption type', Http::STATUS_BAD_REQUEST);
         }
 
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE) {
             /** @var UserChallengeService $challengeService */
             $challengeService = $this->container->get(UserChallengeService::class);
             if(!$challengeService->hasChallenge()) {
-                throw new ApiException('Invalid client side encryption type', 400);
+                throw new ApiException('Invalid client side encryption type', Http::STATUS_BAD_REQUEST);
             }
         }
 
         if($revision->getCseType() !== EncryptionService::CSE_ENCRYPTION_NONE && empty($revision->getCseKey())) {
-            throw new ApiException('Client side encryption key missing', 400);
+            throw new ApiException('Client side encryption key missing', Http::STATUS_BAD_REQUEST);
         }
 
         if($revision->getCseType() === EncryptionService::CSE_ENCRYPTION_NONE && $revision->getSseType() === EncryptionService::SSE_ENCRYPTION_NONE) {
-            throw new ApiException('No encryption specified', 400);
+            throw new ApiException('No encryption specified', Http::STATUS_BAD_REQUEST);
         }
     }
 
@@ -276,6 +277,6 @@ class ValidationService {
             }
         }
 
-        throw new ApiException('Field "hash" must contain a valid sha1 hash', 400);
+        throw new ApiException('Field "hash" must contain a valid sha1 hash', Http::STATUS_BAD_REQUEST);
     }
 }

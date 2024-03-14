@@ -18,6 +18,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\AppFramework\Http;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClientService;
 
@@ -146,12 +147,12 @@ abstract class AbstractPreviewProvider implements PreviewProviderInterface{
             $response = $client->get($url, ['timeout' => 60]);
         } catch(Exception $e) {
             $this->loggingService->error("Invalid Preview Api Response, HTTP {$e->getCode()}");
-            throw new ApiException('API Request Failed', 502, $e);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY, $e);
         }
 
         if(!str_starts_with($response->getHeader('content-type'), 'image')) {
             $this->loggingService->error("Invalid Preview Api Response, HTTP {$response->getStatusCode()}, {$response->getHeader('content-type')}");
-            throw new ApiException('API Request Failed', 502);
+            throw new ApiException('API Request Failed', Http::STATUS_BAD_GATEWAY);
         }
 
         return $response->getBody();

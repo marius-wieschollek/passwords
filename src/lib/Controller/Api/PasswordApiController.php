@@ -213,7 +213,7 @@ class PasswordApiController extends AbstractObjectApiController {
         /** @var Password $model */
         $model = $this->modelService->findByUuid($id);
         if($revision !== null && $revision !== $model->getRevision()) {
-            throw new ApiException('Outdated revision id', 400);
+            throw new ApiException('Outdated revision id', Http::STATUS_CONFLICT);
         }
 
         /** @var PasswordRevision $oldRevision */
@@ -328,7 +328,7 @@ class PasswordApiController extends AbstractObjectApiController {
                 /** @var TagRevision $revision */
                 $revision = $this->tagRevisionService->findByUuid($tag->getRevision());
             } catch(DoesNotExistException $e) {
-                throw new ApiException('Tag does not exist', 400);
+                throw new ApiException('Tag does not exist', Http::STATUS_BAD_REQUEST);
             }
 
             $relation = $this->relationService->create($passwordRevision, $revision);

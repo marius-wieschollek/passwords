@@ -93,7 +93,7 @@ class KeychainApiController extends AbstractApiController {
             $keychain = $this->keychainService->findByType($id, true);
 
             if($keychain->getScope() !== $keychain::SCOPE_CLIENT) {
-                throw new ApiException('Keychain not found', 404);
+                throw new ApiException('Keychain not found', Http::STATUS_NOT_FOUND);
             }
 
             $keychain->setData($data);

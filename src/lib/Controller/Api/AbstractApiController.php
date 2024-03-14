@@ -68,7 +68,7 @@ abstract class AbstractApiController extends ApiController {
         $filters = [];
         foreach($criteria as $key => $value) {
             if(!in_array($key, $this->allowedFilterFields)) {
-                throw new ApiException('Illegal field in search criteria: '.addslashes($key), 400);
+                throw new ApiException('Illegal field in search criteria: '.addslashes($key), Http::STATUS_BAD_REQUEST);
             }
 
             if($value === 'true') {
@@ -76,7 +76,7 @@ abstract class AbstractApiController extends ApiController {
             } else if($value === 'false') {
                 $value = false;
             } else if(is_array($value) && !in_array($value[0], AbstractObjectHelper::$filterOperators)) {
-                throw new ApiException('Illegal operator in search criteria: '.addslashes($value[0]), 400);
+                throw new ApiException('Illegal operator in search criteria: '.addslashes($value[0]), Http::STATUS_BAD_REQUEST);
             }
 
             $filters[ $key ] = $value;

@@ -149,11 +149,11 @@ class FolderApiController extends AbstractObjectApiController {
         bool $hidden = false,
         bool $favorite = false
     ): JSONResponse {
-        if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', 422);
+        if($id === $this->modelService::BASE_FOLDER_UUID) throw new ApiException('Can not edit base folder', Http::STATUS_UNPROCESSABLE_ENTITY);
 
         $model = $this->modelService->findByUuid($id);
         if($revision !== null && $revision !== $model->getRevision()) {
-            throw new ApiException('Outdated revision id', 400);
+            throw new ApiException('Outdated revision id', Http::STATUS_CONFLICT);
         }
 
         /** @var FolderRevision $oldRevision */
@@ -184,7 +184,7 @@ class FolderApiController extends AbstractObjectApiController {
     #[NoAdminRequired]
     public function delete(string $id, ?string $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID) {
-            throw new ApiException('Can not edit base folder', 422);
+            throw new ApiException('Can not edit base folder', Http::STATUS_UNPROCESSABLE_ENTITY);
         }
 
         return parent::delete($id, $revision);
@@ -205,7 +205,7 @@ class FolderApiController extends AbstractObjectApiController {
     #[NoAdminRequired]
     public function restore(string $id, $revision = null): JSONResponse {
         if($id === $this->modelService::BASE_FOLDER_UUID || $revision === $this->revisionService::BASE_REVISION_UUID) {
-            throw new ApiException('Can not edit base folder', 422);
+            throw new ApiException('Can not edit base folder', Http::STATUS_UNPROCESSABLE_ENTITY);
         }
 
         return parent::restore($id, $revision);

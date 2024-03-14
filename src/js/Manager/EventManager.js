@@ -79,6 +79,8 @@ class EventManager {
         if(this.ignoreApiErrors) return;
 
         if(e.id === '4ad27488') {
+            API.clear();
+
             let current = router.currentRoute,
                 target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};
 
@@ -90,7 +92,8 @@ class EventManager {
             ToastService.error('The session has expired');
         } else if(e.response && e.response.status === 404 && e.response.url?.indexOf('service/hashes') !== -1) {
             LoggingService.info(e);
-        } else if(e.response && e.response.status === 401 && e.message === "CORS requires basic auth") {
+        } else if(e.response && e.response.status === 401) {
+            API.disable();
             await MessageService.alert('The session token is no longer valid. The app will now reload.', 'API Session Token expired');
             location.reload();
         } else if(e.message) {
