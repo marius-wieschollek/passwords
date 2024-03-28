@@ -44,16 +44,16 @@
         "message": "forráskód"
     },
     "apps-000004": {
-        "message": "többet megtudni"
+        "message": "tudjon meg többet"
     },
     "apps-000005": {
-        "message": "Csatlakozás a PassLinkhez"
+        "message": "Csatlakozás PassLinkkel"
     },
     "apps-000006": {
         "message": "Új eszköz csatlakoztatása"
     },
     "apps-000007": {
-        "message": "Csatlakozás a linken keresztül"
+        "message": "Csatlakozás linken keresztül"
     },
     "apps-000008": {
         "message": "Válasszon egy nevet:"
@@ -62,19 +62,19 @@
         "message": "A kódok nem egyeznek"
     },
     "apps-000010": {
-        "message": "Jól néz ki"
+        "message": "Jónak tűnik"
     },
     "apps-000011": {
-        "message": "Kapcsolat sikeres"
+        "message": "Sikeres kapcsolódás"
     },
     "apps-000012": {
         "message": "Végeztem."
     },
     "apps-000013": {
-        "message": "Ne próbáld újra"
+        "message": "Ne próbálja újra"
     },
     "apps-000014": {
-        "message": "Csatlakoztasson valami mást"
+        "message": "Csatlakoztasson egy másik klienst"
     },
     "apps-000015": {
         "message": "Próbálja újra"
@@ -106,16 +106,16 @@
         "message": "Ellenőrizze, hogy az alábbi kódok megegyeznek-e a készülék vagy az alkalmazás által megadott kódokkal:"
     },
     "apps-000023": {
-        "message": "Kapcsolja ezt az ügyfelet a Nextcloud-fiókjához idegesítő jelszavak és urlok nélkül"
+        "message": "Kapcsolja ezt a klienst a Nextcloud-fiókjához idegesítő jelszavak és url-ek nélkül"
     },
     "apps-000024": {
-        "message": "Ez az ügyfél hivatalosan is támogatja az erős végponttól végpontig tartó titkosításunkat."
+        "message": "Ez a kliens hivatalosan is támogatja az erős végponttól végpontig tartó titkosításunkat"
     },
     "apps-000025": {
         "message": "Ezt a klienst a Passwords alkalmazás szerzői tartják fenn."
     },
     "apps-000026": {
-        "message": "Kattintson a gombra az ezen az eszközön telepített alkalmazás csatlakoztatásához, vagy olvassa be a QR-kódot az alkalmazással, ha az egy másik eszközön van telepítve."
+        "message": "Kattintson a gombra egy ugyanerre az eszközre telepített alkalmazás csatlakoztatásához, vagy olvassa be a QR-kódot az alkalmazással, ha az egy másik eszközön van telepítve."
     },
     "backups-000028": {
         "message": "Biztonsági mentés vagy exportálás"
@@ -133,7 +133,7 @@
         "message": "Előre meghatározott CSV"
     },
     "backups-000033": {
-        "message": "Olvassa el a $LABEL$ importálási útmutatót",
+        "message": "Olvassa el a(z) $LABEL$ importálási útmutatót",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -156,7 +156,7 @@
         "message": "Nincs importálás a CSV-hez?"
     },
     "backups-000039": {
-        "message": "Biztonsági jelszó"
+        "message": "A biztonsági mentés jelszava"
     },
     "backups-000040": {
         "message": "(Választható) Titkosítja a biztonsági másolatot"
@@ -165,7 +165,7 @@
         "message": "Az importálás csak a CSV formátumot támogatja"
     },
     "backups-000042": {
-        "message": "Jelszavak exportálása"
+        "message": "A jelszavak exportálása"
     },
     "backups-000043": {
         "message": "Mappák exportálása"
@@ -186,10 +186,10 @@
         "message": "ParentLabel"
     },
     "backups-000049": {
-        "message": "Mappa azonosító"
+        "message": "Mappaazonosító"
     },
     "backups-000050": {
-        "message": "Címke azonosítók"
+        "message": "Címkeazonosítók"
     },
     "backups-000051": {
         "message": "ParentId"
@@ -204,19 +204,19 @@
         "message": "Címkék"
     },
     "backups-FolderId": {
-        "message": "Mappa azonosító"
+        "message": "Mappaazonosító"
     },
     "backups-TagIds": {
-        "message": "Címke azonosítók"
+        "message": "Címkeazonosítók"
     },
     "backups-000052": {
         "message": "Üres"
     },
     "backups-000053": {
-        "message": "Fejléc sor hozzáadása"
+        "message": "Fejlécsor hozzáadása"
     },
     "backups-000054": {
-        "message": "Velem megosztott jelszavak exportálása"
+        "message": "A velem megosztott jelszavak exportálása"
     },
     "backups-000055": {
         "message": "Ne szerkessze a velem megosztott jelszavakat"
@@ -231,13 +231,13 @@
         "message": "Exportálás"
     },
     "backups-000059": {
-        "message": "Várunk…"
+        "message": "Várakozás…"
     },
     "backups-000060": {
         "message": "Exportálási hiba"
     },
     "backups-000061": {
-        "message": "Letöltés $FORMAT$",
+        "message": "$FORMAT$ letöltése",
         "placeholders": {
             "format": {
                 "content": "$1"
@@ -254,7 +254,7 @@
         "message": "Visszaállítás vagy importálás"
     },
     "backups-000065": {
-        "message": "Import formátum kiválasztása"
+        "message": "Importálási formátum kiválasztása"
     },
     "backups-000066": {
         "message": "Jelszavak CSV"
@@ -272,25 +272,25 @@
         "message": "Fájl kiválasztása"
     },
     "backups-000071": {
-        "message": "Válassza ki az opciókat"
+        "message": "Válassza ki a lehetőségeket"
     },
     "backups-000072": {
         "message": "Konfliktuskezelés"
     },
     "backups-000073": {
-        "message": "Ugrás, ha ugyanaz a felülvizsgálat"
+        "message": "Hagyja ki, ha ugyanaz a verzió"
     },
     "backups-000074": {
-        "message": "Mindig kihagyni"
+        "message": "Mindig hagyja ki"
     },
     "backups-000075": {
         "message": "A meglévő felülírása"
     },
     "backups-000076": {
-        "message": "Összevonás a meglévő"
+        "message": "Összevonás a meglévővel"
     },
     "backups-000077": {
-        "message": "Új bejegyzés létrehozása"
+        "message": "Új elem létrehozása"
     },
     "backups-000078": {
         "message": "Titkosított biztonsági mentésekhez"
@@ -302,10 +302,10 @@
         "message": "Adatbázis"
     },
     "backups-000081": {
-        "message": "Idézet karakter"
+        "message": "Idézőjel karakter"
     },
     "backups-000082": {
-        "message": "Menekülési karakter"
+        "message": "Escape karakter"
     },
     "backups-000083": {
         "message": "Mezőhatároló"
@@ -320,19 +320,19 @@
         "message": "Egyetlen idézet"
     },
     "backups-000087": {
-        "message": "Backslash"
+        "message": "Fordított perjel"
     },
     "backups-000088": {
-        "message": "A  felismerése"
+        "message": "Felismerés"
     },
     "backups-000089": {
-        "message": "vessző"
+        "message": "Vessző"
     },
     "backups-000090": {
-        "message": "pontosvessző"
+        "message": "Pontosvessző"
     },
     "backups-000091": {
-        "message": "Űr"
+        "message": "Szóköz"
     },
     "backups-000092": {
         "message": "Tab"
@@ -347,13 +347,13 @@
         "message": "Hiányzó mezők interpolálása"
     },
     "backups-000096": {
-        "message": "CSV mező leképezés"
+        "message": "CSV mezők leképzése"
     },
     "backups-000097": {
         "message": "Előnézet vonal"
     },
     "backups-000098": {
-        "message": "Vonal $LINE$",
+        "message": "$LINE$ vonal",
         "placeholders": {
             "line": {
                 "content": "$1"
@@ -364,13 +364,13 @@
         "message": "(nincs érték)"
     },
     "backups-000100": {
-        "message": "Ne törődj a"
+        "message": "Figyelmen kívül hagyás"
     },
     "backups-000101": {
         "message": "Importálás futtatása"
     },
     "backups-000102": {
-        "message": "Import"
+        "message": "Importálás"
     },
     "backups-000103": {
         "message": "Bemeneti fájl elemzése"
