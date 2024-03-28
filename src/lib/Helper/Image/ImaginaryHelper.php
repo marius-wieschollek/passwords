@@ -50,14 +50,14 @@ class ImaginaryHelper extends AbstractImageHelper {
                 $image,
                 'extract',
                 [
-                    'type'    => 'png',
-                    'quality' => 9,
-                    'width'   => $size['cropWidth'],
-                    'height'  => $size['cropHeight'],
-                    'areawidth'   => $size['cropWidth'],
-                    'areaheight'  => $size['cropHeight'],
-                    'top'     => $size['cropX'],
-                    'left'    => $size['cropY']
+                    'type'       => 'png',
+                    'quality'    => 9,
+                    'width'      => $size['cropWidth'],
+                    'height'     => $size['cropHeight'],
+                    'areawidth'  => $size['cropWidth'],
+                    'areaheight' => $size['cropHeight'],
+                    'top'        => $size['cropX'],
+                    'left'       => $size['cropY']
                 ]
             );
         }
