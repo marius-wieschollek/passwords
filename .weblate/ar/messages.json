@@ -1,1 +1,3345 @@
-{}
+{
+    "apps-000003": {
+        "message": "المصدر"
+    },
+    "apps-000004": {
+        "message": "تعلم أكثر"
+    },
+    "apps-000005": {
+        "message": "Connect with PassLink"
+    },
+    "apps-000006": {
+        "message": "ربط جهاز جديد"
+    },
+    "apps-000007": {
+        "message": "Connect via link"
+    },
+    "apps-000008": {
+        "message": "اختر اسما:"
+    },
+    "apps-000009": {
+        "message": "الرموز لا تتطابق"
+    },
+    "apps-000010": {
+        "message": "تبدو جيدة"
+    },
+    "apps-000011": {
+        "message": "النجاح"
+    },
+    "apps-000012": {
+        "message": "لقد انتهيت"
+    },
+    "apps-000013": {
+        "message": "لا تحاول مرة أخرى"
+    },
+    "apps-000014": {
+        "message": "اتصل بزبون آخر"
+    },
+    "apps-000015": {
+        "message": "حاول مرة أخرى"
+    },
+    "apps-000016": {
+        "message": "التشفير القوي"
+    },
+    "apps-000017": {
+        "message": "فشل في جلب التطبيقات: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "لقد ألغيت الإتصال"
+    },
+    "apps-000019": {
+        "message": "أنت لم تؤكد الصلة في الوقت المناسب"
+    },
+    "apps-000020": {
+        "message": "فقط قم بمسح شفرة (كيو آر) مع التطبيق لربطه."
+    },
+    "apps-000021": {
+        "message": "اضغط الزر عندما تكون مستعداً لبدء الاتصال."
+    },
+    "apps-000022": {
+        "message": "تحقق إذا كانت الرموز الواردة أدناه مطابقة للرموز التي يوفرها الجهاز أو التطبيق:"
+    },
+    "apps-000023": {
+        "message": "اربط هذا العميل بحسابك التالي بدون كلمة سر مزعجة"
+    },
+    "apps-000024": {
+        "message": "هذا العميل يدعم رسمياً تشفيرنا القوي"
+    },
+    "backups-000029": {
+        "message": "Format Choose"
+    },
+    "backups-000030": {
+        "message": "الرجاء اختيار"
+    },
+    "backups-000031": {
+        "message": "دعم قاعدة البيانات"
+    },
+    "backups-000032": {
+        "message": "CSV المحدد سلفا"
+    },
+    "backups-000033": {
+        "message": "اقرأ دليل الاستيراد $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "أو"
+    },
+    "backups-000035": {
+        "message": "قاعدة بيانات احتياطية"
+    },
+    "backups-000036": {
+        "message": "طراز CSV"
+    },
+    "backups-000037": {
+        "message": "محاولة استيراد CSV العام"
+    },
+    "backups-000041": {
+        "message": "الاستيراد فقط يدعم CSV"
+    },
+    "backups-000043": {
+        "message": "Export Folders"
+    },
+    "backups-000044": {
+        "message": "Export Tags"
+    },
+    "backups-000045": {
+        "message": "المجالات العرفية"
+    },
+    "backups-000046": {
+        "message": "Folder"
+    },
+    "backups-000051": {
+        "message": "الوالدين"
+    },
+    "backups-CustomFields": {
+        "message": "المجالات العرفية"
+    },
+    "backups-FolderLabel": {
+        "message": "Folder"
+    },
+    "backups-TagLabels": {
+        "message": "Tags"
+    },
+    "backups-FolderId": {
+        "message": "Folder Id"
+    },
+    "backups-TagIds": {
+        "message": "Tag Ids"
+    },
+    "backups-000052": {
+        "message": "فارغ"
+    },
+    "backups-000053": {
+        "message": "أضف خطا"
+    },
+    "backups-000054": {
+        "message": "كلمات سر التصدير المشتركة معي"
+    },
+    "backups-000055": {
+        "message": "لا تُحرر كلمات السر مُشتركة معي"
+    },
+    "backups-000056": {
+        "message": "لا تستورد حقول فارغة"
+    },
+    "backups-000057": {
+        "message": "التصدير"
+    },
+    "backups-000058": {
+        "message": "الصادرات"
+    },
+    "backups-000059": {
+        "message": "انتظر.."
+    },
+    "backups-000060": {
+        "message": "خطأ في التصدير"
+    },
+    "backups-000061": {
+        "message": "حمولة $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "لا شيء للتصدير"
+    },
+    "backups-000063": {
+        "message": "لا توجد بيانات للتصدير"
+    },
+    "backups-000064": {
+        "message": "إعادة أو استيراد"
+    },
+    "backups-000065": {
+        "message": "نموذج الاستيراد المختار"
+    },
+    "backups-000066": {
+        "message": "كلمات السر CSV"
+    },
+    "backups-000068": {
+        "message": "CSV العرفي"
+    },
+    "backups-000069": {
+        "message": "Other / Custom CSV"
+    },
+    "backups-000070": {
+        "message": "بيع الملف"
+    },
+    "backups-000071": {
+        "message": "الخيارات المختارة"
+    },
+    "backups-000072": {
+        "message": "معالجة النزاعات"
+    },
+    "backups-000073": {
+        "message": "Skip if same revision"
+    },
+    "backups-000074": {
+        "message": "دائما"
+    },
+    "backups-000075": {
+        "message": "الكتابة الكاملة القائمة"
+    },
+    "backups-000076": {
+        "message": "الدمج مع القائمة"
+    },
+    "backups-000077": {
+        "message": "إنشاء مدخل جديد"
+    },
+    "backups-000078": {
+        "message": "للدعم المشفر"
+    },
+    "backups-000079": {
+        "message": "CSV الخيارات"
+    },
+    "backups-000080": {
+        "message": "قاعدة البيانات"
+    },
+    "backups-000081": {
+        "message": "الكمية"
+    },
+    "backups-000082": {
+        "message": "سمسار"
+    },
+    "backups-000083": {
+        "message": "تعيين الحدود الميدانية"
+    },
+    "backups-000084": {
+        "message": "خط كسر"
+    },
+    "backups-000085": {
+        "message": "Quote"
+    },
+    "backups-000086": {
+        "message": "One Quote"
+    },
+    "backups-000087": {
+        "message": "الضربة الخلفية"
+    },
+    "backups-000088": {
+        "message": "Detect"
+    },
+    "backups-000089": {
+        "message": "Comma"
+    },
+    "backups-000090": {
+        "message": "Semicolon"
+    },
+    "backups-000091": {
+        "message": "الفضاء"
+    },
+    "backups-000092": {
+        "message": "Tab"
+    },
+    "backups-000093": {
+        "message": "Detect unescaped إقتباسات"
+    },
+    "backups-000094": {
+        "message": "الخط الأول"
+    },
+    "backups-000095": {
+        "message": "الحقول المفقودة"
+    },
+    "backups-000096": {
+        "message": "CSV رسم الخرائط الميدانية"
+    },
+    "backups-000097": {
+        "message": "Preview Line"
+    },
+    "backups-000098": {
+        "message": "السطر $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(لا قيمة)"
+    },
+    "backups-000100": {
+        "message": "Ignore"
+    },
+    "backups-000101": {
+        "message": "الواردات"
+    },
+    "backups-000102": {
+        "message": "الواردات"
+    },
+    "backups-000103": {
+        "message": "ملف تسجيل"
+    },
+    "backups-000104": {
+        "message": "تحليل العلامات"
+    },
+    "backups-000105": {
+        "message": "محلل الملفات"
+    },
+    "backups-000106": {
+        "message": "قراءة العلامات"
+    },
+    "backups-000107": {
+        "message": "بطاقات استيراد"
+    },
+    "backups-000108": {
+        "message": "قراءة الملفات"
+    },
+    "backups-000109": {
+        "message": "ملفات استيراد"
+    },
+    "backups-000110": {
+        "message": "قراءة كلمات السر"
+    },
+    "backups-000111": {
+        "message": "استيراد كلمات السر"
+    },
+    "backups-000112": {
+        "message": "الواردات فشلت"
+    },
+    "backups-000113": {
+        "message": "الواردات فشلت جزئيا"
+    },
+    "backups-000114": {
+        "message": "نجاح الواردات"
+    },
+    "backups-000115": {
+        "message": "خطأ في الاستيراد"
+    },
+    "backups-000116": {
+        "message": "بعض الأشياء لها أخطاء:"
+    },
+    "backups-000117": {
+        "message": "Invalid file type \"$TYPE$",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "كلمة السر المطلوبة"
+    },
+    "backups-000119": {
+        "message": "كلمة السر غير صحيحة"
+    },
+    "backups-000120": {
+        "message": "فشل في فك شفرة كلمات السر"
+    },
+    "backups-000121": {
+        "message": "فشل في فك التشفير"
+    },
+    "backups-000122": {
+        "message": "فشل في فك التشفير"
+    },
+    "backups-000123": {
+        "message": "ملف الاستيراد فارغ"
+    },
+    "backups-000124": {
+        "message": "ملف CSV لا يمكن رسمه"
+    },
+    "backups-000125": {
+        "message": "Logins"
+    },
+    "backups-000126": {
+        "message": "الحواشي"
+    },
+    "backups-000127": {
+        "message": "بطاقات الائتمان"
+    },
+    "backups-000128": {
+        "message": "الهوية"
+    },
+    "backups-000129": {
+        "message": "المالية"
+    },
+    "backups-000130": {
+        "message": "التراخيص"
+    },
+    "backups-000131": {
+        "message": "السفر"
+    },
+    "backups-000132": {
+        "message": "الحواسيب"
+    },
+    "backups-000133": {
+        "message": "متنوعة"
+    },
+    "backups-000134": {
+        "message": "في الميدان المقتبس"
+    },
+    "backups-000135": {
+        "message": "The file could not be parsed: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ in line $LINE$ character $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "\"$LABEL$\" لديه الملفات المرفقة التي لا يمكن استيرادها.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000138": {
+        "message": "نوع \"$FIELD$\" في \"$LABEL$\" غير معروف ولا يمكن استيراده.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "علامة \"$FIELD$\" في \"$LABEL$\" تتجاوز 48 شخصية وتم قطعها.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "قيمة \"$FIELD$\" في \"$LABEL$\" تتجاوز 320 شخصية وتم قطعها.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "ويمكن العثور على المزيد من المعلومات في السجل. (Press F12)"
+    },
+    "backups-000142": {
+        "message": "الملف يحتوي على نوع \"$ACTUAL$\" لكن \"$EXPECTED$\" متوقع ربما اخترت الملف الخاطئ أو المستورد.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "$SERVICE$ معروف بتوليد ملفات تصدير خاطئة. قُم بإستشارة دليل المساعدة إذا كان الملف لا يمكن فصله.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": "Folder"
+    },
+    "backups-000145": {
+        "message": "Tags"
+    },
+    "frontend-000148": {
+        "message": "كلمات السر"
+    },
+    "frontend-000149": {
+        "message": "كل شيء"
+    },
+    "frontend-000150": {
+        "message": "Folders"
+    },
+    "frontend-000151": {
+        "message": "حديثة"
+    },
+    "frontend-000152": {
+        "message": "المفضلة"
+    },
+    "frontend-000153": {
+        "message": "Shared"
+    },
+    "frontend-000154": {
+        "message": "الأمن"
+    },
+    "frontend-000155": {
+        "message": "Trash"
+    },
+    "frontend-000156": {
+        "message": "التفاصيل"
+    },
+    "frontend-000157": {
+        "message": "Edit"
+    },
+    "frontend-000158": {
+        "message": "الاسم"
+    },
+    "frontend-000159": {
+        "message": "تحذف"
+    },
+    "frontend-000160": {
+        "message": "Restore"
+    },
+    "frontend-000161": {
+        "message": "كلمة سر جديدة"
+    },
+    "frontend-000162": {
+        "message": "New Folder"
+    },
+    "frontend-000163": {
+        "message": "New Tag"
+    },
+    "frontend-000164": {
+        "message": "الضمان"
+    },
+    "frontend-000165": {
+        "message": "الحالة"
+    },
+    "frontend-000166": {
+        "message": "ضعيف"
+    },
+    "frontend-000188": {
+        "message": "المجالات العرفية"
+    },
+    "frontend-000189": {
+        "message": "السرية"
+    },
+    "frontend-000190": {
+        "message": "النص"
+    },
+    "frontend-000191": {
+        "message": "File"
+    },
+    "frontend-000192": {
+        "message": "القيمة"
+    },
+    "frontend-000193": {
+        "message": "بروز"
+    },
+    "frontend-000194": {
+        "message": "لغة السر"
+    },
+    "frontend-000208": {
+        "message": "فولدر حذف"
+    },
+    "frontend-000209": {
+        "message": "تصفية الملف الفاشل"
+    },
+    "frontend-000210": {
+        "message": "استعادة فولدر"
+    },
+    "frontend-000211": {
+        "message": "رد الملف الفاشل"
+    },
+    "frontend-000212": {
+        "message": "معدَّات الصنع"
+    },
+    "frontend-000213": {
+        "message": "Tag created"
+    },
+    "frontend-000214": {
+        "message": "اختراق البطاقة"
+    },
+    "frontend-000215": {
+        "message": "Edit tag"
+    },
+    "frontend-000216": {
+        "message": "اللون العشوائي"
+    },
+    "frontend-000217": {
+        "message": "(تاغ)"
+    },
+    "frontend-000218": {
+        "message": "علامه إنقاذ فشلت"
+    },
+    "frontend-000219": {
+        "message": "تحذف البطاقة"
+    },
+    "frontend-000220": {
+        "message": "هل تريد حذف العلامة؟?"
+    },
+    "frontend-000221": {
+        "message": "مسح"
+    },
+    "frontend-000222": {
+        "message": "تصفية العلامة فشلت"
+    },
+    "frontend-000223": {
+        "message": "Tag restored"
+    },
+    "frontend-000228": {
+        "message": "رمز المرور"
+    },
+    "frontend-000229": {
+        "message": "كلمة المرور"
+    },
+    "frontend-000230": {
+        "message": "فشل كلمة المرور"
+    },
+    "frontend-000236": {
+        "message": "استعادة كلمة السر"
+    },
+    "frontend-000237": {
+        "message": "رد كلمة السر الفاشلة"
+    },
+    "frontend-000238": {
+        "message": "Url"
+    },
+    "frontend-000239": {
+        "message": "تلقيت"
+    },
+    "frontend-000240": {
+        "message": "مستعمل نسخ"
+    },
+    "frontend-000241": {
+        "message": "كلمة السر"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ تم نسخه إلى مشبك",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "الطبع $ELEMENT$ إلى لوح النسيج",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000246": {
+        "message": "إعادة التنقيح"
+    },
+    "frontend-000247": {
+        "message": "فشل إعادة النظر"
+    },
+    "frontend-000248": {
+        "message": "هل تريد إعادة التنقيح؟?"
+    },
+    "frontend-000249": {
+        "message": "شارك معك"
+    },
+    "frontend-000250": {
+        "message": "شاركك"
+    },
+    "frontend-000251": {
+        "message": "الإحصاءات"
+    },
+    "frontend-000252": {
+        "message": "الإبداع على"
+    },
+    "frontend-000256": {
+        "message": "المرات المشتركة [X7]",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": "المشفرة المطبقة على الخادم"
+    },
+    "frontend-000258": {
+        "message": "تطبيق التعديل على العملاء"
+    },
+    "frontend-000259": {
+        "message": "لا تشفير"
+    },
+    "frontend-000260": {
+        "message": "تشفير بسيط (الجنس 1)"
+    },
+    "frontend-000261": {
+        "message": "تشفير بسيط (الجنس 2)"
+    },
+    "frontend-000262": {
+        "message": "التشفير المتقدم (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Encryption with libsodium"
+    },
+    "frontend-000264": {
+        "message": "أكثر"
+    },
+    "frontend-000265": {
+        "message": "الدعم والاستعادة"
+    },
+    "frontend-000266": {
+        "message": "الترتيبات"
+    },
+    "frontend-000267": {
+        "message": "الدليل"
+    },
+    "frontend-Donate": {
+        "message": "تبرع"
+    },
+    "frontend-000268": {
+        "message": "تطبيقات وتمديدات"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ and $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": "السماح"
+    },
+    "frontend-000271": {
+        "message": "الإصغاء غير مأهول"
+    },
+    "frontend-000272": {
+        "message": "التقاسم"
+    },
+    "frontend-000273": {
+        "message": "التقاسم غير المألوف"
+    },
+    "frontend-000274": {
+        "message": "مستعمل البحث"
+    },
+    "frontend-000275": {
+        "message": "تاريخ انتهاء المدة"
+    },
+    "frontend-000276": {
+        "message": "المصروفات $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": "اختر تاريخ انتهاء الصلاحية أو اترك فارغاً لتشاركه للأبد"
+    },
+    "frontend-000278": {
+        "message": "يرجى اختيار موعد في المستقبل"
+    },
+    "frontend-000279": {
+        "message": "التاريخ غير المستقر"
+    },
+    "frontend-000280": {
+        "message": "لا وجود للمستعمل $UID$",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "غير قادر على تقاسم كلمة السر: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "لكتابة التصاريح"
+    },
+    "frontend-000283": {
+        "message": "Toggle share permissions"
+    },
+    "frontend-000284": {
+        "message": "توقف عن المشاركة"
+    },
+    "frontend-000285": {
+        "message": "التاريخ"
+    },
+    "frontend-000286": {
+        "message": "شارب العجز (0 ملف، صفر باء)"
+    },
+    "frontend-000288": {
+        "message": "Favicon Cache (0 files, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Preview Cache (0 files, 0 B)"
+    },
+    "frontend-000290": {
+        "message": "كلمات السر (0 ملفات، صفر باء)"
+    },
+    "frontend-000292": {
+        "message": "Modified"
+    },
+    "frontend-000293": {
+        "message": "Edited"
+    },
+    "frontend-000294": {
+        "message": "المنشأة"
+    },
+    "frontend-000295": {
+        "message": "التنقيح"
+    },
+    "frontend-000296": {
+        "message": "Url"
+    },
+    "frontend-000297": {
+        "message": "الوالد"
+    },
+    "frontend-000298": {
+        "message": "تحذف جميع البنود"
+    },
+    "frontend-000299": {
+        "message": "إعادة جميع البنود"
+    },
+    "frontend-000300": {
+        "message": "البنود الأساسية"
+    },
+    "frontend-000301": {
+        "message": "إعادة جميع الأشياء في القمامة؟?"
+    },
+    "frontend-000302": {
+        "message": "أعد هذا البند"
+    },
+    "frontend-000303": {
+        "message": "البنود المستعادة"
+    },
+    "frontend-000304": {
+        "message": "تراش فارغ"
+    },
+    "frontend-000305": {
+        "message": "تحذف كل الأشياء في القمامة؟?"
+    },
+    "frontend-000306": {
+        "message": "مقلية"
+    },
+    "frontend-000307": {
+        "message": "البحث"
+    },
+    "frontend-000308": {
+        "message": "استخدم صندوق البحث للبحث"
+    },
+    "frontend-000309": {
+        "message": "ابحث في كل مكان عن \"$QUERY$\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "ابحث"
+    },
+    "frontend-000310": {
+        "message": "لا يوجد شيء هنا"
+    },
+    "frontend-000311": {
+        "message": "اضغطي على \"أضيفي شيئاً\""
+    },
+    "frontend-000312": {
+        "message": "البنود المحذفة ستظهر هنا"
+    },
+    "frontend-000313": {
+        "message": "لم تُشاركك أي كلمة سر"
+    },
+    "frontend-000314": {
+        "message": "أنت لم تشارك أي كلمة سر"
+    },
+    "frontend-000315": {
+        "message": "المفضلة لديك سوف تظهر هنا"
+    },
+    "frontend-000316": {
+        "message": "من الأفضل التحقق من الأقسام الأخرى"
+    },
+    "frontend-000317": {
+        "message": "ربما هذه علامة جيدة"
+    },
+    "frontend-000318": {
+        "message": "الذهاب إلى $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": "المحتويات"
+    },
+    "frontend-000320": {
+        "message": "الشكل [X7]: $TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "غير قادر على جلب الصفحة: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "نوع المحتوى غير المستقر $MIME$",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "لا يوجد محتوى"
+    },
+    "frontend-000324": {
+        "message": "لم يعثر عليه"
+    },
+    "frontend-HandbookMoreHelp": {
+        "message": "هل تحتاج للمساعدة؟?",
+        "description": "Title of the box on the right in the handbook where users can find links to the forum and chat."
+    },
+    "frontend-HandbookMoreHelpForum": {
+        "message": "نسأل في محفلنا",
+        "description": "Label of the link to the forum in the box on the right in the handbook."
+    },
+    "frontend-HandbookMoreHelpChat": {
+        "message": "إسألْ في تابوتنا",
+        "description": "Label of the link to the chat in the box on the right in the handbook."
+    },
+    "frontend-HandbookBugsReport": {
+        "message": "أبلغ عن حشرة",
+        "description": "Label of the link to the bug report page in the box on the right in the handbook."
+    },
+    "frontend-HandbookMore": {
+        "message": "وثائق أخرى",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "دليل مدير البرنامج",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "دليل المطور",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-000330": {
+        "message": "الدورة الثانية عشرة"
+    },
+    "frontend-000331": {
+        "message": "خطأ الشبكة"
+    },
+    "frontend-000332": {
+        "message": "غير قادر على التحميل $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "نوع من الاسم"
+    },
+    "frontend-000334": {
+        "message": "صنفت حسب التاريخ المعدل"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ كلمة سر",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": "1 كلمة سر"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ folders",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "ملف واحد"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ tags",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": "بطاقة واحدة"
+    },
+    "frontend-000341": {
+        "message": "لا شيء"
+    },
+    "frontend-000342": {
+        "message": " و "
+    },
+    "frontend-000343": {
+        "message": "المباراة"
+    },
+    "frontend-000344": {
+        "message": "تطابق"
+    },
+    "frontend-000345": {
+        "message": "أنشئت من قبل"
+    },
+    "frontend-000346": {
+        "message": "أنت تَدْخلُ في مثل $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Login"
+    },
+    "frontend-000348": {
+        "message": "الطلب مرة أخرى"
+    },
+    "frontend-000349": {
+        "message": "محاولات كثيرة"
+    },
+    "frontend-000350": {
+        "message": "كلمة السر قصيرة جداً"
+    },
+    "frontend-000351": {
+        "message": "غير معروف"
+    },
+    "frontend-000352": {
+        "message": "فشل الطلب"
+    },
+    "frontend-000353": {
+        "message": "الصيانة"
+    },
+    "frontend-000354": {
+        "message": "غير متاحة"
+    },
+    "frontend-000355": {
+        "message": "النظام"
+    },
+    "frontend-000356": {
+        "message": "الوصول العام"
+    },
+    "frontend-000357": {
+        "message": "الخلفية الآلية المهام"
+    },
+    "frontend-000358": {
+        "message": "خط القيادة"
+    },
+    "frontend-000359": {
+        "message": "من فضلك اصحح مدخلك"
+    },
+    "frontend-000360": {
+        "message": "قيمة العرض"
+    },
+    "frontend-000361": {
+        "message": "إلغاء"
+    },
+    "frontend-000362": {
+        "message": "حسناً"
+    },
+    "frontend-000363": {
+        "message": "صحيح"
+    },
+    "frontend-000364": {
+        "message": "كاذب"
+    },
+    "frontend-000365": {
+        "message": "نعم"
+    },
+    "frontend-000366": {
+        "message": "لا"
+    },
+    "frontend-000367": {
+        "message": "$NAME$ قد شارك معك كلمة السر هذه.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": "لقد وصلت إلى الحد الأقصى من 4096 شخص"
+    },
+    "frontend-000369": {
+        "message": "لم نستطع إيجاد أي شيء لـ \"X32X\"",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": "ربما كنت قد طلبت الكثير من الكسور حاول مرة أخرى لاحقاً."
+    },
+    "frontend-000374": {
+        "message": "سيتم تعطيل التشفير من النهاية إلى الثانية من أجل كلمة السر هذه إذا شاركتها."
+    },
+    "frontend-000375": {
+        "message": "ولم تعد الدورة صالحة. التطبيق سيعاد تحميله."
+    },
+    "frontend-000376": {
+        "message": "واليوم في عام 2018، نُشرت النسخة الأولى من كلمات السر. شكراً لك على استخدام التطبيق."
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "إنقاذ كلمة سر مخفية في ملف غير مخبأ بنفسه سيجعل كلمة السر غير متاحة كلمة السر هذه لن تظهر في أي مكان هل تريد الاستمرار؟?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "إخفاء كلمة السر هذه؟?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "خادم الطرف الثالث",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "(ويثن لوجين) كان معاقاً يمكنك تمكينه مرة أخرى في الأماكن",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "الرعب",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "لا كلمة سر",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "كلمات المرور المفضلة لديك سوف تظهر هنا.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "لا نتائج",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "لم نستطع إيجاد أي شيء لـ \"X31X\"",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "ستستكمل النتائج بمجرد تحميل كل كلمة السر",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "فتش كل كلمة السر",
+        "description": "Label for the search query input field in the Nextcloud Dashboard Widget"
+    },
+    "backend-000377": {
+        "message": "HTTPS مطلوب"
+    },
+    "backend-000378": {
+        "message": "أعيد تحميل هذه الصفحة"
+    },
+    "backend-000379": {
+        "message": "منتدى"
+    },
+    "backend-000380": {
+        "message": "الوثائق"
+    },
+    "backend-000381": {
+        "message": "يمكنك محاولة $STR_1$ الصفحة مع HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "This application requires $STR_1$ in order to work safely.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "هذه ليست حشرة أزورنا إذا كنت بحاجة للمساعدة.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Review the HTTPS report below to debug the issue."
+    },
+    "backend-000385": {
+        "message": "إقرأ هذا $STR_1$ لتشكيل خادم الخاص بك لاستخدام HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "اقرأ هذا إذا كنت تستخدم أي نوع من الوكيل.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "اذهب إلى (X6X) للحصول على شهادة (HTTPS) مجاناً إذا كنت بحاجة إلى واحدة.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": "إذا استمرت هذه المشكلة يجب أن تتصل بمديرك."
+    },
+    "backend-000389": {
+        "message": "جلسة كلمات السر $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "الوثائق المفتوحة"
+    },
+    "backend-000391": {
+        "message": "أبداً"
+    },
+    "backend-000392": {
+        "message": "تجهيز البيانات الداخلية"
+    },
+    "backend-000393": {
+        "message": "Image Rendering"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick"
+    },
+    "backend-000395": {
+        "message": "الخدمات الخارجية"
+    },
+    "backend-000396": {
+        "message": "فحص أمن كلمة السر"
+    },
+    "backend-000397": {
+        "message": "هل تم تثبيتي؟ (التوصية)"
+    },
+    "backend-000398": {
+        "message": "قاعدة بيانات محلية كبيرة (25M كلمة سر)"
+    },
+    "backend-000399": {
+        "message": "قاعدة بيانات محلية صغيرة (5 كلمات سر)"
+    },
+    "backend-000400": {
+        "message": "قاعدة بيانات محلية كبيرة?"
+    },
+    "backend-000401": {
+        "message": "خدمة مولدات كلمات السر"
+    },
+    "backend-000402": {
+        "message": "القاموس المحلي"
+    },
+    "backend-000403": {
+        "message": "المصنفات العشوائية"
+    },
+    "backend-000404": {
+        "message": "الساعة 4:"
+    },
+    "backend-000405": {
+        "message": "Leipzig Corpora Collection"
+    },
+    "backend-000406": {
+        "message": "الخدمة الميدانية"
+    },
+    "backend-000407": {
+        "message": "محلل محلي"
+    },
+    "backend-000408": {
+        "message": "Besticon (recommended)"
+    },
+    "backend-000409": {
+        "message": "لا"
+    },
+    "backend-000410": {
+        "message": "خدمة الموقع الشبكي"
+    },
+    "backend-000411": {
+        "message": "الموقع الشبكي: المفتاح"
+    },
+    "backend-000412": {
+        "message": "الصفحات/الهواتف النقالة"
+    },
+    "backend-000413": {
+        "message": "WKHTML (Local)"
+    },
+    "backend-000414": {
+        "message": "الشاشة"
+    },
+    "backend-000415": {
+        "message": "Default Email Settings"
+    },
+    "backend-000416": {
+        "message": "إرسال البريد الإلكتروني للأحداث الأمنية"
+    },
+    "backend-000417": {
+        "message": "إرسال البريد الإلكتروني لتقاسم الأحداث"
+    },
+    "backend-000420": {
+        "message": "\"تظهر المستجدات الليلية في \"آب"
+    },
+    "backend-000421": {
+        "message": "أبداً"
+    },
+    "backend-000422": {
+        "message": "فورا"
+    },
+    "backend-000423": {
+        "message": "بعد ساعتين"
+    },
+    "backend-000424": {
+        "message": "بعد يوم واحد"
+    },
+    "backend-000425": {
+        "message": "بعد أسبوعين"
+    },
+    "backend-000426": {
+        "message": "بعد شهر واحد"
+    },
+    "backend-000427": {
+        "message": "بعد سنة واحدة"
+    },
+    "backend-000428": {
+        "message": "مجموعات الدعم"
+    },
+    "backend-000429": {
+        "message": "فترة الدعم"
+    },
+    "backend-000430": {
+        "message": "كل ساعة"
+    },
+    "backend-000431": {
+        "message": "كل 6 ساعات"
+    },
+    "backend-000432": {
+        "message": "كل يوم"
+    },
+    "backend-000433": {
+        "message": "كل يومين"
+    },
+    "backend-000434": {
+        "message": "كل أسبوع"
+    },
+    "backend-000435": {
+        "message": "كل أسبوعين"
+    },
+    "backend-000436": {
+        "message": "عدد النسخ الاحتياطية"
+    },
+    "backend-000437": {
+        "message": "Caches"
+    },
+    "backend-000438": {
+        "message": "Default Cache ($STR_1$ files, $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "Avatars Cache ($STR_1$ files, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Favicon Cache ($STR_1$ files, $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Preview Cache ($STR_1$ files, $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Passwords Cache ([X17] files, $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "واضح"
+    },
+    "backend-000444": {
+        "message": "أخلوا المكان"
+    },
+    "backend-000445": {
+        "message": "لا يمكنك أن تنظف مخبأ باستخدام خدمة مشتركة"
+    },
+    "backend-000446": {
+        "message": "منقذة"
+    },
+    "backend-000447": {
+        "message": "تطهير"
+    },
+    "backend-000448": {
+        "message": "فشل"
+    },
+    "backend-000449": {
+        "message": "مساعدة"
+    },
+    "backend-000450": {
+        "message": "وجدت حشرة"
+    },
+    "backend-000451": {
+        "message": "البحث عن الوثائق"
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ or $STR_1$? لقد قمنا بتغطيتك!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ لم يعد مدعوما.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": "كلمة السر تتطلب جهاز تحديد المواقع."
+    },
+    "backend-000455": {
+        "message": "وقد يتسبب استخدام $STR_1$ لتنفيذ وظائف خلفية في تأخيرات. نوصي باستخدام (كرون).",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "يرجى التحقق من متطلبات النظام."
+    },
+    "backend-000457": {
+        "message": "كلمة سر غير مشتركة"
+    },
+    "backend-000459": {
+        "message": "لديك كلمة سر غير آمنة"
+    },
+    "backend-000460": {
+        "message": "لديك كلمات سر غير آمنة"
+    },
+    "backend-000461": {
+        "message": "واحدة من كلمات المرور الخاصة بك لم تعد آمنة."
+    },
+    "backend-000462": {
+        "message": "بعض كلمات المرور الخاصة بك لم تعد آمنة."
+    },
+    "backend-000463": {
+        "message": "كلمات السر تدقق بشكل منتظم إذا كانت كلمات السر الخاصة بك قد تعرضت للخطر من قبل خرق البيانات."
+    },
+    "backend-000464": {
+        "message": "هذا الشيك الأمني وجد أن أحد كلمات المرور الخاصة بك غير آمن."
+    },
+    "backend-000465": {
+        "message": "هذا الشيك الأمني وجد أن كلمة السر غير آمنة.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": "هذا يعني أن كلمة السر خارج على الانترنت ويعرض حسابك للخطر."
+    },
+    "backend-000467": {
+        "message": "هذا يعني أن كلمات السر موجودة على الإنترنت وتضع حساباتك في خطر."
+    },
+    "backend-000468": {
+        "message": "ومن ثم فإن كلمة السر قد وُصفت بأنها غير آمنة وينبغي تغييرها الآن."
+    },
+    "backend-000469": {
+        "message": "ومن ثم فقد وُصفت كلمات السر بأنها غير آمنة وينبغي تغييرها الآن."
+    },
+    "backend-000470": {
+        "message": "يمكنك خلق كلمة سر آمنة جديدة في تطبيق كلمة السر."
+    },
+    "backend-000471": {
+        "message": "يمكنك أن تصنع كلمات سر آمنة جديدة في تطبيق كلمة السر."
+    },
+    "backend-000472": {
+        "message": "تغيير كلمة السر الآن"
+    },
+    "backend-000473": {
+        "message": "تغيير كلمات السر الآن"
+    },
+    "backend-000474": {
+        "message": "افتح تطبيق كلمة السر لتغييره."
+    },
+    "backend-000475": {
+        "message": "افتح تطبيق كلمة السر لتغييرها."
+    },
+    "backend-000476": {
+        "message": "$STR_1$ شارك معك كلمة سر.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ and $STRING_3$ shared $STRING_1$ passwords with you.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ and $STRING_2$ others shared $STRING_1$ passwords with you.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000482": {
+        "message": "افتح تطبيق كلمة السر لرؤيتهم."
+    },
+    "backend-000483": {
+        "message": "كلمة سر تم تقاسمها معك في $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "تم تبادل عدة كلمات سر معك في $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "كلمات سر فيو شاركتني"
+    },
+    "backend-000487": {
+        "message": "$STR_1$ of your passwords could not be shared because the recipient already has access to them.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": "تشاطر كلمة السر التي تم تقاسمها معك يمكن أحيانا أن تخلق حلقة."
+    },
+    "backend-000490": {
+        "message": "ولمنع ذلك، لن يتم تقاسم كلمات السر هذه."
+    },
+    "backend-000491": {
+        "message": "الدخول الإداري لحسابك"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ حاول تسجيل في حسابك على $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ سجل في حسابك على $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "بما أنك تستخدم كلمة مرور رئيسية، هذا لا يعني أن الوصول إلى بياناتك تم منحه."
+    },
+    "backend-000495": {
+        "message": "لمنع الوصول غير المرغوب إلى بياناتك، يجب أن تضع كلمة مرور رئيسية."
+    },
+    "backend-000496": {
+        "message": "Deleted User ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "ساعدنا على تحسين كلمات السر"
+    },
+    "backend-000498": {
+        "message": "يمكنك مساعدتنا لتحسين تطبيق كلمة السر من خلال المشاركة في مسح الخادم."
+    },
+    "backend-000499": {
+        "message": "هذا سيرسل لنا بعض البيانات المجهولة عن تركيبك و أماكن مختارة."
+    },
+    "backend-000500": {
+        "message": "يمكنك تغيير هذا في أي وقت في أماكن التطبيق."
+    },
+    "backend-000501": {
+        "message": "ليس بعد"
+    },
+    "backend-000502": {
+        "message": "المشاركة"
+    },
+    "backend-000503": {
+        "message": "مشاركة السيرفر"
+    },
+    "backend-000504": {
+        "message": "أساسي"
+    },
+    "backend-000505": {
+        "message": "كاملة"
+    },
+    "backend-000506": {
+        "message": "غير محدد"
+    },
+    "backend-000507": {
+        "message": "رجاءً إعتبرْ تَأْخذُ نفسياً api"
+    },
+    "backend-000508": {
+        "message": "تالكلود الخاص بك يستعمل حالات أفضلياتنا المشتركة لجلب أيقونات الموقع."
+    },
+    "backend-000509": {
+        "message": "وتستهدف هذه الحالات مجموعات صغيرة من التكيلوود ذات حركة مرور ضئيلة جدا."
+    },
+    "backend-000510": {
+        "message": "من فضلك اضغطي على الرابط و اتبعي دروسنا السهلة لاستضافة (بستيكون) بنفسك."
+    },
+    "backend-000516": {
+        "message": "لقد اكتشفنا العديد من المحاولات الفاشلة لفتح قاعدة بيانات كلمة المرور بـ \"X78X\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": "هذا يمكن أن يشير إلى شخص ما يحاول اقتحام حسابك."
+    },
+    "backend-000518": {
+        "message": "ولمنع المحاولات الأخرى، ألغيت وثائق تفويض هذا العميل."
+    },
+    "backend-000520": {
+        "message": "إذا كنت تريد الاستمرار في استخدام هذا العميل، تحتاج إلى خلق رمز جديد لذلك."
+    },
+    "backend-000521": {
+        "message": "إذا كنت لا تعرف هذا العميل، يرجى تغيير كلمة المرور الخاصة بك واستعراض قائمة الأجهزة الخاصة بك."
+    },
+    "backend-000522": {
+        "message": "وللحيلولة دون وقوع مزيد من المحاولات، أُعيق التوثيق القائم على أساس كلمتي السر."
+    },
+    "backend-000523": {
+        "message": "للتمكين من ذلك مرة أخرى، الدخول مع مكتب الإنترنت أو أي عميل يستخدم التوثيق المكسور."
+    },
+    "backend-000524": {
+        "message": "إذا كنت لا تعرف هذا العميل، يرجى تغيير كلمة المرور الرئيسية الخاص بك وكلمة السر التالية."
+    },
+    "backend-000525": {
+        "message": "من أجل زيادة الأمن، نوصي باستخدام عبوات محددة بدلاً من كلمة سرك."
+    },
+    "frontend-000526": {
+        "message": "Browser extension"
+    },
+    "frontend-000528": {
+        "message": "قواعد كلمة السر"
+    },
+    "frontend-000529": {
+        "message": "مارك مزدوج"
+    },
+    "frontend-000530": {
+        "message": "الحد الأقصى للسن في الأيام"
+    },
+    "frontend-000531": {
+        "message": "مولدات كلمة السر"
+    },
+    "frontend-000532": {
+        "message": "قوة كلمة السر"
+    },
+    "frontend-000533": {
+        "message": "تشمل الأرقام"
+    },
+    "frontend-000534": {
+        "message": "Include special characters"
+    },
+    "frontend-000535": {
+        "message": "المستعمل"
+    },
+    "frontend-000536": {
+        "message": "الفرع الأولي"
+    },
+    "frontend-000537": {
+        "message": "جميع كلمات السر"
+    },
+    "frontend-000538": {
+        "message": "قائمة كلمات السر"
+    },
+    "frontend-000539": {
+        "message": "العنوان المحدد"
+    },
+    "frontend-000540": {
+        "message": "نوعاً ما"
+    },
+    "frontend-000541": {
+        "message": "العنوان"
+    },
+    "frontend-000542": {
+        "message": "النقرة الوحيدة"
+    },
+    "frontend-000543": {
+        "message": "النقر المزدوج"
+    },
+    "frontend-000544": {
+        "message": "كلمة السر"
+    },
+    "frontend-000545": {
+        "message": "اسم مستخدم النسخ"
+    },
+    "frontend-000546": {
+        "message": "موقع إلكتروني"
+    },
+    "frontend-000547": {
+        "message": "التفاصيل"
+    },
+    "frontend-000548": {
+        "message": "إضافة خيارات للنسخ في القائمة"
+    },
+    "frontend-000549": {
+        "message": "اسم المستخدم في القائمة"
+    },
+    "frontend-000550": {
+        "message": "بطاقات العرض في القائمة"
+    },
+    "frontend-000551": {
+        "message": "تُظهر حقول العرف الخفية"
+    },
+    "frontend-000552": {
+        "message": "ابحثوا عن نوع"
+    },
+    "frontend-000553": {
+        "message": "البحث في كل مكان مع Enter"
+    },
+    "frontend-000554": {
+        "message": "دائماً ما تظهر فرق البحث"
+    },
+    "frontend-000555": {
+        "message": "الإخطارات"
+    },
+    "frontend-000556": {
+        "message": "أرسل رسائل البريد"
+    },
+    "frontend-000557": {
+        "message": "المسائل الأمنية"
+    },
+    "frontend-000558": {
+        "message": "كلمات السر مشتركة معي"
+    },
+    "frontend-000559": {
+        "message": "الإخطارات بالعرض"
+    },
+    "frontend-000560": {
+        "message": "أخطاء أخرى"
+    },
+    "frontend-000561": {
+        "message": "منطقة الخطر"
+    },
+    "frontend-000562": {
+        "message": "أعيدوا جميع الأماكن"
+    },
+    "frontend-000563": {
+        "message": "إعادة التوطين"
+    },
+    "frontend-000564": {
+        "message": "كل شيء"
+    },
+    "frontend-000565": {
+        "message": "ديليت كل شيء"
+    },
+    "frontend-000566": {
+        "message": "إعادة الحساب المطلوبة"
+    },
+    "frontend-000569": {
+        "message": "كلمات سر مارك ضعيفة إذا كانت تستخدم في حسابات متعددة"
+    },
+    "frontend-000570": {
+        "message": "كلمات سر العلامة ضعيفة إذا تجاوزت الكمية المحددة من الأيام"
+    },
+    "frontend-000571": {
+        "message": "يؤدي ارتفاع القوة إلى كلمات سر أطول وأكثر تعقيدا"
+    },
+    "frontend-000572": {
+        "message": "عرض الممتلكات المختارة كملكية في القائمة"
+    },
+    "frontend-000573": {
+        "message": "كلمات السر من قبل الممتلكات المختارة عند فرز الاسم"
+    },
+    "frontend-000574": {
+        "message": "الإجراء المتخذ لتأديته عند النقر على كلمة سر في القائمة"
+    },
+    "frontend-000575": {
+        "message": "اتخاذ إجراءات لتأديتها عند النقر المزدوج على كلمة سر في القائمة"
+    },
+    "frontend-000576": {
+        "message": "تظهر خيارات لنسخ كلمة السر واسم المستخدم في القائمة"
+    },
+    "frontend-000577": {
+        "message": "القسم الأولي الذي سيظهر عند فتح التطبيق"
+    },
+    "frontend-000578": {
+        "message": "دائماً يُظهر لقب المُستخدم مُتصل بكلمة السر في مُنظر القائمة"
+    },
+    "frontend-000579": {
+        "message": "اعرض البطاقات لكل كلمة سر في منظر القائمة زيادة أوقات الحمل"
+    },
+    "frontend-000580": {
+        "message": "إظهار حقول العرف الخفية في شكل التحرير وقسم التفاصيل من كلمة السر"
+    },
+    "frontend-000581": {
+        "message": "أرسل لك رسائل إلكترونية عن كلمة السر المسدودة وغيرها من المسائل الأمنية"
+    },
+    "frontend-000582": {
+        "message": "أرسل لك رسائل إلكترونية عندما يتشارك الآخرون كلمات السر معك"
+    },
+    "frontend-000583": {
+        "message": "دائماً يُظهر القسم للبحث العالمي في الملاحة"
+    },
+    "frontend-000584": {
+        "message": "يُخطرُك حول الكلماتِ السرّيةِ المسدودةِ وغيرها من المسائل الأمنية"
+    },
+    "frontend-000585": {
+        "message": "يخطرك عندما يتشارك الآخرين كلمات السر معك"
+    },
+    "frontend-000586": {
+        "message": "يخطرك عندما تفشل عملية خلفية"
+    },
+    "frontend-000587": {
+        "message": "اعيدوا جميع الأماكن في هذه الصفحة إلى تقصيرهم"
+    },
+    "frontend-000588": {
+        "message": "هذا سيعيد وضع كل الأماكن لفشلهم هل تريد الاستمرار؟?"
+    },
+    "frontend-000589": {
+        "message": "بدء وحذف جميع التشكيلات وكلمات السر والملفات والعلامات"
+    },
+    "frontend-000590": {
+        "message": "هل تريد أن تحذف كل أماكنك وكلمات السر والملفات والعلامات؟\nلن يكون من الممكن إلغاء هذا."
+    },
+    "frontend-000593": {
+        "message": "Edit as new"
+    },
+    "frontend-000594": {
+        "message": "تحرك"
+    },
+    "frontend-000595": {
+        "message": "مفتوح $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "غير معروف (لم يتم فحصه)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "ماذا توقعت؟?"
+    },
+    "frontend-000599": {
+        "message": "إضغطْ لإظهار رمزِ QR."
+    },
+    "frontend-000600": {
+        "message": "لا تحذرني ثانية"
+    },
+    "frontend-000601": {
+        "message": "القوة"
+    },
+    "frontend-000602": {
+        "message": "اقترب"
+    },
+    "frontend-000603": {
+        "message": "إزالة من المفضّلات"
+    },
+    "frontend-000604": {
+        "message": "العلامة المفضلة"
+    },
+    "frontend-000605": {
+        "message": "كلمة سر مخفية"
+    },
+    "frontend-000606": {
+        "message": "لا تظهر كلمة السر في أي مكان"
+    },
+    "frontend-000607": {
+        "message": "البيانات"
+    },
+    "frontend-000608": {
+        "message": "النوع"
+    },
+    "frontend-000609": {
+        "message": "ميدان جديد"
+    },
+    "frontend-000610": {
+        "message": "يحذف الحقل"
+    },
+    "frontend-000611": {
+        "message": "دليل العلامات المفتوحة"
+    },
+    "frontend-000612": {
+        "message": "Undo"
+    },
+    "frontend-000613": {
+        "message": "Redo"
+    },
+    "frontend-000614": {
+        "message": "سوف تنتهي $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000616": {
+        "message": "عدد كبير جدا من محاولات قطع الأشجار الفاشلة"
+    },
+    "frontend-000617": {
+        "message": "اختيار ملف"
+    },
+    "frontend-000618": {
+        "message": "اختيار \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ لا يمكن استخدامه",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": "البيت"
+    },
+    "frontend-000621": {
+        "message": "لا يوجد ملف",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": "جوازات السفر"
+    },
+    "frontend-000623": {
+        "message": "غير معروف"
+    },
+    "frontend-000624": {
+        "message": "النجدة"
+    },
+    "frontend-000625": {
+        "message": "اختر نوع التشفير لهذه كلمة السر"
+    },
+    "frontend-000627": {
+        "message": "احرص على أن يكون هذا الرمز مرئياً للناس الذين تثق بهم."
+    },
+    "frontend-000628": {
+        "message": "التشفير الذي طبقه الخادم قبل تخزين البيانات في قاعدة البيانات"
+    },
+    "frontend-000629": {
+        "message": "التشفير الذي طبقه العميل قبل إرسال البيانات إلى الخادم"
+    },
+    "frontend-000630": {
+        "message": "كلمة السر باطلة ألغيت الجلسة للعديد من المحاولات الفاشلة."
+    },
+    "frontend-000631": {
+        "message": "هذه نسخة من الفارق الذي اخترته للتشفير تغيير أو حذف هذا الدخول لا يؤثر على التشفير. لا يمكن تغيير المعبر إلا في البيئات ويمكن الاطلاع على مزيد من المعلومات في الكتيب."
+    },
+    "frontend-Disable": {
+        "message": "العجز"
+    },
+    "backend-000632": {
+        "message": "Favicon Service Api"
+    },
+    "backend-000633": {
+        "message": "(اختياري)"
+    },
+    "backend-000634": {
+        "message": "طلبك القادم أكثر من المعتاد."
+    },
+    "backend-000635": {
+        "message": "التعليم المفتوح"
+    },
+    "backend-000636": {
+        "message": "اكتشاف كمية مريبة من محاولات قطع الأشجار الفاشلة."
+    },
+    "backend-000637": {
+        "message": "المزيد من المعلومات"
+    },
+    "backend-000638": {
+        "message": "مشاهدة كلمات سر غير آمنة"
+    },
+    "backend-000639": {
+        "message": "الأطر المفتوحة"
+    },
+    "backend-000640": {
+        "message": "كلمات السر المفتوحة"
+    },
+    "backend-000641": {
+        "message": "تطبيقات اليقظة"
+    },
+    "backend-000642": {
+        "message": "أجهزة اليقظة"
+    },
+    "backend-000643": {
+        "message": "أجهزة إدارة"
+    },
+    "backend-000644": {
+        "message": "ترجمة"
+    },
+    "backend-000645": {
+        "message": "تحسين التطبيق الموصى به"
+    },
+    "backend-000646": {
+        "message": "عميل جديد أو تطبيق جديد كان متصلا بحسابك"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" مُنحت إمكانية الوصول إلى $STR_1$ حساب كلمة السر عبر \"باسلينك\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000648": {
+        "message": "يمكنك إدارة جميع الأجهزة والتطبيقات ذات الصلة في مواقعك في قسم الأمن.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "The last background job was executed with PHP $STRING_1$, but the webserver uses PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "وقد يثير استخدام نسخ رئيسية مختلفة من برنامج العمل الإنساني مسائل."
+    },
+    "backend-000651": {
+        "message": "Default Password Security Settings"
+    },
+    "backend-000652": {
+        "message": "التفتيش الأمني"
+    },
+    "backend-000653": {
+        "message": "لا تُخزّنْ هزّةَ"
+    },
+    "backend-000654": {
+        "message": "تخزين 50% من الحشيش"
+    },
+    "backend-000655": {
+        "message": "تخزين 75 في المائة من الحشيش"
+    },
+    "backend-000656": {
+        "message": "تخزين الحشيش الكامل"
+    },
+    "backend-000657": {
+        "message": "إعادة الدعم تلقائيا"
+    },
+    "backend-000658": {
+        "message": "يبدو أن تطبيق كلمة السر قد واجه مشكلة في قاعدة البيانات."
+    },
+    "backend-000659": {
+        "message": "بسبب هذا، تمّ إستعادة النسخ الإحتياطي \"$STR_1$ تلقائياً.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "إذا كان هذا خطأ، تم دعم قاعدة البيانات قبل إعادتها."
+    },
+    "backend-000661": {
+        "message": "يمكنك تعطيل الدعم التلقائي في تجهيزات التطبيق."
+    },
+    "backend-000662": {
+        "message": "إعادة الدعم تلقائياً عند مسح قاعدة البيانات"
+    },
+    "backend-000666": {
+        "message": "الانتقاء تلقائيا (التوصية)"
+    },
+    "backend-Passwords": {
+        "message": "كلمات السر"
+    },
+    "frontend-000667": {
+        "message": "Tgs CSV"
+    },
+    "frontend-000669": {
+        "message": "التقصير"
+    },
+    "frontend-000670": {
+        "message": "ابدأ البحث عندما يضغط مفتاح في أي مكان على الصفحة"
+    },
+    "frontend-000671": {
+        "message": "ابحث في كل مكان عندما يضغط مفتاح الدخول في صندوق البحث"
+    },
+    "settings-000678": {
+        "message": "دورة لوجين"
+    },
+    "settings-000679": {
+        "message": "أبقني أسجل"
+    },
+    "settings-000680": {
+        "message": "دائما"
+    },
+    "settings-000681": {
+        "message": "عندما أعمل"
+    },
+    "settings-000682": {
+        "message": "عندما أنشط"
+    },
+    "settings-000683": {
+        "message": "نهاية الدورة"
+    },
+    "settings-000684": {
+        "message": "دقيقة واحدة"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ دقيقة",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "التشفير من نهاية إلى نهاية"
+    },
+    "settings-000687": {
+        "message": "جهاز التشفير"
+    },
+    "settings-000688": {
+        "message": "لا أحد إذا إستعملت"
+    },
+    "settings-000689": {
+        "message": "تشفير بسيط"
+    },
+    "settings-000690": {
+        "message": "التشفير المتقدم"
+    },
+    "settings-000691": {
+        "message": "طريقة تشفير العملاء"
+    },
+    "settings-000693": {
+        "message": "تغيير كلمة السر"
+    },
+    "settings-000694": {
+        "message": "كلمات السر"
+    },
+    "settings-000695": {
+        "message": "موقع العرض:"
+    },
+    "settings-000696": {
+        "message": "كلمة سر جديدة"
+    },
+    "settings-000697": {
+        "message": "تكرار كلمة السر"
+    },
+    "settings-000698": {
+        "message": "كلمة السر القديمة"
+    },
+    "settings-000699": {
+        "message": "تغيرت كلمة السر"
+    },
+    "settings-000700": {
+        "message": "فشل تغيير كلمة السر"
+    },
+    "settings-000701": {
+        "message": "المسائل الإدارية"
+    },
+    "settings-000702": {
+        "message": "اقتسام كلمة السر"
+    },
+    "settings-000703": {
+        "message": "الحصة التي يمكن تهدئتها"
+    },
+    "settings-000704": {
+        "message": "السماح بالتقاسم عن طريق التقصير"
+    },
+    "settings-000705": {
+        "message": "المدونة"
+    },
+    "settings-000706": {
+        "message": "Invalid reset code"
+    },
+    "settings-000707": {
+        "message": "إضافة أرقام لتوليد كلمات سر"
+    },
+    "settings-000708": {
+        "message": "إضافة شخصيات خاصة لتوليد كلمات سر"
+    },
+    "settings-000709": {
+        "message": "تحديد الوقت بعد إلغاء الطلب قبل انعقاد الدورة"
+    },
+    "settings-000710": {
+        "message": "اختيار نوع التشفير المستخدم في تشفير البيانات عن الخادم"
+    },
+    "settings-000711": {
+        "message": "تشغيل ساحر التركيب لوضع تشفير لكلمات السر الخاصة بك"
+    },
+    "settings-000712": {
+        "message": "غير كلمة سر التشفير"
+    },
+    "settings-000713": {
+        "message": "يرجى تقديم عرض مسبق للموقع الشبكي ذي الصلة في التفاصيل. (ليس على الهواتف النقالة)"
+    },
+    "settings-000714": {
+        "message": "يخطركم بأخطاء التشكيل وغيرها من المسائل الإدارية"
+    },
+    "settings-000715": {
+        "message": "أدخلي \"X7X\" لإعادة حسابك وحذف كل شيء.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "يمكنك استخدام هذا الهاتف لتغيير كلمة المرور الرئيسية."
+    },
+    "settings-000717": {
+        "message": "كلمة سرك يجب أن تكون أكثر من 12 شخصية وليس كلمة السر القديمة"
+    },
+    "settings-000718": {
+        "message": "يرجى تأكيد كلمة السر الجديدة"
+    },
+    "settings-000719": {
+        "message": "يجب أن تدخل كلمة مرورك القديمة"
+    },
+    "settings-000720": {
+        "message": "لقد تغيرت كلمة السر بنجاح."
+    },
+    "settings-000721": {
+        "message": "إتاحة خيار السماح للمستعملين الآخرين بتحرير كلمة سر مشتركة عن طريق التقصير"
+    },
+    "settings-000722": {
+        "message": "إتاحة خيار السماح للمستعملين الآخرين بتقاسم كلمة سر مشتركة عن طريق التقصير"
+    },
+    "settings-000723": {
+        "message": "افتح الصفحة في الكتيب"
+    },
+    "settings-000724": {
+        "message": "إرسال طلبات مستمرة إلى الخادم لمنع إلغاء الدورة"
+    },
+    "settings-000725": {
+        "message": "اختر نوع التشفير المستخدم في تشفير البيانات عن العميل قبل إرساله إلى الخادم"
+    },
+    "settings-000726": {
+        "message": "The SHA-1 hash is used to check for breached passwords. ويمكن أن يحول الهزة الجزئية دون وقوع هجمات على القوة الشرسة في حالة اختراق الخادم، ولكن قد يتسبب أيضا في الإبلاغ الخاطئ عن مخالفة كلمات السر الآمنة."
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "نقرة Mousewheel",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "الإجراء الواجب القيام به عندما تضغط عجلة الفأر على دخول كلمة السر",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "اعرض زر الاختصار",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "يضاف زرا إضافيا للعمل المحدد في المنظر المكتبي",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "شاير تاب",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "استرداد المواد الخفية",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recover Items",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "هذا العمل يزيل العلم \"المخفي\" من البنود حتى تظهر هذه المواد في التطبيق مرة أخرى.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "استرداد المواد الخفية",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "يرجى اختيار أي نوع من المواد الخفية كنت ترغب في استرداد.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "كلمات السر التي ليست في ملف مخفي",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "إسترجعْ كلماتَ سرّ مخفيةَ التي في ملفِ الذي لَيسَ مخبأَ نفسه",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "مواد مخفية في القمامة",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "إسترجاع الأشياء المخبأة الموجودة حالياً في القمامة",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "كل كلمة سر مخفية",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "إسترجاع جميع كلمات السر الخفية بغض النظر عن وضعية الملف",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "جميع الملفات المخبأة",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "استرجاع جميع الملفات المخبأة",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "كل العلامات المخفية",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "استرجاع جميع العلامات المخفية",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recovered $PASSWORDS$ password(s), $FOLDERS$ folder(s) and $TAGS$ tag(s).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "البنود المستردة",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "حدث خطأ.",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "اركب مع (ويب)",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "خزنوا جهاز التشفير الخاص بك في هذا المستنقع وسجلوا تلقائيا عند فتح التطبيق",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "تصاريح التشفير",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "أكرر الـ \"باسفراس\"",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "WebAuthn Login Setup",
+        "description": "Title of the WebAuthn setup dialog."
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "أدخل دفتر التشفير أسفل. سوف يتم حفظه في منظفك والتطبيق سيحاول استخدامه عندما تفتحه في المرة القادمة إذا كانت عملية التبريد باطلة، فإن قطع الأشجار سيفشل مرة واحدة وسوف يكون ويبوثن معاقا.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "settings-WebauthnLoginSetupSuccess": {
+        "message": "(ويبوثن) يعمل الآن التطبيق سيحاول أن يستعمل الـ\"مرور\" المنقذ في المرة القادمة التي تدخل فيها",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "tutorial-000736": {
+        "message": "تذكر كلمات السر إذا.."
+    },
+    "tutorial-000737": {
+        "message": "هم أكبر سناً من"
+    },
+    "tutorial-000738": {
+        "message": "ثلاثة أشهر"
+    },
+    "tutorial-000739": {
+        "message": "ستة أشهر"
+    },
+    "tutorial-000740": {
+        "message": "سنة واحدة"
+    },
+    "tutorial-000741": {
+        "message": "سنتين"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ days",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "هم مضاعفون"
+    },
+    "tutorial-000744": {
+        "message": "اجعل كلمات السر الجديدة"
+    },
+    "tutorial-000745": {
+        "message": "قوي"
+    },
+    "tutorial-000746": {
+        "message": "أقوى"
+    },
+    "tutorial-000747": {
+        "message": "قوي جدا"
+    },
+    "tutorial-000748": {
+        "message": "قوية للغاية"
+    },
+    "tutorial-000749": {
+        "message": "الأرقام"
+    },
+    "tutorial-000750": {
+        "message": "تشمل الشخصيات الخاصة"
+    },
+    "tutorial-000751": {
+        "message": "منزل آمن لكلمتك السرّية"
+    },
+    "tutorial-000752": {
+        "message": "أبقي كلمات السر الخاصة بك سرية"
+    },
+    "tutorial-000753": {
+        "message": "تقليد تجربتك"
+    },
+    "tutorial-000755": {
+        "message": "تم ربطها"
+    },
+    "tutorial-000756": {
+        "message": "أدخل كلمات المرور الحالية"
+    },
+    "tutorial-000757": {
+        "message": "أنقذ كلمة السر"
+    },
+    "tutorial-000758": {
+        "message": "كرر كلمة المرور"
+    },
+    "tutorial-000759": {
+        "message": "تركيب التشفير"
+    },
+    "tutorial-000761": {
+        "message": "تنظيف"
+    },
+    "tutorial-000762": {
+        "message": "النجاح"
+    },
+    "tutorial-000763": {
+        "message": "ابحث عن المساعدة عندما تحتاجها"
+    },
+    "tutorial-000764": {
+        "message": "Go to Apps and extensions"
+    },
+    "tutorial-000765": {
+        "message": "استمر"
+    },
+    "tutorial-000766": {
+        "message": "Skip"
+    },
+    "tutorial-000767": {
+        "message": "تفقد أمن كلمة السر"
+    },
+    "tutorial-000768": {
+        "message": "كلمات السر المولدة باستخدام"
+    },
+    "tutorial-000769": {
+        "message": "الحصول على فافيكون من"
+    },
+    "tutorial-000770": {
+        "message": "الحصول على استعراضات الموقع من"
+    },
+    "tutorial-000771": {
+        "message": "اصنع الدعم"
+    },
+    "tutorial-000772": {
+        "message": "في جميع الأماكن"
+    },
+    "tutorial-000773": {
+        "message": "اقرأ نصائحنا للاعلان"
+    },
+    "tutorial-000774": {
+        "message": "كلمة السر (الرمز 12)"
+    },
+    "tutorial-000775": {
+        "message": "التشفير في التقدم.."
+    },
+    "tutorial-000776": {
+        "message": "هناك العديد من الأماكن حتى تتمكن من تكييف تجربتك."
+    },
+    "tutorial-000777": {
+        "message": "يمكنك أن تجد كل منهم في \"مور\" لكننا وضعنا الأكثر شيوعا هنا:"
+    },
+    "tutorial-000778": {
+        "message": "كلمة السر تقدم تشفيراً عصرياً وقوياً لحماية بياناتك من العيون المتطفلة."
+    },
+    "tutorial-000779": {
+        "message": "اختر كلمة سر مؤمنة أسفل لتفعيل الحماية النهائية لكلمات المرور الخاصة بك."
+    },
+    "tutorial-000780": {
+        "message": "اطلع على كلمات السر الخاصة بك بسهولة من أي مكان، بفضل تطبيقاتنا وتمديداتنا."
+    },
+    "tutorial-000781": {
+        "message": "يمكنك أن تجد قسم التأشيرات والتمديدات في \"مور\" أو أن تضغط على الزر."
+    },
+    "tutorial-000782": {
+        "message": "يمكن تكييف كلمة السر بطرق مختلفة."
+    },
+    "tutorial-000783": {
+        "message": "كمدير قد تود إلقاء نظرة على هذه الظروف المشتركة."
+    },
+    "tutorial-000784": {
+        "message": "عندما لا تعرف كيف يعمل شيء، يكون لديك أسئلة أو بحاجة للمساعدة في مشكلة:"
+    },
+    "tutorial-000785": {
+        "message": "المساعدة في الزاوية."
+    },
+    "tutorial-000786": {
+        "message": "دليلنا المبني يمكن العثور عليه بالنقر على \"مور\" ويشرح التطبيق بكل التفاصيل."
+    },
+    "tutorial-000787": {
+        "message": "في أي حالة أخرى، مجتمعنا هو المكان المناسب لطرح أسئلتك."
+    },
+    "tutorial-000788": {
+        "message": "وسيفتح الدليل بعد الدراسة"
+    },
+    "tutorial-000789": {
+        "message": "أدخل كلمة سر مع 12 شخصية أو أكثر"
+    },
+    "tutorial-000790": {
+        "message": "كلمة المرور الخاصة بك تحتاج على الأقل 12 شخصية وكلمة مرور التأكيد يجب أن تكون نفسها"
+    },
+    "tutorial-StartText1": {
+        "message": "مرحبًا بكم في برنامج \"سيّارة المرور\" (التلّكلوود)، المكان المثالي لإبقاء كلمات المرور آمنة ومنظمة.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "قاعدة بيانات سرية مزودة بكلمات سر وملفات وعلامات وبيئات (لا تشمل كلمات السر المشتركة معك. لا يعمل مع E2E مكنت",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "كلمات السر لا يمكن تصديرها",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "لأنّكِ مُكنتِ من التكفير من النهاية إلى الأرض، لا يمكن إضافة كلمة سرّكِ إلى التصدير تلقائياً. كبديل، يمكنك استخدام وظيفة التصدير في تطبيق لتصدير بياناتك.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "خيار الطباعة",
+        "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "يظهر خيار لطباعة كلمة السر في القائمة والتفاصيل",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "كلمة السر المطبوعة",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "ملفات الشحن",
+        "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "Show QrCode",
+        "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "كلمة السر ملصقة بالفعل مع $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "The password was tagged with $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "لا يمكن توسيم كلمة السر مع $TAG$: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-ExpertSettingsLabel": {
+        "message": "مجموعات الخبراء",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "التفاصيل التقنية",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "طريقة التشفير",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "تم إرسال كلمة السر هذه إلى الخادم على اتصال مأمون بجهاز تحديد المواقع و تم تشفيرها هناك قبل تخزينها في قاعدة البيانات.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "كلمة السر هذه مشفرة على جهازك قبل إرسالها إلى الخادم لا يمكن قراءة كلمة السر هذه دون معرفة كلمة سر التشفير الخاصة بك.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "التشفير من نهاية إلى أخرى",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Server Side Encryption",
+        "description": "Label for the server side encryption method"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "لا شيء لنسخ، $ELEMENT$ فارغ",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "توقف!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "وهذه السمة موجهة إلى المطورين، وليس إلى المستخدمين.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "إذا قال لك أي شخص أن تنسخ وترعى أي شيء هنا، فمن المرجح أنها سوف تحصل على الوصول إلى كلمات السر الخاصة بك أو تأخذ على حسابك.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "See {link} for more information.",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "ترتيبات التشفير",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "السماح لطرف ثالث بالتشفير",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudTitle": {
+        "message": "تنتهي كلمات السر بمستجدات المستجدات لـ (توكلود) [X37]",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: Installed Nextcloud version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudText1": {
+        "message": "كلمة السر $STR_1$ هي آخر تحديث للتالية $STR_2$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_2$: Installed Nextcloud version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "ترقية إلى التالي (X21X) للتحسينات المستقبلية.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "تنتهي كلمات السر بمستجدات PHP [X31]",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "كلمة السر [X10] هي آخر تحديث ل PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "ترقية إلى PHP $STR_2$ (أو PHP $STR_3$ لLSR) للتحسينات المستقبلية.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "تنتهي كلمات السر بتحديثات التلكترون [X37] و PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "كلمة السر [X10] هي آخر تحديث للتالية $STR_2$ وPHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Upgrade to nextcloud $STR_1$ and PHP $STR_2$ (or PHP $STR_3$ for LSR) for future upgrades.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "ويمكن حذف هذا الإخطار.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "لا يمكن تحديث قاعدة بيانات كلمات السر المخترقة",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "The breached passwords database update failed three times. يرجى الرجوع إلى الدليل والتحقق من سجلاتك. السبب: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "صفحة كلمة السر",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "لقد إكتشفنا الثور أسفل كصفحة تغيير كلمة السر لـ {لابيل} اضغط الزر لفتحه.",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "apps-000001": {
+        "message": "الرسمي"
+    },
+    "apps-000002": {
+        "message": "$AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000025": {
+        "message": "هذه العميلة يحتفظ بها أصحاب تطبيقات كلمة السر"
+    },
+    "apps-000026": {
+        "message": "قم بضغط الزر لربط جهاز مركب على هذا الجهاز أو مسح رمز QR مع التطبيق إذا تم تركيبه على جهاز آخر."
+    },
+    "backups-000028": {
+        "message": "الدعم أو التصدير"
+    },
+    "backups-000038": {
+        "message": "لا استيراد لسي سي إس في؟?",
+        "description": "Label for the button next to the input format selection which opens the help page for the custom CSV import"
+    },
+    "backups-000039": {
+        "message": "كلمة مرور احتياطية"
+    },
+    "backups-000040": {
+        "message": "(اختياري)"
+    },
+    "backups-000042": {
+        "message": "كلمات سر التصدير"
+    },
+    "backups-000047": {
+        "message": "Tags"
+    },
+    "backups-000048": {
+        "message": "الوالدين"
+    },
+    "backups-000049": {
+        "message": "Folder Id"
+    },
+    "backups-000050": {
+        "message": "Tag Ids"
+    },
+    "backups-000067": {
+        "message": "Folder CSV"
+    },
+    "frontend-000167": {
+        "message": "ضعيف (زائد)"
+    },
+    "frontend-000168": {
+        "message": "ضعيف (مخصص)"
+    },
+    "frontend-000169": {
+        "message": "بريق"
+    },
+    "frontend-000170": {
+        "message": "Share"
+    },
+    "frontend-000171": {
+        "message": "التنقيحات"
+    },
+    "frontend-000172": {
+        "message": "QR Code"
+    },
+    "frontend-000173": {
+        "message": "كلمة السر"
+    },
+    "frontend-000174": {
+        "message": "المستعمل"
+    },
+    "frontend-000175": {
+        "message": "الموقع الشبكي"
+    },
+    "frontend-000176": {
+        "message": "أضف التاغز"
+    },
+    "frontend-000177": {
+        "message": "Color"
+    },
+    "frontend-000178": {
+        "message": "الاسم"
+    },
+    "frontend-000183": {
+        "message": "خصائص خاصة"
+    },
+    "frontend-000179": {
+        "message": "Label"
+    },
+    "frontend-000180": {
+        "message": "معلومات عامة"
+    },
+    "frontend-000181": {
+        "message": "الممتلكات"
+    },
+    "frontend-000182": {
+        "message": "الأرقام"
+    },
+    "frontend-000184": {
+        "message": "المزيد من الخيارات"
+    },
+    "frontend-000185": {
+        "message": "المفضلة"
+    },
+    "frontend-000186": {
+        "message": "التشفير"
+    },
+    "frontend-000187": {
+        "message": "على الخادم"
+    },
+    "frontend-000195": {
+        "message": "تبسيط السيرفر المشفرة"
+    },
+    "frontend-000196": {
+        "message": "خذ بعض الملاحظات"
+    },
+    "frontend-000197": {
+        "message": "أنقذ"
+    },
+    "frontend-000198": {
+        "message": "مجلدات الكريات"
+    },
+    "frontend-000199": {
+        "message": "الطائر المُنشأ"
+    },
+    "frontend-000200": {
+        "message": "اختراق الملفات"
+    },
+    "frontend-000201": {
+        "message": "Rename folder"
+    },
+    "frontend-000202": {
+        "message": "إعادة تسمية الجندي"
+    },
+    "frontend-000203": {
+        "message": "مطروحة فاشلة"
+    },
+    "frontend-000204": {
+        "message": "تحرك"
+    },
+    "frontend-000205": {
+        "message": "فشل في نقل الملفات"
+    },
+    "frontend-000206": {
+        "message": "تحذف الملفات"
+    },
+    "frontend-000207": {
+        "message": "هل تريد حذف الملف ومحتوياته؟?"
+    },
+    "frontend-000224": {
+        "message": "رد البطاقة فشلت"
+    },
+    "frontend-000225": {
+        "message": "Create password"
+    },
+    "frontend-000226": {
+        "message": "كلمة سر خلقت"
+    },
+    "frontend-000227": {
+        "message": "اختراق كلمة السر"
+    },
+    "frontend-000231": {
+        "message": "كلمة المرور"
+    },
+    "frontend-000232": {
+        "message": "فشل كلمة المرور"
+    },
+    "frontend-000233": {
+        "message": "كلمة السر"
+    },
+    "frontend-000234": {
+        "message": "هل تريد حذف كلمة السر؟?"
+    },
+    "frontend-000235": {
+        "message": "كلمة السر حذفت"
+    },
+    "frontend-000244": {
+        "message": "آخر تعديل على [X17]",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "إعادة النظر"
+    },
+    "frontend-000253": {
+        "message": "آخر تحديث"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$تنقيحات",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": "حصص"
+    },
+    "frontend-000287": {
+        "message": "Avatars Cache (0 files, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "تغير"
+    },
+    "frontend-000329": {
+        "message": "انتهت الدورة"
+    },
+    "frontend-000370": {
+        "message": "الصفحة \"$PAGE$\" لا يمكن جلبها من خادم الكتيب.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "بعض البيانات تنتظر أن تكون متزامنة"
+    },
+    "frontend-000372": {
+        "message": "سيتم تسجيلك في $TIME$ ثواني",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-Tags": {
+        "message": "Tags"
+    },
+    "frontend-Folder": {
+        "message": "Folder"
+    },
+    "backend-000418": {
+        "message": "مجموعات أخرى"
+    },
+    "backend-000419": {
+        "message": "إزالة الأجسام المحذوفة من قاعدة البيانات"
+    },
+    "backend-000477": {
+        "message": "$STR_1$ shared $STR_1$ passwords with you.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "افتح تطبيق كلمة السر لرؤيته."
+    },
+    "backend-000486": {
+        "message": "واحدة من كلمات المرور الخاصة بك لا يمكن تقاسمها لأن المتلقي لديه بالفعل الوصول إليها."
+    },
+    "backend-000512": {
+        "message": "تشكيلة خدماتك التمهيدية غير صحيحة"
+    },
+    "backend-000513": {
+        "message": "خدمتك المُختارة في (فايفسون) تتطلب مفتاحاً أو نقطة نهاية، لكن لا أحد يُعطى."
+    },
+    "backend-000514": {
+        "message": "خدماتك المختاره تحتاج الى مفتاح أو نقطة نهاية لكن لا يوجد شيء."
+    },
+    "backend-000515": {
+        "message": "افتحوا أماكن الإعلان لتحديث التشكيلة أو اختاروا خدمة أخرى."
+    },
+    "backend-000519": {
+        "message": "أيضاً، تم تعطيل التوثيق المبني على كلمة السر."
+    },
+    "frontend-000626": {
+        "message": "هل تريد حذف الحقل \"$FIELD$\"؟?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-Enable": {
+        "message": "التمكين"
+    },
+    "tutorial-000730": {
+        "message": "بعد الإطلاق، أظهر لي"
+    },
+    "tutorial-000731": {
+        "message": "الملفات"
+    },
+    "tutorial-000732": {
+        "message": "العلامات"
+    },
+    "tutorial-000733": {
+        "message": "المفضلة"
+    },
+    "tutorial-000734": {
+        "message": "كلمات السر"
+    },
+    "tutorial-000735": {
+        "message": "تغير مؤخرا"
+    },
+    "tutorial-000760": {
+        "message": "Keychain"
+    },
+    "tutorial-StartText2": {
+        "message": "لنبدأ",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "صفحة كلمة السر",
+        "description": "Label in the dialog to open the change password page of the button to open that page"
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "لا يعلنون صفحة تغيير كلمة السر قد تجد وظيفة كلمة المرور على الموقع.",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "The chosen encryption passphrase is insecure and therefore can not be used.",
+        "description": "Text of the alert dialog when the user wants to set up encryption with an insecure/breached passphrase"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "التكسير غير الآمن",
+        "description": "Title of the alert dialog when the users passphrase is insecure/breached"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "تستخدم كلمة السر بشكل منتظم للتحقق إذا كان التشفير الخاص بك لا يزال آمنا. تمريرك الحالي غير آمن و يجب أن يتغير على الفور.",
+        "description": "Text of the alert dialog when the users passphrase has been checked by the app and was found to be insecure/breached"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "التحقق إذا كان الخادم يدير وظائف خلفية مع cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "وتُنفَّذ وظائف أساسية مع cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "التحقق إذا كان الخادم يدير مهام خلفية بنفس صيغة PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "وتُنفَّذ وظائف أساسية بنفس صيغة برنامج العمل الوطني.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    }
+}
