@@ -984,10 +984,10 @@
         "message": "Non trouvé"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Faites nous en part !"
+        "message": "Signaler un bogue"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Toujours besoin d’aide ?"
+        "message": "Avez-vous besoin d'aide ?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Demandez sur le forum !"
@@ -2222,7 +2222,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Ou dans notre Chat !"
+        "message": "Posez votre question dans notre chat"
     },
     "frontend-000616": {
         "message": "Trop de tentatives de connexion échouées"
@@ -3209,11 +3209,11 @@
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "frontend-WebAuthnLoginDisabled": {
-        "message": "WebAuthn Login a été désactivé. Vous pouvez l'activer à nouveau dans les paramètres",
+        "message": "WebAuthn Login a été désactivé. Vous pouvez l'activer à nouveau dans les paramètres.",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "Saisissez votre phrase de chiffrement ci-dessous. Elle sera enregistrée dans votre navigateur et l'application tentera de l'utiliser lorsque vous l'ouvrirez la prochaine fois. Si la phrase de passe n'est pas valide, la connexion échouera une fois et WebAuthn sera désactivé.",
+        "message": "Saisissez votre phrase de passe de chiffrement ci-dessous. Elle sera enregistrée dans votre navigateur et l'application tentera de l'utiliser lorsque vous l'ouvrirez la prochaine fois. Si la phrase de passe n'est pas valide, la connexion échouera une fois et WebAuthn sera désactivé.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnLoginSetupSuccess": {
@@ -3225,7 +3225,7 @@
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
-        "message": "Enregistrez votre phrase de chiffrement dans ce navigateur et connectez-vous automatiquement à l'ouverture de l'application.",
+        "message": "Stockez votre phrase de passe de chiffrement dans ce navigateur et connectez-vous automatiquement à l'ouverture de l'appli.",
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
@@ -3248,7 +3248,7 @@
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     },
     "frontend-DashboardNoPasswords": {
-        "message": "Pas de mot de passe",
+        "message": "Pas de mots de passe",
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
     "frontend-DashboardNoPasswordsText": {
@@ -3264,7 +3264,7 @@
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Rien n’à été trouvé pour la recherche \"$QUERY$\"",
+        "message": "Nous n'avons rien trouvé pour \"$QUERY$\".",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3300,11 +3300,11 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-CSEPassphraseInsecureTitle": {
-        "message": "Phrase de chiffrement non sécurisée",
+        "message": "Phrase de passe de chiffrement non sécurisée",
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-CSEPassphraseInsecureText": {
-        "message": "L'application Mots de passe vérifie régulièrement si votre phrase de chiffrement est toujours sécurisée. Votre phrase de passe actuelle n'est pas sécurisée et doit être modifiée immédiatement."
+        "message": "L'appli mots de passe vérifie régulièrement si votre phrase de passe de chiffrement est toujours sécurisée. Votre phrase de passe actuelle n'est pas sécurisée et doit être modifiée immédiatement."
     },
     "backend-CronSetupCheckName": {
         "message": "Vérifier si le serveur exécute des tâches d'arrière-plan avec cron.",
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Bienvenue dans l'application Mot de passe pour Nextcloud, l'endroit idéal pour garder vos mots de passe en sécurité et organisés.",
+        "message": "Bienvenue dans l'application Mots de passe pour Nextcloud, l'endroit idéal pour garder vos mots de passe en sécurité et organisés.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
