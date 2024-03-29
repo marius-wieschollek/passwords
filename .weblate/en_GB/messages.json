@@ -1484,7 +1484,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Or in our Chat!"
+        "message": "Ask in our Chat"
     },
     "frontend-000616": {
         "message": "Too many failed login attempts"
@@ -2612,13 +2612,13 @@
         "message": "Not Found"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Still need help?"
+        "message": "Do you need help?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Ask in our forum!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Tell us!"
+        "message": "Report a bug"
     },
     "frontend-000329": {
         "message": "The session has expired"
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Show QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Encryption with third party key",
+        "message": "Third party server side encryption",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3059,7 +3059,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "See {link} for more information",
+        "message": "See {link} for more information.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "We have detected the url below as the password change page for \"{label}\". Click the button to open it",
+        "message": "We have detected the url below as the password change page for \"{label}\". Click the button to open it.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Welcome to the  Password App for Nextcloud, the perfect place to keep your passwords safe and organized.",
+        "message": "Welcome to the Passwords App for Nextcloud, the perfect place to keep your passwords safe and organized.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
