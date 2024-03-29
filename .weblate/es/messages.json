@@ -733,7 +733,7 @@
         "message": "Borrar etiqueta"
     },
     "frontend-000220": {
-        "message": "¿Desea eliminar la etiqueta?"
+        "message": "¿Deseas borrar la etiqueta?"
     },
     "frontend-000221": {
         "message": "Etiqueta borrada"
@@ -775,7 +775,7 @@
         "message": "Borrar contraseña"
     },
     "frontend-000234": {
-        "message": "¿Desea eliminar la contraseña?"
+        "message": "Deseas borrar la contraseña?"
     },
     "frontend-000235": {
         "message": "Contraseña borrada"
