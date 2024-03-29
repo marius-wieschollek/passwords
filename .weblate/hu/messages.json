@@ -429,7 +429,7 @@
         "message": "Jelszó érvénytelen"
     },
     "backups-000120": {
-        "message": "Nem sikerült a jelszavak visszafejtése"
+        "message": "Nem sikerült visszafejteni a jelszavakat"
     },
     "backups-000121": {
         "message": "Nem sikerült a mappák visszafejtése"
@@ -474,7 +474,7 @@
         "message": "Érvénytelen utolsó idézőjel az idézőjeles mezőben"
     },
     "backups-000135": {
-        "message": "A fájlt nem sikerült elemezni: $ERRORS$",
+        "message": "A fájlt nem lehetett elemezni: $ERRORS$",
         "placeholders": {
             "errors": {
                 "content": "$1"
@@ -646,7 +646,7 @@
         "message": "Felhasználónév"
     },
     "frontend-000175": {
-        "message": "Weboldal"
+        "message": "Honlap"
     },
     "frontend-000176": {
         "message": "Címkék hozzáadása…"
@@ -935,7 +935,7 @@
         "message": "Fejlett titkosítás (SSE V2)"
     },
     "frontend-000263": {
-        "message": "Titkosítás libsodiummal"
+        "message": "Titkosítás a libsodiummal"
     },
     "frontend-000264": {
         "message": "További"
@@ -990,7 +990,7 @@
         }
     },
     "frontend-000277": {
-        "message": "Válasszon egy lejárati dátumot, vagy hagyja üresen, hogy örökre megossza a fájlt"
+        "message": "Válasszon egy lejárati dátumot, vagy hagyja üresen, hogy örökre megossza a fájlt."
     },
     "frontend-000278": {
         "message": "Kérjük, válasszon egy jövőbeli időpontot"
@@ -1150,7 +1150,7 @@
         }
     },
     "frontend-000321": {
-        "message": "Nem sikerült lekérni az oldalt: $MESSAGE$.",
+        "message": "Nem sikerült az oldalt lekérni: $MESSAGE$.",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -1172,13 +1172,13 @@
         "message": "Nem találták"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Még mindig segítségre van szüksége?"
+        "message": "Segítségre van szüksége?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Kérdezz a fórumunkon!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Mondd el nekünk!"
+        "message": "Hiba jelentése"
     },
     "frontend-000329": {
         "message": "A munkamenet lejárt"
@@ -1423,7 +1423,7 @@
         }
     },
     "backend-000384": {
-        "message": "A probléma elhárításához tekintse át az alábbi HTTPS-jelentést."
+        "message": "Tekintse át az alábbi HTTPS-jelentést a probléma elhárításához."
     },
     "backend-000385": {
         "message": "Olvassa el ezt a $STR_1$ címet, hogy beállítsa a kiszolgálót a HTTPS használatára.",
@@ -1509,7 +1509,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Lipcsei Korpuszgyűjtemény (ajánlott)"
+        "message": "Lipcsei Korpuszgyűjtemény"
     },
     "backend-000406": {
         "message": "Favicon szolgáltatás"
@@ -1729,7 +1729,7 @@
         "message": "Kérjük, ellenőrizze a rendszerkövetelményeket."
     },
     "backend-000457": {
-        "message": "Jelszó nem megosztott"
+        "message": "Nem megosztott jelszó"
     },
     "backend-000459": {
         "message": "Bizonytalan jelszóval rendelkezik"
@@ -1764,7 +1764,7 @@
         "message": "Ez azt jelenti, hogy a jelszavak kint vannak az interneten, és veszélyeztetik a fiókjait."
     },
     "backend-000468": {
-        "message": "Ezért a jelszó nem biztonságosnak lett megjelölve, és mostantól meg kell változtatni."
+        "message": "Ezért a jelszó nem biztonságosnak lett megjelölve, és most meg kell változtatni."
     },
     "backend-000469": {
         "message": "Ezért a jelszavak nem biztonságosnak lettek megjelölve, és mostantól meg kell változtatni őket."
@@ -1969,7 +1969,7 @@
         "message": "Kérjük, fontolja meg a favicon api saját tárhelyen történő elhelyezését."
     },
     "backend-000508": {
-        "message": "A Nextcloud a megosztott Besticon példányainkat használja a weboldal ikonjainak lekérdezésére."
+        "message": "Az Ön Nextcloudja a megosztott Besticon példányainkat használja a weboldal ikonjainak lekérdezésére."
     },
     "backend-000509": {
         "message": "Ezeket a példányokat kis Nextcloud-berendezésekhez szánják, nagyon kis forgalommal."
@@ -2142,10 +2142,10 @@
         "message": "Számla visszaállítását kérte"
     },
     "frontend-000569": {
-        "message": "Jelölje gyenge jelszavaknak, ha több fiókhoz is használják őket"
+        "message": "Jelölje gyenge jelszóként, ha több fiókhoz is használják őket"
     },
     "frontend-000570": {
-        "message": "A jelszavak gyenge jelszavakként való megjelölése, ha a megadott napok száma meghaladja a megadott időtartamot."
+        "message": "A jelszavak gyenge jelszónak jelölése, ha a megadott napok száma meghaladja a megadott időtartamot."
     },
     "frontend-000571": {
         "message": "A nagyobb erősség hosszabb, összetettebb jelszavakat eredményez."
@@ -2284,7 +2284,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Vagy a Chatben!"
+        "message": "Kérdezz a Chatben"
     },
     "frontend-000616": {
         "message": "Túl sok sikertelen bejelentkezési kísérlet"
@@ -2376,7 +2376,7 @@
         "message": "Bizonytalan jelszavak megtekintése"
     },
     "backend-000639": {
-        "message": "Beállítások megnyitása"
+        "message": "Nyissa meg a beállításokat"
     },
     "backend-000640": {
         "message": "Nyitott jelszavak"
@@ -2699,7 +2699,7 @@
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "settings-SettingsRecoverItems": {
-        "message": "Rejtett elemek visszaszerzése",
+        "message": "Rejtett elemek helyreállítása",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-SettingsRecoverItemsButton": {
@@ -2711,7 +2711,7 @@
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
-        "message": "Rejtett elemek visszaszerzése",
+        "message": "Rejtett elemek helyreállítása",
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
@@ -2893,7 +2893,7 @@
         "message": "Jelszavak generálása a"
     },
     "tutorial-000769": {
-        "message": "Szerezd meg a kedvenceket a"
+        "message": "Szerezz kedvenceket a"
     },
     "tutorial-000770": {
         "message": "Weboldal előnézetek a"
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "QrCode megjelenítése",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Titkosítás harmadik fél kulcsával",
+        "message": "Harmadik fél szerveroldali titkosítása",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3059,7 +3059,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "További információért lásd {link}",
+        "message": "További információkért lásd a {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3095,7 +3095,7 @@
         }
     },
     "backend-EOLPHPText1": {
-        "message": "A jelszavak $STR_1$ a PHP $STR_3$ utolsó frissítése.",
+        "message": "Jelszavak $STR_1$ a PHP $STR_3$ utolsó frissítése.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3177,7 +3177,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Az alábbi url-t észleltük a \"{label}\" jelszóváltoztatási oldalaként. Kattintson a gombra a megnyitásához",
+        "message": "Az alábbi url-t észleltük a \"{label}\" jelszóváltoztatási oldalaként. Kattintson a gombra a megnyitásához.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3189,7 +3189,7 @@
         }
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" nem jelenti be a jelszóváltoztatási oldalukat. A jelszóváltoztatási funkciót a weboldalon találja.",
+        "message": "\"{host}\" nem jelenti be a jelszóváltoztatási oldalukat. A jelszóváltoztatási funkciót a weboldalon találhatja meg.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3205,7 +3205,7 @@
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-RecoverItemsInvisibleTrashTitle": {
-        "message": "Visszaszerezze a jelenleg a szemétben lévő rejtett elemeket",
+        "message": "Visszaállítja a jelenleg a szemétben lévő rejtett elemeket",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "frontend-WebAuthnLoginDisabled": {
