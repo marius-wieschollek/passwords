@@ -263,7 +263,7 @@
         "message": "Excluir etiqueta"
     },
     "frontend-000220": {
-        "message": "Quer apagar a etiqueta?"
+        "message": "Você quer deletar a etiqueta"
     },
     "frontend-000221": {
         "message": "Etiqueta deletada"
@@ -305,7 +305,7 @@
         "message": "Excluir senha"
     },
     "frontend-000234": {
-        "message": "Quer apagar a palavra-passe?"
+        "message": "Você quer deletar a senha"
     },
     "frontend-000235": {
         "message": "Senha excluída"
