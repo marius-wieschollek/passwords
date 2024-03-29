@@ -3026,7 +3026,7 @@
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Uçtan Uca Şifreleme",
+        "message": "Uçtan uca Şifreleme",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
