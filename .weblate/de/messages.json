@@ -2537,7 +2537,7 @@
         "message": "Startet die Suche sobald eine Taste gedrückt wird"
     },
     "frontend-000671": {
-        "message": "Sucht überall wenn die Enter-Taste im Suchfeld gedrückt wird"
+        "message": "Sucht überall, wenn die Enter-Taste im Suchfeld gedrückt wird"
     },
     "frontend-000583": {
         "message": "Zeigt die Sektion für die globale Suche immer in der Navigation an"
