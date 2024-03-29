@@ -89,7 +89,7 @@
         "message": "导出"
     },
     "backups-000059": {
-        "message": "等待着…"
+        "message": "等待…"
     },
     "backups-000060": {
         "message": "导出出错"
@@ -1066,7 +1066,7 @@
         "message": "删除分类"
     },
     "frontend-000207": {
-        "message": "你想删除该文件夹和它的内容吗？"
+        "message": "您想删除文件夹及其内容吗？"
     },
     "frontend-000208": {
         "message": "分类已删除"
@@ -1499,13 +1499,13 @@
         "message": "未找到"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "仍需要帮助？"
+        "message": "您需要帮助吗？"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "在我们的论坛中询问！"
     },
     "frontend-HandbookBugsReport": {
-        "message": "告诉我们！"
+        "message": "报告错误"
     },
     "frontend-000329": {
         "message": "该会话已过期"
@@ -1752,7 +1752,7 @@
         }
     },
     "backend-000387": {
-        "message": "如果你需要的话，请到$STR_1$ ，获得一个免费的HTTPS证书。",
+        "message": "如有需要，请访问$STR_1$ 获取免费 HTTPS 证书。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2338,7 +2338,7 @@
         "message": "分类名"
     },
     "frontend-000595": {
-        "message": "开放式$LABEL$",
+        "message": "开放$LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2346,43 +2346,43 @@
         }
     },
     "frontend-000596": {
-        "message": "未知 (Not_checked)"
+        "message": "未知（未选中）"
     },
     "frontend-000597": {
         "message": "SHA-1"
     },
     "frontend-000600": {
-        "message": "不要再警告我"
+        "message": "不要再警告我了"
     },
     "frontend-000601": {
-        "message": "强度"
+        "message": "实力"
     },
     "frontend-000603": {
-        "message": "从收藏夹中删除"
+        "message": "从收藏中删除"
     },
     "frontend-000604": {
-        "message": "标记为最爱"
+        "message": "标记为收藏"
     },
     "frontend-000605": {
-        "message": "隐藏的密码"
+        "message": "隐藏密码"
     },
     "frontend-000606": {
-        "message": "不要在任何地方显示这个密码"
+        "message": "不要在任何地方显示此密码"
     },
     "frontend-000607": {
         "message": "数据"
     },
     "frontend-000611": {
-        "message": "开放性的马克顿指南"
+        "message": "打开 Markdown 指南"
     },
     "frontend-000612": {
-        "message": "撤销"
+        "message": "撤消"
     },
     "frontend-000613": {
         "message": "重做"
     },
     "frontend-000614": {
-        "message": "它将在$DATE$ 。",
+        "message": "$DATE$ 。",
         "placeholders": {
             "date": {
                 "content": "$1"
@@ -2390,13 +2390,13 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "或者在我们的聊天中!"
+        "message": "在聊天中提问"
     },
     "frontend-000616": {
         "message": "登录失败次数过多"
     },
     "frontend-000617": {
-        "message": "选择一个文件夹"
+        "message": "选择文件夹"
     },
     "frontend-000618": {
         "message": "选择 \"$FOLDER$\"",
@@ -2410,7 +2410,7 @@
         "message": "首页"
     },
     "frontend-000621": {
-        "message": "\"$FOLDER$\" 不包含任何文件夹",
+        "message": "\"$FOLDER$\" 不包含文件夹",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -2421,16 +2421,16 @@
         "message": "密码 应用程序加密口令"
     },
     "frontend-000623": {
-        "message": "不详"
+        "message": "未知"
     },
     "frontend-000624": {
         "message": "帮助"
     },
     "frontend-000625": {
-        "message": "选择该密码的加密类型"
+        "message": "为该密码选择加密类型"
     },
     "frontend-000626": {
-        "message": "你想删除字段\"$FIELD$\"吗？",
+        "message": "您想删除字段 \"$FIELD$\"吗？",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -2438,46 +2438,46 @@
         }
     },
     "frontend-000627": {
-        "message": "确保这个二维码只对你信任的人可见。"
+        "message": "确保只有您信任的人才能看到这个二维码。"
     },
     "frontend-000628": {
-        "message": "服务器在将数据存储到数据库之前所应用的加密技术"
+        "message": "服务器在数据库中存储数据前进行的加密"
     },
     "frontend-000629": {
-        "message": "客户端在向服务器发送数据之前所应用的加密技术"
+        "message": "客户端在向服务器发送数据前进行的加密"
     },
     "frontend-000630": {
-        "message": "密码无效。由于登录失败次数过多，会话被撤销。"
+        "message": "密码无效。登录失败次数过多，会话被取消。"
     },
     "frontend-000631": {
-        "message": "这是你为加密选择的口令的副本。改变或删除这个条目并不影响加密。密码口令只能在设置中改变。更多信息可以在手册中找到。"
+        "message": "这是您选择的加密口令的副本。更改或删除此条目不会影响加密。口令只能在设置中更改。更多信息请参阅手册。"
     },
     "backend-000632": {
-        "message": "Favicon Service Api"
+        "message": "Favicon 服务 Api"
     },
     "backend-000633": {
-        "message": "(可选)"
+        "message": "可选"
     },
     "backend-000634": {
-        "message": "您的Nextcloud请求的图标明显多于平均值。"
+        "message": "您的 Nextcloud 要求的图标明显多于平均水平。"
     },
     "backend-000635": {
         "message": "开放式教程"
     },
     "backend-000636": {
-        "message": "检测到可疑的失败登录尝试数量。"
+        "message": "检测到可疑数量的登录失败尝试。"
     },
     "backend-000637": {
         "message": "更多信息"
     },
     "backend-000638": {
-        "message": "查看不安全的密码"
+        "message": "查看不安全密码"
     },
     "backend-000639": {
         "message": "打开设置"
     },
     "backend-000640": {
-        "message": "公开密码"
+        "message": "打开密码"
     },
     "backend-000641": {
         "message": "查看应用程序"
@@ -2495,10 +2495,10 @@
         "message": "建议升级应用程序"
     },
     "backend-000646": {
-        "message": "一个新的客户或应用程序被连接到你的账户上"
+        "message": "新客户或应用程序已连接到您的账户"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" 被授权通过PassLink访问您的$STR_1$ Passwords账户。",
+        "message": "\"$STR_1$\" 已获准通过 PassLink 访问您的$STR_1$ 密码账户。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2509,7 +2509,7 @@
         }
     },
     "backend-000648": {
-        "message": "你可以在你的$STR_1$ 设置中的安全部分管理所有连接的设备和应用程序。",
+        "message": "您可以在$STR_1$ 设置的安全部分管理所有连接的设备和应用程序。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2517,7 +2517,7 @@
         }
     },
     "backend-000649": {
-        "message": "最后一个后台作业是用PHP$STRING_1$ 执行的，但webserver用的是PHP$STRING_2$ 。",
+        "message": "上一个后台任务是使用 PHP$STRING_1$ 执行的，但网络服务器使用的是 PHP$STRING_2$ 。",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -2528,28 +2528,28 @@
         }
     },
     "backend-000650": {
-        "message": "使用不同主要版本的PHP可能会导致问题。"
+        "message": "使用不同主要版本的 PHP 可能会导致问题。"
     },
     "backend-000651": {
-        "message": "默认的密码安全设置"
+        "message": "默认密码安全设置"
     },
     "backend-000653": {
         "message": "不要存储哈希值"
     },
     "backend-000655": {
-        "message": "存储75%的哈希值"
+        "message": "存储 75% 的哈希值"
     },
     "backend-000656": {
         "message": "存储完整的哈希值"
     },
     "backend-000657": {
-        "message": "自动恢复的备份"
+        "message": "自动恢复备份"
     },
     "backend-000658": {
-        "message": "密码应用程序似乎遇到了一个数据库问题。"
+        "message": "密码应用程序似乎遇到了数据库问题。"
     },
     "backend-000659": {
-        "message": "正因为如此，应用程序的备份 \"$STR_1$\" 被自动恢复。",
+        "message": "因此，应用程序备份 \"$STR_1$\" 已自动恢复。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2557,13 +2557,13 @@
         }
     },
     "backend-000660": {
-        "message": "如果这是一个错误，在恢复数据库之前，先对其进行了备份。"
+        "message": "如果这是一个错误，则在恢复数据库之前要先进行备份。"
     },
     "backend-000661": {
-        "message": "你可以在应用程序设置中禁用自动备份恢复功能。"
+        "message": "您可以在应用程序设置中禁用自动备份还原功能。"
     },
     "backend-000662": {
-        "message": "当数据库被擦除时自动恢复备份"
+        "message": "清除数据库时自动恢复备份"
     },
     "backend-EOLNextcloudTitle": {
         "message": "密码结束了Nextcloud的更新$STR_1$",
@@ -2577,16 +2577,16 @@
         "message": "密码共享"
     },
     "settings-000703": {
-        "message": "默认情况下，分享为可编辑"
+        "message": "默认为可编辑共享"
     },
     "settings-000704": {
         "message": "默认情况下允许共享"
     },
     "settings-000706": {
-        "message": "无效的重置代码"
+        "message": "重置密码无效"
     },
     "settings-000715": {
-        "message": "输入 \"$CODE$\" 重置你的账户并删除所有内容。",
+        "message": "输入 \"$CODE$\" 重置账户并删除所有内容。",
         "placeholders": {
             "code": {
                 "content": "$1"
@@ -2594,19 +2594,19 @@
         }
     },
     "settings-SettingsRecoverItemsButton": {
-        "message": "恢复项目",
+        "message": "回收物品",
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "这个动作可以移除项目的 \"隐藏 \"标志，这样这些项目就会再次显示在应用程序中。",
+        "message": "此操作可移除项目的 \"隐藏 \"标记，使这些项目再次显示在应用程序中。",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
-        "message": "恢复隐藏的物品",
+        "message": "恢复隐藏物品",
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "请选择你希望恢复的任何类型的隐藏项目。",
+        "message": "请选择您希望恢复的任何类型的隐藏项目。",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
@@ -2614,31 +2614,31 @@
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message": "恢复隐藏在一个本身没有隐藏的文件夹中的密码",
+        "message": "恢复隐藏在文件夹中的密码，而文件夹本身并不隐藏",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsPasswords": {
-        "message": "所有隐藏的密码",
+        "message": "所有隐藏密码",
         "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
     },
     "settings-RecoverItemsPasswordsTitle": {
-        "message": "恢复所有隐藏的密码，无论文件夹状态如何",
+        "message": "恢复所有隐藏密码，无论文件夹状态如何",
         "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
     },
     "settings-RecoverItemsFolders": {
-        "message": "所有隐藏的文件夹",
+        "message": "所有隐藏文件夹",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsFoldersTitle": {
-        "message": "恢复所有隐藏的文件夹",
+        "message": "恢复所有隐藏文件夹",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
-        "message": "所有隐藏的标签",
+        "message": "所有隐藏标签",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTagsTitle": {
-        "message": "恢复所有隐藏的标签",
+        "message": "恢复所有隐藏标签",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
@@ -2657,11 +2657,11 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "回收的物品",
+        "message": "收回的物品",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
-        "message": "发生了一个错误。",
+        "message": "出现错误。",
         "description": "Generic error message if the recover hidden items action fails"
     },
     "backend-EOLNextcloudText1": {
@@ -2696,49 +2696,49 @@
         "message": "标签 CSV"
     },
     "settings-000722": {
-        "message": "启用默认让其他用户分享共享密码的选项"
+        "message": "启用默认情况下让其他用户共享共享密码的选项"
     },
     "settings-000723": {
         "message": "打开手册中的设置页面"
     },
     "settings-000726": {
-        "message": "SHA-1哈希值是用来检查被破解的密码的。部分哈希值可以防止服务器被黑客攻击，但也可能导致安全的密码被错误地报告为被破坏。"
+        "message": "SHA-1 哈希值用于检查密码是否被破解。部分哈希值可以在服务器被黑客攻击时防止暴力攻击，但也可能导致安全密码被误报为被破解。"
     },
     "settings-SettingsRecoverItems": {
-        "message": "恢复隐藏的物品",
+        "message": "恢复隐藏物品",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "frontend-Id": {
         "message": "同上"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "将一个隐藏的密码保存在一个本身没有隐藏的文件夹中，会使密码无法被访问。这个密码将不再显示在任何地方。你想继续吗？",
+        "message": "将隐藏密码保存在一个本身并不隐藏的文件夹中会使密码无法访问。该密码将不再显示在任何地方。还要继续吗？",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "frontend-PwdSaveHiddenTitle": {
-        "message": "隐藏这个密码？",
+        "message": "隐藏密码？",
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "backend-000413": {
         "message": "WKHTML (本地)"
     },
     "tutorial-000785": {
-        "message": "帮助就在附近。"
+        "message": "帮助就在不远处。"
     },
     "tutorial-000786": {
-        "message": "我们的内置手册可以通过点击 \"更多 \"找到，并解释了该应用程序的所有细节。"
+        "message": "点击 \"更多 \"可查看我们的内置手册，其中详细介绍了该应用程序。"
     },
     "tutorial-000787": {
-        "message": "在任何其他情况下，我们的社区是提出问题的正确场所。"
+        "message": "在任何其他情况下，我们的社区都是您提问的正确场所。"
     },
     "tutorial-000788": {
-        "message": "辅导结束后将打开手册"
+        "message": "手册将在教程结束后打开"
     },
     "tutorial-000789": {
-        "message": "输入12个字符或以上的密码"
+        "message": "输入 12 个字符或更多的密码"
     },
     "tutorial-000790": {
-        "message": "你的密码需要至少12个字符，确认密码必须是相同的。"
+        "message": "密码至少需要 12 个字符，确认密码必须相同"
     },
     "backups-CustomFields": {
         "message": "自定义字段"
@@ -2753,38 +2753,38 @@
         "message": "选择导入格式"
     },
     "frontend-000593": {
-        "message": "编辑为新的"
+        "message": "编辑为新内容"
     },
     "tutorial-000763": {
-        "message": "在你需要的时候找到帮助"
+        "message": "在需要时寻求帮助"
     },
     "tutorial-000774": {
-        "message": "密码（最少12个字符）。"
+        "message": "密码（最少 12 个字符）"
     },
     "tutorial-000775": {
-        "message": "加密正在进行中…"
+        "message": "加密中…"
     },
     "backend-000654": {
-        "message": "存储50%的哈希值"
+        "message": "存储 50%的哈希值"
     },
     "settings-SettingsMouseWheelAction": {
-        "message": "鼠标滑轮点击动作",
+        "message": "鼠标滚轮点击动作",
         "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "当鼠标滚轮点击一个密码条目时要执行的动作",
+        "message": "鼠标滚轮点击密码条目时要执行的操作",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsCustomAction": {
-        "message": "显示快捷键，用于",
+        "message": "显示",
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsCustomActionHelp": {
-        "message": "在桌面视图中为指定的动作添加一个额外的按钮。",
+        "message": "在桌面视图中为指定操作添加一个额外按钮",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
-        "message": "显示共享标签",
+        "message": "显示共享选项卡",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "frontend-000526": {
@@ -2794,7 +2794,7 @@
         "message": "移动"
     },
     "frontend-000619": {
-        "message": "$LABEL$ 用不着",
+        "message": "$LABEL$ 不能用",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2802,7 +2802,7 @@
         }
     },
     "settings-000721": {
-        "message": "启用默认让其他用户编辑共享密码的选项"
+        "message": "启用默认情况下允许其他用户编辑共享密码的选项"
     },
     "frontend-Folder": {
         "message": "分类"
@@ -2822,28 +2822,28 @@
         "message": "数据库备份"
     },
     "backups-000036": {
-        "message": "自定义CSV"
+        "message": "自定义 CSV"
     },
     "backups-000037": {
-        "message": "尝试通用的CSV导入"
+        "message": "尝试通用 CSV 导入"
     },
     "backups-000038": {
-        "message": "没有导入你的CSV？"
+        "message": "没有导入 CSV？"
     },
     "apps-000004": {
         "message": "了解更多"
     },
     "apps-000005": {
-        "message": "与PassLink连接"
+        "message": "连接 PassLink"
     },
     "apps-000006": {
-        "message": "连接一个新的设备"
+        "message": "连接新设备"
     },
     "apps-000007": {
         "message": "通过链接连接"
     },
     "apps-000008": {
-        "message": "选择一个名字。"
+        "message": "选择名称："
     },
     "apps-000009": {
         "message": "代码不匹配"
@@ -2855,13 +2855,13 @@
         "message": "连接成功"
     },
     "apps-000012": {
-        "message": "我不干了"
+        "message": "我受够了"
     },
     "apps-000013": {
         "message": "不要再试了"
     },
     "apps-000014": {
-        "message": "连接其他东西"
+        "message": "连接另一个客户端"
     },
     "apps-000015": {
         "message": "再试一次"
@@ -2870,37 +2870,37 @@
         "message": "强大的加密功能"
     },
     "apps-000018": {
-        "message": "你取消了连接"
+        "message": "您取消了连接"
     },
     "apps-000019": {
-        "message": "你没有及时确认连接"
+        "message": "您没有及时确认连接"
     },
     "apps-000020": {
-        "message": "只要用应用程序扫描二维码就可以连接。"
+        "message": "只需用应用程序扫描二维码即可连接。"
     },
     "apps-000021": {
-        "message": "当你准备好开始连接时，点击按钮。"
+        "message": "准备好开始连接时点击按钮。"
     },
     "apps-000022": {
-        "message": "检查下面的代码是否与设备或应用程序提供的代码相符。"
+        "message": "检查以下代码是否与设备或应用程序提供的代码一致："
     },
     "apps-000023": {
-        "message": "将此客户端链接到您的Nextcloud账户，无需烦人的密码和URL"
+        "message": "将此客户端链接到 Nextcloud 帐户，无需恼人的密码和 URL"
     },
     "apps-000024": {
-        "message": "该客户端正式支持我们强大的端到端加密技术"
+        "message": "该客户端正式支持我们强大的端到端加密功能"
     },
     "apps-000025": {
-        "message": "这个客户端是由密码应用的作者维护的。"
+        "message": "该客户端由密码应用程序的作者维护"
     },
     "apps-000026": {
-        "message": "点击按钮连接安装在此设备上的应用程序，如果该应用程序安装在其他设备上，则用该应用程序扫描QR码。"
+        "message": "单击按钮连接安装在本设备上的应用程序，或扫描安装在其他设备上的应用程序的 QR 码。"
     },
     "frontend-000598": {
-        "message": "你期待什么？"
+        "message": "你以为呢？"
     },
     "frontend-000599": {
-        "message": "单击以显示二维码。"
+        "message": "点击显示二维码。"
     },
     "frontend-000608": {
         "message": "类型"
@@ -2915,13 +2915,13 @@
         "message": "安全检查哈希值"
     },
     "settings-000705": {
-        "message": "编码"
+        "message": "代码"
     },
     "tutorial-000784": {
-        "message": "每当你不知道某样东西是如何工作的，有疑问或需要帮助的时候。"
+        "message": "每当您不知道如何操作、有疑问或需要帮助解决问题时："
     },
     "apps-000017": {
-        "message": "获取应用程序失败。$ERROR$",
+        "message": "获取应用程序失败：$ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"
@@ -2929,21 +2929,21 @@
         }
     },
     "frontend-000165": {
-        "message": "状况"
+        "message": "现状"
     },
     "backend-Passwords": {
         "message": "密码"
     },
     "backend-UserMigrationDescription": {
-        "message": "解密的密码数据库，包括密码、文件夹、标签和设置。(不包括与您共享的密码。 在启用E2E的情况下不工作)",
+        "message": "包含密码、文件夹、标签和设置的解密密码数据库。(不包括与您共享的密码。 在启用 E2E 后不起作用）",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
-        "message": "密码不能被导出",
+        "message": "密码无法导出",
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "因为你启用了端到端加密，所以你的密码不能自动添加到导出中。作为一个替代方案，你可以使用应用程序内的导出功能来导出你的数据。",
+        "message": "由于您启用了端到端加密，您的密码无法自动添加到导出中。作为替代方法，您可以使用应用程序内的导出功能导出数据。",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -2951,7 +2951,7 @@
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "在菜单和细节中显示一个打印密码的选项",
+        "message": "在菜单和详细信息中显示打印密码的选项",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
     "frontend-PasswordActionPrint": {
@@ -2963,11 +2963,11 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "显示 QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "该密码已被标记为$TAG$",
+        "message": "密码已被标记为$TAG$",
         "description": "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
@@ -2979,7 +2979,7 @@
         }
     },
     "frontend-PasswordTagAddSuccess": {
-        "message": "该密码被标记为$TAG$",
+        "message": "密码标记为$TAG$",
         "description": "Notification text when the a tag was successfully added to a password",
         "placeholders": {
             "password": {
@@ -2991,7 +2991,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "密码不能被标记为$TAG$ 。$ERROR$",
+        "message": "密码无法用$TAG$ 标记：$ERROR$",
         "description": "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
@@ -3018,11 +3018,11 @@
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-PwDetailsEncryptionTitleSSE": {
-        "message": "这个密码通过安全的HTTPS连接发送到服务器，并在那里进行加密，然后再存储到数据库中。",
+        "message": "该密码通过安全的 HTTPS 连接发送到服务器，并在那里进行加密，然后存储到数据库中。",
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "这个密码在发送到服务器之前会在你的设备上进行加密。如果不知道你的加密密码，任何人都无法读取这个密码。",
+        "message": "该密码在发送到服务器之前已在您的设备上加密。如果不知道您的加密密码，任何人都无法读取该密码。",
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
@@ -3034,11 +3034,11 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "用第三方密钥加密",
+        "message": "第三方服务器端加密",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "没有什么可复制的，$ELEMENT$ 是空的",
+        "message": "无内容可复制，$ELEMENT$ 为空",
         "description": "Message when the user wants to copy an empty attribute",
         "placeholders": {
             "element": {
@@ -3051,15 +3051,15 @@
         "description": "Title of the warning message users see when they open the browser developer console"
     },
     "frontend-BrowserConsoleWarningLine1": {
-        "message": "这个功能是为开发者准备的，而不是为用户准备的。",
+        "message": "该功能面向开发人员，而非用户。",
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "如果有人告诉你在这里复制和粘贴任何东西，很可能他们会获得你的密码或接管你的账户。",
+        "message": "如果有人告诉你复制并粘贴这里的任何内容，他们很可能会获取你的密码或接管你的账户。",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "更多信息见{链接}。",
+        "message": "更多信息请参见 {链接}。",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3071,7 +3071,7 @@
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLPHPTitle": {
-        "message": "PHP的密码结束更新$STR_1$",
+        "message": "密码结束更新 PHP$STR_1$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3080,7 +3080,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "密码结束后，Nextcloud$STR_1$ 和 PHP 的更新。$STR_2$",
+        "message": "密码结束更新 Nextcloud$STR_1$ 和 PHP$STR_2$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3092,7 +3092,7 @@
         }
     },
     "backend-EOLNextcloudPHPText1": {
-        "message": "密码$STR_1$ 是Nextcloud$STR_2$ 和 PHP$STR_3$ 的最后一次更新。",
+        "message": "密码$STR_1$ 是 Nextcloud$STR_2$ 和 PHP$STR_3$ 的最后一次更新。",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3107,11 +3107,11 @@
         }
     },
     "backend-NotificationInvalid": {
-        "message": "这个通知可以被删除。",
+        "message": "该通知可以删除。",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     },
     "backend-EOLNextcloudText2": {
-        "message": "升级到Nextcloud$STR_1$ ，以便将来升级。",
+        "message": "升级至 Nextcloud$STR_1$ ，以便今后升级。",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3126,7 +3126,7 @@
         }
     },
     "backend-EOLPHPText1": {
-        "message": "密码$STR_1$ 是PHP的最后一次更新$STR_3$ 。",
+        "message": "密码$STR_1$ 是 PHP$STR_3$ 的最后一次更新。",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3141,7 +3141,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "升级到PHP$STR_2$ （或LSR的PHP$STR_3$ ），以便将来升级。",
+        "message": "升级到 PHP$STR_2$ （或用于 LSR 的 PHP$STR_3$ ），以便今后升级。",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3156,11 +3156,11 @@
         }
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "无法更新被破坏的密码数据库",
+        "message": "无法更新被破解的密码数据库",
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "被突破的密码数据库更新失败了三次。请查阅手册并检查你的日志。原因是。$STR_1$",
+        "message": "密码数据库更新三次失败。请查阅手册并检查日志。原因：$STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "我们已经检测到下面的网址是\"{label}\"的密码修改页面。点击该按钮打开它",
+        "message": "我们检测到下面的网址是\"{label}\"的密码更改页面。点击按钮打开。",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3189,7 +3189,7 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\"并没有公布他们的密码修改页面。你可以在网站上找到更改密码的功能。",
+        "message": "\"{host}\"没有公布密码更改页面。您可以在网站上找到更改密码功能。",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3264,7 +3264,7 @@
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "我们找不到任何有关“$QUERY$”的内容。",
+        "message": "我们找不到任何关于 \"$QUERY$\" 的信息。",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "欢迎使用 Nextcloud 的密码应用程序，它是安全、有序地保存密码的理想场所。",
+        "message": "欢迎使用 Nextcloud 密码应用程序，它是安全、有序地保存密码的理想场所。",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
