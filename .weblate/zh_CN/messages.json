@@ -1105,7 +1105,7 @@
         "message": "删除标签"
     },
     "frontend-000220": {
-        "message": "你想删除这个标签吗？"
+        "message": "你想删除这个标签吗"
     },
     "frontend-000221": {
         "message": "标签已删除"
@@ -1147,7 +1147,7 @@
         "message": "删除密码"
     },
     "frontend-000234": {
-        "message": "你想删除密码吗？"
+        "message": "你想删除这个密码吗"
     },
     "frontend-000235": {
         "message": "密码已删除"
@@ -2720,7 +2720,7 @@
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "backend-000413": {
-        "message": "WKHTML (本地)"
+        "message": "WKHTML（本地）"
     },
     "tutorial-000785": {
         "message": "帮助就在不远处。"
@@ -2805,7 +2805,7 @@
         "message": "启用默认情况下允许其他用户编辑共享密码的选项"
     },
     "frontend-Folder": {
-        "message": "分类"
+        "message": "分类名"
     },
     "backups-000033": {
         "message": "阅读$LABEL$ 进口指南",
