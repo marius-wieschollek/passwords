@@ -1172,7 +1172,7 @@
         "message": "Nenalezeno"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Dejte nám vědět!"
+        "message": "Nahlásit chybu"
     },
     "frontend-000331": {
         "message": "Chyba sítě"
@@ -2355,7 +2355,7 @@
         "message": "Není k dispozici žádný obsah"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "I tak potřebujete pomoc?"
+        "message": "Potřebujete pomoc?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Zeptejte se na diskuzním fóru!"
@@ -2525,7 +2525,7 @@
         "message": "Pomozte nám aplikaci Hesla vylepšit"
     },
     "backend-000499": {
-        "message": "Toto nás pošle nějaká anonymizovaná data ohledně vašeho uspořádání a vybraných nastavení."
+        "message": "Tím nám odešlete anonymizované údaje o vašem nastavení a vybraných parametrech."
     },
     "backend-000500": {
         "message": "Toto je možné kdykoli změnit v nastavení aplikace."
@@ -2649,7 +2649,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Nebo v našem chatu!"
+        "message": "Zeptejte se v našem chatu"
     },
     "frontend-000617": {
         "message": "Vybrat složku"
@@ -3241,7 +3241,7 @@
         "message": "Zakázat"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Nebyly nalezeny žádné výsledky pro dotaz „$QUERY$“",
+        "message": "Nepodařilo se nám najít nic pro \"$QUERY$\"",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
