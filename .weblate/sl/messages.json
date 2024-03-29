@@ -53,7 +53,7 @@
         "message": "Ne poskušajte znova"
     },
     "apps-000014": {
-        "message": "Povežite nekaj drugega"
+        "message": "Povezovanje drugega odjemalca"
     },
     "apps-000015": {
         "message": "Poskusite znova"
@@ -480,7 +480,7 @@
         "message": "(brez vrednosti)"
     },
     "backups-000100": {
-        "message": "Ignoriraj"
+        "message": "Ignorirajte"
     },
     "backups-000101": {
         "message": "Izvedite uvoz"
@@ -951,7 +951,7 @@
         "message": "Obnovitev gesla ni uspela"
     },
     "frontend-000238": {
-        "message": "Odprti naslov URL"
+        "message": "Odprti naslov Url"
     },
     "frontend-000239": {
         "message": "Kopiraj naslov Url"
@@ -1161,7 +1161,7 @@
         "message": "Spremenjeno"
     },
     "frontend-000292": {
-        "message": "Spremenjeno"
+        "message": "Spremenjen"
     },
     "frontend-000293": {
         "message": "Urejeno"
@@ -1282,13 +1282,13 @@
         "message": "Ni bilo najdeno"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Še vedno potrebujete pomoč?"
+        "message": "Potrebujete pomoč?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Vprašajte v našem forumu!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Povejte nam!"
+        "message": "Prijavite napako"
     },
     "frontend-000329": {
         "message": "Seja se je iztekla"
@@ -1685,7 +1685,7 @@
         }
     },
     "backend-000454": {
-        "message": "Gesla zahtevajo HTTPS."
+        "message": "Gesla zahteva HTTPS."
     },
     "backend-000455": {
         "message": "Uporaba spletne strani $STR_1$ za izvajanje opravil v ozadju lahko povzroči zamude. Priporočamo uporabo programa Cron.",
@@ -1864,7 +1864,7 @@
         }
     },
     "backend-000489": {
-        "message": "Deljenje gesla, ki vam je bilo posredovano, lahko včasih ustvari zanko."
+        "message": "Deljenje gesla, ki je bilo deljeno z vami, lahko včasih ustvari zanko."
     },
     "backend-000490": {
         "message": "Da bi to preprečili, teh gesel ne bomo delili."
@@ -1898,7 +1898,7 @@
         "message": "Ker uporabljate glavno geslo, to še ne pomeni, da je bil dostop do vaših podatkov odobren."
     },
     "backend-000495": {
-        "message": "Če želite preprečiti neželeni dostop do podatkov, morate določiti glavno geslo."
+        "message": "Če želite preprečiti neželeni dostop do podatkov, nastavite glavno geslo."
     },
     "backend-000496": {
         "message": "Izbrisan uporabnik ($STR_1$)",
@@ -1957,7 +1957,7 @@
         "message": "Izbrana storitev favicon zahteva ključ api ali končno točko, vendar ta ni navedena."
     },
     "backend-000514": {
-        "message": "Izbrana storitev predogleda zahteva ključ api ali končno točko, vendar ta ni podana."
+        "message": "Izbrana storitev predogleda zahteva ključ api ali končno točko, vendar ta ni navedena."
     },
     "backend-000515": {
         "message": "Odprite upraviteljske nastavitve in posodobite konfiguracijo ali izberite drugo storitev."
@@ -2160,7 +2160,7 @@
         "message": "V navigaciji vedno prikažite razdelek za globalno iskanje"
     },
     "frontend-000584": {
-        "message": "vas obvešča o ogroženih geslih in drugih varnostnih težavah."
+        "message": "obveščanje o ogroženih geslih in drugih varnostnih težavah."
     },
     "frontend-000585": {
         "message": "vas obvesti, ko drugi ljudje z vami delijo gesla."
@@ -2257,7 +2257,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Ali v našem klepetu!"
+        "message": "Vprašajte v našem klepetu"
     },
     "frontend-000616": {
         "message": "Preveč neuspešnih poskusov prijave"
@@ -2319,7 +2319,7 @@
         "message": "šifriranje, ki ga uporabi strežnik pred shranjevanjem podatkov v zbirko podatkov."
     },
     "frontend-000629": {
-        "message": "Šifriranje, ki ga odjemalec uporabi pred pošiljanjem podatkov strežniku."
+        "message": "šifriranje, ki ga odjemalec uporabi pred pošiljanjem podatkov strežniku."
     },
     "frontend-000630": {
         "message": "Geslo je neveljavno. Seja preklicana zaradi preveč neuspešnih poskusov prijave."
@@ -2334,7 +2334,7 @@
         "message": "(neobvezno)"
     },
     "backend-000634": {
-        "message": "Vaš Nextcloud zahteva bistveno več ikon, kot je povprečje."
+        "message": "Vaš Nextcloud zahteva bistveno več ikon od povprečja."
     },
     "backend-000635": {
         "message": "Odprta vadnica"
@@ -2599,7 +2599,7 @@
         "message": "dodajanje posebnih znakov v ustvarjena gesla"
     },
     "settings-000709": {
-        "message": "Določite čas, ki preteče po zahtevi, preden se seja prekliče."
+        "message": "Določite čas po zahtevi, preden se seja prekliče."
     },
     "settings-000710": {
         "message": "Izberite vrsto šifriranja, ki se uporablja za šifriranje podatkov v strežniku."
@@ -2768,10 +2768,10 @@
         "message": "gesla"
     },
     "tutorial-000735": {
-        "message": "pred kratkim spremenila"
+        "message": "pred kratkim spremenil"
     },
     "tutorial-000736": {
-        "message": "Označi moja gesla, če…"
+        "message": "Označite moja gesla, če…"
     },
     "tutorial-000737": {
         "message": "so starejši od"
@@ -2803,7 +2803,7 @@
         "message": "Izdelajte moja nova gesla"
     },
     "tutorial-000745": {
-        "message": "močna"
+        "message": "močan"
     },
     "tutorial-000746": {
         "message": "močnejši"
@@ -2896,13 +2896,13 @@
         "message": "Vse najdete v razdelku \"Več\", vendar smo tu navedli najpogostejše:"
     },
     "tutorial-000778": {
-        "message": "Gesla nudijo sodobno in močno šifriranje, ki vaše podatke ščiti pred radovednimi očmi."
+        "message": "Gesla ponujajo sodobno in močno šifriranje za zaščito vaših podatkov pred radovednimi očmi."
     },
     "tutorial-000779": {
         "message": "V nadaljevanju izberite varno geslo in aktivirajte popolno zaščito gesel."
     },
     "tutorial-000780": {
-        "message": "Z našimi aplikacijami in razširitvami lahko preprosto dostopate do gesel od koder koli."
+        "message": "Z našimi aplikacijami in razširitvami lahko do gesel dostopate od koder koli."
     },
     "tutorial-000781": {
         "message": "Razdelek Aplikacije in razširitve najdete v razdelku Več ali pa kliknite spodnji gumb."
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Prikaži kodo Qr",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Šifriranje s ključem tretje osebe",
+        "message": "Šifriranje na strani strežnika s strani tretje osebe",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3059,7 +3059,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Za več informacij glejte {link}",
+        "message": "Za več informacij glejte {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Spodnji url naslov smo zaznali kot stran za spremembo gesla za \"{label}\". Kliknite gumb, da jo odprete",
+        "message": "Spodnji url naslov smo zaznali kot stran za spremembo gesla za \"{label}\". Kliknite gumb, da jo odprete.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
