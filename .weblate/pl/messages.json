@@ -23,13 +23,13 @@
         "message": "Podłącz nowe urządzenie"
     },
     "apps-000007": {
-        "message": "Połącz się przez link"
+        "message": "Połączenie przez link"
     },
     "apps-000008": {
         "message": "Wybierz nazwę:"
     },
     "apps-000009": {
-        "message": "Kody nie pasują."
+        "message": "Kody nie są zgodne"
     },
     "apps-000010": {
         "message": "Wygląda dobrze"
@@ -38,7 +38,7 @@
         "message": "Jest połączenie"
     },
     "apps-000012": {
-        "message": "Skończyłem."
+        "message": "Skończyłem"
     },
     "frontend-000361": {
         "message": "Anuluj"
@@ -53,10 +53,10 @@
         "message": "Włącz"
     },
     "settings-000714": {
-        "message": "Powiadamia o błędach konfiguracji i innych problemach administracyjnych"
+        "message": "Powiadamia o błędach konfiguracji i innych kwestiach administracyjnych"
     },
     "settings-000715": {
-        "message": "Wpisz \"$CODE$\", aby zresetować swoje konto i usunąć wszystko.",
+        "message": "Wpisz \"$CODE$\", aby zresetować konto i usunąć wszystko.",
         "placeholders": {
             "code": {
                 "content": "$1"
@@ -67,25 +67,25 @@
         "message": "Pomoc jest tuż za rogiem."
     },
     "tutorial-000786": {
-        "message": "Nasz wbudowany podręcznik znajduje się po kliknięciu na \"Więcej\" i wyjaśnia aplikację we wszystkich szczegółach."
+        "message": "Nasz wbudowany podręcznik można znaleźć, klikając \"Więcej\" i wyjaśnia aplikację we wszystkich szczegółach."
     },
     "tutorial-000787": {
         "message": "W każdym innym przypadku nasza społeczność jest właściwym miejscem do zadawania pytań."
     },
     "tutorial-000788": {
-        "message": "Podręcznik zostanie otwarty po zakończeniu tutorialu"
+        "message": "Podręcznik zostanie otwarty po zakończeniu samouczka"
     },
     "tutorial-000789": {
-        "message": "Wprowadź hasło składające się z 12 lub więcej znaków"
+        "message": "Wprowadź hasło składające się z co najmniej 12 znaków"
     },
     "tutorial-000790": {
-        "message": "Twoje hasło musi mieć co najmniej 12 znaków, a hasło potwierdzające musi być takie samo."
+        "message": "Hasło musi mieć co najmniej 12 znaków, a hasło potwierdzające musi być takie samo"
     },
     "apps-000013": {
         "message": "Nie próbuj ponownie"
     },
     "apps-000014": {
-        "message": "Podłącz coś innego"
+        "message": "Podłącz innego klienta"
     },
     "apps-000015": {
         "message": "Spróbuj ponownie"
@@ -102,10 +102,10 @@
         }
     },
     "apps-000018": {
-        "message": "Anulowałeś połączenie."
+        "message": "Połączenie zostało anulowane"
     },
     "apps-000019": {
-        "message": "Nie potwierdziłeś połączenia w odpowiednim czasie"
+        "message": "Nie potwierdziłeś połączenia na czas"
     },
     "apps-000020": {
         "message": "Wystarczy zeskanować kod QR za pomocą aplikacji, aby go podłączyć."
@@ -114,37 +114,37 @@
         "message": "Kliknij przycisk, gdy będziesz gotowy do rozpoczęcia połączenia."
     },
     "apps-000022": {
-        "message": "Sprawdź, czy poniższe kody zgadzają się z tymi podanymi przez urządzenie lub aplikację:"
+        "message": "Sprawdź, czy poniższe kody są zgodne z kodami dostarczonymi przez urządzenie lub aplikację:"
     },
     "apps-000023": {
-        "message": "Połącz tego klienta z kontem Nextcloud bez irytujących haseł i adresów URL"
+        "message": "Połącz tego klienta z kontem Nextcloud bez irytujących haseł i adresów URL."
     },
     "apps-000024": {
-        "message": "Ten klient oficjalnie wspiera nasze silne szyfrowanie end-to-end"
+        "message": "Ten klient oficjalnie obsługuje nasze silne szyfrowanie typu end-to-end"
     },
     "apps-000025": {
         "message": "Ten klient jest utrzymywany przez autorów aplikacji Passwords"
     },
     "apps-000026": {
-        "message": "Kliknij przycisk, aby połączyć aplikację zainstalowaną na tym urządzeniu lub zeskanować kod QR z aplikacją, jeśli jest ona zainstalowana na innym urządzeniu."
+        "message": "Kliknij przycisk, aby połączyć aplikację zainstalowaną na tym urządzeniu lub zeskanować kod QR za pomocą aplikacji, jeśli jest ona zainstalowana na innym urządzeniu."
     },
     "backups-000028": {
-        "message": "Tworzenie kopii zapasowych lub eksport"
+        "message": "Kopia zapasowa lub eksport"
     },
     "backups-000029": {
-        "message": "Wybierz Format"
+        "message": "Wybierz format"
     },
     "backups-000030": {
-        "message": "Proszę wybrać"
+        "message": "Wybierz"
     },
     "backups-000031": {
         "message": "Kopia zapasowa bazy danych"
     },
     "backups-000032": {
-        "message": "Predefiniowane CSV"
+        "message": "Predefiniowany CSV"
     },
     "backups-000033": {
-        "message": "Przeczytaj przewodnik importu $LABEL$",
+        "message": "Przeczytaj przewodnik importowania $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -161,10 +161,10 @@
         "message": "niestandardowy CSV"
     },
     "backups-000037": {
-        "message": "spróbuj ogólnego importu CSV"
+        "message": "wypróbuj ogólny import CSV"
     },
     "backups-000038": {
-        "message": "Brak możliwości importu dla Twojego CSV?"
+        "message": "Brak importu pliku CSV?"
     },
     "backups-000039": {
         "message": "Hasło zapasowe"
@@ -173,13 +173,13 @@
         "message": "(Opcjonalnie) Szyfruje kopię zapasową"
     },
     "backups-000041": {
-        "message": "Import obsługuje tylko CSV"
+        "message": "Import obsługuje tylko pliki CSV"
     },
     "backups-000042": {
         "message": "Eksportuj hasła"
     },
     "backups-000043": {
-        "message": "Eksport folderów"
+        "message": "Eksportuj foldery"
     },
     "backups-000044": {
         "message": "Tagi eksportu"
@@ -200,7 +200,7 @@
         "message": "Folder Id"
     },
     "backups-000050": {
-        "message": "Tag Ids"
+        "message": "Identyfikatory tagów"
     },
     "backups-000051": {
         "message": "ParentId"
@@ -218,19 +218,19 @@
         "message": "Folder Id"
     },
     "backups-TagIds": {
-        "message": "Tag Ids"
+        "message": "Identyfikatory tagów"
     },
     "backups-000052": {
-        "message": "Puste"
+        "message": "Pusty"
     },
     "backups-000053": {
         "message": "Dodaj linię nagłówka"
     },
     "backups-000054": {
-        "message": "Eksportowanie haseł udostępnionych mi"
+        "message": "Eksportuj udostępnione mi hasła"
     },
     "backups-000055": {
-        "message": "Nie edytuj haseł udostępnionych mi"
+        "message": "Nie edytuj udostępnionych mi haseł"
     },
     "backups-000056": {
         "message": "Nie importuj pustych pól"
@@ -242,7 +242,7 @@
         "message": "Eksport"
     },
     "backups-000059": {
-        "message": "Czekając…"
+        "message": "Czekam…"
     },
     "backups-000060": {
         "message": "Błąd eksportu"
@@ -256,13 +256,13 @@
         }
     },
     "backups-000062": {
-        "message": "Nic do eksportu"
+        "message": "Nic do wyeksportowania"
     },
     "backups-000063": {
-        "message": "Nie ma danych do eksportu"
+        "message": "Nie ma danych do wyeksportowania"
     },
     "backups-000064": {
-        "message": "Przywrócenie lub import"
+        "message": "Przywracanie lub importowanie"
     },
     "backups-000065": {
         "message": "Wybierz format importu"
@@ -274,10 +274,10 @@
         "message": "Folder CSV"
     },
     "backups-000068": {
-        "message": "Własny CSV"
+        "message": "Niestandardowy CSV"
     },
     "backups-000069": {
-        "message": "Inne / Własne CSV"
+        "message": "Inne / Niestandardowy CSV"
     },
     "backups-000070": {
         "message": "Wybierz plik"
@@ -289,13 +289,13 @@
         "message": "Obsługa konfliktów"
     },
     "backups-000073": {
-        "message": "Pomiń, jeśli ta sama rewizja"
+        "message": "Pomiń, jeśli ta sama wersja"
     },
     "backups-000074": {
-        "message": "Skip zawsze"
+        "message": "Pomiń zawsze"
     },
     "backups-000075": {
-        "message": "Nadpisanie istniejących"
+        "message": "Zastąp istniejące"
     },
     "backups-000076": {
         "message": "Połączenie z istniejącym"
@@ -304,7 +304,7 @@
         "message": "Utwórz nowy wpis"
     },
     "backups-000078": {
-        "message": "W przypadku szyfrowanych kopii zapasowych"
+        "message": "W przypadku zaszyfrowanych kopii zapasowych"
     },
     "backups-000079": {
         "message": "Opcje CSV"
@@ -316,25 +316,25 @@
         "message": "Cytat Postać"
     },
     "backups-000082": {
-        "message": "Charakter ucieczki"
+        "message": "Postać uciekająca"
     },
     "backups-000083": {
-        "message": "Delimiter pola"
+        "message": "Ogranicznik pola"
     },
     "backups-000084": {
-        "message": "Przerwa w linii"
+        "message": "Line Break"
     },
     "backups-000085": {
         "message": "Cytat"
     },
     "backups-000086": {
-        "message": "Cytat jedn."
+        "message": "Pojedynczy cytat"
     },
     "backups-000087": {
         "message": "Backslash"
     },
     "backups-000088": {
-        "message": "Wykryj"
+        "message": "Wykrywanie"
     },
     "backups-000089": {
         "message": "Przecinek"
@@ -349,10 +349,10 @@
         "message": "Zakładka"
     },
     "backups-000093": {
-        "message": "Wykrywanie nieujętych cudzysłowów"
+        "message": "Wykrywanie cudzysłowów bez cudzysłowu"
     },
     "backups-000094": {
-        "message": "Pomiń pierwszy wiersz"
+        "message": "Pomiń pierwszą linię"
     },
     "backups-000095": {
         "message": "Interpolacja brakujących pól"
@@ -361,7 +361,7 @@
         "message": "Mapowanie pól CSV"
     },
     "backups-000097": {
-        "message": "Linia wstępna"
+        "message": "Linia podglądu"
     },
     "backups-000098": {
         "message": "Linia $LINE$",
@@ -372,13 +372,13 @@
         }
     },
     "backups-000099": {
-        "message": "(bez wartości)"
+        "message": "(brak wartości)"
     },
     "backups-000100": {
-        "message": "Zignoruj"
+        "message": "Ignorować"
     },
     "backups-000101": {
-        "message": "Uruchomić import"
+        "message": "Uruchom import"
     },
     "backups-000102": {
         "message": "Import"
@@ -387,19 +387,19 @@
         "message": "Parsowanie pliku wejściowego"
     },
     "backups-000104": {
-        "message": "Analizowanie znaczników"
+        "message": "Analiza tagów"
     },
     "backups-000105": {
         "message": "Analizowanie folderów"
     },
     "backups-000106": {
-        "message": "Znaczniki odczytu"
+        "message": "Czytanie tagów"
     },
     "backups-000107": {
-        "message": "Importowanie znaczników"
+        "message": "Importowanie tagów"
     },
     "backups-000108": {
-        "message": "Teczki do czytania"
+        "message": "Czytanie folderów"
     },
     "backups-000109": {
         "message": "Importowanie folderów"
@@ -414,16 +414,16 @@
         "message": "Import nie powiódł się"
     },
     "backups-000113": {
-        "message": "Import częściowo nieudany"
+        "message": "Import częściowo nie powiódł się"
     },
     "backups-000114": {
-        "message": "Import zakończony sukcesem"
+        "message": "Import powiódł się"
     },
     "backups-000115": {
         "message": "Błąd importu"
     },
     "backups-000116": {
-        "message": "Niektóre obiekty miały błędy:"
+        "message": "Niektóre obiekty zawierały błędy:"
     },
     "backups-000117": {
         "message": "Nieprawidłowy typ pliku \"$TYPE$\"",
@@ -437,10 +437,10 @@
         "message": "Wymagane hasło"
     },
     "backups-000119": {
-        "message": "Nieprawidłowe hasło"
+        "message": "Hasło jest nieprawidłowe"
     },
     "backups-000120": {
-        "message": "Nie udało się odszyfrować haseł"
+        "message": "Odszyfrowanie haseł nie powiodło się"
     },
     "backups-000121": {
         "message": "Nie udało się odszyfrować folderów"
@@ -449,7 +449,7 @@
         "message": "Nie udało się odszyfrować tagów"
     },
     "backups-000123": {
-        "message": "Plik importowy jest pusty"
+        "message": "Plik importu jest pusty"
     },
     "backups-000124": {
         "message": "Plik CSV nie może być mapowany"
@@ -485,7 +485,7 @@
         "message": "Nieprawidłowy końcowy cudzysłów w polu cytowanym"
     },
     "backups-000135": {
-        "message": "Plik nie mógł zostać przetworzony: $ERRORS$",
+        "message": "Nie można przeanalizować pliku: $ERRORS$",
         "placeholders": {
             "errors": {
                 "content": "$1"
@@ -493,7 +493,7 @@
         }
     },
     "backups-000136": {
-        "message": "$MESSAGE$ w wierszu $LINE$ znak $CHARACTER$.",
+        "message": "$MESSAGE$ w linii $LINE$ znak $CHARACTER$.",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -507,7 +507,7 @@
         }
     },
     "backups-000137": {
-        "message": "\"$LABEL$\" ma załączone pliki, których nie można zaimportować.",
+        "message": "\"$LABEL$\" zawiera pliki, których nie można zaimportować.",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -515,7 +515,7 @@
         }
     },
     "backups-000138": {
-        "message": "Typ \"$FIELD$\" w \"$LABEL$\" jest nieznany i nie może być importowany.",
+        "message": "Typ \"$FIELD$\" w \"$LABEL$\" jest nieznany i nie może zostać zaimportowany.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -551,7 +551,7 @@
         "message": "Więcej informacji można znaleźć w dzienniku. (Naciśnij F12)"
     },
     "backups-000142": {
-        "message": "Plik ma typ \"$ACTUAL$\", ale spodziewany jest \"$EXPECTED$\". Być może wybrano niewłaściwy plik lub importer.",
+        "message": "Plik ma typ \"$ACTUAL$\", ale oczekiwany jest \"$EXPECTED$\". Być może wybrano niewłaściwy plik lub importer.",
         "placeholders": {
             "actual": {
                 "content": "$1"
@@ -562,7 +562,7 @@
         }
     },
     "backups-000143": {
-        "message": "$SERVICE$ jest znany z generowania błędnych plików eksportu. Jeśli plik nie może być przetworzony, należy skorzystać z podręcznika w celu uzyskania pomocy.",
+        "message": "$SERVICE$ generuje błędne pliki eksportu. Jeśli plik nie może zostać przetworzony, należy skonsultować się z podręcznikiem w celu uzyskania pomocy.",
         "placeholders": {
             "service": {
                 "content": "$1"
@@ -585,13 +585,13 @@
         "message": "Foldery"
     },
     "frontend-000151": {
-        "message": "Ostatnio"
+        "message": "Najnowsze"
     },
     "frontend-000152": {
         "message": "Ulubione"
     },
     "frontend-000153": {
-        "message": "Wspólne"
+        "message": "Współdzielony"
     },
     "frontend-000154": {
         "message": "Bezpieczeństwo"
@@ -606,7 +606,7 @@
         "message": "Edytuj"
     },
     "frontend-000158": {
-        "message": "Zmień nazwę"
+        "message": "Zmiana nazwy"
     },
     "frontend-000159": {
         "message": "Usuń"
@@ -618,19 +618,19 @@
         "message": "Nowe hasło"
     },
     "frontend-000162": {
-        "message": "Nowy Folder"
+        "message": "Nowy folder"
     },
     "frontend-000163": {
-        "message": "Nowa metka"
+        "message": "Nowa etykieta"
     },
     "frontend-000164": {
-        "message": "Bezpieczny"
+        "message": "Bezpieczeństwo"
     },
     "frontend-000165": {
         "message": "Status"
     },
     "frontend-000166": {
-        "message": "Słaba"
+        "message": "Słaby"
     },
     "frontend-000167": {
         "message": "Słaby (Duplikat)"
@@ -642,7 +642,7 @@
         "message": "Naruszony"
     },
     "frontend-000170": {
-        "message": "Podziel się"
+        "message": "Udział"
     },
     "frontend-000171": {
         "message": "Zmiany"
@@ -711,7 +711,7 @@
         "message": "Wartość"
     },
     "frontend-000193": {
-        "message": "Przełączanie widoczności"
+        "message": "Przełącz widoczność"
     },
     "frontend-000194": {
         "message": "Wygeneruj hasło"
@@ -729,13 +729,13 @@
         "message": "Utwórz folder"
     },
     "frontend-000199": {
-        "message": "Folder utworzony"
+        "message": "Utworzony folder"
     },
     "frontend-000200": {
         "message": "Tworzenie folderu nie powiodło się"
     },
     "frontend-000201": {
-        "message": "Zmień nazwę folderu"
+        "message": "Zmiana nazwy folderu"
     },
     "frontend-000202": {
         "message": "Zmiana nazwy folderu"
@@ -759,10 +759,10 @@
         "message": "Folder usunięty"
     },
     "frontend-000209": {
-        "message": "Usuwanie folderu nie powiodło się"
+        "message": "Usunięcie folderu nie powiodło się"
     },
     "frontend-000210": {
-        "message": "Folder odtworzony"
+        "message": "Przywrócony folder"
     },
     "frontend-000211": {
         "message": "Przywracanie folderu nie powiodło się"
@@ -771,19 +771,19 @@
         "message": "Utwórz tag"
     },
     "frontend-000213": {
-        "message": "Tag stworzony"
+        "message": "Utworzony tag"
     },
     "frontend-000214": {
         "message": "Tworzenie tagu nie powiodło się"
     },
     "frontend-000215": {
-        "message": "Edycja tagu"
+        "message": "Edytuj tag"
     },
     "frontend-000216": {
-        "message": "Wygeneruj losowy kolor"
+        "message": "Generowanie losowego koloru"
     },
     "frontend-000217": {
-        "message": "Znacznik zapisany"
+        "message": "Zapisany tag"
     },
     "frontend-000218": {
         "message": "Zapisywanie tagu nie powiodło się"
@@ -792,16 +792,16 @@
         "message": "Usuń tag"
     },
     "frontend-000220": {
-        "message": "Czy chcesz usunąć ten tag?"
+        "message": "Czy chcesz usunąć tag?"
     },
     "frontend-000221": {
         "message": "Tag usunięty"
     },
     "frontend-000222": {
-        "message": "Usuwanie tagu nie powiodło się"
+        "message": "Usunięcie tagu nie powiodło się"
     },
     "frontend-000223": {
-        "message": "Tag przywrócony"
+        "message": "Przywrócony tag"
     },
     "frontend-000224": {
         "message": "Przywracanie tagu nie powiodło się"
@@ -810,22 +810,22 @@
         "message": "Utwórz hasło"
     },
     "frontend-000226": {
-        "message": "Hasło utworzone"
+        "message": "Utworzone hasło"
     },
     "frontend-000227": {
         "message": "Tworzenie hasła nie powiodło się"
     },
     "frontend-000228": {
-        "message": "Edycja hasła"
+        "message": "Edytuj hasło"
     },
     "frontend-000229": {
         "message": "Hasło zostało zapisane"
     },
     "frontend-000230": {
-        "message": "Zapisywanie hasła nie powiodło się"
+        "message": "Zapisanie hasła nie powiodło się"
     },
     "frontend-000231": {
-        "message": "Hasło przeniesione"
+        "message": "Hasło zostało przeniesione"
     },
     "frontend-000232": {
         "message": "Przenoszenie hasła nie powiodło się"
@@ -840,22 +840,22 @@
         "message": "Hasło usunięte"
     },
     "frontend-000236": {
-        "message": "Hasło przywrócone"
+        "message": "Przywrócone hasło"
     },
     "frontend-000237": {
         "message": "Przywracanie hasła nie powiodło się"
     },
     "frontend-000238": {
-        "message": "Open Url"
+        "message": "Otwarty adres URL"
     },
     "frontend-000239": {
-        "message": "Kopia Url"
+        "message": "Kopiuj adres URL"
     },
     "frontend-000240": {
-        "message": "Kopia Użytkownik"
+        "message": "Kopiuj użytkownika"
     },
     "frontend-000241": {
-        "message": "Kopiowanie hasła"
+        "message": "Kopiuj hasło"
     },
     "frontend-000242": {
         "message": "$ELEMENT$ został skopiowany do schowka",
@@ -882,19 +882,19 @@
         }
     },
     "frontend-000245": {
-        "message": "Przywrócenie rewizji"
+        "message": "Przywróć wersję"
     },
     "frontend-000246": {
-        "message": "Przegląd przywrócony"
+        "message": "Przywrócona wersja"
     },
     "frontend-000247": {
-        "message": "Przywracanie rewizji nie powiodło się"
+        "message": "Przywracanie wersji nie powiodło się"
     },
     "frontend-000248": {
-        "message": "Czy chcesz przywrócić rewizję?"
+        "message": "Czy chcesz przywrócić wersję?"
     },
     "frontend-000249": {
-        "message": "Udostępnione Tobie"
+        "message": "Udostępnione"
     },
     "frontend-000250": {
         "message": "Udostępnione przez Ciebie"
@@ -903,13 +903,13 @@
         "message": "Statystyki"
     },
     "frontend-000252": {
-        "message": "Utworzony na"
+        "message": "Utworzono dnia"
     },
     "frontend-000253": {
         "message": "Ostatnia aktualizacja"
     },
     "frontend-000254": {
-        "message": "$COUNT$ rewizje",
+        "message": "$COUNT$ przeglądy",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -920,7 +920,7 @@
         "message": "Akcje"
     },
     "frontend-000256": {
-        "message": "Udostępnione $COUNT$ razy",
+        "message": "Udostępniono $COUNT$ razy",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -928,10 +928,10 @@
         }
     },
     "frontend-000257": {
-        "message": "Szyfrowanie stosowane na serwerze"
+        "message": "Szyfrowanie zastosowane na serwerze"
     },
     "frontend-000258": {
-        "message": "Szyfrowanie stosowane na kliencie"
+        "message": "Szyfrowanie zastosowane na kliencie"
     },
     "frontend-000259": {
         "message": "Brak szyfrowania"
@@ -940,7 +940,7 @@
         "message": "Proste szyfrowanie (Gen. 1)"
     },
     "frontend-000261": {
-        "message": "Proste szyfrowanie (Rdz 2)"
+        "message": "Proste szyfrowanie (Gen. 2)"
     },
     "frontend-000262": {
         "message": "Zaawansowane szyfrowanie (SSE V2)"
@@ -975,19 +975,19 @@
         }
     },
     "frontend-000270": {
-        "message": "Dopuszczalna edycja"
+        "message": "Edycja dozwolona"
     },
     "frontend-000271": {
-        "message": "Niedozwolone edytowanie"
+        "message": "Edycja niedozwolona"
     },
     "frontend-000272": {
         "message": "udostępnianie dozwolone"
     },
     "frontend-000273": {
-        "message": "podział niedozwolony"
+        "message": "udostępnianie niedozwolone"
     },
     "frontend-000274": {
-        "message": "Wyszukaj użytkownika"
+        "message": "Szukaj użytkownika"
     },
     "frontend-000275": {
         "message": "Ustaw datę wygaśnięcia"
@@ -1001,16 +1001,16 @@
         }
     },
     "frontend-000277": {
-        "message": "Wybierz datę wygaśnięcia lub pozostaw pustą, aby udostępnić na zawsze."
+        "message": "Wybierz datę wygaśnięcia lub pozostaw puste, aby udostępnić na zawsze"
     },
     "frontend-000278": {
-        "message": "Proszę wybrać datę w przyszłości"
+        "message": "Wybierz datę w przyszłości"
     },
     "frontend-000279": {
-        "message": "Nieważna data"
+        "message": "Nieprawidłowa data"
     },
     "frontend-000280": {
-        "message": "Użytkownik $UID$ nie istnieje.",
+        "message": "Użytkownik $UID$ nie istnieje",
         "placeholders": {
             "uid": {
                 "content": "$1"
@@ -1026,10 +1026,10 @@
         }
     },
     "frontend-000282": {
-        "message": "Przełączanie uprawnień do zapisu"
+        "message": "Przełączanie uprawnień zapisu"
     },
     "frontend-000283": {
-        "message": "Przełączanie uprawnień do udostępniania"
+        "message": "Przełączanie uprawnień udostępniania"
     },
     "frontend-000284": {
         "message": "Przestań udostępniać"
@@ -1038,10 +1038,10 @@
         "message": "Data"
     },
     "frontend-000286": {
-        "message": "Default Cache (0 plików, 0 B)"
+        "message": "Domyślna pamięć podręczna (0 plików, 0 B)"
     },
     "frontend-000287": {
-        "message": "Avatars Cache (0 plików, 0 B)"
+        "message": "Pamięć podręczna awatarów (0 plików, 0 B)"
     },
     "frontend-000288": {
         "message": "Favicon Cache (0 plików, 0 B)"
@@ -1050,16 +1050,16 @@
         "message": "Preview Cache (0 plików, 0 B)"
     },
     "frontend-000290": {
-        "message": "Passwords Cache (0 plików, 0 B)"
+        "message": "Pamięć podręczna haseł (0 plików, 0 B)"
     },
     "frontend-000291": {
-        "message": "Zmieniono"
+        "message": "Zmieniony"
     },
     "frontend-000292": {
         "message": "Zmiana"
     },
     "frontend-000293": {
-        "message": "Edytowane"
+        "message": "Edytowano"
     },
     "frontend-000294": {
         "message": "Utworzono"
@@ -1074,16 +1074,16 @@
         "message": "Rodzic"
     },
     "frontend-000298": {
-        "message": "Usuń wszystkie pozycje"
+        "message": "Usuń wszystkie elementy"
     },
     "frontend-000299": {
-        "message": "Przywróć wszystkie pozycje"
+        "message": "Przywróć wszystkie elementy"
     },
     "frontend-000300": {
-        "message": "Przywracanie pozycji"
+        "message": "Przywracanie elementów"
     },
     "frontend-000301": {
-        "message": "Przywrócić wszystkie elementy w koszu?"
+        "message": "Przywrócić wszystkie przedmioty w koszu?"
     },
     "frontend-000302": {
         "message": "Przywróć ten element"
@@ -1115,31 +1115,31 @@
         }
     },
     "frontend-000310": {
-        "message": "Nie ma tu nic"
+        "message": "Nic tu nie ma"
     },
     "frontend-000311": {
         "message": "Kliknij na \"⋯\", aby coś dodać"
     },
     "frontend-000312": {
-        "message": "Usunięte elementy pojawią się tutaj"
+        "message": "Tutaj pojawią się usunięte elementy"
     },
     "frontend-000313": {
-        "message": "Nie udostępniono Ci żadnych haseł"
+        "message": "Żadne hasła nie zostały ci udostępnione"
     },
     "frontend-000314": {
-        "message": "Nie udostępniałeś żadnych haseł"
+        "message": "Nie udostępniłeś żadnych haseł"
     },
     "frontend-000315": {
-        "message": "Twoje ulubione pojawią się tutaj"
+        "message": "Ulubione będą wyświetlane tutaj"
     },
     "frontend-000316": {
-        "message": "Lepiej sprawdź pozostałe sekcje"
+        "message": "Lepiej sprawdź inne sekcje"
     },
     "frontend-000317": {
-        "message": "To chyba dobry znak."
+        "message": "To prawdopodobnie dobry znak"
     },
     "frontend-000318": {
-        "message": "Idź do $HREF$",
+        "message": "Przejdź do $HREF$",
         "placeholders": {
             "href": {
                 "content": "$1"
@@ -1147,7 +1147,7 @@
         }
     },
     "frontend-000319": {
-        "message": "Spis treści"
+        "message": "Zawartość"
     },
     "frontend-000320": {
         "message": "Rysunek $COUNT$: $TITLE$",
@@ -1169,7 +1169,7 @@
         }
     },
     "frontend-000322": {
-        "message": "Niewłaściwy typ zawartości $MIME$",
+        "message": "Nieprawidłowy typ zawartości $MIME$",
         "placeholders": {
             "mime": {
                 "content": "$1"
@@ -1177,19 +1177,19 @@
         }
     },
     "frontend-000323": {
-        "message": "Brak zawartości"
+        "message": "Brak dostępnej zawartości"
     },
     "frontend-000324": {
         "message": "Nie znaleziono"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Nadal potrzebujesz pomocy?"
+        "message": "Potrzebujesz pomocy?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Zapytaj na naszym forum!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Powiedz nam!"
+        "message": "Zgłoś błąd"
     },
     "frontend-000329": {
         "message": "Sesja wygasła"
@@ -1234,7 +1234,7 @@
         }
     },
     "frontend-000338": {
-        "message": "1 teczka"
+        "message": "1 folder"
     },
     "frontend-000339": {
         "message": "$TAGS$ tagi",
@@ -1245,7 +1245,7 @@
         }
     },
     "frontend-000340": {
-        "message": "1 etykieta"
+        "message": "1 znacznik"
     },
     "frontend-000341": {
         "message": "Nic"
@@ -1307,7 +1307,7 @@
         "message": "Wiersz poleceń serwera"
     },
     "frontend-000359": {
-        "message": "Proszę poprawić swoje dane wejściowe"
+        "message": "Popraw swoje dane wejściowe"
     },
     "frontend-000360": {
         "message": "Pokaż wartość"
@@ -1316,7 +1316,7 @@
         "message": "Ok"
     },
     "frontend-000363": {
-        "message": "prawdziwy"
+        "message": "prawda"
     },
     "frontend-000364": {
         "message": "fałszywy"
@@ -1336,10 +1336,10 @@
         }
     },
     "frontend-000368": {
-        "message": "Osiągnąłeś maksymalną długość 4096 znaków"
+        "message": "Osiągnięto maksymalną długość 4096 znaków"
     },
     "frontend-000369": {
-        "message": "Nie mogliśmy znaleźć nic dla \"$QUERY$\"",
+        "message": "Nie mogliśmy znaleźć niczego dla \"$QUERY$\".",
         "placeholders": {
             "query": {
                 "content": "$1"
@@ -1355,10 +1355,10 @@
         }
     },
     "frontend-000371": {
-        "message": "Niektóre dane czekają na synchronizację"
+        "message": "Niektóre dane oczekują na synchronizację"
     },
     "frontend-000372": {
-        "message": "Zostaniesz wylogowany w ciągu $TIME$ sekund.",
+        "message": "Zostaniesz wylogowany w ciągu $TIME$ sekund",
         "placeholders": {
             "time": {
                 "content": "$1"
@@ -1366,16 +1366,16 @@
         }
     },
     "frontend-000373": {
-        "message": "Być może zażądałeś zbyt wielu tokenów. Proszę spróbować ponownie później."
+        "message": "Być może zażądano zbyt wielu tokenów. Spróbuj ponownie później."
     },
     "frontend-000374": {
-        "message": "Szyfrowanie End-to-End będzie wyłączone dla tego hasła, jeśli je udostępnisz."
+        "message": "Szyfrowanie End-to-End zostanie wyłączone dla tego hasła, jeśli zostanie ono udostępnione."
     },
     "frontend-000375": {
         "message": "Token sesji nie jest już ważny. Aplikacja zostanie teraz przeładowana."
     },
     "frontend-000376": {
-        "message": "Dziś w 2018 roku ukazała się pierwsza wersja haseł. Dziękujemy za korzystanie z aplikacji."
+        "message": "Dziś, w 2018 roku, została opublikowana pierwsza wersja haseł. Dziękujemy za korzystanie z aplikacji."
     },
     "frontend-Tags": {
         "message": "Tagi"
@@ -1387,7 +1387,7 @@
         "message": "Id"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "Zapisanie ukrytego hasła w folderze, który sam nie jest ukryty, spowoduje, że hasło będzie niedostępne. To hasło nie będzie już nigdzie widoczne. Czy chcesz kontynuować?",
+        "message": "Zapisanie ukrytego hasła w folderze, który sam nie jest ukryty, spowoduje, że hasło będzie niedostępne. To hasło nie będzie już nigdzie wyświetlane. Czy chcesz kontynuować?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "frontend-PwdSaveHiddenTitle": {
@@ -1395,10 +1395,10 @@
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "backend-000377": {
-        "message": "Wymagane HTTPS"
+        "message": "Wymagany protokół HTTPS"
     },
     "backend-000378": {
-        "message": "przeładować tę stronę"
+        "message": "przeładuj tę stronę"
     },
     "backend-000379": {
         "message": "forum"
@@ -1407,7 +1407,7 @@
         "message": "dokumentacja"
     },
     "backend-000381": {
-        "message": "Możesz spróbować $STR_1$ strony z HTTPS.",
+        "message": "Możesz spróbować $STR_1$ stronę z HTTPS.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1415,7 +1415,7 @@
         }
     },
     "backend-000382": {
-        "message": "Ta aplikacja wymaga $STR_1$ w celu bezpiecznej pracy.",
+        "message": "Ta aplikacja wymaga strony $STR_1$ do bezpiecznej pracy.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1423,7 +1423,7 @@
         }
     },
     "backend-000383": {
-        "message": "To NIE jest błąd. Odwiedź naszą stronę $STR_1$ jeśli potrzebujesz pomocy.",
+        "message": "To NIE jest błąd. Jeśli potrzebujesz pomocy, odwiedź naszą stronę $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1431,10 +1431,10 @@
         }
     },
     "backend-000384": {
-        "message": "Przejrzyj poniższy raport HTTPS, aby rozwiązać problem."
+        "message": "Zapoznaj się z poniższym raportem HTTPS, aby zdebugować problem."
     },
     "backend-000385": {
-        "message": "Przeczytaj tę stronę $STR_1$, aby skonfigurować swój serwer do korzystania z protokołu HTTPS.",
+        "message": "Przeczytaj tę stronę $STR_1$, aby skonfigurować serwer do korzystania z protokołu HTTPS.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1442,7 +1442,7 @@
         }
     },
     "backend-000386": {
-        "message": "Przeczytaj to $STR_1$ jeśli używasz jakiegokolwiek proxy.",
+        "message": "Przeczytaj tę stronę $STR_1$, jeśli korzystasz z dowolnego rodzaju serwera proxy.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1450,7 +1450,7 @@
         }
     },
     "backend-000387": {
-        "message": "Wejdź na stronę $STR_1$, aby uzyskać bezpłatny certyfikat HTTPS, jeśli go potrzebujesz.",
+        "message": "Przejdź na stronę $STR_1$, aby uzyskać bezpłatny certyfikat HTTPS, jeśli go potrzebujesz.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1458,10 +1458,10 @@
         }
     },
     "backend-000388": {
-        "message": "Jeśli ten problem nadal występuje, należy skontaktować się z administratorem."
+        "message": "Jeśli problem nie ustąpi, należy skontaktować się z administratorem."
     },
     "backend-000389": {
-        "message": "Hasła Sesja $STR_1$ -. $STR_2$",
+        "message": "Hasła Sesja $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1478,7 +1478,7 @@
         "message": "Wewnętrzne przetwarzanie danych"
     },
     "backend-000393": {
-        "message": "Rendering obrazu"
+        "message": "Renderowanie obrazu"
     },
     "backend-000394": {
         "message": "Imagick/GMagick"
@@ -1487,16 +1487,16 @@
         "message": "Usługi zewnętrzne"
     },
     "backend-000396": {
-        "message": "Sprawdzanie bezpieczeństwa haseł"
+        "message": "Kontrola bezpieczeństwa haseł"
     },
     "backend-000397": {
-        "message": "Have I been pwned? (recommended)"
+        "message": "Czy zostałem rozgromiony? (zalecane)"
     },
     "backend-000398": {
-        "message": "Duża lokalna baza danych (25M haseł)"
+        "message": "Duża lokalna baza danych (25 mln haseł)"
     },
     "backend-000399": {
-        "message": "Mała lokalna baza danych (5M haseł)"
+        "message": "Mała lokalna baza danych (5 mln haseł)"
     },
     "backend-000400": {
         "message": "Duża lokalna baza danych i Hibp?"
@@ -1505,7 +1505,7 @@
         "message": "Usługa generatora haseł"
     },
     "backend-000402": {
-        "message": "Lokalny słownik"
+        "message": "Słownik lokalny"
     },
     "backend-000403": {
         "message": "Losowe postacie"
@@ -1514,16 +1514,16 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Lipska Kolekcja Korporacyjna (zalecane)"
+        "message": "Kolekcja Corpora Leipzig"
     },
     "backend-000406": {
-        "message": "Serwis Favicon"
+        "message": "Usługa Favicon"
     },
     "backend-000407": {
-        "message": "Lokalny analizator"
+        "message": "Analizator lokalny"
     },
     "backend-000408": {
-        "message": "Besticon (zalecany)"
+        "message": "Besticon (zalecane)"
     },
     "backend-000409": {
         "message": "Brak"
@@ -1532,34 +1532,34 @@
         "message": "Usługa podglądu strony internetowej"
     },
     "backend-000411": {
-        "message": "Klucz API podglądu strony internetowej"
+        "message": "Klucz API podglądu witryny"
     },
     "backend-000412": {
-        "message": "Pageres/PhantomJS (Local)"
+        "message": "Pageres/PhantomJS (lokalny)"
     },
     "backend-000413": {
-        "message": "WKHTML (Local)"
+        "message": "WKHTML (lokalny)"
     },
     "backend-000414": {
         "message": "screenshotapi.io"
     },
     "backend-000415": {
-        "message": "Domyślne ustawienia poczty elektronicznej"
+        "message": "Domyślne ustawienia poczty e-mail"
     },
     "backend-000416": {
-        "message": "Wysyłanie wiadomości e-mail dotyczących zdarzeń związanych z bezpieczeństwem"
+        "message": "Wysyłanie wiadomości e-mail dotyczących zdarzeń bezpieczeństwa"
     },
     "backend-000417": {
-        "message": "Wysyłaj wiadomości e-mail dotyczące udostępniania wydarzeń"
+        "message": "Wysyłanie wiadomości e-mail w celu udostępniania wydarzeń"
     },
     "backend-000418": {
         "message": "Inne ustawienia"
     },
     "backend-000419": {
-        "message": "Usuń usunięte obiekty z bazy danych"
+        "message": "Usuwanie usuniętych obiektów z bazy danych"
     },
     "backend-000420": {
-        "message": "Pokaż nocne aktualizacje w \"Apps\""
+        "message": "Wyświetlanie nocnych aktualizacji w \"Aplikacjach\""
     },
     "backend-000421": {
         "message": "Nigdy"
@@ -1577,7 +1577,7 @@
         "message": "Po dwóch tygodniach"
     },
     "backend-000426": {
-        "message": "Po jednym miesiącu"
+        "message": "Po miesiącu"
     },
     "backend-000427": {
         "message": "Po upływie jednego roku"
@@ -1586,7 +1586,7 @@
         "message": "Ustawienia kopii zapasowej"
     },
     "backend-000429": {
-        "message": "Częstotliwość wykonywania kopii zapasowych"
+        "message": "Interwał tworzenia kopii zapasowych"
     },
     "backend-000430": {
         "message": "Co godzinę"
@@ -1595,7 +1595,7 @@
         "message": "Co sześć godzin"
     },
     "backend-000432": {
-        "message": "Codziennie"
+        "message": "Każdego dnia"
     },
     "backend-000433": {
         "message": "Co dwa dni"
@@ -1607,13 +1607,13 @@
         "message": "Co dwa tygodnie"
     },
     "backend-000436": {
-        "message": "Ilość kopii zapasowych do zachowania"
+        "message": "Ilość przechowywanych kopii zapasowych"
     },
     "backend-000437": {
-        "message": "Cache"
+        "message": "Skrytki"
     },
     "backend-000438": {
-        "message": "Default Cache ($STR_1$ pliki, $STR_1$)",
+        "message": "Domyślna pamięć podręczna (pliki$STR_1$, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1624,7 +1624,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ pliki, $STR_1$)",
+        "message": "Pamięć podręczna awatarów (pliki$STR_1$, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1657,7 +1657,7 @@
         }
     },
     "backend-000442": {
-        "message": "Hasła Cache ($STR_1$ pliki, $STR_1$)",
+        "message": "Pamięć podręczna haseł (pliki$STR_1$, $STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1668,34 +1668,34 @@
         }
     },
     "backend-000443": {
-        "message": "jasne"
+        "message": "czysty"
     },
     "backend-000444": {
         "message": "Wyczyść tę pamięć podręczną"
     },
     "backend-000445": {
-        "message": "Nie można wyczyścić pamięci podręcznej za pomocą usługi współdzielonej"
+        "message": "Nie można wyczyścić pamięci podręcznej przy użyciu usługi udostępnionej"
     },
     "backend-000446": {
         "message": "Zapisane"
     },
     "backend-000447": {
-        "message": "Oczyszczony"
+        "message": "Wyczyszczony"
     },
     "backend-000448": {
-        "message": "Nie udało się"
+        "message": "Nie powiodło się"
     },
     "backend-000449": {
         "message": "Potrzebna pomoc"
     },
     "backend-000450": {
-        "message": "znalazł błąd"
+        "message": "znalazłem błąd"
     },
     "backend-000451": {
         "message": "szukanie dokumentacji"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ lub $STR_1$? Mamy Cię pod opieką!",
+        "message": "$STR_1$, $STR_1$ lub $STR_1$? Jesteśmy do Twojej dyspozycji!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1709,7 +1709,7 @@
         }
     },
     "backend-000453": {
-        "message": "$STRING_1$ $STRING_2$ nie jest już wspierany.",
+        "message": "$STRING_1$ $STRING_2$ nie jest już obsługiwana.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -1723,7 +1723,7 @@
         "message": "Hasła wymagają protokołu HTTPS."
     },
     "backend-000455": {
-        "message": "Używanie $STR_1$ do wykonywania zadań w tle może powodować opóźnienia. Zalecamy używanie Crona.",
+        "message": "Używanie strony $STR_1$ do wykonywania zadań w tle może powodować opóźnienia. Zalecamy korzystanie z funkcji Cron.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1731,10 +1731,10 @@
         }
     },
     "backend-000456": {
-        "message": "Proszę sprawdzić wymagania systemowe."
+        "message": "Sprawdź wymagania systemowe."
     },
     "backend-000457": {
-        "message": "Hasło nie jest udostępniane"
+        "message": "Hasło nie zostało udostępnione"
     },
     "backend-000459": {
         "message": "Masz niezabezpieczone hasło"
@@ -1743,19 +1743,19 @@
         "message": "Masz niezabezpieczone hasła"
     },
     "backend-000461": {
-        "message": "Jedno z Twoich haseł nie jest już bezpieczne."
+        "message": "Jedno z haseł nie jest już bezpieczne."
     },
     "backend-000462": {
-        "message": "Niektóre z Twoich haseł nie są już bezpieczne."
+        "message": "Niektóre hasła nie są już bezpieczne."
     },
     "backend-000463": {
-        "message": "Passwords regularnie sprawdza, czy Twoje hasła zostały narażone na szwank w wyniku naruszenia danych."
+        "message": "Passwords regularnie sprawdza, czy hasła zostały naruszone w wyniku naruszenia bezpieczeństwa danych."
     },
     "backend-000464": {
-        "message": "Ta kontrola bezpieczeństwa wykazała, że jedno z Twoich haseł jest niezabezpieczone."
+        "message": "Ta kontrola bezpieczeństwa wykryła, że jedno z Twoich haseł jest niezabezpieczone."
     },
     "backend-000465": {
-        "message": "Ta kontrola bezpieczeństwa wykazała, że $STR_1$ Twoich haseł jest niezabezpieczonych.",
+        "message": "Ta kontrola bezpieczeństwa wykazała, że $STR_1$ haseł jest niezabezpieczonych.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1763,37 +1763,37 @@
         }
     },
     "backend-000466": {
-        "message": "Oznacza to, że hasło jest w Internecie i naraża Twoje konto na niebezpieczeństwo."
+        "message": "Oznacza to, że hasło jest dostępne w Internecie i naraża konto na ryzyko."
     },
     "backend-000467": {
-        "message": "Oznacza to, że hasła znajdują się w Internecie i narażają Twoje konta na niebezpieczeństwo."
+        "message": "Oznacza to, że hasła są dostępne w Internecie i narażają konta na ryzyko."
     },
     "backend-000468": {
-        "message": "W związku z tym hasło zostało oznaczone jako niezabezpieczone i należy je teraz zmienić."
+        "message": "W związku z tym hasło zostało oznaczone jako niezabezpieczone i powinno zostać zmienione teraz."
     },
     "backend-000469": {
-        "message": "Dlatego hasła zostały oznaczone jako niezabezpieczone i należy je teraz zmienić."
+        "message": "W związku z tym hasła zostały oznaczone jako niezabezpieczone i powinny zostać zmienione teraz."
     },
     "backend-000470": {
-        "message": "Nowe bezpieczne hasło można utworzyć w aplikacji Hasła."
+        "message": "Możesz utworzyć nowe bezpieczne hasło w aplikacji haseł."
     },
     "backend-000471": {
-        "message": "Nowe bezpieczne hasła można tworzyć w aplikacji Hasła."
+        "message": "Nowe bezpieczne hasła można tworzyć w aplikacji haseł."
     },
     "backend-000472": {
         "message": "Zmień hasło teraz"
     },
     "backend-000473": {
-        "message": "Zmień hasła już teraz"
+        "message": "Zmień hasła teraz"
     },
     "backend-000474": {
-        "message": "Otwórz aplikację Hasła, aby ją zmienić."
+        "message": "Otwórz aplikację haseł, aby je zmienić."
     },
     "backend-000475": {
-        "message": "Otwórz aplikację Hasła, aby je zmienić."
+        "message": "Otwórz aplikację haseł, aby je zmienić."
     },
     "backend-000476": {
-        "message": "$STR_1$ podzielił się z tobą hasłem.",
+        "message": "$STR_1$ udostępnił ci hasło.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1801,7 +1801,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ dzielił się z Tobą hasłami $STR_1$.",
+        "message": "$STR_1$ udostępnił hasła $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1812,7 +1812,7 @@
         }
     },
     "backend-000478": {
-        "message": "$STRING_4$ i $STRING_3$ podzieliły się z Tobą hasłami $STRING_1$.",
+        "message": "$STRING_4$ i $STRING_3$ udostępniły ci hasła $STRING_1$.",
         "placeholders": {
             "string_4": {
                 "content": "$4"
@@ -1826,7 +1826,7 @@
         }
     },
     "backend-000479": {
-        "message": "$STRING_5$, $STRING_4$ oraz $STRING_3$ udostępniły hasła $STRING_1$.",
+        "message": "$STRING_5$, $STRING_4$ i $STRING_3$ udostępniły ci hasła $STRING_1$.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1843,7 +1843,7 @@
         }
     },
     "backend-000480": {
-        "message": "$STRING_5$, $STRING_4$ i $STRING_2$ inni udostępnili $STRING_1$ hasła.",
+        "message": "$STRING_5$, $STRING_4$ i $STRING_2$ inni udostępnili ci hasła $STRING_1$.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1860,13 +1860,13 @@
         }
     },
     "backend-000481": {
-        "message": "Otwórz aplikację Hasła, aby ją zobaczyć."
+        "message": "Otwórz aplikację haseł, aby ją zobaczyć."
     },
     "backend-000482": {
-        "message": "Otwórz aplikację Hasła, aby je zobaczyć."
+        "message": "Otwórz aplikację haseł, aby je zobaczyć."
     },
     "backend-000483": {
-        "message": "Hasło zostało udostępnione na $STR_1$",
+        "message": "Hasło zostało udostępnione na stronie $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1874,7 +1874,7 @@
         }
     },
     "backend-000484": {
-        "message": "Kilka haseł zostało udostępnionych na $STR_1$",
+        "message": "Kilka haseł zostało ci udostępnionych na $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1882,13 +1882,13 @@
         }
     },
     "backend-000485": {
-        "message": "Wyświetlanie haseł udostępnionych mi"
+        "message": "Wyświetlanie udostępnionych mi haseł"
     },
     "backend-000486": {
-        "message": "Jedno z Twoich haseł nie mogło zostać udostępnione, ponieważ odbiorca ma już do niego dostęp."
+        "message": "Jedno z haseł nie może zostać udostępnione, ponieważ odbiorca ma już do niego dostęp."
     },
     "backend-000487": {
-        "message": "$STR_1$ swoich haseł nie mógł udostępnić, ponieważ odbiorca ma już do nich dostęp.",
+        "message": "$STR_1$ Hasła nie mogą być udostępniane, ponieważ odbiorca ma już do nich dostęp.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1896,16 +1896,16 @@
         }
     },
     "backend-000489": {
-        "message": "Udostępnianie hasła, które zostało udostępnione użytkownikowi, może czasem tworzyć pętlę."
+        "message": "Udostępnianie hasła, które zostało udostępnione użytkownikowi, może czasami tworzyć pętlę."
     },
     "backend-000490": {
         "message": "Aby temu zapobiec, hasła te nie będą udostępniane."
     },
     "backend-000491": {
-        "message": "Dostęp administracyjny do konta"
+        "message": "Dostęp administracyjny do konta użytkownika"
     },
     "backend-000492": {
-        "message": "$STR_1$ próbował zalogować się na swoje konto na $STR_1$.",
+        "message": "$STR_1$ Próbowano zalogować się na konto na stronie $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1916,7 +1916,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ zalogował się na swoje konto na stronie $STR_1$.",
+        "message": "$STR_1$ zalogować się na swoje konto na stronie $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1927,10 +1927,10 @@
         }
     },
     "backend-000494": {
-        "message": "Skoro używasz hasła głównego, nie oznacza to, że dostęp do Twoich danych został przyznany."
+        "message": "Użycie hasła głównego nie oznacza, że dostęp do danych został przyznany."
     },
     "backend-000495": {
-        "message": "Aby zapobiec niepożądanemu dostępowi do Twoich danych, powinieneś ustanowić hasło główne."
+        "message": "Aby zapobiec niepożądanemu dostępowi do danych, należy ustawić hasło główne."
     },
     "backend-000496": {
         "message": "Usunięty użytkownik ($STR_1$)",
@@ -1941,61 +1941,61 @@
         }
     },
     "backend-000497": {
-        "message": "Pomóż nam ulepszyć Hasła"
+        "message": "Pomóż nam ulepszyć hasła"
     },
     "backend-000498": {
-        "message": "Możesz pomóc nam w ulepszeniu aplikacji Hasła, biorąc udział w naszej ankiecie dotyczącej serwera."
+        "message": "Możesz pomóc nam ulepszyć aplikację Passwords, biorąc udział w naszej ankiecie dotyczącej serwerów."
     },
     "backend-000499": {
-        "message": "To spowoduje przesłanie nam pewnych anonimowych danych na temat Twojej konfiguracji i wybranych ustawień."
+        "message": "Spowoduje to przesłanie nam anonimowych danych dotyczących konfiguracji i wybranych ustawień."
     },
     "backend-000500": {
-        "message": "Możesz to zmienić w każdej chwili w ustawieniach aplikacji."
+        "message": "Można to zmienić w dowolnym momencie w ustawieniach aplikacji."
     },
     "backend-000501": {
         "message": "Jeszcze nie"
     },
     "backend-000502": {
-        "message": "Weź udział"
+        "message": "Uczestniczyć"
     },
     "backend-000503": {
-        "message": "Udział w badaniu serwera"
+        "message": "Udział w ankiecie serwera"
     },
     "backend-000504": {
-        "message": "Podstawowe"
+        "message": "Podstawowy"
     },
     "backend-000505": {
-        "message": "Pełna"
+        "message": "Pełny"
     },
     "backend-000506": {
-        "message": "Nie ustalono"
+        "message": "Nie ustawiono"
     },
     "backend-000507": {
-        "message": "Proszę rozważyć samodzielne hostowanie api favicon."
+        "message": "Prosimy o rozważenie samodzielnego hostowania favicon api"
     },
     "backend-000508": {
-        "message": "Twój Nextcloud używa naszych wspólnych instancji Besticon do pobierania ikon stron internetowych."
+        "message": "Nextcloud używa naszych współdzielonych instancji Besticon do pobierania ikon stron internetowych."
     },
     "backend-000509": {
-        "message": "Te instancje są przeznaczone dla małych konfiguracji Nextcloud z bardzo małym ruchem."
+        "message": "Instancje te są przeznaczone dla małych konfiguracji Nextcloud z bardzo małym ruchem."
     },
     "backend-000510": {
-        "message": "Proszę kliknąć na link i postępować zgodnie z naszym łatwym tutorialem, aby hostować Besticon samodzielnie."
+        "message": "Kliknij link i postępuj zgodnie z naszym prostym samouczkiem, aby samodzielnie hostować Besticon."
     },
     "backend-000512": {
-        "message": "Twoja konfiguracja usługi podglądu jest nieprawidłowa"
+        "message": "Konfiguracja usługi podglądu jest nieprawidłowa"
     },
     "backend-000513": {
-        "message": "Twoja wybrana usługa favicon wymaga klucza api lub punktu końcowego, ale żaden nie jest podany."
+        "message": "Wybrana usługa favicon wymaga klucza api lub punktu końcowego, ale żaden nie został podany."
     },
     "backend-000514": {
-        "message": "Wybrana przez Ciebie usługa podglądu wymaga klucza api lub punktu końcowego, ale żaden nie jest podany."
+        "message": "Wybrana usługa podglądu wymaga klucza API lub punktu końcowego, ale nie został on podany."
     },
     "backend-000515": {
         "message": "Otwórz ustawienia administratora, aby zaktualizować konfigurację lub wybrać inną usługę."
     },
     "backend-000516": {
-        "message": "Wykryliśmy kilka nieudanych prób odblokowania Twojej bazy haseł przez \"$STR_1$\".",
+        "message": "Wykryliśmy kilka nieudanych prób odblokowania bazy danych haseł przez \"$STR_1$\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2003,28 +2003,28 @@
         }
     },
     "backend-000517": {
-        "message": "Może to świadczyć o tym, że ktoś próbuje się włamać na Twoje konto."
+        "message": "Może to oznaczać, że ktoś próbuje włamać się na Twoje konto."
     },
     "backend-000518": {
-        "message": "Aby zapobiec kolejnym próbom, poświadczenia API tego klienta zostały cofnięte."
+        "message": "Aby zapobiec dalszym próbom, poświadczenia API tego klienta zostały cofnięte."
     },
     "backend-000519": {
-        "message": "Wyłączono również uwierzytelnianie API na podstawie hasła."
+        "message": "Wyłączono również uwierzytelnianie API oparte na haśle."
     },
     "backend-000520": {
-        "message": "Jeśli chcesz nadal używać tego klienta, musisz stworzyć dla niego nowy token."
+        "message": "Jeśli chcesz nadal korzystać z tego klienta, musisz utworzyć dla niego nowy token."
     },
     "backend-000521": {
         "message": "Jeśli nie znasz tego klienta, zmień hasło i przejrzyj listę urządzeń."
     },
     "backend-000522": {
-        "message": "Aby zapobiec kolejnym próbom, wyłączono uwierzytelnianie API na podstawie hasła."
+        "message": "Aby zapobiec dalszym próbom, uwierzytelnianie API oparte na haśle zostało wyłączone."
     },
     "backend-000523": {
-        "message": "Aby włączyć go ponownie, zaloguj się za pomocą aplikacji internetowej lub dowolnego klienta przy użyciu uwierzytelniania tokena."
+        "message": "Aby włączyć ją ponownie, zaloguj się za pomocą aplikacji internetowej lub dowolnego klienta korzystającego z uwierzytelniania tokenem."
     },
     "backend-000524": {
-        "message": "Jeśli nie znasz tego klienta, zmień swoje hasło główne i hasło Nextcloud."
+        "message": "Jeśli nie znasz tego klienta, zmień hasło główne i hasło Nextcloud."
     },
     "backend-000525": {
         "message": "Aby zwiększyć bezpieczeństwo, zalecamy używanie tokenów specyficznych dla urządzenia zamiast hasła."
@@ -2033,10 +2033,10 @@
         "message": "Rozszerzenie przeglądarki"
     },
     "frontend-000528": {
-        "message": "Reguły dotyczące haseł"
+        "message": "Zasady dotyczące haseł"
     },
     "frontend-000529": {
-        "message": "Zaznaczaj duplikaty"
+        "message": "Oznaczanie duplikatów"
     },
     "frontend-000530": {
         "message": "Maksymalny wiek w dniach"
@@ -2048,10 +2048,10 @@
         "message": "Siła hasła"
     },
     "frontend-000533": {
-        "message": "Uwzględnić numery"
+        "message": "Uwzględnij liczby"
     },
     "frontend-000534": {
-        "message": "Włączenie znaków specjalnych"
+        "message": "Uwzględnienie znaków specjalnych"
     },
     "frontend-000535": {
         "message": "Interfejs użytkownika"
@@ -2072,16 +2072,16 @@
         "message": "Sortuj według"
     },
     "frontend-000541": {
-        "message": "Pole tytułowe"
+        "message": "Pole tytułu"
     },
     "frontend-000542": {
-        "message": "Działanie za pomocą jednego kliknięcia"
+        "message": "Pojedyncze kliknięcie"
     },
     "frontend-000543": {
-        "message": "Czynność podwójnego kliknięcia"
+        "message": "Działanie dwukrotnego kliknięcia"
     },
     "frontend-000544": {
-        "message": "Kopiuj hasło"
+        "message": "Kopiowanie hasła"
     },
     "frontend-000545": {
         "message": "Kopiuj nazwę użytkownika"
@@ -2099,31 +2099,31 @@
         "message": "Pokaż nazwę użytkownika w widoku listy"
     },
     "frontend-000550": {
-        "message": "Pokaż tagi w widoku listy"
+        "message": "Wyświetlanie tagów w widoku listy"
     },
     "frontend-000551": {
-        "message": "Pokaż ukryte pola własne"
+        "message": "Pokaż ukryte pola niestandardowe"
     },
     "frontend-000552": {
-        "message": "Wyszukiwanie w trakcie pisania"
+        "message": "Wyszukiwanie podczas pisania"
     },
     "frontend-000553": {
         "message": "Szukaj wszędzie za pomocą Enter"
     },
     "frontend-000554": {
-        "message": "Zawsze pokazuj sekcję wyszukiwania"
+        "message": "Zawsze wyświetlaj sekcję wyszukiwania"
     },
     "frontend-000555": {
         "message": "Powiadomienia"
     },
     "frontend-000556": {
-        "message": "Wysyłaj e-maile dla"
+        "message": "Wysyłanie wiadomości e-mail dla"
     },
     "frontend-000557": {
         "message": "Kwestie bezpieczeństwa"
     },
     "frontend-000558": {
-        "message": "Hasła udostępnione mi"
+        "message": "Udostępnione mi hasła"
     },
     "frontend-000559": {
         "message": "Pokaż powiadomienia dla"
@@ -2141,85 +2141,85 @@
         "message": "Usuń wszystko"
     },
     "frontend-000565": {
-        "message": "USUWAĆ WSZYSTKO"
+        "message": "USUNĄĆ WSZYSTKO"
     },
     "frontend-000566": {
         "message": "Żądanie zresetowania konta"
     },
     "frontend-000569": {
-        "message": "Oznaczaj hasła jako słabe, jeśli są one używane do wielu kont"
+        "message": "Oznacz hasła jako słabe, jeśli są używane do wielu kont."
     },
     "frontend-000570": {
-        "message": "Oznaczaj hasła jako słabe, jeśli przekroczą określoną ilość dni"
+        "message": "Oznaczanie haseł jako słabych, jeśli minie określona liczba dni."
     },
     "frontend-000571": {
-        "message": "Wyższa siła skutkuje dłuższymi, bardziej złożonymi hasłami"
+        "message": "Wyższa siła oznacza dłuższe, bardziej złożone hasła"
     },
     "frontend-000572": {
-        "message": "Pokaż wybraną właściwość jako tytuł w widoku listy"
+        "message": "Wyświetla wybraną właściwość jako tytuł w widoku listy"
     },
     "frontend-000573": {
-        "message": "Sortuje hasła według wybranej właściwości, gdy wybrane jest sortowanie według nazwy"
+        "message": "Sortuje hasła według wybranej właściwości, gdy wybrano sortowanie według nazwy"
     },
     "frontend-000574": {
-        "message": "Akcja, którą należy wykonać po kliknięciu na hasło w widoku listy"
+        "message": "Akcja do wykonania po kliknięciu hasła w widoku listy"
     },
     "frontend-000575": {
-        "message": "Akcja, którą należy wykonać po dwukrotnym kliknięciu na hasło w widoku listy"
+        "message": "Akcja do wykonania po dwukrotnym kliknięciu hasła w widoku listy"
     },
     "frontend-000576": {
-        "message": "Pokazuje opcje kopiowania hasła i nazwy użytkownika w menu"
+        "message": "Wyświetla opcje kopiowania hasła i nazwy użytkownika w menu"
     },
     "frontend-000577": {
-        "message": "Sekcja początkowa, która będzie wyświetlana po otwarciu aplikacji"
+        "message": "Początkowa sekcja wyświetlana po otwarciu aplikacji"
     },
     "frontend-000578": {
-        "message": "Zawsze pokazuj nazwę użytkownika związaną z hasłem w widoku listy"
+        "message": "Zawsze wyświetlaj nazwę użytkownika powiązaną z hasłem w widoku listy."
     },
     "frontend-000579": {
-        "message": "Pokaż tagi dla każdego hasła w widoku listy. Zwiększa czas ładowania"
+        "message": "Wyświetlanie tagów dla każdego hasła w widoku listy. Zwiększa czas ładowania"
     },
     "frontend-000580": {
-        "message": "Pokaż ukryte pola niestandardowe w formularzu edycji i sekcji szczegółów hasła"
+        "message": "Wyświetlanie ukrytych pól niestandardowych w formularzu edycji i sekcji szczegółów hasła"
     },
     "frontend-000581": {
-        "message": "Wysyła wiadomości e-mail o naruszonych hasłach i innych problemach związanych z bezpieczeństwem"
+        "message": "Wysyła e-maile o naruszonych hasłach i innych kwestiach bezpieczeństwa."
     },
     "frontend-000582": {
-        "message": "Wysyła wiadomości e-mail, gdy inne osoby dzielą się z Tobą hasłami"
+        "message": "Wysyła wiadomości e-mail, gdy inne osoby udostępniają hasła."
     },
     "frontend-000583": {
-        "message": "Zawsze pokazuj sekcję wyszukiwania globalnego w nawigacji"
+        "message": "Zawsze wyświetlaj sekcję wyszukiwania globalnego w nawigacji."
     },
     "frontend-000584": {
-        "message": "Powiadamia o złamanych hasłach i innych problemach z bezpieczeństwem"
+        "message": "Powiadamia o naruszonych hasłach i innych kwestiach związanych z bezpieczeństwem."
     },
     "frontend-000585": {
-        "message": "Powiadamia o udostępnieniu haseł przez inne osoby"
+        "message": "Powiadamia użytkownika, gdy inne osoby udostępniają mu hasła."
     },
     "frontend-000586": {
         "message": "Powiadamia o niepowodzeniu operacji w tle"
     },
     "frontend-000587": {
-        "message": "Przywrócenie wszystkich ustawień na tej stronie do wartości domyślnych"
+        "message": "Zresetuj wszystkie ustawienia na tej stronie do wartości domyślnych."
     },
     "frontend-000588": {
-        "message": "Spowoduje to przywrócenie wszystkich ustawień do wartości domyślnych. Czy chcesz kontynuować?"
+        "message": "Spowoduje to zresetowanie wszystkich ustawień do wartości domyślnych. Czy chcesz kontynuować?"
     },
     "frontend-000589": {
-        "message": "Zacznij od nowa i usuń wszystkie konfiguracje, hasła, foldery i tagi"
+        "message": "Zacznij od nowa i usuń całą konfigurację, hasła, foldery i tagi."
     },
     "frontend-000590": {
-        "message": "Czy chcesz usunąć wszystkie swoje ustawienia, hasła, foldery i tagi?\nNie będzie można tego cofnąć."
+        "message": "Czy chcesz usunąć wszystkie swoje ustawienia, hasła, foldery i tagi?\nNIE będzie można tego cofnąć."
     },
     "frontend-000593": {
         "message": "Edytuj jako nowy"
     },
     "frontend-000594": {
-        "message": "Przesuń"
+        "message": "Przeprowadzka"
     },
     "frontend-000595": {
-        "message": "Otwórz $LABEL$",
+        "message": "Otwarty $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2236,10 +2236,10 @@
         "message": "Czego się spodziewałeś?"
     },
     "frontend-000599": {
-        "message": "Kliknij, aby pokazać kod QR."
+        "message": "Kliknij, aby wyświetlić kod QR."
     },
     "frontend-000600": {
-        "message": "Nie ostrzegaj mnie więcej."
+        "message": "Nie ostrzegaj mnie więcej"
     },
     "frontend-000601": {
         "message": "Siła hasła"
@@ -2254,10 +2254,10 @@
         "message": "Oznacz jako ulubione"
     },
     "frontend-000605": {
-        "message": "Hasło ukryte"
+        "message": "Ukryte hasło"
     },
     "frontend-000606": {
-        "message": "Nie pokazuj tego hasła nigdzie."
+        "message": "Nie pokazuj nigdzie tego hasła"
     },
     "frontend-000607": {
         "message": "Dane"
@@ -2275,7 +2275,7 @@
         "message": "Otwarty przewodnik po Markdown"
     },
     "frontend-000612": {
-        "message": "Undo"
+        "message": "Cofnij"
     },
     "frontend-000613": {
         "message": "Redo"
@@ -2289,7 +2289,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Albo na naszym czacie!"
+        "message": "Zapytaj na naszym czacie"
     },
     "frontend-000616": {
         "message": "Zbyt wiele nieudanych prób logowania"
@@ -2306,7 +2306,7 @@
         }
     },
     "frontend-000619": {
-        "message": "$LABEL$ nie może być użyty",
+        "message": "$LABEL$ nie może być używany",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2317,7 +2317,7 @@
         "message": "Strona główna"
     },
     "frontend-000621": {
-        "message": "\"$FOLDER$\" nie zawiera folderów",
+        "message": "\"$FOLDER$\" nie zawiera żadnych folderów",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -2325,7 +2325,7 @@
         }
     },
     "frontend-000622": {
-        "message": "Hasła Szyfrowanie aplikacji Hasło"
+        "message": "Hasła Hasło szyfrowania aplikacji"
     },
     "frontend-000623": {
         "message": "Nieznany"
@@ -2345,7 +2345,7 @@
         }
     },
     "frontend-000627": {
-        "message": "Upewnij się, że ten kod QR jest widoczny tylko dla osób, którym ufasz."
+        "message": "Upewnij się, że ten kod QR jest widoczny tylko dla zaufanych osób."
     },
     "frontend-000628": {
         "message": "Szyfrowanie stosowane przez serwer przed zapisaniem danych w bazie danych"
@@ -2354,7 +2354,7 @@
         "message": "Szyfrowanie stosowane przez klienta przed wysłaniem danych do serwera"
     },
     "frontend-000630": {
-        "message": "Nieprawidłowe hasło. Sesja unieważniona z powodu zbyt wielu nieudanych prób logowania."
+        "message": "Hasło jest nieprawidłowe. Sesja została cofnięta z powodu zbyt wielu nieudanych prób logowania."
     },
     "frontend-000631": {
         "message": "Jest to kopia hasła wybranego do szyfrowania. Zmiana lub usunięcie tego wpisu nie ma wpływu na szyfrowanie. Hasło można zmienić tylko w ustawieniach. Więcej informacji można znaleźć w podręczniku."
@@ -2366,19 +2366,19 @@
         "message": "(opcjonalnie)"
     },
     "backend-000634": {
-        "message": "Twój Nextcloud żąda znacznie więcej ikon niż przeciętnie."
+        "message": "Twoja chmura Nextcloud żąda znacznie więcej ikon niż średnia."
     },
     "backend-000635": {
-        "message": "Samouczek otwarty"
+        "message": "Otwarty samouczek"
     },
     "backend-000636": {
-        "message": "Wykryto podejrzaną ilość nieudanych prób logowania."
+        "message": "Wykryto podejrzaną liczbę nieudanych prób logowania."
     },
     "backend-000637": {
         "message": "Więcej informacji"
     },
     "backend-000638": {
-        "message": "Wyświetlanie niepewnych haseł"
+        "message": "Wyświetlanie niezabezpieczonych haseł"
     },
     "backend-000639": {
         "message": "Otwórz ustawienia"
@@ -2390,10 +2390,10 @@
         "message": "Wyświetl aplikacje"
     },
     "backend-000642": {
-        "message": "Zobacz aplikacje i urządzenia"
+        "message": "Wyświetl aplikacje i urządzenia"
     },
     "backend-000643": {
-        "message": "Zarządzaj urządzeniami i aplikacjami"
+        "message": "Zarządzanie urządzeniami i aplikacjami"
     },
     "backend-000644": {
         "message": "Wyświetlanie udostępnionych haseł"
@@ -2402,10 +2402,10 @@
         "message": "Zalecana aktualizacja aplikacji"
     },
     "backend-000646": {
-        "message": "Do konta został podłączony nowy klient lub aplikacja"
+        "message": "Z kontem użytkownika połączono nowego klienta lub aplikację."
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" uzyskał dostęp do Twojego konta $STR_1$ Passwords poprzez PassLink.",
+        "message": "\"$STR_1$\" uzyskał dostęp do konta $STR_1$ Passwords za pośrednictwem PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2416,7 +2416,7 @@
         }
     },
     "backend-000648": {
-        "message": "Wszystkimi podłączonymi urządzeniami i aplikacjami możesz zarządzać w ustawieniach $STR_1$ w sekcji bezpieczeństwa.",
+        "message": "Wszystkimi podłączonymi urządzeniami i aplikacjami można zarządzać w ustawieniach na stronie $STR_1$ w sekcji zabezpieczeń.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2424,7 +2424,7 @@
         }
     },
     "backend-000649": {
-        "message": "Ostatnie zadanie w tle zostało wykonane z PHP $STRING_1$, ale serwer internetowy używa PHP $STRING_2$.",
+        "message": "Ostatnie zadanie w tle zostało wykonane przy użyciu PHP $STRING_1$, ale serwer WWW używa PHP $STRING_2$.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -2441,25 +2441,25 @@
         "message": "Domyślne ustawienia bezpieczeństwa hasła"
     },
     "backend-000652": {
-        "message": "Kontrola bezpieczeństwa Hash"
+        "message": "Skrót kontroli bezpieczeństwa"
     },
     "backend-000653": {
-        "message": "Nie przechowuj haseł"
+        "message": "Nie przechowuj skrótów"
     },
     "backend-000654": {
-        "message": "Przechowywać 50% haszu"
+        "message": "Przechowywanie 50% skrótu"
     },
     "backend-000655": {
-        "message": "Przechowuj 75% haszu"
+        "message": "Przechowywanie 75% skrótu"
     },
     "backend-000656": {
-        "message": "Przechowuj pełny hash"
+        "message": "Przechowywanie pełnego skrótu"
     },
     "backend-000657": {
-        "message": "Automatyczne przywracanie kopii zapasowej"
+        "message": "Kopia zapasowa przywrócona automatycznie"
     },
     "backend-000658": {
-        "message": "Wydaje się, że aplikacja do obsługi haseł napotkała problem z bazą danych."
+        "message": "Wygląda na to, że aplikacja haseł napotkała problem z bazą danych."
     },
     "backend-000659": {
         "message": "Z tego powodu kopia zapasowa aplikacji \"$STR_1$\" została przywrócona automatycznie.",
@@ -2470,10 +2470,10 @@
         }
     },
     "backend-000660": {
-        "message": "Jeśli był to błąd, przed przywróceniem bazy danych wykonano jej kopię zapasową."
+        "message": "Jeśli był to błąd, kopia zapasowa bazy danych została wykonana przed jej przywróceniem."
     },
     "backend-000661": {
-        "message": "Możesz wyłączyć automatyczne przywracanie kopii zapasowych w ustawieniach aplikacji."
+        "message": "Automatyczne przywracanie kopii zapasowych można wyłączyć w ustawieniach aplikacji."
     },
     "backend-000662": {
         "message": "Automatyczne przywracanie kopii zapasowych po wyczyszczeniu bazy danych"
@@ -2527,13 +2527,13 @@
         "message": "Rozpoczęcie wyszukiwania po naciśnięciu klawisza w dowolnym miejscu na stronie"
     },
     "frontend-000671": {
-        "message": "Wyszukiwanie wszędzie po naciśnięciu klawisza enter w polu wyszukiwania"
+        "message": "Wyszukiwanie wszędzie po naciśnięciu klawisza Enter w polu wyszukiwania"
     },
     "settings-000678": {
         "message": "Logowanie i sesja"
     },
     "settings-000679": {
-        "message": "Trzymaj mnie zalogowanego"
+        "message": "Pozostań zalogowany"
     },
     "settings-000680": {
         "message": "Zawsze"
@@ -2545,7 +2545,7 @@
         "message": "Kiedy jestem aktywny"
     },
     "settings-000683": {
-        "message": "Zakończyć sesję po"
+        "message": "Zakończenie sesji po"
     },
     "settings-000684": {
         "message": "Jedna minuta"
@@ -2559,13 +2559,13 @@
         }
     },
     "settings-000686": {
-        "message": "Szyfrowanie end-to-end"
+        "message": "Kompleksowe szyfrowanie"
     },
     "settings-000687": {
         "message": "Tryb szyfrowania serwera"
     },
     "settings-000688": {
-        "message": "Brak w przypadku zastosowania CSE"
+        "message": "Brak w przypadku korzystania z CSE"
     },
     "settings-000689": {
         "message": "Proste szyfrowanie"
@@ -2577,25 +2577,25 @@
         "message": "Tryb szyfrowania klienta"
     },
     "settings-000693": {
-        "message": "Zmiana hasła"
+        "message": "Zmień hasło"
     },
     "settings-000694": {
         "message": "Widok szczegółowy haseł"
     },
     "settings-000695": {
-        "message": "Podgląd strony internetowej pokazu"
+        "message": "Wyświetl podgląd strony internetowej"
     },
     "settings-000696": {
         "message": "Nowe hasło"
     },
     "settings-000697": {
-        "message": "Powtórzenie hasła"
+        "message": "Powtórz hasło"
     },
     "settings-000698": {
         "message": "Stare hasło"
     },
     "settings-000699": {
-        "message": "Hasło zmienione"
+        "message": "Hasło zostało zmienione"
     },
     "settings-000700": {
         "message": "Zmiana hasła nie powiodła się"
@@ -2604,10 +2604,10 @@
         "message": "Kwestie administracyjne"
     },
     "settings-000702": {
-        "message": "Udostępnianie hasła"
+        "message": "Udostępnianie haseł"
     },
     "settings-000703": {
-        "message": "Domyślnie udostępniaj jako edytowalne"
+        "message": "Udostępniaj domyślnie jako edytowalne"
     },
     "settings-000704": {
         "message": "Domyślnie zezwalaj na udostępnianie"
@@ -2616,7 +2616,7 @@
         "message": "Kod"
     },
     "settings-000706": {
-        "message": "Nieważny kod resetowania"
+        "message": "Nieprawidłowy kod resetowania"
     },
     "settings-000707": {
         "message": "Dodawanie liczb do generowanych haseł"
@@ -2625,7 +2625,7 @@
         "message": "Dodawanie znaków specjalnych do generowanych haseł"
     },
     "settings-000709": {
-        "message": "Określenie czasu, jaki upływa od zgłoszenia, zanim sesja zostanie anulowana"
+        "message": "Określenie czasu po żądaniu przed anulowaniem sesji."
     },
     "settings-000710": {
         "message": "Wybierz typ szyfrowania używany do szyfrowania danych na serwerze"
@@ -2637,47 +2637,47 @@
         "message": "Zmiana hasła szyfrowania"
     },
     "settings-000713": {
-        "message": "Pokaż podgląd powiązanej strony internetowej w szczegółach. (Nie na telefonach komórkowych)"
+        "message": "Wyświetlanie podglądu powiązanej strony internetowej w szczegółach. (Nie na telefonach komórkowych)"
     },
     "settings-000716": {
-        "message": "Za pomocą tego okna dialogowego możesz zmienić swoje hasło główne."
+        "message": "Za pomocą tego okna dialogowego można zmienić hasło główne."
     },
     "settings-000717": {
-        "message": "Twoje hasło musi być dłuższe niż 12 znaków i nie może być to stare hasło"
+        "message": "Hasło musi być dłuższe niż 12 znaków i nie może zawierać starego hasła."
     },
     "settings-000718": {
-        "message": "Proszę potwierdzić swoje nowe hasło"
+        "message": "Potwierdź nowe hasło"
     },
     "settings-000719": {
-        "message": "Musisz wprowadzić swoje stare hasło"
+        "message": "Należy wprowadzić stare hasło"
     },
     "settings-000720": {
-        "message": "Twoje hasło zostało zmienione pomyślnie."
+        "message": "Hasło zostało pomyślnie zmienione."
     },
     "settings-000721": {
-        "message": "Włączenie opcji pozwalającej innym użytkownikom na domyślną edycję udostępnionego hasła"
+        "message": "Włącz opcję domyślnego zezwalania innym użytkownikom na edycję udostępnionego hasła."
     },
     "settings-000722": {
-        "message": "Włącz opcję, aby inni użytkownicy domyślnie udostępniali wspólne hasło"
+        "message": "Włącz opcję domyślnego udostępniania hasła innym użytkownikom."
     },
     "settings-000723": {
         "message": "Otwórz stronę ustawień w podręczniku"
     },
     "settings-000724": {
-        "message": "Wysyłaj zapytania keep-alive do serwera, aby zapobiec anulowaniu sesji"
+        "message": "Wysyłanie żądań keep-alive do serwera, aby zapobiec anulowaniu sesji."
     },
     "settings-000725": {
-        "message": "Wybierz typ szyfrowania używany do szyfrowania danych na kliencie przed ich wysłaniem do serwera"
+        "message": "Wybierz typ szyfrowania używany do szyfrowania danych na kliencie przed wysłaniem ich na serwer."
     },
     "settings-000726": {
-        "message": "Skrót SHA-1 jest używany do sprawdzania naruszonych haseł. Częściowy hash może zapobiec atakom brute force w przypadku włamania na serwer, ale może również spowodować, że bezpieczne hasła zostaną błędnie zgłoszone jako naruszone."
+        "message": "Skrót SHA-1 jest używany do sprawdzania naruszonych haseł. Częściowy skrót może zapobiec atakom siłowym w przypadku włamania na serwer, ale może również spowodować, że bezpieczne hasła zostaną błędnie zgłoszone jako naruszone."
     },
     "settings-SettingsMouseWheelAction": {
-        "message": "Kliknięcie kółka myszy",
+        "message": "Akcja kliknięcia kółkiem myszy",
         "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "Akcja, która zostanie wykonana po kliknięciu kółkiem myszy na hasło.",
+        "message": "Akcja wykonywana po kliknięciu kółkiem myszy na wpis hasła",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsCustomAction": {
@@ -2689,27 +2689,27 @@
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
-        "message": "Pokaż kartę Udostępnianie",
+        "message": "Pokaż kartę udostępniania",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "settings-SettingsRecoverItems": {
-        "message": "Odzyskaj ukryte przedmioty",
+        "message": "Odzyskiwanie ukrytych przedmiotów",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-SettingsRecoverItemsButton": {
-        "message": "Odzyskanie przedmiotów",
+        "message": "Odzyskaj przedmioty",
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "Ta akcja usuwa flagę \"ukrytą\" z elementów, dzięki czemu elementy te ponownie pojawiają się w aplikacji.",
+        "message": "Ta czynność usuwa flagę \"ukryte\" z elementów, dzięki czemu elementy te są ponownie wyświetlane w aplikacji.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
-        "message": "Odzyskaj ukryte przedmioty",
+        "message": "Odzyskiwanie ukrytych przedmiotów",
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "Proszę wybrać dowolny rodzaj ukrytych elementów, które chcesz odzyskać.",
+        "message": "Wybierz dowolny typ ukrytych elementów, które chcesz odzyskać.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
@@ -2717,7 +2717,7 @@
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message": "Odzyskaj ukryte hasła znajdujące się w folderze, który sam nie jest ukryty",
+        "message": "Odzyskiwanie ukrytych haseł znajdujących się w folderze, który nie jest ukryty.",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsPasswords": {
@@ -2725,7 +2725,7 @@
         "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
     },
     "settings-RecoverItemsPasswordsTitle": {
-        "message": "Odzyskiwanie wszystkich ukrytych haseł bez względu na status folderu",
+        "message": "Odzyskiwanie wszystkich ukrytych haseł niezależnie od statusu folderu",
         "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
     },
     "settings-RecoverItemsFolders": {
@@ -2745,7 +2745,7 @@
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
-        "message": "Odzyskane hasło(a) $PASSWORDS$, folder(y) $FOLDERS$ oraz tag(i) $TAGS$.",
+        "message": "Odzyskano hasło(a) $PASSWORDS$, folder(y) $FOLDERS$ i tag(i) $TAGS$.",
         "description": "Success message after the recover hidden items action was executed",
         "placeholders": {
             "passwords": {
@@ -2768,7 +2768,7 @@
         "description": "Generic error message if the recover hidden items action fails"
     },
     "tutorial-000730": {
-        "message": "Po uruchomieniu, pokaż moje"
+        "message": "Po uruchomieniu pokaż moje"
     },
     "tutorial-000731": {
         "message": "foldery"
@@ -2777,13 +2777,13 @@
         "message": "tagi"
     },
     "tutorial-000733": {
-        "message": "ulubione"
+        "message": "faworyci"
     },
     "tutorial-000734": {
         "message": "hasła"
     },
     "tutorial-000735": {
-        "message": "ostatnio zmieniony"
+        "message": "Ostatnio zmieniany"
     },
     "tutorial-000736": {
         "message": "Zaznacz moje hasła, jeśli…"
@@ -2812,16 +2812,16 @@
         }
     },
     "tutorial-000743": {
-        "message": "to są duplikaty"
+        "message": "są to duplikaty"
     },
     "tutorial-000744": {
-        "message": "Zrób moje nowe hasła"
+        "message": "Utwórz nowe hasła"
     },
     "tutorial-000745": {
-        "message": "mocny"
+        "message": "silny"
     },
     "tutorial-000746": {
-        "message": "mocniejszy"
+        "message": "silniejszy"
     },
     "tutorial-000747": {
         "message": "bardzo silny"
@@ -2830,37 +2830,37 @@
         "message": "niezwykle silny"
     },
     "tutorial-000749": {
-        "message": "zawierać numery"
+        "message": "zawierać liczby"
     },
     "tutorial-000750": {
         "message": "zawierać znaki specjalne"
     },
     "tutorial-000751": {
-        "message": "Bezpieczny dom dla Twoich haseł"
+        "message": "Bezpieczny dom dla haseł"
     },
     "tutorial-000752": {
-        "message": "Zachowaj swoje hasła w tajemnicy"
+        "message": "Utrzymywanie haseł w tajemnicy"
     },
     "tutorial-000753": {
         "message": "Dostosuj swoje doświadczenie"
     },
     "tutorial-000755": {
-        "message": "Podłącz się"
+        "message": "Połącz się"
     },
     "tutorial-000756": {
-        "message": "Szyfruj moje istniejące hasła"
+        "message": "Szyfrowanie istniejących haseł"
     },
     "tutorial-000757": {
         "message": "Zapisz hasło"
     },
     "tutorial-000758": {
-        "message": "Powtórzenie hasła"
+        "message": "Powtórz hasło"
     },
     "tutorial-000759": {
-        "message": "Instalowanie szyfrowania"
+        "message": "Instalacja szyfrowania"
     },
     "tutorial-000760": {
-        "message": "Brelok do kluczy"
+        "message": "Brelok"
     },
     "tutorial-000761": {
         "message": "Sprzątanie"
@@ -2869,16 +2869,16 @@
         "message": "Sukces"
     },
     "tutorial-000763": {
-        "message": "Znajdź pomoc, kiedy jej potrzebujesz"
+        "message": "Znajdź pomoc, gdy jej potrzebujesz"
     },
     "tutorial-000764": {
-        "message": "Przejdź do aplikacji i rozszerzeń"
+        "message": "Przejdź do Aplikacje i rozszerzenia"
     },
     "tutorial-000765": {
-        "message": "Kontynuuj"
+        "message": "Kontynuować"
     },
     "tutorial-000766": {
-        "message": "Skip"
+        "message": "Pomiń"
     },
     "tutorial-000767": {
         "message": "Sprawdź bezpieczeństwo hasła za pomocą"
@@ -2887,13 +2887,13 @@
         "message": "Generowanie haseł przy użyciu"
     },
     "tutorial-000769": {
-        "message": "Pobierz favicony z"
+        "message": "Pobierz ikony ulubionych z"
     },
     "tutorial-000770": {
-        "message": "Uzyskaj podgląd strony internetowej z"
+        "message": "Uzyskaj podgląd strony internetowej od"
     },
     "tutorial-000771": {
-        "message": "Wykonaj kopie zapasowe"
+        "message": "Tworzenie kopii zapasowych"
     },
     "tutorial-000772": {
         "message": "Wyświetl wszystkie ustawienia"
@@ -2908,34 +2908,34 @@
         "message": "Szyfrowanie w toku…"
     },
     "tutorial-000776": {
-        "message": "Istnieje wiele ustawień, dzięki czemu można dostosować swoje doświadczenie."
+        "message": "Istnieje wiele ustawień, dzięki czemu można dostosować swoje wrażenia."
     },
     "tutorial-000777": {
-        "message": "Wszystkie można znaleźć w \"Więcej\", ale my zamieszczamy tutaj te najczęściej spotykane:"
+        "message": "Wszystkie z nich można znaleźć w sekcji \"Więcej\", ale tutaj umieściliśmy najpopularniejsze z nich:"
     },
     "tutorial-000778": {
-        "message": "Passwords oferuje nowoczesne i silne szyfrowanie, aby chronić Twoje dane przed wścibskimi oczami."
+        "message": "Passwords oferuje nowoczesne i silne szyfrowanie, aby chronić dane przed wścibskimi oczami."
     },
     "tutorial-000779": {
-        "message": "Wybierz poniżej bezpieczne hasło, aby aktywować najwyższą ochronę dla swoich haseł."
+        "message": "Wybierz bezpieczne hasło poniżej, aby aktywować najlepszą ochronę swoich haseł."
     },
     "tutorial-000780": {
-        "message": "Uzyskaj łatwy dostęp do swoich haseł z dowolnego miejsca, dzięki naszym aplikacjom i rozszerzeniom."
+        "message": "Łatwy dostęp do haseł z dowolnego miejsca dzięki naszym aplikacjom i rozszerzeniom."
     },
     "tutorial-000781": {
-        "message": "Możesz znaleźć naszą sekcję Apps and Extensions w \"Więcej\" lub po prostu kliknąć przycisk poniżej."
+        "message": "Możesz znaleźć naszą sekcję Aplikacje i rozszerzenia w sekcji \"Więcej\" lub po prostu kliknąć przycisk poniżej."
     },
     "tutorial-000782": {
-        "message": "Hasła można dostosować na wiele różnych sposobów."
+        "message": "Hasła można dostosowywać na wiele różnych sposobów."
     },
     "tutorial-000783": {
-        "message": "Jako administrator możesz chcieć spojrzeć na te wspólne ustawienia."
+        "message": "Jako administrator warto przyjrzeć się tym typowym ustawieniom."
     },
     "tutorial-000784": {
-        "message": "Zawsze, gdy nie wiesz jak coś działa, masz pytania lub potrzebujesz pomocy w rozwiązaniu problemu:"
+        "message": "Zawsze, gdy nie wiesz, jak coś działa, masz pytania lub potrzebujesz pomocy w rozwiązaniu problemu:"
     },
     "backend-UserMigrationDescription": {
-        "message": "Odszyfrowana baza danych haseł z hasłami, folderami, tagami i ustawieniami. (Nie zawiera haseł udostępnionych użytkownikowi. Nie działa z włączonym E2E)",
+        "message": "Odszyfrowana baza danych haseł z hasłami, folderami, tagami i ustawieniami. (Nie obejmuje haseł udostępnionych użytkownikowi. Nie działa z włączoną funkcją E2E)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
@@ -2943,7 +2943,7 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Ponieważ masz włączone szyfrowanie End-to-End, Twoje hasła nie mogą być automatycznie dodane do eksportu. Jako alternatywę możesz użyć funkcji eksportu w aplikacji, aby wyeksportować swoje dane.",
+        "message": "Ponieważ włączone jest szyfrowanie typu End-to-End, hasła nie mogą zostać automatycznie dodane do eksportu. Alternatywnie można użyć funkcji eksportu w aplikacji, aby wyeksportować dane.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -2951,11 +2951,11 @@
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "Pokazuje opcję drukowania hasła w menu i szczegółach",
+        "message": "Wyświetla opcję drukowania hasła w menu i szczegółach.",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
     "frontend-PasswordActionPrint": {
-        "message": "Hasło do drukowania",
+        "message": "Drukuj hasło",
         "description": "Label of the print password action"
     },
     "frontend-FolderPickerLoading": {
@@ -2963,11 +2963,11 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Pokaż QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "Hasło jest już oznaczone $TAG$",
+        "message": "Hasło jest już oznaczone tagiem $TAG$",
         "description": "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
@@ -2979,7 +2979,7 @@
         }
     },
     "frontend-PasswordTagAddSuccess": {
-        "message": "Hasło zostało otagowane jako. $TAG$",
+        "message": "Hasło zostało oznaczone tagiem $TAG$",
         "description": "Notification text when the a tag was successfully added to a password",
         "placeholders": {
             "password": {
@@ -2991,7 +2991,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "Hasło nie mogło zostać otagowane za pomocą $TAG$: $ERROR$",
+        "message": "Hasło nie mogło zostać oznaczone tagiem $TAG$: $ERROR$",
         "description": "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
@@ -3018,15 +3018,15 @@
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-PwDetailsEncryptionTitleSSE": {
-        "message": "To hasło jest wysyłane do serwera przez bezpieczne połączenie HTTPS i tam szyfrowane, zanim zostanie zapisane w bazie danych.",
+        "message": "Hasło to jest wysyłane do serwera za pośrednictwem bezpiecznego połączenia HTTPS i tam szyfrowane przed zapisaniem w bazie danych.",
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "Hasło to jest szyfrowane na Twoim urządzeniu przed wysłaniem go na serwer. Nikt nie może odczytać tego hasła bez znajomości Twojego hasła szyfrującego.",
+        "message": "To hasło jest szyfrowane na urządzeniu przed wysłaniem na serwer. Nikt nie może odczytać tego hasła bez znajomości hasła szyfrowania.",
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Szyfrowanie \"od końca do końca",
+        "message": "Szyfrowanie od końca do końca",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
@@ -3034,11 +3034,11 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Szyfrowanie za pomocą klucza strony trzeciej",
+        "message": "Szyfrowanie po stronie serwera strony trzeciej",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "Nic do skopiowania, $ELEMENT$ jest pusta",
+        "message": "Nic do skopiowania, $ELEMENT$ jest pusty",
         "description": "Message when the user wants to copy an empty attribute",
         "placeholders": {
             "element": {
@@ -3051,15 +3051,15 @@
         "description": "Title of the warning message users see when they open the browser developer console"
     },
     "frontend-BrowserConsoleWarningLine1": {
-        "message": "Ta funkcja jest przeznaczona dla programistów, a nie dla użytkowników.",
+        "message": "Ta funkcja jest przeznaczona dla deweloperów, a nie użytkowników.",
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "Jeśli ktokolwiek kazał Ci skopiować i wkleić cokolwiek tutaj, prawdopodobnie uzyska dostęp do Twoich haseł lub przejmie Twoje konto.",
+        "message": "Jeśli ktoś kazał ci skopiować i wkleić cokolwiek tutaj, prawdopodobnie uzyska dostęp do twoich haseł lub przejmie twoje konto.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Więcej informacji można znaleźć w {link}",
+        "message": "Więcej informacji można znaleźć na stronie {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3067,11 +3067,11 @@
         "description": "Label of the encryption settings section in the app settings in the admin area"
     },
     "backend-SettingsEncryptionSSEv3": {
-        "message": "Umożliwienie szyfrowania przez osoby trzecie",
+        "message": "Zezwalaj na szyfrowanie przez osoby trzecie",
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLNextcloudText2": {
-        "message": "Uaktualnij do Nextcloud $STR_1$ w celu przyszłych aktualizacji.",
+        "message": "Aktualizacja do Nextcloud $STR_1$ dla przyszłych aktualizacji.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
         "placeholders": {
             "str_1": {
@@ -3152,7 +3152,7 @@
         }
     },
     "backend-NotificationInvalid": {
-        "message": "To powiadomienie może zostać usunięte.",
+        "message": "To powiadomienie można usunąć.",
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     },
     "backend-PassDbDlFailedTitle": {
@@ -3160,7 +3160,7 @@
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "Aktualizacja bazy danych naruszonych haseł trzykrotnie zakończyła się niepowodzeniem. Proszę zapoznać się z instrukcją i sprawdzić logi. Powód: $STR_1$",
+        "message": "Aktualizacja bazy danych naruszonych haseł nie powiodła się trzy razy. Zapoznaj się z instrukcją i sprawdź dzienniki. Powód: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Wykryliśmy poniższy adres url jako stronę zmiany hasła dla \"{label}\". Kliknij przycisk, aby ją otworzyć",
+        "message": "Wykryliśmy poniższy adres URL jako stronę zmiany hasła dla \"{label}\". Kliknij przycisk, aby ją otworzyć.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3189,7 +3189,7 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" nie ogłasza swojej strony zmiany hasła. Możesz znaleźć funkcję zmiany hasła na stronie internetowej.",
+        "message": "\"{host}\" nie ogłasza swojej strony zmiany hasła. Funkcję zmiany hasła można znaleźć na stronie internetowej.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Witamy w aplikacji Hasło dla Nextcloud, idealnym miejscu do przechowywania haseł w bezpieczny i uporządkowany sposób.",
+        "message": "Witamy w aplikacji Passwords dla Nextcloud, idealnym miejscu do bezpiecznego i uporządkowanego przechowywania haseł.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
