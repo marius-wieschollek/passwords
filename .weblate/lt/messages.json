@@ -217,7 +217,7 @@
         "message": "Nebandykite dar kartą"
     },
     "apps-000014": {
-        "message": "Prijunkite ką nors kita"
+        "message": "Prijungti kitą klientą"
     },
     "apps-000015": {
         "message": "Pabandykite dar kartą"
@@ -229,7 +229,7 @@
         "message": "Ištrintų objektų pašalinimas iš duomenų bazės"
     },
     "backend-000420": {
-        "message": "Rodyti naktinius atnaujinimus \"Programose\""
+        "message": "\"Programose\" rodyti naktinius atnaujinimus"
     },
     "backend-000421": {
         "message": "Niekada"
@@ -297,7 +297,7 @@
         "message": "Šis klientas oficialiai palaiko mūsų stiprų galutinį šifravimą"
     },
     "apps-000025": {
-        "message": "Šį klientą prižiūri programos \"Passwords\" autoriai."
+        "message": "Šį klientą prižiūri programos \"Passwords\" autoriai"
     },
     "apps-000026": {
         "message": "Spustelėkite mygtuką, jei norite prijungti šiame prietaise įdiegtą programėlę, arba nuskaitykite QR kodą su programėle, jei ji įdiegta kitame prietaise."
@@ -967,7 +967,7 @@
         }
     },
     "frontend-000270": {
-        "message": "Leidžiamas redagavimas"
+        "message": "Leidžiama redaguoti"
     },
     "frontend-000271": {
         "message": "Neleidžiama redaguoti"
@@ -1178,13 +1178,13 @@
         "message": "Nerastas"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Vis dar reikia pagalbos?"
+        "message": "Ar jums reikia pagalbos?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Klauskite mūsų forume!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Papasakokite mums!"
+        "message": "Pranešti apie klaidą"
     },
     "frontend-000329": {
         "message": "Sesija baigėsi"
@@ -1299,7 +1299,7 @@
         "message": "Viešoji prieiga"
     },
     "frontend-000357": {
-        "message": "Automatinė foninė užduotis"
+        "message": "Automatinė fono užduotis"
     },
     "frontend-000358": {
         "message": "Serverio komandinė eilutė"
@@ -1738,7 +1738,7 @@
         "message": "Turite nesaugų slaptažodį"
     },
     "backend-000460": {
-        "message": "Naudojate nesaugius slaptažodžius"
+        "message": "Turite nesaugius slaptažodžius"
     },
     "backend-000461": {
         "message": "Vienas iš jūsų slaptažodžių nebėra saugus."
@@ -1799,7 +1799,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ bendrinti su jumis $STR_1$ slaptažodžius.",
+        "message": "$STR_1$ su jumis pasidalijo $STR_1$ slaptažodžiais.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1945,7 +1945,7 @@
         "message": "Dalyvaudami mūsų serverio apklausoje galite padėti mums tobulinti slaptažodžių programėlę."
     },
     "backend-000499": {
-        "message": "Taip mums bus išsiųsti anoniminiai duomenys apie jūsų nustatymus ir pasirinktus nustatymus."
+        "message": "Taip mums bus išsiųsti anoniminiai duomenys apie jūsų sąranką ir pasirinktus nustatymus."
     },
     "backend-000500": {
         "message": "Tai galite bet kada pakeisti programėlės nustatymuose."
@@ -2022,7 +2022,7 @@
         "message": "Siekiant užkirsti kelią tolesniems bandymams, slaptažodžiu pagrįstas API autentifikavimas buvo išjungtas."
     },
     "backend-000523": {
-        "message": "Jei norite jį vėl įjungti, prisijunkite naudodami žiniatinklio programą arba bet kurį klientą, naudodami žetono autentifikavimą."
+        "message": "Jei norite vėl jį įjungti, prisijunkite naudodami žiniatinklio programą arba bet kurį klientą, naudodami žetono autentifikavimą."
     },
     "backend-000524": {
         "message": "Jei nežinote šio kliento, pakeiskite pagrindinį slaptažodį ir \"Nextcloud\" slaptažodį."
@@ -2067,7 +2067,7 @@
         "message": "Slaptažodžių sąrašo rodinys"
     },
     "frontend-000539": {
-        "message": "Nustatykite pavadinimą iš"
+        "message": "Nustatyti pavadinimą iš"
     },
     "frontend-000540": {
         "message": "Rūšiuoti pagal"
@@ -2187,7 +2187,7 @@
         "message": "Pranešimai apie pažeistus slaptažodžius ir kitas saugumo problemas"
     },
     "frontend-000585": {
-        "message": "Praneša, kai kiti žmonės dalijasi slaptažodžiais su jumis."
+        "message": "Praneša, kai kiti žmonės su jumis dalijasi slaptažodžiais."
     },
     "frontend-000586": {
         "message": "Praneša, kai fono operacija nepavyksta"
@@ -2267,7 +2267,7 @@
         "message": "Atviras \"Markdown\" vadovas"
     },
     "frontend-000612": {
-        "message": "Atšaukti"
+        "message": "Panaikinti"
     },
     "frontend-000613": {
         "message": "Redo"
@@ -2281,7 +2281,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Arba mūsų pokalbyje!"
+        "message": "Klauskite mūsų pokalbyje"
     },
     "frontend-000616": {
         "message": "Per daug nesėkmingų bandymų prisijungti"
@@ -2343,7 +2343,7 @@
         "message": "serverio taikomas šifravimas prieš saugant duomenis duomenų bazėje."
     },
     "frontend-000629": {
-        "message": "Kliento taikomas šifravimas prieš siunčiant duomenis į serverį"
+        "message": "Kliento taikomas šifravimas prieš siunčiant duomenis į serverį."
     },
     "frontend-000630": {
         "message": "Slaptažodis negalioja. Sesija atšaukta dėl per daug nesėkmingų bandymų prisijungti."
@@ -2623,7 +2623,7 @@
         "message": "Į sugeneruotus slaptažodžius pridėkite specialiųjų simbolių"
     },
     "settings-000709": {
-        "message": "Nurodykite, kiek laiko po užklausos sesija bus atšaukta."
+        "message": "Nurodykite, po kiek laiko po užklausos sesija bus atšaukta"
     },
     "settings-000710": {
         "message": "Pasirinkite šifravimo tipą, naudojamą serverio duomenims šifruoti"
@@ -2676,7 +2676,7 @@
         "message": "Pažymėkite mano slaptažodžius, jei…"
     },
     "settings-000726": {
-        "message": "SHA-1 hash naudojamas tikrinant, ar nėra pažeistų slaptažodžių. Dalinis hash gali užkirsti kelią brutalios jėgos atakoms, jei būtų įsilaužta į serverį, tačiau dėl to saugūs slaptažodžiai gali būti klaidingai pranešami kaip pažeisti."
+        "message": "SHA-1 hash naudojamas tikrinant, ar nėra pažeistų slaptažodžių. Dalinis hash gali užkirsti kelią brutalios jėgos atakoms, jei į serverį būtų įsilaužta, tačiau dėl to saugūs slaptažodžiai gali būti klaidingai pranešami kaip pažeisti."
     },
     "settings-SettingsMouseWheelAction": {
         "message": "Pelės ratuko paspaudimo veiksmas",
@@ -2691,7 +2691,7 @@
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsCustomActionHelp": {
-        "message": "Prideda papildomą nurodyto veiksmo mygtuką darbalaukio rodinyje",
+        "message": "Darbalaukio rodinyje prideda papildomą nurodyto veiksmo mygtuką",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
@@ -2899,7 +2899,7 @@
         "message": "Slaptažodžiai siūlo modernų ir stiprų šifravimą, kad apsaugotų jūsų duomenis nuo pašalinių akių."
     },
     "tutorial-000779": {
-        "message": "Toliau pasirinkite saugų slaptažodį, kad įjungtumėte geriausią slaptažodžių apsaugą."
+        "message": "Toliau pasirinkite saugų slaptažodį, kad įjungtumėte aukščiausią slaptažodžių apsaugą."
     },
     "tutorial-000780": {
         "message": "Naudodamiesi mūsų programėlėmis ir plėtiniais lengvai pasiekite slaptažodžius iš bet kurios vietos."
@@ -2911,7 +2911,7 @@
         "message": "Slaptažodžius galima pritaikyti įvairiais būdais."
     },
     "tutorial-000783": {
-        "message": "Būdami administratoriumi, galbūt norėsite peržiūrėti šiuos bendrus nustatymus."
+        "message": "Kaip administratorius galite peržiūrėti šiuos bendrus nustatymus."
     },
     "tutorial-000784": {
         "message": "Kai nežinote, kaip kas nors veikia, turite klausimų ar reikia pagalbos sprendžiant problemą:"
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Rodyti QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Šifravimas naudojant trečiosios šalies raktą",
+        "message": "Trečiosios šalies serverio pusės šifravimas",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3055,11 +3055,11 @@
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "Jei kas nors liepė jums ką nors čia nukopijuoti ir įklijuoti, tikėtina, kad jis gaus prieigą prie jūsų slaptažodžių arba perims jūsų paskyrą.",
+        "message": "Jei kas nors jums liepė ką nors čia nukopijuoti ir įklijuoti, tikėtina, kad jis gaus prieigą prie jūsų slaptažodžių arba perims jūsų paskyrą.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Daugiau informacijos žr. {link}",
+        "message": "Daugiau informacijos rasite {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Toliau pateiktą url adresą nustatėme kaip slaptažodžio keitimo puslapį \"{žyma}\". Spustelėkite mygtuką, kad jį atidarytumėte",
+        "message": "Toliau pateiktą url adresą nustatėme kaip slaptažodžio keitimo puslapį \"{žyma}\". Spustelėkite mygtuką, kad jį atidarytumėte.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3217,7 +3217,7 @@
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "settings-SettingsWebAuthnEnable": {
-        "message": "Prisijunkite su \"WebAuthn",
+        "message": "Prisijunkite naudodami \"WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
