@@ -21,7 +21,7 @@
         "message": "Henüz değil"
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Ya da Sohbetimizde!"
+        "message": "Sohbetimizde sorun"
     },
     "settings-000718": {
         "message": "Lütfen yeni şifrenizi onaylayın"
@@ -1208,13 +1208,13 @@
         "message": "Bulunamadı"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Hala yardıma ihtiyacınız var mı?"
+        "message": "Yardıma ihtiyacınız var mı?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Forumumuzda sorun!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Anlat bize!"
+        "message": "Hata bildir"
     },
     "frontend-000329": {
         "message": "Oturumun süresi doldu"
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "QrCode'u göster",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Üçüncü taraf anahtarı ile şifreleme",
+        "message": "Üçüncü taraf sunucu tarafı şifreleme",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3055,7 +3055,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Daha fazla bilgi için {link} adresine bakın",
+        "message": "Daha fazla bilgi için {link} adresine bakın.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "frontend-BrowserConsoleWarningTitle": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Aşağıdaki url'yi \"{label}\" için şifre değiştirme sayfası olarak tespit ettik. Açmak için butona tıklayın",
+        "message": "Aşağıdaki url'yi \"{label}\" için şifre değiştirme sayfası olarak tespit ettik. Açmak için butona tıklayınız.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Şifrelerinizi güvende ve düzenli tutmak için mükemmel bir yer olan Nextcloud için Şifre Uygulamasına hoş geldiniz.",
+        "message": "Parolalarınızı güvende ve düzenli tutmak için mükemmel bir yer olan Nextcloud için Parolalar Uygulamasına hoş geldiniz.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
