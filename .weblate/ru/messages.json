@@ -975,7 +975,7 @@
         "message": "Не найдено"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Свяжитесь с нами!"
+        "message": "Сообщить об ошибке"
     },
     "frontend-000331": {
         "message": "Ошибка сети"
@@ -1611,16 +1611,16 @@
         "message": "Отметьте мои пароли, если…"
     },
     "frontend-000329": {
-        "message": "Сессия истекла"
+        "message": "Срок действия сессии истек"
     },
     "frontend-000330": {
-        "message": "Срок действия токена сессии API истек"
+        "message": "Срок действия токена сеанса API истек"
     },
     "frontend-000345": {
         "message": "Создано"
     },
     "frontend-000346": {
-        "message": "Вы вошли в систему как $USER$",
+        "message": "Вы вошли в систему под именем $USER$",
         "placeholders": {
             "user": {
                 "content": "$1"
@@ -1643,13 +1643,13 @@
         "message": "Неизвестная ошибка"
     },
     "frontend-000352": {
-        "message": "Запрос токена не прошел"
+        "message": "Запрос токена не удался"
     },
     "frontend-000353": {
         "message": "Обслуживание системы"
     },
     "frontend-000354": {
-        "message": "Недоступно"
+        "message": "Нет в наличии"
     },
     "frontend-000355": {
         "message": "Система"
@@ -1664,7 +1664,7 @@
         "message": "Командная строка сервера"
     },
     "frontend-000359": {
-        "message": "Пожалуйста, исправьте свои данные"
+        "message": "Пожалуйста, исправьте свой ввод"
     },
     "frontend-000360": {
         "message": "Показать значение"
@@ -1702,7 +1702,7 @@
         "message": "или"
     },
     "backend-000387": {
-        "message": "Перейдите на сайт $STR_1$, чтобы получить бесплатный сертификат HTTPS, если он вам нужен.",
+        "message": "Зайдите на сайт $STR_1$, чтобы получить бесплатный сертификат HTTPS, если он вам нужен.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1729,10 +1729,10 @@
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "tutorial-000776": {
-        "message": "Имеется множество настроек, позволяющих вам настроить свой опыт."
+        "message": "Имеется множество настроек, которые позволят вам настроить свой опыт."
     },
     "apps-000002": {
-        "message": "по $AUTHOR$",
+        "message": "на $AUTHOR$",
         "placeholders": {
             "author": {
                 "content": "$1"
@@ -1788,7 +1788,7 @@
         "message": "Возможно, вы запросили слишком много жетонов. Пожалуйста, повторите попытку позже."
     },
     "frontend-000374": {
-        "message": "Для этого пароля будет отключено End-to-End шифрование, если вы поделитесь им."
+        "message": "При передаче пароля End-to-End шифрование для него будет отключено."
     },
     "frontend-000375": {
         "message": "Токен сессии больше не действителен. Теперь приложение будет перезагружено."
@@ -1809,7 +1809,7 @@
         "message": "Подробный просмотр паролей"
     },
     "settings-000695": {
-        "message": "Предварительный просмотр веб-сайта выставки"
+        "message": "Предварительный просмотр сайта выставки"
     },
     "settings-000696": {
         "message": "Новый пароль"
@@ -1824,16 +1824,16 @@
         "message": "Пароль изменен"
     },
     "settings-000700": {
-        "message": "Изменение пароля не удалось"
+        "message": "Смена пароля не удалась"
     },
     "settings-000701": {
-        "message": "Вопросы администрирования"
+        "message": "Административные вопросы"
     },
     "settings-000702": {
         "message": "Совместное использование паролей"
     },
     "settings-000703": {
-        "message": "Поделиться как редактируемый по умолчанию"
+        "message": "По умолчанию делиться как редактируемый"
     },
     "settings-000704": {
         "message": "Разрешить общий доступ по умолчанию"
@@ -1845,13 +1845,13 @@
         "message": "Неверный код сброса"
     },
     "settings-000707": {
-        "message": "Добавление цифр к сгенерированным паролям"
+        "message": "Добавляйте цифры к сгенерированным паролям"
     },
     "backend-000491": {
         "message": "Административный доступ к вашей учетной записи"
     },
     "backend-000492": {
-        "message": "$STR_1$ попытался войти в свой аккаунт на сайте $STR_1$.",
+        "message": "$STR_1$ попытался войти в свой аккаунт на $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1862,7 +1862,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ войти в свою учетную запись на сайте $STR_1$.",
+        "message": "$STR_1$ Войдите в свою учетную запись на сайте $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1876,7 +1876,7 @@
         "message": "Поскольку вы используете мастер-пароль, это не означает, что доступ к вашим данным был предоставлен."
     },
     "backend-000495": {
-        "message": "Чтобы предотвратить нежелательный доступ к вашим данным, следует установить главный пароль."
+        "message": "Чтобы предотвратить нежелательный доступ к вашим данным, необходимо установить главный пароль."
     },
     "backend-000497": {
         "message": "Помогите нам улучшить пароли"
@@ -1885,13 +1885,13 @@
         "message": "Нажмите кнопку, когда будете готовы начать подключение."
     },
     "backend-000498": {
-        "message": "Вы можете помочь нам улучшить приложение \"Пароли\", приняв участие в опросе нашего сервера."
+        "message": "Вы можете помочь нам улучшить приложение Passwords, приняв участие в опросе сервера."
     },
     "backend-000499": {
         "message": "Это отправит нам некоторые анонимизированные данные о вашей установке и выбранных настройках."
     },
     "backend-000500": {
-        "message": "Вы можете изменить это в любое время в настройках приложения."
+        "message": "Вы можете изменить это в любой момент в настройках приложения."
     },
     "backend-000502": {
         "message": "Участвуйте"
@@ -1900,7 +1900,7 @@
         "message": "Участие в опросе серверов"
     },
     "backend-000504": {
-        "message": "Основной"
+        "message": "Основные"
     },
     "backend-000505": {
         "message": "Полный"
@@ -1909,7 +1909,7 @@
         "message": "Не установлено"
     },
     "backend-000507": {
-        "message": "Пожалуйста, рассмотрите возможность самостоятельного хостинга вашего favicon api"
+        "message": "Пожалуйста, рассмотрите возможность самостоятельного размещения вашего favicon api"
     },
     "backend-000508": {
         "message": "Ваш Nextcloud использует наши общие экземпляры Besticon для получения иконок веб-сайтов."
@@ -1918,10 +1918,10 @@
         "message": "Эти экземпляры предназначены для небольших установок Nextcloud с очень небольшим трафиком."
     },
     "backend-000510": {
-        "message": "Пожалуйста, перейдите по ссылке и следуйте нашему простому руководству, чтобы самостоятельно разместить Besticon."
+        "message": "Перейдите по ссылке и следуйте нашему простому руководству, чтобы самостоятельно разместить Besticon."
     },
     "backups-000033": {
-        "message": "Ознакомьтесь с руководством по импорту $LABEL$",
+        "message": "Читайте руководство по импорту $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1935,7 +1935,7 @@
         "message": "пользовательский CSV"
     },
     "backups-000037": {
-        "message": "попробуйте стандартный импорт CSV"
+        "message": "попробуйте использовать стандартный импорт CSV"
     },
     "backups-000038": {
         "message": "Нет импорта для вашего CSV?"
@@ -1959,10 +1959,10 @@
         "message": "Связь с PassLink"
     },
     "apps-000006": {
-        "message": "Подключение нового устройства"
+        "message": "Подключите новое устройство"
     },
     "apps-000007": {
-        "message": "Подключиться по ссылке"
+        "message": "Подключение по ссылке"
     },
     "apps-000008": {
         "message": "Выберите имя:"
@@ -1983,7 +1983,7 @@
         "message": "Не пытайтесь больше"
     },
     "apps-000014": {
-        "message": "Подключить что-то еще"
+        "message": "Подключите другого клиента"
     },
     "apps-000015": {
         "message": "Попробуйте еще раз"
@@ -2010,7 +2010,7 @@
         "message": "Этот клиент официально поддерживает наше надежное сквозное шифрование"
     },
     "apps-000025": {
-        "message": "Этот клиент поддерживается авторами приложения \"Пароли\"."
+        "message": "Этот клиент поддерживается авторами приложения Passwords."
     },
     "apps-000026": {
         "message": "Нажмите кнопку, чтобы подключить приложение, установленное на этом устройстве, или отсканируйте QR-код с приложением, если оно установлено на другом устройстве."
@@ -2024,7 +2024,7 @@
         }
     },
     "backend-000384": {
-        "message": "Просмотрите отчет HTTPS ниже, чтобы отладить проблему."
+        "message": "Просмотрите отчет HTTPS, приведенный ниже, чтобы отладить проблему."
     },
     "backend-000385": {
         "message": "Прочитайте этот $STR_1$, чтобы настроить свой сервер на использование HTTPS.",
@@ -2035,7 +2035,7 @@
         }
     },
     "backend-000386": {
-        "message": "Прочитайте этот $STR_1$, если вы используете любой вид прокси.",
+        "message": "Прочитайте этот $STR_1$, если вы используете какой-либо прокси-сервер.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2049,16 +2049,16 @@
         "message": "Ваша конфигурация службы предварительного просмотра недействительна"
     },
     "backend-000513": {
-        "message": "Выбранный вами сервис favicon требует api-ключа или конечной точки, но ни один из них не указан."
+        "message": "Для выбранного вами сервиса favicon требуется ключ api или конечная точка, но они не указаны."
     },
     "backend-000514": {
-        "message": "Выбранная вами служба предварительного просмотра требует api-ключа или конечной точки, но ни один из них не указан."
+        "message": "Выбранный вами сервис предварительного просмотра требует api-ключ или конечную точку, но они не указаны."
     },
     "backend-000515": {
         "message": "Откройте настройки администратора, чтобы обновить конфигурацию или выбрать другую службу."
     },
     "backend-000516": {
-        "message": "Мы обнаружили несколько неудачных попыток разблокировать вашу базу паролей по адресу \"$STR_1$\".",
+        "message": "Мы обнаружили несколько неудачных попыток разблокировать вашу базу паролей с помощью \"$STR_1$\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2075,10 +2075,10 @@
         "message": "Также была отключена аутентификация API на основе пароля."
     },
     "backend-000520": {
-        "message": "Если вы хотите продолжать использовать этот клиент, вам необходимо создать для него новый токен."
+        "message": "Если вы хотите продолжать использовать этот клиент, вам нужно создать для него новый токен."
     },
     "backend-000521": {
-        "message": "Если вы не знаете этого клиента, пожалуйста, измените пароль и просмотрите список своих устройств."
+        "message": "Если вы не знаете этого клиента, измените пароль и просмотрите список устройств."
     },
     "backend-000522": {
         "message": "Чтобы предотвратить дальнейшие попытки, аутентификация API на основе пароля была отключена."
@@ -2087,10 +2087,10 @@
         "message": "Чтобы снова включить его, войдите в веб-приложение или любой клиент, используя аутентификацию с помощью маркера."
     },
     "backend-000524": {
-        "message": "Если вы не знаете этого клиента, пожалуйста, измените свой мастер-пароль и пароль Nextcloud."
+        "message": "Если вы не знаете этого клиента, измените свой мастер-пароль и пароль Nextcloud."
     },
     "backend-000525": {
-        "message": "Для повышения безопасности мы рекомендуем использовать вместо пароля маркеры для конкретного устройства."
+        "message": "Для повышения безопасности мы рекомендуем использовать вместо пароля специальные маркеры для устройств."
     },
     "frontend-000594": {
         "message": "Переместить"
@@ -2146,7 +2146,7 @@
         "message": "Удалить поле"
     },
     "frontend-000611": {
-        "message": "Открытое руководство по разметке"
+        "message": "Открытое руководство по уценке"
     },
     "frontend-000612": {
         "message": "Отменить"
@@ -2163,7 +2163,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Или в нашем чате!"
+        "message": "Спросите в нашем чате"
     },
     "frontend-000616": {
         "message": "Слишком много неудачных попыток входа в систему"
@@ -2180,7 +2180,7 @@
         }
     },
     "frontend-000619": {
-        "message": "$LABEL$ не может быть использована",
+        "message": "$LABEL$ не может быть использован",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2202,7 +2202,7 @@
         "message": "Пароли Шифрование приложений Пассфраза"
     },
     "frontend-000623": {
-        "message": "Неизвестно"
+        "message": "Неизвестный"
     },
     "frontend-000624": {
         "message": "Помощь"
@@ -2216,7 +2216,7 @@
         }
     },
     "frontend-000628": {
-        "message": "Шифрование, применяемое сервером перед хранением данных в базе данных"
+        "message": "Шифрование, применяемое сервером перед сохранением данных в базе данных"
     },
     "frontend-000629": {
         "message": "Шифрование, применяемое клиентом перед отправкой данных на сервер"
@@ -2228,13 +2228,13 @@
         "message": "Автоматическое восстановление резервных копий можно отключить в настройках приложения."
     },
     "frontend-000631": {
-        "message": "Это копия парольной фразы, которую вы выбрали для шифрования. Изменение или удаление этой записи не влияет на шифрование. Кодовую фразу можно изменить только в настройках. Более подробную информацию можно найти в справочнике."
+        "message": "Это копия парольной фразы, которую вы выбрали для шифрования. Изменение или удаление этой записи не влияет на шифрование. Кодовую фразу можно изменить только в настройках. Более подробную информацию можно найти в руководстве."
     },
     "backend-000633": {
         "message": "(необязательно)"
     },
     "backend-000634": {
-        "message": "Ваш Nextcloud запрашивает значительно больше значков, чем в среднем."
+        "message": "Ваше облако Nextcloud запрашивает значительно больше иконок, чем в среднем."
     },
     "backend-000635": {
         "message": "Открытый учебник"
@@ -2273,7 +2273,7 @@
         "message": "К вашей учетной записи был подключен новый клиент или приложение"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" был предоставлен доступ к вашей учетной записи $STR_1$ Passwords через PassLink.",
+        "message": "\"$STR_1$\" получил доступ к вашей учетной записи $STR_1$ Passwords через PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2306,7 +2306,7 @@
         "message": "Использование различных основных версий PHP может вызвать проблемы."
     },
     "backend-000651": {
-        "message": "Настройки безопасности пароля по умолчанию"
+        "message": "Настройки безопасности паролей по умолчанию"
     },
     "backend-000652": {
         "message": "Хеш проверки безопасности"
@@ -2315,10 +2315,10 @@
         "message": "Не храните хэши"
     },
     "backend-000654": {
-        "message": "Храните 50% хэша"
+        "message": "Храните 50 % хэша"
     },
     "backend-000655": {
-        "message": "Храните 75% хэша"
+        "message": "Храните 75 % хэша"
     },
     "backend-000656": {
         "message": "Храните полный хэш"
@@ -2338,7 +2338,7 @@
         }
     },
     "backend-000660": {
-        "message": "Если это была ошибка, то перед восстановлением базы данных создается ее резервная копия."
+        "message": "Если это была ошибка, перед восстановлением базы данных создается ее резервная копия."
     },
     "settings-RecoverItemsFolders": {
         "message": "Все скрытые папки",
@@ -2390,7 +2390,7 @@
         "message": "Вход и сессия"
     },
     "settings-000679": {
-        "message": "Сохраняйте мой вход в систему"
+        "message": "Сохраните мой вход в систему"
     },
     "settings-000681": {
         "message": "Когда я работаю"
@@ -2434,28 +2434,28 @@
         "message": "Включить"
     },
     "settings-000708": {
-        "message": "Добавление специальных символов в генерируемые пароли"
+        "message": "Добавляйте специальные символы в сгенерированные пароли"
     },
     "settings-000709": {
-        "message": "Укажите, через какое время после запроса сеанс будет отменен"
+        "message": "Укажите, через какое время после запроса сеанс будет отменен."
     },
     "settings-000710": {
         "message": "Выберите тип шифрования, используемый для шифрования данных на сервере"
     },
     "settings-000711": {
-        "message": "Запустите мастер установки, чтобы настроить шифрование паролей"
+        "message": "Запустите мастер установки, чтобы настроить шифрование паролей."
     },
     "settings-000712": {
         "message": "Изменение пароля шифрования"
     },
     "settings-000713": {
-        "message": "Показать предварительный просмотр связанного веб-сайта в подробной информации. (Не на мобильных устройствах)"
+        "message": "Показать предварительный просмотр связанного сайта в деталях. (Не для мобильных устройств)"
     },
     "settings-000714": {
         "message": "Уведомляет вас об ошибках конфигурации и других административных проблемах"
     },
     "settings-000715": {
-        "message": "Введите \"$CODE$\", чтобы сбросить свой аккаунт и удалить все.",
+        "message": "Введите \"$CODE$\", чтобы перезагрузить свою учетную запись и удалить все.",
         "placeholders": {
             "code": {
                 "content": "$1"
@@ -2463,7 +2463,7 @@
         }
     },
     "settings-000716": {
-        "message": "Вы можете использовать это диалоговое окно для изменения мастер-пароля."
+        "message": "С помощью этого диалога вы можете изменить свой главный пароль."
     },
     "settings-000717": {
         "message": "Ваш пароль должен быть длиннее 12 символов и не должен быть старым паролем"
@@ -2481,19 +2481,19 @@
         "message": "Включите опцию, позволяющую другим пользователям редактировать общий пароль по умолчанию"
     },
     "settings-000722": {
-        "message": "Включите опцию, позволяющую другим пользователям использовать общий пароль по умолчанию"
+        "message": "Включите опцию, позволяющую другим пользователям по умолчанию использовать общий пароль"
     },
     "settings-000723": {
         "message": "Откройте страницу настроек в справочнике"
     },
     "settings-000724": {
-        "message": "Отправляйте запросы на сервер, чтобы предотвратить отмену сеанса."
+        "message": "Отправляйте запросы keep-alive на сервер, чтобы предотвратить отмену сеанса."
     },
     "settings-000725": {
-        "message": "Выберите тип шифрования, используемый для шифрования данных на клиенте перед их отправкой на сервер"
+        "message": "Выберите тип шифрования, используемый для шифрования данных на клиенте перед их отправкой на сервер."
     },
     "settings-000726": {
-        "message": "Хеш SHA-1 используется для проверки взломанных паролей. Неполный хэш может предотвратить атаки методом перебора в случае взлома сервера, но также может привести к ошибочному сообщению о взломе безопасных паролей."
+        "message": "Хеш SHA-1 используется для проверки взломанных паролей. Неполный хэш может предотвратить атаки методом грубой силы в случае взлома сервера, но также может привести к ошибочному сообщению о взломе безопасных паролей."
     },
     "settings-SettingsMouseWheelAction": {
         "message": "Действие при нажатии на колесико мыши",
@@ -2524,7 +2524,7 @@
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "Это действие снимает флаг \"скрытый\" с элементов, чтобы эти элементы снова отображались в приложении.",
+        "message": "Это действие снимает флаг \"скрыто\" с элементов, чтобы они снова отображались в приложении.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
@@ -2532,15 +2532,15 @@
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "Пожалуйста, выберите тип скрытых элементов, которые вы хотите восстановить.",
+        "message": "Выберите тип скрытых элементов, которые вы хотите восстановить.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
-        "message": "Пароли, которые не находятся в скрытой папке",
+        "message": "Пароли, которые не хранятся в скрытой папке",
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message": "Восстановление скрытых паролей, находящихся в папке, которая сама не является скрытой",
+        "message": "Восстановление скрытых паролей, находящихся в папке, которая сама не является скрытой.",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsPasswords": {
@@ -2555,7 +2555,7 @@
         "message": "Спрашивайте на нашем форуме!"
     },
     "settings-RecoverItemsFoldersTitle": {
-        "message": "Восстановление всех скрытых папок",
+        "message": "Восстановите все скрытые папки",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
@@ -2563,11 +2563,11 @@
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTagsTitle": {
-        "message": "Восстановление всех скрытых тегов",
+        "message": "Восстановите все скрытые теги",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
-        "message": "Восстановлен пароль(ы) $PASSWORDS$, папка(и) $FOLDERS$ и тег(и) $TAGS$.",
+        "message": "Восстановлены пароль(ы) $PASSWORDS$, папка(и) $FOLDERS$ и тег(и) $TAGS$.",
         "description": "Success message after the recover hidden items action was executed",
         "placeholders": {
             "passwords": {
@@ -2590,7 +2590,7 @@
         "description": "Generic error message if the recover hidden items action fails"
     },
     "tutorial-000730": {
-        "message": "После запуска покажите"
+        "message": "После запуска покажите мой"
     },
     "tutorial-000731": {
         "message": "папки"
@@ -2625,7 +2625,7 @@
         }
     },
     "tutorial-000743": {
-        "message": "они дубликаты"
+        "message": "это дубликаты"
     },
     "tutorial-000744": {
         "message": "Сделайте мои новые пароли"
@@ -2640,7 +2640,7 @@
         "message": "очень сильный"
     },
     "tutorial-000748": {
-        "message": "очень прочный"
+        "message": "очень сильный"
     },
     "tutorial-000749": {
         "message": "Требовать цифры"
@@ -2649,16 +2649,16 @@
         "message": "Требовать спецсимволы"
     },
     "tutorial-000752": {
-        "message": "Храните свои пароли в секрете"
+        "message": "Держите пароли в секрете"
     },
     "tutorial-000753": {
         "message": "Настройте свой опыт"
     },
     "tutorial-000755": {
-        "message": "Подключиться"
+        "message": "Подключайтесь"
     },
     "tutorial-000756": {
-        "message": "Шифровать мои существующие пароли"
+        "message": "Зашифруйте мои существующие пароли"
     },
     "tutorial-000757": {
         "message": "Сохранить пароль"
@@ -2679,7 +2679,7 @@
         "message": "Успех"
     },
     "tutorial-000764": {
-        "message": "Перейдите в раздел \"Приложения и расширения"
+        "message": "Перейдите в раздел Приложения и расширения"
     },
     "tutorial-000765": {
         "message": "Продолжить"
@@ -2688,16 +2688,16 @@
         "message": "Скип"
     },
     "tutorial-000767": {
-        "message": "Проверьте безопасность пароля с помощью"
+        "message": "Проверьте надежность пароля с помощью"
     },
     "tutorial-000772": {
-        "message": "Просмотр всех настроек"
+        "message": "Просмотреть все настройки"
     },
     "tutorial-000775": {
         "message": "Идет шифрование…"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "Сохранение скрытого пароля в папке, которая сама не является скрытой, сделает пароль недоступным. Этот пароль больше нигде не будет отображаться. Вы хотите продолжить?",
+        "message": "Сохранение скрытого пароля в папке, которая сама не является скрытой, сделает его недоступным. Этот пароль больше нигде не будет отображаться. Вы хотите продолжить?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "backend-000429": {
@@ -2722,13 +2722,13 @@
         "message": "Каждые две недели"
     },
     "backend-000436": {
-        "message": "Количество резервных копий для хранения"
+        "message": "Количество резервных копий, которые необходимо сохранить"
     },
     "frontend-000625": {
         "message": "Выберите тип шифрования для этого пароля"
     },
     "frontend-000627": {
-        "message": "Убедитесь, что этот QR-код виден только людям, которым вы доверяете."
+        "message": "Убедитесь, что этот QR-код виден только тем, кому вы доверяете."
     },
     "tutorial-000751": {
         "message": "Надежный дом для ваших паролей"
@@ -2740,7 +2740,7 @@
         "message": "Получите фавиконы из"
     },
     "tutorial-000770": {
-        "message": "Получайте предварительные просмотры веб-сайтов от"
+        "message": "Получите предварительные просмотры сайтов от"
     },
     "tutorial-000771": {
         "message": "Создайте резервные копии"
@@ -2752,7 +2752,7 @@
         "message": "Пароль (мин. 12 символов)"
     },
     "tutorial-000777": {
-        "message": "Вы можете найти все из них в разделе \"Подробнее\", но мы поместили здесь наиболее распространенные:"
+        "message": "Вы можете найти все из них в разделе \"Подробнее\", но мы поместили здесь самые распространенные:"
     },
     "tutorial-000778": {
         "message": "Passwords предлагает современное и надежное шифрование для защиты ваших данных от посторонних глаз."
@@ -2764,34 +2764,34 @@
         "message": "Благодаря нашим приложениям и расширениям вы можете легко получить доступ к своим паролям из любого места."
     },
     "tutorial-000781": {
-        "message": "Вы можете найти наш раздел \"Приложения и расширения\" в разделе \"Еще\" или просто нажмите кнопку ниже."
+        "message": "Вы можете найти наш раздел \"Приложения и расширения\" в разделе \"Еще\" или просто нажать кнопку ниже."
     },
     "tutorial-000782": {
-        "message": "Пароли можно настраивать по-разному."
+        "message": "Пароли можно настраивать самыми разными способами."
     },
     "tutorial-000783": {
-        "message": "Как администратор вы, возможно, захотите взглянуть на эти общие настройки."
+        "message": "Как администратор, вы, возможно, захотите взглянуть на эти общие настройки."
     },
     "tutorial-000784": {
-        "message": "Когда вы не знаете, как что-то работает, у вас есть вопросы или вам нужна помощь в решении проблемы:"
+        "message": "Если вы не знаете, как что-то работает, у вас есть вопросы или вам нужна помощь в решении проблемы:"
     },
     "tutorial-000785": {
         "message": "Помощь не за горами."
     },
     "tutorial-000786": {
-        "message": "Наше встроенное руководство можно найти, нажав на кнопку \"Подробнее\", оно подробно объясняет работу приложения."
+        "message": "Наше встроенное руководство можно найти, нажав на кнопку \"Подробнее\", и оно подробно объясняет работу приложения."
     },
     "tutorial-000787": {
         "message": "В любом другом случае наше сообщество - подходящее место для того, чтобы задать свои вопросы."
     },
     "tutorial-000788": {
-        "message": "Справочник будет открыт после окончания учебного курса"
+        "message": "Справочник будет открыт после прохождения учебника"
     },
     "tutorial-000789": {
         "message": "Введите пароль, состоящий из 12 символов или более"
     },
     "tutorial-000790": {
-        "message": "Ваш пароль должен содержать не менее 12 символов, а пароль подтверждения должен быть таким же"
+        "message": "Ваш пароль должен состоять не менее чем из 12 символов, а пароль подтверждения должен быть таким же"
     },
     "backups-000084": {
         "message": "Разрыв строки"
@@ -2800,7 +2800,7 @@
         "message": "(нет значения)"
     },
     "backups-000116": {
-        "message": "Некоторые объекты имели ошибки:"
+        "message": "В некоторых объектах были обнаружены ошибки:"
     },
     "backups-000125": {
         "message": "Логины"
@@ -2824,7 +2824,7 @@
         "message": "Разное"
     },
     "backups-000137": {
-        "message": "\"$LABEL$\" имеет вложенные файлы, которые не могут быть импортированы.",
+        "message": "К файлу \"$LABEL$\" прикреплены файлы, которые невозможно импортировать.",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2865,13 +2865,13 @@
         }
     },
     "backups-000141": {
-        "message": "Более подробную информацию можно найти в журнале. (Нажмите F12)"
+        "message": "Дополнительную информацию можно найти в журнале. (Нажмите F12)"
     },
     "frontend-000216": {
         "message": "Генерировать случайный цвет"
     },
     "frontend-000257": {
-        "message": "Шифрование применяется на сервере"
+        "message": "Шифрование на сервере"
     },
     "frontend-000258": {
         "message": "Шифрование применяется на клиенте"
@@ -2886,7 +2886,7 @@
         "message": "Простое шифрование (Быт. 2)"
     },
     "frontend-000262": {
-        "message": "Расширенное шифрование (SSE V2)"
+        "message": "Усовершенствованное шифрование (SSE V2)"
     },
     "frontend-000263": {
         "message": "Шифрование с помощью libsodium"
@@ -2909,7 +2909,7 @@
         "message": "Редактирование запрещено"
     },
     "frontend-000272": {
-        "message": "совместное использование разрешено"
+        "message": "совместное использование"
     },
     "frontend-000273": {
         "message": "совместное использование запрещено"
@@ -2929,7 +2929,7 @@
         "message": "Содержание недоступно"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Вам все еще нужна помощь?"
+        "message": "Вам нужна помощь?"
     },
     "backend-Passwords": {
         "message": "Пароли"
@@ -2943,15 +2943,15 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Поскольку у вас включено End-to-End шифрование, ваши пароли не могут быть добавлены в экспорт автоматически. В качестве альтернативы вы можете использовать функцию экспорта в приложении для экспорта данных.",
+        "message": "Поскольку у вас включено сквозное шифрование, ваши пароли не могут быть добавлены в экспорт автоматически. В качестве альтернативы вы можете использовать функцию экспорта в приложении, чтобы экспортировать свои данные.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
-        "message": "Показать опцию печати",
+        "message": "Показать возможность печати",
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "Показывает опцию печати пароля в меню и подробной информации",
+        "message": "Показывает возможность печати пароля в меню и подробной информации",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
     "frontend-PasswordActionPrint": {
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Показать QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -2991,7 +2991,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "Пароль не может быть помечен $TAG$: $ERROR$",
+        "message": "Пароль не может быть помечен с помощью $TAG$: $ERROR$",
         "description": "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
@@ -3018,7 +3018,7 @@
         "description": "Label of the encryption method info in the password details sidebar"
     },
     "frontend-PwDetailsEncryptionTitleSSE": {
-        "message": "Этот пароль отправляется на сервер по защищенному HTTPS-соединению и шифруется там перед сохранением в базе данных.",
+        "message": "Этот пароль отправляется на сервер по защищенному HTTPS-соединению и шифруется там, прежде чем попасть в базу данных.",
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
@@ -3026,7 +3026,7 @@
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Шифрование из конца в конец",
+        "message": "Комплексное шифрование",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
@@ -3034,11 +3034,11 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Шифрование с помощью ключа третьей стороны",
+        "message": "Шифрование на стороне сервера третьей стороны",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "Копировать нечего, $ELEMENT$ пуст",
+        "message": "Копировать нечего, $ELEMENT$ пуст.",
         "description": "Message when the user wants to copy an empty attribute",
         "placeholders": {
             "element": {
@@ -3055,11 +3055,11 @@
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "Если кто-то сказал вам скопировать и вставить что-либо здесь, скорее всего, он получит доступ к вашим паролям или завладеет вашей учетной записью.",
+        "message": "Если кто-то сказал вам скопировать и вставить что-либо сюда, скорее всего, он получит доступ к вашим паролям или завладеет вашей учетной записью.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Дополнительную информацию см. по {ссылке}",
+        "message": "Дополнительную информацию см. по {ссылке}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3067,7 +3067,7 @@
         "description": "Label of the encryption settings section in the app settings in the admin area"
     },
     "backend-SettingsEncryptionSSEv3": {
-        "message": "Разрешить шифрование третьей стороной",
+        "message": "Разрешить шифрование третьими сторонами",
         "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
     },
     "backend-EOLNextcloudText2": {
@@ -3086,7 +3086,7 @@
         }
     },
     "backend-EOLPHPTitle": {
-        "message": "Пароли заканчиваются обновления для PHP $STR_1$",
+        "message": "Пароли заканчивают обновления для PHP $STR_1$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3125,7 +3125,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "Пароли заканчиваются обновления для Nextcloud $STR_1$ и PHP $STR_2$",
+        "message": "Заканчивается обновление паролей для Nextcloud $STR_1$ и PHP $STR_2$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3137,7 +3137,7 @@
         }
     },
     "backend-EOLNextcloudPHPText1": {
-        "message": "Пароли $STR_1$ - это последнее обновление для Nextcloud $STR_2$ и PHP $STR_3$.",
+        "message": "Passwords $STR_1$ - это последнее обновление для Nextcloud $STR_2$ и PHP $STR_3$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3160,7 +3160,7 @@
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "Обновление базы данных нарушенных паролей не удалось три раза. Пожалуйста, обратитесь к руководству и проверьте журналы. Причина: $STR_1$",
+        "message": "Обновление базы данных взломанных паролей не удалось выполнить три раза. Пожалуйста, обратитесь к руководству и проверьте журналы. Причина: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3177,7 +3177,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Мы определили приведенный ниже url как страницу изменения пароля для \"{label}\". Нажмите на кнопку, чтобы открыть ее",
+        "message": "Мы определили приведенный ниже url как страницу изменения пароля для \"{label}\". Нажмите на кнопку, чтобы открыть ее.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3189,7 +3189,7 @@
         }
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" не сообщает о своей странице смены пароля. Вы можете найти функцию смены пароля на сайте.",
+        "message": "\"{host}\" не анонсирует свою страницу смены пароля. Вы можете найти функцию смены пароля на веб-сайте.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3205,11 +3205,11 @@
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-RecoverItemsInvisibleTrashTitle": {
-        "message": "Восстановление скрытых элементов, которые в настоящее время находятся в корзине",
+        "message": "Восстановите скрытые элементы, которые в данный момент находятся в корзине.",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-SettingsWebAuthnEnable": {
-        "message": "Вход в систему с помощью WebAuthn",
+        "message": "Войдите в систему с помощью WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
@@ -3217,7 +3217,7 @@
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
-        "message": "Пассфраза шифрования",
+        "message": "Пароль шифрования",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnLoginSetupSuccess": {
@@ -3225,7 +3225,7 @@
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "frontend-WebAuthnLoginDisabled": {
-        "message": "Функция WebAuthn Login была отключена. Вы можете снова включить его в настройках",
+        "message": "Вход в систему WebAuthn был отключен. Вы можете снова включить его в настройках",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnEncryptionPassphraseRepeat": {
@@ -3233,7 +3233,7 @@
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "Введите ниже свою кодовую фразу. Она будет сохранена в браузере, и приложение попытается использовать ее при следующем открытии. Если парольная фраза недействительна, вход в систему будет выполнен неудачно и WebAuthn будет отключен.",
+        "message": "Введите ниже свою кодовую фразу. Она будет сохранена в браузере, и приложение попытается использовать ее при следующем открытии. Если парольная фраза недействительна, вход в систему будет выполнен неудачно, и WebAuthn будет отключен.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnEncryptionSetupTitle": {
@@ -3248,11 +3248,11 @@
         "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
     },
     "frontend-DashboardNoPasswords": {
-        "message": "Отсутствие паролей",
+        "message": "Никаких паролей",
         "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
     "frontend-DashboardNoPasswordsText": {
-        "message": "Здесь появятся ваши любимые пароли.",
+        "message": "Здесь будут отображаться ваши любимые пароли.",
         "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
     },
     "frontend-DashboardNoResults": {
@@ -3264,7 +3264,7 @@
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "По запросу \"$QUERY$\" ничего не найдено",
+        "message": "Мы не смогли найти ничего для \"$QUERY$\".",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3274,11 +3274,11 @@
         }
     },
     "frontend-DashboardResultsLoading": {
-        "message": "Результаты будут обновлены после загрузки всех паролей",
+        "message": "Результаты будут обновлены, как только все пароли будут загружены",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     },
     "frontend-HandbookMore": {
-        "message": "Прочая документация",
+        "message": "Другая документация",
         "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
     },
     "frontend-HandbookAdminDocumentation": {
@@ -3327,7 +3327,7 @@
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText1": {
-        "message": "Добро пожаловать в приложение Password App для Nextcloud - идеальное место для хранения паролей в безопасности и порядке.",
+        "message": "Добро пожаловать в приложение Passwords App для Nextcloud - идеальное место для хранения паролей в безопасности и порядке.",
         "description": "Initial welcome text on the first page of the first run wizard"
     }
 }
