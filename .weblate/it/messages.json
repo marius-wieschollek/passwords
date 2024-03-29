@@ -41,7 +41,7 @@
         "message": "Non riprovare"
     },
     "apps-000014": {
-        "message": "Connetti qualcos'altro"
+        "message": "Collegare un altro client"
     },
     "apps-000015": {
         "message": "Riprova"
@@ -1098,13 +1098,13 @@
         "message": "Pagina non trovata"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Serve aiuto?"
+        "message": "Hai bisogno di aiuto?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Chiedi nel nostro forum!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Faccelo sapere!"
+        "message": "Segnala un bug"
     },
     "frontend-000329": {
         "message": "La sessione è scaduta"
@@ -1851,7 +1851,7 @@
         "message": "Puoi aiutarci a migliorare l'app Password per partecipando al nostro sondaggio server."
     },
     "backend-000499": {
-        "message": "Questo ci invierà alcuni dati anonimi sul tuo setup e le impostazioni selezionate."
+        "message": "Questo ci invierà alcuni dati anonimizzati sulla vostra configurazione e sulle impostazioni selezionate."
     },
     "backend-000500": {
         "message": "Puoi cambiare questo in qualsiasi momento nelle impostazioni app."
@@ -2448,7 +2448,7 @@
         "message": "SHA-1"
     },
     "frontend-000626": {
-        "message": "Si vuole eliminare il campo \"$FIELD$\"?",
+        "message": "Si desidera eliminare il campo \"$FIELD$\"?",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -2478,7 +2478,7 @@
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "Azione da eseguire quando si fa clic con la rotellina del mouse su una voce di password",
+        "message": "Azione da eseguire quando si fa clic con la rotella del mouse su una voce di password",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsCustomAction": {
@@ -2542,7 +2542,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "O nella nostra Chat!"
+        "message": "Chiedete nella nostra chat"
     },
     "frontend-000616": {
         "message": "Troppi tentativi di accesso falliti"
@@ -2647,7 +2647,7 @@
         "message": "Aggiornamento dell'app consigliato"
     },
     "backend-000646": {
-        "message": "Un nuovo client o un'app è stata collegata al vostro account"
+        "message": "Un nuovo client o un'app è stata connessa al vostro account"
     },
     "backend-000647": {
         "message": "\"$STR_1$\" ha ottenuto l'accesso al vostro account $STR_1$ Passwords tramite PassLink.",
@@ -2963,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "Codice Qr",
+        "message": "Mostra QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Crittografia con chiave di terze parti",
+        "message": "Crittografia lato server di terze parti",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3059,7 +3059,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Per ulteriori informazioni, vedere {link}",
+        "message": "Per ulteriori informazioni, vedere {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3177,7 +3177,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Abbiamo individuato l'url sottostante come pagina di modifica della password per \"{label}\". Fare clic sul pulsante per aprirla",
+        "message": "Abbiamo individuato l'url sottostante come pagina di modifica della password per \"{label}\". Fare clic sul pulsante per aprirla.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3264,7 +3264,7 @@
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Non sono riuscito a trovare nulla per \"$QUERY$\"",
+        "message": "Non abbiamo trovato nulla per \"$QUERY$\".",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Benvenuti nell'App Password per Nextcloud, il luogo perfetto per tenere le vostre password al sicuro e organizzate.",
+        "message": "Benvenuti nell'App Passwords per Nextcloud, il luogo perfetto per tenere le vostre password al sicuro e organizzate.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
