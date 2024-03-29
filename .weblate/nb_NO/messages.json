@@ -1,24 +1,24 @@
 {
     "apps-000003": {
-        "message": "Kildekode"
+        "message": "kildekode"
     },
     "apps-000004": {
-        "message": "lære mer"
+        "message": "lær mer"
     },
     "apps-000005": {
-        "message": "Ta kontakt med PassLink"
+        "message": "Koble til med PassLink"
     },
     "apps-000006": {
         "message": "Koble til en ny enhet"
     },
     "apps-000007": {
-        "message": "Koble til via lenke"
+        "message": "Koble til med link"
     },
     "apps-000008": {
         "message": "Velg et navn:"
     },
     "apps-000009": {
-        "message": "Kodene stemmer ikke overens"
+        "message": "Kodene samsvarer ikke"
     },
     "apps-000010": {
         "message": "Ser bra ut"
@@ -27,7 +27,7 @@
         "message": "Tilkobling vellykket"
     },
     "apps-000012": {
-        "message": "Jeg er ferdig"
+        "message": "Ferdig"
     },
     "apps-000014": {
         "message": "Koble til en annen klient"
@@ -36,7 +36,7 @@
         "message": "Prøv igjen"
     },
     "apps-000001": {
-        "message": "tjenestemann"
+        "message": "offisiell"
     },
     "apps-000002": {
         "message": "av $AUTHOR$",
