@@ -36,6 +36,7 @@
     import SearchManager from "@js/Manager/SearchManager";
     import {subscribe} from "@nextcloud/event-bus";
     import SettingsService from "@js/Services/SettingsService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -60,7 +61,9 @@
                 }
             });
             subscribe('passwords:search:search', (d) => {
-                this.value = d.query;
+                if(this.value !== d.query) {
+                    this.value = d.query;
+                }
                 this.enabled = d.available;
             });
             subscribe('passwords:search:reset', (d) => {
@@ -82,17 +85,20 @@
             },
             updateValue(value) {
                 this.value = value;
-                if(SearchManager.status.query !== value) {
-                    SearchManager.search(value);
-                }
+                this.searchForQuery(value)
+                    .catch(LoggingService.catch);
             },
             resetSearch() {
-                console.log('test');
                 SearchManager.search();
             },
             globalSearch() {
                 if(this.$route.name !== 'Search' && SettingsService.get('client.search.global')) {
                     this.$router.push({name: 'Search', params: {query: btoa(this.value)}});
+                }
+            },
+            async searchForQuery(query) {
+                if(SearchManager.status.query !== query) {
+                    SearchManager.search(query);
                 }
             }
         }
