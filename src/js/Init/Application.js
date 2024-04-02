@@ -169,7 +169,10 @@ class Application {
             document.body.classList.remove('pw-auth-visible');
             document.body.classList.add('pw-auth-skipped');
             ClientService.getLegacyClient().openSession({})
-               .catch(() => {router.push({name: 'Authorize'});});
+               .catch(() => {
+                   this._loginRequired = true;
+                   router.push({name: 'Authorize'});
+               });
             SetupManager.runAutomatically();
         }
     }
@@ -185,7 +188,7 @@ class Application {
         router.addRoute({path: '*', redirect: {name: section.capitalize()}});
 
         router.beforeEach((to, from, next) => {
-            if(!ClientService.getLegacyClient().isAuthorized && this._loginRequired && to.name !== 'Authorize' && to.name !== 'Help') {
+            if(!this.isAuthorized && to.name !== 'Authorize' && to.name !== 'Help') {
                 let target = {name: to.name, path: to.path, hash: to.hash, params: to.params};
                 target = btoa(JSON.stringify(target));
                 next({name: 'Authorize', params: {target}});

@@ -164,7 +164,11 @@
                            this.$refs.passwordField.$el.focus()
                        })
                    }
-               });
+               })
+                .catch((e) => {
+                    this.hasError = true;
+                    this.errorMessage = e.message;
+                });
         },
 
         computed: {
