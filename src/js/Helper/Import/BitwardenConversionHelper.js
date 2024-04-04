@@ -271,8 +271,7 @@ export default class BitwardenConversionHelper {
             if(field.type === 1) type = 'secret';
             if(field.type === 2) value = LocalisationService.translate(value === 'true' ? 'yes':'no');
 
-            CustomFieldsHelper.createCustomField(password, errors, value, field.name, type);
+            CustomFieldsHelper.createCustomField(password, errors, value, field.name ?? type.capitalize(), type);
         }
     }
-
 }
