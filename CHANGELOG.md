@@ -11,7 +11,7 @@
 - Search input becomes laggy after some time
 
 ## 2024.3.0 - Feature release
-### Changed**
+### Changed
 - "More" menu layout
 - Added Ctrl + F to search again
 ### Fixed
