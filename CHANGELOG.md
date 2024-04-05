@@ -1,6 +1,17 @@
 ## [Unreleased]
-## 2024.3.0 - Feature release
+## 2024.4.0 - Feature release
+### Added
+- Translation for Arabic
 ### Changed
+- Handling of expired sessions improved
+### Fixed
+- Bitwarden import error when custom field has no label
+- Imaginary error when resizing images
+- Error when caching preview & favicons
+- Search input becomes laggy after some time
+
+## 2024.3.0 - Feature release
+### Changed**
 - "More" menu layout
 - Added Ctrl + F to search again
 ### Fixed
