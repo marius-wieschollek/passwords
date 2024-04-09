@@ -48,17 +48,24 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
      * @inheritdoc
      */
     public function dbUpdateRequired(): bool {
+        return !$this->isLocalDbValid() || parent::dbUpdateRequired();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLocalDbValid(): bool {
         try {
             $installedVersion = intval($this->config->getAppValue(self::CONFIG_DB_VERSION));
-            if($installedVersion !== static::PASSWORD_VERSION) return true;
+            if($installedVersion !== static::PASSWORD_VERSION) return false;
 
             $info = $this->fileCacheService->getCacheInfo();
-            if($info['files'] < 64) return true;
+            if($info['files'] < 64) return false;
         } catch(Exception $e) {
             $this->logger->logException($e);
         }
 
-        return parent::dbUpdateRequired();
+        return true;
     }
 
     /**

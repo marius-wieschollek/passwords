@@ -101,6 +101,6 @@ class BigDbPlusHibpSecurityCheckProvider extends AbstractSecurityCheckProvider {
      * @inheritdoc
      */
     function dbUpdateRequired(): bool {
-        return $this->localSecurityCheck->dbUpdateRequired() || parent::dbUpdateRequired();
+        return !$this->localSecurityCheck->isLocalDbValid() || parent::dbUpdateRequired();
     }
 }
