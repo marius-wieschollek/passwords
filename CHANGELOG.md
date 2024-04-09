@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Fixed
+- Local breached passwords db fetched every day instead of once
+
+
 ## 2024.4.0 - Feature release
 ### Added
 - Translation for Arabic
@@ -10,6 +14,7 @@
 - Error when caching preview & favicons
 - Search input becomes laggy after some time
 
+
 ## 2024.3.0 - Feature release
 ### Changed
 - "More" menu layout
@@ -20,6 +25,7 @@
 - Invalid URLs from Bitwarden import
 - First run wizard style
 - Sharing E2EE passwords fails
+
 
 ## 2024.2.0 - Feature release
 ### Added
