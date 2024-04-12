@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2024.4.1 - Bugfix release
 ### Fixed
 - Local breached passwords db fetched every day instead of once
 
