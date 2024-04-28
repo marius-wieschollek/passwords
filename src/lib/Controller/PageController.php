@@ -188,7 +188,7 @@ class PageController extends Controller {
         $csp->addAllowedMediaDomain($manualHost);
         $csp->addAllowedMediaDomain('blob:');
         $csp->allowInlineStyle();
-        $csp->allowEvalScript();
+        $csp->allowEvalWasm();
 
         $response->setContentSecurityPolicy($csp);
     }

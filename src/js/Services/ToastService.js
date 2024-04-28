@@ -8,8 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import '@nextcloud/dialogs/style.css'
+import '@nextcloud/dialogs/style.css';
 import LocalisationService from "@js/Services/LocalisationService";
+
 export default new class ToastService {
 
     info(title, options = {}) {

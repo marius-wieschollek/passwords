@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2024.5.0 - Feature release
+### Changed
+- CSP no longer needs eval
+
 ## 2024.4.1 - Bugfix release
 ### Fixed
 - Local breached passwords db fetched every day instead of once
