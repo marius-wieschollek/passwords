@@ -2,6 +2,7 @@
 ## 2024.5.0 - Feature release
 ### Changed
 - CSP no longer needs eval
+- Breached passwords database updated to v11
 
 ## 2024.4.1 - Bugfix release
 ### Fixed
