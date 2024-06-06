@@ -1,4 +1,9 @@
 ## [Unreleased]
+### Changed
+- Breached passwords database updated to v12
+### Fixed
+- UTF-8 characters in user names not working
+
 ## 2024.5.0 - Feature release
 ### Changed
 - CSP no longer needs eval
