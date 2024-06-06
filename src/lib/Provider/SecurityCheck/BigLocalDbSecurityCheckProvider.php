@@ -29,7 +29,7 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
     const CONFIG_DB_VERSION = 'passwords/localdb/version';
     const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
     const PASSWORD_DB       = 'bigdb';
-    const PASSWORD_VERSION  = 11;
+    const PASSWORD_VERSION  = 12;
 
     public function getHashRange(string $range): array {
         $hashes = $this->readPasswordsFile($range);
