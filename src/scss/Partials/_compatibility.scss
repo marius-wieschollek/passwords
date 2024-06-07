@@ -1,5 +1,6 @@
 #main {
     .passwords-https-report,
+    .passwords-jit-compatibility,
     .passwords-browser-compatibility {
         position         : absolute;
         top              : 55px;
@@ -118,5 +119,24 @@
                 list-style : disc;
             }
         }
+
+        .info {
+            max-width: 400px;
+            margin: auto;
+            color: var(--color-main-text);
+            padding: 0px 24px 24px 24px;
+        }
+
+        .warning-icon{
+            margin-right: 4px;
+            height: 24px;
+        }
+
+        .howto{
+            color: var(--color-main-text);
+            font-weight: bold;
+            font-size: 20px;
+        }
+        
     }
 }
