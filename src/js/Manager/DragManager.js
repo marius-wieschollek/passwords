@@ -1,5 +1,5 @@
-import Utility from '@js/Classes/Utility';
 import FaviconService from "@js/Services/FaviconService";
+import UtilityService from "@js/Services/UtilityService";
 
 /**
  *
@@ -110,9 +110,9 @@ export default new class DragManager {
             offsetTop = window.scrollY;
 
         if(e.clientY < height * 0.25) {
-            Utility.scrollTo(offsetTop - 50);
+            UtilityService.scrollTo(offsetTop - 50);
         } else if(e.clientY > height * 0.85) {
-            Utility.scrollTo(offsetTop + 50);
+            UtilityService.scrollTo(offsetTop + 50);
         }
         return false;
     }

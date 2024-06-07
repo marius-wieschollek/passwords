@@ -31,9 +31,9 @@
 </template>
 
 <script>
-    import Translate from "@vc/Translate";
     import Web from "@vc/Web";
-    import Localisation from "@js/Classes/Localisation";
+    import Translate from "@vc/Translate";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Translate, Web},
@@ -42,7 +42,7 @@
         },
         computed  : {
             author() {
-                return Localisation.translate('by {author}', {author: this.item.author.name});
+                return LocalisationService.translate('by {author}', {author: this.item.author.name});
             },
             official() {
                 return this.item.official;

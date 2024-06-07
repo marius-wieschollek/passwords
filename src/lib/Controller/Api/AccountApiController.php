@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -15,6 +19,9 @@ use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use OCP\IUserManager;
@@ -94,15 +101,14 @@ class AccountApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string|null $code
      *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function reset(?string $code): JSONResponse {
         if($code !== null) {
             if($code === $this->sessionService->get('reset/code')) {
@@ -125,22 +131,17 @@ class AccountApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function getChallenge(): JSONResponse {
         return $this->createJsonResponse($this->challengeService->getChallengeData(), Http::STATUS_OK);
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param null|string $secret
      * @param array       $data
      * @param null        $oldSecret
@@ -148,20 +149,23 @@ class AccountApiController extends AbstractApiController {
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function setChallenge(string $secret, array $data, $oldSecret = null): JSONResponse {
         if($this->challengeService->hasChallenge()) {
-            if($oldSecret === null) throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+            if($oldSecret === null) throw new ApiException('Passphrase invalid', Http::STATUS_UNAUTHORIZED);
             if(!$this->challengeService->validateChallenge($oldSecret)) {
-                throw new ApiException('Password verification failed');
+                throw new ApiException('Passphrase verification failed');
             }
         }
 
         if($this->challengeService->setChallenge($data, $secret)) {
             $this->sessionService->authorizeSession();
 
-            return $this->createJsonResponse(['success' => true], Http::STATUS_OK);
+            return $this->createJsonResponse(['success' => true]);
         }
 
-        throw new ApiException('Password update failed');
+        throw new ApiException('Challenge update failed');
     }
 }

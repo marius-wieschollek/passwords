@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\ApiObjects;
@@ -19,6 +23,7 @@ use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class PasswordObjectHelper
@@ -31,21 +36,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     const LEVEL_FOLDER  = 'folder';
     const LEVEL_TAGS    = 'tags';
     const LEVEL_TAG_IDS = 'tag-ids';
-
-    /**
-     * @var TagService
-     */
-    protected TagService $tagService;
-
-    /**
-     * @var ShareService
-     */
-    protected ShareService $shareService;
-
-    /**
-     * @var FolderService
-     */
-    protected FolderService $folderService;
 
     /**
      * @var TagObjectHelper
@@ -73,18 +63,14 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @param PasswordRevisionService $revisionService
      */
     public function __construct(
-        IAppContainer $container,
-        TagService $tagService,
-        ShareService $shareService,
-        FolderService $folderService,
+        ContainerInterface $container,
+        protected TagService $tagService,
+        protected ShareService $shareService,
+        protected FolderService $folderService,
         EncryptionService $encryptionService,
         PasswordRevisionService $revisionService
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
-
-        $this->tagService    = $tagService;
-        $this->shareService  = $shareService;
-        $this->folderService = $folderService;
     }
 
     /**

@@ -4,7 +4,7 @@
             <translate say="Passwords can be customized in a lot of different ways."/>
             <translate say="As administrator you might want to take a look at these common settings."/>
         </p>
-        <div class="apdmin-settings-container">
+        <div class="admin-settings-container">
             <translate tag="label" say="Check password security with"/>
             <select v-model="settings.security.value">
                 <translate tag="option"
@@ -66,8 +66,8 @@
 </template>
 
 <script>
-    import Utility from '@js/Classes/Utility';
     import Translate from '@vue/Components/Translate';
+    import UtilityService from "@js/Services/UtilityService";
     import AppSettingsService from '@js/Services/AppSettingsService';
 
     export default {
@@ -121,7 +121,7 @@
         },
         computed   : {
             getAppSettingsLink() {
-                return Utility.generateUrl('/settings/admin/passwords')
+                return UtilityService.generateUrl('/settings/admin/passwords')
             }
         },
         watch     : {
@@ -167,10 +167,10 @@
             }
         }
 
-        .apdmin-settings-container {
+        .admin-settings-container {
             display               : grid;
             grid-template-columns : 2fr 1fr;
-            width                 : 60%;
+            width                 : 75%;
             margin                : 1rem auto;
             grid-row-gap          : .5rem;
 
@@ -213,7 +213,7 @@
 
         .admin-notes {
             font-size : .8rem;
-            color     : var(--color-text-lighter);
+            color     : var(--color-text-maxcontrast);
             position  : absolute;
             left      : 1rem;
             bottom    : 1rem;

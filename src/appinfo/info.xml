@@ -29,7 +29,7 @@ You can also share passwords with other Nextcloud users.
  * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)
 
 **Apps & Extensions**
- * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?utm_source=app&utm_medium=nc-apps)
  * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
@@ -65,7 +65,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/-/wikis/administrators/Index)
 
 **Apps & Extensions**
- * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?src=external-ncapps)
+ * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?utm_source=app&utm_medium=nc-apps)
  * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
  * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
  * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) von [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
@@ -76,7 +76,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * [iOS App](https://apps.apple.com/app/id1546212226) von [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 ]]>
     </description>
-    <version>2023.7.0-BUILD</version>
+    <version>2024.1.0-BUILD</version>
     <licence>agpl</licence>
     <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
@@ -121,8 +121,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
     <dependencies>
-        <php min-version="8.1" max-version="8.3" />
-        <nextcloud min-version="25" max-version="28" />
+        <php min-version="8.2" max-version="8.3" />
+        <nextcloud min-version="28" max-version="29" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
@@ -133,7 +133,6 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </background-jobs>
     <repair-steps>
         <pre-migration>
-            <step>OCA\Passwords\Migration\RegisterClassLoader</step>
             <step>OCA\Passwords\Migration\CheckAppRequirements</step>
         </pre-migration>
         <post-migration>

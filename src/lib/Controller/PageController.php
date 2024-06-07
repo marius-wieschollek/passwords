@@ -1,13 +1,20 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller;
 
 use Exception;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\UseSession;
 use OCP\IRequest;
 use OCP\AppFramework\Controller;
 use OCA\Passwords\AppInfo\Application;
@@ -111,14 +118,11 @@ class PageController extends Controller {
     }
 
     /**
-     * @TODO remove "@UseSession" in 2024.1.0
-     *
-     * @NoAdminRequired
-     * @NoCSRFRequired
-     * @UseSession
      * @throws Exception
      */
     #[UseSession]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function index(): TemplateResponse {
         $isSecure = $this->checkIfHttpsUsed();
 
@@ -184,7 +188,7 @@ class PageController extends Controller {
         $csp->addAllowedMediaDomain($manualHost);
         $csp->addAllowedMediaDomain('blob:');
         $csp->allowInlineStyle();
-        $csp->allowEvalScript();
+        $csp->allowEvalWasm();
 
         $response->setContentSecurityPolicy($csp);
     }

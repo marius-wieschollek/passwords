@@ -17,7 +17,7 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import Localisation from '@js/Classes/Localisation';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Translate},
@@ -52,13 +52,13 @@
                         button      = this.resolveFieldButton(field),
                         id          = `password-field-${name}`,
                         label       = field.label ? field.label:name.capitalize(),
-                        title       = Localisation.translateArray(field.title ? field.title:field.label),
+                        title       = LocalisationService.translateArray(field.title ? field.title:field.label),
                         required    = !!field.required,
                         checked     = !!field.checked,
                         minlength   = field.minlength ? field.minlength:null,
                         maxlength   = field.maxlength ? field.maxlength:null,
                         pattern     = field.pattern ? field.pattern:null,
-                        placeholder = Localisation.translateArray(field.placeholder ? field.placeholder:field.label);
+                        placeholder = LocalisationService.translateArray(field.placeholder ? field.placeholder:field.label);
 
                     this.fields[name] = value;
                     if(type === 'checkbox' && !field.hasOwnProperty('value')) value = checked;
@@ -114,7 +114,7 @@
                        !this.form[name].validator(this.fields[name], this.fields, field)) {
                         let message = 'Please correct your input';
                         if(this.form[name].title) message = this.form[name].title;
-                        field.setCustomValidity(Localisation.translate(message));
+                        field.setCustomValidity(LocalisationService.translate(message));
                         invalid = true;
                     }
                 }

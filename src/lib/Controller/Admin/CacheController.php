@@ -8,11 +8,10 @@
 namespace OCA\Passwords\Controller\Admin;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
-use OCA\Passwords\Services\HelperService;
 use OCP\AppFramework\ApiController;
+use OCP\AppFramework\Http;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use Throwable;
@@ -91,7 +90,7 @@ class CacheController extends ApiController {
             return new JSONResponse($info[ $id ]);
         }
 
-        throw new ApiException('Cache not found', 404);
+        throw new ApiException('Cache not found', Http::STATUS_NOT_FOUND);
     }
 
     /**
@@ -104,11 +103,11 @@ class CacheController extends ApiController {
         $info = $this->getCaches();
 
         if(!isset($info[ $id ])) {
-            throw new ApiException('Cache not found', 404);
+            throw new ApiException('Cache not found', Http::STATUS_NOT_FOUND);
         } else if($info[ $id ]['clearable']) {
             $this->fileCacheService->clearCache($id);
         } else {
-            throw new ApiException('Cache not clearable', 401);
+            throw new ApiException('Cache not clearable', Http::STATUS_UNAUTHORIZED);
         }
 
         return $this->show($id);

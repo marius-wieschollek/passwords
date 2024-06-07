@@ -61,7 +61,6 @@
 <script>
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
-    import Localisation from '@js/Classes/Localisation';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import KeyIcon from '@icon/Key';
@@ -79,6 +78,7 @@
     import ClockIcon from '@icon/Clock';
     import EarthIcon from '@icon/Earth';
     import BreadcrumbLoading from '@vc/Breadcrumb/BreadcrumbLoading';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -196,7 +196,7 @@
             async processItems() {
                 if(this.items.length === 0) {
                     this.breadcrumbs = [
-                        {path: this.$route.path, label: Localisation.translate(this.$route.name)}
+                        {path: this.$route.path, label: LocalisationService.translate(this.$route.name)}
                     ];
                     return;
                 }

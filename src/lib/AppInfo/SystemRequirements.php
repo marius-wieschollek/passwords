@@ -29,7 +29,7 @@ class SystemRequirements {
      * Users with NC version lower than this will receive an
      * error in the settings that their version is not supported
      */
-    const NC_MINIMUM_ID = 25;
+    const NC_MINIMUM_ID = 28;
 
     /**
      * Users with NC version lower than this will receive a
@@ -47,8 +47,8 @@ class SystemRequirements {
     /**
      * The PHP minimum version to be able to install this release
      */
-    const PHP_MINIMUM    = '8.1';
-    const PHP_MINIMUM_ID = 80100;
+    const PHP_MINIMUM    = '8.2';
+    const PHP_MINIMUM_ID = 80200;
 
     /**
      * Users with a PHP version lower than this will receive a

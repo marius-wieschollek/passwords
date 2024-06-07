@@ -189,7 +189,7 @@
         "message": "Nové pole"
     },
     "apps-000001": {
-        "message": "oficiálna stránka"
+        "message": "oficiálne"
     },
     "apps-000002": {
         "message": "podľa $AUTHOR$",
@@ -233,7 +233,7 @@
         "message": "Nepokúšajte sa o to znova"
     },
     "apps-000014": {
-        "message": "Pripojte niečo iné"
+        "message": "Pripojenie ďalšieho klienta"
     },
     "apps-000015": {
         "message": "Skúste to znova"
@@ -292,7 +292,7 @@
         "message": "Preddefinované CSV"
     },
     "backups-000033": {
-        "message": "Prečítajte si sprievodcu importom na stránke $LABEL$",
+        "message": "Prečítajte si sprievodcu importom na $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -315,7 +315,7 @@
         "message": "Záložné heslo"
     },
     "backups-000040": {
-        "message": "(voliteľné) Šifruje zálohu"
+        "message": "(Voliteľné) Šifruje zálohu"
     },
     "backups-000041": {
         "message": "Import podporuje iba CSV"
@@ -464,7 +464,7 @@
         "message": "Oddeľovač polí"
     },
     "backups-000084": {
-        "message": "Prerušenie riadkov"
+        "message": "Prerušenie riadku"
     },
     "backups-000085": {
         "message": "Citujem"
@@ -787,7 +787,7 @@
         "message": "Obnovenie značky zlyhalo"
     },
     "frontend-000225": {
-        "message": "Vytvoriť heslo"
+        "message": "Vytvorenie hesla"
     },
     "frontend-000226": {
         "message": "Vytvorené heslo"
@@ -868,7 +868,7 @@
         "message": "Obnovenie revízie"
     },
     "frontend-000247": {
-        "message": "Obnovenie revízie zlyhalo"
+        "message": "Obnovenie revízie sa nepodarilo"
     },
     "frontend-000248": {
         "message": "Chcete obnoviť revíziu?"
@@ -981,7 +981,7 @@
         }
     },
     "frontend-000277": {
-        "message": "Zvoľte dátum ukončenia platnosti alebo nechajte prázdne miesto, aby ste zdieľali navždy"
+        "message": "Zvoľte si dátum ukončenia platnosti alebo ho nechajte prázdny, ak chcete zdieľať navždy"
     },
     "frontend-000278": {
         "message": "Vyberte si dátum v budúcnosti"
@@ -1163,13 +1163,13 @@
         "message": "Nenájdené"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Stále potrebujete pomoc?"
+        "message": "Potrebujete pomoc?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Spýtajte sa na našom fóre!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Povedzte nám to!"
+        "message": "Nahlásiť chybu"
     },
     "frontend-000329": {
         "message": "Relácia vypršala"
@@ -1302,7 +1302,7 @@
         "message": "Pravda"
     },
     "frontend-000364": {
-        "message": "falošný"
+        "message": "nepravdivé"
     },
     "frontend-000365": {
         "message": "áno"
@@ -1500,7 +1500,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Lipská zbierka korpusov (odporúčané)"
+        "message": "Lipská zbierka korpusov"
     },
     "backend-000406": {
         "message": "Služba Favicon"
@@ -1767,7 +1767,7 @@
         "message": "Ak chcete zmeniť heslo, otvorte aplikáciu Heslá."
     },
     "backend-000475": {
-        "message": "Otvorte aplikáciu Heslá a zmeňte ich."
+        "message": "Otvorte aplikáciu na zmenu hesiel."
     },
     "backend-000476": {
         "message": "$STR_1$ zdieľané heslo.",
@@ -1957,7 +1957,7 @@
         "message": "Váš Nextcloud používa na načítanie ikon webových stránok naše zdieľané inštancie Besticon."
     },
     "backend-000509": {
-        "message": "Tieto inštancie sú určené pre malé konfigurácie Nextcloudu s veľmi malou prevádzkou."
+        "message": "Tieto inštancie sú určené pre malé inštalácie Nextcloudu s veľmi malou prevádzkou."
     },
     "backend-000510": {
         "message": "Kliknite na odkaz a postupujte podľa nášho jednoduchého návodu, aby ste mohli sami hostiť Besticon."
@@ -2088,7 +2088,7 @@
         "message": "Vyhľadávanie pri písaní"
     },
     "frontend-000553": {
-        "message": "Vyhľadávanie všade pomocou klávesu Enter"
+        "message": "Vyhľadávať všade pomocou klávesu Enter"
     },
     "frontend-000554": {
         "message": "Vždy zobraziť časť vyhľadávania"
@@ -2196,7 +2196,7 @@
         "message": "Presun"
     },
     "frontend-000595": {
-        "message": "Otvorte stránku $LABEL$",
+        "message": "Otvoriť $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2257,13 +2257,13 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Alebo v našom chate!"
+        "message": "Spýtajte sa v našom chate"
     },
     "frontend-000616": {
         "message": "Príliš veľa neúspešných pokusov o prihlásenie"
     },
     "frontend-000617": {
-        "message": "Výber priečinka"
+        "message": "Vyberte priečinok"
     },
     "frontend-000618": {
         "message": "Vyberte položku \"$FOLDER$\"",
@@ -2325,7 +2325,7 @@
         "message": "Heslo je neplatné. Relácia zrušená pre príliš veľa neúspešných pokusov o prihlásenie."
     },
     "frontend-000631": {
-        "message": "Toto je kópia prístupovej frázy, ktorú ste vybrali na šifrovanie. Zmena alebo odstránenie tejto položky nemá vplyv na šifrovanie. Prístupovú frázu je možné zmeniť len v nastaveniach. Viac informácií nájdete v príručke."
+        "message": "Toto je kópia prístupovej frázy, ktorú ste vybrali na šifrovanie. Zmena alebo vymazanie tejto položky nemá vplyv na šifrovanie. Prístupovú frázu je možné zmeniť len v nastaveniach. Viac informácií nájdete v príručke."
     },
     "backend-000632": {
         "message": "Api služby Favicon"
@@ -2495,7 +2495,7 @@
         "message": "Spustenie vyhľadávania po stlačení klávesu kdekoľvek na stránke"
     },
     "frontend-000671": {
-        "message": "Vyhľadávanie všade po stlačení klávesu enter vo vyhľadávacom poli"
+        "message": "Vyhľadávanie všade po stlačení klávesu enter v poli vyhľadávania"
     },
     "settings-000678": {
         "message": "Prihlásenie a relácia"
@@ -2581,7 +2581,7 @@
         "message": "Zdieľať ako predvolene upraviteľné"
     },
     "settings-000704": {
-        "message": "Povoliť zdieľanie v predvolenom nastavení"
+        "message": "Povolenie zdieľania v predvolenom nastavení"
     },
     "settings-000705": {
         "message": "Kód"
@@ -2826,9 +2826,6 @@
     "tutorial-000753": {
         "message": "Prispôsobte si svoje skúsenosti"
     },
-    "tutorial-000754": {
-        "message": "Urobte si poriadok v heslách"
-    },
     "tutorial-000755": {
         "message": "Pripojte sa"
     },
@@ -2966,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Zobraziť QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3037,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Šifrovanie pomocou kľúča tretej strany",
+        "message": "Šifrovanie na strane servera tretej strany",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3062,7 +3059,7 @@
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Viac informácií nájdete na {link}",
+        "message": "Viac informácií nájdete na {link}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3180,7 +3177,7 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Nižšie uvedenú url adresu sme zistili ako stránku na zmenu hesla pre \"{značka}\". Kliknutím na tlačidlo ju otvoríte",
+        "message": "Nižšie uvedenú url adresu sme zistili ako stránku na zmenu hesla pre \"{značka}\". Kliknutím na tlačidlo ju otvoríte.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3294,5 +3291,43 @@
     },
     "frontend-Donate": {
         "message": "Darujte"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Vyhľadávanie…"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Zvolená šifrovacia fráza je nezabezpečená, a preto ju nemožno použiť.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Nezabezpečená prístupová fráza šifrovania",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Aplikácia Heslá pravidelne kontroluje, či je vaša šifrovacia fráza stále bezpečná. Vaša aktuálna prístupová fráza nie je bezpečná a je potrebné ju okamžite zmeniť."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Kontrola, či server spúšťa úlohy na pozadí pomocou cronu.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Úlohy na pozadí sa vykonávajú pomocou cronu.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrola, či server spúšťa úlohy na pozadí s rovnakou verziou PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Úlohy na pozadí sa vykonávajú s rovnakou verziou PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Vitajte v aplikácii Heslá pre Nextcloud, ktorá je ideálnym miestom na uchovávanie hesiel v bezpečí a organizácii.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Začneme",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

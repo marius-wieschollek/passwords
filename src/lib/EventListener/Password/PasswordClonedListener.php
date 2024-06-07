@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -13,7 +13,7 @@ namespace OCA\Passwords\EventListener\Password;
 
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\PasswordClonedEvent;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\EventDispatcher\Event;
 
 /**
@@ -34,7 +34,7 @@ class PasswordClonedListener extends AbstractPasswordListener {
         $duplicateHashes       = [];
         $currentClonedRevision = null;
         foreach($revisions as $revision) {
-            if($revision->getStatusCode() !== AbstractSecurityCheckHelper::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
+            if($revision->getStatusCode() !== PasswordSecurityCheckService::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
             /** @var PasswordRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedPassword->getUuid()]);
             $this->revisionService->save($revisionClone);

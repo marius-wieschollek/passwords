@@ -9,10 +9,10 @@
   -->
 
 <template>
-    <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter">
+    <div class="password-form-field-wrapper password-form-custom-field-wrapper" :class="{drag:drag}" @dragenter="dragEnter" v-if="isVisible">
         <div class="area-label">
             <icon :icon="icon" @mouseenter="hover = true" @mouseleave="hover = false" @dragstart="dragStart" draggable="true"/>
-            <input class="field-label" :placeholder="placeholder" :maxlength="maxlength" v-model="model.label" required/>
+            <input class="field-label" :placeholder="t('Name')" :maxlength="maxlength" v-model="model.label" required/>
         </div>
         <div class="area-options">
             <icon icon="trash" class="delete" @click="deleteField"/>
@@ -30,6 +30,7 @@
 <script>
     import Icon from "@vc/Icon";
     import Translate from "@vc/Translate";
+    import MessageService from "@js/Services/MessageService";
     import AbstractField from "@vue/Dialog/CreatePassword/AbstractField";
     import TextCustomField from "@vue/Dialog/CreatePassword/CustomFields/TextCustomField";
     import EmailCustomField from "@vue/Dialog/CreatePassword/CustomFields/EmailCustomField";
@@ -37,9 +38,8 @@
     import UrlCustomField from "@vue/Dialog/CreatePassword/CustomFields/UrlCustomField";
     import DataCustomField from "@vue/Dialog/CreatePassword/CustomFields/DataCustomField";
     import FileCustomField from "@vue/Dialog/CreatePassword/CustomFields/FileCustomField";
-    import Messages from "@js/Classes/Messages";
-    import Localisation from "@js/Classes/Localisation";
     import PasswordControls from "@vue/Dialog/CreatePassword/PasswordControls";
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         components: {PasswordControls, FileCustomField, DataCustomField, UrlCustomField, SecretCustomField, EmailCustomField, TextCustomField, Icon, Translate},
@@ -70,19 +70,17 @@
             maxlength() {
                 return 368 - this.model.value.length;
             },
-            placeholder() {
-                return Localisation.translate('Name');
-            },
-            deleteTitle() {
-                return Localisation.translate('Delete field');
-            },
             drag() {
                 return this.dragService.isCurrent(this.model);
+            },
+            isVisible() {
+                return this.model.type !== 'data' ||
+                       SettingsService.get('client.ui.custom.fields.show.hidden', false);
             }
         },
         methods : {
             deleteField() {
-                Messages
+                MessageService
                     .confirm(['Do you want to delete the field "{field}"?', {field: this.model.label}], 'Delete field')
                     .then((success) => {
                         if(success) this.$emit('delete');

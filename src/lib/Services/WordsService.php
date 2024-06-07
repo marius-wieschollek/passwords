@@ -1,15 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\Words\AbstractWordsHelper;
+use OCA\Passwords\Provider\Words\WordsProviderInterface;
+use OCP\AppFramework\Http;
 use Throwable;
 
 /**
@@ -20,30 +24,17 @@ use Throwable;
 class WordsService {
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var AbstractWordsHelper
-     */
-    protected AbstractWordsHelper $wordsHelper;
-
-    /**
-     * @var AbstractSecurityCheckHelper
-     */
-    protected AbstractSecurityCheckHelper $securityHelper;
-
-    /**
-     * FaviconService constructor.
+     * WordsService constructor.
      *
-     * @param HelperService  $helperService
-     * @param LoggingService $logger
+     * @param LoggingService               $logger
+     * @param WordsProviderInterface       $wordsProvider
+     * @param PasswordSecurityCheckService $securityHelper
      */
-    public function __construct(HelperService $helperService, LoggingService $logger) {
-        $this->wordsHelper    = $helperService->getWordsHelper();
-        $this->securityHelper = $helperService->getSecurityHelper();
-        $this->logger         = $logger;
+    public function __construct(
+        protected LoggingService               $logger,
+        protected WordsProviderInterface       $wordsProvider,
+        protected PasswordSecurityCheckService $securityHelper
+    ) {
     }
 
     /**
@@ -57,18 +48,18 @@ class WordsService {
      * @throws ApiException
      */
     public function getPassword(
-        int $strength = 1,
+        int  $strength = 1,
         bool $addNumbers = false,
         bool $addSpecialCharacters = false,
-        int $attempts = 0
+        int  $attempts = 0
     ) {
         $strength = $this->validateStrength($strength);
 
         try {
-            $result = $this->wordsHelper->getWords($strength, $addNumbers, $addSpecialCharacters);
+            $result = $this->wordsProvider->getWords($strength, $addNumbers, $addSpecialCharacters);
 
             if($result !== null) {
-                if($this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength +1 )) {
+                if($this->isSecure($result['password'], $addNumbers, $addSpecialCharacters, $strength + 1)) {
                     return [$result['password'], $result['words'], $strength];
                 } else {
                     $this->logger->warning('Words service delivered low quality result');
@@ -85,7 +76,7 @@ class WordsService {
         }
 
         $this->logger->error("Words service failed {$attempts} times. Returning error to client.");
-        throw new ApiException('Internal Words API Error', 502);
+        throw new ApiException('Internal Words API Error', Http::STATUS_BAD_GATEWAY);
     }
 
     /**

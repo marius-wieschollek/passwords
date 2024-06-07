@@ -1,4 +1,70 @@
 ## [Unreleased]
+### Changed
+- Breached passwords database updated to v12
+### Fixed
+- UTF-8 characters in user names not working
+
+## 2024.5.0 - Feature release
+### Changed
+- CSP no longer needs eval
+- Breached passwords database updated to v11
+
+## 2024.4.1 - Bugfix release
+### Fixed
+- Local breached passwords db fetched every day instead of once
+
+
+## 2024.4.0 - Feature release
+### Added
+- Translation for Arabic
+### Changed
+- Handling of expired sessions improved
+### Fixed
+- Bitwarden import error when custom field has no label
+- Imaginary error when resizing images
+- Error when caching preview & favicons
+- Search input becomes laggy after some time
+
+
+## 2024.3.0 - Feature release
+### Changed
+- "More" menu layout
+- Added Ctrl + F to search again
+### Fixed
+- Handling of custom data fields in the editor
+- Tags missing on edit as new
+- Invalid URLs from Bitwarden import
+- First run wizard style
+- Sharing E2EE passwords fails
+
+
+## 2024.2.0 - Feature release
+### Added
+- Improved accessibility features
+- Setup checks for common issues
+### Fixed
+- Impersonate not working with LDAP users
+
+
+## 2024.1.1 - Bugfix release
+### Fixed
+- PassLink not working
+- Sharing takes longer than usual
+
+## 2024.1.0 - Feature release
+### Added
+- In-App search
+- Breached password hashes API
+- Encryption passphrase security check
+### Changed
+- Breached passwords database updated to v10
+- "pwned-list:process" command now uses the new HIPB format
+- Authentication page now automatically focuses password field
+### Removed
+- Support for Nextcloud 25, 26, 27
+- Support for PHP 7.4, 8.0, 8.1
+- Diagrams missing in handbook
+
 ## 2023.12.2 - Bugfix release
 ### Fixed
 - Excessive session creation

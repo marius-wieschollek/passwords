@@ -7,15 +7,15 @@
               :class="getSecretClass"
               v-if="type === 'secret'"
               @click="copyValue">{{ getSecretValue }}</span>
-        <span v-if="type === 'text'" @click="copyValue">{{ value }}</span>
+        <span v-if="type === 'text' || type === 'data'" @click="copyValue">{{ value }}</span>
     </div>
 </template>
 
 <script>
     import Web from '@vc/Web';
-    import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
     import SettingsService from '@js/Services/SettingsService';
+    import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {
@@ -62,8 +62,8 @@
         methods   : {
             copyValue() {
                 let message = 'Error copying {element} to clipboard';
-                if (Utility.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
-                Messages.notification([message, {element: this.label}]);
+                if (UtilityService.copyToClipboard(this.value)) message = '{element} was copied to clipboard';
+                MessageService.notification([message, {element: this.label}]);
             }
         }
     };

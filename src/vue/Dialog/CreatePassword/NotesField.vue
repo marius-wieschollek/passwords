@@ -19,12 +19,12 @@
 
 <script>
     import Editor from '@toast-ui/editor';
-    import Utility from "@js/Classes/Utility";
-    import Messages from '@js/Classes/Messages';
-    import Localisation from '@js/Classes/Localisation';
     import Icon from '@vc/Icon';
     import Translate from '@vc/Translate';
     import AbstractField from '@vue/Dialog/CreatePassword/AbstractField';
+    import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     const MaxNotesLength = 4096;
 
@@ -44,7 +44,7 @@
                 if(!this.isOverMaxlength) {
                     return `${this.model.length}/${MaxNotesLength}`;
                 } else {
-                    return Localisation.translate('You have reached the maximum length of 4096 characters');
+                    return LocalisationService.translate('You have reached the maximum length of 4096 characters');
                 }
             },
             isOverMaxlength() {
@@ -64,8 +64,8 @@
                 button.innerHTML = ' ';
                 button.className = 'toastui-editor-toolbar-icons last fa fa-question-circle';
                 button.addEventListener('click', () => {
-                    let url = Utility.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes');
-                    Utility.openLink(url);
+                    let url = UtilityService.generateUrl('/apps/passwords/#/help/Passwords%2FMarkdown-Notes');
+                    UtilityService.openLink(url);
                 });
                 return button;
             },
@@ -83,8 +83,8 @@
                             initialValue   : this.model,
                             previewStyle   : window.innerWidth <= 640 ? 'tab':'vertical',
                             usageStatistics: false,
-                            language       : Localisation.locale,
-                            placeholder    : Localisation.translate('Take some notes'),
+                            language       : LocalisationService.locale,
+                            placeholder    : LocalisationService.translate('Take some notes'),
                             hideModeSwitch : true,
                             toolbarItems   : [
                                 [
@@ -102,18 +102,18 @@
                                         name     : 'undo',
                                         command  : 'undo',
                                         className: 'toastui-editor-toolbar-icons fa fa-undo',
-                                        tooltip  : Localisation.translate('Undo')
+                                        tooltip  : LocalisationService.translate('Undo')
                                     },
                                     {
                                         name     : 'redo',
                                         command  : 'redo',
                                         className: 'toastui-editor-toolbar-icons fa fa-repeat',
-                                        tooltip  : Localisation.translate('Redo')
+                                        tooltip  : LocalisationService.translate('Redo')
                                     },
                                     {
                                         el     : this.getHelpButton(),
                                         command: '',
-                                        tooltip: Localisation.translate('Open Markdown Guide')
+                                        tooltip: LocalisationService.translate('Open Markdown Guide')
                                     }
                                 ]
                             ],
@@ -132,7 +132,7 @@
                     );
                 } catch(e) {
                     console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
+                    MessageService.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
                 }
             }
         },
@@ -193,7 +193,7 @@
 
                             &.fa {
                                 background-image : none;
-                                color            : var(--color-text-lighter);
+                                color            : var(--color-text-maxcontrast);
 
                                 &:hover {
                                     padding-bottom : 2px;
@@ -252,10 +252,10 @@
                 &.toastui-editor-md-code-block,
                 &.toastui-editor-md-code-block-line-background {
                     background-color : var(--color-background-dark);
-                    color            : var(--color-text-lighter);
+                    color            : var(--color-text-maxcontrast);
 
                     &.toastui-editor-md-marked-text {
-                        color : var(--color-text-lighter);
+                        color : var(--color-text-maxcontrast);
                     }
                 }
             }
@@ -283,7 +283,7 @@
                 code {
                     font-family      : var(--pw-mono-font-face);
                     background-color : var(--color-background-dark);
-                    color            : var(--color-text-lighter);
+                    color            : var(--color-text-maxcontrast);
                     border-radius    : var(--border-radius);
                     word-wrap        : break-word;
                 }

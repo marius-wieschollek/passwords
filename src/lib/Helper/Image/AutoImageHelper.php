@@ -47,11 +47,11 @@ class AutoImageHelper extends AbstractImageHelper {
         return $this->getImageHelper()->destroyImage($image);
     }
 
-    public function exportJpeg($image) {
+    public function exportJpeg($image): string {
         return $this->getImageHelper()->exportJpeg($image);
     }
 
-    public function exportPng($image) {
+    public function exportPng($image): string {
         return $this->getImageHelper()->exportPng($image);
     }
 
@@ -59,7 +59,7 @@ class AutoImageHelper extends AbstractImageHelper {
         return $this->getImageHelper()->supportsFormat($format);
     }
 
-    public function convertIcoToPng($data) {
+    public function convertIcoToPng($data): string {
         return $this->getImageHelper()->convertIcoToPng($data);
     }
 

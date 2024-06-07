@@ -20,6 +20,7 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
 
 /**
  * Class CreatePasswordShareHelper
@@ -123,7 +124,7 @@ class CreatePasswordShareHelper {
      */
     protected function checkExpires(?int $expires) {
         if(empty($expires)) $expires = null;
-        if($expires !== null && $expires < time()) throw new ApiException('Invalid expiration date', 400);
+        if($expires !== null && $expires < time()) throw new ApiException('Invalid expiration date', Http::STATUS_BAD_REQUEST);
 
         return $expires;
     }
@@ -134,7 +135,7 @@ class CreatePasswordShareHelper {
      * @throws ApiException
      */
     protected function checkType(string $type): void {
-        if($type !== 'user') throw new ApiException('Invalid share type', 400);
+        if($type !== 'user') throw new ApiException('Invalid share type', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -148,8 +149,8 @@ class CreatePasswordShareHelper {
      */
     protected function checkSourceShare(string $receiver, Password $model, bool $editable, ?int $expires): array {
         $sourceShare = $this->modelService->findByUuid($model->getShareId());
-        if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', 400);
-        if(!$sourceShare->isShareable() || !$this->shareSettings->get('resharing')) throw new ApiException('Entity not shareable', 403);
+        if($sourceShare->getUserId() === $receiver) throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
+        if(!$sourceShare->isShareable() || !$this->shareSettings->get('resharing')) throw new ApiException('Entity not shareable', Http::STATUS_FORBIDDEN);
         if(!$sourceShare->isEditable()) $editable = false;
         if($sourceShare->getExpires() !== null) {
             if($expires === null) {
@@ -172,7 +173,7 @@ class CreatePasswordShareHelper {
     protected function checkIfAlreadyShared(string $receiver, Password $model): void {
         try {
             $shares = $this->modelService->findBySourcePasswordAndReceiver($model->getUuid(), $receiver);
-            if($shares !== null) throw new ApiException('Entity already shared with user', 400);
+            if($shares !== null) throw new ApiException('Entity already shared with user', Http::STATUS_BAD_REQUEST);
         } catch(DoesNotExistException $e) {
         }
     }

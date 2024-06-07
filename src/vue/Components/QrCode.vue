@@ -15,7 +15,7 @@
 <script>
     import QrCode from 'vue-qrcode-component';
     import SettingsService from "@js/Services/SettingsService";
-    import Utility from "@js/Classes/Utility";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {QrCode},
@@ -32,8 +32,8 @@
         computed: {
             color() {
                 let primaryColor = SettingsService.get('server.theme.color.primary'),
-                    lumaBg       = Utility.getColorLuma(SettingsService.get('server.theme.color.background')),
-                    lumaFg       = Utility.getColorLuma(primaryColor);
+                    lumaBg       = UtilityService.getColorLuma(SettingsService.get('server.theme.color.background')),
+                    lumaFg       = UtilityService.getColorLuma(primaryColor);
 
                 if(lumaBg - lumaFg < 50) {
                     return '#000';

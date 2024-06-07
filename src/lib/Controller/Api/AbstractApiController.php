@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -60,11 +64,11 @@ abstract class AbstractApiController extends ApiController {
      * @return array
      * @throws ApiException
      */
-    protected function processSearchCriteria($criteria = []): array {
+    protected function processSearchCriteria(array $criteria = []): array {
         $filters = [];
         foreach($criteria as $key => $value) {
             if(!in_array($key, $this->allowedFilterFields)) {
-                throw new ApiException('Illegal field in search criteria: '.addslashes($key), 400);
+                throw new ApiException('Illegal field in search criteria: '.addslashes($key), Http::STATUS_BAD_REQUEST);
             }
 
             if($value === 'true') {
@@ -72,7 +76,7 @@ abstract class AbstractApiController extends ApiController {
             } else if($value === 'false') {
                 $value = false;
             } else if(is_array($value) && !in_array($value[0], AbstractObjectHelper::$filterOperators)) {
-                throw new ApiException('Illegal operator in search criteria: '.addslashes($value[0]), 400);
+                throw new ApiException('Illegal operator in search criteria: '.addslashes($value[0]), Http::STATUS_BAD_REQUEST);
             }
 
             $filters[ $key ] = $value;

@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -15,13 +15,11 @@ use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\TagRevision;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\Object\PasswordRevisionService;
-use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagRevisionService;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\EventDispatcher\IEventListener;
 
@@ -33,56 +31,21 @@ use OCP\EventDispatcher\IEventListener;
 abstract class AbstractPasswordListener implements IEventListener {
 
     /**
-     * @var ShareService
-     */
-    protected ShareService $shareService;
-
-    /**
-     * @var PasswordService
-     */
-    protected PasswordService $passwordService;
-
-    /**
-     * @var PasswordRevisionService
-     */
-    protected PasswordRevisionService $revisionService;
-
-    /**
-     * @var PasswordTagRelationService
-     */
-    protected PasswordTagRelationService $relationService;
-
-    /**
-     * @var TagRevisionService
-     */
-    protected TagRevisionService $tagRevisionService;
-
-    /**
-     * @var HelperService
-     */
-    protected HelperService $helperService;
-
-    /**
      * PasswordHook constructor.
      *
-     * @param ShareService               $shareService
-     * @param HelperService              $helperService
-     * @param TagRevisionService         $tagRevisionService
-     * @param PasswordRevisionService    $revisionService
-     * @param PasswordTagRelationService $relationService
+     * @param ShareService                 $shareService
+     * @param TagRevisionService           $tagRevisionService
+     * @param PasswordRevisionService      $revisionService
+     * @param PasswordTagRelationService   $relationService
+     * @param PasswordSecurityCheckService $passwordSecurityCheckService
      */
     public function __construct(
-        ShareService $shareService,
-        HelperService $helperService,
-        TagRevisionService $tagRevisionService,
-        PasswordRevisionService $revisionService,
-        PasswordTagRelationService $relationService
+        protected ShareService $shareService,
+        protected TagRevisionService $tagRevisionService,
+        protected PasswordRevisionService $revisionService,
+        protected PasswordTagRelationService $relationService,
+        protected PasswordSecurityCheckService $passwordSecurityCheckService
     ) {
-        $this->shareService       = $shareService;
-        $this->helperService      = $helperService;
-        $this->revisionService    = $revisionService;
-        $this->relationService    = $relationService;
-        $this->tagRevisionService = $tagRevisionService;
     }
 
     /**
@@ -92,12 +55,11 @@ abstract class AbstractPasswordListener implements IEventListener {
      * @throws Exception
      */
     protected function checkSecurityStatus(PasswordRevision $revision, bool $searchDuplicates = true): void {
-        $securityCheck = $this->helperService->getSecurityHelper();
-        [$status, $statusCode] = $securityCheck->getRevisionSecurityLevel($revision);
+        [$status, $statusCode] = $this->passwordSecurityCheckService->getRevisionSecurityLevel($revision);
         $revision->setStatus($status);
         $revision->setStatusCode($statusCode);
 
-        if($searchDuplicates && $statusCode === AbstractSecurityCheckHelper::STATUS_DUPLICATE) {
+        if($searchDuplicates && $statusCode === PasswordSecurityCheckService::STATUS_DUPLICATE) {
             $this->updateDuplicateStatus([$revision->getHash()]);
         }
     }

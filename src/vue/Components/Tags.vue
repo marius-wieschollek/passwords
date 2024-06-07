@@ -8,6 +8,7 @@
                :options="options"
                :loading="loading"
                :placeholder="t('Add Tags...')"
+               :aria-label-combobox="t('Tags')"
                v-model="model"
                v-on:option:created="createTag($event)"
     >
@@ -33,10 +34,10 @@
     import Translate from '@vc/Translate';
     import NcSelect from '@nc/NcSelect.js';
     import API from '@js/Helper/api';
-    import Utility from '@js/Classes/Utility';
     import TagManager from '@js/Manager/TagManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import TagIcon from '@icon/Tag';
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         components: {TagIcon, Translate, NcSelect},
@@ -79,7 +80,7 @@
             },
             options() {
                 let options = [],
-                    usedIds = Utility.arrayPluck(this.model, 'id');
+                    usedIds = UtilityService.arrayPluck(this.model, 'id');
 
                 for(let id in this.tags) {
                     if(!this.tags.hasOwnProperty(id) || usedIds.indexOf(id) !== -1) {
@@ -89,7 +90,7 @@
                     options.push(this.tags[id]);
                 }
 
-                return Utility.sortApiObjectArray(options, 'label');
+                return UtilityService.sortApiObjectArray(options, 'label');
             }
         },
         mounted() {
@@ -140,11 +141,11 @@
                     return 'is-dark';
                 }
 
-                return Utility.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
+                return UtilityService.getColorLuma(option.color) < 96 ? 'is-dark':'is-bright';
             },
             handleModelUpdate(value) {
                 if(this.loading) return;
-                let modelIds = Utility.arrayPluck(value, 'id');
+                let modelIds = UtilityService.arrayPluck(value, 'id');
 
                 if(JSON.stringify(this.tagIdsInValue) !== JSON.stringify(modelIds)) {
                     let model = {};
@@ -166,7 +167,7 @@
                 }
 
                 this.timeout = setTimeout(() => {
-                    let data = Utility.cloneObject(this.value);
+                    let data = UtilityService.cloneObject(this.value);
                     if(Object.keys(data.tags).length === 0) {
                         data.tags = [''];
                     }

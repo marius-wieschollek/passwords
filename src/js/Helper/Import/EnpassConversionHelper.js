@@ -1,8 +1,8 @@
-import Localisation from '@js/Classes/Localisation';
+import LoggingService from "@js/Services/LoggingService";
 import RandomColorService from '@js/Services/RandomColorService';
+import LocalisationService from "@js/Services/LocalisationService";
 import CustomFieldsHelper from '@js/Helper/Import/CustomFieldsHelper';
 import ImportMappingHelper from '@js/Helper/Import/ImportMappingHelper';
-import Logger from "@js/Classes/Logger";
 
 export default class EnpassConversionHelper {
 
@@ -234,16 +234,16 @@ export default class EnpassConversionHelper {
      */
     static _getCategoryLabels() {
         return {
-            login     : Localisation.translate('Logins'),
-            creditcard: Localisation.translate('Credit Cards'),
-            identity  : Localisation.translate('Identities'),
-            note      : Localisation.translate('Notes'),
-            password  : Localisation.translate('Passwords'),
-            finance   : Localisation.translate('Finances'),
-            license   : Localisation.translate('Licenses'),
-            travel    : Localisation.translate('Travel'),
-            computer  : Localisation.translate('Computers'),
-            misc      : Localisation.translate('Miscellaneous')
+            login     : LocalisationService.translate('Logins'),
+            creditcard: LocalisationService.translate('Credit Cards'),
+            identity  : LocalisationService.translate('Identities'),
+            note      : LocalisationService.translate('Notes'),
+            password  : LocalisationService.translate('Passwords'),
+            finance   : LocalisationService.translate('Finances'),
+            license   : LocalisationService.translate('Licenses'),
+            travel    : LocalisationService.translate('Travel'),
+            computer  : LocalisationService.translate('Computers'),
+            misc      : LocalisationService.translate('Miscellaneous')
         };
     }
 
@@ -255,8 +255,8 @@ export default class EnpassConversionHelper {
      * @private
      */
     static _logConversionError(text, vars, errors) {
-        let message = Localisation.translate(text, vars);
+        let message = LocalisationService.translate(text, vars);
         errors.push(message);
-        Logger.error(message, vars);
+        LoggingService.error(message, vars);
     }
 }

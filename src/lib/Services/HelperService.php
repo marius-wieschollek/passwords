@@ -1,43 +1,35 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
-use OCA\Passwords\Helper\Favicon\AbstractFaviconHelper;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Favicon\DefaultFaviconHelper;
-use OCA\Passwords\Helper\Favicon\DuckDuckGoHelper;
-use OCA\Passwords\Helper\Favicon\FaviconGrabberHelper;
-use OCA\Passwords\Helper\Favicon\GoogleFaviconHelper;
-use OCA\Passwords\Helper\Favicon\LocalFaviconHelper;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Helper\Image\GdHelper;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Image\ImaginaryHelper;
-use OCA\Passwords\Helper\Preview\AbstractPreviewHelper;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\DefaultPreviewHelper;
-use OCA\Passwords\Helper\Preview\PageresCliHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigDbPlusHibpSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
-use OCA\Passwords\Helper\SecurityCheck\SmallLocalDbSecurityCheckHelper;
-use OCA\Passwords\Helper\Words\AbstractWordsHelper;
-use OCA\Passwords\Helper\Words\AutoWordsHelper;
-use OCA\Passwords\Helper\Words\LeipzigCorporaHelper;
-use OCA\Passwords\Helper\Words\LocalWordsHelper;
-use OCA\Passwords\Helper\Words\RandomCharactersHelper;
-use OCA\Passwords\Helper\Words\SnakesWordsHelper;
+use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
+use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
+use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\Words\AutoWordsProvider;
+use OCA\Passwords\Provider\Words\LeipzigCorporaProvider;
+use OCA\Passwords\Provider\Words\LocalWordsProvider;
+use OCA\Passwords\Provider\Words\RandomCharactersProvider;
+use OCA\Passwords\Provider\Words\SnakesWordsProvider;
+use OCA\Passwords\Provider\Words\WordsProviderInterface;
+use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
+use Psr\Container\NotFoundExceptionInterface;
 
 /**
  * Class HelperService
@@ -116,76 +108,38 @@ class HelperService {
     /**
      * @param string|null $service
      *
-     * @return AbstractPreviewHelper
+     * @return WordsProviderInterface
      */
-    public function getWebsitePreviewHelper(string $service = null): AbstractPreviewHelper {
-        if($service === null) $service = $this->config->getAppValue('service/preview', self::PREVIEW_DEFAULT);
-
-        return match ($service) {
-            self::PREVIEW_PAGERES => $this->container->get(PageresCliHelper::class),
-            self::PREVIEW_BROW_SHOT => $this->container->get(BrowshotPreviewHelper::class),
-            self::PREVIEW_SCREEN_SHOT_LAYER => $this->container->get(ScreenShotLayerHelper::class),
-            self::PREVIEW_SCREEN_SHOT_MACHINE => $this->container->get(ScreenShotMachineHelper::class),
-            self::PREVIEW_SCREEENLY => $this->container->get(ScreeenlyHelper::class),
-            default => $this->container->get(DefaultPreviewHelper::class),
-        };
-    }
-
-    /**
-     * @param string|null $service
-     *
-     * @return AbstractFaviconHelper
-     */
-    public function getFaviconHelper(string $service = null): AbstractFaviconHelper {
-        if($service === null) $service = $this->config->getAppValue('service/favicon', self::FAVICON_DEFAULT);
-
-        return match ($service) {
-            self::FAVICON_BESTICON => $this->container->get(BestIconHelper::class),
-            self::FAVICON_FAVICON_GRABBER => $this->container->get(FaviconGrabberHelper::class),
-            self::FAVICON_DUCK_DUCK_GO => $this->container->get(DuckDuckGoHelper::class),
-            self::FAVICON_GOOGLE => $this->container->get(GoogleFaviconHelper::class),
-            self::FAVICON_LOCAL => $this->container->get(LocalFaviconHelper::class),
-            default => $this->container->get(DefaultFaviconHelper::class),
-        };
-    }
-
-    /**
-     * @param string|null $service
-     *
-     * @return AbstractWordsHelper
-     */
-    public function getWordsHelper(string $service = null): AbstractWordsHelper {
+    public function getWordsHelper(string $service = null): WordsProviderInterface {
         if($service === null) $service = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return match ($service) {
-            self::WORDS_LOCAL => $this->container->get(LocalWordsHelper::class),
-            self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaHelper::class),
-            self::WORDS_SNAKES => $this->container->get(SnakesWordsHelper::class),
-            self::WORDS_RANDOM => $this->container->get(RandomCharactersHelper::class),
-            default => $this->container->get(AutoWordsHelper::class),
+            self::WORDS_LOCAL => $this->container->get(LocalWordsProvider::class),
+            self::WORDS_LEIPZIG => $this->container->get(LeipzigCorporaProvider::class),
+            self::WORDS_SNAKES => $this->container->get(SnakesWordsProvider::class),
+            self::WORDS_RANDOM => $this->container->get(RandomCharactersProvider::class),
+            default => $this->container->get(AutoWordsProvider::class),
         };
     }
 
     /**
      * @param string|null $service
      *
-     * @return AbstractSecurityCheckHelper
+     * @depreacted without replacement
+     *
+     * @return SecurityCheckProviderInterface
+     *
+     * @throws ContainerExceptionInterface
+     * @throws NotFoundExceptionInterface
      */
-    public function getSecurityHelper(string $service = null): AbstractSecurityCheckHelper {
+    public function getSecurityHelper(string $service = null): SecurityCheckProviderInterface {
         $service = $this->config->getAppValue('service/security', $service ?? self::SECURITY_HIBP);
 
         return match ($service) {
-            self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckHelper::class),
-            self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckHelper::class),
-            self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckHelper::class),
-            default => $this->container->get(HaveIBeenPwnedHelper::class),
+            self::SECURITY_BIG_LOCAL => $this->container->get(BigLocalDbSecurityCheckProvider::class),
+            self::SECURITY_SMALL_LOCAL => $this->container->get(SmallLocalDbSecurityCheckProvider::class),
+            self::SECURITY_BIGDB_HIBP => $this->container->get(BigDbPlusHibpSecurityCheckProvider::class),
+            default => $this->container->get(HaveIBeenPwnedProvider::class),
         };
-    }
-
-    /**
-     * @return DefaultFaviconHelper
-     */
-    public function getDefaultFaviconHelper(): DefaultFaviconHelper {
-        return $this->container->get(DefaultFaviconHelper::class);
     }
 }

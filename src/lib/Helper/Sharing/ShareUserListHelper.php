@@ -12,6 +12,7 @@ use OCA\Guests\UserBackend;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\AppFramework\Http;
 use OCP\IGroupManager;
 use OCP\IUser;
 use OCP\IUserManager;
@@ -149,7 +150,7 @@ class ShareUserListHelper {
         $partners = $this->getShareUsers($receiver);
         if(count($partners) === 1) return array_keys($partners)[0];
 
-        throw new ApiException('Invalid receiver uid', 400);
+        throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
     }
 
     /**

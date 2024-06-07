@@ -10,6 +10,7 @@ namespace OCA\Passwords\Helper\Settings;
 use Exception;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\ConfigurationService;
+use OCP\AppFramework\Http;
 
 /**
  * Class ClientSettingsHelper
@@ -57,10 +58,10 @@ class ClientSettingsHelper {
      */
     public function set(string $key, $value, string $userId = null) {
         if(strlen($key) > 48) {
-            throw new ApiException('Key too long', 400);
+            throw new ApiException('Key too long', Http::STATUS_BAD_REQUEST);
         }
         if(strlen(strval($value)) > 128) {
-            throw new ApiException('Value too long', 400);
+            throw new ApiException('Value too long', Http::STATUS_BAD_REQUEST);
         }
 
         $data         = json_decode($this->config->getUserValue('client/settings', '{}', $userId), true);

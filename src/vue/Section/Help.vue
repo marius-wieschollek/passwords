@@ -44,12 +44,12 @@
     import Gallery from '@vc/Gallery';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import Utility from '@js/Classes/Utility';
-    import Localisation from '@js/Classes/Localisation';
-    import HandbookRenderer from '@js/Helper/HandbookRenderer';
+    import HandbookRenderer from '@js/Handbook/HandbookRenderer';
     import Application from "@js/Init/Application";
     import {emit} from "@nextcloud/event-bus";
     import CommunityResources from "@vc/Handbook/CommunityResources.vue";
+    import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     // noinspection JSUnusedGlobalSymbols
     export default {
@@ -81,7 +81,8 @@
 
         created() {
             this.refreshView();
-            document.addEventListener('scroll', this.setActiveSection);
+            document.getElementById('app-content-vue')
+                    .addEventListener('scroll', this.setActiveSection);
             if(!this.isAuthorized) {
                 emit('toggle-navigation', {open: false});
                 document.body.classList.remove('pw-auth-visible');
@@ -90,7 +91,8 @@
         },
 
         beforeDestroy() {
-            document.removeEventListener('scroll', this.setActiveSection);
+            document.getElementById('app-content-vue')
+                    .removeEventListener('scroll', this.setActiveSection);
         },
 
         updated() {
@@ -100,7 +102,7 @@
         computed: {
             getBreadcrumbIcons() {
                 let items = [
-                    {path: {name: 'Help'}, label: Localisation.translate('Handbook')}
+                    {path: {name: 'Help'}, label: LocalisationService.translate('Handbook')}
                 ];
 
                 if(this.$route.params.page === undefined) return items;
@@ -112,7 +114,7 @@
                     items.push(
                         {
                             path : {name: 'Help', params: {page: current.join('/')}},
-                            label: Localisation.translate(path[i].replace(/-{1}/g, ' '))
+                            label: LocalisationService.translate(path[i].replace(/-{1}/g, ' '))
                         }
                     );
                 }
@@ -145,7 +147,7 @@
                 }
             },
             setActiveSection() {
-                let pos     = window.scrollY,
+                let pos     = document.getElementById('app-content-vue').scrollTop,
                     section = '';
 
                 for(let i = 0; i < this.navigation.length; i++) {
@@ -177,7 +179,7 @@
                 let scrollTarget = document.getElementById('app-content-vue');
 
                 if(!this.$route.hash) {
-                    Utility.scrollTo(0, 0, behavior, scrollTarget);
+                    UtilityService.scrollTo(0, 0, behavior, scrollTarget);
                     return;
                 }
 
@@ -186,7 +188,7 @@
                     let breadcrumb = document.querySelector('.breadcrumb.passwords-breadcrumbs'),
                         top        = $el.offsetTop - (breadcrumb ? breadcrumb.offsetHeight:0);
 
-                    Utility.scrollTo(top, 0, behavior, scrollTarget);
+                    UtilityService.scrollTo(top, 0, behavior, scrollTarget);
                     $el.classList.add('highlight');
                     $el.addEventListener('animationend', () => {$el.classList.remove('highlight');});
                     this.anchor = this.$route.hash;

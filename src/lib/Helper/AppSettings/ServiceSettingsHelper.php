@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -12,16 +12,16 @@
 namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
-use OCA\Passwords\Helper\Favicon\BestIconHelper;
-use OCA\Passwords\Helper\Image\ImagickHelper;
-use OCA\Passwords\Helper\Preview\BrowshotPreviewHelper;
-use OCA\Passwords\Helper\Preview\ScreeenlyHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotLayerHelper;
-use OCA\Passwords\Helper\Preview\ScreenShotMachineHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\HaveIBeenPwnedHelper;
+use OCA\Passwords\Provider\Favicon\BestIconProvider;
+use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
+use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotLayerProvider;
+use OCA\Passwords\Provider\Preview\ScreenShotMachineProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\HaveIBeenPwnedProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
+use OCP\AppFramework\Http;
 use OCP\IL10N;
 
 /**
@@ -56,8 +56,8 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'images'             => 'service/images',
             'preview'            => 'service/preview',
             'favicon'            => 'service/favicon',
-            'security.hibp.url'  => HaveIBeenPwnedHelper::CONFIG_SERVICE_URL,
-            'security.local.url' => BigLocalDbSecurityCheckHelper::CONFIG_DB_SOURCE
+            'security.hibp.url'  => HaveIBeenPwnedProvider::CONFIG_SERVICE_URL,
+            'security.local.url' => BigLocalDbSecurityCheckProvider::CONFIG_DB_SOURCE
         ];
 
     /**
@@ -176,7 +176,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 return $this->getGenericSetting($key);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -187,7 +187,7 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         $service = $this->config->getAppValue('service/favicon', HelperService::FAVICON_DEFAULT);
 
         if($service === HelperService::FAVICON_BESTICON) {
-            return BestIconHelper::BESTICON_CONFIG_KEY;
+            return BestIconProvider::BESTICON_CONFIG_KEY;
         }
 
         return 'service/favicon/api';
@@ -201,19 +201,19 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         $service = $this->config->getAppValue('service/preview', HelperService::PREVIEW_DEFAULT);
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_LAYER) {
-            return ScreenShotLayerHelper::SSL_API_CONFIG_KEY;
+            return ScreenShotLayerProvider::SSL_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_SCREEN_SHOT_MACHINE) {
-            return ScreenShotMachineHelper::SSM_API_CONFIG_KEY;
+            return ScreenShotMachineProvider::SSM_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_BROW_SHOT) {
-            return BrowshotPreviewHelper::BWS_API_CONFIG_KEY;
+            return BrowshotPreviewProvider::BWS_API_CONFIG_KEY;
         }
 
         if($service === HelperService::PREVIEW_SCREEENLY) {
-            return ScreeenlyHelper::SCREEENLY_API_CONFIG_KEY;
+            return ScreeenlyProvider::SCREEENLY_API_CONFIG_KEY;
         }
 
         return 'service/preview/api';
@@ -356,22 +356,22 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             $this->generateOptionArray(
                 HelperService::IMAGES_AUTO,
                 $this->localisation->t('Select automatically (recommended)'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_AUTO)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_AUTO)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_IMAGICK,
                 $this->localisation->t('Imagick/GMagick'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGICK)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_IMAGICK)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_IMAGINARY,
                 $this->localisation->t('Imaginary'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_IMAGINARY)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_IMAGINARY)->isAvailable()
             ),
             $this->generateOptionArray(
                 HelperService::IMAGES_GDLIB,
                 $this->localisation->t('PHP GDLib'),
-                $this->helperService->getWordsHelper(HelperService::IMAGES_GDLIB)->isAvailable()
+                $this->helperService->getImageHelper(HelperService::IMAGES_GDLIB)->isAvailable()
             )
         ];
     }

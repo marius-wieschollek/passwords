@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\AppInfo;
 
@@ -92,6 +101,8 @@ $routes = [
         'defaults' => ['domain' => 'default', 'view' => 'desktop', 'width' => '640', 'height' => '360...']
     ],
     ['name' => 'service_api#passwordChangeUrl', 'url' => '/api/1.0/service/password-change', 'verb' => 'POST'],
+    ['name' => 'service_api#get_hashes', 'url' => '/api/1.0/service/hashes/{range}', 'verb' => 'GET'],
+    ['name' => 'service_api#get_hashes', 'url' => '/api/1.0/service/hashes', 'verb' => 'POST', 'postfix' => 'POST'],
     ['name' => 'service_api#coffee', 'url' => '/api/1.0/service/coffee', 'verb' => 'GET'],
 
 

@@ -1,7 +1,7 @@
 import API from '@js/Helper/api';
-import Utility from '@js/Services/UtilityService';
 import {loadState} from '@nextcloud/initial-state';
-import Logger from "@js/Services/LoggingService";
+import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
 
 /**
  *
@@ -13,6 +13,7 @@ class SettingsService {
             'client.ui.sort.field'               : 'label',
             'client.sharing.qrcode.warning'      : true,
             'client.encryption.webauthn.enabled' : false,
+            'client.encryption.passphrase.check' : 0,
             'client.ui.section.default'          : 'folders',
             'client.ui.password.field.title'     : 'label',
             'client.ui.password.field.sorting'   : 'byTitle',
@@ -35,7 +36,7 @@ class SettingsService {
             'client.session.keepalive'           : 0,
             'client.help.more.open'              : false,
         };
-        this._settings = Utility.cloneObject(this._defaults);
+        this._settings = UtilityService.cloneObject(this._defaults);
         this._observers = {};
     }
 
@@ -83,7 +84,7 @@ class SettingsService {
         }
 
         this._triggerObservers(setting, this._settings[setting])
-            .catch(Logger.exception);
+            .catch(LoggingService.exception);
         return this._settings[setting];
     }
 
@@ -126,7 +127,7 @@ class SettingsService {
      *
      */
     getAll() {
-        return Utility.cloneObject(this._settings);
+        return UtilityService.cloneObject(this._settings);
     }
 
     /**

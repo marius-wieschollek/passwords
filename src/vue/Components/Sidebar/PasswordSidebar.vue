@@ -83,7 +83,6 @@
     import PasswordActions from '@js/Actions/Password/PasswordActions';
     import Application from '@js/Init/Application';
     import SettingsService from '@js/Services/SettingsService';
-    import Localisation from '@js/Classes/Localisation';
     import {emit} from '@nextcloud/event-bus';
     import Sidebar from "@js/Models/Sidebar/Sidebar";
     import NcAppSidebar from '@nc/NcAppSidebar.js';
@@ -102,6 +101,9 @@
     import FolderMoveIcon from '@icon/FolderMove';
     import ContentCopyIcon from '@icon/ContentCopy';
     import LockResetIcon from '@icon/LockReset';
+    import LocalisationService from "@js/Services/LocalisationService";
+    import Revisions from '@vc/Sidebar/PasswordSidebar/Tabs/Revisions';
+    import Share from '@vc/Sidebar/PasswordSidebar/Tabs/Share';
 
     export default {
         components: {
@@ -115,9 +117,9 @@
             PencilIcon,
             LockResetIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
-            'share': () => import(/* webpackChunkName: "PasswordShare" */ '@vc/Sidebar/PasswordSidebar/Tabs/Share'),
+            Share,
             'notes': () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
-            'revisions': () => import(/* webpackChunkName: "PasswordRevisions" */ '@vc/Sidebar/PasswordSidebar/Tabs/Revisions'),
+            Revisions,
             Tags,
             Preview,
             PwDetails,
@@ -146,10 +148,10 @@
 
         computed: {
             subtitle() {
-                return Localisation.formatDate(this.password.edited);
+                return LocalisationService.formatDate(this.password.edited);
             },
             subtitleTooltip() {
-                return Localisation.formatDateTime(this.password.edited);
+                return LocalisationService.formatDateTime(this.password.edited);
             },
             compact() {
                 return window.innerWidth <= 640 || window.innerHeight <= 640 || !SettingsService.get('client.ui.password.details.preview');

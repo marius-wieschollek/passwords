@@ -1,9 +1,9 @@
 import Vue from 'vue';
-import Localisation from "@js/Classes/Localisation";
 import SettingsService from '@js/Services/SettingsService';
-import DeferredActivationService from '@js/Services/DeferredActivationService';
-import Utility from "@js/Classes/Utility";
-import Logger from "@js/Classes/Logger";
+import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
+import LocalisationService from "@js/Services/LocalisationService";
+import DeferredActivationService from "@js/Services/DeferredActivationService";
 
 class SetupManager {
 
@@ -14,7 +14,7 @@ class SetupManager {
      */
     async runAutomatically() {
         if(SettingsService.get('client.setup.initialized', false)) return;
-        if(!await DeferredActivationService.check('first-run-wizard', true)) return;
+        if(!DeferredActivationService.check('first-run-wizard', true)) return;
 
         await this._runWizard();
     }
@@ -37,7 +37,7 @@ class SetupManager {
         try {
             return this._runWizard(['encryption'], true, false);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
         }
     }
 
@@ -52,12 +52,12 @@ class SetupManager {
      */
     _runWizard(enableSlides, closable, redirect) {
         return new Promise(async (resolve) => {
-            await Localisation.loadSection('tutorial');
+            await LocalisationService.loadSection('tutorial');
 
             let SetupDialog = await import(/* webpackChunkName: "SetupWizard" */ '@vue/Dialog/SetupDialog.vue'),
                 SetupWizard = Vue.extend(SetupDialog.default);
 
-            new SetupWizard({propsData: {enableSlides, closable, redirect, _close:resolve}}).$mount(Utility.popupContainer());
+            new SetupWizard({propsData: {enableSlides, closable, redirect, _close: resolve}}).$mount(UtilityService.popupContainer());
         });
     }
 }

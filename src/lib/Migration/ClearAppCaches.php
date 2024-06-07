@@ -59,5 +59,12 @@ class ClearAppCaches implements IRepairStep {
     public function run(IOutput $output) {
         $this->fileCache->clearCache(FileCacheService::DEFAULT_CACHE);
         $this->fileCache->clearCache(FileCacheService::AVATAR_CACHE);
+
+        $faviconCache = $this->fileCache->getCache(FileCacheService::FAVICON_CACHE);
+        foreach($faviconCache->getDirectoryListing() as $file) {
+            if($file->getSize() === 0) {
+                $file->delete();
+            }
+        }
     }
 }

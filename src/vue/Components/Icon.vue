@@ -13,7 +13,7 @@
 </template>
 
 <script>
-    import Localisation from '@js/Classes/Localisation';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         props   : {
@@ -32,7 +32,7 @@
                 return 'icon fa fa-' + this.icon + (this.spin ? ' fa-spin':'');
             },
             getTitle() {
-                if(this.title) return Localisation.translate(this.title);
+                if(this.title) return LocalisationService.translate(this.title);
             }
         }
     };

@@ -19,10 +19,10 @@
 </template>
 
 <script>
-    import SettingsService from '@js/Services/SettingsService';
-    import Localisation from '@js/Classes/Localisation';
     import NcEmptyContent from '@nc/NcEmptyContent.js';
     import FolderOpenOutlineIcon from "@icon/FolderOpenOutline";
+    import SettingsService from '@js/Services/SettingsService';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {FolderOpenOutlineIcon, NcEmptyContent},
@@ -42,10 +42,10 @@
 
                 for(let folder of this.folders) {
                     let enabled = this.ignoredFolders.indexOf(folder.id) === -1,
-                        title   = Localisation.translate('Open {label}', {label: folder.label});
+                        title   = LocalisationService.translate('Open {label}', {label: folder.label});
 
                     if(!enabled) {
-                        title = Localisation.translate('{label} can\'t be used', {label: folder.label});
+                        title = LocalisationService.translate('{label} can\'t be used', {label: folder.label});
                     }
 
                     items.push(
@@ -116,7 +116,7 @@
     text-align  : center;
     display     : block;
     line-height : 3rem;
-    color       : var(--color-text-lighter);
+    color       : var(--color-text-maxcontrast);
     min-height  : calc(360px - 10vh);
 }
 </style>

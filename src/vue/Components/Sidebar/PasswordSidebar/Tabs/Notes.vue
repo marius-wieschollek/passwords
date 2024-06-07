@@ -3,8 +3,9 @@
 </template>
 
 <script>
-    import Messages from '@js/Classes/Messages';
     import DOMPurify from 'dompurify';
+    import MessageService from "@js/Services/MessageService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         props: {
@@ -30,8 +31,8 @@
                     marked.setOptions({breaks: true});
                     this.notes = DOMPurify.sanitize(marked.marked.parse(this.password.notes));
                 } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
+                    LoggingService.error(e);
+                    MessageService.alert(['Unable to load {module}', {module: 'Marked'}], 'Network error');
                 }
             }
         },
@@ -57,7 +58,7 @@
     pre {
         font-family      : var(--pw-mono-font-face);
         background-color : var(--color-background-dark);
-        color            : var(--color-text-lighter);
+        color            : var(--color-text-maxcontrast);
         padding          : 1rem;
         border-radius    : var(--border-radius);
         white-space      : pre-wrap;
@@ -114,7 +115,7 @@
             font-family      : var(--pw-mono-font-face);
             padding          : .25rem .5rem;
             background-color : var(--color-background-dark);
-            color            : var(--color-text-lighter);
+            color            : var(--color-text-maxcontrast);
             border-radius    : var(--border-radius);
         }
     }

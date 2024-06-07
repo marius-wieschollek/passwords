@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2022 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -15,6 +15,7 @@ use OCA\Passwords\Exception\Database\DecryptedDataException;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\DB\Exception;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
@@ -29,7 +30,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
 
     /**
      * @return EntityInterface[]
-     * @throws \OCP\DB\Exception
+     * @throws Exception
      */
     public function findAllHidden(): array {
         $qb = $this->db->getQueryBuilder();
@@ -53,8 +54,9 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
     /**
      * @param string $modelUuid
      *
-     * @return null|RevisionInterface|Entity
+     * @return RevisionInterface|null
      * @throws DoesNotExistException
+     * @throws Exception
      * @throws MultipleObjectsReturnedException
      */
     public function findCurrentRevisionByModel(string $modelUuid): ?RevisionInterface {
@@ -73,6 +75,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
      * @param string $modelUuid
      *
      * @return RevisionInterface[]|Entity[]
+     * @throws Exception
      */
     public function findAllByModel(string $modelUuid): array {
         $sql = $this->getJoinStatement(static::MODEL_TABLE_NAME, 'model');
@@ -90,7 +93,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
      *
      * @return AbstractRevision
      * @throws DecryptedDataException
-     * @throws \OCP\DB\Exception
+     * @throws Exception
      */
     public function insert(Entity $entity): AbstractRevision {
         if($entity->_isDecrypted()) {
@@ -105,7 +108,7 @@ abstract class AbstractRevisionMapper extends AbstractMapper {
      *
      * @return AbstractRevision
      * @throws DecryptedDataException
-     * @throws \OCP\DB\Exception
+     * @throws Exception
      */
     public function update(Entity $entity): AbstractRevision {
         if($entity->_isDecrypted()) {

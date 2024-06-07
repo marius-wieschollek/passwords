@@ -159,6 +159,10 @@
             input {
                 min-height : 0;
                 cursor     : pointer;
+
+                &[type="checkbox"] {
+                    height: auto;
+                }
             }
 
             select {

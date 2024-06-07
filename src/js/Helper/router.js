@@ -1,16 +1,16 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Messages from '@js/Classes/Messages';
 import SectionTags from '@vue/Section/Tags';
 import SectionRecent from '@vue/Section/Recent';
 import SectionFolders from '@vue/Section/Folders';
-import Localisation from '@js/Classes/Localisation';
 import SectionFavorites from '@vue/Section/Favorites';
-import Logger from "@js/Classes/Logger";
+import LoggingService from "@js/Services/LoggingService";
+import MessageService from "@js/Services/MessageService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 function handleChunkLoadingError(e, module) {
-    Logger.error(e);
-    Messages
+    LoggingService.error(e);
+    MessageService
         .alert(['Unable to load {module}', {module}], 'Network error')
         .finally(() => {
             router.push('/');
@@ -69,7 +69,7 @@ const SectionHelp = async () => {
 const SectionBackup = async () => {
     try {
         let section      = import(/* webpackChunkName: "BackupSection" */ '@vue/Section/Backup'),
-            translations = Localisation.loadSection('backups');
+            translations = LocalisationService.loadSection('backups');
 
         await Promise.all([section, translations]);
 
@@ -82,7 +82,7 @@ const SectionBackup = async () => {
 const SectionSettings = async () => {
     try {
         let section      = import(/* webpackChunkName: "SettingsSection" */ '@vue/Section/Settings'),
-            translations = Localisation.loadSection('settings');
+            translations = LocalisationService.loadSection('settings');
 
         await Promise.all([section, translations]);
 
@@ -95,7 +95,7 @@ const SectionSettings = async () => {
 const SectionApps = async () => {
     try {
         let section      = import(/* webpackChunkName: "AppsSection" */ '@vue/Section/Apps'),
-            translations = Localisation.loadSection('apps');
+            translations = LocalisationService.loadSection('apps');
 
         await Promise.all([section, translations]);
 

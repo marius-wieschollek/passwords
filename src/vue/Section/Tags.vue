@@ -10,11 +10,11 @@
 
 <script>
     import API from '@js/Helper/api';
-    import Utility from '@js/Classes/Utility';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import Application from "@js/Init/Application";
+    import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         extends: BaseSection,
@@ -40,7 +40,7 @@
                     let route = this.currentTag.trashed ? 'Trash':'Tags';
 
                     items = [
-                        {path: {name:route}, label: Localisation.translate(route)},
+                        {path: {name:route}, label: LocalisationService.translate(route)},
                         {path: this.$route.path, label: this.currentTag.label}
                     ];
                 }
@@ -72,7 +72,7 @@
             updatePasswordList: function(tag) {
                 this.loading = false;
                 this.currentTag = tag;
-                this.passwords = Utility.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                this.passwords = UtilityService.sortApiObjectArray(tag.passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             }
         },
         watch  : {

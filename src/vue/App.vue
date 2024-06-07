@@ -31,7 +31,6 @@
     import '@scss/app';
     import Translate            from '@vc/Translate';
     import router               from '@js/Helper/router';
-    import Messages             from '@js/Classes/Messages';
     import SettingsService      from '@js/Services/SettingsService';
     import NcContent            from '@nc/NcContent.js';
     import NcAppContent         from '@nc/NcAppContent.js';
@@ -39,6 +38,7 @@
     import Application          from '@js/Init/Application';
     import KeepAliveManager     from '@js/Manager/KeepAliveManager';
     import {subscribe}          from "@nextcloud/event-bus";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         el        : '#content',
@@ -95,7 +95,7 @@
         methods: {
             birthDayPopup() {
                 document.getElementById('birthday').remove();
-                Messages.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
+                MessageService.info('Today in 2018, the first version of passwords was published. Thank you for using the app.');
             }
         }
     };

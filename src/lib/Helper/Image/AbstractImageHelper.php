@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Helper\Image;
 
 use OC;
+use OCA\Passwords\Exception\Image\ImageConversionException;
+use OCA\Passwords\Exception\Image\ImageExportException;
 use OCA\Passwords\Services\ConfigurationService;
 
 /**
@@ -43,12 +45,12 @@ abstract class AbstractImageHelper {
         int $maxWidth,
         int $maxHeight
     ) {
-        $heightWidthRatio = $height / $width;
-        $widthHeightRatio = $width / $height;
+        $heightWidthRatio = (int) $height / $width;
+        $widthHeightRatio = (int) $width / $height;
 
         $size = [
-            'width'      => $minWidth,
-            'height'     => $minWidth * $heightWidthRatio,
+            'width'      => (int) $minWidth,
+            'height'     => (int) $minWidth * $heightWidthRatio,
             'cropX'      => 0,
             'cropY'      => 0,
             'cropWidth'  => 0,
@@ -57,36 +59,36 @@ abstract class AbstractImageHelper {
         ];
 
         if($minHeight !== 0 && $size['height'] < $minHeight) {
-            $size['width']  = $minHeight * $widthHeightRatio;
-            $size['height'] = $minHeight;
+            $size['width']  = (int) $minHeight * $widthHeightRatio;
+            $size['height'] = (int) $minHeight;
 
             if($maxWidth !== 0 && $size['width'] > $maxWidth) {
-                $size['cropX']      = ($size['width'] - $maxWidth) / 2;
-                $size['cropWidth']  = $maxWidth;
-                $size['cropHeight'] = $size['height'];
+                $size['cropX']      = (int) ($size['width'] - $maxWidth) / 2;
+                $size['cropWidth']  = (int) $maxWidth;
+                $size['cropHeight'] = (int) $size['height'];
                 $size['cropNeeded'] = true;
             }
         } else if($maxHeight !== 0 && $size['height'] > $maxHeight) {
-            $size['width'] = $minHeight * $widthHeightRatio;
+            $size['width'] = (int) $minHeight * $widthHeightRatio;
 
             if($maxWidth !== 0 && $size['width'] > $maxWidth) {
-                $size['width']      = $maxWidth;
-                $size['height']     = $maxWidth * $heightWidthRatio;
-                $size['cropWidth']  = $size['width'];
-                $size['cropHeight'] = $maxHeight;
+                $size['width']      = (int) $maxWidth;
+                $size['height']     = (int) $maxWidth * $heightWidthRatio;
+                $size['cropWidth']  = (int) $size['width'];
+                $size['cropHeight'] = (int) $maxHeight;
                 $size['cropNeeded'] = true;
             } else if($size['width'] < $minWidth) {
-                $size['width']      = $minWidth;
-                $size['height']     = $minWidth * $heightWidthRatio;
-                $size['cropWidth']  = $size['width'];
-                $size['cropHeight'] = $maxHeight;
+                $size['width']      = (int) $minWidth;
+                $size['height']     = (int) $minWidth * $heightWidthRatio;
+                $size['cropWidth']  = (int) $size['width'];
+                $size['cropHeight'] = (int) $maxHeight;
                 $size['cropNeeded'] = true;
             }
         }
 
         if($size['width'] === 0 && $size['height'] === 0) {
-            $size['width']  = $width;
-            $size['height'] = $height;
+            $size['width']  = (int) $width;
+            $size['height'] = (int) $height;
         }
 
         return $size;
@@ -97,9 +99,9 @@ abstract class AbstractImageHelper {
      *
      * @return string
      */
-    public function getImageMime($blob) {
-        $size = getimagesizefromstring($blob);
-        if(!$size || !isset($size['mime']) || empty($size['mime'])) return 'application/octet-stream';
+    public function getImageMime($blob): string {
+        $size = @getimagesizefromstring($blob);
+        if(!$size || empty($size['mime'])) return 'application/octet-stream';
 
         return $size['mime'];
     }
@@ -161,16 +163,18 @@ abstract class AbstractImageHelper {
     /**
      * @param $image
      *
-     * @return mixed
+     * @return string
+     * @trows ImageExportException
      */
-    abstract public function exportJpeg($image);
+    abstract public function exportJpeg($image): string;
 
     /**
      * @param $image
      *
-     * @return mixed
+     * @return string
+     * @trows ImageExportException
      */
-    abstract public function exportPng($image);
+    abstract public function exportPng($image): string;
 
     /**
      * @param string $format
@@ -182,9 +186,10 @@ abstract class AbstractImageHelper {
     /**
      * @param $data
      *
-     * @return mixed
+     * @return string
+     * @throws ImageConversionException
      */
-    abstract public function convertIcoToPng($data);
+    abstract public function convertIcoToPng($data): string;
 
     /**
      * Whether this service can be used in the current environment

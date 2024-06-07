@@ -5,14 +5,20 @@
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
-            <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
+            <i class="fa fa-ellipsis-h">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
+            </i>
+            <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="edit" @click="editAction()" icon="edit">Edit</translate>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash">Delete</translate>
+                        <li>
+                            <translate tag="li" href="#" data-item-action="edit" @click.prevent="editAction()" icon="edit" say="Edit"/>
+                        </li>
+                        <li>
+                            <translate tag="li" href="#" data-item-action="delete" @click.prevent="deleteAction()" icon="trash" say="Delete"/>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -23,13 +29,13 @@
 </template>
 
 <script>
-    import Translate          from '@vc/Translate';
-    import TagManager         from '@js/Manager/TagManager';
-    import Localisation       from "@js/Classes/Localisation";
-    import SearchManager      from "@js/Manager/SearchManager";
+    import Translate from '@vc/Translate';
+    import TagManager from '@js/Manager/TagManager';
+    import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -52,10 +58,10 @@
 
         computed: {
             getDate() {
-                return Localisation.formatDate(this.tag.edited);
+                return LocalisationService.formatDate(this.tag.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date:Localisation.formatDate(this.tag.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.tag.edited)});
             },
             className() {
                 let classNames = 'row tag';
@@ -78,8 +84,13 @@
                 TagManager.updateTag(this.tag)
                           .catch(() => { this.tag.favorite = !this.tag.favorite; });
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {
@@ -114,16 +125,16 @@
 
 <style lang="scss">
 
-    #app-content {
-        .item-list {
-            .row.tag {
-                .favicon {
-                    text-align     : center;
-                    font-size      : 2.25rem;
-                    vertical-align : top;
-                }
+#app-content {
+    .item-list {
+        .row.tag {
+            .favicon {
+                text-align     : center;
+                font-size      : 2.25rem;
+                vertical-align : top;
             }
         }
     }
+}
 
 </style>

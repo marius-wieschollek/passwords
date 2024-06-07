@@ -8,6 +8,8 @@
 namespace OCA\Passwords\Migration;
 
 use Exception;
+use OC\Files\SimpleFS\SimpleFile;
+use OC\Files\SimpleFS\SimpleFolder;
 use OC\Migration\SimpleOutput;
 use OCA\Passwords\Services\FileCacheService;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -59,6 +61,36 @@ class ClearAppCachesTest extends TestCase {
                                        2 => $this->assertEquals($param, FileCacheService::AVATAR_CACHE),
                                    };
                                });
+
+        $this->fileCacheService->method('getCache')->willReturn(new SimpleFolder());
+
+        try {
+            $this->clearAppCaches->run(new SimpleOutput());
+        } catch(Exception $e) {
+            $this->fail($e->getMessage());
+        }
+    }
+
+    /**
+     *
+     */
+    public function testDeletesBrokenFavicons() {
+        $this->fileCacheService->method('clearCache');
+
+        $goodFavicon = $this->createMock(SimpleFile::class);
+        $goodFavicon->expects($this->once())->method('getSize')->willReturn(123);
+        $goodFavicon->expects($this->never())->method('delete');
+
+        $badFavicon = $this->createMock(SimpleFile::class);
+        $badFavicon->expects($this->once())->method('getSize')->willReturn(0);
+        $badFavicon->expects($this->once())->method('delete');
+
+        $folder = $this->createMock(SimpleFolder::class);
+        $folder->expects($this->once())
+               ->method('getDirectoryListing')
+               ->willReturn([$goodFavicon, $badFavicon]);
+
+        $this->fileCacheService->method('getCache')->willReturn($folder);
 
         try {
             $this->clearAppCaches->run(new SimpleOutput());

@@ -12,8 +12,8 @@
 
 <script>
     import Translate from '@vue/Components/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -62,9 +62,9 @@
                     matches = '';
 
                 if(this.search.total < 2) {
-                    matches = Localisation.translate('matches');
+                    matches = LocalisationService.translate('matches');
                 } else {
-                    matches = Localisation.translate('match');
+                    matches = LocalisationService.translate('match');
                 }
 
                 return `${text} ${matches} "${this.search.query}"`;
@@ -74,34 +74,34 @@
                 let text = [];
 
                 if(passwords === 1) {
-                    text.push(Localisation.translate('1 password'));
+                    text.push(LocalisationService.translate('1 password'));
                 } else if(passwords) {
-                    text.push(Localisation.translate('{passwords} passwords', {passwords: passwords}));
+                    text.push(LocalisationService.translate('{passwords} passwords', {passwords: passwords}));
                 }
 
                 if(folders === 1) {
-                    text.push(Localisation.translate('1 folder'));
+                    text.push(LocalisationService.translate('1 folder'));
                 } else if(folders) {
-                    text.push(Localisation.translate('{folders} folders', {folders: folders}));
+                    text.push(LocalisationService.translate('{folders} folders', {folders: folders}));
                 }
 
                 if(tags === 1) {
-                    text.push(Localisation.translate('1 tag'));
+                    text.push(LocalisationService.translate('1 tag'));
                 } else if(tags) {
-                    text.push(Localisation.translate('{tags} tags', {tags: tags}));
+                    text.push(LocalisationService.translate('{tags} tags', {tags: tags}));
                 }
 
                 if(text.length === 3) {
-                    let and = Localisation.translate(' and ');
+                    let and = LocalisationService.translate(' and ');
                     return text[0] + ', ' + text[1] + and + text[2];
                 } else if(text.length === 2) {
-                    let and = Localisation.translate(' and ');
+                    let and = LocalisationService.translate(' and ');
                     return text[0] + and + text[1];
                 } else if(text.length === 1) {
                     return text[0];
                 }
 
-                return Localisation.translate('Nothing');
+                return LocalisationService.translate('Nothing');
             }
         }
     };

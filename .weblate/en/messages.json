@@ -1077,6 +1077,9 @@
             }
         }
     },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Search …"
+    },
     "frontend-000310": {
         "message": "There is nothing here"
     },
@@ -2894,9 +2897,6 @@
     "tutorial-000753": {
         "message": "Customize your experience"
     },
-    "tutorial-000754": {
-        "message": "Bring order to your passwords"
-    },
     "tutorial-000755": {
         "message": "Get connected"
     },
@@ -3004,6 +3004,14 @@
     },
     "tutorial-000790": {
         "message": "Your password needs at least 12 characters and the confirmation password must be the same"
+    },
+    "tutorial-StartText1": {
+        "message": "Welcome to the Passwords App for Nextcloud, the perfect place to keep your passwords safe and organized.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Let's get you started",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     },
     "backend-UserMigrationDescription": {
         "message": "Decrypted passwords database with passwords, folders, tags and settings. (Does not include passwords shared with you. Does not work with E2E enabled)",
@@ -3292,7 +3300,7 @@
     },
     "frontend-ChangePasswordPageLink": {
         "message": "Open change password page",
-        "description": "Label in the dialog to open the change password of the button to open that page"
+        "description": "Label in the dialog to open the change password page of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
         "message": "\"{host}\" does not announce their password change page. You may find the change password function on the website.",
@@ -3305,5 +3313,33 @@
                 "content": "$2"
             }
         }
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "The chosen encryption passphrase is insecure and therefore can not be used.",
+        "description": "Text of the alert dialog when the user wants to set up encryption with an insecure/breached passphrase"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Insecure encryption passphrase",
+        "description": "Title of the alert dialog when the users passphrase is insecure/breached"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "The passwords app regularly checks if your encryption passphrase is still secure. Your current passphrase is not secure and needs to be changed immediately.",
+        "description": "Text of the alert dialog when the users passphrase has been checked by the app and was found to be insecure/breached"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Checking if the server runs background jobs with cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Background jobs are executed with cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Checking if the server runs background tasks with the same PHP version.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Background jobs are executed with the same PHP version.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     }
 }

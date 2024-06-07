@@ -62,7 +62,7 @@
         "message": "Älä yritä uudelleen"
     },
     "apps-000014": {
-        "message": "Kytke jotain muuta"
+        "message": "Yhdistä toinen asiakas"
     },
     "apps-000015": {
         "message": "Yritä uudelleen"
@@ -459,7 +459,7 @@
         "message": "Sekalaiset"
     },
     "backups-000134": {
-        "message": "Virheellinen peräkkäinen lainausmerkki lainausmerkkikentässä"
+        "message": "Virheellinen perässä oleva lainausmerkki lainausmerkkikentässä"
     },
     "backups-000135": {
         "message": "Tiedostoa ei voitu analysoida: $ERRORS$",
@@ -1157,13 +1157,13 @@
         "message": "Ei löydy"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Tarvitsetko vielä apua?"
+        "message": "Tarvitsetko apua?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Kysy foorumillamme!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Kerro meille!"
+        "message": "Ilmoita virheestä"
     },
     "frontend-000329": {
         "message": "Istunto on päättynyt"
@@ -1729,7 +1729,7 @@
         "message": "Passwords tarkistaa säännöllisesti, onko salasanasi vaarantuneet tietomurron vuoksi."
     },
     "backend-000464": {
-        "message": "Tämä tietoturvatarkistus on havainnut, että yksi salasanasi on epävarma."
+        "message": "Tämä tietoturvatarkastus on havainnut, että yksi salasanasi on epävarma."
     },
     "backend-000465": {
         "message": "Tämä tietoturvatarkastus on osoittanut, että $STR_1$ salasanasi ovat turvattomia.",
@@ -1924,7 +1924,7 @@
         "message": "Voit auttaa meitä parantamaan Passwords-sovellusta osallistumalla palvelinkyselyyn."
     },
     "backend-000499": {
-        "message": "Tämä lähettää meille nimettömiä tietoja asetuksistasi ja valituista asetuksista."
+        "message": "Tämä lähettää meille joitakin nimettömiä tietoja asetuksistasi ja valituista asetuksista."
     },
     "backend-000500": {
         "message": "Voit muuttaa tämän milloin tahansa sovelluksen asetuksissa."
@@ -1948,7 +1948,7 @@
         "message": "Ei asetettu"
     },
     "backend-000507": {
-        "message": "Harkitse favicon api:n itsehostamista."
+        "message": "Harkitse favicon api:n itse isännöintiä."
     },
     "backend-000508": {
         "message": "Nextcloud käyttää jaettuja Besticon-instanssejamme verkkosivujen kuvakkeiden hakemiseen."
@@ -2130,7 +2130,7 @@
         "message": "Merkitse salasanat heikoiksi, jos niitä käytetään useilla tileillä."
     },
     "frontend-000570": {
-        "message": "Merkitse salasanat heikoiksi, jos ne ylittävät määritellyn määrän päiviä."
+        "message": "Merkitse salasanat heikoiksi, jos ne ylittävät määritetyn päivien määrän."
     },
     "frontend-000571": {
         "message": "Korkeampi vahvuus johtaa pidempiin ja monimutkaisempiin salasanoihin."
@@ -2269,7 +2269,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Tai chatissamme!"
+        "message": "Kysy chatissa"
     },
     "frontend-000616": {
         "message": "Liian monta epäonnistunutta kirjautumisyritystä"
@@ -2495,7 +2495,7 @@
         "message": "Tunnisteet CSV"
     },
     "frontend-000669": {
-        "message": "Oletusarvo"
+        "message": "Oletus"
     },
     "frontend-000670": {
         "message": "Aloita haku, kun näppäintä painetaan missä tahansa sivulla"
@@ -2578,7 +2578,7 @@
         "message": "Salasanan vaihtaminen epäonnistui"
     },
     "settings-000701": {
-        "message": "Hallinnolliset kysymykset"
+        "message": "Hallintoon liittyvät kysymykset"
     },
     "settings-000702": {
         "message": "Salasanan jakaminen"
@@ -2756,7 +2756,7 @@
         "message": "Käynnistyksen jälkeen näytä"
     },
     "tutorial-000732": {
-        "message": "tagit"
+        "message": "tunnisteet"
     },
     "tutorial-000733": {
         "message": "suosikit"
@@ -2826,9 +2826,6 @@
     "tutorial-000753": {
         "message": "Mukauta kokemuksesi"
     },
-    "tutorial-000754": {
-        "message": "Järjestä salasanasi"
-    },
     "tutorial-000755": {
         "message": "Ota yhteys"
     },
@@ -2875,7 +2872,7 @@
         "message": "Hanki suosikkikuvakkeet osoitteesta"
     },
     "tutorial-000770": {
-        "message": "Hanki verkkosivujen esikatselu osoitteesta"
+        "message": "Hanki verkkosivujen esikatselukuvat osoitteesta"
     },
     "tutorial-000771": {
         "message": "Tee varmuuskopiot"
@@ -2966,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Näytä QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3037,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Salaus kolmannen osapuolen avaimella",
+        "message": "Kolmannen osapuolen palvelinpuolen salaus",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3058,11 +3055,11 @@
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "Jos joku käskee sinua kopioimaan ja liittämään tänne mitä tahansa, on todennäköistä, että hän pääsee käsiksi salasanoihisi tai ottaa tilisi haltuunsa.",
+        "message": "Jos joku käskee sinua kopioimaan ja liittämään tänne jotain, on todennäköistä, että hän pääsee käsiksi salasanoihisi tai ottaa tilisi haltuunsa.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Katso lisätietoja {linkki}",
+        "message": "Katso lisätietoja {linkki}.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3176,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Olemme havainneet alla olevan url-osoitteen \"{label}\" salasananvaihtosivuksi. Avaa se napsauttamalla painiketta",
+        "message": "Olemme havainneet alla olevan url-osoitteen \"{label}\" salasananvaihtosivuksi. Avaa se napsauttamalla painiketta.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3294,5 +3291,43 @@
     },
     "frontend-Donate": {
         "message": "Lahjoita"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Haku …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Valittu salauslauseke on turvaton, eikä sitä siksi voi käyttää.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Epävarma salauslauseke",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Salasanat-sovellus tarkistaa säännöllisesti, onko salauslausekkeesi edelleen turvallinen. Nykyinen salasanasi ei ole turvallinen, ja se on vaihdettava välittömästi."
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Tarkistetaan, että palvelin suorittaa taustatehtäviä samalla PHP-versiolla.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Tarkistetaan, ajaako palvelin taustatöitä cronin avulla.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Taustatyöt suoritetaan cronilla.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Taustatyöt suoritetaan samalla PHP-versiolla.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Tervetuloa Nextcloudin salasanasovellukseen, joka on täydellinen paikka pitää salasanasi turvassa ja järjestyksessä.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Aloitetaan",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

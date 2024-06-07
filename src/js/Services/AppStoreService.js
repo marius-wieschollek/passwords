@@ -8,9 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import Localisation from "@js/Classes/Localisation";
+import LoggingService from "@js/Services/LoggingService";
 import SettingsService from "@js/Services/SettingsService";
-import Logger from "@js/Classes/Logger";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class AppStoreService {
 
@@ -95,11 +95,11 @@ export default new class AppStoreService {
     }
 
     _resolveTranslatableProperty(property) {
-        if(property.hasOwnProperty(Localisation.language)) {
-            return property[Localisation.language];
+        if(property.hasOwnProperty(LocalisationService.language)) {
+            return property[LocalisationService.language];
         }
-        if(property.hasOwnProperty(Localisation.baseLanguage)) {
-            return property[Localisation.baseLanguage];
+        if(property.hasOwnProperty(LocalisationService.baseLanguage)) {
+            return property[LocalisationService.baseLanguage];
         }
         if(property.hasOwnProperty('en')) {
             return property.en;
@@ -109,13 +109,14 @@ export default new class AppStoreService {
 
     async _loadStoreData() {
         if(this._storeData !== null) return this._storeData;
-        let response = await fetch(new Request(this._appsUrl, {credentials: 'omit', referrerPolicy: 'no-referrer'}));
+        let options = {credentials: 'omit', referrerPolicy: 'no-referrer'},
+            response = await fetch(new Request(this._appsUrl, options), options);
 
         if(response.ok) {
             this._storeData = await response.json();
             return this._storeData;
         } else {
-            Logger.error(response);
+            LoggingService.error(response);
             throw new Error(`${response.status} - ${response.statusText}`);
         }
     }

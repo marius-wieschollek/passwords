@@ -108,7 +108,7 @@ class ApiSessionMiddleware extends Middleware {
             return false;
         }
 
-        if($controller instanceof ServiceApiController && in_array($method, ['getAvatar', 'getFavicon', 'getPreview'])) {
+        if($controller instanceof ServiceApiController && in_array($method, ['getAvatar', 'getFavicon', 'getPreview', 'getHashes'])) {
             return false;
         }
 

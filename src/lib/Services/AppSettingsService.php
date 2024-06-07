@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\AppSettings\EntitySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\NightlySettingsHelper;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
 use OCA\Passwords\Helper\AppSettings\SurveySettingsHelper;
+use OCP\AppFramework\Http;
 
 /**
  * Class AppSettingsService
@@ -71,7 +72,7 @@ class AppSettingsService {
                 return $this->encryptionSettings->get($subKey);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -101,7 +102,7 @@ class AppSettingsService {
                 return $this->encryptionSettings->set($subKey, $value);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -130,7 +131,7 @@ class AppSettingsService {
                 return $this->encryptionSettings->reset($subKey);
         }
 
-        throw new ApiException('Unknown setting identifier', 400);
+        throw new ApiException('Unknown setting identifier', Http::STATUS_BAD_REQUEST);
     }
 
     /**

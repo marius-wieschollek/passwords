@@ -1,5 +1,5 @@
-import {Encryption} from 'passwords-client';
-import Logger from "@js/Classes/Logger";
+import ClientService from "@js/Services/ClientService";
+import LoggingService from "@js/Services/LoggingService";
 
 export default class ImportJsonConversionHelper {
 
@@ -22,7 +22,7 @@ export default class ImportJsonConversionHelper {
             throw new Error('Unsupported database version');
         }
 
-        return {data:json, errors:[]};
+        return {data: json, errors: []};
     }
 
     /**
@@ -67,7 +67,7 @@ export default class ImportJsonConversionHelper {
                 let oldFields = json.passwords[i].customFields,
                     newFields = [];
 
-                for(let j=0; j<oldFields.length; j++) {
+                for(let j = 0; j < oldFields.length; j++) {
                     if(oldFields[j] === null) {
                         continue;
                     }
@@ -80,7 +80,7 @@ export default class ImportJsonConversionHelper {
                     newFields.push(
                         {
                             label: oldFields[j].label,
-                            type: oldFields[j].type,
+                            type : oldFields[j].type,
                             value: oldFields[j].value
                         }
                     );
@@ -100,12 +100,14 @@ export default class ImportJsonConversionHelper {
      */
     static async _decryptJsonBackup(options, json) {
         if(!options.password) throw new Error('Password required');
-        let encryption = new Encryption();
 
         try {
-            encryption.decryptWithPassword(json.challenge, `${options.password}challenge`);
+            await ClientService
+                .getClient()
+                .getInstance('encryption.expv1')
+                .decrypt(json.challenge, `${options.password}challenge`);
         } catch(e) {
-            Logger.error(e);
+            LoggingService.error(e);
             throw new Error('Password invalid');
         }
 
@@ -113,9 +115,14 @@ export default class ImportJsonConversionHelper {
             if(!json.hasOwnProperty(i) || ['version', 'encrypted', 'challenge'].indexOf(i) !== -1) continue;
 
             try {
-                json[i] = JSON.parse(encryption.decryptWithPassword(json[i], options.password + i));
+                let decryptedData = await ClientService
+                    .getClient()
+                    .getInstance('encryption.expv1')
+                    .decrypt(json[i], options.password + i);
+
+                json[i] = JSON.parse(decryptedData);
             } catch(e) {
-                Logger.error(e);
+                LoggingService.error(e);
                 throw new Error(`Failed to decrypt ${i}`);
             }
         }

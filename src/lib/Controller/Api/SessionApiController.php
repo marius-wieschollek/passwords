@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2023 Passwords App
+ * @copyright 2024 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -20,6 +20,11 @@ use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\SessionService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\BruteForceProtection;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
+use OCP\AppFramework\Http\Attribute\UserRateLimit;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 use ReflectionException;
@@ -91,13 +96,12 @@ class SessionApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function request(): JSONResponse {
         if(!$this->loginAttempts->isAttemptAllowed()) {
             throw new ApiException('Login not allowed', Http::STATUS_FORBIDDEN);
@@ -118,15 +122,15 @@ class SessionApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     * @UserRateThrottle(limit=20, period=60)
-     *
      * @return JSONResponse
      * @throws ApiException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 10, period: 30)]
+    #[BruteForceProtection(action: 'passwords-login')]
     public function open(): JSONResponse {
         if(!$this->loginAttempts->isAttemptAllowed()) {
             throw new ApiException('Login not allowed', Http::STATUS_FORBIDDEN);
@@ -144,21 +148,20 @@ class SessionApiController extends AbstractApiController {
             return new JSONResponse(['success' => true, 'keys' => $this->keychainService->getClientKeychainArray()], Http::STATUS_OK);
         } catch(\Throwable $e) {
             $this->session->delete();
-            throw new ApiException('Authorized session required', Http::STATUS_PRECONDITION_FAILED, $e);
+            throw new ApiException('Reading user keychain failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
         }
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     * @UserRateThrottle(limit=3, period=60)
-     *
      * @param $provider
      *
      * @return JSONResponse
      * @throws ReflectionException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 3, period: 60)]
     public function requestToken($provider): JSONResponse {
         [$result, $data] = $this->tokenHelper->triggerProvider($provider);
 
@@ -166,20 +169,23 @@ class SessionApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
+     * @return JSONResponse
      */
-    public function keepAlive() {
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    public function keepAlive(): JSONResponse {
         return new JSONResponse(['success' => true], Http::STATUS_OK);
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
+     * @return JSONResponse
+     * @throws \OCP\DB\Exception
      */
-    public function close() {
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    public function close(): JSONResponse {
         $this->session->delete();
 
         return new JSONResponse(['success' => true], Http::STATUS_OK);
@@ -213,14 +219,14 @@ class SessionApiController extends AbstractApiController {
         if($this->challengeService->hasChallenge()) {
             if(!isset($parameters['challenge'])) {
                 $this->loginAttempts->registerFailedAttempt();
-                throw new ApiException('Password invalid', Http::STATUS_UNAUTHORIZED);
+                throw new ApiException('Passphrase invalid', Http::STATUS_UNAUTHORIZED);
             }
             try {
                 if(!$this->challengeService->validateChallenge($parameters['challenge'])) {
-                    throw new ApiException('Password verification failed');
+                    throw new ApiException('Passphrase verification failed');
                 }
             } catch(ApiException $e) {
-                if($e->getId() === 'a361c427') $this->loginAttempts->registerFailedAttempt();
+                if($e->getId() === 'ab6e13ba') $this->loginAttempts->registerFailedAttempt();
                 throw $e;
             }
         }

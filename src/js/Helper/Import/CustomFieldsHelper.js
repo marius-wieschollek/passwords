@@ -1,5 +1,5 @@
-import Localisation from '@js/Classes/Localisation';
-import Logger from "@js/Classes/Logger";
+import LoggingService from "@js/Services/LoggingService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class CustomFieldsHelper {
 
@@ -46,8 +46,8 @@ export default class CustomFieldsHelper {
      * @private
      */
     static _logConversionError(text, vars, errors) {
-        let message = Localisation.translate(text, vars);
+        let message = LocalisationService.translate(text, vars);
         errors.push(message);
-        Logger.error(message, vars);
+        LoggingService.error(message, vars);
     }
 }

@@ -10,15 +10,23 @@
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
         <div class="title" :title="folder.label"><span>{{ folder.label }}</span></div>
         <slot name="middle"/>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
-            <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
+            <i class="fa fa-ellipsis-h">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
+            </i>
+            <div class="folderActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="edit" @click="renameAction()" icon="pencil" say="Rename"/>
-                        <translate tag="li" data-item-action="move" @click="moveAction" icon="external-link" say="Move"/>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" icon="trash" say="Delete"/>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="edit" @click.prevent="renameAction()" icon="pencil" say="Rename"/>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="move" @click.prevent="moveAction" icon="external-link" say="Move"/>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="delete" @click.prevent="deleteAction()" icon="trash" say="Delete"/>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -31,12 +39,12 @@
 <script>
     import Translate from '@vc/Translate';
     import DragManager from '@js/Manager/DragManager';
-    import Localisation from "@js/Classes/Localisation";
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "vue-material-design-icons/Star.vue";
     import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -59,10 +67,10 @@
 
         computed: {
             getDate() {
-                return Localisation.formatDate(this.folder.edited);
+                return LocalisationService.formatDate(this.folder.edited);
             },
             dateTitle() {
-                return Localisation.translate('Last modified on {date}', {date: Localisation.formatDate(this.folder.edited, 'long')});
+                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.folder.edited)});
             },
             className() {
                 let classNames = 'row folder';
@@ -85,8 +93,13 @@
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {

@@ -7,9 +7,9 @@
 </template>
 
 <script>
-    import API from '@js/Helper/api';
-    import Localisation from '@js/Classes/Localisation';
     import Icon from "@vc/Icon";
+    import API from '@js/Helper/api';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {Icon},
@@ -48,11 +48,11 @@
         },
         computed: {
             getText() {
-                return this.text ? Localisation.translate(this.text, this.getVariables):'';
+                return this.text ? LocalisationService.translate(this.text, this.getVariables):'';
             },
             getTitle() {
                 let title = this.title ? this.title:'Go to {href}';
-                return Localisation.translate(title, this.getVariables);
+                return LocalisationService.translate(title, this.getVariables);
             },
             getVariables() {
                 this.variables.href = this.getHref;

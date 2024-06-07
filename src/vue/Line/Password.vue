@@ -24,53 +24,79 @@
         </router-link>
         <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
-        <div class="more" @click="toggleMenu($event)">
-            <i class="fa fa-ellipsis-h"></i>
-            <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }">
+        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
+            <i class="fa fa-ellipsis-h" :aria-label="t('More')" :title="t('More')">
+                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
+            </i>
+            <div class="passwordActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
                 <slot name="menu">
                     <ul>
                         <slot name="menu-top"/>
-                        <translate tag="li" data-item-action="details" @click="detailsAction()" say="Details">
-                            <information-variant-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="share" @click="detailsAction('share')" say="Share">
-                            <share-variant-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="edit" @click="editAction()" v-if="password.editable" say="Edit">
-                            <pencil-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="edit-new" @click="cloneAction()" v-if="password.editable" say="Edit as new">
-                            <content-copy-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="move" @click="moveAction" say="Move">
-                            <folder-move-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('password')" say="Copy Password">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="showCopyOptions" @click="copyAction('username')" say="Copy User">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="password.url" @click="copyAction('url')" say="Copy Url">
-                            <clipboard-arrow-left-outline-icon slot="icon"/>
-                        </translate>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="details" @click.prevent="detailsAction()" say="Details">
+                                <information-variant-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="share" @click.prevent="detailsAction('share')" say="Share">
+                                <share-variant-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.editable">
+                            <translate tag="a" href="#" data-item-action="edit" @click.prevent="editAction()" say="Edit">
+                                <pencil-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.editable">
+                            <translate tag="a" href="#" data-item-action="edit-new" @click.prevent="cloneAction()" say="Edit as new">
+                                <content-copy-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="move" @click.prevent="moveAction" say="Move">
+                                <folder-move-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="showCopyOptions">
+                            <translate tag="a" href="#" @click.prevent="copyAction('password')" say="Copy Password">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="showCopyOptions">
+                            <translate tag="a" href="#" @click.prevent="copyAction('username')" say="Copy User">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
                         <li v-if="password.url">
-                            <translate tag="a" data-item-action="open-url" :href="password.url" target="_blank" say="Open Url">
+                            <translate tag="a" href="#" @click.prevent="copyAction('url')" say="Copy Url">
+                                <clipboard-arrow-left-outline-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="password.url">
+                            <translate tag="a" href="#" data-item-action="open-url" :href="password.url" target="_blank" say="Open Url">
                                 <open-in-new-icon slot="icon"/>
                             </translate>
                         </li>
-                        <translate tag="li" v-if="password.url" @click="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
-                            <lock-reset-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" @click="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
-                            <qrcode-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" v-if="isPrintEnabled" @click="printAction()" data-item-action="print" say="PasswordActionPrint">
-                            <printer-icon slot="icon"/>
-                        </translate>
-                        <translate tag="li" data-item-action="delete" @click="deleteAction()" say="Delete">
-                            <trash-can-icon slot="icon"/>
-                        </translate>
+                        <li v-if="password.url">
+                            <translate tag="a" href="#" @click.prevent="actions.openChangePasswordPage()" say="PasswordActionChangePwPage">
+                                <lock-reset-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" @click.prevent="actions.qrcode()" data-item-action="qrcode" say="PasswordActionQrcode">
+                                <qrcode-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li v-if="isPrintEnabled">
+                            <translate tag="a" href="#" @click.prevent="printAction()" data-item-action="print" say="PasswordActionPrint">
+                                <printer-icon slot="icon"/>
+                            </translate>
+                        </li>
+                        <li>
+                            <translate tag="a" href="#" data-item-action="delete" @click.prevent="deleteAction()" say="Delete">
+                                <trash-can-icon slot="icon"/>
+                            </translate>
+                        </li>
                         <slot name="menu-bottom"/>
                     </ul>
                 </slot>
@@ -82,9 +108,7 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
     import DragManager from '@js/Manager/DragManager';
-    import Localisation from "@js/Classes/Localisation";
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import Favicon from "@vc/Favicon";
@@ -107,6 +131,8 @@
     import QrcodeIcon from "@icon/Qrcode";
     import ShieldHalfFullIcon from "@icon/ShieldHalfFull";
     import LockResetIcon from "@icon/LockReset";
+    import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -162,7 +188,7 @@
                 if(this.password.status === 1) label = `Weak (${this.password.statusCode.toLowerCase().capitalize()})`;
                 if(this.password.status === 2) label = 'Breached';
 
-                return Localisation.translate(label);
+                return LocalisationService.translate(label);
             },
             securityRoute() {
                 return {name: 'Search', params: {query: btoa('hash:' + this.password.hash)}};
@@ -184,10 +210,10 @@
                 return title;
             },
             getTags() {
-                return Utility.sortApiObjectArray(this.password.tags, 'label');
+                return UtilityService.sortApiObjectArray(this.password.tags, 'label');
             },
             tagStyle() {
-                let length = Utility.objectToArray(this.password.tags).length;
+                let length = UtilityService.objectToArray(this.password.tags).length;
                 if(length) {
                     return {
                         'padding-left': (length + 18) + 'px'
@@ -197,12 +223,12 @@
                 return {};
             },
             getDate() {
-                return Localisation.formatDate(this.password.edited);
+                return LocalisationService.formatDate(this.password.edited);
             },
             dateTitle() {
-                return Localisation.translate(
+                return LocalisationService.translate(
                     'Last modified on {date}',
-                    {date: Localisation.formatDateTime(this.password.edited)}
+                    {date: LocalisationService.formatDateTime(this.password.edited)}
                 );
             },
             isVisible() {
@@ -280,7 +306,7 @@
                 } else if(action === 'details') {
                     this.clickTimeout = setTimeout(this.detailsAction, delay);
                 } else if(action === 'open-url' && this.password.url) {
-                    this.clickTimeout = setTimeout(() => {Utility.openLink(this.password.url);}, delay);
+                    this.clickTimeout = setTimeout(() => {UtilityService.openLink(this.password.url);}, delay);
                 }
             },
             copyAction(attribute, delay = 0) {
@@ -306,8 +332,13 @@
             printAction() {
                 this.actions.print();
             },
-            toggleMenu() {
-                this.showMenu = !this.showMenu;
+            toggleMenu(state = null) {
+                if(state) {
+                    this.showMenu = state === true;
+                } else {
+                    this.showMenu = !this.showMenu;
+                }
+
                 if(this.showMenu) {
                     document.addEventListener('click', this.menuEvent);
                 } else {
@@ -518,8 +549,7 @@
                 .menu {
                     li {
                         line-height : 40px;
-                        font-size   : 0.8rem;
-                        padding     : 0 20px 0 15px;
+                        font-size   : 0.9rem;
                         white-space : nowrap;
                         color       : var(--color-main-text);
                         font-weight : 300;
@@ -527,12 +557,12 @@
 
                         a {
                             color         : var(--color-main-text);
-                            margin        : 0 -20px 0 -15px;
-                            padding-left  : 15px;
+                            margin        : 0 .5rem;
                             padding-right : 0 !important;
                             opacity       : 1 !important;
                             line-height   : inherit;
                             font-weight   : 300;
+                            display       : flex;
 
                             .material-design-icon {
                                 margin-left : 0;

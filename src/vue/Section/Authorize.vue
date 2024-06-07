@@ -24,7 +24,7 @@
                            @click="requestToken()"
                            v-if="retryVisible"/>
                 <div>
-                    <field type="password" placeholder="Password" v-model="password" :disabled="loggingIn" required v-if="hasPassword"/>
+                    <field type="password" placeholder="Password" v-model="password" :disabled="loggingIn" required ref="passwordField" v-if="hasPassword"/>
                     <select v-model="providerId" :disabled="loggingIn" v-if="hasToken && providers.length > 0">
                         <option v-for="(option, id) in providers" :value="id" :title="option.description">
                             {{ option.label }}
@@ -56,12 +56,14 @@
     import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Messages from '@js/Classes/Messages';
     import SetupManager from '@js/Manager/SetupManager';
     import Application from "@js/Init/Application";
     import {emit} from '@nextcloud/event-bus';
     import WebAuthnAuthorizeAction from "@js/Actions/WebAuthn/WebAuthnAuthorizeAction";
     import WebAuthnDisableAction from "@js/Actions/WebAuthn/WebAuthnDisableAction";
+    import CheckPassphrase from "@js/Actions/Encryption/CheckPassphrase";
+    import LoggingService from "@js/Services/LoggingService";
+    import MessageService from "@js/Services/MessageService";
 
     export default {
         components: {
@@ -103,6 +105,9 @@
         },
 
         created() {
+            document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
+            document.body.classList.add('pw-auth-visible');
+
             API.requestSession()
                .then((d) => {
                    emit('toggle-navigation', {open: false});
@@ -138,19 +143,32 @@
                        API.openSession([])
                           .then(() => { this.goToTarget(); })
                           .catch((d) => { this.loginError(d); });
-                   } else if(this.webAuthnAction.isAvailable()) {
-                       this.webAuthnAction.run()
-                           .then((password) => {
-                               if(password) {
-                                   this.password = password;
+                   } else{
+                       document.body.classList.remove('pw-auth-skipped', 'pw-auth-passed');
+                       document.body.classList.add('pw-auth-visible');
 
-                                   if(!this.hasToken) {
-                                       this.submitLogin(null, true);
+                       if(this.webAuthnAction.isAvailable()) {
+                           this.webAuthnAction.run()
+                               .then((password) => {
+                                   if(password) {
+                                       this.password = password;
+
+                                       if(!this.hasToken) {
+                                           this.submitLogin(null, true);
+                                       }
                                    }
-                               }
-                           });
+                               });
+                       }
+
+                       this.$nextTick(() => {
+                           this.$refs.passwordField.$el.focus()
+                       })
                    }
-               });
+               })
+                .catch((e) => {
+                    this.hasError = true;
+                    this.errorMessage = e.message;
+                });
         },
 
         computed: {
@@ -189,7 +207,12 @@
 
                 this.$nextTick(() => {
                     API.openSession(data)
-                       .then(() => { this.goToTarget(); })
+                       .then(() => {
+                           let check = new CheckPassphrase();
+                           check.run(data.password)
+                                .catch(LoggingService.catch)
+                           this.goToTarget();
+                       })
                        .catch((d) => { this.loginError(d, isWebAuthn); });
                 });
             },
@@ -242,7 +265,7 @@
                        setTimeout(() => {this.retryClass = '';}, 1500);
                    })
                    .catch(() => {
-                       Messages.alert(
+                       MessageService.alert(
                            'You may have requested too many tokens. Please try again later.',
                            'Token request failed'
                        );

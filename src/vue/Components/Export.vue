@@ -23,7 +23,7 @@
                        type="password"
                        id="passwords-export-encrypt"
                        minlength="10"
-                       :title="backupPasswordTitle"
+                       :title="t('(Optional) Encrypts the backup')"
                        v-model="options.password"
                        :disabled="exporting"
                        autocomplete="new-password"
@@ -146,10 +146,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Utility from '@js/Classes/Utility';
-    import Messages from '@js/Classes/Messages';
-    import Localisation from '@js/Classes/Localisation';
-    import DAS from "@js/Services/DeferredActivationService";
+    import MessageService from "@js/Services/MessageService";
+    import UtilityService from "@js/Services/UtilityService";
+    import LocalisationService from "@js/Services/LocalisationService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -204,9 +204,6 @@
             csvFieldOptions() {
                 return this.fieldMap[this.options.db];
             },
-            backupPasswordTitle() {
-                return Localisation.translate('(Optional) Encrypts the backup');
-            },
             csvMappedFieldsSize() {
                 return this.options.mapping.length + 1;
             }
@@ -236,20 +233,20 @@
                         .catch((e) => {
                             this.exporting = false;
                             console.error(e);
-                            Messages.alert(e.message, 'Export error');
+                            MessageService.alert(e.message, 'Export error');
                         })
                         .then((d) => {
                             if(d) {
                                 this.data = d;
                                 this.buttonText = 'Download {format}';
                             } else if(this.exporting) {
-                                Messages.alert('There is no data to export', 'Nothing to export');
+                                MessageService.alert('There is no data to export', 'Nothing to export');
                             }
                             this.exporting = false;
                         });
                 } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
+                    LoggingService.error(e);
+                    MessageService.alert(['Unable to load {module}', {module: 'ExportManager'}], 'Network error');
                 }
             },
             setExportModel($e) {
@@ -273,7 +270,7 @@
 
                 if(models.length > 1 && fileExt === 'csv') fileExt = 'zip';
                 for(let i = 0; i < models.length; i++) {
-                    exports.push(Localisation.translate(models[i].capitalize()));
+                    exports.push(LocalisationService.translate(models[i].capitalize()));
                 }
 
                 return `${exports.join('+')}_${date.toLocaleDateString()}.${fileExt}`;
@@ -285,7 +282,7 @@
                 if(this.format === 'xlsx') mime = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
 
                 let filename = this.generateFilename(this.models);
-                Utility.createDownload(this.data, filename, mime);
+                UtilityService.createDownload(this.data, filename, mime);
             },
             csvFieldMapping(event, id) {
                 let mapping = this.options.mapping.clone();

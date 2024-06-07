@@ -59,7 +59,7 @@ Passwords offers the option of a master password for additional safety. (In comb
 The app also supports most 2FA authentication methods offered by Nextcloud.
 
 ## Apps
-* [Official Firefox Add-On](https://addons.mozilla.org/firefox/addon/nextcloud-passwords?src=external-readme)
+* [Official Firefox Add-On](https://addons.mozilla.org/firefox/addon/nextcloud-passwords?utm_source=app&utm_medium=readme)
 * [Official Chrome Extension](https://chrome.google.com/webstore/detail/nextcloud-passwords/mhajlicjhgoofheldnmollgbgjheenbi)
 * [Official Microsoft Edge Extension](https://microsoftedge.microsoft.com/addons/detail/cjmlcljdpphgdfpkngjcmeepdpcgpffk)
 * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)

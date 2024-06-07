@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\ApiObjects;
@@ -16,6 +20,7 @@ use OCA\Passwords\Services\Object\AbstractRevisionService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class AbstractObjectHelper
@@ -33,21 +38,6 @@ abstract class AbstractObjectHelper {
     const OPERATOR_GREATER           = 'gt';
     const OPERATOR_EQUALS_OR_LESS    = 'le';
     const OPERATOR_EQUALS_OR_GREATER = 'ge';
-
-    /**
-     * @var IAppContainer
-     */
-    protected IAppContainer $container;
-
-    /**
-     * @var AbstractRevisionService
-     */
-    protected AbstractRevisionService $revisionService;
-
-    /**
-     * @var EncryptionService
-     */
-    protected EncryptionService $encryptionService;
 
     /**
      * @var array
@@ -70,13 +60,10 @@ abstract class AbstractObjectHelper {
      * @param AbstractRevisionService $revisionService
      */
     public function __construct(
-        IAppContainer $container,
-        EncryptionService $encryptionService,
-        AbstractRevisionService $revisionService
+        protected ContainerInterface $container,
+        protected EncryptionService $encryptionService,
+        protected AbstractRevisionService $revisionService
     ) {
-        $this->container         = $container;
-        $this->revisionService   = $revisionService;
-        $this->encryptionService = $encryptionService;
     }
 
     /**

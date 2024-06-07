@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2021 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -13,12 +13,16 @@ namespace OCA\Passwords\Command;
 
 use Exception;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
-use OCA\Passwords\Helper\SecurityCheck\BigLocalDbSecurityCheckHelper;
+use OCA\Passwords\Provider\SecurityCheck\AbstractSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigDbPlusHibpSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\BigLocalDbSecurityCheckProvider;
+use OCA\Passwords\Provider\SecurityCheck\SmallLocalDbSecurityCheckProvider;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\HelperService;
 use OCP\Files\NotFoundException;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,11 +45,10 @@ class ProcessPwnedPasswordsList extends Command {
      */
     protected function configure(): void {
         $this->setName('passwords:pwned-list:process')
-             ->setDescription('Convert the haveibeenpwned passwords file for the passwords app')
-             ->addArgument('file', InputArgument::REQUIRED, 'The path to the file')
-             ->addOption('size', 's', InputOption::VALUE_REQUIRED, 'Amount of passwords to process in millions', '25')
-             ->addOption('mode', 'm', InputOption::VALUE_OPTIONAL, 'Mode for packing the passwords (auto|json|gzip)', 'auto')
-             ->addOption('import', 'i', InputOption::VALUE_NONE, 'Import the passwords onto the local system');
+             ->setDescription('Convert the haveibeenpwned pwned passwords list for the passwords app')
+             ->addArgument('file', InputArgument::OPTIONAL, 'The path to pwned passwords hash file', 'pwnedpasswords.txt')
+             ->addOption('size', 's', InputOption::VALUE_REQUIRED, 'Amount of hashes to import in millions', '25')
+             ->addOption('mode', 'm', InputOption::VALUE_REQUIRED, 'Mode for packing the hashes (file|json|gzip|import). Use import to import directly, otherwise a ZIP file will be created', 'import');
     }
 
     /**
@@ -58,17 +61,14 @@ class ProcessPwnedPasswordsList extends Command {
      */
     protected function execute(InputInterface $input, OutputInterface $output): int {
         ini_set('memory_limit', -1);
-        [$file, $size, $mode, $import] = $this->getSettings($input, $output);
+        [$file, $size, $mode] = $this->getSettings($input, $output);
 
-        $hashes = $this->readHashes($file, $size);
-        $file   = $this->writeZipFile($size, $mode, $hashes, $import);
-
-        if($import) {
-            $output->writeln('Password database updated');
-            $this->config->setAppValue(AbstractSecurityCheckHelper::CONFIG_DB_TYPE, BigLocalDbSecurityCheckHelper::PASSWORD_DB);
-            $this->config->setAppValue(BigLocalDbSecurityCheckHelper::CONFIG_DB_VERSION, BigLocalDbSecurityCheckHelper::PASSWORD_VERSION);
+        $hashes = $this->readHashes($file, $size, $output);
+        if($mode === 'import') {
+            $this->importHashes($hashes, $output);
+        } else {
+            $this->writeZipFile($size, $mode, $hashes, $output);
         }
-        $output->writeln("Created {$file}");
 
         return 0;
     }
@@ -82,10 +82,9 @@ class ProcessPwnedPasswordsList extends Command {
      * @throws Exception
      */
     protected function getSettings(InputInterface $input, OutputInterface $output): array {
-        $file   = realpath($input->getArgument('file'));
-        $size   = intval($input->getOption('size'));
-        $mode   = $input->getOption('mode');
-        $import = $input->getOption('import');
+        $file = realpath($input->getArgument('file'));
+        $size = intval($input->getOption('size'));
+        $mode = $input->getOption('mode');
 
         if(!is_file($file) || !is_readable($file)) {
             throw new NotFoundException("File not found or not readable: {$file}");
@@ -93,71 +92,50 @@ class ProcessPwnedPasswordsList extends Command {
         if($size < 1) {
             throw new Exception("Invalid size specified: {$size}");
         }
-        if(!in_array($mode, ['auto', 'json', 'gzip'])) {
+        if(!in_array($mode, ['file', 'json', 'gzip', 'import'])) {
             throw new Exception("Invalid mode specified: {$mode}");
         }
         if($mode === 'gzip' && !extension_loaded('zlib')) {
             throw new Exception("Mode gzip not supported. Install zlib extension.");
         }
-        if($mode === 'auto') {
+        if($mode === 'file') {
             $mode = extension_loaded('zlib') ? 'gzip':'json';
         }
 
-        $output->writeln('Processing'.($import ? ' and importing':'')." {$size} million entries from {$file} in {$mode} mode.");
+        $output->writeln(($mode === 'import' ? 'Importing':'Processing')." {$size} million entries from {$file} in {$mode} mode.");
 
-        return [$file, $size, $mode, $import];
+        return [$file, $size, $mode];
     }
 
     /**
-     * @param mixed $file
-     * @param mixed $size
+     * @param mixed           $file
+     * @param mixed           $size
+     * @param OutputInterface $output
      *
      * @return array
      * @throws Exception
      */
-    protected function readHashes(mixed $file, mixed $size): array {
-        $handle = fopen($file, 'r');
-        if(!$handle) {
-            throw new Exception("Could not open file: {$file}");
-        }
+    protected function readHashes(mixed $file, mixed $size, OutputInterface $output): array {
+        $hashPrevalence = $this->getHashPrevalence($file, $output);
 
-        $order  = null;
-        $hashes = [];
-        for($i = 0; $i < $size * 1000000; $i++) {
-            $line = fgets($handle);
-            if(!$line) {
-                throw new Exception("File contains invalid lines");
-            }
+        [$minPrevalence, $minPrevalenceAmount] = $this->getMinimumPrevalence($hashPrevalence, $size);
+        unset($hashPrevalence);
 
-            [$sha1, $count] = explode(':', $line);
-            if(!$count || intval($count) > $order && $order !== null) {
-                throw new Exception('File appears to be unordered. Please provide hashes ordered by count.');
-            }
-            $order = intval($count);
-
-            if(strlen($sha1) !== 40) {
-                throw new Exception('Invalid SHA-1 hash encountered.');
-            }
-
-            $sha1  = strtolower($sha1);
-            $start = substr($sha1, 0, AbstractSecurityCheckHelper::HASH_FILE_KEY_LENGTH);
-            if(!isset($hashes[ $start ])) $hashes[ $start ] = [];
-            $hashes[ $start ][] = $sha1;
-        }
-
-        return $hashes;
+        return $this->getHashesByPrevalence($file, $minPrevalence, $minPrevalenceAmount, $size, $output);
     }
 
     /**
-     * @param mixed $size
-     * @param mixed $mode
-     * @param array $hashes
-     * @param mixed $import
+     * @param mixed           $size
+     * @param mixed           $mode
+     * @param array           $hashes
+     * @param OutputInterface $output
      *
-     * @return string
+     * @return void
+     * @throws BreachedPasswordsZipAccessException
      */
-    protected function writeZipFile(int $size, string $mode, array $hashes, bool $import): string {
-        $fileName = "{$size}-million-v".BigLocalDbSecurityCheckHelper::PASSWORD_VERSION."-{$mode}.zip";
+    protected function writeZipFile(int $size, string $mode, array $hashes, OutputInterface $output): void {
+        $output->writeln("Creating export file…");
+        $fileName = "{$size}m-v".BigLocalDbSecurityCheckProvider::PASSWORD_VERSION."-{$mode}.zip";
         if(is_file($fileName)) {
             unlink($fileName);
         }
@@ -168,23 +146,180 @@ class ProcessPwnedPasswordsList extends Command {
             throw new BreachedPasswordsZipAccessException($result);
         }
 
-        if($import) {
-            $this->fileCacheService->clearCache();
-        }
+        $gzip        = $mode === 'gzip';
+        $fileExt     = $gzip ? 'json.gz':'json';
+        $progressBar = new ProgressBar($output, count($hashes));
+        $progressBar->start();
 
         foreach($hashes as $key => $values) {
-            $file = $mode ? "{$key}.json.gz":"{$key}.json";
+            $file = "{$key}.{$fileExt}";
             $data = json_encode(array_unique($values));
 
-            if($mode === 'gzip') $data = gzcompress($data);
+            if($gzip) $data = gzcompress($data);
             $zip->addFromString($file, $data);
-
-            if($import) {
-                $this->fileCacheService->putFile($file, $data);
-            }
+            $progressBar->advance();
         }
         $zip->close();
+        $progressBar->finish();
+        $output->writeln('');
 
-        return $fileName;
+        $output->writeln("Created {$fileName}");
+    }
+
+    /**
+     * @param array           $hashes
+     * @param OutputInterface $output
+     *
+     * @return void
+     */
+    protected function importHashes(array $hashes, OutputInterface $output): void {
+        $output->writeln("Importing hashes…");
+        $this->fileCacheService->clearCache();
+
+        $gzip    = extension_loaded('zlib');
+        $fileExt = $gzip ? 'json.gz':'json';
+
+        $progressBar = new ProgressBar($output, count($hashes));
+        $progressBar->start();
+
+        foreach($hashes as $key => $values) {
+            $data = json_encode(array_unique($values));
+            if($gzip) $data = gzcompress($data);
+            $this->fileCacheService->putFile("{$key}.{$fileExt}", $data);
+            $progressBar->advance();
+        }
+        $progressBar->finish();
+        $output->writeln('');
+
+        $installed = $this->config->getAppValue('service/security', HelperService::SECURITY_HIBP);
+        if($installed === HelperService::SECURITY_BIGDB_HIBP) {
+            $this->config->setAppValue(AbstractSecurityCheckProvider::CONFIG_DB_TYPE, BigDbPlusHibpSecurityCheckProvider::PASSWORD_DB);
+        } else if($installed === HelperService::SECURITY_BIG_LOCAL) {
+            $this->config->setAppValue(AbstractSecurityCheckProvider::CONFIG_DB_TYPE, BigLocalDbSecurityCheckProvider::PASSWORD_DB);
+        } else if($installed === HelperService::SECURITY_SMALL_LOCAL) {
+            $this->config->setAppValue(AbstractSecurityCheckProvider::CONFIG_DB_TYPE, SmallLocalDbSecurityCheckProvider::PASSWORD_DB);
+        }
+
+        $this->config->setAppValue(BigLocalDbSecurityCheckProvider::CONFIG_DB_VERSION, BigLocalDbSecurityCheckProvider::PASSWORD_VERSION);
+        $output->writeln('Password database updated to v'.BigLocalDbSecurityCheckProvider::PASSWORD_VERSION);
+    }
+
+    /**
+     * @param mixed    $file
+     * @param callable $lineCallback
+     *
+     * @return void
+     * @throws Exception
+     */
+    protected function readHashFile(mixed $file, callable $lineCallback): void {
+        $handle = fopen($file, 'r');
+        if(!$handle) {
+            throw new Exception("Could not open file: {$file}");
+        }
+
+        while(($line = fgets($handle, 4096)) !== false) {
+            if(empty($line)) {
+                throw new Exception("File contains invalid lines");
+            }
+
+            [$sha1, $count] = explode(':', $line);
+            $lineCallback($sha1, intval($count));
+        }
+        fclose($handle);
+    }
+
+    /**
+     * @param array $occurrences
+     * @param mixed $size
+     *
+     * @return array
+     */
+    protected function getMinimumPrevalence(array $occurrences, mixed $size): array {
+        $minOccurrences = 0;
+
+        $keys = array_keys($occurrences);
+        rsort($keys, SORT_NUMERIC);
+        $sizeLeft = $size * 1000000;
+        foreach($keys as $key) {
+            if($occurrences[ $key ] >= $sizeLeft) {
+                return [$key, $sizeLeft];
+            }
+
+            $minOccurrences = $key;
+            $sizeLeft       -= $occurrences[ $key ];
+        }
+
+        return [$minOccurrences, $occurrences[ $minOccurrences ]];
+    }
+
+    /**
+     * @param string          $file
+     * @param OutputInterface $output
+     *
+     * @return array
+     * @throws Exception
+     */
+    protected function getHashPrevalence(string $file, OutputInterface $output): array {
+        $output->writeln('Reading prevalence…');
+        $progressBar = new ProgressBar($output, 4096);
+        $progressBar->start();
+        $progress = 'fff';
+
+        $hashPrevalence = [];
+
+        $this->readHashFile($file, function ($sha1, $count) use (&$hashPrevalence, &$progress, $progressBar) {
+            if(isset($hashPrevalence[ $count ])) {
+                $hashPrevalence[ $count ]++;
+            } else {
+                $hashPrevalence[ $count ] = 1;
+            }
+
+            if(!str_starts_with($sha1, $progress)) {
+                $progress = substr($sha1, 0, 3);
+                $progressBar->advance();
+            }
+        });
+
+        $progressBar->finish();
+        $output->writeln('');
+
+        return $hashPrevalence;
+    }
+
+    /**
+     * @param string $file                The file to read the hashes from
+     * @param int    $minPrevalence       The minimum prevalence to include a hash
+     * @param int    $minPrevalenceAmount The max amount of hashes with the $minPrevalence to be included
+     *
+     * @return string[]
+     * @throws Exception
+     */
+    protected function getHashesByPrevalence(string $file, int $minPrevalence, int $minPrevalenceAmount, int $size, OutputInterface $output): array {
+        $output->writeln('Reading hashes…');
+        $progressBar = new ProgressBar($output, $size * 1000000);
+        $progressBar->start();
+
+        $hashes = [];
+        $this->readHashFile($file, function ($sha1, $count) use (&$hashes, &$minPrevalenceAmount, $minPrevalence, $progressBar) {
+            if($count > $minPrevalence || ($count === $minPrevalence && $minPrevalenceAmount > 0)) {
+                if(strlen($sha1) !== 40) {
+                    throw new Exception('Invalid SHA-1 hash encountered.');
+                }
+
+                if($count === $minPrevalence) {
+                    $minPrevalenceAmount--;
+                }
+
+                $sha1  = strtolower($sha1);
+                $start = substr($sha1, 0, AbstractSecurityCheckProvider::HASH_FILE_KEY_LENGTH);
+                if(!isset($hashes[ $start ])) $hashes[ $start ] = [];
+                $hashes[ $start ][] = $sha1;
+                $progressBar->advance();
+            }
+        });
+        $progressBar->finish();
+        $output->writeln('');
+
+        return $hashes;
     }
 }

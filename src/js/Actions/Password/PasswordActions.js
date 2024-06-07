@@ -11,12 +11,12 @@
 import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
 import Vue from "vue";
-import Utility from "@js/Classes/Utility";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
-import Localisation from "@js/Classes/Localisation";
-import Logger from "@js/Classes/Logger";
 import Events from "@js/Classes/Events";
 import ToastService from "@js/Services/ToastService";
+import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
+import LoggingService from "@js/Services/LoggingService";
 
 export default class PasswordActions {
     get password() {
@@ -34,7 +34,7 @@ export default class PasswordActions {
 
     print() {
         let printer = new PrintPasswordAction(this._password);
-        printer.print().catch(Logger.exception);
+        printer.print().catch(LoggingService.exception);
     }
 
     async favorite(status = null) {
@@ -49,7 +49,7 @@ export default class PasswordActions {
             await PasswordManager.updatePassword(this._password);
         } catch(e) {
             this._password.favorite = oldStatus;
-            Logger.error(e);
+            LoggingService.error(e);
         }
 
         return this._password;
@@ -81,14 +81,14 @@ export default class PasswordActions {
         let PasswordQrCode = await import(/* webpackChunkName: "QrCode" */ '@vue/Dialog/QrCode.vue'),
             PwQrCodeDialog = Vue.extend(PasswordQrCode.default);
 
-        new PwQrCodeDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
+        new PwQrCodeDialog({propsData: {password: this._password}}).$mount(UtilityService.popupContainer());
     }
 
     async openChangePasswordPage() {
         let ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue'),
             ChangePasswordPageDialog = Vue.extend(ChangePasswordPage.default);
 
-        new ChangePasswordPageDialog({propsData: {password: this._password}}).$mount(Utility.popupContainer());
+        new ChangePasswordPageDialog({propsData: {password: this._password}}).$mount(UtilityService.popupContainer());
     }
 
     clipboard(attribute) {
@@ -96,9 +96,9 @@ export default class PasswordActions {
         if(!this._password.hasOwnProperty(attribute) || this._password[attribute].length === 0) {
             message = 'ClipboardCopyEmpty';
         } else {
-            if(Utility.copyToClipboard(this._password[attribute])) message = '{element} was copied to clipboard';
+            if(UtilityService.copyToClipboard(this._password[attribute])) message = '{element} was copied to clipboard';
         }
 
-        ToastService.info([message, {element: Localisation.translate(attribute.capitalize())}]);
+        ToastService.info([message, {element: LocalisationService.translate(attribute.capitalize())}]);
     }
 }

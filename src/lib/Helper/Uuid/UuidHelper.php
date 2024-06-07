@@ -9,6 +9,7 @@ namespace OCA\Passwords\Helper\Uuid;
 
 use Exception;
 use OCA\Passwords\Services\LoggingService;
+use Random\Randomizer;
 
 /**
  * Class UuidHelper
@@ -18,17 +19,12 @@ use OCA\Passwords\Services\LoggingService;
 class UuidHelper {
 
     /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
      * UuidHelper constructor.
      *
      * @param LoggingService $logger
+     * @param Randomizer     $randomizer
      */
-    public function __construct(LoggingService $logger) {
-        $this->logger = $logger;
+    public function __construct(protected LoggingService $logger, protected Randomizer $randomizer) {
     }
 
     /**
@@ -51,11 +47,11 @@ class UuidHelper {
      */
     protected function generateUuidV4(): string {
         return implode('-', [
-            bin2hex(random_bytes(4)),
-            bin2hex(random_bytes(2)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x0F) | 0x40)).bin2hex(random_bytes(1)),
-            bin2hex(chr((ord(random_bytes(1)) & 0x3F) | 0x80)).bin2hex(random_bytes(1)),
-            bin2hex(random_bytes(6))
+            bin2hex($this->randomizer->getBytes(4)),
+            bin2hex($this->randomizer->getBytes(2)),
+            bin2hex(chr((ord($this->randomizer->getBytes(1)) & 0x0F) | 0x40)).bin2hex($this->randomizer->getBytes(1)),
+            bin2hex(chr((ord($this->randomizer->getBytes(1)) & 0x3F) | 0x80)).bin2hex($this->randomizer->getBytes(1)),
+            bin2hex($this->randomizer->getBytes(6))
         ]);
     }
 

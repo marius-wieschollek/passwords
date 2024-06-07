@@ -237,10 +237,10 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Messages from '@js/Classes/Messages';
-    import Localisation from '@js/Classes/Localisation';
-    import DAS from '@js/Services/DeferredActivationService';
     import CustomCsvHelp from '@vue/Import/CustomCsvHelp';
+    import MessageService from "@js/Services/MessageService";
+    import LoggingService from "@js/Services/LoggingService";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -299,7 +299,7 @@
                 return data.length >= this.previewLine ? data[this.previewLine - 1]:data[data.length - 1];
             },
             backupPasswordTitle() {
-                return Localisation.translate('For encrypted backups');
+                return LocalisationService.translate('For encrypted backups');
             }
         },
 
@@ -322,7 +322,7 @@
                             this.importing = false;
                             this.progress.style = 'error';
                             this.progress.status = 'Import failed';
-                            Messages.alert(e.message, 'Import error');
+                            MessageService.alert(e.message, 'Import error');
                         })
                         .then((errors = []) => {
                             this.importing = false;
@@ -332,15 +332,14 @@
                             } else if(errors.length) {
                                 this.progress.style = 'warn';
                                 this.progress.status = 'Import partially failed';
-                                let message = Localisation.translate('Some objects had errors:')
+                                let message = LocalisationService.translate('Some objects had errors:')
                                               + ' ' + errors.join(' ') + ' ' +
-                                              Localisation.translate(
-                                                  'More information can be found in the log. (Press F12)');
-                                Messages.alert(message, 'Import error');
+                                              LocalisationService.translate('More information can be found in the log. (Press F12)');
+                                MessageService.alert(message, 'Import error');
                             }
                         });
                 } catch(e) {
-                    Messages.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
+                    MessageService.alert(['Unable to load {module}', {module: 'ImportManager'}], 'Network error');
                 }
             },
             processFile(event) {
@@ -364,8 +363,8 @@
                 try {
                     Parser = await import(/* webpackChunkName: "CsvHero" */ 'csv-hero');
                 } catch(e) {
-                    console.error(e);
-                    Messages.alert(['Unable to load {module}', {module: 'CsvHero'}], 'Network error');
+                    LoggingService.error(e);
+                    MessageService.alert(['Unable to load {module}', {module: 'CsvHero'}], 'Network error');
                 }
 
                 try {
@@ -399,10 +398,10 @@
                     let errors = [];
                     for(let i = 0; i < result.errors.length; i++) {
                         let error   = result.errors[i],
-                            message = Localisation.translate(error.message);
+                            message = LocalisationService.translate(error.message);
 
                         errors.push(
-                            Localisation.translate(
+                            LocalisationService.translate(
                                 '{message} in line {line} character {character}.',
                                 {
                                     message,
@@ -411,8 +410,8 @@
                                 })
                         );
                     }
-                    console.error(result.errors);
-                    Messages.alert(
+                    LoggingService.error(result.errors);
+                    MessageService.alert(
                         ['The file could not be parsed: {errors}', {errors: errors.join(' ')}],
                         'Import error'
                     );

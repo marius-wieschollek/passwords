@@ -1,10 +1,11 @@
 import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
-import Utility from '@js/Classes/Utility';
-import Messages from '@js/Classes/Messages';
+import ToastService from "@js/Services/ToastService";
 import FolderManager from "@js/Manager/FolderManager";
-import Logger from "@js/Classes/Logger";
+import MessageService from "@js/Services/MessageService";
+import UtilityService from "@js/Services/UtilityService";
+import LoggingService from "@js/Services/LoggingService";
 
 /**
  *
@@ -36,7 +37,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(UtilityService.popupContainer());
         });
     }
 
@@ -49,7 +50,7 @@ class PasswordManager {
         return new Promise((resolve, reject) => {
             API.createPassword(password)
                .then(async (data) => {
-                   Messages.notification('Password created');
+                   ToastService.success('Password created');
 
                    if(password.hasOwnProperty('tags')) {
                        let model = await API.showPassword(data.id, '+tags');
@@ -57,13 +58,16 @@ class PasswordManager {
                    }
 
                    password.id = data.id;
+                   password._encrypted = password.cseKey?.length > 0;
+                   password.cseKey = data.cseKey;
+                   password.cseType = data.cseType;
                    password.status = 3;
                    password.statusCode = 'NOT_CHECKED';
                    password.editable = true;
                    password.revision = data.revision;
-                   password.edited = password.created = password.updated = Utility.getTimestamp();
+                   password.edited = password.created = password.updated = UtilityService.getTimestamp();
                    if(!password.label) API._generatePasswordTitle(password);
-                   password = API._processPassword(password);
+                   password = await API._processPassword(password);
                    Events.fire('password.created', password);
                    API.showPassword(password.id)
                       .then((data) => {
@@ -73,8 +77,8 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
-                   Messages.notification('Creating password failed');
+                   LoggingService.error(e);
+                   ToastService.error('Creating password failed');
                    reject(password);
                });
         });
@@ -92,13 +96,13 @@ class PasswordManager {
                 password.tags = tagData.tags;
             }
 
-            let propsData      = {properties: Utility.cloneObject(password), title: 'Edit password'},
+            let propsData      = {properties: UtilityService.cloneObject(password), title: 'Edit password'},
                 PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default),
-                DialogWindow   = new PwCreateDialog({propsData}).$mount(Utility.popupContainer());
+                DialogWindow   = new PwCreateDialog({propsData}).$mount(UtilityService.popupContainer());
 
             DialogWindow._success = (p) => {
-                p = Utility.mergeObject(password, p);
+                p = UtilityService.mergeObject(password, p);
                 if(!p.label) API._generatePasswordTitle(p);
                 if(password.password !== p.password) {
                     p.edited = new Date();
@@ -114,7 +118,7 @@ class PasswordManager {
                        if(typeof p.customFields === 'string') p.customFields = JSON.parse(p.customFields);
 
                        Events.fire('password.updated', p);
-                       Messages.notification('Password saved');
+                       ToastService.success('Password saved');
                        API.showPassword(p.id)
                           .then((data) => {
                               p.status = data.status;
@@ -123,8 +127,8 @@ class PasswordManager {
                        resolve(p);
                    })
                    .catch((e) => {
-                       Logger.error(e);
-                       Messages.notification('Saving password failed');
+                       LoggingService.error(e);
+                       ToastService.error('Saving password failed');
                        reject(password);
                    });
             };
@@ -139,7 +143,7 @@ class PasswordManager {
      */
     clonePassword(password) {
         return new Promise(async (resolve, reject) => {
-            let properties = Utility.cloneObject(password);
+            let properties = UtilityService.cloneObject(password);
             properties.id = null;
             properties.status = null;
             properties.statusCode = null;
@@ -169,7 +173,7 @@ class PasswordManager {
             let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
                 PwCreateDialog = Vue.extend(PasswordDialog.default);
 
-            new PwCreateDialog({propsData: {properties, _success}}).$mount(Utility.popupContainer());
+            new PwCreateDialog({propsData: {properties, _success}}).$mount(UtilityService.popupContainer());
             PwCreateDialog._fail = reject;
         });
     }
@@ -209,12 +213,12 @@ class PasswordManager {
                    password.revision = d.revision;
                    password.updated = new Date();
                    Events.fire('password.updated', password);
-                   Messages.notification('Password moved');
+                   ToastService.info('Password moved');
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
-                   Messages.notification('Moving password failed');
+                   LoggingService.error(e);
+                   ToastService.error('Moving password failed');
                    password.folder = originalFolder;
                    reject(password);
                });
@@ -236,7 +240,7 @@ class PasswordManager {
                    resolve(password);
                })
                .catch((e) => {
-                   Logger.error(e);
+                   LoggingService.error(e);
                    reject(password);
                });
         });
@@ -258,7 +262,7 @@ class PasswordManager {
                        password.revision = d.revision;
                        if(password.hidden) this.deletePassword(password, false);
                        Events.fire('password.deleted', password);
-                       Messages.notification('Password deleted');
+                       ToastService.info('Password deleted');
                        resolve(password);
                    })
                    .catch((e) => {
@@ -269,12 +273,12 @@ class PasswordManager {
                            Events.fire('password.deleted', password);
                            resolve(password);
                        } else {
-                           Messages.notification('Deleting password failed');
+                           ToastService.error('Deleting password failed');
                            reject(password);
                        }
                    });
             } else {
-                Messages.confirm('Do you want to delete the password', 'Delete password')
+                MessageService.confirm('Do you want to delete the password', 'Delete password')
                         .then(() => { this.deletePassword(password, false); })
                         .catch(() => {reject(password);});
             }
@@ -294,11 +298,11 @@ class PasswordManager {
                        password.trashed = false;
                        password.revision = d.revision;
                        Events.fire('password.restored', password);
-                       Messages.notification('Password restored');
+                       ToastService.info('Password restored');
                        resolve(password);
                    })
                    .catch(() => {
-                       Messages.notification('Restoring password failed');
+                       ToastService.error('Restoring password failed');
                        reject(password);
                    });
             } else {
@@ -321,20 +325,20 @@ class PasswordManager {
             if(!confirm) {
                 API.restorePassword(password.id, revision.id)
                    .then((d) => {
-                       password = Utility.mergeObject(password, revision);
+                       password = UtilityService.mergeObject(password, revision);
                        password.id = d.id;
                        password.updated = new Date();
                        password.revision = d.revision;
                        Events.fire('password.restored', password);
-                       Messages.notification('Revision restored');
+                       ToastService.info('Revision restored');
                        resolve(password);
                    })
                    .catch((e) => {
-                       Messages.notification('Restoring revision failed');
+                       ToastService.error('Restoring revision failed');
                        reject(e);
                    });
             } else {
-                Messages.confirm('Do you want to restore the revision?', 'Restore revision')
+                MessageService.confirm('Do you want to restore the revision?', 'Restore revision')
                         .then(() => { this.restoreRevision(password, revision, false).then(resolve).catch(reject); })
                         .catch(() => {reject(new Error('User aborted revision restore'));});
             }
@@ -353,7 +357,7 @@ class PasswordManager {
         let RevisionDialog     = await import(/* webpackChunkName: "ViewRevision" */ '@vue/Dialog/ViewRevision.vue'),
             ViewRevisionDialog = Vue.extend(RevisionDialog.default);
 
-        new ViewRevisionDialog({propsData: {password, revision}}).$mount(Utility.popupContainer());
+        new ViewRevisionDialog({propsData: {password, revision}}).$mount(UtilityService.popupContainer());
     }
 }
 

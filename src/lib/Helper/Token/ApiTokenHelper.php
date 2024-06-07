@@ -1,15 +1,19 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\Token;
 
 use Exception;
-use OC\Authentication\Token\IProvider;
-use OC\Authentication\Token\IToken;
+use OCP\Authentication\Token\IProvider;
+use OCP\Authentication\Token\IToken;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -35,46 +39,6 @@ class ApiTokenHelper {
     protected ?string $userId;
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var ISecureRandom
-     */
-    protected ISecureRandom $random;
-
-    /**
-     * @var IRequest
-     */
-    protected IRequest $request;
-
-    /**
-     * @var SessionService
-     */
-    protected SessionService $session;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected EnvironmentService $environment;
-
-    /**
-     * @var IL10N
-     */
-    protected IL10N $localisation;
-
-    /**
-     * @var IProvider
-     */
-    protected IProvider $tokenProvider;
-
-    /**
      * ApiTokenHelper constructor.
      *
      * @param IRequest             $request
@@ -87,24 +51,16 @@ class ApiTokenHelper {
      * @param EnvironmentService   $environment
      */
     public function __construct(
-        IRequest $request,
-        IL10N $localisation,
-        ISecureRandom $random,
-        LoggingService $logger,
-        SessionService $session,
-        IProvider $tokenProvider,
-        ConfigurationService $config,
-        EnvironmentService $environment
+        protected IRequest $request,
+        protected IL10N $localisation,
+        protected ISecureRandom $random,
+        protected LoggingService $logger,
+        protected SessionService $session,
+        protected IProvider $tokenProvider,
+        protected ConfigurationService $config,
+        protected EnvironmentService $environment
     ) {
         $this->userId        = $environment->getUserId();
-        $this->config        = $config;
-        $this->random        = $random;
-        $this->logger        = $logger;
-        $this->request       = $request;
-        $this->session       = $session;
-        $this->localisation  = $localisation;
-        $this->tokenProvider = $tokenProvider;
-        $this->environment   = $environment;
     }
 
     /**

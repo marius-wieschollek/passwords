@@ -16,11 +16,11 @@
 
 <script>
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import PasswordManager from '@js/Manager/PasswordManager';
     import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
     import DialogWindow from "@vue/Dialog/DialogWindow";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {DialogWindow, DetailField, Translate},
@@ -38,26 +38,26 @@
                     customFields     = this.revision.customFields,
                     showHiddenFields = SettingsService.get('client.ui.custom.fields.show.hidden');
 
-                fields.push({label: Localisation.translate('Name'), value: this.revision.label});
-                fields.push({label: Localisation.translate('Id'), value: this.revision.id});
+                fields.push({label: LocalisationService.translate('Name'), value: this.revision.label});
+                fields.push({label: LocalisationService.translate('Id'), value: this.revision.id});
                 fields.push({
-                                label: Localisation.translate('Created on'),
-                                value: Localisation.formatDateTime(this.revision.created)
+                                label: LocalisationService.translate('Created on'),
+                                value: LocalisationService.formatDateTime(this.revision.created)
                             });
 
                 let favorite = this.revision.favorite ? 'yes':'no';
-                fields.push({label: Localisation.translate('Favorite'), value: Localisation.translate(favorite)});
+                fields.push({label: LocalisationService.translate('Favorite'), value: LocalisationService.translate(favorite)});
 
                 if(this.revision.username) {
                     fields.push({
-                                    label: Localisation.translate('Username'),
+                                    label: LocalisationService.translate('Username'),
                                     value: this.revision.username
                                 });
                 }
-                fields.push({label: Localisation.translate('Password'), value: this.revision.password, type: 'secret'});
+                fields.push({label: LocalisationService.translate('Password'), value: this.revision.password, type: 'secret'});
                 if(this.revision.url) {
                     fields.push({
-                                    label: Localisation.translate('Website'),
+                                    label: LocalisationService.translate('Website'),
                                     value: this.revision.url,
                                     type : 'url'
                                 });
@@ -70,13 +70,13 @@
                 let status = ['secure', 'weak', 'breached', 'unknown'][this.revision.status].capitalize();
                 if(this.revision.status === 1) status = `Weak (${this.revision.statusCode.toLowerCase().capitalize()})`;
                 if(this.revision.status === 3) status = `Unknown (${this.revision.statusCode.toLowerCase().capitalize()})`;
-                fields.push({label: Localisation.translate('Status'), value: Localisation.translate(status)});
+                fields.push({label: LocalisationService.translate('Status'), value: LocalisationService.translate(status)});
 
-                fields.push({label: Localisation.translate('Encryption on server'), value: this.sseTypeLabel});
+                fields.push({label: LocalisationService.translate('Encryption on server'), value: this.sseTypeLabel});
                 let cseType = 'No encryption';
                 if(this.revision.cseType === 'CSEv1r1') cseType = 'Encryption with libsodium';
-                fields.push({label: Localisation.translate('Encryption on client'), value: Localisation.translate(cseType)});
-                fields.push({label: Localisation.translate('Created by'), value: this.getClientLabel(this.revision.client)});
+                fields.push({label: LocalisationService.translate('Encryption on client'), value: LocalisationService.translate(cseType)});
+                fields.push({label: LocalisationService.translate('Created by'), value: this.getClientLabel(this.revision.client)});
 
                 return fields;
             },
@@ -100,7 +100,7 @@
                         break;
                 }
 
-                return Localisation.translate(encryption)
+                return LocalisationService.translate(encryption)
             },
         },
         methods   : {
@@ -111,7 +111,7 @@
             },
             getClientLabel(client) {
                 if(client.substr(0, 8) === 'CLIENT::') {
-                    return Localisation.translate(client);
+                    return LocalisationService.translate(client);
                 }
 
                 return client;
@@ -151,7 +151,7 @@
                 span {
                     display    : block;
                     font-style : normal;
-                    color      : var(--color-text-lighter);
+                    color      : var(--color-text-maxcontrast);
                     text-align : right;
                     cursor     : text;
                     word-wrap  : break-word;

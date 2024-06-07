@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\ApiObjects;
@@ -18,6 +22,7 @@ use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class TagObjectHelper
@@ -55,7 +60,7 @@ class TagObjectHelper extends AbstractObjectHelper {
      * @param EncryptionService  $encryptionService
      */
     public function __construct(
-        IAppContainer $container,
+        ContainerInterface $container,
         TagService $tagService,
         PasswordService $passwordService,
         TagRevisionService $revisionService,

@@ -7,15 +7,19 @@
  * This file is part of the Passwords App
  * created by Marius David Wieschollek.
  */
-import API from '@js/Helper/api';
 import SettingsService from '@js/Services/SettingsService';
 import Vue from "vue";
 import Dashboard  from "@vue/Dashboard/Dashboard";
+import ClientService from "@js/Services/ClientService";
 
 export default class Dependencies {
 
     get api() {
-        return API;
+        return ClientService.getLegacyClient();
+    }
+
+    get clientService() {
+        return ClientService;
     }
 
     get settingsService() {

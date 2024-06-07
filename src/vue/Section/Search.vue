@@ -11,8 +11,8 @@
 <script>
     import API from '@js/Helper/api';
     import BaseSection from '@vue/Section/BaseSection';
-    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
+    import LocalisationService from "@js/Services/LocalisationService";
     export default {
         extends: BaseSection,
 
@@ -41,7 +41,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate('We could not find anything for "{query}"', {query: this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return 'Use the search box to search';
@@ -62,11 +62,9 @@
                 let db = {passwords: this.passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
                 setTimeout(() => {
-                    let el    = document.getElementById('unified-search__input'),
-                        query = this.$route.params.query;
+                    let query = this.$route.params.query;
 
                     let value = atob(query);
-                    el.value = value;
                     SearchManager.search(value);
                 }, 10);
             }

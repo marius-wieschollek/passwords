@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -14,6 +18,10 @@ use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
+use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -48,24 +56,23 @@ class KeychainApiController extends AbstractApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @return JSONResponse
-     * @throws Exception
+     * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function list(): JSONResponse {
-        $results = $this->keychainService->getClientKeychainArray();
+        try {
+            $results = $this->keychainService->getClientKeychainArray();
+        } catch(Exception $e) {
+            throw new ApiException('Reading user keychain failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
+        }
 
         return $this->createJsonResponse($results);
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $id
      * @param string $data
      *
@@ -74,6 +81,9 @@ class KeychainApiController extends AbstractApiController {
      * @throws MultipleObjectsReturnedException
      * @throws Exception
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function update(string $id, string $data): JSONResponse {
         if(!$this->challengeService->hasChallenge()) {
             throw new ApiException('Encryption not enabled');
@@ -83,7 +93,7 @@ class KeychainApiController extends AbstractApiController {
             $keychain = $this->keychainService->findByType($id, true);
 
             if($keychain->getScope() !== $keychain::SCOPE_CLIENT) {
-                throw new ApiException('Keychain not found', 404);
+                throw new ApiException('Keychain not found', Http::STATUS_NOT_FOUND);
             }
 
             $keychain->setData($data);

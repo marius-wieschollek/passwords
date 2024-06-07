@@ -146,8 +146,9 @@ export default new class LocalisationService {
      */
     async _loadFile(url) {
         try {
-            let request  = new Request(url, {redirect: 'error'}),
-                response = await fetch(request);
+            let options  = {redirect: 'error'},
+                request  = new Request(url, options),
+                response = await fetch(request, options);
 
             if(response.ok) {
                 let data = await response.json();

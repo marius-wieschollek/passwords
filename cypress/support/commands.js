@@ -73,7 +73,27 @@ Cypress.Commands.add('openSections', (...sections) => {
             let openSectionButton = document.querySelector(`.app-navigation-entry-link[title="${section}"]`).parentNode.querySelector('button.icon-collapse:not(.icon-collapse--open)');
             if(openSectionButton) openSectionButton.click();
         });
+        cy.get(`.app-navigation-entry-link[title="${section}"] .loading-icon`).should('not.exist');
     }
+});
+
+Cypress.Commands.add('waitForRequestsToFinish', () => {
+    cy.log('Waiting for requests to finish');
+    cy.window()
+      .then((window) => {
+          window.debugPwRequestLimit();
+      });
+
+    cy.wait(2500);
+    cy.get('body[data-debug-loading="false"]', {timeout: 60000});
+});
+
+Cypress.Commands.add('raiseRequestLimitRequestsToFinish', (limit = 32) => {
+    cy.log('Raise request limit to ' + limit);
+    cy.window()
+      .then((window) => {
+          window.debugPwRequestLimit(limit);
+      });
 });
 
 Cypress.Commands.add(

@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -14,7 +14,7 @@ namespace OCA\Passwords\EventListener\Password;
 use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\PasswordDeletedEvent;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\Event;
@@ -41,7 +41,7 @@ class PasswordDeletedListener extends AbstractPasswordListener {
 
         $duplicateHashes = [];
         foreach($revisions as $revision) {
-            if($revision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
+            if($revision->getStatusCode() === PasswordSecurityCheckService::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
             $this->revisionService->delete($revision);
         }
 

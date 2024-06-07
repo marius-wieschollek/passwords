@@ -1,8 +1,8 @@
-import API from '@js/Helper/api';
 import JSZip from 'jszip';
-import Utility from '@js/Classes/Utility';
-import {Encryption} from 'passwords-client';
-import Localisation from '@js/Classes/Localisation';
+import API from '@js/Helper/api';
+import UtilityService from "@js/Services/UtilityService";
+import ClientService from "@js/Services/ClientService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 /**
  *
@@ -61,17 +61,21 @@ export class ExportManager {
         }
 
         if(options.password) {
-            let encryption = new Encryption();
-
             for(let i in json) {
                 if(!json.hasOwnProperty(i) || ['version', 'encrypted'].indexOf(i) !== -1) continue;
                 let data = JSON.stringify(json[i]),
                     key  = options.password + i;
 
-                json[i] = encryption.encryptWithPassword(data, key);
+                json[i] = await ClientService
+                    .getClient()
+                    .getInstance('encryption.expv1')
+                    .encrypt(data, key);
             }
             json.encrypted = true;
-            json.challenge = encryption.encryptWithPassword('challenge', `${options.password}challenge`);
+            json.challenge = await ClientService
+                .getClient()
+                .getInstance('encryption.expv1')
+                .encrypt('challenge', `${options.password}challenge`);
         }
 
         return JSON.stringify(json);
@@ -131,7 +135,7 @@ export class ExportManager {
             data = await ExportManager._getTagsForExport();
         }
 
-        if(options.header) header = Utility.cloneObject(options.mapping);
+        if(options.header) header = UtilityService.cloneObject(options.mapping);
         data = await this._convertDbToExportArray(data, options.mapping);
         return ExportManager._createCsvExport(data, header, options.delimiter);
     }
@@ -170,7 +174,7 @@ export class ExportManager {
 
             for(let i in sheets) {
                 if(!sheets.hasOwnProperty(i)) continue;
-                let name = Localisation.translate(i.capitalize());
+                let name = LocalisationService.translate(i.capitalize());
 
                 workbook.SheetNames.push(name);
                 workbook.Sheets[name] = XLSX.utils.aoa_to_sheet(sheets[i], {cellDates: true});
@@ -178,7 +182,7 @@ export class ExportManager {
 
             return XLSX.write(workbook, {bookType: format, type: 'array'});
         } catch(e) {
-            throw new Error(Localisation.translate('Unable to load {module}', {module: 'xlsx'}));
+            throw new Error(LocalisationService.translate('Unable to load {module}', {module: 'xlsx'}));
         }
     }
 
@@ -217,7 +221,7 @@ export class ExportManager {
         let folderDb = {};
         if(mapping.indexOf('folderLabel') !== -1 || mapping.indexOf('parentLabel') !== -1) {
             let folders = await API.listFolders();
-            folderDb[this.defaultFolder] = Localisation.translate('Home');
+            folderDb[this.defaultFolder] = LocalisationService.translate('Home');
 
             for(let i in folders) {
                 if(!folders.hasOwnProperty(i)) continue;
@@ -333,7 +337,7 @@ export class ExportManager {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push(`"${Localisation.translate(header[i].capitalize()).replace('"', '""')}"`);
+                line.push(`"${LocalisationService.translate(header[i].capitalize()).replace('"', '""')}"`);
             }
 
             csv.push(line.join(delimiter));
@@ -345,7 +349,7 @@ export class ExportManager {
 
             for(let j = 0; j < element.length; j++) {
                 let value = element[j];
-                if(typeof value === 'boolean') value = Localisation.translate(value.toString());
+                if(typeof value === 'boolean') value = LocalisationService.translate(value.toString());
                 line.push(`"${value.toString().replace(/"/g, '""')}"`);
             }
 
@@ -368,7 +372,7 @@ export class ExportManager {
             let line = [];
 
             for(let i = 0; i < header.length; i++) {
-                line.push(Localisation.translate(header[i].capitalize()));
+                line.push(LocalisationService.translate(header[i].capitalize()));
             }
 
             data.push(line);

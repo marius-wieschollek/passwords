@@ -40,14 +40,14 @@
 <script>
     import Breadcrumb from '@vc/Breadcrumb';
     import Events from '@js/Classes/Events';
-    import Utility from '@js/Classes/Utility';
     import FolderLine from '@vue/Line/Folder';
     import HeaderLine from '@vue/Line/Header';
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
-    import Localisation from '@js/Classes/Localisation';
     import SearchManager from '@js/Manager/SearchManager';
+    import UtilityService from "@js/Services/UtilityService";
     import SettingsService from '@js/Services/SettingsService';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -109,7 +109,7 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return Localisation.translate(
+                    return LocalisationService.translate(
                         'We could not find anything for "{query}"',
                         {query: this.search.query}
                     );
@@ -133,7 +133,7 @@
 
                 if(this.passwords) {
                     this.passwords =
-                        Utility.sortApiObjectArray(
+                        UtilityService.sortApiObjectArray(
                             this.passwords,
                             this.getPasswordsSortingField(),
                             this.sorting.ascending
@@ -141,25 +141,25 @@
                 }
                 if(this.folders) {
                     this.folders =
-                        Utility.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
+                        UtilityService.sortApiObjectArray(this.folders, this.sorting.field, this.sorting.ascending);
                 }
                 if(this.tags) {
                     this.tags =
-                        Utility.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
+                        UtilityService.sortApiObjectArray(this.tags, this.sorting.field, this.sorting.ascending);
                 }
             },
             updatePasswordList(passwords) {
                 this.loading = false;
                 this.passwords =
-                    Utility.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
+                    UtilityService.sortApiObjectArray(passwords, this.getPasswordsSortingField(), this.sorting.ascending);
             },
             updateFolderList(folders) {
                 this.loading = false;
-                this.folders = Utility.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
+                this.folders = UtilityService.sortApiObjectArray(folders, this.sorting.field, this.sorting.ascending);
             },
             updateTagList(tags) {
                 this.loading = false;
-                this.tags = Utility.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
+                this.tags = UtilityService.sortApiObjectArray(tags, this.sorting.field, this.sorting.ascending);
             },
             getPasswordsSortingField() {
                 let sortingField = this.sorting.field === 'label' ? SettingsService.get(

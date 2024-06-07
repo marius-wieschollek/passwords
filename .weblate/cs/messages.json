@@ -1172,7 +1172,7 @@
         "message": "Nenalezeno"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Dejte nám vědět!"
+        "message": "Nahlásit chybu"
     },
     "frontend-000331": {
         "message": "Chyba sítě"
@@ -2032,9 +2032,6 @@
     "tutorial-000753": {
         "message": "Přizpůsobte si svůj dojem z používání aplikace"
     },
-    "tutorial-000754": {
-        "message": "Udělejte si pořádek ve svých heslech"
-    },
     "tutorial-000755": {
         "message": "Propojte si pomocí dalších aplikací"
     },
@@ -2358,7 +2355,7 @@
         "message": "Není k dispozici žádný obsah"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "I tak potřebujete pomoc?"
+        "message": "Potřebujete pomoc?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Zeptejte se na diskuzním fóru!"
@@ -2528,7 +2525,7 @@
         "message": "Pomozte nám aplikaci Hesla vylepšit"
     },
     "backend-000499": {
-        "message": "Toto nás pošle nějaká anonymizovaná data ohledně vašeho uspořádání a vybraných nastavení."
+        "message": "Tím nám odešlete anonymizované údaje o vašem nastavení a vybraných parametrech."
     },
     "backend-000500": {
         "message": "Toto je možné kdykoli změnit v nastavení aplikace."
@@ -2652,7 +2649,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Nebo v našem chatu!"
+        "message": "Zeptejte se v našem chatu"
     },
     "frontend-000617": {
         "message": "Vybrat složku"
@@ -3244,7 +3241,7 @@
         "message": "Zakázat"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Nebyly nalezeny žádné výsledky pro dotaz „$QUERY$“",
+        "message": "Nepodařilo se nám najít nic pro \"$QUERY$\"",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3291,5 +3288,43 @@
     },
     "frontend-Donate": {
         "message": "Darovat"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Vyhledávání …"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Aplikace Hesla pravidelně kontroluje, zda je vaše šifrovací heslo stále bezpečné. Vaše aktuální heslová fráze není bezpečná a je třeba ji okamžitě změnit."
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Zvolená šifrovací fráze není bezpečná, a proto ji nelze použít.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Nezabezpečená šifrovací fráze",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Kontrola, zda server spouští úlohy na pozadí pomocí cronu.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Úlohy na pozadí se provádějí pomocí cronu.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrola, zda server spouští úlohy na pozadí se stejnou verzí PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Úlohy na pozadí jsou prováděny se stejnou verzí jazyka PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Vítejte v aplikaci Hesla pro Nextcloud, která je ideálním místem pro bezpečné a přehledné ukládání hesel.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Začneme",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

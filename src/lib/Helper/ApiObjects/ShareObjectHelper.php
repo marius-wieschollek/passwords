@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2023 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\ApiObjects;
@@ -17,6 +21,7 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\IAppContainer;
 use OCP\IConfig;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class ShareObjectHelper
@@ -31,21 +36,6 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @var null|string
      */
     protected ?string $userId;
-
-    /**
-     * @var IConfig
-     */
-    protected IConfig $config;
-
-    /**
-     * @var UserService
-     */
-    protected UserService $userService;
-
-    /**
-     * @var PasswordService
-     */
-    protected PasswordService $passwordService;
 
     /**
      * @var PasswordObjectHelper
@@ -63,17 +53,13 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @param PasswordService    $passwordService
      */
     public function __construct(
-        IConfig $config,
-        UserService $userService,
-        IAppContainer $container,
+        protected IConfig $config,
+        protected UserService $userService,
+        protected ContainerInterface $container,
         EnvironmentService $environment,
-        PasswordService $passwordService
+        protected PasswordService $passwordService
     ) {
         $this->userId          = $environment->getUserId();
-        $this->config          = $config;
-        $this->container       = $container;
-        $this->userService     = $userService;
-        $this->passwordService = $passwordService;
     }
 
     /**

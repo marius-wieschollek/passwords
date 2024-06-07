@@ -1,6 +1,6 @@
 {
     "apps-000014": {
-        "message": "Συνδέστε κάτι άλλο"
+        "message": "Συνδέστε έναν άλλο πελάτη"
     },
     "apps-000015": {
         "message": "Δοκιμάστε ξανά"
@@ -76,7 +76,7 @@
         "message": "Ρωτήστε στο φόρουμ μας!"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Πείτε μας!"
+        "message": "Αναφέρετε ένα σφάλμα"
     },
     "frontend-000329": {
         "message": "Η σύνοδος έχει λήξει"
@@ -317,9 +317,6 @@
     },
     "tutorial-000753": {
         "message": "Προσαρμόστε την εμπειρία σας"
-    },
-    "tutorial-000754": {
-        "message": "Βάλτε τάξη στους κωδικούς σας"
     },
     "tutorial-000755": {
         "message": "Συνδεθείτε"
@@ -679,7 +676,7 @@
         "message": "Εξαγωγή κωδικών πρόσβασης που μοιράζονται μαζί μου"
     },
     "backups-000055": {
-        "message": "Μην επεξεργάζεστε τους κωδικούς πρόσβασης που μοιράζεστε μαζί μου"
+        "message": "Μην επεξεργάζεστε κωδικούς πρόσβασης που μοιράζεστε μαζί μου"
     },
     "backups-000056": {
         "message": "Μην εισάγετε κενά πεδία"
@@ -1009,7 +1006,7 @@
         "message": "Περισσότερες πληροφορίες μπορείτε να βρείτε στο ημερολόγιο. (Πατήστε F12)"
     },
     "backups-000142": {
-        "message": "Το αρχείο έχει τύπο \"$ACTUAL$\" αλλά αναμένεται \"$EXPECTED$\". Μπορεί να έχετε επιλέξει λάθος αρχείο ή εισαγωγέα.",
+        "message": "Το αρχείο έχει τύπο \"$ACTUAL$\" αλλά αναμένεται \"$EXPECTED$\". Ίσως επιλέξατε λάθος αρχείο ή εισαγωγέα.",
         "placeholders": {
             "actual": {
                 "content": "$1"
@@ -1175,7 +1172,7 @@
         "message": "Απλή κρυπτογράφηση από την πλευρά του διακομιστή V1"
     },
     "frontend-000196": {
-        "message": "Κρατήστε μερικές σημειώσεις"
+        "message": "Κρατήστε σημειώσεις"
     },
     "frontend-000197": {
         "message": "Αποθήκευση"
@@ -1259,7 +1256,7 @@
         "message": "Ετικέτα αποκατασταθεί"
     },
     "frontend-000224": {
-        "message": "Η επαναφορά ετικέτας απέτυχε"
+        "message": "Η επαναφορά της ετικέτας απέτυχε"
     },
     "frontend-000225": {
         "message": "Δημιουργία κωδικού πρόσβασης"
@@ -1316,7 +1313,7 @@
         "message": "Θέλετε να επαναφέρετε την αναθεώρηση;"
     },
     "frontend-000249": {
-        "message": "Μοιράζεται μαζί σας"
+        "message": "Κοινή χρήση με εσάς"
     },
     "frontend-000250": {
         "message": "Κοινή χρήση από εσάς"
@@ -1339,7 +1336,7 @@
         }
     },
     "frontend-000255": {
-        "message": "Μετοχές"
+        "message": "Κοινόχρηστα στοιχεία"
     },
     "frontend-000256": {
         "message": "Κοινή χρήση $COUNT$ φορές",
@@ -1475,7 +1472,7 @@
         "message": "Κρυφή μνήμη κωδικών πρόσβασης (0 αρχεία, 0 B)"
     },
     "frontend-000291": {
-        "message": "Αλλαγή"
+        "message": "Αλλαγμένο"
     },
     "frontend-000292": {
         "message": "Τροποποιημένο"
@@ -1618,7 +1615,7 @@
         "message": "Τελείωσα"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Χρειάζεστε ακόμα βοήθεια;"
+        "message": "Χρειάζεστε βοήθεια;"
     },
     "backend-000383": {
         "message": "Αυτό ΔΕΝ είναι σφάλμα. Επισκεφθείτε το $STR_1$ αν χρειάζεστε βοήθεια.",
@@ -1648,7 +1645,7 @@
         }
     },
     "backend-000387": {
-        "message": "Πηγαίνετε στη διεύθυνση $STR_1$ για να λάβετε ένα δωρεάν πιστοποιητικό HTTPS, αν το χρειάζεστε.",
+        "message": "Μεταβείτε στη διεύθυνση $STR_1$ για να λάβετε ένα δωρεάν πιστοποιητικό HTTPS, αν το χρειάζεστε.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1670,7 +1667,7 @@
         }
     },
     "backend-000390": {
-        "message": "Ανοιχτή τεκμηρίωση"
+        "message": "Ανοικτή τεκμηρίωση"
     },
     "backend-000391": {
         "message": "ποτέ"
@@ -1715,7 +1712,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "Συλλογή σωμάτων της Λειψίας (συνιστάται)"
+        "message": "Συλλογή Corpora της Λειψίας"
     },
     "backend-000406": {
         "message": "Υπηρεσία Favicon"
@@ -1927,7 +1924,7 @@
         "message": "Ορισμένοι από τους κωδικούς πρόσβασής σας δεν είναι πλέον ασφαλείς."
     },
     "backend-000463": {
-        "message": "Το Passwords ελέγχει τακτικά εάν οι κωδικοί σας έχουν παραβιαστεί από παραβίαση δεδομένων."
+        "message": "Το Passwords ελέγχει τακτικά αν οι κωδικοί σας έχουν παραβιαστεί από παραβίαση δεδομένων."
     },
     "backend-000464": {
         "message": "Αυτός ο έλεγχος ασφαλείας διαπίστωσε ότι ένας από τους κωδικούς πρόσβασής σας δεν είναι ασφαλής."
@@ -2152,13 +2149,13 @@
         "message": "Παρακαλώ σκεφτείτε το ενδεχόμενο να φιλοξενήσετε μόνοι σας το favicon api"
     },
     "backend-000508": {
-        "message": "Το Nextcloud σας χρησιμοποιεί τις κοινές μας περιπτώσεις Besticon για την ανάκτηση εικονιδίων ιστοτόπων."
+        "message": "Το Nextcloud σας χρησιμοποιεί τις κοινές μας περιπτώσεις Besticon για την άντληση εικονιδίων ιστοτόπων."
     },
     "backend-000509": {
         "message": "Αυτές οι περιπτώσεις προορίζονται για μικρές εγκαταστάσεις Nextcloud με πολύ μικρή κυκλοφορία."
     },
     "backend-000510": {
-        "message": "Κάντε κλικ στο σύνδεσμο και ακολουθήστε το εύκολο σεμινάριό μας για να φιλοξενήσετε το Besticon μόνοι σας."
+        "message": "Κάντε κλικ στο σύνδεσμο και ακολουθήστε το εύκολο σεμινάριο για να φιλοξενήσετε το Besticon μόνοι σας."
     },
     "backend-000512": {
         "message": "Η διαμόρφωση της υπηρεσίας προεπισκόπησης είναι άκυρη"
@@ -2181,7 +2178,7 @@
         }
     },
     "backend-000517": {
-        "message": "Αυτό θα μπορούσε να υποδηλώνει ότι κάποιος προσπαθεί να εισβάλει στο λογαριασμό σας."
+        "message": "Αυτό θα μπορούσε να υποδηλώνει ότι κάποιος προσπαθεί να παραβιάσει το λογαριασμό σας."
     },
     "backend-000518": {
         "message": "Για να αποτραπούν περαιτέρω προσπάθειες, τα διαπιστευτήρια API αυτού του πελάτη ανακλήθηκαν."
@@ -2199,7 +2196,7 @@
         "message": "Για την αποτροπή περαιτέρω προσπαθειών, ο έλεγχος ταυτότητας API με βάση τον κωδικό πρόσβασης έχει απενεργοποιηθεί."
     },
     "backend-000523": {
-        "message": "Για να το ενεργοποιήσετε ξανά, συνδεθείτε με την εφαρμογή ιστού ή με οποιονδήποτε πελάτη χρησιμοποιώντας έλεγχο ταυτότητας με κουπόνι."
+        "message": "Για να το ενεργοποιήσετε ξανά, συνδεθείτε με την εφαρμογή ιστού ή με οποιονδήποτε πελάτη που χρησιμοποιεί έλεγχο ταυτότητας token."
     },
     "backend-000524": {
         "message": "Εάν δεν γνωρίζετε αυτόν τον πελάτη, αλλάξτε τον κύριο κωδικό πρόσβασης και τον κωδικό πρόσβασης Nextcloud."
@@ -2320,7 +2317,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Ή στο Chat μας!"
+        "message": "Ρωτήστε στο Chat μας"
     },
     "frontend-000616": {
         "message": "Πάρα πολλές αποτυχημένες προσπάθειες σύνδεσης"
@@ -2593,7 +2590,7 @@
         "message": "Λειτουργία κρυπτογράφησης διακομιστή"
     },
     "settings-000688": {
-        "message": "Καμία εάν χρησιμοποιείται CSE"
+        "message": "Καμία αν χρησιμοποιείται CSE"
     },
     "settings-000689": {
         "message": "Απλή κρυπτογράφηση"
@@ -2671,7 +2668,7 @@
         "message": "Εμφάνιση μιας προεπισκόπησης του σχετικού ιστότοπου στις λεπτομέρειες. (Όχι στα κινητά)"
     },
     "settings-000714": {
-        "message": "Σας ειδοποιεί για σφάλματα διαμόρφωσης και άλλα διοικητικά θέματα"
+        "message": "Σας ειδοποιεί για σφάλματα διαμόρφωσης και άλλα διοικητικά ζητήματα"
     },
     "settings-000715": {
         "message": "Πληκτρολογήστε \"$CODE$\" για να επαναφέρετε το λογαριασμό σας και να διαγράψετε τα πάντα.",
@@ -2694,7 +2691,7 @@
         "message": "Πρέπει να πληκτρολογήσετε τον παλιό σας κωδικό πρόσβασης"
     },
     "settings-000720": {
-        "message": "Ο κωδικός πρόσβασής σας άλλαξε με επιτυχία."
+        "message": "Ο κωδικός πρόσβασής σας άλλαξε επιτυχώς."
     },
     "frontend-000245": {
         "message": "Επαναφορά αναθεώρησης"
@@ -2749,7 +2746,7 @@
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "Αυτή η ενέργεια αφαιρεί τη σημαία \"κρυμμένη\" από τα στοιχεία, ώστε αυτά τα στοιχεία να εμφανίζονται ξανά στην εφαρμογή.",
+        "message": "Αυτή η ενέργεια αφαιρεί τη σημαία \"κρυμμένο\" από τα στοιχεία, ώστε αυτά τα στοιχεία να εμφανίζονται ξανά στην εφαρμογή.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
@@ -2866,7 +2863,7 @@
         "message": "Κάντε τους νέους μου κωδικούς πρόσβασης"
     },
     "tutorial-000745": {
-        "message": "ισχυρό"
+        "message": "ισχυρή"
     },
     "tutorial-000746": {
         "message": "ισχυρότερο"
@@ -2890,7 +2887,7 @@
         "message": "Επιλέξτε έναν ασφαλή κωδικό πρόσβασης παρακάτω για να ενεργοποιήσετε την απόλυτη προστασία των κωδικών σας."
     },
     "tutorial-000780": {
-        "message": "Αποκτήστε πρόσβαση στους κωδικούς σας με ευκολία από οπουδήποτε, χάρη στις εφαρμογές και τις επεκτάσεις μας."
+        "message": "Αποκτήστε πρόσβαση στους κωδικούς πρόσβασής σας με ευκολία από οπουδήποτε, χάρη στις εφαρμογές και τις επεκτάσεις μας."
     },
     "tutorial-000781": {
         "message": "Μπορείτε να βρείτε την ενότητα \"Εφαρμογές και επεκτάσεις\" στην ενότητα \"Περισσότερα\" ή απλά κάντε κλικ στο παρακάτω κουμπί."
@@ -2920,7 +2917,7 @@
         "message": "Εισάγετε έναν κωδικό πρόσβασης με 12 ή περισσότερους χαρακτήρες"
     },
     "tutorial-000790": {
-        "message": "Ο κωδικός πρόσβασής σας χρειάζεται τουλάχιστον 12 χαρακτήρες και ο κωδικός επιβεβαίωσης πρέπει να είναι ο ίδιος."
+        "message": "Ο κωδικός πρόσβασής σας πρέπει να έχει τουλάχιστον 12 χαρακτήρες και ο κωδικός επιβεβαίωσης πρέπει να είναι ο ίδιος."
     },
     "frontend-000192": {
         "message": "Αξία"
@@ -2966,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "Εμφάνιση QrCode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3037,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Κρυπτογράφηση με κλειδί τρίτου μέρους",
+        "message": "Κρυπτογράφηση διακομιστή τρίτου μέρους",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3058,7 +3055,7 @@
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Δείτε {link} για περισσότερες πληροφορίες",
+        "message": "Δείτε {link} για περισσότερες πληροφορίες.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "frontend-BrowserConsoleWarningLine2": {
@@ -3176,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Εντοπίσαμε το παρακάτω url ως τη σελίδα αλλαγής κωδικού πρόσβασης για το \"{label}\". Κάντε κλικ στο κουμπί για να την ανοίξετε",
+        "message": "Εντοπίσαμε το παρακάτω url ως τη σελίδα αλλαγής κωδικού πρόσβασης για το \"{label}\". Κάντε κλικ στο κουμπί για να την ανοίξετε.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3294,5 +3291,43 @@
     },
     "frontend-Donate": {
         "message": "Δωρεά"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Αναζήτηση …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Η επιλεγμένη κωδική φράση κρυπτογράφησης δεν είναι ασφαλής και επομένως δεν μπορεί να χρησιμοποιηθεί.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Μη ασφαλής κωδικός πρόσβασης κρυπτογράφησης",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Η εφαρμογή κωδικών πρόσβασης ελέγχει τακτικά αν η φράση πρόσβασης κρυπτογράφησης εξακολουθεί να είναι ασφαλής. Η τρέχουσα συνθηματική φράση σας δεν είναι ασφαλής και πρέπει να αλλάξει αμέσως."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Έλεγχος αν ο διακομιστής εκτελεί εργασίες παρασκηνίου με cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Οι εργασίες στο παρασκήνιο εκτελούνται με το cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Έλεγχος αν ο διακομιστής εκτελεί εργασίες παρασκηνίου με την ίδια έκδοση PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Οι εργασίες στο παρασκήνιο εκτελούνται με την ίδια έκδοση PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Καλώς ήρθατε στην εφαρμογή Passwords App για το Nextcloud, το ιδανικό μέρος για να διατηρείτε τους κωδικούς σας ασφαλείς και οργανωμένους.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Ας ξεκινήσουμε",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

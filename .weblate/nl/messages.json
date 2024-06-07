@@ -9,7 +9,7 @@
         "message": "Kies Format"
     },
     "backups-000030": {
-        "message": "Alstublieft kiezen"
+        "message": "Maak een keuze"
     },
     "backups-000032": {
         "message": "Voorgedefinieerde CSV"
@@ -462,7 +462,7 @@
         "message": "Map verwijderen"
     },
     "frontend-000207": {
-        "message": "Wilt u de map en de inhoud ervan verwijderen?"
+        "message": "Wil je de map en de inhoud ervan verwijderen?"
     },
     "frontend-000208": {
         "message": "Map verwijderd"
@@ -498,7 +498,7 @@
         "message": "Tag verwijderen"
     },
     "frontend-000220": {
-        "message": "Wil je de tag verwijderen?"
+        "message": "Wilt u de Tag verwijderen?"
     },
     "frontend-000221": {
         "message": "Tag verwijderd"
@@ -975,7 +975,7 @@
         "message": "Pagina niet gevonden"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Meld het ons dan!"
+        "message": "Een bug melden"
     },
     "frontend-000331": {
         "message": "Netwerkfout"
@@ -1308,7 +1308,7 @@
         "message": "Om de zes uur"
     },
     "backend-000432": {
-        "message": "Yeden Tag"
+        "message": "Elke dag"
     },
     "backend-000433": {
         "message": "Elke twee dagen"
@@ -1658,16 +1658,16 @@
         "message": "De codes komen niet overeen"
     },
     "apps-000010": {
-        "message": "Ziet er goed uit."
+        "message": "Ziet er goed uit"
     },
     "apps-000011": {
         "message": "Verbinding geslaagd"
     },
     "backend-000501": {
-        "message": "Nog niet."
+        "message": "Nog niet"
     },
     "backend-000500": {
-        "message": "U kunt dit te allen tijde wijzigen in de instellingen van de app."
+        "message": "Je kunt dit op elk moment wijzigen in de app-instellingen."
     },
     "backend-000504": {
         "message": "Basis"
@@ -1676,7 +1676,7 @@
         "message": "Volledig"
     },
     "backend-000509": {
-        "message": "Deze instanties zijn bedoeld voor kleine Nextcloud-opstellingen met zeer weinig verkeer."
+        "message": "Deze instanties zijn bedoeld voor kleine Nextcloud-setups met heel weinig verkeer."
     },
     "backend-000510": {
         "message": "Klik op de link en volg onze eenvoudige handleiding om Besticon zelf te hosten."
@@ -1691,7 +1691,7 @@
         "message": "Id"
     },
     "backend-000383": {
-        "message": "Dit is geen bug. Bezoek onze $STR_1$ als je hulp nodig hebt.",
+        "message": "Dit is GEEN bug. Bezoek onze $STR_1$ als je hulp nodig hebt.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1702,7 +1702,7 @@
         "message": "Bekijk het HTTPS-rapport hieronder om het probleem op te lossen."
     },
     "backend-000385": {
-        "message": "Lees deze $STR_1$ om uw server te configureren om HTTPS te gebruiken.",
+        "message": "Lees deze $STR_1$ om je server te configureren om HTTPS te gebruiken.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1710,7 +1710,7 @@
         }
     },
     "backend-000386": {
-        "message": "Lees dit $STR_1$ als u een proxy gebruikt.",
+        "message": "Lees dit $STR_1$ als je een proxy gebruikt.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1718,7 +1718,7 @@
         }
     },
     "backend-000387": {
-        "message": "Ga naar $STR_1$ voor een gratis HTTPS-certificaat als u dat nodig hebt.",
+        "message": "Ga naar $STR_1$ om een gratis HTTPS-certificaat te krijgen als je er een nodig hebt.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1729,10 +1729,10 @@
         "message": "Deelnemen"
     },
     "backend-000503": {
-        "message": "Deelname server enquête"
+        "message": "Deelname aan serveronderzoek"
     },
     "backend-000512": {
-        "message": "Uw voorbeelddienstconfiguratie is ongeldig"
+        "message": "De configuratie van je voorbeeldservice is ongeldig"
     },
     "frontend-000667": {
         "message": "Tags CSV"
@@ -1741,10 +1741,10 @@
         "message": "Back-up interval"
     },
     "tutorial-000730": {
-        "message": "Na de lancering, toon mijn"
+        "message": "Laat na de lancering mijn"
     },
     "tutorial-000755": {
-        "message": "Maak verbinding"
+        "message": "Verbinding maken"
     },
     "frontend-000620": {
         "message": "Home"
@@ -1761,22 +1761,22 @@
         "message": "of"
     },
     "backups-000035": {
-        "message": "database back-up"
+        "message": "databaseback-up"
     },
     "backups-000036": {
         "message": "aangepaste CSV"
     },
     "backups-000037": {
-        "message": "probeer de generieke CSV import"
+        "message": "probeer de algemene CSV-import"
     },
     "backups-000038": {
-        "message": "Geen import voor uw CSV?"
+        "message": "Geen import voor je CSV?"
     },
     "backups-000045": {
         "message": "Eigen Velden"
     },
     "backups-000139": {
-        "message": "Het label van \"$FIELD$\" in \"$LABEL$\" is langer dan 48 tekens en werd geknipt.",
+        "message": "Het label van \"$FIELD$\" in \"$LABEL$\" is langer dan 48 tekens en is verwijderd.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -1801,52 +1801,52 @@
         "message": "Meer informatie is te vinden in het logboek. (Druk op F12)"
     },
     "apps-000012": {
-        "message": "Ik ben klaar."
+        "message": "Ik ben klaar"
     },
     "apps-000013": {
-        "message": "Probeer het niet opnieuw."
+        "message": "Probeer het niet opnieuw"
     },
     "apps-000014": {
-        "message": "Sluit iets anders aan"
+        "message": "Een andere client aansluiten"
     },
     "apps-000015": {
-        "message": "Probeer het nog eens."
+        "message": "Probeer het nog eens"
     },
     "apps-000016": {
         "message": "Sterke encryptie"
     },
     "apps-000018": {
-        "message": "Je hebt de verbinding verbroken"
+        "message": "Je hebt de verbinding geannuleerd"
     },
     "apps-000019": {
         "message": "Je hebt de verbinding niet op tijd bevestigd"
     },
     "apps-000020": {
-        "message": "Scan gewoon de QR-code met de app om hem aan te sluiten."
+        "message": "Scan gewoon de QR-code met de app om verbinding te maken."
     },
     "apps-000021": {
-        "message": "Klik op de knop wanneer u klaar bent om de verbinding te starten."
+        "message": "Klik op de knop als je klaar bent om de verbinding te starten."
     },
     "apps-000022": {
-        "message": "Controleer of de onderstaande codes overeenkomen met die van het apparaat of de app:"
+        "message": "Controleer of de onderstaande codes overeenkomen met de codes die door het apparaat of de app worden geleverd:"
     },
     "apps-000023": {
         "message": "Koppel deze client aan uw Nextcloud-account zonder vervelende wachtwoorden en url's"
     },
     "apps-000024": {
-        "message": "Deze cliënt ondersteunt officieel onze sterke end-to-end encryptie"
+        "message": "Deze client ondersteunt officieel onze sterke end-to-end encryptie"
     },
     "apps-000025": {
-        "message": "Deze client wordt onderhouden door de auteurs van de Wachtwoorden app"
+        "message": "Deze client wordt onderhouden door de auteurs van de app Wachtwoorden"
     },
     "apps-000026": {
-        "message": "Klik op de knop om een op dit apparaat geïnstalleerde app te verbinden of scan de QR-code met de app als deze op een ander apparaat is geïnstalleerd."
+        "message": "Klik op de knop om een app te verbinden die op dit apparaat is geïnstalleerd of scan de QR-code met de app als die op een ander apparaat is geïnstalleerd."
     },
     "backend-000491": {
-        "message": "Administratieve toegang tot uw account"
+        "message": "Administratieve toegang tot je account"
     },
     "backend-000492": {
-        "message": "$STR_1$ probeerde in te loggen op uw account op $STR_1$.",
+        "message": "$STR_1$ geprobeerd in te loggen op uw account op $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1857,7 +1857,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ ingelogd op uw account op $STR_1$.",
+        "message": "$STR_1$ ingelogd op je account op $STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1868,31 +1868,31 @@
         }
     },
     "backend-000494": {
-        "message": "Aangezien u een hoofdwachtwoord gebruikt, betekent dit niet dat er toegang tot uw gegevens is verleend."
+        "message": "Omdat je een hoofdwachtwoord gebruikt, betekent dit niet dat er toegang is verleend tot je gegevens."
     },
     "backend-000495": {
-        "message": "Om ongewenste toegang tot uw gegevens te voorkomen, moet u een hoofdwachtwoord instellen."
+        "message": "Om ongewenste toegang tot je gegevens te voorkomen, moet je een hoofdwachtwoord instellen."
     },
     "backend-000497": {
-        "message": "Help ons wachtwoorden te verbeteren"
+        "message": "Help ons om wachtwoorden te verbeteren"
     },
     "backend-000498": {
         "message": "U kunt ons helpen de Wachtwoorden app te verbeteren door deel te nemen aan onze server enquête."
     },
     "backend-000499": {
-        "message": "Dit stuurt ons enkele geanonimiseerde gegevens over uw instelling en geselecteerde instellingen."
+        "message": "Dit stuurt ons wat geanonimiseerde gegevens over je instellingen en geselecteerde instellingen."
     },
     "backend-000513": {
-        "message": "Uw gekozen favicon-service vereist een api-sleutel of eindpunt, maar er is er geen gegeven."
+        "message": "Je gekozen favicon service vereist een api key of endpoint, maar er is er geen gegeven."
     },
     "backend-000514": {
-        "message": "Je gekozen preview service vereist een api key of endpoint, maar er is er geen gegeven."
+        "message": "De door jou gekozen previewservice vereist een api-sleutel of eindpunt, maar er is er geen gegeven."
     },
     "backend-000515": {
-        "message": "Open de beheerdersinstellingen om de configuratie bij te werken of kies een andere dienst."
+        "message": "Open de beheerinstellingen om de configuratie bij te werken of kies een andere service."
     },
     "backend-000516": {
-        "message": "We hebben verschillende mislukte pogingen gedetecteerd om uw wachtwoord database te ontgrendelen door \"$STR_1$\".",
+        "message": "We hebben verschillende mislukte pogingen gedetecteerd om uw wachtwoorddatabase te ontgrendelen door \"$STR_1$\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1900,34 +1900,34 @@
         }
     },
     "backend-000517": {
-        "message": "Dit kan erop wijzen dat iemand probeert in te breken in uw account."
+        "message": "Dit kan erop wijzen dat iemand probeert in te breken in je account."
     },
     "backend-000518": {
-        "message": "Om verdere pogingen te voorkomen, zijn de API-gegevens van deze cliënt ingetrokken."
+        "message": "Om verdere pogingen te voorkomen, zijn de API-referenties van deze client ingetrokken."
     },
     "backend-000519": {
-        "message": "Ook is de wachtwoordgebaseerde API-authenticatie uitgeschakeld."
+        "message": "Ook is de wachtwoordgebaseerde API-verificatie uitgeschakeld."
     },
     "backend-000520": {
-        "message": "Als u deze client wilt blijven gebruiken, moet u er een nieuw token voor aanmaken."
+        "message": "Als je deze client wilt blijven gebruiken, moet je er een nieuw token voor aanmaken."
     },
     "backend-000521": {
-        "message": "Als u deze client niet kent, verander dan uw wachtwoord en bekijk uw apparatenlijst."
+        "message": "Als je deze client niet kent, verander dan je wachtwoord en bekijk je apparatenlijst."
     },
     "backend-000522": {
-        "message": "Om verdere pogingen te voorkomen is de op een wachtwoord gebaseerde API-authenticatie uitgeschakeld."
+        "message": "Om verdere pogingen te voorkomen, is de wachtwoordgebaseerde API-authenticatie uitgeschakeld."
     },
     "backend-000523": {
-        "message": "Om het weer in te schakelen, logt u in met de webapp of een andere client met tokenverificatie."
+        "message": "Om het weer in te schakelen, logt u in met de webapp of een client die tokenverificatie gebruikt."
     },
     "backend-000524": {
-        "message": "Als u deze client niet kent, verander dan uw hoofdwachtwoord en Nextcloud-wachtwoord."
+        "message": "Als je deze client niet kent, verander dan je masterwachtwoord en Nextcloud-wachtwoord."
     },
     "backend-000525": {
-        "message": "Om de veiligheid te verhogen, raden wij aan apparaatspecifieke tokens te gebruiken in plaats van uw wachtwoord."
+        "message": "Om de beveiliging te verhogen, raden we aan om apparaatspecifieke tokens te gebruiken in plaats van je wachtwoord."
     },
     "frontend-000604": {
-        "message": "Markeer als favoriet"
+        "message": "Markeren als favoriet"
     },
     "frontend-000605": {
         "message": "Verborgen wachtwoord"
@@ -1954,10 +1954,10 @@
         "message": "Ongedaan maken"
     },
     "frontend-000613": {
-        "message": "Redo"
+        "message": "Opnieuw doen"
     },
     "frontend-000614": {
-        "message": "Het vervalt op $DATE$.",
+        "message": "Deze verloopt op $DATE$.",
         "placeholders": {
             "date": {
                 "content": "$1"
@@ -1965,10 +1965,10 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Of in onze Chat!"
+        "message": "Vraag het in onze Chat"
     },
     "frontend-000616": {
-        "message": "Teveel mislukte inlogpogingen"
+        "message": "Te veel mislukte aanmeldingspogingen"
     },
     "frontend-000617": {
         "message": "Selecteer een map"
@@ -1982,7 +1982,7 @@
         }
     },
     "frontend-000619": {
-        "message": "$LABEL$ kan niet gebruikt worden",
+        "message": "$LABEL$ kan niet worden gebruikt",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1998,7 +1998,7 @@
         }
     },
     "frontend-000622": {
-        "message": "Wachtwoorden App Encryptie Passphrase"
+        "message": "Wachtwoorden App Encryptie Wachtzin"
     },
     "frontend-000623": {
         "message": "Onbekend"
@@ -2015,34 +2015,34 @@
         }
     },
     "frontend-000627": {
-        "message": "Zorg ervoor dat deze QR-code alleen zichtbaar is voor mensen die u vertrouwt."
+        "message": "Zorg ervoor dat deze QR code alleen zichtbaar is voor mensen die je vertrouwt."
     },
     "frontend-000628": {
-        "message": "De versleuteling die door de server wordt toegepast voordat de gegevens in de database worden opgeslagen."
+        "message": "De versleuteling die door de server wordt toegepast voordat de gegevens in de database worden opgeslagen"
     },
     "frontend-000629": {
-        "message": "De versleuteling die door de cliënt wordt toegepast voordat de gegevens naar de server worden verzonden."
+        "message": "De versleuteling die door de client wordt toegepast voordat de gegevens naar de server worden verzonden"
     },
     "frontend-000630": {
-        "message": "Wachtwoord ongeldig. Sessie ingetrokken wegens te veel mislukte aanmeldingspogingen."
+        "message": "Wachtwoord ongeldig. Sessie ingetrokken voor te veel mislukte aanmeldingspogingen."
     },
     "frontend-000631": {
-        "message": "Dit is een kopie van de wachtwoordzin die u voor de versleuteling hebt gekozen. Het wijzigen of verwijderen van dit gegeven heeft geen invloed op de versleuteling. De wachtwoordzin kan alleen in de instellingen worden gewijzigd. Meer informatie vindt u in het handboek."
+        "message": "Dit is een kopie van de wachtwoordzin die je hebt gekozen voor de codering. Het wijzigen of verwijderen van dit item heeft geen invloed op de codering. De wachtwoordzin kan alleen worden gewijzigd in de instellingen. Meer informatie is te vinden in het handboek."
     },
     "backend-000632": {
         "message": "Favicon Service Api"
     },
     "backend-000633": {
-        "message": "(facultatief)"
+        "message": "(optioneel)"
     },
     "backend-000634": {
-        "message": "Uw Nextcloud vraagt aanzienlijk meer pictogrammen dan het gemiddelde."
+        "message": "Uw Nextcloud vraagt aanzienlijk meer pictogrammen op dan het gemiddelde."
     },
     "backend-000635": {
         "message": "Open handleiding"
     },
     "backend-000636": {
-        "message": "Verdacht aantal mislukte inlogpogingen ontdekt."
+        "message": "Verdacht aantal mislukte aanmeldingspogingen gedetecteerd."
     },
     "backend-000637": {
         "message": "Meer informatie"
@@ -2051,7 +2051,7 @@
         "message": "Onveilige wachtwoorden bekijken"
     },
     "backend-000639": {
-        "message": "Open instellingen"
+        "message": "Instellingen openen"
     },
     "backend-000640": {
         "message": "Open wachtwoorden"
@@ -2060,7 +2060,7 @@
         "message": "Bekijk apps"
     },
     "backend-000642": {
-        "message": "Bekijk apps & apparaten"
+        "message": "Bekijk apps en apparaten"
     },
     "backend-000643": {
         "message": "Apparaten en apps beheren"
@@ -2069,13 +2069,13 @@
         "message": "Gedeelde wachtwoorden bekijken"
     },
     "backend-000645": {
-        "message": "App upgrade aanbevolen"
+        "message": "App-upgrade aanbevolen"
     },
     "backend-000646": {
-        "message": "Een nieuwe client of app werd verbonden met uw account"
+        "message": "Er is een nieuwe client of app gekoppeld aan je account"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" kreeg toegang tot uw $STR_1$ Passwords account via PassLink.",
+        "message": "\"$STR_1$\" heeft toegang gekregen tot uw $STR_1$ Passwords account via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2086,7 +2086,7 @@
         }
     },
     "backend-000648": {
-        "message": "U kunt alle aangesloten apparaten en apps beheren in uw $STR_1$ instellingen in de beveiligingssectie.",
+        "message": "Je kunt alle aangesloten apparaten en apps beheren in je $STR_1$ instellingen in het gedeelte beveiliging.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2094,7 +2094,7 @@
         }
     },
     "backend-000649": {
-        "message": "De laatste achtergrondjob werd uitgevoerd met PHP $STRING_1$, maar de webserver gebruikt PHP $STRING_2$.",
+        "message": "De laatste achtergrondtaak werd uitgevoerd met PHP $STRING_1$, maar de webserver gebruikt PHP $STRING_2$.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -2105,19 +2105,19 @@
         }
     },
     "backend-000650": {
-        "message": "Het gebruik van verschillende grote versies van PHP kan problemen veroorzaken."
+        "message": "Het gebruik van verschillende hoofdversies van PHP kan problemen veroorzaken."
     },
     "backend-000652": {
-        "message": "Veiligheidscontrole Hash"
+        "message": "Beveiligingscontrole Hash"
     },
     "backend-000653": {
         "message": "Sla geen hashes op"
     },
     "backend-000654": {
-        "message": "Bewaar 50% van de hash"
+        "message": "50% van de hash opslaan"
     },
     "backend-000655": {
-        "message": "Bewaar 75% van de hash"
+        "message": "75% van de hash opslaan"
     },
     "backend-000656": {
         "message": "Sla de volledige hash op"
@@ -2126,7 +2126,7 @@
         "message": "Back-up automatisch hersteld"
     },
     "backend-000658": {
-        "message": "De wachtwoorden app lijkt een database probleem te hebben."
+        "message": "De wachtwoorden-app lijkt een databaseprobleem te hebben."
     },
     "backend-000659": {
         "message": "Hierdoor werd de app back-up \"$STR_1$\" automatisch hersteld.",
@@ -2137,10 +2137,10 @@
         }
     },
     "backend-000660": {
-        "message": "Als dit een fout was, werd een back-up van de database gemaakt voordat deze werd hersteld."
+        "message": "Als dit een fout was, werd er een back-up van de database gemaakt voordat deze werd hersteld."
     },
     "backend-000661": {
-        "message": "U kunt het automatisch herstellen van back-ups uitschakelen in de instellingen van de app."
+        "message": "Je kunt het automatisch herstellen van back-ups uitschakelen in de app-instellingen."
     },
     "backend-000662": {
         "message": "Back-ups automatisch herstellen wanneer database wordt gewist"
@@ -2182,25 +2182,25 @@
         "message": "Selecteer automatisch (aanbevolen)"
     },
     "settings-000678": {
-        "message": "Inloggen & Sessie"
+        "message": "Inloggen & sessie"
     },
     "settings-000679": {
-        "message": "Hou me ingelogd"
+        "message": "Houd me ingelogd"
     },
     "settings-000680": {
         "message": "Altijd"
     },
     "settings-000681": {
-        "message": "Als ik aan het werk ben"
+        "message": "Wanneer ik werk"
     },
     "settings-000682": {
-        "message": "Als ik actief ben"
+        "message": "Wanneer ik actief ben"
     },
     "settings-000683": {
-        "message": "Einde sessie na"
+        "message": "Beëindig sessie na"
     },
     "settings-000684": {
-        "message": "Eén minuut."
+        "message": "Een minuut"
     },
     "settings-000685": {
         "message": "$MINUTES$ minuten",
@@ -2211,13 +2211,13 @@
         }
     },
     "settings-000686": {
-        "message": "End-to-end encryptie"
+        "message": "End-to-end versleuteling"
     },
     "settings-000687": {
         "message": "Server encryptie modus"
     },
     "settings-000688": {
-        "message": "Geen indien CSE wordt gebruikt"
+        "message": "Geen als CSE wordt gebruikt"
     },
     "settings-000689": {
         "message": "Eenvoudige encryptie"
@@ -2226,7 +2226,7 @@
         "message": "Geavanceerde encryptie"
     },
     "settings-000691": {
-        "message": "Cliënt encryptie modus"
+        "message": "Coderingsmodus voor client"
     },
     "frontend-Enable": {
         "message": "Schakel  in."
@@ -2235,7 +2235,7 @@
         "message": "Wachtwoord wijzigen"
     },
     "settings-000694": {
-        "message": "Wachtwoorden Detailweergave"
+        "message": "Detailweergave wachtwoorden"
     },
     "settings-000695": {
         "message": "Toon website preview"
@@ -2256,7 +2256,7 @@
         "message": "Wachtwoord wijzigen mislukt"
     },
     "settings-000701": {
-        "message": "Administratieve kwesties"
+        "message": "Administratieve problemen"
     },
     "settings-000702": {
         "message": "Wachtwoord delen"
@@ -2271,7 +2271,7 @@
         "message": "Code"
     },
     "settings-000706": {
-        "message": "Ongeldige reset code"
+        "message": "Ongeldige resetcode"
     },
     "settings-000707": {
         "message": "Nummers toevoegen aan gegenereerde wachtwoorden"
@@ -2280,13 +2280,13 @@
         "message": "Speciale tekens toevoegen aan gegenereerde wachtwoorden"
     },
     "settings-000709": {
-        "message": "Specificeer de hoeveelheid tijd na een verzoek voordat de sessie wordt geannuleerd"
+        "message": "Geef de hoeveelheid tijd op na een verzoek voordat de sessie wordt geannuleerd"
     },
     "settings-000710": {
-        "message": "Kies het type versleuteling dat wordt gebruikt om gegevens op de server te versleutelen"
+        "message": "Kies het type codering dat wordt gebruikt om gegevens op de server te versleutelen"
     },
     "settings-000711": {
-        "message": "Voer de installatiewizard uit om encryptie voor uw wachtwoorden in te stellen"
+        "message": "Voer de installatiewizard uit om versleuteling voor uw wachtwoorden in te stellen"
     },
     "settings-000712": {
         "message": "Het coderingswachtwoord wijzigen"
@@ -2296,19 +2296,19 @@
         "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "Uit te voeren actie wanneer met het muiswiel op een wachtwoord wordt geklikt",
+        "message": "Actie die moet worden uitgevoerd wanneer met het muiswiel op een wachtwoord wordt geklikt",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsCustomAction": {
-        "message": "Toon sneltoets voor",
+        "message": "Sneltoets weergeven voor",
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsCustomActionHelp": {
-        "message": "Voegt een extra knop toe voor de opgegeven actie in de desktopweergave",
+        "message": "Voegt een extra knop toe voor de opgegeven actie in de bureaubladweergave",
         "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-SettingsShowShareTab": {
-        "message": "Tabblad Delen tonen",
+        "message": "Tabblad Delen weergeven",
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "settings-SettingsRecoverItems": {
@@ -2320,11 +2320,11 @@
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "Deze actie verwijdert de \"verborgen\" vlag van items zodat deze items weer in de app verschijnen.",
+        "message": "Deze actie verwijdert de \"verborgen\" vlag van items zodat deze items weer verschijnen in de app.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "Door een verborgen wachtwoord op te slaan in een map die zelf niet verborgen is, wordt het wachtwoord ontoegankelijk. Dit wachtwoord wordt nergens meer getoond. Wilt u doorgaan?",
+        "message": "Door een verborgen wachtwoord op te slaan in een map die zelf niet verborgen is, wordt het wachtwoord ontoegankelijk. Dit wachtwoord wordt nergens meer weergegeven. Wilt u doorgaan?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "frontend-PwdSaveHiddenTitle": {
@@ -2336,7 +2336,7 @@
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "Selecteer elk type verborgen items dat u wilt herstellen.",
+        "message": "Selecteer het type verborgen items dat je wilt herstellen.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
@@ -2344,7 +2344,7 @@
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message": "Vindt verborgen wachtwoorden terug die in een map staan die zelf niet verborgen is",
+        "message": "Verborgen wachtwoorden herstellen die in een map staan die zelf niet verborgen is",
         "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsPasswords": {
@@ -2360,7 +2360,7 @@
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsFoldersTitle": {
-        "message": "Herstel alle verborgen mappen",
+        "message": "Alle verborgen mappen herstellen",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
@@ -2372,7 +2372,7 @@
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
-        "message": "Teruggevonden $PASSWORDS$ wachtwoord(en), $FOLDERS$ map(pen) en $TAGS$ tag(s).",
+        "message": "Hersteld $PASSWORDS$ wachtwoord(en), $FOLDERS$ map(pen) en $TAGS$ tag(s).",
         "description": "Success message after the recover hidden items action was executed",
         "placeholders": {
             "passwords": {
@@ -2387,11 +2387,11 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "Gevonden voorwerpen",
+        "message": "Teruggevonden voorwerpen",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
-        "message": "Er is een fout opgetreden.",
+        "message": "Er heeft zich een fout voorgedaan.",
         "description": "Generic error message if the recover hidden items action fails"
     },
     "tutorial-000731": {
@@ -2433,16 +2433,16 @@
         "message": "het zijn duplicaten"
     },
     "tutorial-000744": {
-        "message": "Maak mijn nieuwe wachtwoorden"
+        "message": "Mijn nieuwe wachtwoorden maken"
     },
     "tutorial-000745": {
         "message": "sterk"
     },
     "tutorial-000746": {
-        "message": "sterker"
+        "message": "Sterker"
     },
     "tutorial-000747": {
-        "message": "zeer sterk"
+        "message": "heel sterk"
     },
     "tutorial-000748": {
         "message": "extreem sterk"
@@ -2454,25 +2454,22 @@
         "message": "Bijzondere tekens gebruiken"
     },
     "tutorial-000751": {
-        "message": "Een veilig thuis voor uw wachtwoorden"
+        "message": "Een veilig thuis voor je wachtwoorden"
     },
     "tutorial-000752": {
-        "message": "Houd uw wachtwoorden geheim"
+        "message": "Houd je wachtwoorden geheim"
     },
     "tutorial-000753": {
         "message": "Uw ervaring aanpassen"
-    },
-    "tutorial-000754": {
-        "message": "Breng orde in uw wachtwoorden"
     },
     "tutorial-000756": {
         "message": "Mijn bestaande wachtwoorden versleutelen"
     },
     "tutorial-000757": {
-        "message": "Bewaar het wachtwoord"
+        "message": "Het wachtwoord opslaan"
     },
     "tutorial-000758": {
-        "message": "Herhaal uw wachtwoord"
+        "message": "Herhaal je wachtwoord"
     },
     "tutorial-000759": {
         "message": "Encryptie installeren"
@@ -2490,7 +2487,7 @@
         "message": "Vind hulp wanneer je die nodig hebt"
     },
     "tutorial-000764": {
-        "message": "Ga naar Apps en Extensies"
+        "message": "Ga naar Apps en uitbreidingen"
     },
     "tutorial-000765": {
         "message": "Ga verder"
@@ -2505,16 +2502,16 @@
         "message": "Wachtwoorden genereren met"
     },
     "tutorial-000769": {
-        "message": "Krijg favicons van"
+        "message": "Haal favicons van"
     },
     "tutorial-000770": {
-        "message": "Krijg website previews van"
+        "message": "Ontvang website previews van"
     },
     "tutorial-000771": {
         "message": "Back-ups maken"
     },
     "tutorial-000772": {
-        "message": "Alle instellingen bekijken"
+        "message": "Alle instellingen weergeven"
     },
     "tutorial-000773": {
         "message": "Lees onze tips voor beheerders"
@@ -2523,40 +2520,40 @@
         "message": "Wachtwoord (min. 12 tekens)"
     },
     "tutorial-000775": {
-        "message": "Encryptie in uitvoering…"
+        "message": "Encryptie bezig…"
     },
     "tutorial-000776": {
-        "message": "Er zijn veel instellingen zodat u uw ervaring kunt aanpassen."
+        "message": "Er zijn veel instellingen zodat je je ervaring kunt aanpassen."
     },
     "tutorial-000777": {
         "message": "Je kunt ze allemaal vinden in \"Meer\", maar we zetten de meest voorkomende hier neer:"
     },
     "tutorial-000778": {
-        "message": "Passwords biedt moderne en sterke encryptie om uw gegevens te beschermen tegen nieuwsgierige ogen."
+        "message": "Passwords biedt moderne en sterke versleuteling om je gegevens te beschermen tegen nieuwsgierige ogen."
     },
     "tutorial-000779": {
-        "message": "Kies hieronder een veilig wachtwoord om de ultieme bescherming van uw wachtwoorden te activeren."
+        "message": "Kies hieronder een veilig wachtwoord om de ultieme bescherming voor je wachtwoorden te activeren."
     },
     "tutorial-000780": {
-        "message": "Dankzij onze apps en extensies heeft u overal gemakkelijk toegang tot uw wachtwoorden."
+        "message": "Overal gemakkelijk toegang tot je wachtwoorden dankzij onze apps en extensies."
     },
     "backend-000506": {
         "message": "Niet ingesteld"
     },
     "backend-000507": {
-        "message": "Overweeg om uw favicon api zelf te hosten."
+        "message": "Overweeg om je favicon api zelf te hosten"
     },
     "backend-000508": {
         "message": "Uw Nextcloud gebruikt onze gedeelde Besticon-instanties om websitepictogrammen op te halen."
     },
     "tutorial-000781": {
-        "message": "U vindt onze Apps en Extensies sectie in \"Meer\" of klik gewoon op de knop hieronder."
+        "message": "Je vindt onze Apps en Extensies sectie onder \"Meer\" of klik gewoon op de knop hieronder."
     },
     "tutorial-000782": {
         "message": "Wachtwoorden kunnen op veel verschillende manieren worden aangepast."
     },
     "tutorial-000783": {
-        "message": "Als beheerder kunt u misschien eens kijken naar deze algemene instellingen."
+        "message": "Als beheerder kun je deze veelgebruikte instellingen bekijken."
     },
     "tutorial-000784": {
         "message": "Wanneer je niet weet hoe iets werkt, vragen hebt of hulp nodig hebt bij een probleem:"
@@ -2565,19 +2562,19 @@
         "message": "Hulp is om de hoek."
     },
     "tutorial-000786": {
-        "message": "Ons ingebouwde handboek vindt u door op \"Meer\" te klikken en legt de app in alle details uit."
+        "message": "Ons ingebouwde handboek kun je vinden door op \"Meer\" te klikken en legt de app in alle details uit."
     },
     "tutorial-000787": {
-        "message": "In elk ander geval is onze gemeenschap de juiste plaats om uw vragen te stellen."
+        "message": "In elk ander geval is onze community de juiste plaats om je vragen te stellen."
     },
     "tutorial-000788": {
-        "message": "Het handboek wordt geopend na de tutorial"
+        "message": "Handboek wordt geopend na de tutorial"
     },
     "tutorial-000789": {
         "message": "Voer een wachtwoord in van 12 tekens of meer"
     },
     "tutorial-000790": {
-        "message": "Uw wachtwoord moet minstens 12 tekens bevatten en het bevestigingswachtwoord moet hetzelfde zijn."
+        "message": "Je wachtwoord moet minstens 12 tekens bevatten en het bevestigingswachtwoord moet hetzelfde zijn"
     },
     "frontend-000593": {
         "message": "Bewerken als nieuw"
@@ -2603,10 +2600,10 @@
         "message": "Wat had je verwacht?"
     },
     "frontend-000599": {
-        "message": "Klik om de QR-code te tonen."
+        "message": "Klik om de QR-code weer te geven."
     },
     "frontend-000600": {
-        "message": "Waarschuw me niet nog eens."
+        "message": "Waarschuw me niet nog een keer"
     },
     "frontend-000601": {
         "message": "Sterkte"
@@ -2627,7 +2624,7 @@
         "message": "Kies importformaat"
     },
     "backups-000084": {
-        "message": "Lijnbreuk"
+        "message": "Regeleinde"
     },
     "backups-000099": {
         "message": "(geen waarde)"
@@ -2688,7 +2685,7 @@
         "message": "Inloggen"
     },
     "frontend-000243": {
-        "message": "Fout bij het kopiëren van $ELEMENT$ naar het klembord",
+        "message": "Fout bij het kopiëren van $ELEMENT$ naar klembord",
         "placeholders": {
             "element": {
                 "content": "$1"
@@ -2696,22 +2693,22 @@
         }
     },
     "frontend-000257": {
-        "message": "Encryptie toegepast op de server"
+        "message": "Encryptie toegepast op server"
     },
     "frontend-000258": {
-        "message": "Encryptie toegepast op cliënt"
+        "message": "Encryptie toegepast op client"
     },
     "frontend-000259": {
-        "message": "Geen encryptie"
+        "message": "Geen versleuteling"
     },
     "frontend-000260": {
-        "message": "Eenvoudige encryptie (Gen. 1)"
+        "message": "Eenvoudige codering (Gen. 1)"
     },
     "frontend-000261": {
-        "message": "Eenvoudige encryptie (Gen. 2)"
+        "message": "Eenvoudige codering (Gen. 2)"
     },
     "frontend-000262": {
-        "message": "Geavanceerde versleuteling (SSE V2)"
+        "message": "Geavanceerde codering (SSE V2)"
     },
     "frontend-000263": {
         "message": "Encryptie met libsodium"
@@ -2754,7 +2751,7 @@
         "message": "Geen inhoud beschikbaar"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Nog hulp nodig?"
+        "message": "Heb je hulp nodig?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Vraag het in ons forum!"
@@ -2763,13 +2760,13 @@
         "message": "De sessie is verlopen"
     },
     "frontend-000330": {
-        "message": "API Sessie Token verlopen"
+        "message": "API-sessietoken verlopen"
     },
     "frontend-000345": {
         "message": "Gemaakt door"
     },
     "frontend-000346": {
-        "message": "U logt in als $USER$",
+        "message": "U meldt zich aan als $USER$",
         "placeholders": {
             "user": {
                 "content": "$1"
@@ -2777,10 +2774,10 @@
         }
     },
     "frontend-000373": {
-        "message": "U heeft misschien te veel tokens aangevraagd. Probeer het later nog eens."
+        "message": "Je hebt misschien te veel tokens aangevraagd. Probeer het later nog eens."
     },
     "frontend-000374": {
-        "message": "End-to-End-codering wordt uitgeschakeld voor dit wachtwoord als u het deelt."
+        "message": "End-to-End codering wordt uitgeschakeld voor dit wachtwoord als je het deelt."
     },
     "frontend-000375": {
         "message": "Het sessietoken is niet langer geldig. De app wordt nu opnieuw geladen."
@@ -2792,7 +2789,7 @@
         "message": "forum"
     },
     "apps-000017": {
-        "message": "Mislukt om apps op te halen: $ERROR$",
+        "message": "Mislukt bij het ophalen van apps: $ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"
@@ -2824,7 +2821,7 @@
         "message": "Genereer willekeurige kleur"
     },
     "frontend-000348": {
-        "message": "Vraag opnieuw een token aan"
+        "message": "Token opnieuw aanvragen"
     },
     "frontend-000349": {
         "message": "Te veel pogingen"
@@ -2836,10 +2833,10 @@
         "message": "Onbekende fout"
     },
     "frontend-000352": {
-        "message": "Token aanvraag mislukt"
+        "message": "Token-aanvraag mislukt"
     },
     "frontend-000353": {
-        "message": "Onderhoud van het systeem"
+        "message": "Systeemonderhoud"
     },
     "frontend-000354": {
         "message": "Niet beschikbaar"
@@ -2851,16 +2848,16 @@
         "message": "Openbare toegang"
     },
     "frontend-000357": {
-        "message": "Automatische achtergrond taak"
+        "message": "Automatische achtergrondtaak"
     },
     "frontend-000358": {
-        "message": "Server Commandolijn"
+        "message": "Opdrachtregel server"
     },
     "frontend-000359": {
         "message": "Corrigeer uw invoer alstublieft"
     },
     "frontend-000360": {
-        "message": "Toon waarde"
+        "message": "Waarde tonen"
     },
     "frontend-000361": {
         "message": "Annuleren"
@@ -2877,7 +2874,7 @@
         }
     },
     "frontend-000372": {
-        "message": "U wordt uitgelogd in $TIME$ seconden",
+        "message": "Je wordt uitgelogd na $TIME$ seconden",
         "placeholders": {
             "time": {
                 "content": "$1"
@@ -2888,13 +2885,13 @@
         "message": "Standaard wachtwoordbeveiligingsinstellingen"
     },
     "settings-000713": {
-        "message": "Toon een voorbeeld van de bijbehorende website in de details. (Niet op mobiele telefoons)"
+        "message": "Een voorbeeld van de bijbehorende website weergeven in de details. (Niet op mobiele telefoons)"
     },
     "settings-000714": {
-        "message": "Informeert u over configuratiefouten en andere administratieve problemen"
+        "message": "Stelt je op de hoogte van configuratiefouten en andere administratieve problemen"
     },
     "settings-000715": {
-        "message": "Voer \"$CODE$\" in om uw account te resetten en alles te wissen.",
+        "message": "Voer \"$CODE$\" in om je account te resetten en alles te verwijderen.",
         "placeholders": {
             "code": {
                 "content": "$1"
@@ -2905,16 +2902,16 @@
         "message": "U kunt dit dialoogvenster gebruiken om uw hoofdwachtwoord te wijzigen."
     },
     "settings-000717": {
-        "message": "Uw wachtwoord moet langer zijn dan 12 tekens en niet het oude wachtwoord"
+        "message": "Je wachtwoord moet langer zijn dan 12 tekens en mag niet het oude wachtwoord zijn"
     },
     "settings-000718": {
         "message": "Bevestig uw nieuwe wachtwoord"
     },
     "settings-000719": {
-        "message": "U moet uw oude wachtwoord invoeren"
+        "message": "Je moet je oude wachtwoord invoeren"
     },
     "settings-000720": {
-        "message": "Uw wachtwoord is succesvol gewijzigd."
+        "message": "Je wachtwoord is succesvol gewijzigd."
     },
     "settings-000721": {
         "message": "De optie inschakelen om andere gebruikers standaard een gedeeld wachtwoord te laten bewerken"
@@ -2926,19 +2923,19 @@
         "message": "Open de instellingenpagina in het handboek"
     },
     "settings-000724": {
-        "message": "Keep-alive verzoeken naar de server sturen om te voorkomen dat de sessie wordt afgebroken."
+        "message": "Keep-alive verzoeken naar de server sturen om te voorkomen dat de sessie wordt geannuleerd"
     },
     "settings-000725": {
-        "message": "Kies het type versleuteling dat wordt gebruikt om gegevens op de client te versleutelen voordat ze naar de server worden gestuurd."
+        "message": "Kies het type versleuteling dat wordt gebruikt om gegevens op de client te versleutelen voordat ze naar de server worden verzonden"
     },
     "settings-000726": {
-        "message": "De SHA-1 hash wordt gebruikt om te controleren op geschonden wachtwoorden. Een gedeeltelijke hash kan brute force aanvallen voorkomen indien de server wordt gehackt, maar kan er ook toe leiden dat veilige wachtwoorden ten onrechte als geschonden worden gerapporteerd."
+        "message": "De SHA-1 hash wordt gebruikt om te controleren op geschonden wachtwoorden. Een gedeeltelijke hash kan brute force aanvallen voorkomen in het geval dat de server gehackt wordt, maar kan er ook voor zorgen dat veilige wachtwoorden ten onrechte als geschonden worden gerapporteerd."
     },
     "backend-Passwords": {
         "message": "Wachtwoorden"
     },
     "backend-UserMigrationDescription": {
-        "message": "Ontcijferde wachtwoorden database met wachtwoorden, mappen, tags en instellingen. (Bevat geen wachtwoorden die met u zijn gedeeld. Werkt niet met E2E ingeschakeld)",
+        "message": "Ontcijferde wachtwoordendatabase met wachtwoorden, mappen, tags en instellingen. (Bevat geen wachtwoorden die met jou zijn gedeeld. Werkt niet met E2E ingeschakeld)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
@@ -2946,7 +2943,7 @@
         "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
     },
     "backend-ExportNotPossibleText": {
-        "message": "Omdat je End-to-End-codering hebt ingeschakeld, kunnen je wachtwoorden niet automatisch aan de export worden toegevoegd. Als alternatief kunt u de exportfunctie binnen de app gebruiken om uw gegevens te exporteren.",
+        "message": "Omdat je End-to-End-encryptie hebt ingeschakeld, kunnen je wachtwoorden niet automatisch worden toegevoegd aan de export. Als alternatief kun je de exportfunctie binnen de app gebruiken om je gegevens te exporteren.",
         "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
     },
     "settings-SettingsPasswordPrint": {
@@ -2954,7 +2951,7 @@
         "description": "Label text in the settings for the option to show a print option for passwords"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "Toont een optie om het wachtwoord af te drukken in het menu en de details",
+        "message": "Toont een optie om het wachtwoord in het menu en de details af te drukken",
         "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
     },
     "frontend-PasswordActionPrint": {
@@ -2966,7 +2963,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode",
+        "message": "QrCode weergeven",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -2994,7 +2991,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "Het wachtwoord kon niet getagd worden met $TAG$: $ERROR$",
+        "message": "Het wachtwoord kon niet worden getagd met $TAG$: $ERROR$",
         "description": "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
@@ -3025,23 +3022,23 @@
         "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "Dit wachtwoord wordt gecodeerd op uw apparaat voordat het naar de server wordt gestuurd. Niemand kan dit wachtwoord lezen zonder uw coderingswachtwoord te kennen.",
+        "message": "Dit wachtwoord wordt versleuteld op je apparaat voordat het naar de server wordt gestuurd. Niemand kan dit wachtwoord lezen zonder je coderingswachtwoord te kennen.",
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "End-to-end encryptie",
+        "message": "End-to-end versleuteling",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
-        "message": "Encryptie aan de serverkant",
+        "message": "Encryptie aan serverzijde",
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Encryptie met sleutel van derden",
+        "message": "Server side encryptie van derden",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "Niets te kopiëren, $ELEMENT$ is leeg",
+        "message": "Niets om te kopiëren, $ELEMENT$ is leeg",
         "description": "Message when the user wants to copy an empty attribute",
         "placeholders": {
             "element": {
@@ -3058,11 +3055,11 @@
         "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "Als iemand u zegt hier iets te kopiëren en te plakken, is het waarschijnlijk dat hij toegang krijgt tot uw wachtwoorden of uw account overneemt.",
+        "message": "Als iemand je vertelt om hier iets te kopiëren en te plakken, is het waarschijnlijk dat ze toegang krijgen tot je wachtwoorden of je account overnemen.",
         "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "Zie {link} voor meer informatie",
+        "message": "Zie {link} voor meer informatie.",
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-SettingsEncryptionSection": {
@@ -3104,7 +3101,7 @@
         }
     },
     "backend-EOLPHPTitle": {
-        "message": "Wachtwoorden eindigen updates voor PHP $STR_1$",
+        "message": "Wachtwoorden beëindigen updates voor PHP $STR_1$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3143,7 +3140,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "Wachtwoorden eindigen updates voor Nextcloud $STR_1$ en PHP $STR_2$",
+        "message": "Wachtwoorden beëindigen updates voor Nextcloud $STR_1$ en PHP $STR_2$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3159,11 +3156,11 @@
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "Kon de database met geschonden wachtwoorden niet bijwerken",
+        "message": "Kan database met geschonden wachtwoorden niet bijwerken",
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "De update van de databank met de gebroken wachtwoorden is drie keer mislukt. Raadpleeg de handleiding en controleer uw logboeken. Reden: $STR_1$",
+        "message": "De update van de database met geschonden wachtwoorden is drie keer mislukt. Raadpleeg de handleiding en controleer uw logboeken. Reden: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3180,7 +3177,7 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "We hebben de onderstaande url gedetecteerd als de wachtwoordwijzigingspagina voor \"{label}\". Klik op de knop om deze te openen",
+        "message": "We hebben de onderstaande url gedetecteerd als de wachtwoordwijzigingspagina voor \"{label}\". Klik op de knop om deze te openen.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3192,7 +3189,7 @@
         }
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" kondigt hun wachtwoord wijzigingspagina niet aan. U kunt de functie wachtwoord wijzigen vinden op de website.",
+        "message": "\"{host} kondigt hun wachtwoordwijzigingspagina niet aan. U kunt de wachtwoordwijzigingsfunctie op de website vinden.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3240,7 +3237,7 @@
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "settings-WebauthnEncryptionSetupTitle": {
-        "message": "WebAuthn Aanmelding instellen",
+        "message": "WebAuthn Inloggen Setup",
         "description": "Title of the WebAuthn setup dialog."
     },
     "frontend-Disable": {
@@ -3285,7 +3282,7 @@
         "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
     },
     "frontend-HandbookAdminDocumentation": {
-        "message": "Handboek voor beheerders",
+        "message": "Handleiding voor beheerders",
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     },
     "frontend-HandbookDevDocumentation": {
@@ -3294,5 +3291,43 @@
     },
     "frontend-Donate": {
         "message": "Doneer"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Zoeken …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "De gekozen coderingswachtzin is onveilig en kan daarom niet worden gebruikt.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Onveilige coderingswachtzin",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "De wachtwoorden-app controleert regelmatig of je coderingswachtzin nog steeds veilig is. Je huidige wachtwoordzin is niet veilig en moet onmiddellijk worden gewijzigd."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Controleren of de server achtergrondtaken uitvoert met cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Achtergrondtaken worden uitgevoerd met cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Controleren of de server achtergrondtaken uitvoert met dezelfde PHP-versie.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Achtergrondtaken worden uitgevoerd met dezelfde PHP-versie.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText1": {
+        "message": "Welkom bij de Wachtwoorden App voor Nextcloud, de perfecte plek om uw wachtwoorden veilig en georganiseerd te bewaren.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Laten we beginnen",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
     }
 }

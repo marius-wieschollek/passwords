@@ -6,7 +6,6 @@
 
 ## Authors
 - Marius David Wieschollek
-  - Etherum Address: `0xfeab0bb419aeead202f4516cc674e5868269e5d5`
   - [ko-fi.com](https://ko-fi.com/mariusdavid) (PayPal, etc.)
 
 ## Don't forget these developers

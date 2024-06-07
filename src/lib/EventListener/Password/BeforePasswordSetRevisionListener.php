@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2023 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -14,7 +14,7 @@ namespace OCA\Passwords\EventListener\Password;
 use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Events\Password\BeforePasswordSetRevisionEvent;
-use OCA\Passwords\Helper\SecurityCheck\AbstractSecurityCheckHelper;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\EventDispatcher\Event;
@@ -65,7 +65,7 @@ class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
             $this->revisionService->save($newRevision);
         }
 
-        if($oldRevision->getStatusCode() === AbstractSecurityCheckHelper::STATUS_DUPLICATE && $newRevision->getHash() !== $oldRevision->getHash()) {
+        if($oldRevision->getStatusCode() === PasswordSecurityCheckService::STATUS_DUPLICATE && $newRevision->getHash() !== $oldRevision->getHash()) {
             $this->updateDuplicateStatus([$oldRevision->getHash()]);
         }
     }

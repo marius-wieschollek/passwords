@@ -49,10 +49,10 @@
     import Web from '@vc/Web';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
-    import Localisation from '@js/Classes/Localisation';
     import SettingsService from '@js/Services/SettingsService';
     import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
     import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch.js';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -118,14 +118,14 @@
 
                 if(this.password.username) {
                     fields.push({
-                                    label: Localisation.translate('Username'),
+                                    label: LocalisationService.translate('Username'),
                                     value: this.password.username
                                 });
                 }
-                fields.push({label: Localisation.translate('Password'), value: this.password.password, type: 'secret'});
+                fields.push({label: LocalisationService.translate('Password'), value: this.password.password, type: 'secret'});
                 if(this.password.url) {
                     fields.push({
-                                    label: Localisation.translate('Website'),
+                                    label: LocalisationService.translate('Website'),
                                     value: this.password.url,
                                     type : 'url'
                                 });
@@ -154,13 +154,13 @@
                         break;
                 }
 
-                return Localisation.translate(encryption);
+                return LocalisationService.translate(encryption);
             },
             getCseType() {
                 let encryption = 'No encryption';
                 if(this.password.cseType === 'CSEv1r1') encryption = 'Encryption with libsodium';
 
-                return Localisation.translate(encryption);
+                return LocalisationService.translate(encryption);
             },
             getSimpleEncryptionTitle() {
                 return this.password.cseType === 'CSEv1r1' ? 'PwDetailsEncryptionTitleCSE':'PwDetailsEncryptionTitleSSE';
@@ -171,7 +171,7 @@
         },
         methods : {
             getDateTime(date) {
-                return Localisation.formatDateTime(date);
+                return LocalisationService.formatDateTime(date);
             },
             async computeHash() {
 
@@ -213,7 +213,7 @@
             display    : block;
             font-style : normal;
             font-size  : 1rem;
-            color      : var(--color-text-lighter);
+            color      : var(--color-text-maxcontrast);
             text-align : right;
             cursor     : text;
             word-wrap  : break-word;
@@ -256,7 +256,7 @@
         margin-top  : 20px;
         font-size   : 1rem;
         font-weight : bold;
-        color       : var(--color-text-light);
+        color       : var(--color-main-text);
     }
 
     .password-details-options {

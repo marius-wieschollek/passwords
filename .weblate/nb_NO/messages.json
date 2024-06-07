@@ -1,24 +1,24 @@
 {
     "apps-000003": {
-        "message": "Kildekode"
+        "message": "kildekode"
     },
     "apps-000004": {
-        "message": "lære mer"
+        "message": "lær mer"
     },
     "apps-000005": {
-        "message": "Ta kontakt med PassLink"
+        "message": "Koble til med PassLink"
     },
     "apps-000006": {
         "message": "Koble til en ny enhet"
     },
     "apps-000007": {
-        "message": "Koble til via lenke"
+        "message": "Koble til med link"
     },
     "apps-000008": {
         "message": "Velg et navn:"
     },
     "apps-000009": {
-        "message": "Kodene stemmer ikke overens"
+        "message": "Kodene samsvarer ikke"
     },
     "apps-000010": {
         "message": "Ser bra ut"
@@ -27,7 +27,7 @@
         "message": "Tilkobling vellykket"
     },
     "apps-000012": {
-        "message": "Jeg er ferdig"
+        "message": "Ferdig"
     },
     "apps-000014": {
         "message": "Koble til en annen klient"
@@ -36,7 +36,7 @@
         "message": "Prøv igjen"
     },
     "apps-000001": {
-        "message": "tjenestemann"
+        "message": "offisiell"
     },
     "apps-000002": {
         "message": "av $AUTHOR$",
@@ -262,7 +262,7 @@
         "message": "Bruk søkefeltet for å søke"
     },
     "frontend-HandbookBugsReport": {
-        "message": "Fortell oss!"
+        "message": "Rapportere en feil"
     },
     "frontend-000334": {
         "message": "Sorter etter endret dato"
@@ -286,7 +286,7 @@
         "message": "watchout4snakes.com"
     },
     "backend-000406": {
-        "message": "Favicon-tjeneste"
+        "message": "Favicon-tjenesten"
     },
     "backend-000437": {
         "message": "Cacher"
@@ -1188,7 +1188,7 @@
         "message": "Ikke funnet"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Trenger du fortsatt hjelp?"
+        "message": "Trenger du hjelp?"
     },
     "frontend-HandbookMoreHelpForum": {
         "message": "Spør i forumet vårt!"
@@ -1760,7 +1760,7 @@
         "message": "Passordene er derfor merket som usikre og bør endres nå."
     },
     "backend-000470": {
-        "message": "Du kan opprette et nytt sikkert passord i passord-appen."
+        "message": "Du kan opprette et nytt, sikkert passord i passord-appen."
     },
     "backend-000471": {
         "message": "Du kan opprette nye sikre passord i passord-appen."
@@ -1953,7 +1953,7 @@
         "message": "Ikke innstilt"
     },
     "backend-000507": {
-        "message": "Vær så snill å vurdere å hoste favicon-apien din selv"
+        "message": "Vær så snill å vurdere å hoste favicon-api'et ditt selv"
     },
     "backend-000508": {
         "message": "Nextcloud bruker våre delte Besticon-instanser til å hente nettstedsikoner."
@@ -1971,7 +1971,7 @@
         "message": "Den valgte favicon-tjenesten krever en api-nøkkel eller et endepunkt, men det er ikke oppgitt."
     },
     "backend-000514": {
-        "message": "Forhåndsvisningstjenesten du har valgt, krever en api-nøkkel eller et endepunkt, men ingen er oppgitt."
+        "message": "Den valgte forhåndsvisningstjenesten krever en api-nøkkel eller et endepunkt, men det er ikke oppgitt."
     },
     "backend-000515": {
         "message": "Åpne administratorinnstillingene for å oppdatere konfigurasjonen eller velge en annen tjeneste."
@@ -1988,7 +1988,7 @@
         "message": "Dette kan tyde på at noen prøver å bryte seg inn på kontoen din."
     },
     "backend-000518": {
-        "message": "For å forhindre ytterligere forsøk ble API-legitimasjonen til denne klienten tilbakekalt."
+        "message": "For å forhindre flere forsøk ble API-legitimasjonen til denne klienten tilbakekalt."
     },
     "backend-000519": {
         "message": "Passordbasert API-autentisering er også deaktivert."
@@ -2063,7 +2063,7 @@
         "message": "Dobbeltklikk på handling"
     },
     "frontend-000544": {
-        "message": "Kopier passord"
+        "message": "Kopier Passord"
     },
     "frontend-000545": {
         "message": "Kopier brukernavn"
@@ -2274,7 +2274,7 @@
         }
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "Eller i chatten vår!"
+        "message": "Spør i chatten vår"
     },
     "frontend-000616": {
         "message": "For mange mislykkede påloggingsforsøk"
@@ -2476,7 +2476,7 @@
         "message": "Standardinnstilling"
     },
     "frontend-000670": {
-        "message": "Start søk når du trykker på en tast hvor som helst på siden."
+        "message": "Start søk når du trykker på en tast hvor som helst på siden"
     },
     "frontend-000671": {
         "message": "Søk overalt når du trykker på enter-tasten i søkefeltet."
@@ -2541,7 +2541,7 @@
         "message": "Vis forhåndsvisning av nettstedet"
     },
     "settings-000696": {
-        "message": "Nytt passord"
+        "message": "Nytt Passord"
     },
     "settings-000697": {
         "message": "Gjenta passord"
@@ -2810,9 +2810,6 @@
     "tutorial-000753": {
         "message": "Tilpass opplevelsen din"
     },
-    "tutorial-000754": {
-        "message": "Få orden på passordene dine"
-    },
     "tutorial-000755": {
         "message": "Bli tilkoblet"
     },
@@ -2859,7 +2856,7 @@
         "message": "Få favicons fra"
     },
     "tutorial-000770": {
-        "message": "Få forhåndsvisninger av nettsteder fra"
+        "message": "Få forhåndsvisning av nettstedet fra"
     },
     "tutorial-000771": {
         "message": "Ta sikkerhetskopier"
@@ -3124,7 +3121,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "Passwords avslutter oppdateringer for Nextcloud $STR_1$ og PHP $STR_2$",
+        "message": "Passord avslutter oppdateringer for Nextcloud $STR_1$ og PHP $STR_2$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3301,5 +3298,43 @@
     },
     "frontend-Donate": {
         "message": "Donere"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Søk …"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "Den valgte krypteringsfrasen er usikker og kan derfor ikke brukes.",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Usikker passordfrase for kryptering",
+        "description": "Label in the dialog to open the change password of the button to open that page"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "Passord-appen sjekker regelmessig om passordfrasen din fortsatt er sikker. Den nåværende passordfrasen er ikke sikker og må endres umiddelbart."
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Sjekker om serveren kjører bakgrunnsjobber med cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Bakgrunnsjobber utføres med cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Kontrollerer om serveren kjører bakgrunnsoppgaver med samme PHP-versjon.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Bakgrunnsjobber utføres med samme PHP-versjon.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "tutorial-StartText2": {
+        "message": "La oss komme i gang",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText1": {
+        "message": "Velkommen til Passwords App for Nextcloud, det perfekte stedet for å holde passordene dine trygge og organiserte.",
+        "description": "Initial welcome text on the first page of the first run wizard"
     }
 }

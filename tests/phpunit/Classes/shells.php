@@ -33,6 +33,54 @@ namespace OCP\AppFramework {
         public function getContainer(): IAppContainer {return new IAppContainer();}
         public function dispatch(string $controllerName, string $methodName) {}
     }
+
+    class Http {
+        public const STATUS_OK = 200;
+        public const STATUS_CREATED = 201;
+        public const STATUS_ACCEPTED = 202;
+        public const STATUS_NO_CONTENT = 204;
+        public const STATUS_MOVED_PERMANENTLY = 301;
+        public const STATUS_FOUND = 302;
+        public const STATUS_NOT_MODIFIED = 304;
+        public const STATUS_BAD_REQUEST = 400;
+        public const STATUS_UNAUTHORIZED = 401;
+        public const STATUS_PAYMENT_REQUIRED = 402;
+        public const STATUS_FORBIDDEN = 403;
+        public const STATUS_NOT_FOUND = 404;
+        public const STATUS_METHOD_NOT_ALLOWED = 405;
+        public const STATUS_NOT_ACCEPTABLE = 406;
+        public const STATUS_PROXY_AUTHENTICATION_REQUIRED = 407;
+        public const STATUS_REQUEST_TIMEOUT = 408;
+        public const STATUS_CONFLICT = 409;
+        public const STATUS_GONE = 410;
+        public const STATUS_LENGTH_REQUIRED = 411;
+        public const STATUS_PRECONDITION_FAILED = 412;
+        public const STATUS_REQUEST_ENTITY_TOO_LARGE = 413;
+        public const STATUS_REQUEST_URI_TOO_LONG = 414;
+        public const STATUS_UNSUPPORTED_MEDIA_TYPE = 415;
+        public const STATUS_REQUEST_RANGE_NOT_SATISFIABLE = 416;
+        public const STATUS_EXPECTATION_FAILED = 417;
+        public const STATUS_IM_A_TEAPOT = 418;
+        public const STATUS_UNPROCESSABLE_ENTITY = 422;
+        public const STATUS_LOCKED = 423;
+        public const STATUS_FAILED_DEPENDENCY = 424;
+        public const STATUS_UPGRADE_REQUIRED = 426;
+        public const STATUS_PRECONDITION_REQUIRED = 428;
+        public const STATUS_TOO_MANY_REQUESTS = 429;
+        public const STATUS_REQUEST_HEADER_FIELDS_TOO_LARGE = 431;
+        public const STATUS_INTERNAL_SERVER_ERROR = 500;
+        public const STATUS_NOT_IMPLEMENTED = 501;
+        public const STATUS_BAD_GATEWAY = 502;
+        public const STATUS_SERVICE_UNAVAILABLE = 503;
+        public const STATUS_GATEWAY_TIMEOUT = 504;
+        public const STATUS_HTTP_VERSION_NOT_SUPPORTED = 505;
+        public const STATUS_VARIANT_ALSO_NEGOTIATES = 506;
+        public const STATUS_INSUFFICIENT_STORAGE = 507;
+        public const STATUS_LOOP_DETECTED = 508;
+        public const STATUS_BANDWIDTH_LIMIT_EXCEEDED = 509;
+        public const STATUS_NOT_EXTENDED = 510;
+        public const STATUS_NETWORK_AUTHENTICATION_REQUIRED = 511;
+    }
 }
 
 namespace OCP\AppFramework\Bootstrap {
@@ -73,6 +121,11 @@ namespace OCP {
         public function getAbsoluteURL(string $url): string {return '';}
         public function imagePath(string $appName, string $file): string {return '';}
         public function linkToRouteAbsolute(string $routeName, array $arguments = []): string {return '';}
+        public function linkToDocs(string $key): string {return '';}
+    }
+
+    interface IL10N{
+        public function t(string $text, $parameters = []): string;
     }
 }
 
@@ -178,21 +231,37 @@ namespace OC\Migration {
 
 namespace OCP\Files\SimpleFS {
     interface ISimpleFile {}
+
+    interface ISimpleFolder {}
 }
 
 namespace OC\Files\SimpleFS {
+
+    use OCP\Files\NotFoundException;
+    use OCP\Files\NotPermittedException;
     use OCP\Files\SimpleFS\ISimpleFile;
+    use OCP\Files\SimpleFS\ISimpleFolder;
     class SimpleFile implements ISimpleFile{
-        public function getName() {}
-        public function getSize() {}
-        public function getETag() {}
-        public function getMTime() {}
-        public function getContent() {}
-        public function putContent($data) {}
-        public function delete() {}
-        public function getMimeType() {}
+        public function getName(): string {return '';}
+        public function getSize(): int {return 0;}
+        public function getETag(): string {return '';}
+        public function getMTime(): int {return 0;}
+        public function getContent(): string {return '';}
+        public function putContent($data): void {}
+        public function delete(): void {}
+        public function getMimeType(): string {return '';}
         public function read() {}
         public function write() {}
+    }
+    class SimpleFolder implements ISimpleFolder {
+        public function getDirectoryListing(): array {return [];}
+        public function fileExists(string $name): bool {return false;}
+        public function getFile(string $name): ISimpleFile {return new SimpleFile(); }
+        public function newFile(string $name, $content = null): ISimpleFile {return new SimpleFile(); }
+        public function delete(): void {}
+        public function getName(): string {return '';}
+        public function getFolder(string $name): ISimpleFolder  {return new SimpleFolder(); }
+        public function newFolder(string $path): ISimpleFolder {return new SimpleFolder(); }
     }
 }
 
@@ -244,5 +313,18 @@ namespace Psr\Log {
         public function info($message, array $context = array()) {}
         public function debug($message, array $context = array()) {}
         public function log($level, $message, array $context = array()) {}
+    }
+}
+namespace OCP\SetupCheck {
+    interface ISetupCheck {
+        public function getCategory(): string;
+        public function getName(): string;
+        public function run(): SetupResult;
+    }
+
+    class SetupResult {
+        public static function warning(?string $description = null, ?string $linkToDoc = null): self {return new self();}
+        public static function error(?string $description = null, ?string $linkToDoc = null): self {return new self();}
+        public static function success(?string $description = null, ?string $linkToDoc = null): self {return new self();}
     }
 }

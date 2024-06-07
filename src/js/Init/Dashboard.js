@@ -8,9 +8,9 @@
  * created by Marius David Wieschollek.
  */
 
-import Utility from "@js/Classes/Utility";
 import {loadState} from "@nextcloud/initial-state";
-import Localisation from "@js/Classes/Localisation";
+import UtilityService from "@js/Services/UtilityService";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default new class Dashboard {
 
@@ -53,7 +53,7 @@ export default new class Dashboard {
         this._dependencies.vue.mixin(
             {
                 methods: {
-                    t: (t, v) => { return Localisation.translate(t, v); }
+                    t: (t, v) => { return LocalisationService.translate(t, v); }
                 }
             }
         );
@@ -63,7 +63,7 @@ export default new class Dashboard {
     }
 
     async _initApi() {
-        let baseUrl = Utility.generateUrl(),
+        let baseUrl = UtilityService.generateUrl(),
             user    = loadState('passwords', 'api-user', null),
             token   = loadState('passwords', 'api-token', null);
 
@@ -73,7 +73,7 @@ export default new class Dashboard {
 
         if(baseUrl.indexOf('index.php') !== -1) baseUrl = baseUrl.substr(0, baseUrl.indexOf('index.php'));
 
-        this._dependencies.api.initialize({baseUrl, user, password: token});
+        this._dependencies.clientService.initialize(baseUrl, user, token);
         await this._checkLoginRequirement();
 
         return this._dependencies.api;

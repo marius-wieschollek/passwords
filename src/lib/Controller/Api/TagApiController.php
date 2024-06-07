@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2024 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Controller\Api;
@@ -21,6 +25,9 @@ use OCA\Passwords\Services\ValidationService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\Http\Attribute\CORS;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IRequest;
 
@@ -71,10 +78,6 @@ class TagApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string $label
      * @param string $color
      * @param string $cseKey
@@ -87,6 +90,9 @@ class TagApiController extends AbstractObjectApiController {
      * @throws Exception
      * @throws ApiException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function create(
         string $label = '',
         string $color = '',
@@ -113,10 +119,6 @@ class TagApiController extends AbstractObjectApiController {
     }
 
     /**
-     * @CORS
-     * @NoCSRFRequired
-     * @NoAdminRequired
-     *
      * @param string      $id
      * @param string      $label
      * @param string      $color
@@ -132,6 +134,9 @@ class TagApiController extends AbstractObjectApiController {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
     public function update(
         string $id,
         string $label,
@@ -145,7 +150,7 @@ class TagApiController extends AbstractObjectApiController {
     ): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         if($revision !== null && $revision !== $model->getRevision()) {
-            throw new ApiException('Outdated revision id', 400);
+            throw new ApiException('Outdated revision id', Http::STATUS_CONFLICT);
         }
 
         /** @var TagRevision $oldRevision */

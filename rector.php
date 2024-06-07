@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-use Rector\Core\Configuration\Option;
-use Rector\Core\ValueObject\PhpVersion;
+use Rector\ValueObject\PhpVersion;
 use Rector\Set\ValueObject\DowngradeSetList;
 use Rector\Config\RectorConfig;
 
-require_once ".rector/RemovePureAnnotation.php";
-require_once ".rector/FixReturnTypeExtension.php";
+require_once '.rector/PhpRandomizerFallback.php';
 
 return static function (RectorConfig $rectorConfig): void {
     $rectorConfig->paths(
         [
             __DIR__.'/src/appinfo',
             __DIR__.'/src/lib',
-            __DIR__.'/src/lib/.overrides',
             __DIR__.'/src/templates'
         ]
     );
@@ -29,7 +26,7 @@ return static function (RectorConfig $rectorConfig): void {
 
     $rectorConfig->phpVersion(PhpVersion::PHP_80);
     $rectorConfig->bootstrapFiles([__DIR__.'/rector-shells.php',]);
+    $rectorConfig->removeUnusedImports(true);
 
-    $rectorConfig->rule(\Utils\Rector\Rector\RemovePureAnnotation::class);
-    $rectorConfig->rule(\Utils\Rector\Rector\FixReturnTypeExtension::class);
+    $rectorConfig->rule(\Utils\Rector\Rector\PhpRandomizerFallback::class);
 };

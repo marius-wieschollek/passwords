@@ -46,8 +46,8 @@
     import TagIcon from "@icon/Tag";
     import Events from "@js/Classes/Events";
     import API from "@js/Helper/api";
-    import Utility from "@js/Classes/Utility";
     import {subscribe} from "@nextcloud/event-bus";
+    import UtilityService from "@js/Services/UtilityService";
 
     export default {
         name      : 'app-navigation-item-favorites',
@@ -108,7 +108,7 @@
                 this.loading = true;
                 API.findTags({favorite: true})
                    .then((d) => {
-                       this.tags = Utility.sortApiObjectArray(d, 'label');
+                       this.tags = UtilityService.sortApiObjectArray(d, 'label');
                        this.loading = false;
                    });
             },
@@ -116,7 +116,7 @@
                 this.loading = true;
                 API.findFolders({favorite: true})
                    .then((d) => {
-                       this.folders = Utility.sortApiObjectArray(d, 'label');
+                       this.folders = UtilityService.sortApiObjectArray(d, 'label');
                        this.loading = false;
                    });
             },

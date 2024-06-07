@@ -186,7 +186,7 @@ class UserChallengeService {
         } catch(Exception $e) {
             $this->logger->logException($e);
 
-            throw new ApiException('Loading challenge failed');
+            throw new ApiException('Loading challenge failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
         }
     }
 
@@ -205,7 +205,7 @@ class UserChallengeService {
             } catch(Exception $e) {
                 $this->logger->logException($e);
 
-                throw new ApiException('Password update failed');
+                throw new ApiException('Challenge update failed', Http::STATUS_INTERNAL_SERVER_ERROR, $e);
             }
         }
 
@@ -213,7 +213,7 @@ class UserChallengeService {
     }
 
     /**
-     * @param $backup
+     * @param array $backup
      */
     protected function revertChallenge(array $backup): void {
         try {
