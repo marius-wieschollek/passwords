@@ -11,7 +11,7 @@ __webpack_public_path__ = `${OC.appswebroots.passwords}/`;
 (function() {
     if(location.protocol !== 'https:') {
         location.href = `${location.origin}${location.pathname}?https=false`;
-    } else if(isCompatibleBrowser()) {
+    } else if(checkBrowserSupport() === true) {
         Application.init();
     }
 }());

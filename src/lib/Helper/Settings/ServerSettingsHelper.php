@@ -20,6 +20,8 @@ class ServerSettingsHelper {
 
     const SERVER_MANUAL_URL = 'https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/';
 
+    const SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/';
+
     /**
      * @var ConfigurationService
      */
@@ -49,10 +51,10 @@ class ServerSettingsHelper {
      * @param ThemeSettingsHelper  $themeSettings
      */
     public function __construct(
-        IURLGenerator $urlGenerator,
+        IURLGenerator        $urlGenerator,
         ConfigurationService $config,
-        ShareSettingsHelper $shareSettings,
-        ThemeSettingsHelper $themeSettings
+        ShareSettingsHelper  $shareSettings,
+        ThemeSettingsHelper  $themeSettings
     ) {
         $this->urlGenerator  = $urlGenerator;
         $this->shareSettings = $shareSettings;
@@ -91,8 +93,13 @@ class ServerSettingsHelper {
             case 'sharing':
                 return $this->shareSettings->get($subKey);
             case 'handbook':
-                if($subKey !== 'url') return null;
-                $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
+                if($subKey === 'url') {
+                    $handbookUrl = $this->config->getAppValue('handbook/url', self::SERVER_MANUAL_URL);
+                } else if($subKey === 'url.web') {
+                    $handbookUrl = $this->config->getAppValue('handbook/url/web', self::SERVER_MANUAL_URL_WEB);
+                } else {
+                    return null;
+                }
 
                 return empty($handbookUrl) ? self::SERVER_MANUAL_URL:$handbookUrl;
         }
@@ -106,12 +113,13 @@ class ServerSettingsHelper {
     public function list(): array {
         return array_merge(
             [
-                'server.baseUrl'        => $this->get('baseUrl'),
-                'server.baseUrl.webdav' => $this->get('baseUrl.webdav'),
-                'server.version'        => $this->get('version'),
-                'server.app.version'    => $this->get('app.version'),
-                'server.handbook.url'   => $this->get('handbook.url'),
-                'server.performance'    => $this->get('performance')
+                'server.baseUrl'          => $this->get('baseUrl'),
+                'server.baseUrl.webdav'   => $this->get('baseUrl.webdav'),
+                'server.version'          => $this->get('version'),
+                'server.app.version'      => $this->get('app.version'),
+                'server.handbook.url'     => $this->get('handbook.url'),
+                'server.handbook.url.web' => $this->get('handbook.url.web'),
+                'server.performance'      => $this->get('performance')
             ],
             $this->themeSettings->list(),
             $this->shareSettings->list()
