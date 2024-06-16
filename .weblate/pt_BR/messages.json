@@ -3329,5 +3329,37 @@
     "tutorial-StartText2": {
         "message": "Vamos começar",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Seu navegador está desatualizado",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Seu navegador está desatualizado e não tem a funcionalidade necessária para executar este aplicativo.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Verifique se há uma atualização disponível para seu navegador ou escolha um navegador moderno e compatível na lista abaixo.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Seu navegador não é compatível com o WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Seu navegador não é compatível com WebAssembly (WASM), que é necessário para executar este aplicativo.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Em alguns navegadores, o WebAssembly deve ser ativado na configuração do navegador.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Se o seu navegador não for compatível com o WebAssembly, verifique se há uma atualização disponível para ele ou escolha um navegador moderno e compatível na lista abaixo.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Um guia para ativar o WebAssembly pode ser encontrado no manual do aplicativo Passwords.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
