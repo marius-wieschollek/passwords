@@ -3341,5 +3341,37 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "Background jobs are executed with the same PHP version.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Your browser is outdated",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Your browser is outdated and does not have the necessary functionality to run this app.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Please check if an update is available for your browser or choose a modern and compatible browser from the list below.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Your browser does not support WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Your browser does not support WebAssembly (WASM), which is required to run this app.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "In some browsers, WebAssembly must be enabled in the browser configuration.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "If your browser does not have WebAssembly support, check if an update is available for your browser or choose a modern and compatible browser from the list below.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "A guide to enable WebAssembly can be found in the Passwords App handbook.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }

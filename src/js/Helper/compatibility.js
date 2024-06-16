@@ -21,11 +21,11 @@ function checkBrowserSupport() {
 }
 
 function showBrowserCompatibilityWarning(reason) {
-    var imgpath   = OC.filePath('passwords', 'img', 'browser/'),
+    var tl        = function(t) {return OC.L10N.translate('passwords', t);},
+        imgpath   = OC.filePath('passwords', 'img', 'browser/'),
         container = document.getElementById('main'),
-        title     = OC.L10N.translate('passwords', 'Your browser is outdated'),
-        message   = OC.L10N.translate('passwords', 'Your browser is outdated and does not have the necessary functionality to run this app.') + '<br>' +
-                    OC.L10N.translate('passwords', 'Please check if an update is available for your browser or choose a modern and compatible browser from the list below.');
+        title     = tl('CompatHeadline'),
+        message   = tl('CompatText1') + '<br>' + tl('CompatText2');
 
     if(reason === 'WebAssembly') {
         var handbookLink = null,
@@ -35,15 +35,13 @@ function showBrowserCompatibilityWarning(reason) {
             handbookLink = settings['server.handbook.url.web'] + 'Enable-WebAssembly';
         }
 
-        title = OC.L10N.translate('passwords', 'Your browser does not support WebAssembly');
-        message = OC.L10N.translate('passwords', 'Your browser does not support WebAssembly (WASM), which is required to run this app.') +
-                  '<br>' + OC.L10N.translate('passwords', 'In some browsers, WebAssembly must be enabled in the browser configuration.') + '<br>' +
+        title = tl('CompatWASMHeadline');
+        message = tl('CompatWASMText1') +
+                  '<br>' + tl('CompatWASMText2') + '<br>' +
                   (handbookLink ? '<a target="_blank" rel="noreferrer noopener" href="' + handbookLink + '">':'') +
-                  OC.L10N.translate('passwords', 'A guide to enable WebAssembly can be found in the Passwords App handbook.') +
+                  tl('CompatWASMHandbookLink') +
                   (handbookLink ? '</a>':'') +
-                  '<br><br>' +
-                  OC.L10N.translate('passwords',
-                                    'If your browser does not have WebAssembly support, check if an update is available for your browser or choose a modern and compatible browser from the list below.');
+                  '<br><br>' + tl('CompatWASMText3');
     }
 
     container.innerHTML =
