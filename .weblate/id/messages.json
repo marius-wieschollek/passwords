@@ -3329,5 +3329,37 @@
     "tutorial-StartText1": {
         "message": "Selamat datang di Aplikasi Kata Sandi untuk Nextcloud, tempat yang tepat untuk menyimpan kata sandi Anda dengan aman dan teratur.",
         "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Browser Anda sudah usang",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Browser Anda sudah ketinggalan zaman dan tidak memiliki fungsionalitas yang diperlukan untuk menjalankan aplikasi ini.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Silakan periksa apakah pembaruan tersedia untuk browser Anda atau pilih browser yang modern dan kompatibel dari daftar di bawah ini.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Browser Anda tidak mendukung WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Browser Anda tidak mendukung WebAssembly (WASM), yang diperlukan untuk menjalankan aplikasi ini.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Pada beberapa browser, WebAssembly harus diaktifkan dalam konfigurasi browser.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Jika browser Anda tidak memiliki dukungan WebAssembly, periksa apakah pembaruan tersedia untuk browser Anda atau pilih browser modern dan kompatibel dari daftar di bawah ini.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Panduan untuk mengaktifkan WebAssembly dapat ditemukan di buku panduan Aplikasi Kata Sandi.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
