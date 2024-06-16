@@ -3329,5 +3329,37 @@
     "tutorial-StartText1": {
         "message": "Dobrodošli v aplikaciji Gesla za Nextcloud, ki je odličen prostor za varno in urejeno shranjevanje gesel.",
         "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Vaš brskalnik je zastarel",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Vaš brskalnik je zastarel in nima potrebnih funkcij za zagon te aplikacije.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Preverite, ali je za vaš brskalnik na voljo posodobitev, ali izberite sodoben in združljiv brskalnik s spodnjega seznama.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Vaš brskalnik ne podpira WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Vaš brskalnik ne podpira WebAssembly (WASM), ki je potreben za zagon te aplikacije.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "V nekaterih brskalnikih je treba v konfiguraciji brskalnika omogočiti WebAssembly.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Če vaš brskalnik nima podpore za WebAssembly, preverite, ali je za vaš brskalnik na voljo posodobitev, ali pa izberite sodoben in združljiv brskalnik s spodnjega seznama.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Vodnik za omogočanje WebAssembly je na voljo v priročniku Passwords App.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
