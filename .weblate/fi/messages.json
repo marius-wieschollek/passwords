@@ -3329,5 +3329,37 @@
     "tutorial-StartText2": {
         "message": "Aloitetaan",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Selaimesi on vanhentunut",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Selaimesi on vanhentunut, eikä siinä ole tarvittavia toimintoja tämän sovelluksen käyttämiseen.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Tarkista, onko selaimellesi saatavilla päivitys, tai valitse moderni ja yhteensopiva selain alla olevasta luettelosta.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Selaimesi ei tue WebAssemblyä",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Selaimesi ei tue WebAssemblyä (WASM), jota tarvitaan tämän sovelluksen käyttämiseen.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Joissakin selaimissa WebAssembly on otettava käyttöön selaimen asetuksissa.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Jos selaimessasi ei ole WebAssembly-tukea, tarkista, onko selaimellesi saatavilla päivitys tai valitse moderni ja yhteensopiva selain alla olevasta luettelosta.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "WebAssemblyn käyttöönoton opas löytyy Passwords App -käsikirjasta.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
