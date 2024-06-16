@@ -3329,5 +3329,37 @@
     "tutorial-StartText2": {
         "message": "Ας ξεκινήσουμε",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Το πρόγραμμα περιήγησής σας είναι ξεπερασμένο",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Το πρόγραμμα περιήγησής σας είναι απαρχαιωμένο και δεν διαθέτει την απαραίτητη λειτουργικότητα για την εκτέλεση αυτής της εφαρμογής.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Ελέγξτε αν υπάρχει διαθέσιμη ενημέρωση για το πρόγραμμα περιήγησής σας ή επιλέξτε ένα σύγχρονο και συμβατό πρόγραμμα περιήγησης από την παρακάτω λίστα.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Το πρόγραμμα περιήγησής σας δεν υποστηρίζει το WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Το πρόγραμμα περιήγησής σας δεν υποστηρίζει το WebAssembly (WASM), το οποίο απαιτείται για την εκτέλεση αυτής της εφαρμογής.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Σε ορισμένα προγράμματα περιήγησης, το WebAssembly πρέπει να είναι ενεργοποιημένο στις ρυθμίσεις του προγράμματος περιήγησης.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Αν το πρόγραμμα περιήγησής σας δεν υποστηρίζει το WebAssembly, ελέγξτε αν υπάρχει διαθέσιμη ενημέρωση για το πρόγραμμα περιήγησής σας ή επιλέξτε ένα σύγχρονο και συμβατό πρόγραμμα περιήγησης από την παρακάτω λίστα.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Ένας οδηγός για την ενεργοποίηση του WebAssembly βρίσκεται στο εγχειρίδιο της εφαρμογής Passwords App.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
