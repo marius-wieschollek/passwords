@@ -3326,5 +3326,37 @@
     "tutorial-StartText2": {
         "message": "Začneme",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Váš prohlížeč nepodporuje WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Váš prohlížeč je zastaralý",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Váš prohlížeč je zastaralý a nemá potřebné funkce pro spuštění této aplikace.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Zkontrolujte, zda je pro váš prohlížeč k dispozici aktualizace, nebo si vyberte moderní a kompatibilní prohlížeč z níže uvedeného seznamu.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Váš prohlížeč nepodporuje WebAssembly (WASM), který je pro spuštění této aplikace nutný.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "V některých prohlížečích musí být v konfiguraci prohlížeče povolena funkce WebAssembly.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Pokud váš prohlížeč nepodporuje WebAssembly, zkontrolujte, zda pro něj není k dispozici aktualizace, nebo si vyberte moderní a kompatibilní prohlížeč z níže uvedeného seznamu.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Průvodce povolením WebAssembly najdete v příručce aplikace Hesla.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
