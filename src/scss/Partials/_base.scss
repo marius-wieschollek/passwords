@@ -1,18 +1,5 @@
-[data-constant] {
-    display    : none;
-    visibility : hidden;
-}
-
 .oc-dialog-dim {
     z-index : 1001;
-}
-
-form.searchbox {
-    transition : opacity .15s ease-in-out;
-
-    #searchbox:valid {
-        padding-right : 25px;
-    }
 }
 
 #main {
