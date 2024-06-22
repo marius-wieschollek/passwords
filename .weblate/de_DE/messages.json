@@ -3333,7 +3333,7 @@
         "description": "Headline of the error page when the browser can not run the app"
     },
     "frontend-CompatWASMHandbookLink": {
-        "message": "Eine Anleitung zur Aktivierung von WebAssembly finden Sie im Handbuch zur Kennwörter-App.",
+        "message": "Eine Anleitung zur Aktivierung von WebAssembly finden Sie im Handbuch zur Passwörter-App.",
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     },
     "frontend-CompatText1": {
@@ -3349,11 +3349,11 @@
         "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
     },
     "frontend-CompatWASMText1": {
-        "message": "Ihr Browser unterstützt kein WebAssembly (WASM), das für die Ausführung dieser Anwendung erforderlich ist.",
+        "message": "Ihr Browser unterstützt kein WebAssembly (WASM), welches für die Ausführung dieser Anwendung erforderlich ist.",
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
     },
     "frontend-CompatWASMText2": {
-        "message": "In einigen Browsern muss WebAssembly in der Browserkonfiguration aktiviert sein.",
+        "message": "In einigen Browsern kann WebAssembly in der Browserkonfiguration aktiviert werden.",
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
     },
     "frontend-CompatWASMText3": {
