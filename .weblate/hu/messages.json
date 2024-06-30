@@ -3329,5 +3329,37 @@
     "tutorial-StartText1": {
         "message": "Üdvözöljük a Nextcloud jelszóalkalmazásán, a tökéletes helyen, ahol biztonságban és rendszerezve tarthatja jelszavait.",
         "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "A böngészője elavult",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "A böngészője elavult, és nem rendelkezik az alkalmazás futtatásához szükséges funkciókkal.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Kérjük, ellenőrizze, hogy elérhető-e frissítés a böngészőjéhez, vagy válasszon egy modern és kompatibilis böngészőt az alábbi listából.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Az Ön böngészője nem támogatja a WebAssembly-t",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Az Ön böngészője nem támogatja a WebAssembly (WASM) programot, amely az alkalmazás futtatásához szükséges.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Egyes böngészőkben a WebAssemblyt engedélyezni kell a böngésző konfigurációjában.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Ha böngészője nem támogatja a WebAssemblyt, ellenőrizze, hogy elérhető-e frissítés a böngészőjéhez, vagy válasszon egy modern és kompatibilis böngészőt az alábbi listából.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "A WebAssembly engedélyezésének útmutatója a Passwords App kézikönyvben található.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }

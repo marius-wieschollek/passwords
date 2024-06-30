@@ -3329,5 +3329,37 @@
     "tutorial-StartText1": {
         "message": "Sveiki atvykę į \"Nextcloud\" skirtą slaptažodžių programėlę - puikią vietą slaptažodžiams saugoti ir tvarkyti.",
         "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Jūsų naršyklė yra pasenusi",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Jūsų naršyklė yra pasenusi ir neturi reikiamų funkcijų šiai programėlei paleisti.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Patikrinkite, ar jūsų naršyklė turi atnaujinimą, arba pasirinkite modernią ir suderinamą naršyklę iš toliau pateikto sąrašo.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Jūsų naršyklė nepalaiko \"WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Jūsų naršyklė nepalaiko \"WebAssembly\" (WASM), kuris reikalingas šiai programėlei paleisti.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Kai kuriose naršyklėse \"WebAssembly\" turi būti įjungtas naršyklės konfigūracijoje.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Jei jūsų naršyklė nepalaiko \"WebAssembly\", patikrinkite, ar jūsų naršyklei nėra atnaujinimo, arba pasirinkite modernią ir suderinamą naršyklę iš toliau pateikto sąrašo.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Vadovą, kaip įjungti \"WebAssembly\", rasite \"Passwords App\" vadove.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }

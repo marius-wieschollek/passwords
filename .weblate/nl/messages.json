@@ -3329,5 +3329,37 @@
     "tutorial-StartText2": {
         "message": "Laten we beginnen",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "Uw browser is verouderd",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "Je browser is verouderd en heeft niet de benodigde functionaliteit om deze app uit te voeren.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "Controleer of er een update beschikbaar is voor je browser of kies een moderne en compatibele browser uit de onderstaande lijst.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "Uw browser ondersteunt WebAssembly niet",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "Je browser ondersteunt geen WebAssembly (WASM), dat nodig is om deze app uit te voeren.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "In sommige browsers moet WebAssembly ingeschakeld zijn in de browserconfiguratie.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Als uw browser geen ondersteuning biedt voor WebAssembly, controleer dan of er een update beschikbaar is voor uw browser of kies een moderne en compatibele browser uit de onderstaande lijst.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Een handleiding om WebAssembly in te schakelen is te vinden in het handboek van de Wachtwoorden App.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }

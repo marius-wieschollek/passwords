@@ -3329,5 +3329,37 @@
     "tutorial-StartText2": {
         "message": "让我们开始吧",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-CompatHeadline": {
+        "message": "您的浏览器已过时",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "您的浏览器已经过时，不具备运行此应用程序所需的功能。",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "frontend-CompatText2": {
+        "message": "请检查您的浏览器是否有更新，或从下面的列表中选择一款兼容的现代浏览器。",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "您的浏览器不支持 WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "您的浏览器不支持运行此应用程序所需的 WebAssembly (WASM)。",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "在某些浏览器中，必须在浏览器配置中启用 WebAssembly。",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "如果您的浏览器不支持 WebAssembly，请检查您的浏览器是否有更新，或从下面的列表中选择一个现代的兼容浏览器。",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "启用 WebAssembly 的指南可在密码应用程序手册中找到。",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     }
 }
