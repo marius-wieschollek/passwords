@@ -181,6 +181,8 @@ class Version20220101 extends SimpleMigrationStep {
 
                     foreach($item as $key => $value) {
                         if($key === 'id') continue;
+                        if(!$schema->getTable($newTable)->hasColumn($key)) continue;
+
                         $type = $schema->getTable($newTable)->getColumn($key)->getType();
                         $query->setValue($key, $query->createNamedParameter($value, $type));
                     }

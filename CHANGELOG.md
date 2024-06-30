@@ -3,6 +3,7 @@
 - Breached passwords database updated to v12
 ### Fixed
 - UTF-8 characters in user names not working
+- Migration not working with ancient database schema
 
 ## 2024.5.0 - Feature release
 ### Changed
