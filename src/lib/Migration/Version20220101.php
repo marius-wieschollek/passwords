@@ -171,6 +171,14 @@ class Version20220101 extends SimpleMigrationStep {
                         continue;
                     }
 
+                    // #662 Fix upgrade from extremly old versions of the app
+                    if(isset($item['favourite'])) {
+                        if(!isset($item['favorite'])) {
+                            $item['favorite'] = $item['favourite'];
+                        }
+                        unset($item['favourite']);
+                    }
+
                     foreach($item as $key => $value) {
                         if($key === 'id') continue;
                         $type = $schema->getTable($newTable)->getColumn($key)->getType();
