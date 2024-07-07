@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2024.7.0 - Feature release
 ### Changed
 - Breached passwords database updated to v12
 - Info page when WebAssembly disabled
