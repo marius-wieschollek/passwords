@@ -1,6 +1,7 @@
 ## [Unreleased]
 ### Changed
 - Breached passwords database updated to v12
+- Info page when WebAssembly disabled
 ### Fixed
 - UTF-8 characters in user names not working
 - Migration not working with ancient database schema
