@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2024.8.0 - Feature release
+### Fixed
+- Imaginary not working when api key used
+
 ## 2024.7.0 - Feature release
 ### Changed
 - Breached passwords database updated to v12
