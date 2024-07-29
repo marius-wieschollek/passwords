@@ -16,4 +16,5 @@
 /var/www/html/occ config:system:set trusted_domains 1 --value=passwords.local --type=string;
 /var/www/html/occ config:system:set overwrite.cli.url --value=https://localhost --type=string;
 /var/www/html/occ config:system:set preview_imaginary_url --value=http://passwords-imaginary:9000/ --type=string;
+/var/www/html/occ config:system:set preview_imaginary_key --value=passwords --type=string;
 /var/www/html/occ config:system:set default_phone_region --value=DE --type=string;

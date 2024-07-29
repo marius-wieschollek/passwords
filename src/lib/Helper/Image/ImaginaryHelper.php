@@ -205,9 +205,10 @@ class ImaginaryHelper extends AbstractImageHelper {
         }
 
         try {
-            $response = $httpClient->post(
+            $imaginaryKey = $this->config->getSystemValue('preview_imaginary_key', '');
+            $response     = $httpClient->post(
                 $imaginaryEndpointUrl, [
-                'query'           => $params,
+                'query'           => ['key' => $imaginaryKey, ...$params],
                 'stream'          => true,
                 'body'            => $image->getResource(),
                 'nextcloud'       => ['allow_local_address' => true],
@@ -233,8 +234,6 @@ class ImaginaryHelper extends AbstractImageHelper {
     }
 
     /**
-     * @param string $operation
-     *
      * @return string
      * @throws NotConfiguredException
      */

@@ -76,10 +76,13 @@ services:
       PORT: 7070
 
   imaginary:
-    image: h2non/imaginary:latest
+    image: nextcloud/aio-imaginary:latest
     container_name: "passwords-imaginary"
     environment:
       PORT: 9000
+      IMAGINARY_SECRET: "passwords"
+    cap_add:
+      - SYS_NICE
 
 volumes:
   mysql:
