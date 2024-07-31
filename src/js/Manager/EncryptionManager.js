@@ -218,11 +218,12 @@ class EncryptionManager {
         password.tags = tags;
 
         if(!password.shared && password.share === null) {
-            await this._deleteObject(password.id, 'password');
+            let oldPasswordId = password.id;
             password.cseType = 'CSEv1r1';
 
             try {
                 await API.createPassword(password);
+                await this._deleteObject(oldPasswordId, 'password');
                 LoggingService.success(`Encrypted password ${password.id}`);
                 this._sendStatus('passwords');
             } catch(e) {
