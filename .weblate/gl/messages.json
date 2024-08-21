@@ -21,5 +21,49 @@
                 "content": "$1"
             }
         }
+    },
+    "apps-000008": {
+        "message": "Escolla un nome:"
+    },
+    "apps-000007": {
+        "message": "Conectar mediante ligazón"
+    },
+    "apps-000009": {
+        "message": "Os códigos non coinciden"
+    },
+    "apps-000010": {
+        "message": "Semella ser bo"
+    },
+    "apps-000011": {
+        "message": "Conexión satisfactoria"
+    },
+    "apps-000012": {
+        "message": "Rematei"
+    },
+    "apps-000014": {
+        "message": "Conectar outro cliente"
+    },
+    "apps-000013": {
+        "message": "Non tentar de novo"
+    },
+    "apps-000015": {
+        "message": "Tentar de novo"
+    },
+    "apps-000016": {
+        "message": "Cifrado forte"
+    },
+    "apps-000017": {
+        "message": "Produciuse un fallo ao obter as aplicacións: $ERROR$",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": "Vde. cancelou a conexión"
+    },
+    "apps-000019": {
+        "message": "Vde. non confirmou a conexión a tempo"
     }
 }
