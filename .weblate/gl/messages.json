@@ -1,1 +1,25 @@
-{}
+{
+    "apps-000003": {
+        "message": "código fonte"
+    },
+    "apps-000004": {
+        "message": "saber máis"
+    },
+    "apps-000005": {
+        "message": "Conectar con PassLink"
+    },
+    "apps-000006": {
+        "message": "Conectar un novo dispositivo"
+    },
+    "apps-000001": {
+        "message": "oficial"
+    },
+    "apps-000002": {
+        "message": "por $AUTHOR$",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    }
+}
