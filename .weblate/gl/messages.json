@@ -65,5 +65,11 @@
     },
     "apps-000019": {
         "message": "Vde. non confirmou a conexión a tempo"
+    },
+    "apps-000020": {
+        "message": "Só ten que escanear o código QR coa aplicación para conectalo."
+    },
+    "apps-000021": {
+        "message": "Prema no botón cando estea listo para iniciar a conexión."
     }
 }
