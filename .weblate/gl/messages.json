@@ -674,7 +674,7 @@
         "message": "Alternar a visibilidade"
     },
     "frontend-000204": {
-        "message": "O cartafol foi movido"
+        "message": "Cartafol movido"
     },
     "frontend-000195": {
         "message": "Cifrado simple do lado do servidor V1"
@@ -771,5 +771,120 @@
     },
     "frontend-000218": {
         "message": "Produciuse un fallo ao gardar a etiqueta"
+    },
+    "frontend-000227": {
+        "message": "Produciuse un fallo ao crear o contrasinal"
+    },
+    "frontend-000228": {
+        "message": "Editar contrasinal"
+    },
+    "frontend-000229": {
+        "message": "Gardouse o contrasinal"
+    },
+    "frontend-000230": {
+        "message": "Produciuse un fallo ao gardar o contrasinal"
+    },
+    "frontend-000231": {
+        "message": "Moveuse o contrasinal"
+    },
+    "frontend-000232": {
+        "message": "Produciuse un fallo ao mover o contrasinal"
+    },
+    "frontend-000234": {
+        "message": "Quere eliminar o contrasinal?"
+    },
+    "frontend-000233": {
+        "message": "Eliminar o contrasinal"
+    },
+    "frontend-000235": {
+        "message": "Eliminouse o contrasinal"
+    },
+    "frontend-000236": {
+        "message": "Recuperouse o contrasinal"
+    },
+    "frontend-000237": {
+        "message": "Produciuse un fallo ao restaurar o contrasinal"
+    },
+    "frontend-000238": {
+        "message": "Abrir o URL"
+    },
+    "frontend-000239": {
+        "message": "Copiar o URL"
+    },
+    "frontend-000240": {
+        "message": "Copiar o usuário"
+    },
+    "frontend-000241": {
+        "message": "Copiar o contrasinal"
+    },
+    "frontend-000242": {
+        "message": "$ELEMENT$ foi copiado no portapapeis",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "Produciuse un erro ao copiar $ELEMENT$ no portapapeis",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "Última modificación: $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": "Restaurar a revisión"
+    },
+    "frontend-000248": {
+        "message": "Quere restaurar a revisión?"
+    },
+    "frontend-000249": {
+        "message": "Compartido con Vde."
+    },
+    "frontend-000246": {
+        "message": "A revisión foi restaurada"
+    },
+    "frontend-000247": {
+        "message": "Produciuse un fallo ao restaurar a revisión"
+    },
+    "frontend-000251": {
+        "message": "Estatísticas"
+    },
+    "frontend-000252": {
+        "message": "Creado o"
+    },
+    "frontend-000253": {
+        "message": "Última actualización"
+    },
+    "frontend-000255": {
+        "message": "Comparticións"
+    },
+    "frontend-000254": {
+        "message": "$COUNT$ revisións",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000250": {
+        "message": "Compartido por Vde."
+    },
+    "frontend-000256": {
+        "message": "Compartiuse $COUNT$ veces",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
     }
 }
