@@ -71,5 +71,555 @@
     },
     "apps-000021": {
         "message": "Prema no botón cando estea listo para iniciar a conexión."
+    },
+    "apps-000022": {
+        "message": "Comprobe se os códigos seguintes coinciden cos fornecidos polo dispositivo ou a aplicación:"
+    },
+    "apps-000023": {
+        "message": "Vencelle este cliente á súa conta de Nextcloud sen contrasinais e URL molestos"
+    },
+    "backups-000028": {
+        "message": "Copia de seguranza ou exportación"
+    },
+    "backups-000029": {
+        "message": "Escolla o formato"
+    },
+    "backups-000030": {
+        "message": "Escolla"
+    },
+    "backups-000031": {
+        "message": "Copia de seguranza da base de datos"
+    },
+    "backups-000032": {
+        "message": "CSV predefinido"
+    },
+    "backups-000033": {
+        "message": "Lea a guía de importación de $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": "ou"
+    },
+    "backups-000036": {
+        "message": "CSV personalizado"
+    },
+    "backups-000038": {
+        "message": "Non hai ningunha importación para o seu CSV?",
+        "description": "Label for the button next to the input format selection which opens the help page for the custom CSV import"
+    },
+    "backups-000039": {
+        "message": "Contrasinal da copia de seguranza"
+    },
+    "backups-000040": {
+        "message": "(Opcional) Cifrar a copia de seguranza"
+    },
+    "backups-000042": {
+        "message": "Exportar contrasinais"
+    },
+    "backups-000044": {
+        "message": "Exportar etiquetas"
+    },
+    "backups-000046": {
+        "message": "Cartafol"
+    },
+    "backups-000047": {
+        "message": "Etiquetas"
+    },
+    "backups-000050": {
+        "message": "ID das etiquetas"
+    },
+    "backups-CustomFields": {
+        "message": "Campos personalizados"
+    },
+    "backups-FolderLabel": {
+        "message": "Cartafol"
+    },
+    "backups-TagLabels": {
+        "message": "Etiquetas"
+    },
+    "backups-FolderId": {
+        "message": "ID do cartafol"
+    },
+    "backups-TagIds": {
+        "message": "ID das etiquetas"
+    },
+    "backups-000052": {
+        "message": "Baleiro"
+    },
+    "backups-000053": {
+        "message": "Engadir un encabezamento"
+    },
+    "backups-000055": {
+        "message": "Non editar ningún dos contrasinais compartidos comigo"
+    },
+    "backups-000056": {
+        "message": "Non importar campos baleiros"
+    },
+    "backups-000058": {
+        "message": "Exportar"
+    },
+    "backups-000059": {
+        "message": "Agarde…"
+    },
+    "backups-000060": {
+        "message": "Produciuse un erro de exportación"
+    },
+    "backups-000061": {
+        "message": "Descargar $FORMAT$",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": "Non hai nada que exportar"
+    },
+    "backups-000063": {
+        "message": "Non hai ningún dato para exportar"
+    },
+    "backups-000065": {
+        "message": "Escoller o formato de importación"
+    },
+    "backups-000066": {
+        "message": "Contrasinais en CSV"
+    },
+    "backups-000067": {
+        "message": "Cartafol con CSV"
+    },
+    "backups-000068": {
+        "message": "CSV personalizado"
+    },
+    "backups-000069": {
+        "message": "CSV xenérico / personalizado"
+    },
+    "backups-000070": {
+        "message": "Seleccionar ficheiro"
+    },
+    "backups-000072": {
+        "message": "Xestión de conflitos"
+    },
+    "backups-000073": {
+        "message": "Omitir se é a mesma revisión"
+    },
+    "backups-000074": {
+        "message": "Omitir sempre"
+    },
+    "backups-000075": {
+        "message": "Sobrescribir o existente"
+    },
+    "backups-000076": {
+        "message": "Combinar co existente"
+    },
+    "backups-000078": {
+        "message": "Para copias de seguranza cifradas"
+    },
+    "backups-000079": {
+        "message": "Opcións do CSV"
+    },
+    "backups-000080": {
+        "message": "Base de datos"
+    },
+    "backups-000082": {
+        "message": "Carácter de escape"
+    },
+    "backups-000083": {
+        "message": "Delimitador de campos"
+    },
+    "backups-000081": {
+        "message": "Carácter de cita"
+    },
+    "backups-000084": {
+        "message": "Salto de liña"
+    },
+    "backups-000087": {
+        "message": "Barra invertida"
+    },
+    "backups-000088": {
+        "message": "Detectar"
+    },
+    "backups-000093": {
+        "message": "Detectar comiñas non escapadas"
+    },
+    "backups-000089": {
+        "message": "Coma"
+    },
+    "backups-000090": {
+        "message": "Punto e coma"
+    },
+    "backups-000091": {
+        "message": "Espazo"
+    },
+    "backups-000092": {
+        "message": "Tabulador"
+    },
+    "backups-000095": {
+        "message": "Interpolar os campos que faltan"
+    },
+    "backups-000096": {
+        "message": "Asignación de campos CSV"
+    },
+    "backups-000085": {
+        "message": "Comiña"
+    },
+    "backups-000097": {
+        "message": "Amosar a liña"
+    },
+    "backups-000098": {
+        "message": "Liña $LINE$",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": "(ningún valor)"
+    },
+    "backups-000100": {
+        "message": "Ignorar"
+    },
+    "backups-000102": {
+        "message": "Importar"
+    },
+    "backups-000103": {
+        "message": "Analizando o ficheiro de entrada"
+    },
+    "backups-000105": {
+        "message": "Analizando os cartafoles"
+    },
+    "backups-000106": {
+        "message": "Lendo etiquetas"
+    },
+    "backups-000108": {
+        "message": "Lendo os cartafoles"
+    },
+    "backups-000110": {
+        "message": "Lendo os contrasinais"
+    },
+    "backups-000111": {
+        "message": "Importando os contrasinais"
+    },
+    "backups-000114": {
+        "message": "Importación satisfactoria"
+    },
+    "backups-000115": {
+        "message": "Produciuse un erro na importación"
+    },
+    "backups-000117": {
+        "message": "O tipo de ficheiro «$TYPE$» non é válido",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": "Contrasinal obrigatorio"
+    },
+    "backups-000119": {
+        "message": "Contrasinal incorrecto"
+    },
+    "backups-000120": {
+        "message": "Produciuse un fallo ao descifrar os contrasinais"
+    },
+    "backups-000122": {
+        "message": "Produciuse un fallo ao descifrar as etiquetas"
+    },
+    "backups-000123": {
+        "message": "O ficheiro de importación está baleiro"
+    },
+    "backups-000124": {
+        "message": "Non é posíbel pode asignar o ficheiro CSV"
+    },
+    "backups-000125": {
+        "message": "Credenciais de acceso"
+    },
+    "backups-000126": {
+        "message": "Notas"
+    },
+    "backups-000128": {
+        "message": "Identidades"
+    },
+    "backups-000129": {
+        "message": "Finanzas"
+    },
+    "backups-000130": {
+        "message": "Licenzas"
+    },
+    "backups-000131": {
+        "message": "Viaxes"
+    },
+    "backups-000132": {
+        "message": "Computadores"
+    },
+    "backups-000133": {
+        "message": "Miscelánea"
+    },
+    "backups-000137": {
+        "message": "«$LABEL$» contén ficheiros anexos que non é posíbel importar.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "A etiqueta de «$FIELD$» en «$LABEL$» supera os 48 caracteres e foi cortada.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": "Pódese atopar máis información no rexistro. (Prema F12)"
+    },
+    "backups-000144": {
+        "message": "Cartafol"
+    },
+    "backups-000145": {
+        "message": "Etiquetas"
+    },
+    "frontend-000148": {
+        "message": "Contrasinais"
+    },
+    "frontend-000149": {
+        "message": "Todas"
+    },
+    "frontend-000151": {
+        "message": "Recente"
+    },
+    "frontend-000153": {
+        "message": "Compartidas"
+    },
+    "frontend-000155": {
+        "message": "Lixo"
+    },
+    "frontend-000156": {
+        "message": "Detalles"
+    },
+    "frontend-000157": {
+        "message": "Editar"
+    },
+    "frontend-000159": {
+        "message": "Eliminar"
+    },
+    "frontend-000160": {
+        "message": "Restaurar"
+    },
+    "frontend-000161": {
+        "message": "Novo contrasinal"
+    },
+    "frontend-000163": {
+        "message": "Nova etiqueta"
+    },
+    "frontend-000164": {
+        "message": "Segura"
+    },
+    "frontend-000166": {
+        "message": "Feble"
+    },
+    "frontend-000167": {
+        "message": "Feble (repetido)"
+    },
+    "frontend-000168": {
+        "message": "Feble (anticuado)"
+    },
+    "frontend-000169": {
+        "message": "Comprometido"
+    },
+    "frontend-000170": {
+        "message": "Compartir"
+    },
+    "frontend-000171": {
+        "message": "Revisións"
+    },
+    "frontend-000172": {
+        "message": "Codigo QR"
+    },
+    "frontend-000173": {
+        "message": "Contrasinal"
+    },
+    "frontend-000174": {
+        "message": "Nome de usuario"
+    },
+    "frontend-000175": {
+        "message": "Sitio web"
+    },
+    "frontend-000176": {
+        "message": "Engadir etiquetas…"
+    },
+    "apps-000024": {
+        "message": "Este cliente admite oficialmente o noso forte cifrado de extremo a extremo"
+    },
+    "apps-000025": {
+        "message": "Este cliente é mantido polos autores da aplicación Contrasinais"
+    },
+    "backups-000043": {
+        "message": "Exportar cartafoles"
+    },
+    "backups-000045": {
+        "message": "Campos personalizados"
+    },
+    "backups-000051": {
+        "message": "ID do cartafol superior"
+    },
+    "backups-000054": {
+        "message": "Exportar os contrasinais compartidos comigo"
+    },
+    "backups-000071": {
+        "message": "Seleccionar opcións"
+    },
+    "backups-000094": {
+        "message": "Omitir a primeira liña"
+    },
+    "backups-000112": {
+        "message": "Produciuse un fallo na importación"
+    },
+    "backups-000140": {
+        "message": "O valor de «$FIELD$» en «$LABEL$» supera os 320 caracteres e foi cortado.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000162": {
+        "message": "Novo cartafol"
+    },
+    "backups-000077": {
+        "message": "Crear unha nova entrada"
+    },
+    "backups-000086": {
+        "message": "Comiña simple"
+    },
+    "backups-000113": {
+        "message": "Produciuse un fallo parcial na importación"
+    },
+    "backups-000121": {
+        "message": "Produciuse un fallo ao descifrar os cartafoles"
+    },
+    "backups-000138": {
+        "message": "O tipo de «$FIELD$» en «$LABEL$» é descoñecido e non é posíbel importalo.",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000158": {
+        "message": "Cambiar o nome"
+    },
+    "apps-000026": {
+        "message": "Prema no botón para conectar unha aplicación instalada neste dispositivo ou escanee o código QR coa aplicación se está instalada noutro dispositivo."
+    },
+    "backups-000035": {
+        "message": "copia de seguranza da base de datos"
+    },
+    "backups-000049": {
+        "message": "ID do cartafol"
+    },
+    "backups-000064": {
+        "message": "Restaurar ou importar"
+    },
+    "backups-000107": {
+        "message": "Importando etiquetas"
+    },
+    "backups-000116": {
+        "message": "Algúns obxectos tiñan erros:"
+    },
+    "frontend-000150": {
+        "message": "Cartafoles"
+    },
+    "frontend-000154": {
+        "message": "Seguranza"
+    },
+    "frontend-000165": {
+        "message": "Estado"
+    },
+    "backups-000037": {
+        "message": "probe a importación xenérica de CSV"
+    },
+    "backups-000041": {
+        "message": "A importación só admite ficheiros CSV"
+    },
+    "backups-000048": {
+        "message": "Cartafol superior"
+    },
+    "backups-000057": {
+        "message": "Executar a exportación"
+    },
+    "backups-000134": {
+        "message": "Comiña mal escapada nun campo delimitado por comiñas"
+    },
+    "backups-000136": {
+        "message": "$MESSAGE$ na liña $LINE$, carácter $CHARACTER$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000101": {
+        "message": "Executar a importación"
+    },
+    "backups-000104": {
+        "message": "Analizando as etiquetas"
+    },
+    "backups-000109": {
+        "message": "Importando os cartafoles"
+    },
+    "backups-000127": {
+        "message": "Tarxetas de crédito"
+    },
+    "backups-000135": {
+        "message": "Non foi posíbel analizar o ficheiro: $ERRORS$",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000142": {
+        "message": "O ficheiro ten o tipo «$ACTUAL$» mais agardábase «$EXPECTED$». É posíbel que escollera o ficheiro ou o importador incorrecto.",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "Sábese que $SERVICE$ xera ficheiros de exportación defectuosos. Consulte o manual para obter axuda se non é posíbel analizar o ficheiro.",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000152": {
+        "message": "Favoritos"
     }
 }
