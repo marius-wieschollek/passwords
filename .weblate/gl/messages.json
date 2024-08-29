@@ -392,13 +392,13 @@
         "message": "Contrasinais"
     },
     "frontend-000149": {
-        "message": "Todas"
+        "message": "Todos"
     },
     "frontend-000151": {
         "message": "Recente"
     },
     "frontend-000153": {
-        "message": "Compartidas"
+        "message": "Compartidos"
     },
     "frontend-000155": {
         "message": "Lixo"
@@ -422,7 +422,7 @@
         "message": "Nova etiqueta"
     },
     "frontend-000164": {
-        "message": "Segura"
+        "message": "Seguro"
     },
     "frontend-000166": {
         "message": "Feble"
@@ -621,5 +621,155 @@
     },
     "frontend-000152": {
         "message": "Favoritos"
+    },
+    "frontend-000177": {
+        "message": "Cor"
+    },
+    "frontend-000178": {
+        "message": "Nome"
+    },
+    "frontend-000179": {
+        "message": "Etiqueta"
+    },
+    "frontend-000180": {
+        "message": "Xeral"
+    },
+    "frontend-000181": {
+        "message": "Propiedades"
+    },
+    "frontend-000182": {
+        "message": "Números"
+    },
+    "frontend-000183": {
+        "message": "Caracteres especiais"
+    },
+    "frontend-000184": {
+        "message": "Máis opcións"
+    },
+    "frontend-000185": {
+        "message": "Favorito"
+    },
+    "frontend-000186": {
+        "message": "Cifrado"
+    },
+    "frontend-000187": {
+        "message": "No servidor"
+    },
+    "frontend-000188": {
+        "message": "Campos personalizados"
+    },
+    "frontend-000189": {
+        "message": "Segredo"
+    },
+    "frontend-000190": {
+        "message": "Texto"
+    },
+    "frontend-000191": {
+        "message": "Ficheiro"
+    },
+    "frontend-000192": {
+        "message": "Valor"
+    },
+    "frontend-000193": {
+        "message": "Alternar a visibilidade"
+    },
+    "frontend-000204": {
+        "message": "O cartafol foi movido"
+    },
+    "frontend-000195": {
+        "message": "Cifrado simple do lado do servidor V1"
+    },
+    "frontend-000196": {
+        "message": "Tome algunhas notas"
+    },
+    "frontend-000197": {
+        "message": "Gardar"
+    },
+    "frontend-000198": {
+        "message": "Crear un cartafol"
+    },
+    "frontend-000200": {
+        "message": "Produciuse un fallo ao crear o cartafol"
+    },
+    "frontend-000201": {
+        "message": "Cambiar o nome do cartafol"
+    },
+    "frontend-000202": {
+        "message": "O cartafol cambiou de nome"
+    },
+    "frontend-000203": {
+        "message": "Produciuse un fallo ao cambiar o nome do cartafol"
+    },
+    "frontend-000205": {
+        "message": "Produciuse un fallo ao mover o cartafol"
+    },
+    "frontend-000206": {
+        "message": "Eliminar o cartafol"
+    },
+    "frontend-000194": {
+        "message": "Xerar un contrasinal"
+    },
+    "frontend-000208": {
+        "message": "O cartafol foi eliminado"
+    },
+    "frontend-000199": {
+        "message": "Creouse o cartafol"
+    },
+    "frontend-000207": {
+        "message": "Quere eliminar o cartafol e o seu contido?"
+    },
+    "frontend-000210": {
+        "message": "O cartafol foi restaurado"
+    },
+    "frontend-000211": {
+        "message": "Produciuse un fallo ao restaurar o cartafol"
+    },
+    "frontend-000214": {
+        "message": "Produciuse un fallo ao crear a etiqueta"
+    },
+    "frontend-000212": {
+        "message": "Crear unha etiqueta"
+    },
+    "frontend-000215": {
+        "message": "Editar a etiqueta"
+    },
+    "frontend-000216": {
+        "message": "Xerar unha cor ao chou"
+    },
+    "frontend-000217": {
+        "message": "A etiqueta foi gardada"
+    },
+    "frontend-000219": {
+        "message": "Eliminar a etiqueta"
+    },
+    "frontend-000220": {
+        "message": "Quere eliminar a etiqueta?"
+    },
+    "frontend-000221": {
+        "message": "A etiqueta foi eliminada"
+    },
+    "frontend-000222": {
+        "message": "Produciuse un fallo ao eliminar a etiqueta"
+    },
+    "frontend-000223": {
+        "message": "A etiqueta foi restaurada"
+    },
+    "frontend-000224": {
+        "message": "Produciuse un fallo ao restaurar a etiqueta"
+    },
+    "frontend-000226": {
+        "message": "Creouse un contrasinal"
+    },
+    "frontend-000225": {
+        "message": "Crear un contrasinal"
+    },
+    "frontend-000209": {
+        "message": "Produciuse un fallo ao eliminar o cartafol"
+    },
+    "frontend-000213": {
+        "message": "Creouse a etiqueta"
+    },
+    "frontend-000218": {
+        "message": "Produciuse un fallo ao gardar a etiqueta"
     }
 }
