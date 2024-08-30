@@ -1147,5 +1147,202 @@
     },
     "frontend-000315": {
         "message": "Os seus favoritos aparecerán aquí"
+    },
+    "frontend-HandbookMoreHelp": {
+        "message": "Precisa de axuda?",
+        "description": "Title of the box on the right in the handbook where users can find links to the forum and chat."
+    },
+    "frontend-HandbookMoreHelpForum": {
+        "message": "Pregunte no noso foro",
+        "description": "Label of the link to the forum in the box on the right in the handbook."
+    },
+    "frontend-HandbookMoreHelpChat": {
+        "message": "Pregunte na nosa sala de parola",
+        "description": "Label of the link to the chat in the box on the right in the handbook."
+    },
+    "frontend-HandbookBugsReport": {
+        "message": "Informar dun fallo",
+        "description": "Label of the link to the bug report page in the box on the right in the handbook."
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Manual de administración",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Manual do desenvolvedor",
+        "description": "Label of the link to the admin wiki in the box on the right in the handbook."
+    },
+    "frontend-000329": {
+        "message": "A sesión caducou"
+    },
+    "frontend-000330": {
+        "message": "O testemuño de sesión da API caducou"
+    },
+    "frontend-000331": {
+        "message": "Produciuse un erro de rede"
+    },
+    "frontend-000332": {
+        "message": "Non foi posíbel cargar o módulo $MODULE$",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": "Ordenar por nome"
+    },
+    "frontend-000334": {
+        "message": "Ordenar por data de modificación"
+    },
+    "frontend-000336": {
+        "message": "1 contrasinal"
+    },
+    "frontend-000337": {
+        "message": "$FOLDERS$ cartafoles",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": "1 cartafol"
+    },
+    "frontend-000340": {
+        "message": "1 etiqueta"
+    },
+    "frontend-000341": {
+        "message": "Ren"
+    },
+    "frontend-000342": {
+        "message": " e "
+    },
+    "frontend-000343": {
+        "message": "coincidencia"
+    },
+    "frontend-000344": {
+        "message": "coincidencias"
+    },
+    "frontend-000345": {
+        "message": "Creado por"
+    },
+    "frontend-000346": {
+        "message": "Vde. accedeu como $USER$",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": "Acceso"
+    },
+    "frontend-000348": {
+        "message": "Volver solicitar o testemuño"
+    },
+    "frontend-000349": {
+        "message": "Demasiados intentos"
+    },
+    "frontend-000350": {
+        "message": "O contrasinal e curto de máis"
+    },
+    "frontend-000352": {
+        "message": "Produciuse un fallo ao solicitar o testemuño"
+    },
+    "frontend-000354": {
+        "message": "Non está dispoñíbel"
+    },
+    "frontend-000355": {
+        "message": "Sistema"
+    },
+    "frontend-000356": {
+        "message": "Aceso público"
+    },
+    "frontend-000357": {
+        "message": "Tarefa automática en segundo plano"
+    },
+    "frontend-000359": {
+        "message": "Corrixa a súa entrada"
+    },
+    "frontend-000360": {
+        "message": "Amosar o valor"
+    },
+    "frontend-000361": {
+        "message": "Cancelar"
+    },
+    "frontend-000362": {
+        "message": "Aceptar"
+    },
+    "frontend-000363": {
+        "message": "verdadeiro"
+    },
+    "frontend-000364": {
+        "message": "falso"
+    },
+    "frontend-000365": {
+        "message": "si"
+    },
+    "frontend-000366": {
+        "message": "non"
+    },
+    "frontend-000368": {
+        "message": "Acadou a lonxitude máxima de 4096 caracteres"
+    },
+    "frontend-000370": {
+        "message": "Non foi posíbel recuperar a páxina «$PAGE$» do servidor de manuais.",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": "Algúns datos están a agardar para seren sincronizados"
+    },
+    "frontend-000335": {
+        "message": "$PASSWORDS$ contrasinais",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000367": {
+        "message": "$NAME$ compartiu este contrasinal con Vde.",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-HandbookMore": {
+        "message": "Outra documentación",
+        "description": "Label of the button to reveal other documentation in the box on the right in the handbook."
+    },
+    "frontend-000351": {
+        "message": "Produciuse un erro descoñecido"
+    },
+    "frontend-000353": {
+        "message": "Sistema en mantemento"
+    },
+    "frontend-000339": {
+        "message": "$TAGS$ etiquetas",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000369": {
+        "message": "Non foi posíbel atopar nada por «$QUERY$»",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000358": {
+        "message": "Liña de ordes do servidor"
     }
 }
