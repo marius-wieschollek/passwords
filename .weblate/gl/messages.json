@@ -886,5 +886,266 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-000258": {
+        "message": "Cifrado do lado do cliente"
+    },
+    "frontend-000259": {
+        "message": "Sen cifrado"
+    },
+    "frontend-000260": {
+        "message": "Cifrado simple (Xeración 1)"
+    },
+    "frontend-000262": {
+        "message": "Cifrado avanzado (SSE V2)"
+    },
+    "frontend-000263": {
+        "message": "Cifrado con libsodium"
+    },
+    "frontend-000264": {
+        "message": "Máis"
+    },
+    "frontend-000265": {
+        "message": "Copia de seguranza e restaurar"
+    },
+    "frontend-000266": {
+        "message": "Axustes"
+    },
+    "frontend-000267": {
+        "message": "Manual de instrucións"
+    },
+    "frontend-000268": {
+        "message": "Aplicacións e extensións"
+    },
+    "frontend-000270": {
+        "message": "Permitida a edición"
+    },
+    "frontend-000271": {
+        "message": "Non se permite a edición"
+    },
+    "frontend-000272": {
+        "message": "permítese compartir"
+    },
+    "frontend-000273": {
+        "message": "non se permite compartir"
+    },
+    "frontend-000274": {
+        "message": "Buscar usuario"
+    },
+    "frontend-000276": {
+        "message": "Caduca o $DATETIME$",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000279": {
+        "message": "Data non válida"
+    },
+    "frontend-000281": {
+        "message": "No é posíbel compartir o contrasinal: $MESSAGE$",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": "Cambiar os permisos de escritura"
+    },
+    "frontend-000283": {
+        "message": "Cambiar os permisos para compartir"
+    },
+    "frontend-000284": {
+        "message": "Deixar de compartir"
+    },
+    "frontend-000285": {
+        "message": "Data"
+    },
+    "frontend-000286": {
+        "message": "Memoria caché predeterminada (0 ficheiros, 0 B)"
+    },
+    "frontend-000288": {
+        "message": "Memoria caché de faviconas (0 ficheiros, 0 B)"
+    },
+    "frontend-000289": {
+        "message": "Memoria caché de vistas previas (0 ficheiros, 0 B)"
+    },
+    "frontend-000291": {
+        "message": "Cambiada"
+    },
+    "frontend-000292": {
+        "message": "Modificada"
+    },
+    "frontend-000293": {
+        "message": "Editada"
+    },
+    "frontend-000294": {
+        "message": "Creada"
+    },
+    "frontend-000295": {
+        "message": "Revisión"
+    },
+    "frontend-000296": {
+        "message": "URL"
+    },
+    "frontend-000297": {
+        "message": "Superior"
+    },
+    "frontend-000298": {
+        "message": "Eliminar todos os elementos"
+    },
+    "frontend-000299": {
+        "message": "Restaurar todos os elementos"
+    },
+    "frontend-000300": {
+        "message": "Restaurar os elementos"
+    },
+    "frontend-000301": {
+        "message": "Quere restaurar todos os elementos do lixo?"
+    },
+    "frontend-000303": {
+        "message": "Elementos restaurados"
+    },
+    "frontend-000304": {
+        "message": "Baleirar o lixo"
+    },
+    "frontend-000305": {
+        "message": "Quere eliminar todos os elementos do lixo?"
+    },
+    "frontend-000306": {
+        "message": "Cesto do lixo baleiro"
+    },
+    "frontend-000308": {
+        "message": "Para facer buscas use a caixa de buscas"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Buscar…"
+    },
+    "frontend-000310": {
+        "message": "Aquí non hai ren"
+    },
+    "frontend-000311": {
+        "message": "Prema en «…» para engadir algo"
+    },
+    "frontend-000312": {
+        "message": "Os elementos eliminados aparecerán aquí"
+    },
+    "frontend-000313": {
+        "message": "Non foi compartido ningún contrasinal con Vde."
+    },
+    "frontend-000314": {
+        "message": "Vde. non está a compartir ningún contrasinal"
+    },
+    "frontend-000317": {
+        "message": "Iso probabelmente sexa un bo sinal"
+    },
+    "frontend-000318": {
+        "message": "Ir a $HREF$",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": "Contido"
+    },
+    "frontend-000320": {
+        "message": "Imaxe $COUNT$:$TITLE$",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "Non é posíbel obter a páxina: $MESSAGE$.",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "Tipo de contido $MIME$ non válido",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": "Non hai ningún contido dispoñíbel"
+    },
+    "frontend-000324": {
+        "message": "Non atopado"
+    },
+    "frontend-000257": {
+        "message": "Cifrado do lado do servidor"
+    },
+    "frontend-Donate": {
+        "message": "Doar"
+    },
+    "frontend-000269": {
+        "message": "$EDITABLE$ e $SHAREABLE$.",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000275": {
+        "message": "Definir data de caducidade"
+    },
+    "frontend-000277": {
+        "message": "Escolla unha data de caducidade ou deixe o campo baleiro para compartir para sempre"
+    },
+    "frontend-000290": {
+        "message": "Memoria caché de contrasinais (0 ficheiros, 0 B)"
+    },
+    "frontend-000261": {
+        "message": "Cifrado simple (Xeración 2)"
+    },
+    "frontend-000278": {
+        "message": "Escolla unha data no futuro"
+    },
+    "frontend-000280": {
+        "message": "Non existe o usuario $UID$",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000302": {
+        "message": "Restaurar este elemento"
+    },
+    "frontend-000307": {
+        "message": "Buscar"
+    },
+    "frontend-000287": {
+        "message": "Memoria caché de avatares (0 ficheiros, 0 B)"
+    },
+    "frontend-000316": {
+        "message": "É mellor comprobar as outras seccións"
+    },
+    "frontend-000309": {
+        "message": "Buscar «$QUERY$» en todos os lugares",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000315": {
+        "message": "Os seus favoritos aparecerán aquí"
     }
 }
