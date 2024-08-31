@@ -1344,5 +1344,87 @@
     },
     "frontend-000358": {
         "message": "Liña de ordes do servidor"
+    },
+    "frontend-000372": {
+        "message": "Vde. vai ser desconectado en $TIME$ segundos",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000375": {
+        "message": "O testemuño de sesión xa non é válido. A aplicación vai volver cargarse."
+    },
+    "frontend-000376": {
+        "message": "Tal día coma hoxe en 2018 publicouse a primeira versión de «contrasinais». Grazas por usar a aplicación."
+    },
+    "frontend-Tags": {
+        "message": "Etiquetas"
+    },
+    "frontend-Id": {
+        "message": "ID"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Agochar este contrasinal?",
+        "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Cifrado de terceiros do lado do servidor",
+        "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Erro",
+        "description": "Label of the error message in the Nextcloud Dashboard Widget when the login fails"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Non hai ningún contrasinal",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Os seus contrasinais favoritos aparecerán aquí.",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if the user has no passwords"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Ningún resultado",
+        "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Os resultados actualizaranse unha vez que se carguen todos os contrasinais",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
+    },
+    "backend-000377": {
+        "message": "É obrigatorio empregar HTTPS"
+    },
+    "frontend-000374": {
+        "message": "O cifrado de extremo a extremo desactivarase para este contrasinal se o comparte."
+    },
+    "frontend-000373": {
+        "message": "Pode ter solicitado demasiados testemuños. Ténteo de novo máis tarde."
+    },
+    "frontend-Folder": {
+        "message": "Cartafol"
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "Non foi posíbel atopar nada para «$QUERY$»",
+        "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "Desactivouse o acceso de WebAuthn. Pode volver activalo na configuración",
+        "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Busca todos os contrasinais",
+        "description": "Label for the search query input field in the Nextcloud Dashboard Widget"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Gardar un contrasinal agochado nun cartafol que non estea agochado fará que o contrasinal non sexa accesíbel. Este contrasinal xa non se amosará en ningún lugar. Quere continuar?",
+        "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     }
 }
