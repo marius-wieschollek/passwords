@@ -1426,5 +1426,166 @@
     "frontend-PwdSaveHiddenMessage": {
         "message": "Gardar un contrasinal agochado nun cartafol que non estea agochado fará que o contrasinal non sexa accesíbel. Este contrasinal xa non se amosará en ningún lugar. Quere continuar?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
+    },
+    "backend-000378": {
+        "message": "volver cargar esta páxina"
+    },
+    "backend-000379": {
+        "message": "foro"
+    },
+    "backend-000380": {
+        "message": "documentación"
+    },
+    "backend-000381": {
+        "message": "Pode tentar $STR_1$ a páxina con HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "Isto NON é un fallo. Visite o noso $STR_1$ se precisa axuda.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": "Revise o informe HTTPS a continuación para depurar o incidente."
+    },
+    "backend-000385": {
+        "message": "Lea esta $STR_1$ para configurar o seu servidor para que use HTTPS.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "Vai a $STR_1$ para obter un certificado HTTPS de balde se o precisa.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000395": {
+        "message": "Servizos externos"
+    },
+    "backend-000394": {
+        "message": "Imagick/GMagick"
+    },
+    "backend-000391": {
+        "message": "nunca"
+    },
+    "backend-000392": {
+        "message": "Procesamento interno de datos"
+    },
+    "backend-000393": {
+        "message": "Representación de imaxes"
+    },
+    "backend-000389": {
+        "message": "Contrasinais da sesión $STR_1$ - $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": "Abrir a documentación"
+    },
+    "backend-000413": {
+        "message": "WKHTML (Local)"
+    },
+    "backend-000409": {
+        "message": "Ningún"
+    },
+    "backend-000406": {
+        "message": "Servizo de faviconas"
+    },
+    "backend-000408": {
+        "message": "Besticon (recomendado)"
+    },
+    "backend-000410": {
+        "message": "Servizo de vista previa de sitios web"
+    },
+    "backend-000412": {
+        "message": "Pageres/PhantomJS (Local)"
+    },
+    "backend-000403": {
+        "message": "Caracteres ao chou"
+    },
+    "backend-000404": {
+        "message": "watchout4snakes.com"
+    },
+    "backend-000405": {
+        "message": "Colección de corpus de Leipzig"
+    },
+    "backend-000396": {
+        "message": "Comprobacións de seguranza do contrasinal"
+    },
+    "backend-000398": {
+        "message": "Gran base de datos local (25 millóns de contrasinais)"
+    },
+    "backend-000399": {
+        "message": "Pequena base de datos local (5 millóns de contrasinais)"
+    },
+    "backend-000400": {
+        "message": "Gran base de datos local e «Enganáronme?» (HIBP?)"
+    },
+    "backend-000402": {
+        "message": "Dicionario local"
+    },
+    "backend-000415": {
+        "message": "Axustes de correo-e predeterminados"
+    },
+    "backend-000416": {
+        "message": "Enviar correos-e para eventos de seguranza"
+    },
+    "backend-000417": {
+        "message": "Enviar correos-e para compartir eventos"
+    },
+    "backend-000414": {
+        "message": "screenshotapi.io"
+    },
+    "backend-000407": {
+        "message": "Analizador local"
+    },
+    "backend-000411": {
+        "message": "Chave para a API do servizo de vista previa de sitos web"
+    },
+    "backend-000401": {
+        "message": "Servizo de xeración de contrasinais"
+    },
+    "backend-000388": {
+        "message": "Se este problema persiste, debe contactar coa administración do sitio."
+    },
+    "backend-000382": {
+        "message": "Esta aplicación require $STR_1$ para funcionar de xeito seguro.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "Lea esta $STR_1$ se está a usar calquera tipo de proxy.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000418": {
+        "message": "Outros axustes"
+    },
+    "backend-000397": {
+        "message": "Enganáronme? (recomendado)"
     }
 }
