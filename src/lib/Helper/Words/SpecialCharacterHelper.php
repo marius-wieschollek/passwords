@@ -36,8 +36,6 @@ class SpecialCharacterHelper {
 
     const REPLACE_SPECIAL
         = [
-            'e' => '€',
-            'E' => '€',
             'A' => '@',
             'a' => '@',
             's' => '$',
