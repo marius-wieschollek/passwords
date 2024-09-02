@@ -1587,5 +1587,186 @@
     },
     "backend-000397": {
         "message": "Enganáronme? (recomendado)"
+    },
+    "backend-000419": {
+        "message": "Retirar os obxectos eliminados da base de datos"
+    },
+    "backend-000420": {
+        "message": "Amosar as actualizacións nocturnas en «Aplicacións»"
+    },
+    "backend-000421": {
+        "message": "Nunca"
+    },
+    "backend-000422": {
+        "message": "Inmediatamente"
+    },
+    "backend-000423": {
+        "message": "Após dúas horas"
+    },
+    "backend-000424": {
+        "message": "Após un día"
+    },
+    "backend-000425": {
+        "message": "Após dúas semanas"
+    },
+    "backend-000426": {
+        "message": "Após un mes"
+    },
+    "backend-000431": {
+        "message": "Cada seis horas"
+    },
+    "backend-000432": {
+        "message": "Cada día"
+    },
+    "backend-000433": {
+        "message": "Cada dous días"
+    },
+    "backend-000434": {
+        "message": "Cada semana"
+    },
+    "backend-000435": {
+        "message": "Cada dúas semanas"
+    },
+    "backend-000436": {
+        "message": "Cantidade de copias para manter"
+    },
+    "backend-000437": {
+        "message": "Memoria caché"
+    },
+    "backend-000438": {
+        "message": "Memoria caché predeterminada ($STR_1$ ficheiros, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "Memoria caché de faviconas ($STR_1$ ficheiros, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "Memoria caché de vistas previas ($STR_1$ ficheiros, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "Memoria caché de contrasinais ($STR_1$ ficheiros, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": "limpar"
+    },
+    "backend-000444": {
+        "message": "Limpar esta caché"
+    },
+    "backend-000445": {
+        "message": "Vde. non podes limpar unha caché usando un servizo compartido"
+    },
+    "backend-000446": {
+        "message": "Gardada"
+    },
+    "backend-000447": {
+        "message": "Limpa"
+    },
+    "backend-000448": {
+        "message": "Fallada"
+    },
+    "backend-000449": {
+        "message": "Necesita axuda"
+    },
+    "backend-000451": {
+        "message": "busca a documentación"
+    },
+    "backend-000454": {
+        "message": "Contrasinais precisa de HTTPS."
+    },
+    "backend-000455": {
+        "message": "Usar $STR_1$ para executar traballos en segundo plano pode provocar atrasos. Recomendamos usar Cron.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000456": {
+        "message": "Comprobe os requisitos do sistema."
+    },
+    "backend-000457": {
+        "message": "Contrasinal non compartida"
+    },
+    "backend-000450": {
+        "message": "atopou un fallo"
+    },
+    "backend-000428": {
+        "message": "Axustes das copias de seguranza"
+    },
+    "backend-000429": {
+        "message": "Intervalo entre copias"
+    },
+    "backend-000427": {
+        "message": "Após un ano"
+    },
+    "backend-000430": {
+        "message": "Cada hora"
+    },
+    "backend-000439": {
+        "message": "Memoria caché de avatares ($STR_1$ ficheiros, $STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000452": {
+        "message": "$STR_1$, $STR_1$ ou $STR_1$? nosoutros encargámonos!",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "$STRING_1$ $STRING_2$ xa non é compatíbel.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
     }
 }
