@@ -1768,5 +1768,248 @@
                 "content": "$2"
             }
         }
+    },
+    "backend-000460": {
+        "message": "Vde. ten contrasinais inseguros"
+    },
+    "backend-000459": {
+        "message": "Vde. ten un contrasinal inseguro"
+    },
+    "backend-000461": {
+        "message": "Un dos seus contrasinais xa non é seguro."
+    },
+    "backend-000462": {
+        "message": "Algúns dos seus contrasinais xa non son seguros."
+    },
+    "backend-000463": {
+        "message": "Contrasinais comproba regularmente se os seus contrasinais foron comprometidos por algunha fintración de datos."
+    },
+    "backend-000464": {
+        "message": "Esta comprobación de seguranza descubriu que un dos seus contrasinais non é seguro."
+    },
+    "backend-000465": {
+        "message": "Esta comprobación de seguranza descubriu que $STR_1$ dos seus contrasinais non son seguros.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000467": {
+        "message": "Isto significa que os contrasinais están expostos en Internet e poñen en risco as súas contas."
+    },
+    "backend-000466": {
+        "message": "Isto significa que o contrasinal está exposto en Internet e pon en risco a súa conta."
+    },
+    "backend-000468": {
+        "message": "Por tanto, o contrasinal foi marcado como inseguro e debería cambialo agora."
+    },
+    "backend-000470": {
+        "message": "Pode crear un novo contrasinal seguro na aplicación de contrasinais."
+    },
+    "backend-000471": {
+        "message": "Pode crear novos contrasinais seguros na aplicación de contrasinais."
+    },
+    "backend-000473": {
+        "message": "Cambiar agora os contrasinais"
+    },
+    "backend-000472": {
+        "message": "Cambiar agora o contrasinal"
+    },
+    "backend-000476": {
+        "message": "$STR_1$ compartiu un contrasinal con Vde.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "$STR_1$ compartiu $STR_1$ contrasinais con Vde.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000474": {
+        "message": "Abrir a aplicación de contrasinais para cambialo."
+    },
+    "backend-000480": {
+        "message": "$STRING_5$, $STRING_4$ e outros $STRING_2$ máis compartiron $STRING_1$ contrasinais con Vde.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": "Abra a aplicación de contrasinais para velo."
+    },
+    "backend-000482": {
+        "message": "Abra a aplicación de contrasinais para velos."
+    },
+    "backend-000483": {
+        "message": "Foi compartido un contrasinal con Vde. en $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000485": {
+        "message": "Ver os contrasinais que foron compartidos comigo"
+    },
+    "backend-000486": {
+        "message": "Non foi posíbel compartir un dos seus contrasinais porque o destinatario xa ten acceso a el."
+    },
+    "backend-000489": {
+        "message": "Compartir un contrasinal que foi compartiu con Vde., ás veces pode crear un bucle."
+    },
+    "backend-000490": {
+        "message": "Para evitar iso, estes contrasinais non se compartirán."
+    },
+    "backend-000491": {
+        "message": "Acceso administrativo á súa conta"
+    },
+    "backend-000492": {
+        "message": "$STR_1$ tentou acceder á súa conta en $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "$STR_1$ accedeu á súa conta en $STR_1$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000495": {
+        "message": "Para evitar o acceso non desexado aos seus datos, debe configurar un contrasinal principal."
+    },
+    "backend-000496": {
+        "message": "Usuario eliminado ($STR_1$)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": "Axúdenos a mellorar Contrasinais"
+    },
+    "backend-000499": {
+        "message": "Isto enviaranos algúns datos anónimos sobre a súa configuración e os axustes seleccionados."
+    },
+    "backend-000500": {
+        "message": "Pode cambialo en calquera momento nos axustes da aplicación."
+    },
+    "backend-000501": {
+        "message": "Aínda non"
+    },
+    "backend-000502": {
+        "message": "Participar"
+    },
+    "backend-000504": {
+        "message": "Datos básicos"
+    },
+    "backend-000505": {
+        "message": "Datos completos"
+    },
+    "backend-000506": {
+        "message": "Sen especificar"
+    },
+    "backend-000507": {
+        "message": "Considere aloxar a súa propia instancia da API de faviconas"
+    },
+    "backend-000509": {
+        "message": "Estas instancias están destinadas a pequenas configuracións de Nextcloud con moi pouco tráfico."
+    },
+    "backend-000508": {
+        "message": "O seu Nextcloud usa as nosas instancias compartidas de Besticon para buscar iconas de sitios web."
+    },
+    "backend-000475": {
+        "message": "Abrir a aplicación de contrasinais para cambialos."
+    },
+    "backend-000487": {
+        "message": "Non foi posíbel compartir $STR_1$ dos seus contrasinais porque o destinatario xa ten acceso a eles.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000503": {
+        "message": "Participación na enquisa de servidores"
+    },
+    "backend-000478": {
+        "message": "$STRING_4$ e $STRING_3$ compartiron $STRING_1$ contrasinais con Vde.",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": "O feito de empregar un contrasinal principal non significa que se lle teña concedido o acceso aos seus datos."
+    },
+    "backend-000484": {
+        "message": "Foron compartidos varios contrasinais con Vde. en $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000498": {
+        "message": "Pode axudarnos a mellorar a aplicación Contrasinais participando na nosa enquisa de servidores."
+    },
+    "backend-000469": {
+        "message": "Por tanto, os contrasinais foron marcados como inseguros e debería cambialos agora."
+    },
+    "backend-000479": {
+        "message": "$STRING_5$, $STRING_4$ e $STRING_3$ compartiron $STRING_1$ contrasinais con Vde.",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
     }
 }
