@@ -2011,5 +2011,220 @@
                 "content": "$1"
             }
         }
+    },
+    "backend-000510": {
+        "message": "Prema na ligazón e siga o noso sinxelo titorial para facer un aloxamento autónomo de Besticon ."
+    },
+    "backend-000512": {
+        "message": "A configuración do seu servizo de vista previa non é válida"
+    },
+    "backend-000517": {
+        "message": "Isto pode indicar que alguén está tentando acceder á súa conta."
+    },
+    "backend-000518": {
+        "message": "Para evitar novos intentos, foron revogadas as credenciais da API deste cliente."
+    },
+    "backend-000519": {
+        "message": "Ademais, desactivouse a autenticación da API baseada en contrasinal."
+    },
+    "backend-000520": {
+        "message": "Se queres seguir empregando este cliente, debe crear un novo testemuño para el."
+    },
+    "backend-000522": {
+        "message": "Para evitar máis intentos, desactivouse a autenticación da API baseada en contrasinal."
+    },
+    "backend-000523": {
+        "message": "Para volver activala, acceda coa aplicación web ou con calquera cliente mediante a autenticación con testemuño."
+    },
+    "backend-000525": {
+        "message": "Para aumentar a seguranza, recomendamos usar testemuños específicos do dispositivo no canto de contrasinais."
+    },
+    "frontend-000526": {
+        "message": "Extensión do navegador"
+    },
+    "frontend-000528": {
+        "message": "Regras para contrasinais"
+    },
+    "frontend-000529": {
+        "message": "Marcar os duplicados"
+    },
+    "frontend-000530": {
+        "message": "Duración máxima en días"
+    },
+    "frontend-000531": {
+        "message": "Xerador de contrasinais"
+    },
+    "frontend-000532": {
+        "message": "Forza do contrasinal"
+    },
+    "frontend-000533": {
+        "message": "Incluír números"
+    },
+    "frontend-000534": {
+        "message": "Incluír caracteres especiais"
+    },
+    "frontend-000536": {
+        "message": "Sección inicial"
+    },
+    "frontend-000538": {
+        "message": "Vista de lista de contrasinais"
+    },
+    "frontend-000539": {
+        "message": "Definir o título de"
+    },
+    "frontend-000540": {
+        "message": "Ordenar por"
+    },
+    "frontend-000541": {
+        "message": "Campo de título"
+    },
+    "frontend-000542": {
+        "message": "Acción dun só clic"
+    },
+    "frontend-000543": {
+        "message": "Acción de dobre clic"
+    },
+    "frontend-000544": {
+        "message": "Copiar o contrasinal"
+    },
+    "frontend-000546": {
+        "message": "Copiar o sitio web"
+    },
+    "frontend-000547": {
+        "message": "Amosar detalles"
+    },
+    "frontend-000548": {
+        "message": "Engadir as opcións de copia no menú"
+    },
+    "frontend-000549": {
+        "message": "Amosar o nome de usuario na vista de lista"
+    },
+    "frontend-000572": {
+        "message": "Amosar o atributo seleccionado como título na vista de lista"
+    },
+    "frontend-000574": {
+        "message": "Acción a realizar ao premer nun contrasinal na vista de lista"
+    },
+    "frontend-000578": {
+        "message": "Amosar sempre o nome de usuario relacionado co contrasinal na vista de lista"
+    },
+    "frontend-000579": {
+        "message": "Amosar as etiquetas de cada contrasinal na vista de lista. Isto aumenta os tempos de carga"
+    },
+    "frontend-000551": {
+        "message": "Amosar os campos personalizados agochados"
+    },
+    "frontend-000552": {
+        "message": "Buscar mentres escribo"
+    },
+    "frontend-000553": {
+        "message": "Buscar en todas partes con «Intro»"
+    },
+    "frontend-000554": {
+        "message": "Amosar sempre a sección de busca"
+    },
+    "frontend-000555": {
+        "message": "Notificacións"
+    },
+    "frontend-000556": {
+        "message": "Enviar correos-e para"
+    },
+    "frontend-000557": {
+        "message": "Incidentes de seguranza"
+    },
+    "frontend-000558": {
+        "message": "Contrasinais compartidos comigo"
+    },
+    "frontend-000559": {
+        "message": "Amosar notificacións para"
+    },
+    "frontend-000561": {
+        "message": "Zona de perigo"
+    },
+    "frontend-000562": {
+        "message": "Restabelecer todos os axustes"
+    },
+    "frontend-000563": {
+        "message": "Restabelecer"
+    },
+    "frontend-000564": {
+        "message": "Eliminar todo"
+    },
+    "frontend-000565": {
+        "message": "ELIMINAR TODO"
+    },
+    "frontend-000566": {
+        "message": "Solicitouse o restabelecemento da conta"
+    },
+    "frontend-000570": {
+        "message": "Marca os contrasinais como febles se teñen máis días de antigüidade que o especificado"
+    },
+    "frontend-000571": {
+        "message": "Unha maior forza resulta en contrasinais máis longos e complexos"
+    },
+    "frontend-000577": {
+        "message": "A sección inicial que se amosará cando se abra a aplicación"
+    },
+    "frontend-000580": {
+        "message": "Amosar os campos personalizados agochados no formulario de edición e na sección de detalles dun contrasinal"
+    },
+    "frontend-000583": {
+        "message": "Amosar sempre a sección de busca global na navegación"
+    },
+    "backend-000515": {
+        "message": "Abra os axustes de administración para actualizar a configuración ou escolla outro servizo."
+    },
+    "frontend-000573": {
+        "message": "Ordena os contrasinais polo atributo seleccionado cando se selecciona a clasificación por nome"
+    },
+    "backend-000513": {
+        "message": "O servizo de favicon escollido require unha chave de API ou un punto final, mais non se forneceu nada."
+    },
+    "frontend-000582": {
+        "message": "Envíalle correos cando outras persoas comparten contrasinais con Vde."
+    },
+    "backend-000514": {
+        "message": "O servizo de vista previa escollido require unha chave de API ou un punto final, mais non se forneceu nada."
+    },
+    "backend-000516": {
+        "message": "Detectamos varios intentos fallados de desbloquear a súa base de datos de contrasinais empregando «$STR_1$».",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000524": {
+        "message": "Se non coñece este cliente, cambie o contrasinal principal e o contrasinal de Nextcloud."
+    },
+    "frontend-000550": {
+        "message": "Amosar as etiquetas na vista de lista"
+    },
+    "frontend-000575": {
+        "message": "Acción a realizar ao premer dúas veces nun contrasinal na vista de lista"
+    },
+    "backend-000521": {
+        "message": "Se non coñece este cliente, cambie o seu contrasinal e revise a lista de dispositivos."
+    },
+    "frontend-000535": {
+        "message": "Interface de usuario"
+    },
+    "frontend-000537": {
+        "message": "Todos os contrasinais"
+    },
+    "frontend-000560": {
+        "message": "Outros erros"
+    },
+    "frontend-000569": {
+        "message": "Marcar os contrasinais como febles cando se empreguen para varias contas"
+    },
+    "frontend-000581": {
+        "message": "Envíalle correos sobre contrasinais comprometidos e outros incidentes de seguranza"
+    },
+    "frontend-000545": {
+        "message": "Copiar o nome de usuario"
+    },
+    "frontend-000576": {
+        "message": "Amosa as opcións para copiar o contrasinal e o nome de usuario no menú"
     }
 }
