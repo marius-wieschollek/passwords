@@ -2226,5 +2226,124 @@
     },
     "frontend-000576": {
         "message": "Amosa as opcións para copiar o contrasinal e o nome de usuario no menú"
+    },
+    "frontend-000586": {
+        "message": "Avísao cando falla unha operación en segundo plano"
+    },
+    "frontend-000585": {
+        "message": "Avísao cando outras persoas comparten contrasinais con Vde."
+    },
+    "frontend-000587": {
+        "message": "Restabelece todos os axustes desta páxina aos seus valores predeterminados"
+    },
+    "frontend-000588": {
+        "message": "Isto restabelecerá todos os axustes aos seus valores predeterminados. Quere continuar?"
+    },
+    "frontend-000590": {
+        "message": "Quere eliminar todos os seus axustes, contrasinais, cartafoles e etiquetas?\nNON será posíbel desfacer isto."
+    },
+    "frontend-000593": {
+        "message": "Editar como novo"
+    },
+    "frontend-000594": {
+        "message": "Mover"
+    },
+    "frontend-000595": {
+        "message": "Abrir $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": "Descoñecido (Not_checked)"
+    },
+    "frontend-000597": {
+        "message": "SHA-1"
+    },
+    "frontend-000598": {
+        "message": "Que agardaba?"
+    },
+    "frontend-000599": {
+        "message": "Prema para amosar o código QR."
+    },
+    "frontend-000600": {
+        "message": "Non volver advertir"
+    },
+    "frontend-000601": {
+        "message": "Forza"
+    },
+    "frontend-000602": {
+        "message": "Pechar"
+    },
+    "frontend-000604": {
+        "message": "Marcar como favorito"
+    },
+    "frontend-000605": {
+        "message": "Contrasinal agochado"
+    },
+    "frontend-000606": {
+        "message": "Non amosar este contrasinal en ningún lugar"
+    },
+    "frontend-000607": {
+        "message": "Datos"
+    },
+    "frontend-000608": {
+        "message": "Tipo"
+    },
+    "frontend-000609": {
+        "message": "Novo campo"
+    },
+    "frontend-000610": {
+        "message": "Eliminar campo"
+    },
+    "frontend-000612": {
+        "message": "Desfacer"
+    },
+    "frontend-000613": {
+        "message": "Refacer"
+    },
+    "frontend-000614": {
+        "message": "Caduca o $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000616": {
+        "message": "Demasiados intentos de acceso fallados"
+    },
+    "frontend-000617": {
+        "message": "Seleccione un cartafol"
+    },
+    "frontend-000619": {
+        "message": "Non é posíbel empregar $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000589": {
+        "message": "Comezar de novo e eliminar toda a configuración, contrasinais, cartafoles e etiquetas"
+    },
+    "frontend-000603": {
+        "message": "Retirar de favoritos"
+    },
+    "frontend-000611": {
+        "message": "Abrir a guía de Markdown"
+    },
+    "frontend-000584": {
+        "message": "Avísao sobre contrasinais comprometidos e outros problemas de seguranza"
+    },
+    "frontend-000618": {
+        "message": "Seleccione «$FOLDER$»",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
     }
 }
