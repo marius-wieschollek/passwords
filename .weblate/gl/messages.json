@@ -2687,7 +2687,7 @@
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
-        "message": "Produciuse un erro",
+        "message": "Produciuse un erro.",
         "description": "Generic error message if the recover hidden items action fails"
     },
     "settings-SettingsWebAuthnEnableHelp": {
@@ -2883,7 +2883,7 @@
         "message": "Amosar unha vista previa do sitio web asociado nos detalles. (nos móbiles non)"
     },
     "backend-000645": {
-        "message": "Recoméndase unha actualización da aplicación"
+        "message": "Recoméndase unha anovación da aplicación"
     },
     "backend-000646": {
         "message": "Conectouse un novo cliente ou aplicación á súa conta"
@@ -3056,7 +3056,322 @@
         "description": "Title of the warning message users see when they open the browser developer console"
     },
     "settings-SettingsPasswordPrint": {
-        "message": "Amsar opción de impresión",
+        "message": "Amosar opción de impresión",
         "description": "Label text in the settings for the option to show a print option for passwords"
+    },
+    "tutorial-000776": {
+        "message": "Hai moitos axustes para que poida personalizar a súa experiencia."
+    },
+    "tutorial-000777": {
+        "message": "Pode atopalos en «Máis», mais aquí poñemos os máis comúns:"
+    },
+    "tutorial-000778": {
+        "message": "Contrasinais ofrece un cifrado moderno e forte para protexer os seus datos de olladas indiscretas."
+    },
+    "tutorial-000779": {
+        "message": "Escolla embaixo un contrasinal seguro para activar a máxima protección para os seus contrasinais."
+    },
+    "tutorial-000780": {
+        "message": "Acceda aos seus contrasinais de xeito doado dende calquera lugar, grazas ás nosas aplicacións e extensións."
+    },
+    "tutorial-000781": {
+        "message": "Pode atopar a nosa sección de aplicacións e extensións en «Máis» ou simplemente premendo no botón de embaixo."
+    },
+    "tutorial-000782": {
+        "message": "Os contrasinais poden ser personalizados de moitos xeitos diferentes."
+    },
+    "tutorial-000783": {
+        "message": "Como responsábel da administración, pode querer botar unha ollada a estas configuracións comúns."
+    },
+    "tutorial-000784": {
+        "message": "Cando non saiba como funciona algo, teña dúbidas ou necesite axuda con algún problema:"
+    },
+    "backend-UserMigrationDescription": {
+        "message": "Base de datos de contrasinais descifrada con contrasinais, cartafoles, etiquetas e configuración. (Non inclúe contrasinais compartidos con Vde. Non funciona con E2E activado)",
+        "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Non é posíbel exportar os contrasinais",
+        "description": "Title of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Amosa unha opción para imprimir o contrasinal no menú e nos detalles",
+        "description": "Help text in the settings for the option to show a print option for passwords in the list view and sidebar"
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "O contrasinal foi etiquetado con $TAG$",
+        "description": "Notification text when the a tag was successfully added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "Non foi posíbel etiquetar o contrasinal con $TAG$: $ERROR$",
+        "description": "Notification text when the a tag could not be added to a password",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-ExpertSettingsLabel": {
+        "message": "Axustes especializados",
+        "description": "Label of the option in the settings that shows additional settings intended for advanced users that allow more detailed control of how the app behaves"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Amosar detalles técnicos",
+        "description": "Label of the option in the info tab of the password details sidebar that will show additional (technical) information that is useful for advanced users"
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Este contrasinal é cifrado no seu dispositivo antes de envialo ao servidor. Ninguén pode ler este contrasinal sen coñecer o seu contrasinal de cifrado.",
+        "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "Non hai nada que copiar, $ELEMENT$ está baleiro",
+        "description": "Message when the user wants to copy an empty attribute",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Esta funcionalidade está destinada aos desenvolvedores, non aos usuarios.",
+        "description": "First section of the warning message users see when they open the browser developer console which explains that the feature is intended for developers only"
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Permitir o cifrado de terceiros",
+        "description": "Label of the option to enable SSEv3 in the encryption settings section in the app settings in the admin area"
+    },
+    "backend-EOLNextcloudText1": {
+        "message": "Contrasinais $STR_1$ é a última actualización para Nextcloud $STR_2$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_2$: Installed Nextcloud version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudTitle": {
+        "message": "Contrasinais remata as actualizacións para Nextcloud $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: Installed Nextcloud version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Anovar a Nextcloud $STR_1$ para futuras anovacións.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Contrasinais remata as actualizacións para PHP $STR_1$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "Contrasinais $STR_1$ é a última actualización para PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Anovar a PHP $STR_2$ (ou PHP $STR_3$ para LSR) para futuras anovacións.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Contrasinais remata as actualizacións para Nextcloud $STR_1$ e para PHP $STR_2$",
+        "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Anovar a Nextcloud $STR_1$ e PHP $STR_2$ (ou PHP $STR_3$ para LSR) para futuras anovacións.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. I lays out the minimum requirements for an update. ($STR_1$: Minimum Nextcloud version, $STR_2$: Minimum PHP version, $STR_3$: Minimum PHP LSR version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "Abrir a páxina de cambio de contrasinal",
+        "description": "Label in the dialog to open the change password page of the button to open that page"
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "«{host}» non anuncia a súa páxina de cambio de contrasinal. Pode atopar a función de cambio de contrasinal no sitio web.",
+        "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "Abrir a páxina de cambio de contrasinal",
+        "description": "Label of the menu option to open the change password page for the current password"
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "O URL de embaixo foi detectado como páxina de cambio de contrasinal para «{label}». Prema no botón para abrilo.",
+        "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Esta notificación pode ser eliminada.",
+        "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "Os traballos en segundo plano execútanse con cron.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Comprobando se o servidor executa tarefas en segundo plano coa mesma versión de PHP.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Comprobando se o servidor executa traballos en segundo plano con cron.",
+        "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "O seu navegador non é compatíbel con WebAssembly",
+        "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "O seu navegador non admite WebAssembly (WASM), que é necesario para executar esta aplicación.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
+    },
+    "frontend-CompatWASMText2": {
+        "message": "Nalgúns navegadores, WebAssembly debe estar activado na configuración do navegador.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Se o seu navegador non ten compatibilidade con WebAssembly, comprobe se hai unha actualización dispoñíbel para o navegador ou escolla un navegador moderno e compatíbel da lista de embaixo.",
+        "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "frontend-CompatText2": {
+        "message": "Comprobe se hai unha actualización dispoñíbel para o seu navegador ou escolla un navegador moderno e compatíbel da lista de embaixo.",
+        "description": "Error page message when the browser can not run the app. Tells users to check for a browser update or install another browser"
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "Os traballos en segundo plano execútanse coa mesma versión de PHP.",
+        "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Ao ter o cifrado de extremo a extremo activado, non é posíbel engadir automaticamente os seus contrasinais á exportación. Como alternativa, pode empregar a función de exportación da aplicación para exportar os seus datos.",
+        "description": "Text of the notification when a user requested an export of the passwords app data trough the user migration app, but we can't export his data because it's end-to-end encrypted. The notification contains a link to the export feature in the app where the user can create an export manually."
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "O contrasinal xa está etiquetado con $TAG$",
+        "description": "Notification text when the user adds a tag to a password that already has the tag",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Este contrasinal é enviado ao servidor a través dunha conexión HTTPS segura e cífrase alí antes de almacenalo na base de datos.",
+        "description": "Info text for the encryption method in the password details sidebar if a server-side encryption method is used. The password sent plain text over HTTPS, then encrypted on the server before it's stored"
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "A aplicación de contrasinais comproba regularmente se a súa frase de paso de cifrado aínda é segura. A súa frase de paso actual non é segura e hai que cambiala inmediatamente.",
+        "description": "Text of the alert dialog when the users passphrase has been checked by the app and was found to be insecure/breached"
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Se alguén lle dixo que copiase e pegase algo aquí, é probábel que acceda aos seus contrasinais ou que se apodere da súa conta.",
+        "description": "Second section of the warning message users see when they open the browser developer console which explains that pasting code here may give others access to their passwords and their account"
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Contrasinais $STR_1$ é a última actualización para Nextcloud $STR_2$ e para PHP $STR_3$.",
+        "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
     }
 }
