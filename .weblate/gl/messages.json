@@ -888,7 +888,7 @@
         }
     },
     "frontend-000258": {
-        "message": "Cifrado do lado do cliente"
+        "message": "Cifrado aplicado no cliente"
     },
     "frontend-000259": {
         "message": "Sen cifrado"
@@ -1086,7 +1086,7 @@
         "message": "Non atopado"
     },
     "frontend-000257": {
-        "message": "Cifrado do lado do servidor"
+        "message": "Cifrado aplicado no servidor"
     },
     "frontend-Donate": {
         "message": "Doar"
@@ -2412,5 +2412,595 @@
     },
     "backend-000636": {
         "message": "Detectouse unha cantidade sospeitosa de intentos de acceso fallados."
+    },
+    "backend-000637": {
+        "message": "Máis información"
+    },
+    "backend-000638": {
+        "message": "Ver os contrasinais inseguros"
+    },
+    "backend-000639": {
+        "message": "Abrir os axustes"
+    },
+    "backend-000640": {
+        "message": "Abrir os contrasinais"
+    },
+    "backend-000641": {
+        "message": "Ver as aplicacións"
+    },
+    "backend-000643": {
+        "message": "Xestionar dispositivos e aplicacións"
+    },
+    "backend-000644": {
+        "message": "Ver os contrasinais compartidos"
+    },
+    "backend-000647": {
+        "message": "«$STR_1$» foi autorizado a acceder á súa conta de Contrasinais $STR_1$ a través de PassLink.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "O último traballo en segundo plano executouse con PHP $STRING_1$, mais o servidor web usa PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "Usar diferentes versións maiores de PHP pode causar problemas."
+    },
+    "backend-000651": {
+        "message": "Axustes de seguranza predeterminados de contrasinal"
+    },
+    "backend-000652": {
+        "message": "Resumo de comprobación de seguranza"
+    },
+    "backend-000653": {
+        "message": "Non almacenar os resumos criptográficos"
+    },
+    "backend-000654": {
+        "message": "Almacenar o 50% do resumo criptográfico"
+    },
+    "backend-000655": {
+        "message": "Almacenar o 75% do resumo criptográfico"
+    },
+    "backend-000656": {
+        "message": "Almacenar o resumo criptográfico completo"
+    },
+    "backend-000660": {
+        "message": "Por se fose un erro, fíxose unha copia de seguranza da base de datos antes de restaurala."
+    },
+    "backend-000661": {
+        "message": "Pode desactivar a restauración automática da copia de seguranza nos axustes da aplicación."
+    },
+    "backend-000662": {
+        "message": "Restaurar copias de seguranza automaticamente cando se limpa a base de datos"
+    },
+    "backend-Passwords": {
+        "message": "Contrasinais"
+    },
+    "frontend-000667": {
+        "message": "Etiquetas CSV"
+    },
+    "frontend-000669": {
+        "message": "Predeterminado"
+    },
+    "settings-000678": {
+        "message": "Acceso e sesión"
+    },
+    "frontend-000670": {
+        "message": "Iniciar a busca cando se preme unha tecla en calquera lugar da páxina"
+    },
+    "settings-000679": {
+        "message": "Manterme conectado"
+    },
+    "settings-000680": {
+        "message": "Sempre"
+    },
+    "settings-000681": {
+        "message": "Cando estou traballando"
+    },
+    "settings-000682": {
+        "message": "Cando estou activo"
+    },
+    "settings-000683": {
+        "message": "Rematar a sesión após"
+    },
+    "settings-000684": {
+        "message": "Un minuto"
+    },
+    "settings-000685": {
+        "message": "$MINUTES$ minutos",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": "Cifrado de extremo a extremo"
+    },
+    "settings-000687": {
+        "message": "Modo de cifrado no servidor"
+    },
+    "settings-000688": {
+        "message": "Ningún se se emprega CSE (cifrado no lado do cliente)"
+    },
+    "settings-000690": {
+        "message": "Cifrado avanzado"
+    },
+    "settings-000691": {
+        "message": "Modo de cifrado no cliente"
+    },
+    "settings-000693": {
+        "message": "Cambiar o contrasinal"
+    },
+    "settings-000695": {
+        "message": "Amosar a vista previa do sitio web"
+    },
+    "settings-000696": {
+        "message": "Novo contrasinal"
+    },
+    "settings-000697": {
+        "message": "Repetir o contrasinal"
+    },
+    "settings-000698": {
+        "message": "Contrasinal antigo"
+    },
+    "settings-000699": {
+        "message": "O contrasinal cambiou"
+    },
+    "settings-000700": {
+        "message": "Produciuse un fallo ao cambiar o contrasinal"
+    },
+    "settings-000702": {
+        "message": "Compartición de contrasinais"
+    },
+    "settings-000705": {
+        "message": "Clave"
+    },
+    "settings-000707": {
+        "message": "Engadir números aos contrasinais xerados"
+    },
+    "settings-000708": {
+        "message": "Engadir caracteres especiais aos contrasinais xerados"
+    },
+    "settings-000710": {
+        "message": "Escolla o tipo de cifrado utilizado para cifrar os datos no servidor"
+    },
+    "settings-000703": {
+        "message": "De xeito predeterminado, compartir como editábel"
+    },
+    "settings-000704": {
+        "message": "De xeito predeterminado, permitir a compartición"
+    },
+    "settings-000712": {
+        "message": "Cambiar o contrasinal de cifrado"
+    },
+    "settings-000714": {
+        "message": "Avísao de erros de configuración e doutros incidentes administrativos"
+    },
+    "settings-000715": {
+        "message": "Introduza «$CODE$» para restabelecer a súa conta e eliminar todo.",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": "Pode usar este diálogo para cambiar o seu contrasinal principal."
+    },
+    "settings-000717": {
+        "message": "O seu contrasinal debe ter máis de 12 caracteres e non pode ser igual ao antigo"
+    },
+    "settings-000718": {
+        "message": "Confirme o seu novo contrasinal"
+    },
+    "settings-000720": {
+        "message": "O contrasinal foi cambiado satisfactoriamente."
+    },
+    "settings-000721": {
+        "message": "De xeito predeterminado, activar a opción para que outros usuarios poidan editar un contrasinal que recibiron compartido"
+    },
+    "settings-000723": {
+        "message": "Abrir a páxina de axustes no manual"
+    },
+    "settings-000724": {
+        "message": "Enviar solicitudes «keep-alive» (de conexión persistente) ao servidor para evitar que se cancele a sesión"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Amosar o botón de atallo para",
+        "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-000726": {
+        "message": "O resumo criptográfico SHA-1 úsase para comprobar se hai contrasinais comprometidos. Un resumo parcial pode evitar ataques de forza bruta no caso de que o servidor sufra unha intrusión, mais tamén pode provocar que se informe por erro de contrasinais seguros como comprometidos."
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Amosar a lapela Compartir",
+        "description": "Label in the settings for the option to show the share tab in the details of an item"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Recuperar elementos agochados",
+        "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recuperar elementos",
+        "description": "Button to trigger the recover hidden items action dialog"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recuperar elementos agochados",
+        "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Seleccione o tipo de elementos agochados que queira recuperar.",
+        "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Contrasinais que non están nun cartafol agochado",
+        "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Recuperar contrasinais agochados que están nun cartafol que non está agochado",
+        "description": "Title of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Elementos agochados no lixo",
+        "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Recuperar os elementos agochados que están actualmente no lixo",
+        "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Todos os contrasinais agochados",
+        "description": "Label of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Todos os cartafoles agochados",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recuperar todos os cartafoles agochados",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Todas as etiquetas agochadas",
+        "description": "Label of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recuperar todas as etiquetas agochadas",
+        "description": "Title of the option to recover all hidden folders in the recover hidden items action"
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Elementos recuperados",
+        "description": "Title of the success message after the recover hidden items action was executed"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Produciuse un erro",
+        "description": "Generic error message if the recover hidden items action fails"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Garde a súa frase de paso de cifrado neste navegador e acceda automaticamente ao abrir a aplicación",
+        "description": "Help text in the settings for the log in with WebAuthn setup option"
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Frase de paso de cifrado",
+        "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Repetir a frase de paso",
+        "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Configuración de acceso con WebAuthn",
+        "description": "Title of the WebAuthn setup dialog."
+    },
+    "tutorial-000732": {
+        "message": "etiquetas"
+    },
+    "tutorial-000733": {
+        "message": "favoritos"
+    },
+    "tutorial-000734": {
+        "message": "contrasinais"
+    },
+    "tutorial-000738": {
+        "message": "tres meses"
+    },
+    "tutorial-000739": {
+        "message": "seis meses"
+    },
+    "tutorial-000740": {
+        "message": "un ano"
+    },
+    "tutorial-000741": {
+        "message": "dous anos"
+    },
+    "tutorial-000742": {
+        "message": "$DAYS$ días",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": "están duplicados"
+    },
+    "tutorial-000750": {
+        "message": "que inclúan caracteres especiais"
+    },
+    "tutorial-000757": {
+        "message": "Gardar o contrasinal"
+    },
+    "tutorial-000758": {
+        "message": "Repita o seu contrasinal"
+    },
+    "tutorial-000761": {
+        "message": "Limpar"
+    },
+    "tutorial-000762": {
+        "message": "Satisfactorio"
+    },
+    "tutorial-000765": {
+        "message": "Continuar"
+    },
+    "tutorial-000736": {
+        "message": "Marcar os meus contrasinais se…"
+    },
+    "tutorial-000730": {
+        "message": "Após iniciar, amosar"
+    },
+    "tutorial-000760": {
+        "message": "Chaveiro"
+    },
+    "tutorial-000759": {
+        "message": "Instalación do cifrado"
+    },
+    "tutorial-000744": {
+        "message": "Facer que os meus contrasinais"
+    },
+    "tutorial-000745": {
+        "message": "sexan fortes"
+    },
+    "tutorial-000746": {
+        "message": "sexan máis fortes"
+    },
+    "tutorial-000747": {
+        "message": "sexan moi fortes"
+    },
+    "tutorial-000748": {
+        "message": "sexan extremadamente fortes"
+    },
+    "tutorial-000766": {
+        "message": "Omitir"
+    },
+    "tutorial-000768": {
+        "message": "Xerar contrasinais con"
+    },
+    "tutorial-000769": {
+        "message": "Obter faviconas de"
+    },
+    "tutorial-000771": {
+        "message": "Facer copias de seguranza"
+    },
+    "tutorial-000772": {
+        "message": "Ver todos os axustes"
+    },
+    "tutorial-000774": {
+        "message": "Contrasinal (mín. 12 caracteres)"
+    },
+    "tutorial-000788": {
+        "message": "O manual abrirase após o titorial"
+    },
+    "tutorial-000789": {
+        "message": "Introduza un contrasinal con 12 caracteres ou máis"
+    },
+    "tutorial-StartText1": {
+        "message": "Benvido á aplicación Contrasinais para Nextcloud, o lugar perfecto para manter os seus contrasinais seguros e organizados.",
+        "description": "Initial welcome text on the first page of the first run wizard"
+    },
+    "tutorial-StartText2": {
+        "message": "Imos comezar",
+        "description": "Second part of the initial welcome text on the first page of the first run wizard"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Método de cifrado",
+        "description": "Label of the encryption method info in the password details sidebar"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Axustes de cifrado",
+        "description": "Label of the encryption settings section in the app settings in the admin area"
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": "Cifrado de extremo a extremo",
+        "description": "Label for the client side / end-to-end encryption method"
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Cifrado do lado do servidor",
+        "description": "Label for the server side encryption method"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "A frase de paso de cifrado escollida non é segura e, polo tanto, non é posíbel empregala.",
+        "description": "Text of the alert dialog when the user wants to set up encryption with an insecure/breached passphrase"
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "A frase de paso de cifrado non é segura",
+        "description": "Title of the alert dialog when the users passphrase is insecure/breached"
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Atopará unha guía para activar WebAssembly no manual da aplicación Contrasinais.",
+        "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
+    },
+    "frontend-CompatHeadline": {
+        "message": "O seu navegar está anticuado",
+        "description": "Headline of the error page when the browser can not run the app"
+    },
+    "frontend-CompatText1": {
+        "message": "O seu navegador está anticuado e non ten a funcionalidade necesaria para executar esta aplicación.",
+        "description": "Error page message when the browser can not run the app"
+    },
+    "backend-000642": {
+        "message": "Ver as aplicacións e os dispositivos"
+    },
+    "backend-000648": {
+        "message": "Pode xestionar todos os dispositivos e aplicacións conectados nos axustes de $STR_1$ na sección de seguranza.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000659": {
+        "message": "Por mor disto, a copia de seguranza da aplicación «$STR_1$» foi restaurada automaticamente.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000694": {
+        "message": "Vista detallada de contrasinais"
+    },
+    "backend-000657": {
+        "message": "Copia de seguranza restaurada automaticamente"
+    },
+    "frontend-000671": {
+        "message": "Buscar en todos os lugares cando se preme a tecla Intro na caixa de busca"
+    },
+    "settings-000713": {
+        "message": "Amosar unha vista previa do sitio web asociado nos detalles. (nos móbiles non)"
+    },
+    "backend-000645": {
+        "message": "Recoméndase unha actualización da aplicación"
+    },
+    "backend-000646": {
+        "message": "Conectouse un novo cliente ou aplicación á súa conta"
+    },
+    "settings-000689": {
+        "message": "Cifrado sinxelo"
+    },
+    "settings-000706": {
+        "message": "Clave de restabelecemento non válido"
+    },
+    "settings-000711": {
+        "message": "Execute o asistente de instalación para configurar o cifrado dos seus contrasinais"
+    },
+    "settings-000719": {
+        "message": "Debe introducir o seu antigo contrasinal"
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "Non foi posíbel actualizar a base de datos de contrasinais comprometidos",
+        "description": "Title of the notification when the download of the precompiled breached passwords database failed"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recuperar todos os contrasinais agochados, independentemente do estado do cartafol",
+        "description": "Title of the option to recover all hidden passwords in the recover hidden items action"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Recuperáronse $PASSWORDS$ contrasinal(is), $FOLDERS$ cartafol(es) e $TAGS$ etiqueta(s).",
+        "description": "Success message after the recover hidden items action was executed",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-000701": {
+        "message": "Incidentes de Administración"
+    },
+    "tutorial-000786": {
+        "message": "O noso manual integrado pódese atopar premendo en «Máis» e explica a aplicación con todos os detalles."
+    },
+    "tutorial-000731": {
+        "message": "cartafoles"
+    },
+    "tutorial-000735": {
+        "message": "cambiados recentemente"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Acción ao premer coa roda do rato",
+        "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Engade un botón adicional para a acción especificada na vista do escritorio",
+        "description": "Help text in the settings for the option to add a custom shortcut button to each password entry"
+    },
+    "settings-000725": {
+        "message": "Escolla o tipo de cifrado utilizado para cifrar os datos no cliente antes de que se envíen ao servidor"
+    },
+    "backend-000658": {
+        "message": "Semella que a aplicación de contrasinais atopou un incidente na base de datos."
+    },
+    "backend-000666": {
+        "message": "Seleccionar automaticamente (recomendado)"
+    },
+    "settings-000709": {
+        "message": "Especifique o tempo de espera após unha solicitude antes de que se cancele a sesión"
+    },
+    "tutorial-000787": {
+        "message": "En calquera outro caso, a nosa comunidade é o lugar axeitado para formular as súas preguntas."
+    },
+    "tutorial-000737": {
+        "message": "foron creados hai máis de"
+    },
+    "settings-000722": {
+        "message": "De xeito predeterminado, activar a opción para que outros usuarios poidan compartir un contrasinal que recibiron compartido"
+    },
+    "tutorial-000749": {
+        "message": "que inclúan números"
+    },
+    "tutorial-000790": {
+        "message": "O seu contrasinal debe ter polo menos 12 caracteres e o contrasinal de confirmación ten que ser exactamente igual"
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "Acción que se realizará cando se prema coa roda do rato nunha entrada de contrasinal",
+        "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Esta acción elimina a marca «agochado» dos elementos para que volvan aparecer na aplicación.",
+        "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Consulte {link} para obter máis información.",
+        "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "A actualización da base de datos de contrasinais comprometidos fallou tres veces. Consulte o manual e revise os seus rexistros. Motivo: $STR_1$",
+        "description": "Text of the notification when the download of the precompiled breached passwords database failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Acceder con WebAuthn",
+        "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
+    },
+    "settings-WebauthnLoginSetupSuccess": {
+        "message": "WebAuthn agora está activado. A aplicación tentará utilizar a frase de paso gardada a próxima vez que acceda",
+        "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Introduza embaixo a súa frase de paso de cifrado. Esta vai ser gardada no seu navegador e a aplicación tentará usala cando o abra a próxima vez. Se a frase de paso non é válida, o acceso fallará unha vez e WebAuthn desactivarase.",
+        "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     }
 }
