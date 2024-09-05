@@ -434,7 +434,7 @@
         "message": "Feble (anticuado)"
     },
     "frontend-000169": {
-        "message": "Comprometido"
+        "message": "Quebrantado"
     },
     "frontend-000170": {
         "message": "Compartir"
@@ -1782,7 +1782,7 @@
         "message": "Algúns dos seus contrasinais xa non son seguros."
     },
     "backend-000463": {
-        "message": "Contrasinais comproba regularmente se os seus contrasinais foron comprometidos por algunha fintración de datos."
+        "message": "Contrasinais comproba regularmente se os seus contrasinais foron comprometidos por algún quebrantamento de datos."
     },
     "backend-000464": {
         "message": "Esta comprobación de seguranza descubriu que un dos seus contrasinais non é seguro."
@@ -2624,7 +2624,7 @@
         "description": "Label in the settings for the option to add a custom shortcut button to each password entry"
     },
     "settings-000726": {
-        "message": "O resumo criptográfico SHA-1 úsase para comprobar se hai contrasinais comprometidos. Un resumo parcial pode evitar ataques de forza bruta no caso de que o servidor sufra unha intrusión, mais tamén pode provocar que se informe por erro de contrasinais seguros como comprometidos."
+        "message": "O resumo criptográfico SHA-1 úsase para comprobar se hai contrasinais quebrantados. Un resumo parcial pode evitar ataques de forza bruta no caso de que o servidor sufra unha intrusión, mais tamén pode provocar que se informe por erro de contrasinais seguros como quebrantados."
     },
     "settings-SettingsShowShareTab": {
         "message": "Amosar a lapela Compartir",
@@ -2739,7 +2739,7 @@
         "message": "están duplicados"
     },
     "tutorial-000750": {
-        "message": "que inclúan caracteres especiais"
+        "message": "inclúan caracteres especiais"
     },
     "tutorial-000757": {
         "message": "Gardar o contrasinal"
@@ -2775,10 +2775,10 @@
         "message": "sexan fortes"
     },
     "tutorial-000746": {
-        "message": "sexan máis fortes"
+        "message": "sexan moi fortes"
     },
     "tutorial-000747": {
-        "message": "sexan moi fortes"
+        "message": "sexan fortisimas"
     },
     "tutorial-000748": {
         "message": "sexan extremadamente fortes"
@@ -2901,7 +2901,7 @@
         "message": "Debe introducir o seu antigo contrasinal"
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "Non foi posíbel actualizar a base de datos de contrasinais comprometidos",
+        "message": "Non foi posíbel actualizar a base de datos de contrasinais quebrantados",
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "settings-RecoverItemsPasswordsTitle": {
@@ -2965,7 +2965,7 @@
         "message": "De xeito predeterminado, activar a opción para que outros usuarios poidan compartir un contrasinal que recibiron compartido"
     },
     "tutorial-000749": {
-        "message": "que inclúan números"
+        "message": "inclúan números"
     },
     "tutorial-000790": {
         "message": "O seu contrasinal debe ter polo menos 12 caracteres e o contrasinal de confirmación ten que ser exactamente igual"
@@ -2983,7 +2983,7 @@
         "description": "Third section of the warning message users see when they open the browser developer console which contains a link to the handbook page with more information"
     },
     "backend-PassDbDlFailedText": {
-        "message": "A actualización da base de datos de contrasinais comprometidos fallou tres veces. Consulte o manual e revise os seus rexistros. Motivo: $STR_1$",
+        "message": "A actualización da base de datos de contrasinais quebrantados fallou tres veces. Consulte o manual e revise os seus rexistros. Motivo: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3002,5 +3002,61 @@
     "settings-WebauthnEncryptionPassphraseText": {
         "message": "Introduza embaixo a súa frase de paso de cifrado. Esta vai ser gardada no seu navegador e a aplicación tentará usala cando o abra a próxima vez. Se a frase de paso non é válida, o acceso fallará unha vez e WebAuthn desactivarase.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
+    },
+    "tutorial-000751": {
+        "message": "Un lugar seguro para os teus contrasinais"
+    },
+    "tutorial-000752": {
+        "message": "Manteña os seus contrasinais en segredo"
+    },
+    "tutorial-000753": {
+        "message": "Personalice a súa experiencia"
+    },
+    "tutorial-000755": {
+        "message": "Conéctese"
+    },
+    "tutorial-000756": {
+        "message": "Cifrar os meus contrasinais existentes"
+    },
+    "tutorial-000763": {
+        "message": "Atope axuda cando a necesite"
+    },
+    "tutorial-000764": {
+        "message": "Ir a Aplicacións e extensións"
+    },
+    "tutorial-000767": {
+        "message": "Comprobar a seguranza do contrasinal con"
+    },
+    "tutorial-000770": {
+        "message": "Obter vistas previas de sitios web con"
+    },
+    "tutorial-000773": {
+        "message": "Lea os nosos consellos para a administración do sitio"
+    },
+    "tutorial-000775": {
+        "message": "Cifrado en curso…"
+    },
+    "tutorial-000785": {
+        "message": "A axuda está da túa man."
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Imprimir un contrasinal",
+        "description": "Label of the print password action"
+    },
+    "frontend-FolderPickerLoading": {
+        "message": "Cargando cartafoles",
+        "description": "Text of the loading animation while folders are being loaded"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "Amosar o código Qr",
+        "description": "Label of the action to show a qrcode for the password"
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "PARAR!",
+        "description": "Title of the warning message users see when they open the browser developer console"
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Amsar opción de impresión",
+        "description": "Label text in the settings for the option to show a print option for passwords"
     }
 }
