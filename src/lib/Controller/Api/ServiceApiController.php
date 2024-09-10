@@ -97,6 +97,7 @@ class ServiceApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 60, period: 60)]
     public function generatePassword(?int $strength = null, ?bool $numbers = null, ?bool $special = null): JSONResponse {
         if($strength === null) $strength = $this->userSettings->get('password.generator.strength');
         if($numbers === null) $numbers = $this->userSettings->get('password.generator.numbers');
@@ -125,6 +126,7 @@ class ServiceApiController extends AbstractApiController {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 60, period: 60)]
     public function getAvatar(string $user, int $size = 32): FileDisplayResponse {
         $file = $this->avatarService->getAvatar($user, $size);
 
@@ -140,6 +142,7 @@ class ServiceApiController extends AbstractApiController {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 60, period: 60)]
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
         $file = $this->faviconService->getFavicon($domain, $size);
 
@@ -157,6 +160,7 @@ class ServiceApiController extends AbstractApiController {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
+    #[UserRateLimit(limit: 10, period: 30)]
     public function getPreview(string $domain, string $view = 'desktop', string $width = '640', string $height = '360...'): FileDisplayResponse {
         [$minWidth, $maxWidth] = $this->validatePreviewSize($width);
         [$minHeight, $maxHeight] = $this->validatePreviewSize($height);
