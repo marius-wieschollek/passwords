@@ -1,5 +1,9 @@
 ## [Unreleased]
-## 2024.8.0 - Feature release
+## 2024.9.0 - Feature release
+### Added
+- Translation for Galician
+### Changed
+- Removed some special characters from password generator
 ### Fixed
 - Imaginary not working when api key used
 
