@@ -23,7 +23,7 @@ class RandomCharactersProvider extends AbstractWordsProvider {
 
     const CHARACTER_LIST = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
     const NUMBERS        = '0123456789';
-    const SPECIAL        = '!?&%/()[]{}$€@-_';
+    const SPECIAL        = '!?&%/()[]{}$@-_';
 
     /**
      * @var string
