@@ -581,7 +581,7 @@
         "message": "Copier le mot de passe"
     },
     "frontend-000242": {
-        "message": "$ELEMENT$ a été copié dans le presse-papier",
+        "message": "$ELEMENT$ copié dans le presse-papier",
         "placeholders": {
             "element": {
                 "content": "$1"
