@@ -141,6 +141,7 @@ class ServiceApiController extends AbstractApiController {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
+        $domain = preg_replace("/\:([0-9]+)\$/",'',$domain);
         $file = $this->faviconService->getFavicon($domain, $size);
 
         return $this->createFileDisplayResponse($file);
