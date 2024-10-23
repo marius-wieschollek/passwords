@@ -22,13 +22,8 @@ use Random\Randomizer;
 class RandomCharactersProvider extends AbstractWordsProvider {
 
     const CHARACTER_LIST = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-    const CHARACTERS_DE  = 'ÄäÖöÜüß';
-    const CHARACTERS_FR  = 'ÉèÊéÈêÂâÀàÔôÚúÛû';
-    const CHARACTERS_IT  = 'ÀàÈèÚú';
-    const CHARACTERS_ES  = 'ÁáÉéÍíÑñÓóÚú';
-    const CHARACTERS_PT  = 'ÁáÂâÀàÃãÇçÉéÊêÍíÔôÓôÕõÚÚ';
     const NUMBERS        = '0123456789';
-    const SPECIAL        = '!?&%/()[]{}$€@-_';
+    const SPECIAL        = '!?&%/()[]{}$@-_';
 
     /**
      * @var string
@@ -54,7 +49,7 @@ class RandomCharactersProvider extends AbstractWordsProvider {
      */
     public function getWords(int $strength, bool $addNumbers, bool $addSpecial): ?array {
         $words      = [];
-        $characters = $this->getCharacterString();
+        $characters = self::CHARACTER_LIST;
         $strength   += 3;
         $length     = $strength === 3 ? 4:$strength;
 
@@ -75,27 +70,6 @@ class RandomCharactersProvider extends AbstractWordsProvider {
             'words'    => $words,
             'password' => $this->wordsArrayToPassword($words, $strength, $addNumbers, $addSpecial)
         ];
-    }
-
-    /**
-     * @return string
-     */
-    protected function getCharacterString(): string {
-        $characters = self::CHARACTER_LIST;
-        switch($this->langCode) {
-            case 'de':
-                return $characters.self::CHARACTERS_DE;
-            case 'fr':
-                return $characters.self::CHARACTERS_FR;
-            case 'it':
-                return $characters.self::CHARACTERS_IT;
-            case 'es':
-                return $characters.self::CHARACTERS_ES;
-            case 'pt':
-                return $characters.self::CHARACTERS_PT;
-        }
-
-        return $characters;
     }
 
     /**

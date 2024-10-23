@@ -163,7 +163,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    public function findOneByField(string $field, string $value, int $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
+    public function findOneByField(string $field, string $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
         return $this->findOneByFields([$field, $value, $type, $operator]);
     }
 
@@ -176,7 +176,7 @@ abstract class AbstractMapper extends QBMapper {
      * @return EntityInterface[]
      * @throws Exception
      */
-    public function findAllByField(string $field, mixed $value, int $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
+    public function findAllByField(string $field, mixed $value, $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
         return $this->findAllByFields([$field, $value, $type, $operator]);
     }
 
