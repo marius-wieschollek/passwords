@@ -2358,7 +2358,7 @@
         "message": "Potřebujete pomoc?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Zeptejte se na diskuzním fóru!"
+        "message": "Zeptejte se na diskuzním fóru"
     },
     "frontend-000329": {
         "message": "Platnost relace skončila"
@@ -3198,7 +3198,7 @@
         }
     },
     "settings-RecoverItemsInvisibleTrash": {
-        "message": "Skryté předměty v koši",
+        "message": "Skryté položky v koši",
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-RecoverItemsInvisibleTrashTitle": {
@@ -3206,7 +3206,7 @@
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-SettingsWebAuthnEnable": {
-        "message": "Přihlášení pomocí WebAuthn",
+        "message": "Přihlásit se pomocí WebAuthn",
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
@@ -3214,15 +3214,15 @@
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
-        "message": "Šifrovací heslo",
+        "message": "Šifrovací přístupová fráze",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseRepeat": {
-        "message": "Opakování přístupové fráze",
+        "message": "Zopakování přístupové fráze",
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "Níže zadejte svou šifrovací frázi. Uloží se do prohlížeče a aplikace se ji pokusí použít při příštím otevření. Pokud je heslová fráze neplatná, přihlášení se jednou nezdaří a WebAuthn bude deaktivován.",
+        "message": "Níže zadejte svou šifrovací frázi. Bude uložena ve vámi využívaném prohlížeči a bude proveden pokus jí použít při příštím otevření aplikace. Pokud nebude heslová fráze platná a přihlášení se tím jedinkrát nezdaří, bude WebAuthn vypnuto.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnLoginSetupSuccess": {
@@ -3230,7 +3230,7 @@
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "frontend-WebAuthnLoginDisabled": {
-        "message": "WebAuthn Přihlášení bylo zakázáno. Můžete jej znovu povolit v nastavení",
+        "message": "WebAuthn přihlašování bylo vypnuto. Můžete jej znovu povolit v nastavení",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnEncryptionSetupTitle": {
@@ -3238,10 +3238,10 @@
         "description": "Title of the WebAuthn setup dialog."
     },
     "frontend-Disable": {
-        "message": "Zakázat"
+        "message": "Vypnout"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "Nepodařilo se nám najít nic pro \"$QUERY$\"",
+        "message": "Pro „$QUERY$“ se nepodařilo nic najít",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results",
         "placeholders": {
             "query": {
@@ -3271,7 +3271,7 @@
         "description": "Title of the message in the Nextcloud Dashboard Widget if current search query returns no results"
     },
     "frontend-DashboardResultsLoading": {
-        "message": "Výsledky budou aktualizovány po načtení všech hesel.",
+        "message": "Výsledky budou aktualizovány až po načtení všech hesel",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     },
     "frontend-HandbookDevDocumentation": {
@@ -3287,10 +3287,10 @@
         "description": "Label of the link to the admin wiki in the box on the right in the handbook."
     },
     "frontend-Donate": {
-        "message": "Darovat"
+        "message": "Podpořit vývoj darem"
     },
     "frontend-SearchInputPlaceholder": {
-        "message": "Vyhledávání …"
+        "message": "Hledat …"
     },
     "frontend-CSEPassphraseInsecureText": {
         "message": "Aplikace Hesla pravidelně kontroluje, zda je vaše šifrovací heslo stále bezpečné. Vaše aktuální heslová fráze není bezpečná a je třeba ji okamžitě změnit."
@@ -3324,7 +3324,7 @@
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
-        "message": "Začneme",
+        "message": "Začněme",
         "description": "Second part of the initial welcome text on the first page of the first run wizard"
     },
     "frontend-CompatWASMHeadline": {
