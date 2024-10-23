@@ -331,8 +331,8 @@
         position    : relative;
 
         h2 {
-            position : absolute;
-            top      : -2.1rem;
+            margin: 0 -100px 1rem;
+            text-align: center;
         }
 
         .status {
