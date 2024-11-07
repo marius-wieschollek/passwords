@@ -13,6 +13,9 @@ use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OC_User;
+use OCP\Authentication\Exceptions\CredentialsUnavailableException;
+use OCP\Authentication\LoginCredentials\IStore;
+use OCP\Authentication\LoginCredentials\ICredentials;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
@@ -164,14 +167,15 @@ class EnvironmentService {
      * @throws Exception
      */
     public function __construct(
-        ?string        $userId,
-        IConfig        $config,
-        IRequest       $request,
-        ISession       $session,
-        LoggingService $logger,
-        IProvider      $tokenProvider,
-        IUserSession   $userSession,
-        IUserManager   $userManager
+        ?string          $userId,
+        IConfig          $config,
+        IRequest         $request,
+        ISession         $session,
+        LoggingService   $logger,
+        IProvider        $tokenProvider,
+        IUserSession     $userSession,
+        IUserManager     $userManager,
+        protected IStore $credentialsStore,
     ) {
         $this->config        = $config;
         $this->logger        = $logger;
@@ -373,8 +377,15 @@ class EnvironmentService {
     protected function loadUserInformation(?string $userId, IRequest $request): bool {
         $authHeader   = $request->getHeader('Authorization');
         $userIdString = $userId ? :'invalid user id';
-        if($this->session->exists('login_credentials')) {
-            if($this->loadUserFromSession($userId, $request)) return true;
+
+        try {
+            $loginCredentials = $this->credentialsStore->getLoginCredentials();
+        } catch (CredentialsUnavailableException) {
+            // this is fine
+        }
+
+        if(isset($loginCredentials)) {
+            if($this->loadUserFromSession($userId, $request, $loginCredentials)) return true;
             $this->logger->warning('Login attempt with invalid session for '.$userIdString);
         } else if($authHeader !== '') {
             [$type, $value] = explode(' ', $authHeader, 2);
@@ -492,18 +503,18 @@ class EnvironmentService {
      *
      * @return bool
      */
-    protected function loadUserFromSession(?string $userId, IRequest $request): bool {
-        $loginCredentials = json_decode($this->session->get('login_credentials'));
-        $loginName        = $this->session->get('loginname');
-        $uid              = $loginCredentials->uid;
+    protected function loadUserFromSession(?string $userId, IRequest $request, ICredentials $loginCredentials): bool {
+        $loginName     = $loginCredentials->getLoginName();
+        $uid           = $loginCredentials->getUID();
+        $loginPassword = $loginCredentials->getPassword();
 
         if($uid === $userId) {
-            if(isset($loginCredentials->isTokenLogin) && $loginCredentials->isTokenLogin && $this->session->exists('app_password') && !empty($this->session->get('app_password'))) {
+            if($this->session->exists('app_password') && !empty($this->session->get('app_password'))) {
                 $tokenId = $this->session->get('app_password');
 
-                return $this->getUserInfoFromToken($tokenId, $loginName, $userId, $loginCredentials->password ?? null);
-            } else if(!empty($loginCredentials->password)) {
-                return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginCredentials->password);
+                return $this->getUserInfoFromToken($tokenId, $loginName, $userId, $loginPassword);
+            } else if($loginPassword !== null) {
+                return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginPassword);
             } else {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
             }
