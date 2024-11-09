@@ -1,4 +1,9 @@
 ## [Unreleased]
+## 2024.11.0 - Feature release
+#### Fixed
+- Sharing not working
+- User verification fails on NC 30.0.2 and NC 29.0.9
+
 ## 2024.9.0 - Feature release
 ### Added
 - Translation for Galician
