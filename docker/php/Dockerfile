@@ -1,4 +1,4 @@
-FROM nextcloud:29-fpm
+FROM nextcloud:30-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -46,7 +46,7 @@ RUN apt-get clean; \
     apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false gnupg; \
     rm -rf /var/lib/apt/lists/*
 
-RUN npm install --global pageres-cli --unsafe-perm
+#RUN npm install --global pageres-cli --unsafe-perm
 RUN mkdir -p /var/www/.config
 RUN chown -R "www-data:$(id -gn www-data)" /var/www/.config
 RUN mkdir -p /var/www/.cache/puppeteer

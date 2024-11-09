@@ -513,7 +513,7 @@ class EnvironmentService {
                 $tokenId = $this->session->get('app_password');
 
                 return $this->getUserInfoFromToken($tokenId, $loginName, $userId, $loginPassword);
-            } else if($loginPassword !== null) {
+            } else if($loginPassword !== null && $loginPassword !== "") {
                 return $this->getUserInfoFromPassword($userId, $request, $loginName, $loginPassword);
             } else {
                 return $this->getUserInfoFromUserId($userId, $request, $loginName);
