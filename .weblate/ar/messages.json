@@ -3341,5 +3341,29 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "وتُنفَّذ وظائف أساسية بنفس صيغة برنامج العمل الوطني.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "frontend-CompatHeadline": {
+        "message": ""
+    },
+    "frontend-CompatText1": {
+        "message": ""
+    },
+    "frontend-CompatText2": {
+        "message": ""
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": ""
+    },
+    "frontend-CompatWASMText1": {
+        "message": ""
+    },
+    "frontend-CompatWASMText2": {
+        "message": ""
+    },
+    "frontend-CompatWASMText3": {
+        "message": ""
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": ""
     }
 }
