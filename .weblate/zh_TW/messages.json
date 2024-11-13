@@ -1,1 +1,3270 @@
-{}
+{
+    "backend-000485": {
+        "message": ""
+    },
+    "frontend-000612": {
+        "message": ""
+    },
+    "frontend-000623": {
+        "message": ""
+    },
+    "frontend-Enable": {
+        "message": ""
+    },
+    "settings-000684": {
+        "message": ""
+    },
+    "frontend-000625": {
+        "message": ""
+    },
+    "frontend-000626": {
+        "message": "",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": ""
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": ""
+    },
+    "frontend-000628": {
+        "message": ""
+    },
+    "frontend-000629": {
+        "message": ""
+    },
+    "frontend-000630": {
+        "message": ""
+    },
+    "frontend-000631": {
+        "message": ""
+    },
+    "frontend-Disable": {
+        "message": ""
+    },
+    "backend-000632": {
+        "message": ""
+    },
+    "backend-000633": {
+        "message": ""
+    },
+    "backend-000634": {
+        "message": ""
+    },
+    "backend-000635": {
+        "message": ""
+    },
+    "backend-000636": {
+        "message": ""
+    },
+    "backend-000637": {
+        "message": ""
+    },
+    "backend-000638": {
+        "message": ""
+    },
+    "backend-000639": {
+        "message": ""
+    },
+    "backend-000640": {
+        "message": ""
+    },
+    "backend-000641": {
+        "message": ""
+    },
+    "backend-000642": {
+        "message": ""
+    },
+    "backend-000643": {
+        "message": ""
+    },
+    "settings-000680": {
+        "message": ""
+    },
+    "settings-000681": {
+        "message": ""
+    },
+    "settings-000682": {
+        "message": ""
+    },
+    "settings-000683": {
+        "message": ""
+    },
+    "backend-000644": {
+        "message": ""
+    },
+    "backend-000645": {
+        "message": ""
+    },
+    "backend-000646": {
+        "message": ""
+    },
+    "frontend-000545": {
+        "message": ""
+    },
+    "frontend-000546": {
+        "message": ""
+    },
+    "frontend-000547": {
+        "message": ""
+    },
+    "frontend-000548": {
+        "message": ""
+    },
+    "frontend-000549": {
+        "message": ""
+    },
+    "frontend-000550": {
+        "message": ""
+    },
+    "frontend-000551": {
+        "message": ""
+    },
+    "frontend-000552": {
+        "message": ""
+    },
+    "frontend-000553": {
+        "message": ""
+    },
+    "frontend-000554": {
+        "message": ""
+    },
+    "frontend-000555": {
+        "message": ""
+    },
+    "frontend-000556": {
+        "message": ""
+    },
+    "frontend-000557": {
+        "message": ""
+    },
+    "frontend-000558": {
+        "message": ""
+    },
+    "frontend-000559": {
+        "message": ""
+    },
+    "frontend-000560": {
+        "message": ""
+    },
+    "frontend-000561": {
+        "message": ""
+    },
+    "frontend-000562": {
+        "message": ""
+    },
+    "frontend-000563": {
+        "message": ""
+    },
+    "frontend-000564": {
+        "message": ""
+    },
+    "frontend-000565": {
+        "message": ""
+    },
+    "frontend-000566": {
+        "message": ""
+    },
+    "frontend-000569": {
+        "message": ""
+    },
+    "settings-000685": {
+        "message": "",
+        "placeholders": {
+            "minutes": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000686": {
+        "message": ""
+    },
+    "settings-000687": {
+        "message": ""
+    },
+    "settings-000688": {
+        "message": ""
+    },
+    "settings-000689": {
+        "message": ""
+    },
+    "settings-000690": {
+        "message": ""
+    },
+    "settings-000691": {
+        "message": ""
+    },
+    "frontend-000570": {
+        "message": ""
+    },
+    "frontend-000571": {
+        "message": ""
+    },
+    "tutorial-000757": {
+        "message": ""
+    },
+    "frontend-000572": {
+        "message": ""
+    },
+    "frontend-000573": {
+        "message": ""
+    },
+    "frontend-000574": {
+        "message": ""
+    },
+    "frontend-000575": {
+        "message": ""
+    },
+    "frontend-000576": {
+        "message": ""
+    },
+    "frontend-000577": {
+        "message": ""
+    },
+    "frontend-000578": {
+        "message": ""
+    },
+    "frontend-000579": {
+        "message": ""
+    },
+    "frontend-000580": {
+        "message": ""
+    },
+    "frontend-000581": {
+        "message": ""
+    },
+    "frontend-000582": {
+        "message": ""
+    },
+    "backend-000648": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000693": {
+        "message": ""
+    },
+    "settings-000694": {
+        "message": ""
+    },
+    "settings-000695": {
+        "message": ""
+    },
+    "settings-000696": {
+        "message": ""
+    },
+    "settings-000697": {
+        "message": ""
+    },
+    "settings-000698": {
+        "message": ""
+    },
+    "settings-000699": {
+        "message": ""
+    },
+    "settings-000700": {
+        "message": ""
+    },
+    "settings-000701": {
+        "message": ""
+    },
+    "settings-000702": {
+        "message": ""
+    },
+    "settings-000703": {
+        "message": ""
+    },
+    "settings-000704": {
+        "message": ""
+    },
+    "settings-000705": {
+        "message": ""
+    },
+    "frontend-000583": {
+        "message": ""
+    },
+    "settings-000706": {
+        "message": ""
+    },
+    "settings-000707": {
+        "message": ""
+    },
+    "frontend-000584": {
+        "message": ""
+    },
+    "frontend-000585": {
+        "message": ""
+    },
+    "frontend-000586": {
+        "message": ""
+    },
+    "frontend-000587": {
+        "message": ""
+    },
+    "frontend-000588": {
+        "message": ""
+    },
+    "frontend-000589": {
+        "message": ""
+    },
+    "frontend-000590": {
+        "message": ""
+    },
+    "frontend-000593": {
+        "message": ""
+    },
+    "frontend-000594": {
+        "message": ""
+    },
+    "frontend-000595": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000596": {
+        "message": ""
+    },
+    "tutorial-000780": {
+        "message": ""
+    },
+    "frontend-000597": {
+        "message": ""
+    },
+    "frontend-000598": {
+        "message": ""
+    },
+    "frontend-000599": {
+        "message": ""
+    },
+    "frontend-000600": {
+        "message": ""
+    },
+    "frontend-000601": {
+        "message": ""
+    },
+    "frontend-000602": {
+        "message": ""
+    },
+    "frontend-000603": {
+        "message": ""
+    },
+    "frontend-000604": {
+        "message": ""
+    },
+    "tutorial-000786": {
+        "message": ""
+    },
+    "settings-000708": {
+        "message": ""
+    },
+    "settings-000709": {
+        "message": ""
+    },
+    "settings-000710": {
+        "message": ""
+    },
+    "settings-000711": {
+        "message": ""
+    },
+    "settings-000712": {
+        "message": ""
+    },
+    "settings-000713": {
+        "message": ""
+    },
+    "settings-000714": {
+        "message": ""
+    },
+    "settings-000715": {
+        "message": "",
+        "placeholders": {
+            "code": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000716": {
+        "message": ""
+    },
+    "settings-000717": {
+        "message": ""
+    },
+    "settings-000718": {
+        "message": ""
+    },
+    "settings-000719": {
+        "message": ""
+    },
+    "settings-000720": {
+        "message": ""
+    },
+    "frontend-000605": {
+        "message": ""
+    },
+    "frontend-000606": {
+        "message": ""
+    },
+    "frontend-000607": {
+        "message": ""
+    },
+    "frontend-000608": {
+        "message": ""
+    },
+    "frontend-000609": {
+        "message": ""
+    },
+    "backend-000483": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000484": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "settings-000721": {
+        "message": ""
+    },
+    "settings-000722": {
+        "message": ""
+    },
+    "backend-000486": {
+        "message": ""
+    },
+    "settings-000723": {
+        "message": ""
+    },
+    "frontend-000610": {
+        "message": ""
+    },
+    "frontend-000611": {
+        "message": ""
+    },
+    "frontend-000613": {
+        "message": ""
+    },
+    "settings-000724": {
+        "message": ""
+    },
+    "frontend-000614": {
+        "message": "",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000616": {
+        "message": ""
+    },
+    "frontend-000617": {
+        "message": ""
+    },
+    "frontend-000618": {
+        "message": "",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000619": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000620": {
+        "message": ""
+    },
+    "settings-000725": {
+        "message": ""
+    },
+    "settings-000726": {
+        "message": ""
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": ""
+    },
+    "settings-RecoverItemsError": {
+        "message": ""
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": ""
+    },
+    "backend-000487": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000489": {
+        "message": ""
+    },
+    "backend-000490": {
+        "message": ""
+    },
+    "backend-000491": {
+        "message": ""
+    },
+    "backend-000492": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000493": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000494": {
+        "message": ""
+    },
+    "backend-000495": {
+        "message": ""
+    },
+    "backend-000496": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000497": {
+        "message": ""
+    },
+    "backend-000498": {
+        "message": ""
+    },
+    "backend-000499": {
+        "message": ""
+    },
+    "backend-000500": {
+        "message": ""
+    },
+    "backend-000501": {
+        "message": ""
+    },
+    "backend-000502": {
+        "message": ""
+    },
+    "backend-000503": {
+        "message": ""
+    },
+    "backend-000504": {
+        "message": ""
+    },
+    "backend-000505": {
+        "message": ""
+    },
+    "backend-000506": {
+        "message": ""
+    },
+    "backend-000507": {
+        "message": ""
+    },
+    "backend-000508": {
+        "message": ""
+    },
+    "backend-000509": {
+        "message": ""
+    },
+    "backend-000510": {
+        "message": ""
+    },
+    "backend-000512": {
+        "message": ""
+    },
+    "backend-000513": {
+        "message": ""
+    },
+    "backend-000514": {
+        "message": ""
+    },
+    "backend-000515": {
+        "message": ""
+    },
+    "backend-000516": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000517": {
+        "message": ""
+    },
+    "backend-000518": {
+        "message": ""
+    },
+    "backend-000519": {
+        "message": ""
+    },
+    "backend-000520": {
+        "message": ""
+    },
+    "backend-000521": {
+        "message": ""
+    },
+    "backend-000522": {
+        "message": ""
+    },
+    "backend-000523": {
+        "message": ""
+    },
+    "backend-000524": {
+        "message": ""
+    },
+    "backend-000525": {
+        "message": ""
+    },
+    "frontend-000526": {
+        "message": ""
+    },
+    "frontend-000528": {
+        "message": ""
+    },
+    "frontend-000529": {
+        "message": ""
+    },
+    "frontend-000530": {
+        "message": ""
+    },
+    "frontend-000531": {
+        "message": ""
+    },
+    "frontend-000621": {
+        "message": "",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000622": {
+        "message": ""
+    },
+    "frontend-000624": {
+        "message": ""
+    },
+    "frontend-000532": {
+        "message": ""
+    },
+    "frontend-000533": {
+        "message": ""
+    },
+    "frontend-000534": {
+        "message": ""
+    },
+    "frontend-000535": {
+        "message": ""
+    },
+    "frontend-000536": {
+        "message": ""
+    },
+    "frontend-000537": {
+        "message": ""
+    },
+    "frontend-000538": {
+        "message": ""
+    },
+    "frontend-000539": {
+        "message": ""
+    },
+    "frontend-000540": {
+        "message": ""
+    },
+    "frontend-000541": {
+        "message": ""
+    },
+    "frontend-000542": {
+        "message": ""
+    },
+    "frontend-000543": {
+        "message": ""
+    },
+    "frontend-000544": {
+        "message": ""
+    },
+    "frontend-000223": {
+        "message": ""
+    },
+    "backend-000647": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": ""
+    },
+    "backend-000651": {
+        "message": ""
+    },
+    "backend-000652": {
+        "message": ""
+    },
+    "backend-000653": {
+        "message": ""
+    },
+    "backend-000654": {
+        "message": ""
+    },
+    "backend-000655": {
+        "message": ""
+    },
+    "backend-000656": {
+        "message": ""
+    },
+    "backend-000657": {
+        "message": ""
+    },
+    "backend-000658": {
+        "message": ""
+    },
+    "backend-000659": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": ""
+    },
+    "backend-000661": {
+        "message": ""
+    },
+    "backend-000662": {
+        "message": ""
+    },
+    "backend-000666": {
+        "message": ""
+    },
+    "backend-Passwords": {
+        "message": ""
+    },
+    "frontend-000667": {
+        "message": ""
+    },
+    "frontend-000669": {
+        "message": ""
+    },
+    "frontend-000670": {
+        "message": ""
+    },
+    "frontend-000671": {
+        "message": ""
+    },
+    "settings-000678": {
+        "message": ""
+    },
+    "settings-000679": {
+        "message": ""
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": ""
+    },
+    "settings-SettingsCustomAction": {
+        "message": ""
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": ""
+    },
+    "settings-SettingsShowShareTab": {
+        "message": ""
+    },
+    "settings-SettingsRecoverItems": {
+        "message": ""
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": ""
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": ""
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": ""
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": ""
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": ""
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsFolders": {
+        "message": ""
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsTags": {
+        "message": ""
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": ""
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-RecoverItemsTitle": {
+        "message": ""
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": ""
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": ""
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": ""
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": ""
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": ""
+    },
+    "settings-WebauthnLoginSetupSuccess": {
+        "message": ""
+    },
+    "tutorial-000730": {
+        "message": ""
+    },
+    "tutorial-000731": {
+        "message": ""
+    },
+    "tutorial-000732": {
+        "message": ""
+    },
+    "tutorial-000733": {
+        "message": ""
+    },
+    "tutorial-000734": {
+        "message": ""
+    },
+    "tutorial-000735": {
+        "message": ""
+    },
+    "tutorial-000736": {
+        "message": ""
+    },
+    "tutorial-000737": {
+        "message": ""
+    },
+    "tutorial-000738": {
+        "message": ""
+    },
+    "tutorial-000739": {
+        "message": ""
+    },
+    "tutorial-000740": {
+        "message": ""
+    },
+    "tutorial-000741": {
+        "message": ""
+    },
+    "tutorial-000742": {
+        "message": "",
+        "placeholders": {
+            "days": {
+                "content": "$1"
+            }
+        }
+    },
+    "tutorial-000743": {
+        "message": ""
+    },
+    "tutorial-000744": {
+        "message": ""
+    },
+    "tutorial-000745": {
+        "message": ""
+    },
+    "tutorial-000746": {
+        "message": ""
+    },
+    "tutorial-000747": {
+        "message": ""
+    },
+    "tutorial-000748": {
+        "message": ""
+    },
+    "tutorial-000749": {
+        "message": ""
+    },
+    "tutorial-000750": {
+        "message": ""
+    },
+    "tutorial-000751": {
+        "message": ""
+    },
+    "tutorial-000752": {
+        "message": ""
+    },
+    "tutorial-000753": {
+        "message": ""
+    },
+    "tutorial-000755": {
+        "message": ""
+    },
+    "tutorial-000756": {
+        "message": ""
+    },
+    "tutorial-000758": {
+        "message": ""
+    },
+    "tutorial-000759": {
+        "message": ""
+    },
+    "tutorial-000760": {
+        "message": ""
+    },
+    "tutorial-000761": {
+        "message": ""
+    },
+    "tutorial-000762": {
+        "message": ""
+    },
+    "tutorial-000763": {
+        "message": ""
+    },
+    "tutorial-000764": {
+        "message": ""
+    },
+    "tutorial-000765": {
+        "message": ""
+    },
+    "tutorial-000766": {
+        "message": ""
+    },
+    "tutorial-000767": {
+        "message": ""
+    },
+    "tutorial-000768": {
+        "message": ""
+    },
+    "tutorial-000769": {
+        "message": ""
+    },
+    "tutorial-000770": {
+        "message": ""
+    },
+    "tutorial-000771": {
+        "message": ""
+    },
+    "tutorial-000772": {
+        "message": ""
+    },
+    "tutorial-000773": {
+        "message": ""
+    },
+    "tutorial-000774": {
+        "message": ""
+    },
+    "tutorial-000775": {
+        "message": ""
+    },
+    "tutorial-000776": {
+        "message": ""
+    },
+    "tutorial-000777": {
+        "message": ""
+    },
+    "tutorial-000778": {
+        "message": ""
+    },
+    "tutorial-000779": {
+        "message": ""
+    },
+    "tutorial-000781": {
+        "message": ""
+    },
+    "tutorial-000782": {
+        "message": ""
+    },
+    "tutorial-000783": {
+        "message": ""
+    },
+    "tutorial-000784": {
+        "message": ""
+    },
+    "tutorial-000785": {
+        "message": ""
+    },
+    "tutorial-000787": {
+        "message": ""
+    },
+    "tutorial-000790": {
+        "message": ""
+    },
+    "tutorial-000788": {
+        "message": ""
+    },
+    "tutorial-000789": {
+        "message": ""
+    },
+    "tutorial-StartText1": {
+        "message": ""
+    },
+    "tutorial-StartText2": {
+        "message": ""
+    },
+    "backend-UserMigrationDescription": {
+        "message": ""
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": ""
+    },
+    "backend-ExportNotPossibleText": {
+        "message": ""
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": ""
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": ""
+    },
+    "frontend-PasswordActionPrint": {
+        "message": ""
+    },
+    "frontend-FolderPickerLoading": {
+        "message": ""
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": ""
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-ExpertSettingsLabel": {
+        "message": ""
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": ""
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": ""
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": ""
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": ""
+    },
+    "frontend-PasswordEncryptionCSE": {
+        "message": ""
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": ""
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": ""
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": ""
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": ""
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": ""
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": ""
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": ""
+    },
+    "backend-EOLNextcloudTitle": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudText1": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPTitle": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText1": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPText2": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": ""
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": ""
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": ""
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": ""
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": ""
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": ""
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": ""
+    },
+    "backend-CronSetupCheckName": {
+        "message": ""
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": ""
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": ""
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": ""
+    },
+    "frontend-CompatHeadline": {
+        "message": ""
+    },
+    "frontend-CompatText1": {
+        "message": ""
+    },
+    "frontend-CompatText2": {
+        "message": ""
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": ""
+    },
+    "frontend-CompatWASMText1": {
+        "message": ""
+    },
+    "frontend-CompatWASMText2": {
+        "message": ""
+    },
+    "frontend-CompatWASMText3": {
+        "message": ""
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": ""
+    },
+    "backups-000040": {
+        "message": ""
+    },
+    "backups-000041": {
+        "message": ""
+    },
+    "backups-000128": {
+        "message": ""
+    },
+    "apps-000001": {
+        "message": ""
+    },
+    "apps-000002": {
+        "message": "",
+        "placeholders": {
+            "author": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000003": {
+        "message": ""
+    },
+    "apps-000004": {
+        "message": ""
+    },
+    "apps-000005": {
+        "message": ""
+    },
+    "apps-000006": {
+        "message": ""
+    },
+    "apps-000007": {
+        "message": ""
+    },
+    "apps-000008": {
+        "message": ""
+    },
+    "apps-000009": {
+        "message": ""
+    },
+    "apps-000010": {
+        "message": ""
+    },
+    "apps-000011": {
+        "message": ""
+    },
+    "apps-000012": {
+        "message": ""
+    },
+    "apps-000013": {
+        "message": ""
+    },
+    "apps-000014": {
+        "message": ""
+    },
+    "apps-000015": {
+        "message": ""
+    },
+    "apps-000016": {
+        "message": ""
+    },
+    "apps-000017": {
+        "message": "",
+        "placeholders": {
+            "error": {
+                "content": "$1"
+            }
+        }
+    },
+    "apps-000018": {
+        "message": ""
+    },
+    "apps-000019": {
+        "message": ""
+    },
+    "apps-000020": {
+        "message": ""
+    },
+    "apps-000021": {
+        "message": ""
+    },
+    "apps-000022": {
+        "message": ""
+    },
+    "apps-000023": {
+        "message": ""
+    },
+    "apps-000024": {
+        "message": ""
+    },
+    "apps-000025": {
+        "message": ""
+    },
+    "apps-000026": {
+        "message": ""
+    },
+    "backups-000028": {
+        "message": ""
+    },
+    "backups-000029": {
+        "message": ""
+    },
+    "backups-000030": {
+        "message": ""
+    },
+    "backups-000031": {
+        "message": ""
+    },
+    "backups-000032": {
+        "message": ""
+    },
+    "backups-000033": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000034": {
+        "message": ""
+    },
+    "backups-000035": {
+        "message": ""
+    },
+    "backups-000036": {
+        "message": ""
+    },
+    "backups-000037": {
+        "message": ""
+    },
+    "backups-000038": {
+        "message": ""
+    },
+    "backups-000039": {
+        "message": ""
+    },
+    "backups-000042": {
+        "message": ""
+    },
+    "backups-000043": {
+        "message": ""
+    },
+    "backups-000044": {
+        "message": ""
+    },
+    "backups-000045": {
+        "message": ""
+    },
+    "backups-000046": {
+        "message": ""
+    },
+    "backups-000047": {
+        "message": ""
+    },
+    "backups-000048": {
+        "message": ""
+    },
+    "backups-000049": {
+        "message": ""
+    },
+    "backups-000050": {
+        "message": ""
+    },
+    "backups-000051": {
+        "message": ""
+    },
+    "backups-CustomFields": {
+        "message": ""
+    },
+    "backups-FolderLabel": {
+        "message": ""
+    },
+    "backups-TagLabels": {
+        "message": ""
+    },
+    "backups-FolderId": {
+        "message": ""
+    },
+    "backups-TagIds": {
+        "message": ""
+    },
+    "backups-000052": {
+        "message": ""
+    },
+    "backups-000053": {
+        "message": ""
+    },
+    "backups-000054": {
+        "message": ""
+    },
+    "backups-000055": {
+        "message": ""
+    },
+    "backups-000056": {
+        "message": ""
+    },
+    "backups-000057": {
+        "message": ""
+    },
+    "backups-000058": {
+        "message": ""
+    },
+    "backups-000059": {
+        "message": ""
+    },
+    "backups-000060": {
+        "message": ""
+    },
+    "backups-000061": {
+        "message": "",
+        "placeholders": {
+            "format": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000062": {
+        "message": ""
+    },
+    "backups-000063": {
+        "message": ""
+    },
+    "backups-000064": {
+        "message": ""
+    },
+    "backups-000065": {
+        "message": ""
+    },
+    "backups-000066": {
+        "message": ""
+    },
+    "backups-000067": {
+        "message": ""
+    },
+    "backups-000068": {
+        "message": ""
+    },
+    "backups-000069": {
+        "message": ""
+    },
+    "backups-000070": {
+        "message": ""
+    },
+    "backups-000071": {
+        "message": ""
+    },
+    "backups-000072": {
+        "message": ""
+    },
+    "backups-000073": {
+        "message": ""
+    },
+    "backups-000074": {
+        "message": ""
+    },
+    "backups-000075": {
+        "message": ""
+    },
+    "backups-000076": {
+        "message": ""
+    },
+    "backups-000077": {
+        "message": ""
+    },
+    "backups-000078": {
+        "message": ""
+    },
+    "backups-000079": {
+        "message": ""
+    },
+    "backups-000080": {
+        "message": ""
+    },
+    "backups-000081": {
+        "message": ""
+    },
+    "backups-000082": {
+        "message": ""
+    },
+    "backups-000083": {
+        "message": ""
+    },
+    "backups-000084": {
+        "message": ""
+    },
+    "backups-000085": {
+        "message": ""
+    },
+    "backups-000086": {
+        "message": ""
+    },
+    "backups-000087": {
+        "message": ""
+    },
+    "backups-000088": {
+        "message": ""
+    },
+    "backups-000089": {
+        "message": ""
+    },
+    "backups-000090": {
+        "message": ""
+    },
+    "backups-000091": {
+        "message": ""
+    },
+    "backups-000092": {
+        "message": ""
+    },
+    "backups-000093": {
+        "message": ""
+    },
+    "backups-000094": {
+        "message": ""
+    },
+    "backups-000095": {
+        "message": ""
+    },
+    "backups-000096": {
+        "message": ""
+    },
+    "backups-000097": {
+        "message": ""
+    },
+    "backups-000098": {
+        "message": "",
+        "placeholders": {
+            "line": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000099": {
+        "message": ""
+    },
+    "backups-000100": {
+        "message": ""
+    },
+    "backups-000101": {
+        "message": ""
+    },
+    "backups-000102": {
+        "message": ""
+    },
+    "backups-000103": {
+        "message": ""
+    },
+    "backups-000104": {
+        "message": ""
+    },
+    "backups-000105": {
+        "message": ""
+    },
+    "backups-000106": {
+        "message": ""
+    },
+    "backups-000107": {
+        "message": ""
+    },
+    "backups-000108": {
+        "message": ""
+    },
+    "backups-000109": {
+        "message": ""
+    },
+    "backups-000110": {
+        "message": ""
+    },
+    "backups-000111": {
+        "message": ""
+    },
+    "backups-000112": {
+        "message": ""
+    },
+    "backups-000113": {
+        "message": ""
+    },
+    "backups-000114": {
+        "message": ""
+    },
+    "backups-000115": {
+        "message": ""
+    },
+    "backups-000116": {
+        "message": ""
+    },
+    "backups-000117": {
+        "message": "",
+        "placeholders": {
+            "type": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000118": {
+        "message": ""
+    },
+    "backups-000119": {
+        "message": ""
+    },
+    "backups-000120": {
+        "message": ""
+    },
+    "backups-000121": {
+        "message": ""
+    },
+    "backups-000122": {
+        "message": ""
+    },
+    "backups-000123": {
+        "message": ""
+    },
+    "backups-000124": {
+        "message": ""
+    },
+    "backups-000125": {
+        "message": ""
+    },
+    "backups-000126": {
+        "message": ""
+    },
+    "backups-000127": {
+        "message": ""
+    },
+    "backups-000129": {
+        "message": ""
+    },
+    "backups-000130": {
+        "message": ""
+    },
+    "backups-000131": {
+        "message": ""
+    },
+    "backups-000132": {
+        "message": ""
+    },
+    "backups-000133": {
+        "message": ""
+    },
+    "backups-000134": {
+        "message": ""
+    },
+    "backups-000135": {
+        "message": "",
+        "placeholders": {
+            "errors": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000136": {
+        "message": "",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            },
+            "line": {
+                "content": "$2"
+            },
+            "character": {
+                "content": "$3"
+            }
+        }
+    },
+    "backups-000137": {
+        "message": "",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000232": {
+        "message": ""
+    },
+    "backups-000138": {
+        "message": "",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000139": {
+        "message": "",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000140": {
+        "message": "",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            },
+            "label": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000141": {
+        "message": ""
+    },
+    "frontend-000233": {
+        "message": ""
+    },
+    "backups-000142": {
+        "message": "",
+        "placeholders": {
+            "actual": {
+                "content": "$1"
+            },
+            "expected": {
+                "content": "$2"
+            }
+        }
+    },
+    "backups-000143": {
+        "message": "",
+        "placeholders": {
+            "service": {
+                "content": "$1"
+            }
+        }
+    },
+    "backups-000144": {
+        "message": ""
+    },
+    "backups-000145": {
+        "message": ""
+    },
+    "frontend-000148": {
+        "message": ""
+    },
+    "frontend-000149": {
+        "message": ""
+    },
+    "frontend-000150": {
+        "message": ""
+    },
+    "frontend-000151": {
+        "message": ""
+    },
+    "frontend-000152": {
+        "message": ""
+    },
+    "frontend-000153": {
+        "message": ""
+    },
+    "frontend-000154": {
+        "message": ""
+    },
+    "frontend-000155": {
+        "message": ""
+    },
+    "frontend-000156": {
+        "message": ""
+    },
+    "frontend-000157": {
+        "message": ""
+    },
+    "frontend-000158": {
+        "message": ""
+    },
+    "frontend-000159": {
+        "message": ""
+    },
+    "frontend-000160": {
+        "message": ""
+    },
+    "frontend-000161": {
+        "message": ""
+    },
+    "frontend-000162": {
+        "message": ""
+    },
+    "frontend-000163": {
+        "message": ""
+    },
+    "frontend-000164": {
+        "message": ""
+    },
+    "frontend-000165": {
+        "message": ""
+    },
+    "frontend-000166": {
+        "message": ""
+    },
+    "frontend-000167": {
+        "message": ""
+    },
+    "frontend-000168": {
+        "message": ""
+    },
+    "frontend-000169": {
+        "message": ""
+    },
+    "frontend-000170": {
+        "message": ""
+    },
+    "frontend-000171": {
+        "message": ""
+    },
+    "frontend-000172": {
+        "message": ""
+    },
+    "frontend-000173": {
+        "message": ""
+    },
+    "frontend-000174": {
+        "message": ""
+    },
+    "frontend-000175": {
+        "message": ""
+    },
+    "frontend-000176": {
+        "message": ""
+    },
+    "frontend-000177": {
+        "message": ""
+    },
+    "frontend-000178": {
+        "message": ""
+    },
+    "frontend-000179": {
+        "message": ""
+    },
+    "frontend-000180": {
+        "message": ""
+    },
+    "frontend-000181": {
+        "message": ""
+    },
+    "frontend-000182": {
+        "message": ""
+    },
+    "frontend-000183": {
+        "message": ""
+    },
+    "frontend-000184": {
+        "message": ""
+    },
+    "frontend-000185": {
+        "message": ""
+    },
+    "frontend-000186": {
+        "message": ""
+    },
+    "frontend-000187": {
+        "message": ""
+    },
+    "frontend-000234": {
+        "message": ""
+    },
+    "frontend-000188": {
+        "message": ""
+    },
+    "frontend-000189": {
+        "message": ""
+    },
+    "frontend-000190": {
+        "message": ""
+    },
+    "frontend-000191": {
+        "message": ""
+    },
+    "frontend-000192": {
+        "message": ""
+    },
+    "frontend-000193": {
+        "message": ""
+    },
+    "frontend-000194": {
+        "message": ""
+    },
+    "frontend-000195": {
+        "message": ""
+    },
+    "frontend-000196": {
+        "message": ""
+    },
+    "frontend-000197": {
+        "message": ""
+    },
+    "frontend-000198": {
+        "message": ""
+    },
+    "frontend-000199": {
+        "message": ""
+    },
+    "frontend-000200": {
+        "message": ""
+    },
+    "frontend-000201": {
+        "message": ""
+    },
+    "frontend-000202": {
+        "message": ""
+    },
+    "frontend-000203": {
+        "message": ""
+    },
+    "frontend-000204": {
+        "message": ""
+    },
+    "frontend-000205": {
+        "message": ""
+    },
+    "frontend-000206": {
+        "message": ""
+    },
+    "frontend-000207": {
+        "message": ""
+    },
+    "frontend-000208": {
+        "message": ""
+    },
+    "frontend-000209": {
+        "message": ""
+    },
+    "frontend-000210": {
+        "message": ""
+    },
+    "frontend-000211": {
+        "message": ""
+    },
+    "frontend-000212": {
+        "message": ""
+    },
+    "frontend-000213": {
+        "message": ""
+    },
+    "frontend-000214": {
+        "message": ""
+    },
+    "frontend-000215": {
+        "message": ""
+    },
+    "frontend-000216": {
+        "message": ""
+    },
+    "frontend-000217": {
+        "message": ""
+    },
+    "frontend-000218": {
+        "message": ""
+    },
+    "frontend-000219": {
+        "message": ""
+    },
+    "frontend-000220": {
+        "message": ""
+    },
+    "frontend-000221": {
+        "message": ""
+    },
+    "frontend-000222": {
+        "message": ""
+    },
+    "frontend-000224": {
+        "message": ""
+    },
+    "frontend-000225": {
+        "message": ""
+    },
+    "frontend-000226": {
+        "message": ""
+    },
+    "frontend-000227": {
+        "message": ""
+    },
+    "frontend-000228": {
+        "message": ""
+    },
+    "frontend-000229": {
+        "message": ""
+    },
+    "frontend-000230": {
+        "message": ""
+    },
+    "frontend-000231": {
+        "message": ""
+    },
+    "frontend-000235": {
+        "message": ""
+    },
+    "frontend-000236": {
+        "message": ""
+    },
+    "frontend-000237": {
+        "message": ""
+    },
+    "frontend-000238": {
+        "message": ""
+    },
+    "frontend-000239": {
+        "message": ""
+    },
+    "frontend-000240": {
+        "message": ""
+    },
+    "frontend-000241": {
+        "message": ""
+    },
+    "frontend-000242": {
+        "message": "",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000243": {
+        "message": "",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000244": {
+        "message": "",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000245": {
+        "message": ""
+    },
+    "frontend-000246": {
+        "message": ""
+    },
+    "frontend-000247": {
+        "message": ""
+    },
+    "frontend-000248": {
+        "message": ""
+    },
+    "frontend-000249": {
+        "message": ""
+    },
+    "frontend-000250": {
+        "message": ""
+    },
+    "frontend-000251": {
+        "message": ""
+    },
+    "frontend-000252": {
+        "message": ""
+    },
+    "frontend-000253": {
+        "message": ""
+    },
+    "frontend-000254": {
+        "message": "",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000255": {
+        "message": ""
+    },
+    "frontend-000256": {
+        "message": "",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000257": {
+        "message": ""
+    },
+    "frontend-000258": {
+        "message": ""
+    },
+    "frontend-000259": {
+        "message": ""
+    },
+    "frontend-000260": {
+        "message": ""
+    },
+    "frontend-000261": {
+        "message": ""
+    },
+    "frontend-000262": {
+        "message": ""
+    },
+    "frontend-000263": {
+        "message": ""
+    },
+    "frontend-000264": {
+        "message": ""
+    },
+    "frontend-000265": {
+        "message": ""
+    },
+    "frontend-000266": {
+        "message": ""
+    },
+    "frontend-000267": {
+        "message": ""
+    },
+    "frontend-Donate": {
+        "message": ""
+    },
+    "frontend-000268": {
+        "message": ""
+    },
+    "frontend-000269": {
+        "message": "",
+        "placeholders": {
+            "editable": {
+                "content": "$1"
+            },
+            "shareable": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000270": {
+        "message": ""
+    },
+    "frontend-000271": {
+        "message": ""
+    },
+    "frontend-000272": {
+        "message": ""
+    },
+    "frontend-000288": {
+        "message": ""
+    },
+    "frontend-000273": {
+        "message": ""
+    },
+    "frontend-000274": {
+        "message": ""
+    },
+    "frontend-000275": {
+        "message": ""
+    },
+    "frontend-000276": {
+        "message": "",
+        "placeholders": {
+            "datetime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000277": {
+        "message": ""
+    },
+    "frontend-000289": {
+        "message": ""
+    },
+    "frontend-000278": {
+        "message": ""
+    },
+    "frontend-000279": {
+        "message": ""
+    },
+    "frontend-000280": {
+        "message": "",
+        "placeholders": {
+            "uid": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000281": {
+        "message": "",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000282": {
+        "message": ""
+    },
+    "frontend-000283": {
+        "message": ""
+    },
+    "frontend-000284": {
+        "message": ""
+    },
+    "frontend-000285": {
+        "message": ""
+    },
+    "frontend-000286": {
+        "message": ""
+    },
+    "frontend-000287": {
+        "message": ""
+    },
+    "frontend-000290": {
+        "message": ""
+    },
+    "frontend-000291": {
+        "message": ""
+    },
+    "frontend-000292": {
+        "message": ""
+    },
+    "frontend-000293": {
+        "message": ""
+    },
+    "frontend-000294": {
+        "message": ""
+    },
+    "frontend-000295": {
+        "message": ""
+    },
+    "frontend-000296": {
+        "message": ""
+    },
+    "frontend-000297": {
+        "message": ""
+    },
+    "frontend-000298": {
+        "message": ""
+    },
+    "frontend-000299": {
+        "message": ""
+    },
+    "frontend-000300": {
+        "message": ""
+    },
+    "frontend-000301": {
+        "message": ""
+    },
+    "frontend-000302": {
+        "message": ""
+    },
+    "frontend-000303": {
+        "message": ""
+    },
+    "frontend-000304": {
+        "message": ""
+    },
+    "frontend-000305": {
+        "message": ""
+    },
+    "frontend-000306": {
+        "message": ""
+    },
+    "frontend-000307": {
+        "message": ""
+    },
+    "frontend-000308": {
+        "message": ""
+    },
+    "frontend-000309": {
+        "message": "",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": ""
+    },
+    "frontend-000310": {
+        "message": ""
+    },
+    "frontend-000311": {
+        "message": ""
+    },
+    "frontend-000312": {
+        "message": ""
+    },
+    "frontend-000313": {
+        "message": ""
+    },
+    "frontend-000314": {
+        "message": ""
+    },
+    "frontend-000315": {
+        "message": ""
+    },
+    "frontend-000316": {
+        "message": ""
+    },
+    "frontend-000317": {
+        "message": ""
+    },
+    "frontend-000318": {
+        "message": "",
+        "placeholders": {
+            "href": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000319": {
+        "message": ""
+    },
+    "frontend-000320": {
+        "message": "",
+        "placeholders": {
+            "count": {
+                "content": "$1"
+            },
+            "title": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-000321": {
+        "message": "",
+        "placeholders": {
+            "message": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000322": {
+        "message": "",
+        "placeholders": {
+            "mime": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000323": {
+        "message": ""
+    },
+    "frontend-000324": {
+        "message": ""
+    },
+    "frontend-HandbookMoreHelp": {
+        "message": ""
+    },
+    "frontend-HandbookMoreHelpForum": {
+        "message": ""
+    },
+    "frontend-HandbookMoreHelpChat": {
+        "message": ""
+    },
+    "frontend-HandbookBugsReport": {
+        "message": ""
+    },
+    "frontend-HandbookMore": {
+        "message": ""
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": ""
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": ""
+    },
+    "frontend-000329": {
+        "message": ""
+    },
+    "frontend-000330": {
+        "message": ""
+    },
+    "frontend-000331": {
+        "message": ""
+    },
+    "frontend-000332": {
+        "message": "",
+        "placeholders": {
+            "module": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000333": {
+        "message": ""
+    },
+    "frontend-000334": {
+        "message": ""
+    },
+    "frontend-000335": {
+        "message": "",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000336": {
+        "message": ""
+    },
+    "frontend-000337": {
+        "message": "",
+        "placeholders": {
+            "folders": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000338": {
+        "message": ""
+    },
+    "frontend-000339": {
+        "message": "",
+        "placeholders": {
+            "tags": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000340": {
+        "message": ""
+    },
+    "frontend-000341": {
+        "message": ""
+    },
+    "frontend-000342": {
+        "message": ""
+    },
+    "frontend-000343": {
+        "message": ""
+    },
+    "frontend-000344": {
+        "message": ""
+    },
+    "frontend-000345": {
+        "message": ""
+    },
+    "frontend-000346": {
+        "message": "",
+        "placeholders": {
+            "user": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000347": {
+        "message": ""
+    },
+    "frontend-000348": {
+        "message": ""
+    },
+    "frontend-000349": {
+        "message": ""
+    },
+    "frontend-000350": {
+        "message": ""
+    },
+    "frontend-000351": {
+        "message": ""
+    },
+    "frontend-000352": {
+        "message": ""
+    },
+    "frontend-000353": {
+        "message": ""
+    },
+    "frontend-000354": {
+        "message": ""
+    },
+    "frontend-000355": {
+        "message": ""
+    },
+    "frontend-000356": {
+        "message": ""
+    },
+    "frontend-000357": {
+        "message": ""
+    },
+    "frontend-000358": {
+        "message": ""
+    },
+    "frontend-000359": {
+        "message": ""
+    },
+    "frontend-000360": {
+        "message": ""
+    },
+    "frontend-000361": {
+        "message": ""
+    },
+    "frontend-000362": {
+        "message": ""
+    },
+    "frontend-000363": {
+        "message": ""
+    },
+    "frontend-000364": {
+        "message": ""
+    },
+    "frontend-000365": {
+        "message": ""
+    },
+    "frontend-000366": {
+        "message": ""
+    },
+    "frontend-000367": {
+        "message": "",
+        "placeholders": {
+            "name": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000368": {
+        "message": ""
+    },
+    "frontend-000369": {
+        "message": "",
+        "placeholders": {
+            "query": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000370": {
+        "message": "",
+        "placeholders": {
+            "page": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000371": {
+        "message": ""
+    },
+    "backend-000380": {
+        "message": ""
+    },
+    "frontend-000372": {
+        "message": "",
+        "placeholders": {
+            "time": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000373": {
+        "message": ""
+    },
+    "frontend-000374": {
+        "message": ""
+    },
+    "frontend-000375": {
+        "message": ""
+    },
+    "frontend-000376": {
+        "message": ""
+    },
+    "frontend-Tags": {
+        "message": ""
+    },
+    "frontend-Folder": {
+        "message": ""
+    },
+    "frontend-Id": {
+        "message": ""
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": ""
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": ""
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": ""
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": ""
+    },
+    "frontend-DashboardLoginError": {
+        "message": ""
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": ""
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": ""
+    },
+    "frontend-DashboardNoResults": {
+        "message": ""
+    },
+    "frontend-DashboardNoResultsText": {
+        "message": "",
+        "placeholders": {
+            "query": {
+                "content": "$1",
+                "example": "my search query"
+            }
+        }
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": ""
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": ""
+    },
+    "backend-000377": {
+        "message": ""
+    },
+    "backend-000378": {
+        "message": ""
+    },
+    "backend-000379": {
+        "message": ""
+    },
+    "backend-000381": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000382": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000383": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000384": {
+        "message": ""
+    },
+    "backend-000385": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000386": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000387": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000388": {
+        "message": ""
+    },
+    "backend-000389": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000390": {
+        "message": ""
+    },
+    "backend-000391": {
+        "message": ""
+    },
+    "backend-000392": {
+        "message": ""
+    },
+    "backend-000393": {
+        "message": ""
+    },
+    "backend-000394": {
+        "message": ""
+    },
+    "backend-000395": {
+        "message": ""
+    },
+    "backend-000396": {
+        "message": ""
+    },
+    "backend-000397": {
+        "message": ""
+    },
+    "backend-000398": {
+        "message": ""
+    },
+    "backend-000399": {
+        "message": ""
+    },
+    "backend-000400": {
+        "message": ""
+    },
+    "backend-000401": {
+        "message": ""
+    },
+    "backend-000402": {
+        "message": ""
+    },
+    "backend-000403": {
+        "message": ""
+    },
+    "backend-000404": {
+        "message": ""
+    },
+    "backend-000405": {
+        "message": ""
+    },
+    "backend-000406": {
+        "message": ""
+    },
+    "backend-000407": {
+        "message": ""
+    },
+    "backend-000408": {
+        "message": ""
+    },
+    "backend-000409": {
+        "message": ""
+    },
+    "backend-000410": {
+        "message": ""
+    },
+    "backend-000411": {
+        "message": ""
+    },
+    "backend-000412": {
+        "message": ""
+    },
+    "backend-000413": {
+        "message": ""
+    },
+    "backend-000414": {
+        "message": ""
+    },
+    "backend-000415": {
+        "message": ""
+    },
+    "backend-000416": {
+        "message": ""
+    },
+    "backend-000417": {
+        "message": ""
+    },
+    "backend-000455": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000418": {
+        "message": ""
+    },
+    "backend-000419": {
+        "message": ""
+    },
+    "backend-000420": {
+        "message": ""
+    },
+    "backend-000421": {
+        "message": ""
+    },
+    "backend-000422": {
+        "message": ""
+    },
+    "backend-000423": {
+        "message": ""
+    },
+    "backend-000424": {
+        "message": ""
+    },
+    "backend-000425": {
+        "message": ""
+    },
+    "backend-000426": {
+        "message": ""
+    },
+    "backend-000427": {
+        "message": ""
+    },
+    "backend-000428": {
+        "message": ""
+    },
+    "backend-000429": {
+        "message": ""
+    },
+    "backend-000430": {
+        "message": ""
+    },
+    "backend-000431": {
+        "message": ""
+    },
+    "backend-000432": {
+        "message": ""
+    },
+    "backend-000433": {
+        "message": ""
+    },
+    "backend-000434": {
+        "message": ""
+    },
+    "backend-000435": {
+        "message": ""
+    },
+    "backend-000436": {
+        "message": ""
+    },
+    "backend-000437": {
+        "message": ""
+    },
+    "backend-000438": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000439": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000440": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000441": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000442": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000443": {
+        "message": ""
+    },
+    "backend-000444": {
+        "message": ""
+    },
+    "backend-000445": {
+        "message": ""
+    },
+    "backend-000446": {
+        "message": ""
+    },
+    "backend-000447": {
+        "message": ""
+    },
+    "backend-000448": {
+        "message": ""
+    },
+    "backend-000449": {
+        "message": ""
+    },
+    "backend-000450": {
+        "message": ""
+    },
+    "backend-000451": {
+        "message": ""
+    },
+    "backend-000452": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-000453": {
+        "message": "",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000454": {
+        "message": ""
+    },
+    "backend-000456": {
+        "message": ""
+    },
+    "backend-000457": {
+        "message": ""
+    },
+    "backend-000459": {
+        "message": ""
+    },
+    "backend-000460": {
+        "message": ""
+    },
+    "backend-000461": {
+        "message": ""
+    },
+    "backend-000462": {
+        "message": ""
+    },
+    "backend-000463": {
+        "message": ""
+    },
+    "backend-000464": {
+        "message": ""
+    },
+    "backend-000465": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000466": {
+        "message": ""
+    },
+    "backend-000467": {
+        "message": ""
+    },
+    "backend-000468": {
+        "message": ""
+    },
+    "backend-000469": {
+        "message": ""
+    },
+    "backend-000470": {
+        "message": ""
+    },
+    "backend-000471": {
+        "message": ""
+    },
+    "backend-000472": {
+        "message": ""
+    },
+    "backend-000473": {
+        "message": ""
+    },
+    "backend-000474": {
+        "message": ""
+    },
+    "backend-000475": {
+        "message": ""
+    },
+    "backend-000476": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000477": {
+        "message": "",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000478": {
+        "message": "",
+        "placeholders": {
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000479": {
+        "message": "",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_3": {
+                "content": "$3"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000480": {
+        "message": "",
+        "placeholders": {
+            "string_5": {
+                "content": "$5"
+            },
+            "string_4": {
+                "content": "$4"
+            },
+            "string_2": {
+                "content": "$2"
+            },
+            "string_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000481": {
+        "message": ""
+    },
+    "backend-000482": {
+        "message": ""
+    }
+}
