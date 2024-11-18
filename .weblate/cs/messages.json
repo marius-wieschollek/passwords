@@ -3210,7 +3210,7 @@
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
-        "message": "Uložení šifrovací fráze do tohoto prohlížeče a automatické přihlášení při otevření aplikace.",
+        "message": "Uložení šifrovací fráze do tohoto prohlížeče a automatické přihlášení při otevření aplikace",
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
@@ -3226,7 +3226,7 @@
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnLoginSetupSuccess": {
-        "message": "WebAuthn je nyní aktivován. Při příštím přihlášení se aplikace pokusí použít uloženou přístupovou frázi.",
+        "message": "WebAuthn je nyní aktivován. Při příštím přihlášení se aplikace pokusí použít uloženou přístupovou frázi",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "frontend-WebAuthnLoginDisabled": {
@@ -3234,7 +3234,7 @@
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnEncryptionSetupTitle": {
-        "message": "Nastavení přihlášení WebAuthn",
+        "message": "Nastavení WebAuthn přihlašování",
         "description": "Title of the WebAuthn setup dialog."
     },
     "frontend-Disable": {
@@ -3304,15 +3304,15 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "backend-CronSetupCheckName": {
-        "message": "Kontrola, zda server spouští úlohy na pozadí pomocí cronu.",
+        "message": "Kontroluje se, zda server spouští úlohy na pozadí pomocí plánovače cron.",
         "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
     },
     "backend-CronSetupCheckSuccess": {
-        "message": "Úlohy na pozadí se provádějí pomocí cronu.",
+        "message": "Úlohy na pozadí jsou vykonávány pomocí plánovače cron.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
     },
     "backend-CronPhpVersionSetupCheckName": {
-        "message": "Kontrola, zda server spouští úlohy na pozadí se stejnou verzí PHP.",
+        "message": "Zjišťuje se, zda server spouští úlohy na pozadí se stejnou verzí PHP.",
         "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "backend-CronPhpVersionSetupCheckSuccess": {
@@ -3332,11 +3332,11 @@
         "description": "Headline of the error page when the browser can not run the app because WebAssembly is not supported"
     },
     "frontend-CompatHeadline": {
-        "message": "Váš prohlížeč je zastaralý",
+        "message": "Používáte zastaralou verzi prohlížeče",
         "description": "Headline of the error page when the browser can not run the app"
     },
     "frontend-CompatText1": {
-        "message": "Váš prohlížeč je zastaralý a nemá potřebné funkce pro spuštění této aplikace.",
+        "message": "Verze vámi využívaného prohlížeče je zastaralá a nemá tak potřebné funkce pro spuštění této aplikace.",
         "description": "Error page message when the browser can not run the app"
     },
     "frontend-CompatText2": {
@@ -3348,7 +3348,7 @@
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported"
     },
     "frontend-CompatWASMText2": {
-        "message": "V některých prohlížečích musí být v konfiguraci prohlížeče povolena funkce WebAssembly.",
+        "message": "V některých prohlížečích je třeba podporu pro WebAssembly zapnout v nastavení prohlížeče.",
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users that they may enable it in the browser configuration."
     },
     "frontend-CompatWASMText3": {
