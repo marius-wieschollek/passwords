@@ -142,7 +142,7 @@ class ServiceApiController extends AbstractApiController {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    #[UserRateLimit(limit: 60, period: 60)]
+    #[UserRateLimit(limit: 500, period: 60)]
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
         $file = $this->faviconService->getFavicon($domain, $size);
 
