@@ -436,13 +436,13 @@ class EnvironmentService {
     }
 
     /**
-     * @param string $userId
+     * @param string|null $userId
      * @param string $value
      *
      * @return bool
      */
     protected function loadUserFromBearerAuth(?string $userId, string $value): bool {
-        if(empty($value)) return false;
+        if(empty($value) || empty($userId)) return false;
 
         try {
             $token     = $this->tokenProvider->getToken($value);
