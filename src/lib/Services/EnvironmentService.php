@@ -441,7 +441,7 @@ class EnvironmentService {
      *
      * @return bool
      */
-    protected function loadUserFromBearerAuth(string $userId, string $value): bool {
+    protected function loadUserFromBearerAuth(?string $userId, string $value): bool {
         if(empty($value)) return false;
 
         try {
