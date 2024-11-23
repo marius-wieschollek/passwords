@@ -3341,5 +3341,29 @@
     "backend-CronPhpVersionSetupCheckSuccess": {
         "message": "وتُنفَّذ وظائف أساسية بنفس صيغة برنامج العمل الوطني.",
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
+    },
+    "frontend-CompatHeadline": {
+        "message": "مهرّبكَ عاطل"
+    },
+    "frontend-CompatText1": {
+        "message": "مصففكم عفا عليه الزمن وليس لديه القدرة اللازمة لتشغيل هذا التطبيق."
+    },
+    "frontend-CompatText2": {
+        "message": "يرجى التحقق من ما إذا كان التحديث متاحاً لمنظفك أو اختيار منظف حديث ومتوافق من القائمة أدناه."
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "مصففكم لا يدعم (ويب آسمبلي)"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "مصففكم لا يدعم (ويب آسمبلي) وهو مطلوب لتشغيل هذا التطبيق."
+    },
+    "frontend-CompatWASMText2": {
+        "message": "In some browsers, WebAsembly must be enabled in the browser formation."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "إن لم يكن لدى مصففكم أي دعم على شبكة الإنترنت، تحققوا إذا كان المستجدات متاحة لمنظفكم أو تختاروا ممسحة حديثة ومتوافقة من القائمة أدناه."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "A guide to enable WebAsembly can be found in the Passwords App Handbook."
     }
 }
