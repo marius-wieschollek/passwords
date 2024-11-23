@@ -107,8 +107,17 @@ export default class ImportCsvConversionHelper {
                     let value = line[j];
 
                     if(value === undefined) continue;
-                    let targetField = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field;
-                    object[targetField] = this._processCsvValue(value, field, errors);
+                    let targetField    = fieldMap.hasOwnProperty(field) ? fieldMap[field]:field,
+                        processedValue = this._processCsvValue(value, field, errors);
+                    if(targetField.startsWith('customField:') || targetField === 'customFields') {
+                        if(!object.hasOwnProperty('customFields')) {
+                            object.customFields = processedValue;
+                        } else {
+                            object.customFields.push(...processedValue);
+                        }
+                    } else {
+                        object[targetField] = processedValue;
+                    }
                 }
             }
 
@@ -146,6 +155,9 @@ export default class ImportCsvConversionHelper {
             return value.split(',');
         } else if(field === 'customFields') {
             return this._processCustomFields(value, errors);
+        } else if(field.startsWith('customField:') && value) {
+            let fieldValue = `${field.substr(12)}:${value.toString()}`;
+            return this._processCustomFields(fieldValue, errors);
         }
         return value;
     }
@@ -434,7 +446,7 @@ export default class ImportCsvConversionHelper {
             dashlane    : {
                 firstLine: 1,
                 db       : 'passwords',
-                mapping  : ['label', 'url', 'username', 'password', 'notes'],
+                mapping  : ['username', 'customField:User 2,text', 'customField:User 3,text', 'label', 'password', 'notes', 'url', 'tagLabels', 'customField:Otp Url,url'],
                 repair   : true
             },
             roboform    : {

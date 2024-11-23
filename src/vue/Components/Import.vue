@@ -277,7 +277,7 @@
                 fileMime   : '',
                 csvFile    : null,
                 csvReady   : false,
-                csv        : {newLine: 'auto', delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false},
+                csv        : {newLine: 'auto', delimiter: 'auto', quotes: '"', escape: '"', badQuotes: false, rowSize: -1, strictRows: false},
                 options    : {mode: 0, skipShared: true, skipEmpty: false},
                 step       : 1,
                 previewLine: 1,
@@ -374,8 +374,9 @@
                         quotes            : this.csv.quotes,
                         escape            : this.csv.escape,
                         strictSpaces      : false,
-                        strictRows        : false,
+                        strictRows        : this.csv.strictRows,
                         strictQuotes      : !this.csv.badQuotes,
+                        rowSize           : this.csv.rowSize,
                         skipEmptyRows     : true,
                         skipEmptyFieldRows: true,
                         trimFields        : true
@@ -530,7 +531,8 @@
                         this.type = 'pmanCsv';
                     case 'dashlane':
                         this.options.profile = value;
-                        this.csv.badQuotes = true;
+                        this.csv.strictRows = true;
+                        this.csv.rowSize = 9;
                         break;
                     case 'pwdCsv':
                         this.options.profile = 'passwords';
