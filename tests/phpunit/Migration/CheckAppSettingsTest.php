@@ -223,10 +223,10 @@ class CheckAppSettingsTest extends TestCase {
         try {
             $this->checkAppSettings->run(new SimpleOutput());
         } catch(Exception $e) {
-            \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
             $this->fail($e->getMessage());
+        } finally {
+            \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
         }
-        \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
     }
 
     /**

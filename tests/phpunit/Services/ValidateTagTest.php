@@ -27,6 +27,11 @@ class ValidateTagTest extends TestCase {
     protected $validationService;
 
     /**
+     * @var UserChallengeService
+     */
+    protected $challengeService;
+
+    /**
      *
      */
     protected function setUp(): void {
@@ -194,7 +199,7 @@ class ValidateTagTest extends TestCase {
 
         $mock->expects($this->any())
              ->method('getSseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_SSE_ENCRYPTION));
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_SSE_ENCRYPTION, EncryptionService::DEFAULT_SSE_ENCRYPTION));
 
         $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');
@@ -214,7 +219,7 @@ class ValidateTagTest extends TestCase {
 
         $mock->expects($this->any())
              ->method('getCseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
+             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
 
         $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $mock->method('getLabel')->willReturn('label');

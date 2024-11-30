@@ -14,8 +14,8 @@ namespace {
     }
 
     class OC_Util {
-        public static $ncDefaultVersion = [29,0,0,0];
-        public static $ncVersion = [29,0,0,0];
+        public static $ncDefaultVersion = [\OCA\Passwords\AppInfo\SystemRequirements::NC_NOTIFICATION_ID,0,0,0];
+        public static $ncVersion = [\OCA\Passwords\AppInfo\SystemRequirements::NC_NOTIFICATION_ID,0,0,0];
         public static function getVersion(): array {return self::$ncVersion;}
     }
 }
