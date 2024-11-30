@@ -1,4 +1,14 @@
 ## [Unreleased]
+## 2024.12.0 - Feature release
+### Added
+- Traditional Chinese translation
+### Changed
+- Updated Dashlane import to new format
+### Fixed
+- Crash on requests with bearer auth
+- Favicons requests result in 429 error code
+
+
 ## 2024.11.0 - Feature release
 #### Fixed
 - Sharing not working

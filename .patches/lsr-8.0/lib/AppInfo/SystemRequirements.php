@@ -21,12 +21,12 @@ class SystemRequirements {
     const APP_LSR = true;
 
     const NC_MINIMUM_ID      = 28;
-    const NC_NOTIFICATION_ID = 28;
-    const NC_UPGRADE_MINIMUM = '28';
+    const NC_NOTIFICATION_ID = 30;
+    const NC_UPGRADE_MINIMUM = '30';
 
     const PHP_MINIMUM             = '8.0.0';
     const PHP_MINIMUM_ID          = 80000;
-    const PHP_NOTIFICATION_ID     = 80000;
-    const PHP_UPGRADE_MINIMUM     = '8.2';
-    const PHP_UPGRADE_MINIMUM_LSR = '8.0';
+    const PHP_NOTIFICATION_ID     = 80100;
+    const PHP_UPGRADE_MINIMUM     = '8.3';
+    const PHP_UPGRADE_MINIMUM_LSR = '8.1';
 }
