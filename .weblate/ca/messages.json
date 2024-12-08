@@ -2547,5 +2547,722 @@
                 "example": "my search query"
             }
         }
+    },
+    "frontend-CSEPassphraseInsecureText": {
+        "message": "L' aplicació de contrasenyes comprova regularment si la frase de contrasenya d' encriptatge encara és segura. La frase de contrasenya actual no és segura i s' ha de canviar immediatament."
+    },
+    "tutorial-StartText2": {
+        "message": "Anem a començar"
+    },
+    "frontend-PasswordActionPrint": {
+        "message": "Imprimeix la contrasenya"
+    },
+    "frontend-DashboardResultsLoading": {
+        "message": "Els resultats s' actualitzaran quan es carreguin totes les contrasenyes"
+    },
+    "frontend-DashboardLoginError": {
+        "message": "Error"
+    },
+    "frontend-DashboardNoPasswords": {
+        "message": "Sense contrasenyes"
+    },
+    "frontend-DashboardNoPasswordsText": {
+        "message": "Les vostres contrasenyes preferides apareixeran aquí."
+    },
+    "frontend-000601": {
+        "message": "Fortalesa"
+    },
+    "backend-000658": {
+        "message": "L' aplicació de contrasenyes sembla que ha trobat un problema de base de dades."
+    },
+    "frontend-000624": {
+        "message": "Ajuda"
+    },
+    "frontend-000625": {
+        "message": "Escolliu el tipus d' encriptatge per aquesta contrasenya"
+    },
+    "frontend-HandbookMoreHelpChat": {
+        "message": "Pregunta al nostre xat"
+    },
+    "frontend-Id": {
+        "message": "Id"
+    },
+    "frontend-SearchInputPlaceholder": {
+        "message": "Cerca.."
+    },
+    "settings-WebauthnEncryptionPassphrase": {
+        "message": "Contrasenya d' encriptatge"
+    },
+    "frontend-CSENewPassphraseInsecureText": {
+        "message": "La frase de contrasenya d' encriptatge seleccionada és insegura i per tant no es pot usar."
+    },
+    "frontend-CSEPassphraseInsecureTitle": {
+        "message": "Frase de l' encriptatge insegur"
+    },
+    "frontend-EncryptionSSEv3r1": {
+        "message": "Encriptatge secundari del servidor de la tercera festa"
+    },
+    "backend-EOLNextcloudPHPText2": {
+        "message": "Actualitzeu a Nextcloud $STR_1$ i PHP $STR_2$ (o PHP [X53AR) per a futures actualitzacions.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-UserMigrationDescription": {
+        "message": "S' han desencriptat la base de dades amb contrasenyes, carpetes, etiquetes i arranjaments. (No inclou contrasenyes compartides amb vós. No funciona amb E2E habilitat)"
+    },
+    "backend-ExportNotPossibleText": {
+        "message": "Perquè teniu habilitat l' encriptatge final a final, les contrasenyes no es poden afegir a l' exportació automàticament. Com alternativa, podeu usar la funció d' exportació dins de l' aplicació per a exportar les vostres dades."
+    },
+    "frontend-PasswordTagAddFail": {
+        "message": "No s' ha pogut marcar la contrasenya amb [X338X]: $ERROR$",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            },
+            "error": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-PwDetailsEncryptionTitleSSE": {
+        "message": "Aquesta contrasenya s' envia al servidor sobre una connexió HTTPS segura i encriptada abans de desar- la a la base de dades."
+    },
+    "frontend-PwDetailsEncryptionTitleCSE": {
+        "message": "Aquesta contrasenya està encriptada al dispositiu abans que s' enviï al servidor. No es pot llegir aquesta contrasenya sense saber la contrasenya d' encriptatge."
+    },
+    "frontend-PasswordEncryptionSSE": {
+        "message": "Encriptatge del servidor Side"
+    },
+    "frontend-ClipboardCopyEmpty": {
+        "message": "No hi ha res a copiar, $ELEMENT$ és buit",
+        "placeholders": {
+            "element": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudTitle": {
+        "message": "Les contrasenyes acaben d' actualitzacions per al Nextcloud $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLNextcloudText1": {
+        "message": "Les contrasenyes $STR_1$ són l' última actualització del Nextcloud $STR_2$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-EOLNextcloudPHPTitle": {
+        "message": "Les contrasenyes acaben actualitzacions per a Nextcloud $STR_1$ i PHP $STR_2$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-CronSetupCheckName": {
+        "message": "Comprovant si el servidor executa treballs de fons amb cron."
+    },
+    "backend-CronSetupCheckSuccess": {
+        "message": "S' executen treballs de fons amb cron."
+    },
+    "backend-CronPhpVersionSetupCheckName": {
+        "message": "Comprovant si el servidor executa tasques de fons amb la mateixa versió PHP."
+    },
+    "backend-CronPhpVersionSetupCheckSuccess": {
+        "message": "S' executen treballs de fons amb la mateixa versió PHP."
+    },
+    "frontend-000622": {
+        "message": "Contrasenya de la contrasenya de la contrasenya de xifrat"
+    },
+    "backend-000643": {
+        "message": "Gestiona les & aplicacions dels dispositius"
+    },
+    "frontend-000667": {
+        "message": "Etiquetes CSV"
+    },
+    "frontend-PwdSaveHiddenMessage": {
+        "message": "Desar una contrasenya oculta en una carpeta que no s' oculta per si mateixa farà que la contrasenya sigui inaccessible. Aquesta contrasenya no es tornarà a mostrar enlloc. Voleu continuar?"
+    },
+    "frontend-PwdSaveHiddenTitle": {
+        "message": "Oculta aquesta contrasenya?"
+    },
+    "backend-EOLNextcloudPHPText1": {
+        "message": "Les contrasenyes $STR_1$ és la darrera actualització del Nextcloud $STR_2$ i PHP $STR_3$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-ChangePasswordPageFallback": {
+        "message": "\"{ màquina}\" no anuncia la seva pàgina de canvi de contrasenya. Podeu trobar la funció Canvia la contrasenya al lloc web.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "frontend-HandbookMore": {
+        "message": "Altres documentació"
+    },
+    "frontend-HandbookAdminDocumentation": {
+        "message": "Manual d' administrador"
+    },
+    "frontend-HandbookDevDocumentation": {
+        "message": "Manual de desenvolupador"
+    },
+    "backend-EOLPHPText1": {
+        "message": "Les contrasenyes $STR_1$ són l' última actualització de PHP $STR_3$.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "settings-WebauthnLoginSetupSuccess": {
+        "message": "WebAuthn està activat. L' aplicació intentarà usar la frase de contrasenya desada la propera vegada que hi entreu"
+    },
+    "frontend-DashboardSearchLabel": {
+        "message": "Cerca totes les contrasenyes"
+    },
+    "frontend-000628": {
+        "message": "L' encriptatge aplicat pel servidor abans d' emmagatzemar les dades de la base de dades"
+    },
+    "frontend-000629": {
+        "message": "L' encriptatge aplicat pel client abans d' enviar les dades al servidor"
+    },
+    "frontend-000630": {
+        "message": "Contrasenya no vàlida. La sessió ha revocat massa intents d' accés erronis."
+    },
+    "backend-000641": {
+        "message": "Visualitza aplicacions"
+    },
+    "backend-000642": {
+        "message": "Visualitza & dispositius d' aplicacions"
+    },
+    "backend-000644": {
+        "message": "Visualitza les contrasenyes compartides"
+    },
+    "backend-000645": {
+        "message": "Recomanat d' actualització de l'aplicació"
+    },
+    "backend-000646": {
+        "message": "Un nou client o aplicació estava connectat al vostre compte"
+    },
+    "backend-000657": {
+        "message": "Còpia de seguretat restaurada automàticament"
+    },
+    "backend-000659": {
+        "message": "Per això, s' ha restaurat automàticament la còpia de seguretat de l' aplicació \"[X3X].\".",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000660": {
+        "message": "Si això fos un error, s' ha fet una còpia de seguretat de la base de dades abans de restaurar- la."
+    },
+    "backend-000661": {
+        "message": "Podeu deshabilitar la restauració automàtica de les còpies de seguretat a l' arranjament de l' aplicació."
+    },
+    "backend-000662": {
+        "message": "Restaura les còpies de seguretat automàticament en esborrar la base de dades"
+    },
+    "settings-SettingsCustomAction": {
+        "message": "Mostra el botó de drecera per"
+    },
+    "settings-SettingsMouseWheelAction": {
+        "message": "Acció del clic amb el ratolí"
+    },
+    "settings-SettingsRecoverItems": {
+        "message": "Recupera els elements ocults"
+    },
+    "settings-SettingsRecoverItemsHelp": {
+        "message": "Aquesta acció elimina la bandera \"oculta\" dels elements per tal que aquests elements apareguin a l' aplicació una altra vegada."
+    },
+    "settings-RecoverItemsInvisibleTrashTitle": {
+        "message": "Recupera els elements ocults que estan actualment a la paperera"
+    },
+    "settings-RecoverItemsPasswordsTitle": {
+        "message": "Recupera totes les contrasenyes ocultes independentment de l' estat de la carpeta"
+    },
+    "settings-RecoverItemsFoldersTitle": {
+        "message": "Recupera totes les carpetes ocultes"
+    },
+    "settings-RecoverItemsError": {
+        "message": "Hi ha hagut un error."
+    },
+    "settings-SettingsWebAuthnEnable": {
+        "message": "Registra amb WebAuthn"
+    },
+    "settings-SettingsWebAuthnEnableHelp": {
+        "message": "Emmagatzema la vostra frase de contrasenya d' encriptatge en aquest navegador i registre automàticament en obrir l' aplicació"
+    },
+    "settings-WebauthnEncryptionPassphraseText": {
+        "message": "Introduïu la vostra contrasenya d' encriptatge a sota. Es desarà al vostre navegador i l'aplicació intentarà usar-lo quan l' obriu la propera vegada. Si la frase de contrasenya no és vàlida, el registre falla una vegada i la WebAuthn es deshabilitarà."
+    },
+    "frontend-PasswordTagAddExists": {
+        "message": "La contrasenya ja està etiquetada amb $TAG$",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "settings-WebauthnEncryptionSetupTitle": {
+        "message": "Configuració de connexió WebAuthn"
+    },
+    "frontend-BrowserConsoleWarningTitle": {
+        "message": "¡TREU!"
+    },
+    "backend-ExportNotPossibleTitle": {
+        "message": "Les contrasenyes no es poden exportar"
+    },
+    "frontend-PasswordDetailsAdvancedView": {
+        "message": "Mostra els detalls tècnics"
+    },
+    "backend-EOLNextcloudText2": {
+        "message": "Actualitza a Nextcloud $STR_1$ per futures actualitzacions.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "backend-NotificationInvalid": {
+        "message": "Aquesta notificació es pot esborrar."
+    },
+    "backend-PassDbDlFailedText": {
+        "message": "L' actualització de les contrasenyes trencades de la base de dades ha fallat tres vegades. Si us plau, consulteu el manual i comproveu els vostres registres. Motiu: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-PasswordActionChangePwPage": {
+        "message": "Obre la pàgina de canvi de contrasenya"
+    },
+    "frontend-ChangePasswordPageLink": {
+        "message": "Obre la pàgina de canvi de contrasenya"
+    },
+    "backend-SettingsEncryptionSection": {
+        "message": "Arranjament d' encriptatge"
+    },
+    "settings-SettingsRecoverItemsButton": {
+        "message": "Recuperar elements"
+    },
+    "frontend-000616": {
+        "message": "Massa intents d' accés erronis"
+    },
+    "frontend-000617": {
+        "message": "Selecciona una carpeta"
+    },
+    "frontend-000599": {
+        "message": "Cliqueu per mostrar el codi QR."
+    },
+    "frontend-000600": {
+        "message": "No em tornis a avisar"
+    },
+    "frontend-DashboardNoResults": {
+        "message": "Sense resultats"
+    },
+    "frontend-000596": {
+        "message": "Desconegut (sense comprovar)"
+    },
+    "frontend-000598": {
+        "message": "Què esperaves?"
+    },
+    "frontend-000602": {
+        "message": "Tanca"
+    },
+    "frontend-000603": {
+        "message": "Elimina dels preferits"
+    },
+    "frontend-000604": {
+        "message": "Marca com a preferida"
+    },
+    "frontend-000605": {
+        "message": "Contrasenya oculta"
+    },
+    "frontend-000606": {
+        "message": "No mostris aquesta contrasenya enlloc"
+    },
+    "frontend-000607": {
+        "message": "Dades"
+    },
+    "frontend-000608": {
+        "message": "Tipus"
+    },
+    "frontend-000609": {
+        "message": "Nou camp"
+    },
+    "frontend-000620": {
+        "message": "Inici"
+    },
+    "frontend-000631": {
+        "message": "Aquesta és una còpia de la frase de contrasenya que heu escollit per encriptar. El canvi o l' esborrat d' aquesta entrada no afecta l' encriptatge. La frase de contrasenya només es pot canviar en els arranjaments. Es pot trobar més informació en el manual."
+    },
+    "frontend-Disable": {
+        "message": "Deshabilita"
+    },
+    "backend-000647": {
+        "message": "\"$STR_1$\" es va concedir accés al $STR_1$ Compte de contrasenyes mitjançant Passall.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "settings-SettingsMouseWheelActionHelp": {
+        "message": "S' ha de realitzar una acció quan es fa clic a sobre d' una entrada de contrasenya"
+    },
+    "settings-SettingsCustomActionHelp": {
+        "message": "Afegeix un botó addicional per a l' acció especificada a la vista d' escriptori"
+    },
+    "settings-RecoverItemsSelectTitle": {
+        "message": "Recupera els elements ocults"
+    },
+    "settings-RecoverItemsSuccessMessage": {
+        "message": "Torna a manipular $PASSWORDS$ contrasenya(s), $FOLDERS$ carpeta(s) i $TAGS$ tag(s).",
+        "placeholders": {
+            "passwords": {
+                "content": "$1"
+            },
+            "folders": {
+                "content": "$2"
+            },
+            "tags": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-BrowserConsoleWarningLine2": {
+        "message": "Si algú us ha dit que copieu i enganxeu alguna cosa aquí, és probable que entendran accés a les vostres contrasenyes o tenir-ne compte."
+    },
+    "backend-SettingsEncryptionSSEv3": {
+        "message": "Permet l' encriptatge de terceres parts"
+    },
+    "frontend-CompatHeadline": {
+        "message": "El vostre navegador està desactualitzat"
+    },
+    "frontend-CompatText1": {
+        "message": "El vostre navegador està obsolet i no té la funcionalitat necessària per executar aquesta aplicació."
+    },
+    "frontend-CompatText2": {
+        "message": "Si us plau, comproveu si una actualització està disponible pel vostre navegador o escolliu un navegador modern i compatible des de la llista de sota."
+    },
+    "frontend-CompatWASMHeadline": {
+        "message": "El vostre navegador no permet la WebAssèmia"
+    },
+    "frontend-CompatWASMText1": {
+        "message": "El vostre navegador no permet la WebAssemible (WASM), que és necessari executar aquesta aplicació."
+    },
+    "frontend-CompatWASMText2": {
+        "message": "En alguns navegadors, WebAsshemy ha d'estar habilitat a la configuració del navegador."
+    },
+    "frontend-CompatWASMText3": {
+        "message": "Si el vostre navegador no té suport WebAssemible, comproveu si una actualització està disponible pel vostre navegador o escolliu un navegador modern i compatible des de la llista de sota."
+    },
+    "frontend-CompatWASMHandbookLink": {
+        "message": "Es pot trobar una guia per habilitar la WebAssemible en el manual de l' aplicació de contrasenyes."
+    },
+    "frontend-000593": {
+        "message": "Edita com a nou"
+    },
+    "settings-RecoverItemsInvisiblePwd": {
+        "message": "Contrasenyes que no estan en una carpeta oculta"
+    },
+    "settings-RecoverItemsTags": {
+        "message": "Totes les etiquetes ocultes"
+    },
+    "settings-RecoverItemsTagsTitle": {
+        "message": "Recupera totes les etiquetes ocultes"
+    },
+    "frontend-PwDetailsEncryptionLabel": {
+        "message": "Mètode d' encriptatge"
+    },
+    "backend-000638": {
+        "message": "Visualitza les contrasenyes insegures"
+    },
+    "frontend-000526": {
+        "message": "Extensió del navegador"
+    },
+    "frontend-000594": {
+        "message": "Mou"
+    },
+    "frontend-000595": {
+        "message": "Obre $LABEL$",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000597": {
+        "message": "SHA-1NAME OF THE HASH ALGORITHM"
+    },
+    "frontend-000610": {
+        "message": "Esborra el camp"
+    },
+    "frontend-000611": {
+        "message": "Obre la guia de majúscules"
+    },
+    "frontend-000612": {
+        "message": "Desfés"
+    },
+    "frontend-000613": {
+        "message": "Refés"
+    },
+    "frontend-000621": {
+        "message": "\"$FOLDER$\" no conté carpetes",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000627": {
+        "message": "Assegura't que aquest codi QR només és visible per a la gent en qui confieu."
+    },
+    "backend-000633": {
+        "message": "(opcional)"
+    },
+    "backend-000634": {
+        "message": "Les seves sol·licituds Nextcloudes significativament més icones que la mitjana."
+    },
+    "backend-000635": {
+        "message": "Obre un tutorial"
+    },
+    "backend-000636": {
+        "message": "S' ha detectat una quantitat delicada d' intents d' accés erroni."
+    },
+    "backend-000637": {
+        "message": "Més informació"
+    },
+    "backend-000639": {
+        "message": "Arranjament d' obertura"
+    },
+    "backend-000640": {
+        "message": "Obre contrasenyes"
+    },
+    "backend-000648": {
+        "message": "Podeu gestionar tots els dispositius connectats i aplicacions en els vostres paràmetres $STR_1$ a la secció Seguretat.",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000649": {
+        "message": "L' última tasca de fons s' ha executat amb PHP $STRING_1$, però el servidor web usa PHP $STRING_2$.",
+        "placeholders": {
+            "string_1": {
+                "content": "$1"
+            },
+            "string_2": {
+                "content": "$2"
+            }
+        }
+    },
+    "backend-000650": {
+        "message": "Usar diferents versions principals de PHP pot causar problemes."
+    },
+    "backend-000651": {
+        "message": "Arranjament de seguretat per omissió"
+    },
+    "backend-000666": {
+        "message": "Selecciona automàticament (recomanat)"
+    },
+    "settings-SettingsShowShareTab": {
+        "message": "Mostra la pestanya compartida"
+    },
+    "settings-RecoverItemsSelectText": {
+        "message": "Seleccioneu qualsevol tipus d' elements ocults que vulgueu recuperar."
+    },
+    "settings-RecoverItemsInvisibleTrash": {
+        "message": "Elements ocults a la paperera"
+    },
+    "settings-RecoverItemsTitle": {
+        "message": "Els elements recuperats"
+    },
+    "settings-WebauthnEncryptionPassphraseRepeat": {
+        "message": "Repeteix la frase de contrasenya"
+    },
+    "settings-SettingsPasswordPrint": {
+        "message": "Mostra l' opció d' impressió"
+    },
+    "settings-SettingsPasswordPrintHelp": {
+        "message": "Mostra una opció per a imprimir la contrasenya en el menú i els detalls"
+    },
+    "frontend-PasswordTagAddSuccess": {
+        "message": "La contrasenya ha estat etiquetada amb $TAG$",
+        "placeholders": {
+            "password": {
+                "content": "$1"
+            },
+            "tag": {
+                "content": "$2"
+            }
+        }
+    },
+    "settings-ExpertSettingsLabel": {
+        "message": "Arranjament dels experts"
+    },
+    "frontend-BrowserConsoleWarningLine1": {
+        "message": "Aquesta característica està pensada pels desenvolupadors, no pels usuaris."
+    },
+    "backend-EOLPHPTitle": {
+        "message": "Les contrasenyes acaben actualitzacions per PHP $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-EOLPHPText2": {
+        "message": "Actualitza a PHP $STR_2$ (o PHP $STR_3$ per a les futures actualitzacions de LSR).",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            },
+            "str_2": {
+                "content": "$2"
+            },
+            "str_3": {
+                "content": "$3"
+            }
+        }
+    },
+    "frontend-000614": {
+        "message": "Expirarà $DATE$.",
+        "placeholders": {
+            "date": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000618": {
+        "message": "Seleccioneu \"$FOLDER$\"",
+        "placeholders": {
+            "folder": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-000623": {
+        "message": "Desconegut"
+    },
+    "frontend-000626": {
+        "message": "Voleu eliminar el camp \"[X3X]\"?",
+        "placeholders": {
+            "field": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-000632": {
+        "message": "Servei Favicon Api"
+    },
+    "settings-RecoverItemsInvisiblePwdTitle": {
+        "message": "Torna a recuperar les contrasenyes ocultes que estan en una carpeta que no s' oculta"
+    },
+    "settings-RecoverItemsPasswords": {
+        "message": "Totes les contrasenyes ocultes"
+    },
+    "settings-RecoverItemsFolders": {
+        "message": "Totes les carpetes ocultes"
+    },
+    "frontend-WebAuthnLoginDisabled": {
+        "message": "S' ha deshabilitat l' entrada WebAuthn. Podeu habilitar- lo de nou a l' arranjament"
+    },
+    "frontend-PasswordActionQrcode": {
+        "message": "Mostra el QrCode"
+    },
+    "frontend-BrowserConsoleWarningLine3": {
+        "message": "Mireu {link} per a més informació."
+    },
+    "frontend-ChangePasswordPageText": {
+        "message": "Hem detectat l' URL a sota com la pàgina de canvi de contrasenya de \"{ etiqueta}.\" Cliqueu el botó per obrir- lo.",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            },
+            "host": {
+                "content": "$2"
+            }
+        }
+    },
+    "tutorial-StartText1": {
+        "message": "Benvingut a l'aplicació de contrasenyes per al Nextclou, el lloc perfecte per mantenir les vostres contrasenyes fora de perill i organitzat."
+    },
+    "backend-PassDbDlFailedTitle": {
+        "message": "No s' ha pogut actualitzar la base de dades de contrasenyes trencades"
+    },
+    "frontend-000619": {
+        "message": "$LABEL$ no es pot usar",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-Donate": {
+        "message": "Donate"
     }
 }
