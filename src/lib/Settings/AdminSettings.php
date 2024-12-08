@@ -39,7 +39,7 @@ class AdminSettings implements ISettings {
     const LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/App-Settings';
     const LINK_REQUIREMENTS  = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/System-Requirements';
     const LINK_ISSUES        = 'https://github.com/marius-wieschollek/passwords/issues';
-    const LINK_FORUM         = 'https://help.nextcloud.com/c/apps/passwords';
+    const LINK_FORUM         = 'https://help.nextcloud.com/tag/passwords-app';
 
     /**
      * @var ConfigurationService

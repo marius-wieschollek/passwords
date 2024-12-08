@@ -14,7 +14,7 @@
 
 ## Support
 * [Official Chat](https://t.me/nc_passwords/1)
-* [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+* [Official Forum](https://help.nextcloud.com/tag/passwords-app)
 * [User Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/Index)
 * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)
 * [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)

@@ -28,7 +28,7 @@ $messageReload = $l->t('You can try to %s the page with HTTPS.', ["<a href='{$li
 if($isAdmin) {
     $linkDocumentation = 'https://docs.nextcloud.com/server/latest/admin_manual/installation/harden_server.html#use-https';
     $linkReverseProxy  = 'https://docs.nextcloud.com/server/latest/admin_manual/configuration_server/reverse_proxy_configuration.html';
-    $linkForum         = 'https://help.nextcloud.com/c/apps/passwords';
+    $linkForum         = 'https://help.nextcloud.com/tag/passwords-app';
     $linkCertificate   = 'https://letsencrypt.org/getting-started/';
 
     $l10nForum          = $l->t('forum');

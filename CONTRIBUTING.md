@@ -8,7 +8,7 @@
 * Issues not following the template will be closed without review
 * No "I have this issue"-comments. Use the 👍 reaction if you experience the same issue.
 * Issues with the browser extension have to be opened in this [repository](https://github.com/marius-wieschollek/passwords-webextension)
-* For questions and support, visit the [forum](https://help.nextcloud.com/c/apps/passwords)
+* For questions and support, visit the [forum](https://help.nextcloud.com/tag/passwords-app)
 
 ## Set up the local environment
 ### Option 1: Development with the Docker environment

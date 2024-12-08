@@ -74,7 +74,7 @@
                 anchor    : '',
                 gallery   : {images: [], index: null},
                 chatPage  : 'https://t.me/nc_passwords/1',
-                forumPage : 'https://help.nextcloud.com/c/apps/passwords',
+                forumPage : 'https://help.nextcloud.com/tag/passwords-app',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
             };
         },
