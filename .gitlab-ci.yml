@@ -74,11 +74,11 @@ Assemble:
     - testing
     - stable
 
-Assemble Legacy PHP 8.0 Support Release:
+Assemble Legacy PHP 8.1 Support Release:
   stage: assembling
   script:
     - mkdir passwords-lsr-80
-    - rsync -r .patches/lsr-8.0/* src
+    - rsync -r .patches/lsr-8.1/* src
     - npm run rector
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr 1; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
@@ -107,7 +107,7 @@ Publish Package:
       release-cli create --name "Passwords ${APP_VERSION}" --tag-name ${APP_VERSION} \
         --description "description.txt" \
         --assets-link "{\"name\":\"Passwords Handbook ${APP_VERSION}\",\"url\":\"https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION}\",\"link_type\":\"other\"}" \
-        --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.0 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.1 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-80.tar.gz\",\"link_type\":\"package\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"link_type\":\"package\"}"
   only:
     - stable
