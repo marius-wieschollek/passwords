@@ -1,4 +1,9 @@
 ## [Unreleased]
+## 2025.1.0 - Feature release
+### Removed
+- Support for PHP 8.2
+- Support for Nextcloud 28 & 29
+
 ## 2024.12.1 - Bugfix release
 ### Fixed
 - Fixed version number in EOL message
