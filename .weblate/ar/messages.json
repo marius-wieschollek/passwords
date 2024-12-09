@@ -1404,7 +1404,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Default Cache ($STR_1$ files, $STR_1$",
+        "message": "Default Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1415,7 +1415,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ files, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1426,7 +1426,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ files, $STR_1$",
+        "message": "Favicon Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1437,7 +1437,7 @@
         }
     },
     "backend-000441": {
-        "message": "Preview Cache ($STR_1$ files, $STR_1$",
+        "message": "Preview Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1448,7 +1448,7 @@
         }
     },
     "backend-000442": {
-        "message": "Passwords Cache ([X17] files, $STR_1$",
+        "message": "Passwords Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1486,7 +1486,7 @@
         "message": "البحث عن الوثائق"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ or $STR_1$? لقد قمنا بتغطيتك!",
+        "message": "$STR_1$, $STR_2$ or $STR_3$? لقد قمنا بتغطيتك!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1679,7 +1679,7 @@
         "message": "الدخول الإداري لحسابك"
     },
     "backend-000492": {
-        "message": "$STR_1$ حاول تسجيل في حسابك على $STR_1$.",
+        "message": "$STR_1$ حاول تسجيل في حسابك على $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1690,7 +1690,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ سجل في حسابك على $STR_1$.",
+        "message": "$STR_1$ سجل في حسابك على $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2159,7 +2159,7 @@
         "message": "عميل جديد أو تطبيق جديد كان متصلا بحسابك"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" مُنحت إمكانية الوصول إلى $STR_1$ حساب كلمة السر عبر \"باسلينك\".",
+        "message": "\"$STR_1$\" مُنحت إمكانية الوصول إلى $STR_2$ حساب كلمة السر عبر \"باسلينك\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3231,7 +3231,7 @@
         "message": "إزالة الأجسام المحذوفة من قاعدة البيانات"
     },
     "backend-000477": {
-        "message": "$STR_1$ shared $STR_1$ passwords with you.",
+        "message": "$STR_1$ shared $STR_2$ passwords with you.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

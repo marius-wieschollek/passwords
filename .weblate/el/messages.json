@@ -438,7 +438,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Προεπιλεγμένη κρυφή μνήμη ($STR_1$ αρχεία, $STR_1$)",
+        "message": "Προεπιλεγμένη κρυφή μνήμη ($STR_1$ αρχεία, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1802,7 +1802,7 @@
         "message": "Κάθε εβδομάδα"
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ αρχεία, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ αρχεία, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1813,7 +1813,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ αρχεία, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ αρχεία, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1824,7 +1824,7 @@
         }
     },
     "backend-000441": {
-        "message": "Προεπισκόπηση Cache ($STR_1$ αρχεία, $STR_1$)",
+        "message": "Προεπισκόπηση Cache ($STR_1$ αρχεία, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1835,7 +1835,7 @@
         }
     },
     "backend-000442": {
-        "message": "Κρυφή μνήμη κωδικών πρόσβασης ($STR_1$ αρχεία, $STR_1$)",
+        "message": "Κρυφή μνήμη κωδικών πρόσβασης ($STR_1$ αρχεία, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1870,7 +1870,7 @@
         "message": "αναζητώντας την τεκμηρίωση"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ ή $STR_1$; Σας καλύπτουμε!",
+        "message": "$STR_1$, $STR_2$ ή $STR_3$; Σας καλύπτουμε!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1976,7 +1976,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ μοιράστηκε μαζί σας τους κωδικούς πρόσβασης $STR_1$.",
+        "message": "$STR_1$ μοιράστηκε μαζί σας τους κωδικούς πρόσβασης $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2080,7 +2080,7 @@
         "message": "Διοικητική πρόσβαση στο λογαριασμό σας"
     },
     "backend-000492": {
-        "message": "$STR_1$ Προσπάθησα να συνδεθώ στο λογαριασμό σας στο $STR_1$.",
+        "message": "$STR_1$ Προσπάθησα να συνδεθώ στο λογαριασμό σας στο $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2091,7 +2091,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ συνδεθείτε στο λογαριασμό σας στο $STR_1$.",
+        "message": "$STR_1$ συνδεθείτε στο λογαριασμό σας στο $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2433,7 +2433,7 @@
         "message": "Ένας νέος πελάτης ή μια νέα εφαρμογή συνδέθηκε στο λογαριασμό σας"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" έλαβε πρόσβαση στο λογαριασμό σας $STR_1$ Passwords μέσω του PassLink.",
+        "message": "\"$STR_1$\" έλαβε πρόσβαση στο λογαριασμό σας $STR_2$ Passwords μέσω του PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

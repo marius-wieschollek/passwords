@@ -1605,7 +1605,7 @@
         "message": "Cacher"
     },
     "backend-000438": {
-        "message": "Standard-cache ($STR_1$ filer, $STR_1$)",
+        "message": "Standard-cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1616,7 +1616,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1627,7 +1627,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1638,7 +1638,7 @@
         }
     },
     "backend-000441": {
-        "message": "Preview Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Preview Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1649,7 +1649,7 @@
         }
     },
     "backend-000442": {
-        "message": "Cache til adgangskoder ($STR_1$ filer, $STR_1$)",
+        "message": "Cache til adgangskoder ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1687,7 +1687,7 @@
         "message": "leder efter dokumentationen"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi har styr på det!",
+        "message": "$STR_1$, $STR_2$ eller $STR_3$? Vi har styr på det!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1793,7 +1793,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ delt $STR_1$ adgangskoder med dig.",
+        "message": "$STR_1$ delt $STR_2$ adgangskoder med dig.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1897,7 +1897,7 @@
         "message": "Administrativ adgang til din konto"
     },
     "backend-000492": {
-        "message": "$STR_1$ prøvede at logge ind på din konto på $STR_1$.",
+        "message": "$STR_1$ prøvede at logge ind på din konto på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1908,7 +1908,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ logget ind på din konto på $STR_1$.",
+        "message": "$STR_1$ logget ind på din konto på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2394,7 +2394,7 @@
         "message": "En ny klient eller app blev forbundet til din konto"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" har fået adgang til din $STR_1$ Passwords-konto via PassLink.",
+        "message": "\"$STR_1$\" har fået adgang til din $STR_2$ Passwords-konto via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

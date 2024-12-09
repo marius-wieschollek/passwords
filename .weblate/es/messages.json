@@ -1391,7 +1391,7 @@
         "message": "Si el problema persiste, contacta con el administrador del sistema."
     },
     "backend-000389": {
-        "message": "Sesión de la App Contraseñas $STR_1$ - $STR_1$",
+        "message": "Sesión de la App Contraseñas $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1546,7 +1546,7 @@
         "message": "Memoria caché"
     },
     "backend-000438": {
-        "message": "Memoria caché por defecto ($STR_1$ archivos, $STR_1$)",
+        "message": "Memoria caché por defecto ($STR_1$ archivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1557,7 +1557,7 @@
         }
     },
     "backend-000439": {
-        "message": "Memoria caché de imágenes ($STR_1$ archivos, $STR_1$)",
+        "message": "Memoria caché de imágenes ($STR_1$ archivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1568,7 +1568,7 @@
         }
     },
     "backend-000440": {
-        "message": "Memoria caché de Faviconos ($STR_1$ archivos, $STR_1$)",
+        "message": "Memoria caché de Faviconos ($STR_1$ archivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1579,7 +1579,7 @@
         }
     },
     "backend-000441": {
-        "message": "Memoria caché de vistas previas ($STR_1$ archivos, $STR_1$)",
+        "message": "Memoria caché de vistas previas ($STR_1$ archivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1590,7 +1590,7 @@
         }
     },
     "backend-000442": {
-        "message": "Memoria caché de contraseñas ($STR_1$ archivos, $STR_1$)",
+        "message": "Memoria caché de contraseñas ($STR_1$ archivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1628,7 +1628,7 @@
         "message": "buscas la documentación"
     },
     "backend-000452": {
-        "message": "¿$STR_1$, $STR_1$ o $STR_1$? ¡Podemos ayudarte!",
+        "message": "¿$STR_1$, $STR_2$ o $STR_3$? ¡Podemos ayudarte!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1734,7 +1734,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ ha compartido $STR_1$ contraseñas contigo.",
+        "message": "$STR_1$ ha compartido $STR_2$ contraseñas contigo.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1838,7 +1838,7 @@
         "message": "Acceso administrativo a tu cuenta"
     },
     "backend-000492": {
-        "message": "$STR_1$ ha intentado acceder a tu cuenta en $STR_1$.",
+        "message": "$STR_1$ ha intentado acceder a tu cuenta en $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1849,7 +1849,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ ha accedido a tu cuenta en $STR_1$.",
+        "message": "$STR_1$ ha accedido a tu cuenta en $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2768,7 +2768,7 @@
         "message": "Se ha conectado un nuevo cliente o aplicación a tu cuenta"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" ha obtenido acceso a su cuenta de $STR_1$ Contraseñas a través de PassLink.",
+        "message": "\"$STR_1$\" ha obtenido acceso a su cuenta de $STR_2$ Contraseñas a través de PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

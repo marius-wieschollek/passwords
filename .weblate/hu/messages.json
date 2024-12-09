@@ -1608,7 +1608,7 @@
         "message": "Cache-ek"
     },
     "backend-000438": {
-        "message": "Alapértelmezett gyorsítótár ($STR_1$ fájlok, $STR_1$)",
+        "message": "Alapértelmezett gyorsítótár ($STR_1$ fájlok, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1619,7 +1619,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatarok gyorsítótár ($STR_1$ fájlok, $STR_1$)",
+        "message": "Avatarok gyorsítótár ($STR_1$ fájlok, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1630,7 +1630,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ fájlok, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ fájlok, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1641,7 +1641,7 @@
         }
     },
     "backend-000441": {
-        "message": "Előnézeti gyorsítótár ($STR_1$ fájlok, $STR_1$)",
+        "message": "Előnézeti gyorsítótár ($STR_1$ fájlok, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1652,7 +1652,7 @@
         }
     },
     "backend-000442": {
-        "message": "Jelszavak gyorsítótár ($STR_1$ fájlok, $STR_1$)",
+        "message": "Jelszavak gyorsítótár ($STR_1$ fájlok, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1690,7 +1690,7 @@
         "message": "a dokumentációt keresve"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ vagy $STR_1$? Mi gondoskodunk rólad!",
+        "message": "$STR_1$, $STR_2$ vagy $STR_3$? Mi gondoskodunk rólad!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1796,7 +1796,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ megosztott $STR_1$ jelszavakkal.",
+        "message": "$STR_1$ megosztott $STR_2$ jelszavakkal.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1900,7 +1900,7 @@
         "message": "Adminisztrációs hozzáférés a fiókjához"
     },
     "backend-000492": {
-        "message": "$STR_1$ megpróbált bejelentkezni a fiókjába a $STR_1$ oldalon.",
+        "message": "$STR_1$ megpróbált bejelentkezni a fiókjába a $STR_2$ oldalon.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1911,7 +1911,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ bejelentkezett a fiókjába a $STR_1$ oldalon.",
+        "message": "$STR_1$ bejelentkezett a fiókjába a $STR_2$ oldalon.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2400,7 +2400,7 @@
         "message": "Új ügyfél vagy alkalmazás csatlakozott a fiókjához"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" hozzáférést kapott a $STR_1$ Passwords fiókjához a PassLink-en keresztül.",
+        "message": "\"$STR_1$\" hozzáférést kapott a $STR_2$ Passwords fiókjához a PassLink-en keresztül.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

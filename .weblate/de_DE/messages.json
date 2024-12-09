@@ -1693,7 +1693,7 @@
         "message": "Zwischenspeicher"
     },
     "backend-000438": {
-        "message": "Standard Cache ($STR_1$ Dateien, $STR_1$)",
+        "message": "Standard Cache ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1704,7 +1704,7 @@
         }
     },
     "backend-000439": {
-        "message": "Profilbilder ($STR_1$ Dateien, $STR_1$)",
+        "message": "Profilbilder ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1715,7 +1715,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon ($STR_1$ Dateien, $STR_1$)",
+        "message": "Favicon ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1726,7 +1726,7 @@
         }
     },
     "backend-000441": {
-        "message": "Webseitenansichten ($STR_1$ Dateien, $STR_1$)",
+        "message": "Webseitenansichten ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1737,7 +1737,7 @@
         }
     },
     "backend-000442": {
-        "message": "Schlechte Passwörter ($STR_1$ Dateien, $STR_1$)",
+        "message": "Schlechte Passwörter ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1775,7 +1775,7 @@
         "message": "suchen Sie die Dokumentation"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ oder $STR_1$? Wir stehen gerne bereit!",
+        "message": "$STR_1$, $STR_2$ oder $STR_3$? Wir stehen gerne bereit!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1881,7 +1881,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ hat $STR_1$ Passwörter mit Ihnen geteilt.",
+        "message": "$STR_1$ hat $STR_2$ Passwörter mit Ihnen geteilt.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1985,7 +1985,7 @@
         "message": "Administrativer Zugriff auf Ihr Konto"
     },
     "backend-000492": {
-        "message": "$STR_1$ hat am $STR_1$ versucht, sich in Ihr Konto anzumelden.",
+        "message": "$STR_1$ hat am $STR_2$ versucht, sich in Ihr Konto anzumelden.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1996,7 +1996,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ sich am $STR_1$ in Ihrem Konto angemeldet.",
+        "message": "$STR_1$ sich am $STR_2$ in Ihrem Konto angemeldet.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2149,7 +2149,7 @@
         "message": "Eine neue App wurde mit Ihrem Konto verknüpft"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" wurde mittels PassLink Zugriff auf Ihr $STR_1$ Konto gewährt.",
+        "message": "\"$STR_1$\" wurde mittels PassLink Zugriff auf Ihr $STR_2$ Konto gewährt.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -1457,7 +1457,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Standard cache ($STR_1$ filer, $STR_1$)",
+        "message": "Standard cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1468,7 +1468,7 @@
         }
     },
     "backend-000439": {
-        "message": "Profil cache ($STR_1$ filer, $STR_1$)",
+        "message": "Profil cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1479,7 +1479,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon cache ($STR_1$ filer, $STR_1$)",
+        "message": "Favicon cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1490,7 +1490,7 @@
         }
     },
     "backend-000441": {
-        "message": "Förhandsgranska cache ($STR_1$ filer, $STR_1$)",
+        "message": "Förhandsgranska cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1501,7 +1501,7 @@
         }
     },
     "backend-000442": {
-        "message": "Lösenord cache ($STR_1$ filer, $STR_1$)",
+        "message": "Lösenord cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1539,7 +1539,7 @@
         "message": "letar efter dokumentationen"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi kan hjälpa till!",
+        "message": "$STR_1$, $STR_2$ eller $STR_3$? Vi kan hjälpa till!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1645,7 +1645,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ delar $STR_1$ lösenord med dig.",
+        "message": "$STR_1$ delar $STR_2$ lösenord med dig.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1805,7 +1805,7 @@
         "message": "Välj ett namn:"
     },
     "backend-000493": {
-        "message": "$STR_1$ loggat in på ditt konto på $STR_1$.",
+        "message": "$STR_1$ loggat in på ditt konto på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1861,7 +1861,7 @@
         "message": "Administrativ åtkomst till ditt konto"
     },
     "backend-000492": {
-        "message": "$STR_1$ försökte logga in på ditt konto på $STR_1$.",
+        "message": "$STR_1$ försökte logga in på ditt konto på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2185,7 +2185,7 @@
         "message": "En ny kund eller app kopplades till ditt konto"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" fick tillgång till ditt $STR_1$ Passwords-konto via PassLink.",
+        "message": "\"$STR_1$\" fick tillgång till ditt $STR_2$ Passwords-konto via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -1174,7 +1174,7 @@
         "message": "Neem contact op met uw beheerder wanneer het probleem zich weer voordoet."
     },
     "backend-000389": {
-        "message": "Wachtwoorden sessie $STR_1$ - $STR_1$",
+        "message": "Wachtwoorden sessie $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1326,7 +1326,7 @@
         "message": "Cache"
     },
     "backend-000438": {
-        "message": "Standard Cache ($STR_1$ Bestanden, $STR_1$)",
+        "message": "Standard Cache ($STR_1$ Bestanden, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1337,7 +1337,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatar Cache ($STR_1$ Bestanden, $STR_1$)",
+        "message": "Avatar Cache ($STR_1$ Bestanden, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1348,7 +1348,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon ($STR_1$ Bestanden, $STR_1$)",
+        "message": "Favicon ($STR_1$ Bestanden, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1359,7 +1359,7 @@
         }
     },
     "backend-000441": {
-        "message": "Voorvertoning Cache ($STR_1$ Bestanden, $STR_1$)",
+        "message": "Voorvertoning Cache ($STR_1$ Bestanden, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1370,7 +1370,7 @@
         }
     },
     "backend-000442": {
-        "message": "Wachtwoorden Cache ($STR_1$ Bestanden, $STR_1$)",
+        "message": "Wachtwoorden Cache ($STR_1$ Bestanden, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1408,7 +1408,7 @@
         "message": "zoekt u naar de documentatie"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ of $STR_1$? We staan voor u klaar!",
+        "message": "$STR_1$, $STR_2$ of $STR_3$? We staan voor u klaar!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1514,7 +1514,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ heeft $STR_1$ wachtwoorden met u gedeeld.",
+        "message": "$STR_1$ heeft $STR_2$ wachtwoorden met u gedeeld.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1846,7 +1846,7 @@
         "message": "Administratieve toegang tot je account"
     },
     "backend-000492": {
-        "message": "$STR_1$ geprobeerd in te loggen op uw account op $STR_1$.",
+        "message": "$STR_1$ geprobeerd in te loggen op uw account op $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1857,7 +1857,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ ingelogd op je account op $STR_1$.",
+        "message": "$STR_1$ ingelogd op je account op $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2075,7 +2075,7 @@
         "message": "Er is een nieuwe client of app gekoppeld aan je account"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" heeft toegang gekregen tot uw $STR_1$ Passwords account via PassLink.",
+        "message": "\"$STR_1$\" heeft toegang gekregen tot uw $STR_2$ Passwords account via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

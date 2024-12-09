@@ -526,7 +526,7 @@
         "message": "行政访问您的账户"
     },
     "backend-000492": {
-        "message": "$STR_1$试图登录你的账户在$STR_1$.",
+        "message": "$STR_1$试图登录你的账户在$STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -537,7 +537,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$登录入你的账户上$STR_1$.",
+        "message": "$STR_1$登录入你的账户上$STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -722,7 +722,7 @@
         "message": "标记已恢复"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\"获准进入你的$STR_1$ 密码账户通过PassLink.",
+        "message": "\"$STR_1$\"获准进入你的$STR_2$ 密码账户通过PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3011,7 +3011,7 @@
         "message": "缓冲"
     },
     "backend-000438": {
-        "message": "默认缓存($STR_1$文件,$STR_1$)",
+        "message": "默认缓存($STR_1$文件,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3022,7 +3022,7 @@
         }
     },
     "backend-000439": {
-        "message": "神通快取 ($STR_1$ 文件, $STR_1$)",
+        "message": "神通快取 ($STR_1$ 文件,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3033,7 +3033,7 @@
         }
     },
     "backend-000440": {
-        "message": "法维康缓存($STR_1$文件,$STR_1$)",
+        "message": "法维康缓存($STR_1$文件,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3044,7 +3044,7 @@
         }
     },
     "backend-000441": {
-        "message": "预览缓存($STR_1$文件,$STR_1$)",
+        "message": "预览缓存($STR_1$文件,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3055,7 +3055,7 @@
         }
     },
     "backend-000442": {
-        "message": "密码缓存($STR_1$文件,$STR_1$)",
+        "message": "密码缓存($STR_1$文件,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3093,7 +3093,7 @@
         "message": "查找文档"
     },
     "backend-000452": {
-        "message": "$STR_1$,$STR_1$或$STR_1$? 我们掩护你!",
+        "message": "$STR_1$,$STR_2$或$STR_3$? 我们掩护你!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3203,7 +3203,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$与您共享 $STR_1$密码.",
+        "message": "$STR_1$与您共享 $STR_2$密码.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

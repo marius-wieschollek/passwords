@@ -1590,7 +1590,7 @@
         "message": "Kätköt"
     },
     "backend-000438": {
-        "message": "Oletusvälimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "message": "Oletusvälimuisti ($STR_1$ tiedostot, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1601,7 +1601,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ tiedostot, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ tiedostot, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1612,7 +1612,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ tiedostot, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ tiedostot, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1623,7 +1623,7 @@
         }
     },
     "backend-000441": {
-        "message": "Esikatseluvälimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "message": "Esikatseluvälimuisti ($STR_1$ tiedostot, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1634,7 +1634,7 @@
         }
     },
     "backend-000442": {
-        "message": "Salasanojen välimuisti ($STR_1$ tiedostot, $STR_1$)",
+        "message": "Salasanojen välimuisti ($STR_1$ tiedostot, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1672,7 +1672,7 @@
         "message": "etsitään dokumentaatiota"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ tai $STR_1$? Me hoidamme sinut!",
+        "message": "$STR_1$, $STR_2$ tai $STR_3$? Me hoidamme sinut!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1778,7 +1778,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ jaettu $STR_1$ salasanat kanssasi.",
+        "message": "$STR_1$ jaettu $STR_2$ salasanat kanssasi.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1882,7 +1882,7 @@
         "message": "Hallinnollinen pääsy tiliisi"
     },
     "backend-000492": {
-        "message": "$STR_1$ Yritin kirjautua tilillesi osoitteessa $STR_1$.",
+        "message": "$STR_1$ Yritin kirjautua tilillesi osoitteessa $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1893,7 +1893,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ kirjautunut tilillesi osoitteessa $STR_1$.",
+        "message": "$STR_1$ kirjautunut tilillesi osoitteessa $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2382,7 +2382,7 @@
         "message": "Uusi asiakas tai sovellus on yhdistetty tiliisi."
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" on saanut pääsyn $STR_1$ Passwords -tilillesi PassLinkin kautta.",
+        "message": "\"$STR_1$\" on saanut pääsyn $STR_2$ Passwords -tilillesi PassLinkin kautta.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

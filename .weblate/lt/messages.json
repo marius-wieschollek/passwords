@@ -1611,7 +1611,7 @@
         "message": "Talpyklos"
     },
     "backend-000438": {
-        "message": "Numatytoji talpykla ($STR_1$ failai, $STR_1$)",
+        "message": "Numatytoji talpykla ($STR_1$ failai, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1622,7 +1622,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatarų talpykla ($STR_1$ failai, $STR_1$)",
+        "message": "Avatarų talpykla ($STR_1$ failai, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1633,7 +1633,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon talpykla ($STR_1$ failai, $STR_1$)",
+        "message": "Favicon talpykla ($STR_1$ failai, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1644,7 +1644,7 @@
         }
     },
     "backend-000441": {
-        "message": "Peržiūros talpykla ($STR_1$ failai, $STR_1$)",
+        "message": "Peržiūros talpykla ($STR_1$ failai, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1655,7 +1655,7 @@
         }
     },
     "backend-000442": {
-        "message": "Slaptažodžių talpykla ($STR_1$ failai, $STR_1$)",
+        "message": "Slaptažodžių talpykla ($STR_1$ failai, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1693,7 +1693,7 @@
         "message": "ieško dokumentacijos"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ arba $STR_1$? Mes jums padėsime!",
+        "message": "$STR_1$, $STR_2$ arba $STR_3$? Mes jums padėsime!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1799,7 +1799,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ su jumis pasidalijo $STR_1$ slaptažodžiais.",
+        "message": "$STR_1$ su jumis pasidalijo $STR_2$ slaptažodžiais.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1903,7 +1903,7 @@
         "message": "Administracinė prieiga prie jūsų paskyros"
     },
     "backend-000492": {
-        "message": "$STR_1$ bandė prisijungti prie savo paskyros $STR_1$.",
+        "message": "$STR_1$ bandė prisijungti prie savo paskyros $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1914,7 +1914,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ prisijungę prie savo paskyros $STR_1$.",
+        "message": "$STR_1$ prisijungę prie savo paskyros $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2397,7 +2397,7 @@
         "message": "prie jūsų paskyros prijungtas naujas klientas arba programėlė"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" buvo suteikta prieiga prie jūsų $STR_1$ Passwords paskyros per PassLink.",
+        "message": "\"$STR_1$\" buvo suteikta prieiga prie jūsų $STR_2$ Passwords paskyros per PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

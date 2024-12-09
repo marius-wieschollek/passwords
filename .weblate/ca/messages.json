@@ -1391,7 +1391,7 @@
         "message": "Si aquest problema persisteix, hauríeu de contactar amb el vostre administrador."
     },
     "backend-000389": {
-        "message": "Sessió de l'aplicació Contrasenyes $STR_1$ - $STR_1$",
+        "message": "Sessió de l'aplicació Contrasenyes $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1546,7 +1546,7 @@
         "message": "Memòria cau"
     },
     "backend-000438": {
-        "message": "Memòria cau per defecte ($STR_1$ fitxers, $STR_1$)",
+        "message": "Memòria cau per defecte ($STR_1$ fitxers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1557,7 +1557,7 @@
         }
     },
     "backend-000439": {
-        "message": "Memòria cau per imatges ($STR_1$ fitxers, $STR_1$)",
+        "message": "Memòria cau per imatges ($STR_1$ fitxers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1568,7 +1568,7 @@
         }
     },
     "backend-000440": {
-        "message": "Memòria cau per Favicons ($STR_1$ fitxers, $STR_1$)",
+        "message": "Memòria cau per Favicons ($STR_1$ fitxers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1579,7 +1579,7 @@
         }
     },
     "backend-000441": {
-        "message": "Memòria cau per vistes prèvies ($STR_1$ fitxers, $STR_1$)",
+        "message": "Memòria cau per vistes prèvies ($STR_1$ fitxers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1590,7 +1590,7 @@
         }
     },
     "backend-000442": {
-        "message": "Memòria cau per contrasenyes ($STR_1$ fitxers, $STR_1$)",
+        "message": "Memòria cau per contrasenyes ($STR_1$ fitxers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1628,7 +1628,7 @@
         "message": "cerqueu la documentació"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ o $STR_1$? Podem ajudar-vos!",
+        "message": "$STR_1$, $STR_2$ o $STR_3$? Podem ajudar-vos!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1734,7 +1734,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ us ha compartit $STR_1$ contrasenyes.",
+        "message": "$STR_1$ us ha compartit $STR_2$ contrasenyes.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1833,7 +1833,7 @@
         "message": "Accés administratiu al vostre compte"
     },
     "backend-000492": {
-        "message": "$STR_1$ ha intentat iniciar sessió al vostre compte a $STR_1$.",
+        "message": "$STR_1$ ha intentat iniciar sessió al vostre compte a $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1844,7 +1844,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ va iniciar sessió al vostre compte a $STR_1$.",
+        "message": "$STR_1$ va iniciar sessió al vostre compte a $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2959,7 +2959,7 @@
         "message": "Deshabilita"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" es va concedir accés al $STR_1$ Compte de contrasenyes mitjançant Passall.",
+        "message": "\"$STR_1$\" es va concedir accés al $STR_2$ Compte de contrasenyes mitjançant Passall.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

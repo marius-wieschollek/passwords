@@ -1624,7 +1624,7 @@
         "message": "Önbellekler"
     },
     "backend-000438": {
-        "message": "Varsayılan Önbellek ($STR_1$ dosyaları, $STR_1$)",
+        "message": "Varsayılan Önbellek ($STR_1$ dosyaları, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1635,7 +1635,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatarlar Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "message": "Avatarlar Önbelleği ($STR_1$ dosyaları, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1646,7 +1646,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ dosyaları, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ dosyaları, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1657,7 +1657,7 @@
         }
     },
     "backend-000441": {
-        "message": "Önizleme Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "message": "Önizleme Önbelleği ($STR_1$ dosyaları, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1668,7 +1668,7 @@
         }
     },
     "backend-000442": {
-        "message": "Parolalar Önbelleği ($STR_1$ dosyaları, $STR_1$)",
+        "message": "Parolalar Önbelleği ($STR_1$ dosyaları, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1703,7 +1703,7 @@
         "message": "belgeleri arıyorum"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ veya $STR_1$? Biz sizi koruruz!",
+        "message": "$STR_1$, $STR_2$ veya $STR_3$? Biz sizi koruruz!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1809,7 +1809,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ $STR_1$ şifrelerini sizinle paylaştı.",
+        "message": "$STR_1$ $STR_2$ şifrelerini sizinle paylaştı.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1913,7 +1913,7 @@
         "message": "Hesabınıza idari erişim"
     },
     "backend-000492": {
-        "message": "$STR_1$ $STR_1$ adresinden hesabınıza giriş yapmaya çalıştım.",
+        "message": "$STR_1$ $STR_2$ adresinden hesabınıza giriş yapmaya çalıştım.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1924,7 +1924,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ $STR_1$ adresinden hesabınıza giriş yaptınız.",
+        "message": "$STR_1$ $STR_2$ adresinden hesabınıza giriş yaptınız.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2410,7 +2410,7 @@
         "message": "Hesabınıza yeni bir müşteri veya uygulama bağlandı"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" PassLink aracılığıyla $STR_1$ Passwords hesabınıza erişim izni verildi.",
+        "message": "\"$STR_1$\" PassLink aracılığıyla $STR_2$ Passwords hesabınıza erişim izni verildi.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

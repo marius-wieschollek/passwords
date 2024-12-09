@@ -1591,7 +1591,7 @@
         "message": "Cache"
     },
     "backend-000438": {
-        "message": "Cache Default ($STR_1$ files, $STR_1$)",
+        "message": "Cache Default ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1602,7 +1602,7 @@
         }
     },
     "backend-000439": {
-        "message": "Cache Avatar ($STR_1$ files, $STR_1$)",
+        "message": "Cache Avatar ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1613,7 +1613,7 @@
         }
     },
     "backend-000440": {
-        "message": "Cache Favicon ($STR_1$ files, $STR_1$)",
+        "message": "Cache Favicon ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1624,7 +1624,7 @@
         }
     },
     "backend-000441": {
-        "message": "Pratinjau Cache ($STR_1$ file, $STR_1$)",
+        "message": "Pratinjau Cache ($STR_1$ file, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1635,7 +1635,7 @@
         }
     },
     "backend-000442": {
-        "message": "Cache Kata Sandi ($STR_1$ files, $STR_1$)",
+        "message": "Cache Kata Sandi ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1673,7 +1673,7 @@
         "message": "mencari dokumentasi"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ atau $STR_1$? Kami siap membantu Anda!",
+        "message": "$STR_1$, $STR_2$ atau $STR_3$? Kami siap membantu Anda!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1779,7 +1779,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ berbagi kata sandi $STR_1$ dengan Anda.",
+        "message": "$STR_1$ berbagi kata sandi $STR_2$ dengan Anda.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1883,7 +1883,7 @@
         "message": "Akses administratif ke akun Anda"
     },
     "backend-000492": {
-        "message": "$STR_1$ mencoba masuk ke akun Anda di $STR_1$.",
+        "message": "$STR_1$ mencoba masuk ke akun Anda di $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1894,7 +1894,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ masuk ke akun Anda di $STR_1$.",
+        "message": "$STR_1$ masuk ke akun Anda di $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2383,7 +2383,7 @@
         "message": "Klien atau aplikasi baru terhubung ke akun Anda"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" diberikan akses ke akun $STR_1$ Kata Sandi Anda melalui PassLink.",
+        "message": "\"$STR_1$\" diberikan akses ke akun $STR_2$ Kata Sandi Anda melalui PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

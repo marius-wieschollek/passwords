@@ -1344,7 +1344,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Cache par défaut ($STR_1$ fichiers, $STR_1$)",
+        "message": "Cache par défaut ($STR_1$ fichiers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1355,7 +1355,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars ($STR_1$ fichiers, $STR_1$)",
+        "message": "Avatars ($STR_1$ fichiers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1366,7 +1366,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon ($STR_1$ fichiers, $STR_1$)",
+        "message": "Favicon ($STR_1$ fichiers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1377,7 +1377,7 @@
         }
     },
     "backend-000441": {
-        "message": "Aperçus ($STR_1$ fichiers, $STR_1$)",
+        "message": "Aperçus ($STR_1$ fichiers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1388,7 +1388,7 @@
         }
     },
     "backend-000442": {
-        "message": "Mots de passe ($STR_1$ fichiers, $STR_1$)",
+        "message": "Mots de passe ($STR_1$ fichiers, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1426,7 +1426,7 @@
         "message": "vous cherchez la documentation (anglais uniquement)"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ ou $STR_1$ ? Nous avons la solution pour vous !",
+        "message": "$STR_1$, $STR_2$ ou $STR_3$ ? Nous avons la solution pour vous !",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1532,7 +1532,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ a partagé $STR_1$ mot(s) de passe avec vous.",
+        "message": "$STR_1$ a partagé $STR_2$ mot(s) de passe avec vous.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1769,7 +1769,7 @@
         "message": "Veuillez cliquer sur le lien et suivre notre tutoriel facile pour héberger vous-même Besticon."
     },
     "backend-000492": {
-        "message": "$STR_1$ a essayé de se connecter à votre compte sur $STR_1$.",
+        "message": "$STR_1$ a essayé de se connecter à votre compte sur $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1971,7 +1971,7 @@
         "message": "(pas de valeur)"
     },
     "backend-000493": {
-        "message": "$STR_1$ s'est connecté à votre compte sur $STR_1$.",
+        "message": "$STR_1$ s'est connecté à votre compte sur $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2329,7 +2329,7 @@
         "message": "Un nouveau client ou une nouvelle application a été connecté à votre compte"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" a été autorisé à accéder à votre compte $STR_1$ Passwords via PassLink.",
+        "message": "\"$STR_1$\" a été autorisé à accéder à votre compte $STR_2$ Passwords via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
