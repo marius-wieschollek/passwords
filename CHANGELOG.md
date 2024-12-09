@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2024.12.1 - Bugfix release
+### Fixed
+- Fixed version number in EOL message
+
 ## 2024.12.0 - Feature release
 ### Added
 - Traditional Chinese translation
