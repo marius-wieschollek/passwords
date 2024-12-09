@@ -1763,7 +1763,7 @@
         "message": "如果此问题仍然存在，您应与管理员联系。"
     },
     "backend-000389": {
-        "message": "密码令牌 $STR_1$ - $STR_1$",
+        "message": "密码令牌 $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1915,7 +1915,7 @@
         "message": "缓存"
     },
     "backend-000438": {
-        "message": "默认缓存（$STR_1$ 个文件，$STR_1$）",
+        "message": "默认缓存（$STR_1$ 个文件，$STR_2$）",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1926,7 +1926,7 @@
         }
     },
     "backend-000439": {
-        "message": "头像缓存（$STR_1$ 个文件，$STR_1$）",
+        "message": "头像缓存（$STR_1$ 个文件，$STR_2$）",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1937,7 +1937,7 @@
         }
     },
     "backend-000440": {
-        "message": "网站图标缓存（$STR_1$ 个文件，$STR_1$）",
+        "message": "网站图标缓存（$STR_1$ 个文件，$STR_2$）",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1948,7 +1948,7 @@
         }
     },
     "backend-000441": {
-        "message": "预览缓存（$STR_1$ 个文件，$STR_1$）",
+        "message": "预览缓存（$STR_1$ 个文件，$STR_2$）",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1959,7 +1959,7 @@
         }
     },
     "backend-000442": {
-        "message": "密码缓存（$STR_1$ 个文件，$STR_1$）",
+        "message": "密码缓存（$STR_1$ 个文件，$STR_2$）",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1994,7 +1994,7 @@
         "message": "查询文档"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ 还是 $STR_1$？我们都考虑到了！",
+        "message": "$STR_1$, $STR_2$ 还是 $STR_3$？我们都考虑到了！",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2100,7 +2100,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ 共享给您 $STR_1$ 个密码。",
+        "message": "$STR_1$ 共享给您 $STR_2$ 个密码。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2204,7 +2204,7 @@
         "message": "对您帐户的管理权限"
     },
     "backend-000492": {
-        "message": "$STR_1$ 于 $STR_1$ 尝试登录您的账号。",
+        "message": "$STR_1$ 于 $STR_2$ 尝试登录您的账号。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2215,7 +2215,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ 于 $STR_1$ 登录您的账号。",
+        "message": "$STR_1$ 于 $STR_2$ 登录您的账号。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2498,7 +2498,7 @@
         "message": "新客户或应用程序已连接到您的账户"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" 已获准通过 PassLink 访问您的$STR_1$ 密码账户。",
+        "message": "\"$STR_1$\" 已获准通过 PassLink 访问您的$STR_2$ 密码账户。",
         "placeholders": {
             "str_1": {
                 "content": "$1"

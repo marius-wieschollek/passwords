@@ -534,7 +534,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Default Cache ($STR_1$ files, $STR_1$)",
+        "message": "Default Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -847,7 +847,7 @@
         "message": "Open documentation"
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ files, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -858,7 +858,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ files, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -869,7 +869,7 @@
         }
     },
     "backend-000441": {
-        "message": "Preview Cache ($STR_1$ files, $STR_1$)",
+        "message": "Preview Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -880,7 +880,7 @@
         }
     },
     "backend-000442": {
-        "message": "Passwords Cache ($STR_1$ files, $STR_1$)",
+        "message": "Passwords Cache ($STR_1$ files, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -921,7 +921,7 @@
         "message": "Change the encryption password"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ or $STR_1$? We've got you covered!",
+        "message": "$STR_1$, $STR_2$ or $STR_3$? We've got you covered!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1193,7 +1193,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ shared $STR_1$ passwords with you.",
+        "message": "$STR_1$ shared $STR_2$ passwords with you.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1297,7 +1297,7 @@
         "message": "Administrative access to your account"
     },
     "backend-000492": {
-        "message": "$STR_1$ tried to log into your account on $STR_1$.",
+        "message": "$STR_1$ tried to log into your account on $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1308,7 +1308,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ logged into your account on $STR_1$.",
+        "message": "$STR_1$ logged into your account on $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1600,7 +1600,7 @@
         "message": "A new client or app was connected to your account"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" was granted access to your $STR_1$ Passwords account via PassLink.",
+        "message": "\"$STR_1$\" was granted access to your $STR_2$ Passwords account via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

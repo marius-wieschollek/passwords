@@ -1484,7 +1484,7 @@
         "message": "Mezipaměti"
     },
     "backend-000438": {
-        "message": "Výchozí mezipaměť ($STR_1$ souborů, $STR_1$)",
+        "message": "Výchozí mezipaměť ($STR_1$ souborů, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1495,7 +1495,7 @@
         }
     },
     "backend-000439": {
-        "message": "Mezipaměť profilových obrázků ($STR_1$ souborů, $STR_1$)",
+        "message": "Mezipaměť profilových obrázků ($STR_1$ souborů, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1506,7 +1506,7 @@
         }
     },
     "backend-000440": {
-        "message": "Mezipaměť ikon webů ($STR_1$ souborů, $STR_1$)",
+        "message": "Mezipaměť ikon webů ($STR_1$ souborů, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1517,7 +1517,7 @@
         }
     },
     "backend-000441": {
-        "message": "Mezipaměť náhledů ($STR_1$ souborů, $STR_1$)",
+        "message": "Mezipaměť náhledů ($STR_1$ souborů, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1528,7 +1528,7 @@
         }
     },
     "backend-000442": {
-        "message": "Mezipaměť hesel ($STR_1$ souborů, $STR_1$)",
+        "message": "Mezipaměť hesel ($STR_1$ souborů, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1566,7 +1566,7 @@
         "message": "hledáte dokumentaci"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ nebo $STR_1$? Pomůžeme Vám!",
+        "message": "$STR_1$, $STR_2$ nebo $STR_3$? Pomůžeme Vám!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1669,7 +1669,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ vám nasdílel(a) $STR_1$ hesel.",
+        "message": "$STR_1$ vám nasdílel(a) $STR_2$ hesel.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2494,7 +2494,7 @@
         "message": "Administrátorský přístup k vašemu účtu"
     },
     "backend-000492": {
-        "message": "$STR_1$ se pokusil(a) přihlásit do vašeho účtu na $STR_1$.",
+        "message": "$STR_1$ se pokusil(a) přihlásit do vašeho účtu na $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2505,7 +2505,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ se přihlásil(a) do vašeho účtu v $STR_1$.",
+        "message": "$STR_1$ se přihlásil(a) do vašeho účtu v $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2753,7 +2753,7 @@
         "message": "K vašemu účtu se připojil nový klient nebo aplikace"
     },
     "backend-000647": {
-        "message": "„$STR_1$“ byl udělen přístup k vašemu $STR_1$ účtu v Heslech prostřednictvím PassLink.",
+        "message": "„$STR_1$“ byl udělen přístup k vašemu $STR_2$ účtu v Heslech prostřednictvím PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

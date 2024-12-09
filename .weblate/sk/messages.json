@@ -1587,7 +1587,7 @@
         "message": "Cache"
     },
     "backend-000438": {
-        "message": "Predvolená vyrovnávacia pamäť ($STR_1$ súbory, $STR_1$)",
+        "message": "Predvolená vyrovnávacia pamäť ($STR_1$ súbory, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1598,7 +1598,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatary Cache ($STR_1$ súbory, $STR_1$)",
+        "message": "Avatary Cache ($STR_1$ súbory, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1609,7 +1609,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ súbory, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ súbory, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1620,7 +1620,7 @@
         }
     },
     "backend-000441": {
-        "message": "Náhľad vyrovnávacej pamäte ($STR_1$ súbory, $STR_1$)",
+        "message": "Náhľad vyrovnávacej pamäte ($STR_1$ súbory, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1631,7 +1631,7 @@
         }
     },
     "backend-000442": {
-        "message": "Heslá Cache ($STR_1$ súbory, $STR_1$)",
+        "message": "Heslá Cache ($STR_1$ súbory, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1669,7 +1669,7 @@
         "message": "hľadanie dokumentácie"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ alebo $STR_1$? Máme o vás postarané!",
+        "message": "$STR_1$, $STR_2$ alebo $STR_3$? Máme o vás postarané!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1778,7 +1778,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ zdieľané heslá $STR_1$.",
+        "message": "$STR_1$ zdieľané heslá $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1885,7 +1885,7 @@
         "message": "Administratívny prístup k vášmu účtu"
     },
     "backend-000492": {
-        "message": "$STR_1$ sa pokúsil prihlásiť do svojho konta na stránke $STR_1$.",
+        "message": "$STR_1$ sa pokúsil prihlásiť do svojho konta na stránke $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1896,7 +1896,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ prihlásený do svojho konta na stránke $STR_1$.",
+        "message": "$STR_1$ prihlásený do svojho konta na stránke $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2373,7 +2373,7 @@
         "message": "K vášmu kontu bol pripojený nový klient alebo aplikácia"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" bol udelený prístup k vášmu kontu $STR_1$ Passwords prostredníctvom PassLink.",
+        "message": "\"$STR_1$\" bol udelený prístup k vášmu kontu $STR_2$ Passwords prostredníctvom PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

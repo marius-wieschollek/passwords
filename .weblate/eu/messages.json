@@ -565,7 +565,7 @@
         "message": "Pasahitz seguru berriak sor ditzakezu pasahitzen aplikazioan."
     },
     "backend-000493": {
-        "message": "$STR_1$ zure kontuan sartu zen $STR_1$.",
+        "message": "$STR_1$ zure kontuan sartu zen $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1119,7 +1119,7 @@
         "message": "Bi egun"
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ fitxategiak, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ fitxategiak, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1130,7 +1130,7 @@
         }
     },
     "backend-000441": {
-        "message": "Aurreikusi cachea ($STR_1$ fitxategiak, $STR_1$)",
+        "message": "Aurreikusi cachea ($STR_1$ fitxategiak, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1147,7 +1147,7 @@
         "message": "dokumentazioaren bila"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ edo $STR_1$? Babestu egin zaitugu!",
+        "message": "$STR_1$, $STR_2$ edo $STR_3$? Babestu egin zaitugu!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1336,7 +1336,7 @@
         "message": "Zure konturako sarbide administratiboa"
     },
     "backend-000492": {
-        "message": "$STR_1$ zure kontuan sartzen saiatu zen $STR_1$.",
+        "message": "$STR_1$ zure kontuan sartzen saiatu zen $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1582,7 +1582,7 @@
         "message": "Ireki ezarpenak"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" zure eskura eman zen $STR_1$ Pasahitzak PassLink bidez.",
+        "message": "\"$STR_1$\" zure eskura eman zen $STR_2$ Pasahitzak PassLink bidez.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2683,7 +2683,7 @@
         "message": "ez"
     },
     "backend-000442": {
-        "message": "Pasahitzak Cache ($STR_1$ fitxategiak, $STR_1$)",
+        "message": "Pasahitzak Cache ($STR_1$ fitxategiak, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2870,7 +2870,7 @@
         "message": "Cacheak"
     },
     "backend-000438": {
-        "message": "Cache lehenetsia ($STR_1$ fitxategiak, $STR_1$)",
+        "message": "Cache lehenetsia ($STR_1$ fitxategiak, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2881,7 +2881,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ fitxategiak, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ fitxategiak, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"

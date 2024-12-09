@@ -963,7 +963,7 @@
         "message": "Se o problema persistir, você deve entrar em contato com o administrador."
     },
     "backend-000389": {
-        "message": "Sessão de senhas $STR_1$ - $STR_1$",
+        "message": "Sessão de senhas $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1124,7 +1124,7 @@
         "message": "Caches"
     },
     "backend-000438": {
-        "message": "Cache padrão ($STR_1$ arquivos, $STR_1$)",
+        "message": "Cache padrão ($STR_1$ arquivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1135,7 +1135,7 @@
         }
     },
     "backend-000439": {
-        "message": "Cache de Avatars ($STR_1$ arquivos, $STR_1$)",
+        "message": "Cache de Avatars ($STR_1$ arquivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1146,7 +1146,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon ($STR_1$ Dateien, $STR_1$)",
+        "message": "Favicon ($STR_1$ Dateien, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1157,7 +1157,7 @@
         }
     },
     "backend-000441": {
-        "message": "Cache de visualização ($STR_1$ arquivos, $STR_1$)",
+        "message": "Cache de visualização ($STR_1$ arquivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1168,7 +1168,7 @@
         }
     },
     "backend-000442": {
-        "message": "Cache de senhas ($STR_1$ arquivos, $STR_1$)",
+        "message": "Cache de senhas ($STR_1$ arquivos, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1206,7 +1206,7 @@
         "message": "procurando a documentação"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ ou $STR_1$? Nós ajudamos você!",
+        "message": "$STR_1$, $STR_2$ ou $STR_3$? Nós ajudamos você!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1312,7 +1312,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ compartilhou $STR_1$ senhas com você.",
+        "message": "$STR_1$ compartilhou $STR_2$ senhas com você.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1416,7 +1416,7 @@
         "message": "Acesso administrativo à sua conta"
     },
     "backend-000492": {
-        "message": "$STR_1$ tentou entrar na sua conta em $STR_1$.",
+        "message": "$STR_1$ tentou entrar na sua conta em $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1427,7 +1427,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ logou em sua conta em $STR_1$.",
+        "message": "$STR_1$ logou em sua conta em $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1580,7 +1580,7 @@
         "message": "Um novo cliente ou aplicativo foi conectado à sua conta"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" recebeu acesso à sua conta $STR_1$ Passwords através do PassLink.",
+        "message": "\"$STR_1$\" recebeu acesso à sua conta $STR_2$ Passwords através do PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

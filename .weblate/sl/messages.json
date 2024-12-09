@@ -1578,7 +1578,7 @@
         "message": "Predpomnilniki"
     },
     "backend-000438": {
-        "message": "Privzeti predpomnilnik ($STR_1$ datoteke, $STR_1$)",
+        "message": "Privzeti predpomnilnik ($STR_1$ datoteke, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1589,7 +1589,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatarji v predpomnilniku ($STR_1$ datoteke, $STR_1$)",
+        "message": "Avatarji v predpomnilniku ($STR_1$ datoteke, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1600,7 +1600,7 @@
         }
     },
     "backend-000440": {
-        "message": "Predpomnilnik Favicon ($STR_1$ datoteke, $STR_1$)",
+        "message": "Predpomnilnik Favicon ($STR_1$ datoteke, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1611,7 +1611,7 @@
         }
     },
     "backend-000441": {
-        "message": "Predpomnilnik za predogled ($STR_1$ datoteke, $STR_1$)",
+        "message": "Predpomnilnik za predogled ($STR_1$ datoteke, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1622,7 +1622,7 @@
         }
     },
     "backend-000442": {
-        "message": "Predpomnilnik gesel ($STR_1$ datoteke, $STR_1$)",
+        "message": "Predpomnilnik gesel ($STR_1$ datoteke, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1660,7 +1660,7 @@
         "message": "iskanje dokumentacije"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ ali $STR_1$? Za vas smo poskrbeli!",
+        "message": "$STR_1$, $STR_2$ ali $STR_3$? Za vas smo poskrbeli!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1766,7 +1766,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ z vami delil gesla za $STR_1$.",
+        "message": "$STR_1$ z vami delil gesla za $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1873,7 +1873,7 @@
         "message": "upravni dostop do vašega računa."
     },
     "backend-000492": {
-        "message": "$STR_1$ poskušal prijaviti v svoj račun na $STR_1$.",
+        "message": "$STR_1$ poskušal prijaviti v svoj račun na $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1884,7 +1884,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ prijavljeni v svoj račun na spletni strani $STR_1$.",
+        "message": "$STR_1$ prijavljeni v svoj račun na spletni strani $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2373,7 +2373,7 @@
         "message": "z vašim računom je bil povezan nov odjemalec ali aplikacija."
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" je bil prek PassLink odobren dostop do vašega računa $STR_1$ Passwords.",
+        "message": "\"$STR_1$\" je bil prek PassLink odobren dostop do vašega računa $STR_2$ Passwords.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

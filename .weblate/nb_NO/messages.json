@@ -1598,7 +1598,7 @@
         "message": "Antall sikkerhetskopier som skal oppbevares"
     },
     "backend-000438": {
-        "message": "Standardbuffer ($STR_1$ filer, $STR_1$)",
+        "message": "Standardbuffer ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1609,7 +1609,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Avatars Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1620,7 +1620,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1631,7 +1631,7 @@
         }
     },
     "backend-000441": {
-        "message": "Forhåndsvisning Cache ($STR_1$ filer, $STR_1$)",
+        "message": "Forhåndsvisning Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1642,7 +1642,7 @@
         }
     },
     "backend-000442": {
-        "message": "Passordbuffer ($STR_1$ filer, $STR_1$)",
+        "message": "Passordbuffer ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1680,7 +1680,7 @@
         "message": "leter etter dokumentasjonen"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ eller $STR_1$? Vi har alt du trenger!",
+        "message": "$STR_1$, $STR_2$ eller $STR_3$? Vi har alt du trenger!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1786,7 +1786,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ delt $STR_1$ passord med deg.",
+        "message": "$STR_1$ delt $STR_2$ passord med deg.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1887,7 +1887,7 @@
         "message": "Administrativ tilgang til kontoen din"
     },
     "backend-000492": {
-        "message": "$STR_1$ prøvde å logge inn på kontoen din på $STR_1$.",
+        "message": "$STR_1$ prøvde å logge inn på kontoen din på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1898,7 +1898,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ logget inn på kontoen din på $STR_1$.",
+        "message": "$STR_1$ logget inn på kontoen din på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2390,7 +2390,7 @@
         "message": "En ny klient eller app ble koblet til kontoen din."
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" fikk tilgang til $STR_1$ Passwords-kontoen din via PassLink.",
+        "message": "\"$STR_1$\" fikk tilgang til $STR_2$ Passwords-kontoen din via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

@@ -1613,7 +1613,7 @@
         "message": "Skrytki"
     },
     "backend-000438": {
-        "message": "Domyślna pamięć podręczna (pliki$STR_1$, $STR_1$)",
+        "message": "Domyślna pamięć podręczna (pliki$STR_1$, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1624,7 +1624,7 @@
         }
     },
     "backend-000439": {
-        "message": "Pamięć podręczna awatarów (pliki$STR_1$, $STR_1$)",
+        "message": "Pamięć podręczna awatarów (pliki$STR_1$, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1635,7 +1635,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ pliki, $STR_1$)",
+        "message": "Favicon Cache ($STR_1$ pliki, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1646,7 +1646,7 @@
         }
     },
     "backend-000441": {
-        "message": "Preview Cache ($STR_1$ pliki, $STR_1$)",
+        "message": "Preview Cache ($STR_1$ pliki, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1657,7 +1657,7 @@
         }
     },
     "backend-000442": {
-        "message": "Pamięć podręczna haseł (pliki$STR_1$, $STR_1$)",
+        "message": "Pamięć podręczna haseł (pliki$STR_1$, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1695,7 +1695,7 @@
         "message": "szukanie dokumentacji"
     },
     "backend-000452": {
-        "message": "$STR_1$, $STR_1$ lub $STR_1$? Jesteśmy do Twojej dyspozycji!",
+        "message": "$STR_1$, $STR_2$ lub $STR_3$? Jesteśmy do Twojej dyspozycji!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1801,7 +1801,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ udostępnił hasła $STR_1$.",
+        "message": "$STR_1$ udostępnił hasła $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1905,7 +1905,7 @@
         "message": "Dostęp administracyjny do konta użytkownika"
     },
     "backend-000492": {
-        "message": "$STR_1$ Próbowano zalogować się na konto na stronie $STR_1$.",
+        "message": "$STR_1$ Próbowano zalogować się na konto na stronie $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1916,7 +1916,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ zalogować się na swoje konto na stronie $STR_1$.",
+        "message": "$STR_1$ zalogować się na swoje konto na stronie $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2405,7 +2405,7 @@
         "message": "Z kontem użytkownika połączono nowego klienta lub aplikację."
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" uzyskał dostęp do konta $STR_1$ Passwords za pośrednictwem PassLink.",
+        "message": "\"$STR_1$\" uzyskał dostęp do konta $STR_2$ Passwords za pośrednictwem PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"

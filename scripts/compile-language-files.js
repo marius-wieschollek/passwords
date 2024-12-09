@@ -268,9 +268,9 @@ class CompileLanguageFilesPlugin {
 
                 let replacement;
                 if(placeholder.substr(0, 4) === 'str_') {
-                    replacement = `%s`;
+                    replacement = `%${placeholder.substr(4)}$s`;
                 } else if(placeholder.substr(0, 4) === 'num_') {
-                    replacement = `%d`;
+                    replacement = `%${placeholder.substr(4)}$d`;
                 } else if(placeholder.substr(0, 7) === 'string_') {
                     replacement = `%${placeholder.substr(7)}$s`;
                 } else if(placeholder.substr(0, 7) === 'number_') {
