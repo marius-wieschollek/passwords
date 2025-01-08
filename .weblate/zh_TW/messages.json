@@ -309,10 +309,10 @@
         "message": "这将重置全部设置为默认设置 。 你想继续吗?"
     },
     "frontend-000589": {
-        "message": "重新开始并删除所有配置、密码、文件夹和标签"
+        "message": "重新開始並刪除所有設定、密碼、目錄和標籤"
     },
     "frontend-000590": {
-        "message": "您想要删除所有设置、 密码、 文件夹和标签 吗 ?\n无法消除这种情况."
+        "message": "您確定要刪除所有設定、密碼、目錄和標籤嗎？\n刪除後將無法還原。"
     },
     "frontend-000593": {
         "message": "编辑为新"
@@ -472,10 +472,10 @@
         "message": "太多的登录尝试失败"
     },
     "frontend-000617": {
-        "message": "选择文件夹"
+        "message": "選擇目錄"
     },
     "frontend-000618": {
-        "message": "选择“ $FOLDER$ ”",
+        "message": "選擇目錄「$FOLDER$」",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -666,7 +666,7 @@
         "message": "密码生成器"
     },
     "frontend-000621": {
-        "message": "\"$FOLDER$\"没有文件夹",
+        "message": "目錄「$FOLDER$」沒有包含其他目錄",
         "placeholders": {
             "folder": {
                 "content": "$1"
@@ -836,10 +836,10 @@
         "message": "请选择您想要回收的任何类型的隐藏项目 ."
     },
     "settings-RecoverItemsInvisiblePwd": {
-        "message": "隐藏文件夹中的密码"
+        "message": "不在隱藏目錄中的密碼"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
-        "message": "恢复隐藏在不隐藏的文件夹中的密码"
+        "message": "還原在非隱藏目錄中的隱藏密碼"
     },
     "settings-RecoverItemsInvisibleTrash": {
         "message": "隐藏在垃圾桶中的物品"
@@ -851,13 +851,13 @@
         "message": "所有隐藏密码"
     },
     "settings-RecoverItemsPasswordsTitle": {
-        "message": "恢复所有隐藏密码, 不论文件夹状态"
+        "message": "還原所有隱藏的密碼，無論資料夾設定為什麼狀態"
     },
     "settings-RecoverItemsFolders": {
-        "message": "所有隐藏文件夹"
+        "message": "所有隱藏目錄"
     },
     "settings-RecoverItemsFoldersTitle": {
-        "message": "回收所有隐藏文件夹"
+        "message": "還原所有隱藏目錄"
     },
     "settings-RecoverItemsTags": {
         "message": "所有隐藏标签"
@@ -866,7 +866,7 @@
         "message": "回收所有隐藏标签"
     },
     "settings-RecoverItemsSuccessMessage": {
-        "message": "恢复了$PASSWORDS$密码,$FOLDERS$文件夹和$TAGS$标记.",
+        "message": "已還原 密碼 $PASSWORDS$，目錄 $FOLDERS$ 和 標籤 $TAGS$。",
         "placeholders": {
             "passwords": {
                 "content": "$1"
@@ -904,7 +904,7 @@
         "message": "发射后,展示我的"
     },
     "tutorial-000731": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "tutorial-000732": {
         "message": "标签"
@@ -919,7 +919,7 @@
         "message": "最近更改"
     },
     "tutorial-000736": {
-        "message": "标记我的密码,如果.."
+        "message": "標記我的密碼，如果…"
     },
     "tutorial-000737": {
         "message": "他们比"
@@ -1035,7 +1035,7 @@
         "message": "密码( 12个字符)"
     },
     "tutorial-000775": {
-        "message": "加密中.."
+        "message": "加密中…"
     },
     "tutorial-000776": {
         "message": "有许多设置可以自定义自己的经历."
@@ -1083,7 +1083,7 @@
         "message": "我们开始吧"
     },
     "backend-UserMigrationDescription": {
-        "message": "有密码、文件夹、标签和设置的解密密码数据库。 (不包括与您共享的密码. 未启用 E2E 操作)"
+        "message": "包含密碼、目錄、標籤和設定的解密密碼資料庫。（不包括與您共享的密碼。啟用端對端加密時無法使用。）"
     },
     "backend-ExportNotPossibleTitle": {
         "message": "密码不能导出"
@@ -1101,7 +1101,7 @@
         "message": "打印密码"
     },
     "frontend-FolderPickerLoading": {
-        "message": "正在装入文件夹"
+        "message": "正在讀取目錄"
     },
     "frontend-PasswordActionQrcode": {
         "message": "显示 QrCode"
@@ -1385,7 +1385,7 @@
         "message": "自定义字段"
     },
     "backups-000046": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "frontend-CompatWASMText3": {
         "message": "如果您的浏览器没有WebAssembly的支持, 请检查是否有更新可供您的浏览器使用, 或者从下面的列表中选择一个现代兼容的浏览器 ."
@@ -1394,19 +1394,19 @@
         "message": "启用WebAssembly的指南可以在密码App手册中找到."
     },
     "backups-000040": {
-        "message": "(可选)加密备份"
+        "message": "（選用）加密備份"
     },
     "backups-000041": {
-        "message": "导入只支持 CSV"
+        "message": "只支援匯入 CSV"
     },
     "backups-000128": {
         "message": "身份"
     },
     "apps-000001": {
-        "message": "正式"
+        "message": "官方"
     },
     "apps-000002": {
-        "message": "$AUTHOR$",
+        "message": "by $AUTHOR$",
         "placeholders": {
             "author": {
                 "content": "$1"
@@ -1414,49 +1414,49 @@
         }
     },
     "apps-000003": {
-        "message": "源代码"
+        "message": "原始碼"
     },
     "apps-000004": {
-        "message": "学习更多"
+        "message": "了解更多"
     },
     "apps-000005": {
-        "message": "连接 PassLink"
+        "message": "連結 PassLink"
     },
     "apps-000006": {
-        "message": "连接新设备"
+        "message": "連結新裝置"
     },
     "apps-000007": {
-        "message": "通过链接连接"
+        "message": "透過網址連結"
     },
     "apps-000008": {
-        "message": "选择名称 :"
+        "message": "選擇名稱 :"
     },
     "apps-000009": {
-        "message": "密码不匹配"
+        "message": "密碼不相符"
     },
     "apps-000010": {
-        "message": "看起来不错"
+        "message": "看起來不錯"
     },
     "apps-000011": {
-        "message": "连接成功"
+        "message": "連線成功"
     },
     "apps-000012": {
-        "message": "我受够了"
+        "message": "已完成"
     },
     "apps-000013": {
-        "message": "别再试了"
+        "message": "請勿繼續嘗試"
     },
     "apps-000014": {
-        "message": "连接另一个客户端"
+        "message": "連接至其他用戶端"
     },
     "apps-000015": {
-        "message": "再试一次"
+        "message": "再試一次"
     },
     "apps-000016": {
-        "message": "强加密"
+        "message": "強加密"
     },
     "apps-000017": {
-        "message": "获取应用程序失败 : $ERROR$",
+        "message": "無法獲取應用程式 : $ERROR$",
         "placeholders": {
             "error": {
                 "content": "$1"
@@ -1464,49 +1464,49 @@
         }
     },
     "apps-000018": {
-        "message": "您取消了连接"
+        "message": "已取消連線"
     },
     "apps-000019": {
-        "message": "你没有及时确认联系"
+        "message": "您沒有及時確認連線"
     },
     "apps-000020": {
-        "message": "只要用应用程序扫描QR代码即可连接."
+        "message": "使用應用程式掃描 QR code 即可連接。"
     },
     "apps-000021": {
-        "message": "准备启动连接时单击按钮."
+        "message": "當您準備好開始連線時，請點擊按鈕。"
     },
     "apps-000022": {
-        "message": "检查下面的代码是否符合设备或应用程序提供的代码 :"
+        "message": "檢查下列代碼是否與裝置或應用程式提供的代碼一致："
     },
     "apps-000023": {
-        "message": "将此客户端链接到您的下个 Cloud 账户, 没有令人讨厌的密码和urls"
+        "message": "將此客戶端連結到您的 Nextcloud 帳戶，無需輸入煩人的密碼和網址"
     },
     "apps-000024": {
-        "message": "这个客户端正式支持我们强大的端到端加密"
+        "message": "該客戶端正式支援我們強大的端對端加密"
     },
     "apps-000025": {
-        "message": "此客户端由密码程序作者维护"
+        "message": "此用戶端由 Passwords 應用程式的作者維護"
     },
     "apps-000026": {
-        "message": "点击按钮将安装在这个设备上的应用程序连接起来,或者扫描安装在另一个设备上的QR代码和应用程序."
+        "message": "點擊按鈕即可連接此裝置上安裝的應用程式，或者使用其他裝置上安裝的應用程式掃描QR碼。"
     },
     "backups-000028": {
-        "message": "备份或导出"
+        "message": "備份或匯出"
     },
     "backups-000029": {
-        "message": "选择格式"
+        "message": "選擇格式"
     },
     "backups-000030": {
-        "message": "请选择"
+        "message": "請選擇"
     },
     "backups-000031": {
-        "message": "数据库备份"
+        "message": "資料庫備份"
     },
     "backups-000032": {
-        "message": "预定义 CSV"
+        "message": "預先定義的 CSV"
     },
     "backups-000033": {
-        "message": "读取 $LABEL$ 导入指南",
+        "message": "閱讀 $LABEL$ 匯入指南",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1514,28 +1514,28 @@
         }
     },
     "backups-000034": {
-        "message": "或者说"
+        "message": "或"
     },
     "backups-000035": {
-        "message": "数据库备份"
+        "message": "資料庫備份"
     },
     "backups-000036": {
-        "message": "自定义 CSV"
+        "message": "自定義 CSV"
     },
     "backups-000037": {
-        "message": "尝试通用 CSV 导入"
+        "message": "嘗試匯入通用 CSV"
     },
     "backups-000038": {
-        "message": "您的CSV没有导入吗 ?"
+        "message": "沒有匯入 CSV 嗎？"
     },
     "backups-000039": {
-        "message": "备份密码"
+        "message": "備份密碼"
     },
     "backups-000042": {
-        "message": "导出密码"
+        "message": "匯出密碼"
     },
     "backups-000043": {
-        "message": "导出文件夹"
+        "message": "匯出目錄"
     },
     "backups-000044": {
         "message": "导出标记"
@@ -1547,7 +1547,7 @@
         "message": "父标签"
     },
     "backups-000049": {
-        "message": "文件夹编号"
+        "message": "目錄 ID"
     },
     "backups-000050": {
         "message": "标记编号"
@@ -1559,13 +1559,13 @@
         "message": "自定义字段"
     },
     "backups-FolderLabel": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "backups-TagLabels": {
         "message": "标记"
     },
     "backups-FolderId": {
-        "message": "文件夹编号"
+        "message": "目錄 ID"
     },
     "backups-TagIds": {
         "message": "标记编号"
@@ -1592,7 +1592,7 @@
         "message": "导出"
     },
     "backups-000059": {
-        "message": "等着.."
+        "message": "等待中…"
     },
     "backups-000060": {
         "message": "导出错误"
@@ -1621,7 +1621,7 @@
         "message": "密码 CSV"
     },
     "backups-000067": {
-        "message": "文件夹 CSV"
+        "message": "目錄 CSV"
     },
     "backups-000068": {
         "message": "自定义 CSV"
@@ -1740,7 +1740,7 @@
         "message": "分析标签"
     },
     "backups-000105": {
-        "message": "分析文件夹"
+        "message": "正在分析目錄"
     },
     "backups-000106": {
         "message": "读取标签"
@@ -1749,10 +1749,10 @@
         "message": "导入标记"
     },
     "backups-000108": {
-        "message": "读取文件夹"
+        "message": "正在讀取目錄"
     },
     "backups-000109": {
-        "message": "导入文件夹"
+        "message": "正在匯入目錄"
     },
     "backups-000110": {
         "message": "读取密码"
@@ -1793,7 +1793,7 @@
         "message": "解密密码失败"
     },
     "backups-000121": {
-        "message": "解密文件夹失败"
+        "message": "解密目錄失敗"
     },
     "backups-000122": {
         "message": "解密标签失败"
@@ -1932,7 +1932,7 @@
         "message": "全体"
     },
     "frontend-000150": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "frontend-000151": {
         "message": "近期"
@@ -1968,7 +1968,7 @@
         "message": "新建密码"
     },
     "frontend-000162": {
-        "message": "新建文件夹"
+        "message": "新目錄"
     },
     "frontend-000163": {
         "message": "新标签"
@@ -2010,7 +2010,7 @@
         "message": "网站"
     },
     "frontend-000176": {
-        "message": "添加标记.."
+        "message": "新增標籤…"
     },
     "frontend-000177": {
         "message": "颜色"
@@ -2079,46 +2079,46 @@
         "message": "保存"
     },
     "frontend-000198": {
-        "message": "创建文件夹"
+        "message": "建立目錄"
     },
     "frontend-000199": {
-        "message": "创建文件夹"
+        "message": "已建立目錄"
     },
     "frontend-000200": {
-        "message": "创建文件夹失败"
+        "message": "建立目錄失敗"
     },
     "frontend-000201": {
-        "message": "重命名文件夹"
+        "message": "重新命名目錄"
     },
     "frontend-000202": {
-        "message": "文件夹重命名"
+        "message": "已重新命名目錄"
     },
     "frontend-000203": {
-        "message": "重命名文件夹失败"
+        "message": "重新命名目錄失敗"
     },
     "frontend-000204": {
-        "message": "文件夹已移动"
+        "message": "已移動目錄"
     },
     "frontend-000205": {
-        "message": "移动文件夹失败"
+        "message": "移動目錄失敗"
     },
     "frontend-000206": {
-        "message": "删除文件夹"
+        "message": "刪除目錄"
     },
     "frontend-000207": {
-        "message": "您要删除文件夹及其内容吗 ?"
+        "message": "您確定要刪除此目錄及其內容嗎？"
     },
     "frontend-000208": {
-        "message": "文件夹已删除"
+        "message": "已刪除目錄"
     },
     "frontend-000209": {
-        "message": "删除文件夹失败"
+        "message": "刪除目錄失敗"
     },
     "frontend-000210": {
-        "message": "文件夹已恢复"
+        "message": "已還原目錄"
     },
     "frontend-000211": {
-        "message": "恢复文件夹失败"
+        "message": "還原目錄失敗"
     },
     "frontend-000213": {
         "message": "创建标记"
@@ -2456,7 +2456,7 @@
         }
     },
     "frontend-SearchInputPlaceholder": {
-        "message": "搜索.."
+        "message": "搜尋…"
     },
     "frontend-000310": {
         "message": "这里什么都没有"
@@ -2582,7 +2582,7 @@
         "message": "1个密码"
     },
     "frontend-000337": {
-        "message": "$FOLDERS$ 文件夹",
+        "message": "$FOLDERS$ 目錄",
         "placeholders": {
             "folders": {
                 "content": "$1"
@@ -2590,7 +2590,7 @@
         }
     },
     "frontend-000338": {
-        "message": "1个文件夹"
+        "message": "1 個目錄"
     },
     "frontend-000339": {
         "message": "$TAGS$ 标记",
@@ -2743,13 +2743,13 @@
         "message": "标记"
     },
     "frontend-Folder": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "frontend-Id": {
         "message": "编号"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "在不隐藏的文件夹中保存隐藏的密码将使密码无法访问 。 此密码将不再在任何地方显示 。 你想继续吗?"
+        "message": "將隱藏的密碼保存在非隱藏的目錄中會導致密碼無法存取。此密碼將不會顯示在任何地方。確定要繼續嗎？"
     },
     "frontend-PwdSaveHiddenTitle": {
         "message": "隐藏密码吗 ?"
@@ -2800,7 +2800,7 @@
         "message": "论坛"
     },
     "backend-000381": {
-        "message": "您可以尝试使用 HTTPS 的页面 .",
+        "message": "你可以嘗試透過 HTTPS 來 $STR_1$ 此頁面。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2835,7 +2835,7 @@
         }
     },
     "backend-000386": {
-        "message": "如果您正在使用任何代理, 请读取此[ X10X] .",
+        "message": "如果您使用任何類型的代理程式，請參閱 $STR_1$。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3159,7 +3159,7 @@
         "message": "永远"
     },
     "backups-000144": {
-        "message": "文件夹"
+        "message": "目錄"
     },
     "backend-000418": {
         "message": "其他设置"
