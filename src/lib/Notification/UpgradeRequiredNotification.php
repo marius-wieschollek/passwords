@@ -9,6 +9,7 @@ namespace OCA\Passwords\Notification;
 
 use Exception;
 use OCA\Passwords\AppInfo\SystemRequirements;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -71,7 +72,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $ncVersion     = \OC_Util::getVersion()[0];
+        $ncVersion     = ServerVersion::getMajorVersion();
         $phpVersion    = PHP_VERSION_ID;
         $parameters    = $notification->getSubjectParameters();
         $isNcOutdated  = $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;

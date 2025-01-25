@@ -7,6 +7,7 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
 use OCP\Util;
@@ -130,7 +131,7 @@ class ServerSettingsHelper {
      * @return string
      */
     protected function getServerVersion(): string {
-        return \OC_Util::getVersion()[0];
+        return (string) ServerVersion::getMajorVersion();
     }
 
     /**

@@ -4,7 +4,6 @@ namespace OCA\Passwords\Helper\Survey;
 
 use Exception;
 use OC_App;
-use OC_Util;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Db\FolderRevisionMapper;
 use OCA\Passwords\Db\PasswordRevisionMapper;
@@ -12,6 +11,7 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
@@ -145,7 +145,7 @@ class ServerReportHelper {
      */
     protected function getVersions(): array {
         return [
-            'server'  => $this->config->getSystemValue('version'),
+            'server'  => ServerVersion::getVersionString(),
             'app'     => $this->config->getAppValue('installed_version'),
             'lsr'     => SystemRequirements::APP_LSR,
             'php'     => $this->config->getAppValue('web/php/version/string', phpversion()),
@@ -219,7 +219,7 @@ class ServerReportHelper {
         if($performance < 0 || $performance > 6) $performance = 2;
 
         return [
-            'channel'     => OC_Util::getChannel(),
+            'channel'     => ServerVersion::getChannel(),
             'nightlies'   => $this->config->getAppValue('nightly/enabled', '0') === '1',
             'handbook'    => $this->config->getAppValue('handbook/url') !== null,
             'performance' => intval($performance)

@@ -14,6 +14,7 @@ namespace OCA\Passwords\Migration;
 use Exception;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackgroundJobService;
 use OCA\Passwords\Services\ConfigurationService;
@@ -112,7 +113,7 @@ class CheckAppSettings implements IRepairStep {
             $this->sendEmptySettingNotification('preview');
         }
 
-        $ncVersion = \OC_Util::getVersion()[0];
+        $ncVersion = ServerVersion::getMajorVersion();
         if($ncVersion < SystemRequirements::NC_NOTIFICATION_ID || PHP_VERSION_ID < SystemRequirements::PHP_NOTIFICATION_ID) {
             $this->sendDeprecatedPlatformNotification($ncVersion, PHP_VERSION_ID);
         }

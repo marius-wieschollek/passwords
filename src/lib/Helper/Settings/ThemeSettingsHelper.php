@@ -120,11 +120,7 @@ class ThemeSettingsHelper {
     protected function getBackgroundImage(): string {
         try {
             if(method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
-                if(\OC_Util::getVersion()[0] === 25) {
-                    $userBackground = $this->config->getUserValue('background', '', null, 'theming');
-                } else {
-                    $userBackground = $this->config->getUserValue('background_image', '', null, 'theming');
-                }
+                $userBackground = $this->config->getUserValue('background_image', '', null, 'theming');
 
                 if(!empty($userBackground) && !str_starts_with($userBackground, '#') && $userBackground !== 'disabled') {
                     if($userBackground === 'custom') {
@@ -152,12 +148,8 @@ class ThemeSettingsHelper {
             return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
         }
 
-        if(\OC_Util::getVersion()[0] === 25) {
-            return $this->urlGenerator->getAbsoluteURL($this->urlGenerator->imagePath('core', 'app-background.jpg'));
-        }
-
         return $this->urlGenerator->getAbsoluteURL(
-            $this->urlGenerator->linkTo('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => $this->getCacheBuster()])
+            $this->urlGenerator->linkTo('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => $this->getCacheBuster()])
         );
     }
 

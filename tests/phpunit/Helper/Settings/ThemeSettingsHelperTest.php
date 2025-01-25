@@ -175,20 +175,20 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
         $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])
-                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
+                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1'])
+                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
         $this->urlGenerator->method('getAbsoluteURL')
-                           ->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1')
-                           ->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1']);
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1');
+                           ->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1')
+                           ->willReturn('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1']);
+        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
 
         $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1', $result);
     }
 
     /**
@@ -294,16 +294,16 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
 
         $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1'])
-                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
+                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1_1'])
+                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
         $this->urlGenerator->method('getAbsoluteURL')
-                           ->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1')
-                           ->willReturn('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1_1']);
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1');
+                           ->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1')
+                           ->willReturn('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
+        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1_1']);
+        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
 
         $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg?v=1_1', $result);
+        self::assertEquals('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1', $result);
     }
 
     /**
@@ -411,7 +411,7 @@ class ThemeSettingsHelperTest extends TestCase {
             'server.theme.color.primary'    => '#0082c9',
             'server.theme.color.text'       => '#ffffff',
             'server.theme.color.background' => '#ffffff',
-            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg',
+            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp',
             'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
             'server.theme.label'            => 'Nextcloud',
             'server.theme.app.icon'         => 'https://cloud.com/apps/passwords/app-themed.svg',
@@ -429,8 +429,8 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
 
         $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/kamil-porembinski-clouds.jpg', ['v' => '1'])
-                           ->willReturn('/apps/theming/img/background/kamil-porembinski-clouds.jpg');
+                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1'])
+                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp');
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
@@ -444,7 +444,7 @@ class ThemeSettingsHelperTest extends TestCase {
                 ['/core/img/logo.svg', 'https://cloud.com/core/img/logo.svg'],
                 ['/apps/passwords/app-themed.svg', 'https://cloud.com/apps/passwords/app-themed.svg'],
                 ['/core/img/filetypes/folder.svg', 'https://cloud.com/core/img/filetypes/folder.svg'],
-                ['/apps/theming/img/background/kamil-porembinski-clouds.jpg', 'https://cloud.com/apps/theming/img/background/kamil-porembinski-clouds.jpg'],
+                ['/apps/theming/img/background/jenna-kim-the-globe.webp', 'https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp'],
             ]
         );
 

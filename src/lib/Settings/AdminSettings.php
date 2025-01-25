@@ -12,9 +12,11 @@
 namespace OCA\Passwords\Settings;
 
 use Exception;
+use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
 use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
@@ -76,11 +78,11 @@ class AdminSettings implements ISettings {
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
-        IRequest $request,
-        IURLGenerator $urlGenerator,
+        IRequest             $request,
+        IURLGenerator        $urlGenerator,
         ConfigurationService $config,
-        HelperService $helperService,
-        FileCacheService $fileCacheService
+        HelperService        $helperService,
+        FileCacheService     $fileCacheService
     ) {
         $this->request          = $request;
         $this->config           = $config;
@@ -109,7 +111,7 @@ class AdminSettings implements ISettings {
             'mailSharing'      => $this->config->getAppValue('settings/mail/shares', false),
             'nightlyUpdates'   => $this->config->getAppValue('nightly/enabled', false),
             'encryptionSSEv3'  => $this->config->getAppValue('encryption/SSEv3/enabled', false),
-            'hasSSEv3'         => \OC::$server->has(SseV3KeyProviderInterface::class),
+            'hasSSEv3'         => OC::$server->has(SseV3KeyProviderInterface::class),
             'caches'           => $this->getFileCaches(),
             'support'          => $this->getPlatformSupport(),
             'links'            => [
@@ -423,7 +425,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion     = \OC_Util::getVersion()[0];
+        $ncVersion     = ServerVersion::getMajorVersion();
         $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
         $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
         $cronPhpString = $this->config->getAppValue('cron/php/version/string', phpversion());
