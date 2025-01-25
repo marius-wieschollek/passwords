@@ -34,7 +34,6 @@ use OC\Files\AppData\Factory;
 use OCP\AppFramework\Utility\ITimeFactory;
 use OCP\Http\Client\IClientService;
 use OCP\IConfig;
-use OCP\ILogger;
 use OCP\Support\Subscription\IRegistry;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -75,23 +74,20 @@ class NightlyAppFetcher extends Fetcher {
      * @param LoggerInterface $logger
      */
     public function __construct(
-        Factory $appDataFactory,
-        IClientService $clientService,
-        ITimeFactory $timeFactory,
-        IConfig $config,
-        CompareVersion $compareVersion,
+        Factory         $appDataFactory,
+        IClientService  $clientService,
+        ITimeFactory    $timeFactory,
+        IConfig         $config,
+        CompareVersion  $compareVersion,
         LoggerInterface $logger,
-        IRegistry $registry
+        IRegistry       $registry
     ) {
-
-        $parentLogger = $logger;
-
         parent::__construct(
             $appDataFactory,
             $clientService,
             $timeFactory,
             $config,
-            $parentLogger,
+            $logger,
             $registry
         );
 
@@ -199,7 +195,7 @@ class NightlyAppFetcher extends Fetcher {
      */
     protected function releaseAllowedInChannel($release, $app, $allowUnstable): bool {
         $isPreRelease     = strpos($release['version'], '-');
-        $allowNightly     = $allowUnstable|| $this->getChannel() === 'daily' || $app === 'passwords';
+        $allowNightly     = $allowUnstable || $this->getChannel() === 'daily' || $app === 'passwords';
         $allowPreReleases = $this->getChannel() === 'beta' || $allowNightly;
 
         return (!$isPreRelease && !$release['isNightly']) || ($allowNightly && $release['isNightly']) || ($allowPreReleases && $isPreRelease);
@@ -216,7 +212,7 @@ class NightlyAppFetcher extends Fetcher {
 
             return $file->getETag();
         } catch(Exception $e) {
-            $this->logger->emergency($e, ['app' => 'nightlyAppstoreFetcher', 'level' => ILogger::WARN]);
+            $this->logger->emergency($e, ['app' => 'nightlyAppstoreFetcher']);
 
             return '';
         }
