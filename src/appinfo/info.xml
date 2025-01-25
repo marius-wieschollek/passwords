@@ -120,6 +120,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/handbook-section.jpg">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/handbook-section.png]]>
     </screenshot>
+    <donation>https://ko-fi.com/mariusdavid</donation>
     <dependencies>
         <php min-version="8.3" max-version="8.4" />
         <nextcloud min-version="30" max-version="31" />
