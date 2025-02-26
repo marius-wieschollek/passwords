@@ -1,5 +1,5 @@
 ## [Unreleased]
-## 2025.1.0 - Feature release
+## 2025.2.0 - Feature release
 ### Removed
 - Support for PHP 8.2
 - Support for Nextcloud 28 & 29
