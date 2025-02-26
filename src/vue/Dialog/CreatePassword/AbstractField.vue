@@ -63,11 +63,11 @@
         align-items     : center;
 
         & > * {
-            padding : 0 0.25rem;
+            padding : 0 .5rem;
         }
 
         & .icon {
-            width : 1.5rem;
+            width : 2rem;
         }
 
         & > .passwords-password-controls {

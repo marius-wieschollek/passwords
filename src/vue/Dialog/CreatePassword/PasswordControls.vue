@@ -92,8 +92,13 @@
     flex-shrink : 0;
 
     & > * {
-        padding : 0 0.25rem;
+        padding : 0 .5rem;
         cursor  : pointer;
+    }
+
+    .menu-toggle.icon {
+        padding : 0;
+        width   : 1rem;
     }
 
     li {

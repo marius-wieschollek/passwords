@@ -318,6 +318,10 @@
             }
         }
     }
+
+    @media all and (max-height : $height-1024) {
+        padding-top : .5rem;
+    }
 }
 
 body.theme--dark {
