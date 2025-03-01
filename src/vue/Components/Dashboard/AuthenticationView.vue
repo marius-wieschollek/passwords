@@ -37,6 +37,7 @@
     import NcPasswordField from '@nc/NcPasswordField.js';
     import WebAuthnDisableAction from '@js/Actions/WebAuthn/WebAuthnDisableAction';
     import WebAuthnAuthorizeAction from '@js/Actions/WebAuthn/WebAuthnAuthorizeAction';
+    import Dashboard from "@js/Init/Dashboard";
 
     export default {
         components: {NcLoadingIcon, NcButton, NcPasswordField, ArrowRight, NcNoteCard},
@@ -81,7 +82,7 @@
 
                     if(password) {
                         this.password = password;
-                        this.tryLogin({password, salts: this.salts});
+                        this.tryLogin({password, salts: this.salts}, true);
                     }
                 }
             },
@@ -94,6 +95,7 @@
                 this.error = null;
 
                 this.api.openSession(loginData)
+                    .then(() => { this.$emit('authorized'); })
                     .catch((d) => { this.loginError(d, isWebAuthn); });
             },
             loginError(e, isWebAuthn = false) {

@@ -10,7 +10,7 @@
 
 <template>
     <div class="passwords-widget" id="passwords-widget">
-        <authentication-view v-if="!isAuthorized"/>
+        <authentication-view v-if="!isAuthorized" v-on:authorized="authorize"/>
         <passwords-view v-else/>
     </div>
 </template>
@@ -32,9 +32,14 @@
                 api: this.api
             };
         },
-        computed: {
-            isAuthorized() {
-                return Dashboard.isAuthorized;
+        data() {
+            return {
+                isAuthorized: Dashboard.isAuthorized
+            }
+        },
+        methods: {
+            authorize() {
+                this.isAuthorized = Dashboard.isAuthorized;
             }
         }
     };
