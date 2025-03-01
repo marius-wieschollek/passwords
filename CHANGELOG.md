@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2025.2.1 - Bugfix release
+### Fixed
+- Login not working in dashboard widget
+
 ## 2025.2.0 - Feature release
 ### Removed
 - Support for PHP 8.2
