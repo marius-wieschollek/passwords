@@ -8,13 +8,13 @@
 namespace OCA\Passwords\Notification;
 
 use Exception;
-use InvalidArgumentException;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
+use OCP\Notification\UnknownNotificationException;
 
 /**
  * Class LoginAttemptNotification
@@ -75,10 +75,10 @@ class LoginAttemptNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
-     * @throws InvalidArgumentException
+     * @throws UnknownNotificationException
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        if($this->environment->isImpersonating()) throw new InvalidArgumentException();
+        if($this->environment->isImpersonating()) throw new UnknownNotificationException();
         $link    = $this->getLink();
         $title   = $localisation->t('Suspicious amount of failed login attempts detected.');
         $message = $this->getMessage($localisation, $notification->getSubjectParameters());

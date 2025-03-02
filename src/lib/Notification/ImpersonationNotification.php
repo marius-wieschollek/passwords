@@ -10,7 +10,6 @@ namespace OCA\Passwords\Notification;
 use DateTime;
 use Exception;
 use IntlDateFormatter;
-use InvalidArgumentException;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\UserChallengeService;
 use OCA\Passwords\Services\UserService;
@@ -19,6 +18,7 @@ use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
+use OCP\Notification\UnknownNotificationException;
 
 /**
  * Class ImpersonationNotification
@@ -93,10 +93,10 @@ class ImpersonationNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
-     * @throws InvalidArgumentException
+     * @throws UnknownNotificationException
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        if($this->environment->isImpersonating()) throw new InvalidArgumentException();
+        if($this->environment->isImpersonating()) throw new UnknownNotificationException();
 
         $link    = $this->getLink();
         $title   = $localisation->t('Administrative access to your account');

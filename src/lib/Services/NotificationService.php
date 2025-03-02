@@ -32,6 +32,7 @@ use OCA\Passwords\Notification\UpgradeRequiredNotification;
 use OCP\L10N\IFactory;
 use OCP\Notification\INotification;
 use OCP\Notification\INotifier;
+use OCP\Notification\UnknownNotificationException;
 
 /**
  * Class NotificationService
@@ -287,7 +288,7 @@ class NotificationService implements INotifier {
      * @throws Exception
      */
     public function prepare(INotification $notification, string $languageCode): INotification {
-        if($notification->getApp() !== Application::APP_NAME) throw new InvalidArgumentException();
+        if($notification->getApp() !== Application::APP_NAME) throw new UnknownNotificationException();
 
         $localisation = $this->l10NFactory->get(Application::APP_NAME, $languageCode);
 

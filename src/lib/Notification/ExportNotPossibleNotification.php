@@ -12,12 +12,7 @@
 namespace OCA\Passwords\Notification;
 
 use Exception;
-use InvalidArgumentException;
-use OCA\Passwords\Services\EnvironmentService;
 use OCP\IL10N;
-use OCP\IURLGenerator;
-use OCP\L10N\IFactory;
-use OCP\Notification\IManager;
 use OCP\Notification\INotification;
 
 class ExportNotPossibleNotification extends AbstractNotification {
@@ -50,7 +45,6 @@ class ExportNotPossibleNotification extends AbstractNotification {
      * @param IL10N         $localisation
      *
      * @return INotification
-     * @throws InvalidArgumentException
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
         $link    = $this->getLink();

@@ -12,12 +12,10 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC;
-use OC\AppConfig;
-use OC\SystemConfig;
 use OCA\Passwords\AppInfo\Application;
 use OCP\Cache\CappedMemoryCache;
 use OCP\HintException;
+use OCP\IAppConfig;
 use OCP\IConfig;
 use ReflectionClass;
 use ReflectionException;
@@ -30,11 +28,6 @@ use ReflectionException;
 class ConfigurationService {
 
     /**
-     * @var IConfig
-     */
-    protected IConfig $config;
-
-    /**
      * @var string|null
      */
     protected ?string $userId;
@@ -43,8 +36,7 @@ class ConfigurationService {
      * @param IConfig            $config
      * @param EnvironmentService $environment
      */
-    public function __construct(IConfig $config, EnvironmentService $environment) {
-        $this->config = $config;
+    public function __construct(protected IConfig $config, protected IAppConfig $appConfig, EnvironmentService $environment) {
         $this->userId = $environment->getUserId();
     }
 
@@ -71,7 +63,9 @@ class ConfigurationService {
      * @return string|null
      */
     public function getAppValue(string $key, $default = null, string $app = Application::APP_NAME): ?string {
-        return $this->config->getAppValue($app, $key, $default);
+        $value = $this->appConfig->getValueString($app, $key);
+
+        return $value === '' ? $default:$value;
     }
 
     /**
@@ -102,7 +96,7 @@ class ConfigurationService {
      * @param string $value
      */
     public function setAppValue(string $key, string $value): void {
-        $this->config->setAppValue(Application::APP_NAME, $key, $value);
+        $this->appConfig->setValueString(Application::APP_NAME, $key, $value);
     }
 
     /**
@@ -138,7 +132,7 @@ class ConfigurationService {
      * @return bool
      */
     public function hasAppValue(string $key, string $app = Application::APP_NAME): bool {
-        $keys = $this->config->getAppKeys($app);
+        $keys = $this->appConfig->getKeys($app);
 
         return in_array($key, $keys);
     }
@@ -158,7 +152,7 @@ class ConfigurationService {
      * @param string $key
      */
     public function deleteAppValue(string $key): void {
-        $this->config->deleteAppValue(Application::APP_NAME, $key);
+        $this->appConfig->deleteKey(Application::APP_NAME, $key);
     }
 
     /**
@@ -174,7 +168,7 @@ class ConfigurationService {
      * @return bool
      */
     public function isAppEnabled(string $appName): bool {
-        return $this->config->getAppValue($appName, 'enabled', 'no') === 'yes';
+        return $this->appConfig->getValueString($appName, 'enabled', 'no') === 'yes';
     }
 
     /**
@@ -197,22 +191,35 @@ class ConfigurationService {
         }
 
         try {
-            // @TODO Use container instead
-            $appConfig = OC::$server->get(AppConfig::class);
-            $class     = new ReflectionClass($appConfig);
-            $property  = $class->getProperty('configLoaded');
+            $class    = new ReflectionClass($this->appConfig);
+            $property = $class->getProperty('fastLoaded');
             $property->setAccessible(true);
-            $property->setValue($appConfig, false);
+            $property->setValue($this->appConfig, false);
+            $property = $class->getProperty('lazyLoaded');
+            $property->setAccessible(true);
+            $property->setValue($this->appConfig, false);
         } catch(Exception $e) {
         }
 
         try {
             // @TODO Use container instead
-            $systemConfig = OC::$server->get(SystemConfig::class);
-            $class        = new ReflectionClass($systemConfig);
-            $method       = $class->getMethod('readData');
+            $class     = new ReflectionClass($this->config);
+            $property1 = $class->getProperty('systemConfig');
+            $property1->setAccessible(true);
+            $systemConfig = $property1->getValue($this->config);
+
+            $scClass   = new ReflectionClass($systemConfig);
+            $property2 = $scClass->getProperty('config');
+            $property2->setAccessible(true);
+            $config = $property2->getValue($systemConfig);
+
+            $cfClass  = new ReflectionClass($config);
+            $method = $cfClass->getMethod('readData');
             $method->setAccessible(true);
-            $method->invoke($systemConfig);
+            $method->invoke($config);
+
+            $property2->setValue($systemConfig, $config);
+            $property1->setValue($this->config, $systemConfig);
         } catch(Exception $e) {
         }
     }
@@ -222,7 +229,7 @@ class ConfigurationService {
      */
     public function getTempDir(): string {
         $tempDir = $this->getSystemValue('tempdirectory', '/tmp/');
-        if(substr($tempDir, -1) !== DIRECTORY_SEPARATOR) $tempDir.=DIRECTORY_SEPARATOR;
+        if(substr($tempDir, -1) !== DIRECTORY_SEPARATOR) $tempDir .= DIRECTORY_SEPARATOR;
 
         return $tempDir;
     }
