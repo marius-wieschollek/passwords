@@ -220,6 +220,7 @@ class PageController extends Controller {
         }
         if($this->config->hasAppValue('dev/app/hash')) {
             $variables['hash'] = $this->config->getAppValue('dev/app/hash');
+            opcache_reset();
         }
 
         return $variables;

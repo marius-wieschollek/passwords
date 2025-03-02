@@ -122,7 +122,9 @@ $routes = [
     ['name' => 'service_api#preflighted_cors', 'url' => '/api/1.0/service/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'settings_api#preflighted_cors', 'url' => '/api/1.0/setting/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
     ['name' => 'keychain_api#preflighted_cors', 'url' => '/api/1.0/keychain/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
-    ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']]
+    ['name' => 'password_api#preflighted_cors', 'url' => '/api/1.0/password/{path}', 'verb' => 'OPTIONS', 'requirements' => ['path' => '.+']],
+
+    ['name' => 'user_settings#createAppToken', 'url' => '/user/createAppToken', 'verb' => 'GET'],
 ];
 
 $resources = [

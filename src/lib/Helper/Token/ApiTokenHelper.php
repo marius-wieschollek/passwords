@@ -18,6 +18,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\SessionService;
+use OCP\Authentication\Token\IToken as OCPIToken;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\Security\ISecureRandom;
@@ -79,11 +80,20 @@ class ApiTokenHelper {
         }
     }
 
+    public function createStaticWebUiToken(): void {
+        try {
+            $token = $this->createToken('Passwords App WebUi', true);
+            $this->config->setUserValue('passwords/webui/token', $token['token']);
+        } catch(Throwable $e) {
+            $this->logger->logException($e);
+        }
+    }
+
     /**
      * @param string $name
      * @param bool   $permanent
      *
-     * @return array
+     * @return array<int, OCPIToken|string>>
      * @throws Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
@@ -126,6 +136,11 @@ class ApiTokenHelper {
      */
     protected function loadWebUiToken() {
         if($this->environment->isImpersonating()) return false;
+
+        $userToken = $this->config->getUserValue('passwords/webui/token');
+        if($userToken) {
+            return [$userToken, $this->environment->getUserLogin()];
+        }
 
         $token   = $this->session->get(self::WEBUI_TOKEN);
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
