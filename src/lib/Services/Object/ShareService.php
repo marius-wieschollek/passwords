@@ -170,7 +170,7 @@ class ShareService extends AbstractService {
         string $receiverId,
         string $type,
         bool $editable,
-        int $expires = null,
+        ?int $expires = null,
         bool $shareable = true
     ): Share {
         $model = $this->createModel($passwordId, $receiverId, $type, $editable, $expires, $shareable);
