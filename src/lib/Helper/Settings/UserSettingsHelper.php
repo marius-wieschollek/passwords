@@ -86,7 +86,7 @@ class UserSettingsHelper {
      * @return null|string
      * @throws Exception
      */
-    public function get(string $key, string $userId = null) {
+    public function get(string $key, ?string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(in_array($key, ['sharing/editable', 'sharing/resharing'])) {
@@ -115,7 +115,7 @@ class UserSettingsHelper {
      * @return bool|float|int|null|string
      * @throws Exception
      */
-    public function set(string $key, $value, string $userId = null) {
+    public function set(string $key, $value, ?string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(in_array($key, ['sharing/editable', 'sharing/resharing'])) {
@@ -149,7 +149,7 @@ class UserSettingsHelper {
      * @return mixed
      * @throws Exception
      */
-    public function reset(string $key, string $userId = null) {
+    public function reset(string $key, ?string $userId = null) {
         $key = str_replace('.', '/', $key);
 
         if(isset($this->userSettings[ $key ])) {
@@ -169,7 +169,7 @@ class UserSettingsHelper {
      * @return array
      * @throws Exception
      */
-    public function list(string $userId = null): array {
+    public function list(?string $userId = null): array {
         $settings = [];
         foreach(array_keys($this->userSettings) as $key) {
             $setting              = 'user.'.str_replace('/', '.', $key);
@@ -187,7 +187,7 @@ class UserSettingsHelper {
      * @return array
      * @throws Exception
      */
-    public function listRaw(string $userId = null) {
+    public function listRaw(?string $userId = null) {
         $settings = [];
         foreach(array_keys($this->userSettings) as $key) {
             $setting              = str_replace('/', '.', $key);
@@ -249,7 +249,7 @@ class UserSettingsHelper {
      *
      * @return int|bool
      */
-    protected function validateValue(string $key, $value, string $userId = null) {
+    protected function validateValue(string $key, $value, ?string $userId = null) {
         if($key === 'session/lifetime' && $value < 30) {
             return $this->getDefaultValue($key, $userId);
         }
