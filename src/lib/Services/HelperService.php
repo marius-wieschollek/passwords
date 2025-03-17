@@ -94,7 +94,7 @@ class HelperService {
      *
      * @return AbstractImageHelper
      */
-    public function getImageHelper(string $service = null): AbstractImageHelper {
+    public function getImageHelper(?string $service = null): AbstractImageHelper {
         if($service === null) $service = $this->config->getAppValue('service/images', self::IMAGES_AUTO);
 
         return match ($service) {
@@ -110,7 +110,7 @@ class HelperService {
      *
      * @return WordsProviderInterface
      */
-    public function getWordsHelper(string $service = null): WordsProviderInterface {
+    public function getWordsHelper(?string $service = null): WordsProviderInterface {
         if($service === null) $service = $this->config->getAppValue('service/words', HelperService::WORDS_AUTO);
 
         return match ($service) {
@@ -132,7 +132,7 @@ class HelperService {
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function getSecurityHelper(string $service = null): SecurityCheckProviderInterface {
+    public function getSecurityHelper(?string $service = null): SecurityCheckProviderInterface {
         $service = $this->config->getAppValue('service/security', $service ?? self::SECURITY_HIBP);
 
         return match ($service) {
