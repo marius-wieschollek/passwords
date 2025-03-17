@@ -216,7 +216,7 @@ class EncryptionService {
      * @return string
      * @throws Exception
      */
-    public function getDefaultEncryption(string $cseType = null, string $userId = null): string {
+    public function getDefaultEncryption(?string $cseType = null, ?string $userId = null): string {
         $sseMode = $this->userSettings->get('encryption.sse', $userId);
 
         if($sseMode === 0 && $cseType !== self::CSE_ENCRYPTION_NONE) return self::SSE_ENCRYPTION_NONE;
