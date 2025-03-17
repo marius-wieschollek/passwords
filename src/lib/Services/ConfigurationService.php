@@ -240,7 +240,7 @@ class ConfigurationService {
      * @return string|null
      * @throws Exception
      */
-    protected function getUserId(string $user = null): ?string {
+    protected function getUserId(?string $user = null): ?string {
         if($this->userId !== null && $user !== null && $this->userId !== $user) {
             throw new Exception("Illegal user configuration access request by {$this->userId} for {$user}");
         }
