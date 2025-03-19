@@ -90,7 +90,7 @@ class SettingsApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    public function list(array $scopes = null): JSONResponse {
+    public function list(?array $scopes = null): JSONResponse {
         return $this->createJsonResponse(
             $this->settings->list($scopes)
         );
