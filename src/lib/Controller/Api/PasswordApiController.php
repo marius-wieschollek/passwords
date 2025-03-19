@@ -195,7 +195,7 @@ class PasswordApiController extends AbstractObjectApiController {
     public function update(
         string $id,
         string $password,
-        string $revision = null,
+        ?string $revision = null,
         string $username = '',
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
