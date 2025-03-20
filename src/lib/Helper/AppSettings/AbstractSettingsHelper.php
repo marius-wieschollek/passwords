@@ -202,7 +202,7 @@ abstract class AbstractSettingsHelper {
      * @return array
      * @throws ApiException
      */
-    protected function getGenericSetting(string $key, string $type = null): array {
+    protected function getGenericSetting(string $key, ?string $type = null): array {
         $configKey = $this->getSettingKey($key);
         $default   = $this->getSettingDefault($key);
         $value     = $this->config->getAppValue($configKey, $default);
