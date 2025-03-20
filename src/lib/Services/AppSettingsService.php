@@ -139,7 +139,7 @@ class AppSettingsService {
      *
      * @return array
      */
-    public function list(array $scope = null): array {
+    public function list(?array $scope = null): array {
         $settings = [];
 
         if($scope === null || in_array('entity', $scope)) {
