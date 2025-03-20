@@ -28,7 +28,7 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
      *
      * @return bool
      */
-    public function hasDuplicates(string $hash, string $model, string $user = null): bool {
+    public function hasDuplicates(string $hash, string $model, ?string $user = null): bool {
         $sql = $this->getStatement();
 
         $sql->andWhere(
