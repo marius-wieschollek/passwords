@@ -121,7 +121,7 @@ abstract class AbstractMapper extends QBMapper {
      * @return EntityInterface[]
      * @throws \OCP\DB\Exception
      */
-    public function findAllDeleted(string $userId = null): array {
+    public function findAllDeleted(?string $userId = null): array {
         $qb = $this->db->getQueryBuilder();
 
         $qb->select('*')
