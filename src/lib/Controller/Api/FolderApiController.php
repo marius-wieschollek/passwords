@@ -141,7 +141,7 @@ class FolderApiController extends AbstractObjectApiController {
     public function update(
         string $id,
         string $label,
-        string $revision = null,
+        ?string $revision = null,
         string $parent = FolderService::BASE_FOLDER_UUID,
         string $cseKey = '',
         string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,

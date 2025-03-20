@@ -68,7 +68,7 @@ class FileCacheService {
      * @throws NotPermittedException
      * @throws Exception
      */
-    public function getCache(string $cache = null): ISimpleFolder {
+    public function getCache(?string $cache = null): ISimpleFolder {
         $cache = $this->validateCacheName($cache);
 
         try {
@@ -137,7 +137,7 @@ class FileCacheService {
      * @return string
      * @throws Exception
      */
-    protected function validateCacheName(string $cache = null): string {
+    protected function validateCacheName(?string $cache = null): string {
         if($cache === null) return $this->defaultCache;
         if(!$this->hasCache($cache)) throw new Exception('Unknown Cache '.$cache);
 
@@ -147,7 +147,7 @@ class FileCacheService {
     /**
      * @param string|null $cache
      */
-    public function clearCache(string $cache = null): void {
+    public function clearCache(?string $cache = null): void {
         try {
             $this->getCache($cache)->delete();
             $class    = new ReflectionClass($this->appData);
@@ -174,7 +174,7 @@ class FileCacheService {
      *
      * @return bool
      */
-    public function isCacheEmpty(string $cache = null): bool {
+    public function isCacheEmpty(?string $cache = null): bool {
         try {
             $files = $this->getCache($cache)->getDirectoryListing();
 
@@ -192,7 +192,7 @@ class FileCacheService {
      *
      * @return bool
      */
-    public function hasFile(string $file, string $cache = null): bool {
+    public function hasFile(string $file, ?string $cache = null): bool {
         try {
             return $this->getCache($cache)->fileExists($file);
         } catch(Throwable $e) {
@@ -208,7 +208,7 @@ class FileCacheService {
      *
      * @return ISimpleFile
      */
-    public function getFile(string $file, string $cache = null): ?ISimpleFile {
+    public function getFile(string $file, ?string $cache = null): ?ISimpleFile {
         try {
             $cache = $this->getCache($cache);
 
@@ -227,7 +227,7 @@ class FileCacheService {
      *
      * @return ISimpleFile|null
      */
-    public function putFile(string $file, string $content, string $cache = null): ?ISimpleFile {
+    public function putFile(string $file, string $content, ?string $cache = null): ?ISimpleFile {
         try {
             $cache = $this->getCache($cache);
 

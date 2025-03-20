@@ -28,7 +28,7 @@ class ApiException extends Exception {
      * @param int            $httpCode
      * @param Throwable|null $previous
      */
-    public function __construct(string $message = "", int $httpCode = 500, Throwable $previous = null) {
+    public function __construct(string $message = "", int $httpCode = 500, ?Throwable $previous = null) {
         parent::__construct($message, E_USER_ERROR, $previous);
         $this->httpCode = $httpCode;
     }
