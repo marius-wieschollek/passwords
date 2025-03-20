@@ -59,7 +59,7 @@ class UserSettingsService {
      * @return mixed
      * @throws Exception
      */
-    public function get(string $key, string $userId = null) {
+    public function get(string $key, ?string $userId = null) {
         [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
@@ -83,7 +83,7 @@ class UserSettingsService {
      * @throws ApiException
      * @throws Exception
      */
-    public function set(string $key, $value, string $userId = null) {
+    public function set(string $key, $value, ?string $userId = null) {
         [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
@@ -103,7 +103,7 @@ class UserSettingsService {
      * @return mixed|null
      * @throws Exception
      */
-    public function reset(string $key, string $userId = null) {
+    public function reset(string $key, ?string $userId = null) {
         [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {
@@ -123,7 +123,7 @@ class UserSettingsService {
      * @return array
      * @throws Exception
      */
-    public function list(array $scope = null, string $userId = null): array {
+    public function list(?array $scope = null, ?string $userId = null): array {
         $settings = [];
 
         if($scope === null || in_array('server', $scope)) {
