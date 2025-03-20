@@ -14,7 +14,6 @@ namespace OCA\Passwords\AppInfo;
 use OCA\Passwords\Controller\Actions\RecoverHiddenController;
 use OCA\Passwords\Controller\Admin\CacheController;
 use OCA\Passwords\Controller\Admin\SettingsController;
-use OCA\Passwords\Controller\User\SettingsController as UserSettingsController;
 use OCA\Passwords\Controller\Api\AccountApiController;
 use OCA\Passwords\Controller\Api\FolderApiController;
 use OCA\Passwords\Controller\Api\KeychainApiController;
@@ -196,7 +195,6 @@ class Application extends App implements IBootstrap {
     protected function registerController(IRegistrationContext $context): void {
         $context->registerServiceAlias('AdminSettingsController', SettingsController::class);
         $context->registerServiceAlias('AdminCachesController', CacheController::class);
-        $context->registerServiceAlias('UserSettingsController', UserSettingsController::class);
         $context->registerServiceAlias('KeychainApiController', KeychainApiController::class);
         $context->registerServiceAlias('PasswordApiController', PasswordApiController::class);
         $context->registerServiceAlias('SettingsApiController', SettingsApiController::class);

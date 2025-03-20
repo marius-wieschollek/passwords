@@ -80,15 +80,6 @@ class ApiTokenHelper {
         }
     }
 
-    public function createStaticWebUiToken(): void {
-        try {
-            $token = $this->createToken('Passwords App WebUi', true);
-            $this->config->setUserValue('passwords/webui/token', $token['token']);
-        } catch(Throwable $e) {
-            $this->logger->logException($e);
-        }
-    }
-
     /**
      * @param string $name
      * @param bool   $permanent
@@ -136,11 +127,6 @@ class ApiTokenHelper {
      */
     protected function loadWebUiToken() {
         if($this->environment->isImpersonating()) return false;
-
-        $userToken = $this->config->getUserValue('passwords/webui/token');
-        if($userToken) {
-            return [$userToken, $this->environment->getUserLogin()];
-        }
 
         $token   = $this->session->get(self::WEBUI_TOKEN);
         $tokenId = $this->session->get(self::WEBUI_TOKEN_ID);
