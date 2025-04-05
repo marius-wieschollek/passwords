@@ -1,4 +1,12 @@
 ## [Unreleased]
+## 2025.4.0 - Feature release
+### Fixed
+- Error messages when using PHP 8.4
+- E2E passphrase not working on dashboard
+### Changed
+- Updated breached passwords list
+
+
 ## 2025.2.1 - Bugfix release
 ### Fixed
 - Login not working in dashboard widget
