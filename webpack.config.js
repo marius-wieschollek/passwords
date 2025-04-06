@@ -29,7 +29,7 @@ module.exports = (env, argv) => {
                     APP_FEATURE_VERSION: `"${config.version.substr(0, config.version.lastIndexOf('.'))}"`,
                     APP_ENVIRONMENT    : production ? '"production"':'"development"',
                     APP_NIGHTLY        : !!(env && env.features === 'true'),
-                    appName            : 'passwords',
+                    appName            : '"passwords"',
                     appVersion         : `"${config.version}"`
                 }
             ),
