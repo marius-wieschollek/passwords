@@ -251,7 +251,7 @@ class FileCacheService {
      * @param string      $file
      * @param string|null $cache
      */
-    public function removeFile(string $file, string $cache = null): void {
+    public function removeFile(string $file, ?string $cache = null): void {
         try {
             $cache = $this->getCache($cache);
             if($cache->fileExists($file)) {
