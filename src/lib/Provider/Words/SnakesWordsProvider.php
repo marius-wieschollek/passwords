@@ -23,7 +23,7 @@ use OCP\Http\Client\IClientService;
  */
 class SnakesWordsProvider extends AbstractWordsProvider {
 
-    const SERVICE_URL = 'http://watchout4snakes.com/Random/RandomPhrase';
+    const string SERVICE_URL = 'http://watchout4snakes.com/Random/RandomPhrase';
 
     /**
      * @var bool

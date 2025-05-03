@@ -30,7 +30,7 @@ use Psr\Container\ContainerInterface;
  */
 class ShareObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_PASSWORD = 'password';
+    const string LEVEL_PASSWORD = 'password';
 
     /**
      * @var null|string

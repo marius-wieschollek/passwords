@@ -138,7 +138,7 @@ class AccountApiController extends AbstractApiController {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     public function getChallenge(): JSONResponse {
-        return $this->createJsonResponse($this->challengeService->getChallengeData(), Http::STATUS_OK);
+        return $this->createJsonResponse($this->challengeService->getChallengeData());
     }
 
     /**

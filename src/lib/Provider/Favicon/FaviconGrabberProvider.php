@@ -28,7 +28,7 @@ use Throwable;
  */
 class FaviconGrabberProvider extends AbstractFaviconProvider {
 
-    const FAVICON_GRABBER_URL = 'https://favicongrabber.com';
+    const string FAVICON_GRABBER_URL = 'https://favicongrabber.com';
 
     /**
      * @var ConfigurationService

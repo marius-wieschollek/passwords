@@ -16,7 +16,7 @@ use Throwable;
 
 class ImageExportException extends Exception {
 
-    const EXCEPTION_CODE = 0;
+    const int EXCEPTION_CODE = 0;
 
     /**
      * AbstractException constructor.

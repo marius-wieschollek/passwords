@@ -21,9 +21,9 @@ use Random\Randomizer;
  */
 class RandomCharactersProvider extends AbstractWordsProvider {
 
-    const CHARACTER_LIST = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-    const NUMBERS        = '0123456789';
-    const SPECIAL        = '!?&%/()[]{}$@-_';
+    const string CHARACTER_LIST = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+    const string NUMBERS        = '0123456789';
+    const string SPECIAL = '!?&%/()[]{}$@-_';
 
     /**
      * @var string

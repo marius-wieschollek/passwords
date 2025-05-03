@@ -16,7 +16,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  */
 class TagMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_tag';
+    const string TABLE_NAME = 'passwords_tag';
 
     /**
      * @param string $passwordUuid

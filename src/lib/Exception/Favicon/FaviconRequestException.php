@@ -15,6 +15,6 @@ use OCA\Passwords\Exception\AbstractException;
  * @package OCA\Passwords\Exception\Favicon
  */
 class FaviconRequestException extends AbstractException {
-    const EXCEPTION_CODE    = 103;
-    const EXCEPTION_MESSAGE = 'The request to the favicon service failed';
+    const int EXCEPTION_CODE       = 103;
+    const string EXCEPTION_MESSAGE = 'The request to the favicon service failed';
 }

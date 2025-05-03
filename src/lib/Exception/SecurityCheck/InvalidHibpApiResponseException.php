@@ -19,7 +19,7 @@ use Throwable;
  */
 class InvalidHibpApiResponseException extends Exception {
 
-    const EXCEPTION_CODE = 105;
+    const int EXCEPTION_CODE = 105;
 
     /**
      * InvalidHibpApiResponseException constructor.

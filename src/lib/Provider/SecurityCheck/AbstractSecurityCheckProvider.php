@@ -25,9 +25,9 @@ use Throwable;
  */
 abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInterface {
 
-    const PASSWORD_DB          = 'none';
-    const HASH_FILE_KEY_LENGTH = 3;
-    const CONFIG_DB_TYPE       = 'passwords/localdb/type';
+    const PASSWORD_DB              = 'none';
+    const int HASH_FILE_KEY_LENGTH = 3;
+    const string CONFIG_DB_TYPE    = 'passwords/localdb/type';
 
     /**
      * @var FileCacheService

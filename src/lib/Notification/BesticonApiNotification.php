@@ -19,9 +19,9 @@ use OCP\Notification\INotification;
  */
 class BesticonApiNotification extends AbstractNotification {
 
-    const NAME                 = 'besticon';
-    const TYPE                 = 'admin';
-    const BESTICON_HOSTING_URL = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Services/Besticon-Self-Hosting';
+    const string NAME = 'besticon';
+    const string TYPE = 'admin';
+    const string BESTICON_HOSTING_URL = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Services/Besticon-Self-Hosting';
 
     /**
      * Send the notification

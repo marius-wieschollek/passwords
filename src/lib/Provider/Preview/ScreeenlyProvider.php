@@ -25,7 +25,7 @@ use Throwable;
  */
 class ScreeenlyProvider extends AbstractPreviewProvider {
 
-    const SCREEENLY_API_CONFIG_KEY = 'service/preview/screeenly/key';
+    const string SCREEENLY_API_CONFIG_KEY = 'service/preview/screeenly/key';
 
     /**
      * @var string

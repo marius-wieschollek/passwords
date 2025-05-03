@@ -28,12 +28,12 @@ use Throwable;
  */
 class FileCacheService {
 
-    const DEFAULT_CACHE     = 'default';
-    const AVATAR_CACHE      = 'avatars';
-    const FAVICON_CACHE     = 'favicon';
-    const PREVIEW_CACHE     = 'preview';
-    const PASSWORDS_CACHE   = 'passwords';
-    const CACHEDIR_TAG_FILE = 'CACHEDIR.TAG';
+    const string DEFAULT_CACHE = 'default';
+    const string AVATAR_CACHE  = 'avatars';
+    const string FAVICON_CACHE = 'favicon';
+    const string PREVIEW_CACHE = 'preview';
+    const string PASSWORDS_CACHE = 'passwords';
+    const string CACHEDIR_TAG_FILE = 'CACHEDIR.TAG';
 
     /**
      * @var IAppData

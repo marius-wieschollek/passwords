@@ -33,9 +33,9 @@ namespace OCA\Passwords\Db;
  */
 class Share extends AbstractEntity implements EntityInterface {
 
-    const TYPE_USER  = 'user';
-    const TYPE_GROUP = 'group';
-    const TYPE_LINK  = 'link';
+    const string TYPE_USER  = 'user';
+    const string TYPE_GROUP = 'group';
+    const string TYPE_LINK  = 'link';
 
     /**
      * @var string

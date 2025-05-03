@@ -21,14 +21,14 @@ use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
  */
 class LocalWordsProvider extends AbstractWordsProvider {
 
-    const WORDS_DE      = '/usr/share/dict/ngerman';
-    const WORDS_US      = '/usr/share/dict/american-english';
-    const WORDS_GB      = '/usr/share/dict/british-english';
-    const WORDS_FR      = '/usr/share/dict/french';
-    const WORDS_IT      = '/usr/share/dict/italian';
-    const WORDS_ES      = '/usr/share/dict/spanish';
-    const WORDS_PT      = '/usr/share/dict/portuguese';
-    const WORDS_DEFAULT = '/usr/share/dict/words';
+    const string WORDS_DE = '/usr/share/dict/ngerman';
+    const string WORDS_US = '/usr/share/dict/american-english';
+    const string WORDS_GB = '/usr/share/dict/british-english';
+    const string WORDS_FR = '/usr/share/dict/french';
+    const string WORDS_IT = '/usr/share/dict/italian';
+    const string WORDS_ES = '/usr/share/dict/spanish';
+    const string WORDS_PT = '/usr/share/dict/portuguese';
+    const string WORDS_DEFAULT = '/usr/share/dict/words';
 
     /**
      * @var string

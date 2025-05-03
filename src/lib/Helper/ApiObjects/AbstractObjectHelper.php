@@ -29,15 +29,15 @@ use Psr\Container\ContainerInterface;
  */
 abstract class AbstractObjectHelper {
 
-    const LEVEL_MODEL     = 'model';
-    const LEVEL_REVISIONS = 'revisions';
+    const string LEVEL_MODEL     = 'model';
+    const string LEVEL_REVISIONS = 'revisions';
 
-    const OPERATOR_EQUALS            = 'eq';
-    const OPERATOR_NOT_EQUALS        = 'ne';
-    const OPERATOR_LESS              = 'lt';
-    const OPERATOR_GREATER           = 'gt';
-    const OPERATOR_EQUALS_OR_LESS    = 'le';
-    const OPERATOR_EQUALS_OR_GREATER = 'ge';
+    const string OPERATOR_EQUALS     = 'eq';
+    const string OPERATOR_NOT_EQUALS = 'ne';
+    const string OPERATOR_LESS       = 'lt';
+    const string OPERATOR_GREATER = 'gt';
+    const string OPERATOR_EQUALS_OR_LESS = 'le';
+    const string OPERATOR_EQUALS_OR_GREATER = 'ge';
 
     /**
      * @var array

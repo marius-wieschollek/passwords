@@ -16,7 +16,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  */
 class SessionMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_session';
+    const string TABLE_NAME = 'passwords_session';
 
     /**
      * @param int $updated

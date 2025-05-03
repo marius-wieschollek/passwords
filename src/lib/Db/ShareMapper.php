@@ -17,7 +17,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  */
 class ShareMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_share';
+    const string TABLE_NAME = 'passwords_share';
 
     /**
      * @param string $userId

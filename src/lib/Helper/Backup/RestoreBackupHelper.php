@@ -45,7 +45,7 @@ use OCA\Passwords\Services\UserChallengeService;
  */
 class RestoreBackupHelper {
 
-    const BACKUP_VERSION = 106;
+    const int BACKUP_VERSION = 106;
 
     /**
      * @var ConfigurationService
@@ -235,7 +235,7 @@ class RestoreBackupHelper {
      * @throws Exception
      */
     protected function restoreServerKeys(array $keys, ?string $user): void {
-        $sseV1ServerKey = $this->config->getAppValue('SSEv1ServerKey', null);
+        $sseV1ServerKey = $this->config->getAppValue('SSEv1ServerKey');
         if($sseV1ServerKey !== $keys['server']['SSEv1ServerKey']) {
             if($user !== null && $sseV1ServerKey !== null) {
                 throw new Exception('Can not restore single user data because server key has changed');
@@ -244,7 +244,7 @@ class RestoreBackupHelper {
             $this->config->setAppValue('SSEv1ServerKey', $keys['server']['SSEv1ServerKey']);
         }
 
-        $serverSecret = $this->config->getSystemValue('secret', null);
+        $serverSecret = $this->config->getSystemValue('secret');
         if($serverSecret !== $keys['server']['secret'] && !empty($keys['server']['secret'])) {
             if($user !== null && $serverSecret !== null) {
                 throw new Exception('Can not restore single user data because server secret has changed');

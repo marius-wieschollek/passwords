@@ -16,7 +16,7 @@ use Throwable;
  * @package OCA\Passwords\Exception\Favicon
  */
 class UnexpectedResponseCodeException extends Exception {
-    const EXCEPTION_CODE = 102;
+    const int EXCEPTION_CODE = 102;
 
     /**
      * UnexpectedResponseCodeException constructor.

@@ -20,7 +20,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  */
 class PasswordMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_password';
+    const string TABLE_NAME = 'passwords_password';
 
     /**
      * @return Password[]

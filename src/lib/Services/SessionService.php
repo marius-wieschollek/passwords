@@ -30,13 +30,13 @@ use Throwable;
  */
 class SessionService {
 
-    const VALUE_USER_SECRET  = 'userSecret';
-    const API_SESSION_HEADER = 'X-API-SESSION';
-    const API_SESSION_COOKIE = 'nc_passwords';
+    const string VALUE_USER_SECRET  = 'userSecret';
+    const string API_SESSION_HEADER = 'X-API-SESSION';
+    const string API_SESSION_COOKIE = 'nc_passwords';
 
-    const SESSION_KEY_ID = 'nc_pw_session';
+    const string SESSION_KEY_ID = 'nc_pw_session';
 
-    const SESSION_KEY_PASSPHRASE = 'nc_pw_passphrase';
+    const string SESSION_KEY_PASSPHRASE = 'nc_pw_passphrase';
 
     /**
      * @var array

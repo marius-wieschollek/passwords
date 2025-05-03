@@ -27,9 +27,9 @@ use OCP\IDBConnection;
  */
 abstract class AbstractMapper extends QBMapper {
 
-    const TABLE_NAME        = '';
-    const ALLOWED_OPERATORS = ['eq', 'neq', 'lt', 'gt', 'lte', 'gte'];
-    const FORBIDDEN_FIELDS  = [];
+    const TABLE_NAME              = '';
+    const array ALLOWED_OPERATORS = ['eq', 'neq', 'lt', 'gt', 'lte', 'gte'];
+    const array FORBIDDEN_FIELDS  = [];
 
     /**
      * @var string|null

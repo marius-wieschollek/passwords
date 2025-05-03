@@ -21,11 +21,11 @@ namespace OCA\Passwords\Db;
  */
 class Keychain extends AbstractEntity {
 
-    const SCOPE_CLIENT = 'client';
-    const SCOPE_SERVER = 'server';
+    const string SCOPE_CLIENT = 'client';
+    const string SCOPE_SERVER = 'server';
 
-    const TYPE_CSE_V1V1 = 'CSEv1r1';
-    const TYPE_SSE_V2R1 = 'SSEv2r1';
+    const string TYPE_CSE_V1V1 = 'CSEv1r1';
+    const string TYPE_SSE_V2R1 = 'SSEv2r1';
 
     /**
      * @var string

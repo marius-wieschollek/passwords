@@ -26,7 +26,7 @@ use Throwable;
  */
 class BigDbPlusHibpSecurityCheckProvider extends AbstractSecurityCheckProvider {
 
-    const PASSWORD_DB = 'bigdb+hibp';
+    const string PASSWORD_DB = 'bigdb+hibp';
 
     /**
      * BigDbPlusHibpSecurityCheckProvider constructor.

@@ -28,7 +28,7 @@ use OCP\EventDispatcher\IEventDispatcher;
  */
 class FolderService extends AbstractModelService {
 
-    const BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
+    const string BASE_FOLDER_UUID = '00000000-0000-0000-0000-000000000000';
 
     /**
      * @var FolderMapper|AbstractMapper

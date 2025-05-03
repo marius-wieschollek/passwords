@@ -23,9 +23,9 @@ use OCP\AppFramework\Http;
  */
 class UserLoginAttemptHelper {
 
-    const MAX_FAILED_ATTEMPTS = 5;
+    const int MAX_FAILED_ATTEMPTS = 5;
 
-    const CONFIG_LOGIN_ATTEMPTS = 'login/attempts/failed';
+    const string CONFIG_LOGIN_ATTEMPTS = 'login/attempts/failed';
 
     /**
      * @var ConfigurationService

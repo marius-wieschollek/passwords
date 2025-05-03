@@ -15,7 +15,7 @@ use Throwable;
 
 class ImaginaryCommunicationException extends \Exception {
 
-    const EXCEPTION_CODE = 0;
+    const int EXCEPTION_CODE = 0;
 
     /**
      * AbstractException constructor.

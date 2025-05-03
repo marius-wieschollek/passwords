@@ -78,7 +78,7 @@ abstract class AbstractRevisionRepair {
      * @throws Exception
      */
     public function run(IOutput $output): void {
-        $allRevisions = $this->revisionService->findAll(false);
+        $allRevisions = $this->revisionService->findAll();
 
         $fixed = 0;
         $total = count($allRevisions);

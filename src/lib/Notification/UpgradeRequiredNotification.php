@@ -24,9 +24,9 @@ use OCP\Notification\INotification;
  */
 class UpgradeRequiredNotification extends AbstractNotification {
 
-    const NAME                           = 'upgrade_required';
-    const TYPE                           = 'admin';
-    const MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
+    const string NAME = 'upgrade_required';
+    const string TYPE = 'admin';
+    const string MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
      * @var ConfigurationService

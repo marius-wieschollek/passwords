@@ -25,7 +25,7 @@ use Throwable;
  */
 class ServerReportHelper {
 
-    const API_URL = 'https://statistics.passwordsapp.org/api.php';
+    const string API_URL = 'https://statistics.passwordsapp.org/api.php';
 
     /**
      * @var ConfigurationService
@@ -214,7 +214,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getSettings(): array {
-        $performance = $this->config->getAppValue('performance', null);
+        $performance = $this->config->getAppValue('performance');
         if($performance === null) $performance = in_array(php_uname('m'), ['amd64', 'x86_64']) ? 5:1;
         if($performance < 0 || $performance > 6) $performance = 2;
 

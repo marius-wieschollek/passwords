@@ -28,10 +28,10 @@ use Throwable;
  */
 class BestIconProvider extends AbstractFaviconProvider {
 
-    const BESTICON_SHARED_INSTANCE = 'https://icons.passwordsapp.org/icon';
-    const BESTICON_CONFIG_KEY      = 'service/favicon/bi/url';
-    const BESTICON_COUNTER_KEY     = 'service/favicon/bi/counter';
-    const BESTICON_INSTANCE_LIMIT  = 250;
+    const string BESTICON_SHARED_INSTANCE = 'https://icons.passwordsapp.org/icon';
+    const string BESTICON_CONFIG_KEY      = 'service/favicon/bi/url';
+    const string BESTICON_COUNTER_KEY    = 'service/favicon/bi/counter';
+    const int    BESTICON_INSTANCE_LIMIT = 250;
 
     /**
      * @var ConfigurationService

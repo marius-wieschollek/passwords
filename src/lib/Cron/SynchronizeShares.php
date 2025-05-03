@@ -35,7 +35,7 @@ use OCP\AppFramework\Utility\ITimeFactory;
  */
 class SynchronizeShares extends AbstractTimedJob {
 
-    const EXECUTION_TIMESTAMP = 'cron/sharing/time';
+    const string EXECUTION_TIMESTAMP = 'cron/sharing/time';
 
     /**
      * @var array

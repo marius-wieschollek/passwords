@@ -21,8 +21,8 @@ use Throwable;
  * @package OCA\Passwords\Exception\SecurityCheck
  */
 class PasswordDatabaseDownloadException extends Exception {
-    const EXCEPTION_CODE    = 106;
-    const EXCEPTION_MESSAGE = '';
+    const int EXCEPTION_CODE       = 106;
+    const string EXCEPTION_MESSAGE = '';
 
     /**
      * PasswordDatabaseDownloadException constructor.

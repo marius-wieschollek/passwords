@@ -22,8 +22,8 @@ use OCP\Mail\IMailer;
  */
 class ShareCreatedMail extends AbstractMail {
 
-    const MAIL_ID   = 'share.created';
-    const MAIL_TYPE = 'shares';
+    const string MAIL_ID   = 'share.created';
+    const string MAIL_TYPE = 'shares';
 
     /**
      * @var UserService

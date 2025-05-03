@@ -15,7 +15,7 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  * @package OCA\Passwords\Db
  */
 class RegistrationMapper extends AbstractMapper {
-    const TABLE_NAME = 'passwords_registration';
+    const string TABLE_NAME = 'passwords_registration';
 
     /**
      * @param int $created

@@ -9,7 +9,7 @@ namespace OCA\Passwords\Db;
 
 class FolderRevisionMapper extends AbstractRevisionMapper {
 
-    const TABLE_NAME = 'passwords_folder_rv';
+    const string TABLE_NAME = 'passwords_folder_rv';
 
-    const MODEL_TABLE_NAME = 'passwords_folder';
+    const string MODEL_TABLE_NAME = 'passwords_folder';
 }

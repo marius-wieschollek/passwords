@@ -21,7 +21,7 @@ use ZipArchive;
  * @package OCA\Passwords\Exception\SecurityCheck
  */
 class BreachedPasswordsZipAccessException extends Exception {
-    const EXCEPTION_CODE = 108;
+    const int EXCEPTION_CODE = 108;
 
     public function __construct($errorCode, Throwable $previous = null) {
         if($errorCode === ZipArchive::ER_EXISTS) $errorCode = 'ZipArchive::ER_EXISTS ('.ZipArchive::ER_EXISTS.')';

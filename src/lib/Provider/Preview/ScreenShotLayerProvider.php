@@ -21,7 +21,7 @@ use OCA\Passwords\Services\WebsitePreviewService;
  */
 class ScreenShotLayerProvider extends AbstractPreviewProvider {
 
-    const SSL_API_CONFIG_KEY = 'service/preview/ssl/key';
+    const string SSL_API_CONFIG_KEY = 'service/preview/ssl/key';
 
     /**
      * @var string

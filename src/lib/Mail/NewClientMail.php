@@ -26,8 +26,8 @@ use OCP\Mail\IMailer;
  */
 class NewClientMail extends AbstractMail {
 
-    const MAIL_ID   = 'security.connect';
-    const MAIL_TYPE = 'security';
+    const string MAIL_ID   = 'security.connect';
+    const string MAIL_TYPE = 'security';
     /**
      * @var ThemeSettingsHelper
      */

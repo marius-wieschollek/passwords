@@ -23,9 +23,9 @@ use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
  */
 class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
 
-    const PASSWORD_DB        = 'hibp';
-    const CONFIG_SERVICE_URL = 'passwords/hibp/url';
-    const SERVICE_URL        = 'https://api.pwnedpasswords.com/range/:range';
+    const string PASSWORD_DB        = 'hibp';
+    const string CONFIG_SERVICE_URL = 'passwords/hibp/url';
+    const string SERVICE_URL        = 'https://api.pwnedpasswords.com/range/:range';
 
     /**
      * @var array
@@ -204,8 +204,6 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
      * @return string
      */
     protected function makeHibpRange(string $hash): string {
-        $range = substr($hash, 0, 5);
-
-        return $range;
+        return substr($hash, 0, 5);
     }
 }

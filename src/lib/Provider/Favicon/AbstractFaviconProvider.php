@@ -32,7 +32,7 @@ use Throwable;
  * @package OCA\Passwords\Helper
  */
 abstract class AbstractFaviconProvider implements FaviconProviderInterface {
-    const COMMON_SUBDOMAIN_PATTERN = '/^(m|de|web|www|www2|mail|email|login|signin)\./';
+    const string COMMON_SUBDOMAIN_PATTERN = '/^(m|de|web|www|www2|mail|email|login|signin)\./';
 
     /**
      * @var string

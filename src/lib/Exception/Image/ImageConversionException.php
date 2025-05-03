@@ -15,6 +15,6 @@ use OCA\Passwords\Exception\AbstractException;
 
 class ImageConversionException extends AbstractException {
 
-    const EXCEPTION_MESSAGE = 'Could not convert image';
+    const string EXCEPTION_MESSAGE = 'Could not convert image';
 
 }

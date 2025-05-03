@@ -18,8 +18,8 @@ use OCP\Util;
  * @package OCA\Passwords\Services
  */
 class BackupService {
-    const AUTO_BACKUPS = 'autoBackups';
-    const BACKUPS      = 'backups';
+    const string AUTO_BACKUPS = 'autoBackups';
+    const string BACKUPS      = 'backups';
 
     /**
      * @var ConfigurationService

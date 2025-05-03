@@ -27,8 +27,8 @@ use OCP\Notification\UnknownNotificationException;
  */
 class ImpersonationNotification extends AbstractNotification {
 
-    const NAME = 'user_impersonation';
-    const TYPE = 'security';
+    const string NAME = 'user_impersonation';
+    const string TYPE = 'security';
 
     /**
      * @var EnvironmentService

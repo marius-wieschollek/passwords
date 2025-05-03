@@ -18,9 +18,9 @@ use OCP\Notification\INotification;
  */
 class BreachedPasswordsUpdateFailedNotification extends AbstractNotification {
 
-    const NAME = 'breached_passwords_update_failed';
-    const TYPE = 'errors';
-    const MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Breached-Passwords-Update-Failure-Notification';
+    const string NAME = 'breached_passwords_update_failed';
+    const string TYPE = 'errors';
+    const string MANUAL_URL_BREACHED_PASSWORDS_UPDATE_FAILED = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Breached-Passwords-Update-Failure-Notification';
 
     /**
      * Send the notification

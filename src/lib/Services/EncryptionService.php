@@ -33,17 +33,17 @@ use OCP\AppFramework\IAppContainer;
  */
 class EncryptionService {
 
-    const DEFAULT_CSE_ENCRYPTION   = 'none';
-    const DEFAULT_SSE_ENCRYPTION   = 'SSEv1r2';
-    const DEFAULT_SHARE_ENCRYPTION = 'SSSEv1r1';
-    const CSE_ENCRYPTION_NONE      = 'none';
-    const CSE_ENCRYPTION_V1R1      = 'CSEv1r1';
-    const SSE_ENCRYPTION_NONE      = 'none';
-    const SSE_ENCRYPTION_V1R1      = 'SSEv1r1';
-    const SSE_ENCRYPTION_V1R2      = 'SSEv1r2';
-    const SSE_ENCRYPTION_V2R1      = 'SSEv2r1';
-    const SSE_ENCRYPTION_V3R1      = 'SSEv3r1';
-    const SHARE_ENCRYPTION_V1      = 'SSSEv1r1';
+    const string DEFAULT_CSE_ENCRYPTION = 'none';
+    const string DEFAULT_SSE_ENCRYPTION = 'SSEv1r2';
+    const string DEFAULT_SHARE_ENCRYPTION = 'SSSEv1r1';
+    const string CSE_ENCRYPTION_NONE      = 'none';
+    const string CSE_ENCRYPTION_V1R1 = 'CSEv1r1';
+    const string SSE_ENCRYPTION_NONE = 'none';
+    const string SSE_ENCRYPTION_V1R1 = 'SSEv1r1';
+    const string SSE_ENCRYPTION_V1R2 = 'SSEv1r2';
+    const string SSE_ENCRYPTION_V2R1 = 'SSEv2r1';
+    const string SSE_ENCRYPTION_V3R1 = 'SSEv3r1';
+    const string SHARE_ENCRYPTION_V1 = 'SSSEv1r1';
 
     /**
      * @var array|string[]

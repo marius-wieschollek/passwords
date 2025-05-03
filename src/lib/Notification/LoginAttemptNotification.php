@@ -23,8 +23,8 @@ use OCP\Notification\UnknownNotificationException;
  */
 class LoginAttemptNotification extends AbstractNotification {
 
-    const NAME = 'user_login_attempts';
-    const TYPE = 'security';
+    const string NAME = 'user_login_attempts';
+    const string TYPE = 'security';
 
     /**
      * @var EnvironmentService

@@ -31,13 +31,13 @@ use Psr\Container\ContainerInterface;
  */
 class FolderObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_TAGS          = 'tags';
-    const LEVEL_PARENT        = 'parent';
-    const LEVEL_FOLDERS       = 'folders';
-    const LEVEL_FOLDER_IDS    = 'folder-ids';
-    const LEVEL_PASSWORDS     = 'passwords';
-    const LEVEL_PASSWORD_IDS  = 'password-ids';
-    const LEVEL_PASSWORD_TAGS = 'password-tags';
+    const string LEVEL_TAGS   = 'tags';
+    const string LEVEL_PARENT = 'parent';
+    const string LEVEL_FOLDERS = 'folders';
+    const string LEVEL_FOLDER_IDS = 'folder-ids';
+    const string LEVEL_PASSWORDS  = 'passwords';
+    const string LEVEL_PASSWORD_IDS = 'password-ids';
+    const string LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
      * @var PasswordObjectHelper

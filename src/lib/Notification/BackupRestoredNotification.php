@@ -17,8 +17,8 @@ use OCP\Notification\INotification;
 
 class BackupRestoredNotification extends AbstractNotification {
 
-    const NAME = 'backup_autorestore';
-    const TYPE = 'errors';
+    const string NAME = 'backup_autorestore';
+    const string TYPE = 'errors';
 
     /**
      * Send the notification

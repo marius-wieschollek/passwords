@@ -25,9 +25,9 @@ use stdClass;
  */
 class BrowshotPreviewProvider extends AbstractPreviewProvider {
 
-    const BWS_API_CONFIG_KEY   = 'service/preview/bws/key';
-    const BWS_MOBILE_INSTANCE  = 'service/preview/bws/mobile';
-    const BWS_DESKTOP_INSTANCE = 'service/preview/bws/desktop';
+    const string BWS_API_CONFIG_KEY  = 'service/preview/bws/key';
+    const string BWS_MOBILE_INSTANCE = 'service/preview/bws/mobile';
+    const string BWS_DESKTOP_INSTANCE = 'service/preview/bws/desktop';
 
     /**
      * @var string

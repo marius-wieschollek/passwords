@@ -25,8 +25,8 @@ use OCP\Share\IManager;
  */
 class ShareUserListHelper {
 
-    const USER_SEARCH_MINIMUM = 5;
-    const USER_SEARCH_LIMIT   = 256;
+    const int USER_SEARCH_MINIMUM = 5;
+    const int USER_SEARCH_LIMIT   = 256;
 
     /**
      * @var IUser|null

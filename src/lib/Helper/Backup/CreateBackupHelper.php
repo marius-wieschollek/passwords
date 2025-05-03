@@ -37,7 +37,7 @@ use OCA\Passwords\Services\UserChallengeService;
  */
 class CreateBackupHelper {
 
-    const BACKUP_VERSION = 106;
+    const int BACKUP_VERSION = 106;
 
     /**
      * @var ConfigurationService
@@ -173,7 +173,7 @@ class CreateBackupHelper {
             'keys'                 => [
                 'server' => [
                     'secret'         => $this->config->getSystemValue('secret'),
-                    'SSEv1ServerKey' => $this->config->getAppValue('SSEv1ServerKey', null)
+                    'SSEv1ServerKey' => $this->config->getAppValue('SSEv1ServerKey')
                 ],
                 'users'  => $this->getUserKeys()
             ],

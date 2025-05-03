@@ -14,7 +14,7 @@ namespace OCA\Passwords\Db;
  */
 class FolderMapper extends AbstractMapper {
 
-    const TABLE_NAME = 'passwords_folder';
+    const string TABLE_NAME = 'passwords_folder';
 
     /**
      * @param string $parentUuid

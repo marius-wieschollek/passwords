@@ -23,9 +23,9 @@ use OCP\AppFramework\Http;
  */
 class ScreenShotMachineProvider extends AbstractPreviewProvider {
 
-    const SSM_API_CONFIG_KEY = 'service/preview/ssm/key';
+    const string SSM_API_CONFIG_KEY = 'service/preview/ssm/key';
 
-    const SSM_ERROR_IMAGES
+    const array SSM_ERROR_IMAGES
         = [
             'de2b58db567799c57939e7c037ac5c7177b7d000' => 'Invalid URL',
             '15fbaa9ab38c202d88f6d154cd3406323cfffb0b' => 'Invalid key'

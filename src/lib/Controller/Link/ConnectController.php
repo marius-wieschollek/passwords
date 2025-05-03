@@ -41,11 +41,11 @@ use Throwable;
  */
 class ConnectController extends Controller {
 
-    const PASSLINK_CONNECT_EXTENSION = "ext+passlink:%s/do/connect/%s";
-    const PASSLINK_CONNECT_DOMAIN = "https://link.passwordsapp.org/open/%s/do/connect/%s";
-    const PASSLINK_CONNECT_WEB = "web+passlink:%s/do/connect/%s";
-    const PASSLINK_CONNECT_PROTOCOL = "passlink:%s/do/connect/%s";
-    const SESSION_KEY = 'passlink.connect';
+    const string PASSLINK_CONNECT_EXTENSION = "ext+passlink:%s/do/connect/%s";
+    const string PASSLINK_CONNECT_DOMAIN    = "https://link.passwordsapp.org/open/%s/do/connect/%s";
+    const string PASSLINK_CONNECT_WEB    = "web+passlink:%s/do/connect/%s";
+    const string PASSLINK_CONNECT_PROTOCOL = "passlink:%s/do/connect/%s";
+    const string SESSION_KEY               = 'passlink.connect';
 
     /**
      * @var MailService

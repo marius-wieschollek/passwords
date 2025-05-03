@@ -24,7 +24,7 @@ use Random\Randomizer;
  */
 class LeipzigCorporaProvider extends AbstractWordsProvider {
 
-    const SERVICE_URL = 'http://api.wortschatz-leipzig.de/ws/';
+    const string SERVICE_URL = 'https://api.wortschatz-leipzig.de/ws/';
 
     /**
      * @var bool

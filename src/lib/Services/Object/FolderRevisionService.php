@@ -30,7 +30,7 @@ use OCP\AppFramework\Db\MultipleObjectsReturnedException;
  */
 class FolderRevisionService extends AbstractRevisionService {
 
-    const BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
+    const string BASE_REVISION_UUID = '00000000-0000-0000-0000-000000000000';
 
     /**
      * @var string

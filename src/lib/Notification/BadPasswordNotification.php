@@ -18,8 +18,8 @@ use OCP\Notification\INotification;
  */
 class BadPasswordNotification extends AbstractNotification {
 
-    const NAME = 'bad_password';
-    const TYPE = 'security';
+    const string NAME = 'bad_password';
+    const string TYPE = 'security';
 
     /**
      * Send the notification

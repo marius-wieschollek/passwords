@@ -26,8 +26,8 @@ use OCP\Notification\INotification;
  */
 class NewClientNotification extends AbstractNotification {
 
-    const NAME = 'new_client';
-    const TYPE = 'security';
+    const string NAME = 'new_client';
+    const string TYPE = 'security';
 
     /**
      * @var ThemeSettingsHelper

@@ -17,7 +17,7 @@ use Random\Randomizer;
  */
 class SpecialCharacterHelper {
 
-    const REPLACE_NUMBERS
+    const array REPLACE_NUMBERS
         = [
             'A' => '4',
             'a' => '4',
@@ -34,7 +34,7 @@ class SpecialCharacterHelper {
             'T' => '7'
         ];
 
-    const REPLACE_SPECIAL
+    const array REPLACE_SPECIAL
         = [
             'A' => '@',
             'a' => '@',
@@ -44,8 +44,8 @@ class SpecialCharacterHelper {
             'I' => '!'
         ];
 
-    const ADD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    const ADD_SPECIAL = ['!', '$', '%', '&', '?', '#', '='];
+    const array ADD_NUMBERS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    const array ADD_SPECIAL = ['!', '$', '%', '&', '?', '#', '='];
 
     /**
      * @param Randomizer $randomizer

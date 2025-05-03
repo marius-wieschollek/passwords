@@ -31,27 +31,27 @@ use Throwable;
  */
 class EnvironmentService {
 
-    const MODE_PUBLIC = 'public';
-    const MODE_USER   = 'user';
-    const MODE_GLOBAL = 'global';
+    const string MODE_PUBLIC = 'public';
+    const string MODE_USER   = 'user';
+    const string MODE_GLOBAL = 'global';
 
-    const TYPE_REQUEST     = 'request';
-    const TYPE_CRON        = 'cron';
-    const TYPE_CLI         = 'cli';
-    const TYPE_MAINTENANCE = 'maintenance';
+    const string TYPE_REQUEST = 'request';
+    const string TYPE_CRON    = 'cron';
+    const string TYPE_CLI  = 'cli';
+    const string TYPE_MAINTENANCE = 'maintenance';
 
-    const LOGIN_NONE     = 'none';
-    const LOGIN_TOKEN    = 'token';
-    const LOGIN_SESSION  = 'session';
-    const LOGIN_PASSWORD = 'password';
-    const LOGIN_EXTERNAL = 'external';
+    const string LOGIN_NONE  = 'none';
+    const string LOGIN_TOKEN = 'token';
+    const string LOGIN_SESSION = 'session';
+    const string LOGIN_PASSWORD = 'password';
+    const string LOGIN_EXTERNAL = 'external';
 
-    const CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
-    const CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
-    const CLIENT_SYSTEM      = 'CLIENT::SYSTEM';
-    const CLIENT_PUBLIC      = 'CLIENT::PUBLIC';
-    const CLIENT_CRON        = 'CLIENT::CRON';
-    const CLIENT_CLI         = 'CLIENT::CLI';
+    const string CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
+    const string CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
+    const string CLIENT_SYSTEM  = 'CLIENT::SYSTEM';
+    const string CLIENT_PUBLIC = 'CLIENT::PUBLIC';
+    const string CLIENT_CRON   = 'CLIENT::CRON';
+    const string CLIENT_CLI  = 'CLIENT::CLI';
 
     /**
      * @var array

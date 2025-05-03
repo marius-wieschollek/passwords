@@ -29,7 +29,7 @@ use stdClass;
  */
 class UserChallengeService {
 
-    const USER_CHALLENGE_ID = 'user/challenge/id';
+    const string USER_CHALLENGE_ID = 'user/challenge/id';
 
     /**
      * @var LoggingService

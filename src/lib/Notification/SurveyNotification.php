@@ -18,8 +18,8 @@ use OCP\Notification\INotification;
  */
 class SurveyNotification extends AbstractNotification {
 
-    const NAME = 'survey';
-    const TYPE = 'admin';
+    const string NAME = 'survey';
+    const string TYPE = 'admin';
 
     /**
      * Send the notification

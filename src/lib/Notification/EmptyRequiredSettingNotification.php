@@ -18,8 +18,8 @@ use OCP\Notification\INotification;
  */
 class EmptyRequiredSettingNotification extends AbstractNotification {
 
-    const NAME = 'empty_setting';
-    const TYPE = 'admin';
+    const string NAME = 'empty_setting';
+    const string TYPE = 'admin';
 
     /**
      * Send the notification

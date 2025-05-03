@@ -17,6 +17,6 @@ namespace OCA\Passwords\Provider\SecurityCheck;
  * @package OCA\Passwords\Helper\SecurityCheck
  */
 class SmallLocalDbSecurityCheckProvider extends BigLocalDbSecurityCheckProvider {
-    const ARCHIVE_URL = 'https://breached.passwordsapp.org/databases/5m-v:version-:format.zip';
-    const PASSWORD_DB = 'smalldb';
+    const string ARCHIVE_URL = 'https://breached.passwordsapp.org/databases/5m-v:version-:format.zip';
+    const string PASSWORD_DB = 'smalldb';
 }

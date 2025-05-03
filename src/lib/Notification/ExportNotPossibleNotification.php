@@ -17,8 +17,8 @@ use OCP\Notification\INotification;
 
 class ExportNotPossibleNotification extends AbstractNotification {
 
-    const NAME = 'user_export_not_possible';
-    const TYPE = 'errors';
+    const string NAME = 'user_export_not_possible';
+    const string TYPE = 'errors';
 
     /**
      * Send the notification

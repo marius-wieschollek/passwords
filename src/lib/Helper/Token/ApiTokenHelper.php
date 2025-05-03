@@ -31,8 +31,8 @@ use Throwable;
  */
 class ApiTokenHelper {
 
-    const WEBUI_TOKEN    = 'webui/token';
-    const WEBUI_TOKEN_ID = 'webui/token/id';
+    const string WEBUI_TOKEN    = 'webui/token';
+    const string WEBUI_TOKEN_ID = 'webui/token/id';
 
     /**
      * @var null|string

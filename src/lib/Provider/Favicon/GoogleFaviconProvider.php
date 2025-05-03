@@ -24,7 +24,7 @@ use Throwable;
  * @package OCA\Passwords\Helper\Favicon
  */
 class GoogleFaviconProvider extends AbstractFaviconProvider {
-    const DEFAULT_ICON_MD5 = '3ca64f83fdcf25135d87e08af65e68c9';
+    const string DEFAULT_ICON_MD5 = '3ca64f83fdcf25135d87e08af65e68c9';
 
     /**
      * @var string

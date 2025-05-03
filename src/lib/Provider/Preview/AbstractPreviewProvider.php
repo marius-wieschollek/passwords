@@ -29,10 +29,10 @@ use OCP\Http\Client\IClientService;
  */
 abstract class AbstractPreviewProvider implements PreviewProviderInterface{
 
-    const VIEWPORT_DESKTOP = '1366x768';
-    const VIEWPORT_MOBILE  = '360x640';
-    const WIDTH_DESKTOP    = 1366;
-    const WIDTH_MOBILE     = 360;
+    const string VIEWPORT_DESKTOP = '1366x768';
+    const string VIEWPORT_MOBILE = '360x640';
+    const int    WIDTH_DESKTOP = 1366;
+    const int    WIDTH_MOBILE  = 360;
 
     /**
      * @var string

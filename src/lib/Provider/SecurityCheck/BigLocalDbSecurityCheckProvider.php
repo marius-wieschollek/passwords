@@ -25,11 +25,11 @@ use ZipArchive;
  */
 class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
 
-    const ARCHIVE_URL       = 'https://breached.passwordsapp.org/databases/25m-v:version-:format.zip';
-    const CONFIG_DB_VERSION = 'passwords/localdb/version';
-    const CONFIG_DB_SOURCE  = 'passwords/localdb/source';
-    const PASSWORD_DB       = 'bigdb';
-    const PASSWORD_VERSION  = 14;
+    const ARCHIVE_URL              = 'https://breached.passwordsapp.org/databases/25m-v:version-:format.zip';
+    const string CONFIG_DB_VERSION = 'passwords/localdb/version';
+    const string CONFIG_DB_SOURCE  = 'passwords/localdb/source';
+    const PASSWORD_DB          = 'bigdb';
+    const int PASSWORD_VERSION = 14;
 
     public function getHashRange(string $range): array {
         $hashes = $this->readPasswordsFile($range);

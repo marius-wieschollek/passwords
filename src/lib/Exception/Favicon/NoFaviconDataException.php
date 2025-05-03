@@ -15,6 +15,6 @@ use OCA\Passwords\Exception\AbstractException;
  * @package OCA\Passwords\Exception\Favicon
  */
 class NoFaviconDataException extends AbstractException {
-    const EXCEPTION_CODE    = 100;
-    const EXCEPTION_MESSAGE = 'Favicon service returned no data';
+    const int EXCEPTION_CODE       = 100;
+    const string EXCEPTION_MESSAGE = 'Favicon service returned no data';
 }

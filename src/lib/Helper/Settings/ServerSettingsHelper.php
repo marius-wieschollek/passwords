@@ -19,9 +19,9 @@ use OCP\Util;
  */
 class ServerSettingsHelper {
 
-    const SERVER_MANUAL_URL = 'https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/';
+    const string SERVER_MANUAL_URL = 'https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/';
 
-    const SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/';
+    const string SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/';
 
     /**
      * @var ConfigurationService
@@ -148,7 +148,7 @@ class ServerSettingsHelper {
      * @return int
      */
     protected function getServerPerformanceHint(): int {
-        $performance = $this->config->getAppValue('performance', null);
+        $performance = $this->config->getAppValue('performance');
         if($performance === null) {
             if($this->config->getSystemValue('dbtype') === 'sqlite') return 1;
 

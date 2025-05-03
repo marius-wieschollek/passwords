@@ -17,7 +17,7 @@ namespace OCA\Passwords\Db;
  */
 class Challenge extends AbstractEntity {
 
-    const TYPE_PWD_V1R1 = 'PWDv1r1';
+    const string TYPE_PWD_V1R1 = 'PWDv1r1';
 
     /**
      * @var string

@@ -8,5 +8,5 @@ namespace OCA\Passwords\Db;
  * @package OCA\Passwords\Db
  */
 class ChallengeMapper extends AbstractMapper {
-    const TABLE_NAME = 'passwords_challenge';
+    const string TABLE_NAME = 'passwords_challenge';
 }

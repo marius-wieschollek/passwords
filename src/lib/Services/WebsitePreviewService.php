@@ -29,8 +29,8 @@ class WebsitePreviewService {
 
     use ValidatesDomainTrait;
 
-    const VIEWPORT_DESKTOP = 'desktop';
-    const VIEWPORT_MOBILE  = 'mobile';
+    const string VIEWPORT_DESKTOP = 'desktop';
+    const string VIEWPORT_MOBILE  = 'mobile';
 
     /**
      * WebsitePreviewService constructor.

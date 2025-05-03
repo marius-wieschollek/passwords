@@ -38,35 +38,35 @@ use Psr\Container\NotFoundExceptionInterface;
  */
 class HelperService {
 
-    const PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
-    const PREVIEW_SCREEN_SHOT_LAYER   = 'ssl';
-    const PREVIEW_BROW_SHOT           = 'bws';
-    const PREVIEW_PAGERES             = 'pageres';
-    const PREVIEW_SCREEENLY           = 'screeenly';
-    const PREVIEW_DEFAULT             = 'default';
+    const string PREVIEW_SCREEN_SHOT_MACHINE = 'ssm';
+    const string PREVIEW_SCREEN_SHOT_LAYER   = 'ssl';
+    const string PREVIEW_BROW_SHOT         = 'bws';
+    const string PREVIEW_PAGERES    = 'pageres';
+    const string PREVIEW_SCREEENLY = 'screeenly';
+    const string PREVIEW_DEFAULT   = 'default';
 
-    const FAVICON_BESTICON        = 'bi';
-    const FAVICON_FAVICON_GRABBER = 'fg';
-    const FAVICON_DUCK_DUCK_GO    = 'ddg';
-    const FAVICON_GOOGLE          = 'gl';
-    const FAVICON_LOCAL           = 'local';
-    const FAVICON_DEFAULT         = 'default';
+    const string FAVICON_BESTICON        = 'bi';
+    const string FAVICON_FAVICON_GRABBER = 'fg';
+    const string FAVICON_DUCK_DUCK_GO    = 'ddg';
+    const string FAVICON_GOOGLE       = 'gl';
+    const string FAVICON_LOCAL  = 'local';
+    const string FAVICON_DEFAULT = 'default';
 
-    const WORDS_LOCAL   = 'local';
-    const WORDS_RANDOM  = 'random';
-    const WORDS_SNAKES  = 'wo4snakes';
-    const WORDS_LEIPZIG = 'leipzig';
-    const WORDS_AUTO    = 'auto';
+    const string WORDS_LOCAL  = 'local';
+    const string WORDS_RANDOM = 'random';
+    const string WORDS_SNAKES = 'wo4snakes';
+    const string WORDS_LEIPZIG = 'leipzig';
+    const string WORDS_AUTO    = 'auto';
 
-    const SECURITY_BIGDB_HIBP  = 'bigdb+hibp';
-    const SECURITY_BIG_LOCAL   = 'bigdb';
-    const SECURITY_SMALL_LOCAL = 'smalldb';
-    const SECURITY_HIBP        = 'hibp';
+    const string SECURITY_BIGDB_HIBP = 'bigdb+hibp';
+    const string SECURITY_BIG_LOCAL  = 'bigdb';
+    const string SECURITY_SMALL_LOCAL = 'smalldb';
+    const string SECURITY_HIBP        = 'hibp';
 
-    const IMAGES_AUTO = 'auto';
-    const IMAGES_IMAGICK = 'imagick';
-    const IMAGES_GDLIB   = 'gdlib';
-    const IMAGES_IMAGINARY   = 'imaginary';
+    const string IMAGES_AUTO    = 'auto';
+    const string IMAGES_IMAGICK = 'imagick';
+    const string IMAGES_GDLIB   = 'gdlib';
+    const string IMAGES_IMAGINARY = 'imaginary';
 
     /**
      * @var ConfigurationService

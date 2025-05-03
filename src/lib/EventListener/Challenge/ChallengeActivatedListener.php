@@ -31,7 +31,7 @@ use OCP\Security\ISecureRandom;
  */
 class ChallengeActivatedListener implements IEventListener {
 
-    const MINIMUM_KEY_LENGTH = 1024;
+    const int MINIMUM_KEY_LENGTH = 1024;
 
     /**
      * @var UuidHelper

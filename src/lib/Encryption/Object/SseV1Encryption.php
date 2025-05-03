@@ -30,7 +30,7 @@ use OCP\Security\ISecureRandom;
  */
 class SseV1Encryption implements ObjectEncryptionInterface {
 
-    const MINIMUM_KEY_LENGTH = 1024;
+    const int MINIMUM_KEY_LENGTH = 1024;
 
     /**
      * @var array
@@ -224,11 +224,11 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @throws Exception
      */
     protected function getServerKey(): string {
-        $serverKey = $this->config->getAppValue('SSEv1ServerKey', null);
+        $serverKey = $this->config->getAppValue('SSEv1ServerKey');
 
         if($serverKey === null) {
             $this->config->clearCache();
-            $serverKey = $this->config->getAppValue('SSEv1ServerKey', null);
+            $serverKey = $this->config->getAppValue('SSEv1ServerKey');
         }
 
         if($serverKey === null || strlen($serverKey) < self::MINIMUM_KEY_LENGTH) {
@@ -302,7 +302,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
     protected function generateServerKey(): string {
         $this->config->clearCache();
         $lockCode    = uniqid('passwords', true);
-        $currentLock = $this->config->getAppValue('sse.generate.lock', null);
+        $currentLock = $this->config->getAppValue('sse.generate.lock');
         if($currentLock !== null) {
             sleep(1);
 
@@ -313,7 +313,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         $serverKey = $this->getSecureRandom();
 
         $this->config->clearCache();
-        $currentLock = $this->config->getAppValue('sse.generate.lock', null);
+        $currentLock = $this->config->getAppValue('sse.generate.lock');
         if($currentLock !== $lockCode) {
             sleep(1);
 

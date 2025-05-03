@@ -17,8 +17,8 @@ use Throwable;
  */
 class InvalidFaviconDataException extends Exception {
 
-    const EXCEPTION_CODE    = 101;
-    const EXCEPTION_MESSAGE = 'Favicon service returned unsupported data type: ';
+    const int EXCEPTION_CODE       = 101;
+    const string EXCEPTION_MESSAGE = 'Favicon service returned unsupported data type: ';
 
     /**
      * InvalidFaviconDataException constructor.

@@ -17,9 +17,9 @@ use OCP\DB\QueryBuilder\IQueryBuilder;
  */
 class PasswordRevisionMapper extends AbstractRevisionMapper {
 
-    const TABLE_NAME = 'passwords_password_rv';
+    const string TABLE_NAME = 'passwords_password_rv';
 
-    const MODEL_TABLE_NAME = 'passwords_password';
+    const string MODEL_TABLE_NAME = 'passwords_password';
 
     /**
      * @param string      $hash

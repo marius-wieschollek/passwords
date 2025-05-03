@@ -15,6 +15,6 @@ use OCA\Passwords\Exception\AbstractException;
 
 class NotConfiguredException extends AbstractException {
 
-    const EXCEPTION_MESSAGE = 'Imaginary image provider is enabled but not configured';
+    const string EXCEPTION_MESSAGE = 'Imaginary image provider is enabled but not configured';
 
 }

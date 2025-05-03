@@ -17,8 +17,8 @@ use OCP\IUser;
  */
 class BadPasswordMail extends AbstractMail {
 
-    const MAIL_ID   = 'security.password';
-    const MAIL_TYPE = 'security';
+    const string MAIL_ID   = 'security.password';
+    const string MAIL_TYPE = 'security';
 
     /**
      * @param IUser $user

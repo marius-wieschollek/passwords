@@ -31,9 +31,9 @@ use Psr\Container\ContainerInterface;
  */
 class TagObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_PASSWORDS     = 'passwords';
-    const LEVEL_PASSWORD_IDS  = 'password-ids';
-    const LEVEL_PASSWORD_TAGS = 'password-tags';
+    const string LEVEL_PASSWORDS    = 'passwords';
+    const string LEVEL_PASSWORD_IDS = 'password-ids';
+    const string LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
      * @var TagService

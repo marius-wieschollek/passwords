@@ -222,8 +222,6 @@ abstract class AbstractService {
         if(class_exists($eventClassName)) {
             $eventClass = new $eventClassName(...$arguments);
             $this->eventDispatcher->dispatchTyped($eventClass);
-        } else {
-            \OC::$server->getLogger()->error('Missing Event: '.$eventClassName);
         }
     }
 }

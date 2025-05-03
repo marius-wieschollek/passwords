@@ -39,7 +39,7 @@ class PasswordsMigrator implements IMigrator, ISizeEstimationMigrator {
 
     use TMigratorBasicVersionHandling;
 
-    const DATA_FILE = 'passwords.json';
+    const string DATA_FILE = 'passwords.json';
 
     /**
      * @param KeychainService         $keychainService

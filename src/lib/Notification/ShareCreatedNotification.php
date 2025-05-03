@@ -22,8 +22,8 @@ use OCP\Notification\INotification;
  */
 class ShareCreatedNotification extends AbstractNotification {
 
-    const NAME = 'share_create';
-    const TYPE = 'shares';
+    const string NAME = 'share_create';
+    const string TYPE = 'shares';
 
     /**
      * @var UserService

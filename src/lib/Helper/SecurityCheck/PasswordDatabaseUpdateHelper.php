@@ -20,7 +20,7 @@ use Throwable;
 
 class PasswordDatabaseUpdateHelper {
 
-    protected const CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
+    protected const string CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
 
     public function __construct(
         protected SecurityCheckProviderInterface $securityCheckProvider,
@@ -41,7 +41,7 @@ class PasswordDatabaseUpdateHelper {
         if($this->securityCheckProvider->dbUpdateRequired()) {
             if(!$this->registerUpdateAttempt()) {
                 return false;
-            };
+            }
             try {
                 $this->securityCheckProvider->updateDb();
                 $this->registerUpdateSuccess();
@@ -62,7 +62,7 @@ class PasswordDatabaseUpdateHelper {
         if($attempts > 3) {
             if($attempts === 4) {
                 $this->sendUpdateFailureNotification('Too many failed attempts');
-            } else if ($attempts > 9) {
+            } else if($attempts > 9) {
                 /**
                  * Nearly a week has passed since the last attempt.
                  * Let's try again tomorrow.
@@ -72,6 +72,7 @@ class PasswordDatabaseUpdateHelper {
 
             return false;
         }
+
         return true;
     }
 

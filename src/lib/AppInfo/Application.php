@@ -123,7 +123,7 @@ use Random\Randomizer;
  */
 class Application extends App implements IBootstrap {
 
-    const APP_NAME = 'passwords';
+    const string APP_NAME = 'passwords';
 
     /**
      * Application constructor.

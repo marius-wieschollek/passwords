@@ -15,6 +15,6 @@ use OCA\Passwords\Exception\AbstractException;
  * @package OCA\Passwords\Exception\Command
  */
 class NonInteractiveShellException extends AbstractException {
-    const EXCEPTION_CODE    = 107;
-    const EXCEPTION_MESSAGE = 'Interactive command requires "--no-interaction" to be set to run in non-interactive shell';
+    const int EXCEPTION_CODE       = 107;
+    const string EXCEPTION_MESSAGE = 'Interactive command requires "--no-interaction" to be set to run in non-interactive shell';
 }

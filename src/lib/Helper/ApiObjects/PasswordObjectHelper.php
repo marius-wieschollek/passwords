@@ -32,10 +32,10 @@ use Psr\Container\ContainerInterface;
  */
 class PasswordObjectHelper extends AbstractObjectHelper {
 
-    const LEVEL_SHARES  = 'shares';
-    const LEVEL_FOLDER  = 'folder';
-    const LEVEL_TAGS    = 'tags';
-    const LEVEL_TAG_IDS = 'tag-ids';
+    const string LEVEL_SHARES = 'shares';
+    const string LEVEL_FOLDER = 'folder';
+    const string LEVEL_TAGS   = 'tags';
+    const string LEVEL_TAG_IDS = 'tag-ids';
 
     /**
      * @var TagObjectHelper

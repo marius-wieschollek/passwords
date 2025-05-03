@@ -14,7 +14,7 @@ namespace OCA\Passwords\Db;
  */
 class TagRevisionMapper extends AbstractRevisionMapper {
 
-    const TABLE_NAME = 'passwords_tag_rv';
+    const string TABLE_NAME = 'passwords_tag_rv';
 
-    const MODEL_TABLE_NAME = 'passwords_tag';
+    const string MODEL_TABLE_NAME = 'passwords_tag';
 }
