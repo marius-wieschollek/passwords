@@ -14,8 +14,10 @@ RUN apt-get update -y && \
         libmagickwand-dev \
         gnupg
 
-RUN pecl uninstall imagick; \
-    pecl install xdebug; #\
+RUN pecl install xdebug;
+
+#RUN pecl uninstall imagick; \
+#    pecl install xdebug; \
 #    pecl install imagick;
 
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -

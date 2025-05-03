@@ -238,8 +238,6 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @throws MultipleObjectsReturnedException
      */
     protected function getFolder(PasswordRevision $revision, array $object): array {
-        $object['folder'] = [];
-
         $filters      = $revision->isHidden() ? []:['hidden' => false];
         $objectHelper = $this->getFolderObjectHelper();
         $folder       = $this->folderService->findByUuid($revision->getFolder());
