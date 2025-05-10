@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2025.5.0 - Feature release
+### Fixed
+- Error messages when using PHP 8.4
+
 ## 2025.4.0 - Feature release
 ### Fixed
 - Error messages when using PHP 8.4
