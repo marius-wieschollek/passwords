@@ -19,9 +19,7 @@ return RectorConfig::configure()
                        ]
                    )
                    ->withDowngradeSets(
-                       php80: true,
-                       php81: true,
-                       php82: true,
+                       php80: true
                    )
                    ->withPhpVersion(PhpVersion::PHP_80)
                    ->withBootstrapFiles([__DIR__.'/rector-shells.php',])
