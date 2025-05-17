@@ -172,7 +172,7 @@ class CreateBackupHelper {
             'passwordTagRelations' => $this->getEntityArray($this->passwordTagRelationMapper),
             'keys'                 => [
                 'server' => [
-                    'secret'         => $this->config->getSystemValue('secret'),
+                    'secret'         => $this->config->getServerSecret(),
                     'SSEv1ServerKey' => $this->config->getAppValue('SSEv1ServerKey')
                 ],
                 'users'  => $this->getUserKeys()

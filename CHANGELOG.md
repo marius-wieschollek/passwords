@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2025.6.0 - Feature release
+### Added
+- Server secret for app only
+
 ## 2025.5.1 - Bugfix release
 ### Fixed
 - Issues with LSR release

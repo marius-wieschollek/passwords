@@ -199,7 +199,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @throws Exception
      */
     protected function getEncryptionKey(string $passwordKey, string $userId): string {
-        return $this->config->getSystemValue('secret').
+        return $this->config->getServerSecret().
                $this->getServerKey().
                $this->getUserKey($userId).
                $passwordKey;

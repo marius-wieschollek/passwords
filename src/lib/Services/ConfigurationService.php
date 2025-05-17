@@ -163,6 +163,28 @@ class ConfigurationService {
     }
 
     /**
+     * @return string|null
+     */
+    public function getServerSecret(): ?string {
+        return $this->getSystemValue(
+            'passwords_secret',
+            $this->getSystemValue('secret')
+        );
+    }
+
+    /**
+     * @param string $secret
+     *
+     * @throws HintException
+     */
+    public function setServerSecret(string $secret): void {
+        $this->setSystemValue(
+            'passwords_secret',
+            $secret
+        );
+    }
+
+    /**
      * @param string $appName
      *
      * @return bool

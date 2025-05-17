@@ -150,7 +150,7 @@ class SseV2KeychainEncryption implements KeychainEncryptionInterface {
      */
     protected function getEncryptionPassword(): string {
         $userSecret   = $this->sessionService->get(SessionService::VALUE_USER_SECRET);
-        $serverSecret = $this->config->getSystemValue('secret');
+        $serverSecret = $this->config->getServerSecret();
 
         return $serverSecret.$userSecret;
     }

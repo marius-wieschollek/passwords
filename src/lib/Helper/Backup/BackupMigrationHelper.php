@@ -192,7 +192,7 @@ class BackupMigrationHelper {
 
         $data['keychains']                = [];
         $data['challenges']               = [];
-        $data['keys']['server']['secret'] = $this->config->getSystemValue('secret');
+        $data['keys']['server']['secret'] = $this->config->getServerSecret();
         foreach($data['keys']['users'] as $user => $keys) {
             $data['keys']['users'][ $user ]['ChallengeId'] = null;
         }
