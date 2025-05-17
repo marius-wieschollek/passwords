@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Challenge;
@@ -18,25 +22,13 @@ use OCP\EventDispatcher\Event;
 class AfterChallengeClonedEvent extends Event {
 
     /**
-     * @var Challenge
-     */
-    protected Challenge $original;
-
-    /**
-     * @var Challenge
-     */
-    protected Challenge $clone;
-
-    /**
      * BeforeChallengeClonedEvent constructor.
      *
      * @param Challenge $original
      * @param Challenge $clone
      */
-    public function __construct(Challenge $original, Challenge $clone) {
+    public function __construct(protected Challenge $original, protected Challenge $clone) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
     }
 
     /**

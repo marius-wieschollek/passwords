@@ -138,15 +138,15 @@ class TagApiController extends AbstractObjectApiController {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     public function update(
-        string $id,
-        string $label,
-        string $color,
-        string $revision = null,
-        string $cseKey = '',
-        string $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
-        int $edited = 0,
-        bool $hidden = false,
-        bool $favorite = false
+        string  $id,
+        string  $label,
+        string  $color,
+        ?string $revision = null,
+        string  $cseKey = '',
+        string  $cseType = EncryptionService::DEFAULT_CSE_ENCRYPTION,
+        int     $edited = 0,
+        bool    $hidden = false,
+        bool    $favorite = false
     ): JSONResponse {
         $model = $this->modelService->findByUuid($id);
         if($revision !== null && $revision !== $model->getRevision()) {

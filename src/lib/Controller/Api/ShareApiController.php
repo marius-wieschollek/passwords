@@ -202,9 +202,9 @@ class ShareApiController extends AbstractApiController {
         string $password,
         string $receiver,
         string $type = 'user',
-        int $expires = null,
-        bool $editable = false,
-        bool $shareable = false
+        ?int   $expires = null,
+        bool   $editable = false,
+        bool   $shareable = false
     ): JSONResponse {
         $this->checkAccessPermissions();
 
@@ -237,7 +237,7 @@ class ShareApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    public function update(string $id, int $expires = null, bool $editable = false, bool $shareable = true): JSONResponse {
+    public function update(string $id, ?int $expires = null, bool $editable = false, bool $shareable = true): JSONResponse {
         $this->checkAccessPermissions();
 
         if(empty($expires)) $expires = null;

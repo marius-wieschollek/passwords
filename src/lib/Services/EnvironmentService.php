@@ -1,21 +1,23 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Services;
 
 use Exception;
-use OC\Authentication\Exceptions\ExpiredTokenException;
-use OC\Authentication\Exceptions\InvalidTokenException;
 use OC\Authentication\Token\IProvider;
 use OC\Authentication\Token\IToken;
 use OC_User;
 use OCP\Authentication\Exceptions\CredentialsUnavailableException;
-use OCP\Authentication\LoginCredentials\IStore;
 use OCP\Authentication\LoginCredentials\ICredentials;
+use OCP\Authentication\LoginCredentials\IStore;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;
@@ -35,23 +37,23 @@ class EnvironmentService {
     const string MODE_USER   = 'user';
     const string MODE_GLOBAL = 'global';
 
-    const string TYPE_REQUEST = 'request';
-    const string TYPE_CRON    = 'cron';
-    const string TYPE_CLI  = 'cli';
+    const string TYPE_REQUEST     = 'request';
+    const string TYPE_CRON        = 'cron';
+    const string TYPE_CLI         = 'cli';
     const string TYPE_MAINTENANCE = 'maintenance';
 
-    const string LOGIN_NONE  = 'none';
-    const string LOGIN_TOKEN = 'token';
-    const string LOGIN_SESSION = 'session';
+    const string LOGIN_NONE     = 'none';
+    const string LOGIN_TOKEN    = 'token';
+    const string LOGIN_SESSION  = 'session';
     const string LOGIN_PASSWORD = 'password';
     const string LOGIN_EXTERNAL = 'external';
 
     const string CLIENT_MAINTENANCE = 'CLIENT::MAINTENANCE';
     const string CLIENT_UNKNOWN     = 'CLIENT::UNKNOWN';
-    const string CLIENT_SYSTEM  = 'CLIENT::SYSTEM';
-    const string CLIENT_PUBLIC = 'CLIENT::PUBLIC';
-    const string CLIENT_CRON   = 'CLIENT::CRON';
-    const string CLIENT_CLI  = 'CLIENT::CLI';
+    const string CLIENT_SYSTEM      = 'CLIENT::SYSTEM';
+    const string CLIENT_PUBLIC      = 'CLIENT::PUBLIC';
+    const string CLIENT_CRON        = 'CLIENT::CRON';
+    const string CLIENT_CLI         = 'CLIENT::CLI';
 
     /**
      * @var array
@@ -66,41 +68,6 @@ class EnvironmentService {
             self::CLIENT_UNKNOWN,
             self::CLIENT_CRON,
         ];
-
-    /**
-     * @var IConfig
-     */
-    protected IConfig $config;
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var ISession
-     */
-    protected ISession $session;
-
-    /**
-     * @var IRequest
-     */
-    protected IRequest $request;
-
-    /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var IUserSession
-     */
-    protected IUserSession $userSession;
-
-    /**
-     * @var IProvider
-     */
-    protected IProvider $tokenProvider;
 
     /**
      * @var IUser
@@ -168,23 +135,15 @@ class EnvironmentService {
      */
     public function __construct(
         ?string          $userId,
-        IConfig          $config,
-        IRequest         $request,
-        ISession         $session,
-        LoggingService   $logger,
-        IProvider        $tokenProvider,
-        IUserSession     $userSession,
-        IUserManager     $userManager,
+        protected IConfig          $config,
+        protected IRequest         $request,
+        protected ISession         $session,
+        protected LoggingService   $logger,
+        protected IProvider        $tokenProvider,
+        protected IUserSession     $userSession,
+        protected IUserManager     $userManager,
         protected IStore $credentialsStore,
     ) {
-        $this->config        = $config;
-        $this->logger        = $logger;
-        $this->session       = $session;
-        $this->request       = $request;
-        $this->userManager   = $userManager;
-        $this->userSession   = $userSession;
-        $this->tokenProvider = $tokenProvider;
-
         $this->determineRunType($request);
         $this->determineAppMode($userId, $request);
     }
@@ -380,7 +339,7 @@ class EnvironmentService {
 
         try {
             $loginCredentials = $this->credentialsStore->getLoginCredentials();
-        } catch (CredentialsUnavailableException) {
+        } catch(CredentialsUnavailableException) {
             // this is fine
         }
 
@@ -437,7 +396,7 @@ class EnvironmentService {
 
     /**
      * @param string|null $userId
-     * @param string $value
+     * @param string      $value
      *
      * @return bool
      */

@@ -24,7 +24,7 @@ abstract class AbstractException extends Exception {
      *
      * @param Throwable|null $previous
      */
-    public function __construct(Throwable $previous = null) {
+    public function __construct(?Throwable $previous = null) {
         parent::__construct(static::EXCEPTION_MESSAGE, static::EXCEPTION_CODE, $previous);
     }
 

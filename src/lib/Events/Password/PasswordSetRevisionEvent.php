@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Password;
@@ -19,25 +23,13 @@ use OCP\EventDispatcher\Event;
 class PasswordSetRevisionEvent extends Event {
 
     /**
-     * @var Password
-     */
-    protected Password $password;
-
-    /**
-     * @var PasswordRevision
-     */
-    protected PasswordRevision $revision;
-
-    /**
      * PasswordSetRevisionEvent constructor.
      *
      * @param Password         $password
      * @param PasswordRevision $revision
      */
-    public function __construct(Password $password, PasswordRevision $revision) {
+    public function __construct(protected Password $password, protected PasswordRevision $revision) {
         parent::__construct();
-        $this->password = $password;
-        $this->revision = $revision;
     }
 
     /**

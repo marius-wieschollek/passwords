@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Folder;
@@ -19,25 +23,13 @@ use OCP\EventDispatcher\Event;
 class FolderSetRevisionEvent extends Event {
 
     /**
-     * @var Folder
-     */
-    protected Folder $Folder;
-
-    /**
-     * @var FolderRevision
-     */
-    protected FolderRevision $revision;
-
-    /**
      * FolderSetRevisionEvent constructor.
      *
      * @param Folder         $Folder
      * @param FolderRevision $revision
      */
-    public function __construct(Folder $Folder, FolderRevision $revision) {
+    public function __construct(protected Folder $Folder, protected FolderRevision $revision) {
         parent::__construct();
-        $this->Folder = $Folder;
-        $this->revision = $revision;
     }
 
     /**

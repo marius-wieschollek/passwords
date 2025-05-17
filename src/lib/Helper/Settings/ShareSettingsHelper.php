@@ -48,7 +48,7 @@ class ShareSettingsHelper {
     /**
      * @param $key
      *
-     * @return mixed
+     * @return bool|string[]|null
      */
     public function get($key) {
         switch($key) {

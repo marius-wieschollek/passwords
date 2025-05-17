@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Share;
@@ -18,18 +22,12 @@ use OCP\EventDispatcher\Event;
 class GenericShareEvent extends Event {
 
     /**
-     * @var Share
-     */
-    protected Share $Share;
-
-    /**
      * GenericShareEvent constructor.
      *
      * @param Share $Share
      */
-    public function __construct(Share $Share) {
+    public function __construct(protected Share $Share) {
         parent::__construct();
-        $this->Share = $Share;
     }
 
     /**

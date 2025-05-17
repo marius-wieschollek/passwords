@@ -379,7 +379,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_password');
             $table->setPrimaryKey(['id']);
         }
@@ -725,7 +725,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_password_rv');
             $table->setPrimaryKey(['id']);
         }
@@ -863,7 +863,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_folder');
             $table->setPrimaryKey(['id']);
         }
@@ -1116,7 +1116,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_folder_rv');
             $table->setPrimaryKey(['id']);
         }
@@ -1242,7 +1242,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_tag');
             $table->setPrimaryKey(['id']);
         }
@@ -1494,7 +1494,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_tag_rv');
             $table->setPrimaryKey(['id']);
         }
@@ -1682,7 +1682,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_pw_tag_rel');
             $table->setPrimaryKey(['id']);
         }
@@ -1933,7 +1933,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_share');
             $table->setPrimaryKey(['id']);
         }
@@ -2102,7 +2102,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_session');
             $table->setPrimaryKey(['id']);
         }
@@ -2246,7 +2246,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_keychain');
             $table->setPrimaryKey(['id']);
         }
@@ -2400,7 +2400,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_challenge');
             $table->setPrimaryKey(['id']);
         }
@@ -2582,7 +2582,7 @@ class Version20220101 extends SimpleMigrationStep {
             );
         }
 
-        if(!$table->hasPrimaryKey()) {
+        if($table->getPrimaryKey() === null) {
             $output->info('Creating primary key id in table passwords_registration');
             $table->setPrimaryKey(['id']);
         }

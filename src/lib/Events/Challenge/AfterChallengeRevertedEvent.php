@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2025 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -21,18 +21,12 @@ use OCP\EventDispatcher\Event;
 class AfterChallengeRevertedEvent extends Event {
 
     /**
-     * @var array
-     */
-    protected array $previousChallenge;
-
-    /**
      * BeforeChallengeRevertedEvent constructor.
      *
      * @param array $previousChallenge
      */
-    public function __construct(array $previousChallenge) {
+    public function __construct(protected array $previousChallenge) {
         parent::__construct();
-        $this->previousChallenge = $previousChallenge;
     }
 
     /**

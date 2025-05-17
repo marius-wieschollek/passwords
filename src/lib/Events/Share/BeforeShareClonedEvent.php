@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Share;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforeShareClonedEvent extends Event {
 
     /**
-     * @var Share
-     */
-    protected Share $original;
-
-    /**
-     * @var Share
-     */
-    protected Share $clone;
-
-    /**
-     * @var array
-     */
-    protected array $overwrites;
-
-    /**
      * BeforeShareClonedEvent constructor.
      *
      * @param Share $original
      * @param Share $clone
      * @param array $overwrites
      */
-    public function __construct(Share $original, Share $clone, array $overwrites) {
+    public function __construct(protected Share $original, protected Share $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

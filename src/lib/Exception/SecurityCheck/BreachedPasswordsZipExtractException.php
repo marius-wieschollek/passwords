@@ -22,7 +22,11 @@ use Throwable;
 class BreachedPasswordsZipExtractException extends Exception {
     const int EXCEPTION_CODE = 109;
 
-    public function __construct(string $file, Throwable $previous = null) {
+    /**
+     * @param string         $file
+     * @param Throwable|null $previous
+     */
+    public function __construct(string $file, ?Throwable $previous = null) {
         parent::__construct("Unable to extract {$file} from breached passwords zip file", static::EXCEPTION_CODE, $previous);
     }
 }

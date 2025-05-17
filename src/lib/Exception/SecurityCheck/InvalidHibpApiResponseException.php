@@ -24,10 +24,10 @@ class InvalidHibpApiResponseException extends Exception {
     /**
      * InvalidHibpApiResponseException constructor.
      *
-     * @param IResponse|null  $response
+     * @param IResponse|null $response
      * @param Throwable|null $previous
      */
-    public function __construct(IResponse $response = null, Throwable $previous = null) {
+    public function __construct(?IResponse $response = null, ?Throwable $previous = null) {
         $message = 'HIBP API returned invalid response';
         if($response instanceof IResponse) {
             $message .= " HTTP {$response->getStatusCode()}";

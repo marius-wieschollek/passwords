@@ -25,26 +25,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class UserMoveCommand extends AbstractInteractiveCommand {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var MoveUserDataHelper
-     */
-    protected MoveUserDataHelper $moveUserData;
-
-    /**
-     * @var DeleteUserDataHelper
-     */
-    protected DeleteUserDataHelper $deleteUserData;
-
-    /**
      * UserMoveCommand constructor.
      *
      * @param IUserManager         $userManager
@@ -53,12 +33,14 @@ class UserMoveCommand extends AbstractInteractiveCommand {
      * @param MoveUserDataHelper   $moveUserData
      * @param string|null          $name
      */
-    public function __construct(IUserManager $userManager, ConfigurationService $config, DeleteUserDataHelper $deleteUserData, MoveUserDataHelper $moveUserData, string $name = null) {
+    public function __construct(
+        protected IUserManager $userManager,
+        protected ConfigurationService $config,
+        protected DeleteUserDataHelper $deleteUserData,
+        protected MoveUserDataHelper $moveUserData,
+        ?string $name = null
+    ) {
         parent::__construct($name);
-        $this->userManager    = $userManager;
-        $this->config         = $config;
-        $this->deleteUserData = $deleteUserData;
-        $this->moveUserData   = $moveUserData;
     }
 
     /**

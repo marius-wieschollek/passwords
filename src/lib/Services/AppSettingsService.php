@@ -108,10 +108,10 @@ class AppSettingsService {
     /**
      * @param string $key
      *
-     * @return mixed|null
+     * @return array
      * @throws ApiException
      */
-    public function reset(string $key) {
+    public function reset(string $key): array {
         [$scope, $subKey] = explode('.', $key, 2);
 
         switch($scope) {

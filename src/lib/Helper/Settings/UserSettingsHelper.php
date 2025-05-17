@@ -112,7 +112,7 @@ class UserSettingsHelper {
      * @param             $value
      * @param string|null $userId
      *
-     * @return bool|float|int|null|string
+     * @return bool|float|int|null
      * @throws Exception
      */
     public function set(string $key, $value, ?string $userId = null) {

@@ -27,18 +27,17 @@ use OCP\Http\Client\IClientService;
  *
  * @package OCA\Passwords\Helper\Preview
  */
-abstract class AbstractPreviewProvider implements PreviewProviderInterface{
+abstract class AbstractPreviewProvider implements PreviewProviderInterface {
 
     const string VIEWPORT_DESKTOP = '1366x768';
-    const string VIEWPORT_MOBILE = '360x640';
-    const int    WIDTH_DESKTOP = 1366;
-    const int    WIDTH_MOBILE  = 360;
+    const string VIEWPORT_MOBILE  = '360x640';
+    const int    WIDTH_DESKTOP    = 1366;
+    const int    WIDTH_MOBILE     = 360;
 
     /**
      * @var string
      */
     protected string $prefix = 'af';
-
 
     /**
      * @var AbstractImageHelper
@@ -60,14 +59,14 @@ abstract class AbstractPreviewProvider implements PreviewProviderInterface{
      * @param LoggingService       $loggingService
      */
     public function __construct(
-        HelperService $helperService,
-        FileCacheService $fileCacheService,
+        HelperService                  $helperService,
+        FileCacheService               $fileCacheService,
         protected ConfigurationService $config,
-        protected IClientService $httpClientService,
-        protected LoggingService $loggingService
+        protected IClientService       $httpClientService,
+        protected LoggingService       $loggingService
     ) {
-        $this->imageHelper       = $helperService->getImageHelper();
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
+        $this->imageHelper      = $helperService->getImageHelper();
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::PREVIEW_CACHE);
     }
 
     /**
@@ -123,10 +122,10 @@ abstract class AbstractPreviewProvider implements PreviewProviderInterface{
     protected function getPreviewFilename(
         string $domain,
         string $view,
-        int $minWidth = null,
-        int $minHeight = null,
-        int $maxWidth = null,
-        int $maxHeight = null
+        ?int   $minWidth = null,
+        ?int   $minHeight = null,
+        ?int   $maxWidth = null,
+        ?int   $maxHeight = null
     ): string {
         if($minWidth !== null) {
             return "{$this->prefix}_{$domain}_{$view}_{$minWidth}x{$minHeight}_{$maxWidth}x{$maxHeight}.jpg";

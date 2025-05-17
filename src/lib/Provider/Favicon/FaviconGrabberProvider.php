@@ -154,7 +154,7 @@ class FaviconGrabberProvider extends AbstractFaviconProvider {
      *
      * @return null|string
      */
-    protected function loadIcon(string $url, string $data = null): ?string {
+    protected function loadIcon(string $url, ?string $data = null): ?string {
         $request = $this->requestService->newClient();
         try {
             $response = $request->get($url, ['idn_conversion' => true]);

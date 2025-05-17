@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Password;
@@ -18,25 +22,13 @@ use OCP\EventDispatcher\Event;
 class AfterPasswordClonedEvent extends Event {
 
     /**
-     * @var Password
-     */
-    protected Password $original;
-
-    /**
-     * @var Password
-     */
-    protected Password $clone;
-
-    /**
      * BeforePasswordClonedEvent constructor.
      *
      * @param Password $original
      * @param Password $clone
      */
-    public function __construct(Password $original, Password $clone) {
+    public function __construct(protected Password $original, protected Password $clone) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
     }
 
     /**

@@ -26,26 +26,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 class UserDeleteCommand extends AbstractInteractiveCommand {
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var DeleteUserDataHelper
-     */
-    protected DeleteUserDataHelper $deleteUserData;
-
-    /**
-     * @var BackgroundJobService
-     */
-    protected BackgroundJobService $backgroundJobs;
-
-    /**
      * UserDeleteCommand constructor.
      *
      * @param IUserManager         $userManager
@@ -54,12 +34,14 @@ class UserDeleteCommand extends AbstractInteractiveCommand {
      * @param BackgroundJobService $backgroundJobs
      * @param string|null          $name
      */
-    public function __construct(IUserManager $userManager, ConfigurationService $config, DeleteUserDataHelper $deleteUserData, BackgroundJobService $backgroundJobs, string $name = null) {
+    public function __construct(
+        protected IUserManager $userManager,
+        protected ConfigurationService $config,
+        protected DeleteUserDataHelper $deleteUserData,
+        protected BackgroundJobService $backgroundJobs,
+        ?string $name = null
+    ) {
         parent::__construct($name);
-        $this->userManager    = $userManager;
-        $this->config         = $config;
-        $this->deleteUserData = $deleteUserData;
-        $this->backgroundJobs = $backgroundJobs;
     }
 
     /**

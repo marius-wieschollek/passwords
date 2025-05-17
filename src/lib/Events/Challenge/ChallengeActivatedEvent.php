@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2025 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -22,25 +22,13 @@ use OCP\EventDispatcher\Event;
 class ChallengeActivatedEvent extends Event {
 
     /**
-     * @var Challenge
-     */
-    protected Challenge $challenge;
-
-    /**
-     * @var string
-     */
-    protected string    $key;
-
-    /**
      * ChallengeActivatedEvent constructor.
      *
      * @param Challenge $challenge
      * @param string    $key
      */
-    public function __construct(Challenge $challenge, string $key) {
+    public function __construct(protected Challenge $challenge, protected string $key) {
         parent::__construct();
-        $this->challenge = $challenge;
-        $this->key       = $key;
     }
 
     /**

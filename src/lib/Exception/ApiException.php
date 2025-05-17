@@ -16,10 +16,6 @@ use Throwable;
  * @package OCA\Passwords\Exception
  */
 class ApiException extends Exception {
-    /**
-     * @var int
-     */
-    private int $httpCode;
 
     /**
      * ApiException constructor.
@@ -28,22 +24,21 @@ class ApiException extends Exception {
      * @param int            $httpCode
      * @param Throwable|null $previous
      */
-    public function __construct(string $message = "", int $httpCode = 500, ?Throwable $previous = null) {
+    public function __construct(string $message = "", private int $httpCode = 500, ?Throwable $previous = null) {
         parent::__construct($message, E_USER_ERROR, $previous);
-        $this->httpCode = $httpCode;
     }
 
     /**
      * @return int
      */
-    public function getHttpCode() {
+    public function getHttpCode(): int {
         return $this->httpCode;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getId() {
+    public function getId(): string {
         return hash('crc32', $this->getMessage());
     }
 }

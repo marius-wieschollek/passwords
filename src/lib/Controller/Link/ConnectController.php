@@ -218,7 +218,7 @@ class ConnectController extends Controller {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    public function confirm(string $label = null): JSONResponse {
+    public function confirm(?string $label = null): JSONResponse {
         $registration = $this->getRegistrationFromSession();
         if($registration === null || $registration->getStatus() !== 1) {
             return new JSONResponse(['success' => false], Http::STATUS_NOT_FOUND);
@@ -257,7 +257,7 @@ class ConnectController extends Controller {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     #[AnonRateLimit(limit: 3, period: 60)]
-    public function apply(string $id, array $codes, string $label = null): JSONResponse {
+    public function apply(string $id, array $codes, ?string $label = null): JSONResponse {
         try {
             /** @var Registration $registration */
             $registration = $this->registrationService->findByUuid($id);

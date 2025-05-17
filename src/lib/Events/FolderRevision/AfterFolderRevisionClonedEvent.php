@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\FolderRevision;
@@ -18,25 +22,13 @@ use OCP\EventDispatcher\Event;
 class AfterFolderRevisionClonedEvent extends Event {
 
     /**
-     * @var FolderRevision
-     */
-    protected FolderRevision $original;
-
-    /**
-     * @var FolderRevision
-     */
-    protected FolderRevision $clone;
-
-    /**
      * BeforeFolderRevisionClonedEvent constructor.
      *
      * @param FolderRevision $original
      * @param FolderRevision $clone
      */
-    public function __construct(FolderRevision $original, FolderRevision $clone) {
+    public function __construct(protected FolderRevision $original, protected FolderRevision $clone) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
     }
 
     /**

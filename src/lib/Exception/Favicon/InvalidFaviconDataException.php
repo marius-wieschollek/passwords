@@ -23,10 +23,10 @@ class InvalidFaviconDataException extends Exception {
     /**
      * InvalidFaviconDataException constructor.
      *
-     * @param string          $mime
+     * @param string         $mime
      * @param Throwable|null $previous
      */
-    public function __construct(string $mime, Throwable $previous = null) {
+    public function __construct(string $mime, ?Throwable $previous = null) {
         parent::__construct(static::EXCEPTION_MESSAGE.$mime, static::EXCEPTION_CODE, $previous);
     }
 }

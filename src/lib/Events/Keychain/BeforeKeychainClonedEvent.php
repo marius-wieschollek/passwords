@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Keychain;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforeKeychainClonedEvent extends Event {
 
     /**
-     * @var Keychain
-     */
-    protected Keychain $original;
-
-    /**
-     * @var Keychain
-     */
-    protected Keychain $clone;
-
-    /**
-     * @var array
-     */
-    protected array    $overwrites;
-
-    /**
      * BeforeKeychainClonedEvent constructor.
      *
      * @param Keychain $original
      * @param Keychain $clone
      * @param array    $overwrites
      */
-    public function __construct(Keychain $original, Keychain $clone, array $overwrites) {
+    public function __construct(protected Keychain $original, protected Keychain $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Registration;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforeRegistrationClonedEvent extends Event {
 
     /**
-     * @var Registration
-     */
-    protected Registration $original;
-
-    /**
-     * @var Registration
-     */
-    protected Registration $clone;
-
-    /**
-     * @var array
-     */
-    protected array        $overwrites;
-
-    /**
      * BeforeRegistrationClonedEvent constructor.
      *
      * @param Registration $original
      * @param Registration $clone
      * @param array        $overwrites
      */
-    public function __construct(Registration $original, Registration $clone, array $overwrites) {
+    public function __construct(protected Registration $original, protected Registration $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

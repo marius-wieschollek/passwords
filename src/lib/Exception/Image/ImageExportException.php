@@ -23,7 +23,7 @@ class ImageExportException extends Exception {
      *
      * @param Throwable|null $previous
      */
-    public function __construct(string $format, Throwable $previous = null) {
+    public function __construct(string $format, ?Throwable $previous = null) {
         parent::__construct("Could not convert image to {$format}", static::EXCEPTION_CODE, $previous);
     }
 }

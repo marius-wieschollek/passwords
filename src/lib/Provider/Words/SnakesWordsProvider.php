@@ -90,7 +90,7 @@ class SnakesWordsProvider extends AbstractWordsProvider {
     /**
      * @param array $options
      *
-     * @return mixed
+     * @return resource|string
      * @throws Exception
      */
     protected function getHttpRequest(array $options = []) {

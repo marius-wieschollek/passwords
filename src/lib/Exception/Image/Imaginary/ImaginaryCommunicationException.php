@@ -22,7 +22,7 @@ class ImaginaryCommunicationException extends \Exception {
      *
      * @param Throwable|null $previous
      */
-    public function __construct(string $message, Throwable $previous = null) {
+    public function __construct(string $message, ?Throwable $previous = null) {
         parent::__construct($message, static::EXCEPTION_CODE, $previous);
     }
 }

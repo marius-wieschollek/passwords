@@ -26,7 +26,7 @@ abstract class AbstractInteractiveCommand extends Command {
      *
      * @param string|null $name
      */
-    public function __construct(string $name = null) {
+    public function __construct(?string $name = null) {
         parent::__construct($name);
     }
 

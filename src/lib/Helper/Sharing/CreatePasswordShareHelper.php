@@ -87,9 +87,9 @@ class CreatePasswordShareHelper {
         string $password,
         string $receiver,
         string $type = 'user',
-        int $expires = null,
-        bool $editable = false,
-        bool $shareable = false
+        ?int   $expires = null,
+        bool   $editable = false,
+        bool   $shareable = false
     ) {
         $expires = $this->checkExpires($expires);
         $this->checkType($type);

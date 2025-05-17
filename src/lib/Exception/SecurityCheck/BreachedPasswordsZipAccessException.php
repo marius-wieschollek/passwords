@@ -23,7 +23,11 @@ use ZipArchive;
 class BreachedPasswordsZipAccessException extends Exception {
     const int EXCEPTION_CODE = 108;
 
-    public function __construct($errorCode, Throwable $previous = null) {
+    /**
+     * @param                $errorCode
+     * @param Throwable|null $previous
+     */
+    public function __construct($errorCode, ?Throwable $previous = null) {
         if($errorCode === ZipArchive::ER_EXISTS) $errorCode = 'ZipArchive::ER_EXISTS ('.ZipArchive::ER_EXISTS.')';
         if($errorCode === ZipArchive::ER_INCONS) $errorCode = 'ZipArchive::ER_INCONS ('.ZipArchive::ER_INCONS.')';
         if($errorCode === ZipArchive::ER_INVAL) $errorCode = 'ZipArchive::ER_INVAL ('.ZipArchive::ER_INVAL.')';

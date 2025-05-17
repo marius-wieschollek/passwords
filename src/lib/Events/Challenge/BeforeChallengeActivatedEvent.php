@@ -1,6 +1,6 @@
 <?php
 /*
- * @copyright 2020 Passwords App
+ * @copyright 2025 Passwords App
  *
  * @author Marius David Wieschollek
  * @license AGPL-3.0
@@ -21,25 +21,13 @@ use OCP\EventDispatcher\Event;
 class BeforeChallengeActivatedEvent extends Event {
 
     /**
-     * @var array
-     */
-    protected array $clientData;
-
-    /**
-     * @var string
-     */
-    protected string $secret;
-
-    /**
      * BeforeChallengeActivatedEvent constructor.
      *
      * @param array  $clientData
      * @param string $secret
      */
-    public function __construct(array $clientData, string $secret) {
+    public function __construct(protected array $clientData, protected string $secret) {
         parent::__construct();
-        $this->clientData = $clientData;
-        $this->secret     = $secret;
     }
 
     /**

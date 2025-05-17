@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Tag;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforeTagClonedEvent extends Event {
 
     /**
-     * @var Tag
-     */
-    protected Tag $original;
-
-    /**
-     * @var Tag
-     */
-    protected Tag $clone;
-
-    /**
-     * @var array
-     */
-    protected array $overwrites;
-
-    /**
      * BeforeTagClonedEvent constructor.
      *
      * @param Tag   $original
      * @param Tag   $clone
      * @param array $overwrites
      */
-    public function __construct(Tag $original, Tag $clone, array $overwrites) {
+    public function __construct(protected Tag $original, protected Tag $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

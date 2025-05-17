@@ -24,7 +24,7 @@ class UnexpectedResponseCodeException extends Exception {
      * @param                $responseCode
      * @param Throwable|null $previous
      */
-    public function __construct($responseCode, Throwable $previous = null) {
+    public function __construct($responseCode, ?Throwable $previous = null) {
         parent::__construct('Favicon service returned unexpected HTTP Response code '.$responseCode, static::EXCEPTION_CODE, $previous);
     }
 }

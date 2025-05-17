@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\PasswordTagRelation;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforePasswordTagRelationClonedEvent extends Event {
 
     /**
-     * @var PasswordTagRelation
-     */
-    protected PasswordTagRelation $original;
-
-    /**
-     * @var PasswordTagRelation
-     */
-    protected PasswordTagRelation $clone;
-
-    /**
-     * @var array
-     */
-    protected array               $overwrites;
-
-    /**
      * BeforePasswordTagRelationClonedEvent constructor.
      *
      * @param PasswordTagRelation $original
      * @param PasswordTagRelation $clone
      * @param array               $overwrites
      */
-    public function __construct(PasswordTagRelation $original, PasswordTagRelation $clone, array $overwrites) {
+    public function __construct(protected PasswordTagRelation $original, protected PasswordTagRelation $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

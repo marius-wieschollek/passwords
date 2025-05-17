@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Folder;
@@ -18,32 +22,14 @@ use OCP\EventDispatcher\Event;
 class BeforeFolderClonedEvent extends Event {
 
     /**
-     * @var Folder
-     */
-    protected Folder $original;
-
-    /**
-     * @var Folder
-     */
-    protected Folder $clone;
-
-    /**
-     * @var array
-     */
-    protected array  $overwrites;
-
-    /**
      * BeforeFolderClonedEvent constructor.
      *
      * @param Folder $original
      * @param Folder $clone
      * @param array  $overwrites
      */
-    public function __construct(Folder $original, Folder $clone, array $overwrites) {
+    public function __construct(protected Folder $original, protected Folder $clone, protected array $overwrites) {
         parent::__construct();
-        $this->original = $original;
-        $this->clone = $clone;
-        $this->overwrites = $overwrites;
     }
 
     /**

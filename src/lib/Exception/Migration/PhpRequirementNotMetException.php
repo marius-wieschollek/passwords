@@ -28,7 +28,7 @@ class PhpRequirementNotMetException extends Exception {
      * @param                $minimumVersion
      * @param Throwable|null $previous
      */
-    public function __construct($currentVersion, $minimumVersion, Throwable $previous = null) {
+    public function __construct($currentVersion, $minimumVersion, ?Throwable $previous = null) {
         parent::__construct(
             "You are using PHP {$currentVersion} but this release of the passwords app requires at least PHP {$minimumVersion}. See https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Migrations/Minimum-Requirement-Error for help.",
             E_USER_ERROR,

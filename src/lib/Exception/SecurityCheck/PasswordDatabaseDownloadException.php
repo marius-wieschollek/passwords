@@ -22,19 +22,18 @@ use Throwable;
  */
 class PasswordDatabaseDownloadException extends Exception {
     const int EXCEPTION_CODE       = 106;
-    const string EXCEPTION_MESSAGE = '';
 
     /**
      * PasswordDatabaseDownloadException constructor.
      *
      * @param Throwable|null $previous
      */
-    public function __construct(Throwable $previous = null) {
+    public function __construct(?Throwable $previous = null) {
         $message = 'Failed to download common passwords zip file';
         if($previous instanceof ClientException) {
-            $message .= " HTTP {$previous->getResponse()->getStatusCode()}";
+            $message .= ": HTTP {$previous->getResponse()->getStatusCode()}";
         } else if($previous instanceof Throwable) {
-            $message .= ' '.$previous->getMessage();
+            $message .= ': '.$previous->getMessage();
         }
 
         parent::__construct($message, static::EXCEPTION_CODE, $previous);

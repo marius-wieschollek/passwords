@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Tag;
@@ -18,18 +22,12 @@ use OCP\EventDispatcher\Event;
 class GenericTagEvent extends Event {
 
     /**
-     * @var Tag
-     */
-    protected Tag $Tag;
-
-    /**
      * GenericTagEvent constructor.
      *
      * @param Tag $Tag
      */
-    public function __construct(Tag $Tag) {
+    public function __construct(protected Tag $Tag) {
         parent::__construct();
-        $this->Tag = $Tag;
     }
 
     /**

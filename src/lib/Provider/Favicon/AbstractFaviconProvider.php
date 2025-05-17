@@ -118,7 +118,7 @@ abstract class AbstractFaviconProvider implements FaviconProviderInterface {
      *
      * @return string
      */
-    protected function getFaviconFilename(string $domain, int $size = null): string {
+    protected function getFaviconFilename(string $domain, ?int $size = null): string {
         $domain = idn_to_utf8($domain);
         if($size !== null) {
             return "{$this->prefix}_{$domain}_{$size}.png";

@@ -1,8 +1,12 @@
 <?php
-/**
+/*
+ * @copyright 2025 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Events\Tag;
@@ -19,25 +23,13 @@ use OCP\EventDispatcher\Event;
 class AfterTagSetRevisionEvent extends Event {
 
     /**
-     * @var Tag
-     */
-    protected Tag $Tag;
-
-    /**
-     * @var TagRevision
-     */
-    protected TagRevision $revision;
-
-    /**
      * AfterTagSetRevisionEvent constructor.
      *
      * @param Tag         $Tag
      * @param TagRevision $revision
      */
-    public function __construct(Tag $Tag, TagRevision $revision) {
+    public function __construct(protected Tag $Tag, protected TagRevision $revision) {
         parent::__construct();
-        $this->Tag = $Tag;
-        $this->revision = $revision;
     }
 
     /**
