@@ -167,7 +167,7 @@ class ConfigurationService {
      */
     public function getServerSecret(): ?string {
         return $this->getSystemValue(
-            'passwords_secret',
+            'passwords.secret',
             $this->getSystemValue('secret')
         );
     }
@@ -179,7 +179,7 @@ class ConfigurationService {
      */
     public function setServerSecret(string $secret): void {
         $this->setSystemValue(
-            'passwords_secret',
+            'passwords.secret',
             $secret
         );
     }
