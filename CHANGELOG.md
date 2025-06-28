@@ -1,7 +1,9 @@
 ## [Unreleased]
-## 2025.6.0 - Feature release
+## 2025.7.0 - Feature release
 ### Added
 - Server secret for app only
+### Fixed
+- Password label from website name not working for IPs
 
 ## 2025.5.1 - Bugfix release
 ### Fixed
