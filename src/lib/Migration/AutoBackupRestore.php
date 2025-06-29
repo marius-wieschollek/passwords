@@ -108,13 +108,13 @@ class AutoBackupRestore implements IRepairStep {
     public function run(IOutput $output) {
         $enabled = $this->config->getAppValue(Application::APP_NAME, 'backup/update/autorestore', true);
         if(!$enabled || !empty($this->passwordRevisionMapper->findAll()) || !empty($this->folderRevisionMapper->findAll()) || !empty($this->tagRevisionMapper->findAll())) {
-            $this->config->setAppValue(Application::APP_NAME, 'backup/update/restored', 0);
+            $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 0);
             return;
         }
 
         $backups = $this->backupService->getBackups();
         if(empty($backups)) {
-            $this->config->setAppValue(Application::APP_NAME, 'backup/update/restored', 1);
+            $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 1);
             return;
         }
         $backups = array_reverse($backups, true);
@@ -135,11 +135,11 @@ class AutoBackupRestore implements IRepairStep {
                     ];
                     $this->backupService->restoreBackup($name, $options);
                     $this->sendNotification('sendBackupRestoredNotification', $name);
-                    $this->config->setAppValue(Application::APP_NAME, 'backup/update/restored', 2);
+                    $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 2);
                     break;
                 } catch(\Throwable $e) {
                     $this->sendNotification('sendBackupRestoredNotification', $name);
-                    $this->config->setAppValue(Application::APP_NAME, 'backup/update/restored', 3);
+                    $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 3);
                 }
             }
         }
