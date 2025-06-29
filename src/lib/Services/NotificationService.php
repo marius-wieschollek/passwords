@@ -253,6 +253,12 @@ class NotificationService implements INotifier {
         );
     }
 
+    /**
+     * @param string $userId
+     * @param string $reason
+     *
+     * @return void
+     */
     public function sendUserExportNotPossibleNotification(string $userId, string $reason) {
         $this->sendNotification(
             $this->exportNotPossibleNotification,
@@ -261,6 +267,12 @@ class NotificationService implements INotifier {
         );
     }
 
+    /**
+     * @param string $userId
+     * @param string $reason
+     *
+     * @return void
+     */
     public function sendBreachedPasswordsUpdateFailedNotification(string $userId, string $reason) {
         $this->sendNotification(
             $this->breachedPasswordsUpdateFailedNotification,

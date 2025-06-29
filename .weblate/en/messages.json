@@ -3373,5 +3373,22 @@
     "frontend-CompatWASMHandbookLink": {
         "message": "A guide to enable WebAssembly can be found in the Passwords App handbook.",
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Breached passwords database update",
+        "description": "Name of the setup check for the breached passwords database update"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "The breached passwords database can not be updated: $STR_1$",
+        "description": "Warning text of the setup check for the breached passwords update download when the download failed",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "Update of breached passwords database has not reported errors.",
+        "description": "Message of the setup check for the breached passwords database update when no errors are known"
     }
 }

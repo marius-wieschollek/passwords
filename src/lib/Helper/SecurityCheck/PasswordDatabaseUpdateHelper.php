@@ -20,7 +20,9 @@ use Throwable;
 
 class PasswordDatabaseUpdateHelper {
 
-    protected const string CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
+    public const string CONFIG_UPDATE_ATTEMPTS = 'passwords/db/attempts';
+
+    public const string CONFIG_UPDATE_ERROR_MESSAGE = 'passwords/db/error/message';
 
     public function __construct(
         protected SecurityCheckProviderInterface $securityCheckProvider,
@@ -55,10 +57,13 @@ class PasswordDatabaseUpdateHelper {
         return true;
     }
 
-    protected function registerUpdateAttempt() {
-        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
+    /**
+     * @return bool
+     */
+    protected function registerUpdateAttempt(): bool {
+        $attempts = $this->config->getAppValueInt(self::CONFIG_UPDATE_ATTEMPTS);
         $attempts++;
-        $this->config->setAppValue(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
+        $this->config->setAppValueInt(self::CONFIG_UPDATE_ATTEMPTS, $attempts);
         if($attempts > 3) {
             if($attempts === 4) {
                 $this->sendUpdateFailureNotification('Too many failed attempts');
@@ -83,7 +88,8 @@ class PasswordDatabaseUpdateHelper {
      */
     protected function registerUpdateFailure(Throwable $e): void {
         $this->logger->logException($e, [], 'Could not update breached passwords database: '.$e->getMessage());
-        $attempts = intval($this->config->getAppValue(self::CONFIG_UPDATE_ATTEMPTS, 0));
+        $this->config->setAppValue(self::CONFIG_UPDATE_ERROR_MESSAGE, $e->getMessage());
+        $attempts = $this->config->getAppValueInt(self::CONFIG_UPDATE_ATTEMPTS);
         if($attempts >= 2) $this->sendUpdateFailureNotification($e->getMessage());
     }
 
@@ -92,6 +98,7 @@ class PasswordDatabaseUpdateHelper {
      */
     protected function registerUpdateSuccess(): void {
         $this->config->deleteAppValue(self::CONFIG_UPDATE_ATTEMPTS);
+        $this->config->deleteAppValue(self::CONFIG_UPDATE_ERROR_MESSAGE);
     }
 
     /**

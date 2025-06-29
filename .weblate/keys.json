@@ -780,5 +780,8 @@
     "backend-CronSetupCheckName": "Checking if the server runs background jobs with cron.",
     "backend-CronSetupCheckSuccess": "Background jobs are executed with cron.",
     "backend-CronPhpVersionSetupCheckName": "Checking if the server runs background tasks with the same PHP version.",
-    "backend-CronPhpVersionSetupCheckSuccess": "Background jobs are executed with the same PHP version."
+    "backend-CronPhpVersionSetupCheckSuccess": "Background jobs are executed with the same PHP version.",
+    "backend-BreachedPasswordsDbUpdateCheck": "Breached passwords database update",
+    "backend-BreachedPasswordsDbUpdateCheckWarning": "Update of breached passwords database failed: %1$s",
+    "backend-BreachedPasswordsDbUpdateCheckOk": "Update of breached passwords database has not reported errors."
 }

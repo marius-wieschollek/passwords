@@ -69,6 +69,28 @@ class ConfigurationService {
     }
 
     /**
+     * @param string   $key
+     * @param int $default
+     * @param string   $app
+     *
+     * @return int
+     */
+    public function getAppValueInt(string $key, int $default = 0, string $app = Application::APP_NAME): int {
+        return $this->appConfig->getValueInt($app, $key, $default);
+    }
+
+    /**
+     * @param string   $key
+     * @param bool $default
+     * @param string   $app
+     *
+     * @return bool
+     */
+    public function getAppValueBool(string $key, bool $default = false, string $app = Application::APP_NAME): bool {
+        return $this->appConfig->getValueBool($app, $key, $default);
+    }
+
+    /**
      * @param string $key
      * @param null   $default
      *
@@ -97,6 +119,22 @@ class ConfigurationService {
      */
     public function setAppValue(string $key, string $value): void {
         $this->appConfig->setValueString(Application::APP_NAME, $key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @param int $value
+     */
+    public function setAppValueInt(string $key, int $value): void {
+        $this->appConfig->setValueInt(Application::APP_NAME, $key, $value);
+    }
+
+    /**
+     * @param string $key
+     * @param bool $value
+     */
+    public function setAppValueBool(string $key, bool $value): void {
+        $this->appConfig->setValueBool(Application::APP_NAME, $key, $value);
     }
 
     /**
