@@ -3365,5 +3365,19 @@
     },
     "frontend-CompatWASMHandbookLink": {
         "message": "A guide to enable WebAsembly can be found in the Passwords App Handbook."
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "تحديث قاعدة بيانات كلمات السر"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "لا يمكن تحديث قاعدة بيانات كلمات السر المنتهكة: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "ولم يُبلغ عن حدوث أخطاء في تحديث قاعدة بيانات كلمات السر المنتهكة."
     }
 }
