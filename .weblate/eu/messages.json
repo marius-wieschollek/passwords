@@ -3266,5 +3266,19 @@
     },
     "backend-000446": {
         "message": "Gordeta"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "Pasahitz urratuen datu-basearen eguneratzeak ez du errorerik jakinarazi."
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Pasahitzen datu-basearen eguneratzea"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "Pasahitzen datu-basea ezin da eguneratu: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
