@@ -3264,5 +3264,19 @@
     },
     "frontend-Donate": {
         "message": "Donate"
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Actualització de la base de dades de contrasenyes resumides"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "No s' ha pogut actualitzar la base de dades d' interrupció: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "L' actualització de la base de dades de contrasenyes trencades no ha informat d' errors."
     }
 }
