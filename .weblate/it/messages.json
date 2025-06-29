@@ -3361,5 +3361,19 @@
     "frontend-CompatWASMText3": {
         "message": "Se il vostro browser non supporta WebAssembly, verificate se è disponibile un aggiornamento per il vostro browser o scegliete un browser moderno e compatibile dall'elenco seguente.",
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Aggiornamento del database delle password violate"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "Il database delle password violate non può essere aggiornato: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "L'aggiornamento del database delle password violate non ha riportato errori."
     }
 }
