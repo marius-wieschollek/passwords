@@ -3361,10 +3361,10 @@
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
-        "message": "Update der Datenbank für verletzte Kennwörter"
+        "message": "Update der Datenbank für kompromittierte Passwörter"
     },
     "backend-BreachedPasswordsDbUpdateCheckWarning": {
-        "message": "Die Datenbank mit den verletzten Passwörtern kann nicht aktualisiert werden: $STR_1$",
+        "message": "Die Datenbank mit den kompromittierten Passwörtern kann nicht aktualisiert werden: $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3372,6 +3372,6 @@
         }
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
-        "message": "Die Aktualisierung der Datenbank mit den verletzten Passwörtern hat keine Fehler gemeldet."
+        "message": "Die Aktualisierung der Datenbank mit den kompromittierten Passwörtern hat keine Fehler gemeldet."
     }
 }
