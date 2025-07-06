@@ -3361,5 +3361,19 @@
     "frontend-CompatWASMText3": {
         "message": "Si votre navigateur ne prend pas en charge WebAssembly, vérifiez si une mise à jour est disponible pour votre navigateur ou choisissez un navigateur moderne et compatible dans la liste ci-dessous.",
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Mise à jour de la base de données des mots de passe inaccessibles"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "La base de données des mots de passe rompus ne peut pas être mise à jour : $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "La mise à jour de la base de données des mots de passe rompus n'a pas signalé d'erreurs."
     }
 }

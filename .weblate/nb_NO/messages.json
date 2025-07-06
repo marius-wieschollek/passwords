@@ -3368,5 +3368,19 @@
     "frontend-CompatWASMHandbookLink": {
         "message": "Du finner en veiledning for aktivering av WebAssembly i håndboken for Passwords App.",
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "Oppdater passorddatabasen"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "Oppdatering av brudd på passorddatabasen har ikke rapportert feil."
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "Den bruddne passorddatabasen kan ikke oppdateres: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
     }
 }
