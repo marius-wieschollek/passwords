@@ -3361,5 +3361,19 @@
     "frontend-CompatWASMHandbookLink": {
         "message": "启用 WebAssembly 的指南可在密码应用程序手册中找到。",
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "被破解的密码数据库更新"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "被破解的密码数据库无法更新：$STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "更新被破解的密码数据库时未报告错误。"
     }
 }
