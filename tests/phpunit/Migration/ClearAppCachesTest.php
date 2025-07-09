@@ -60,6 +60,8 @@ class ClearAppCachesTest extends TestCase {
                                        1 => $this->assertEquals($param, FileCacheService::DEFAULT_CACHE),
                                        2 => $this->assertEquals($param, FileCacheService::AVATAR_CACHE),
                                    };
+
+                                   return true;
                                });
 
         $this->fileCacheService->method('getCache')->willReturn(new SimpleFolder());
@@ -75,7 +77,7 @@ class ClearAppCachesTest extends TestCase {
      *
      */
     public function testDeletesBrokenFavicons() {
-        $this->fileCacheService->method('clearCache');
+        $this->fileCacheService->method('clearCache')->willReturn(true);
 
         $goodFavicon = $this->createMock(SimpleFile::class);
         $goodFavicon->expects($this->once())->method('getSize')->willReturn(123);
