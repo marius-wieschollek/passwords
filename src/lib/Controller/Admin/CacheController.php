@@ -54,9 +54,9 @@ class CacheController extends ApiController {
      * @param ConfigurationService $config
      */
     public function __construct(
-        string $appName,
-        IRequest $request,
-        FileCacheService $fileCacheService,
+        string               $appName,
+        IRequest             $request,
+        FileCacheService     $fileCacheService,
         ConfigurationService $config
     ) {
         parent::__construct(
@@ -105,7 +105,11 @@ class CacheController extends ApiController {
         if(!isset($info[ $id ])) {
             throw new ApiException('Cache not found', Http::STATUS_NOT_FOUND);
         } else if($info[ $id ]['clearable']) {
-            $this->fileCacheService->clearCache($id);
+            $result = $this->fileCacheService->clearCache($id);
+
+            if(!$result) {
+                throw new ApiException('Clearing cache failed', Http::STATUS_INTERNAL_SERVER_ERROR);
+            }
         } else {
             throw new ApiException('Cache not clearable', Http::STATUS_UNAUTHORIZED);
         }
@@ -120,7 +124,7 @@ class CacheController extends ApiController {
         $caches = $this->fileCacheService->listCaches();
         $info   = [];
 
-        foreach ($caches as $cache) {
+        foreach($caches as $cache) {
             try {
                 $info[ $cache ]              = $this->fileCacheService->getCacheInfo($cache);
                 $info[ $cache ]['name']      = $cache;
@@ -131,7 +135,7 @@ class CacheController extends ApiController {
                 } else {
                     $info[ $cache ]['label'] = '';
                 }
-            } catch (Throwable $e) {
+            } catch(Throwable $e) {
             }
         }
 

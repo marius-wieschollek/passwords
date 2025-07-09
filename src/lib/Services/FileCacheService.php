@@ -28,11 +28,11 @@ use Throwable;
  */
 class FileCacheService {
 
-    const string DEFAULT_CACHE = 'default';
-    const string AVATAR_CACHE  = 'avatars';
-    const string FAVICON_CACHE = 'favicon';
-    const string PREVIEW_CACHE = 'preview';
-    const string PASSWORDS_CACHE = 'passwords';
+    const string DEFAULT_CACHE     = 'default';
+    const string AVATAR_CACHE      = 'avatars';
+    const string FAVICON_CACHE     = 'favicon';
+    const string PREVIEW_CACHE     = 'preview';
+    const string PASSWORDS_CACHE   = 'passwords';
     const string CACHEDIR_TAG_FILE = 'CACHEDIR.TAG';
 
     /**
@@ -146,16 +146,22 @@ class FileCacheService {
 
     /**
      * @param string|null $cache
+     *
+     * @return bool
      */
-    public function clearCache(?string $cache = null): void {
+    public function clearCache(?string $cache = null): bool {
         try {
             $this->getCache($cache)->delete();
             $class    = new ReflectionClass($this->appData);
             $property = $class->getProperty('folders');
             $property->setAccessible(true);
             $property->setValue($this->appData, new CappedMemoryCache());
+
+            return true;
         } catch(Throwable $e) {
             $this->logger->logException($e);
+
+            return false;
         }
     }
 
