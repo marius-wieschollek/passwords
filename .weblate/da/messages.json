@@ -33,7 +33,7 @@
         "message": "Installation af kryptering"
     },
     "apps-000001": {
-        "message": "embedsmand"
+        "message": "officiel"
     },
     "apps-000002": {
         "message": "af $AUTHOR$",
@@ -44,7 +44,7 @@
         }
     },
     "apps-000003": {
-        "message": "Kildekode"
+        "message": "kildekode"
     },
     "apps-000004": {
         "message": "Få mere at vide"
@@ -109,13 +109,13 @@
         "message": "Tjek, om koderne nedenfor stemmer overens med dem, der er angivet af enheden eller appen:"
     },
     "apps-000023": {
-        "message": "Link denne klient til din Nextcloud-konto uden irriterende adgangskoder og url'er"
+        "message": "Forbind denne klient til din Nextcloud-konto uden irriterende adgangskoder og url'er"
     },
     "apps-000024": {
-        "message": "Denne klient understøtter officielt vores stærke end-to-end-kryptering."
+        "message": "Denne klient understøtter officielt vores stærke end-to-end-kryptering"
     },
     "apps-000025": {
-        "message": "Denne klient vedligeholdes af forfatterne til Passwords app'en."
+        "message": "Denne klient vedligeholdes af forfatterne til Adgangskoder-app'en"
     },
     "apps-000026": {
         "message": "Klik på knappen for at forbinde en app, der er installeret på denne enhed, eller scan QR-koden med appen, hvis den er installeret på en anden enhed."
@@ -130,7 +130,7 @@
         "message": "Vælg venligst"
     },
     "backups-000031": {
-        "message": "Backup af database"
+        "message": "Sikkerhedskopiering af database"
     },
     "backups-000032": {
         "message": "Foruddefineret CSV"
@@ -144,10 +144,10 @@
         }
     },
     "backups-000035": {
-        "message": "backup af database"
+        "message": "sikkerhedskopiering af database"
     },
     "backups-000036": {
-        "message": "Brugerdefineret CSV"
+        "message": "tilpasset CSV"
     },
     "backups-000037": {
         "message": "Prøv den generiske CSV-import"
@@ -183,7 +183,7 @@
         "message": "Mærker"
     },
     "backups-000048": {
-        "message": "ParentLabel"
+        "message": "Overordnet etiket"
     },
     "backups-000049": {
         "message": "Mappe-id"
@@ -317,7 +317,7 @@
         "message": "Enkelt tilbud"
     },
     "backups-000087": {
-        "message": "Backslash"
+        "message": "Omvendt stråstreg"
     },
     "backups-000088": {
         "message": "Detektere"
@@ -903,7 +903,7 @@
         }
     },
     "frontend-000255": {
-        "message": "Aktier"
+        "message": "Delte adgangskoder"
     },
     "frontend-000256": {
         "message": "Delt $COUNT$ gange",
@@ -987,7 +987,7 @@
         }
     },
     "frontend-000277": {
-        "message": "Vælg en udløbsdato, eller lad den være tom for at dele for evigt."
+        "message": "Vælg en udløbsdato, eller lad den være tom for at dele for evigt"
     },
     "frontend-000278": {
         "message": "Vælg venligst en dato i fremtiden"
@@ -1172,7 +1172,7 @@
         "message": "Har du brug for hjælp?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Spørg i vores forum!"
+        "message": "Spørg i vores forum"
     },
     "frontend-HandbookBugsReport": {
         "message": "Rapporter en fejl"
@@ -1325,7 +1325,7 @@
         }
     },
     "frontend-000368": {
-        "message": "Du har nået den maksimale længde på 4096 tegn."
+        "message": "Du har nået den maksimale længde på 4096 tegn"
     },
     "frontend-000369": {
         "message": "Vi kunne ikke finde noget for \"$QUERY$\"",
@@ -1364,7 +1364,7 @@
         "message": "Sessionstokenet er ikke længere gyldigt. Appen vil nu genindlæse."
     },
     "frontend-000376": {
-        "message": "I dag i 2018 blev den første version af passwords offentliggjort. Tak, fordi du bruger appen."
+        "message": "I dag i 2018 blev den første version af Adgangskoder offentliggjort. Tak, fordi du bruger appen."
     },
     "frontend-Tags": {
         "message": "Mærker"
@@ -1616,7 +1616,7 @@
         }
     },
     "backend-000439": {
-        "message": "Avatars Cache ($STR_1$ filer, $STR_2$)",
+        "message": "Profilbilled-Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1627,7 +1627,7 @@
         }
     },
     "backend-000440": {
-        "message": "Favicon Cache ($STR_1$ filer, $STR_2$)",
+        "message": "Favicon-Cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1638,7 +1638,7 @@
         }
     },
     "backend-000441": {
-        "message": "Preview Cache ($STR_1$ filer, $STR_2$)",
+        "message": "Forhåndsvisnings-cache ($STR_1$ filer, $STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1735,13 +1735,13 @@
         "message": "Du har usikre adgangskoder"
     },
     "backend-000461": {
-        "message": "Et af dine passwords er ikke længere sikkert."
+        "message": "Én af dine adgangskoder er ikke længere sikker."
     },
     "backend-000462": {
         "message": "Nogle af dine adgangskoder er ikke længere sikre."
     },
     "backend-000463": {
-        "message": "Passwords tjekker regelmæssigt, om dine adgangskoder er blevet kompromitteret af et databrud."
+        "message": "Adgangskoder-app'en tjekker regelmæssigt, om dine adgangskoder er blevet kompromitteret af et databrud."
     },
     "backend-000464": {
         "message": "Dette sikkerhedstjek har fundet ud af, at et af dine adgangskoder er usikkert."
@@ -1793,7 +1793,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ delt $STR_2$ adgangskoder med dig.",
+        "message": "$STR_1$ har delt $STR_2$ adgangskoder med dig.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1877,10 +1877,10 @@
         "message": "Se adgangskoder, der er delt med mig"
     },
     "backend-000486": {
-        "message": "Et af dine passwords kan ikke deles, fordi modtageren allerede har adgang til det."
+        "message": "Én af dine adgangskoder kan ikke deles, fordi modtageren allerede har adgang til den."
     },
     "backend-000487": {
-        "message": "$STR_1$ af dine passwords kan ikke deles, fordi modtageren allerede har adgang til dem.",
+        "message": "$STR_1$ af dine adgangskoder kan ikke deles, fordi modtageren allerede har adgang til dem.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1908,7 +1908,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ logget ind på din konto på $STR_2$.",
+        "message": "$STR_1$ har logget ind på din konto på $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1933,10 +1933,10 @@
         }
     },
     "backend-000497": {
-        "message": "Hjælp os med at forbedre Passwords"
+        "message": "Hjælp os med at forbedre Adgangskoder-app'en"
     },
     "backend-000498": {
-        "message": "Du kan hjælpe os med at forbedre Passwords app'en ved at deltage i vores serverundersøgelse."
+        "message": "Du kan hjælpe os med at forbedre Adgangskoder-app'en ved at deltage i vores serverundersøgelse."
     },
     "backend-000499": {
         "message": "Dette vil sende os nogle anonymiserede data om din opsætning og valgte indstillinger."
@@ -2136,13 +2136,13 @@
         "message": "Anmodning om nulstilling af konto"
     },
     "frontend-000569": {
-        "message": "Markér adgangskoder som svage, hvis de bruges til flere konti."
+        "message": "Markér adgangskoder som svage, hvis de bruges til flere konti"
     },
     "frontend-000570": {
         "message": "Marker adgangskoder som svage, hvis de overskrider det angivne antal dage"
     },
     "frontend-000571": {
-        "message": "En højere styrke resulterer i længere og mere komplekse adgangskoder."
+        "message": "En højere styrke resulterer i længere og mere komplekse adgangskoder"
     },
     "frontend-000572": {
         "message": "Vis den valgte egenskab som titel i listevisningen"
@@ -2190,13 +2190,13 @@
         "message": "Giver dig besked, når en baggrundsoperation fejler"
     },
     "frontend-000587": {
-        "message": "Nulstil alle indstillinger på denne side til standardindstillingerne."
+        "message": "Nulstil alle indstillinger på denne side til standardindstillingerne"
     },
     "frontend-000588": {
         "message": "Dette vil nulstille alle indstillinger til deres standardindstillinger. Ønsker du at fortsætte?"
     },
     "frontend-000589": {
-        "message": "Start forfra, og slet alle konfigurationer, adgangskoder, mapper og tags."
+        "message": "Start forfra, og slet alle konfigurationer, adgangskoder, mapper og mærker"
     },
     "frontend-000590": {
         "message": "Vil du slette alle dine indstillinger, adgangskoder, mapper og tags?\nDet vil IKKE være muligt at fortryde dette."
@@ -2337,10 +2337,10 @@
         "message": "Sørg for, at denne QR-kode kun er synlig for folk, du stoler på."
     },
     "frontend-000628": {
-        "message": "Den kryptering, som serveren anvender, før dataene lagres i databasen."
+        "message": "Den kryptering som serveren anvender, før dataene lagres i databasen"
     },
     "frontend-000629": {
-        "message": "Den kryptering, som klienten anvender, før den sender data til serveren."
+        "message": "Den kryptering som klienten anvender, før den sender data til serveren"
     },
     "frontend-000630": {
         "message": "Adgangskoden er ugyldig. Session tilbagekaldt på grund af for mange mislykkede loginforsøg."
@@ -2349,7 +2349,7 @@
         "message": "Dette er en kopi af den passphrase, du valgte til kryptering. Ændring eller sletning af denne post påvirker ikke krypteringen. Passphrase kan kun ændres i indstillingerne. Du kan finde flere oplysninger i håndbogen."
     },
     "backend-000632": {
-        "message": "Favicon Service Api"
+        "message": "Favicon-service API"
     },
     "backend-000633": {
         "message": "(valgfrit)"
@@ -2394,7 +2394,7 @@
         "message": "En ny klient eller app blev forbundet til din konto"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\" har fået adgang til din $STR_2$ Passwords-konto via PassLink.",
+        "message": "\"$STR_1$\" har fået adgang til din $STR_2$ Adgangskoder-konto via PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2476,7 +2476,7 @@
         }
     },
     "backend-EOLNextcloudText1": {
-        "message": "Passwords $STR_1$ er den sidste opdatering af Nextcloud $STR_2$.",
+        "message": "Adgangskoder $STR_1$ er den sidste opdatering som understøtter Nextcloud $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2563,7 +2563,7 @@
         "message": "Klientens krypteringstilstand"
     },
     "frontend-Enable": {
-        "message": "Aktiver"
+        "message": "Aktivér"
     },
     "settings-000693": {
         "message": "Skift adgangskode"
@@ -2614,10 +2614,10 @@
         "message": "Tilføj specialtegn til genererede adgangskoder"
     },
     "settings-000709": {
-        "message": "Angiv, hvor lang tid der skal gå efter en anmodning, før sessionen annulleres."
+        "message": "Angiv hvor lang tid der skal gå efter en anmodning, før sessionen annulleres"
     },
     "settings-000710": {
-        "message": "Vælg den krypteringstype, der bruges til at kryptere data på serveren."
+        "message": "Vælg den krypteringstype, der bruges til at kryptere data på serveren"
     },
     "settings-000711": {
         "message": "Kør installationsguiden for at konfigurere kryptering af dine adgangskoder"
@@ -2643,7 +2643,7 @@
         "message": "Du kan bruge denne dialog til at ændre din hovedadgangskode."
     },
     "settings-000717": {
-        "message": "Din adgangskode skal være længere end 12 tegn og ikke den gamle adgangskode."
+        "message": "Din adgangskode skal være på mindst 12 tegn og må ikke være den gamle adgangskode"
     },
     "settings-000718": {
         "message": "Bekræft venligst din nye adgangskode"
@@ -2664,10 +2664,10 @@
         "message": "Åbn indstillingssiden i håndbogen"
     },
     "settings-000724": {
-        "message": "Send keep-alive-anmodninger til serveren for at forhindre sessionen i at blive afbrudt."
+        "message": "Send keep-alive-anmodninger til serveren for at forhindre sessionen i at blive afbrudt"
     },
     "settings-000725": {
-        "message": "Vælg den krypteringstype, der bruges til at kryptere data på klienten, før de sendes til serveren."
+        "message": "Vælg den krypteringstype der bruges til at kryptere data på klienten, før de sendes til serveren"
     },
     "settings-000726": {
         "message": "SHA-1-hash bruges til at kontrollere, om adgangskoder er blevet brudt. En delvis hash kan forhindre brute force-angreb, hvis serveren bliver hacket, men kan også medføre, at sikre adgangskoder fejlagtigt rapporteres som brudte."
@@ -2893,7 +2893,7 @@
         "message": "Du kan finde dem alle under \"Mere\", men vi har samlet de mest almindelige her:"
     },
     "tutorial-000778": {
-        "message": "Passwords tilbyder moderne og stærk kryptering for at beskytte dine data mod nysgerrige blikke."
+        "message": "Adgangskoder-app'en tilbyder moderne og stærk kryptering for at beskytte dine data mod nysgerrige blikke."
     },
     "tutorial-000779": {
         "message": "Vælg en sikker adgangskode nedenfor for at aktivere den ultimative beskyttelse af dine adgangskoder."
@@ -2929,7 +2929,7 @@
         "message": "Indtast en adgangskode med 12 tegn eller mere"
     },
     "tutorial-000790": {
-        "message": "Din adgangskode skal bestå af mindst 12 tegn, og bekræftelsesadgangskoden skal være den samme."
+        "message": "Din adgangskode skal bestå af mindst 12 tegn, og bekræftelsesadgangskoden skal være den samme"
     },
     "backend-Passwords": {
         "message": "Adgangskoder"
@@ -3095,7 +3095,7 @@
         }
     },
     "backend-EOLPHPText1": {
-        "message": "Passwords $STR_1$ er den seneste opdatering af PHP $STR_3$.",
+        "message": "Adgangskoder $STR_1$ er den seneste opdatering af PHP $STR_3$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud. ($STR_1$: App version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3125,7 +3125,7 @@
         }
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "Passwords slutter opdateringer til Nextcloud $STR_1$ og PHP $STR_2$",
+        "message": "Adgangskoder slutter opdateringer til Nextcloud $STR_1$ og PHP $STR_2$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: Installed Nextcloud version, $STR_2$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3137,7 +3137,7 @@
         }
     },
     "backend-EOLNextcloudPHPText1": {
-        "message": "Passwords $STR_1$ er den sidste opdatering til Nextcloud $STR_2$ og PHP $STR_3$.",
+        "message": "Adgangskoder $STR_1$ er den sidste opdatering til Nextcloud $STR_2$ og PHP $STR_3$.",
         "description": "Text in the end of support notification for admins when they install the last release of the app for their version of Nextcloud AND PHP. ($STR_1$: App version, $STR_2$: Installed Nextcloud version, $STR_3$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3213,7 +3213,7 @@
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnLoginSetupSuccess": {
-        "message": "WebAuthn er nu aktiveret. Appen vil forsøge at bruge den gemte adgangskode, næste gang du logger ind.",
+        "message": "WebAuthn er nu aktiveret. Appen vil forsøge at bruge den gemte adgangskode, næste gang du logger ind",
         "description": "Success message of the WebAuthn setup dialog when the passphrase was saved"
     },
     "settings-SettingsWebAuthnEnable": {
@@ -3221,7 +3221,7 @@
         "description": "Label of the option in the settings to enable logging into the app using the WebAuthn protocol"
     },
     "settings-SettingsWebAuthnEnableHelp": {
-        "message": "Gem din krypteringspassphrase i denne browser, og log ind automatisk, når du åbner appen.",
+        "message": "Gem din krypteringsnøgle i denne browser, og log ind automatisk, når du åbner appen",
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
@@ -3274,7 +3274,7 @@
         "description": "Placeholder text in the Nextcloud Dashboard Widget for the search query input"
     },
     "frontend-DashboardResultsLoading": {
-        "message": "Resultaterne vil blive opdateret, når alle adgangskoder er indlæst.",
+        "message": "Resultaterne vil blive opdateret, når alle adgangskoder er indlæst",
         "description": "Text of the message in the Nextcloud Dashboard Widget if current search query returns no results but not all passwords have been loaded"
     },
     "frontend-HandbookAdminDocumentation": {
@@ -3323,7 +3323,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "tutorial-StartText1": {
-        "message": "Velkommen til Passwords App til Nextcloud, det perfekte sted at holde dine adgangskoder sikre og organiserede.",
+        "message": "Velkommen til Adgangskoder-app'en til Nextcloud, det perfekte sted at holde dine adgangskoder sikre og organiserede.",
         "description": "Initial welcome text on the first page of the first run wizard"
     },
     "tutorial-StartText2": {
@@ -3359,7 +3359,7 @@
         "description": "Error page message when the browser can not run the app because WebAssembly is not supported. Tells users to upgrade or download a different browser if theirs does not support WebAssembly."
     },
     "frontend-CompatWASMHandbookLink": {
-        "message": "En vejledning i at aktivere WebAssembly findes i håndbogen til Passwords App.",
+        "message": "Du kan finde en vejledning i at aktivere WebAssembly i håndbogen til Adgangskoder-app'en.",
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
