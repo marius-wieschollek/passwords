@@ -153,7 +153,7 @@
         "message": "Prøv den generiske CSV-import"
     },
     "backups-000038": {
-        "message": "Ingen import til din CSV?"
+        "message": "Ingen importeringsmetode til din CSV?"
     },
     "backups-000039": {
         "message": "Adgangskode til sikkerhedskopi"
@@ -832,10 +832,10 @@
         "message": "Gendannelse af adgangskode mislykkedes"
     },
     "frontend-000238": {
-        "message": "Åbn Url"
+        "message": "Åbn URL"
     },
     "frontend-000239": {
-        "message": "Kopier Url"
+        "message": "Kopier URL"
     },
     "frontend-000240": {
         "message": "Kopier bruger"
@@ -871,7 +871,7 @@
         "message": "Gendan revision"
     },
     "frontend-000246": {
-        "message": "Revision genoprettet"
+        "message": "Revision gendannet"
     },
     "frontend-000247": {
         "message": "Gendannelse af revision mislykkedes"
@@ -1027,13 +1027,13 @@
         "message": "Standard-cache (0 filer, 0 B)"
     },
     "frontend-000287": {
-        "message": "Avatars Cache (0 filer, 0 B)"
+        "message": "Profilbilledcache (0 filer, 0 B)"
     },
     "frontend-000288": {
-        "message": "Favicon Cache (0 filer, 0 B)"
+        "message": "Favicon-cache (0 filer, 0 B)"
     },
     "frontend-000289": {
-        "message": "Preview Cache (0 filer, 0 B)"
+        "message": "Forhåndsvisningscache (0 filer, 0 B)"
     },
     "frontend-000290": {
         "message": "Cache til adgangskoder (0 filer, 0 B)"
@@ -1054,7 +1054,7 @@
         "message": "Revision"
     },
     "frontend-000296": {
-        "message": "Url"
+        "message": "URL"
     },
     "frontend-000297": {
         "message": "Forælder"
@@ -1069,13 +1069,13 @@
         "message": "Gendan elementer"
     },
     "frontend-000301": {
-        "message": "Gendanner du alle ting i papirkurven?"
+        "message": "Gendan alle elementer i papirkurven?"
     },
     "frontend-000302": {
         "message": "Gendan dette element"
     },
     "frontend-000303": {
-        "message": "Genstande restaureret"
+        "message": "Elementer gendannet"
     },
     "frontend-000304": {
         "message": "Tøm papirkurven"
@@ -1084,7 +1084,7 @@
         "message": "Slet alle elementer i papirkurven?"
     },
     "frontend-000306": {
-        "message": "Affald tømt"
+        "message": "Papirkurv tømt"
     },
     "frontend-000307": {
         "message": "Søgning"
@@ -1110,7 +1110,7 @@
         "message": "Slettede elementer vil blive vist her"
     },
     "frontend-000313": {
-        "message": "Ingen adgangskoder blev delt med dig"
+        "message": "Ingen adgangskoder er delt med dig"
     },
     "frontend-000314": {
         "message": "Du har ikke delt nogen adgangskoder"
@@ -1223,7 +1223,7 @@
         "message": "1 mappe"
     },
     "frontend-000339": {
-        "message": "$TAGS$ tags",
+        "message": "$TAGS$ mærker",
         "placeholders": {
             "tags": {
                 "content": "$1"
@@ -1231,19 +1231,19 @@
         }
     },
     "frontend-000340": {
-        "message": "1 tag"
+        "message": "1 mærke"
     },
     "frontend-000341": {
-        "message": "Ikke noget"
+        "message": "Intet"
     },
     "frontend-000342": {
         "message": " og "
     },
     "frontend-000343": {
-        "message": "kamp"
+        "message": "matcher"
     },
     "frontend-000344": {
-        "message": "kampe"
+        "message": "matcher"
     },
     "frontend-000345": {
         "message": "Oprettet af"
@@ -1257,7 +1257,7 @@
         }
     },
     "frontend-000347": {
-        "message": "Login"
+        "message": "Log ind"
     },
     "frontend-000348": {
         "message": "Anmod om token igen"
@@ -1299,7 +1299,7 @@
         "message": "Vis værdi"
     },
     "frontend-000361": {
-        "message": "Annuller"
+        "message": "Annullér"
     },
     "frontend-000362": {
         "message": "Ok"
@@ -1373,14 +1373,14 @@
         "message": "Mappe"
     },
     "frontend-Id": {
-        "message": "Id"
+        "message": "ID"
     },
     "frontend-PwdSaveHiddenMessage": {
         "message": "Hvis du gemmer en skjult adgangskode i en mappe, der ikke selv er skjult, bliver adgangskoden utilgængelig. Adgangskoden vil ikke længere blive vist nogen steder. Ønsker du at fortsætte?",
         "description": "This message warns the user before saving a password as hidden in a not hidden folder as the password will no longer be shown anywhere at all"
     },
     "frontend-PwdSaveHiddenTitle": {
-        "message": "Skjule denne adgangskode?",
+        "message": "Skjul denne adgangskode?",
         "description": "Dialog title of the warning message shown when the user wants to save hidden password in a not-hidden folder."
     },
     "backend-000377": {
@@ -1450,7 +1450,7 @@
         "message": "Hvis problemet fortsætter, bør du kontakte din administrator."
     },
     "backend-000389": {
-        "message": "Adgangskoder Session $STR_1$ - $STR_2$",
+        "message": "Adgangskoder-session $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1461,7 +1461,7 @@
         }
     },
     "backend-000390": {
-        "message": "Åben dokumentation"
+        "message": "Åbn dokumentation"
     },
     "backend-000391": {
         "message": "aldrig"
@@ -1482,7 +1482,7 @@
         "message": "Sikkerhedstjek af adgangskoder"
     },
     "backend-000397": {
-        "message": "Er jeg blevet pwned? (anbefales)"
+        "message": "Have I been pwned? (anbefales)"
     },
     "backend-000398": {
         "message": "Stor lokal database (25 mio. adgangskoder)"
@@ -1509,7 +1509,7 @@
         "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
-        "message": "Favicon-service"
+        "message": "Favicon-tjeneste"
     },
     "backend-000407": {
         "message": "Lokal analysator"
@@ -1521,7 +1521,7 @@
         "message": "Ingen"
     },
     "backend-000410": {
-        "message": "Service til forhåndsvisning af hjemmesider"
+        "message": "Tjeneste til forhåndsvisning af hjemmesider"
     },
     "backend-000411": {
         "message": "API-nøgle til forhåndsvisning af hjemmeside"
@@ -1551,19 +1551,19 @@
         "message": "Fjern slettede objekter fra databasen"
     },
     "backend-000420": {
-        "message": "Vis natlige opdateringer i \"Apps\""
+        "message": "Vis \"Nightly Updates\" i \"Apps\""
     },
     "backend-000421": {
         "message": "Aldrig"
     },
     "backend-000422": {
-        "message": "Med det samme"
+        "message": "Straks"
     },
     "backend-000423": {
         "message": "Efter to timer"
     },
     "backend-000424": {
-        "message": "Efter en dag"
+        "message": "Efter én dag"
     },
     "backend-000425": {
         "message": "Efter to uger"
@@ -1575,7 +1575,7 @@
         "message": "Efter et år"
     },
     "backend-000428": {
-        "message": "Backup-indstillinger"
+        "message": "Indstillinger for sikkerhedskopiering"
     },
     "backend-000429": {
         "message": "Interval for sikkerhedskopiering"
@@ -1599,7 +1599,7 @@
         "message": "Hver anden uge"
     },
     "backend-000436": {
-        "message": "Mængde af sikkerhedskopier, der skal gemmes"
+        "message": "Antal sikkerhedskopier, der skal gemmes"
     },
     "backend-000437": {
         "message": "Cacher"
@@ -1660,7 +1660,7 @@
         }
     },
     "backend-000443": {
-        "message": "klar"
+        "message": "ryd"
     },
     "backend-000444": {
         "message": "Ryd denne cache"
@@ -1723,7 +1723,7 @@
         }
     },
     "backend-000456": {
-        "message": "Tjek venligst systemkravene."
+        "message": "Kontrollér systemkravene."
     },
     "backend-000457": {
         "message": "Adgangskode ikke delt"
@@ -1744,10 +1744,10 @@
         "message": "Adgangskoder-app'en tjekker regelmæssigt, om dine adgangskoder er blevet kompromitteret af et databrud."
     },
     "backend-000464": {
-        "message": "Dette sikkerhedstjek har fundet ud af, at et af dine adgangskoder er usikkert."
+        "message": "Dette sikkerhedstjek viser at én af dine adgangskoder er usikker."
     },
     "backend-000465": {
-        "message": "Dette sikkerhedstjek har vist, at $STR_1$ af dine adgangskoder er usikre.",
+        "message": "Dette sikkerhedstjek viser at $STR_1$ af dine adgangskoder er usikre.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1755,22 +1755,22 @@
         }
     },
     "backend-000466": {
-        "message": "Det betyder, at adgangskoden er ude på internettet og udgør en risiko for din konto."
+        "message": "Det betyder at adgangskoden kan findes ude på internettet og udgør en risiko for din konto."
     },
     "backend-000467": {
-        "message": "Det betyder, at adgangskoderne er ude på internettet og udgør en risiko for dine konti."
+        "message": "Det betyder at adgangskoderne kan findes ude på internettet og udgør en risiko for dine konti."
     },
     "backend-000468": {
-        "message": "Derfor er adgangskoden blevet markeret som usikker og bør ændres nu."
+        "message": "Derfor er adgangskoden blevet markeret som usikker og bør ændres øjeblikkeligt."
     },
     "backend-000469": {
-        "message": "Derfor er adgangskoderne blevet markeret som usikre og bør ændres nu."
+        "message": "Derfor er adgangskoderne blevet markeret som usikre og bør ændres øjeblikkeligt."
     },
     "backend-000470": {
         "message": "Du kan oprette en ny sikker adgangskode i appen Adgangskoder."
     },
     "backend-000471": {
-        "message": "Du kan oprette nye sikre adgangskoder i adgangskoder-appen."
+        "message": "Du kan oprette nye sikre adgangskoder i Adgangskoder-appen."
     },
     "backend-000472": {
         "message": "Skift adgangskode nu"
@@ -1782,7 +1782,7 @@
         "message": "Åbn appen Adgangskoder for at ændre den."
     },
     "backend-000475": {
-        "message": "Åbn password-appen for at ændre dem."
+        "message": "Åbn Adgangskoder-appen for at ændre dem."
     },
     "backend-000476": {
         "message": "$STR_1$ delt en adgangskode med dig.",
@@ -1804,7 +1804,7 @@
         }
     },
     "backend-000478": {
-        "message": "$STRING_4$ og $STRING_3$ delte $STRING_1$ adgangskoder med dig.",
+        "message": "$STRING_4$ og $STRING_3$ har delt $STRING_1$ adgangskoder med dig.",
         "placeholders": {
             "string_4": {
                 "content": "$4"
@@ -1818,7 +1818,7 @@
         }
     },
     "backend-000479": {
-        "message": "$STRING_5$, $STRING_4$ og $STRING_3$ delte $STRING_1$ adgangskoder med dig.",
+        "message": "$STRING_5$, $STRING_4$ og $STRING_3$ har delt $STRING_1$ adgangskoder med dig.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1835,7 +1835,7 @@
         }
     },
     "backend-000480": {
-        "message": "$STRING_5$, $STRING_4$ og $STRING_2$ andre delte $STRING_1$ adgangskoder med dig.",
+        "message": "$STRING_5$, $STRING_4$ og $STRING_2$ andre har delt $STRING_1$ adgangskoder med dig.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1919,7 +1919,7 @@
         }
     },
     "backend-000494": {
-        "message": "Da du bruger en masteradgangskode, betyder det ikke, at du har fået adgang til dine data."
+        "message": "Da du bruger en hovedadgangskode, betyder dette ikke, at der blev givet adgang til dine data."
     },
     "backend-000495": {
         "message": "For at forhindre uønsket adgang til dine data bør du oprette en hovedadgangskode."
@@ -1945,10 +1945,10 @@
         "message": "Du kan til enhver tid ændre dette i appens indstillinger."
     },
     "backend-000501": {
-        "message": "Ikke endnu"
+        "message": "Senere"
     },
     "backend-000502": {
-        "message": "Deltag i"
+        "message": "Deltag"
     },
     "backend-000503": {
         "message": "Deltagelse i serverundersøgelse"
@@ -1963,7 +1963,7 @@
         "message": "Ikke indstillet"
     },
     "backend-000507": {
-        "message": "Overvej venligst selv at hoste din favicon api"
+        "message": "Overvej selv at hoste din favicon-api"
     },
     "backend-000508": {
         "message": "Din Nextcloud bruger vores delte Besticon-instanser til at hente hjemmesideikoner."
@@ -1975,19 +1975,19 @@
         "message": "Klik på linket og følg vores nemme vejledning til selv at hoste Besticon."
     },
     "backend-000512": {
-        "message": "Konfigurationen af din preview-service er ugyldig"
+        "message": "Konfigurationen af din forhåndsvisningstjeneste er ugyldig"
     },
     "backend-000513": {
         "message": "Din valgte favicon-tjeneste kræver en api-nøgle eller et slutpunkt, men der er ikke angivet nogen."
     },
     "backend-000514": {
-        "message": "Din valgte preview-tjeneste kræver en api-nøgle eller et slutpunkt, men der er ikke angivet nogen."
+        "message": "Din valgte forhåndsvisningstjeneste kræver en api-nøgle eller et slutpunkt, men der er ikke angivet nogen."
     },
     "backend-000515": {
         "message": "Åbn administratorindstillingerne for at opdatere konfigurationen eller vælge en anden tjeneste."
     },
     "backend-000516": {
-        "message": "Vi har registreret flere mislykkede forsøg på at låse din password-database op via \"$STR_1$\".",
+        "message": "Vi har registreret flere mislykkede forsøg på at låse din adgangskode-database op via \"$STR_1$\".",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1995,7 +1995,7 @@
         }
     },
     "backend-000517": {
-        "message": "Det kunne tyde på, at nogen forsøger at bryde ind på din konto."
+        "message": "Dette kunne tyde på, at nogen forsøger at bryde ind i din konto."
     },
     "backend-000518": {
         "message": "For at forhindre yderligere forsøg blev API-legitimationsoplysningerne for denne klient tilbagekaldt."
@@ -2007,7 +2007,7 @@
         "message": "Hvis du vil fortsætte med at bruge denne klient, skal du oprette et nyt token til den."
     },
     "backend-000521": {
-        "message": "Hvis du ikke kender denne klient, bedes du ændre din adgangskode og gennemgå din enhedsliste."
+        "message": "Hvis du ikke kender denne klient, bør du ændre din adgangskode og gennemgå din liste over tilknyttede enheder."
     },
     "backend-000522": {
         "message": "For at forhindre yderligere forsøg er adgangskodebaseret API-godkendelse blevet deaktiveret."
@@ -2022,7 +2022,7 @@
         "message": "Regler for adgangskoder"
     },
     "frontend-000529": {
-        "message": "Marker duplikater"
+        "message": "Markér dubletter"
     },
     "frontend-000530": {
         "message": "Maksimal alder i dage"
@@ -2034,10 +2034,10 @@
         "message": "Adgangskodestyrke"
     },
     "frontend-000533": {
-        "message": "Medtag tal"
+        "message": "Inkludér tal"
     },
     "frontend-000534": {
-        "message": "Inkluder specialtegn"
+        "message": "Inkludér specialtegn"
     },
     "frontend-000535": {
         "message": "Brugergrænseflade"
@@ -2055,25 +2055,25 @@
         "message": "Indstil titel fra"
     },
     "frontend-000540": {
-        "message": "Sorter efter"
+        "message": "Sortér efter"
     },
     "frontend-000541": {
         "message": "Titel-felt"
     },
     "frontend-000542": {
-        "message": "Handling med et enkelt klik"
+        "message": "Handling ved enkeltklik"
     },
     "frontend-000543": {
-        "message": "Dobbeltklik på handling"
+        "message": "Handling ved dobbeltklik"
     },
     "frontend-000544": {
-        "message": "Kopier adgangskode"
+        "message": "Kopiér adgangskode"
     },
     "frontend-000545": {
-        "message": "Kopier brugernavn"
+        "message": "Kopiér brugernavn"
     },
     "frontend-000546": {
-        "message": "Kopier hjemmeside"
+        "message": "Kopiér hjemmeside"
     },
     "frontend-000547": {
         "message": "Vis detaljer"
@@ -2085,13 +2085,13 @@
         "message": "Vis brugernavn i listevisning"
     },
     "frontend-000550": {
-        "message": "Vis tags i listevisning"
+        "message": "Vis mærke i listevisning"
     },
     "frontend-000551": {
         "message": "Vis skjulte brugerdefinerede felter"
     },
     "frontend-000552": {
-        "message": "Søg, mens jeg skriver"
+        "message": "Søg mens jeg skriver"
     },
     "frontend-000553": {
         "message": "Søg overalt med Enter"
@@ -2103,7 +2103,7 @@
         "message": "Meddelelser"
     },
     "frontend-000556": {
-        "message": "Send e-mails til"
+        "message": "Send e-mails om"
     },
     "frontend-000557": {
         "message": "Sikkerhedsproblemer"
@@ -2112,7 +2112,7 @@
         "message": "Adgangskoder delt med mig"
     },
     "frontend-000559": {
-        "message": "Vis meddelelser for"
+        "message": "Vis notifikationer om"
     },
     "frontend-000560": {
         "message": "Andre fejl"
@@ -2139,7 +2139,7 @@
         "message": "Markér adgangskoder som svage, hvis de bruges til flere konti"
     },
     "frontend-000570": {
-        "message": "Marker adgangskoder som svage, hvis de overskrider det angivne antal dage"
+        "message": "Marker adgangskoder som svage, hvis de er ældre end det angivne antal dage"
     },
     "frontend-000571": {
         "message": "En højere styrke resulterer i længere og mere komplekse adgangskoder"
@@ -2163,13 +2163,13 @@
         "message": "Den første sektion, der vises, når appen åbnes"
     },
     "frontend-000578": {
-        "message": "Vis altid det brugernavn, der er relateret til adgangskoden, i listevisningen"
+        "message": "Vis altid brugernavnet for adgangskoden i listevisningen"
     },
     "frontend-000579": {
-        "message": "Vis tags for hver adgangskode i listevisningen. Øger indlæsningstiden"
+        "message": "Vis mærker for hver adgangskode i listevisningen. Øger indlæsningstiden"
     },
     "frontend-000580": {
-        "message": "Vis skjulte brugerdefinerede felter i redigeringsformularen og detaljesektionen i en adgangskode"
+        "message": "Vis skjulte brugerdefinerede felter i redigeringsformularen og i adgangskodedetaljerne"
     },
     "frontend-000581": {
         "message": "Sender dig e-mails om kompromitterede adgangskoder og andre sikkerhedsproblemer"
@@ -2205,10 +2205,10 @@
         "message": "Rediger som ny"
     },
     "frontend-000594": {
-        "message": "Flyt dig"
+        "message": "Flyt"
     },
     "frontend-000595": {
-        "message": "Åben $LABEL$",
+        "message": "Åbn $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -2216,7 +2216,7 @@
         }
     },
     "frontend-000596": {
-        "message": "Ukendt (Ikke_afkrydset)"
+        "message": "Ukendt (Ikke_testet)"
     },
     "frontend-000597": {
         "message": "SHA-1"
@@ -2261,7 +2261,7 @@
         "message": "Slet felt"
     },
     "frontend-000611": {
-        "message": "Guide til åben markdown"
+        "message": "Åbn markdown-vejledning"
     },
     "frontend-000612": {
         "message": "Fortryd"
@@ -2281,7 +2281,7 @@
         "message": "Spørg i vores chat"
     },
     "frontend-000616": {
-        "message": "For mange mislykkede login-forsøg"
+        "message": "For mange mislykkede indlogningsforsøg"
     },
     "frontend-000617": {
         "message": "Vælg en mappe"
@@ -2355,13 +2355,13 @@
         "message": "(valgfrit)"
     },
     "backend-000634": {
-        "message": "Din Nextcloud kræver betydeligt flere ikoner end gennemsnittet."
+        "message": "Din Nextcloud anmoder om betydeligt flere ikoner end gennemsnittet."
     },
     "backend-000635": {
-        "message": "Åben vejledning"
+        "message": "Åbn vejledning"
     },
     "backend-000636": {
-        "message": "Mistænkeligt antal mislykkede login-forsøg opdaget."
+        "message": "Mistænkeligt antal mislykkede indlogningsforsøg opdaget."
     },
     "backend-000637": {
         "message": "Mere information"
@@ -2405,7 +2405,7 @@
         }
     },
     "backend-000648": {
-        "message": "Du kan administrere alle tilsluttede enheder og apps i dine $STR_1$ indstillinger i sikkerhedsafsnittet.",
+        "message": "Du kan administrere alle tilsluttede enheder og apps i dine $STR_1$-indstillinger i sikkerhedsafsnittet.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2413,7 +2413,7 @@
         }
     },
     "backend-000649": {
-        "message": "Det sidste baggrundsjob blev udført med PHP $STRING_1$, men webserveren bruger PHP $STRING_2$.",
+        "message": "Det seneste baggrundsjob blev udført med PHP $STRING_1$, men webserveren bruger PHP $STRING_2$.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -2427,28 +2427,28 @@
         "message": "Brug af forskellige hovedversioner af PHP kan give problemer."
     },
     "backend-000651": {
-        "message": "Standard sikkerhedsindstillinger for adgangskode"
+        "message": "Standardindstillinger for adgangskodesikkerhed"
     },
     "backend-000652": {
-        "message": "Sikkerhedstjek Hash"
+        "message": "Sikkerhedstjeks-Hash"
     },
     "backend-000653": {
         "message": "Gem ikke hashes"
     },
     "backend-000654": {
-        "message": "Gem 50% af hashen"
+        "message": "Gem 50% af hashet"
     },
     "backend-000655": {
-        "message": "Gem 75% af hashen"
+        "message": "Gem 75% af hashet"
     },
     "backend-000656": {
-        "message": "Gem den fulde hash"
+        "message": "Gem det fulde hash"
     },
     "backend-000657": {
-        "message": "Backup gendannes automatisk"
+        "message": "Sikkerhedskopi blev gendannet automatisk"
     },
     "backend-000658": {
-        "message": "Adgangskode-appen ser ud til at have et databaseproblem."
+        "message": "Adgangskoder-appen ser ud til at have et databaseproblem."
     },
     "backend-000659": {
         "message": "Derfor blev appens backup \"$STR_1$\" automatisk gendannet.",
@@ -2459,13 +2459,13 @@
         }
     },
     "backend-000660": {
-        "message": "Hvis det var en fejl, blev der lavet en backup af databasen, før den blev gendannet."
+        "message": "I tilfælde af at det var en fejl, blev der lavet en sikkerhedskopi af databasen, før den blev gendannet."
     },
     "backend-000661": {
-        "message": "Du kan deaktivere automatisk gendannelse af backup i appens indstillinger."
+        "message": "Du kan deaktivere automatisk gendannelse af sikkerhedskopier i appens indstillinger."
     },
     "backend-000662": {
-        "message": "Gendan sikkerhedskopier automatisk, når databasen slettes"
+        "message": "Gendan sikkerhedskopier automatisk når databasen slettes"
     },
     "backend-EOLNextcloudTitle": {
         "message": "Adgangskoder slutter opdateringer til Nextcloud $STR_1$",
@@ -2504,7 +2504,7 @@
         "message": "Vælg automatisk (anbefalet)"
     },
     "frontend-000667": {
-        "message": "Tags CSV"
+        "message": "Mærker-CSV"
     },
     "frontend-000669": {
         "message": "Standard"
@@ -2516,7 +2516,7 @@
         "message": "Søg overalt, når der trykkes på enter-tasten i søgefeltet"
     },
     "settings-000678": {
-        "message": "Login og session"
+        "message": "Logind og session"
     },
     "settings-000679": {
         "message": "Hold mig logget ind"
@@ -2593,7 +2593,7 @@
         "message": "Spørgsmål om administration"
     },
     "settings-000702": {
-        "message": "Deling af adgangskode"
+        "message": "Deling af adgangskoder"
     },
     "settings-000703": {
         "message": "Del som redigerbar som standard"
@@ -2652,7 +2652,7 @@
         "message": "Du skal indtaste din gamle adgangskode"
     },
     "settings-000720": {
-        "message": "Din adgangskode er blevet ændret med succes."
+        "message": "Din adgangskode er blevet ændret."
     },
     "settings-000721": {
         "message": "Aktivér muligheden for at lade andre brugere redigere en delt adgangskode som standard"
@@ -2670,14 +2670,14 @@
         "message": "Vælg den krypteringstype der bruges til at kryptere data på klienten, før de sendes til serveren"
     },
     "settings-000726": {
-        "message": "SHA-1-hash bruges til at kontrollere, om adgangskoder er blevet brudt. En delvis hash kan forhindre brute force-angreb, hvis serveren bliver hacket, men kan også medføre, at sikre adgangskoder fejlagtigt rapporteres som brudte."
+        "message": "SHA-1-hash bruges til at kontrollere, om adgangskoder er blevet kompromitteret. Et delvist hash kan forhindre brute force-angreb, hvis serveren bliver hacket, men kan også medføre, at sikre adgangskoder fejlagtigt rapporteres som kompromitteret."
     },
     "settings-SettingsMouseWheelAction": {
-        "message": "Klik på musehjulet",
+        "message": "Handling ved klik på musehjulet",
         "description": "Label in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "Handling, der skal udføres, når der klikkes med musehjulet på et kodeord",
+        "message": "Handling der skal udføres, når der klikkes med musehjulet på en adgangskode",
         "description": "Help text in the settings for the option to select the action to be executed when a mouse wheel click is performed on a password entry"
     },
     "settings-SettingsCustomAction": {
@@ -2693,7 +2693,7 @@
         "description": "Label in the settings for the option to show the share tab in the details of an item"
     },
     "settings-SettingsRecoverItems": {
-        "message": "Gendan skjulte genstande",
+        "message": "Gendan skjulte elementer",
         "description": "Label of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-SettingsRecoverItemsButton": {
@@ -2701,19 +2701,19 @@
         "description": "Button to trigger the recover hidden items action dialog"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "Denne handling fjerner \"skjult\"-flaget fra elementer, så disse elementer vises i appen igen.",
+        "message": "Denne handling fjerner \"skjult\"-flaget fra elementer, så disse vises i appen igen.",
         "description": "Help text of the action in the settings to recover items that are inaccessible because they were hidden"
     },
     "settings-RecoverItemsSelectTitle": {
-        "message": "Gendan skjulte genstande",
+        "message": "Gendan skjulte elementer",
         "description": "Title of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "Vælg en hvilken som helst type skjulte genstande, du ønsker at gendanne.",
+        "message": "Vælg de typer skjulte elementer, du ønsker at gendanne.",
         "description": "Description text of the dialog where users can select which hidden items should be unhidden by the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwd": {
-        "message": "Adgangskoder, der ikke er i en skjult mappe",
+        "message": "Adgangskoder der ikke er i en skjult mappe",
         "description": "Label of the option to recover hidden passwords that are not in a hidden folder in the recover hidden items action"
     },
     "settings-RecoverItemsInvisiblePwdTitle": {
@@ -2737,11 +2737,11 @@
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTags": {
-        "message": "Alle skjulte tags",
+        "message": "Alle skjulte mærker",
         "description": "Label of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsTagsTitle": {
-        "message": "Gendan alle skjulte tags",
+        "message": "Gendan alle skjulte mærker",
         "description": "Title of the option to recover all hidden folders in the recover hidden items action"
     },
     "settings-RecoverItemsSuccessMessage": {
@@ -2760,7 +2760,7 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "Genstande fundet",
+        "message": "Elementer er gendannet",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
@@ -2768,13 +2768,13 @@
         "description": "Generic error message if the recover hidden items action fails"
     },
     "tutorial-000730": {
-        "message": "Efter opstart skal du vise min"
+        "message": "Efter opstart skal vises min"
     },
     "tutorial-000731": {
         "message": "mapper"
     },
     "tutorial-000732": {
-        "message": "tags"
+        "message": "mærker"
     },
     "tutorial-000733": {
         "message": "favoritter"
@@ -2786,7 +2786,7 @@
         "message": "for nylig ændret"
     },
     "tutorial-000736": {
-        "message": "Marker mine adgangskoder, hvis…"
+        "message": "Markér mine adgangskoder, hvis…"
     },
     "tutorial-000737": {
         "message": "de er ældre end"
@@ -2812,28 +2812,28 @@
         }
     },
     "tutorial-000743": {
-        "message": "De er duplikater"
+        "message": "De er dubletter"
     },
     "tutorial-000744": {
-        "message": "Lav mine nye adgangskoder"
+        "message": "Gør mine nye adgangskoder"
     },
     "tutorial-000745": {
-        "message": "stærk"
+        "message": "stærke"
     },
     "tutorial-000746": {
         "message": "stærkere"
     },
     "tutorial-000747": {
-        "message": "meget stærk"
+        "message": "meget stærke"
     },
     "tutorial-000748": {
-        "message": "ekstremt stærk"
+        "message": "ekstremt stærke"
     },
     "tutorial-000749": {
-        "message": "inkluderer tal"
+        "message": "inkludér tal"
     },
     "tutorial-000750": {
-        "message": "inkludere specialtegn"
+        "message": "inkludér specialtegn"
     },
     "tutorial-000751": {
         "message": "Et sikkert hjem til dine adgangskoder"
@@ -2863,7 +2863,7 @@
         "message": "Tjek adgangskodesikkerheden med"
     },
     "tutorial-000768": {
-        "message": "Generer adgangskoder ved hjælp af"
+        "message": "Generér adgangskoder ved hjælp af"
     },
     "tutorial-000769": {
         "message": "Hent favicons fra"
@@ -2902,13 +2902,13 @@
         "message": "Få nem adgang til dine adgangskoder overalt takket være vores apps og udvidelser."
     },
     "tutorial-000781": {
-        "message": "Du kan finde vores apps og udvidelser under \"Mere\" eller bare klikke på knappen nedenfor."
+        "message": "Du kan finde vores apps og udvidelser under \"Mere\" eller bare ved at klikke på knappen nedenfor."
     },
     "tutorial-000782": {
         "message": "Adgangskoder kan tilpasses på mange forskellige måder."
     },
     "tutorial-000783": {
-        "message": "Som administrator kan du tage et kig på disse almindelige indstillinger."
+        "message": "Som administrator bør du tage et kig på disse almindelige indstillinger."
     },
     "tutorial-000784": {
         "message": "Når du ikke ved, hvordan noget fungerer, har spørgsmål eller brug for hjælp til et problem:"
@@ -2923,10 +2923,10 @@
         "message": "I alle andre tilfælde er vores community det rette sted at stille dine spørgsmål."
     },
     "tutorial-000788": {
-        "message": "Håndbogen vil blive åbnet efter vejledningen"
+        "message": "Håndbogen bliver åbnet efter denne gennemgang"
     },
     "tutorial-000789": {
-        "message": "Indtast en adgangskode med 12 tegn eller mere"
+        "message": "Indtast en adgangskode på mindst 12 tegn"
     },
     "tutorial-000790": {
         "message": "Din adgangskode skal bestå af mindst 12 tegn, og bekræftelsesadgangskoden skal være den samme"
@@ -2935,7 +2935,7 @@
         "message": "Adgangskoder"
     },
     "backend-UserMigrationDescription": {
-        "message": "Dekrypteret adgangskodedatabase med adgangskoder, mapper, tags og indstillinger. (Inkluderer ikke adgangskoder, der er delt med dig. Fungerer ikke med E2E aktiveret)",
+        "message": "Dekrypteret adgangskodedatabase med adgangskoder, mapper, mærker og indstillinger. (Inkluderer ikke adgangskoder, der er delt med dig. Fungerer ikke med E2E aktiveret)",
         "description": "Description text for the password export option in the user migration app. Exports won't include items shared with the user and the export only works if end-to-end encryption is disabled."
     },
     "backend-ExportNotPossibleTitle": {
@@ -2963,11 +2963,11 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "Vis QrCode",
+        "message": "Vis QR-kode",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "Adgangskoden er allerede mærket med $TAG$",
+        "message": "Adgangskoden er allerede markeret med $TAG$",
         "description": "Notification text when the user adds a tag to a password that already has the tag",
         "placeholders": {
             "password": {
@@ -2979,7 +2979,7 @@
         }
     },
     "frontend-PasswordTagAddSuccess": {
-        "message": "Adgangskoden blev tagget med $TAG$",
+        "message": "Adgangskoden blev markeret med $TAG$",
         "description": "Notification text when the a tag was successfully added to a password",
         "placeholders": {
             "password": {
@@ -2991,7 +2991,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "Adgangskoden kunne ikke mærkes med $TAG$: $ERROR$",
+        "message": "Adgangskoden kunne ikke markeres med $TAG$: $ERROR$",
         "description": "Notification text when the a tag could not be added to a password",
         "placeholders": {
             "password": {
@@ -3026,7 +3026,7 @@
         "description": "Info text for the encryption method in the password details sidebar if a client side / end-to-end encryption method is used. The password is encrypted on the users device before it's sent to the server and can only be decrypted with the users encryption password"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "Kryptering fra start til slut",
+        "message": "End-to-end-kryptering",
         "description": "Label for the client side / end-to-end encryption method"
     },
     "frontend-PasswordEncryptionSSE": {
@@ -3034,7 +3034,7 @@
         "description": "Label for the server side encryption method"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "Tredjeparts kryptering på serversiden",
+        "message": "Tredjepartskryptering på serversiden",
         "description": "Label of the SSEv3 server side encryption where the (secret) key is managed by a different application"
     },
     "frontend-ClipboardCopyEmpty": {
@@ -3086,7 +3086,7 @@
         }
     },
     "backend-EOLPHPTitle": {
-        "message": "Adgangskoder afslutter opdateringer til PHP $STR_1$",
+        "message": "Adgangskoder-appen afslutter opdateringer til PHP $STR_1$",
         "description": "Label of the end of support notification for admins when they install the last release of the app for their version of PHP. ($STR_1$: Installed PHP version)",
         "placeholders": {
             "str_1": {
@@ -3156,11 +3156,11 @@
         "description": "Title of a notification if the content is no longer correct and the notification can be deleted. (The notification has no other text)"
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "Kunne ikke opdatere databasen over brudte adgangskoder",
+        "message": "Kunne ikke opdatere databasen over kompromitterede adgangskoder",
         "description": "Title of the notification when the download of the precompiled breached passwords database failed"
     },
     "backend-PassDbDlFailedText": {
-        "message": "Opdateringen af databasen med de brudte adgangskoder mislykkedes tre gange. Se venligst manualen og tjek dine logfiler. Årsag: $STR_1$",
+        "message": "Opdatering af databasen med kompromitterede adgangskoder mislykkedes tre gange. Se venligst manualen og tjek dine logfiler. Årsag: $STR_1$",
         "description": "Text of the notification when the download of the precompiled breached passwords database failed",
         "placeholders": {
             "str_1": {
@@ -3173,7 +3173,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Vi har fundet nedenstående url som siden til ændring af adgangskode for \"{label}\". Klik på knappen for at åbne den.",
+        "message": "Vi har fundet nedenstående URL som siden til ændring af adgangskode for \"{label}\". Klik på knappen for at åbne den.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3201,15 +3201,15 @@
         }
     },
     "settings-RecoverItemsInvisibleTrash": {
-        "message": "Skjulte genstande i skraldespanden",
+        "message": "Skjulte elementer i papirkurven",
         "description": "Label of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "settings-RecoverItemsInvisibleTrashTitle": {
-        "message": "Gendan skjulte ting, som i øjeblikket er i papirkurven",
+        "message": "Gendan skjulte elementer, som i øjeblikket er i papirkurven",
         "description": "Title of the option to recover hidden items that are currently in the trash in the recover hidden items action"
     },
     "frontend-WebAuthnLoginDisabled": {
-        "message": "WebAuthn Login var deaktiveret. Du kan aktivere det igen i indstillingerne",
+        "message": "WebAuthn-logind blev deaktiveret. Du kan aktivere det igen i indstillingerne",
         "description": "Notification message when the WebAuthn login was disabled due to the provided passphrase not working"
     },
     "settings-WebauthnLoginSetupSuccess": {
@@ -3237,11 +3237,11 @@
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnEncryptionSetupTitle": {
-        "message": "Opsætning af WebAuthn-login",
+        "message": "Opsætning af indlogning med WebAuthn",
         "description": "Title of the WebAuthn setup dialog."
     },
     "frontend-Disable": {
-        "message": "Deaktiver"
+        "message": "Deaktivér"
     },
     "frontend-DashboardLoginError": {
         "message": "Fejl",
@@ -3307,7 +3307,7 @@
         "message": "Adgangskode-appen tjekker regelmæssigt, om din krypteringspassphrase stadig er sikker. Din nuværende passphrase er ikke sikker og skal ændres med det samme."
     },
     "backend-CronSetupCheckName": {
-        "message": "Kontrollerer, om serveren kører baggrundsjobs med cron.",
+        "message": "Kontrollerer om serveren kører baggrundsjobs med cron.",
         "description": "Name of the Nextcloud setup check which checks if background jobs are run with cron"
     },
     "backend-CronSetupCheckSuccess": {
@@ -3315,7 +3315,7 @@
         "description": "Success message of the Nextcloud setup check which checks if background jobs are run with cron"
     },
     "backend-CronPhpVersionSetupCheckName": {
-        "message": "Kontrollerer, om serveren kører baggrundsopgaver med den samme PHP-version.",
+        "message": "Kontrollerer om serveren kører baggrundsopgaver med den samme PHP-version.",
         "description": "Name of the Nextcloud setup check which checks if background jobs are run with the same php version as the webserver"
     },
     "backend-CronPhpVersionSetupCheckSuccess": {
@@ -3363,10 +3363,10 @@
         "description": "Error page link when the browser can not run the app because WebAssembly is not supported. Links to a handbook page to enable WebAssembly"
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
-        "message": "Opdatering af databasen med overtrådte adgangskoder"
+        "message": "Opdatering af databasen med kompromitterede adgangskoder"
     },
     "backend-BreachedPasswordsDbUpdateCheckWarning": {
-        "message": "Databasen med brudte adgangskoder kan ikke opdateres: $STR_1$",
+        "message": "Databasen med kompromitterede adgangskoder kan ikke opdateres: $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
