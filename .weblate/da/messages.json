@@ -171,7 +171,7 @@
         "message": "Eksporter mapper"
     },
     "backups-000044": {
-        "message": "Eksport-tags"
+        "message": "Eksportér mærker"
     },
     "backups-000045": {
         "message": "Brugerdefinerede felter"
@@ -189,10 +189,10 @@
         "message": "Mappe-id"
     },
     "backups-000050": {
-        "message": "Tag ID'er"
+        "message": "Mærke-ID'er"
     },
     "backups-000051": {
-        "message": "ForældreId"
+        "message": "Overordnet ID"
     },
     "backups-CustomFields": {
         "message": "Brugerdefinerede felter"
@@ -204,7 +204,7 @@
         "message": "Mappe-id"
     },
     "backups-TagIds": {
-        "message": "Tag ID'er"
+        "message": "Mærke-ID'er"
     },
     "backups-000052": {
         "message": "Tom"
@@ -222,7 +222,7 @@
         "message": "Importer ikke tomme felter"
     },
     "backups-000057": {
-        "message": "Kør eksport"
+        "message": "Eksportér"
     },
     "backups-000058": {
         "message": "Eksport"
@@ -257,7 +257,7 @@
         "message": "Adgangskoder CSV"
     },
     "backups-000067": {
-        "message": "Mappe CSV"
+        "message": "Mappe-CSV"
     },
     "backups-000068": {
         "message": "Brugerdefineret CSV"
@@ -269,7 +269,7 @@
         "message": "Vælg fil"
     },
     "backups-000071": {
-        "message": "Vælg indstillinger"
+        "message": "Vælg egenskaber"
     },
     "backups-000072": {
         "message": "Håndtering af konflikter"
@@ -299,10 +299,10 @@
         "message": "Database"
     },
     "backups-000081": {
-        "message": "Citat Karakter"
+        "message": "Anførselstegn"
     },
     "backups-000082": {
-        "message": "Flygtningetegn"
+        "message": "Escape-tegn"
     },
     "backups-000083": {
         "message": "Feltafgrænser"
@@ -314,13 +314,13 @@
         "message": "Citat"
     },
     "backups-000086": {
-        "message": "Enkelt tilbud"
+        "message": "Enkelt anførselstegn"
     },
     "backups-000087": {
         "message": "Omvendt stråstreg"
     },
     "backups-000088": {
-        "message": "Detektere"
+        "message": "Detekter"
     },
     "backups-000089": {
         "message": "Komma"
@@ -329,13 +329,13 @@
         "message": "Semikolon"
     },
     "backups-000091": {
-        "message": "Rummet"
+        "message": "Mellemrum"
     },
     "backups-000092": {
         "message": "Fane"
     },
     "backups-000093": {
-        "message": "Registrer anførselstegn, der ikke er skrevet med store bogstaver"
+        "message": "Registrer anførselstegn uden escape-sekvens"
     },
     "backups-000094": {
         "message": "Spring første linje over"
@@ -370,31 +370,31 @@
         "message": "Import"
     },
     "backups-000103": {
-        "message": "Parsing af inputfil"
+        "message": "Fortolker inputfil"
     },
     "backups-000104": {
-        "message": "Analyse af tags"
+        "message": "Analyserer mærker"
     },
     "backups-000105": {
-        "message": "Analyse af mapper"
+        "message": "Analyserer mapper"
     },
     "backups-000106": {
-        "message": "Læsning af tags"
+        "message": "Indlæser mærker"
     },
     "backups-000107": {
-        "message": "Import af tags"
+        "message": "Importerer mærker"
     },
     "backups-000108": {
-        "message": "Læsemapper"
+        "message": "Læser mapper"
     },
     "backups-000109": {
-        "message": "Import af mapper"
+        "message": "Importerer mapper"
     },
     "backups-000110": {
-        "message": "Læsning af adgangskoder"
+        "message": "Indlæser adgangskoder"
     },
     "backups-000111": {
-        "message": "Import af adgangskoder"
+        "message": "Importerer adgangskoder"
     },
     "backups-000112": {
         "message": "Import mislykkedes"
@@ -432,22 +432,22 @@
         "message": "Kunne ikke dekryptere mapper"
     },
     "backups-000122": {
-        "message": "Kunne ikke dekryptere tags"
+        "message": "Kunne ikke dekryptere mærker"
     },
     "backups-000123": {
         "message": "Importfilen er tom"
     },
     "backups-000124": {
-        "message": "CSV-fil kan ikke mappes"
+        "message": "CSV-fil kan ikke kortlægges"
     },
     "backups-000125": {
-        "message": "Log ind"
+        "message": "Indlogningsdata"
     },
     "backups-000126": {
         "message": "Noter"
     },
     "backups-000127": {
-        "message": "Kreditkort"
+        "message": "Betalingskort"
     },
     "backups-000128": {
         "message": "Identiteter"
@@ -468,7 +468,7 @@
         "message": "Diverse"
     },
     "backups-000134": {
-        "message": "Ugyldigt afsluttende citationstegn i citeret felt"
+        "message": "Ugyldigt afsluttende anførselstegn i citeret felt"
     },
     "backups-000135": {
         "message": "Filen kunne ikke analyseres: $ERRORS$",
@@ -479,7 +479,7 @@
         }
     },
     "backups-000136": {
-        "message": "$MESSAGE$ i linje $LINE$ tegn $CHARACTER$.",
+        "message": "$MESSAGE$ i linje $LINE$, tegn $CHARACTER$.",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -512,7 +512,7 @@
         }
     },
     "backups-000139": {
-        "message": "Etiketten på \"$FIELD$\" i \"$LABEL$\" overskrider 48 tegn og blev klippet ud.",
+        "message": "Etiketten på \"$FIELD$\" i \"$LABEL$\" overskrider 48 tegn og blev forkortet.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -523,7 +523,7 @@
         }
     },
     "backups-000140": {
-        "message": "Værdien af \"$FIELD$\" i \"$LABEL$\" overstiger 320 tegn og blev klippet.",
+        "message": "Værdien af \"$FIELD$\" i \"$LABEL$\" overstiger 320 tegn og blev forkortet.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -583,13 +583,13 @@
         "message": "Sikkerhed"
     },
     "frontend-000155": {
-        "message": "Affald"
+        "message": "Papirkurv"
     },
     "frontend-000156": {
         "message": "Detaljer"
     },
     "frontend-000157": {
-        "message": "Rediger"
+        "message": "Redigér"
     },
     "frontend-000158": {
         "message": "Omdøb"
@@ -619,13 +619,13 @@
         "message": "Svag"
     },
     "frontend-000167": {
-        "message": "Svag (duplikat)"
+        "message": "Svag (dublet)"
     },
     "frontend-000168": {
         "message": "Svag (forældet)"
     },
     "frontend-000169": {
-        "message": "Overtrådt"
+        "message": "Kompromitteret"
     },
     "frontend-000170": {
         "message": "Del"
@@ -646,7 +646,7 @@
         "message": "Hjemmeside"
     },
     "frontend-000176": {
-        "message": "Tilføj tags…"
+        "message": "Tilføj mærker…"
     },
     "frontend-000177": {
         "message": "Farve"
@@ -661,13 +661,13 @@
         "message": "Generelt"
     },
     "frontend-000181": {
-        "message": "Ejendomme"
+        "message": "Egenskaber"
     },
     "frontend-000182": {
         "message": "Tal"
     },
     "frontend-000183": {
-        "message": "Særlige tegn"
+        "message": "Specialtegn"
     },
     "frontend-000184": {
         "message": "Flere muligheder"
@@ -700,7 +700,7 @@
         "message": "Skift synlighed"
     },
     "frontend-000194": {
-        "message": "Generer adgangskode"
+        "message": "Generér adgangskode"
     },
     "frontend-000195": {
         "message": "Enkel kryptering på serversiden V1"
@@ -748,49 +748,49 @@
         "message": "Sletning af mappe mislykkedes"
     },
     "frontend-000210": {
-        "message": "Mappe restaureret"
+        "message": "Mappe gendannet"
     },
     "frontend-000211": {
         "message": "Gendannelse af mappe mislykkedes"
     },
     "frontend-000212": {
-        "message": "Opret tag"
+        "message": "Opret mærke"
     },
     "frontend-000213": {
-        "message": "Tag oprettet"
+        "message": "Mærke oprettet"
     },
     "frontend-000214": {
-        "message": "Oprettelse af tag mislykkedes"
+        "message": "Oprettelse af mærke mislykkedes"
     },
     "frontend-000215": {
-        "message": "Rediger tag"
+        "message": "Redigér mærke"
     },
     "frontend-000216": {
-        "message": "Generer tilfældig farve"
+        "message": "Generér tilfældig farve"
     },
     "frontend-000217": {
-        "message": "Tag gemt"
+        "message": "Mærke gemt"
     },
     "frontend-000218": {
-        "message": "Lagring af tag mislykkedes"
+        "message": "Lagring af mærke mislykkedes"
     },
     "frontend-000219": {
-        "message": "Slet tag"
+        "message": "Slet mærke"
     },
     "frontend-000220": {
-        "message": "Ønsker du at slette tagget?"
+        "message": "Ønsker du at slette mærket?"
     },
     "frontend-000221": {
-        "message": "Tag slettet"
+        "message": "Mærke slettet"
     },
     "frontend-000222": {
-        "message": "Sletning af tag mislykkedes"
+        "message": "Sletning af mærke mislykkedes"
     },
     "frontend-000223": {
-        "message": "Tag restaureret"
+        "message": "Mærke gendannet"
     },
     "frontend-000224": {
-        "message": "Gendannelse af tag mislykkedes"
+        "message": "Gendannelse af mærke mislykkedes"
     },
     "frontend-000225": {
         "message": "Opret adgangskode"
@@ -1198,7 +1198,7 @@
         "message": "Sorter efter navn"
     },
     "frontend-000334": {
-        "message": "Sorter efter ændret dato"
+        "message": "Sorter efter ændringsdato"
     },
     "frontend-000335": {
         "message": "$PASSWORDS$ adgangskoder",
@@ -3374,6 +3374,6 @@
         }
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
-        "message": "Opdatering af databasen med overtrådte adgangskoder har ikke rapporteret fejl."
+        "message": "Opdatering af databasen med kompromitterede adgangskoder har ikke rapporteret fejl."
     }
 }
