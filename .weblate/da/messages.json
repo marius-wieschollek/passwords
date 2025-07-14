@@ -254,7 +254,7 @@
         "message": "Vælg importformat"
     },
     "backups-000066": {
-        "message": "Adgangskoder CSV"
+        "message": "Adgangskoder-app CSV"
     },
     "backups-000067": {
         "message": "Mappe-CSV"
@@ -290,7 +290,7 @@
         "message": "Opret ny post"
     },
     "backups-000078": {
-        "message": "For krypterede sikkerhedskopier"
+        "message": "Nødvendig for krypterede sikkerhedskopier"
     },
     "backups-000079": {
         "message": "CSV-indstillinger"
@@ -311,7 +311,7 @@
         "message": "Linjeskift"
     },
     "backups-000085": {
-        "message": "Citat"
+        "message": "Anførselstegn"
     },
     "backups-000086": {
         "message": "Enkelt anførselstegn"
@@ -409,7 +409,7 @@
         "message": "Importfejl"
     },
     "backups-000116": {
-        "message": "Nogle objekter havde fejl:"
+        "message": "Nogle poster havde fejl:"
     },
     "backups-000117": {
         "message": "Ugyldig filtype \"$TYPE$\"",
@@ -1057,7 +1057,7 @@
         "message": "URL"
     },
     "frontend-000297": {
-        "message": "Forælder"
+        "message": "Overordnet"
     },
     "frontend-000298": {
         "message": "Slet alle elementer"
@@ -1512,7 +1512,7 @@
         "message": "Favicon-tjeneste"
     },
     "backend-000407": {
-        "message": "Lokal analysator"
+        "message": "Lokale filer"
     },
     "backend-000408": {
         "message": "Besticon (anbefales)"
@@ -2314,7 +2314,7 @@
         }
     },
     "frontend-000622": {
-        "message": "Adgangskoder App-kryptering Passphrase"
+        "message": "Krypteringsnøgle til Adgangskoder-app'en"
     },
     "frontend-000623": {
         "message": "Ukendt"
@@ -2346,7 +2346,7 @@
         "message": "Adgangskoden er ugyldig. Session tilbagekaldt på grund af for mange mislykkede loginforsøg."
     },
     "frontend-000631": {
-        "message": "Dette er en kopi af den passphrase, du valgte til kryptering. Ændring eller sletning af denne post påvirker ikke krypteringen. Passphrase kan kun ændres i indstillingerne. Du kan finde flere oplysninger i håndbogen."
+        "message": "Dette er en kopi af den nøgle, du valgte til kryptering. Ændring eller sletning af denne post påvirker ikke krypteringen. Krypteringsnøglen kan kun ændres i indstillingerne. Du kan finde flere oplysninger i håndbogen."
     },
     "backend-000632": {
         "message": "Favicon-service API"
@@ -3225,15 +3225,15 @@
         "description": "Help text in the settings for the log in with WebAuthn setup option"
     },
     "settings-WebauthnEncryptionPassphrase": {
-        "message": "Kryptering Passphrase",
+        "message": "Krypteringsnøgle",
         "description": "Label of the password input for the user to enter their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseRepeat": {
-        "message": "Gentag adgangssætningen",
+        "message": "Gentag krypteringsnøglen",
         "description": "Label of the password input for the user to repeat their encryption passphrase in the WebAuthn setup dialog"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "Indtast din krypteringspasfrase nedenfor. Den vil blive gemt i din browser, og appen vil forsøge at bruge den, når du åbner den næste gang. Hvis adgangssætningen er ugyldig, vil login mislykkes én gang, og WebAuthn vil blive deaktiveret.",
+        "message": "Indtast din krypteringsnøgle nedenfor. Den vil blive gemt i din browser, og appen vil forsøge at bruge den når du åbner den næste gang. Hvis krypteringsnøglen er ugyldig, vil login mislykkes én gang, og WebAuthn vil blive deaktiveret.",
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "settings-WebauthnEncryptionSetupTitle": {
@@ -3296,15 +3296,15 @@
         "message": "Søg …"
     },
     "frontend-CSENewPassphraseInsecureText": {
-        "message": "Den valgte krypteringspassphrase er usikker og kan derfor ikke bruges.",
+        "message": "Den valgte krypteringsnøgle er usikker og kan derfor ikke bruges.",
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-CSEPassphraseInsecureTitle": {
-        "message": "Usikker passphrase til kryptering",
+        "message": "Usikker krypteringsnøgle",
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-CSEPassphraseInsecureText": {
-        "message": "Adgangskode-appen tjekker regelmæssigt, om din krypteringspassphrase stadig er sikker. Din nuværende passphrase er ikke sikker og skal ændres med det samme."
+        "message": "Adgangskode-appen tjekker regelmæssigt, om din krypteringsnøgle stadig er sikker. Din nuværende krypteringsnøgle er ikke sikker og skal ændres med det samme."
     },
     "backend-CronSetupCheckName": {
         "message": "Kontrollerer om serveren kører baggrundsjobs med cron.",
