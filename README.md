@@ -13,7 +13,7 @@
 * [Licenses](Licenses.md)
 
 ## Support
-* [Official Chat](https://t.me/nc_passwords/1)
+* [Official Chat](https://chat.passwordsapp.org/#/room/#nextcloud-passwords:chat.passwordsapp.org)
 * [Official Forum](https://help.nextcloud.com/tag/passwords-app)
 * [User Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/Index)
 * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)
@@ -96,7 +96,7 @@ The servers are reset every six hours.
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * Do you want to translate the app? You can do so on [Weblate](https://weblate.passwordsapp.org/projects/passwords/passwords/).
 * Do you want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/Index).
-* For questions and announcements, visit the [Telegram Group for Developers](https://t.me/nc_passwords/3826)
+* For questions and announcements, visit the [Matrix Chat for Developers](https://matrix.to/#/#developers:chat.passwordsapp.org)
 
 ## Donations
 See [Donate.md](Donate.md) for a list of developers making the Passwords app for Nextcloud possible.
