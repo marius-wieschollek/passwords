@@ -242,46 +242,7 @@ class ConfigurationService {
      * Clear the config cache
      */
     public function clearCache(): void {
-        try {
-            $class    = new ReflectionClass($this->config);
-            $property = $class->getProperty('userCache');
-            $property->setAccessible(true);
-            $property->setValue($this->config, new CappedMemoryCache());
-        } catch(ReflectionException $e) {
-        }
-
-        try {
-            $class    = new ReflectionClass($this->appConfig);
-            $property = $class->getProperty('fastLoaded');
-            $property->setAccessible(true);
-            $property->setValue($this->appConfig, false);
-            $property = $class->getProperty('lazyLoaded');
-            $property->setAccessible(true);
-            $property->setValue($this->appConfig, false);
-        } catch(Exception $e) {
-        }
-
-        try {
-            // @TODO Use container instead
-            $class     = new ReflectionClass($this->config);
-            $property1 = $class->getProperty('systemConfig');
-            $property1->setAccessible(true);
-            $systemConfig = $property1->getValue($this->config);
-
-            $scClass   = new ReflectionClass($systemConfig);
-            $property2 = $scClass->getProperty('config');
-            $property2->setAccessible(true);
-            $config = $property2->getValue($systemConfig);
-
-            $cfClass  = new ReflectionClass($config);
-            $method = $cfClass->getMethod('readData');
-            $method->setAccessible(true);
-            $method->invoke($config);
-
-            $property2->setValue($systemConfig, $config);
-            $property1->setValue($this->config, $systemConfig);
-        } catch(Exception $e) {
-        }
+        $this->appConfig->clearCache();
     }
 
     /**
