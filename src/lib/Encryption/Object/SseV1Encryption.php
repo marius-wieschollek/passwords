@@ -224,18 +224,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @throws Exception
      */
     protected function getServerKey(): string {
-        $serverKey = $this->config->getAppValue('SSEv1ServerKey');
-
-        if($serverKey === null) {
-            $this->config->clearCache();
-            $serverKey = $this->config->getAppValue('SSEv1ServerKey');
-        }
-
-        if($serverKey === null || strlen($serverKey) < self::MINIMUM_KEY_LENGTH) {
-            return $this->generateServerKey();
-        }
-
-        return $serverKey;
+        return $this->config->getAppValue('SSEv1ServerKey', '');
     }
 
     /**
@@ -248,8 +237,8 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         if($this->userId !== $userId && $this->environment->getAppMode() !== EnvironmentService::MODE_GLOBAL) {
             throw new Exception('User key requested with illegal user id: '.$userId);
         }
-        $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
 
+        $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
         if($userKey === null) {
             $this->config->clearCache();
             $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
@@ -279,6 +268,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         }
 
         $this->config->setUserValue('sse.generate.lock', $lockCode, $userId);
+
         $userKey = $this->getSecureRandom();
 
         $this->config->clearCache();
@@ -293,37 +283,6 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         $this->config->deleteUserValue('sse.generate.lock', $userId);
 
         return $userKey;
-    }
-
-    /**
-     * @return string
-     * @throws Exception
-     */
-    protected function generateServerKey(): string {
-        $this->config->clearCache();
-        $lockCode    = uniqid('passwords', true);
-        $currentLock = $this->config->getAppValue('sse.generate.lock');
-        if($currentLock !== null) {
-            sleep(1);
-
-            return $this->getServerKey();
-        }
-
-        $this->config->setAppValue('sse.generate.lock', $lockCode);
-        $serverKey = $this->getSecureRandom();
-
-        $this->config->clearCache();
-        $currentLock = $this->config->getAppValue('sse.generate.lock');
-        if($currentLock !== $lockCode) {
-            sleep(1);
-
-            return $this->getServerKey();
-        }
-
-        $this->config->setAppValue('SSEv1ServerKey', $serverKey);
-        $this->config->deleteAppValue('sse.generate.lock');
-
-        return $serverKey;
     }
 
     /**
