@@ -13,7 +13,7 @@
 * [Licenses](Licenses.md)
 
 ## Support
-* [Official Chat](https://chat.passwordsapp.org/#/room/#nextcloud-passwords:chat.passwordsapp.org)
+* [Official Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
 * [Official Forum](https://help.nextcloud.com/tag/passwords-app)
 * [User Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/Index)
 * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)

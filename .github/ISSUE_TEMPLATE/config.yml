@@ -4,7 +4,7 @@ contact_links:
     url: https://help.nextcloud.com/tag/passwords-app
     about: Get support with problems you have
   - name: Matrix Chat
-    url: https://chat.passwordsapp.org/#/room/#nextcloud-passwords:chat.passwordsapp.org
+    url: https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org
     about: Ask questions and discuss with other users
   - name: User Handbook
     url: https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index

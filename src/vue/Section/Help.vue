@@ -73,7 +73,7 @@
                 section   : '',
                 anchor    : '',
                 gallery   : {images: [], index: null},
-                chatPage  : 'https://chat.passwordsapp.org/#/room/#nextcloud-passwords:chat.passwordsapp.org',
+                chatPage  : 'https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org',
                 forumPage : 'https://help.nextcloud.com/tag/passwords-app',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue'
             };
