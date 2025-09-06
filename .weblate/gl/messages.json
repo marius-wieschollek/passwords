@@ -3375,10 +3375,10 @@
         }
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
-        "message": "Actualización da base de datos de contrasinais"
+        "message": "Actualización da base de datos de contrasinais violados"
     },
     "backend-BreachedPasswordsDbUpdateCheckWarning": {
-        "message": "A base de datos de contrasinais non se pode actualizar: $STR_1$",
+        "message": "Non é posíbel actualizar a base de datos de contrasinais violados: $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3386,6 +3386,6 @@
         }
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
-        "message": "A actualización da base de datos de contrasinais non reportou erros."
+        "message": "A actualización da base de datos de contrasinais violados non informou de erros."
     }
 }
