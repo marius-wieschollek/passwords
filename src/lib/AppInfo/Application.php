@@ -213,7 +213,7 @@ class Application extends App implements IBootstrap {
      *
      */
     protected function registerInternalListeners() {
-        /* @var IEventDispatcher $eventDispatcher */
+        /* @var IEventDispatcher $dispatcher */
         $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
         $dispatcher->addServiceListener(BeforePasswordDeletedEvent::class, BeforePasswordDeletedListener::class);
         $dispatcher->addServiceListener(BeforePasswordSetRevisionEvent::class, BeforePasswordSetRevisionListener::class);
@@ -243,7 +243,7 @@ class Application extends App implements IBootstrap {
      *
      */
     protected function registerSystemHooks(): void {
-        /* @var IEventDispatcher $eventDispatcher */
+        /* @var IEventDispatcher $dispatcher */
         $dispatcher = $this->getContainer()->get(IEventDispatcher::class);
         $dispatcher->addServiceListener(CreateUserEvent::class, BeforeUserCreatedListener::class);
         $dispatcher->addServiceListener(BeforeUserCreatedEvent::class, BeforeUserCreatedListener::class);

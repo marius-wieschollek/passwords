@@ -16,13 +16,14 @@ use OCA\Passwords\Events\Password\BeforePasswordDeletedEvent;
 use OCA\Passwords\Services\Object\PasswordTagRelationService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
 /**
  * Class BeforeTagDeletedListener
  *
  * @package OCA\Passwords\EventListener\Password
  */
-class BeforePasswordDeletedListener {
+class BeforePasswordDeletedListener implements IEventListener {
 
     /**
      * @var ShareService

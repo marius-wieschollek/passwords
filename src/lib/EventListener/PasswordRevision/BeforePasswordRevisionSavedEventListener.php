@@ -11,17 +11,19 @@
 
 namespace OCA\Passwords\EventListener\PasswordRevision;
 
+use Exception;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCP\EventDispatcher\Event;
+use OCP\EventDispatcher\IEventListener;
 
 /**
  * Class BeforePasswordRevisionSavedEventListener
  *
  * @package OCA\Passwords\EventListener\PasswordRevision
  */
-class BeforePasswordRevisionSavedEventListener {
+class BeforePasswordRevisionSavedEventListener implements IEventListener {
 
     /**
      * @var UserSettingsHelper
@@ -40,7 +42,7 @@ class BeforePasswordRevisionSavedEventListener {
     /**
      * @param BeforePasswordRevisionCreatedEvent|BeforePasswordRevisionUpdatedEvent $event
      *
-     * @throws \Exception
+     * @throws Exception
      */
     public function handle(Event $event): void {
         $revision = $event->getPasswordRevision();
