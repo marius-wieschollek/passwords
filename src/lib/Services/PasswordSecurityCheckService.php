@@ -25,15 +25,15 @@ use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
  */
 class PasswordSecurityCheckService {
 
-    const string STATUS_BREACHED = 'BREACHED';
-    const string STATUS_OUTDATED = 'OUTDATED';
-    const string STATUS_DUPLICATE = 'DUPLICATE';
-    const string STATUS_GOOD      = 'GOOD';
+    const string STATUS_BREACHED    = 'BREACHED';
+    const string STATUS_OUTDATED    = 'OUTDATED';
+    const string STATUS_DUPLICATE   = 'DUPLICATE';
+    const string STATUS_GOOD        = 'GOOD';
     const string STATUS_NOT_CHECKED = 'NOT_CHECKED';
     const int    LEVEL_OK           = 0;
-    const int LEVEL_WEAK            = 1;
-    const int LEVEL_BAD  = 2;
-    const int LEVEL_UNKNOWN = 3;
+    const int    LEVEL_WEAK         = 1;
+    const int    LEVEL_BAD          = 2;
+    const int    LEVEL_UNKNOWN      = 3;
 
     /**
      * @param SecurityCheckProviderInterface $securityCheckProvider

@@ -121,6 +121,7 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
         }
 
         $hashes = $this->executeApiRequest($range);
+
         return $this->checkForHashInHashes($hashes, $hash);
     }
 
