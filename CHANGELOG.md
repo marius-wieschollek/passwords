@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2025.9.0 - Feature release
+### Added
+- Nextcloud 32 support
+
 ## 2025.7.0 - Feature release
 ### Added
 - Server secret for app only
