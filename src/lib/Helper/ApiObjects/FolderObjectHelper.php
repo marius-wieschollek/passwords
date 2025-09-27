@@ -21,7 +21,6 @@ use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\AppFramework\IAppContainer;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -31,12 +30,12 @@ use Psr\Container\ContainerInterface;
  */
 class FolderObjectHelper extends AbstractObjectHelper {
 
-    const string LEVEL_TAGS   = 'tags';
-    const string LEVEL_PARENT = 'parent';
-    const string LEVEL_FOLDERS = 'folders';
-    const string LEVEL_FOLDER_IDS = 'folder-ids';
-    const string LEVEL_PASSWORDS  = 'passwords';
-    const string LEVEL_PASSWORD_IDS = 'password-ids';
+    const string LEVEL_TAGS          = 'tags';
+    const string LEVEL_PARENT        = 'parent';
+    const string LEVEL_FOLDERS       = 'folders';
+    const string LEVEL_FOLDER_IDS    = 'folder-ids';
+    const string LEVEL_PASSWORDS     = 'passwords';
+    const string LEVEL_PASSWORD_IDS  = 'password-ids';
     const string LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
@@ -47,18 +46,18 @@ class FolderObjectHelper extends AbstractObjectHelper {
     /**
      * FolderObjectHelper constructor.
      *
-     * @param IAppContainer         $container
+     * @param ContainerInterface    $container
      * @param FolderService         $folderService
      * @param PasswordService       $passwordService
      * @param EncryptionService     $encryptionService
      * @param FolderRevisionService $folderRevisionService
      */
     public function __construct(
-        ContainerInterface $container,
-        protected FolderService $folderService,
+        ContainerInterface        $container,
+        protected FolderService   $folderService,
         protected PasswordService $passwordService,
-        EncryptionService $encryptionService,
-        FolderRevisionService $folderRevisionService
+        EncryptionService         $encryptionService,
+        FolderRevisionService     $folderRevisionService
     ) {
         parent::__construct($container, $encryptionService, $folderRevisionService);
     }
@@ -75,8 +74,8 @@ class FolderObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(
         EntityInterface $folder,
-        string $level = self::LEVEL_MODEL,
-        $filter = []
+        string          $level = self::LEVEL_MODEL,
+                        $filter = []
     ): ?array {
         $detailLevel = explode('+', $level);
         $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);

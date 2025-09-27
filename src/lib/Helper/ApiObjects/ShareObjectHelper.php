@@ -19,7 +19,6 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\UserService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\AppFramework\IAppContainer;
 use OCP\IConfig;
 use Psr\Container\ContainerInterface;
 
@@ -48,18 +47,18 @@ class ShareObjectHelper extends AbstractObjectHelper {
      *
      * @param IConfig            $config
      * @param UserService        $userService
-     * @param IAppContainer      $container
+     * @param ContainerInterface $container
      * @param EnvironmentService $environment
      * @param PasswordService    $passwordService
      */
     public function __construct(
-        protected IConfig $config,
-        protected UserService $userService,
+        protected IConfig            $config,
+        protected UserService        $userService,
         protected ContainerInterface $container,
-        EnvironmentService $environment,
-        protected PasswordService $passwordService
+        EnvironmentService           $environment,
+        protected PasswordService    $passwordService
     ) {
-        $this->userId          = $environment->getUserId();
+        $this->userId = $environment->getUserId();
     }
 
     /**
@@ -74,8 +73,8 @@ class ShareObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(
         EntityInterface $share,
-        string $level = self::LEVEL_MODEL,
-        $filter = []
+        string          $level = self::LEVEL_MODEL,
+                        $filter = []
     ): ?array {
 
         if(!$this->filter($share, $filter)) return null;

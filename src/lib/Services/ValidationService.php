@@ -20,7 +20,7 @@ use OCA\Passwords\Services\Object\PasswordService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Http;
-use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 use Throwable;
 
 /**
@@ -31,17 +31,11 @@ use Throwable;
 class ValidationService {
 
     /**
-     * @var IAppContainer
-     */
-    protected IAppContainer $container;
-
-    /**
      * ValidationService constructor.
      *
-     * @param IAppContainer $container
+     * @param ContainerInterface $container
      */
-    public function __construct(IAppContainer $container) {
-        $this->container = $container;
+    public function __construct(protected ContainerInterface $container) {
     }
 
     /**
@@ -203,7 +197,13 @@ class ValidationService {
             $revision->setCseType(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         }
 
-        $validSSE = [EncryptionService::SSE_ENCRYPTION_NONE, EncryptionService::SSE_ENCRYPTION_V1R1, EncryptionService::SSE_ENCRYPTION_V1R2, EncryptionService::SSE_ENCRYPTION_V2R1, EncryptionService::SSE_ENCRYPTION_V3R1];
+        $validSSE = [
+            EncryptionService::SSE_ENCRYPTION_NONE,
+            EncryptionService::SSE_ENCRYPTION_V1R1,
+            EncryptionService::SSE_ENCRYPTION_V1R2,
+            EncryptionService::SSE_ENCRYPTION_V2R1,
+            EncryptionService::SSE_ENCRYPTION_V3R1
+        ];
         if(!in_array($revision->getSseType(), $validSSE)) {
             throw new ApiException('Invalid server side encryption type', Http::STATUS_BAD_REQUEST);
         }

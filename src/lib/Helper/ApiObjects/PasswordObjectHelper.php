@@ -22,7 +22,6 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\AppFramework\IAppContainer;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -32,9 +31,9 @@ use Psr\Container\ContainerInterface;
  */
 class PasswordObjectHelper extends AbstractObjectHelper {
 
-    const string LEVEL_SHARES = 'shares';
-    const string LEVEL_FOLDER = 'folder';
-    const string LEVEL_TAGS   = 'tags';
+    const string LEVEL_SHARES  = 'shares';
+    const string LEVEL_FOLDER  = 'folder';
+    const string LEVEL_TAGS    = 'tags';
     const string LEVEL_TAG_IDS = 'tag-ids';
 
     /**
@@ -55,7 +54,7 @@ class PasswordObjectHelper extends AbstractObjectHelper {
     /**
      * PasswordObjectHelper constructor.
      *
-     * @param IAppContainer           $container
+     * @param ContainerInterface      $container
      * @param TagService              $tagService
      * @param ShareService            $shareService
      * @param FolderService           $folderService
@@ -63,11 +62,11 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      * @param PasswordRevisionService $revisionService
      */
     public function __construct(
-        ContainerInterface $container,
-        protected TagService $tagService,
-        protected ShareService $shareService,
+        ContainerInterface      $container,
+        protected TagService    $tagService,
+        protected ShareService  $shareService,
         protected FolderService $folderService,
-        EncryptionService $encryptionService,
+        EncryptionService       $encryptionService,
         PasswordRevisionService $revisionService
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
@@ -85,8 +84,8 @@ class PasswordObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(
         EntityInterface $password,
-        string $level = self::LEVEL_MODEL,
-        $filter = []
+        string          $level = self::LEVEL_MODEL,
+                        $filter = []
     ): ?array {
         $detailLevel = explode('+', $level);
         $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);

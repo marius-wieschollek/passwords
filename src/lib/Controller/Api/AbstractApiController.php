@@ -39,10 +39,7 @@ abstract class AbstractApiController extends ApiController {
     public function __construct(IRequest $request) {
         parent::__construct(
             Application::APP_NAME,
-            $request,
-            'PUT, POST, GET, DELETE, PATCH',
-            'Authorization, Content-Type, Accept',
-            1728000
+            $request
         );
     }
 

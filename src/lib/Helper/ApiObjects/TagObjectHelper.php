@@ -21,7 +21,6 @@ use OCA\Passwords\Services\Object\TagRevisionService;
 use OCA\Passwords\Services\Object\TagService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
-use OCP\AppFramework\IAppContainer;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -31,8 +30,8 @@ use Psr\Container\ContainerInterface;
  */
 class TagObjectHelper extends AbstractObjectHelper {
 
-    const string LEVEL_PASSWORDS    = 'passwords';
-    const string LEVEL_PASSWORD_IDS = 'password-ids';
+    const string LEVEL_PASSWORDS     = 'passwords';
+    const string LEVEL_PASSWORD_IDS  = 'password-ids';
     const string LEVEL_PASSWORD_TAGS = 'password-tags';
 
     /**
@@ -53,7 +52,7 @@ class TagObjectHelper extends AbstractObjectHelper {
     /**
      * TagObjectHelper constructor.
      *
-     * @param IAppContainer      $container
+     * @param ContainerInterface $container
      * @param TagService         $tagService
      * @param PasswordService    $passwordService
      * @param TagRevisionService $revisionService
@@ -61,10 +60,10 @@ class TagObjectHelper extends AbstractObjectHelper {
      */
     public function __construct(
         ContainerInterface $container,
-        TagService $tagService,
-        PasswordService $passwordService,
+        TagService         $tagService,
+        PasswordService    $passwordService,
         TagRevisionService $revisionService,
-        EncryptionService $encryptionService
+        EncryptionService  $encryptionService
     ) {
         parent::__construct($container, $encryptionService, $revisionService);
 
@@ -84,8 +83,8 @@ class TagObjectHelper extends AbstractObjectHelper {
      */
     public function getApiObject(
         EntityInterface $tag,
-        string $level = self::LEVEL_MODEL,
-        $filter = []
+        string          $level = self::LEVEL_MODEL,
+                        $filter = []
     ): ?array {
         $detailLevel = explode('+', $level);
         $withModel   = in_array(self::LEVEL_MODEL, $detailLevel);

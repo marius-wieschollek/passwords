@@ -24,7 +24,7 @@ use OCA\Passwords\Encryption\Object\SseV1Encryption;
 use OCA\Passwords\Encryption\Object\SseV2Encryption;
 use OCA\Passwords\Encryption\Object\SseV3Encryption;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
-use OCP\AppFramework\IAppContainer;
+use Psr\Container\ContainerInterface;
 
 /**
  * Class EncryptionService
@@ -74,24 +74,12 @@ class EncryptionService {
         ];
 
     /**
-     * @var IAppContainer
-     */
-    private IAppContainer $container;
-
-    /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $userSettings;
-
-    /**
      * EncryptionService constructor.
      *
-     * @param IAppContainer      $container
+     * @param ContainerInterface $container
      * @param UserSettingsHelper $userSettings
      */
-    public function __construct(IAppContainer $container, UserSettingsHelper $userSettings) {
-        $this->container    = $container;
-        $this->userSettings = $userSettings;
+    public function __construct(protected ContainerInterface $container, protected UserSettingsHelper $userSettings) {
     }
 
     /**

@@ -28,16 +28,11 @@ use ReflectionException;
 class ConfigurationService {
 
     /**
-     * @var string|null
-     */
-    protected ?string $userId;
-
-    /**
      * @param IConfig            $config
+     * @param IAppConfig         $appConfig
      * @param EnvironmentService $environment
      */
-    public function __construct(protected IConfig $config, protected IAppConfig $appConfig, EnvironmentService $environment) {
-        $this->userId = $environment->getUserId();
+    public function __construct(protected IConfig $config, protected IAppConfig $appConfig, protected EnvironmentService $environment) {
     }
 
     /**
@@ -301,10 +296,11 @@ class ConfigurationService {
      * @throws Exception
      */
     protected function getUserId(?string $user = null): ?string {
-        if($this->userId !== null && $user !== null && $this->userId !== $user) {
-            throw new Exception("Illegal user configuration access request by {$this->userId} for {$user}");
+        $userId = $this->environment->getUserId();
+        if($userId !== null && $user !== null && $userId !== $user) {
+            throw new Exception("Illegal user configuration access request by {$userId} for {$user}");
         }
 
-        return $this->userId === null ? $user:$this->userId;
+        return $userId === null ? $user:$userId;
     }
 }
