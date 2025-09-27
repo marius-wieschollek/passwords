@@ -10,6 +10,7 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
@@ -29,7 +30,7 @@ class ValidationServiceTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $container               = $this->createMock(ContainerInterface::class);
         $this->validationService = new ValidationService($container);
     }
 

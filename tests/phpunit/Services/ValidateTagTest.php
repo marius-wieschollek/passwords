@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
@@ -35,7 +36,7 @@ class ValidateTagTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $container               = $this->createMock(ContainerInterface::class);
 
         $this->challengeService = $this->createMock(UserChallengeService::class);
         $container->method('get')->willReturn($this->challengeService);

@@ -14,6 +14,7 @@ use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
@@ -48,7 +49,7 @@ class ValidatePasswordTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $container = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $container = $this->createMock(ContainerInterface::class);
 
         $this->challengeService   = $this->createMock(UserChallengeService::class);
         $this->passwordService    = $this->createMock(PasswordService::class);

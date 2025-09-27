@@ -11,7 +11,9 @@ use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\FolderService;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
@@ -27,7 +29,7 @@ class ValidateFolderTest extends TestCase {
      */
     protected $validationService;
     /**
-     * @var UserChallengeService|\PHPUnit\Framework\MockObject\MockObject
+     * @var UserChallengeService|MockObject
      */
     protected $challengeService;
 
@@ -35,7 +37,7 @@ class ValidateFolderTest extends TestCase {
      *
      */
     protected function setUp(): void {
-        $container               = $this->createMock('\OCP\AppFramework\IAppContainer');
+        $container               = $this->createMock(ContainerInterface::class);
 
         $this->challengeService = $this->createMock(UserChallengeService::class);
         $container->method('get')->willReturn($this->challengeService);
