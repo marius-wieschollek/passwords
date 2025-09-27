@@ -128,7 +128,7 @@ class ImpersonationNotification extends AbstractNotification {
         $date         = $formatter->format($dateTime);
         $impersonator = $this->userService->getUserName($parameters['impersonator']);
 
-        if($this->challengeService->hasChallenge()) {
+        if($this->environment->getAppMode() === EnvironmentService::MODE_USER && $this->challengeService->hasChallenge()) {
             return $localisation->t('%s tried to log into your account on %s.', [$impersonator, $date])
                    .' '.
                    $localisation->t('Since you use a master password, this does not mean that access to your data was granted.');
