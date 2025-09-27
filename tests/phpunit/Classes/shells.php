@@ -328,3 +328,12 @@ namespace OCP\SetupCheck {
         public static function success(?string $description = null, ?string $linkToDoc = null): self {return new self();}
     }
 }
+
+
+namespace Psr\Container {
+    interface ContainerInterface
+    {
+        public function get(string $id);
+        public function has(string $id): bool;
+    }
+}

@@ -15,7 +15,6 @@ use OCA\Passwords\Services\Object\FolderService;
 use OCA\Passwords\Services\Object\PasswordService;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidatePasswordTest
@@ -71,7 +70,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidSse() {
         $mock = $this->getPasswordMock();
@@ -89,7 +87,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidCse() {
         $mock = $this->getPasswordMock();
@@ -109,7 +106,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordCseKeyBotNoCse() {
         $mock = $this->getPasswordMock();
@@ -130,7 +126,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordNoSseAndCse() {
         $mock = $this->getPasswordMock();
@@ -149,7 +144,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordMissingCseKey() {
         $mock = $this->getPasswordMock();
@@ -170,7 +164,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordEmptyLabel() {
         $mock = $this->getPasswordMock();
@@ -190,7 +183,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordEmptyPassword() {
         $mock = $this->getPasswordMock();
@@ -211,7 +203,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidEmptyHash() {
         $mock = $this->getPasswordMock();
@@ -243,7 +234,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidHash() {
         $mock = $this->getPasswordMock();
@@ -275,7 +265,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidHashWithCustomLength() {
         $mock = $this->getPasswordMock();
@@ -306,7 +295,6 @@ class ValidatePasswordTest extends TestCase {
     }
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordInvalidEmptyHash() {
         $mock = $this->getPasswordMock();
@@ -332,7 +320,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordInvalidHash() {
         $mock = $this->getPasswordMock();
@@ -364,7 +351,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordInvalidHashWithCustomLength() {
         $mock = $this->getPasswordMock();
@@ -396,7 +382,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordInvalidHashWithSharedPassword() {
         $mock = $this->getPasswordMock();
@@ -426,7 +411,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordValidEmptyHash() {
         $mock = $this->getPasswordMock();
@@ -453,7 +437,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordValidFullHash() {
         $mock = $this->getPasswordMock();
@@ -480,7 +463,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordValidHashWithCustomLength() {
         $mock = $this->getPasswordMock();
@@ -507,7 +489,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordValidEmptyHash() {
         $mock = $this->getPasswordMock();
@@ -528,7 +509,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordValidFullHash() {
         $mock = $this->getPasswordMock();
@@ -555,7 +535,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateNewPasswordValidHashWithCustomLength() {
         $mock = $this->getPasswordMock();
@@ -582,7 +561,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordValidHashWithSharedPassword() {
         $mock = $this->getPasswordMock();
@@ -609,7 +587,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsSseType() {
         $mock = $this->getPasswordMock();
@@ -632,7 +609,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsCseType() {
         $mock = $this->getPasswordMock();
@@ -655,7 +631,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordCorrectsInvalidFolderUuid() {
         $mock = $this->getPasswordMock();
@@ -675,7 +650,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenEmpty() {
         $mock = $this->getPasswordMock();
@@ -695,7 +669,6 @@ class ValidatePasswordTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidatePasswordSetsEditedWhenInFuture() {
         $mock = $this->getPasswordMock();

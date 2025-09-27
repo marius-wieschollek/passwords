@@ -12,7 +12,6 @@ use OCA\Passwords\Db\TagRevision;
 use OCA\Passwords\Exception\ApiException;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidateTagTest
@@ -52,7 +51,6 @@ class ValidateTagTest extends TestCase {
      */
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidSse() {
         $mock = $this->getTagMock();
@@ -70,7 +68,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagInvalidCse() {
         $mock = $this->getTagMock();
@@ -90,7 +87,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagCseKeyButNoCse() {
         $mock = $this->getTagMock();
@@ -111,7 +107,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagNoSseAndCse() {
         $mock = $this->getTagMock();
@@ -131,7 +126,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagMissingCseKey() {
         $mock = $this->getTagMock();
@@ -152,7 +146,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyLabel() {
         $mock = $this->getTagMock();
@@ -172,7 +165,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagEmptyColor() {
         $mock = $this->getTagMock();
@@ -193,7 +185,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsSseType() {
         $mock = $this->getTagMock();
@@ -213,7 +204,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsCseType() {
         $mock = $this->getTagMock();
@@ -233,7 +223,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenEmpty() {
         $mock = $this->getTagMock();
@@ -250,7 +239,6 @@ class ValidateTagTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateTagSetsEditedWhenInFuture() {
         $mock = $this->getTagMock();

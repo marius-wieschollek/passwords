@@ -11,7 +11,6 @@ use Exception;
 use OCA\Passwords\Services\Object\FolderService;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use SebastianBergmann\RecursionContext\InvalidArgumentException;
 
 /**
  * Class ValidationServiceTest
@@ -41,7 +40,6 @@ class ValidationServiceTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateDomainValid() {
         $this->assertEquals(
@@ -52,7 +50,6 @@ class ValidationServiceTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateDomainInvalid() {
         $this->assertEquals(
@@ -69,7 +66,6 @@ class ValidationServiceTest extends TestCase {
      */
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateUuidValid() {
         $this->assertEquals(
@@ -80,7 +76,6 @@ class ValidationServiceTest extends TestCase {
 
     /**
      * @throws Exception
-     * @throws InvalidArgumentException
      */
     public function testValidateUuidInvalid() {
         $this->assertEquals(
