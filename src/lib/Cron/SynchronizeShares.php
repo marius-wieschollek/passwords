@@ -264,17 +264,13 @@ class SynchronizeShares extends AbstractTimedJob {
      * @throws Exception
      */
     protected function removeSharedAttribute(): void {
-        $passwords = $this->passwordService->findShared();
+        $passwords = $this->passwordService->findSharedPasswordsWithoutShares();
         $total     = 0;
 
         foreach($passwords as $password) {
-            $shares = $this->shareService->findBySourcePassword($password->getUuid());
-
-            if(empty($shares)) {
-                $password->setHasShares(false);
-                $this->passwordService->save($password);
-                $total++;
-            }
+            $password->setHasShares(false);
+            $this->passwordService->save($password);
+            $total++;
         }
 
         $this->logger->debugOrInfo(['Removed shared attribute from %s password(s)', $total], $total);
