@@ -87,6 +87,22 @@ class PasswordMapper extends AbstractMapper {
     }
 
     /**
+     * @return Password[]
+     */
+
+     public function findAllSharedPasswordsWithoutShares() {
+        $sql = $this->db->getQueryBuilder();
+        $sql->select('a.*')
+            ->from(static::TABLE_NAME, 'a')
+            ->leftJoin('a', ShareMapper::TABLE_NAME, 'b', 'a.`uuid` = b.`source_password`')
+            ->where(
+                $sql->expr()->eq('a.has_shares', $sql->createNamedParameter(true, IQueryBuilder::PARAM_BOOL)),
+                $sql->expr()->isNull('b.id')
+            );
+        return $this->findEntities($sql);
+    }
+
+    /**
      * @param string $folderUuid
      *
      * @return Password[]
