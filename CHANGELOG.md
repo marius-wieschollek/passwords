@@ -1,4 +1,12 @@
 ## [Unreleased]
+## 2025.10.0 - Feature release
+### Added
+- Improved performance of sharing job
+### Fixed
+- NC 32 / PHP 8.4 dependency injection issues
+- Crash in impersonation notification email
+
+
 ## 2025.9.0 - Feature release
 ### Added
 - Nextcloud 32 support

@@ -123,7 +123,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <donation>https://ko-fi.com/mariusdavid</donation>
     <dependencies>
         <php min-version="8.3" max-version="8.4" />
-        <nextcloud min-version="30" max-version="32" />
+        <nextcloud min-version="30" max-version="31" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
