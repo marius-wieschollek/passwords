@@ -230,7 +230,7 @@ class ServerReportHelper {
      * @return array
      */
     protected function getStatus(): array {
-        $autoBackupStatus = intval($this->config->getAppValue('auto-backup/status', '0'));
+        $autoBackupStatus = $this->config->getAppValueInt('auto-backup/status');
 
         return [
             'autoBackupStatus' => $autoBackupStatus

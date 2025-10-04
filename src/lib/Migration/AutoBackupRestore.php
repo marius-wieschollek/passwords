@@ -18,7 +18,7 @@ use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Helper\User\AdminUserHelper;
 use OCA\Passwords\Services\BackupService;
 use OCA\Passwords\Services\NotificationService;
-use OCP\IConfig;
+use OCP\AppFramework\Services\IAppConfig;
 use OCP\Migration\IOutput;
 use OCP\Migration\IRepairStep;
 
@@ -30,41 +30,6 @@ use OCP\Migration\IRepairStep;
 class AutoBackupRestore implements IRepairStep {
 
     /**
-     * @var PasswordRevisionMapper
-     */
-    protected PasswordRevisionMapper $passwordRevisionMapper;
-
-    /**
-     * @var FolderRevisionMapper
-     */
-    protected FolderRevisionMapper $folderRevisionMapper;
-
-    /**
-     * @var TagRevisionMapper
-     */
-    protected TagRevisionMapper $tagRevisionMapper;
-
-    /**
-     * @var BackupService
-     */
-    protected BackupService $backupService;
-
-    /**
-     * @var NotificationService
-     */
-    protected NotificationService $notifications;
-
-    /**
-     * @var IConfig
-     */
-    protected IConfig $config;
-
-    /**
-     * @var AdminUserHelper
-     */
-    protected AdminUserHelper $adminHelper;
-
-    /**
      * AutoBackupRestore constructor.
      *
      * @param PasswordRevisionMapper $passwordRevisionMapper
@@ -73,24 +38,17 @@ class AutoBackupRestore implements IRepairStep {
      * @param NotificationService    $notifications
      * @param AdminUserHelper        $adminHelper
      * @param BackupService          $backupService
-     * @param IConfig                $config
+     * @param IAppConfig             $config
      */
     public function __construct(
-        PasswordRevisionMapper $passwordRevisionMapper,
-        FolderRevisionMapper $folderRevisionMapper,
-        TagRevisionMapper $tagRevisionMapper,
-        NotificationService $notifications,
-        AdminUserHelper $adminHelper,
-        BackupService $backupService,
-        IConfig $config
+        protected PasswordRevisionMapper $passwordRevisionMapper,
+        protected FolderRevisionMapper $folderRevisionMapper,
+        protected TagRevisionMapper $tagRevisionMapper,
+        protected NotificationService $notifications,
+        protected AdminUserHelper $adminHelper,
+        protected BackupService $backupService,
+        protected IAppConfig $config
     ) {
-        $this->passwordRevisionMapper = $passwordRevisionMapper;
-        $this->folderRevisionMapper   = $folderRevisionMapper;
-        $this->tagRevisionMapper      = $tagRevisionMapper;
-        $this->backupService          = $backupService;
-        $this->notifications          = $notifications;
-        $this->adminHelper            = $adminHelper;
-        $this->config                 = $config;
     }
 
     /**
@@ -106,15 +64,15 @@ class AutoBackupRestore implements IRepairStep {
      * @throws \OCP\Files\NotPermittedException
      */
     public function run(IOutput $output) {
-        $enabled = $this->config->getAppValue(Application::APP_NAME, 'backup/update/autorestore', true);
+        $enabled = $this->config->getAppValueBool('backup/update/autorestore', true);
         if(!$enabled || !empty($this->passwordRevisionMapper->findAll()) || !empty($this->folderRevisionMapper->findAll()) || !empty($this->tagRevisionMapper->findAll())) {
-            $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 0);
+            $this->config->setAppValueInt('auto-backup/status', 0);
             return;
         }
 
         $backups = $this->backupService->getBackups();
         if(empty($backups)) {
-            $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 1);
+            $this->config->setAppValueInt('auto-backup/status', 1);
             return;
         }
         $backups = array_reverse($backups, true);
@@ -135,11 +93,11 @@ class AutoBackupRestore implements IRepairStep {
                     ];
                     $this->backupService->restoreBackup($name, $options);
                     $this->sendNotification('sendBackupRestoredNotification', $name);
-                    $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 2);
+                    $this->config->setAppValueInt('auto-backup/status', 2);
                     break;
                 } catch(\Throwable $e) {
-                    $this->sendNotification('sendBackupRestoredNotification', $name);
-                    $this->config->setAppValue(Application::APP_NAME, 'auto-backup/status', 3);
+                    $this->sendNotification('sendBackupFailedNotification', $name);
+                    $this->config->setAppValueInt('auto-backup/status', 3);
                 }
             }
         }
