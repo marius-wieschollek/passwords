@@ -3266,5 +3266,19 @@
     },
     "backend-000482": {
         "message": "打开密码程序来查看它们 ."
+    },
+    "backend-BreachedPasswordsDbUpdateCheck": {
+        "message": "有密碼被違背了 :"
+    },
+    "backend-BreachedPasswordsDbUpdateCheckWarning": {
+        "message": "已破解的密碼數據庫無法更新: $STR_1$",
+        "placeholders": {
+            "str_1": {
+                "content": "$1"
+            }
+        }
+    },
+    "backend-BreachedPasswordsDbUpdateCheckOk": {
+        "message": "已破譯密碼數據庫的更新沒有報告錯誤 ."
     }
 }
