@@ -719,7 +719,7 @@
         "message": "复制密码"
     },
     "frontend-000223": {
-        "message": "标记已恢复"
+        "message": "標籤已還原"
     },
     "backend-000647": {
         "message": "\"$STR_1$\"获准进入你的$STR_2$ 密码账户通过PassLink.",
@@ -1862,7 +1862,7 @@
         }
     },
     "frontend-000232": {
-        "message": "移动密码失败"
+        "message": "移動密碼失敗"
     },
     "backups-000138": {
         "message": "\"$LABEL$\"中的\"$FIELD$\"类型不详,不能进口.",
@@ -1901,7 +1901,7 @@
         "message": "更多信息可在日志中找到. (新闻F12)"
     },
     "frontend-000233": {
-        "message": "删除密码"
+        "message": "刪除密碼"
     },
     "backups-000142": {
         "message": "文件有\"$ACTUAL$\"的类型,但\"$EXPECTED$\"是预期的. 你可能选择了错误的文件或进口商.",
@@ -2046,7 +2046,7 @@
         "message": "在服务器上"
     },
     "frontend-000234": {
-        "message": "您想要删除密码吗 ?"
+        "message": "您確定要刪除此密碼嗎？"
     },
     "frontend-000188": {
         "message": "自定义字段"
@@ -2133,46 +2133,46 @@
         "message": "生成随机颜色"
     },
     "frontend-000217": {
-        "message": "标记已保存"
+        "message": "標籤已儲存"
     },
     "frontend-000218": {
-        "message": "保存标签失败"
+        "message": "標籤儲存失敗"
     },
     "frontend-000219": {
-        "message": "删除标签"
+        "message": "刪除標籤"
     },
     "frontend-000220": {
-        "message": "您要删除标签吗 ?"
+        "message": "您要刪除此標籤嗎？"
     },
     "frontend-000221": {
-        "message": "标记已删除"
+        "message": "標籤已刪除"
     },
     "frontend-000222": {
-        "message": "删除标签失败"
+        "message": "刪除標籤失敗"
     },
     "frontend-000224": {
-        "message": "恢复标记失败"
+        "message": "還原標籤失敗"
     },
     "frontend-000225": {
-        "message": "创建密码"
+        "message": "新增密碼"
     },
     "frontend-000226": {
-        "message": "创建密码"
+        "message": "密碼已新增"
     },
     "frontend-000227": {
-        "message": "创建密码失败"
+        "message": "新增密碼失敗"
     },
     "frontend-000228": {
-        "message": "编辑密码"
+        "message": "編輯密碼"
     },
     "frontend-000229": {
-        "message": "密码已保存"
+        "message": "密碼已儲存"
     },
     "frontend-000230": {
-        "message": "保存密码失败"
+        "message": "密碼儲存失敗"
     },
     "frontend-000231": {
-        "message": "密码已移动"
+        "message": "密碼已移動"
     },
     "frontend-000235": {
         "message": "密码已删除"
