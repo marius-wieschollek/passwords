@@ -8,8 +8,10 @@
 namespace OCA\Passwords\Services;
 
 use OC\Avatar\GuestAvatar;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IAvatarManager;
+use OCP\IConfig;
 use OCP\IUserManager;
 use Psr\Log\LoggerInterface;
 use Throwable;
@@ -30,12 +32,14 @@ class AvatarService {
      * AvatarService constructor.
      *
      * @param LoggerInterface  $logger
+     * @param IConfig          $config
      * @param IUserManager     $userManager
      * @param IAvatarManager   $avatarManager
      * @param FileCacheService $fileCacheService
      */
     public function __construct(
         protected LoggerInterface $logger,
+        protected IConfig         $config,
         protected IUserManager    $userManager,
         protected IAvatarManager  $avatarManager,
         FileCacheService          $fileCacheService
@@ -59,7 +63,11 @@ class AvatarService {
 
             return $avatar->getFile($size);
         } else {
-            return (new GuestAvatar($userId, $this->logger))->getFile($size);
+            if(ServerVersion::getMajorVersion() < 32) {
+                return (new GuestAvatar($userId, $this->logger))->getFile($size);
+            } else {
+                return (new GuestAvatar($userId, $this->config, $this->logger))->getFile($size);
+            }
         }
     }
 

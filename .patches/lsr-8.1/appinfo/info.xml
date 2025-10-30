@@ -23,8 +23,8 @@ You can also share passwords with other Nextcloud users.
  * ... and many more to come
 
 **Support**
- * [Official Chat](https://t.me/nc_passwords/1)
- * [Official Forum](https://help.nextcloud.com/c/apps/passwords)
+ * [Official Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
+ * [Official Forum](https://help.nextcloud.com/tag/passwords-app)
  * [User Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index)
  * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index)
 
@@ -59,8 +59,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
  * ... und vieles mehr
 
 **Hilfe & Unterstützung**
- * [Offizieller Chat](https://t.me/nc_passwords/1)
- * [Offizielles Forum](https://help.nextcloud.com/c/apps/passwords)
+ * [Offizieller Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
+ * [Offizielles Forum](https://help.nextcloud.com/tag/passwords-app)
  * [Handbuch für Nutzer](https://git.mdns.eu/nextcloud/passwords/wikis/users/Index)
  * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/wikis/administrators/Index)
 
@@ -78,7 +78,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </description>
     <version>2025.1.0-BUILD</version>
     <licence>agpl</licence>
-    <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
+    <author homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
     <documentation>
         <user>https://git.mdns.eu/nextcloud/passwords/wikis/users/index</user>
@@ -88,6 +88,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <category>security</category>
     <category>dashboard</category>
     <category>office</category>
+    <website>https://passwordsapp.org/</website>
+    <discussion>https://help.nextcloud.com/tag/passwords-app</discussion>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
     <repository>https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/feature-overview.png">

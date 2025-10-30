@@ -17,12 +17,14 @@ use OCA\Passwords\Exception\Favicon\FaviconRequestException;
 use OCA\Passwords\Exception\Favicon\InvalidFaviconDataException;
 use OCA\Passwords\Exception\Favicon\NoFaviconDataException;
 use OCA\Passwords\Exception\Favicon\UnexpectedResponseCodeException;
+use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Helper\Image\AbstractImageHelper;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
+use OCP\IConfig;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -53,18 +55,20 @@ abstract class AbstractFaviconProvider implements FaviconProviderInterface {
      * AbstractFaviconProvider constructor.
      *
      * @param HelperService    $helperService
+     * @param IConfig          $iConfig
      * @param LoggerInterface  $logger
      * @param FileCacheService $fileCacheService
      * @param IClientService   $requestService
      */
     public function __construct(
-        HelperService $helperService,
+        HelperService             $helperService,
+        protected IConfig         $iConfig,
         protected LoggerInterface $logger,
-        FileCacheService $fileCacheService,
-        protected IClientService $requestService
+        FileCacheService          $fileCacheService,
+        protected IClientService  $requestService
     ) {
-        $this->imageHelper           = $helperService->getImageHelper();
-        $this->fileCacheService      = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
+        $this->imageHelper      = $helperService->getImageHelper();
+        $this->fileCacheService = $fileCacheService->getCacheService($fileCacheService::FAVICON_CACHE);
     }
 
     /**
@@ -107,7 +111,11 @@ abstract class AbstractFaviconProvider implements FaviconProviderInterface {
         }
 
         $domain  = preg_replace(self::COMMON_SUBDOMAIN_PATTERN, '', $domain);
-        $content = (new GuestAvatar(idn_to_utf8($domain), $this->logger))->get($size)->data();
+        if(ServerVersion::getMajorVersion() < 32) {
+            $content = (new GuestAvatar(idn_to_utf8($domain), $this->logger))->get($size)->data();
+        } else {
+            $content = (new GuestAvatar(idn_to_utf8($domain), $this->iConfig, $this->logger))->get($size)->data();
+        }
 
         return $this->fileCacheService->putFile($fileName, $content);
     }

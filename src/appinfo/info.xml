@@ -78,7 +78,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </description>
     <version>2025.1.0-BUILD</version>
     <licence>agpl</licence>
-    <author mail="nc.passwords@mdns.eu" homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
+    <author homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
     <documentation>
         <user>https://git.mdns.eu/nextcloud/passwords/-/wikis/users/index</user>
@@ -89,7 +89,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <category>dashboard</category>
     <category>office</category>
     <website>https://passwordsapp.org/</website>
-    <discussion>https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org</discussion>
+    <discussion>https://help.nextcloud.com/tag/passwords-app</discussion>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
     <repository>https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/feature-overview.png">
@@ -125,7 +125,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <donation>https://ko-fi.com/mariusdavid</donation>
     <dependencies>
         <php min-version="8.3" max-version="8.4" />
-        <nextcloud min-version="30" max-version="31" />
+        <nextcloud min-version="32.0.1" max-version="32.99.99" />
     </dependencies>
     <background-jobs>
         <job>OCA\Passwords\Cron\CheckPasswordsJob</job>
