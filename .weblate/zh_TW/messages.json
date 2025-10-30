@@ -719,7 +719,7 @@
         "message": "复制密码"
     },
     "frontend-000223": {
-        "message": "标记已恢复"
+        "message": "標籤已還原"
     },
     "backend-000647": {
         "message": "\"$STR_1$\"获准进入你的$STR_2$ 密码账户通过PassLink.",
@@ -1382,7 +1382,7 @@
         "message": "您的浏览器不支持运行此应用程序所需的WebAssem( WASM) ."
     },
     "backups-000045": {
-        "message": "自定义字段"
+        "message": "自訂欄位"
     },
     "backups-000046": {
         "message": "目錄"
@@ -1538,67 +1538,67 @@
         "message": "匯出目錄"
     },
     "backups-000044": {
-        "message": "导出标记"
+        "message": "匯出標籤"
     },
     "backups-000047": {
-        "message": "标记"
+        "message": "標籤"
     },
     "backups-000048": {
-        "message": "父标签"
+        "message": "上層標籤"
     },
     "backups-000049": {
         "message": "目錄 ID"
     },
     "backups-000050": {
-        "message": "标记编号"
+        "message": "標籤編號"
     },
     "backups-000051": {
-        "message": "父文件夹"
+        "message": "上層編號"
     },
     "backups-CustomFields": {
-        "message": "自定义字段"
+        "message": "自訂欄位"
     },
     "backups-FolderLabel": {
         "message": "目錄"
     },
     "backups-TagLabels": {
-        "message": "标记"
+        "message": "標籤"
     },
     "backups-FolderId": {
         "message": "目錄 ID"
     },
     "backups-TagIds": {
-        "message": "标记编号"
+        "message": "標籤編號"
     },
     "backups-000052": {
         "message": "空"
     },
     "backups-000053": {
-        "message": "添加标题行"
+        "message": "增加標題"
     },
     "backups-000054": {
-        "message": "导出与我共享的密码"
+        "message": "匯出與我分享的密碼"
     },
     "backups-000055": {
-        "message": "不要编辑我共享的密码"
+        "message": "不要編輯與我分享的密碼"
     },
     "backups-000056": {
-        "message": "不要导入空字段"
+        "message": "不要匯入空欄位"
     },
     "backups-000057": {
-        "message": "运行导出"
+        "message": "開始匯出"
     },
     "backups-000058": {
-        "message": "导出"
+        "message": "匯出"
     },
     "backups-000059": {
         "message": "等待中…"
     },
     "backups-000060": {
-        "message": "导出错误"
+        "message": "匯出錯誤"
     },
     "backups-000061": {
-        "message": "下载 $FORMAT$",
+        "message": "下載 $FORMAT$",
         "placeholders": {
             "format": {
                 "content": "$1"
@@ -1606,115 +1606,115 @@
         }
     },
     "backups-000062": {
-        "message": "没有要导出的内容"
+        "message": "沒有東西可供匯出"
     },
     "backups-000063": {
-        "message": "没有要导出的数据"
+        "message": "沒有資料可供匯出"
     },
     "backups-000064": {
-        "message": "恢复或导入"
+        "message": "還原或匯入"
     },
     "backups-000065": {
-        "message": "选择导入格式"
+        "message": "選擇匯入格式"
     },
     "backups-000066": {
-        "message": "密码 CSV"
+        "message": "密碼 CSV"
     },
     "backups-000067": {
         "message": "目錄 CSV"
     },
     "backups-000068": {
-        "message": "自定义 CSV"
+        "message": "自訂 CSV"
     },
     "backups-000069": {
-        "message": "其他/ 自定义 CSV"
+        "message": "其他 / 自訂 CSV"
     },
     "backups-000070": {
-        "message": "选择文件"
+        "message": "選擇檔案"
     },
     "backups-000071": {
-        "message": "选择选项"
+        "message": "設定選項"
     },
     "backups-000072": {
-        "message": "冲突处理"
+        "message": "衝突處理"
     },
     "backups-000073": {
-        "message": "如果同一版本则跳过"
+        "message": "如果為相同版本則跳過"
     },
     "backups-000074": {
-        "message": "总是跳过"
+        "message": "總是跳過"
     },
     "backups-000075": {
-        "message": "覆盖已存在的"
+        "message": "覆寫現有資料"
     },
     "backups-000076": {
-        "message": "与已存在的合并"
+        "message": "與現有資料合併"
     },
     "backups-000077": {
-        "message": "创建新条目"
+        "message": "建立新項目"
     },
     "backups-000078": {
-        "message": "用于加密备份"
+        "message": "用於加密備份"
     },
     "backups-000079": {
-        "message": "简历 选项"
+        "message": "CSV 選項"
     },
     "backups-000080": {
-        "message": "数据库"
+        "message": "資料庫"
     },
     "backups-000081": {
-        "message": "引用字符"
+        "message": "引號字符"
     },
     "backups-000082": {
-        "message": "逃逸字符"
+        "message": "跳脫字符"
     },
     "backups-000083": {
-        "message": "字段分隔符"
+        "message": "欄位分隔符"
     },
     "backups-000084": {
-        "message": "换行符"
+        "message": "換行字符"
     },
     "backups-000085": {
-        "message": "引用"
+        "message": "引號"
     },
     "backups-000086": {
-        "message": "单引号"
+        "message": "單引號"
     },
     "backups-000087": {
-        "message": "反斜线"
+        "message": "反斜線"
     },
     "backups-000088": {
-        "message": "检测"
+        "message": "偵測"
     },
     "backups-000089": {
-        "message": "逗号"
+        "message": "逗號"
     },
     "backups-000090": {
-        "message": "分号"
+        "message": "分號"
     },
     "backups-000091": {
-        "message": "空间"
+        "message": "空格"
     },
     "backups-000092": {
-        "message": "标签"
+        "message": "製表符 (tab)"
     },
     "backups-000093": {
-        "message": "检测未回避的引用"
+        "message": "偵測未跳脫的引號"
     },
     "backups-000094": {
-        "message": "跳过第一行"
+        "message": "跳過第一行"
     },
     "backups-000095": {
-        "message": "插入缺失字段"
+        "message": "自動補齊缺失的欄位"
     },
     "backups-000096": {
-        "message": "简历 实地绘图"
+        "message": "CSV 欄位對照"
     },
     "backups-000097": {
-        "message": "预览行"
+        "message": "預覽行"
     },
     "backups-000098": {
-        "message": "线路 $LINE$",
+        "message": "行 $LINE$",
         "placeholders": {
             "line": {
                 "content": "$1"
@@ -1722,31 +1722,31 @@
         }
     },
     "backups-000099": {
-        "message": "(无值)"
+        "message": "（空值）"
     },
     "backups-000100": {
         "message": "忽略"
     },
     "backups-000101": {
-        "message": "运行导入"
+        "message": "開始匯入"
     },
     "backups-000102": {
-        "message": "导入"
+        "message": "匯入"
     },
     "backups-000103": {
-        "message": "分析输入文件"
+        "message": "正在分析輸入文件"
     },
     "backups-000104": {
-        "message": "分析标签"
+        "message": "正在分析標籤"
     },
     "backups-000105": {
         "message": "正在分析目錄"
     },
     "backups-000106": {
-        "message": "读取标签"
+        "message": "正在讀取標籤"
     },
     "backups-000107": {
-        "message": "导入标记"
+        "message": "正在匯入標籤"
     },
     "backups-000108": {
         "message": "正在讀取目錄"
@@ -1755,28 +1755,28 @@
         "message": "正在匯入目錄"
     },
     "backups-000110": {
-        "message": "读取密码"
+        "message": "正在讀取密碼"
     },
     "backups-000111": {
-        "message": "导入密码"
+        "message": "正在匯入密碼"
     },
     "backups-000112": {
-        "message": "导入失败"
+        "message": "匯入失敗"
     },
     "backups-000113": {
-        "message": "导入部分失败"
+        "message": "匯入部分失敗"
     },
     "backups-000114": {
-        "message": "导入成功"
+        "message": "匯入成功"
     },
     "backups-000115": {
-        "message": "导入出错"
+        "message": "匯入錯誤"
     },
     "backups-000116": {
-        "message": "一些对象有错误 :"
+        "message": "部分項目發生錯誤："
     },
     "backups-000117": {
-        "message": "无效的文件类型 \"$TYPE$\"",
+        "message": "無效的檔案類型 \"$TYPE$\"",
         "placeholders": {
             "type": {
                 "content": "$1"
@@ -1784,19 +1784,19 @@
         }
     },
     "backups-000118": {
-        "message": "需要密码"
+        "message": "需要密碼"
     },
     "backups-000119": {
-        "message": "密码无效"
+        "message": "密碼錯誤"
     },
     "backups-000120": {
-        "message": "解密密码失败"
+        "message": "無法解開密碼"
     },
     "backups-000121": {
         "message": "解密目錄失敗"
     },
     "backups-000122": {
-        "message": "解密标签失败"
+        "message": "無法解密標籤"
     },
     "backups-000123": {
         "message": "导入文件为空"
@@ -1862,7 +1862,7 @@
         }
     },
     "frontend-000232": {
-        "message": "移动密码失败"
+        "message": "移動密碼失敗"
     },
     "backups-000138": {
         "message": "\"$LABEL$\"中的\"$FIELD$\"类型不详,不能进口.",
@@ -1901,7 +1901,7 @@
         "message": "更多信息可在日志中找到. (新闻F12)"
     },
     "frontend-000233": {
-        "message": "删除密码"
+        "message": "刪除密碼"
     },
     "backups-000142": {
         "message": "文件有\"$ACTUAL$\"的类型,但\"$EXPECTED$\"是预期的. 你可能选择了错误的文件或进口商.",
@@ -2046,7 +2046,7 @@
         "message": "在服务器上"
     },
     "frontend-000234": {
-        "message": "您想要删除密码吗 ?"
+        "message": "您確定要刪除此密碼嗎？"
     },
     "frontend-000188": {
         "message": "自定义字段"
@@ -2133,46 +2133,46 @@
         "message": "生成随机颜色"
     },
     "frontend-000217": {
-        "message": "标记已保存"
+        "message": "標籤已儲存"
     },
     "frontend-000218": {
-        "message": "保存标签失败"
+        "message": "標籤儲存失敗"
     },
     "frontend-000219": {
-        "message": "删除标签"
+        "message": "刪除標籤"
     },
     "frontend-000220": {
-        "message": "您要删除标签吗 ?"
+        "message": "您要刪除此標籤嗎？"
     },
     "frontend-000221": {
-        "message": "标记已删除"
+        "message": "標籤已刪除"
     },
     "frontend-000222": {
-        "message": "删除标签失败"
+        "message": "刪除標籤失敗"
     },
     "frontend-000224": {
-        "message": "恢复标记失败"
+        "message": "還原標籤失敗"
     },
     "frontend-000225": {
-        "message": "创建密码"
+        "message": "新增密碼"
     },
     "frontend-000226": {
-        "message": "创建密码"
+        "message": "密碼已新增"
     },
     "frontend-000227": {
-        "message": "创建密码失败"
+        "message": "新增密碼失敗"
     },
     "frontend-000228": {
-        "message": "编辑密码"
+        "message": "編輯密碼"
     },
     "frontend-000229": {
-        "message": "密码已保存"
+        "message": "密碼已儲存"
     },
     "frontend-000230": {
-        "message": "保存密码失败"
+        "message": "密碼儲存失敗"
     },
     "frontend-000231": {
-        "message": "密码已移动"
+        "message": "密碼已移動"
     },
     "frontend-000235": {
         "message": "密码已删除"
