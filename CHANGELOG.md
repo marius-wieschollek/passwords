@@ -1,11 +1,16 @@
 ## [Unreleased]
+## 2025.11.0 - Feature release
+### Fixed
+- Avatar issues with NC 32
+### Removed
+- Support for Nextcloud 30, 31, 32.0.0
+
 ## 2025.10.0 - Feature release
 ### Added
 - Improved performance of sharing job
 ### Fixed
 - NC 32 / PHP 8.4 dependency injection issues
 - Crash in impersonation notification email
-
 
 ## 2025.9.0 - Feature release
 ### Added
