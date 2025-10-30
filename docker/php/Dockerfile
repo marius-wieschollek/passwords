@@ -1,4 +1,4 @@
-FROM nextcloud:31-fpm
+FROM nextcloud:32-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
@@ -16,9 +16,9 @@ RUN apt-get update -y && \
 
 RUN pecl install xdebug;
 
-#RUN pecl uninstall imagick; \
-#    pecl install xdebug; \
-#    pecl install imagick;
+RUN pecl uninstall imagick; \
+    pecl install xdebug; \
+    pecl install imagick;
 
 RUN curl -sL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get update -y && \
