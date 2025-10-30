@@ -127,6 +127,9 @@ namespace OCP {
     interface IL10N{
         public function t(string $text, $parameters = []): string;
     }
+
+    class IConfig {
+    }
 }
 
 namespace OC\User {

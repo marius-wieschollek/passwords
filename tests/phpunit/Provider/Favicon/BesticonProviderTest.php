@@ -90,12 +90,14 @@ class BesticonProviderTest extends TestCase {
         $this->fileCacheService     = $this->createMock(FileCacheService::class);
         $this->notificationService  = $this->createMock(NotificationService::class);
         $this->logger               = $this->createMock(LoggerInterface::class);
+        $this->iConfigService       = $this->createMock(\OCP\IConfig::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
         $this->besticonHelper = new BestIconProvider(
             $this->dateTimeHelper,
             $this->configurationService,
+            $this->iConfigService,
             $this->logger,
             $helperService,
             $this->adminService,

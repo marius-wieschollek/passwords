@@ -20,6 +20,7 @@ use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
 use OCP\Http\Client\IClientService;
+use OCP\IConfig;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -30,8 +31,8 @@ class BestIconProvider extends AbstractFaviconProvider {
 
     const string BESTICON_SHARED_INSTANCE = 'https://icons.passwordsapp.org/icon';
     const string BESTICON_CONFIG_KEY      = 'service/favicon/bi/url';
-    const string BESTICON_COUNTER_KEY    = 'service/favicon/bi/counter';
-    const int    BESTICON_INSTANCE_LIMIT = 250;
+    const string BESTICON_COUNTER_KEY     = 'service/favicon/bi/counter';
+    const int    BESTICON_INSTANCE_LIMIT  = 250;
 
     /**
      * @var ConfigurationService
@@ -92,21 +93,22 @@ class BestIconProvider extends AbstractFaviconProvider {
      * @param NotificationService  $notificationService
      */
     public function __construct(
-        DateTimeHelper        $dateTime,
-        ConfigurationService  $config,
-        LoggerInterface       $logger,
-        HelperService         $helperService,
-        AdminUserHelper       $adminHelper,
-        IClientService        $requestService,
-        FileCacheService      $fileCacheService,
-        NotificationService   $notificationService
+        DateTimeHelper       $dateTime,
+        ConfigurationService $config,
+        protected IConfig    $iConfig,
+        LoggerInterface      $logger,
+        HelperService        $helperService,
+        AdminUserHelper      $adminHelper,
+        IClientService       $requestService,
+        FileCacheService     $fileCacheService,
+        NotificationService  $notificationService
     ) {
         $this->config        = $config;
         $this->dateTime      = $dateTime;
         $this->adminHelper   = $adminHelper;
         $this->notifications = $notificationService;
 
-        parent::__construct($helperService, $logger, $fileCacheService, $requestService);
+        parent::__construct($helperService, $iConfig, $logger, $fileCacheService, $requestService);
     }
 
     /**
