@@ -846,10 +846,10 @@
         "message": "Przywracanie hasła nie powiodło się"
     },
     "frontend-000238": {
-        "message": "Otwarty adres URL"
+        "message": "Otwórz URL"
     },
     "frontend-000239": {
-        "message": "Kopiuj adres URL"
+        "message": "Kopiuj URL"
     },
     "frontend-000240": {
         "message": "Kopiuj użytkownika"
@@ -1490,7 +1490,7 @@
         "message": "Kontrola bezpieczeństwa haseł"
     },
     "backend-000397": {
-        "message": "Czy zostałem rozgromiony? (zalecane)"
+        "message": "Have I been pwned? (zalecane)"
     },
     "backend-000398": {
         "message": "Duża lokalna baza danych (25 mln haseł)"
@@ -1668,7 +1668,7 @@
         }
     },
     "backend-000443": {
-        "message": "czysty"
+        "message": "wyczyść"
     },
     "backend-000444": {
         "message": "Wyczyść tę pamięć podręczną"
