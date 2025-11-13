@@ -642,7 +642,7 @@
         "message": "Naruszony"
     },
     "frontend-000170": {
-        "message": "Udział"
+        "message": "Udostępnij"
     },
     "frontend-000171": {
         "message": "Zmiany"
@@ -917,7 +917,7 @@
         }
     },
     "frontend-000255": {
-        "message": "Akcje"
+        "message": "Udostępnienia"
     },
     "frontend-000256": {
         "message": "Udostępniono $COUNT$ razy",
