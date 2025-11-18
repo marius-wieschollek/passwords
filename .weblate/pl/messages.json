@@ -1801,7 +1801,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$ udostępnił hasła $STR_2$.",
+        "message": "$STR_1$ udostępnił(a) hasła $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1812,7 +1812,7 @@
         }
     },
     "backend-000478": {
-        "message": "$STRING_4$ i $STRING_3$ udostępniły ci hasła $STRING_1$.",
+        "message": "$STRING_4$ i $STRING_3$ udostępnili(-ły) ci hasła ($STRING_1$).",
         "placeholders": {
             "string_4": {
                 "content": "$4"
@@ -1826,7 +1826,7 @@
         }
     },
     "backend-000479": {
-        "message": "$STRING_5$, $STRING_4$ i $STRING_3$ udostępniły ci hasła $STRING_1$.",
+        "message": "$STRING_5$, $STRING_4$ i $STRING_3$ udostępnili(-ły) ci hasła ($STRING_1$).",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1843,7 +1843,7 @@
         }
     },
     "backend-000480": {
-        "message": "$STRING_5$, $STRING_4$ i $STRING_2$ inni udostępnili ci hasła $STRING_1$.",
+        "message": "$STRING_5$, $STRING_4$ i jeszcze $STRING_2$ udostępnili ci hasła ($STRING_1$).",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -1860,10 +1860,10 @@
         }
     },
     "backend-000481": {
-        "message": "Otwórz aplikację haseł, aby ją zobaczyć."
+        "message": "Otwórz aplikację Hasła, aby to zobaczyć."
     },
     "backend-000482": {
-        "message": "Otwórz aplikację haseł, aby je zobaczyć."
+        "message": "Otwórz aplikację Hasła, aby je zobaczyć."
     },
     "backend-000483": {
         "message": "Hasło zostało udostępnione na stronie $STR_1$",
@@ -1905,7 +1905,7 @@
         "message": "Dostęp administracyjny do konta użytkownika"
     },
     "backend-000492": {
-        "message": "$STR_1$ Próbowano zalogować się na konto na stronie $STR_2$.",
+        "message": "$STR_1$ próbował(a) zalogować się na konto na stronie $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1916,7 +1916,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$ zalogować się na swoje konto na stronie $STR_2$.",
+        "message": "$STR_1$ zalogował(a) się na swoje konto na stronie $STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1941,10 +1941,10 @@
         }
     },
     "backend-000497": {
-        "message": "Pomóż nam ulepszyć hasła"
+        "message": "Pomóż nam ulepszyć Hasła"
     },
     "backend-000498": {
-        "message": "Możesz pomóc nam ulepszyć aplikację Passwords, biorąc udział w naszej ankiecie dotyczącej serwerów."
+        "message": "Możesz pomóc nam ulepszyć aplikację Hasła, biorąc udział w naszej ankiecie dotyczącej serwerów."
     },
     "backend-000499": {
         "message": "Spowoduje to przesłanie nam anonimowych danych dotyczących konfiguracji i wybranych ustawień."
@@ -1956,7 +1956,7 @@
         "message": "Jeszcze nie"
     },
     "backend-000502": {
-        "message": "Uczestniczyć"
+        "message": "Weź udział"
     },
     "backend-000503": {
         "message": "Udział w ankiecie serwera"
