@@ -195,15 +195,15 @@ class ThemeSettingsHelper {
      * @return string|null
      */
     public function getCacheBuster(): ?string {
-        $version = $this->config->getAppValue('cachebuster', '0', 'theming');
+        $version = $this->config->getAppValueInt('cachebuster', 0, 'theming');
 
         if(method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
             try {
-                return $version.'_'.$this->config->getUserValue('userCacheBuster', '0', null, 'theming');
+                return $this->config->getUserValue('userCacheBuster', '0', null, 'theming').'_'.$version;
             } catch(\Throwable $e) {
             }
         }
 
-        return $version;
+        return (string) $version;
     }
 }
