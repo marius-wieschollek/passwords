@@ -183,7 +183,7 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1']);
         $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
 
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
         $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
 
@@ -241,7 +241,7 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetUserBackgroundImage() {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
 
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
                 ['background_image', '', null, 'theming', 'user-background.jpg'],
@@ -262,7 +262,7 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetUserCustomBackgroundImage() {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
 
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
                 ['background_image', '', null, 'theming', 'custom'],
@@ -284,7 +284,7 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetUserNoBackgroundImage() {
         $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
 
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
         $this->configurationService->method('getUserValue')->willReturnMap(
             [
                 ['background', '', null, 'theming', ''],
@@ -342,8 +342,8 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetThemedAppIcon() {
         $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(true);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('2');
-        $this->configurationService->expects($this->once())->method('getAppValue')->with('cachebuster', '0', 'theming');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(2);
+        $this->configurationService->expects($this->once())->method('getAppValueInt')->with('cachebuster', 0, 'theming');
 
         $this->urlGenerator->method('linkToRouteAbsolute')
                            ->with('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => '2'])
@@ -384,8 +384,8 @@ class ThemeSettingsHelperTest extends TestCase {
     public function testGetThemedFolderIcon() {
         $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(true);
         $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('2');
-        $this->configurationService->expects($this->once())->method('getAppValue')->with('cachebuster', '0', 'theming');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(2);
+        $this->configurationService->expects($this->once())->method('getAppValueInt')->with('cachebuster', 0, 'theming');
 
         $this->urlGenerator->method('linkToRouteAbsolute')
                            ->with('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => '2'])
@@ -419,7 +419,7 @@ class ThemeSettingsHelperTest extends TestCase {
         ];
 
         $this->configurationService->method('isAppEnabled')->willReturn(false);
-        $this->configurationService->method('getAppValue')->with('cachebuster', '0', 'theming')->willReturn('1');
+        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
         $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
 
         $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
