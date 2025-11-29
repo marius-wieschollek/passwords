@@ -29,39 +29,39 @@ class SystemRequirements {
      * Users with NC version lower than this will receive an
      * error in the settings that their version is not supported
      */
-    const int NC_MINIMUM_ID = 30;
+    const int NC_MINIMUM_ID = 32;
 
     /**
      * Users with NC version lower than this will receive a
      * notification that this is the last version of passwords
      * for their version of Nextcloud
      */
-    const int NC_NOTIFICATION_ID = 30;
+    const int NC_NOTIFICATION_ID = 32;
 
     /**
      * Minimum version of NC that users must upgrade to in order
      * to get updates again.
      */
-    const string NC_UPGRADE_MINIMUM = '30';
+    const string NC_UPGRADE_MINIMUM = '32';
 
     /**
      * The PHP minimum version to be able to install this release
      */
-    const string PHP_MINIMUM = '8.3';
-    const int PHP_MINIMUM_ID = 80300;
+    const string PHP_MINIMUM = '8.4';
+    const int PHP_MINIMUM_ID = 80400;
 
     /**
      * Users with a PHP version lower than this will receive a
      * notification that this is the last version of passwords
      * for their version of Nextcloud
      */
-    const int PHP_NOTIFICATION_ID = 80300;
+    const int PHP_NOTIFICATION_ID = 80400;
 
     /**
      * Minimum version of PHP that users must upgrade to
      * in order to get regular updates again.
      */
-    const string PHP_UPGRADE_MINIMUM = '8.3';
+    const string PHP_UPGRADE_MINIMUM = '8.4';
 
     /**
      * Minimum version of PHP that users must upgrade to in order
