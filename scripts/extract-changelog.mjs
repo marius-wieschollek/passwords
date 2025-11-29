@@ -9,8 +9,7 @@
  */
 
 import {readFile} from 'fs/promises';
-import json from '../package.json' assert {type: 'json'};
-
+import json from '../package.json' with {type: 'json'};
 
 async function main() {
     let contents     = await readFile('./CHANGELOG.md', {encoding: 'utf-8'}),
