@@ -18,6 +18,7 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Http\Client\IClientService;
+use OCP\IConfig;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
@@ -55,14 +56,15 @@ class FaviconGrabberProvider extends AbstractFaviconProvider {
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
-        LoggerInterface       $logger,
+        LoggerInterface      $logger,
+        IConfig              $iConfig,
         ConfigurationService $config,
-        HelperService $helperService,
-        IClientService $requestService,
-        FileCacheService $fileCacheService
+        HelperService        $helperService,
+        IClientService       $requestService,
+        FileCacheService     $fileCacheService
     ) {
         $this->config = $config;
-        parent::__construct($helperService, $logger, $fileCacheService, $requestService);
+        parent::__construct($helperService, $iConfig, $logger, $fileCacheService, $requestService);
     }
 
     /**
