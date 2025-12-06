@@ -1,4 +1,12 @@
 ## [Unreleased]
+## 2025.12.0 - Feature release
+### Changed
+- Updated breached passwords db
+### Fixed
+- Crash caused by theming settings
+- Crash when using favicon grabber service
+- Crash while sharing when guest app enabled
+
 ## 2025.11.0 - Feature release
 ### Fixed
 - Avatar issues with NC 32
