@@ -47,8 +47,8 @@ class SystemRequirements {
     /**
      * The PHP minimum version to be able to install this release
      */
-    const string PHP_MINIMUM = '8.4';
-    const int PHP_MINIMUM_ID = 80400;
+    const string PHP_MINIMUM = '8.3';
+    const int PHP_MINIMUM_ID = 80300;
 
     /**
      * Users with a PHP version lower than this will receive a

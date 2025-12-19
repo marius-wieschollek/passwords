@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2025.12.1 - Feature release
+### Changed
+- Lowered minimum pph requirement
+
 ## 2025.12.0 - Feature release
 ### Changed
 - Updated breached passwords db
