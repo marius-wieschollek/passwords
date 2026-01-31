@@ -206,7 +206,7 @@
                                       .getAttribute('data-user-displayname')
                     };
                     share.receiver = {id: receiver, name: this.idMap[receiver]};
-                    this.shares[d.id] = API._processShare(share);
+                    this.shares[d.id] = await API._processShare(share);
                     this.search = '';
                     this.refreshShares();
                 } catch(e) {

@@ -355,7 +355,7 @@ class SynchronizeShares extends AbstractTimedJob {
         } while($count !== 0);
 
         if($loopCount > 32 && $count !== 0) {
-            $this->logger->error("Failed to update all target passwords in 32 loops, {$count} still pending update");
+            $this->logger->error("Failed to update all target passwords in 32 loops, {$count} still pending update", ['shares' => $count <= 16 ? $shares:null]);
         }
 
         return $total;
@@ -403,7 +403,7 @@ class SynchronizeShares extends AbstractTimedJob {
         } while($count !== 0);
 
         if($loopCount > 32 && $count !== 0) {
-            $this->logger->error("Failed to update all target passwords in 32 loops, {$count} still pending update");
+            $this->logger->error("Failed to update all source passwords in 32 loops, {$count} still pending update", ['shares' => $count <= 16 ? $shares:null]);
         }
 
         return $total;
