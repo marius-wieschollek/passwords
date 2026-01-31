@@ -25,9 +25,9 @@ This repository ships with a full docker based development environment that enab
 1. Checkout the project with `git clone git@github.com:marius-wieschollek/passwords.git`
 2. Open the project directory in a terminal
 3. Run `npm ci`
-4. Run `npm run build`
-5. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`
-6. Run `npm run start`
+4. If you have [mkcert](https://github.com/FiloSottile/mkcert), run `npm run mkcert`
+5. Run `npm run start`
+6. Run `npm run build`
 7. Open your browser and type [https://localhost/](https://localhost/)
 8. Log in with the username `admin` and the password `admin`
 9. You can now access the [app](http://localhost/index.php/apps/passwords)
