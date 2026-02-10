@@ -134,15 +134,15 @@ class EnvironmentService {
      * @throws Exception
      */
     public function __construct(
-        ?string          $userId,
-        protected IConfig          $config,
-        protected IRequest         $request,
-        protected ISession         $session,
-        protected LoggingService   $logger,
-        protected IProvider        $tokenProvider,
-        protected IUserSession     $userSession,
-        protected IUserManager     $userManager,
-        protected IStore $credentialsStore,
+        ?string                  $userId,
+        protected IConfig        $config,
+        protected IRequest       $request,
+        protected ISession       $session,
+        protected LoggingService $logger,
+        protected IProvider      $tokenProvider,
+        protected IUserSession   $userSession,
+        protected IUserManager   $userManager,
+        protected IStore         $credentialsStore,
     ) {
         $this->determineRunType($request);
         $this->determineAppMode($userId, $request);
@@ -265,8 +265,10 @@ class EnvironmentService {
      * @return bool
      */
     protected function isCronJob(IRequest $request): bool {
+        global $argv;
+
         $cronMode   = $this->config->getAppValue('core', 'backgroundjobs_mode', 'ajax');
-        $cronScript = str_ends_with($request->getScriptName(), 'cron.php');
+        $cronScript = str_ends_with($request->getScriptName(), 'cron.php') || (str_ends_with($request->getScriptName(), '/occ') && $argv[1] === 'background-job:worker');
 
         if($cronScript && (in_array($cronMode, ['ajax', 'webcron']) || (PHP_SAPI === 'cli' && $cronMode === 'cron'))) {
             return true;
