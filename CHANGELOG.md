@@ -1,4 +1,10 @@
 ## [Unreleased]
+## 2026.2.0 - Feature release
+### Added
+- Nextcloud 33 support
+### Fixed
+- Encryption passphrase change dialog
+
 ## 2025.12.1 - Feature release
 ### Changed
 - Lowered minimum PHP requirement
