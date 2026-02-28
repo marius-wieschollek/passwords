@@ -87,6 +87,7 @@ class Application {
     init() {
         window.addEventListener('DOMContentLoaded', () => { this._initApp(); }, {once: true, passive: true});
         this._timer = setInterval(() => { this._initApp(); }, 10);
+        window.MessageService = MessageService;
     }
 
     /**
