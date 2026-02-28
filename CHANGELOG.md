@@ -2,6 +2,7 @@
 ## 2026.2.0 - Feature release
 ### Added
 - Nextcloud 33 support
+- Nextcloud worker support
 ### Fixed
 - Encryption passphrase change dialog
 
