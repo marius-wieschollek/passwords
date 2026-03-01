@@ -58,11 +58,11 @@
             font-size : 8rem;
             margin    : 2rem 3rem;
             width     : auto;
-            color     : var(--color-success);
+            color     : var(--color-element-success);
         }
 
         &.error i {
-            color : var(--color-error);
+            color : var(--color-element-error);
         }
     }
 

@@ -341,13 +341,13 @@
             font-size   : 1rem;
 
             &.success {
-                color       : var(--color-success);
+                color       : var(--color-element-success);
                 font-family : var(--pw-icon-font-face);
                 font-size   : 2rem;
             }
 
             &.failed {
-                color       : var(--color-error);
+                color       : var(--color-element-error);
                 font-family : var(--pw-icon-font-face);
                 font-size   : 2rem;
             }
@@ -364,14 +364,14 @@
         .result {
             margin           : 1.25rem 0;
             font-size        : 1rem;
-            background-color : var(--color-success);
+            background-color : var(--color-element-success);
             border-radius    : var(--border-radius);
             color            : var(--color-primary-text);
             text-align       : center;
             padding          : 0.25rem;
 
             &.failure {
-                background-color : var(--color-error);
+                background-color : var(--color-element-error);
             }
         }
     }

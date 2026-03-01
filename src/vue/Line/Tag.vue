@@ -1,6 +1,6 @@
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
         <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>

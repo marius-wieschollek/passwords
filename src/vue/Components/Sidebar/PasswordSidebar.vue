@@ -53,7 +53,7 @@
         <template #tertiary-actions>
             <favicon class="icon" :domain="password.website"/>
             <nc-button class="password-details-favorite" :aria-label="t(password.favorite ? 'Remove from favorites':'Mark as favorite')" type="tertiary" @click.prevent="actions.favorite()">
-                <star-icon slot="icon" fill-color="var(--color-warning)" v-if="password.favorite" :size="20"/>
+                <star-icon slot="icon" fill-color="var(--color-element-warning)" v-if="password.favorite" :size="20"/>
                 <star-outline-icon slot="icon" v-else :size="20"/>
             </nc-button>
         </template>

@@ -452,12 +452,12 @@ body#body-user {
     }
 
     .login-error {
-        color            : var(--color-error);
+        color            : var(--color-element-error);
         margin-top       : 1rem;
         background-color : var(--color-box-shadow);
         border-radius    : var(--border-radius);
         padding          : 0.5rem;
-        border           : 1px solid var(--color-error);
+        border           : 1px solid var(--color-element-error);
         position         : absolute;
         width            : 300px;
         animation        : shake 0.1s ease-in-out 0s 5;

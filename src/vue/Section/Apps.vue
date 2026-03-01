@@ -70,7 +70,7 @@
     }
 
     .appstore-error {
-        background-color : var(--color-error);
+        background-color : var(--color-element-error);
         color            : var(--color-primary-text);
         margin           : 1rem;
         padding          : 1rem;

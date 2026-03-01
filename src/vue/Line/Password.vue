@@ -6,7 +6,7 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-warning)" @click.prevent.stop="favoriteAction" v-if="password.favorite"/>
+        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="password.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
@@ -20,7 +20,7 @@
         </ul>
         <slot name="middle"/>
         <router-link :to="securityRoute" :title="securityTitle" v-if="password.statusCode === 'DUPLICATE'" @click.prevent.stop @dblclick.prevent.stop>
-            <shield-half-full-icon :size="20" fill-color="var(--color-warning)"/>
+            <shield-half-full-icon :size="20" fill-color="var(--color-element-warning)"/>
         </router-link>
         <shield-half-full-icon :size="20" :fill-color="securityColor" :title="securityTitle" v-else/>
         <i v-if="hasCustomAction" @click="runCustomAction" class="action-button fa" :class="customActionClass"></i>
@@ -173,11 +173,11 @@
             securityColor() {
                 switch(this.password.status) {
                     case 0:
-                        return 'var(--color-success)';
+                        return 'var(--color-element-success)';
                     case 1:
-                        return 'var(--color-warning)';
+                        return 'var(--color-element-warning)';
                     case 2:
-                        return 'var(--color-error)';
+                        return 'var(--color-element-error)';
                     case 3:
                         return 'var(--color-main-text)';
                 }

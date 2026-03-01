@@ -25,12 +25,12 @@ section.section.passwords {
         margin-bottom : 1rem;
 
         &.error {
-            background-color : var(--color-error);
+            background-color : var(--color-element-error);
             color            : var(--color-primary-text);
         }
 
         &.warn {
-            background-color : var(--color-warning);
+            background-color : var(--color-element-warning);
         }
 
         &:first-of-type {

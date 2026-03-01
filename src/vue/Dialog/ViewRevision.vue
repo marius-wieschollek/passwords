@@ -164,11 +164,11 @@
                         }
                     }
 
-                    &.secure {color : var(--color-success);}
+                    &.secure {color : var(--color-element-success);}
 
-                    &.weak {color : var(--color-warning);}
+                    &.weak {color : var(--color-element-warning);}
 
-                    &.breached {color : var(--color-error);}
+                    &.breached {color : var(--color-element-error);}
                 }
 
                 a {

@@ -77,14 +77,14 @@
     }
 
     &.official {
-        color : var(--color-success);
+        color : var(--color-element-success);
 
         .features .feature {
             font-weight : normal;
         }
 
         a.sources {
-            color : var(--color-success);
+            color : var(--color-element-success);
         }
     }
 }

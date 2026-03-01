@@ -138,7 +138,7 @@
         transition : color .15s ease-in-out;
 
         &:hover {
-            color : var(--color-error);
+            color : var(--color-element-error);
         }
     }
 

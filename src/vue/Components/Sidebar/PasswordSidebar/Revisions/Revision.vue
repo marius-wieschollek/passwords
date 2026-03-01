@@ -74,11 +74,11 @@
             securityColor() {
                 switch(this.revision.status) {
                     case 0:
-                        return 'var(--color-success)';
+                        return 'var(--color-element-success)';
                     case 1:
-                        return 'var(--color-warning)';
+                        return 'var(--color-element-warning)';
                     case 2:
-                        return 'var(--color-error)';
+                        return 'var(--color-element-error)';
                     case 3:
                         return 'var(--color-main-text)';
                 }

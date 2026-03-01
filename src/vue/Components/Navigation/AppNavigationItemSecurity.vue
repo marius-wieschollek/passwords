@@ -13,13 +13,13 @@
         <shield-half-full-icon :size="20" slot="icon"/>
         <template>
             <app-navigation-item :name="t('Secure')" :to="{ name: 'Security', params: {status: '0'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-success)" slot="icon"/>
+                <shield-half-full-icon :size="20" fill-color="var(--color-element-success)" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item :name="t('Weak')" :to="{ name: 'Security', params: {status: '1'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-warning)" slot="icon"/>
+                <shield-half-full-icon :size="20" fill-color="var(--color-element-warning)" slot="icon"/>
             </app-navigation-item>
             <app-navigation-item :name="t('Breached')" :to="{ name: 'Security', params: {status: '2'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-error)" slot="icon"/>
+                <shield-half-full-icon :size="20" fill-color="var(--color-element-error)" slot="icon"/>
             </app-navigation-item>
         </template>
     </app-navigation-item>

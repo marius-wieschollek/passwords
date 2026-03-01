@@ -652,31 +652,31 @@
 
             &.success {
                 &::-moz-progress-bar {
-                    background-color : var(--color-success);
+                    background-color : var(--color-element-success);
                 }
 
                 &::-webkit-progress-value {
-                    background-color : var(--color-success);
+                    background-color : var(--color-element-success);
                 }
             }
 
             &.warn {
                 &::-moz-progress-bar {
-                    background-color : var(--color-warning);
+                    background-color : var(--color-element-warning);
                 }
 
                 &::-webkit-progress-value {
-                    background-color : var(--color-warning);
+                    background-color : var(--color-element-warning);
                 }
             }
 
             &.error {
                 &::-moz-progress-bar {
-                    background-color : var(--color-error)
+                    background-color : var(--color-element-error)
                 }
 
                 &::-webkit-progress-value {
-                    background-color : var(--color-error)
+                    background-color : var(--color-element-error)
                 }
             }
         }

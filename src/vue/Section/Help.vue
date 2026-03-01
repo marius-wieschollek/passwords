@@ -402,7 +402,7 @@
 
                 @keyframes Highlight {
                     0% {background-color : transparent}
-                    50% {background-color : var(--color-success)}
+                    50% {background-color : var(--color-element-success)}
                     100% {background-color : transparent}
                 }
             }
@@ -549,7 +549,7 @@
             }
 
             &.important {
-                background-color : var(--color-error);
+                background-color : var(--color-element-error);
 
                 > p:first-of-type:before {
                     content : "\f071"
@@ -557,7 +557,7 @@
             }
 
             &.warning {
-                background-color : var(--color-warning);
+                background-color : var(--color-element-warning);
 
                 > p:first-of-type:before {
                     content : "\f06a"
@@ -565,7 +565,7 @@
             }
 
             &.recommended {
-                background-color : var(--color-success);
+                background-color : var(--color-element-success);
 
                 > p:first-of-type:before {
                     content : "\f164"

@@ -640,8 +640,8 @@
                 transition : color .2s ease-in-out, border-color .2s ease-in-out, background-color .2s ease-in-out;
 
                 &:hover {
-                    background-color : var(--color-error);
-                    border-color     : var(--color-error);
+                    background-color : var(--color-element-error);
+                    border-color     : var(--color-element-error);
                     color            : var(--color-primary-text);
                 }
             }

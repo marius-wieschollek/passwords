@@ -128,7 +128,7 @@
         progress {
             height           : 2rem;
             border-radius    : var(--border-radius-pill);
-            background-color : var(--color-error);
+            background-color : var(--color-element-error);
 
             &::-moz-progress-bar {
                 background    : var(--color-box-shadow);
