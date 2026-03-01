@@ -1,6 +1,8 @@
 ## Rules for contributors
 
 * Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits)
+* Code must be created by humans and copyrightable under the [LICENSE](https://github.com/marius-wieschollek/passwords/blob/master/LICENSE).
+    Code created in significant parts by AI is not copyrightable and can not be submitted.
 * Keep any discussions professional and civil
 
 ## Rules for issues
