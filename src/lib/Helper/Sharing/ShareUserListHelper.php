@@ -29,36 +29,6 @@ class ShareUserListHelper {
     const int USER_SEARCH_LIMIT   = 256;
 
     /**
-     * @var IUser|null
-     */
-    protected ?IUser $user;
-
-    /**
-     * @var string|null
-     */
-    protected ?string $userId;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IUserManager
-     */
-    protected IUserManager $userManager;
-
-    /**
-     * @var IGroupManager
-     */
-    protected IGroupManager $groupManager;
-
-    /**
-     * @var IManager
-     */
-    protected IManager $shareManager;
-
-    /**
      * ShareUserListHelper constructor.
      *
      * @param IManager             $shareManager
@@ -68,18 +38,12 @@ class ShareUserListHelper {
      * @param EnvironmentService   $environment
      */
     public function __construct(
-        IManager $shareManager,
-        IUserManager $userManager,
-        IGroupManager $groupManager,
-        ConfigurationService $config,
-        EnvironmentService $environment
+        protected IManager $shareManager,
+        protected IUserManager $userManager,
+        protected IGroupManager $groupManager,
+        protected ConfigurationService $config,
+        protected EnvironmentService $environment
     ) {
-        $this->user         = $environment->getUser();
-        $this->userId       = $environment->getUserId();
-        $this->userManager  = $userManager;
-        $this->groupManager = $groupManager;
-        $this->shareManager = $shareManager;
-        $this->config       = $config;
     }
 
     /**
@@ -105,12 +69,12 @@ class ShareUserListHelper {
      */
     protected function getUsersFromUserGroup(string $pattern, int $limit): array {
         $partners   = [];
-        $userGroups = $this->groupManager->getUserGroupIds($this->user);
+        $userGroups = $this->groupManager->getUserGroupIds($this->environment->getUser());
         foreach($userGroups as $userGroup) {
             if($userGroup === 'guest_app') continue;
             $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, $limit);
             foreach($users as $uid => $name) {
-                if($uid === $this->userId) continue;
+                if($uid === $this->environment->getUserId()) continue;
                 $partners[ $uid ] = $name;
             }
             if(count($partners) >= $limit) break;
@@ -159,12 +123,12 @@ class ShareUserListHelper {
      * @return bool
      */
     public function canShareWithUser(string $uid): bool {
-        if($uid === $this->userId) return false;
+        if($uid === $this->environment->getUserId()) return false;
         if(!$this->userManager->userExists($uid)) return false;
         if(!$this->shareWithGroupMembersOnly()) return true;
 
         $user       = $this->userManager->get($uid);
-        $userGroups = $this->groupManager->getUserGroupIds($this->user);
+        $userGroups = $this->groupManager->getUserGroupIds($this->environment->getUser());
         foreach($userGroups as $userGroup) {
             if($this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== 'guest_app') return true;
         }
@@ -182,7 +146,7 @@ class ShareUserListHelper {
             // @TODO: Use container instead
             $guestBackend = OC::$server->get(UserBackend::class);
 
-            return $guestBackend->userExists($this->userId);
+            return $guestBackend->userExists($this->environment->getUserId());
         }
 
         return false;
