@@ -436,7 +436,7 @@ body#body-user {
             margin-top            : 1rem;
             border                : 1px solid var(--color-primary-text);
             color                 : var(--color-primary-text);
-            background            : var(--color-primary-element) var(--icon-confirm-fff) no-repeat;
+            background            : var(--color-primary-element);
             background-position-y : 50%;
             background-position-x : calc(100% - 16px);
             transition            : background-position-x 0.25s ease-in-out;
