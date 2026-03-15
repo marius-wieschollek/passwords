@@ -1,4 +1,9 @@
 ## [Unreleased]
+## 2026.3.0 - Feature release
+### Fixed
+- E2EE login button transparent
+- Sharing with guest user fails
+
 ## 2026.2.0 - Feature release
 ### Added
 - Nextcloud 33 support
