@@ -8,7 +8,7 @@
                 @submit="submit($event)"
                 :class="{ 'with-actions': this.hasActions }"
         >
-            <translate tag="div" class="message" :say="message" v-if="message"/>
+            <div class="message" v-if="message">{{localizedMessage}}</div>
             <br v-else>
             <div
                     v-for="field in fields"
@@ -124,6 +124,9 @@
             },
             localizedTitle() {
                 return LocalisationService.translateArray(this.title);
+            },
+            localizedMessage() {
+                return LocalisationService.translateArray(this.message);
             }
         },
         methods : {

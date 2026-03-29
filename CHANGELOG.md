@@ -1,4 +1,8 @@
 ## [Unreleased]
+## 2026.3.1 - Bugfix release
+### Fixed
+- Missing code in account reset dialog
+
 ## 2026.3.0 - Feature release
 ### Fixed
 - E2EE login button transparent
