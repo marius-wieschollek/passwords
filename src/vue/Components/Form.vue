@@ -27,7 +27,7 @@
             </div>
             <div class="actions">
                 <nc-button type="primary" nativeType="button" size="large" @click="submit">
-                    {{ t("Save") }}
+                    {{ t("Ok") }}
                 </nc-button>
             </div>
         </form>
