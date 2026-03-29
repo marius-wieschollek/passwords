@@ -2570,7 +2570,7 @@
         "message": "Werkseinstellungen wiederherstellen und Passwörter, Ordner und Tags löschen"
     },
     "settings-000715": {
-        "message": "Gib unten \"$CODE$\" ein um dein Konto zurückzusezen und alle Daten zu löschen.",
+        "message": "Gib unten \"$CODE$\" ein um dein Konto zurückzusetzen und alle Daten zu löschen.",
         "placeholders": {
             "code": {
                 "content": "$1"
