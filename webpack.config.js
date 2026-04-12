@@ -4,6 +4,7 @@ let webpack                    = require('webpack'),
     {exec}                     = require("child_process"),
     CopyWebpackPlugin          = require('copy-webpack-plugin'),
     CleanWebpackPlugin         = require('clean-webpack-plugin'),
+ NodePolyfillPlugin = require('node-polyfill-webpack-plugin'),
     VueLoaderPlugin            = require('vue-loader/lib/plugin'),
     MiniCssExtractPlugin       = require('mini-css-extract-plugin'),
     CssMinimizerPlugin         = require('css-minimizer-webpack-plugin'),
@@ -21,6 +22,10 @@ module.exports = (env, argv) => {
             return result.code;
         },
         plugins   = [
+            new NodePolyfillPlugin({
+                                       // Console is available in the web-browser
+                                       excludeAliases: ['console', 'crypto']
+                                   }),
             new webpack.DefinePlugin(
                 {
                     APP_TYPE           : '"webapp"',
@@ -111,7 +116,6 @@ module.exports = (env, argv) => {
             extensions: ['.mjs', '.js', '.vue', '.scss'],
             fallback  : {
                 url   : false,
-                path  : false,
                 crypto: false,
                 assert: false,
                 util  : false

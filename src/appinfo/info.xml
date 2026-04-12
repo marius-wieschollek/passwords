@@ -124,7 +124,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </screenshot>
     <donation>https://ko-fi.com/mariusdavid</donation>
     <dependencies>
-        <php min-version="8.3" max-version="8.5" />
+        <php min-version="8.4" max-version="8.5" />
         <nextcloud min-version="32.0.1" max-version="33" />
     </dependencies>
     <background-jobs>

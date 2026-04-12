@@ -201,14 +201,20 @@ export default new (class MessageService {
                            })
                 .addButton({
                                label   : LocalisationService.translate("Ok"),
-                               callback: (e, f) => {
-                                   resolve(e, f);
+                               callback: (nodes) => {
+                                   if(!multiselect && nodes[0]?.path) {
+                                       resolve(nodes[0].path);
+                                   } else {
+                                       resolve(nodes);
+                                   }
                                },
                                variant : "primary"
                            })
                 .allowDirectories(allowDirectories)
                 .setMimeTypeFilter(mime)
-                .setMultiSelect(multiselect);
+                .setMultiSelect(multiselect)
+                .build()
+                .pick();
         });
     }
 
