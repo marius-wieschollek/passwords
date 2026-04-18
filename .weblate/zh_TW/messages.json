@@ -1,48 +1,48 @@
 {
     "frontend-000547": {
-        "message": "显示细节"
+        "message": "顯示詳細資訊"
     },
     "frontend-000548": {
-        "message": "在菜单中添加复制选项"
+        "message": "在選單中新增複製選項"
     },
     "frontend-000549": {
-        "message": "在列表视图中显示用户名"
+        "message": "在列表檢視中顯示使用者名稱"
     },
     "frontend-000550": {
-        "message": "在列表视图中显示标签"
+        "message": "在列表檢視中顯示標籤"
     },
     "frontend-000551": {
-        "message": "显示隐藏自定义字段"
+        "message": "顯示隱藏的自訂欄位"
     },
     "frontend-000552": {
-        "message": "搜索为 I 类型"
+        "message": "即時搜尋"
     },
     "frontend-000553": {
-        "message": "随 Enter 到处搜索"
+        "message": "按 Enter 搜尋全部"
     },
     "frontend-000554": {
-        "message": "总是显示搜索区域"
+        "message": "總是顯示搜尋區域"
     },
     "backend-000485": {
-        "message": "查看与我共享的密码"
+        "message": "檢視與我共享的密碼"
     },
     "frontend-000612": {
-        "message": "撤销"
+        "message": "撤銷"
     },
     "frontend-000623": {
         "message": "未知"
     },
     "frontend-Enable": {
-        "message": "启用"
+        "message": "啟用"
     },
     "settings-000684": {
-        "message": "一分钟"
+        "message": "一分鐘"
     },
     "frontend-000625": {
-        "message": "选择此密码的加密类型"
+        "message": "選擇此密碼的加密類型"
     },
     "frontend-000626": {
-        "message": "您要删除字段\"$FIELD$\"吗?",
+        "message": "您要刪除欄位\"$FIELD$\"嗎?",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -50,124 +50,124 @@
         }
     },
     "frontend-000627": {
-        "message": "确保这个QR代码只能被你信任的人看到."
+        "message": "請確保此 QR Code 僅對您信任的人可見。"
     },
     "settings-SettingsRecoverItemsButton": {
-        "message": "回收项目"
+        "message": "回收專案"
     },
     "frontend-000628": {
-        "message": "在数据库中存储数据之前服务器应用的加密"
+        "message": "伺服器在將資料儲存至資料庫前套用的加密"
     },
     "frontend-000629": {
-        "message": "客户端在向服务器发送数据前应用的加密"
+        "message": "客戶端在傳送資料至伺服器前套用的加密"
     },
     "frontend-000630": {
-        "message": "密码无效 。 太多的登录尝试失败, 会话被取消 ."
+        "message": "密碼無效。因登入失敗次數過多，工作階段已被撤銷。"
     },
     "frontend-000631": {
-        "message": "这是你为加密选择的密码句的复制件 。 更改或删除此条目不影响加密. 密码句只能在设置中更改 。 更多情况可在手册中找到."
+        "message": "這是您選擇的加密密碼句副本。更改或刪除此項目不會影響加密。密碼句只能在設定中更改。更多資訊請參閱手冊。"
     },
     "frontend-Disable": {
-        "message": "禁用"
+        "message": "停用"
     },
     "backend-000632": {
-        "message": "法维康服务 Api"
+        "message": "Favicon 服務 API"
     },
     "backend-000633": {
-        "message": "(可选)"
+        "message": "(可選)"
     },
     "backend-000634": {
-        "message": "您的下个星云请求的图标比平均值要多得多 ."
+        "message": "您的 Nextcloud 請求的圖示數量遠超平均值。"
     },
     "backend-000635": {
-        "message": "打开教程"
+        "message": "開啟教程"
     },
     "backend-000636": {
-        "message": "检测到的登录失败的可疑数量 ."
+        "message": "偵測到可疑的大量登入失敗嘗試。"
     },
     "backend-000637": {
-        "message": "更多信息"
+        "message": "更多資訊"
     },
     "backend-000638": {
-        "message": "查看不安全的密码"
+        "message": "檢視不安全的密碼"
     },
     "backend-000639": {
-        "message": "打开设置"
+        "message": "開啟設定"
     },
     "backend-000640": {
-        "message": "打开密码"
+        "message": "開啟密碼"
     },
     "backend-000641": {
-        "message": "查看应用程序"
+        "message": "檢視應用程式"
     },
     "backend-000642": {
-        "message": "查看应用设备( U)"
+        "message": "檢視應用程式與裝置"
     },
     "backend-000643": {
-        "message": "管理设备( A)"
+        "message": "管理裝置與應用程式"
     },
     "settings-000681": {
-        "message": "当我工作的时候"
+        "message": "當我工作的時候"
     },
     "settings-000682": {
-        "message": "当我活动时"
+        "message": "當我活動時"
     },
     "settings-000683": {
-        "message": "结束会话后"
+        "message": "工作階段逾時"
     },
     "backend-000644": {
-        "message": "查看共享密码"
+        "message": "檢視共享密碼"
     },
     "backend-000645": {
-        "message": "建议App升级"
+        "message": "建議升級應用程式"
     },
     "backend-000646": {
-        "message": "新的客户端或应用程序已连接到您的账户"
+        "message": "有新的客戶端或應用程式連線至您的帳戶"
     },
     "frontend-000545": {
-        "message": "复制用户名"
+        "message": "複製使用者名稱"
     },
     "frontend-000546": {
-        "message": "复制网站"
+        "message": "複製網站"
     },
     "frontend-000555": {
         "message": "通知"
     },
     "frontend-000556": {
-        "message": "发送电子邮件"
+        "message": "傳送電子郵件"
     },
     "frontend-000557": {
-        "message": "安全问题"
+        "message": "安全問題"
     },
     "frontend-000558": {
-        "message": "密码与我共享"
+        "message": "密碼與我共享"
     },
     "frontend-000559": {
-        "message": "显示通知"
+        "message": "顯示通知"
     },
     "frontend-000560": {
-        "message": "其他错误"
+        "message": "其他錯誤"
     },
     "frontend-000561": {
-        "message": "危险区"
+        "message": "危險區"
     },
     "frontend-000562": {
-        "message": "重置所有设置"
+        "message": "重置所有設定"
     },
     "frontend-000563": {
-        "message": "重设"
+        "message": "重設"
     },
     "frontend-000564": {
-        "message": "全部删除"
+        "message": "全部刪除"
     },
     "frontend-000565": {
-        "message": "全部删除"
+        "message": "全部刪除"
     },
     "frontend-000566": {
-        "message": "要求重新设置账户"
+        "message": "已請求重設帳戶"
     },
     "frontend-000569": {
-        "message": "如果密码用于多个账户, 则标记为弱"
+        "message": "如果密碼用於多個帳戶，則標記為弱"
     },
     "settings-000685": {
         "message": "$MINUTES$分",
@@ -178,67 +178,67 @@
         }
     },
     "settings-000686": {
-        "message": "端到端加密"
+        "message": "端對端加密"
     },
     "settings-000687": {
-        "message": "服务器加密模式"
+        "message": "伺服器加密模式"
     },
     "settings-000688": {
-        "message": "使用 CSE 时无"
+        "message": "使用 CSE 時無"
     },
     "settings-000689": {
-        "message": "简单加密"
+        "message": "簡單加密"
     },
     "settings-000690": {
-        "message": "高级加密"
+        "message": "高階加密"
     },
     "settings-000691": {
-        "message": "客户端加密模式"
+        "message": "客戶端加密模式"
     },
     "frontend-000570": {
-        "message": "超过指定天数的密码标为弱"
+        "message": "密碼超過指定天數時標記為弱"
     },
     "frontend-000571": {
-        "message": "强度越高,密码越长,越复杂"
+        "message": "強度越高，密碼越長且越複雜"
     },
     "tutorial-000757": {
-        "message": "保存密码"
+        "message": "儲存密碼"
     },
     "frontend-000572": {
-        "message": "在列表视图中显示选中的属性为标题"
+        "message": "在列表檢視中將所選屬性顯示為標題"
     },
     "frontend-000573": {
-        "message": "选择名称排序时按所选属性排序密码"
+        "message": "選擇按名稱排序時，依所選屬性排序密碼"
     },
     "frontend-000574": {
-        "message": "在列表视图中点击密码时要执行的动作"
+        "message": "在列表檢視中點選密碼時的動作"
     },
     "frontend-000575": {
-        "message": "列表视图中双击密码时的动作"
+        "message": "在列表檢視中雙擊密碼時的動作"
     },
     "frontend-000576": {
-        "message": "显示在菜单中复制密码和用户名的选项"
+        "message": "在選單中顯示複製密碼和使用者名稱的選項"
     },
     "frontend-000577": {
-        "message": "应用程序打开时要显示的初始部分"
+        "message": "開啟應用程式時顯示的初始區段"
     },
     "frontend-000578": {
-        "message": "在列表视图中总是显示与密码相关的用户名"
+        "message": "在列表檢視中始終顯示與密碼關聯的使用者名稱"
     },
     "frontend-000579": {
-        "message": "显示列表视图中每个密码的标记 。 增加加载时间"
+        "message": "在列表檢視中顯示每組密碼的標籤，會增加載入時間"
     },
     "frontend-000580": {
-        "message": "在密码的编辑形式和细节部分显示隐藏自定义字段"
+        "message": "在密碼的編輯表單和詳細資訊中顯示隱藏的自訂欄位"
     },
     "frontend-000581": {
-        "message": "发送电子邮件给您关于密码故障和其他安全问题"
+        "message": "傳送關於已洩漏密碼和其他安全問題的電子郵件"
     },
     "frontend-000582": {
-        "message": "当别人跟你分享密码时,会发电子邮件给你"
+        "message": "當其他人與您共享密碼時傳送電子郵件"
     },
     "backend-000648": {
-        "message": "您可以在安全区域中的您的 $STR_1$ 设置中管理所有连接的设备和应用程序 .",
+        "message": "您可以在安全區域中的您的 $STR_1$ 設定中管理所有連線的裝置和應用程式 .",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -246,82 +246,82 @@
         }
     },
     "settings-000693": {
-        "message": "更改密码"
+        "message": "更改密碼"
     },
     "settings-000694": {
-        "message": "密码详细视图"
+        "message": "密碼詳細檢視"
     },
     "settings-000695": {
-        "message": "显示网站预览"
+        "message": "顯示網站預覽"
     },
     "settings-000696": {
-        "message": "新密码"
+        "message": "新密碼"
     },
     "settings-000697": {
-        "message": "重复密码"
+        "message": "重複密碼"
     },
     "settings-000698": {
-        "message": "旧密码"
+        "message": "舊密碼"
     },
     "settings-000699": {
-        "message": "密码已更改"
+        "message": "密碼已更改"
     },
     "settings-000700": {
-        "message": "更改密码失败"
+        "message": "更改密碼失敗"
     },
     "settings-000701": {
-        "message": "行政问题"
+        "message": "管理問題"
     },
     "settings-000702": {
-        "message": "密码共享"
+        "message": "密碼共享"
     },
     "settings-000703": {
-        "message": "默认共享为可编辑"
+        "message": "預設共享為可編輯"
     },
     "settings-000704": {
-        "message": "默认允许共享"
+        "message": "預設允許共享"
     },
     "settings-000705": {
-        "message": "代码"
+        "message": "程式碼"
     },
     "frontend-000583": {
-        "message": "总是在导航中显示全局搜索区域"
+        "message": "在導覽列中始終顯示全域搜尋區段"
     },
     "settings-000706": {
-        "message": "无效的重置代码"
+        "message": "無效的重置程式碼"
     },
     "settings-000707": {
-        "message": "在生成的密码中添加数字"
+        "message": "在生成的密碼中新增數字"
     },
     "frontend-000584": {
-        "message": "通知你密码故障和其他安全问题"
+        "message": "通知您已洩漏的密碼和其他安全問題"
     },
     "frontend-000585": {
-        "message": "当别人跟你分享密码时通知你"
+        "message": "當其他人與您共享密碼時通知您"
     },
     "frontend-000586": {
-        "message": "当背景操作失败时通知您"
+        "message": "當背景操作失敗時通知您"
     },
     "frontend-000587": {
-        "message": "将页面上的所有设置重置为默认值"
+        "message": "將此頁面上的所有設定重設為預設值"
     },
     "frontend-000588": {
-        "message": "这将重置全部设置为默认设置 。 你想继续吗?"
+        "message": "這將把所有設定重設為預設值。您確定要繼續嗎？"
     },
     "frontend-000589": {
-        "message": "重新開始並刪除所有設定、密碼、目錄和標籤"
+        "message": "重新開始，刪除所有設定、密碼、目錄和標籤"
     },
     "frontend-000590": {
         "message": "您確定要刪除所有設定、密碼、目錄和標籤嗎？\n刪除後將無法還原。"
     },
     "frontend-000593": {
-        "message": "编辑为新"
+        "message": "編輯為新"
     },
     "frontend-000594": {
-        "message": "移动"
+        "message": "移動"
     },
     "frontend-000595": {
-        "message": "打开 $LABEL$",
+        "message": "開啟 $LABEL$",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -329,61 +329,61 @@
         }
     },
     "frontend-000596": {
-        "message": "未知( 未检查)"
+        "message": "未知（未檢查）"
     },
     "tutorial-000780": {
-        "message": "多亏了我们的应用软件和扩展软件 随时随地可以访问密码."
+        "message": "透過我們的應用程式和擴充套件，您可以隨時隨地輕鬆存取密碼。"
     },
     "frontend-000597": {
-        "message": "萨摩亚-1"
+        "message": "SHA-1"
     },
     "frontend-000598": {
-        "message": "你想怎样?"
+        "message": "您預期什麼結果？"
     },
     "frontend-000599": {
-        "message": "点击可显示 QR 代码 ."
+        "message": "點選以顯示 QR Code。"
     },
     "frontend-000600": {
-        "message": "别再警告我了"
+        "message": "別再警告我了"
     },
     "frontend-000601": {
-        "message": "强度"
+        "message": "強度"
     },
     "frontend-000602": {
-        "message": "关闭"
+        "message": "關閉"
     },
     "frontend-000603": {
-        "message": "从最爱中删除"
+        "message": "從最愛中刪除"
     },
     "frontend-000604": {
-        "message": "标为最爱"
+        "message": "標為最愛"
     },
     "tutorial-000786": {
-        "message": "我们的内置手册可以点击\"More\"找到,并详细解释应用程序."
+        "message": "點選「更多」即可找到我們的內建手冊，其中詳細說明了應用程式的各項功能。"
     },
     "settings-000708": {
-        "message": "在生成的密码中添加特殊字符"
+        "message": "在生成的密碼中新增特殊字元"
     },
     "settings-000709": {
-        "message": "指定会议取消前的请求后的时间"
+        "message": "指定請求後多久將工作階段取消"
     },
     "settings-000710": {
-        "message": "选择用于加密服务器上数据的加密类型"
+        "message": "選擇用於在伺服器上加密資料的加密類型"
     },
     "settings-000711": {
-        "message": "运行安装向导为您的密码设置加密"
+        "message": "執行安裝精靈來為您的密碼設定加密"
     },
     "settings-000712": {
-        "message": "更改加密密码"
+        "message": "更改加密密碼"
     },
     "settings-000713": {
-        "message": "在细节中显示关联网站的预览. (手机上没有)"
+        "message": "在詳細資訊中顯示關聯網站的預覽（不適用於行動裝置）"
     },
     "settings-000714": {
-        "message": "通知你配置错误和其他行政问题"
+        "message": "通知您設定錯誤和其他管理問題"
     },
     "settings-000715": {
-        "message": "输入\"$CODE$\"以重置您的账户并删除所有内容.",
+        "message": "輸入\"$CODE$\"以重置您的賬戶並刪除所有內容.",
         "placeholders": {
             "code": {
                 "content": "$1"
@@ -391,37 +391,37 @@
         }
     },
     "settings-000716": {
-        "message": "您可以使用此对话框来更改您的主密码 ."
+        "message": "您可以使用此對話方塊來更改主密碼。"
     },
     "settings-000717": {
-        "message": "您的密码必须超过 12 个字符而不是旧密码"
+        "message": "密碼必須超過 12 個字元，且不能與舊密碼相同"
     },
     "settings-000718": {
-        "message": "请确认您的新密码"
+        "message": "請確認您的新密碼"
     },
     "settings-000719": {
-        "message": "您必须输入您的旧密码"
+        "message": "您必須輸入您的舊密碼"
     },
     "settings-000720": {
-        "message": "您的密码已成功更改 ."
+        "message": "密碼已成功更改。"
     },
     "frontend-000605": {
-        "message": "隐藏密码"
+        "message": "隱藏密碼"
     },
     "frontend-000606": {
-        "message": "不要在任何地方显示密码"
+        "message": "不要在任何地方顯示密碼"
     },
     "frontend-000607": {
-        "message": "数据"
+        "message": "資料"
     },
     "frontend-000608": {
-        "message": "类型"
+        "message": "型別"
     },
     "frontend-000609": {
-        "message": "新建字段"
+        "message": "新建欄位"
     },
     "backend-000483": {
-        "message": "$STR_1$ 与您共享了密码",
+        "message": "$STR_1$ 與您共享了密碼",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -429,7 +429,7 @@
         }
     },
     "backend-000484": {
-        "message": "在$STR_1$上与您共享了多个密码",
+        "message": "在$STR_1$上與您共享了多個密碼",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -437,31 +437,31 @@
         }
     },
     "settings-000721": {
-        "message": "启用让其他用户默认编辑共享密码的选项"
+        "message": "啟用選項以預設允許其他使用者編輯共享的密碼"
     },
     "settings-000722": {
-        "message": "启用让其他用户默认共享密码的选项"
+        "message": "啟用選項以預設允許其他使用者轉發共享的密碼"
     },
     "backend-000486": {
-        "message": "您的一个密码无法共享, 因为收件人已经可以访问它 ."
+        "message": "您有一組密碼無法共享，因為對方已擁有存取權限。"
     },
     "settings-000723": {
-        "message": "打开手册中的设置页面"
+        "message": "開啟手冊中的設定頁面"
     },
     "frontend-000610": {
-        "message": "删除字段"
+        "message": "刪除欄位"
     },
     "frontend-000611": {
-        "message": "打开Markdown 指南"
+        "message": "開啟Markdown 指南"
     },
     "frontend-000613": {
-        "message": "重做( R)"
+        "message": "重做"
     },
     "settings-000724": {
-        "message": "向服务器发送 status- salive 请求以防止会话被取消"
+        "message": "向伺服器傳送 keep-alive 請求以防止工作階段被取消"
     },
     "frontend-000614": {
-        "message": "它将过期 $DATE$.",
+        "message": "它將過期 $DATE$.",
         "placeholders": {
             "date": {
                 "content": "$1"
@@ -469,7 +469,7 @@
         }
     },
     "frontend-000616": {
-        "message": "太多的登录尝试失败"
+        "message": "登入失敗次數過多"
     },
     "frontend-000617": {
         "message": "選擇目錄"
@@ -483,7 +483,7 @@
         }
     },
     "frontend-000619": {
-        "message": "$LABEL$ 无法使用",
+        "message": "$LABEL$ 無法使用",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -491,25 +491,25 @@
         }
     },
     "frontend-000620": {
-        "message": "内容"
+        "message": "內容"
     },
     "settings-000725": {
-        "message": "选择在发送到服务器前加密客户端数据的加密类型"
+        "message": "選擇資料傳送至伺服器前，在客戶端加密所使用的加密類型"
     },
     "settings-000726": {
-        "message": "SHA-1散列用于检查被违反的密码. 局部散列可以防止野蛮武力攻击,以防服务器被黑入,但也可能导致安全密码被误报为被违反."
+        "message": "SHA-1 雜湊用於檢查已洩漏的密碼。部分雜湊可在伺服器被入侵時防止暴力破解攻擊，但也可能導致安全密碼被誤報為已洩漏。"
     },
     "settings-SettingsMouseWheelAction": {
-        "message": "鼠标轮点击动作"
+        "message": "滑鼠滾輪點選動作"
     },
     "settings-RecoverItemsError": {
-        "message": "发生了错误 ."
+        "message": "發生了錯誤 ."
     },
     "settings-SettingsWebAuthnEnable": {
-        "message": "登录到 WebAuthn"
+        "message": "登入到 WebAuthn"
     },
     "backend-000487": {
-        "message": "您的 $STR_1$ 密码无法共享, 因为收件人已经可以访问它们 .",
+        "message": "您的 $STR_1$ 密碼無法共享, 因為收件人已經可以訪問它們 .",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -517,16 +517,16 @@
         }
     },
     "backend-000489": {
-        "message": "共享已共享的密码有时可以创建回路."
+        "message": "將別人共享給您的密碼再次共享，有時會產生循環。"
     },
     "backend-000490": {
-        "message": "为了防止这种情况,这些密码将不会被共享."
+        "message": "為了防止這種情況,這些密碼將不會被共享."
     },
     "backend-000491": {
-        "message": "行政访问您的账户"
+        "message": "您的帳戶遭到管理員存取"
     },
     "backend-000492": {
-        "message": "$STR_1$试图登录你的账户在$STR_2$.",
+        "message": "$STR_1$試圖登入你的賬戶在$STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -537,7 +537,7 @@
         }
     },
     "backend-000493": {
-        "message": "$STR_1$登录入你的账户上$STR_2$.",
+        "message": "$STR_1$登入入你的賬戶上$STR_2$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -548,13 +548,13 @@
         }
     },
     "backend-000494": {
-        "message": "既然您使用主密码, 这并不意味着您的数据访问被允许 ."
+        "message": "由於您使用了主密碼，這不代表您的資料已被存取。"
     },
     "backend-000495": {
-        "message": "为防止意外访问您的数据,您应当设置主密码."
+        "message": "為防止未經授權的存取，您應設定主密碼。"
     },
     "backend-000496": {
-        "message": "删除用户($STR_1$)",
+        "message": "刪除使用者($STR_1$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -562,61 +562,61 @@
         }
     },
     "backend-000497": {
-        "message": "帮助我们改进密码"
+        "message": "幫助我們改進密碼"
     },
     "backend-000498": {
-        "message": "你可以帮助我们改进密码应用程序 通过参与我们的服务器调查."
+        "message": "您可以透過參與我們的伺服器調查，幫助改進 Passwords 應用程式。"
     },
     "backend-000499": {
-        "message": "这将发送一些有关您的设置和选定设置的匿名数据 ."
+        "message": "這將會傳送一些關於您的環境及設定的匿名資料。"
     },
     "backend-000500": {
-        "message": "您可以在应用程序设置中随时更改此选项 ."
+        "message": "您可以隨時在應用程式設定中更改此選項。"
     },
     "backend-000501": {
-        "message": "还没有"
+        "message": "還沒有"
     },
     "backend-000502": {
-        "message": "参与"
+        "message": "參與"
     },
     "backend-000503": {
-        "message": "服务器调查参与情况"
+        "message": "伺服器調查參與情況"
     },
     "backend-000504": {
-        "message": "基础"
+        "message": "基礎"
     },
     "backend-000505": {
-        "message": "满"
+        "message": "完整"
     },
     "backend-000506": {
-        "message": "未设置"
+        "message": "未設定"
     },
     "backend-000507": {
-        "message": "请考虑自我接待你的favicon api"
+        "message": "請考慮自行架設您的 Favicon API"
     },
     "backend-000508": {
-        "message": "您的下个星云使用我们共享的 Besticon 实例获取网站图标 ."
+        "message": "您的 Nextcloud 使用我們共享的 Besticon 實例來取得網站圖示。"
     },
     "backend-000509": {
-        "message": "这些案件是针对交通很少的下层云小区."
+        "message": "這些實例僅供流量較小的小型 Nextcloud 部署使用。"
     },
     "backend-000510": {
-        "message": "请点击链接, 并遵循我们的简易教程 亲自主持 Besticon ."
+        "message": "請點選連結，依照我們的簡易教學自行架設 Besticon。"
     },
     "backend-000512": {
-        "message": "您的预览服务配置无效"
+        "message": "您的預覽服務配置無效"
     },
     "backend-000513": {
-        "message": "您选择的favicon 服务需要 api 密钥或端点, 但是没有给出 ."
+        "message": "您所選的 Favicon 服務需要 API 金鑰或端點，但尚未設定。"
     },
     "backend-000514": {
-        "message": "您选中的预览服务需要一个 api 键或端点, 但是没有给出 ."
+        "message": "您所選的預覽服務需要 API 金鑰或端點，但尚未設定。"
     },
     "backend-000515": {
-        "message": "打开管理员设置以更新配置或选择其他服务 ."
+        "message": "開啟管理員設定以更新配置或選擇其他服務。"
     },
     "backend-000516": {
-        "message": "我们检测到了几次试图用\"$STR_1$\"解锁您的密码数据库的失败尝试.",
+        "message": "我們檢測到了幾次試圖用\"$STR_1$\"解鎖您的密碼資料庫的失敗嘗試.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -624,46 +624,46 @@
         }
     },
     "backend-000517": {
-        "message": "这可能表明有人想闯入你的账户."
+        "message": "這可能表示有人正在嘗試入侵您的帳戶。"
     },
     "backend-000518": {
-        "message": "为了防止进一步的企图,取消了该客户的API证书."
+        "message": "為防止進一步嘗試，已撤銷該客戶端的 API 憑證。"
     },
     "backend-000519": {
-        "message": "另外,基于密码的API认证已被禁用."
+        "message": "此外，基於密碼的 API 驗證已被停用。"
     },
     "backend-000520": {
-        "message": "如果您想要继续使用此客户端, 您需要为此创建新符号 ."
+        "message": "如果您想繼續使用此客戶端，需要為其建立新的權杖。"
     },
     "backend-000521": {
-        "message": "不了解该客户端的,请更改密码并审查设备列表."
+        "message": "如果您不認識此客戶端，請更改密碼並檢查您的裝置清單。"
     },
     "backend-000522": {
-        "message": "为防止进一步尝试,基于密码的API认证已被禁用."
+        "message": "為防止進一步嘗試，基於密碼的 API 驗證已被停用。"
     },
     "backend-000523": {
-        "message": "要再次启用, 请登录网络应用程序或任何使用符号认证的客户端 ."
+        "message": "若要重新啟用，請使用網頁應用程式或任何支援權杖驗證的客戶端登入。"
     },
     "backend-000524": {
-        "message": "如果您不知道这个客户端, 请更改您的主密码 和 Nextcloud 密码 ."
+        "message": "如果您不認識此客戶端，請更改您的主密碼和 Nextcloud 密碼。"
     },
     "backend-000525": {
-        "message": "为了增加安全性,我们建议使用设备特定代号而不是密码."
+        "message": "為了提高安全性，我們建議使用裝置專用權杖來取代密碼。"
     },
     "frontend-000526": {
-        "message": "浏览器扩展"
+        "message": "瀏覽器擴充套件"
     },
     "frontend-000528": {
-        "message": "密码规则"
+        "message": "密碼規則"
     },
     "frontend-000529": {
-        "message": "标记重复"
+        "message": "標記重複"
     },
     "frontend-000530": {
-        "message": "最高年龄(天)"
+        "message": "最大天數"
     },
     "frontend-000531": {
-        "message": "密码生成器"
+        "message": "密碼產生器"
     },
     "frontend-000621": {
         "message": "目錄「$FOLDER$」沒有包含其他目錄",
@@ -674,55 +674,55 @@
         }
     },
     "frontend-000622": {
-        "message": "密码 应用加密口令"
+        "message": "Passwords 應用程式加密密碼句"
     },
     "frontend-000624": {
-        "message": "帮助"
+        "message": "幫助"
     },
     "frontend-000532": {
-        "message": "密码强度"
+        "message": "密碼強度"
     },
     "frontend-000533": {
-        "message": "包含数字"
+        "message": "包含數字"
     },
     "frontend-000534": {
-        "message": "包含特殊字符"
+        "message": "包含特殊字元"
     },
     "frontend-000535": {
-        "message": "用户界面"
+        "message": "使用者介面"
     },
     "frontend-000536": {
-        "message": "第一节"
+        "message": "初始區段"
     },
     "frontend-000537": {
-        "message": "所有密码"
+        "message": "所有密碼"
     },
     "frontend-000538": {
-        "message": "密码列表视图"
+        "message": "密碼列表檢視"
     },
     "frontend-000539": {
-        "message": "设定标题从"
+        "message": "標題來源"
     },
     "frontend-000540": {
-        "message": "排序为"
+        "message": "排序方式"
     },
     "frontend-000541": {
-        "message": "标题字段"
+        "message": "標題欄位"
     },
     "frontend-000542": {
-        "message": "单击动作"
+        "message": "單擊動作"
     },
     "frontend-000543": {
-        "message": "双击动作"
+        "message": "雙擊動作"
     },
     "frontend-000544": {
-        "message": "复制密码"
+        "message": "複製密碼"
     },
     "frontend-000223": {
         "message": "標籤已還原"
     },
     "backend-000647": {
-        "message": "\"$STR_1$\"获准进入你的$STR_2$ 密码账户通过PassLink.",
+        "message": "\"$STR_1$\"獲准進入你的$STR_2$ 密碼賬戶透過PassLink.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -733,7 +733,7 @@
         }
     },
     "backend-000649": {
-        "message": "上个背景任务与 PHP $STRING_1$ 一起执行,但网络服务器使用 PHP $STRING_2$.",
+        "message": "上個背景任務與 PHP $STRING_1$ 一起執行,但網路伺服器使用 PHP $STRING_2$.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -744,34 +744,34 @@
         }
     },
     "backend-000650": {
-        "message": "使用不同的PHP主要版本可能引起问题."
+        "message": "使用不同的 PHP 主要版本可能會造成問題。"
     },
     "backend-000651": {
-        "message": "默认密码安全设置"
+        "message": "預設密碼安全設定"
     },
     "backend-000652": {
-        "message": "安全检查"
+        "message": "安全檢查雜湊"
     },
     "backend-000653": {
-        "message": "不要买散货"
+        "message": "不儲存雜湊"
     },
     "backend-000654": {
-        "message": "储存50%的散列"
+        "message": "儲存50%的雜湊"
     },
     "backend-000655": {
-        "message": "储存75%的散列"
+        "message": "儲存75%的雜湊"
     },
     "backend-000656": {
-        "message": "存储全部散列"
+        "message": "儲存全部雜湊"
     },
     "backend-000657": {
-        "message": "自动恢复备份"
+        "message": "自動恢復備份"
     },
     "backend-000658": {
-        "message": "密码程序似乎已经遇到数据库问题 ."
+        "message": "Passwords 應用程式似乎遇到了資料庫問題。"
     },
     "backend-000659": {
-        "message": "由于这个原因,应用程序备份\"$STR_1$\"自动被恢复.",
+        "message": "由於這個原因,應用程式備份\"$STR_1$\"自動被恢復.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -779,61 +779,61 @@
         }
     },
     "backend-000660": {
-        "message": "如果这是个错误,则在恢复数据库之前会进行备份."
+        "message": "如果這是一個錯誤，在還原之前已先備份了資料庫。"
     },
     "backend-000661": {
-        "message": "您可以在应用程序设置中禁用自动备份恢复 ."
+        "message": "您可以在應用程式設定中停用自動備份還原。"
     },
     "backend-000662": {
-        "message": "清除数据库时自动恢复备份"
+        "message": "資料庫被清除時自動還原備份"
     },
     "backend-000666": {
-        "message": "自动选择( 建议)"
+        "message": "自動選擇（建議）"
     },
     "backend-Passwords": {
-        "message": "密码"
+        "message": "密碼"
     },
     "frontend-000667": {
-        "message": "标记 CSV"
+        "message": "標記 CSV"
     },
     "frontend-000669": {
-        "message": "默认"
+        "message": "預設"
     },
     "frontend-000670": {
-        "message": "在页面任意位置按下密钥时启动搜索"
+        "message": "在頁面任意位置按下按鍵時啟動搜尋"
     },
     "frontend-000671": {
-        "message": "在搜索框中按下输入密钥时到处搜索"
+        "message": "在搜尋框中按下 Enter 時搜尋全部"
     },
     "settings-000678": {
-        "message": "登录会话( S)"
+        "message": "登入與工作階段"
     },
     "settings-000679": {
-        "message": "保持我登录"
+        "message": "保持我登入"
     },
     "settings-SettingsMouseWheelActionHelp": {
-        "message": "当鼠标方向盘点击密码条目时要执行的动作"
+        "message": "滑鼠滾輪點選密碼項目時要執行的動作"
     },
     "settings-SettingsCustomAction": {
-        "message": "显示快捷键"
+        "message": "顯示快捷鍵"
     },
     "settings-SettingsCustomActionHelp": {
-        "message": "为桌面视图中指定的动作添加额外按钮"
+        "message": "在桌面檢視中為指定動作新增額外按鈕"
     },
     "settings-SettingsShowShareTab": {
-        "message": "显示共享标签"
+        "message": "顯示共享標籤"
     },
     "settings-SettingsRecoverItems": {
-        "message": "回收隐藏项目"
+        "message": "回收隱藏專案"
     },
     "settings-SettingsRecoverItemsHelp": {
-        "message": "此动作从项目中去掉\"隐藏\"的旗帜,使这些项目再次出现在应用程序中."
+        "message": "此動作會移除項目的「隱藏」標記，使這些項目重新出現在應用程式中。"
     },
     "settings-RecoverItemsSelectTitle": {
-        "message": "回收隐藏项目"
+        "message": "回收隱藏專案"
     },
     "settings-RecoverItemsSelectText": {
-        "message": "请选择您想要回收的任何类型的隐藏项目 ."
+        "message": "請選擇您想要復原的任何類型的隱藏項目。"
     },
     "settings-RecoverItemsInvisiblePwd": {
         "message": "不在隱藏目錄中的密碼"
@@ -842,13 +842,13 @@
         "message": "還原在非隱藏目錄中的隱藏密碼"
     },
     "settings-RecoverItemsInvisibleTrash": {
-        "message": "隐藏在垃圾桶中的物品"
+        "message": "隱藏在垃圾桶中的物品"
     },
     "settings-RecoverItemsInvisibleTrashTitle": {
-        "message": "回收目前存放在垃圾桶中的隐藏项目"
+        "message": "回收目前存放在垃圾桶中的隱藏專案"
     },
     "settings-RecoverItemsPasswords": {
-        "message": "所有隐藏密码"
+        "message": "所有隱藏密碼"
     },
     "settings-RecoverItemsPasswordsTitle": {
         "message": "還原所有隱藏的密碼，無論資料夾設定為什麼狀態"
@@ -860,10 +860,10 @@
         "message": "還原所有隱藏目錄"
     },
     "settings-RecoverItemsTags": {
-        "message": "所有隐藏标签"
+        "message": "所有隱藏標籤"
     },
     "settings-RecoverItemsTagsTitle": {
-        "message": "回收所有隐藏标签"
+        "message": "回收所有隱藏標籤"
     },
     "settings-RecoverItemsSuccessMessage": {
         "message": "已還原 密碼 $PASSWORDS$，目錄 $FOLDERS$ 和 標籤 $TAGS$。",
@@ -880,40 +880,40 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "追回的物品"
+        "message": "已復原的項目"
     },
     "settings-SettingsWebAuthnEnableHelp": {
-        "message": "在此浏览器中存储您的加密密码句, 在打开应用程序时自动登录"
+        "message": "在此瀏覽器中儲存您的加密密碼句，開啟應用程式時自動登入"
     },
     "settings-WebauthnEncryptionPassphrase": {
-        "message": "加密密码句"
+        "message": "加密密碼句"
     },
     "settings-WebauthnEncryptionPassphraseRepeat": {
-        "message": "重复密码句"
+        "message": "重複密碼句"
     },
     "settings-WebauthnEncryptionSetupTitle": {
-        "message": "WebAuthn 登录设置"
+        "message": "WebAuthn 登入設定"
     },
     "settings-WebauthnEncryptionPassphraseText": {
-        "message": "在下面输入您的加密密码句 。 它会保存在您的浏览器中, 应用程序会在下次打开时尝试使用它 。 如果密码句无效, 登录失败一次, WebAuthn 将被禁用 ."
+        "message": "在下方輸入您的加密密碼句。它將儲存在您的瀏覽器中，應用程式會在下次開啟時嘗試使用。如果密碼句無效，登入將失敗一次，且 WebAuthn 將被停用。"
     },
     "settings-WebauthnLoginSetupSuccess": {
-        "message": "WebAuthn 现已启用. 应用程序将在下次登录时尝试使用已保存的密码句"
+        "message": "WebAuthn 已啟用。應用程式將在下次登入時嘗試使用已儲存的密碼句。"
     },
     "tutorial-000730": {
-        "message": "发射后,展示我的"
+        "message": "啟動後，顯示我的"
     },
     "tutorial-000731": {
         "message": "目錄"
     },
     "tutorial-000732": {
-        "message": "标签"
+        "message": "標籤"
     },
     "tutorial-000733": {
-        "message": "最爱"
+        "message": "最愛"
     },
     "tutorial-000734": {
-        "message": "密码"
+        "message": "密碼"
     },
     "tutorial-000735": {
         "message": "最近更改"
@@ -922,19 +922,19 @@
         "message": "標記我的密碼，如果…"
     },
     "tutorial-000737": {
-        "message": "他们比"
+        "message": "密碼超過"
     },
     "tutorial-000738": {
-        "message": "三个月"
+        "message": "三個月"
     },
     "tutorial-000739": {
-        "message": "6个月"
+        "message": "6個月"
     },
     "tutorial-000740": {
-        "message": "一岁"
+        "message": "一年"
     },
     "tutorial-000741": {
-        "message": "两年"
+        "message": "兩年"
     },
     "tutorial-000742": {
         "message": "$DAYS$天",
@@ -945,169 +945,169 @@
         }
     },
     "tutorial-000743": {
-        "message": "它们是重复的"
+        "message": "它們是重複的"
     },
     "tutorial-000744": {
-        "message": "做我的新密码"
+        "message": "產生新密碼時"
     },
     "tutorial-000745": {
-        "message": "强"
+        "message": "強"
     },
     "tutorial-000746": {
-        "message": "更强"
+        "message": "更強"
     },
     "tutorial-000747": {
-        "message": "非常强壮"
+        "message": "極度強"
     },
     "tutorial-000748": {
-        "message": "非常强壮"
+        "message": "極度強"
     },
     "tutorial-000749": {
-        "message": "包括数字"
+        "message": "包括數字"
     },
     "tutorial-000750": {
-        "message": "包含特殊字符"
+        "message": "包含特殊字元"
     },
     "tutorial-000751": {
-        "message": "密码的安全之家"
+        "message": "密碼的安全之家"
     },
     "tutorial-000752": {
-        "message": "保密密码"
+        "message": "保密密碼"
     },
     "tutorial-000753": {
-        "message": "定制您的体验"
+        "message": "自訂您的體驗"
     },
     "tutorial-000755": {
-        "message": "连接"
+        "message": "連線"
     },
     "tutorial-000756": {
-        "message": "加密我现有的密码"
+        "message": "加密我現有的密碼"
     },
     "tutorial-000758": {
-        "message": "重复密码"
+        "message": "重複密碼"
     },
     "tutorial-000759": {
-        "message": "安装加密"
+        "message": "安裝加密"
     },
     "tutorial-000760": {
-        "message": "键盘链"
+        "message": "鑰匙圈"
     },
     "tutorial-000761": {
         "message": "清理"
     },
     "tutorial-000762": {
-        "message": "成绩"
+        "message": "成功"
     },
     "tutorial-000763": {
-        "message": "需要的时候找帮助"
+        "message": "需要的時候找幫助"
     },
     "tutorial-000764": {
-        "message": "转到 Apps 和扩展"
+        "message": "前往應用程式與擴充套件"
     },
     "tutorial-000765": {
-        "message": "继续"
+        "message": "繼續"
     },
     "tutorial-000766": {
-        "message": "跳过"
+        "message": "跳過"
     },
     "tutorial-000767": {
-        "message": "检查密码安全"
+        "message": "使用以下服務檢查密碼安全"
     },
     "tutorial-000768": {
-        "message": "使用密码生成密码"
+        "message": "使用以下服務產生密碼"
     },
     "tutorial-000769": {
-        "message": "获取favicons 从"
+        "message": "從以下來源取得 Favicon"
     },
     "tutorial-000770": {
-        "message": "获取网站预览"
+        "message": "從以下來源取得網站預覽"
     },
     "tutorial-000771": {
-        "message": "创建备份"
+        "message": "建立備份"
     },
     "tutorial-000772": {
-        "message": "查看所有设置"
+        "message": "檢視所有設定"
     },
     "tutorial-000773": {
-        "message": "给管理员看我们的提示"
+        "message": "閱讀我們給管理員的建議"
     },
     "tutorial-000774": {
-        "message": "密码( 12个字符)"
+        "message": "密碼（最少 12 個字元）"
     },
     "tutorial-000775": {
         "message": "加密中…"
     },
     "tutorial-000776": {
-        "message": "有许多设置可以自定义自己的经历."
+        "message": "有許多設定可以讓您自訂使用體驗。"
     },
     "tutorial-000777": {
-        "message": "你可以在\"更多\"中找到他们,但我们把这里最常见的:"
+        "message": "您可以在「更多」中找到所有設定，以下是最常見的："
     },
     "tutorial-000778": {
-        "message": "密码可以提供现代而强大的加密,保护您的数据不被偷窥的眼睛."
+        "message": "Passwords 提供現代且強大的加密功能，保護您的資料免於被窺探。"
     },
     "tutorial-000779": {
-        "message": "在下面选择一个安全密码来激活您的密码的最终保护 ."
+        "message": "在下方選擇一組安全密碼，為您的密碼啟用最高級別的保護。"
     },
     "tutorial-000781": {
-        "message": "您可以在“ 更多” 中找到我们的 Apps 和扩展部分, 或者点击下面的按钮 ."
+        "message": "您可以在「更多」中找到我們的應用程式與擴充套件區，或直接點選下方按鈕。"
     },
     "tutorial-000782": {
-        "message": "密码可以有很多不同的定制方式."
+        "message": "Passwords 有許多不同的自訂方式。"
     },
     "tutorial-000783": {
-        "message": "作为管理员,您可能想要查看这些常见设置 ."
+        "message": "身為管理員，您可能想看看這些常用設定。"
     },
     "tutorial-000784": {
-        "message": "每当你不知道事情是如何运作的, 有问题或需要帮助的问题:"
+        "message": "每當您不知道如何操作、有疑問或需要協助時："
     },
     "tutorial-000785": {
-        "message": "帮助就在拐角处."
+        "message": "幫助就在身邊。"
     },
     "tutorial-000787": {
-        "message": "在任何其他情况下,我们的社区是问你问题的适当地方."
+        "message": "如有其他問題，我們的社群是提問的好地方。"
     },
     "tutorial-000790": {
-        "message": "您的密码至少需要12个字符,确认密码必须相同"
+        "message": "密碼至少需要 12 個字元，且確認密碼必須相同"
     },
     "tutorial-000788": {
-        "message": "教程结束后将打开手册"
+        "message": "教學結束後將開啟手冊"
     },
     "tutorial-000789": {
-        "message": "输入12个或更多字符的密码"
+        "message": "請輸入 12 個字元以上的密碼"
     },
     "tutorial-StartText1": {
-        "message": "欢迎来到\"下个云\"的密码App,这是保护密码安全有序的完美场所."
+        "message": "歡迎使用 Nextcloud 的 Passwords 應用程式，這是安全保管與整理您密碼的最佳工具。"
     },
     "tutorial-StartText2": {
-        "message": "我们开始吧"
+        "message": "讓我們開始吧"
     },
     "backend-UserMigrationDescription": {
         "message": "包含密碼、目錄、標籤和設定的解密密碼資料庫。（不包括與您共享的密碼。啟用端對端加密時無法使用。）"
     },
     "backend-ExportNotPossibleTitle": {
-        "message": "密码不能导出"
+        "message": "密碼不能匯出"
     },
     "backend-ExportNotPossibleText": {
-        "message": "由于您已启用端到端加密, 您的密码无法自动添加到导出中 。 作为替代,您可以使用应用程序中的导出函数来导出您的数据."
+        "message": "由於您已啟用端對端加密，密碼無法自動新增至匯出。您可以改用應用程式內的匯出功能來匯出資料。"
     },
     "settings-SettingsPasswordPrint": {
-        "message": "显示打印选项"
+        "message": "顯示列印選項"
     },
     "settings-SettingsPasswordPrintHelp": {
-        "message": "显示在菜单和细节中打印密码的选项"
+        "message": "在選單和詳細資訊中顯示列印密碼的選項"
     },
     "frontend-PasswordActionPrint": {
-        "message": "打印密码"
+        "message": "列印密碼"
     },
     "frontend-FolderPickerLoading": {
-        "message": "正在讀取目錄"
+        "message": "正在載入目錄"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "显示 QrCode"
+        "message": "顯示 QR Code"
     },
     "frontend-PasswordTagAddExists": {
-        "message": "密码已经标记为 $TAG$",
+        "message": "密碼已經標記為 $TAG$",
         "placeholders": {
             "password": {
                 "content": "$1"
@@ -1118,7 +1118,7 @@
         }
     },
     "frontend-PasswordTagAddSuccess": {
-        "message": "密码被标记为 $TAG$",
+        "message": "密碼被標記為 $TAG$",
         "placeholders": {
             "password": {
                 "content": "$1"
@@ -1129,7 +1129,7 @@
         }
     },
     "frontend-PasswordTagAddFail": {
-        "message": "无法用 $TAG$ 标记密码 : $ERROR$",
+        "message": "無法用 $TAG$ 標記密碼 : $ERROR$",
         "placeholders": {
             "password": {
                 "content": "$1"
@@ -1143,28 +1143,28 @@
         }
     },
     "settings-ExpertSettingsLabel": {
-        "message": "专家设置"
+        "message": "專家設定"
     },
     "frontend-PasswordDetailsAdvancedView": {
-        "message": "显示技术细节"
+        "message": "顯示技術詳細資訊"
     },
     "frontend-PwDetailsEncryptionLabel": {
-        "message": "加密方法"
+        "message": "加密方式"
     },
     "frontend-PwDetailsEncryptionTitleSSE": {
-        "message": "这个密码通过安全的HTTPS连接发送到服务器,并在存储在数据库之前在那里加密."
+        "message": "此密碼透過安全的 HTTPS 連線傳送至伺服器，並在儲存至資料庫前於伺服器端加密。"
     },
     "frontend-PwDetailsEncryptionTitleCSE": {
-        "message": "此密码在发送到服务器之前在您的设备上加密 。 无法在未知密码的情况下读取此密码 ."
+        "message": "此密碼在傳送至伺服器前已於您的裝置上加密。無人能在不知道密碼句的情況下讀取此密碼。"
     },
     "frontend-PasswordEncryptionCSE": {
-        "message": "端到端加密"
+        "message": "端對端加密"
     },
     "frontend-PasswordEncryptionSSE": {
-        "message": "服务器侧加密"
+        "message": "伺服器端加密"
     },
     "frontend-ClipboardCopyEmpty": {
-        "message": "没有要复制的, $ELEMENT$ 是空的",
+        "message": "沒有要複製的, $ELEMENT$ 是空的",
         "placeholders": {
             "element": {
                 "content": "$1"
@@ -1172,25 +1172,25 @@
         }
     },
     "frontend-BrowserConsoleWarningTitle": {
-        "message": "停下来!"
+        "message": "停下！"
     },
     "frontend-BrowserConsoleWarningLine1": {
-        "message": "此功能针对开发者,而非用户."
+        "message": "此功能是給開發者使用的，不是一般使用者。"
     },
     "frontend-BrowserConsoleWarningLine2": {
-        "message": "如果有人叫你在这里复制和粘贴任何东西 他们很可能会访问你的密码 或者接管你的账户."
+        "message": "如果有人要求您在此處複製貼上任何內容，他們很可能會竊取您的密碼或接管您的帳戶。"
     },
     "frontend-BrowserConsoleWarningLine3": {
-        "message": "更多信息见{link}."
+        "message": "更多資訊請參閱 {link}。"
     },
     "backend-SettingsEncryptionSection": {
-        "message": "加密设置"
+        "message": "加密設定"
     },
     "backend-SettingsEncryptionSSEv3": {
-        "message": "允许第三方加密"
+        "message": "允許第三方加密"
     },
     "backend-EOLNextcloudTitle": {
-        "message": "密码结束 Nextcloud $STR_1$ 的更新",
+        "message": "密碼結束 Nextcloud $STR_1$ 的更新",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1198,7 +1198,7 @@
         }
     },
     "backend-EOLNextcloudText1": {
-        "message": "密码 $STR_1$是Nextcloud $STR_2$ 的最后更新.",
+        "message": "密碼 $STR_1$是Nextcloud $STR_2$ 的最後更新.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1212,7 +1212,7 @@
         }
     },
     "backend-EOLNextcloudText2": {
-        "message": "升级到 Nextcloud $STR_1$ 用于未来的升级.",
+        "message": "升級到 Nextcloud $STR_1$ 用於未來的升級.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1226,7 +1226,7 @@
         }
     },
     "backend-EOLPHPTitle": {
-        "message": "PHP $STR_1$ 密码结束更新",
+        "message": "PHP $STR_1$ 密碼結束更新",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1234,7 +1234,7 @@
         }
     },
     "backend-EOLPHPText1": {
-        "message": "密码$STR_1$是PHP$STR_3$的最后更新.",
+        "message": "密碼$STR_1$是PHP$STR_3$的最後更新.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1248,7 +1248,7 @@
         }
     },
     "backend-EOLPHPText2": {
-        "message": "升级到PHP $STR_2$ (或PHP $STR_3$ for LSR),用于未来的升级.",
+        "message": "升級到PHP $STR_2$ (或PHP $STR_3$ for LSR),用於未來的升級.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1262,10 +1262,10 @@
         }
     },
     "frontend-CompatWASMText2": {
-        "message": "在一些浏览器中,WebAssembly必须在浏览器配置中被启用."
+        "message": "在某些瀏覽器中，WebAssembly 必須在瀏覽器設定中手動啟用。"
     },
     "backend-EOLNextcloudPHPTitle": {
-        "message": "密码结束 Nextcloud $STR_1$ 和 PHP $STR_2$ 的更新",
+        "message": "密碼結束 Nextcloud $STR_1$ 和 PHP $STR_2$ 的更新",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1276,7 +1276,7 @@
         }
     },
     "backend-EOLNextcloudPHPText1": {
-        "message": "密码$STR_1$是Nextcloud $STR_2$和PHP $STR_3$的最后一个更新.",
+        "message": "密碼$STR_1$是Nextcloud $STR_2$和PHP $STR_3$的最後一個更新.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1290,7 +1290,7 @@
         }
     },
     "backend-EOLNextcloudPHPText2": {
-        "message": "升级到Nextcloud $STR_1$和PHP $STR_2$ (或PHP $STR_3$ for LSR),用于未来的升级.",
+        "message": "升級到Nextcloud $STR_1$和PHP $STR_2$ (或PHP $STR_3$ for LSR),用於未來的升級.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1304,13 +1304,13 @@
         }
     },
     "backend-NotificationInvalid": {
-        "message": "这一通知可以删除."
+        "message": "此通知可以刪除。"
     },
     "backend-PassDbDlFailedTitle": {
-        "message": "无法更新已违反的密码数据库"
+        "message": "無法更新已洩漏密碼資料庫"
     },
     "backend-PassDbDlFailedText": {
-        "message": "被违反的密码数据库更新失败了三次 。 请查看手册 并检查您的日志。 理由:$STR_1$",
+        "message": "被違反的密碼資料庫更新失敗了三次 。 請檢視手冊 並檢查您的日誌。 理由:$STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -1318,10 +1318,10 @@
         }
     },
     "frontend-PasswordActionChangePwPage": {
-        "message": "打开更改密码页"
+        "message": "開啟更改密碼頁面"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "我们检测到下面的url作为\"{label}\"的密码更改页. 点击按钮打开 .",
+        "message": "我們偵測到以下網址為「{label}」的密碼更改頁面。點選按鈕即可開啟。",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1332,10 +1332,10 @@
         }
     },
     "frontend-ChangePasswordPageLink": {
-        "message": "打开更改密码页"
+        "message": "開啟更改密碼頁面"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\"不宣布他们的密码更改页. 您可以在网站上找到更改密码功能 .",
+        "message": "「{host}」未提供密碼更改頁面。您可以在該網站上尋找更改密碼的功能。",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1346,40 +1346,40 @@
         }
     },
     "frontend-CSENewPassphraseInsecureText": {
-        "message": "所选加密密码句不安全,因此不能使用."
+        "message": "所選的加密密碼句不安全，因此無法使用。"
     },
     "frontend-CSEPassphraseInsecureTitle": {
-        "message": "不可靠的加密密码句"
+        "message": "加密密碼句不安全"
     },
     "frontend-CSEPassphraseInsecureText": {
-        "message": "密码程序定期检查您的加密密码句是否仍然安全 。 您的密码句不安全, 需要立即更改 ."
+        "message": "Passwords 會定期檢查您的加密密碼句是否仍然安全。您的密碼句不安全，需要立即更改。"
     },
     "backend-CronSetupCheckName": {
-        "message": "检查服务器是否以 cron 运行背景任务 ."
+        "message": "檢查伺服器是否以 Cron 執行背景工作。"
     },
     "backend-CronSetupCheckSuccess": {
-        "message": "背景任务以 cron 执行 ."
+        "message": "背景工作以 Cron 執行。"
     },
     "backend-CronPhpVersionSetupCheckName": {
-        "message": "检查服务器是否以相同的 PHP 版本运行背景任务 ."
+        "message": "檢查伺服器是否以相同的 PHP 版本執行背景工作。"
     },
     "backend-CronPhpVersionSetupCheckSuccess": {
-        "message": "背景任务以相同的PHP版本执行."
+        "message": "背景工作以相同的 PHP 版本執行。"
     },
     "frontend-CompatHeadline": {
-        "message": "您的浏览器已经过时"
+        "message": "您的瀏覽器已過時"
     },
     "frontend-CompatText1": {
-        "message": "您的浏览器已经过时, 没有运行此应用程序的必要功能 ."
+        "message": "您的瀏覽器已過時，缺少執行此應用程式所需的功能。"
     },
     "frontend-CompatText2": {
-        "message": "请检查您的浏览器是否有更新, 或者从下面的列表中选择一个现代兼容的浏览器 ."
+        "message": "請檢查瀏覽器是否有更新，或從下方清單中選擇一個現代相容的瀏覽器。"
     },
     "frontend-CompatWASMHeadline": {
-        "message": "您的浏览器不支持 WebAssembly"
+        "message": "您的瀏覽器不支援 WebAssembly"
     },
     "frontend-CompatWASMText1": {
-        "message": "您的浏览器不支持运行此应用程序所需的WebAssem( WASM) ."
+        "message": "您的瀏覽器不支援執行此應用程式所需的 WebAssembly（WASM）。"
     },
     "backups-000045": {
         "message": "自訂欄位"
@@ -1388,10 +1388,10 @@
         "message": "目錄"
     },
     "frontend-CompatWASMText3": {
-        "message": "如果您的浏览器没有WebAssembly的支持, 请检查是否有更新可供您的浏览器使用, 或者从下面的列表中选择一个现代兼容的浏览器 ."
+        "message": "如果您的瀏覽器不支援 WebAssembly，請檢查是否有更新，或從下方清單中選擇一個現代相容的瀏覽器。"
     },
     "frontend-CompatWASMHandbookLink": {
-        "message": "启用WebAssembly的指南可以在密码App手册中找到."
+        "message": "啟用 WebAssembly 的指南可在 Passwords 應用程式手冊中找到。"
     },
     "backups-000040": {
         "message": "（選用）加密備份"
@@ -1417,7 +1417,7 @@
         "message": "原始碼"
     },
     "apps-000004": {
-        "message": "了解更多"
+        "message": "瞭解更多"
     },
     "apps-000005": {
         "message": "連結 PassLink"
@@ -1447,7 +1447,7 @@
         "message": "請勿繼續嘗試"
     },
     "apps-000014": {
-        "message": "連接至其他用戶端"
+        "message": "連線至其他使用者端"
     },
     "apps-000015": {
         "message": "再試一次"
@@ -1470,13 +1470,13 @@
         "message": "您沒有及時確認連線"
     },
     "apps-000020": {
-        "message": "使用應用程式掃描 QR code 即可連接。"
+        "message": "使用應用程式掃描 QR code 即可連線。"
     },
     "apps-000021": {
-        "message": "當您準備好開始連線時，請點擊按鈕。"
+        "message": "當您準備好開始連線時，請點選按鈕。"
     },
     "apps-000022": {
-        "message": "檢查下列代碼是否與裝置或應用程式提供的代碼一致："
+        "message": "檢查下列程式碼是否與裝置或應用程式提供的程式碼一致："
     },
     "apps-000023": {
         "message": "將此客戶端連結到您的 Nextcloud 帳戶，無需輸入煩人的密碼和網址"
@@ -1485,10 +1485,10 @@
         "message": "該客戶端正式支援我們強大的端對端加密"
     },
     "apps-000025": {
-        "message": "此用戶端由 Passwords 應用程式的作者維護"
+        "message": "此使用者端由 Passwords 應用程式的作者維護"
     },
     "apps-000026": {
-        "message": "點擊按鈕即可連接此裝置上安裝的應用程式，或者使用其他裝置上安裝的應用程式掃描QR碼。"
+        "message": "點選按鈕即可連線此裝置上安裝的應用程式，或者使用其他裝置上安裝的應用程式掃描QR碼。"
     },
     "backups-000028": {
         "message": "備份或匯出"
@@ -1520,7 +1520,7 @@
         "message": "資料庫備份"
     },
     "backups-000036": {
-        "message": "自定義 CSV"
+        "message": "自訂 CSV"
     },
     "backups-000037": {
         "message": "嘗試匯入通用 CSV"
@@ -1663,16 +1663,16 @@
         "message": "資料庫"
     },
     "backups-000081": {
-        "message": "引號字符"
+        "message": "引號字元"
     },
     "backups-000082": {
-        "message": "跳脫字符"
+        "message": "跳脫字元"
     },
     "backups-000083": {
         "message": "欄位分隔符"
     },
     "backups-000084": {
-        "message": "換行字符"
+        "message": "換行字元"
     },
     "backups-000085": {
         "message": "引號"
@@ -1734,7 +1734,7 @@
         "message": "匯入"
     },
     "backups-000103": {
-        "message": "正在分析輸入文件"
+        "message": "正在分析輸入檔案"
     },
     "backups-000104": {
         "message": "正在分析標籤"
@@ -1749,7 +1749,7 @@
         "message": "正在匯入標籤"
     },
     "backups-000108": {
-        "message": "正在讀取目錄"
+        "message": "正在載入目錄"
     },
     "backups-000109": {
         "message": "正在匯入目錄"
@@ -1776,7 +1776,7 @@
         "message": "部分項目發生錯誤："
     },
     "backups-000117": {
-        "message": "無效的檔案類型 \"$TYPE$\"",
+        "message": "無效的檔案型別 \"$TYPE$\"",
         "placeholders": {
             "type": {
                 "content": "$1"
@@ -1799,40 +1799,40 @@
         "message": "無法解密標籤"
     },
     "backups-000123": {
-        "message": "导入文件为空"
+        "message": "匯入檔案為空"
     },
     "backups-000124": {
-        "message": "无法映射 CSV 文件"
+        "message": "無法對應 CSV 檔案"
     },
     "backups-000125": {
-        "message": "登录"
+        "message": "登入"
     },
     "backups-000126": {
-        "message": "页:1"
+        "message": "備忘錄"
     },
     "backups-000127": {
         "message": "信用卡"
     },
     "backups-000129": {
-        "message": "财务"
+        "message": "財務"
     },
     "backups-000130": {
-        "message": "许可证"
+        "message": "授權"
     },
     "backups-000131": {
-        "message": "旅费"
+        "message": "旅行"
     },
     "backups-000132": {
-        "message": "计算机"
+        "message": "電腦"
     },
     "backups-000133": {
-        "message": "杂项"
+        "message": "雜項"
     },
     "backups-000134": {
-        "message": "引用字段的引用无效"
+        "message": "引用欄位的引用無效"
     },
     "backups-000135": {
-        "message": "无法解析文件 : $ERRORS$",
+        "message": "無法解析檔案 : $ERRORS$",
         "placeholders": {
             "errors": {
                 "content": "$1"
@@ -1840,7 +1840,7 @@
         }
     },
     "backups-000136": {
-        "message": "$MESSAGE$行 $LINE$字符 $CHARACTER$.",
+        "message": "$MESSAGE$行 $LINE$字元 $CHARACTER$.",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -1854,7 +1854,7 @@
         }
     },
     "backups-000137": {
-        "message": "\"$LABEL$\"有无法导入的附加文件.",
+        "message": "\"$LABEL$\"有無法匯入的附加檔案.",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -1865,7 +1865,7 @@
         "message": "移動密碼失敗"
     },
     "backups-000138": {
-        "message": "\"$LABEL$\"中的\"$FIELD$\"类型不详,不能进口.",
+        "message": "\"$LABEL$\"中的\"$FIELD$\"型別不詳,不能進口.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -1876,7 +1876,7 @@
         }
     },
     "backups-000139": {
-        "message": "\"$LABEL$\"中\"$FIELD$\"的标签已超过48个字符并被剪去.",
+        "message": "\"$LABEL$\"中\"$FIELD$\"的標籤已超過48個字元並被剪去.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -1887,7 +1887,7 @@
         }
     },
     "backups-000140": {
-        "message": "\"$LABEL$\"中\"$FIELD$\"的值已超过320个字符并被剪接.",
+        "message": "\"$LABEL$\"中\"$FIELD$\"的值已超過320個字元並被剪接.",
         "placeholders": {
             "field": {
                 "content": "$1"
@@ -1898,13 +1898,13 @@
         }
     },
     "backups-000141": {
-        "message": "更多信息可在日志中找到. (新闻F12)"
+        "message": "更多資訊可在日誌中找到.（按 F12）"
     },
     "frontend-000233": {
         "message": "刪除密碼"
     },
     "backups-000142": {
-        "message": "文件有\"$ACTUAL$\"的类型,但\"$EXPECTED$\"是预期的. 你可能选择了错误的文件或进口商.",
+        "message": "檔案有\"$ACTUAL$\"的型別,但\"$EXPECTED$\"是預期的. 你可能選擇了錯誤的檔案或進口商.",
         "placeholders": {
             "actual": {
                 "content": "$1"
@@ -1915,7 +1915,7 @@
         }
     },
     "backups-000143": {
-        "message": "$SERVICE$已知生成出错导出文件. 如果文件无法解析, 请咨询手册求取帮助 .",
+        "message": "$SERVICE$已知生成出錯匯出檔案. 如果檔案無法解析, 請諮詢手冊求取幫助 .",
         "placeholders": {
             "service": {
                 "content": "$1"
@@ -1923,166 +1923,166 @@
         }
     },
     "backups-000145": {
-        "message": "标记"
+        "message": "標記"
     },
     "frontend-000148": {
-        "message": "密码"
+        "message": "密碼"
     },
     "frontend-000149": {
-        "message": "全体"
+        "message": "全部"
     },
     "frontend-000150": {
         "message": "目錄"
     },
     "frontend-000151": {
-        "message": "近期"
+        "message": "最近"
     },
     "frontend-000152": {
-        "message": "爱好"
+        "message": "收藏"
     },
     "frontend-000153": {
         "message": "共享"
     },
     "frontend-000154": {
-        "message": "警卫"
+        "message": "安全性"
     },
     "frontend-000155": {
-        "message": "废物"
+        "message": "回收桶"
     },
     "frontend-000156": {
-        "message": "细节"
+        "message": "詳細資訊"
     },
     "frontend-000157": {
-        "message": "编辑"
+        "message": "編輯"
     },
     "frontend-000158": {
-        "message": "重命名"
+        "message": "重新命名"
     },
     "frontend-000159": {
-        "message": "删除"
+        "message": "刪除"
     },
     "frontend-000160": {
-        "message": "恢复"
+        "message": "還原"
     },
     "frontend-000161": {
-        "message": "新建密码"
+        "message": "新增密碼"
     },
     "frontend-000162": {
         "message": "新目錄"
     },
     "frontend-000163": {
-        "message": "新标签"
+        "message": "新標籤"
     },
     "frontend-000164": {
         "message": "安全"
     },
     "frontend-000165": {
-        "message": "状态"
+        "message": "狀態"
     },
     "frontend-000166": {
-        "message": "弱点"
+        "message": "弱"
     },
     "frontend-000167": {
-        "message": "薄弱( 重复)"
+        "message": "弱（重複）"
     },
     "frontend-000168": {
-        "message": "薄弱(已过时)"
+        "message": "弱（已過期）"
     },
     "frontend-000169": {
-        "message": "被突破"
+        "message": "已洩漏"
     },
     "frontend-000170": {
-        "message": "份额"
+        "message": "份額"
     },
     "frontend-000171": {
-        "message": "订正"
+        "message": "版本"
     },
     "frontend-000172": {
-        "message": "QR 代码"
+        "message": "QR Code"
     },
     "frontend-000173": {
-        "message": "密码"
+        "message": "密碼"
     },
     "frontend-000174": {
-        "message": "用户名"
+        "message": "使用者名稱"
     },
     "frontend-000175": {
-        "message": "网站"
+        "message": "網站"
     },
     "frontend-000176": {
         "message": "新增標籤…"
     },
     "frontend-000177": {
-        "message": "颜色"
+        "message": "顏色"
     },
     "frontend-000178": {
-        "message": "名称"
+        "message": "名稱"
     },
     "frontend-000179": {
-        "message": "标签"
+        "message": "標籤"
     },
     "frontend-000180": {
-        "message": "常规"
+        "message": "常規"
     },
     "frontend-000181": {
-        "message": "属性"
+        "message": "屬性"
     },
     "frontend-000182": {
-        "message": "数字"
+        "message": "數字"
     },
     "frontend-000183": {
-        "message": "特殊字符"
+        "message": "特殊字元"
     },
     "frontend-000184": {
-        "message": "更多选项"
+        "message": "更多選項"
     },
     "frontend-000185": {
-        "message": "最喜欢"
+        "message": "收藏"
     },
     "frontend-000186": {
         "message": "加密"
     },
     "frontend-000187": {
-        "message": "在服务器上"
+        "message": "在伺服器端"
     },
     "frontend-000234": {
         "message": "您確定要刪除此密碼嗎？"
     },
     "frontend-000188": {
-        "message": "自定义字段"
+        "message": "自訂欄位"
     },
     "frontend-000189": {
-        "message": "秘诀"
+        "message": "密碼欄位"
     },
     "frontend-000190": {
-        "message": "文本"
+        "message": "文字"
     },
     "frontend-000191": {
-        "message": "文件"
+        "message": "檔案"
     },
     "frontend-000192": {
-        "message": "数值"
+        "message": "值"
     },
     "frontend-000193": {
-        "message": "切换能见度"
+        "message": "切換顯示"
     },
     "frontend-000194": {
-        "message": "生成密码"
+        "message": "產生密碼"
     },
     "frontend-000195": {
-        "message": "简单服务器侧加密 V1"
+        "message": "簡易伺服器端加密 V1"
     },
     "frontend-000196": {
-        "message": "记下来"
+        "message": "新增備註"
     },
     "frontend-000197": {
-        "message": "保存"
+        "message": "儲存"
     },
     "frontend-000198": {
         "message": "建立目錄"
     },
     "frontend-000199": {
-        "message": "已建立目錄"
+        "message": "目錄已建立"
     },
     "frontend-000200": {
         "message": "建立目錄失敗"
@@ -2091,13 +2091,13 @@
         "message": "重新命名目錄"
     },
     "frontend-000202": {
-        "message": "已重新命名目錄"
+        "message": "目錄已重新命名"
     },
     "frontend-000203": {
         "message": "重新命名目錄失敗"
     },
     "frontend-000204": {
-        "message": "已移動目錄"
+        "message": "目錄已移動"
     },
     "frontend-000205": {
         "message": "移動目錄失敗"
@@ -2109,40 +2109,40 @@
         "message": "您確定要刪除此目錄及其內容嗎？"
     },
     "frontend-000208": {
-        "message": "已刪除目錄"
+        "message": "目錄已刪除"
     },
     "frontend-000209": {
         "message": "刪除目錄失敗"
     },
     "frontend-000210": {
-        "message": "已還原目錄"
+        "message": "目錄已還原"
     },
     "frontend-000211": {
         "message": "還原目錄失敗"
     },
     "frontend-000213": {
-        "message": "创建标记"
+        "message": "建立標記"
     },
     "frontend-000214": {
-        "message": "创建标签失败"
+        "message": "建立標籤失敗"
     },
     "frontend-000215": {
-        "message": "编辑标签"
+        "message": "編輯標籤"
     },
     "frontend-000216": {
-        "message": "生成随机颜色"
+        "message": "產生隨機顏色"
     },
     "frontend-000217": {
         "message": "標籤已儲存"
     },
     "frontend-000218": {
-        "message": "標籤儲存失敗"
+        "message": "儲存標籤失敗"
     },
     "frontend-000219": {
         "message": "刪除標籤"
     },
     "frontend-000220": {
-        "message": "您要刪除此標籤嗎？"
+        "message": "您確定要刪除此標籤嗎？"
     },
     "frontend-000221": {
         "message": "標籤已刪除"
@@ -2157,10 +2157,10 @@
         "message": "新增密碼"
     },
     "frontend-000226": {
-        "message": "密碼已新增"
+        "message": "密碼已建立"
     },
     "frontend-000227": {
-        "message": "新增密碼失敗"
+        "message": "建立密碼失敗"
     },
     "frontend-000228": {
         "message": "編輯密碼"
@@ -2169,34 +2169,34 @@
         "message": "密碼已儲存"
     },
     "frontend-000230": {
-        "message": "密碼儲存失敗"
+        "message": "儲存密碼失敗"
     },
     "frontend-000231": {
         "message": "密碼已移動"
     },
     "frontend-000235": {
-        "message": "密码已删除"
+        "message": "密碼已刪除"
     },
     "frontend-000236": {
-        "message": "密码已恢复"
+        "message": "密碼已還原"
     },
     "frontend-000237": {
-        "message": "恢复密码失败"
+        "message": "還原密碼失敗"
     },
     "frontend-000238": {
-        "message": "打开 Url"
+        "message": "開啟 Url"
     },
     "frontend-000239": {
-        "message": "复制乌尔尔"
+        "message": "複製網址"
     },
     "frontend-000240": {
-        "message": "复制用户"
+        "message": "複製使用者名稱"
     },
     "frontend-000241": {
-        "message": "复制密码"
+        "message": "複製密碼"
     },
     "frontend-000242": {
-        "message": "$ELEMENT$被复制到剪贴板",
+        "message": "$ELEMENT$被複制到剪貼簿",
         "placeholders": {
             "element": {
                 "content": "$1"
@@ -2204,7 +2204,7 @@
         }
     },
     "frontend-000243": {
-        "message": "复制 $ELEMENT$ 到剪贴板出错",
+        "message": "複製 $ELEMENT$ 到剪貼簿出錯",
         "placeholders": {
             "element": {
                 "content": "$1"
@@ -2212,7 +2212,7 @@
         }
     },
     "frontend-000244": {
-        "message": "最后在 $DATE$ 上修改",
+        "message": "最後在 $DATE$ 上修改",
         "placeholders": {
             "date": {
                 "content": "$1"
@@ -2220,34 +2220,34 @@
         }
     },
     "frontend-000245": {
-        "message": "恢复修订"
+        "message": "還原版本"
     },
     "frontend-000246": {
-        "message": "版本已恢复"
+        "message": "版本已還原"
     },
     "frontend-000247": {
-        "message": "恢复修订失败"
+        "message": "還原版本失敗"
     },
     "frontend-000248": {
-        "message": "您想要恢复修订吗 ?"
+        "message": "您確定要還原此版本嗎？"
     },
     "frontend-000249": {
-        "message": "和你们分享"
+        "message": "與您共享"
     },
     "frontend-000250": {
-        "message": "与你共享"
+        "message": "由您共享"
     },
     "frontend-000251": {
-        "message": "统计"
+        "message": "統計"
     },
     "frontend-000252": {
-        "message": "创建于"
+        "message": "建立者"
     },
     "frontend-000253": {
         "message": "上次更新"
     },
     "frontend-000254": {
-        "message": "$COUNT$修订",
+        "message": "$COUNT$修訂",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -2255,10 +2255,10 @@
         }
     },
     "frontend-000255": {
-        "message": "股份"
+        "message": "共享"
     },
     "frontend-000256": {
-        "message": "共享 $COUNT$ 时间",
+        "message": "共享 $COUNT$ 時間",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -2266,46 +2266,46 @@
         }
     },
     "frontend-000257": {
-        "message": "在服务器上应用加密"
+        "message": "在伺服器端加密"
     },
     "frontend-000258": {
-        "message": "对客户端应用加密"
+        "message": "在客戶端加密"
     },
     "frontend-000259": {
-        "message": "无加密"
+        "message": "無加密"
     },
     "frontend-000260": {
-        "message": "简单加密( Gen. 1)"
+        "message": "簡易加密（第 1 代）"
     },
     "frontend-000261": {
-        "message": "简单加密( Gen. 2)"
+        "message": "簡易加密（第 2 代）"
     },
     "frontend-000262": {
-        "message": "高级加密( SSE V2)"
+        "message": "進階加密（SSE V2）"
     },
     "frontend-000263": {
-        "message": "用 libsodium 加密"
+        "message": "使用 libsodium 加密"
     },
     "frontend-000264": {
-        "message": "再来"
+        "message": "更多"
     },
     "frontend-000265": {
-        "message": "备份和恢复"
+        "message": "備份與還原"
     },
     "frontend-000266": {
-        "message": "设置"
+        "message": "設定"
     },
     "frontend-000267": {
-        "message": "手册"
+        "message": "手冊"
     },
     "frontend-Donate": {
-        "message": "捐赠"
+        "message": "捐贈"
     },
     "frontend-000268": {
-        "message": "应用程序和扩展"
+        "message": "應用程式與擴充套件"
     },
     "frontend-000269": {
-        "message": "$EDITABLE$和 $SHAREABLE$ (中文(简体) ).",
+        "message": "$EDITABLE$和 $SHAREABLE$ (中文(簡體) ).",
         "placeholders": {
             "editable": {
                 "content": "$1"
@@ -2316,28 +2316,28 @@
         }
     },
     "frontend-000270": {
-        "message": "允许编辑"
+        "message": "允許編輯"
     },
     "frontend-000271": {
-        "message": "编辑失败"
+        "message": "不允許編輯"
     },
     "frontend-000272": {
-        "message": "允许共享"
+        "message": "允許共享"
     },
     "frontend-000288": {
-        "message": "Favicon 快取( 0 文件, 0 B)"
+        "message": "Favicon 快取（0 個檔案，0 B）"
     },
     "frontend-000273": {
-        "message": "无法共享"
+        "message": "不允許共享"
     },
     "frontend-000274": {
-        "message": "搜索用户"
+        "message": "搜尋使用者"
     },
     "frontend-000275": {
-        "message": "设定过期日期"
+        "message": "設定過期日期"
     },
     "frontend-000276": {
-        "message": "过期 $DATETIME$",
+        "message": "過期 $DATETIME$",
         "placeholders": {
             "datetime": {
                 "content": "$1"
@@ -2345,19 +2345,19 @@
         }
     },
     "frontend-000277": {
-        "message": "选择到期日或留空以永久共享"
+        "message": "選擇到期日期，留空則永久共享"
     },
     "frontend-000289": {
-        "message": "预览缓存( 0 文件, 0 B)"
+        "message": "預覽快取（0 個檔案，0 B）"
     },
     "frontend-000278": {
-        "message": "请将来选择一个日期"
+        "message": "請選擇未來的日期"
     },
     "frontend-000279": {
-        "message": "无效的日期"
+        "message": "無效的日期"
     },
     "frontend-000280": {
-        "message": "用户 $UID$ 不存在",
+        "message": "使用者 $UID$ 不存在",
         "placeholders": {
             "uid": {
                 "content": "$1"
@@ -2365,7 +2365,7 @@
         }
     },
     "frontend-000281": {
-        "message": "无法共享密码 : $MESSAGE$",
+        "message": "無法共享密碼 : $MESSAGE$",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -2373,10 +2373,10 @@
         }
     },
     "frontend-000282": {
-        "message": "切换写入权限"
+        "message": "切換寫入權限"
     },
     "frontend-000283": {
-        "message": "切换共享权限"
+        "message": "切換共享權限"
     },
     "frontend-000284": {
         "message": "停止共享"
@@ -2385,13 +2385,13 @@
         "message": "日期"
     },
     "frontend-000286": {
-        "message": "默认缓存( 0 文件, 0 B)"
+        "message": "預設快取（0 個檔案，0 B）"
     },
     "frontend-000287": {
-        "message": "神通缓存( 0 文件, 0 B)"
+        "message": "頭像快取（0 個檔案，0 B）"
     },
     "frontend-000290": {
-        "message": "密码缓存( 0 文件, 0 B)"
+        "message": "密碼快取（0 個檔案，0 B）"
     },
     "frontend-000291": {
         "message": "已更改"
@@ -2400,55 +2400,55 @@
         "message": "已修改"
     },
     "frontend-000293": {
-        "message": "已编辑"
+        "message": "已編輯"
     },
     "frontend-000294": {
-        "message": "已创建"
+        "message": "已建立"
     },
     "frontend-000295": {
-        "message": "订正"
+        "message": "版本"
     },
     "frontend-000296": {
-        "message": "乌尔尔"
+        "message": "網址"
     },
     "frontend-000297": {
-        "message": "家长"
+        "message": "上層"
     },
     "frontend-000298": {
-        "message": "删除所有项目"
+        "message": "刪除所有項目"
     },
     "frontend-000299": {
-        "message": "恢复所有项目"
+        "message": "還原所有項目"
     },
     "frontend-000300": {
-        "message": "恢复项目"
+        "message": "項目已還原"
     },
     "frontend-000301": {
-        "message": "恢复垃圾中的所有项目 ?"
+        "message": "還原回收桶中的所有項目？"
     },
     "frontend-000302": {
-        "message": "恢复此项目"
+        "message": "還原此項目"
     },
     "frontend-000303": {
-        "message": "恢复项目"
+        "message": "項目已還原"
     },
     "frontend-000304": {
-        "message": "空回收站"
+        "message": "清空回收桶"
     },
     "frontend-000305": {
-        "message": "删除回收站中的所有项目吗 ?"
+        "message": "刪除回收桶中的所有項目嗎？"
     },
     "frontend-000306": {
-        "message": "回收站已清空"
+        "message": "回收桶已清空"
     },
     "frontend-000307": {
-        "message": "搜索"
+        "message": "搜尋"
     },
     "frontend-000308": {
-        "message": "使用搜索框搜索"
+        "message": "使用搜尋框搜尋"
     },
     "frontend-000309": {
-        "message": "到处找\"$QUERY$\"",
+        "message": "到處找\"$QUERY$\"",
         "placeholders": {
             "query": {
                 "content": "$1"
@@ -2459,31 +2459,31 @@
         "message": "搜尋…"
     },
     "frontend-000310": {
-        "message": "这里什么都没有"
+        "message": "這裡沒有內容"
     },
     "frontend-000311": {
-        "message": "点击“ QQ” 添加内容"
+        "message": "點選「⋯」以新增內容"
     },
     "frontend-000312": {
-        "message": "删除的项目将在此显示"
+        "message": "已刪除的項目會顯示在這裡"
     },
     "frontend-000313": {
-        "message": "没有与您共享密码"
+        "message": "沒有人與您共享密碼"
     },
     "frontend-000314": {
-        "message": "您没有共享任何密码"
+        "message": "您沒有共享任何密碼"
     },
     "frontend-000315": {
-        "message": "你最喜欢的会在这里出现"
+        "message": "您的收藏會顯示在這裡"
     },
     "frontend-000316": {
-        "message": "最好检查其他部分"
+        "message": "建議查看其他區段"
     },
     "frontend-000317": {
-        "message": "这也许是个好兆头"
+        "message": "這也許是個好兆頭"
     },
     "frontend-000318": {
-        "message": "转到 $HREF$",
+        "message": "轉到 $HREF$",
         "placeholders": {
             "href": {
                 "content": "$1"
@@ -2491,10 +2491,10 @@
         }
     },
     "frontend-000319": {
-        "message": "目录"
+        "message": "目錄"
     },
     "frontend-000320": {
-        "message": "图$COUNT$:$TITLE$",
+        "message": "圖$COUNT$:$TITLE$",
         "placeholders": {
             "count": {
                 "content": "$1"
@@ -2505,7 +2505,7 @@
         }
     },
     "frontend-000321": {
-        "message": "无法获取页面 : $MESSAGE$.",
+        "message": "無法獲取頁面 : $MESSAGE$.",
         "placeholders": {
             "message": {
                 "content": "$1"
@@ -2513,7 +2513,7 @@
         }
     },
     "frontend-000322": {
-        "message": "无效的内容类型 $MIME$",
+        "message": "無效的內容型別 $MIME$",
         "placeholders": {
             "mime": {
                 "content": "$1"
@@ -2521,43 +2521,43 @@
         }
     },
     "frontend-000323": {
-        "message": "无可用内容"
+        "message": "無可用內容"
     },
     "frontend-000324": {
         "message": "未找到"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "你需要帮助吗?"
+        "message": "需要幫助嗎？"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "在我们的论坛问"
+        "message": "在論壇發問"
     },
     "frontend-HandbookMoreHelpChat": {
-        "message": "在聊天时问"
+        "message": "在聊天室發問"
     },
     "frontend-HandbookBugsReport": {
-        "message": "报告错误"
+        "message": "回報錯誤"
     },
     "frontend-HandbookMore": {
-        "message": "其他文档"
+        "message": "其他文件"
     },
     "frontend-HandbookAdminDocumentation": {
-        "message": "署长手册"
+        "message": "管理員手冊"
     },
     "frontend-HandbookDevDocumentation": {
-        "message": "开发者手册"
+        "message": "開發者手冊"
     },
     "frontend-000329": {
-        "message": "会话已过期"
+        "message": "工作階段已過期"
     },
     "frontend-000330": {
-        "message": "API 会话托肯已过期"
+        "message": "API 工作階段權杖已過期"
     },
     "frontend-000331": {
-        "message": "网络错误"
+        "message": "網路錯誤"
     },
     "frontend-000332": {
-        "message": "无法装入 $MODULE$",
+        "message": "無法裝入 $MODULE$",
         "placeholders": {
             "module": {
                 "content": "$1"
@@ -2565,13 +2565,13 @@
         }
     },
     "frontend-000333": {
-        "message": "按名称排序"
+        "message": "按名稱排序"
     },
     "frontend-000334": {
-        "message": "按修改后的日期排序"
+        "message": "按修改日期排序"
     },
     "frontend-000335": {
-        "message": "$PASSWORDS$密码",
+        "message": "$PASSWORDS$密碼",
         "placeholders": {
             "passwords": {
                 "content": "$1"
@@ -2579,7 +2579,7 @@
         }
     },
     "frontend-000336": {
-        "message": "1个密码"
+        "message": "1 組密碼"
     },
     "frontend-000337": {
         "message": "$FOLDERS$ 目錄",
@@ -2593,7 +2593,7 @@
         "message": "1 個目錄"
     },
     "frontend-000339": {
-        "message": "$TAGS$ 标记",
+        "message": "$TAGS$ 標記",
         "placeholders": {
             "tags": {
                 "content": "$1"
@@ -2601,10 +2601,10 @@
         }
     },
     "frontend-000340": {
-        "message": "1个标签"
+        "message": "1 個標籤"
     },
     "frontend-000341": {
-        "message": "没什么"
+        "message": "無"
     },
     "frontend-000342": {
         "message": " 和 "
@@ -2616,10 +2616,10 @@
         "message": "匹配"
     },
     "frontend-000345": {
-        "message": "创建于"
+        "message": "建立者"
     },
     "frontend-000346": {
-        "message": "您正在登录为 $USER$",
+        "message": "您正在登入為 $USER$",
         "placeholders": {
             "user": {
                 "content": "$1"
@@ -2627,67 +2627,67 @@
         }
     },
     "frontend-000347": {
-        "message": "登录"
+        "message": "登入"
     },
     "frontend-000348": {
-        "message": "再次请求符号"
+        "message": "重新請求權杖"
     },
     "frontend-000349": {
-        "message": "尝试太多"
+        "message": "嘗試次數過多"
     },
     "frontend-000350": {
-        "message": "密码太短了"
+        "message": "密碼太短了"
     },
     "frontend-000351": {
-        "message": "未知错误"
+        "message": "未知錯誤"
     },
     "frontend-000352": {
-        "message": "Token 请求失败"
+        "message": "權杖請求失敗"
     },
     "frontend-000353": {
-        "message": "系统维护"
+        "message": "系統維護中"
     },
     "frontend-000354": {
-        "message": "不详"
+        "message": "未知"
     },
     "frontend-000355": {
-        "message": "系统"
+        "message": "系統"
     },
     "frontend-000356": {
-        "message": "公众查阅"
+        "message": "公開存取"
     },
     "frontend-000357": {
-        "message": "自动背景 任务"
+        "message": "自動背景工作"
     },
     "frontend-000358": {
-        "message": "服务器命令行"
+        "message": "伺服器命令列"
     },
     "frontend-000359": {
-        "message": "请更正您的输入"
+        "message": "請更正您的輸入"
     },
     "frontend-000360": {
-        "message": "显示值"
+        "message": "顯示值"
     },
     "frontend-000361": {
         "message": "取消"
     },
     "frontend-000362": {
-        "message": "还好"
+        "message": "確定"
     },
     "frontend-000363": {
-        "message": "真实"
+        "message": "是"
     },
     "frontend-000364": {
-        "message": "虚假"
+        "message": "否"
     },
     "frontend-000365": {
-        "message": "对"
+        "message": "是"
     },
     "frontend-000366": {
-        "message": "没有"
+        "message": "否"
     },
     "frontend-000367": {
-        "message": "$NAME$已经与您共享了这个密码.",
+        "message": "$NAME$已經與您共享了這個密碼.",
         "placeholders": {
             "name": {
                 "content": "$1"
@@ -2695,10 +2695,10 @@
         }
     },
     "frontend-000368": {
-        "message": "您已经达到4096个字符的最大长度"
+        "message": "已達到 4096 個字元的最大長度"
     },
     "frontend-000369": {
-        "message": "我们找不到\"$QUERY$\"的东西",
+        "message": "我們找不到\"$QUERY$\"的東西",
         "placeholders": {
             "query": {
                 "content": "$1"
@@ -2706,7 +2706,7 @@
         }
     },
     "frontend-000370": {
-        "message": "无法从手册服务器获取“ $PAGE$” 页面 .",
+        "message": "無法從手冊伺服器獲取“ $PAGE$” 頁面 .",
         "placeholders": {
             "page": {
                 "content": "$1"
@@ -2714,13 +2714,13 @@
         }
     },
     "frontend-000371": {
-        "message": "一些数据正在等待同步"
+        "message": "部分資料正在等待同步"
     },
     "backend-000380": {
-        "message": "文档"
+        "message": "文件"
     },
     "frontend-000372": {
-        "message": "你将在$TIME$秒内登出",
+        "message": "你將在$TIME$秒內登出",
         "placeholders": {
             "time": {
                 "content": "$1"
@@ -2728,55 +2728,55 @@
         }
     },
     "frontend-000373": {
-        "message": "你可能要求太多代币 请以后再试."
+        "message": "您可能請求了太多權杖，請稍後再試。"
     },
     "frontend-000374": {
-        "message": "如果您共享此密码, 端到端加密将被禁用 ."
+        "message": "如果您共享此密碼，端對端加密將被停用。"
     },
     "frontend-000375": {
-        "message": "会话符号不再有效 。 应用程序将重新装入 ."
+        "message": "工作階段權杖已失效，應用程式將重新載入。"
     },
     "frontend-000376": {
-        "message": "2018年\"今日\"发布首个密码版本. 谢谢你使用应用程序."
+        "message": "2018 年的今天，Passwords 的第一個版本正式發布。感謝您使用此應用程式。"
     },
     "frontend-Tags": {
-        "message": "标记"
+        "message": "標記"
     },
     "frontend-Folder": {
         "message": "目錄"
     },
     "frontend-Id": {
-        "message": "编号"
+        "message": "編號"
     },
     "frontend-PwdSaveHiddenMessage": {
-        "message": "將隱藏的密碼保存在非隱藏的目錄中會導致密碼無法存取。此密碼將不會顯示在任何地方。確定要繼續嗎？"
+        "message": "將隱藏的密碼儲存在非隱藏的目錄中，會導致密碼無法被存取。此密碼將不會顯示在任何地方。確定要繼續嗎？"
     },
     "frontend-PwdSaveHiddenTitle": {
-        "message": "隐藏密码吗 ?"
+        "message": "要隱藏密碼嗎？"
     },
     "frontend-EncryptionSSEv3r1": {
-        "message": "第三方服务器侧加密"
+        "message": "第三方伺服器端加密"
     },
     "frontend-WebAuthnLoginDisabled": {
-        "message": "WebAuthn 登录被禁用 。 您可以在设置中再次启用"
+        "message": "WebAuthn 登入已停用。您可以在設定中重新啟用。"
     },
     "frontend-DashboardLoginError": {
-        "message": "错误"
+        "message": "錯誤"
     },
     "frontend-DashboardNoPasswords": {
-        "message": "无密码"
+        "message": "沒有密碼"
     },
     "backend-000417": {
-        "message": "为共享事件发送邮件"
+        "message": "共享事件時傳送電子郵件"
     },
     "frontend-DashboardNoPasswordsText": {
-        "message": "你最喜欢的密码会在这里出现."
+        "message": "您的收藏密碼會顯示在這裡。"
     },
     "frontend-DashboardNoResults": {
-        "message": "无结果"
+        "message": "沒有結果"
     },
     "frontend-DashboardNoResultsText": {
-        "message": "我们找不到\"$QUERY$\"的东西",
+        "message": "我們找不到\"$QUERY$\"的東西",
         "placeholders": {
             "query": {
                 "content": "$1",
@@ -2785,19 +2785,19 @@
         }
     },
     "frontend-DashboardResultsLoading": {
-        "message": "一旦装入所有密码, 将更新结果"
+        "message": "載入所有密碼後將更新結果"
     },
     "frontend-DashboardSearchLabel": {
-        "message": "搜索所有密码"
+        "message": "搜尋所有密碼"
     },
     "backend-000377": {
-        "message": "需要的 HTTPS"
+        "message": "需要 HTTPS"
     },
     "backend-000378": {
-        "message": "重新装入此页面"
+        "message": "重新載入此頁面"
     },
     "backend-000379": {
-        "message": "论坛"
+        "message": "論壇"
     },
     "backend-000381": {
         "message": "你可以嘗試透過 HTTPS 來 $STR_1$ 此頁面。",
@@ -2808,7 +2808,7 @@
         }
     },
     "backend-000382": {
-        "message": "这个应用需要$STR_1$才能安全工作.",
+        "message": "這個應用需要$STR_1$才能安全工作.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2816,7 +2816,7 @@
         }
     },
     "backend-000383": {
-        "message": "这不是虫子。 如果你需要帮助,请访问我们的$STR_1$.",
+        "message": "這不是蟲子。 如果你需要幫助,請訪問我們的$STR_1$.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2824,10 +2824,10 @@
         }
     },
     "backend-000384": {
-        "message": "审查下面的HTTPS报告来调试这个问题."
+        "message": "請檢視下方的 HTTPS 報告以排除問題。"
     },
     "backend-000385": {
-        "message": "读取此 $STR_1$ 以配置您的服务器以使用 HTTPS .",
+        "message": "讀取此 $STR_1$ 以配置您的伺服器以使用 HTTPS .",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2835,7 +2835,7 @@
         }
     },
     "backend-000386": {
-        "message": "如果您使用任何類型的代理程式，請參閱 $STR_1$。",
+        "message": "如果您使用任何型別的代理程式，請參閱 $STR_1$。",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2843,7 +2843,7 @@
         }
     },
     "backend-000387": {
-        "message": "如果需要,请前往 $STR_1$ 获取免费的 HTTPS 证书.",
+        "message": "如果需要,請前往 $STR_1$ 獲取免費的 HTTPS 證書.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2851,10 +2851,10 @@
         }
     },
     "backend-000388": {
-        "message": "如果问题依然存在,您应该与您的管理员联系."
+        "message": "如果問題持續存在，請聯絡您的管理員。"
     },
     "backend-000389": {
-        "message": "密码会话 $STR_1$ - $STR_2$",
+        "message": "密碼會話 $STR_1$ - $STR_2$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2865,88 +2865,88 @@
         }
     },
     "backend-000390": {
-        "message": "开放文档"
+        "message": "開啟文件"
     },
     "backend-000391": {
-        "message": "永远"
+        "message": "永遠"
     },
     "backend-000392": {
-        "message": "内部数据处理"
+        "message": "內部資料處理"
     },
     "backend-000393": {
-        "message": "图像渲染"
+        "message": "圖片渲染"
     },
     "backend-000394": {
-        "message": "Imagick/ Gmagick 图像"
+        "message": "Imagick/GMagick"
     },
     "backend-000395": {
-        "message": "外部服务"
+        "message": "外部服務"
     },
     "backend-000396": {
-        "message": "密码安全检查"
+        "message": "密碼安全檢查"
     },
     "backend-000397": {
-        "message": "我被鞭打了吗? (建议)"
+        "message": "Have I Been Pwned?（建議）"
     },
     "backend-000398": {
-        "message": "本地大数据库( 25M 密码)"
+        "message": "大型本機資料庫（2500 萬組密碼）"
     },
     "backend-000399": {
-        "message": "小型本地数据库( 5M 密码)"
+        "message": "小型本機資料庫（500 萬組密碼）"
     },
     "backend-000400": {
-        "message": "本地大数据库 & Hibp ?"
+        "message": "大型本機資料庫 + HIBP ?"
     },
     "backend-000401": {
-        "message": "密码生成服务"
+        "message": "密碼生成服務"
     },
     "backend-000402": {
-        "message": "本地词典"
+        "message": "本機字典"
     },
     "backend-000403": {
-        "message": "随机字符"
+        "message": "隨機字元"
     },
     "backend-000404": {
-        "message": "watchout 4snakes.com (原始内容存档于2018-09-29)"
+        "message": "watchout4snakes.com"
     },
     "backend-000405": {
-        "message": "莱比锡公司收藏"
+        "message": "Leipzig Corpora Collection"
     },
     "backend-000406": {
-        "message": "法维康服务"
+        "message": "Favicon 服務"
     },
     "backend-000407": {
-        "message": "本地分析器"
+        "message": "本機分析器"
     },
     "backend-000408": {
-        "message": "(建议)"
+        "message": "Besticon（建議）"
     },
     "backend-000409": {
-        "message": "无"
+        "message": "無"
     },
     "backend-000410": {
-        "message": "网站预览服务"
+        "message": "網站預覽服務"
     },
     "backend-000411": {
-        "message": "网站预览 API 键"
+        "message": "網站預覽 API 金鑰"
     },
     "backend-000412": {
-        "message": "网页/PhantomJS(当地)"
+        "message": "Pageres/PhantomJS（本機）"
     },
     "backend-000413": {
-        "message": "WKHTML(当地)"
+        "message": "WKHTML（本機）"
     },
     "backend-000414": {
-        "message": "截图api.io"
+        "message": "截圖api.io"
     },
     "backend-000415": {
-        "message": "默认电子邮件设置"
+        "message": "預設電子郵件設定"
     },
     "backend-000416": {
-        "message": "为安全事件发送电子邮件"
+        "message": "安全事件時傳送電子郵件"
     },
     "backend-000455": {
-        "message": "使用 $STR_1$ 来执行背景任务可能会造成延迟. 我们建议使用克龙.",
+        "message": "使用 $STR_1$ 來執行背景任務可能會造成延遲. 我們建議使用克龍.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -2954,64 +2954,64 @@
         }
     },
     "backend-000419": {
-        "message": "从数据库中删除已删除的对象"
+        "message": "從資料庫中刪除已刪除的物件"
     },
     "backend-000420": {
-        "message": "在“ apps” 中显示晚间更新"
+        "message": "在「應用程式」中顯示每夜版更新"
     },
     "backend-000421": {
-        "message": "从不"
+        "message": "從不"
     },
     "backend-000422": {
-        "message": "马上"
+        "message": "馬上"
     },
     "backend-000423": {
-        "message": "两小时后"
+        "message": "兩小時後"
     },
     "backend-000424": {
-        "message": "过了一天"
+        "message": "一天後"
     },
     "backend-000425": {
-        "message": "两周后"
+        "message": "兩週後"
     },
     "backend-000426": {
-        "message": "一个月后"
+        "message": "一個月後"
     },
     "backend-000427": {
-        "message": "一年之后"
+        "message": "一年之後"
     },
     "backend-000428": {
-        "message": "备份设置"
+        "message": "備份設定"
     },
     "backend-000429": {
-        "message": "备份间隔"
+        "message": "備份間隔"
     },
     "backend-000430": {
-        "message": "每小时"
+        "message": "每小時"
     },
     "backend-000431": {
-        "message": "每6小时"
+        "message": "每6小時"
     },
     "backend-000432": {
-        "message": "每天都会"
+        "message": "每天"
     },
     "backend-000433": {
-        "message": "每两天"
+        "message": "每兩天"
     },
     "backend-000434": {
-        "message": "每个星期"
+        "message": "每個星期"
     },
     "backend-000435": {
-        "message": "每两周"
+        "message": "每兩週"
     },
     "backend-000436": {
-        "message": "保存的备份数量"
+        "message": "儲存的備份數量"
     },
     "backend-000437": {
-        "message": "缓冲"
+        "message": "快取"
     },
     "backend-000438": {
-        "message": "默认缓存($STR_1$文件,$STR_2$)",
+        "message": "預設快取($STR_1$檔案,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3022,7 +3022,7 @@
         }
     },
     "backend-000439": {
-        "message": "神通快取 ($STR_1$ 文件,$STR_2$)",
+        "message": "神通快取 ($STR_1$ 檔案,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3033,7 +3033,7 @@
         }
     },
     "backend-000440": {
-        "message": "法维康缓存($STR_1$文件,$STR_2$)",
+        "message": "法維康快取($STR_1$檔案,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3044,7 +3044,7 @@
         }
     },
     "backend-000441": {
-        "message": "预览缓存($STR_1$文件,$STR_2$)",
+        "message": "預覽快取($STR_1$檔案,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3055,7 +3055,7 @@
         }
     },
     "backend-000442": {
-        "message": "密码缓存($STR_1$文件,$STR_2$)",
+        "message": "密碼快取($STR_1$檔案,$STR_2$)",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3069,31 +3069,31 @@
         "message": "清除"
     },
     "backend-000444": {
-        "message": "清除此缓存"
+        "message": "清除此快取"
     },
     "backend-000445": {
-        "message": "您无法使用共享服务清除缓存"
+        "message": "您無法使用共享服務清除快取"
     },
     "backend-000446": {
-        "message": "已保存"
+        "message": "已儲存"
     },
     "backend-000447": {
         "message": "已清除"
     },
     "backend-000448": {
-        "message": "失败"
+        "message": "失敗"
     },
     "backend-000449": {
-        "message": "需要帮助"
+        "message": "需要幫助"
     },
     "backend-000450": {
-        "message": "找到一个错误"
+        "message": "發現錯誤"
     },
     "backend-000451": {
-        "message": "查找文档"
+        "message": "查詢文件"
     },
     "backend-000452": {
-        "message": "$STR_1$,$STR_2$或$STR_3$? 我们掩护你!",
+        "message": "$STR_1$,$STR_2$或$STR_3$? 我們掩護你!",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3107,7 +3107,7 @@
         }
     },
     "backend-000453": {
-        "message": "$STRING_1$ $STRING_2$不再支持.",
+        "message": "$STRING_1$ $STRING_2$不再支援.",
         "placeholders": {
             "string_1": {
                 "content": "$1"
@@ -3118,34 +3118,34 @@
         }
     },
     "backend-000454": {
-        "message": "密码需要HTTPS."
+        "message": "密碼需要HTTPS."
     },
     "backend-000456": {
-        "message": "请检查date=中的日期值 (帮助) 系统要求."
+        "message": "請檢查系統需求。"
     },
     "backend-000457": {
-        "message": "未共享密码"
+        "message": "未共享密碼"
     },
     "backend-000459": {
-        "message": "你有一个不安全的密码"
+        "message": "你有一個不安全的密碼"
     },
     "backend-000460": {
-        "message": "你有不安全的密码"
+        "message": "你有不安全的密碼"
     },
     "backend-000461": {
-        "message": "你的密码已经不安全了."
+        "message": "你的密碼已經不安全了."
     },
     "backend-000462": {
-        "message": "你的一些密码已经不安全了."
+        "message": "你的一些密碼已經不安全了."
     },
     "backend-000463": {
-        "message": "密码定期检查您的密码是否因数据破损而失密."
+        "message": "Passwords 會定期檢查您的密碼是否因資料外洩而遭到洩露。"
     },
     "backend-000464": {
-        "message": "这次安全检查发现你的密码不安全."
+        "message": "安全檢查發現您有一組密碼不安全。"
     },
     "backend-000465": {
-        "message": "这次安全检查发现您的密码有$STR_1$不安全.",
+        "message": "這次安全檢查發現您的密碼有$STR_1$不安全.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3153,49 +3153,49 @@
         }
     },
     "backend-000466": {
-        "message": "这意味着密码在互联网上公布 让你的账户处于危险之中."
+        "message": "這代表該密碼已在網路上流傳，使您的帳戶面臨風險。"
     },
     "settings-000680": {
-        "message": "永远"
+        "message": "永遠"
     },
     "backups-000144": {
-        "message": "目錄"
+        "message": "資料夾"
     },
     "backend-000418": {
-        "message": "其他设置"
+        "message": "其他設定"
     },
     "frontend-000212": {
-        "message": "创建标签"
+        "message": "建立標籤"
     },
     "backend-000467": {
-        "message": "这意味着密码在互联网上 让你的账户处于危险之中."
+        "message": "這代表這些密碼已在網路上流傳，使您的帳戶面臨風險。"
     },
     "backend-000468": {
-        "message": "因此,密码被标记为不安全,现在应该改变."
+        "message": "因此這些密碼已被標記為不安全，請立即更改。"
     },
     "backend-000469": {
-        "message": "因此,密码被标记为不安全,现在应该改变."
+        "message": "因此這些密碼已被標記為不安全，請立即更改。"
     },
     "backend-000470": {
-        "message": "您可以在密码应用程序中创建新的安全密码 ."
+        "message": "您可以在 Passwords 應用程式中建立新的安全密碼。"
     },
     "backend-000471": {
-        "message": "您可以在密码应用程序中创建新的安全密码 ."
+        "message": "您可以在 Passwords 應用程式中建立新的安全密碼。"
     },
     "backend-000472": {
-        "message": "现在更改密码"
+        "message": "現在更改密碼"
     },
     "backend-000473": {
-        "message": "现在更改密码"
+        "message": "現在更改密碼"
     },
     "backend-000474": {
-        "message": "打开密码应用程序来更改它 ."
+        "message": "開啟 Passwords 應用程式來更改。"
     },
     "backend-000475": {
-        "message": "打开密码应用程序来更改它们."
+        "message": "開啟 Passwords 應用程式來更改。"
     },
     "backend-000476": {
-        "message": "$STR_1$与您共享了密码.",
+        "message": "$STR_1$與您共享了密碼.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3203,7 +3203,7 @@
         }
     },
     "backend-000477": {
-        "message": "$STR_1$与您共享 $STR_2$密码.",
+        "message": "$STR_1$與您共享 $STR_2$密碼.",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3214,7 +3214,7 @@
         }
     },
     "backend-000478": {
-        "message": "$STRING_4$和 $STRING_3$ 与您共享 $STRING_1$ 密码.",
+        "message": "$STRING_4$和 $STRING_3$ 與您共享 $STRING_1$ 密碼.",
         "placeholders": {
             "string_4": {
                 "content": "$4"
@@ -3228,7 +3228,7 @@
         }
     },
     "backend-000479": {
-        "message": "$STRING_5$, $STRING_4$和 $STRING_3$ 与您共享 $STRING_1$ 密码.",
+        "message": "$STRING_5$, $STRING_4$和 $STRING_3$ 與您共享 $STRING_1$ 密碼.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -3245,7 +3245,7 @@
         }
     },
     "backend-000480": {
-        "message": "$STRING_5$, $STRING_4$和 $STRING_2$ 其他人与您共享了 $STRING_1$ 密码.",
+        "message": "$STRING_5$, $STRING_4$和 $STRING_2$ 其他人與您共享了 $STRING_1$ 密碼.",
         "placeholders": {
             "string_5": {
                 "content": "$5"
@@ -3262,16 +3262,16 @@
         }
     },
     "backend-000481": {
-        "message": "打开密码程序查看 ."
+        "message": "開啟 Passwords 應用程式來檢視。"
     },
     "backend-000482": {
-        "message": "打开密码程序来查看它们 ."
+        "message": "開啟 Passwords 應用程式來檢視。"
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
-        "message": "有密碼被違背了 :"
+        "message": "已洩漏密碼資料庫更新"
     },
     "backend-BreachedPasswordsDbUpdateCheckWarning": {
-        "message": "已破解的密碼數據庫無法更新: $STR_1$",
+        "message": "已破解的密碼資料庫無法更新: $STR_1$",
         "placeholders": {
             "str_1": {
                 "content": "$1"
@@ -3279,6 +3279,6 @@
         }
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
-        "message": "已破譯密碼數據庫的更新沒有報告錯誤 ."
+        "message": "已洩漏密碼資料庫更新未回報錯誤。"
     }
 }
