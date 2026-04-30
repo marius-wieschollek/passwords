@@ -13,11 +13,11 @@ namespace OCA\Passwords\Services;
 
 use Exception;
 use OC\Authentication\Token\IProvider;
-use OC\Authentication\Token\IToken;
 use OC_User;
 use OCP\Authentication\Exceptions\CredentialsUnavailableException;
 use OCP\Authentication\LoginCredentials\ICredentials;
 use OCP\Authentication\LoginCredentials\IStore;
+use OCP\Authentication\Token\IToken;
 use OCP\IConfig;
 use OCP\IRequest;
 use OCP\ISession;

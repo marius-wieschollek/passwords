@@ -12,13 +12,13 @@
 namespace OCA\Passwords\Helper\Token;
 
 use Exception;
-use OCP\Authentication\Token\IProvider;
-use OCP\Authentication\Token\IToken;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\SessionService;
-use OCP\Authentication\Token\IToken as OCPIToken;
+use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\Authentication\Token\IProvider;
+use OCP\Authentication\Token\IToken;
 use OCP\IL10N;
 use OCP\IRequest;
 use OCP\Security\ISecureRandom;
@@ -52,16 +52,17 @@ class ApiTokenHelper {
      * @param EnvironmentService   $environment
      */
     public function __construct(
-        protected IRequest $request,
-        protected IL10N $localisation,
-        protected ISecureRandom $random,
-        protected LoggingService $logger,
-        protected SessionService $session,
-        protected IProvider $tokenProvider,
+        protected IRequest             $request,
+        protected IL10N                $localisation,
+        protected ITimeFactory         $time,
+        protected ISecureRandom        $random,
+        protected LoggingService       $logger,
+        protected SessionService       $session,
+        protected IProvider            $tokenProvider,
         protected ConfigurationService $config,
-        protected EnvironmentService $environment
+        protected EnvironmentService   $environment
     ) {
-        $this->userId        = $environment->getUserId();
+        $this->userId = $environment->getUserId();
     }
 
     /**
@@ -84,18 +85,20 @@ class ApiTokenHelper {
      * @param string $name
      * @param bool   $permanent
      *
-     * @return array<int, OCPIToken|string>>
+     * @return array<int, IToken|string>>
      * @throws Exception
      */
     public function createToken(string $name, bool $permanent = false): array {
         $userLogin = $this->environment->getUserLogin();
         $token     = $this->generateRandomDeviceToken();
         $password  = $this->getUserPassword();
-        $type      = $permanent ? IToken::PERMANENT_TOKEN:IToken::TEMPORARY_TOKEN;
+        $scope     = ['filesystem' => $this->mustHaveFileSystemPermission()];
 
-        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, $type);
-        $deviceToken->setScope(['filesystem' => $this->mustHaveFileSystemPermission()]);
-        $this->tokenProvider->updateToken($deviceToken);
+        $deviceToken = $this->tokenProvider->generateToken($token, $this->userId, $userLogin, $password, $name, IToken::PERMANENT_TOKEN, scope: $scope);
+        if(!$permanent) {
+            $deviceToken->setExpires($this->session->getSessionLifetime($this->time->getTime() + 120));
+            $this->tokenProvider->updateToken($deviceToken);
+        }
 
         return [$token, $deviceToken];
     }
@@ -205,7 +208,7 @@ class ApiTokenHelper {
                 $this->localisation->t(
                     '%2$s via Impersonate %1$s - %3$s@%4$s',
                     [
-                        date('d.m.y H:i'),
+                        date('d.m.y H:i', $this->time->getTime()),
                         $this->environment->getRealUser()->getDisplayName(),
                         $this->environment->getRealUser()->getUID(),
                         $this->request->getRemoteAddress()
@@ -216,7 +219,7 @@ class ApiTokenHelper {
         return $this->localisation->t(
             'Passwords Session %s - %s@%s',
             [
-                date('d.m.y H:i'),
+                date('d.m.y H:i', $this->time->getTime()),
                 $this->environment->getUserLogin(),
                 $this->request->getRemoteAddress()
             ]

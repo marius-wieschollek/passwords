@@ -1,4 +1,9 @@
 ## [Unreleased]
+## 2026.5.0 - Feature release
+### Fixed
+- WebUI token expired in NC 33.0.3
+- File picker not working
+
 ## 2026.3.1 - Bugfix release
 ### Fixed
 - Missing code in account reset dialog

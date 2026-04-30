@@ -12,13 +12,15 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
+use OC\Authentication\Token\PublicKeyToken;
 use OCA\Passwords\Db\Session;
 use OCA\Passwords\Db\SessionMapper;
 use OCA\Passwords\Encryption\Object\SimpleEncryption;
-use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCP\AppFramework\Db\DoesNotExistException;
+use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\Authentication\Token\IProvider;
 use OCP\IRequest;
 use OCP\ISession;
 use Throwable;
@@ -81,6 +83,8 @@ class SessionService {
      * @param UserSettingsHelper $userSettings
      */
     public function __construct(
+        protected ITimeFactory       $time,
+        protected IProvider          $tokenProvider,
         protected IRequest           $request,
         protected ISession           $userSession,
         protected SessionMapper      $mapper,
@@ -225,7 +229,7 @@ class SessionService {
         if(empty($this->session->getId())) {
             $this->session = $this->mapper->insert($this->session);
         } else {
-            $this->session->setUpdated(time());
+            $this->session->setUpdated($this->time->getTime());
             $this->session = $this->mapper->update($this->session);
         }
         $this->modified = false;
@@ -233,6 +237,8 @@ class SessionService {
         if($this->environment->getLoginType() === EnvironmentService::LOGIN_SESSION || $this->environment->getLoginType() === EnvironmentService::LOGIN_PASSWORD) {
             $this->userSession->set(self::SESSION_KEY_ID, $this->session->getUuid());
             $this->userSession->set(self::SESSION_KEY_PASSPHRASE, $this->getPassphrase());
+        } else if($this->environment->getLoginType() === EnvironmentService::LOGIN_TOKEN) {
+            $this->refreshTemporaryToken();
         }
     }
 
@@ -264,7 +270,7 @@ class SessionService {
                 if($this->environment->getUserId() !== $session->getUserId() || $this->environment->getLoginType() !== $session->getLoginType()) {
                     $this->mapper->delete($session);
                     $this->logger->error(['Unauthorized session access by %s on %s', $this->environment->getUserId(), $session->getUserId()]);
-                } else if(time() > $session->getUpdated() + $this->userSettings->get('session/lifetime')) {
+                } else if($this->time->getTime() > $this->getSessionLifetime($session->getUpdated())) {
                     $this->mapper->delete($session);
                     $this->logger->info(['Cancelled expired session %s for %s', $session->getUuid(), $session->getUserId()]);
                 } else {
@@ -290,6 +296,15 @@ class SessionService {
         }
 
         $this->session = $this->create();
+    }
+
+    /**
+     * @param int $base
+     *
+     * @return int
+     */
+    public function getSessionLifetime(int $base = 0): int {
+        return $base + $this->userSettings->get('session/lifetime');
     }
 
     /**
@@ -334,8 +349,8 @@ class SessionService {
         $model->setUuid($this->uuidHelper->generateUuid());
         $model->setAuthorized(false);
         $model->setDeleted(false);
-        $model->setCreated(time());
-        $model->setUpdated(time());
+        $model->setCreated($this->time->getTime());
+        $model->setUpdated($this->time->getTime());
         $this->modified    = true;
         $this->encryptedId = null;
         $this->passphrase  = null;
@@ -383,5 +398,22 @@ class SessionService {
         }
 
         return $this->passphrase;
+    }
+
+    /**
+     * @return void
+     */
+    protected function refreshTemporaryToken(): void {
+        try {
+            $token = $this->environment->getLoginToken();
+            if($token instanceof PublicKeyToken && $token->getExpires()) {
+                $newExpires = $this->getSessionLifetime($this->time->getTime() + 120);
+                if($newExpires > $token->getExpires() + 30) {
+                    $token->setExpires($newExpires);
+                    $this->tokenProvider->updateToken($token);
+                }
+            }
+        } catch(Exception $e) {
+        }
     }
 }
