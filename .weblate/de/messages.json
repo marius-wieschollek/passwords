@@ -1451,7 +1451,7 @@
         "message": "Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn du das Passwort teilst."
     },
     "frontend-000375": {
-        "message": "Dast Sitzungs-Token ist nicht mehr valide. Die App wird nun neu geladen."
+        "message": "Das Sitzungs-Token ist nicht mehr valide. Die App wird nun neu geladen."
     },
     "frontend-000376": {
         "message": "Heute im Jahr 2018 wurde die erste Version von Passwords veröffentlicht. Danke, dass du die App benutzt."
