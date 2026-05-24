@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- Nextcloud 34 support
+
 ## 2026.5.0 - Feature release
 ### Fixed
 - WebUI token expired in NC 33.0.3

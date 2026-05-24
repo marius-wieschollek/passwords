@@ -43,7 +43,7 @@ class AddCSPListener implements IEventListener {
         $csp = new EmptyContentSecurityPolicy();
         $csp->addAllowedScriptDomain($this->request->getServerHost());
         $csp->addAllowedConnectDomain('data:');
-        $csp->allowEvalScript();
+        $csp->allowEvalWasm();
         $event->addPolicy($csp);
     }
 }
