@@ -46,16 +46,6 @@ use Throwable;
 class NightlyAppFetcher extends Fetcher {
 
     /**
-     * @var LoggerInterface
-     */
-    protected LoggerInterface $psrLogger;
-
-    /**
-     * @var CompareVersion
-     */
-    protected CompareVersion $compareVersion;
-
-    /**
      * @var bool
      */
     protected bool $ignoreMaxVersion;
@@ -74,13 +64,13 @@ class NightlyAppFetcher extends Fetcher {
      * @param LoggerInterface $logger
      */
     public function __construct(
-        Factory         $appDataFactory,
-        IClientService  $clientService,
-        ITimeFactory    $timeFactory,
-        IConfig         $config,
-        CompareVersion  $compareVersion,
-        LoggerInterface $logger,
-        IRegistry       $registry
+        Factory                  $appDataFactory,
+        IClientService           $clientService,
+        ITimeFactory             $timeFactory,
+        IConfig                  $config,
+        protected CompareVersion $compareVersion,
+        LoggerInterface          $logger,
+        IRegistry                $registry
     ) {
         parent::__construct(
             $appDataFactory,
@@ -95,8 +85,6 @@ class NightlyAppFetcher extends Fetcher {
         $this->fileName         = 'apps_nightly.json';
         $this->endpointName     = 'apps.json';
         $this->ignoreMaxVersion = true;
-        $this->psrLogger        = $logger;
-        $this->compareVersion   = $compareVersion;
     }
 
     /**
@@ -106,7 +94,7 @@ class NightlyAppFetcher extends Fetcher {
      *
      * @return array
      */
-    public function get($allowUnstable = false) {
+    public function get($allowUnstable = false): array {
         $this->dbUpdated = false;
 
         $eTag   = $this->prepareAppDbForUpdate();
@@ -148,8 +136,8 @@ class NightlyAppFetcher extends Fetcher {
      * @return array
      * @throws Exception
      */
-    protected function fetch($ETag, $content, $allowUnstable = false) {
-        $json = parent::fetch($ETag, $content);
+    protected function fetch($ETag, $content, $allowUnstable = false): array {
+        $json = parent::fetch($ETag, $content, $allowUnstable);
 
         if(!isset($json['data'])) return $json;
 
@@ -310,6 +298,6 @@ class NightlyAppFetcher extends Fetcher {
     protected function logException(Throwable $exception, array $context = []): void {
         $context['app']       = 'nightlyAppstoreFetcher';
         $context['exception'] = $exception;
-        $this->psrLogger->emergency($exception->getMessage(), $context);
+        $this->logger->emergency($exception->getMessage(), $context);
     }
 }
