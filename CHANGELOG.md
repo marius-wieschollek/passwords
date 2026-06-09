@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2026.6.0 - Feature release
 ### Added
 - Nextcloud 34 support
 
