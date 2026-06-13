@@ -14,6 +14,7 @@ namespace OCA\Passwords\Services\Traits;
 trait ValidatesDomainTrait {
 
     protected function validateDomain(string $domain): string {
+        if(str_contains($domain, ':')) $domain = substr($domain, 0, strpos($domain, ':'));
         if(filter_var($domain, FILTER_VALIDATE_URL)) $domain = parse_url($domain, PHP_URL_HOST);
         if(filter_var($domain, FILTER_VALIDATE_DOMAIN)) $domain = filter_var($domain, FILTER_VALIDATE_DOMAIN);
         if(filter_var($domain, FILTER_VALIDATE_IP)) $domain = filter_var($domain, FILTER_VALIDATE_IP);

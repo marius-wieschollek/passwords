@@ -23,6 +23,7 @@ export default new class FaviconService {
      * @return {String}
      */
     get(domain, size = 32) {
+        console.trace('favicon', domain);
         if(this._cache.hasOwnProperty(`${domain}_${size}`)) {
             return this._cache[`${domain}_${size}`];
         }
@@ -37,6 +38,7 @@ export default new class FaviconService {
      * @return {Promise<String>}
      */
     async fetch(domain, size = 32) {
+        console.trace('favicon', domain);
         if(this._cache.hasOwnProperty(`${domain}_${size}`)) {
             return this._cache[`${domain}_${size}`];
         }
