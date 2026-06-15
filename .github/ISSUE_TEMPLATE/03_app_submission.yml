@@ -77,3 +77,11 @@ body:
         Information how we can test your app
     validations:
       required: true
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Add additional information can be provided here
+    validations:
+      required: false

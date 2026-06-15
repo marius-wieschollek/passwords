@@ -99,3 +99,11 @@ body:
         [Check out our guide to get the logs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
         > NOTE: This will be automatically formatted into code for better readability.
       render: shell
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional Context
+      description: |
+        Add additional information can be provided here
+    validations:
+      required: false
