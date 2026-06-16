@@ -110,7 +110,16 @@ class ShareUserListHelper {
     public function mapReceiverToUid(string $receiver): string {
         $receiver = trim($receiver);
         if($this->userManager->userExists($receiver)) return $receiver;
-
+        
+        //search by email
+        $usersByEmail = $this->userManager->getByEmail($receiver);
+        if(count($usersByEmail) === 1) {
+            $user = $usersByEmail[0];
+            if($user->isEnabled() && $user->getUID() !== $this->userId) {
+                return $user->getUID();
+            }
+        }
+        
         $partners = $this->getShareUsers($receiver);
         if(count($partners) === 1) return array_keys($partners)[0];
 
