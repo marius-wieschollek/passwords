@@ -79,9 +79,10 @@ class UpgradeRequiredNotification extends AbstractNotification {
         $isPhpOutdated = $phpVersion < SystemRequirements::PHP_NOTIFICATION_ID;
 
         if(!$isNcOutdated && !$isPhpOutdated || !isset($parameters['appVersion'])) {
+            $message = $localisation->t('This notification can be deleted.');
             return $notification
-                ->setParsedSubject($localisation->t('This notification can be deleted.'))
-                ->setParsedMessage('');
+                ->setParsedSubject($message)
+                ->setParsedMessage($message);
         }
 
         $phpVersionString = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;

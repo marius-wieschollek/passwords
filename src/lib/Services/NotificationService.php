@@ -12,7 +12,6 @@
 namespace OCA\Passwords\Services;
 
 use Exception;
-use InvalidArgumentException;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Notification\AbstractNotification;
 use OCA\Passwords\Notification\BackupFailedNotification;
