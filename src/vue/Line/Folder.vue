@@ -5,6 +5,9 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
+        <label class="select-item" @click.stop>
+            <input type="checkbox" :checked="isSelected" @change="toggleSelected">
+        </label>
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="folder.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
@@ -41,6 +44,7 @@
     import DragManager from '@js/Manager/DragManager';
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
+    import SelectionManager from "@js/Manager/SelectionManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "vue-material-design-icons/Star.vue";
     import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
@@ -72,9 +76,13 @@
             dateTitle() {
                 return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.folder.edited)});
             },
+            isSelected() {
+                return SelectionManager.isFolderSelected(this.folder);
+            },
             className() {
                 let classNames = 'row folder';
 
+                if(this.isSelected) classNames += ' selected';
                 if(SearchManager.status.active) {
                     classNames += SearchManager.status.ids.indexOf(this.folder.id) !== -1 ? ' search-visible':' search-hidden';
                 }
@@ -92,6 +100,9 @@
                 this.folder.favorite = !this.folder.favorite;
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });
+            },
+            toggleSelected() {
+                SelectionManager.toggleFolder(this.folder);
             },
             toggleMenu(state = null) {
                 if(state) {

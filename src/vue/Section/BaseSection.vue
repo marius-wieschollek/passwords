@@ -45,6 +45,7 @@
     import FooterLine from '@vue/Line/Footer';
     import PasswordLine from '@vue/Line/Password';
     import SearchManager from '@js/Manager/SearchManager';
+    import SelectionManager from '@js/Manager/SelectionManager';
     import UtilityService from "@js/Services/UtilityService";
     import SettingsService from '@js/Services/SettingsService';
     import LocalisationService from "@js/Services/LocalisationService";
@@ -73,7 +74,7 @@
                 ui       : {
                     showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
-                search   : SearchManager.status
+                search   : SearchManager.status,
             };
         },
 
@@ -86,6 +87,7 @@
         beforeDestroy() {
             Events.off('data.changed', this.refreshView);
             SearchManager.clearDatabase();
+            SelectionManager.clear();
         },
 
         computed: {
@@ -172,14 +174,17 @@
             passwords(passwords) {
                 let db = {passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
+                SelectionManager.setVisible(this.folders, this.tags, passwords);
             },
             tags(tags) {
                 let db = {passwords: this.passwords, folders: this.folders, tags};
                 SearchManager.setDatabase(db);
+                SelectionManager.setVisible(this.folders, tags, this.passwords);
             },
             folders(folders) {
                 let db = {passwords: this.passwords, folders, tags: this.tags};
                 SearchManager.setDatabase(db);
+                SelectionManager.setVisible(folders, this.tags, this.passwords);
             }
         }
     };
