@@ -1,4 +1,9 @@
 ## [Unreleased]
+## 2026.7.0 - Feature release
+### Fixed
+- Exception in notification
+- Issues with port numbers in favicon requests
+
 ## 2026.6.0 - Feature release
 ### Added
 - Nextcloud 34 support
