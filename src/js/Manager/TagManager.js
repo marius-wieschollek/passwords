@@ -1,3 +1,4 @@
+import Vue from 'vue';
 import API from '@js/Helper/api';
 import Events from '@js/Classes/Events';
 import RandomColorService from '@js/Services/RandomColorService';
@@ -204,6 +205,21 @@ class TagManager {
             } else {
                 reject(tag);
             }
+        });
+    }
+
+    /**
+     * Opens a dialog to bulk add/remove tags on the given passwords.
+     *
+     * @param passwords
+     * @returns {Promise}
+     */
+    manageTags(passwords) {
+        return new Promise(async (resolve) => {
+            let ManageTagsDialog = await import(/* webpackChunkName: "ManageTags" */ '@vue/Dialog/ManageTags.vue'),
+                Dialog           = Vue.extend(ManageTagsDialog.default);
+
+            new Dialog({propsData: {passwords, resolve}}).$mount(UtilityService.popupContainer());
         });
     }
 

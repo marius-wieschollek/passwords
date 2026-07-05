@@ -450,6 +450,36 @@
                 flex-shrink : 0;
                 cursor      : pointer;
                 text-align  : center;
+
+                input[type="checkbox"] {
+                    appearance         : none;
+                    -webkit-appearance : none;
+                    width              : 20px;
+                    height             : 20px;
+                    margin             : 0;
+                    border             : 2px solid var(--color-primary-element);
+                    border-radius      : 4px;
+                    background-color   : transparent;
+                    vertical-align     : middle;
+                    cursor             : pointer;
+                    position           : relative;
+
+                    &:checked {
+                        background-color : var(--color-primary-element);
+
+                        &::after {
+                            content      : '';
+                            position     : absolute;
+                            left         : 5px;
+                            top          : 1px;
+                            width        : 5px;
+                            height       : 10px;
+                            border       : solid var(--color-primary-element-text);
+                            border-width : 0 2px 2px 0;
+                            transform    : rotate(45deg);
+                        }
+                    }
+                }
             }
 
             .favorite {

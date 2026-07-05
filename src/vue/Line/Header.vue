@@ -3,34 +3,69 @@
         <label class="select-all" @click.stop title="Select All">
             <input type="checkbox" :checked="allSelected" @change="toggleAll">
         </label>
-        <translate class="title" :class="titleClass" say="Name" @click="updateSorting('label')" title="Sort by name"/>
-        <translate class="date" :class="dateClass" say="Modified" @click="updateSorting('edited')" title="Sort by modified date"/>
-        <dropdown-menu class="bulk-actions" v-if="hasSelection">
-            <ul slot="items">
-                <li v-if="canMove">
-                    <translate tag="a" href="#" @click.prevent="moveSelection" icon="external-link" say="Move"/>
-                </li>
-                <li>
-                    <translate tag="a" href="#" @click.prevent="deleteSelection" icon="trash" say="Delete"/>
-                </li>
-            </ul>
-        </dropdown-menu>
+        <div class="selection-toolbar" v-if="hasSelection">
+            <span class="selection-count">{{ selectionCountLabel }}</span>
+            <nc-button type="tertiary" @click="favoriteSelection" v-if="canFavorite">
+                <template #icon>
+                    <star-icon v-if="allFavorites"/>
+                    <star-outline-icon v-else/>
+                </template>
+                {{ allFavorites ? t('Remove from favorites') : t('Add to favorites') }}
+            </nc-button>
+            <nc-button type="tertiary" @click="manageTagsSelection" v-if="canManageTags">
+                <template #icon>
+                    <tag-icon/>
+                </template>
+                {{ t('Manage tags') }}
+            </nc-button>
+            <nc-button type="tertiary" @click="moveSelection" v-if="canMove">
+                <template #icon>
+                    <folder-move-icon/>
+                </template>
+                {{ t('Move') }}
+            </nc-button>
+            <nc-actions class="selection-more" :force-menu="true">
+                <nc-action-button @click="deleteSelection" :close-after-click="true">
+                    <template #icon>
+                        <trash-can-icon/>
+                    </template>
+                    {{ t('Delete') }}
+                </nc-action-button>
+            </nc-actions>
+        </div>
+        <template v-else>
+            <translate class="title" :class="titleClass" say="Name" @click="updateSorting('label')" title="Sort by name"/>
+            <translate class="date" :class="dateClass" say="Modified" @click="updateSorting('edited')" title="Sort by modified date"/>
+        </template>
     </div>
 </template>
 
 <script>
     import Translate from "@vue/Components/Translate";
-    import DropdownMenu from "@vc/DropdownMenu";
     import SelectionManager from "@js/Manager/SelectionManager";
     import FolderManager from "@js/Manager/FolderManager";
     import TagManager from "@js/Manager/TagManager";
     import PasswordManager from "@js/Manager/PasswordManager";
     import MessageService from "@js/Services/MessageService";
+    import NcButton from "@nc/NcButton.js";
+    import StarIcon from "@icon/Star";
+    import StarOutlineIcon from "@icon/StarOutline";
+    import TagIcon from "@icon/Tag";
+    import FolderMoveIcon from "@icon/FolderMove";
+    import TrashCanIcon from "@icon/TrashCan";
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
             Translate,
-            DropdownMenu
+            NcButton,
+            StarIcon,
+            StarOutlineIcon,
+            TagIcon,
+            FolderMoveIcon,
+            TrashCanIcon,
+            'nc-actions'      : () => import(/* webpackChunkName: "NcActions" */ '@nc/NcActions.js'),
+            'nc-action-button': () => import(/* webpackChunkName: "NcActionButton" */ '@nc/NcActionButton.js')
         },
 
         props: {
@@ -55,8 +90,20 @@
             hasSelection() {
                 return SelectionManager.active;
             },
+            selectionCountLabel() {
+                return LocalisationService.translate('{count} selected', {count: SelectionManager.count});
+            },
             canMove() {
                 return SelectionManager.folders.length !== 0 || SelectionManager.passwords.length !== 0;
+            },
+            canFavorite() {
+                return SelectionManager.passwords.length !== 0;
+            },
+            canManageTags() {
+                return SelectionManager.passwords.length !== 0;
+            },
+            allFavorites() {
+                return SelectionManager.passwords.every((password) => password.favorite === true);
             }
         },
 
@@ -92,11 +139,11 @@
                     .catch(() => {});
             },
             async moveSelection() {
-                let target_folder = await FolderManager.selectFolder(); 
-                let target_folder_id = target_folder.id
+                let target_folder = await FolderManager.selectFolder(),
+                    target_folder_id = target_folder.id;
 
                 for(let folder of SelectionManager.folders) {
-                    if(folder.id === target) continue;
+                    if(folder.id === target_folder_id || folder.parent === target_folder_id) continue;
                     await FolderManager.moveFolder(folder, target_folder_id);
                 }
                 for(let password of SelectionManager.passwords) {
@@ -104,6 +151,18 @@
                 }
 
                 SelectionManager.clear();
+            },
+            async favoriteSelection() {
+                let makeFavorite = !this.allFavorites;
+
+                for(let password of SelectionManager.passwords) {
+                    if(password.favorite === makeFavorite) continue;
+                    password.favorite = makeFavorite;
+                    await PasswordManager.updatePassword(password);
+                }
+            },
+            manageTagsSelection() {
+                TagManager.manageTags(SelectionManager.passwords);
             }
         }
     };
@@ -127,6 +186,36 @@
                     cursor       : pointer;
                     line-height  : 0;
                     padding-left : 10px;
+
+                    input[type="checkbox"] {
+                        appearance         : none;
+                        -webkit-appearance : none;
+                        width              : 40px;
+                        height             : 40px;
+                        margin             : 0;
+                        border             : 4px solid var(--color-primary-element);
+                        border-radius      : 8px;
+                        background-color   : transparent;
+                        vertical-align     : middle;
+                        cursor             : pointer;
+                        position           : relative;
+
+                        &:checked {
+                            background-color : var(--color-primary-element);
+
+                            &::after {
+                                content      : '';
+                                position     : absolute;
+                                left         : 5px;
+                                top          : 1px;
+                                width        : 5px;
+                                height       : 10px;
+                                border       : solid var(--color-primary-element-text);
+                                border-width : 0 2px 2px 0;
+                                transform    : rotate(45deg);
+                            }
+                        }
+                    }
                 }
 
                 .title {
@@ -140,33 +229,24 @@
                     min-width : 85px;
                 }
 
-                .bulk-actions {
-                    margin-right : 10px;
+                .selection-toolbar {
+                    display      : flex;
+                    align-items  : center;
+                    flex-grow    : 1;
+                    gap          : .5rem;
+                    padding-right: 10px;
+                    font-size    : 0.875rem;
 
-                    .popovermenu {
-                        background-color : var(--color-main-background);
-                        border            : 1px solid var(--color-border);
-                        box-shadow        : 0 1px 5px var(--color-box-shadow);
-                        border-radius     : var(--border-radius);
-                        top               : auto;
+                    .selection-count {
+                        font-weight  : bold;
+                        font-size    : 0.875rem;
+                        color        : var(--color-main-text);
+                        margin-right : .5rem;
+                        white-space  : nowrap;
+                    }
 
-                        li {
-                            font-size   : 0.9rem;
-                            line-height : 2.5rem;
-                            white-space : nowrap;
-                            cursor      : pointer;
-                            padding     : 0 .75rem;
-
-                            a {
-                                display     : flex;
-                                align-items : center;
-                                color       : var(--color-main-text);
-                            }
-
-                            &:hover {
-                                background-color : var(--color-background-hover);
-                            }
-                        }
+                    .selection-more {
+                        margin-left : auto;
                     }
                 }
 
