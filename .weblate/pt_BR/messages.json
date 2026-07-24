@@ -3447,5 +3447,8 @@
     },
     "frontend-BatchActionRemoveFavorites": {
         "message": "Remover dos favoritos"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Restaurar Itens"
     }
 }
