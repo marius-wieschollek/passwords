@@ -3444,5 +3444,8 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Remover dos favoritos"
     }
 }
