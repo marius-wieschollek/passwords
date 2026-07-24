@@ -3444,5 +3444,11 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Sık kullanılanlardan kaldır"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Öğeleri Geri Yükle"
     }
 }
