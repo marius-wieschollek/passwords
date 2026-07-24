@@ -26,10 +26,10 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import HeaderLine from '@vue/Line/Header';
-    import FooterLine from '@vue/Line/Footer';
-    import PasswordLine from '@vue/Line/Password';
-    import SecurityLine from '@vue/Line/Security';
+    import HeaderLine from '@vue/Components/ContentList/Item/Header';
+    import FooterLine from '@vue/Components/ContentList/Item/Footer';
+    import PasswordLine from '@vue/Components/ContentList/Item/Password';
+    import SecurityLine from '@vue/Components/ContentList/Item/Security';
     import BaseSection from '@vue/Section/BaseSection';
     import Application from '@js/Init/Application';
     import UtilityService from "@js/Services/UtilityService";

@@ -43,10 +43,10 @@
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import FolderLine from '@vue/Line/Folder';
-    import HeaderLine from '@vue/Line/Header';
-    import FooterLine from '@vue/Line/Footer';
-    import PasswordLine from '@vue/Line/Password';
+    import FolderLine from '@vue/Components/ContentList/Item/Folder';
+    import HeaderLine from '@vue/Components/ContentList/Item/Header';
+    import FooterLine from '@vue/Components/ContentList/Item/Footer';
+    import PasswordLine from '@vue/Components/ContentList/Item/Password';
     import TagManager from '@js/Manager/TagManager';
     import BaseSection from '@vue/Section/BaseSection';
     import FolderManager from '@js/Manager/FolderManager';
@@ -66,7 +66,7 @@
             FooterLine,
             PasswordLine,
             'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
-            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Line/Tag'),
+            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag'),
         },
 
         computed: {

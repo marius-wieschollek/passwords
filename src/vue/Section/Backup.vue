@@ -26,7 +26,7 @@
     import Import from '@vc/Import';
     import Translate from '@vc/Translate';
     import Breadcrumb from '@vc/Breadcrumb';
-    import GenericLine from '@vue/Line/Generic';
+    import GenericLine from '@vue/Components/ContentList/Item/Generic';
     import LocalisationService from "@js/Services/LocalisationService";
 
     export default {

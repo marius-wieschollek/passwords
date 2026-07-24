@@ -1,5 +1,5 @@
 <template>
-    <img :src="src" :title="title" :width="size" :height="size" alt=""/>
+    <img :src="src" :title="title" :width="size" :height="size" loading="lazy" alt=""/>
 </template>
 
 <script>
@@ -9,7 +9,7 @@
     export default {
         props: {
             domain: String,
-            size : {
+            size  : {
                 type   : Number,
                 default: 32
             },

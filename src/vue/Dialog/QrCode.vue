@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <nc-modal :container="container" size="small" :name="t('PasswordActionChangePwPage')" v-on:close="close">
+    <nc-modal :container="container" size="small" :name="t('QR Code')" v-on:close="close">
         <div class="password-share-qrcode">
             <select id="password-details-qrcode" v-model="property">
                 <translate tag="option" value="username" v-if="password.username" say="Username"/>

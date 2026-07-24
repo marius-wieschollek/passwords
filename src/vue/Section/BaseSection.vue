@@ -19,7 +19,7 @@
                     :folder="getBreadcrumb.folder"
                     :tag="getBreadcrumb.tag"
                     :items="getBreadcrumb.items"/>
-            <div class="item-list">
+            <div class="item-list" :class="{'context-menu': contextMenu}" :style="style">
                 <header-line :field="sorting.field"
                              :ascending="sorting.ascending"
                              v-on:updateSorting="updateSorting($event)"
@@ -40,15 +40,16 @@
 <script>
     import Breadcrumb from '@vc/Breadcrumb';
     import Events from '@js/Classes/Events';
-    import FolderLine from '@vue/Line/Folder';
-    import HeaderLine from '@vue/Line/Header';
-    import FooterLine from '@vue/Line/Footer';
-    import PasswordLine from '@vue/Line/Password';
+    import FolderLine from '@vue/Components/ContentList/Item/Folder';
+    import HeaderLine from '@vue/Components/ContentList/Item/Header';
+    import FooterLine from '@vue/Components/ContentList/Item/Footer';
+    import PasswordLine from '@vue/Components/ContentList/Item/Password';
     import SearchManager from '@js/Manager/SearchManager';
     import BatchActionManager from '@js/Manager/BatchActionManager';
     import UtilityService from "@js/Services/UtilityService";
     import SettingsService from '@js/Services/SettingsService';
     import LocalisationService from "@js/Services/LocalisationService";
+    import {subscribe, unsubscribe} from "@nextcloud/event-bus";
 
     export default {
         components: {
@@ -57,24 +58,26 @@
             HeaderLine,
             FooterLine,
             PasswordLine,
-            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
-            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Line/Tag'),
+            'empty'   : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag')
         },
 
         data() {
             return {
-                passwords: [],
-                folders  : [],
-                tags     : [],
-                loading  : true,
-                sorting  : {
+                passwords  : [],
+                folders    : [],
+                tags       : [],
+                loading    : true,
+                style      : '',
+                contextMenu: false,
+                sorting    : {
                     field    : SettingsService.get('client.ui.sorting.field', 'label'),
                     ascending: SettingsService.get('client.ui.sorting.ascending', true)
                 },
-                ui       : {
+                ui         : {
                     showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
-                search   : SearchManager.status,
+                search     : SearchManager.status
             };
         },
 
@@ -82,12 +85,16 @@
             this.refreshView();
             Events.on('data.changed', this.refreshView);
             SearchManager.clearDatabase();
+            subscribe('passwords:contextmenu:opened', this.positionContextMenu);
+            subscribe('passwords:contextmenu:closed', this.closeContextMenu);
         },
 
         beforeDestroy() {
             Events.off('data.changed', this.refreshView);
             SearchManager.clearDatabase();
             BatchActionManager.clear();
+            unsubscribe('passwords:contextmenu:opened', this.positionContextMenu);
+            unsubscribe('passwords:contextmenu:closed', this.closeContextMenu);
         },
 
         computed: {
@@ -168,6 +175,14 @@
                     'client.ui.password.field.sorting'):this.sorting.field;
                 if(sortingField === 'byTitle') sortingField = SettingsService.get('client.ui.password.field.title');
                 return sortingField;
+            },
+            positionContextMenu(event) {
+                this.contextMenu = true;
+                this.style = `--mouse-pos-x:${Math.max(300, event.pos.x - 125)}px;--mouse-pos-y:${Math.max(0, event.pos.y - 30)}px`;
+            },
+            closeContextMenu() {
+                this.contextMenu = false;
+                this.style = '';
             }
         },
         watch  : {
@@ -197,5 +212,11 @@
     overflow-x                 : initial;
     border-top-right-radius    : var(--body-container-radius);
     border-bottom-right-radius : var(--body-container-radius);
+
+    .item-list.context-menu {
+        .v-popper__popper {
+            transform : translate3d(var(--mouse-pos-x), var(--mouse-pos-y), 0px) !important;
+        }
+    }
 }
 </style>

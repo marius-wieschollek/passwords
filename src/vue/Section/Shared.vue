@@ -39,10 +39,10 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import HeaderLine from '@vue/Line/Header';
-    import FooterLine from '@vue/Line/Footer';
-    import GenericLine from '@vue/Line/Generic';
-    import PasswordLine from '@vue/Line/Password';
+    import HeaderLine from '@vue/Components/ContentList/Item/Header';
+    import FooterLine from '@vue/Components/ContentList/Item/Footer';
+    import GenericLine from '@vue/Components/ContentList/Item/Generic';
+    import PasswordLine from '@vue/Components/ContentList/Item/Password';
     import BaseSection from '@vue/Section/BaseSection';
     import Application from '@js/Init/Application';
     import UtilityService from "@js/Services/UtilityService";

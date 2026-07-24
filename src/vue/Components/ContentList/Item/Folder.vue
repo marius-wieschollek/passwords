@@ -1,3 +1,13 @@
+<!--
+  - @copyright 2026 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <div :class="className"
          @click="openAction($event)"
@@ -43,7 +53,6 @@
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
     import BatchActionManager from "@js/Manager/BatchActionManager";
-    import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "vue-material-design-icons/Star.vue";
     import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
     import LocalisationService from "@js/Services/LocalisationService";
@@ -93,10 +102,6 @@
             batchActionActive() {
                 return BatchActionManager.isItemProcessed(this.folder);
             }
-        },
-
-        mounted() {
-            ContextMenuService.register(this.folder, this.$el);
         },
 
         methods: {
@@ -153,9 +158,6 @@
         },
 
         watch: {
-            folder(value) {
-                ContextMenuService.register(value, this.$el);
-            },
             isSelected(value) {
                 if(this.batchActionSelected !== value) {
                     BatchActionManager.toggleFolder(this.folder, value);

@@ -1,3 +1,13 @@
+<!--
+  - @copyright 2026 Passwords App
+  -
+  - @author Marius David Wieschollek
+  - @license AGPL-3.0
+  -
+  - This file is part of the Passwords App
+  - created by Marius David Wieschollek.
+  -->
+
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
         <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive"/>
@@ -34,7 +44,6 @@
     import TagManager from '@js/Manager/TagManager';
     import SearchManager from "@js/Manager/SearchManager";
     import BatchActionManager from "@js/Manager/BatchActionManager";
-    import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
     import LocalisationService from "@js/Services/LocalisationService";
@@ -86,10 +95,6 @@
             }
         },
 
-        mounted() {
-            ContextMenuService.register(this.tag, this.$el);
-        },
-
         methods: {
             favoriteAction() {
                 this.tag.favorite = !this.tag.favorite;
@@ -128,9 +133,6 @@
         },
 
         watch: {
-            tag(value) {
-                ContextMenuService.register(value, this.$el);
-            },
             isSelected(value) {
                 if(this.batchActionSelected !== value) {
                     BatchActionManager.toggleTag(this.tag, value);
