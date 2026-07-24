@@ -3370,5 +3370,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "ولم يُبلغ عن حدوث أخطاء في تحديث قاعدة بيانات كلمات السر المنتهكة."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ selected",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "إزالة من المفضّلات"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "إضافة إلى المفضّلات"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Manage Tags"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "تحذف البنود"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "هل تريد نقل الأشياء إلى القمامة؟?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ أصناف نقلت إلى نفايات",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "تحذف البنود"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "البنود الأساسية"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ أصناف مستعادة من القمامة",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ مفضلات مضافة",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ مفضّلات أزيلت",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ أصناف انتقلت إلى \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
