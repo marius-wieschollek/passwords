@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Aktualizacja bazy haseł nie zgłosiła błędów."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ wybrany",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Usuń z ulubionych"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Dodaj do ulubionych"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Zarządzanie tagami"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Usuń elementy"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Chcesz przenieść przedmioty do kosza?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ pozycje przeniesione do kosza",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Usuń elementy"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Przywróć pozycje"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ przedmioty odzyskane ze śmieci",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Dodano ulubione",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Ulubione usunięte",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ pozycje przeniesione do \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
