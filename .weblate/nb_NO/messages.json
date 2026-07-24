@@ -3454,5 +3454,8 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Gjenopprett elementer"
     }
 }
