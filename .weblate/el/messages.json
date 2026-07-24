@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheck": {
         "message": "Ενημέρωση βάσης δεδομένων παραβάσεων κωδικών πρόσβασης"
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ επιλεγμένο",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Αφαίρεση από τα αγαπημένα"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Προσθήκη στα αγαπημένα"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Διαχείριση ετικετών"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Διαγραφή αντικειμένων"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Θέλετε να μετακινήσετε αντικείμενα $TOTAL$ στα σκουπίδια?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "Τα αντικείμενα μετακινήθηκαν στα σκουπίδια",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Διαγραφή αντικειμένων"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Αποκατάσταση αντικειμένων"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "Αποκατάσταση αντικειμένων από σκουπίδια",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Προστίθενται τα αγαπημένα",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "Τα αγαπημένα αφαιρέθηκαν",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ στοιχεία που μετακινήθηκαν στο \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
