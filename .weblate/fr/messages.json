@@ -3444,5 +3444,11 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Retirer des favoris"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Restaure les éléments"
     }
 }
