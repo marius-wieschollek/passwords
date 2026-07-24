@@ -3447,5 +3447,8 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Recupera oggetti"
     }
 }
