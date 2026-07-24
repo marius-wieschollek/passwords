@@ -3378,5 +3378,83 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "A actualización da base de datos de contrasinais violados non informou de erros."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ seleccionado",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Engadir aos favoritos"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Gestionar tags"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Eliminar elementos"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "¿Queres mover os obxectos X20X ao lixo?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ Os obxectos móvense ao lixo",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Eliminar elementos"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ Artigos restaurados de lixo",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Favoritos",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favoritos",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ → Páxinas que ligan con \"X24X\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
