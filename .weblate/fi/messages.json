@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Rikottujen salasanojen tietokannan päivitys ei ole ilmoittanut virheitä."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ valittu",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Poista suosikeista"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Lisää suosikkeihin"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Hallitse tunnisteita"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Poista kohdat"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Haluatko siirtää $TOTAL$ kohteita roskiin?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ kohteita siirretty roskakoriin",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Poista kohdat"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Palauta kohteet"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ kohteita palautettu roskista",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ lisätyt suosikit",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Suosikit poistettu",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ kohteita siirretty \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
