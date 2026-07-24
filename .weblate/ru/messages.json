@@ -3366,5 +3366,86 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Обновление базы данных взломанных паролей не выявило ошибок."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ Выбранный",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Удалить из любимых"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Добавить в избранное"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Управлять тегами"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Исключить пункты"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Вы хотите переместить $TOTAL$ предметы в мусор?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ Вещи перенесли в мусор",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Исключить пункты"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ предметы, восстановленные из мусора",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Добавлены фавориты",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Любимые удалены",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ Элементы перешли на \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
