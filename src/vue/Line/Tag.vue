@@ -1,5 +1,8 @@
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
+        <label class="select-item" @click.stop>
+            <input type="checkbox" :checked="isSelected" @change="toggleSelected">
+        </label>
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
@@ -32,6 +35,7 @@
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
     import SearchManager from "@js/Manager/SearchManager";
+    import SelectionManager from "@js/Manager/SelectionManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
@@ -63,9 +67,13 @@
             dateTitle() {
                 return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.tag.edited)});
             },
+            isSelected() {
+                return SelectionManager.isTagSelected(this.tag);
+            },
             className() {
                 let classNames = 'row tag';
 
+                if(this.isSelected) classNames += ' selected';
                 if(SearchManager.status.active) {
                     classNames += SearchManager.status.ids.indexOf(this.tag.id) !== -1 ? ' search-visible':' search-hidden';
                 }
@@ -83,6 +91,9 @@
                 this.tag.favorite = !this.tag.favorite;
                 TagManager.updateTag(this.tag)
                           .catch(() => { this.tag.favorite = !this.tag.favorite; });
+            },
+            toggleSelected() {
+                SelectionManager.toggleTag(this.tag);
             },
             toggleMenu(state = null) {
                 if(state) {

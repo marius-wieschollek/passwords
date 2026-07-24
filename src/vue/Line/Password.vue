@@ -6,6 +6,9 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
+        <label class="select-item" @click.stop>
+            <input type="checkbox" :checked="isSelected" @change="toggleSelected">
+        </label>
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="password.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <favicon class="favicon" :domain="password.website" :title="getTitle" v-if="isVisible"/>
@@ -113,6 +116,7 @@
     import SettingsService from '@js/Services/SettingsService';
     import Favicon from "@vc/Favicon";
     import SearchManager from "@js/Manager/SearchManager";
+    import SelectionManager from "@js/Manager/SelectionManager";
     import ContextMenuService from "@js/Services/ContextMenuService";
     import TrashCanIcon from "@icon/TrashCan";
     import OpenInNewIcon from "@icon/OpenInNew";
@@ -234,10 +238,14 @@
             isVisible() {
                 return !SearchManager.status.active || SearchManager.status.ids.indexOf(this.password.id) !== -1;
             },
+            isSelected() {
+                return SelectionManager.isPasswordSelected(this.password);
+            },
             className() {
                 let classNames = 'row password';
 
                 if(this.detailsActive) classNames += ' details-open';
+                if(this.isSelected) classNames += ' selected';
                 if(SearchManager.status.active) {
                     classNames += SearchManager.status.ids.indexOf(this.password.id) !== -1 ? ' search-visible':' search-hidden';
                 }
@@ -328,6 +336,9 @@
             },
             favoriteAction() {
                 this.actions.favorite();
+            },
+            toggleSelected() {
+                SelectionManager.togglePassword(this.password);
             },
             printAction() {
                 this.actions.print();
@@ -432,6 +443,44 @@
             border-bottom : 1px solid var(--color-border);
             cursor        : pointer;
             display       : flex;
+
+            .select-item {
+                line-height : 50px;
+                width       : 40px;
+                flex-shrink : 0;
+                cursor      : pointer;
+                text-align  : center;
+
+                input[type="checkbox"] {
+                    appearance         : none;
+                    -webkit-appearance : none;
+                    width              : 20px;
+                    height             : 20px;
+                    margin             : 0;
+                    border             : 2px solid var(--color-primary-element);
+                    border-radius      : 4px;
+                    background-color   : transparent;
+                    vertical-align     : middle;
+                    cursor             : pointer;
+                    position           : relative;
+
+                    &:checked {
+                        background-color : var(--color-primary-element);
+
+                        &::after {
+                            content      : '';
+                            position     : absolute;
+                            left         : 5px;
+                            top          : 1px;
+                            width        : 5px;
+                            height       : 10px;
+                            border       : solid var(--color-primary-element-text);
+                            border-width : 0 2px 2px 0;
+                            transform    : rotate(45deg);
+                        }
+                    }
+                }
+            }
 
             .favorite {
                 line-height : 50px;
@@ -612,7 +661,8 @@
                 background-color : var(--color-background-hover);
             }
 
-            &.details-open {
+            &.details-open,
+            &.selected {
                 background-color : var(--color-primary-light);
             }
 
