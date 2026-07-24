@@ -3441,5 +3441,8 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Odebrat z oblíbených"
     }
 }
