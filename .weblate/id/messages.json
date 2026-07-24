@@ -3366,5 +3366,89 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ dipilih",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Hapus dari favorit"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Tambahkan ke favorit"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Kelola Tag"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Hapus butir"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Apakah Anda ingin memindahkan $TOTAL$ item ke tempat sampah?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ item dipindahkan ke tempat sampah",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Hapus butir"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Kembalikan butir"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ item dikembalikan dari tempat sampah",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ favorit ditambahkan",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Favorit dihapus",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ item dipindahkan ke \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
