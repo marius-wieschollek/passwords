@@ -3373,5 +3373,86 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ valgt",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Fjern fra favoritter"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Legg til i favoritter"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Administrer etiketter"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Slett elementer"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Vil du flytte $TOTAL$ elementer til søppel?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ elementer flyttet til søppel",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Slett elementer"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ elementer gjenopprettet fra søppel",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ favoritter lagt til",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favoritter fjernet",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ elementer flyttet til \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
