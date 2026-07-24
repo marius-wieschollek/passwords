@@ -3349,5 +3349,11 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "從最愛中刪除"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "項目已還原"
     }
 }
