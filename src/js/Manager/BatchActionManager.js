@@ -8,12 +8,12 @@ import LoggingService from "@js/Services/LoggingService";
 class BatchActionManager {
 
     constructor() {
-        this._actions = Vue.observable([]);
         this._state = Vue.observable(
             {
                 folders  : [],
                 tags     : [],
                 passwords: [],
+                actions  : [],
                 visible  : {folders: [], tags: [], passwords: []}
             }
         );
@@ -74,7 +74,14 @@ class BatchActionManager {
     }
 
     isItemProcessed(item) {
+        for(let action of this._state.actions) {
+            console.log(action.hasItem(item));
+            if(action.hasItem(item)) {
+                return true;
+            }
+        }
 
+        return false;
     }
 
     toggleFolder(folder, state) {
@@ -142,14 +149,14 @@ class BatchActionManager {
     async executeAction(actionClass, options = {}) {
         let action = new actionClass(
             {
-                folders  : this.folders,
-                passwords: this.passwords,
-                tags     : this.tags
+                folders  : this._state.folders,
+                passwords: this._state.passwords,
+                tags     : this._state.tags
             },
             options
         );
 
-        this._actions.push(action);
+        this._state.actions.push(action);
 
         this.clear();
 
@@ -159,7 +166,7 @@ class BatchActionManager {
             LoggingService.error(e);
         }
 
-        this._actions = this._remove(this._actions, action);
+        this._state.actions = this._remove(this._state.actions, action);
     }
 
     _toggle(list, item) {
