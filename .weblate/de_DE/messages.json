@@ -3162,7 +3162,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "Die unten stehende URL ist als die Seite zur Passwortänderung für \"{label}\" hinterlegt. Klicken Sie auf die Schaltfläche, um sie zu öffnen.",
+        "message": "Die unten stehende URL ist als die Seite zur Passwortänderung für \"$LABEL$\" hinterlegt. Klicken Sie auf die Schaltfläche, um sie zu öffnen.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3178,7 +3178,7 @@
         "description": "Label in the dialog to open the change password of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" hat keine Seite zur Passwortänderung mitgeteilt. Sie können die Funktion zum Ändern des Passworts möglicherweise auf der Website finden.",
+        "message": "\"$HOST$\" hat keine Seite zur Passwortänderung mitgeteilt. Sie können die Funktion zum Ändern des Passworts möglicherweise auf der Website finden.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3370,5 +3370,83 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Objekte wiederherstellen"
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ ausgewählt",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Zu den Favoriten hinzufügen"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Tags verwalten"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Objekte löschen"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Möchten Sie $TOTAL$ Objekte in den Papierkorb verschieben?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ Objekte in den Papierkorb verschoben",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Objekte löschen"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ Objekte aus dem Papierkorb wiederhergestellt",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Favoriten hinzugefügt",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Favoriten entfernt",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ Objekte nach \"$FOLDER$\" verschoben",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
