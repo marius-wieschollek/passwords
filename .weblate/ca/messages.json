@@ -3269,5 +3269,86 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "L' actualització de la base de dades de contrasenyes trencades no ha informat d' errors."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ Seleccionat",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Eliminar dels favorits"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Afegeix als favorits"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Gestiona les etiquetes"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Suprimir elements"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Vols moure els elements de l'$TOTAL$ a la paperera?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ Els elements s'han mogut a la paperera",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Suprimir elements"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ elements restaurats de la paperera",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Afegit favorits",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Elimminats els favorits",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ Els articles s'han traslladat a \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
