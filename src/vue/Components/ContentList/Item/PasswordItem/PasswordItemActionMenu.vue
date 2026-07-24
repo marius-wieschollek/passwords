@@ -19,17 +19,19 @@
                 variant="tertiary"
                 @click.stop.prevent
         >
-            <nc-action-button @click="runCustomAction" v-if="hasCustomAction">
-                <template #icon>
-                    <information-variant-icon :size="20" v-if="customAction === 'details'"/>
-                    <share-variant-icon :size="20" v-else-if="customAction === 'share'"/>
-                    <content-copy-icon :size="20" v-else-if="customAction === 'edit'"/>
-                    <printer-icon :size="20" v-else-if="customAction === 'print'"/>
-                    <open-in-new-icon :size="20" v-else-if="customAction === 'open-url'"/>
-                    <qrcode-icon :size="20" v-else-if="customAction === 'qrcode'"/>
-                    <clipboard-arrow-left-outline-icon :size="20" v-else/>
-                </template>
-            </nc-action-button>
+            <slot name="custom-action">
+                <nc-action-button @click="runCustomAction" v-if="hasCustomAction">
+                    <template #icon>
+                        <information-outline-icon :size="20" v-if="customAction === 'details'"/>
+                        <account-plus-outline-icon :size="20" v-else-if="customAction === 'share'"/>
+                        <content-copy-icon :size="20" v-else-if="customAction === 'edit'"/>
+                        <printer-icon :size="20" v-else-if="customAction === 'print'"/>
+                        <open-in-new-icon :size="20" v-else-if="customAction === 'open-url'"/>
+                        <qrcode-icon :size="20" v-else-if="customAction === 'qrcode'"/>
+                        <clipboard-arrow-left-outline-icon :size="20" v-else/>
+                    </template>
+                </nc-action-button>
+            </slot>
             <nc-action-button @click="actions.favorite()">
                 <template #icon>
                     <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="password.favorite"/>
@@ -39,13 +41,13 @@
             </nc-action-button>
             <nc-action-button @click="$emit('details-action', null)">
                 <template #icon>
-                    <information-variant-icon :size="20"/>
+                    <information-outline-icon :size="20"/>
                 </template>
                 {{ t('Details') }}
             </nc-action-button>
             <nc-action-button @click="$emit('details-action', 'share')">
                 <template #icon>
-                    <share-variant-icon :size="20"/>
+                    <account-plus-outline-icon :size="20"/>
                 </template>
                 {{ t('Share') }}
             </nc-action-button>
@@ -113,6 +115,12 @@
                 {{ t('PasswordActionPrint') }}
             </nc-action-button>
             <nc-action-separator/>
+            <nc-action-button @click="$emit('restore', password)" v-if="password.trashed">
+                <template #icon>
+                    <restore-icon :size="20"/>
+                </template>
+                {{ t('Restore') }}
+            </nc-action-button>
             <nc-action-button @click="deleteAction">
                 <template #icon>
                     <trash-can-icon :size="20"/>
@@ -129,8 +137,8 @@
     import FolderMoveIcon from "@icon/FolderMove";
     import ContentCopyIcon from "@icon/ContentCopy";
     import PencilIcon from "@icon/Pencil";
-    import ShareVariantIcon from "@icon/ShareVariant";
-    import InformationVariantIcon from "@icon/InformationVariant";
+    import AccountPlusOutlineIcon from "@icon/AccountPlusOutline.vue";
+    import InformationOutlineIcon from "@icon/InformationOutline";
     import ClipboardArrowLeftOutlineIcon from "@icon/ClipboardArrowLeftOutline";
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
@@ -152,13 +160,14 @@
             StarOutlineIcon,
             StarIcon,
             ClipboardArrowLeftOutlineIcon,
-            InformationVariantIcon,
-            ShareVariantIcon,
+            InformationOutlineIcon,
+            AccountPlusOutlineIcon,
             PencilIcon,
             ContentCopyIcon,
             FolderMoveIcon,
             OpenInNewIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
+            'restore-icon': () => import(/* webpackChunkName: "RestoreIcon" */ '@icon/Restore'),
             TrashCanIcon,
             NcActions,
             NcDateTime,
@@ -187,8 +196,11 @@
                 return SettingsService.get('client.ui.password.print');
             },
             hasCustomAction() {
-                return SettingsService.get('client.ui.password.custom.action') !== 'none' &&
-                       (SettingsService.get('client.ui.password.custom.action') !== 'edit' || this.password.editable);
+                return this.$slots.hasOwnProperty('custom-action') ||
+                       (
+                           SettingsService.get('client.ui.password.custom.action') !== 'none' &&
+                           (SettingsService.get('client.ui.password.custom.action') !== 'edit' || this.password.editable)
+                       );
             },
             customAction() {
                 return SettingsService.get('client.ui.password.custom.action');
@@ -204,7 +216,7 @@
                 if(action === 'share' || action === 'details') {
                     this.$emit('details-action', action);
                 } else if(action === 'print') {
-                    this.printAction();
+                    this.actions.print();
                 } else if(action === 'qrcode') {
                     this.actions.qrcode();
                 } else {

@@ -21,19 +21,25 @@
         <password-item-favicon :domain="password.website" :title="getTitle" :favorite="password.favorite" v-if="isVisible"/>
         <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
         <slot name="middle">
-            <password-item-tags :password="password" />
+            <password-item-tags :password="password"/>
         </slot>
         <password-item-security-icon :password="password"/>
-        <password-item-action-menu
-                :actions="actions"
-                :password="password"
-                :opened-menu.sync="openedMenu"
-                v-on:edit-action="editAction"
-                v-on:copy-action="copyAction"
-                v-on:details-action="detailsAction"
-                v-on:click-action="clickAction"
-                @closed="openedMenu = false"
-        />
+        <slot name="actions">
+            <password-item-action-menu
+                    :actions="actions"
+                    :password="password"
+                    :opened-menu.sync="openedMenu"
+                    v-on:edit-action="editAction"
+                    v-on:copy-action="copyAction"
+                    v-on:details-action="detailsAction"
+                    v-on:click-action="clickAction"
+                    @closed="openedMenu = false"
+            >
+                <template v-if="hasCustomAction" #custom-action>
+                    <slot name="custom-action"/>
+                </template>
+            </password-item-action-menu>
+        </slot>
         <nc-date-time class="date" :timestamp="password.edited"/>
     </div>
 </template>
@@ -114,6 +120,9 @@
             },
             batchActionActive() {
                 return BatchActionManager.isItemProcessed(this.password);
+            },
+            hasCustomAction() {
+                return this.$slots.hasOwnProperty('custom-action');
             }
         },
 

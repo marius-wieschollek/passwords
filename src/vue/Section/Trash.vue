@@ -26,11 +26,15 @@
                         <translate tag="a" href="#" data-item-action="restore" icon="undo" @click.prevent="restoreTagAction(tag)" say="Restore"/>
                     </li>
                 </tag-line>
-                <password-line :password="password" v-for="password in passwords" v-if="password.trashed" :key="password.id">
-                    <i class="icon fa fa-undo" slot="middle" @click.prevent="restorePasswordAction(password)" :title="restoreTitle"></i>
-                    <li slot="menu-top">
-                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click.prevent="restorePasswordAction(password)" say="Restore"/>
-                    </li>
+                <password-line :password="password" v-for="password in passwords" v-if="password.trashed" v-on:restore="restorePasswordAction(password)" :key="password.id">
+                    <template #custom-action>
+                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)" v-if="password.trashed">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
                 </password-line>
                 <footer-line :passwords="passwords" :folders="folders" :tags="tags" v-if="isNotEmpty"/>
                 <empty v-if="isEmpty" :text="getEmptyText"/>
@@ -51,9 +55,9 @@
     import BaseSection from '@vue/Section/BaseSection';
     import FolderManager from '@js/Manager/FolderManager';
     import PasswordManager from '@js/Manager/PasswordManager';
-    import MessageService from "@js/Services/MessageService";
-    import ToastService from "@js/Services/ToastService";
     import LocalisationService from "@js/Services/LocalisationService";
+    import RestoreIcon from "vue-material-design-icons/Restore.vue";
+    import NcActionButton from "@nextcloud/vue/components/NcActionButton";
 
     export default {
         extends: BaseSection,
@@ -65,8 +69,10 @@
             HeaderLine,
             FooterLine,
             PasswordLine,
-            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
-            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag'),
+            RestoreIcon,
+            NcActionButton,
+            'empty'   : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag')
         },
 
         computed: {
@@ -75,15 +81,15 @@
             },
             getEmptyText() {
                 if(this.search.active) {
-                    return LocalisationService.translate('We could not find anything for "{query}"', {query:this.search.query});
+                    return LocalisationService.translate('We could not find anything for "{query}"', {query: this.search.query});
                 }
 
                 return 'Deleted items will appear here';
-            },
+            }
         },
 
         methods: {
-            refreshView       : function() {
+            refreshView: function() {
                 let model = this.ui.showTags ? 'model+tags':'model';
                 API.findPasswords({trashed: true}, model).then(this.updatePasswordList);
                 API.findFolders({trashed: true}).then(this.updateFolderList);
