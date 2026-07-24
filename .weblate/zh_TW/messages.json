@@ -3271,5 +3271,83 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "已洩漏密碼資料庫更新未回報錯誤。"
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$被選取",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "添加到最愛"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "管理標籤"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "刪除項目"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "您要把 $TOTAL$ 項目移入垃圾桶嗎 ?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ 項目已移至回收站",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "刪除項目"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ 从回收站恢复的項目",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ 已添加最愛",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$取出最愛",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ 項目已移至\"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
