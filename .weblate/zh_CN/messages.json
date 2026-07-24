@@ -3366,5 +3366,86 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "更新被破解的密码数据库时未报告错误。"
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ 选中",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "从最爱中删除"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "添加到最爱"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "管理标记"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "删除项目"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "您要将 $TOTAL$ 项移动到垃圾桶吗 ?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ 项已移至废件夹",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "删除项目"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ 从垃圾堆中恢复的项目",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ 增加的最爱",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ 最爱被删除",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$项目被移动到\"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
