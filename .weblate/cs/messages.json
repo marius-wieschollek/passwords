@@ -3363,5 +3363,83 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Aktualizace databáze prolomených hesel nenahlásila chyby."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ zvoleno",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Přidat do oblíbených"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Správa značek"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Smazat položky"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Chcete přesunout položky $TOTAL$ do koše?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ položky přesunuty do koše",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Smazat položky"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ předměty obnoveny z koše",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ přidány oblíbené",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Odstraněny oblíbené",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "Položky přesunuty na \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
