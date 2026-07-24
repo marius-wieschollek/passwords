@@ -3366,5 +3366,86 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Оновлення бази даних зламаних паролів не виявило помилок."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ вибрано",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Додати до обраного"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Управління тегами"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Видалити елементи"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Ви хочете перемістити $TOTAL$ елементи до сміття?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ елементи переїхали на сміття",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Видалити елементи"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Відновити елементи"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ елементи відновлені з сміття",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ додано",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ обрані",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ елементи переїхали на X24X]\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
