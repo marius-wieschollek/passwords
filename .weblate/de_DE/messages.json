@@ -1087,12 +1087,6 @@
     "frontend-000297": {
         "message": "Überordner"
     },
-    "frontend-000298": {
-        "message": "Alles löschen"
-    },
-    "frontend-000299": {
-        "message": "Alles wiederherstellen"
-    },
     "frontend-000300": {
         "message": "Objekte wiederherstellen"
     },
@@ -1101,9 +1095,6 @@
     },
     "frontend-000302": {
         "message": "Dieses Objekt wiederherstellen"
-    },
-    "frontend-000303": {
-        "message": "Objekte wiederhergestellt"
     },
     "frontend-000304": {
         "message": "Papierkorb leeren"

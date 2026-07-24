@@ -1084,12 +1084,6 @@
     "frontend-000297": {
         "message": "Foreldre"
     },
-    "frontend-000298": {
-        "message": "Slett alle elementer"
-    },
-    "frontend-000299": {
-        "message": "Gjenopprett alle elementer"
-    },
     "frontend-000300": {
         "message": "Gjenopprett elementer"
     },
@@ -1098,9 +1092,6 @@
     },
     "frontend-000302": {
         "message": "Gjenopprett dette elementet"
-    },
-    "frontend-000303": {
-        "message": "Gjenstander gjenopprettet"
     },
     "frontend-000304": {
         "message": "Tøm søppelkurven"

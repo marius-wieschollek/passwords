@@ -9,7 +9,7 @@
   -->
 
 <template>
-    <nc-modal :container="container" size="small" v-on:close="close">
+    <nc-modal :container="container" size="small" :name="t('Change Password')" v-on:close="close">
         <div class="password-change-dialog">
             <nc-loading-icon :size="64" v-if="loading"/>
             <div v-else-if="passwordPageUrl">

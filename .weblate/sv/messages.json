@@ -837,12 +837,6 @@
     "frontend-000297": {
         "message": "Överårdnad"
     },
-    "frontend-000298": {
-        "message": "Radera alla objekt"
-    },
-    "frontend-000299": {
-        "message": "Återställ alla objekt"
-    },
     "frontend-000300": {
         "message": "Återställ objekt"
     },
@@ -851,9 +845,6 @@
     },
     "frontend-000302": {
         "message": "Återställ detta objekt"
-    },
-    "frontend-000303": {
-        "message": "Objekt återställda"
     },
     "frontend-000304": {
         "message": "Töm papperskorgen"

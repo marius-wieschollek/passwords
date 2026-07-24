@@ -765,12 +765,6 @@
     "frontend-000297": {
         "message": "Parent"
     },
-    "frontend-000298": {
-        "message": "Effacer tous les éléments"
-    },
-    "frontend-000299": {
-        "message": "Restaurer tous les éléments"
-    },
     "frontend-000300": {
         "message": "Restaure les éléments"
     },
@@ -779,9 +773,6 @@
     },
     "frontend-000302": {
         "message": "Restaurer cet élément"
-    },
-    "frontend-000303": {
-        "message": "Élément restauré"
     },
     "frontend-000304": {
         "message": "Vider la corbeille"

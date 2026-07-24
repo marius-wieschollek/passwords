@@ -1053,12 +1053,6 @@
     "frontend-000297": {
         "message": "Rodič"
     },
-    "frontend-000298": {
-        "message": "Odstránenie všetkých položiek"
-    },
-    "frontend-000299": {
-        "message": "Obnovenie všetkých položiek"
-    },
     "frontend-000300": {
         "message": "Obnovenie položiek"
     },
@@ -1067,9 +1061,6 @@
     },
     "frontend-000302": {
         "message": "Obnovenie tejto položky"
-    },
-    "frontend-000303": {
-        "message": "Obnovené položky"
     },
     "frontend-000304": {
         "message": "Prázdny odpadkový kôš"

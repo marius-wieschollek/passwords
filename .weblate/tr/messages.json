@@ -1098,12 +1098,6 @@
     "frontend-000297": {
         "message": "Ebeveyn"
     },
-    "frontend-000298": {
-        "message": "Tüm Öğeleri Sil"
-    },
-    "frontend-000299": {
-        "message": "Tüm Öğeleri Geri Yükle"
-    },
     "frontend-000300": {
         "message": "Öğeleri Geri Yükle"
     },
@@ -1112,9 +1106,6 @@
     },
     "frontend-000302": {
         "message": "Bu öğeyi geri yükle"
-    },
-    "frontend-000303": {
-        "message": "Geri yüklenen öğeler"
     },
     "frontend-000304": {
         "message": "Boş Çöp Kutusu"

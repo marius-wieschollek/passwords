@@ -1062,12 +1062,6 @@
     "frontend-000297": {
         "message": "Szülő"
     },
-    "frontend-000298": {
-        "message": "Minden elem törlése"
-    },
-    "frontend-000299": {
-        "message": "Minden elem visszaállítása"
-    },
     "frontend-000300": {
         "message": "Elemek helyreállítása"
     },
@@ -1076,9 +1070,6 @@
     },
     "frontend-000302": {
         "message": "Állítsa vissza ezt az elemet"
-    },
-    "frontend-000303": {
-        "message": "Visszaállított tételek"
     },
     "frontend-000304": {
         "message": "Üres szemetes"

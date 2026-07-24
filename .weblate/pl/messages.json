@@ -1073,12 +1073,6 @@
     "frontend-000297": {
         "message": "Rodzic"
     },
-    "frontend-000298": {
-        "message": "Usuń wszystkie elementy"
-    },
-    "frontend-000299": {
-        "message": "Przywróć wszystkie elementy"
-    },
     "frontend-000300": {
         "message": "Przywracanie elementów"
     },
@@ -1087,9 +1081,6 @@
     },
     "frontend-000302": {
         "message": "Przywróć ten element"
-    },
-    "frontend-000303": {
-        "message": "Przywrócone przedmioty"
     },
     "frontend-000304": {
         "message": "Pusty kosz"

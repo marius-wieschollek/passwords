@@ -1036,12 +1036,6 @@
     "frontend-000297": {
         "message": "Parent"
     },
-    "frontend-000298": {
-        "message": "Delete All Items"
-    },
-    "frontend-000299": {
-        "message": "Restore All Items"
-    },
     "frontend-000300": {
         "message": "Restore Items"
     },
@@ -1050,9 +1044,6 @@
     },
     "frontend-000302": {
         "message": "Restore this item"
-    },
-    "frontend-000303": {
-        "message": "Items restored"
     },
     "frontend-000304": {
         "message": "Empty Trash"
@@ -3287,7 +3278,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "We have detected the url below as the password change page for \"{label}\". Click the button to open it.",
+        "message": "We have detected the url below as the password change page for \"$LABEL$\". Click the button to open it.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3303,7 +3294,7 @@
         "description": "Label in the dialog to open the change password page of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "\"{host}\" does not announce their password change page. You may find the change password function on the website.",
+        "message": "\"$HOST$\" does not announce their password change page. You may find the change password function on the website.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3390,5 +3381,102 @@
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Update of breached passwords database has not reported errors.",
         "description": "Message of the setup check for the breached passwords database update when no errors are known"
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ selected",
+        "description": "Label for the \"Select all\" checkbox in the content list header which displays the amount of selected items. ",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Remove from favorites",
+        "description": "Label for the batch action to remove all selected items from favorites"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Add to favorites",
+        "description": "Label for the the batch action to add all items to favorites"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Manage Tags",
+        "description": "Label for the the batch action to manage the assigned tags for all selected passwords"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Delete items",
+        "description": "Label for the batch action dialog to delete all selected items"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Do you want to move $TOTAL$ items to the trash?",
+        "description": "Text for the batch action dialog to delete all selected items",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ items moved to trash",
+        "description": "Text for the batch action toast after selected items have been deleted",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Delete items",
+        "description": "Label for the batch action dialog to delete all selected items"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Restore items",
+        "description": "Label for the batch action dialog to restore all selected items from trash"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ items restored from trash",
+        "description": "Text for the batch action toast after selected items have been restored from trash",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ favorites added",
+        "description": "Label for the batch action toast when items were marked as favorites",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favorites removed",
+        "description": "Label for the batch action toast when items were removed from favorites",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ items moved to \"$FOLDER$\"",
+        "description": "Text of the batch action toast when items were moved to a new folder",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }

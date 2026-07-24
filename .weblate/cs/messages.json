@@ -956,12 +956,6 @@
     "frontend-000297": {
         "message": "Nadřazené"
     },
-    "frontend-000298": {
-        "message": "Smazat všechny položky"
-    },
-    "frontend-000299": {
-        "message": "Obnovit všechny položky"
-    },
     "frontend-000300": {
         "message": "Obnovit položky"
     },
@@ -970,9 +964,6 @@
     },
     "frontend-000302": {
         "message": "Obnovit tuto položku"
-    },
-    "frontend-000303": {
-        "message": "Položky obnoveny"
     },
     "frontend-000304": {
         "message": "Vysypat koš"

@@ -1068,12 +1068,6 @@
     "frontend-000297": {
         "message": "Tėvai"
     },
-    "frontend-000298": {
-        "message": "Ištrinti visus elementus"
-    },
-    "frontend-000299": {
-        "message": "Atkurti visus elementus"
-    },
     "frontend-000300": {
         "message": "Atkurti elementus"
     },
@@ -1082,9 +1076,6 @@
     },
     "frontend-000302": {
         "message": "Atkurti šį elementą"
-    },
-    "frontend-000303": {
-        "message": "Atkurti daiktai"
     },
     "frontend-000304": {
         "message": "Tuščios šiukšliadėžės"

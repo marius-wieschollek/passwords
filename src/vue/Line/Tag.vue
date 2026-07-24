@@ -1,8 +1,6 @@
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <label class="select-item" @click.stop>
-            <input type="checkbox" :checked="isSelected" @change="toggleSelected">
-        </label>
+        <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive"/>
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
@@ -35,17 +33,19 @@
     import Translate from '@vc/Translate';
     import TagManager from '@js/Manager/TagManager';
     import SearchManager from "@js/Manager/SearchManager";
-    import SelectionManager from "@js/Manager/SelectionManager";
+    import BatchActionManager from "@js/Manager/BatchActionManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
     import LocalisationService from "@js/Services/LocalisationService";
+    import NcCheckboxRadioSwitch from "@nextcloud/vue/components/NcCheckboxRadioSwitch";
 
     export default {
         components: {
             Translate,
             StarIcon,
-            StarOutlineIcon
+            StarOutlineIcon,
+            NcCheckboxRadioSwitch
         },
 
         props: {
@@ -56,7 +56,8 @@
 
         data() {
             return {
-                showMenu: false
+                showMenu  : false,
+                isSelected: false
             };
         },
 
@@ -67,9 +68,6 @@
             dateTitle() {
                 return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.tag.edited)});
             },
-            isSelected() {
-                return SelectionManager.isTagSelected(this.tag);
-            },
             className() {
                 let classNames = 'row tag';
 
@@ -79,6 +77,12 @@
                 }
 
                 return classNames;
+            },
+            batchActionSelected() {
+                return BatchActionManager.isTagSelected(this.tag);
+            },
+            batchActionActive() {
+                return BatchActionManager.isItemProcessed(this.tag);
             }
         },
 
@@ -91,9 +95,6 @@
                 this.tag.favorite = !this.tag.favorite;
                 TagManager.updateTag(this.tag)
                           .catch(() => { this.tag.favorite = !this.tag.favorite; });
-            },
-            toggleSelected() {
-                SelectionManager.toggleTag(this.tag);
             },
             toggleMenu(state = null) {
                 if(state) {
@@ -114,7 +115,7 @@
                 document.removeEventListener('click', this.menuEvent);
             },
             openAction($event) {
-                if($event.target.closest('.more') !== null) return;
+                if($event.target.closest('.more') !== null || $event.target.closest('.checkbox-radio-switch') !== null) return;
                 this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
             },
             deleteAction() {
@@ -129,6 +130,16 @@
         watch: {
             tag(value) {
                 ContextMenuService.register(value, this.$el);
+            },
+            isSelected(value) {
+                if(this.batchActionSelected !== value) {
+                    BatchActionManager.toggleTag(this.tag, value);
+                }
+            },
+            batchActionSelected(value) {
+                if(this.isSelected !== value) {
+                    this.isSelected = value;
+                }
             }
         }
     };

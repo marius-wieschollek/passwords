@@ -993,20 +993,11 @@
     "frontend-000297": {
         "message": "Superior"
     },
-    "frontend-000298": {
-        "message": "Eliminar todos os elementos"
-    },
-    "frontend-000299": {
-        "message": "Restaurar todos os elementos"
-    },
     "frontend-000300": {
         "message": "Restaurar os elementos"
     },
     "frontend-000301": {
         "message": "Quere restaurar todos os elementos do lixo?"
-    },
-    "frontend-000303": {
-        "message": "Elementos restaurados"
     },
     "frontend-000304": {
         "message": "Baleirar o lixo"

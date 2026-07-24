@@ -756,12 +756,6 @@
     "frontend-000297": {
         "message": "Bovenliggende"
     },
-    "frontend-000298": {
-        "message": "Alle items verwijderen"
-    },
-    "frontend-000299": {
-        "message": "Alle items restoren"
-    },
     "frontend-000300": {
         "message": "Restore Items"
     },
@@ -770,9 +764,6 @@
     },
     "frontend-000302": {
         "message": "Dit item restoren"
-    },
-    "frontend-000303": {
-        "message": "Item restored"
     },
     "frontend-000304": {
         "message": "Prullenbak legen"

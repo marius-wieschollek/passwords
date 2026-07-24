@@ -366,12 +366,6 @@
     "frontend-000297": {
         "message": "Parent"
     },
-    "frontend-000298": {
-        "message": "Delete All Items"
-    },
-    "frontend-000299": {
-        "message": "Restore All Items"
-    },
     "frontend-000300": {
         "message": "Restore Items"
     },
@@ -380,9 +374,6 @@
     },
     "frontend-000302": {
         "message": "Restore this item"
-    },
-    "frontend-000303": {
-        "message": "Items restored"
     },
     "frontend-PwdSaveHiddenMessage": {
         "message": "Saving a hidden password in a folder that is not hidden itself will make the password inaccessible. This password will no longer be shown anywhere. Do you want to continue?",

@@ -11,9 +11,9 @@
 <template>
     <div id="app-content" :class="getContentClass">
         <div class="app-content-left">
-            <breadcrumb :showAddNew="isNotEmpty" :deleteAll="true" :restoreAll="true" :newPassword="false" v-on:deleteAll="clearTrash" v-on:restoreAll="restoreTrash"/>
+            <breadcrumb :showAddNew="isNotEmpty" :newPassword="false"/>
             <div class="item-list">
-                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" v-if="isNotEmpty"/>
+                <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" :is-trash-section="true" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
                     <i class="icon fa fa-undo" slot="middle" @click.prevent="restoreFolderAction(folder)" :title="restoreTitle"></i>
                     <li slot="menu-top">
@@ -100,38 +100,6 @@
             restoreTagAction(tag) {
                 TagManager.restoreTag(tag);
                 API.findTags({trashed: true}).then(this.updateTagList);
-            },
-            restoreTrash() {
-                MessageService.confirm('Restore all items in trash?', 'Restore Items')
-                        .then(() => {
-                            for(let i = 0; i < this.passwords.length; i++) {
-                                PasswordManager.restorePassword(this.passwords[i]);
-                            }
-                            for(let i = 0; i < this.folders.length; i++) {
-                                FolderManager.restoreFolder(this.folders[i]);
-                            }
-                            for(let i = 0; i < this.tags.length; i++) {
-                                TagManager.restoreTag(this.tags[i]);
-                            }
-
-                            ToastService.success('Items restored');
-                        });
-            },
-            clearTrash() {
-                MessageService.confirm('Delete all items in trash?', 'Empty Trash')
-                        .then(() => {
-                            for(let i = 0; i < this.passwords.length; i++) {
-                                PasswordManager.deletePassword(this.passwords[i], false);
-                            }
-                            for(let i = 0; i < this.folders.length; i++) {
-                                FolderManager.deleteFolder(this.folders[i], false);
-                            }
-                            for(let i = 0; i < this.tags.length; i++) {
-                                TagManager.deleteTag(this.tags[i], false);
-                            }
-
-                            ToastService.info('Trash emptied');
-                        });
             }
         }
     };

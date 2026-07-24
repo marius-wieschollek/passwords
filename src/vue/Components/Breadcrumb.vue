@@ -46,12 +46,6 @@
                     <key-icon slot="icon" :size="16"/>
                     {{ t('New Password') }}
                 </nc-action-button>
-                <nc-action-button close-after-click icon="icon-history" v-if="restoreAll" @click="restoreAllEvent" class="passwords-trash-restore">
-                    {{ t('Restore All Items') }}
-                </nc-action-button>
-                <nc-action-button close-after-click icon="icon-delete" v-if="deleteAll" @click="deleteAllEvent" class="passwords-trash-delete">
-                    {{ t('Delete All Items') }}
-                </nc-action-button>
             </nc-actions>
             <slot/>
         </template>
@@ -121,14 +115,6 @@
                 type     : Boolean,
                 'default': false
             },
-            deleteAll     : {
-                type     : Boolean,
-                'default': false
-            },
-            restoreAll    : {
-                type     : Boolean,
-                'default': false
-            },
             showAddNew    : {
                 type     : Boolean,
                 'default': true
@@ -186,12 +172,6 @@
             },
             createPassword() {
                 PasswordManager.createPassword(this.folder, this.tag);
-            },
-            deleteAllEvent() {
-                this.$emit('deleteAll');
-            },
-            restoreAllEvent() {
-                this.$emit('restoreAll');
             },
             async processItems() {
                 if(this.items.length === 0) {

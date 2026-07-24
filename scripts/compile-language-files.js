@@ -100,23 +100,25 @@ class CompileLanguageFilesPlugin {
      * Processes a single language file
      *
      * @param {String} file
-     * @param language
+     * @param {String} language
      * @returns {Promise<void>}
      * @private
      */
     async _processLanguageFile(file, language) {
         let languageKeys = JSON.parse(await readFile(file, {encoding: 'utf-8'})),
-            translations = this._processLanguageKeys(languageKeys);
+            translations = this._processLanguageKeys(languageKeys, language);
         await this._writeSectionL10nFiles(translations, language);
     }
 
     /**
      *
      * @param languageKeys
+     * @param {String} language
+     *
      * @returns {Object}
      * @private
      */
-    _processLanguageKeys(languageKeys) {
+    _processLanguageKeys(languageKeys, language) {
         let translations = {};
 
         for(let indexKey in this._index) {
@@ -130,7 +132,7 @@ class CompileLanguageFilesPlugin {
                 continue;
             }
             if(!this._index.hasOwnProperty(key)) {
-                console.warn(`Unknown translation key ${key}`);
+                console.warn(`Unknown translation key ${key} in ${language}`);
                 continue;
             }
             let value      = this._processEntry(languageKeys[key]),

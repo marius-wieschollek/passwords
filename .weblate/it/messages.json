@@ -988,12 +988,6 @@
     "frontend-000297": {
         "message": "Cartella superiore"
     },
-    "frontend-000298": {
-        "message": "Cancella tutti gli oggetti"
-    },
-    "frontend-000299": {
-        "message": "Recupera tutti gli oggetti"
-    },
     "frontend-000300": {
         "message": "Recupera oggetti"
     },
@@ -1002,9 +996,6 @@
     },
     "frontend-000302": {
         "message": "Recupera questo oggetto"
-    },
-    "frontend-000303": {
-        "message": "Oggetti recuperati"
     },
     "frontend-000304": {
         "message": "Svuota cestino"

@@ -16,7 +16,7 @@
             :inlineActions="0"
             v-on:close="close"
             :container="container"
-            :title="t('Manage tags')">
+            :name="t('Manage tags')">
         <template #default>
             <ul class="pw-manage-tags-list" v-if="!loading">
                 <li v-for="tag in tags" :key="tag.id" @click="toggleTag(tag)">

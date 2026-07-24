@@ -122,5 +122,28 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
 * [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
 
 ## Translations
-1. You can translate the app on our [Weblate](https://weblate.passwordsapp.org/projects/passwords/passwords/)
-2. If you want to add a new language, make a [feature request](https://github.com/marius-wieschollek/passwords/issues/new/choose) and it will be added.
+
+#### Where to translate
+You can translate the app on our [Weblate instance](https://weblate.passwordsapp.org/projects/passwords/passwords/).  If you want to add a new language, make a [feature request](https://github.com/marius-wieschollek/passwords/issues/new/choose) and it will be added.
+
+#### How to use translations in the frontend
+1. Add the new language tag to the file in `.weblate/en/messages.json`.
+    - The key should be in pascal case, e.g. `BatchActionManageTags`
+    - You need to use a prefix. For general frontend language tags, this is just `frontend`, but for specific sections there are also `apps`, `backups`, `settings` and `tutorial`.
+      These will be loaded dynamically when the user opens these sections.
+    - The key should look like `frontend-YourPascalCaseKey`.
+2. Document the language tag in the `messages.json` using the [locale specific message reference](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/i18n/Locale-Specific_Message_reference)
+    - Do include a description of what the key does and where it is shown
+    - You must include placeholders in the object if used
+      The placeholder in the text must be formatted like `$KEY$`, in the placeholders object the lowercase `key` is used without `$`.
+3. Now you can use the key without the prefix in the frontend. It may be necessary to recompile the javascript assets or clear the browser cache to see the translation.
+
+#### How to use translations in the backend
+1. Use a short english fallback text in the code.
+2. Map the fallback text in the keys.json by using `backend-YourKeyHere` as the key and the fallback text from step 1 as value.
+    - The key should be in pascal case, e.g. `BatchActionManageTags`
+3. Add the language tag to `.weblate/en/messages.json` using the [locale specific message reference](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/i18n/Locale-Specific_Message_reference)
+    - Do include a description of what the key does and where it is shown
+    - You must include placeholders in the object if used.
+      The placeholder for strings in the text is `$STR_<index>$`, in the placeholders object it is `str_<index>`.
+      The placeholder for numbers in the text is `$NUM_<index>$`, in the placeholders object it is `num_<index>`.

@@ -2414,12 +2414,6 @@
     "frontend-000297": {
         "message": "上層"
     },
-    "frontend-000298": {
-        "message": "刪除所有項目"
-    },
-    "frontend-000299": {
-        "message": "還原所有項目"
-    },
     "frontend-000300": {
         "message": "項目已還原"
     },
@@ -2428,9 +2422,6 @@
     },
     "frontend-000302": {
         "message": "還原此項目"
-    },
-    "frontend-000303": {
-        "message": "項目已還原"
     },
     "frontend-000304": {
         "message": "清空回收桶"

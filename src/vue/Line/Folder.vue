@@ -5,9 +5,7 @@
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
          data-drop-type="folder">
-        <label class="select-item" @click.stop>
-            <input type="checkbox" :checked="isSelected" @change="toggleSelected">
-        </label>
+        <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive"/>
         <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="folder.favorite"/>
         <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
         <div class="favicon" :style="{'background-image': 'url(' + folder.icon + ')'}" :title="folder.label">&nbsp;</div>
@@ -44,17 +42,19 @@
     import DragManager from '@js/Manager/DragManager';
     import FolderManager from '@js/Manager/FolderManager';
     import SearchManager from "@js/Manager/SearchManager";
-    import SelectionManager from "@js/Manager/SelectionManager";
+    import BatchActionManager from "@js/Manager/BatchActionManager";
     import ContextMenuService from '@js/Services/ContextMenuService';
     import StarIcon from "vue-material-design-icons/Star.vue";
     import StarOutlineIcon from "vue-material-design-icons/StarOutline.vue";
     import LocalisationService from "@js/Services/LocalisationService";
+    import NcCheckboxRadioSwitch from "@nextcloud/vue/components/NcCheckboxRadioSwitch";
 
     export default {
         components: {
             Translate,
             StarIcon,
-            StarOutlineIcon
+            StarOutlineIcon,
+            NcCheckboxRadioSwitch
         },
 
         props: {
@@ -65,7 +65,8 @@
 
         data() {
             return {
-                showMenu: false
+                showMenu  : false,
+                isSelected: false
             };
         },
 
@@ -76,9 +77,6 @@
             dateTitle() {
                 return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.folder.edited)});
             },
-            isSelected() {
-                return SelectionManager.isFolderSelected(this.folder);
-            },
             className() {
                 let classNames = 'row folder';
 
@@ -88,6 +86,12 @@
                 }
 
                 return classNames;
+            },
+            batchActionSelected() {
+                return BatchActionManager.isFolderSelected(this.folder);
+            },
+            batchActionActive() {
+                return BatchActionManager.isItemProcessed(this.folder);
             }
         },
 
@@ -100,9 +104,6 @@
                 this.folder.favorite = !this.folder.favorite;
                 FolderManager.updateFolder(this.folder)
                              .catch(() => { this.folder.favorite = !this.folder.favorite; });
-            },
-            toggleSelected() {
-                SelectionManager.toggleFolder(this.folder);
             },
             toggleMenu(state = null) {
                 if(state) {
@@ -123,7 +124,7 @@
                 document.removeEventListener('click', this.menuEvent);
             },
             openAction($event) {
-                if($event.target.closest('.more') !== null) return;
+                if($event.target.closest('.more') !== null || $event.target.closest('.checkbox-radio-switch') !== null) return;
                 this.$router.push({name: 'Folders', params: {folder: this.folder.id}});
             },
             deleteAction() {
@@ -154,6 +155,16 @@
         watch: {
             folder(value) {
                 ContextMenuService.register(value, this.$el);
+            },
+            isSelected(value) {
+                if(this.batchActionSelected !== value) {
+                    BatchActionManager.toggleFolder(this.folder, value);
+                }
+            },
+            batchActionSelected(value) {
+                if(this.isSelected !== value) {
+                    this.isSelected = value;
+                }
             }
         }
     };

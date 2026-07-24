@@ -78,6 +78,8 @@ export default new (class MessageService {
      * @param message
      * @param title
      * @param booleanResponse
+     *
+     * @return Promise<{Boolean}>
      */
     confirm(message, title = "Confirm", booleanResponse = false) {
         return new Promise((resolve, reject) => {

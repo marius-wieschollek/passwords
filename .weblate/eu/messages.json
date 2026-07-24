@@ -3019,12 +3019,6 @@
     "frontend-000297": {
         "message": "Gurasoa"
     },
-    "frontend-000298": {
-        "message": "Ezabatu elementu guztiak"
-    },
-    "frontend-000299": {
-        "message": "Elementu guztiak leheneratu"
-    },
     "frontend-000300": {
         "message": "Leheneratu elementuak"
     },
@@ -3033,9 +3027,6 @@
     },
     "frontend-000302": {
         "message": "Leheneratu elementu hau"
-    },
-    "frontend-000303": {
-        "message": "Elementuak berreskuratuta"
     },
     "frontend-000304": {
         "message": "Hustu zakarrontzia"

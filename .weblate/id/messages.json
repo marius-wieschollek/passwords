@@ -1051,12 +1051,6 @@
     "frontend-000297": {
         "message": "Orang tua"
     },
-    "frontend-000298": {
-        "message": "Hapus Semua Item"
-    },
-    "frontend-000299": {
-        "message": "Kembalikan Semua Item"
-    },
     "frontend-000300": {
         "message": "Mengembalikan Item"
     },
@@ -1065,9 +1059,6 @@
     },
     "frontend-000302": {
         "message": "Kembalikan item ini"
-    },
-    "frontend-000303": {
-        "message": "Item yang dipulihkan"
     },
     "frontend-000304": {
         "message": "Sampah Kosong"

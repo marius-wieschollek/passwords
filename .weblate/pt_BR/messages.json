@@ -547,12 +547,6 @@
     "frontend-000297": {
         "message": "Pai"
     },
-    "frontend-000298": {
-        "message": "Excluir todos os itens"
-    },
-    "frontend-000299": {
-        "message": "Restaurar todos os itens"
-    },
     "frontend-000300": {
         "message": "Restaurar Itens"
     },
@@ -561,9 +555,6 @@
     },
     "frontend-000302": {
         "message": "Restaurar este item"
-    },
-    "frontend-000303": {
-        "message": "Itens restaurados"
     },
     "frontend-000304": {
         "message": "Lixo vazio"

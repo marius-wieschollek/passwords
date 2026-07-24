@@ -1,5 +1,5 @@
 <template>
-    <dialog-window ref="window" id="passlink-connect" title="Connect a new device" :has-controls="false">
+    <dialog-window ref="window" id="passlink-connect" name="Connect a new device" :has-controls="false">
         <div class="content">
             <connect-link :has-link="hasLink" :has-code="hasCode" :protocol="protocol" v-on:connect="connect($event)" v-if="step === 1"/>
             <connect-confirm :client="client"

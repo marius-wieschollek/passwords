@@ -1017,12 +1017,6 @@
     "frontend-000297": {
         "message": "Carpeta superior"
     },
-    "frontend-000298": {
-        "message": "Borrar todos los elementos"
-    },
-    "frontend-000299": {
-        "message": "Restaurar todos los elementos"
-    },
     "frontend-000300": {
         "message": "Restaurar los elementos"
     },
@@ -1031,9 +1025,6 @@
     },
     "frontend-000302": {
         "message": "Restaurar este elemento"
-    },
-    "frontend-000303": {
-        "message": "Elemento restaurado"
     },
     "frontend-000304": {
         "message": "Vaciar papelera"

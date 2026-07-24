@@ -16,7 +16,7 @@
             :inlineActions="0"
             v-on:close="close"
             :container="container"
-            :title="t('Select a folder')">
+            :name="t('Select a folder')">
         <template #default>
             <div class="pw-folder-picker" v-if="currentFolder !== null">
                 <picker-breadcrumb :current="currentFolder" :folders="folderList" v-on:navigate="openFolder" />
@@ -111,9 +111,9 @@
 
 <style lang="scss">
 .pw-folder-picker-dialog {
-
     .pw-folder-picker {
-        overflow-x : hidden;;
+        overflow-x : hidden;
+        border-radius: var(--border-radius-container);
 
         .buttons {
             position : absolute;

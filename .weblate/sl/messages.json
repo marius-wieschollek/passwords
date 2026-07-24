@@ -1178,12 +1178,6 @@
     "frontend-000297": {
         "message": "Starši"
     },
-    "frontend-000298": {
-        "message": "Brisanje vseh elementov"
-    },
-    "frontend-000299": {
-        "message": "Obnovitev vseh elementov"
-    },
     "frontend-000300": {
         "message": "Obnovitev elementov"
     },
@@ -1192,9 +1186,6 @@
     },
     "frontend-000302": {
         "message": "Obnovitev tega elementa"
-    },
-    "frontend-000303": {
-        "message": "Obnovljeni predmeti"
     },
     "frontend-000304": {
         "message": "Prazne smeti"

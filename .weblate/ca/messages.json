@@ -1017,12 +1017,6 @@
     "frontend-000297": {
         "message": "Carpeta superior"
     },
-    "frontend-000298": {
-        "message": "Esborrar tots els elements"
-    },
-    "frontend-000299": {
-        "message": "Restaurar tots els elements"
-    },
     "frontend-000300": {
         "message": "Restaurar els elements"
     },
@@ -1031,9 +1025,6 @@
     },
     "frontend-000302": {
         "message": "Restaurar aquest objete"
-    },
-    "frontend-000303": {
-        "message": "S'han restaurat els elements"
     },
     "frontend-000304": {
         "message": "Buidar la paperera"

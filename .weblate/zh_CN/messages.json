@@ -1389,12 +1389,6 @@
     "frontend-000297": {
         "message": "上级项"
     },
-    "frontend-000298": {
-        "message": "删除所有项"
-    },
-    "frontend-000299": {
-        "message": "恢复所有项"
-    },
     "frontend-000300": {
         "message": "恢复项"
     },
@@ -1403,9 +1397,6 @@
     },
     "frontend-000302": {
         "message": "恢复该项"
-    },
-    "frontend-000303": {
-        "message": "项已恢复"
     },
     "frontend-000304": {
         "message": "清空回收站"
