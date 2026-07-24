@@ -11,6 +11,17 @@
 export default class BatchAction {
     _items;
 
+    get clearSelection() {
+        return false;
+    }
+
+    get count() {
+        return this._items.folders.length +
+               this._items.tags.length +
+               this._items.passwords.length;
+    }
+
+
     /**
      *
      * @param items {folders: Object, passwords: Object, tags: Object}
@@ -27,13 +38,6 @@ export default class BatchAction {
                this._items.passwords.indexOf(item) !== -1;
     }
 
-    count() {
-        return this._items.folders.length +
-               this._items.tags.length +
-               this._items.passwords.length;
-    }
-
     async run() {
     }
-
 }

@@ -15,6 +15,10 @@ import ToastService from "@js/Services/ToastService";
 
 export default class MoveItemsBatchAction extends BatchAction {
 
+    get clearSelection() {
+        return true;
+    }
+
     async run() {
         let ignoredFolders = this._items.folders.map(folder => folder.id),
             targetFolder   = await FolderManager.selectFolder('00000000-0000-0000-0000-000000000000', ignoredFolders),
@@ -32,6 +36,6 @@ export default class MoveItemsBatchAction extends BatchAction {
         }
         await Promise.all(promises);
 
-        ToastService.success(['BatchActionMoveItemsToast', {total: this.count(), folder: targetFolder.label}]);
+        ToastService.success(['BatchActionMoveItemsToast', {total: this.count, folder: targetFolder.label}]);
     }
 }

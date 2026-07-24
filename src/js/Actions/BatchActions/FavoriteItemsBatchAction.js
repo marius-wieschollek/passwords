@@ -43,6 +43,6 @@ export default class FavoriteItemsBatchAction extends BatchAction {
         }
         await Promise.all(promises);
 
-        ToastService.success([makeFavorite ? 'BatchActionFavoriteAddedToast':'BatchActionFavoriteRemoveToast', {total: this.count()}]);
+        ToastService.success([makeFavorite ? 'BatchActionFavoriteAddedToast':'BatchActionFavoriteRemoveToast', {total: this.count}]);
     }
 }

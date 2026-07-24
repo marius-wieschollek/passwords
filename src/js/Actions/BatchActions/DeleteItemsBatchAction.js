@@ -15,16 +15,21 @@ import FolderManager from "@js/Manager/FolderManager";
 import ToastService from "@js/Services/ToastService";
 
 export default class DeleteItemsBatchAction extends BatchAction {
+
+    get clearSelection() {
+        return true;
+    }
+
     async run() {
         const languageTags = this.#getLanguageTags();
 
-        if(!await MessageService.confirm([languageTags.text, {total: this.count()}], languageTags.title, true)) {
+        if(!await MessageService.confirm([languageTags.text, {total: this.count}], languageTags.title, true)) {
             return;
         }
 
         await this.#deleteItems();
 
-        ToastService.success([languageTags.toast, {total: this.count()}]);
+        ToastService.success([languageTags.toast, {total: this.count}]);
     }
 
     #getLanguageTags() {

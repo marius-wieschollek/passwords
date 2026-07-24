@@ -157,7 +157,9 @@ class BatchActionManager {
 
         this._state.actions.push(action);
 
-        this.clear();
+        if(action.clearSelection) {
+            this.clear();
+        }
 
         try {
             await action.run();

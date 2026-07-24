@@ -16,6 +16,10 @@ import ToastService from "@js/Services/ToastService";
 
 export default class RestoreTrashItemsBatchAction extends BatchAction {
 
+    get clearSelection() {
+        return true;
+    }
+
     async run() {
         if(!await MessageService.confirm('Restore all items in trash?', 'Restore Items', true)) {
             return;
@@ -23,7 +27,7 @@ export default class RestoreTrashItemsBatchAction extends BatchAction {
 
         await this.#restoreItems();
 
-        ToastService.success(['BatchActionRestoreToast', {total: this.count()}]);
+        ToastService.success(['BatchActionRestoreToast', {total: this.count}]);
     }
 
 
