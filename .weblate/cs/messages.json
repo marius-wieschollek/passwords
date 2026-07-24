@@ -3444,5 +3444,8 @@
     },
     "frontend-BatchActionRemoveFavorites": {
         "message": "Odebrat z oblíbených"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Obnovit položky"
     }
 }
