@@ -3366,5 +3366,83 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "İhlal edilen parolalar veritabanının güncellenmesinde hata bildirilmedi."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ seçilmiş",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Favorilere Ekle"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Yönetin Etiketler"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Delete öğeleri"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "$TOTAL$ eşyaları çöpe taşımak mı istiyorsunuz?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ eşyaları çöpe taşındı",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Delete öğeleri"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ çöpten restore edilen öğeler",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ favoriler ekledi",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favoriler kaldırıldı",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ eşyaları \"$FOLDER$'a taşındı",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
