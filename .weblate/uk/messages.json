@@ -3447,5 +3447,8 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Прибрати зірочку"
     }
 }
