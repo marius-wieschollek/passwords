@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "A sérült jelszavak adatbázisának frissítése nem jelentett hibákat."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ kiválasztott",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Eltávolítás a kedvencekből"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Hozzáadás a kedvencekhez"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Címkék kezelése"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "A tételek törlése"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "El akarod vinni a $TOTAL$ tárgyakat a szemétbe?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ tárgyak a szemétbe",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "A tételek törlése"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "A tételek visszaállítása"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ a szemétből visszanyert termékek",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ Hozzáadott kedvencek",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ Kedvencek eltávolítása",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ elemek áthelyezve \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
