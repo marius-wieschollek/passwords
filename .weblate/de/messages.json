@@ -3367,5 +3367,8 @@
     },
     "frontend-BatchActionRemoveFavorites": {
         "message": "Aus den Favoriten entfernen"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Objekte wiederherstellen"
     }
 }
