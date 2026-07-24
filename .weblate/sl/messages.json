@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Posodobitev baze kršenih gesel ni poročala o napakah."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "Izbrano $TOTAL$",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Odstrani iz priljubljenih"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Dodaj med priljubljene"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Upravljajte značke"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Zbriši postavke"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Ali želite premakniti $TOTAL$ predmetov v smeti?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "Predmeti premaknjeni v smeti",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Zbriši postavke"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Obnovi predmete"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "Predmeti obnovljeni iz smeti",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ najljubši dodani",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favoriti odstranjeni",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ postavke preselil v \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
