@@ -3364,5 +3364,8 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Die Aktualisierung der Datenbank mit den kompromittierten Passwörtern hat keine Fehler gemeldet."
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Aus den Favoriten entfernen"
     }
 }
