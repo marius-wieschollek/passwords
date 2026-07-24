@@ -2916,7 +2916,7 @@
         }
     },
     "settings-RecoverItemsTitle": {
-        "message": "Objekte wiederhergestellt",
+        "message": "Elemente wiederhergestellt",
         "description": "Title of the success message after the recover hidden items action was executed"
     },
     "settings-RecoverItemsError": {
