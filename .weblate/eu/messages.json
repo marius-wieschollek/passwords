@@ -3271,5 +3271,89 @@
                 "content": "$1"
             }
         }
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ hautatuta",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Kendu gogokoetatik"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Gehitu gogokoei"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Kudeatu etiketak"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Ezabatu elementuak"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Elementuak zakarrontzira bota nahi dituzu?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ elementuak zakarrontzira bota zituzten",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Ezabatu elementuak"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Leheneratu elementuak"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ zakarrontzitik berreskuratutako elementuak",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ gogokoak gehitu dira",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ gogokoak kenduak",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ elementuak \"$FOLDER$\"era aldatu ziren",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
