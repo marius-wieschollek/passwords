@@ -3366,5 +3366,89 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Aktualizácia porušenej databázy hesiel nenahlásil chyby."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ vybrané",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Odstrániť z obľúbených"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Pridať k obľúbeným"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Správa značiek"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Odstrániť položky"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Chcete presunúť položky $TOTAL$ do koša?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ položky presunuté do koša",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Odstrániť položky"
+    },
+    "frontend-BatchActionTrashRestore": {
+        "message": "Obnoviť položky"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ položky obnovené z odpadu",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ obľúbené pridané",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ odstránené obľúbené",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ položky presunuté do \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
