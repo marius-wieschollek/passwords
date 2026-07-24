@@ -28,7 +28,6 @@ export default class DeleteItemsBatchAction extends BatchAction {
     }
 
     #getLanguageTags() {
-        console.log(this._options.isTrashSection);
         if(this._options.isTrashSection) {
             return {
                 title: 'Empty Trash',

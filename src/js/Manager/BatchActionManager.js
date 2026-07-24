@@ -75,7 +75,6 @@ class BatchActionManager {
 
     isItemProcessed(item) {
         for(let action of this._state.actions) {
-            console.log(action.hasItem(item));
             if(action.hasItem(item)) {
                 return true;
             }
