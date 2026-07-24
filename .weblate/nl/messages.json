@@ -3366,5 +3366,86 @@
     },
     "backend-BreachedPasswordsDbUpdateCheckOk": {
         "message": "Update van inbreuk op wachtwoorden database heeft geen fouten gemeld."
+    },
+    "frontend-BatchActionSelectedLabel": {
+        "message": "$TOTAL$ geselecteerd",
+        "placeholders": {
+            "total": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-BatchActionRemoveFavorites": {
+        "message": "Uit favorieten verwijderen"
+    },
+    "frontend-BatchActionAddFavorites": {
+        "message": "Aan favorieten toevoegen"
+    },
+    "frontend-BatchActionManageTags": {
+        "message": "Tags beheren"
+    },
+    "frontend-BatchActionDeleteItemsTitle": {
+        "message": "Items verwijderen"
+    },
+    "frontend-BatchActionDeleteItemsText": {
+        "message": "Wilt u $TOTAL$ items naar de prullenbak verplaatsen?",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of items to be deleted"
+            }
+        }
+    },
+    "frontend-BatchActionDeleteItemsToast": {
+        "message": "$TOTAL$ items verplaatst naar prullenbak",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of deleted items"
+            }
+        }
+    },
+    "frontend-BatchActionTrashDelete": {
+        "message": "Items verwijderen"
+    },
+    "frontend-BatchActionRestoreToast": {
+        "message": "$TOTAL$ items hersteld uit prullenbak",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of restored items"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteAddedToast": {
+        "message": "$TOTAL$ favorieten toegevoegd",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of added favorites"
+            }
+        }
+    },
+    "frontend-BatchActionFavoriteRemoveToast": {
+        "message": "$TOTAL$ favorieten verwijderd",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of removed favorites"
+            }
+        }
+    },
+    "frontend-BatchActionMoveItemsToast": {
+        "message": "$TOTAL$ items verplaatst naar \"$FOLDER$\"",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of moved items"
+            },
+            "folder": {
+                "content": "$1",
+                "description": "Target folder name"
+            }
+        }
     }
 }
