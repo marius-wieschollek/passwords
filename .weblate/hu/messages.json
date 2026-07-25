@@ -3450,5 +3450,32 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Választás bekapcsolása \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Jelszó: \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Mappa bejegyzés \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

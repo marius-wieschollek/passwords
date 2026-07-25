@@ -3457,5 +3457,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Gjenopprett elementer"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Endre utvalg for \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Passordoppføring for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

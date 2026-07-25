@@ -3450,5 +3450,32 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Valitse valinta \"X22X]\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Salasanamerkintä \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Kansiomerkintä \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

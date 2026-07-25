@@ -3450,5 +3450,32 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Prepnúť výber pre \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Záznam hesla pre \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Záznam priečinku pre \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

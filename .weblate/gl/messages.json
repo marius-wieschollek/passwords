@@ -3462,5 +3462,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Restaurar os elementos"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Selección de \"X22X\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Contrasinal: \"X20X\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

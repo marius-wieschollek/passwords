@@ -3450,5 +3450,32 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Öğeleri Geri Yükle"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "\"$ITEM$ için seçim yapmak",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Şifre girişi \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "\"$LABEL$\" için klasör girişi",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

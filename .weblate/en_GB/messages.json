@@ -3450,5 +3450,32 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Toggle selection for \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Password entry for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the password entry"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Folder entry for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

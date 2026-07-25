@@ -3450,5 +3450,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "恢复项"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "切换“ $ITEM$” 的选择",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "\"$LABEL$\"的密码条目",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }
