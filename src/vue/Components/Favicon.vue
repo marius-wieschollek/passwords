@@ -1,5 +1,5 @@
 <template>
-    <img :src="src" :title="title" :width="size" :height="size" loading="lazy" alt=""/>
+    <img :src="src" :title="title" :width="size" :height="size" loading="lazy" alt="" @load="lazyLoad"/>
 </template>
 
 <script>
@@ -21,34 +21,40 @@
 
         data() {
             return {
-                src: SettingsService.get('server.theme.app.icon')
+                loaded: false,
+                src   : SettingsService.get('server.theme.app.icon')
             };
-        },
-
-        mounted() {
-            this.fetchIcon();
         },
 
         methods: {
             fetchIcon() {
-                let domain = this.domain,
-                    size   = this.size;
                 this.src = SettingsService.get('server.theme.app.icon');
-                FaviconService
-                    .fetch(domain, size)
-                    .then((data) => {
-                        if(this.domain !== domain || this.size !== size) return;
-                        this.src = data;
-                    });
+                this.$nextTick(() => {
+                    let domain = this.domain,
+                        size   = this.size;
+
+                    FaviconService
+                        .fetch(domain, size)
+                        .then((data) => {
+                            if(this.domain !== domain || this.size !== size) return;
+                            this.src = data;
+                            this.loaded = true;
+                        });
+                });
+            },
+            lazyLoad() {
+                if(!this.loaded) {
+                    this.fetchIcon();
+                }
             }
         },
 
         watch: {
             domain() {
-                this.fetchIcon();
+                this.lazyLoad();
             },
             size() {
-                this.fetchIcon();
+                this.lazyLoad();
             }
         }
     };
