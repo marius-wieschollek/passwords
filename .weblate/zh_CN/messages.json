@@ -3477,5 +3477,14 @@
                 "description": "Name of the folder entry"
             }
         }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "\"$LABEL$\"的标记条目",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
     }
 }
