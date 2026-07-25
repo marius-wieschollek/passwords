@@ -3255,7 +3255,7 @@
         "description": "Label in the dialog to open the change password page of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "«{host}» non anuncia a súa páxina de cambio de contrasinal. Pode atopar a función de cambio de contrasinal no sitio web.",
+        "message": "«$HOST$» non anuncia a súa páxina de cambio de contrasinal. Pode atopar a función de cambio de contrasinal no sitio web.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3271,7 +3271,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "O URL de embaixo foi detectado como páxina de cambio de contrasinal para «{label}». Prema no botón para abrilo.",
+        "message": "O URL de embaixo foi detectado como páxina de cambio de contrasinal para «$LABEL$». Prema no botón para abrilo.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3380,7 +3380,7 @@
         "message": "A actualización da base de datos de contrasinais violados non informou de erros."
     },
     "frontend-BatchActionSelectedLabel": {
-        "message": "$TOTAL$ seleccionado",
+        "message": "$TOTAL$ seleccionado(s)",
         "placeholders": {
             "total": {
                 "content": "$1"
@@ -3464,7 +3464,7 @@
         "message": "Restaurar os elementos"
     },
     "frontend-BatchActionSelectToggleAriaLabel": {
-        "message": "Selección de \"X22X\"",
+        "message": "Activar/desactivar a selección de «$ITEM$»",
         "placeholders": {
             "item": {
                 "content": "$1",
@@ -3473,7 +3473,7 @@
         }
     },
     "frontend-PasswordListItemAriaLabel": {
-        "message": "Contrasinal: \"X20X\"",
+        "message": "Entrada de contrasinal para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3482,7 +3482,7 @@
         }
     },
     "frontend-FolderListItemAriaLabel": {
-        "message": "Páxinas que ligan con \"X18X\"",
+        "message": "Entrada de cartafol para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3491,7 +3491,7 @@
         }
     },
     "frontend-TagListItemAriaLabel": {
-        "message": "Páxinas que ligan con \"X15X\"",
+        "message": "Entrada de etiqueta para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3500,13 +3500,13 @@
         }
     },
     "frontend-TagPickerEmpty": {
-        "message": "No se han encontrado etiquetas"
+        "message": "Non foi atopada ningunha etiqueta"
     },
     "frontend-TagPickerLoading": {
         "message": "Cargando"
     },
     "frontend-TagPickerTagAdded": {
-        "message": "Engadir etiqueta {tag}",
+        "message": "Engadiuse a etiqueta «$TAG$»",
         "placeholders": {
             "tag": {
                 "content": "$1",
@@ -3515,7 +3515,7 @@
         }
     },
     "frontend-TagPickerTagRemoved": {
-        "message": "Eliminar etiqueta {tag}",
+        "message": "A etiqueta «$TAG$» foi retirada",
         "placeholders": {
             "tag": {
                 "content": "$1",
