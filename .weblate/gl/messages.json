@@ -3498,5 +3498,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "No se han encontrado etiquetas"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Cargando"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Engadir etiqueta {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Eliminar etiqueta {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
