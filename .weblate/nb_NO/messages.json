@@ -3493,5 +3493,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Ingen tagger funnet"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Laster"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Lagt til etikett {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Fjernet merket {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
