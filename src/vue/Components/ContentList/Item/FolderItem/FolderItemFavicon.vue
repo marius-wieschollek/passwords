@@ -9,7 +9,7 @@
   -->
 <template>
     <div class="favicon">
-        <img :src="imgSrc" :title="title" width="32" height="32" loading="lazy" alt=""/>
+        <img class="icon" :src="imgSrc" :title="title" width="32" height="32" loading="lazy" alt=""/>
         <star-icon class="favorite" :size="20" fill-color="var(--color-element-warning)" v-if="favorite"/>
     </div>
 </template>
@@ -17,9 +17,11 @@
 <script>
     import StarIcon from "@icon/Star.vue";
     import SettingsService from "@js/Services/SettingsService";
+    import Favicon from "@vc/Favicon.vue";
 
     export default {
         components: {
+            Favicon,
             StarIcon,
         },
 
