@@ -3468,5 +3468,14 @@
                 "description": "Name of the item"
             }
         }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Wpis folderu dla \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }
