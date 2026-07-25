@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Tunnisteita ei löytynyt"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Ladataan"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Lisätty tagi {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Poistettu tagi {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
