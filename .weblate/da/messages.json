@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Ingen mærker fundet"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Indlæsning"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Tilføjet tag {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Fjernet mærke {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
