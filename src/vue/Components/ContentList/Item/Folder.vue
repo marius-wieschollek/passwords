@@ -11,6 +11,7 @@
 <template>
     <div :class="className"
          @click="openAction($event)"
+         @contextmenu="openContextMenu"
          @dragstart="dragStartAction($event)"
          :data-folder-id="folder.id"
          :data-folder-title="folder.label"
@@ -39,6 +40,7 @@
     import FolderActions from "@js/Actions/Folder/FolderActions";
     import LoggingService from "@js/Services/LoggingService";
     import NcDateTime from "@nextcloud/vue/components/NcDateTime";
+    import {emit} from "@nextcloud/event-bus";
 
     export default {
         components: {
@@ -80,6 +82,17 @@
                 if($event.target.closest('.checkbox-radio-switch') !== null) return;
                 this.$router.push({name: 'Folders', params: {folder: this.folder.id}});
             },
+            openContextMenu(event) {
+                if(this.openedMenu) {
+                    return;
+                }
+
+                this.openedMenu = true;
+                emit('passwords:contextmenu:opened', {item: this.folder, pos: {x: event.clientX, y: event.clientY}});
+
+                event.preventDefault();
+                event.stopPropagation();
+            },
             dragStartAction($e) {
                 DragManager
                     .start($e, this.folder)
@@ -90,6 +103,14 @@
                             this.actions.delete(this.folder).catch(LoggingService.catch);
                         }
                     });
+            }
+        },
+
+        watch: {
+            openedMenu(value) {
+                if(!value) {
+                    emit('passwords:contextmenu:closed', {item: this.folder});
+                }
             }
         }
     };
