@@ -3465,5 +3465,14 @@
                 "description": "Name of the item"
             }
         }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Zápis složky pro \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }
