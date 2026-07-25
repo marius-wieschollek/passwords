@@ -1528,7 +1528,7 @@
         "message": "Pequena base de datos local (5 millóns de contrasinais)"
     },
     "backend-000400": {
-        "message": "Gran base de datos local e «Enganáronme?» (HIBP?)"
+        "message": "Gran base de datos local e HIBP?"
     },
     "backend-000402": {
         "message": "Dicionario local"
@@ -2169,7 +2169,7 @@
         "message": "Ordena os contrasinais polo atributo seleccionado cando se selecciona a clasificación por nome"
     },
     "backend-000513": {
-        "message": "O servizo de favicon escollido require unha chave de API ou un punto final, mais non se forneceu nada."
+        "message": "O servizo de faviconas escollido require unha chave de API ou un punto final, mais non se forneceu nada."
     },
     "frontend-000582": {
         "message": "Envíalle correos cando outras persoas comparten contrasinais con Vde."
