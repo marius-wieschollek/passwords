@@ -3450,5 +3450,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Restaurar Itens"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Alternar seleção para \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Senha para \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

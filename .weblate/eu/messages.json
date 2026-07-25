@@ -3355,5 +3355,23 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Txandakatu hautapena \"$ITEM$\"-rako",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Pasahitza: \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

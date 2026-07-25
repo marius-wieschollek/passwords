@@ -3450,5 +3450,23 @@
     },
     "frontend-BatchActionRemoveFavorites": {
         "message": "Прибрати зірочку"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Вибір Toggle для \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Введення пароля для \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

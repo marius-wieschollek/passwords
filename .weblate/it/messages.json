@@ -3450,5 +3450,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Recupera oggetti"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Selezione di gioco per \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Password per \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

@@ -3447,5 +3447,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Obnovit položky"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Volba přepínání pro \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Záznam hesla pro \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

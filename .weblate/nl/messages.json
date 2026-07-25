@@ -3450,5 +3450,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Restore Items"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Schakel selectie voor \"$ITEM$\" in/uit",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Wachtwoord voor \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }
