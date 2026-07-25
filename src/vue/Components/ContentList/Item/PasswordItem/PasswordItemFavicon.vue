@@ -17,7 +17,7 @@
 
 <script>
     import Favicon from "@vc/Favicon.vue";
-    import StarIcon from "vue-material-design-icons/Star.vue";
+    import StarIcon from "@icon/Star.vue";
 
     export default {
         components: {

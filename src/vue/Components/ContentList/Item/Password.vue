@@ -48,7 +48,6 @@
 
 <script>
     import DragManager from '@js/Manager/DragManager';
-    import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import SearchManager from "@js/Manager/SearchManager";
     import PasswordSidebar from "@js/Models/Sidebar/PasswordSidebar";
@@ -61,6 +60,7 @@
     import PasswordItemTags from "@vc/ContentList/Item/PasswordItem/PasswordItemTags.vue";
     import PasswordItemFavicon from "@vc/ContentList/Item/PasswordItem/PasswordItemFavicon.vue";
     import PasswordItemBatchToggle from "@vc/ContentList/Item/PasswordItem/PasswordItemBatchToggle.vue";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -69,7 +69,7 @@
             PasswordItemFavicon,
             PasswordItemBatchToggle,
             PasswordItemSecurityIcon,
-            'password-item-action-menu': () => import(/* webpackChunkName: "PasswordActionMenu" */ '@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue')
+            'password-item-action-menu': () => import(/* webpackChunkName: "PasswordItemActionMenu" */ '@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue')
         },
 
         props: {
@@ -206,7 +206,7 @@
                         } else if(data.dropType === 'tag') {
                             this.password = await this.actions.addTag(data.tagId);
                         } else if(data.dropType === 'trash') {
-                            PasswordManager.deletePassword(this.password);
+                            this.actions.delete().catch(LoggingService.catch);
                         }
                     });
             }
@@ -241,7 +241,7 @@
             border-bottom : 1px solid var(--color-border);
             cursor        : pointer;
             display       : flex;
-            padding       : 0 .25rem;
+            padding       : 0 1.5rem 0 .25rem;
 
             .title {
                 font-size      : 1rem;

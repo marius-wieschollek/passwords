@@ -3491,11 +3491,21 @@
     },
     "frontend-PasswordListItemAriaLabel": {
         "message": "Password entry for \"$LABEL$\"",
-        "description": "Aria label of the list entry for passwords, folders and tags in the list view",
+        "description": "Aria label of the list entry for passwords in the list view",
         "placeholders": {
             "label": {
                 "content": "$1",
-                "description": "Name of the item"
+                "description": "Name of the password entry"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Folder entry for \"$LABEL$\"",
+        "description": "Aria label of the list entry for folders in the list view",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
             }
         }
     }

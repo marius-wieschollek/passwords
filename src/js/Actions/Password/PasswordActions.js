@@ -19,84 +19,86 @@ import LocalisationService from "@js/Services/LocalisationService";
 import LoggingService from "@js/Services/LoggingService";
 
 export default class PasswordActions {
+    #password;
+
     get password() {
-        return this._password;
+        return this.#password;
     }
 
     constructor(password) {
-        this._password = password;
+        this.#password = password;
         Events.on('password.changed', (event) => {
-            if(this._password.id === event.object.id) {
-                this._password = event.object;
+            if(this.#password.id === event.object.id) {
+                this.#password = event.object;
             }
         })
     }
 
     print() {
-        let printer = new PrintPasswordAction(this._password);
+        let printer = new PrintPasswordAction(this.#password);
         printer.print().catch(LoggingService.exception);
     }
 
     async favorite(status = null) {
-        let oldStatus = this._password.favorite === true;
+        let oldStatus = this.#password.favorite === true;
         if(status !== null) {
-            this._password.favorite = status === true;
+            this.#password.favorite = status === true;
         } else {
-            this._password.favorite = !this._password.favorite;
+            this.#password.favorite = !this.#password.favorite;
         }
 
         try {
-            await PasswordManager.updatePassword(this._password);
+            await PasswordManager.updatePassword(this.#password);
         } catch(e) {
-            this._password.favorite = oldStatus;
+            this.#password.favorite = oldStatus;
             LoggingService.error(e);
         }
 
-        return this._password;
+        return this.#password;
     }
 
     edit() {
-        return PasswordManager.editPassword(this._password);
+        return PasswordManager.editPassword(this.#password);
     }
 
     clone() {
-        return PasswordManager.clonePassword(this._password);
+        return PasswordManager.clonePassword(this.#password);
     }
 
     delete() {
-        return PasswordManager.deletePassword(this._password);
+        return PasswordManager.deletePassword(this.#password);
     }
 
     move(folder = null) {
-        return PasswordManager.movePassword(this._password, folder);
+        return PasswordManager.movePassword(this.#password, folder);
     }
 
     async addTag(tag) {
-        let action = new AddTagAction(this._password);
-        this._password = await action.addTag(tag);
-        return this._password;
+        let action = new AddTagAction(this.#password);
+        this.#password = await action.addTag(tag);
+        return this.#password;
     }
 
     async qrcode() {
         let PasswordQrCode = await import(/* webpackChunkName: "QrCode" */ '@vue/Dialog/QrCode.vue'),
             PwQrCodeDialog = Vue.extend(PasswordQrCode.default);
 
-        new PwQrCodeDialog({propsData: {password: this._password}}).$mount(UtilityService.popupContainer());
+        new PwQrCodeDialog({propsData: {password: this.#password}}).$mount(UtilityService.popupContainer());
     }
 
     async openChangePasswordPage() {
         let ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue'),
             ChangePasswordPageDialog = Vue.extend(ChangePasswordPage.default);
 
-        new ChangePasswordPageDialog({propsData: {password: this._password}}).$mount(UtilityService.popupContainer());
+        new ChangePasswordPageDialog({propsData: {password: this.#password}}).$mount(UtilityService.popupContainer());
     }
 
     clipboard(attribute) {
         let message = 'Error copying {element} to clipboard';
-        if(!this._password.hasOwnProperty(attribute) || this._password[attribute].length === 0) {
+        if(!this.#password.hasOwnProperty(attribute) || this.#password[attribute].length === 0) {
             message = 'ClipboardCopyEmpty';
         } else {
-            if(UtilityService.copyToClipboard(this._password[attribute])) message = '{element} was copied to clipboard';
+            if(UtilityService.copyToClipboard(this.#password[attribute])) message = '{element} was copied to clipboard';
         }
 
         ToastService.info([message, {element: LocalisationService.translate(attribute.capitalize())}]);

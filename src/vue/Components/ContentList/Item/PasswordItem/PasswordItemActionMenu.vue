@@ -58,13 +58,13 @@
                 </template>
                 {{ t('Edit') }}
             </nc-action-button>
-            <nc-action-button @click="cloneAction" v-if="password.editable">
+            <nc-action-button @click="actions.clone()" v-if="password.editable">
                 <template #icon>
                     <content-copy-icon :size="20"/>
                 </template>
                 {{ t('Edit as new') }}
             </nc-action-button>
-            <nc-action-button @click="moveAction">
+            <nc-action-button @click="actions.move()">
                 <template #icon>
                     <folder-move-icon :size="20"/>
                 </template>
@@ -145,7 +145,6 @@
     import QrcodeIcon from "@icon/Qrcode";
     import LockResetIcon from "@icon/LockReset";
     import NcActions from '@nc/NcActions.js';
-    import NcDateTime from '@nc/NcDateTime.js';
     import NcActionButton from '@nc/NcActionButton.js';
     import NcActionLink from '@nc/NcActionLink.js';
     import NcActionSeparator from '@nc/NcActionSeparator.js';
@@ -170,7 +169,6 @@
             'restore-icon': () => import(/* webpackChunkName: "RestoreIcon" */ '@icon/Restore'),
             TrashCanIcon,
             NcActions,
-            NcDateTime,
             NcActionLink,
             NcActionButton,
             NcActionSeparator
@@ -223,14 +221,8 @@
                     this.$emit('click-action', action);
                 }
             },
-            cloneAction() {
-                PasswordManager.clonePassword(this.password);
-            },
             deleteAction() {
-                PasswordManager.deletePassword(this.password);
-            },
-            moveAction() {
-                PasswordManager.movePassword(this.password);
+                this.actions.delete();
             }
         }
     };
