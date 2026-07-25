@@ -91,7 +91,7 @@
 
         computed: {
             selectionCountLabel() {
-                return BatchActionManager.count ? LocalisationService.translate('BatchActionSelectedLabel', {total: BatchActionManager.count}):'';
+                return BatchActionManager.totalSelectedItems ? LocalisationService.translate('BatchActionSelectedLabel', {total: BatchActionManager.totalSelectedItems}):'';
             },
             canMove() {
                 return !this.isTrashSection && (BatchActionManager.folders.length !== 0 || BatchActionManager.passwords.length !== 0);
@@ -109,10 +109,10 @@
                        (BatchActionManager.tags.length === 0 || BatchActionManager.tags.every((tag) => tag.favorite === true));
             },
             hasSelection() {
-                return BatchActionManager.active;
+                return BatchActionManager.hasSelectedItems;
             },
             allSelected() {
-                return BatchActionManager.allSelected;
+                return BatchActionManager.allVisibleSelected;
             },
             isIntermediate() {
                 return this.hasSelection && !this.allSelected;
@@ -153,10 +153,10 @@
                 }
             },
             selectAllValue(value) {
-                if(!value && BatchActionManager.allSelected) {
-                    BatchActionManager.clear();
-                } else if(value && !BatchActionManager.allSelected) {
-                    BatchActionManager.selectAll();
+                if(!value && BatchActionManager.allVisibleSelected) {
+                    BatchActionManager.clearSelectedItems();
+                } else if(value && !BatchActionManager.allVisibleSelected) {
+                    BatchActionManager.selectAllVisibleItems();
                 }
             }
         }

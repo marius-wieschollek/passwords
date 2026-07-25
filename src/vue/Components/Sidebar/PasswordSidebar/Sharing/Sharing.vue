@@ -40,7 +40,7 @@
     import ToastService from "@js/Services/ToastService";
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
-
+    import LoggingService from "@js/Services/LoggingService";
     export default {
         components: {
             Field,
@@ -221,7 +221,7 @@
             reloadShares() {
                 API.showPassword(this.password.id, 'shares')
                    .then((d) => {this.shares = d.shares;})
-                   .catch(console.error);
+                   .catch(LoggingService.catch);
             },
             submitAction($event) {
                 if($event.keyCode === 13) {
@@ -278,7 +278,7 @@
                            })
                            .catch((e) => {
                                this.cronPromise = null;
-                               console.error(e);
+                               LoggingService.error(e);
                                reject(e);
                            });
                     });

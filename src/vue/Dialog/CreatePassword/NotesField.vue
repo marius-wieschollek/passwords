@@ -25,6 +25,7 @@
     import MessageService from "@js/Services/MessageService";
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
+    import LoggingService from "@js/Services/LoggingService";
 
     const MaxNotesLength = 4096;
 
@@ -131,7 +132,7 @@
                         }
                     );
                 } catch(e) {
-                    console.error(e);
+                    LoggingService.error(e);
                     MessageService.alert(['Unable to load {module}', {module: 'ToastUI Editor'}], 'Network error');
                 }
             }

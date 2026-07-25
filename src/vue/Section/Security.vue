@@ -34,7 +34,7 @@
     import Application from '@js/Init/Application';
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
-
+    import LoggingService from "@js/Services/LoggingService";
     export default {
         extends   : BaseSection,
         components: {
@@ -95,7 +95,7 @@
 
                     API.findPasswords({status: status}, model)
                        .then((d) => {this.updatePasswordList(d, status);})
-                       .catch(console.error);
+                       .catch(LoggingService.catch);
                     if(!this.passwords.length) this.loading = true;
                 } else {
                     this.loading = false;

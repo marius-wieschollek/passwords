@@ -21,6 +21,7 @@
     import DetailField from '@vc/Sidebar/PasswordSidebar/Details/DetailField';
     import DialogWindow from "@vue/Dialog/DialogWindow";
     import LocalisationService from "@js/Services/LocalisationService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {DialogWindow, DetailField, Translate},
@@ -107,7 +108,7 @@
             restoreAction() {
                 PasswordManager.restoreRevision(this.password, this.revision)
                                .then(() => {this.closeWindow();})
-                               .catch(console.error);
+                               .catch(LoggingService.catch);
             },
             getClientLabel(client) {
                 if(client.substr(0, 8) === 'CLIENT::') {

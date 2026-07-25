@@ -84,7 +84,7 @@
             },
             search: {
                 handler(value) {
-                    if(value.active) {
+                    if(value.hasSelectedItems) {
                         let query = btoa(value.query);
                         if(this.$route.name === 'Search' && this.$route.params.query !== query) {
                             this.$router.push({name: 'Search', params: {query}});

@@ -91,7 +91,7 @@
                 return BatchActionManager.isTagSelected(this.tag);
             },
             batchActionActive() {
-                return BatchActionManager.isItemProcessed(this.tag);
+                return BatchActionManager.isItemBeingProcessed(this.tag);
             }
         },
 

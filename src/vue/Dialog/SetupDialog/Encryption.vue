@@ -57,7 +57,7 @@
     import Translate from '@vue/Components/Translate';
     import SettingsService from '@js/Services/SettingsService';
     import EncryptionManager from '@js/Manager/EncryptionManager';
-
+    import LoggingService from "@js/Services/LoggingService";
     export default {
         components: {Translate},
         props     : {
@@ -171,7 +171,7 @@
                         (d) => {this.updateEncryptionStatus(d);}
                     );
                 } catch(e) {
-                    console.error(e);
+                    LoggingService.error(e);
                 }
 
                 this.ready = true;

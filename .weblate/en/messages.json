@@ -3478,5 +3478,25 @@
                 "description": "Target folder name"
             }
         }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Toggle selection for \"$ITEM$\"",
+        "description": "Aria label of the batch action selection toggle for passwords, folders and tags in the list view",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Password entry for \"$LABEL$\"",
+        "description": "Aria label of the list entry for passwords, folders and tags in the list view",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }

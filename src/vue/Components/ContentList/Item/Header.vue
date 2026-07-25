@@ -40,7 +40,7 @@
                 return this.getClass('edited');
             },
             isBatchActionActive() {
-                return BatchActionManager.active;
+                return BatchActionManager.hasSelectedItems;
             }
         },
 
@@ -75,7 +75,7 @@
             align-items         : center;
 
             .title {
-                padding-left : 99px;
+                padding-left : 50px;
                 flex-grow    : 1;
             }
 

@@ -20,6 +20,7 @@
     import Translate from "@vc/Translate";
     import API from '@js/Helper/api';
     import FolderManager from "@js/Manager/FolderManager";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {Translate},
@@ -36,7 +37,7 @@
             };
         },
         mounted() {
-            this.getFolderName().catch(console.error);
+            this.getFolderName().catch(LoggingService.catch);
         },
         methods: {
             async getFolderName() {

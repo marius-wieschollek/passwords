@@ -318,7 +318,7 @@
                     new module.ImportManager()
                         .importDatabase(this.file, this.type, this.options, this.registerProgress)
                         .catch((e) => {
-                            console.error(e);
+                            LoggingService.error(e);
                             this.importing = false;
                             this.progress.style = 'error';
                             this.progress.status = 'Import failed';

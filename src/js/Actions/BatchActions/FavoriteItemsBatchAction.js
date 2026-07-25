@@ -17,32 +17,41 @@ import ToastService from "@js/Services/ToastService";
 export default class FavoriteItemsBatchAction extends BatchAction {
 
     async run() {
-        let makeFavorite = this._options.favorite;
+        const makeFavorite = this._options.favorite;
 
-        let promises = [];
-        for(let password of this._items.passwords) {
-            if(password.favorite === makeFavorite) continue;
-            password.favorite = makeFavorite;
-            promises.push(PasswordManager.updatePassword(password));
+        let total = 0;
+
+        total += await this.#setFavoriteStatus(
+            this._items.passwords,
+            makeFavorite,
+            async (password) => { await PasswordManager.updatePassword(password); }
+        );
+        total += await this.#setFavoriteStatus(
+            this._items.folders,
+            makeFavorite,
+            async (folder) => { await FolderManager.updateFolder(folder); }
+        );
+        total += await this.#setFavoriteStatus(
+            this._items.tags,
+            makeFavorite,
+            async (tag) => { await TagManager.updateTag(tag); }
+        );
+
+        ToastService.success([makeFavorite ? 'BatchActionFavoriteAddedToast':'BatchActionFavoriteRemoveToast', {total}]);
+    }
+
+    async #setFavoriteStatus(items, state, callback) {
+        let total    = 0,
+            promises = [];
+
+        for(let item of items) {
+            if(item.favorite === state) continue;
+            item.favorite = state;
+            promises.push(callback(item));
+            total++;
         }
         await Promise.all(promises);
 
-        promises = [];
-        for(let folder of this._items.folders) {
-            if(folder.favorite === makeFavorite) continue;
-            folder.favorite = makeFavorite;
-            promises.push(FolderManager.updateFolder(folder));
-        }
-        await Promise.all(promises);
-
-        promises = [];
-        for(let tag of this._items.tags) {
-            if(tag.favorite === makeFavorite) continue;
-            tag.favorite = makeFavorite;
-            promises.push(TagManager.updateTag(tag));
-        }
-        await Promise.all(promises);
-
-        ToastService.success([makeFavorite ? 'BatchActionFavoriteAddedToast':'BatchActionFavoriteRemoveToast', {total: this.count}]);
+        return total;
     }
 }

@@ -79,7 +79,7 @@ class EventManager {
         if(this.ignoreApiErrors) return;
 
         if(e.id === '4ad27488') {
-            API.clear();
+            API.clearSelectedItems();
 
             let current = router.currentRoute,
                 target  = {name: current.name, path: current.path, hash: current.hash, params: current.params};

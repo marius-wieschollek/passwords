@@ -100,7 +100,7 @@
                 return BatchActionManager.isFolderSelected(this.folder);
             },
             batchActionActive() {
-                return BatchActionManager.isItemProcessed(this.folder);
+                return BatchActionManager.isItemBeingProcessed(this.folder);
             }
         },
 

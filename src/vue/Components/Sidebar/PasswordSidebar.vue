@@ -104,6 +104,7 @@
     import LocalisationService from "@js/Services/LocalisationService";
     import Revisions from '@vc/Sidebar/PasswordSidebar/Tabs/Revisions';
     import Share from '@vc/Sidebar/PasswordSidebar/Tabs/Share';
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -143,7 +144,7 @@
         },
 
         mounted() {
-            this.loadPassword().catch(console.error);
+            this.loadPassword().catch(LoggingService.catch);
         },
 
         computed: {
@@ -197,7 +198,7 @@
             sidebar: {
                 handler(value) {
                     if(value) {
-                        this.loadPassword().catch(console.error);
+                        this.loadPassword().catch(LoggingService.catch);
                     } else {
 
                     }

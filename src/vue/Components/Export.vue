@@ -232,7 +232,7 @@
                         .exportDatabase(this.format, this.models, this.options)
                         .catch((e) => {
                             this.exporting = false;
-                            console.error(e);
+                            LoggingService.error(e);
                             MessageService.alert(e.message, 'Export error');
                         })
                         .then((d) => {

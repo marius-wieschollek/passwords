@@ -77,24 +77,27 @@
                 ui         : {
                     showTags: SettingsService.get('client.ui.list.tags.show', false) && window.innerWidth > 360
                 },
-                search     : SearchManager.status
+                search     : SearchManager.status,
+                timeout    : null
             };
         },
 
         created() {
-            this.refreshView();
-            Events.on('data.changed', this.refreshView);
+            this.triggerViewUpdate();
+            Events.on('data.changed', this.triggerViewUpdate);
             SearchManager.clearDatabase();
             subscribe('passwords:contextmenu:opened', this.positionContextMenu);
             subscribe('passwords:contextmenu:closed', this.closeContextMenu);
+            subscribe('passwords:batch-action:completed', this.triggerViewUpdate);
         },
 
         beforeDestroy() {
-            Events.off('data.changed', this.refreshView);
+            Events.off('data.changed', this.triggerViewUpdate);
             SearchManager.clearDatabase();
-            BatchActionManager.clear();
+            BatchActionManager.clearSelectedItems();
             unsubscribe('passwords:contextmenu:opened', this.positionContextMenu);
             unsubscribe('passwords:contextmenu:closed', this.closeContextMenu);
+            unsubscribe('passwords:batch-action:completed', this.triggerViewUpdate);
         },
 
         computed: {
@@ -135,6 +138,21 @@
         },
 
         methods: {
+            triggerViewUpdate() {
+                if(this.timeout) {
+                    clearTimeout(this.timeout);
+                }
+
+                if(BatchActionManager.isProcessingItems) {
+                    this.timeout = null;
+                    return;
+                }
+
+                this.timeout = setTimeout(
+                    () => { this.refreshView(); },
+                    100
+                );
+            },
             updateSorting($event) {
                 this.sorting = $event;
                 SettingsService.set('client.ui.sorting.field', $event.field);
@@ -189,17 +207,17 @@
             passwords(passwords) {
                 let db = {passwords, folders: this.folders, tags: this.tags};
                 SearchManager.setDatabase(db);
-                BatchActionManager.setVisible(this.folders, this.tags, passwords);
+                BatchActionManager.setVisibleItems(this.folders, this.tags, passwords);
             },
             tags(tags) {
                 let db = {passwords: this.passwords, folders: this.folders, tags};
                 SearchManager.setDatabase(db);
-                BatchActionManager.setVisible(this.folders, tags, this.passwords);
+                BatchActionManager.setVisibleItems(this.folders, tags, this.passwords);
             },
             folders(folders) {
                 let db = {passwords: this.passwords, folders, tags: this.tags};
                 SearchManager.setDatabase(db);
-                BatchActionManager.setVisible(folders, this.tags, this.passwords);
+                BatchActionManager.setVisibleItems(folders, this.tags, this.passwords);
             }
         }
     };

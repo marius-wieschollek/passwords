@@ -74,6 +74,7 @@
     import NcButton from '@nc/NcButton.js';
     import MessageService from "@js/Services/MessageService";
     import UtilityService from "@js/Services/UtilityService";
+    import LoggingService from "@js/Services/LoggingService";
 
     export default {
         components: {
@@ -164,7 +165,7 @@
                         this._success(password);
                         this.closeWindow(false);
                     } catch(e) {
-                        console.error(e);
+                        LoggingService.error(e);
                     }
                 }
             },

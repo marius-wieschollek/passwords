@@ -17,9 +17,11 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive"/>
+        <password-item-batch-toggle :password="password"/>
         <password-item-favicon :domain="password.website" :title="getTitle" :favorite="password.favorite" v-if="isVisible"/>
-        <div class="title" :title="getTitle"><span>{{ getTitle }}</span></div>
+        <div class="title" :title="getTitle">
+            <button :aria-label="t('PasswordListItemAriaLabel', {label: password.label})">{{ getTitle }}</button>
+        </div>
         <slot name="middle">
             <password-item-tags :password="password"/>
         </slot>
@@ -45,31 +47,28 @@
 </template>
 
 <script>
-    import Translate from '@vc/Translate';
     import DragManager from '@js/Manager/DragManager';
     import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import SearchManager from "@js/Manager/SearchManager";
-    import BatchActionManager from "@js/Manager/BatchActionManager";
     import PasswordSidebar from "@js/Models/Sidebar/PasswordSidebar";
     import Application from "@js/Init/Application";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import {emit, subscribe, unsubscribe} from '@nextcloud/event-bus';
     import UtilityService from "@js/Services/UtilityService";
     import NcDateTime from '@nc/NcDateTime.js';
-    import NcCheckboxRadioSwitch from '@nc/NcCheckboxRadioSwitch.js';
     import PasswordItemSecurityIcon from '@vc/ContentList/Item/PasswordItem/PasswordItemSecurityIcon.vue';
     import PasswordItemTags from "@vc/ContentList/Item/PasswordItem/PasswordItemTags.vue";
     import PasswordItemFavicon from "@vc/ContentList/Item/PasswordItem/PasswordItemFavicon.vue";
+    import PasswordItemBatchToggle from "@vc/ContentList/Item/PasswordItem/PasswordItemBatchToggle.vue";
 
     export default {
         components: {
+            NcDateTime,
             PasswordItemTags,
             PasswordItemFavicon,
-            Translate,
-            NcDateTime,
+            PasswordItemBatchToggle,
             PasswordItemSecurityIcon,
-            NcCheckboxRadioSwitch,
             'password-item-action-menu': () => import(/* webpackChunkName: "PasswordActionMenu" */ '@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue')
         },
 
@@ -82,7 +81,6 @@
         data() {
             return {
                 clickTimeout : null,
-                showMenu     : false,
                 detailsActive: false,
                 isSelected   : false,
                 openedMenu   : false,
@@ -115,12 +113,6 @@
 
                 return classNames;
             },
-            batchActionSelected() {
-                return BatchActionManager.isPasswordSelected(this.password);
-            },
-            batchActionActive() {
-                return BatchActionManager.isItemProcessed(this.password);
-            },
             hasCustomAction() {
                 return this.$slots.hasOwnProperty('custom-action');
             }
@@ -130,9 +122,7 @@
             clickAction($event) {
                 if($event && ($event.detail !== 1 ||
                               $event.target.closest('.checkbox-radio-switch') !== null ||
-                              $event.target.classList.contains('duplicate') ||
-                              $event.target.classList.contains('action-button') ||
-                              $event.target.classList.contains('action-button')
+                              $event.target.classList.contains('duplicate')
                 )
                 ) {
                     return;
@@ -223,16 +213,6 @@
         },
 
         watch: {
-            isSelected(value) {
-                if(this.batchActionSelected !== value) {
-                    BatchActionManager.togglePassword(this.password, value);
-                }
-            },
-            batchActionSelected(value) {
-                if(this.isSelected !== value) {
-                    this.isSelected = value;
-                }
-            },
             openedMenu(value) {
                 if(!value) {
                     emit('passwords:contextmenu:closed', {item: this.password});
@@ -243,7 +223,6 @@
 </script>
 
 <style lang="scss">
-
 #dragicon {
     padding         : 5px 5px 5px 42px;
     background      : no-repeat 5px;
@@ -262,10 +241,10 @@
             border-bottom : 1px solid var(--color-border);
             cursor        : pointer;
             display       : flex;
+            padding       : 0 .25rem;
 
             .title {
                 font-size      : 1rem;
-                padding-left   : .5rem;
                 cursor         : pointer;
                 line-height    : 50px;
                 min-width      : 0;
@@ -276,26 +255,27 @@
                 vertical-align : baseline;
                 display        : flex;
 
-                > span {
-                    text-overflow : ellipsis;
-                    overflow      : hidden;
-                    cursor        : pointer;
+                > button {
+                    text-overflow    : ellipsis;
+                    overflow         : hidden;
+                    cursor           : pointer;
+                    border           : none;
+                    background-color : transparent;
+                    color            : inherit;
+                    padding          : 0 0 0 .5rem;
+                    margin           : 0;
+                    line-height      : 50px;
+                    font-weight      : normal;
+                    text-align       : left;
+                    width            : 100%;
                 }
             }
 
-            .actions {
-                display         : flex;
-                align-self      : center;
-                align-items     : center;
-                justify-content : center;
-            }
-
             .date {
-                line-height   : 50px;
-                width         : 10rem;
-                font-size     : 1rem;
-                text-align    : right;
-                padding-right : .5rem;
+                line-height : 50px;
+                width       : 10rem;
+                font-size   : 1rem;
+                text-align  : right;
             }
 
             &:hover,
@@ -314,8 +294,7 @@
             }
 
             @media(max-width : $width-extra-small) {
-                .date,
-                .action-button {
+                .date {
                     display : none;
                 }
             }
@@ -324,8 +303,7 @@
 
     @media(max-width : $width-large) {
         &.show-details .item-list .row {
-            .date,
-            .action-button {
+            .date {
                 display : none;
             }
         }
@@ -334,8 +312,7 @@
     @media(max-width : $width-medium) {
         &.show-details .item-list .row {
             .tags,
-            .date,
-            .action-button {
+            .date {
                 display : none;
             }
         }
