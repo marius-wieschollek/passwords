@@ -3353,5 +3353,23 @@
     },
     "frontend-BatchActionTrashRestore": {
         "message": "Restaurar els elements"
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Commuta la selecció per \"$ITEM$\"",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Entrada de contrasenya per a \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
     }
 }
