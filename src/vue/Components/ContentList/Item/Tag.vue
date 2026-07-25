@@ -10,51 +10,45 @@
 
 <template>
     <div :class="className" @click="openAction($event)" :data-tag-id="tag.id" :data-tag-title="tag.label">
-        <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive"/>
-        <star-icon class="favorite" data-item-action="favorite" fill-color="var(--color-element-warning)" @click.prevent.stop="favoriteAction" v-if="tag.favorite"/>
-        <star-outline-icon class="favorite" data-item-action="favorite" fill-color="var(--color-placeholder-dark)" @click.prevent.stop="favoriteAction" v-else/>
-        <div class="favicon fa fa-tag" :style="{color: this.tag.color}" :title="tag.label"></div>
-        <div class="title" :title="tag.label"><span>{{ tag.label }}</span></div>
-        <slot name="middle"/>
-        <div class="more" @click="toggleMenu()" :aria-label="t('More')">
-            <i class="fa fa-ellipsis-h">
-                <a href="#" :aria-label="t('More')" :title="t('More')" @click.stop.prevent="toggleMenu()"></a>
-            </i>
-            <div class="tagActionsMenu popovermenu bubble menu" :class="{ open: showMenu }" @keydown.esc.stop.prevent="toggleMenu(false)">
-                <slot name="menu">
-                    <ul>
-                        <slot name="menu-top"/>
-                        <li>
-                            <translate tag="li" href="#" data-item-action="edit" @click.prevent="editAction()" icon="edit" say="Edit"/>
-                        </li>
-                        <li>
-                            <translate tag="li" href="#" data-item-action="delete" @click.prevent="deleteAction()" icon="trash" say="Delete"/>
-                        </li>
-                        <slot name="menu-bottom"/>
-                    </ul>
-                </slot>
-            </div>
+        <tag-item-batch-toggle :item="tag" v-model="isSelected"/>
+        <tag-item-favicon :favorite="tag.favorite" :color="tag.color" :title="tag.label"/>
+        <div class="title" :title="tag.label">
+            <button :aria-label="t('TagListItemAriaLabel', {label: tag.label})">{{ tag.label }}</button>
         </div>
-        <div class="date" :title="dateTitle">{{ getDate }}</div>
+        <slot name="middle"/>
+        <slot name="actions">
+            <tag-item-action-menu
+                    :actions="actions"
+                    :tag="tag"
+                    :opened-menu.sync="openedMenu"
+                    @closed="openedMenu = false"
+            >
+                <template v-if="hasCustomAction" #custom-action>
+                    <slot name="custom-action"/>
+                </template>
+                <template #restore-action>
+                    <slot name="restore-action"/>
+                </template>
+            </tag-item-action-menu>
+
+        </slot>
+        <nc-date-time class="date" :timestamp="tag.edited"/>
     </div>
 </template>
 
 <script>
-    import Translate from '@vc/Translate';
-    import TagManager from '@js/Manager/TagManager';
     import SearchManager from "@js/Manager/SearchManager";
-    import BatchActionManager from "@js/Manager/BatchActionManager";
-    import StarIcon from "@icon/Star";
-    import StarOutlineIcon from "@icon/StarOutline";
-    import LocalisationService from "@js/Services/LocalisationService";
-    import NcCheckboxRadioSwitch from "@nextcloud/vue/components/NcCheckboxRadioSwitch";
+    import TagItemFavicon from "@vc/ContentList/Item/TagItem/TagItemFavicon.vue";
+    import NcDateTime from "@nextcloud/vue/components/NcDateTime";
+    import TagActions from "@js/Actions/Tag/TagActions";
+    import TagItemBatchToggle from "@vc/ContentList/Item/TagItem/TagItemBatchToggle.vue";
 
     export default {
         components: {
-            Translate,
-            StarIcon,
-            StarOutlineIcon,
-            NcCheckboxRadioSwitch
+            TagItemBatchToggle,
+            TagItemFavicon,
+            NcDateTime,
+            'tag-item-action-menu': () => import(/* webpackChunkName: "TagItemActionMenu" */ '@vc/ContentList/Item/TagItem/TagItemActionMenu.vue')
         },
 
         props: {
@@ -65,18 +59,13 @@
 
         data() {
             return {
-                showMenu  : false,
-                isSelected: false
+                openedMenu: false,
+                isSelected: false,
+                actions   : new TagActions(this.tag)
             };
         },
 
         computed: {
-            getDate() {
-                return LocalisationService.formatDate(this.tag.edited);
-            },
-            dateTitle() {
-                return LocalisationService.translate('Last modified on {date}', {date: LocalisationService.formatDateTime(this.tag.edited)});
-            },
             className() {
                 let classNames = 'row tag';
 
@@ -87,78 +76,16 @@
 
                 return classNames;
             },
-            batchActionSelected() {
-                return BatchActionManager.isTagSelected(this.tag);
-            },
-            batchActionActive() {
-                return BatchActionManager.isItemBeingProcessed(this.tag);
+            hasCustomAction() {
+                return this.$slots.hasOwnProperty('custom-action');
             }
         },
 
         methods: {
-            favoriteAction() {
-                this.tag.favorite = !this.tag.favorite;
-                TagManager.updateTag(this.tag)
-                          .catch(() => { this.tag.favorite = !this.tag.favorite; });
-            },
-            toggleMenu(state = null) {
-                if(state) {
-                    this.showMenu = state === true;
-                } else {
-                    this.showMenu = !this.showMenu;
-                }
-
-                if(this.showMenu) {
-                    document.addEventListener('click', this.menuEvent);
-                } else {
-                    document.removeEventListener('click', this.menuEvent);
-                }
-            },
-            menuEvent($e) {
-                if($e.target.closest('[data-tag-id="' + this.tag.id + '"] .more') !== null) return;
-                this.showMenu = false;
-                document.removeEventListener('click', this.menuEvent);
-            },
             openAction($event) {
-                if($event.target.closest('.more') !== null || $event.target.closest('.checkbox-radio-switch') !== null) return;
+                if($event.target.closest('.checkbox-radio-switch') !== null) return;
                 this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
-            },
-            deleteAction() {
-                TagManager.deleteTag(this.tag);
-            },
-            editAction() {
-                TagManager.editTag(this.tag)
-                          .then((t) => {this.tag = t;});
-            }
-        },
-
-        watch: {
-            isSelected(value) {
-                if(this.batchActionSelected !== value) {
-                    BatchActionManager.toggleTag(this.tag, value);
-                }
-            },
-            batchActionSelected(value) {
-                if(this.isSelected !== value) {
-                    this.isSelected = value;
-                }
             }
         }
     };
 </script>
-
-<style lang="scss">
-
-#app-content {
-    .item-list {
-        .row.tag {
-            .favicon {
-                text-align     : center;
-                font-size      : 2.25rem;
-                vertical-align : top;
-            }
-        }
-    }
-}
-
-</style>

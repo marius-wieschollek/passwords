@@ -17,17 +17,26 @@
          :data-folder-title="folder.label"
          data-drop-type="folder">
         <folder-item-batch-toggle :item="folder"/>
-        <folder-item-favicon :title="folder.label"/>
+        <folder-item-favicon :title="folder.label" v-model="isSelected"/>
         <div class="title" :title="folder.label">
             <button :aria-label="t('FolderListItemAriaLabel', {label: folder.label})">{{ folder.label }}</button>
         </div>
         <slot name="middle"/>
-        <folder-item-action-menu
-                :actions="actions"
-                :folder="folder"
-                :opened-menu.sync="openedMenu"
-                @closed="openedMenu = false"
-        />
+        <slot name="actions">
+            <folder-item-action-menu
+                    :actions="actions"
+                    :folder="folder"
+                    :opened-menu.sync="openedMenu"
+                    @closed="openedMenu = false"
+            >
+                <template v-if="hasCustomAction" #custom-action>
+                    <slot name="custom-action"/>
+                </template>
+                <template #restore-action>
+                    <slot name="restore-action"/>
+                </template>
+            </folder-item-action-menu>
+        </slot>
         <nc-date-time class="date" :timestamp="folder.edited"/>
     </div>
 </template>
@@ -41,9 +50,13 @@
     import LoggingService from "@js/Services/LoggingService";
     import NcDateTime from "@nextcloud/vue/components/NcDateTime";
     import {emit} from "@nextcloud/event-bus";
+    import PasswordItemActionMenu from "@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue";
+    import PasswordItemSecurityIcon from "@vc/ContentList/Item/PasswordItem/PasswordItemSecurityIcon.vue";
 
     export default {
         components: {
+            PasswordItemSecurityIcon,
+            PasswordItemActionMenu,
             NcDateTime,
             FolderItemFavicon,
             FolderItemBatchToggle,
@@ -74,6 +87,9 @@
                 }
 
                 return classNames;
+            },
+            hasCustomAction() {
+                return this.$slots.hasOwnProperty('custom-action');
             }
         },
 

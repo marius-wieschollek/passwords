@@ -22,26 +22,20 @@
             <slot name="custom-action"/>
             <nc-action-button @click="actions.favorite()">
                 <template #icon>
-                    <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="folder.favorite"/>
+                    <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="tag.favorite"/>
                     <star-outline-icon :size="20" fill-color="var(--color-placeholder-dark)" v-else/>
                 </template>
-                {{ folder.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
+                {{ tag.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button @click="actions.rename()">
+            <nc-action-button @click="actions.edit()">
                 <template #icon>
                     <pencil-icon :size="20"/>
                 </template>
-                {{ t('Rename') }}
-            </nc-action-button>
-            <nc-action-button @click="actions.move()">
-                <template #icon>
-                    <folder-move-icon :size="20"/>
-                </template>
-                {{ t('Move') }}
+                {{ t('Edit') }}
             </nc-action-button>
             <nc-action-separator/>
             <slot name="restore-action" />
-            <nc-action-button @click="deleteFolder">
+            <nc-action-button @click="deleteTag">
                 <template #icon>
                     <trash-can-icon :size="20"/>
                 </template>
@@ -53,21 +47,19 @@
 
 <script>
     import TrashCanIcon from "@icon/TrashCan";
-    import FolderMoveIcon from "@icon/FolderMove";
     import PencilIcon from "@icon/Pencil";
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
     import NcActions from '@nc/NcActions.js';
     import NcActionButton from '@nc/NcActionButton.js';
     import NcActionSeparator from '@nc/NcActionSeparator.js';
-    import FolderActions from "@js/Actions/Folder/FolderActions";
+    import TagActions from "@js/Actions/Tag/TagActions";
 
     export default {
         components: {
             StarOutlineIcon,
             StarIcon,
             PencilIcon,
-            FolderMoveIcon,
             TrashCanIcon,
             NcActions,
             NcActionButton,
@@ -75,11 +67,11 @@
         },
 
         props: {
-            folder    : {
+            tag       : {
                 type: Object
             },
-            actions    : {
-                type: FolderActions
+            actions   : {
+                type: TagActions
             },
             openedMenu: {
                 type: Boolean
@@ -96,7 +88,7 @@
         },
 
         methods: {
-            deleteFolder() {
+            deleteTag() {
                 this.actions.delete();
             }
         }

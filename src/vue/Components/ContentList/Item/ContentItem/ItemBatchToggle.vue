@@ -24,6 +24,9 @@
         props: {
             item: {
                 type: Object
+            },
+            value: {
+                type: Boolean
             }
         },
 
@@ -51,7 +54,7 @@
                 if(this.batchActionSelected !== value) {
                     this.toggleSelection(value);
                 }
-                this.$emit('selected', value);
+                this.$emit('input', value);
             },
             batchActionSelected(value) {
                 if(this.isSelected !== value) {

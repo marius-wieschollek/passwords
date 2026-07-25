@@ -164,7 +164,7 @@ class BatchActionManager {
     }
 
     _toggle(list, item, state) {
-        let isActive = !this._has(list, item);
+        let isActive = this._has(list, item);
 
         if(typeof state !== 'boolean') {
             state = !isActive;

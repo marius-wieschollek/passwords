@@ -17,7 +17,7 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <password-item-batch-toggle :item="password"/>
+        <password-item-batch-toggle :item="password" v-model="isSelected"/>
         <password-item-favicon :domain="password.website" :title="getTitle" :favorite="password.favorite" v-if="isVisible"/>
         <div class="title" :title="getTitle">
             <button :aria-label="t('PasswordListItemAriaLabel', {label: password.label})">{{ getTitle }}</button>
@@ -39,6 +39,9 @@
             >
                 <template v-if="hasCustomAction" #custom-action>
                     <slot name="custom-action"/>
+                </template>
+                <template #restore-action>
+                    <slot name="restore-action"/>
                 </template>
             </password-item-action-menu>
         </slot>

@@ -14,21 +14,53 @@
             <breadcrumb :showAddNew="isNotEmpty" :newPassword="false"/>
             <div class="item-list">
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" :is-trash-section="true" v-if="isNotEmpty"/>
-                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id">
-                    <i class="icon fa fa-undo" slot="middle" @click.prevent="restoreFolderAction(folder)" :title="restoreTitle"></i>
-                    <li slot="menu-top">
-                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click.prevent="restoreFolderAction(folder)" say="Restore"/>
-                    </li>
+                <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" v-on:restore="restoreFolderAction(folder)">
+                    <template #custom-action>
+                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
+                    <template #restore-action>
+                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
                 </folder-line>
-                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id">
-                    <i class="icon fa fa-undo" slot="middle" @click.prevent="restoreTagAction(tag)" :title="restoreTitle"></i>
-                    <li slot="menu-top">
-                        <translate tag="a" href="#" data-item-action="restore" icon="undo" @click.prevent="restoreTagAction(tag)" say="Restore"/>
-                    </li>
+                <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" v-if="tag.trashed" v-on:restore="restoreTagAction(tag)">
+                    <template #custom-action>
+                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
+                    <template #restore-action>
+                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" v-on:restore="restorePasswordAction(password)" :key="password.id">
                     <template #custom-action>
-                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)" v-if="password.trashed">
+                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)">
+                            <template #icon>
+                                <restore-icon :size="20"/>
+                            </template>
+                            {{ t('Restore') }}
+                        </nc-action-button>
+                    </template>
+                    <template #restore-action>
+                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)">
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>

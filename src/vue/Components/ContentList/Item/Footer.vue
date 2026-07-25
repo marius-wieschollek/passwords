@@ -120,7 +120,7 @@
                 opacity             : 0.3;
 
                 .title {
-                    padding-left : 99px;
+                    padding-left : 50px;
                     cursor       : default;
 
                     span {

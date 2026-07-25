@@ -115,12 +115,7 @@
                 {{ t('PasswordActionPrint') }}
             </nc-action-button>
             <nc-action-separator/>
-            <nc-action-button @click="$emit('restore', password)" v-if="password.trashed">
-                <template #icon>
-                    <restore-icon :size="20"/>
-                </template>
-                {{ t('Restore') }}
-            </nc-action-button>
+            <slot name="restore-action" />
             <nc-action-button @click="deleteAction">
                 <template #icon>
                     <trash-can-icon :size="20"/>
@@ -166,7 +161,6 @@
             FolderMoveIcon,
             OpenInNewIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
-            'restore-icon': () => import(/* webpackChunkName: "RestoreIcon" */ '@icon/Restore'),
             TrashCanIcon,
             NcActions,
             NcActionLink,
