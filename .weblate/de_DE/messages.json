@@ -2952,7 +2952,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "QrCode anzeigen",
+        "message": "QR Code anzeigen",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-PasswordTagAddExists": {
@@ -3446,6 +3446,66 @@
             "folder": {
                 "content": "$1",
                 "description": "Target folder name"
+            }
+        }
+    },
+    "frontend-BatchActionSelectToggleAriaLabel": {
+        "message": "Auswahl für \"$ITEM$\" umschalten",
+        "placeholders": {
+            "item": {
+                "content": "$1",
+                "description": "Name of the item"
+            }
+        }
+    },
+    "frontend-PasswordListItemAriaLabel": {
+        "message": "Passwort Listeneintrag für \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the password entry"
+            }
+        }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Ordner Listeneintrag für \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "Tag Listeneintrag für \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Keine Tags gefunden"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Lädt"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Tag \"$TAG$\" hinzugefügt",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Tag \"$TAG$\" entfernt",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
             }
         }
     }
