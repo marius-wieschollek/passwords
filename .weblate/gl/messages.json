@@ -3489,5 +3489,14 @@
                 "description": "Name of the folder entry"
             }
         }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "Páxinas que ligan con \"X15X\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
     }
 }

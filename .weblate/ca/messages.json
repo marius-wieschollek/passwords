@@ -3380,5 +3380,14 @@
                 "description": "Name of the folder entry"
             }
         }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "Entrada d' etiqueta per a \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
     }
 }
