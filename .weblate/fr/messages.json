@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Aucune balise trouvée"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Chargement"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Ajouté la balise {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Étiquette supprimée {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }

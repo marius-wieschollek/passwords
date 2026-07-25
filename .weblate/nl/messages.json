@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Geen tags gevonden"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Laden"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Tag {tag} toegevoegd",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Tag {tag} verwijderd",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }

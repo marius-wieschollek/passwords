@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Ni najdenih značk"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Nalaganje"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Dodana oznaka {znaka}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Odstrani oznako {znaka}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }

@@ -3391,5 +3391,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Ez da etiketarik aurkitu"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Kargatzen"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Gehitu etiketa {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Kendutako etiketa {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }

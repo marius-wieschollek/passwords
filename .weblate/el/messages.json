@@ -3486,5 +3486,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Δε βρέθηκαν ετικέτες"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Φόρτωση"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Προστέθηκε ετικέτα {ετικέτα}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Αφαίρεση ετικέτας {ετικέτα}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }

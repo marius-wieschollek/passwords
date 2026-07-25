@@ -3483,5 +3483,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "Nebyly nalezeny žádné štítky"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Načítání"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Přidaná tag {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Odstraněná tag {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
