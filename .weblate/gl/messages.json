@@ -3480,5 +3480,14 @@
                 "description": "Name of the item"
             }
         }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Páxinas que ligan con \"X18X\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }
