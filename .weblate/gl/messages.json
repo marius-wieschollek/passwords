@@ -3506,7 +3506,7 @@
         "message": "Cargando"
     },
     "frontend-TagPickerTagAdded": {
-        "message": "Engadiuse a etiqueta «$TAG$»",
+        "message": "Foi engadida a etiqueta «$TAG$»",
         "placeholders": {
             "tag": {
                 "content": "$1",
