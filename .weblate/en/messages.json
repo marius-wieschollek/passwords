@@ -3528,7 +3528,7 @@
         "description": "Text in the manage tags dialog during loading"
     },
     "frontend-TagPickerTagAdded": {
-        "message": "Added tag {tag}",
+        "message": "Added tag \"$TAG$\"",
         "description": "Toast in the manage tags dialog when a tag was added",
         "placeholders": {
             "tag": {
@@ -3538,7 +3538,7 @@
         }
     },
     "frontend-TagPickerTagRemoved": {
-        "message": "Removed tag {tag}",
+        "message": "Removed tag \"$TAG$\"",
         "description": "Toast in the manage tags dialog when a tag was removed",
         "placeholders": {
             "tag": {
