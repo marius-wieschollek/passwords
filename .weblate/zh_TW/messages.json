@@ -3391,5 +3391,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "找不到標籤"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "正在載入中"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "已新增標籤 {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "已移除標籤 {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
