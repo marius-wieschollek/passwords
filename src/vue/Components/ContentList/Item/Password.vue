@@ -17,7 +17,7 @@
          :class="className"
          :data-password-id="password.id"
          :data-password-title="password.label">
-        <password-item-batch-toggle :password="password"/>
+        <password-item-batch-toggle :item="password"/>
         <password-item-favicon :domain="password.website" :title="getTitle" :favorite="password.favorite" v-if="isVisible"/>
         <div class="title" :title="getTitle">
             <button :aria-label="t('PasswordListItemAriaLabel', {label: password.label})">{{ getTitle }}</button>
