@@ -3490,5 +3490,29 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "لا توجد بطاقات"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Loading"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "بطاقة مضافة",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Removed tag {tag}",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
