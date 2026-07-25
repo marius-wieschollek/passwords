@@ -3484,5 +3484,14 @@
                 "description": "Name of the folder entry"
             }
         }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "Tagg oppføring for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
     }
 }
