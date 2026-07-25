@@ -1528,7 +1528,7 @@
         "message": "Pequena base de datos local (5 millóns de contrasinais)"
     },
     "backend-000400": {
-        "message": "Gran base de datos local e «Enganáronme?» (HIBP?)"
+        "message": "Gran base de datos local e HIBP?"
     },
     "backend-000402": {
         "message": "Dicionario local"
@@ -2169,7 +2169,7 @@
         "message": "Ordena os contrasinais polo atributo seleccionado cando se selecciona a clasificación por nome"
     },
     "backend-000513": {
-        "message": "O servizo de favicon escollido require unha chave de API ou un punto final, mais non se forneceu nada."
+        "message": "O servizo de faviconas escollido require unha chave de API ou un punto final, mais non se forneceu nada."
     },
     "frontend-000582": {
         "message": "Envíalle correos cando outras persoas comparten contrasinais con Vde."
@@ -3039,7 +3039,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "Amosar o código Qr",
+        "message": "Amosar o código QR",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-BrowserConsoleWarningTitle": {
@@ -3255,7 +3255,7 @@
         "description": "Label in the dialog to open the change password page of the button to open that page"
     },
     "frontend-ChangePasswordPageFallback": {
-        "message": "«{host}» non anuncia a súa páxina de cambio de contrasinal. Pode atopar a función de cambio de contrasinal no sitio web.",
+        "message": "«$HOST$» non anuncia a súa páxina de cambio de contrasinal. Pode atopar a función de cambio de contrasinal no sitio web.",
         "description": "Text in the dialog to open the change password page if the website of the password does not announce the url of the page. The link will lead to the page itself",
         "placeholders": {
             "label": {
@@ -3271,7 +3271,7 @@
         "description": "Label of the menu option to open the change password page for the current password"
     },
     "frontend-ChangePasswordPageText": {
-        "message": "O URL de embaixo foi detectado como páxina de cambio de contrasinal para «{label}». Prema no botón para abrilo.",
+        "message": "O URL de embaixo foi detectado como páxina de cambio de contrasinal para «$LABEL$». Prema no botón para abrilo.",
         "description": "Text in the dialog to open the change password page when the change password url could be detected. The url is also shown below the text for confirmation",
         "placeholders": {
             "label": {
@@ -3380,7 +3380,7 @@
         "message": "A actualización da base de datos de contrasinais violados non informou de erros."
     },
     "frontend-BatchActionSelectedLabel": {
-        "message": "$TOTAL$ seleccionado",
+        "message": "$TOTAL$ seleccionado(s)",
         "placeholders": {
             "total": {
                 "content": "$1"
@@ -3391,13 +3391,13 @@
         "message": "Engadir aos favoritos"
     },
     "frontend-BatchActionManageTags": {
-        "message": "Gestionar tags"
+        "message": "Xestionar etiquetas"
     },
     "frontend-BatchActionDeleteItemsTitle": {
         "message": "Eliminar elementos"
     },
     "frontend-BatchActionDeleteItemsText": {
-        "message": "¿Queres mover os obxectos X20X ao lixo?",
+        "message": "Quere mover os $TOTAL$ obxectos ao lixo?",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3406,7 +3406,7 @@
         }
     },
     "frontend-BatchActionDeleteItemsToast": {
-        "message": "$TOTAL$ Os obxectos móvense ao lixo",
+        "message": "$TOTAL$ obxectos foron movidos ao lixo",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3418,7 +3418,7 @@
         "message": "Eliminar elementos"
     },
     "frontend-BatchActionRestoreToast": {
-        "message": "$TOTAL$ Artigos restaurados de lixo",
+        "message": "$TOTAL$ elementos foron restaurados desde o lixo",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3427,7 +3427,7 @@
         }
     },
     "frontend-BatchActionFavoriteAddedToast": {
-        "message": "$TOTAL$ Favoritos",
+        "message": "$TOTAL$ elementos engadidos aos favoritos",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3436,7 +3436,7 @@
         }
     },
     "frontend-BatchActionFavoriteRemoveToast": {
-        "message": "$TOTAL$ favoritos",
+        "message": "$TOTAL$ elementos foron retirados dos favoritos",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3445,7 +3445,7 @@
         }
     },
     "frontend-BatchActionMoveItemsToast": {
-        "message": "$TOTAL$ → Páxinas que ligan con \"X24X\"",
+        "message": "$TOTAL$ elementos foron movidos a «$FOLDER$»",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3458,13 +3458,13 @@
         }
     },
     "frontend-BatchActionRemoveFavorites": {
-        "message": "Retirar de favoritos"
+        "message": "Retirar dos favoritos"
     },
     "frontend-BatchActionTrashRestore": {
-        "message": "Restaurar os elementos"
+        "message": "Restaurar elementos"
     },
     "frontend-BatchActionSelectToggleAriaLabel": {
-        "message": "Selección de \"X22X\"",
+        "message": "Activar/desactivar a selección de «$ITEM$»",
         "placeholders": {
             "item": {
                 "content": "$1",
@@ -3473,7 +3473,7 @@
         }
     },
     "frontend-PasswordListItemAriaLabel": {
-        "message": "Contrasinal: \"X20X\"",
+        "message": "Entrada de contrasinal para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3482,7 +3482,7 @@
         }
     },
     "frontend-FolderListItemAriaLabel": {
-        "message": "Páxinas que ligan con \"X18X\"",
+        "message": "Entrada de cartafol para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3491,7 +3491,7 @@
         }
     },
     "frontend-TagListItemAriaLabel": {
-        "message": "Páxinas que ligan con \"X15X\"",
+        "message": "Entrada de etiqueta para «$LABEL$»",
         "placeholders": {
             "label": {
                 "content": "$1",
@@ -3500,13 +3500,13 @@
         }
     },
     "frontend-TagPickerEmpty": {
-        "message": "No se han encontrado etiquetas"
+        "message": "Non foi atopada ningunha etiqueta"
     },
     "frontend-TagPickerLoading": {
         "message": "Cargando"
     },
     "frontend-TagPickerTagAdded": {
-        "message": "Engadir etiqueta {tag}",
+        "message": "Foi engadida a etiqueta «$TAG$»",
         "placeholders": {
             "tag": {
                 "content": "$1",
@@ -3515,7 +3515,7 @@
         }
     },
     "frontend-TagPickerTagRemoved": {
-        "message": "Eliminar etiqueta {tag}",
+        "message": "A etiqueta «$TAG$» foi retirada",
         "placeholders": {
             "tag": {
                 "content": "$1",
