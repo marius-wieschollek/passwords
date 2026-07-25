@@ -2,6 +2,8 @@
 ## 2026.8.0 - Feature release
 ### Added
 - Batch actions for moving, deleting, favorites and restoring items
+- New Nextcloud design for list view
+- Context menu for list view
 
 ## 2026.7.0 - Feature release
 ### Fixed
