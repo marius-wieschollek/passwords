@@ -50,17 +50,18 @@
     import LoggingService from "@js/Services/LoggingService";
     import NcDateTime from "@nextcloud/vue/components/NcDateTime";
     import {emit} from "@nextcloud/event-bus";
-    import PasswordItemActionMenu from "@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue";
-    import PasswordItemSecurityIcon from "@vc/ContentList/Item/PasswordItem/PasswordItemSecurityIcon.vue";
+    import ContentItemMenuLoadingIcon from "@vc/ContentList/Item/ContentItem/ContentItemMenuLoadingIcon.vue";
 
     export default {
         components: {
-            PasswordItemSecurityIcon,
-            PasswordItemActionMenu,
             NcDateTime,
             FolderItemFavicon,
             FolderItemBatchToggle,
-            'folder-item-action-menu': () => import(/* webpackChunkName: "FolderItemActionMenu" */ '@vc/ContentList/Item/FolderItem/FolderItemActionMenu.vue')
+            'folder-item-action-menu': () => ({
+                component: import(/* webpackChunkName: "FolderItemActionMenu" */ '@vc/ContentList/Item/FolderItem/FolderItemActionMenu.vue'),
+                loading  : ContentItemMenuLoadingIcon,
+                delay    : 0
+            })
         },
 
         props: {

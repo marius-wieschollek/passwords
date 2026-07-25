@@ -26,7 +26,6 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import HeaderLine from '@vue/Components/ContentList/Item/Header';
     import FooterLine from '@vue/Components/ContentList/Item/Footer';
     import PasswordLine from '@vue/Components/ContentList/Item/Password';
     import SecurityLine from '@vue/Components/ContentList/Item/Security';
@@ -35,15 +34,16 @@
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
     import LoggingService from "@js/Services/LoggingService";
+
     export default {
         extends   : BaseSection,
         components: {
             Breadcrumb,
-            HeaderLine,
             FooterLine,
             PasswordLine,
             SecurityLine,
-            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty')
+            'empty'      : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'header-line': () => import(/* webpackChunkName: "HeaderLine" */ '@vue/Components/ContentList/Item/Header')
         },
         data() {
             return {

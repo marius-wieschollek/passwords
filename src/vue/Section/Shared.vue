@@ -39,7 +39,6 @@
 <script>
     import API from '@js/Helper/api';
     import Breadcrumb from '@vc/Breadcrumb';
-    import HeaderLine from '@vue/Components/ContentList/Item/Header';
     import FooterLine from '@vue/Components/ContentList/Item/Footer';
     import GenericLine from '@vue/Components/ContentList/Item/Generic';
     import PasswordLine from '@vue/Components/ContentList/Item/Password';
@@ -53,17 +52,17 @@
 
         components: {
             Breadcrumb,
-            HeaderLine,
             FooterLine,
             GenericLine,
             PasswordLine,
-            'empty': () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty')
+            'empty'      : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'header-line': () => import(/* webpackChunkName: "HeaderLine" */ '@vue/Components/ContentList/Item/Header')
         },
         data() {
             return {
-                loading    : false,
-                shareType  : ['Shared with you', 'Shared by you'],
-                shareUsers : []
+                loading   : false,
+                shareType : ['Shared with you', 'Shared by you'],
+                shareUsers: []
             };
         },
 

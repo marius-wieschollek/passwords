@@ -42,13 +42,18 @@
     import NcDateTime from "@nextcloud/vue/components/NcDateTime";
     import TagActions from "@js/Actions/Tag/TagActions";
     import TagItemBatchToggle from "@vc/ContentList/Item/TagItem/TagItemBatchToggle.vue";
+    import ContentItemMenuLoadingIcon from "@vc/ContentList/Item/ContentItem/ContentItemMenuLoadingIcon.vue";
 
     export default {
         components: {
             TagItemBatchToggle,
             TagItemFavicon,
             NcDateTime,
-            'tag-item-action-menu': () => import(/* webpackChunkName: "TagItemActionMenu" */ '@vc/ContentList/Item/TagItem/TagItemActionMenu.vue')
+            'tag-item-action-menu': () => ({
+                component: import(/* webpackChunkName: "TagItemActionMenu" */ '@vc/ContentList/Item/TagItem/TagItemActionMenu.vue'),
+                loading  : ContentItemMenuLoadingIcon,
+                delay    : 0
+            })
         },
 
         props: {

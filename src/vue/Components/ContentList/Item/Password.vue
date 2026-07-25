@@ -64,6 +64,7 @@
     import PasswordItemFavicon from "@vc/ContentList/Item/PasswordItem/PasswordItemFavicon.vue";
     import PasswordItemBatchToggle from "@vc/ContentList/Item/PasswordItem/PasswordItemBatchToggle.vue";
     import LoggingService from "@js/Services/LoggingService";
+    import ContentItemMenuLoadingIcon from "@vc/ContentList/Item/ContentItem/ContentItemMenuLoadingIcon.vue";
 
     export default {
         components: {
@@ -72,7 +73,11 @@
             PasswordItemFavicon,
             PasswordItemBatchToggle,
             PasswordItemSecurityIcon,
-            'password-item-action-menu': () => import(/* webpackChunkName: "PasswordItemActionMenu" */ '@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue')
+            'password-item-action-menu': () => ({
+                component: import(/* webpackChunkName: "PasswordItemActionMenu" */ '@vc/ContentList/Item/PasswordItem/PasswordItemActionMenu.vue'),
+                loading  : ContentItemMenuLoadingIcon,
+                delay    : 0
+            })
         },
 
         props: {

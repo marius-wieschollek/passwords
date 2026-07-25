@@ -41,7 +41,6 @@
     import Breadcrumb from '@vc/Breadcrumb';
     import Events from '@js/Classes/Events';
     import FolderLine from '@vue/Components/ContentList/Item/Folder';
-    import HeaderLine from '@vue/Components/ContentList/Item/Header';
     import FooterLine from '@vue/Components/ContentList/Item/Footer';
     import PasswordLine from '@vue/Components/ContentList/Item/Password';
     import SearchManager from '@js/Manager/SearchManager';
@@ -55,11 +54,11 @@
         components: {
             Breadcrumb,
             FolderLine,
-            HeaderLine,
             FooterLine,
             PasswordLine,
-            'empty'   : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
-            'tag-line': () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag')
+            'header-line': () => import(/* webpackChunkName: "HeaderLine" */ '@vue/Components/ContentList/Item/Header'),
+            'empty'      : () => import(/* webpackChunkName: "EmptyContent" */ '@vc/Empty'),
+            'tag-line'   : () => import(/* webpackChunkName: "TagLine" */ '@vue/Components/ContentList/Item/Tag')
         },
 
         data() {

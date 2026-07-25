@@ -2,55 +2,75 @@
     <div class="row header">
         <batch-action-toolbar :is-trash-section="isTrashSection"/>
         <template v-if="!isBatchActionActive">
-            <translate class="title" :class="titleClass" say="Name" @click="updateSorting('label')" title="Sort by name"/>
-            <translate class="date" :class="dateClass" say="Modified" @click="updateSorting('edited')" title="Sort by modified date"/>
+            <div class="header-title">
+                <nc-button alignment="start-reverse" variant="tertiary" :title="t('Sort by name')" wide @click="updateSorting('label')">
+                    <template #icon>
+                        <sort-alphabetical-ascending-icon :size="20" v-if="currentSorting === 'label-ascending'"/>
+                        <sort-alphabetical-descending-icon :size="20" v-if="currentSorting === 'label-descending'"/>
+                    </template>
+                    {{ t('Name') }}
+                </nc-button>
+            </div>
+            <div class="header-date">
+                <nc-button :alignment="modifiedAlignment" variant="tertiary" :title="t('Sort by modified date')" wide @click="updateSorting('edited')">
+                    <template #icon>
+                        <sort-calendar-ascending-icon :size="20" v-if="currentSorting === 'edited-ascending'"/>
+                        <sort-calendar-descending-icon :size="20" v-if="currentSorting === 'edited-descending'"/>
+                    </template>
+                    {{ t('Modified') }}
+                </nc-button>
+            </div>
         </template>
     </div>
 </template>
 
 <script>
     import Translate from "@vue/Components/Translate";
+    import NcButton from '@nextcloud/vue/components/NcButton';
     import BatchActionManager from "@js/Manager/BatchActionManager";
     import BatchActionToolbar from "@vue/Components/Header/BatchActionToolbar";
+    import SortAlphabeticalAscendingIcon from "@icon/SortAlphabeticalAscending.vue";
+    import SortAlphabeticalDescendingIcon from "@icon/SortAlphabeticalDescending.vue";
+    import SortCalendarAscendingIcon from "@icon/SortCalendarAscending.vue";
+    import SortCalendarDescendingIcon from "@icon/SortCalendarDescending.vue";
 
     export default {
         components: {
+            SortCalendarDescendingIcon,
+            SortCalendarAscendingIcon,
+            SortAlphabeticalDescendingIcon,
+            SortAlphabeticalAscendingIcon,
             Translate,
+            NcButton,
             BatchActionToolbar
         },
 
         props: {
-            field    : {
+            field         : {
                 type: String
             },
-            ascending: {
+            ascending     : {
                 type: Boolean
             },
-            isTrashSection    : {
+            isTrashSection: {
                 type: Boolean
             }
         },
 
 
         computed: {
-            titleClass() {
-                return this.getClass('label');
-            },
-            dateClass() {
-                return this.getClass('edited');
-            },
             isBatchActionActive() {
                 return BatchActionManager.hasSelectedItems;
+            },
+            currentSorting() {
+                return `${this.field}-${this.ascending ? 'ascending':'descending'}`;
+            },
+            modifiedAlignment() {
+                return this.field === 'edited' ? 'end-reverse':'end';
             }
         },
 
         methods: {
-            getClass(field) {
-                if(this.field === field) {
-                    return this.ascending ? 'asc':'desc';
-                }
-                return '';
-            },
             updateSorting(field) {
                 if(this.field === field) {
                     this.$emit('updateSorting', {field: field, ascending: !this.ascending});
@@ -66,34 +86,18 @@
 #app-content {
     .item-list {
         .row.header {
-            color               : $color-grey-dark;
-            -webkit-user-select : none;
-            -moz-user-select    : none;
-            -ms-user-select     : none;
-            user-select         : none;
-            display             : flex;
-            align-items         : center;
+            display     : flex;
+            align-items : center;
+            padding     : 0 1rem 0 .25rem;
 
-            .title {
-                padding-left : 50px;
+            .header-title {
+                padding-left : 40px;
                 flex-grow    : 1;
             }
 
-            .date {
-                color     : $color-grey-dark;
+            .header-date {
                 width     : auto;
-                min-width : 85px;
-            }
-
-            .asc::after,
-            .desc::after {
-                content      : "\f0d7";
-                font-family  : var(--pw-icon-font-face);
-                padding-left : 5px;
-            }
-
-            .asc::after {
-                content : "\f0d8";
+                min-width : 10rem;
             }
 
             &:active,

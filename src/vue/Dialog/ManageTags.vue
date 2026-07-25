@@ -27,9 +27,9 @@
                     <tag-icon :fill-color="tag.color"/>
                     <span>{{ tag.label }}</span>
                 </li>
-                <li class="pw-manage-tags-empty" v-if="tags.length === 0">{{ t('No tags found') }}</li>
+                <li class="pw-manage-tags-empty" v-if="tags.length === 0">{{ t('TagPickerEmpty') }}</li>
             </ul>
-            <nc-loading-icon class="pw-manage-tags-loading" :name="t('Loading')" :size="40" v-else/>
+            <nc-loading-icon class="pw-manage-tags-loading" :name="t('TagPickerLoading')" :size="40" v-else/>
         </template>
     </nc-modal>
 </template>
@@ -110,7 +110,7 @@
                     }
                 }
 
-                ToastService.success(add ? ['Added tag {tag}', {tag: tag.label}]:['Removed tag {tag}', {tag: tag.label}]);
+                ToastService.success([add ? 'TagPickerTagAdded':'TagPickerTagRemoved', {tag: tag.label}]);
                 this.$forceUpdate();
             },
             close() {

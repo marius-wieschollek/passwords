@@ -3518,5 +3518,33 @@
                 "description": "Name of the tag entry"
             }
         }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "No tags found",
+        "description": "Text in the manage tags dialog when the user has no tags"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Loading",
+        "description": "Text in the manage tags dialog during loading"
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Added tag {tag}",
+        "description": "Toast in the manage tags dialog when a tag was added",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Removed tag {tag}",
+        "description": "Toast in the manage tags dialog when a tag was removed",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
     }
 }
