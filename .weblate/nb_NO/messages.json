@@ -3475,5 +3475,14 @@
                 "description": "Name of the item"
             }
         }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "Mappeoppføring for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }

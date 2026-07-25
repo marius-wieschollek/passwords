@@ -3373,5 +3373,14 @@
                 "description": "Name of the item"
             }
         }
+    },
+    "frontend-FolderListItemAriaLabel": {
+        "message": "\"$LABEL$\" karpeta-sarrera",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the folder entry"
+            }
+        }
     }
 }
