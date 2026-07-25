@@ -3039,7 +3039,7 @@
         "description": "Text of the loading animation while folders are being loaded"
     },
     "frontend-PasswordActionQrcode": {
-        "message": "Amosar o código Qr",
+        "message": "Amosar o código QR",
         "description": "Label of the action to show a qrcode for the password"
     },
     "frontend-BrowserConsoleWarningTitle": {
@@ -3391,13 +3391,13 @@
         "message": "Engadir aos favoritos"
     },
     "frontend-BatchActionManageTags": {
-        "message": "Gestionar tags"
+        "message": "Xestionar etiquetas"
     },
     "frontend-BatchActionDeleteItemsTitle": {
         "message": "Eliminar elementos"
     },
     "frontend-BatchActionDeleteItemsText": {
-        "message": "¿Queres mover os obxectos X20X ao lixo?",
+        "message": "Quere mover os $TOTAL$ obxectos ao lixo?",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3406,7 +3406,7 @@
         }
     },
     "frontend-BatchActionDeleteItemsToast": {
-        "message": "$TOTAL$ Os obxectos móvense ao lixo",
+        "message": "$TOTAL$ obxectos foron movidos ao lixo",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3418,7 +3418,7 @@
         "message": "Eliminar elementos"
     },
     "frontend-BatchActionRestoreToast": {
-        "message": "$TOTAL$ Artigos restaurados de lixo",
+        "message": "$TOTAL$ elementos foron restaurados desde o lixo",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3427,7 +3427,7 @@
         }
     },
     "frontend-BatchActionFavoriteAddedToast": {
-        "message": "$TOTAL$ Favoritos",
+        "message": "$TOTAL$ elementos engadidos aos favoritos",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3436,7 +3436,7 @@
         }
     },
     "frontend-BatchActionFavoriteRemoveToast": {
-        "message": "$TOTAL$ favoritos",
+        "message": "$TOTAL$ elementos foron retirados dos favoritos",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3445,7 +3445,7 @@
         }
     },
     "frontend-BatchActionMoveItemsToast": {
-        "message": "$TOTAL$ → Páxinas que ligan con \"X24X\"",
+        "message": "$TOTAL$ elementos foron movidos a «$FOLDER$»",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3458,10 +3458,10 @@
         }
     },
     "frontend-BatchActionRemoveFavorites": {
-        "message": "Retirar de favoritos"
+        "message": "Retirar dos favoritos"
     },
     "frontend-BatchActionTrashRestore": {
-        "message": "Restaurar os elementos"
+        "message": "Restaurar elementos"
     },
     "frontend-BatchActionSelectToggleAriaLabel": {
         "message": "Activar/desactivar a selección de «$ITEM$»",
