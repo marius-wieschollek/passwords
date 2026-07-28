@@ -3510,5 +3510,11 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Κοινόχρηστα στοιχεία"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Κοινόχρηστα στοιχεία"
     }
 }
