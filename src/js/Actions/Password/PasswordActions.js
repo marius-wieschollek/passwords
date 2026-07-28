@@ -10,13 +10,13 @@
 
 import PrintPasswordAction from "@js/Actions/Password/PrintPasswordAction";
 import PasswordManager from "@js/Manager/PasswordManager";
-import Vue from "vue";
 import AddTagAction from "@js/Actions/Password/AddTagAction";
 import Events from "@js/Classes/Events";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
 import LocalisationService from "@js/Services/LocalisationService";
 import LoggingService from "@js/Services/LoggingService";
+import {spawnDialog} from "@nextcloud/vue/functions/dialog";
 
 export default class PasswordActions {
     #password;
@@ -31,7 +31,7 @@ export default class PasswordActions {
             if(this.#password.id === event.object.id) {
                 this.#password = event.object;
             }
-        })
+        });
     }
 
     print() {
@@ -80,17 +80,23 @@ export default class PasswordActions {
     }
 
     async qrcode() {
-        let PasswordQrCode = await import(/* webpackChunkName: "QrCode" */ '@vue/Dialog/QrCode.vue'),
-            PwQrCodeDialog = Vue.extend(PasswordQrCode.default);
+        const PasswordQrCode = await import(/* webpackChunkName: "QrCode" */ '@vue/Dialog/QrCode.vue');
 
-        new PwQrCodeDialog({propsData: {password: this.#password}}).$mount(UtilityService.popupContainer());
+        spawnDialog(
+            PasswordQrCode.default,
+            {password: this.#password},
+            {container: UtilityService.popupContainer()}
+        );
     }
 
     async openChangePasswordPage() {
-        let ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue'),
-            ChangePasswordPageDialog = Vue.extend(ChangePasswordPage.default);
+        const ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue');
 
-        new ChangePasswordPageDialog({propsData: {password: this.#password}}).$mount(UtilityService.popupContainer());
+        spawnDialog(
+            ChangePasswordPage.default,
+            {password: this.#password},
+            {container: UtilityService.popupContainer()}
+        );
     }
 
     clipboard(attribute) {

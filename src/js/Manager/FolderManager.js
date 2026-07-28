@@ -4,6 +4,7 @@ import Vue from "vue";
 import MessageService from "@js/Services/MessageService";
 import ToastService from "@js/Services/ToastService";
 import UtilityService from "@js/Services/UtilityService";
+import {spawnDialog} from "@nextcloud/vue/functions/dialog";
 
 /**
  *
@@ -245,10 +246,12 @@ class FolderManager {
         if(typeof folder === 'object') folder = folder.id;
 
         return new Promise(async (resolve, reject) => {
-            let FolderPicker       = await import(/* webpackChunkName: "FolderPicker" */ '@vue/Dialog/FolderPicker.vue'),
-                FolderPickerDialog = Vue.extend(FolderPicker.default);
-
-            new FolderPickerDialog({propsData: {folder, ignoredFolders, resolve, reject}}).$mount(UtilityService.popupContainer());
+            const FolderPicker       = await import(/* webpackChunkName: "FolderPicker" */ '@vue/Dialog/FolderPicker.vue');
+            spawnDialog(
+                FolderPicker.default,
+                {folder, ignoredFolders, resolve, reject},
+                {container: UtilityService.popupContainer()}
+            );
         });
     }
 }

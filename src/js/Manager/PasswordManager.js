@@ -7,6 +7,7 @@ import MessageService from "@js/Services/MessageService";
 import UtilityService from "@js/Services/UtilityService";
 import LoggingService from "@js/Services/LoggingService";
 import {emitMultiple} from "@js/Helper/event-bus";
+import {spawnDialog} from "@nextcloud/vue/functions/dialog";
 
 /**
  *
@@ -35,10 +36,12 @@ class PasswordManager {
             }
             if(tag) properties.tags = [tag];
 
-            let PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue'),
-                PwCreateDialog = Vue.extend(PasswordDialog.default);
-
-            new PwCreateDialog({propsData: {properties, _success}}).$mount(UtilityService.popupContainer());
+            const PasswordDialog = await import(/* webpackChunkName: "CreatePassword" */ '@vue/Dialog/CreatePassword.vue');
+            spawnDialog(
+                PasswordDialog.default,
+                {properties, _success},
+                {container: UtilityService.popupContainer()}
+            );
         });
     }
 
@@ -286,8 +289,8 @@ class PasswordManager {
                    });
             } else {
                 MessageService.confirm('Do you want to delete the password', 'Delete password')
-                        .then(() => { this.deletePassword(password, false); })
-                        .catch(() => {reject(password);});
+                              .then(() => { this.deletePassword(password, false); })
+                              .catch(() => {reject(password);});
             }
         });
     }
@@ -348,8 +351,8 @@ class PasswordManager {
                    });
             } else {
                 MessageService.confirm('Do you want to restore the revision?', 'Restore revision')
-                        .then(() => { this.restoreRevision(password, revision, false).then(resolve).catch(reject); })
-                        .catch(() => {reject(new Error('User aborted revision restore'));});
+                              .then(() => { this.restoreRevision(password, revision, false).then(resolve).catch(reject); })
+                              .catch(() => {reject(new Error('User aborted revision restore'));});
             }
         });
     }
