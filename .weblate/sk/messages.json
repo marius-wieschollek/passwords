@@ -3510,5 +3510,127 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Podiel"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Zdieľanie vybraných hesiel"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Je možné zdieľať iba heslá. Žiadne iné vybrané položky nebudú zdieľané"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Vyberte užívateľov, s ktorými chcete zdieľať"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Typ pre vyhľadávanie užívateľov"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Len pohľad"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Upraviť"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Vlastné práva"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Zrušiť prístup"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Pokročilé opcie"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Nastaviť dátum exspirácie"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Je možné upraviť"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Môže zdieľať"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Podiel"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Zrušiť prístup"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Možnosti zdieľania"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Práva"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Možnosti tvorby šarží"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Prepísať existujúce akcie"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Nemáte povolenie zdieľať \"$PASSWORD$\" s \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Nemôžete zdieľať \"$PASSWORD$\" s \"$RECIPIENT$,\" pretože oni zdieľali s vami.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" je už zdieľaný s \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ zdieľané heslá $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Prístup zrušený na $TOTAL$ hesla pre $RECIPIENTS$ užívateľov.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
