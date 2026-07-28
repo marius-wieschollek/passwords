@@ -28,7 +28,7 @@
     import Translate from "@vue/Components/Translate";
     import NcButton from '@nextcloud/vue/components/NcButton';
     import BatchActionManager from "@js/Manager/BatchActionManager";
-    import BatchActionToolbar from "@vue/Components/Header/BatchActionToolbar";
+    import BatchActionToolbar from "@vue/Components/ContentList/Item/HeaderItem/BatchActionToolbar";
     import SortAlphabeticalAscendingIcon from "@icon/SortAlphabeticalAscending.vue";
     import SortAlphabeticalDescendingIcon from "@icon/SortAlphabeticalDescending.vue";
     import SortCalendarAscendingIcon from "@icon/SortCalendarAscending.vue";

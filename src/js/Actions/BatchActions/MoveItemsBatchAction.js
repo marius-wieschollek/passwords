@@ -19,6 +19,16 @@ export default class MoveItemsBatchAction extends BatchAction {
         return true;
     }
 
+    get count() {
+        return this._items.folders.length +
+               this._items.passwords.length;
+    }
+
+    hasItem(item) {
+        return this._items.folders.indexOf(item) !== -1 ||
+               this._items.passwords.indexOf(item) !== -1;
+    }
+
     async run() {
         let ignoredFolders = this._items.folders.map(folder => folder.id),
             targetFolder   = await FolderManager.selectFolder('00000000-0000-0000-0000-000000000000', ignoredFolders),

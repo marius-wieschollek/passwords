@@ -20,7 +20,7 @@
                 @click.stop.prevent
         >
             <slot name="custom-action">
-                <nc-action-button @click="runCustomAction" v-if="hasCustomAction">
+                <nc-action-button @click="runCustomAction" v-if="hasCustomAction" close-after-click>
                     <template #icon>
                         <information-outline-icon :size="20" v-if="customAction === 'details'"/>
                         <account-plus-outline-icon :size="20" v-else-if="customAction === 'share'"/>
@@ -32,33 +32,33 @@
                     </template>
                 </nc-action-button>
             </slot>
-            <nc-action-button @click="actions.favorite()">
+            <nc-action-button @click="actions.favorite()" close-after-click>
                 <template #icon>
                     <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="password.favorite"/>
                     <star-outline-icon :size="20" fill-color="var(--color-placeholder-dark)" v-else/>
                 </template>
                 {{ password.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('details-action', null)">
+            <nc-action-button @click="$emit('details-action', null)" close-after-click>
                 <template #icon>
                     <information-outline-icon :size="20"/>
                 </template>
                 {{ t('Details') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('details-action', 'share')">
+            <nc-action-button @click="$emit('details-action', 'share')" close-after-click>
                 <template #icon>
                     <account-plus-outline-icon :size="20"/>
                 </template>
                 {{ t('Share') }}
             </nc-action-button>
             <nc-action-separator/>
-            <nc-action-button @click="$emit('edit-action')" v-if="password.editable">
+            <nc-action-button @click="$emit('edit-action')" v-if="password.editable" close-after-click>
                 <template #icon>
                     <pencil-icon :size="20"/>
                 </template>
                 {{ t('Edit') }}
             </nc-action-button>
-            <nc-action-button @click="actions.clone()" v-if="password.editable">
+            <nc-action-button @click="actions.clone()" v-if="password.editable" close-after-click>
                 <template #icon>
                     <content-copy-icon :size="20"/>
                 </template>
@@ -71,44 +71,44 @@
                 {{ t('Move') }}
             </nc-action-button>
             <nc-action-separator/>
-            <nc-action-button @click="$emit('copy-action', 'password')" v-if="showCopyOptions">
+            <nc-action-button @click="$emit('copy-action', 'password')" v-if="showCopyOptions" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy Password') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('copy-action', 'username')" v-if="showCopyOptions">
+            <nc-action-button @click="$emit('copy-action', 'username')" v-if="showCopyOptions" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy User') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('copy-action', 'url')" v-if="password.url">
+            <nc-action-button @click="$emit('copy-action', 'url')" v-if="password.url" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy Url') }}
             </nc-action-button>
-            <nc-action-link :href="password.url" target="_blank">
+            <nc-action-link :href="password.url" target="_blank" close-after-click>
                 <template #icon>
                     <open-in-new-icon :size="20"/>
                 </template>
                 {{ t('Open Url') }}
             </nc-action-link>
             <nc-action-separator/>
-            <nc-action-button @click="actions.openChangePasswordPage()" v-if="password.url">
+            <nc-action-button @click="actions.openChangePasswordPage()" v-if="password.url" close-after-click>
                 <template #icon>
                     <lock-reset-icon :size="20"/>
                 </template>
                 {{ t('PasswordActionChangePwPage') }}
             </nc-action-button>
-            <nc-action-button @click="actions.qrcode()">
+            <nc-action-button @click="actions.qrcode()" close-after-click>
                 <template #icon>
                     <qrcode-icon :size="20"/>
                 </template>
                 {{ t('PasswordActionQrcode') }}
             </nc-action-button>
-            <nc-action-button @click="actions.print()" v-if="isPrintEnabled">
+            <nc-action-button @click="actions.print()" v-if="isPrintEnabled" close-after-click>
                 <template #icon>
                     <printer-icon :size="20"/>
                 </template>
@@ -116,9 +116,9 @@
             </nc-action-button>
             <nc-action-separator/>
             <slot name="restore-action" />
-            <nc-action-button @click="deleteAction">
+            <nc-action-button @click="deleteAction" close-after-click>
                 <template #icon>
-                    <trash-can-icon :size="20"/>
+                    <trash-can-outline-icon :size="20"/>
                 </template>
                 {{ t('Delete') }}
             </nc-action-button>
@@ -127,10 +127,10 @@
 </template>
 
 <script>
-    import TrashCanIcon from "@icon/TrashCan";
     import OpenInNewIcon from "@icon/OpenInNew";
     import FolderMoveIcon from "@icon/FolderMove";
     import ContentCopyIcon from "@icon/ContentCopy";
+    import TrashCanOutlineIcon from "@icon/TrashCanOutline";
     import PencilIcon from "@icon/Pencil";
     import AccountPlusOutlineIcon from "@icon/AccountPlusOutline.vue";
     import InformationOutlineIcon from "@icon/InformationOutline";
@@ -161,7 +161,7 @@
             FolderMoveIcon,
             OpenInNewIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
-            TrashCanIcon,
+            TrashCanOutlineIcon,
             NcActions,
             NcActionLink,
             NcActionButton,

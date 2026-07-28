@@ -29,7 +29,7 @@
             </template>
             {{ t('HandbookBugsReport') }}
         </nc-button>
-        <nc-button :wide="true" type="tertiary-no-background" alignment="start" @click="more = !more">
+        <nc-button :wide="true" variant="tertiary-no-background" alignment="start" @click="more = !more">
             <template #icon>
                 <chevron-right :size="20" :class="{rotate: more}"/>
             </template>

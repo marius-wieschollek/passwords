@@ -10,34 +10,40 @@
 
 <template>
     <div class="batch-action-toolbar">
-        <nc-checkbox-radio-switch :checked.sync="selectAllValue" :indeterminate="isIntermediate">{{ selectionCountLabel }}</nc-checkbox-radio-switch>
+        <nc-checkbox-radio-switch variant="tertiary" :checked.sync="selectAllValue" :indeterminate="isIntermediate">{{ selectionCountLabel }}</nc-checkbox-radio-switch>
         <nc-actions class="selection-more" :force-name="true" :inline="3" v-if="hasSelection">
-            <nc-action-button type="tertiary" @click="favoriteAction" v-if="canFavorite">
+            <nc-action-button variant="tertiary" @click="favoriteAction" v-if="canFavorite" close-after-click>
                 <template #icon>
                     <star-icon :size="20" v-if="allFavorites"/>
                     <star-outline-icon :size="20" v-else/>
                 </template>
                 {{ allFavorites ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button type="tertiary" @click="manageTagsAction" v-if="canManageTags">
+            <nc-action-button variant="tertiary" @click="manageTagsAction" v-if="canManageTags" close-after-click>
                 <template #icon>
                     <tag-multiple-outline-icon :size="20"/>
                 </template>
                 {{ t('BatchActionManageTags') }}
             </nc-action-button>
-            <nc-action-button type="tertiary" @click="moveAction" v-if="canMove">
+            <nc-action-button variant="tertiary" @click="moveAction" v-if="canMove" close-after-click>
                 <template #icon>
                     <folder-move-outline-icon :size="20"/>
                 </template>
                 {{ t('Move') }}
             </nc-action-button>
-            <nc-action-button @click="deleteAction" :close-after-click="true">
+            <nc-action-button variant="tertiary" @click="shareAction" v-if="canShare" close-after-click>
+                <template #icon>
+                    <folder-move-outline-icon :size="20"/>
+                </template>
+                {{ t('BatchActionShare') }}
+            </nc-action-button>
+            <nc-action-button variant="tertiary" @click="deleteAction" close-after-click>
                 <template #icon>
                     <trash-can-outline-icon :size="20"/>
                 </template>
                 {{ t(isTrashSection ? 'BatchActionTrashDelete':'Delete') }}
             </nc-action-button>
-            <nc-action-button @click="restoreAction" :close-after-click="true" v-if="isTrashSection">
+            <nc-action-button variant="tertiary" @click="restoreAction" close-after-click v-if="isTrashSection">
                 <template #icon>
                     <restore-icon :size="20"/>
                 </template>
@@ -63,6 +69,8 @@
     import ManageTagsBatchAction from "@js/Actions/BatchActions/ManageTagsBatchAction";
     import LoggingService from "@js/Services/LoggingService";
     import RestoreTrashItemsBatchAction from "@js/Actions/BatchActions/RestoreTrashItemsBatchAction";
+    import ShareBatchAction from "@js/Actions/BatchActions/ShareBatchAction";
+    import SettingsService from "@js/Services/SettingsService";
 
     export default {
         components: {
@@ -95,6 +103,9 @@
             },
             canMove() {
                 return !this.isTrashSection && (BatchActionManager.folders.length !== 0 || BatchActionManager.passwords.length !== 0);
+            },
+            canShare() {
+                return SettingsService.get('server.sharing.enabled') && !this.isTrashSection && BatchActionManager.passwords.length !== 0;
             },
             canFavorite() {
                 return !this.isTrashSection;
@@ -143,6 +154,11 @@
             restoreAction() {
                 BatchActionManager
                     .executeAction(RestoreTrashItemsBatchAction)
+                    .catch(LoggingService.catch);
+            },
+            shareAction() {
+                BatchActionManager
+                    .executeAction(ShareBatchAction)
                     .catch(LoggingService.catch);
             }
         },

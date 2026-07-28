@@ -20,14 +20,14 @@
                 @click.stop.prevent
         >
             <slot name="custom-action"/>
-            <nc-action-button @click="actions.favorite()">
+            <nc-action-button @click="actions.favorite()" close-after-click>
                 <template #icon>
                     <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="tag.favorite"/>
                     <star-outline-icon :size="20" fill-color="var(--color-placeholder-dark)" v-else/>
                 </template>
                 {{ tag.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button @click="actions.edit()">
+            <nc-action-button @click="actions.edit()" close-after-click>
                 <template #icon>
                     <pencil-icon :size="20"/>
                 </template>
@@ -35,9 +35,9 @@
             </nc-action-button>
             <nc-action-separator/>
             <slot name="restore-action" />
-            <nc-action-button @click="deleteTag">
+            <nc-action-button @click="deleteTag" close-after-click>
                 <template #icon>
-                    <trash-can-icon :size="20"/>
+                    <trash-can-outline-icon :size="20"/>
                 </template>
                 {{ t('Delete') }}
             </nc-action-button>
@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import TrashCanIcon from "@icon/TrashCan";
+    import TrashCanOutlineIcon from "@icon/TrashCanOutline";
     import PencilIcon from "@icon/Pencil";
     import StarIcon from "@icon/Star";
     import StarOutlineIcon from "@icon/StarOutline";
@@ -60,7 +60,7 @@
             StarOutlineIcon,
             StarIcon,
             PencilIcon,
-            TrashCanIcon,
+            TrashCanOutlineIcon,
             NcActions,
             NcActionButton,
             NcActionSeparator

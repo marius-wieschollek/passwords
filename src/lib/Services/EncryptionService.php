@@ -233,7 +233,7 @@ class EncryptionService {
     protected function getObjectEncryptionByType(string $type): ObjectEncryptionInterface {
 
         if(!isset($this->objectMapping[ $type ])) {
-            throw new Exception("Object encryption type {$type} does not exist");
+            throw new Exception("Object encryption type '{$type}' does not exist");
         }
 
         return $this->container->get($this->objectMapping[ $type ]);
@@ -248,7 +248,7 @@ class EncryptionService {
     protected function getKeychainEncryptionByType(string $type): KeychainEncryptionInterface {
 
         if(!isset($this->keychainMapping[ $type ])) {
-            throw new Exception("Keychain encryption not found for {$type}");
+            throw new Exception("Keychain encryption not found for '{$type}'");
         }
 
         return $this->container->get($this->keychainMapping[ $type ]);

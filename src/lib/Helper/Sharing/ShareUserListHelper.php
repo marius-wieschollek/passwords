@@ -73,14 +73,21 @@ class ShareUserListHelper {
         foreach($userGroups as $userGroup) {
             if($userGroup === 'guest_app') continue;
             $users = $this->groupManager->displayNamesInGroup($userGroup, $pattern, $limit);
+            $groupName = $this->groupManager->getDisplayName($userGroup);
+
             foreach($users as $uid => $name) {
                 if($uid === $this->environment->getUserId()) continue;
-                $partners[ $uid ] = $name;
+                $partners[ $uid ] = [
+                    'id' => $uid,
+                    'name' => $name,
+                    'type' => 'user',
+                    'context' => $groupName
+                ];;
             }
             if(count($partners) >= $limit) break;
         }
 
-        return $partners;
+        return array_values($partners);
     }
 
     /**
@@ -94,8 +101,13 @@ class ShareUserListHelper {
         $usersTmp = $this->userManager->search($pattern, $limit);
 
         foreach($usersTmp as $user) {
-            if(!$user->isEnabled() || $user->getUID() === $this->userId) continue;
-            $partners[ $user->getUID() ] = $user->getDisplayName();
+            if(!$user->isEnabled() || $user->getUID() === $this->environment->getUserId()) continue;
+            $partners[] = [
+                'id' => $user->getUID(),
+                'name' => $user->getDisplayName(),
+                'type' => 'user',
+                'context' => $user->getEMailAddress()
+            ];
         }
 
         return $partners;

@@ -13,6 +13,14 @@ import BatchAction from "@js/Actions/BatchActions/BatchAction";
 
 export default class ManageTagsBatchAction extends BatchAction {
 
+    get count() {
+        return this._items.passwords.length;
+    }
+
+    hasItem(item) {
+        return this._items.passwords.indexOf(item) !== -1;
+    }
+
     async run() {
         await TagManager.manageTags(this._items.passwords);
     }

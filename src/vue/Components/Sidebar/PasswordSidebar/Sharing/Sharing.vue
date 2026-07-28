@@ -41,6 +41,10 @@
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
     import LoggingService from "@js/Services/LoggingService";
+    import {getCurrentUser} from '@nextcloud/auth';
+    import BatchActionManager from "@js/Manager/BatchActionManager";
+    import {subscribe, subscribeOnce, unsubscribe} from "@js/Helper/event-bus";
+
     export default {
         components: {
             Field,
@@ -58,7 +62,6 @@
             let shares = this.password.hasOwnProperty('shares') ? this.password.shares:[],
                 hasCse = this.password.cseType !== 'none' && !this.password.shared;
 
-
             return {
                 search      : '',
                 matches     : [],
@@ -69,17 +72,20 @@
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
                 interval    : null,
                 polling     : {interval: null, mode: null},
-                cronPromise : null
+                cronPromise : null,
+                user        : getCurrentUser()
             };
         },
 
         created() {
             this.reloadShares();
             this.startPolling();
+            subscribe('passwords:password:updated', this.processPasswordUpdate);
         },
 
         beforeDestroy() {
             this.stopPolling();
+            unsubscribe('passwords:password:updated', this.processPasswordUpdate);
         },
 
         computed: {
@@ -111,9 +117,9 @@
             getExpirationDate() {
                 if(this.password.share !== null && typeof this.password.share !== 'string') {
                     return {
-                        'date': LocalisationService.formatDate(this.password.share.expires),
-                        'dateTime': LocalisationService.formatDateTime(this.password.share.expires),
-                    }
+                        'date'    : LocalisationService.formatDate(this.password.share.expires),
+                        'dateTime': LocalisationService.formatDateTime(this.password.share.expires)
+                    };
                 }
 
                 return {'date': '', 'dateTime': ''};
@@ -164,16 +170,13 @@
                 }
 
                 let users   = this.getSharedWithUsers,
-                    matches = await API.findSharePartners(this.search, users.length + 10);
+                    matches = await API.findSharePartners(this.search, 25);
                 this.matches = [];
 
-                for(let i in matches) {
-                    if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
-                    let name = matches[i];
-
-                    if(this.matches.length < 5) this.matches.push({id: i, name});
-                    this.nameMap[name] = i;
-                    this.idMap[i] = name;
+                for(let match of matches) {
+                    if(users.indexOf(match.id) === -1 && match.id !== this.user.id && this.matches.length < 5) this.matches.push(match);
+                    this.nameMap[match.name] = match.id;
+                    this.idMap[match.id] = match.name;
                 }
             },
             async disableCse() {
@@ -201,9 +204,8 @@
                     share.id = d.id;
                     share.updatePending = true;
                     share.owner = {
-                        id  : document.querySelector('head[data-user]').getAttribute('data-user'),
-                        name: document.querySelector('head[data-user-displayname]')
-                                      .getAttribute('data-user-displayname')
+                        id  : this.user.id,
+                        name: this.user.displayName
                     };
                     share.receiver = {id: receiver, name: this.idMap[receiver]};
                     this.shares[d.id] = await API._processShare(share);
@@ -285,6 +287,20 @@
                 }
 
                 return this.cronPromise;
+            },
+            processPasswordUpdate(password) {
+                if(password.id === this.password.id) {
+                    if(BatchActionManager.isProcessingItems) {
+                        subscribeOnce('passwords:batch-action:completed', () => {this.processPasswordUpdate(password);});
+                        return;
+                    }
+
+                    if(this.password.hasOwnProperty('shares')) {
+                        this.shares = this.password.shares;
+                    } else {
+                        this.refreshShares();
+                    }
+                }
             }
         },
 

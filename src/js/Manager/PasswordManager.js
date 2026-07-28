@@ -6,6 +6,7 @@ import FolderManager from "@js/Manager/FolderManager";
 import MessageService from "@js/Services/MessageService";
 import UtilityService from "@js/Services/UtilityService";
 import LoggingService from "@js/Services/LoggingService";
+import {emitMultiple} from "@js/Helper/event-bus";
 
 /**
  *
@@ -69,6 +70,7 @@ class PasswordManager {
                    if(!password.label) API._generatePasswordTitle(password);
                    password = await API._processPassword(password);
                    Events.fire('password.created', password);
+                   emitMultiple(['passwords:password:created', 'passwords:password:updated', 'passwords:item:updated'], password);
                    API.showPassword(password.id)
                       .then((data) => {
                           password.status = data.status;
@@ -118,6 +120,7 @@ class PasswordManager {
                        if(typeof p.customFields === 'string') p.customFields = JSON.parse(p.customFields);
 
                        Events.fire('password.updated', p);
+                       emitMultiple(['passwords:password:updated', 'passwords:item:updated'], p);
                        ToastService.success('Password saved');
                        API.showPassword(p.id)
                           .then((data) => {
@@ -213,6 +216,7 @@ class PasswordManager {
                    password.revision = d.revision;
                    password.updated = new Date();
                    Events.fire('password.updated', password);
+                   emitMultiple(['passwords:password:updated', 'passwords:item:updated'], password);
                    ToastService.info('Password moved');
                    resolve(password);
                })
@@ -237,6 +241,7 @@ class PasswordManager {
                    password.revision = d.revision;
                    password.updated = new Date();
                    Events.fire('password.updated', password);
+                   emitMultiple(['passwords:password:updated', 'passwords:item:updated'], password);
                    resolve(password);
                })
                .catch((e) => {
@@ -262,6 +267,7 @@ class PasswordManager {
                        password.revision = d.revision;
                        if(password.hidden) this.deletePassword(password, false);
                        Events.fire('password.deleted', password);
+                       emitMultiple(['passwords:password:deleted', 'passwords:password:updated', 'passwords:item:updated'], password);
                        ToastService.info('Password deleted');
                        resolve(password);
                    })
@@ -271,6 +277,7 @@ class PasswordManager {
                            password.updated = new Date();
                            if(password.hidden) this.deletePassword(password, false);
                            Events.fire('password.deleted', password);
+                           emitMultiple(['passwords:password:deleted', 'passwords:password:updated', 'passwords:item:updated'], password);
                            resolve(password);
                        } else {
                            ToastService.error('Deleting password failed');
@@ -298,6 +305,7 @@ class PasswordManager {
                        password.trashed = false;
                        password.revision = d.revision;
                        Events.fire('password.restored', password);
+                       emitMultiple(['passwords:password:updated', 'passwords:item:updated'], password);
                        ToastService.info('Password restored');
                        resolve(password);
                    })
@@ -330,6 +338,7 @@ class PasswordManager {
                        password.updated = new Date();
                        password.revision = d.revision;
                        Events.fire('password.restored', password);
+                       emitMultiple(['passwords:password:updated', 'passwords:item:updated'], password);
                        ToastService.info('Revision restored');
                        resolve(password);
                    })

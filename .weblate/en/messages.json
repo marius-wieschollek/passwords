@@ -3546,5 +3546,151 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Share",
+        "description": "Label of the batch action entry to share selected items"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Share selected Passwords",
+        "description": "Title of the passwords batch share dialog"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Only passwords can be shared. Any other selected items will not be shared",
+        "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Select users to share with",
+        "description": "Label of the user selection field in the batch share dialog"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Type to search for users",
+        "description": "Placeholder of the user selection field in the batch share dialog"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "View only",
+        "description": "Label of the permission preset in the batch share dialog to let the target user only view/use the password. (No edit & re-sharing)"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Edit",
+        "description": "Label of the permission preset in the batch share dialog to let the target user view and edit the password"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Custom Permissions",
+        "description": "Label of the permission preset in the batch share dialog to set custom permissions"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoke access",
+        "description": "Label of the permission preset in the batch share dialog to revoke the users access"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Advanced options",
+        "description": "Label of the button in the batch share dialog to show more sharing options"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Set expiration date",
+        "description": "Label of the option in the batch share dialog to enable the expiration date input"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Can edit",
+        "description": "Label of the option in the batch share dialog to set the permission for the receiver to be able to edit the password"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Can share",
+        "description": "Label of the option in the batch share dialog to set the permission for the receiver to be able to edit the password"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Share",
+        "description": "Label of the submit button in the batch share dialog"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoke access",
+        "description": "Label of the submit button in the batch share dialog if the revoke access option has been chosen"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Sharing options",
+        "description": "Label of the section in the batch share dialog to set specific options for sharing"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permissions",
+        "description": "Label of the section in the batch share dialog to set permissions for sharing"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batch creation options",
+        "description": "Label of the section in the batch share dialog to set options for the batch creation process"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Overwrite existing shares",
+        "description": "Label of the option in the batch share dialog to overwrite existing shares in batch creation process"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "You dont have permission to share \"$PASSWORD$\" with \"$RECIPIENT$\".",
+        "description": "Error message in the create share action when the user does not have the permission to share",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "You can't share \"$PASSWORD$\" with \"$RECIPIENT$\" because they shared it with you.",
+        "description": "Error message in the create share action when the user attempts to share with the person that shared with them",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" is already shared with \"$RECIPIENT$\".",
+        "description": "Error message in the create share action when the user has already shared the password with the recipient",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ passwords shared $RECIPIENTS$ users.",
+        "description": "Toast message after passwords were shared in batch with one or more users",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Access revoked to $TOTAL$ passwords for $RECIPIENTS$ users.",
+        "description": "Toast message after passwords sharing was revoked with one or more users",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }

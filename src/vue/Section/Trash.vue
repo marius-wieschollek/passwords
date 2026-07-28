@@ -16,7 +16,7 @@
                 <header-line :field="sorting.field" :ascending="sorting.ascending" v-on:updateSorting="updateSorting($event)" :is-trash-section="true" v-if="isNotEmpty"/>
                 <folder-line :folder="folder" v-for="folder in folders" :key="folder.id" v-on:restore="restoreFolderAction(folder)">
                     <template #custom-action>
-                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)">
+                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>
@@ -24,7 +24,7 @@
                         </nc-action-button>
                     </template>
                     <template #restore-action>
-                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)">
+                        <nc-action-button @click.stop.prevent="restoreFolderAction(folder)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>
@@ -34,7 +34,7 @@
                 </folder-line>
                 <tag-line :tag="tag" v-for="tag in tags" :key="tag.id" v-if="tag.trashed" v-on:restore="restoreTagAction(tag)">
                     <template #custom-action>
-                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)">
+                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>
@@ -42,7 +42,7 @@
                         </nc-action-button>
                     </template>
                     <template #restore-action>
-                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)">
+                        <nc-action-button @click.stop.prevent="restoreTagAction(tag)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>
@@ -52,7 +52,7 @@
                 </tag-line>
                 <password-line :password="password" v-for="password in passwords" v-if="password.trashed" v-on:restore="restorePasswordAction(password)" :key="password.id">
                     <template #custom-action>
-                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)">
+                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>
@@ -60,7 +60,7 @@
                         </nc-action-button>
                     </template>
                     <template #restore-action>
-                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)">
+                        <nc-action-button @click.stop.prevent="restorePasswordAction(password)" close-after-click>
                             <template #icon>
                                 <restore-icon :size="20"/>
                             </template>

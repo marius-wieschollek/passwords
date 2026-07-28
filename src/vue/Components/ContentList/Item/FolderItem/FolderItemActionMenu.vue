@@ -20,20 +20,20 @@
                 @click.stop.prevent
         >
             <slot name="custom-action"/>
-            <nc-action-button @click="actions.favorite()">
+            <nc-action-button @click="actions.favorite()" close-after-click>
                 <template #icon>
                     <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="folder.favorite"/>
                     <star-outline-icon :size="20" fill-color="var(--color-placeholder-dark)" v-else/>
                 </template>
                 {{ folder.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button @click="actions.rename()">
+            <nc-action-button @click="actions.rename()" close-after-click>
                 <template #icon>
                     <pencil-icon :size="20"/>
                 </template>
                 {{ t('Rename') }}
             </nc-action-button>
-            <nc-action-button @click="actions.move()">
+            <nc-action-button @click="actions.move()" close-after-click>
                 <template #icon>
                     <folder-move-icon :size="20"/>
                 </template>
@@ -41,9 +41,9 @@
             </nc-action-button>
             <nc-action-separator/>
             <slot name="restore-action" />
-            <nc-action-button @click="deleteFolder">
+            <nc-action-button @click="deleteFolder" close-after-click>
                 <template #icon>
-                    <trash-can-icon :size="20"/>
+                    <trash-can-outline-icon :size="20"/>
                 </template>
                 {{ t('Delete') }}
             </nc-action-button>
@@ -52,10 +52,10 @@
 </template>
 
 <script>
-    import TrashCanIcon from "@icon/TrashCan";
     import FolderMoveIcon from "@icon/FolderMove";
     import PencilIcon from "@icon/Pencil";
     import StarIcon from "@icon/Star";
+    import TrashCanOutlineIcon from "@icon/TrashCanOutline";
     import StarOutlineIcon from "@icon/StarOutline";
     import NcActions from '@nc/NcActions.js';
     import NcActionButton from '@nc/NcActionButton.js';
@@ -68,7 +68,7 @@
             StarIcon,
             PencilIcon,
             FolderMoveIcon,
-            TrashCanIcon,
+            TrashCanOutlineIcon,
             NcActions,
             NcActionButton,
             NcActionSeparator
