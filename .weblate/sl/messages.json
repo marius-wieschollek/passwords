@@ -3516,5 +3516,8 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Souporaba"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Uredi"
     }
 }
