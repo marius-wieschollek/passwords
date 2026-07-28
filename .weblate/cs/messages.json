@@ -3519,5 +3519,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Sdílet"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Sdílet vybraná hesla"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Pouze hesla mohou být sdílena. Jiné vybrané položky nebudou sdíleny"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Vyberte uživatele, se kterými budete sdílet"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Typ pro vyhledávání uživatelů"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Zobrazit pouze"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Vlastní oprávnění"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Odvolat přístup"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Pokročilé možnosti"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Can edit"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Sdílet"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Odvolat přístup"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Možnosti sdílení"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Povolení"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Možnosti vytváření šarží"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Přepsat stávající akcie"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Nemáte povolení sdílet \"$PASSWORD$\" s \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Nemůžete sdílet \"$PASSWORD$\" s \"$RECIPIENT$\", protože to sdíleli s vámi.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" je již sdíleno s \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ hesla sdílených $RECIPIENTS$ uživatelů.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Přístup zrušen $TOTAL$ hesla pro $RECIPIENTS$ uživatelů.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
