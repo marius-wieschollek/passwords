@@ -3425,5 +3425,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Compartir"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Comparteix les contrasenyes seleccionades"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Només es poden compartir contrasenyes. Qualsevol altre element seleccionat no serà compartit"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Seleccioneu els usuaris amb els que compartir"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Tipus a cercar pels usuaris"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Només veure"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Permisos personalitzats"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoca l' accés"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Opcions avançades"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Pot editar"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Pot compartir"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoca l' accés"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Opcions de compartició"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permisos"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Opcions de creació per lots"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Sobreescriu els recursos compartits existents"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "No teniu permís per compartir \"$PASSWORD$\" amb \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "No pots compartir \"$PASSWORD$\" amb \"$RECIPIENT$\" perquè ho van compartir amb tu.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" ja està compartit amb \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ contrasenyes compartides $RECIPIENTS$ usuaris.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Accés revocat a $TOTAL$ contrasenyes per als usuaris $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
