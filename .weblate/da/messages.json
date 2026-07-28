@@ -3519,5 +3519,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Del"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Del valgte kodeord"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Kun adgangskoder kan deles. Alle andre markerede punkter deles ikke"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Vælg brugere at dele med"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Type til at søge efter brugere"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Vis kun"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Brugerdefinerede tilladelser"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Tilbagekaldelse"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Avancerede optioner"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Kan redigere"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Kan dele"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Tilbagekaldelse"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Delingsmuligheder"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Tilladelser"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batchtilvalg"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Overskriv eksisterende aktier"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Du har ikke tilladelse til at dele \"$PASSWORD$\" med \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Du kan ikke dele \"$PASSWORD$\" med \"$RECIPIENT$\" fordi de delte det med dig.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" er allerede delt med \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ adgangskoder delt $RECIPIENTS$ brugere.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Adgang tilbagekaldt til $TOTAL$ adgangskoder for $RECIPIENTS$ brugere.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
