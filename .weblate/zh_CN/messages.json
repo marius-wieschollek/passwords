@@ -3510,5 +3510,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "分享"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "编辑"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "设置过期日期"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "分享"
     }
 }
