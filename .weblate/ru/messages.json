@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Общий доступ"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Поделиться выбранными паролями"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Можно делиться только паролями. Любые другие выбранные элементы не будут совместно использоваться"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Выберите пользователей, чтобы поделиться с"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Тип для поиска пользователей"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Смотреть только"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Пользовательские разрешения"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Отменить доступ"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Расширенные варианты"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Может редактировать"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Может делиться"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Отменить доступ"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Варианты совместного использования"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Разрешения"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Варианты создания пакетов"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Перезаписывать существующие акции"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Вы не имеете права делиться «$PASSWORD$» с «$RECIPIENT$».",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Вы не можете поделиться «$PASSWORD$» с «$RECIPIENT$», потому что они поделились этим с вами.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "«$PASSWORD$» уже используется совместно с «$RECIPIENT$».",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ пароли общих $RECIPIENTS$ пользователей.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Доступ отменен к паролям $TOTAL$ для пользователей $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
