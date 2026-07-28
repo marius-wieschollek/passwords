@@ -3516,5 +3516,121 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Jaot"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Jaa valitut salasanat"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Vain salasanoja voidaan jakaa. Mitään muita valittuja kohteita ei jaeta"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Valitse jaettavat käyttäjät"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Käyttäjän hakutyyppi"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Näytä vain"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Muuta"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Omat luvat"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Palauta"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Lisäasetukset"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Aseta viimeinen käyttöpäivämäärä"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Voi muokata"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Voit jakaa"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Palauta"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Jakamisvaihtoehdot"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Lupa"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Erän luontivalinnat"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Korvaa olemassa olevat osakkeet"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Sinulla ei ole lupaa jakaa $PASSWORD$ \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Et voi jakaa \"X17X\" kanssa \"X35X], koska he jakoivat sen kanssasi.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" on jo jaettu $RECIPIENT$.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ salasanat jaettu $RECIPIENTS$ käyttäjät.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Pääsy peruutettu $TOTAL$ salasanoja $RECIPIENTS$ käyttäjille.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
