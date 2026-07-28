@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Compartir"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Compartir contraseñas seleccionadas"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Sólo se pueden compartir contraseñas. Cualquier otro artículo seleccionado no será compartido"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Seleccione usuarios para compartir con"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Escribe para buscar usuarios"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Ver sólo"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Permisos aduaneros"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoque el acceso"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Opciones avanzadas"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Puede editar"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Puede compartir"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoque el acceso"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Compartir opciones"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permisos"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Opciones de creación de lotes"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Sobreescribir las acciones existentes"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "No tienes permiso para compartir \"$PASSWORD$\" con \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "No puedes compartir \"$PASSWORD$\" con \"$RECIPIENT$\" porque lo compartieron contigo.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" ya se comparte con \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ contraseñas compartidas $RECIPIENTS$ usuarios.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Acceso revocado a contraseñas $TOTAL$ para usuarios $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
