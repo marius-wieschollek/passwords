@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Dela"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Dela utvalda lösenord"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Endast lösenord kan delas. Andra utvalda objekt kommer inte att delas"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Välj användare att dela med"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Typ för att söka efter användare"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Visa endast"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Anpassade behörigheter"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Återkalla åtkomst"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Avancerade alternativ"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Kan redigera"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Kan dela"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Återkalla åtkomst"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Dela alternativ"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Tillstånd"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batch skapelse alternativ"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Överskriv befintliga aktier"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Du har inte tillåtelse att dela \"$PASSWORD$\" med \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Du kan inte dela \"$PASSWORD$\" med \"$RECIPIENT$\" eftersom de delade det med dig.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" delas redan med \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ lösenord som delas $RECIPIENTS$ användare.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Access återkallas till $TOTAL$ lösenord för $RECIPIENTS$ användare.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
