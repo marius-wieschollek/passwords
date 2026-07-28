@@ -3519,5 +3519,118 @@
     },
     "frontend-BatchActionSharePermissionEdit": {
         "message": "Uredi"
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Ne moreš deliti \"$PASSWORD$\" z \"$RECIPIENT$\", ker so ga delili s tabo.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" se že deli z \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ gesla deljeni $RECIPIENTS$ uporabniki.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Dostop preklican na $TOTAL$ gesla za $RECIPIENTS$ uporabnike.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Deli izbrana gesla"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Delite lahko le gesla. Druge izbrane postavke ne bodo deljene"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Izberite uporabnike za souporabo z"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Vrsta za iskanje uporabnikov"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Samo pogled"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Lastna dovoljenja"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Opomni dostop"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Napredne možnosti"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Datum izteka"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Uredi"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Lahko delimo"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Opomni dostop"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Možnosti souporabe"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Dovoljenja"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Možnosti ustvarjanja serije"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Nadomesti obstoječe delnice"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Nimate dovoljenja za delitev \"$PASSWORD$\" z \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
