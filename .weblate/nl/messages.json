@@ -3510,5 +3510,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Delen"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Bewerken"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Stel verloopdatum in"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Delen"
     }
 }
