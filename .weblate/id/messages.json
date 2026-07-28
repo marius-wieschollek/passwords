@@ -3510,5 +3510,127 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Berbagi"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Berbagi Sandi yang dipilih"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Hanya password yang bisa dibagi. Butir lain yang dipilih tidak akan dibagikan"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Pilih pengguna untuk dibagi"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Ketik untuk mencari pengguna"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Hanya tampilkan"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Sunting"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Hak Gubahan"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Mengembalikan akses"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Opsi tingkat lanjut"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Menentukan tanggal kedaluwarsa"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Dapat menyunting"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Dapat berbagi"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Berbagi"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Mengembalikan akses"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Opsi Berbagi"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Hak"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Pilihan pembuatan batch"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Timpa saham yang telah ada"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Anda tidak memiliki izin untuk berbagi \"$PASSWORD$\" dengan \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Anda tidak dapat berbagi \"$PASSWORD$\" dengan \"$RECIPIENT$\" karena mereka berbagi dengan Anda.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" sudah dibagikan dengan \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ kata sandi terbagi $RECIPIENTS$ pengguna.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Akses dibatalkan ke $TOTAL$ sandi untuk pengguna $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
