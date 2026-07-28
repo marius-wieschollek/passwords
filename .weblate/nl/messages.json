@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Delen"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Geselecteerde wachtwoorden delen"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Alleen wachtwoorden kunnen gedeeld worden. Andere geselecteerde items worden niet gedeeld"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Selecteer gebruikers om mee te delen"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Type om naar gebruikers te zoeken"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Alleen weergeven"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Aangepaste rechten"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Toegang ongedaan maken"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Geavanceerde opties"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Kan bewerken"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Kan delen"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Toegang ongedaan maken"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Delen van opties"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Rechten"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Aanmaakopties voor batch"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Bestaande aandelen overschrijven"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Je hebt geen rechten om \"$PASSWORD$\" te delen met \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Je kunt \"$PASSWORD$\" niet delen met \"$RECIPIENT$\" omdat ze het met je delen.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" wordt al gedeeld met \"$RECIPIENT$.\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ wachtwoorden gedeeld $RECIPIENTS$ gebruikers.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Toegang ingetrokken tot $TOTAL$ wachtwoorden voor $RECIPIENTS$ gebruikers.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
