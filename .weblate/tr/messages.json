@@ -3510,5 +3510,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Paylaş"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Düzenle"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Son kullanma tarihini ayarlayın"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Paylaş"
     }
 }
