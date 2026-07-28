@@ -3516,5 +3516,121 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Κοινόχρηστα στοιχεία"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Κοινή χρήση επιλεγμένων κωδικών πρόσβασης"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Μόνο οι κωδικοί πρόσβασης μπορούν να μοιραστούν. Οποιαδήποτε άλλα επιλεγμένα αντικείμενα δεν θα μοιραστούν"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Επιλέξτε χρήστες για να μοιραστείτε με"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Τύπος για αναζήτηση χρηστών"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Προβολή μόνο"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Επεξεργασία"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Προσαρμοσμένες άδειες"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Ανακαίνιση πρόσβασης"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Προχωρημένες επιλογές"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Ορισμός ημερομηνίας λήξης"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Μπορεί να επεξεργαστεί"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Μπορέστε να μοιραστείτε"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Ανακαίνιση πρόσβασης"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Επιλογές ανταλλαγής"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Άδειες"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Επιλογές δημιουργίας παρτίδων"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Αντικατάσταση υφιστάμενων μετοχών"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Δεν έχετε την άδεια να μοιραστείτε \"$PASSWORD$\" με \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Δεν μπορείτε να μοιραστείτε \"$PASSWORD$\" με \"$RECIPIENT$\" επειδή το μοιράστηκαν μαζί σας.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" έχει ήδη μοιραστεί με \" $RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ κοινόχρηστοι κωδικοί πρόσβασης $RECIPIENTS$ χρήστες.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Η πρόσβαση ανακλήθηκε στους κωδικούς πρόσβασης $TOTAL$ για χρήστες $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
