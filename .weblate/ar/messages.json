@@ -3514,5 +3514,127 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Share"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Share selected Passwords"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "فقط كلمات السر يمكن تقاسمها أي بنود أخرى مختارة لن يتم تقاسمها"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "مستعملون مختارون للمشاركة"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "نوع البحث عن المستخدمين"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "مشاهدة فقط"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Edit"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "الانبعاثات العرفية"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "الخيارات المتقدمة"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "تاريخ انتهاء المدة"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "يمكن تحريره"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "يمكن أن نتشارك"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Share"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "تقاسم الخيارات"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "الانبعاثات"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "خيارات إنشاء البطاقات"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "تخطي الأسهم القائمة"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "ليس لديكِ إذن لتشاركي \"X35X\" بـ \"X53X\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "لا يمكنك مشاركة \"X17X\" مع \"$RECIPIENT$\" لأنهم شاركوا معك.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\" $PASSWORD$ \"مشترك بالفعل مع \"$RECIPIENT$.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ passwords shared $RECIPIENTS$ users.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Access revoked to $TOTAL$ passwords for $RECIPIENTS$ users.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
