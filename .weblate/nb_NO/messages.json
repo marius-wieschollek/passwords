@@ -3517,5 +3517,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Dele"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Redigere"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Angi utløpsdato"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Dele"
     }
 }
