@@ -3510,5 +3510,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Compartir"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Modificar"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Definir fecha de vencimiento"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Compartir"
     }
 }
