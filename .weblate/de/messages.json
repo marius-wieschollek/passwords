@@ -3508,5 +3508,20 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Teilen"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Bearbeiten"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Erweiterte Verschlüsselung"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Ablaufdatum setzen"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Teilen"
     }
 }
