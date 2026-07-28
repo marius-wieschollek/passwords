@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Compartilhar"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Compartilhar senhas selecionadas"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Só senhas podem ser compartilhadas. Qualquer outro item selecionado não será compartilhado"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Selecione usuários para compartilhar com"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Digite para procurar usuários"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Só para ver"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Permissões personalizadas"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revogar acesso"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Opções avançadas"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Pode editar"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Pode compartilhar"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revogar acesso"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Opções de compartilhamento"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permissões"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Opções de criação em lote"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Sobrescrever ações existentes"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Você não tem permissão para compartilhar \"$PASSWORD$\" com \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Você não pode compartilhar \"$PASSWORD$\" com \"$RECIPIENT$\" porque eles compartilharam com você.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" já é compartilhado com \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ senhas compartilhadas $RECIPIENTS$ usuários.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Acesso revogado para senhas $TOTAL$ para usuários $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
