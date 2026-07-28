@@ -3507,5 +3507,17 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Sdílet"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Upravit"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Nastavit datum skončení platnosti"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Sdílet"
     }
 }
