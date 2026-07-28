@@ -3522,5 +3522,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Paylaş"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Share selected Passwords"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Sadece şifreler paylaşılabilir. Herhangi bir seçilmiş ürün paylaşılmayacaktır"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Kullanıcıları paylaşmak için seçin"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Kullanıcılar için arama"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Sadece sadece manzarayı görüntüle"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Özel İzinler"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Gelişmiş seçenekler"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Düzenleyebilir"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Paylaşabilir"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Paylaşım seçenekleri"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "İzinler"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batch oluşturma seçenekleri"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Mevcut hisseleri yazmak için"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "\"$PASSWORD$\"i \"[X53X) paylaşmak için izniniz yok.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "\"$PASSWORD$\" ile paylaşamazsınız, çünkü sizinle paylaştılar.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" zaten \"$RECIPIENT$ ile paylaşılıyor.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ şifreler $RECIPIENTS$ kullanıcıları paylaştı.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Access revoked to $TOTAL$ passwords for $RECIPIENTS$ users.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
