@@ -3519,5 +3519,118 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Спільне"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Поділитися вибраними паролями"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Тільки паролі можна поділитись. Будь-які інші вибрані елементи не поділяться"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Виберіть користувачів, щоб поділитися з"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Пошук користувачів"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Переглянути тільки"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Редагування"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Спеціальні дозволи"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Відновити доступ"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Додаткові параметри"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Чи можна редагувати"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Чи можна поділитися"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Відновити доступ"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Параметри обробки"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Дозвіли"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Варіанти створення пакета"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Поверніть існуючі акції"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Ви не маєте дозволу поділитися \"X35X\" з \"X53X\"\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Ви не можете поділитися \"$PASSWORD$\" з \"$RECIPIENT$\", оскільки вони поділилися з вами.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" вже ділиться з \"$RECIPIENT$.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ паролі діляться $RECIPIENTS$ користувачів.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Доступ до паролів $TOTAL$ для користувачів $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
