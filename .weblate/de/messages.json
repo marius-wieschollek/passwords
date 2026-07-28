@@ -3523,5 +3523,8 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Teilen"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Bestehendes überschreiben"
     }
 }
