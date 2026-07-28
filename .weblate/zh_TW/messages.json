@@ -3427,5 +3427,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "份額"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "分享所選取的密碼"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "只有密碼可以共享 。 所選取的任何其他項目不會被共享"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "選擇要分享的用戶"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "搜尋使用者的類型"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "只查看"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "自訂權限"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "取消存取"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "高级選項"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "能編輯"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "可以分取"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "取消存取"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "相通相通"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "權限"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "批次建立選項"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "覆寫已存在共享"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "您沒有權限分取\"$PASSWORD$\"和\"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "你不能分出\"$PASSWORD$\"和\"$RECIPIENT$\" 因為他們都跟你分享了.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\"已与\"$RECIPIENT$\"同用.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$口令共享 $RECIPIENTS$用戶.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "$RECIPIENTS$用戶取用 $TOTAL$ 口令被取消.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
