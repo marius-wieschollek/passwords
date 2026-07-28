@@ -3556,7 +3556,7 @@
         "description": "Title of the passwords batch share dialog"
     },
     "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
-        "message": "Only passwords can be shared. Any other selected items will not be shared",
+        "message": "Only passwords can be shared. Any other selected items will not be shared.",
         "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
     },
     "frontend-BatchActionShareSelectUsersLabel": {
