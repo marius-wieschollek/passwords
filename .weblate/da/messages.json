@@ -3629,5 +3629,8 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Redigér"
     }
 }
