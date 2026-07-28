@@ -3510,5 +3510,14 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Del"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Indstil udløbsdato"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Del"
     }
 }
