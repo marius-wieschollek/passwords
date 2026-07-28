@@ -44,7 +44,7 @@
         "message": "Conectar outro cliente"
     },
     "apps-000013": {
-        "message": "Non tentar de novo"
+        "message": "Non volver tentar de novo"
     },
     "apps-000015": {
         "message": "Tentar de novo"
@@ -2995,7 +2995,7 @@
         "description": "Explanation text in the WebAuthn setup dialog. The user must enter their encryption passphrase in the form below. The passphrase won't be checked, it will just be saved in the users browser. The app will attempt to log in with the password when opened. IF that is not possible/fails, WebAuthn will be disabled."
     },
     "tutorial-000751": {
-        "message": "Un lugar seguro para os teus contrasinais"
+        "message": "Un lugar seguro para os seus contrasinais"
     },
     "tutorial-000752": {
         "message": "Manteña os seus contrasinais en segredo"
@@ -3028,7 +3028,7 @@
         "message": "Cifrado en curso…"
     },
     "tutorial-000785": {
-        "message": "A axuda está da túa man."
+        "message": "A axuda está da súa man."
     },
     "frontend-PasswordActionPrint": {
         "message": "Imprimir un contrasinal",
@@ -3530,58 +3530,58 @@
         "message": "Editar"
     },
     "frontend-BatchActionShareExpiryDate": {
-        "message": "Definir data de caducidade"
+        "message": "Definir a data de caducidade"
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Compartir"
     },
     "frontend-BatchActionShareDialogTitle": {
-        "message": "Compartir contrasinais seleccionados"
+        "message": "Compartir os contrasinais seleccionados"
     },
     "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
-        "message": "Só se poden compartir contrasinais. Non se compartirán outros elementos seleccionados"
+        "message": "Só se poden compartir contrasinais. Calquera outro elemento seleccionado non será compartido."
     },
     "frontend-BatchActionShareSelectUsersLabel": {
         "message": "Seleccione os usuarios para compartir"
     },
     "frontend-BatchActionShareSelectUsersPlaceholder": {
-        "message": "Tipo para buscar usuarios"
+        "message": "Escriba para buscar usuarios"
     },
     "frontend-BatchActionSharePermissionView": {
-        "message": "Ver só"
+        "message": "Só ver"
     },
     "frontend-BatchActionSharePermissionCustom": {
         "message": "Permisos personalizados"
     },
     "frontend-BatchActionSharePermissionDelete": {
-        "message": "Revogar acceso"
+        "message": "Revogar o acceso"
     },
     "frontend-BatchActionShareAdvanced": {
         "message": "Opcións avanzadas"
     },
     "frontend-BatchActionShareCanEdit": {
-        "message": "Pódese editar"
+        "message": "Pode editar"
     },
     "frontend-BatchActionShareCanShare": {
         "message": "Pode compartir"
     },
     "frontend-BatchActionShareSubmitRevoke": {
-        "message": "Revogar acceso"
+        "message": "Revogar o acceso"
     },
     "frontend-BatchActionShareShareOptions": {
-        "message": "Compartir opcións"
+        "message": "Compartir as opcións"
     },
     "frontend-BatchActionSharePermissionOptions": {
         "message": "Permisos"
     },
     "frontend-BatchActionShareCreateOptions": {
-        "message": "Opcións de creación de Batch"
+        "message": "Opcións de creación por lotes"
     },
     "frontend-BatchActionShareCreateOverwrite": {
-        "message": "Sobreescribir accións existentes"
+        "message": "Sobrescribir as accións existentes"
     },
     "frontend-CreateShareErrorNoPermission": {
-        "message": "\"[Mentres facía a película,] falamos do feito de que era moi probable que [Scar e Mufasa] non tivesen ambos os mesmos pais\", declarou o produtor Don Hahn.",
+        "message": "Non ten permiso para compartir «$PASSWORD$« con «$RECIPIENT$».",
         "placeholders": {
             "password": {
                 "content": "$1",
@@ -3594,7 +3594,7 @@
         }
     },
     "frontend-CreateShareErrorShareWithOwner": {
-        "message": "Non podes compartir \"X17X\" con \"X35X\" porque o compartiron contigo.",
+        "message": "Non pode compartir «$PASSWORD$» con «$RECIPIENT$» porque o compartiron con Vde.",
         "placeholders": {
             "password": {
                 "content": "$1",
@@ -3607,7 +3607,7 @@
         }
     },
     "frontend-CreateShareErrorAlreadyShared": {
-        "message": "|data de nacemento = [[5 de setembro]] de [[1638]].",
+        "message": "«$PASSWORD$» xa está compartido con «$RECIPIENT$».",
         "placeholders": {
             "password": {
                 "content": "$1",
@@ -3620,7 +3620,7 @@
         }
     },
     "frontend-BatchActionShareCreatedToast": {
-        "message": "$TOTAL$ Os contrasinais compartidos cos usuarios $RECIPIENTS$.",
+        "message": "$TOTAL$ contrasinais compartidos con $RECIPIENTS$ usuarios.",
         "placeholders": {
             "total": {
                 "content": "$1",
@@ -3633,7 +3633,7 @@
         }
     },
     "frontend-BatchActionShareDeletedToast": {
-        "message": "Acceso revogado a $TOTAL$ contrasinais para usuarios $RECIPIENTS$.",
+        "message": "Acceso revogado a $TOTAL$ contrasinais para $RECIPIENTS$ usuarios.",
         "placeholders": {
             "total": {
                 "content": "$1",
