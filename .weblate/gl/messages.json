@@ -3534,5 +3534,115 @@
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Compartir"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Compartir contrasinais seleccionados"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Só se poden compartir contrasinais. Non se compartirán outros elementos seleccionados"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Seleccione os usuarios para compartir"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Tipo para buscar usuarios"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Ver só"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Permisos personalizados"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revogar acceso"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Opcións avanzadas"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Pódese editar"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Pode compartir"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revogar acceso"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Compartir opcións"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permisos"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Opcións de creación de Batch"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Sobreescribir accións existentes"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "\"[Mentres facía a película,] falamos do feito de que era moi probable que [Scar e Mufasa] non tivesen ambos os mesmos pais\", declarou o produtor Don Hahn.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Non podes compartir \"X17X\" con \"X35X\" porque o compartiron contigo.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "|data de nacemento = [[5 de setembro]] de [[1638]].",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ Os contrasinais compartidos cos usuarios $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Acceso revogado a $TOTAL$ contrasinais para usuarios $RECIPIENTS$.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
