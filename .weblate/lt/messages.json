@@ -3510,5 +3510,127 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Dalys"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Dalinti pasirinktus slaptažodžius"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Bendrinti galima tik slaptažodžius. Nr kitų pasirinktų elementų nebus dalijamasi"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Parinkite naudotojus, su kuriais dalinsis"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Name"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Rodyti tik"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Keisti"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Spausdinti leidimai"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Prieiga prie atstatymų"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Patobulintos galimybės"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "@ info: whatsthis"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "A button on a Remote Control"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "NAME OF TRANSLATORS"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Dalys"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Prieiga prie atstatymų"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Dalijimosi galimybės"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Leidimai"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Partijos kūrimo galimybės"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Perrašyti esamas akcijas"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Jūs neturite leidimo dalintis \"$PASSWORD$\" su \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Jūs negalite dalintis \"$PASSWORD$\" su \"$RECIPIENT$\", nes jie dalinosi su jumis.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" jau dalijasi su \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ slaptažodžiai bendri $RECIPIENTS$ vartotojai.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Prieiga $TOTAL$ slaptažodžiams $RECIPIENTS$ vartotojams.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
