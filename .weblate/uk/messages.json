@@ -3510,5 +3510,14 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Спільне"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Встановити термін доступности"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Спільне"
     }
 }
