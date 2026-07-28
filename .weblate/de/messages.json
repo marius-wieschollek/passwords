@@ -3513,10 +3513,10 @@
         "message": "Teilen"
     },
     "frontend-BatchActionSharePermissionEdit": {
-        "message": "Bearbeiten"
+        "message": "Bearbeiten erlauben"
     },
     "frontend-BatchActionShareAdvanced": {
-        "message": "Erweiterte Verschlüsselung"
+        "message": "Erweiterte Optionen"
     },
     "frontend-BatchActionShareExpiryDate": {
         "message": "Ablaufdatum setzen"
@@ -3525,6 +3525,110 @@
         "message": "Teilen"
     },
     "frontend-BatchActionShareCreateOverwrite": {
-        "message": "Bestehendes überschreiben"
+        "message": "Bestehende Freigaben überschreiben"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Ausgewählte Passwörter teilen"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Nur Passwörter können geteilt werden. Alle anderen ausgewählten Objekte werden nicht geteilt werden."
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Wähle die gewünschten Empfänger"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Tippen, um nach Benutzern zu suchen"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Nur anzeigen"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Benutzerdefinierte Berechtigungen"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Zugriff widerrufen"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Kann bearbeiten"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Kann teilen"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Zugriff widerrufen"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Freigabeoptionen"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Berechtigungen"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Optionen für die Stapelerstellung"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Du hast nicht die notwendigen Rechte um \"$PASSWORD$\" mit \"$RECIPIENT$\" zu teilen.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Du kannst \"$PASSWORD$\" nicht mit \"$RECIPIENT$\" teilen, da sie es mit dir geteilt haben.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" ist bereits mit \"$RECIPIENT$\" geteilt.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ Passwörter mit $RECIPIENTS$ Benutzern geteilt.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Zugriff auf $TOTAL$ Passwörter für $RECIPIENTS$ Benutzer widerrufen.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
