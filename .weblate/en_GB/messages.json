@@ -3477,5 +3477,160 @@
                 "description": "Name of the folder entry"
             }
         }
+    },
+    "frontend-TagListItemAriaLabel": {
+        "message": "Tag entry for \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1",
+                "description": "Name of the tag entry"
+            }
+        }
+    },
+    "frontend-TagPickerEmpty": {
+        "message": "No tags found"
+    },
+    "frontend-TagPickerLoading": {
+        "message": "Loading"
+    },
+    "frontend-TagPickerTagRemoved": {
+        "message": "Removed tag \"$TAG$\"",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-TagPickerTagAdded": {
+        "message": "Added tag \"$TAG$\"",
+        "placeholders": {
+            "tag": {
+                "content": "$1",
+                "description": "Name of the tag"
+            }
+        }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Share"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Share selected Passwords"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Only passwords can be shared. Any other selected items will not be shared"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Select users to share with"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Type to search for users"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "View only"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Edit"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Custom Permissions"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Advanced options"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Set expiration date"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Can edit"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Can share"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Share"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Revoke access"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Sharing options"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Permissions"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batch creation options"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Overwrite existing shares"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "You dont have permission to share \"$PASSWORD$\" with \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "You can't share \"$PASSWORD$\" with \"$RECIPIENT$\" because they shared it with you.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" is already shared with \"$RECIPIENT$\".",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ passwords shared $RECIPIENTS$ users.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Access revoked to $TOTAL$ passwords for $RECIPIENTS$ users.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
