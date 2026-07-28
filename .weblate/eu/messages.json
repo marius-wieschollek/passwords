@@ -3415,5 +3415,127 @@
                 "description": "Name of the tag"
             }
         }
+    },
+    "frontend-BatchActionShare": {
+        "message": "Partekatu"
+    },
+    "frontend-BatchActionShareDialogTitle": {
+        "message": "Partekatu hautatutako pasahitzak"
+    },
+    "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
+        "message": "Pasahitzak bakarrik parteka daitezke. Hautatutako beste elementurik ez da partekatuko"
+    },
+    "frontend-BatchActionShareSelectUsersLabel": {
+        "message": "Hautatu erabiltzaileak partekatzeko"
+    },
+    "frontend-BatchActionShareSelectUsersPlaceholder": {
+        "message": "Idatzi erabiltzaileak bilatzeko"
+    },
+    "frontend-BatchActionSharePermissionView": {
+        "message": "Ikusi bakarrik"
+    },
+    "frontend-BatchActionSharePermissionEdit": {
+        "message": "Editatu"
+    },
+    "frontend-BatchActionSharePermissionCustom": {
+        "message": "Baimen pertsonalizatuak"
+    },
+    "frontend-BatchActionSharePermissionDelete": {
+        "message": "Errebokatu sarbidea"
+    },
+    "frontend-BatchActionShareAdvanced": {
+        "message": "Aukera aurreratuak"
+    },
+    "frontend-BatchActionShareExpiryDate": {
+        "message": "Ezarri iraungitze-data"
+    },
+    "frontend-BatchActionShareCanEdit": {
+        "message": "Edita daiteke"
+    },
+    "frontend-BatchActionShareCanShare": {
+        "message": "Partekatu daiteke"
+    },
+    "frontend-BatchActionShareSubmit": {
+        "message": "Partekatu"
+    },
+    "frontend-BatchActionShareSubmitRevoke": {
+        "message": "Errebokatu sarbidea"
+    },
+    "frontend-BatchActionShareShareOptions": {
+        "message": "Partekatzeko aukerak"
+    },
+    "frontend-BatchActionSharePermissionOptions": {
+        "message": "Baimenak"
+    },
+    "frontend-BatchActionShareCreateOptions": {
+        "message": "Batch sortzeko aukerak"
+    },
+    "frontend-BatchActionShareCreateOverwrite": {
+        "message": "Gainidatzi existitzen diren akzioak"
+    },
+    "frontend-CreateShareErrorNoPermission": {
+        "message": "Ez duzu baimenik \"$PASSWORD$\" \"$RECIPIENT$\"-rekin partekatzeko.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorShareWithOwner": {
+        "message": "Ezin duzu \"$PASSWORD$\" \"$RECIPIENT$\"-rekin partekatu, zurekin partekatzen zutelako.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-CreateShareErrorAlreadyShared": {
+        "message": "\"$PASSWORD$\" dagoeneko \"$RECIPIENT$\"-rekin partekatzen da.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-BatchActionShareCreatedToast": {
+        "message": "$TOTAL$ pasahitzak partekatuak $RECIPIENTS$ erabiltzaileak.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
+    },
+    "frontend-BatchActionShareDeletedToast": {
+        "message": "Sarbidea $TOTAL$ pasahitzetara errebokatua $RECIPIENTS$ erabiltzaileentzat.",
+        "placeholders": {
+            "total": {
+                "content": "$1",
+                "description": "Number of passwords"
+            },
+            "recipients": {
+                "content": "$1",
+                "description": "Number of recipients"
+            }
+        }
     }
 }
