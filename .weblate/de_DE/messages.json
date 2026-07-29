@@ -3531,7 +3531,7 @@
         "message": "Ausgewählte Passwörter teilen"
     },
     "frontend-BatchActionShareDialogPasswordsOnlyWarning": {
-        "message": "Nur Passwörter können geteilt werden. Alle anderen ausgewählten Objekte werden nicht geteilt werden."
+        "message": "Nur Passwörter können geteilt werden. Alle anderen ausgewählten Objekte werden nicht geteilt."
     },
     "frontend-BatchActionShareSelectUsersLabel": {
         "message": "Empfänger auswählen"
