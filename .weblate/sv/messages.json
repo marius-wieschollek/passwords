@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "End-to-End-kryptering kommer att inaktiveras på alla lösenord när de delas."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Att dela med sig av grupper stöds inte. Istället kommer lösenorden delas med varje nuvarande gruppmedlem individuellt."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Användargrupp"
     }
 }
