@@ -3644,5 +3644,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "O cifrado final será desactivado en calquera contrasinal cando sexa compartido."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Non se permite compartir con grupos. Os contrasinais serán compartidos individualmente con cada membro do grupo actual."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Grupo de usuario"
     }
 }
