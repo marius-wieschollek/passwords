@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Loppusalaus poistetaan millä tahansa salasanalla, kun se on jaettu."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Ryhmien kanssa tehtävää yhteistyötä ei tueta. Sen sijaan salasanat jaetaan kunkin nykyisen ryhmän jäsenen kanssa erikseen."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Käyttäjäryhmä"
     }
 }
