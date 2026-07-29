@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Η κρυπτογράφηση από το τέλος στο τέλος θα απενεργοποιηθεί σε οποιονδήποτε κωδικό πρόσβασης όταν μοιραστείτε."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Η κοινή χρήση με ομάδες δεν υποστηρίζεται. Αντ' αυτού, οι κωδικοί πρόσβασης θα μοιράζονται με κάθε τρέχον μέλος της ομάδας ξεχωριστά."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Ομάδα χρηστών"
     }
 }
