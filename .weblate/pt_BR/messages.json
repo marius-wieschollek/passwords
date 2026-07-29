@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "A criptografia de ponta a ponta será desativada em qualquer senha quando compartilhada."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Compartilhar com grupos não é suportado. Em vez disso, as senhas serão compartilhadas com cada membro do grupo."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Grupo de usuários"
     }
 }
