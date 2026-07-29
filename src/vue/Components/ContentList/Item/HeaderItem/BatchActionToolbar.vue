@@ -71,6 +71,7 @@
     import RestoreTrashItemsBatchAction from "@js/Actions/BatchActions/RestoreTrashItemsBatchAction";
     import ShareBatchAction from "@js/Actions/BatchActions/ShareBatchAction";
     import SettingsService from "@js/Services/SettingsService";
+    import DeferredActivationService from "@js/Services/DeferredActivationService";
 
     export default {
         components: {
@@ -105,7 +106,10 @@
                 return !this.isTrashSection && (BatchActionManager.folders.length !== 0 || BatchActionManager.passwords.length !== 0);
             },
             canShare() {
-                return SettingsService.get('server.sharing.enabled') && !this.isTrashSection && BatchActionManager.passwords.length !== 0;
+                return SettingsService.get('server.sharing.enabled') &&
+                       !this.isTrashSection &&
+                       BatchActionManager.passwords.length !== 0 &&
+                       DeferredActivationService.check('batch-action-share');
             },
             canFavorite() {
                 return !this.isTrashSection;
