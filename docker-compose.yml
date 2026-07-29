@@ -81,6 +81,7 @@ services:
     environment:
       PORT: 9000
       IMAGINARY_SECRET: "passwords"
+    stop_grace_period: 5s
     cap_add:
       - SYS_NICE
 

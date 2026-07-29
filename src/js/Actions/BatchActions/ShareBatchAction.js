@@ -18,6 +18,7 @@ import CreateShareError from "@js/Actions/Share/CreateShareError";
 import DeleteShareAction from "@js/Actions/Share/DeleteShareAction";
 import API from "@js/Helper/api";
 import ToastService from "@js/Services/ToastService";
+import CreateGroupShareAction from "@js/Actions/Share/CreateGroupShareAction";
 
 export default class ShareBatchAction extends BatchAction {
 
@@ -63,11 +64,12 @@ export default class ShareBatchAction extends BatchAction {
         return new Promise(async (resolve) => {
             try {
                 const BatchShareDialog     = await import(/* webpackChunkName: "BatchShareDialog" */ '@vue/Dialog/BatchActions/BatchShareDialog.vue'),
-                      passwordsOnlyWarning = this._items.folders.length > 0 || this._items.tags.length > 0;
+                      passwordsOnlyWarning = this._items.folders.length > 0 || this._items.tags.length > 0,
+                      cseDisableWarning =  this._items.passwords.some(password => password.cseType !== 'none');
 
                 spawnDialog(
                     BatchShareDialog.default,
-                    {resolve, passwordsOnlyWarning},
+                    {resolve, passwordsOnlyWarning, cseDisableWarning},
                     {container: UtilityService.popupContainer()}
                 );
             } catch(e) {
@@ -90,9 +92,16 @@ export default class ShareBatchAction extends BatchAction {
             };
 
             for(let password of this._items.passwords) {
-                promises.push(
-                    this.#createShare(password, recipient, options, messages)
-                );
+                if(recipient.isNoUser) {
+                    promises.push(
+                        this.#createGroupShare(password, recipient, options, messages)
+                    );
+                } else {
+                    promises.push(
+                        this.#createShare(password, recipient, options, messages)
+                    );
+                }
+
             }
         }
 
@@ -116,6 +125,22 @@ export default class ShareBatchAction extends BatchAction {
             } else {
                 LoggingService.error(e);
             }
+        }
+    }
+
+    async #createGroupShare(password, receiver, options, messages) {
+        try {
+            let action = new CreateGroupShareAction(
+                password,
+                receiver,
+                options
+            );
+
+            let newMessages = await action.run();
+            messages.push(...newMessages);
+
+        } catch(e) {
+            LoggingService.error(e);
         }
     }
 

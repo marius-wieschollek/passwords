@@ -3559,6 +3559,14 @@
         "message": "Only passwords can be shared. Any other selected items will not be shared.",
         "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
     },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "End-to-End encryption will be disabled on any password when shared.",
+        "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Sharing with groups is not supported. Instead, the passwords will be shared with each current group member individually.",
+        "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
+    },
     "frontend-BatchActionShareSelectUsersLabel": {
         "message": "Select users to share with",
         "description": "Label of the user selection field in the batch share dialog"
@@ -3692,5 +3700,9 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "User group",
+        "description": "Subtext in the user selection dropdown in the batch sharing dialog for group entries"
     }
 }

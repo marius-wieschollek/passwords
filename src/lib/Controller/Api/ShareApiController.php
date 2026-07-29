@@ -18,7 +18,7 @@ use OCA\Passwords\Helper\ApiObjects\AbstractObjectHelper;
 use OCA\Passwords\Helper\ApiObjects\ShareObjectHelper;
 use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
 use OCA\Passwords\Helper\Sharing\CreatePasswordShareHelper;
-use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
+use OCA\Passwords\Helper\Sharing\RecipientSearchHelper;
 use OCA\Passwords\Helper\Sharing\UpdatePasswordShareHelper;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -39,41 +39,6 @@ use OCP\IRequest;
 class ShareApiController extends AbstractApiController {
 
     /**
-     * @var string|null
-     */
-    protected ?string $userId;
-
-    /**
-     * @var ShareService
-     */
-    protected ShareService $modelService;
-
-    /**
-     * @var ShareObjectHelper
-     */
-    protected ShareObjectHelper $objectHelper;
-
-    /**
-     * @var ShareSettingsHelper
-     */
-    protected ShareSettingsHelper $shareSettings;
-
-    /**
-     * @var ShareUserListHelper
-     */
-    protected ShareUserListHelper $shareUserList;
-
-    /**
-     * @var CreatePasswordShareHelper
-     */
-    protected CreatePasswordShareHelper $createPasswordShare;
-
-    /**
-     * @var UpdatePasswordShareHelper
-     */
-    protected UpdatePasswordShareHelper $updatePasswordShareHelper;
-
-    /**
      * @var array
      */
     protected array $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
@@ -86,29 +51,21 @@ class ShareApiController extends AbstractApiController {
      * @param ShareService              $modelService
      * @param ShareObjectHelper         $objectHelper
      * @param ShareSettingsHelper       $shareSettings
-     * @param ShareUserListHelper       $shareUserList
+     * @param RecipientSearchHelper     $shareUserList
      * @param CreatePasswordShareHelper $createPasswordShare
      * @param UpdatePasswordShareHelper $updatePasswordShareHelper
      */
     public function __construct(
-        ?string $userId,
-        IRequest $request,
-        ShareService $modelService,
-        ShareObjectHelper $objectHelper,
-        ShareSettingsHelper $shareSettings,
-        ShareUserListHelper $shareUserList,
-        CreatePasswordShareHelper $createPasswordShare,
-        UpdatePasswordShareHelper $updatePasswordShareHelper
+        protected ?string                   $userId,
+        IRequest                            $request,
+        protected ShareService              $modelService,
+        protected ShareObjectHelper         $objectHelper,
+        protected ShareSettingsHelper       $shareSettings,
+        protected RecipientSearchHelper     $shareUserList,
+        protected CreatePasswordShareHelper $createPasswordShare,
+        protected UpdatePasswordShareHelper $updatePasswordShareHelper
     ) {
         parent::__construct($request);
-
-        $this->userId                    = $userId;
-        $this->modelService              = $modelService;
-        $this->objectHelper              = $objectHelper;
-        $this->shareSettings             = $shareSettings;
-        $this->shareUserList             = $shareUserList;
-        $this->createPasswordShare       = $createPasswordShare;
-        $this->updatePasswordShareHelper = $updatePasswordShareHelper;
     }
 
     /**
@@ -182,16 +139,16 @@ class ShareApiController extends AbstractApiController {
     }
 
     /**
-     * @param string   $password
-     * @param string   $receiver
-     * @param string   $type
-     * @param int|null $expires
-     * @param bool     $editable
-     * @param bool     $shareable
+     * @param string      $password
+     * @param string|null $recipient
+     * @param string      $type
+     * @param int|null    $expires
+     * @param bool        $editable
+     * @param bool        $shareable
+     * @param string|null $receiver
      *
      * @return JSONResponse
      * @throws ApiException
-     * @throws Exception
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
@@ -200,20 +157,32 @@ class ShareApiController extends AbstractApiController {
     #[NoAdminRequired]
     public function create(
         string $password,
-        string $receiver,
+        string $recipient = null,
         string $type = 'user',
         ?int   $expires = null,
         bool   $editable = false,
-        bool   $shareable = false
+        bool   $shareable = false,
+        string $receiver = null,
     ): JSONResponse {
         $this->checkAccessPermissions();
 
-        $receiver = $this->shareUserList->mapReceiverToUid($receiver);
-        if(!$this->shareUserList->canShareWithUser($receiver)) throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
+        /**
+         * Map deprecated $receiver property
+         */
+        if($recipient === null) {
+            if($receiver !== null) {
+                $recipient = $receiver;
+            } else {
+                throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
+            }
+        }
+
+        $recipient = $this->shareUserList->mapRecipientToUid($recipient);
+        if(!$this->shareUserList->canShareWithUser($recipient)) throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
 
         $share = $this->createPasswordShare->createPasswordShare(
             $password,
-            $receiver,
+            $recipient,
             $type,
             $expires,
             $editable,
@@ -294,10 +263,54 @@ class ShareApiController extends AbstractApiController {
 
         $partners = [];
         if($this->shareSettings->get('autocomplete')) {
-            $partners = $this->shareUserList->getShareUsers($search, $limit);
+            $matches = $this->shareUserList->findRecipientSuggestions($search, $limit);
+
+            foreach($matches as $match) {
+                if($match['type'] === 'user') {
+                    $partners[ $match['id'] ] = $match['name'];
+                }
+            }
         }
 
         return $this->createJsonResponse($partners);
+    }
+
+    /**
+     * @param string $search
+     * @param int    $limit
+     * @param bool   $withGroups
+     *
+     * @return JSONResponse
+     * @throws ApiException
+     */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 20, period: 30)]
+    public function recipients(string $search = '', int $limit = 5, bool $withGroups = true): JSONResponse {
+        $this->checkAccessPermissions();
+
+        return $this->createJsonResponse(
+            $this->shareUserList->findRecipientSuggestions($search, $limit, $withGroups)
+        );
+    }
+
+    /**
+     * @param string $groupId
+     *
+     * @return JSONResponse
+     * @throws ApiException
+     */
+    #[CORS]
+    #[NoCSRFRequired]
+    #[NoAdminRequired]
+    #[UserRateLimit(limit: 20, period: 30)]
+    public function resolveGroup(string $groupId): JSONResponse {
+        $this->checkAccessPermissions();
+
+        return $this->createJsonResponse(
+            $this->shareUserList->resolveGroup($groupId)
+        );
     }
 
     /**

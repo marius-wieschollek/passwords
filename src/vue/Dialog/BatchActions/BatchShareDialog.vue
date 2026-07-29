@@ -19,6 +19,8 @@
         <template #default>
             <div class="pw-batch-share">
                 <nc-note-card type="warning" :text="t('BatchActionShareDialogPasswordsOnlyWarning')" v-if="passwordsOnlyWarning"/>
+                <nc-note-card type="warning" :text="t('BatchActionShareDialogCseDisableWarning')" v-if="cseDisableWarning"/>
+                <nc-note-card type="warning" :text="t('BatchActionShareDialogGroupShareWarning')" v-if="groupShareWarning"/>
 
                 <div class="select-users">
                     <nc-select-users :input-label="t('BatchActionShareSelectUsersLabel')"
@@ -26,7 +28,7 @@
                                      :options="availableUsers"
                                      :placeholder="t('BatchActionShareSelectUsersPlaceholder')"
                                      v-model="selectedUsers"
-                                     @search="fetchSuggestedUsers"
+                                     @search="fetchShareSuggestions"
                                      :disabled="initializing"
                                      class="wide"
                                      keep-open
@@ -118,6 +120,7 @@
     import SettingsService from "@js/Services/SettingsService";
     import NcNoteCard from '@nc/NcNoteCard.js';
     import NcFormGroup from '@nc/NcFormGroup.js';
+    import LocalisationService from "@js/Services/LocalisationService";
 
     export default {
         components: {
@@ -139,7 +142,8 @@
         },
         props     : {
             resolve             : Function,
-            passwordsOnlyWarning: Boolean
+            passwordsOnlyWarning: Boolean,
+            cseDisableWarning   : Boolean
         },
         data() {
             let edit            = SettingsService.get('user.sharing.editable'),
@@ -156,12 +160,11 @@
                 hasExpires       : false,
                 showAdvanced     : false,
                 container        : UtilityService.popupContainer(true),
-                autocomplete     : SettingsService.get('server.sharing.autocomplete'),
                 initializing     : true
             };
         },
         mounted() {
-            this.fetchSuggestedUsers('')
+            this.fetchShareSuggestions('')
                 .catch(LoggingService.catch);
         },
         computed: {
@@ -170,18 +173,19 @@
             },
             canConfigure() {
                 return this.hasUsersSelected && this.permissionLevel !== 'delete';
+            },
+            groupShareWarning() {
+                return this.selectedUsers && this.selectedUsers.some(item => item.isNoUser);
             }
         },
         methods : {
-            async fetchSuggestedUsers(query) {
-                let matches = await API.findSharePartners(query, 25),
-                    users   = [];
+            async fetchShareSuggestions(query) {
+                let matches      = await API.findShareRecipients(query, 25),
+                    groupSubname = LocalisationService.translate('BatchShareSubnameGroup'),
+                    users        = [];
+
                 for(let match of matches) {
-                    if(
-                        match.id === OC.currentUser ||
-                        (this.selectedUsers !== null && this.selectedUsers.indexOf(match) !== -1) ||
-                        (!this.autocomplete && match.id !== query && match.displayName !== query && match.context !== query)
-                    ) {
+                    if(this.selectedUsers !== null && this.selectedUsers.indexOf(match) !== -1) {
                         continue;
                     }
 
@@ -189,8 +193,8 @@
                         {
                             id         : match.id,
                             displayName: match.name,
-                            isNoUser   : false,
-                            subname    : match.context
+                            isNoUser   : match.type === 'group',
+                            subname    : match.type === 'group' ? groupSubname:match.context
                         });
                 }
 

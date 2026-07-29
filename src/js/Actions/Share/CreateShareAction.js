@@ -109,10 +109,10 @@ export default class CreateShareAction {
         share.id = shareModel.id;
         share.updatePending = true;
         share.owner = {
-            id  : this.#user.id,
+            id  : this.#user.uid,
             name: this.#user.displayName
         };
-        share.receiver = {id: this.#recipient, name: this.#recipient.displayName};
+        share.receiver = {id: this.#recipient.id, name: this.#recipient.displayName};
 
         this.#password.shares[share.id] = await API._processShare(share);
     }

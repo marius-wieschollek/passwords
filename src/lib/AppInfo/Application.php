@@ -61,7 +61,8 @@ use OCA\Passwords\Events\Tag\BeforeTagDeletedEvent;
 use OCA\Passwords\Events\Tag\BeforeTagSetRevisionEvent;
 use OCA\Passwords\Events\Tag\TagClonedEvent;
 use OCA\Passwords\Events\Tag\TagDeletedEvent;
-use OCA\Passwords\Helper\Sharing\ShareUserListHelper;
+use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
+use OCA\Passwords\Helper\Sharing\RecipientSearchHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
@@ -298,14 +299,15 @@ class Application extends App implements IBootstrap {
         );
 
         $context->registerService(
-            ShareUserListHelper::class,
+            RecipientSearchHelper::class,
             function (ContainerInterface $c) {
-                return new ShareUserListHelper(
+                return new RecipientSearchHelper(
                     $c->get(ShareManager::class),
                     $c->get(IUserManager::class),
                     $c->get(IGroupManager::class),
                     $c->get(ConfigurationService::class),
-                    $c->get(EnvironmentService::class)
+                    $c->get(EnvironmentService::class),
+                    $c->get(ShareSettingsHelper::class)
                 );
             }
         );

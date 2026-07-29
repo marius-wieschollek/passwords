@@ -66,6 +66,9 @@ $routes = [
     ['name' => 'share_api#create', 'url' => '/api/1.0/share/create', 'verb' => 'POST'],
     ['name' => 'share_api#update', 'url' => '/api/1.0/share/update', 'verb' => 'PATCH'],
     ['name' => 'share_api#delete', 'url' => '/api/1.0/share/delete', 'verb' => 'DELETE'],
+    ['name' => 'share_api#recipients', 'url' => '/api/1.0/share/recipients', 'verb' => 'GET'],
+    ['name' => 'share_api#recipients', 'url' => '/api/1.0/share/recipients', 'verb' => 'POST', 'postfix' => 'POST'],
+    ['name' => 'share_api#resolveGroup', 'url' => '/api/1.0/share/recipients/resolve-group', 'verb' => 'POST'],
     ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'GET'],
     ['name' => 'share_api#partners', 'url' => '/api/1.0/share/partners', 'verb' => 'POST', 'postfix' => 'POST'],
 
