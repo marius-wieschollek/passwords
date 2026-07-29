@@ -3630,5 +3630,8 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Ende-zu-Ende-Verschlüsselung wird deaktiviert wenn Sie das Passwort teilen."
     }
 }
