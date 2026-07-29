@@ -67,7 +67,7 @@
         "marked": "^4.2.2",
         "mermaid": "^10.6.1",
         "mini-css-extract-plugin": "^2.7.2",
-        "passwords-client": "1.0.0-beta.5918",
+        "passwords-client": "1.0.0-beta.5974",
         "node-polyfill-webpack-plugin": "^3.0.0",
         "process": "^0.11.10",
         "sass": "^1.57.1",
