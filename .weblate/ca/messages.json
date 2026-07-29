@@ -3535,5 +3535,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "L' encriptatge final a final es deshabilitarà en qualsevol contrasenya quan es comparteixi."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "No es permet compartir amb grups. En comptes d' això, les contrasenyes seran compartides amb cada membre del grup actual individualment."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Grup d' usuaris"
     }
 }
