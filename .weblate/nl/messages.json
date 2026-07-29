@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "End-to-End encryptie zal worden uitgeschakeld op elk wachtwoord wanneer gedeeld."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Delen met groepen wordt niet ondersteund. In plaats daarvan worden de wachtwoorden gedeeld met elk huidig groepslid afzonderlijk."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Gebruikersgroep"
     }
 }
