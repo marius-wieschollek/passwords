@@ -54,6 +54,8 @@ class ShareSettingsHelper {
         switch($key) {
             case 'enabled':
                 return $this->isSharingEnabled();
+            case 'groups.enabled':
+                return $this->isGroupSharingEnabled();
             case 'resharing':
                 return $this->isReSharingEnabled();
             case 'autocomplete':
@@ -70,10 +72,11 @@ class ShareSettingsHelper {
      */
     public function list(): array {
         return [
-            'server.sharing.enabled'      => $this->isSharingEnabled(),
-            'server.sharing.resharing'    => $this->isReSharingEnabled(),
-            'server.sharing.autocomplete' => $this->isSharingEnumerationEnabled(),
-            'server.sharing.types'        => $this->get('types')
+            'server.sharing.enabled'        => $this->isSharingEnabled(),
+            'server.sharing.groups.enabled' => $this->isGroupSharingEnabled(),
+            'server.sharing.resharing'      => $this->isReSharingEnabled(),
+            'server.sharing.autocomplete'   => $this->isSharingEnumerationEnabled(),
+            'server.sharing.types'          => $this->get('types')
         ];
     }
 
@@ -91,6 +94,13 @@ class ShareSettingsHelper {
     /**
      * @return bool
      */
+    protected function isGroupSharingEnabled(): bool {
+        return $this->shareManager->allowGroupSharing();
+    }
+
+    /**
+     * @return bool
+     */
     protected function isReSharingEnabled(): bool {
         return $this->config->getAppValue('shareapi_allow_resharing', 'yes', 'core') === 'yes';
     }
@@ -99,6 +109,6 @@ class ShareSettingsHelper {
      * @return bool
      */
     protected function isSharingEnumerationEnabled(): bool {
-        return $this->config->getAppValue('shareapi_allow_share_dialog_user_enumeration', 'yes', 'core') === 'yes';
+        return $this->shareManager->allowEnumeration();
     }
 }

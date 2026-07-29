@@ -119,7 +119,7 @@ class RecipientSearchHelper {
      * @return array
      */
     public function resolveGroup(string $groupId): array {
-        if(!$this->groupManager->isInGroup($this->environment->getUserId(), $groupId)) {
+        if(!$this->shareSettings->get('groups.enabled') || !$this->groupManager->isInGroup($this->environment->getUserId(), $groupId)) {
             return [];
         };
 
@@ -210,6 +210,10 @@ class RecipientSearchHelper {
      * @return array
      */
     protected function getMatchingGroups(string $query, int $limit): array {
+        if(!$this->shareSettings->get('groups.enabled')) {
+            return [];
+        }
+
         $autocomplete   = $this->shareSettings->get('autocomplete');
         $matchingGroups = $this->groupManager->search($query, $limit);
         $userGroups     = $this->groupManager->getUserGroupIds($this->environment->getUser());
