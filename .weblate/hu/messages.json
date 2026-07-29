@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Az End- to- End titkosítást a megosztott jelszavakra letiltjuk."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "A csoportokkal való megosztás nem támogatott. Ehelyett a jelszavakat minden jelenlegi csoporttaggal egyenként osztják meg."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Felhasználócsoport"
     }
 }
