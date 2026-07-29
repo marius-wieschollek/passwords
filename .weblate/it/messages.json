@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "La crittografia end-to-End sarà disabilitata su qualsiasi password quando condivisa."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "La condivisione con i gruppi non è supportata. Invece, le password saranno condivise con ogni membro del gruppo corrente singolarmente."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Gruppo utente"
     }
 }
