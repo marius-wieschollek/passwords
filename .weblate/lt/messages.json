@@ -3632,5 +3632,14 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "@ info: whatsthis."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Bendravimas su grupėmis neremiamas. Vietoj to slaptažodžiais bus dalijamasi su kiekvienu dabartiniu grupės nariu atskirai."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Vartotojo grupė"
     }
 }
