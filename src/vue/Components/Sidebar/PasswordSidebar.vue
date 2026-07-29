@@ -105,6 +105,7 @@
     import Revisions from '@vc/Sidebar/PasswordSidebar/Tabs/Revisions';
     import Share from '@vc/Sidebar/PasswordSidebar/Tabs/Share';
     import LoggingService from "@js/Services/LoggingService";
+    import DeferredActivationService from "@js/Services/DeferredActivationService";
 
     export default {
         components: {
@@ -119,7 +120,7 @@
             LockResetIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
             Share,
-            'notes': () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
+            'notes'       : () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),
             Revisions,
             Tags,
             Preview,
@@ -155,7 +156,10 @@
                 return LocalisationService.formatDateTime(this.password.edited);
             },
             compact() {
-                return window.innerWidth <= 640 || window.innerHeight <= 640 || !SettingsService.get('client.ui.password.details.preview');
+                return window.innerWidth <= 640 ||
+                       window.innerHeight <= 640 ||
+                       !SettingsService.get('client.ui.password.details.preview') ||
+                       !DeferredActivationService.check('website-preview', true, true);
             },
             hasSharing() {
                 return SettingsService.get('server.sharing.enabled');
@@ -211,7 +215,7 @@
 
 <style lang="scss">
 .passwords-sidebar-password.app-sidebar {
-    overflow-y: hidden;
+    overflow-y : hidden;
 
     .app-sidebar-header__tertiary-actions {
         position : relative;
@@ -242,7 +246,7 @@
     }
 
     .app-sidebar-tabs__content {
-        min-height: 0;
+        min-height : 0;
     }
 }
 </style>

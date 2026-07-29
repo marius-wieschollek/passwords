@@ -139,9 +139,9 @@
 
         data() {
             return {
-                breadcrumbs: [],
-                folders    : {},
-                baseFolderId   : '00000000-0000-0000-0000-000000000000',
+                breadcrumbs : [],
+                folders     : {},
+                baseFolderId: '00000000-0000-0000-0000-000000000000'
             };
         },
 
@@ -237,6 +237,7 @@ div.passwords-breadcrumbs {
     top              : 0;
     background-color : var(--color-main-background);
     z-index          : 1;
+    flex-grow        : 0 !important;
 
     .breadcrumb__crumbs {
         min-width : auto !important;

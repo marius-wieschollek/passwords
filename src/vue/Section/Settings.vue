@@ -294,12 +294,12 @@
                     <input type="checkbox" id="setting-password-tags" v-model="settings['client.ui.list.tags.show']">
                     <settings-help text="Show the tags for each password in the list view. Increases loading times"/>
 
-                    <translate tag="h3" say="Passwords Detail View"/>
-                    <translate tag="label" for="setting-website-preview" say="Show website preview"/>
+                    <translate tag="h3" say="Passwords Detail View" v-if="websitePreview"/>
+                    <translate tag="label" for="setting-website-preview" say="Show website preview" v-if="websitePreview"/>
                     <input type="checkbox"
                            id="setting-website-preview"
-                           v-model="settings['client.ui.password.details.preview']">
-                    <settings-help text="Show a preview of the associated website in the details. (Not on mobiles)"/>
+                           v-model="settings['client.ui.password.details.preview']" v-if="websitePreview">
+                    <settings-help text="Show a preview of the associated website in the details. (Not on mobiles)" v-if="websitePreview"/>
 
                     <translate tag="h3" say="Password Sharing" v-if="hasSharing"/>
                     <translate tag="label" for="setting-sharing-editable" say="Share as editable by default" v-if="hasSharing"/>
@@ -439,6 +439,7 @@
     import UserAccountResetAction from "@js/Actions/User/UserAccountResetAction";
     import UserSettingsResetAction from "@js/Actions/User/UserSettingsResetAction";
     import RecoverHiddenItemsAction from "@js/Actions/User/RecoverHiddenItemsAction";
+    import DeferredActivationService from "@js/Services/DeferredActivationService";
 
     export default {
         components: {
@@ -461,15 +462,16 @@
             return {
                 observer,
                 settings,
-                hasSharing   : SettingsService.get('server.sharing.enabled'),
-                hasResharing : SettingsService.get('server.sharing.resharing'),
-                advanced     : SettingsService.get('client.settings.advanced') === true,
-                hasEncryption: API.hasEncryption === true,
-                isAdmin      : getCurrentUser().isAdmin,
-                nightly      : APP_NIGHTLY,
-                noSave       : false,
-                locked       : false,
-                hasWebAuthn  : WebAuthnInitializeAction.isWebauthnPasswordAvailable()
+                hasSharing    : SettingsService.get('server.sharing.enabled'),
+                hasResharing  : SettingsService.get('server.sharing.resharing'),
+                advanced      : SettingsService.get('client.settings.advanced') === true,
+                hasEncryption : API.hasEncryption === true,
+                isAdmin       : getCurrentUser().isAdmin,
+                nightly       : APP_NIGHTLY,
+                noSave        : false,
+                locked        : false,
+                websitePreview: !DeferredActivationService.check('website-preview', true, true),
+                hasWebAuthn   : WebAuthnInitializeAction.isWebauthnPasswordAvailable()
             };
         },
 

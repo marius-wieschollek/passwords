@@ -230,6 +230,16 @@
     border-top-right-radius    : var(--body-container-radius);
     border-bottom-right-radius : var(--body-container-radius);
 
+    .app-content-left {
+        display        : flex;
+        flex-direction : column;
+        height         : 100%;
+
+        .item-list {
+            flex-grow : 1;
+        }
+    }
+
     .item-list.context-menu {
         .v-popper__popper {
             transform : translate3d(var(--mouse-pos-x), var(--mouse-pos-y), 0px) !important;
