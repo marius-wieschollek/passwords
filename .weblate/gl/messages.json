@@ -3646,12 +3646,12 @@
         }
     },
     "frontend-BatchActionShareDialogCseDisableWarning": {
-        "message": "O cifrado final será desactivado en calquera contrasinal cando sexa compartido."
+        "message": "O cifrado de extremo a extremo desactivarase en calquera contrasinal cando se comparta."
     },
     "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Non se permite compartir con grupos. Os contrasinais serán compartidos individualmente con cada membro do grupo actual."
+        "message": "Non se permite compartir con grupos. No canto diso, os contrasinais compartiránse de xeito individual con cada un dos membros actuais do grupo."
     },
     "frontend-BatchShareSubnameGroup": {
-        "message": "Grupo de usuario"
+        "message": "Grupo de usuarios"
     }
 }
