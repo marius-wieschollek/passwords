@@ -3632,5 +3632,14 @@
     },
     "frontend-BatchActionSharePermissionEdit": {
         "message": "Redigér"
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Ende- to- End kryptering vil blive deaktiveret på alle kodeord når de deles."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Deling med grupper støttes ikke. I stedet vil adgangskoderne blive delt med hvert nuværende gruppemedlem individuelt."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Brugergruppe"
     }
 }
