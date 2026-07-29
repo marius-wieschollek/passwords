@@ -3632,5 +3632,14 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Šifriranje med koncema bo ob deljenju onemogočeno."
+    },
+    "frontend-BatchActionShareDialogGroupShareWarning": {
+        "message": "Izmenjava s skupinami ni podprta. Namesto tega se gesla delijo z vsakim trenutnim članom skupine posebej."
+    },
+    "frontend-BatchShareSubnameGroup": {
+        "message": "Skupina uporabnikov"
     }
 }
