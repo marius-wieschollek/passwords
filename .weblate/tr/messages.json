@@ -3632,5 +3632,8 @@
                 "description": "Number of recipients"
             }
         }
+    },
+    "frontend-BatchActionShareDialogCseDisableWarning": {
+        "message": "Paylaşırsanız bu parola için Uçtan Uca şifreleme devre dışı bırakılacaktır."
     }
 }
