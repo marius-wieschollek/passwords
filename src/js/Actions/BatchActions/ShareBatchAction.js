@@ -19,6 +19,7 @@ import DeleteShareAction from "@js/Actions/Share/DeleteShareAction";
 import API from "@js/Helper/api";
 import ToastService from "@js/Services/ToastService";
 import CreateGroupShareAction from "@js/Actions/Share/CreateGroupShareAction";
+import LocalisationService from "@js/Services/LocalisationService";
 
 export default class ShareBatchAction extends BatchAction {
 
@@ -47,7 +48,10 @@ export default class ShareBatchAction extends BatchAction {
                 MessageService.alert((await messages).join(' '));
             }
         } else if(sharingOptions.action === 'delete') {
-            await this.#deleteShares(sharingOptions);
+            let messages = await this.#deleteShares(sharingOptions);
+            if(messages.length > 0) {
+                MessageService.alert(messages.join(' '));
+            }
         }
 
         await this.#runSharingCron();
@@ -149,17 +153,35 @@ export default class ShareBatchAction extends BatchAction {
             messages = [];
         for(let recipient of sharingOptions.recipients) {
             for(let password of this._items.passwords) {
-                let action = new DeleteShareAction(
-                    password,
-                    recipient
+                promises.push(
+                    this.#deleteShare(password, recipient, messages)
                 );
-                promises.push(action.run());
             }
         }
 
         await Promise.all(promises);
 
         return messages;
+    }
+
+    async #deleteShare(password, recipient, messages) {
+        try {
+            let action = new DeleteShareAction(password, recipient);
+            await action.run();
+
+            if(action.blockedByGroupShare) {
+                // The messages are joined into one text, so they have to be translated here
+                messages.push(
+                    LocalisationService.translateArray(
+                        ['DeleteShareErrorGroupShare', {password: password.label, recipient: recipient.displayName}]
+                    )
+                );
+            }
+        } catch(e) {
+            LoggingService.error(e);
+            let message = e.hasOwnProperty('message') ? e.message:e.statusText;
+            messages.push(LocalisationService.translateArray(['Unable to share password: {message}', {message}]));
+        }
     }
 
     async #runSharingCron() {

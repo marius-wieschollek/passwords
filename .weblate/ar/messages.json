@@ -3640,9 +3640,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "سيُعوق التشفير من النهاية إلى الثانية على أي كلمة سر عندما يُتقاسمها."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "والتقاسم مع المجموعات غير مدعوم. وبدلا من ذلك، ستتقاسم كل كلمة سر مع كل عضو من أعضاء المجموعة الحاليين على حدة."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "مجموعة المستخدمين"
     }

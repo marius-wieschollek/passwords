@@ -3563,10 +3563,6 @@
         "message": "End-to-End encryption will be disabled on any password when shared.",
         "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Sharing with groups is not supported. Instead, the passwords will be shared with each current group member individually.",
-        "description": "Warning in the passwords batch share dialog if the user has selected items that can't be shared"
-    },
     "frontend-BatchActionShareSelectUsersLabel": {
         "message": "Select users to share with",
         "description": "Label of the user selection field in the batch share dialog"
@@ -3704,5 +3700,41 @@
     "frontend-BatchShareSubnameGroup": {
         "message": "User group",
         "description": "Subtext in the user selection dropdown in the batch sharing dialog for group entries"
+    },
+    "frontend-ShareTabSearchPlaceholder": {
+        "message": "Search user or group",
+        "description": "Placeholder of the recipient selection field in the share tab of the password details"
+    },
+    "frontend-ShareTabSelectRecipientLabel": {
+        "message": "Share with user or group",
+        "description": "Label of the recipient selection field in the share tab of the password details"
+    },
+    "frontend-ShareTabGroupShareHint": {
+        "message": "Shared with all members of this group",
+        "description": "Tooltip of a group entry in the list of shares in the share tab of the password details"
+    },
+    "frontend-DeleteShareErrorGroupShare": {
+        "message": "\"$RECIPIENT$\" still has \"$PASSWORD$\" because it is shared with a group they are a member of. Remove them from the group or delete the group share.",
+        "description": "Message in the batch share dialog when the access of a recipient can not be revoked because a group share gives them the password",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$2",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-ShareTabGroupDoesNotExist": {
+        "message": "The group \"$GROUP$\" does not exist.",
+        "description": "Error message in the share tab of the password details if the selected group can not be found",
+        "placeholders": {
+            "group": {
+                "content": "$1",
+                "description": "Name of the group"
+            }
+        }
     }
 }

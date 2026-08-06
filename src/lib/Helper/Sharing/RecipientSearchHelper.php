@@ -29,6 +29,12 @@ class RecipientSearchHelper {
     const int USER_SEARCH_LIMIT   = 256;
 
     /**
+     * Pseudo group of the guests app. Being in it does not make users colleagues,
+     * so it must never be used to find recipients or as a recipient itself.
+     */
+    const string GUEST_GROUP = 'guest_app';
+
+    /**
      * RecipientSearchHelper constructor.
      *
      * @param IManager             $shareManager
@@ -89,7 +95,7 @@ class RecipientSearchHelper {
         if($this->userManager->userExists($recipient)) return $recipient;
 
         $recipients = $this->findRecipientSuggestions($recipient);
-        if(count($recipients) === 1) return $recipients[0]['uid'];
+        if(count($recipients) === 1) return $recipients[0]['id'];
 
         throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
     }
@@ -107,10 +113,27 @@ class RecipientSearchHelper {
         $user       = $this->userManager->get($uid);
         $userGroups = $this->groupManager->getUserGroupIds($this->environment->getUser());
         foreach($userGroups as $userGroup) {
-            if($this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== 'guest_app') return true;
+            if($this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== self::GUEST_GROUP) return true;
         }
 
         return false;
+    }
+
+    /**
+     * Whether the current user is allowed to share with the given group.
+     * This is the only place where group share permissions are checked,
+     * the cron job expands group shares with system privileges.
+     *
+     * @param string $groupId
+     *
+     * @return bool
+     */
+    public function canShareWithGroup(string $groupId): bool {
+        if(!$this->shareSettings->get('groups.enabled')) return false;
+        if($groupId === self::GUEST_GROUP) return false;
+        if($this->groupManager->get($groupId) === null) return false;
+
+        return $this->groupManager->isInGroup($this->environment->getUserId(), $groupId);
     }
 
     /**
@@ -144,7 +167,7 @@ class RecipientSearchHelper {
         $autocomplete = $this->shareSettings->get('autocomplete');
 
         foreach($userGroups as $userGroup) {
-            if($userGroup === 'guest_app') continue;
+            if($userGroup === self::GUEST_GROUP) continue;
             $users     = $this->groupManager->displayNamesInGroup($userGroup, $query, $limit);
             $groupName = $this->groupManager->getDisplayName($userGroup);
 
@@ -220,6 +243,7 @@ class RecipientSearchHelper {
 
         $recipients = [];
         foreach($matchingGroups as $group) {
+            if($group->getGID() === self::GUEST_GROUP) continue;
             if(!in_array($group->getGID(), $userGroups)) continue;
             if(!$autocomplete && $group->getGID() !== $query && $group->getDisplayName() !== $query) continue;
 

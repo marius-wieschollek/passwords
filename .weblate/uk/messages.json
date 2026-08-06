@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "За допомогою шифрування End-to-End буде вимкнено на будь-якому паролі."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Відсутність з групами не підтримується. Замість паролів буде поділятися з кожним членом групи окремо."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Група користувачів"
     }

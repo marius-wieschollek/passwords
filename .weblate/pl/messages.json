@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Szyfrowanie end- to- End zostanie wyłączone na dowolnym haśle podczas udostępniania."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Dzielenie się z grupami nie jest wspierane. Zamiast tego hasła będą udostępniane każdemu obecnemu członkowi grupy indywidualnie."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupa użytkowników"
     }

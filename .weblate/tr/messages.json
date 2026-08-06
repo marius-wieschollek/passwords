@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End-to-Bitki şifreleme, paylaşılan herhangi bir şifrede devre dışı bırakılacaktır."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Gruplarla paylaşmak desteklenmez. Bunun yerine, şifreler her mevcut grup üyesi ile bireysel olarak paylaşılacaktır."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Kullanıcı grubu"
     }

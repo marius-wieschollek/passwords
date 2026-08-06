@@ -20,7 +20,6 @@
             <div class="pw-batch-share">
                 <nc-note-card type="warning" :text="t('BatchActionShareDialogPasswordsOnlyWarning')" v-if="passwordsOnlyWarning"/>
                 <nc-note-card type="warning" :text="t('BatchActionShareDialogCseDisableWarning')" v-if="cseDisableWarning"/>
-                <nc-note-card type="warning" :text="t('BatchActionShareDialogGroupShareWarning')" v-if="groupShareWarning"/>
 
                 <div class="select-users">
                     <nc-select-users :input-label="t('BatchActionShareSelectUsersLabel')"
@@ -153,6 +152,7 @@
             return {
                 selectedUsers    : null,
                 availableUsers   : [],
+                groupSharing     : SettingsService.get('server.sharing.groups.enabled'),
                 permissionLevel,
                 permissions      : {edit, share},
                 overwriteExisting: false,
@@ -173,9 +173,6 @@
             },
             canConfigure() {
                 return this.hasUsersSelected && this.permissionLevel !== 'delete';
-            },
-            groupShareWarning() {
-                return this.selectedUsers && this.selectedUsers.some(item => item.isNoUser);
             }
         },
         methods : {
@@ -188,6 +185,7 @@
                     if(this.selectedUsers !== null && this.selectedUsers.indexOf(match) !== -1) {
                         continue;
                     }
+                    if(match.type === 'group' && !this.groupSharing) continue;
 
                     users.push(
                         {

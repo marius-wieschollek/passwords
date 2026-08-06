@@ -135,7 +135,10 @@ class CreatePasswordShareHelper {
      * @throws ApiException
      */
     protected function checkType(string $type): void {
-        if($type !== 'user') throw new ApiException('Invalid share type', Http::STATUS_BAD_REQUEST);
+        if($type === Share::TYPE_USER) return;
+        if($type === Share::TYPE_GROUP && $this->shareSettings->get('groups.enabled')) return;
+
+        throw new ApiException('Invalid share type', Http::STATUS_BAD_REQUEST);
     }
 
     /**

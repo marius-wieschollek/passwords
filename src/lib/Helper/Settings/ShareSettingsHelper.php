@@ -61,7 +61,7 @@ class ShareSettingsHelper {
             case 'autocomplete':
                 return $this->isSharingEnumerationEnabled();
             case 'types':
-                return ['user'];
+                return $this->isGroupSharingEnabled() ? ['user', 'group']:['user'];
         }
 
         return null;

@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Encriptación de extremo a extremo se deshabilitará en cualquier contraseña cuando se comparta."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Compartir con grupos no es compatible. En cambio, las contraseñas se compartirán con cada miembro del grupo actual individualmente."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupo de usuarios"
     }

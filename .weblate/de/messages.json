@@ -3634,9 +3634,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Ende-zu-Ende Verschlüsselung wird für jedes zu teilende Passwort deaktiviert."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Teilen mit Gruppen ist nicht möglich. Stattdessen werden die Passwörter mit jedem Gruppenmitglied einzeln geteilt."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Benutzergruppe"
     }

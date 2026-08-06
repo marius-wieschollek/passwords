@@ -21,12 +21,23 @@ export default class CreateShareAction {
     #options;
     #recipient;
     #user;
+    #cseDisabled = false;
 
     constructor(password, recipient, options) {
         this.#password = password;
         this.#recipient = recipient;
         this.#options = options;
         this.#user = getCurrentUser();
+    }
+
+    /**
+     * Whether the end-to-end encryption of the password was disabled.
+     * This can not be undone, even if the share was not created afterwards.
+     *
+     * @returns {Boolean}
+     */
+    get cseDisabled() {
+        return this.#cseDisabled;
     }
 
     async run() {
@@ -59,7 +70,7 @@ export default class CreateShareAction {
     }
 
     #isShareWithOwner() {
-        return this.#password.hasOwnProperty('share') && this.#password.share !== null && !this.#password.share.owner.id === this.#recipient.id;
+        return this.#password.hasOwnProperty('share') && this.#password.share !== null && this.#password.share.owner.id === this.#recipient.id;
     }
 
     async #loadShares() {
@@ -74,13 +85,16 @@ export default class CreateShareAction {
         for(let index in this.#password.shares) {
             let share = this.#password.shares[index];
 
+            // The shares of the members of a group share are managed by the server
+            if(share.parentShare) continue;
+
             if(share.receiver.id === this.#recipient.id) {
                 if(!this.#options.overwrite) {
                     return false;
                 }
 
                 await API.deleteShare(share.id);
-                delete this.#password[share.id];
+                delete this.#password.shares[share.id];
             }
         }
 
@@ -94,16 +108,19 @@ export default class CreateShareAction {
         password.shared = true;
 
         this.#password = await PasswordManager.updatePassword(password);
+        this.#cseDisabled = true;
     }
 
     async #createShare() {
-        let share = {
-            password : this.#password.id,
-            expires  : this.#getExpiryDate(),
-            editable : this.#getEditable(),
-            shareable: this.#options.shareable,
-            receiver : this.#recipient.id
-        };
+        let type  = this.#recipient.type === 'group' ? 'group':'user',
+            share = {
+                password : this.#password.id,
+                expires  : this.#getExpiryDate(),
+                editable : this.#getEditable(),
+                shareable: this.#options.shareable,
+                receiver : this.#recipient.id,
+                type
+            };
 
         let shareModel = await API.createShare(share);
         share.id = shareModel.id;
@@ -112,7 +129,7 @@ export default class CreateShareAction {
             id  : this.#user.uid,
             name: this.#user.displayName
         };
-        share.receiver = {id: this.#recipient.id, name: this.#recipient.displayName};
+        share.receiver = {id: this.#recipient.id, name: this.#recipient.displayName, type};
 
         this.#password.shares[share.id] = await API._processShare(share);
     }

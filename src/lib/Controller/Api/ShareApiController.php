@@ -41,7 +41,7 @@ class ShareApiController extends AbstractApiController {
     /**
      * @var array
      */
-    protected array $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable'];
+    protected array $allowedFilterFields = ['created', 'updated', 'userId', 'receiver', 'expires', 'editable', 'shareable', 'type'];
 
     /**
      * ShareApiController constructor.
@@ -177,8 +177,12 @@ class ShareApiController extends AbstractApiController {
             }
         }
 
-        $recipient = $this->shareUserList->mapRecipientToUid($recipient);
-        if(!$this->shareUserList->canShareWithUser($recipient)) throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
+        if($type === Share::TYPE_GROUP) {
+            if(!$this->shareUserList->canShareWithGroup($recipient)) throw new ApiException('Invalid recipient group', Http::STATUS_BAD_REQUEST);
+        } else {
+            $recipient = $this->shareUserList->mapRecipientToUid($recipient);
+            if(!$this->shareUserList->canShareWithUser($recipient)) throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
+        }
 
         $share = $this->createPasswordShare->createPasswordShare(
             $password,
@@ -218,6 +222,7 @@ class ShareApiController extends AbstractApiController {
         if($share->getUserId() !== $this->userId) {
             throw new ApiException('Access denied', Http::STATUS_FORBIDDEN);
         }
+        $this->checkIsNotDerived($share);
 
         $share = $this->updatePasswordShareHelper->updatePasswordShare($share, $expires, $editable, $shareable);
 
@@ -241,10 +246,26 @@ class ShareApiController extends AbstractApiController {
         if($model->getUserId() !== $this->userId) {
             throw new ApiException('Access denied', Http::STATUS_FORBIDDEN);
         }
+        $this->checkIsNotDerived($model);
 
         $this->modelService->delete($model);
 
         return $this->createJsonResponse(['id' => $model->getUuid()]);
+    }
+
+    /**
+     * The shares of the members of a group share belong to the group share.
+     * Changing or deleting them directly would be undone by the next cron run,
+     * so it is rejected instead of silently ignored.
+     *
+     * @param Share $share
+     *
+     * @throws ApiException
+     */
+    protected function checkIsNotDerived(Share $share): void {
+        if($share->isDerived()) {
+            throw new ApiException('Share belongs to a group share', Http::STATUS_BAD_REQUEST);
+        }
     }
 
     /**

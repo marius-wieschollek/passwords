@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Окончательное шифрование будет отключено на любом пароле при совместном использовании."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Обмен информацией с группами не поддерживается. Вместо этого пароли будут передаваться каждому текущему члену группы индивидуально."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Группа пользователей"
     }

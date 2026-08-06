@@ -18,6 +18,8 @@ namespace OCA\Passwords\Db;
  * @method void setTargetPassword(string $targetPassword)
  * @method string getReceiver()
  * @method void setReceiver(string $receiver)
+ * @method string|null getParentShare()
+ * @method void setParentShare(string|null $parentShare)
  * @method bool getEditable()
  * @method void setEditable(bool $editable)
  * @method bool getShareable()
@@ -88,12 +90,20 @@ class Share extends AbstractEntity implements EntityInterface {
     protected bool $targetUpdated;
 
     /**
+     * Uuid of the group share which created this share
+     *
+     * @var string|null
+     */
+    protected ?string $parentShare;
+
+    /**
      * Password constructor.
      */
     public function __construct() {
         $this->addType('type', 'string');
         $this->addType('client', 'string');
         $this->addType('receiver', 'string');
+        $this->addType('parentShare', 'string');
         $this->addType('sourcePassword', 'string');
         $this->addType('targetPassword', 'string');
 
@@ -105,6 +115,22 @@ class Share extends AbstractEntity implements EntityInterface {
         $this->addType('targetUpdated', 'boolean');
 
         parent::__construct();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isGroupShare(): bool {
+        return $this->getType() === self::TYPE_GROUP;
+    }
+
+    /**
+     * Whether this share was created by the cron job from a group share
+     *
+     * @return bool
+     */
+    public function isDerived(): bool {
+        return $this->getParentShare() !== null;
     }
 
     /**

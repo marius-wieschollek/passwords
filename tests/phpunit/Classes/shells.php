@@ -87,6 +87,21 @@ namespace OCP\AppFramework\Bootstrap {
     interface IBootstrap {}
 }
 
+namespace OCP\AppFramework\Db {
+    class DoesNotExistException extends \Exception {}
+
+    class MultipleObjectsReturnedException extends \Exception {}
+}
+
+namespace OCP\Share {
+    interface IManager {
+        public function shareApiEnabled(): bool;
+        public function sharingDisabledForUser(?string $userId): bool;
+        public function allowGroupSharing(): bool;
+        public function allowEnumeration(): bool;
+    }
+}
+
 namespace OCP\L10N {
     use OCP\IUser;
     interface IFactory {
@@ -105,15 +120,31 @@ namespace OCP\L10N {
 
 namespace OCP {
     class IGroup {
+        public function getGID(): string {return '';}
+        public function getDisplayName(): string {return '';}
         public function getUsers() { return  []; }
+        public function inGroup(IUser $user): bool {return false;}
     }
 
     class IGroupManager {
-        public function get() {return new IGroup();}
+        public function get(string $gid) {return new IGroup();}
+        public function search(string $search, ?int $limit = null, ?int $offset = null): array {return [];}
+        // Untyped like the real interface, the user id can be null
+        public function isInGroup($userId, $group) {return false;}
+        public function getUserGroupIds(?IUser $user = null): array {return [];}
+        public function displayNamesInGroup(string $gid, string $search = '', int $limit = -1, int $offset = 0): array {return [];}
+        public function getDisplayName(string $gid): ?string {return null;}
     }
 
     interface IUser {
         public function getUID();
+    }
+
+    class IUserManager {
+        public function get(string $uid) {return null;}
+        public function userExists(string $uid): bool {return false;}
+        public function searchDisplayName(string $pattern, ?int $limit = null, ?int $offset = null): array {return [];}
+        public function getByEmail(string $email): array {return [];}
     }
 
     class IURLGenerator {

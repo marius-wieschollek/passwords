@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End-to- End šifrovanie bude vypnuté na akomkoľvek hesle po zdieľaní."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Zdieľanie so skupinami nie je podporované. Namiesto toho budú heslá zdieľané s každým súčasným členom skupiny individuálne."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Skupina používateľov"
     }

@@ -13,7 +13,9 @@ namespace OCA\Passwords\EventListener\Share;
 
 use Exception;
 use OCA\Passwords\Db\Password;
+use OCA\Passwords\Db\Share;
 use OCA\Passwords\Events\Share\ShareDeletedEvent;
+use OCA\Passwords\Helper\Sharing\GroupShareSyncHelper;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -41,10 +43,15 @@ class ShareDeletedListener implements IEventListener {
     /**
      * ShareHook constructor.
      *
-     * @param ShareService    $shareService
-     * @param PasswordService $passwordService
+     * @param ShareService         $shareService
+     * @param PasswordService      $passwordService
+     * @param GroupShareSyncHelper $groupShareSync
      */
-    public function __construct(ShareService $shareService, PasswordService $passwordService) {
+    public function __construct(
+        ShareService                     $shareService,
+        PasswordService                  $passwordService,
+        protected GroupShareSyncHelper   $groupShareSync
+    ) {
         $this->passwordService = $passwordService;
         $this->shareService    = $shareService;
     }
@@ -58,7 +65,9 @@ class ShareDeletedListener implements IEventListener {
     public function handle(Event $event): void {
         if(!($event instanceof ShareDeletedEvent)) return;
         try {
-            $share  = $event->getShare();
+            $share = $event->getShare();
+            if($share->isGroupShare()) $this->deleteGroupMemberShares($share);
+
             $shares = $this->shareService->findBySourcePassword($share->getSourcePassword());
 
             if(empty($shares)) {
@@ -69,5 +78,17 @@ class ShareDeletedListener implements IEventListener {
             }
         } catch(DoesNotExistException $e) {
         }
+    }
+
+    /**
+     * Deleting a group share also revokes the access of all group members.
+     * Members who are covered by another group share of the same password keep it.
+     *
+     * @param Share $groupShare
+     *
+     * @throws Exception
+     */
+    protected function deleteGroupMemberShares(Share $groupShare): void {
+        $this->groupShareSync->removeGroupShare($groupShare);
     }
 }

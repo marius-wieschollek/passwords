@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End-to-End enkripsi akan dinonaktifkan pada password apapun ketika terbagi."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Berbagi dengan grup tidak didukung. Sebaliknya, password akan dibagi dengan masing-masing anggota kelompok saat ini secara individual."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grup pengguna"
     }

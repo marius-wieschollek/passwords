@@ -9,47 +9,55 @@
             <translate say="{name} has shared this password with you." :variables="password.share.owner"/>
             <translate say="It will expire {date}." :variables="getExpirationDate" v-if="getDefaultExpires"/>
         </div>
-        <field v-model="search"
-               class="share-add-user"
-               placeholder="Search user"
-               @keypress="submitAction($event)" v-if="canBeShared"/>
-        <ul class="shares" v-if="shares.length !== 0">
+        <nc-select-users class="share-add-user"
+                         :options="matches"
+                         :placeholder="t('ShareTabSearchPlaceholder')"
+                         :input-label="t('ShareTabSelectRecipientLabel')"
+                         :multiple="false"
+                         :loading="searching"
+                         v-model="selected"
+                         @search="searchRecipients"
+                         v-if="canBeShared"/>
+        <ul class="shares" v-if="visibleShares.length !== 0">
             <share :share="share"
                    v-on:delete="deleteShare($event)"
                    v-on:update="refreshShares()"
                    :data-share-id="share.id"
                    :editable="isEditable"
-                   v-for="share in shares"
+                   v-for="share in visibleShares"
                    :key="share.id"/>
-        </ul>
-        <ul :class="getDropdownClasses" v-if="matches.length !== 0">
-            <li v-for="match in matches" @click="shareWithUser(match.id)">
-                <img :src="getAvatarUrl(match.id)" alt="" class="avatar">&nbsp;{{ match.name }}
-            </li>
         </ul>
     </div>
 </template>
 
 <script>
-    import Field from '@vc/Field';
     import API from '@js/Helper/api';
     import Translate from '@vc/Translate';
+    import NcSelectUsers from '@nc/NcSelectUsers.js';
     import Share from '@vc/Sidebar/PasswordSidebar/Sharing/Share';
-    import PasswordManager from '@js/Manager/PasswordManager';
     import SettingsService from '@js/Services/SettingsService';
     import ToastService from "@js/Services/ToastService";
-    import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
     import LoggingService from "@js/Services/LoggingService";
+    import CreateShareAction from "@js/Actions/Share/CreateShareAction";
+    import CreateShareError from "@js/Actions/Share/CreateShareError";
     import {getCurrentUser} from '@nextcloud/auth';
     import BatchActionManager from "@js/Manager/BatchActionManager";
     import {subscribe, subscribeOnce, unsubscribe} from "@js/Helper/event-bus";
 
+    /**
+     * The api reports errors with the crc32 hash of the message of the exception.
+     * "Invalid receiver uid" and "Invalid recipient uid" are thrown when the user
+     * can not be found, "Invalid recipient group" when the group can not be found.
+     */
+    const UNKNOWN_USER_ERRORS  = ['65782183', '6a935de5'];
+    const UNKNOWN_GROUP_ERRORS = ['5abffc24'];
+
     export default {
         components: {
-            Field,
             Share,
-            Translate
+            Translate,
+            NcSelectUsers
         },
 
         props: {
@@ -63,13 +71,13 @@
                 hasCse = this.password.cseType !== 'none' && !this.password.shared;
 
             return {
-                search      : '',
                 matches     : [],
-                nameMap     : [],
-                idMap       : [],
+                selected    : null,
+                searching   : false,
                 shares,
                 hasCse,
                 autocomplete: SettingsService.get('server.sharing.autocomplete'),
+                groupSharing: SettingsService.get('server.sharing.groups.enabled'),
                 interval    : null,
                 polling     : {interval: null, mode: null},
                 cronPromise : null,
@@ -153,74 +161,100 @@
 
                 return text;
             },
-            getDropdownClasses() {
-                let classes = ['user-search'];
+            /**
+             * The shares created by the server for the members of a group share
+             * are hidden, the group share itself represents them
+             */
+            visibleShares() {
+                let shares = [];
 
-                if(this.isSharedWithUser) classes.push('shared-with');
+                for(let id in this.shares) {
+                    if(!this.shares.hasOwnProperty(id)) continue;
+                    if(this.shares[id].parentShare) continue;
 
-                return classes;
+                    shares.push(this.shares[id]);
+                }
+
+                return shares;
             }
         },
 
         methods: {
-            async searchUsers() {
-                if(this.search === '' || !this.autocomplete || !this.canBeShared) {
+            async searchRecipients(query) {
+                if(!this.canBeShared) {
                     this.matches = [];
                     return;
                 }
 
-                const users   = this.getSharedWithUsers,
-                    matches = await API.findSharePartners(this.search, users.length + 10);
+                if(!this.autocomplete) {
+                    // Without autocomplete no suggestions are returned, so the typed id is offered as is
+                    this.matches = query === '' ? []:[{id: query, displayName: query, isNoUser: false, type: 'user'}];
+                    return;
+                }
 
-                this.matches = [];
-                for(let i in matches) {
-                    if(!matches.hasOwnProperty(i) || users.indexOf(i) !== -1) continue;
-                    let name = matches[i];
+                const receivers = this.getSharedWithUsers;
 
-                    this.matches.push({id: i, name});
-                    this.nameMap[name] = i;
-                    this.idMap[i] = name;
+                this.searching = true;
+                try {
+                    let matches      = await API.findShareRecipients(query, receivers.length + 25),
+                        groupSubname = LocalisationService.translate('BatchShareSubnameGroup'),
+                        options      = [];
+
+
+                    for(let match of matches) {
+                        if(receivers.indexOf(match.id) !== -1) continue;
+                        if(match.type === 'group' && !this.groupSharing) continue;
+
+                        options.push(
+                            {
+                                id         : match.id,
+                                displayName: match.name,
+                                isNoUser   : match.type === 'group',
+                                subname    : match.type === 'group' ? groupSubname:match.context,
+                                type       : match.type
+                            }
+                        );
+                    }
+
+                    this.matches = options;
+                } catch(e) {
+                    LoggingService.error(e);
+                } finally {
+                    this.searching = false;
                 }
             },
-            async disableCse() {
-                let password = UtilityService.cloneObject(this.password);
-                password.shared = true;
+            async addShare(recipient) {
+                if(!this.canBeShared || recipient === null) return;
 
-                await PasswordManager.updatePassword(password);
-                this.hasCse = false;
-            },
-            async addShare(receiver) {
-                if(!this.canBeShared) return;
-                if(this.hasCse) await this.disableCse();
-
-                let share = {
-                    password : this.password.id,
-                    expires  : this.getDefaultExpires,
-                    editable : SettingsService.get('user.sharing.editable'),
-                    shareable: SettingsService.get('user.sharing.resharing'),
-                    receiver
-                };
+                let action = new CreateShareAction(
+                    this.password,
+                    recipient,
+                    {
+                        expires  : this.getDefaultExpires,
+                        editable : SettingsService.get('user.sharing.editable'),
+                        shareable: SettingsService.get('user.sharing.resharing'),
+                        overwrite: false
+                    }
+                );
 
                 try {
-                    let d = await API.createShare(share);
-                    this.getSharedWithUsers.push(receiver);
-                    share.id = d.id;
-                    share.updatePending = true;
-                    share.owner = {
-                        id  : this.user.uid,
-                        name: this.user.displayName
-                    };
-                    share.receiver = {id: receiver, name: this.idMap[receiver]};
-                    this.shares[d.id] = await API._processShare(share);
-                    this.search = '';
+                    await action.run();
+                    this.matches = [];
                     this.refreshShares();
                 } catch(e) {
-                    if(e.id === '65782183') {
-                        ToastService.error(['The user {uid} does not exist', {uid: receiver}]);
+                    if(e instanceof CreateShareError) {
+                        ToastService.error(e.message);
+                    } else if(UNKNOWN_GROUP_ERRORS.indexOf(e.id) !== -1) {
+                        ToastService.error(['ShareTabGroupDoesNotExist', {group: recipient.displayName}]);
+                    } else if(UNKNOWN_USER_ERRORS.indexOf(e.id) !== -1) {
+                        ToastService.error(['The user {uid} does not exist', {uid: recipient.id}]);
                     } else {
                         let message = e.hasOwnProperty('message') ? e.message:e.statusText;
                         ToastService.error(['Unable to share password: {message}', {message}]);
                     }
+                } finally {
+                    // Disabling the encryption can not be undone, even if the share failed afterwards
+                    if(action.cseDisabled) this.hasCse = false;
                 }
             },
             reloadShares() {
@@ -228,28 +262,8 @@
                    .then((d) => {this.shares = d.shares;})
                    .catch(LoggingService.catch);
             },
-            submitAction($event) {
-                if($event.keyCode === 13) {
-                    let uid = this.search;
-                    if(this.nameMap.hasOwnProperty(uid)) {
-                        uid = this.nameMap[uid];
-                    }
-
-                    if(this.idMap.hasOwnProperty(uid) || !this.autocomplete) {
-                        this.addShare(uid);
-                    } else {
-                        ToastService.error(['The user {uid} does not exist', {uid}]);
-                    }
-                }
-            },
-            shareWithUser(uid) {
-                this.addShare(uid);
-            },
-            getAvatarUrl(uid) {
-                return API.getAvatarUrl(uid);
-            },
             deleteShare($event) {
-                delete this.shares[$event.id];
+                this.$delete(this.shares, $event.id);
                 this.refreshShares();
             },
             async refreshShares() {
@@ -314,8 +328,11 @@
 
                 this.$forceUpdate();
             },
-            search() {
-                this.searchUsers();
+            selected(recipient) {
+                if(recipient === null) return;
+
+                this.selected = null;
+                this.addShare(recipient);
             },
             shares(shares) {
                 for(let id in shares) {
@@ -359,33 +376,6 @@
 
     .shares {
         margin-top : 5px;
-    }
-
-    .user-search {
-        position         : absolute;
-        top              : 37px;
-        width            : 100%;
-        border-radius    : var(--border-radius);
-        z-index          : 2;
-        background-color : var(--color-main-background);
-        color            : var(--color-primary);
-        border           : 1px solid var(--color-primary);
-
-        &.shared-with {
-            top : 77px;
-        }
-
-        li {
-            line-height : 32px;
-            display     : flex;
-            padding     : 3px;
-            cursor      : pointer;
-
-            &:hover {
-                color            : var(--color-primary-text);
-                background-color : var(--color-primary);
-            }
-        }
     }
 }
 </style>

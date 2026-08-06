@@ -8,50 +8,34 @@
  * created by Marius David Wieschollek.
  */
 
-import {getCurrentUser} from "@nextcloud/auth";
-import API from "@js/Helper/api";
 import CreateShareAction from "@js/Actions/Share/CreateShareAction";
 import CreateShareError from "@js/Actions/Share/CreateShareError";
 import LoggingService from "@js/Services/LoggingService";
+import LocalisationService from "@js/Services/LocalisationService";
 
+/**
+ * Creates a single share for a group.
+ * The server expands it into one share per group member and keeps
+ * that list in sync with the members of the group.
+ */
 export default class CreateGroupShareAction {
     #password;
     #options;
     #group;
-    #user;
 
     constructor(password, group, options) {
         this.#password = password;
         this.#group = group;
         this.#options = options;
-        this.#user = getCurrentUser();
     }
 
     async run() {
-        let messages = [],
-            promises = [];
-        const users = await API.resolveGroup(this.#group.id);
+        let messages = [];
 
-        for(let userId in users) {
-            if(users.hasOwnProperty(userId) && userId !== this.#user.uid) {
-                const recipient = {id: userId, displayName: users[userId]};
-
-                promises.push(
-                    this.#createShare(recipient, messages)
-                );
-            }
-        }
-
-        await Promise.all(promises);
-
-        return messages;
-    }
-
-    async #createShare(receiver, messages) {
         try {
             let action = new CreateShareAction(
                 this.#password,
-                receiver,
+                {id: this.#group.id, displayName: this.#group.displayName, type: 'group'},
                 this.#options
             );
 
@@ -60,8 +44,14 @@ export default class CreateGroupShareAction {
             if(e instanceof CreateShareError) {
                 messages.push(e.message);
             } else {
+                // The error is reported as well, otherwise the user is told that everything worked.
+                // CreateShareError translates its message, so these have to be translated too
                 LoggingService.error(e);
+                let message = e.hasOwnProperty('message') ? e.message:e.statusText;
+                messages.push(LocalisationService.translateArray(['Unable to share password: {message}', {message}]));
             }
         }
+
+        return messages;
     }
 }

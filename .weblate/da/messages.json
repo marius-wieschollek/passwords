@@ -3636,9 +3636,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End-to-End-kryptering deaktiveres for alle adgangskoder, når de deles."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Deling med grupper understøttes ikke. I stedet vil adgangskoderne blive delt med hvert enkelt nuværende gruppemedlem individuelt."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Brugergruppe"
     }

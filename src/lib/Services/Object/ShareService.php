@@ -99,7 +99,8 @@ class ShareService extends AbstractService {
     public function findBySourceUpdated(): array {
         return $this->mapper->findAllByFields(
             ['source_updated', true, IQueryBuilder::PARAM_BOOL],
-            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq']
+            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq'],
+            ['type', Share::TYPE_GROUP, IQueryBuilder::PARAM_STR, 'neq']
         );
     }
 
@@ -129,11 +130,48 @@ class ShareService extends AbstractService {
     }
 
     /**
+     * All shares which were created for a group instead of a single user
+     *
+     * @return Share[]
+     * @throws Exception
+     */
+    public function findAllGroupShares(): array {
+        return $this->mapper->findAllByField('type', Share::TYPE_GROUP);
+    }
+
+    /**
+     * All shares which were created from the given group share
+     *
+     * @param string $shareUuid
+     *
+     * @return Share[]
+     * @throws Exception
+     */
+    public function findByParentShare(string $shareUuid): array {
+        return $this->mapper->findAllByField('parent_share', $shareUuid);
+    }
+
+    /**
+     * All shares which were created for the member of a group share
+     *
+     * @return Share[]
+     * @throws Exception
+     */
+    public function findAllDerivedShares(): array {
+        return $this->mapper->findAllByField('parent_share', null, IQueryBuilder::PARAM_NULL, 'neq');
+    }
+
+    /**
+     * Group shares are never turned into a password, so they are excluded here
+     *
      * @return Share[]
      * @throws Exception
      */
     public function findNew(): array {
-        return $this->mapper->findAllByField('target_password', null, IQueryBuilder::PARAM_NULL);
+        return $this->mapper->findAllByFields(
+            ['target_password', null, IQueryBuilder::PARAM_NULL],
+            ['type', Share::TYPE_GROUP, IQueryBuilder::PARAM_STR, 'neq']
+        );
     }
 
     /**
@@ -158,10 +196,12 @@ class ShareService extends AbstractService {
     /**
      * @param string   $passwordId
      * @param string   $receiverId
-     * @param string   $type
-     * @param bool     $editable
-     * @param int|null $expires
-     * @param bool     $shareable
+     * @param string      $type
+     * @param bool        $editable
+     * @param int|null    $expires
+     * @param bool        $shareable
+     * @param string|null $parentShare
+     * @param string|null $userId      Owner of the share. Required when there is no user session, e.g. in the cron job
      *
      * @return Share|ModelInterface
      */
@@ -171,21 +211,25 @@ class ShareService extends AbstractService {
         string $type,
         bool $editable,
         ?int $expires = null,
-        bool $shareable = true
+        bool $shareable = true,
+        ?string $parentShare = null,
+        ?string $userId = null
     ): Share {
-        $model = $this->createModel($passwordId, $receiverId, $type, $editable, $expires, $shareable);
+        $model = $this->createModel($passwordId, $receiverId, $type, $editable, $expires, $shareable, $parentShare, $userId);
         $this->fireEvent('instantiated', $model);
 
         return $model;
     }
 
     /**
-     * @param string   $passwordId
-     * @param string   $receiverId
-     * @param string   $type
-     * @param bool     $editable
-     * @param int|null $expires
-     * @param bool     $shareable
+     * @param string      $passwordId
+     * @param string      $receiverId
+     * @param string      $type
+     * @param bool        $editable
+     * @param int|null    $expires
+     * @param bool        $shareable
+     * @param string|null $parentShare
+     * @param string|null $userId
      *
      * @return Share
      */
@@ -195,12 +239,14 @@ class ShareService extends AbstractService {
         string $type,
         bool $editable,
         ?int $expires,
-        bool $shareable
+        bool $shareable,
+        ?string $parentShare = null,
+        ?string $userId = null
     ): Share {
 
         $model = new Share();
         $model->setDeleted(false);
-        $model->setUserId($this->userId);
+        $model->setUserId($userId ?? $this->userId);
         $model->setUuid($this->uuidHelper->generateUuid());
         $model->setCreated(time());
         $model->setUpdated(time());
@@ -208,6 +254,7 @@ class ShareService extends AbstractService {
         $model->setSourcePassword($passwordId);
         $model->setSourceUpdated(true);
         $model->setReceiver($receiverId);
+        $model->setParentShare($parentShare);
         $model->setShareable($shareable);
         $model->setEditable($editable);
         $model->setExpires($expires);

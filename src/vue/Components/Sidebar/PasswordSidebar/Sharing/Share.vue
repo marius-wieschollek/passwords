@@ -6,7 +6,8 @@
             <translate icon="calendar" :class="{active: share.expires}" :title="getExpirationDateTitle" @click="setExpires(share)"/>
             <translate icon="trash" title="Stop sharing" @click="deleteAction(share)"/>
         </div>
-        <img :src="share.receiver.icon" :alt="share.receiver.name" class="avatar" loading="lazy" width="32" height="32">
+        <account-group-icon :size="32" class="avatar group-avatar" v-if="isGroupShare"/>
+        <img :src="share.receiver.icon" :alt="share.receiver.name" class="avatar" loading="lazy" width="32" height="32" v-else>
         <div v-if="share.updatePending" class="loading"></div>
         {{ share.receiver.name }}
     </li>
@@ -18,10 +19,12 @@
     import SettingsService from "@js/Services/SettingsService";
     import MessageService from "@js/Services/MessageService";
     import LocalisationService from "@js/Services/LocalisationService";
+    import AccountGroupIcon from "@icon/AccountGroup";
 
     export default {
         components: {
-            Translate
+            Translate,
+            AccountGroupIcon
         },
 
         props: {
@@ -40,9 +43,15 @@
         },
 
         computed: {
+            isGroupShare() {
+                return this.share.receiver.type === 'group';
+            },
             getTitle() {
                 if(this.share.updatePending) {
                     return LocalisationService.translate('Some data is waiting to be synchronized');
+                }
+                if(this.isGroupShare) {
+                    return LocalisationService.translate('ShareTabGroupShareHint');
                 }
                 return undefined;
             },
@@ -143,6 +152,14 @@
         margin-right  : 5px;
         height        : 32px;
         width         : 32px;
+    }
+
+    .group-avatar {
+        border-radius    : 16px;
+        margin-right     : 5px;
+        height           : 32px;
+        width            : 32px;
+        background-color : var(--color-background-darker);
     }
 
     .options {

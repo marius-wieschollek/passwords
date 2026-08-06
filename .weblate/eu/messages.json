@@ -3541,9 +3541,6 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Amaierako enkriptatzea desgaitu egingo da pasahitzarekin partekatuz gero."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
-        "message": "Taldeekin partekatzea ez dago onartuta. Horren ordez, pasahitzak uneko taldeko kide bakoitzarekin partekatuko dira banaka."
-    },
     "frontend-BatchShareSubnameGroup": {
         "message": "Erabiltzaile taldea"
     }

@@ -15,6 +15,7 @@ use Exception;
 use OCA\Passwords\Db\Password;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
+use OCA\Passwords\Helper\Sharing\GroupShareSyncHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCA\Passwords\Services\LoggingService;
@@ -54,6 +55,7 @@ class SynchronizeShares extends AbstractTimedJob {
      * @param PasswordService         $passwordService
      * @param NotificationService     $notificationService
      * @param PasswordRevisionService $passwordRevisionService
+     * @param GroupShareSyncHelper    $groupShareSync
      */
     public function __construct(
         ITimeFactory                      $time,
@@ -64,7 +66,8 @@ class SynchronizeShares extends AbstractTimedJob {
         EnvironmentService                $environment,
         protected PasswordService         $passwordService,
         protected NotificationService     $notificationService,
-        protected PasswordRevisionService $passwordRevisionService
+        protected PasswordRevisionService $passwordRevisionService,
+        protected GroupShareSyncHelper    $groupShareSync
     ) {
         parent::__construct($time, $logger, $config, $environment);
     }
@@ -78,8 +81,12 @@ class SynchronizeShares extends AbstractTimedJob {
         if(!$this->canExecute()) return;
         $this->config->setAppValue(self::EXECUTION_TIMESTAMP, time());
 
-        $this->deleteOrphanedTargetPasswords();
+        // Expired group shares are removed before they are expanded again,
+        // and the group sync runs before the orphaned passwords are deleted so
+        // that a user who left a group loses the password in the same run
         $this->deleteExpiredShares();
+        $this->synchronizeGroupShares();
+        $this->deleteOrphanedTargetPasswords();
         $this->createNewShares();
         $this->removeSharedAttribute();
         $this->updatePasswords();
@@ -133,21 +140,48 @@ class SynchronizeShares extends AbstractTimedJob {
     protected function deleteExpiredShares(): void {
         $total = 0;
         do {
-            $shares = $this->shareService->findExpired();
+            // The expiry date of a share created for a group member is a copy of the one of the group
+            // share, so it is deleted together with the group share and never on its own. An outdated
+            // copy would otherwise delete the password of a member whose access was just extended.
+            // These shares must be removed before the shares are counted, they are never deleted here
+            // and would make this loop run forever.
+            $shares = array_values(
+                array_filter(
+                    $this->shareService->findExpired(),
+                    function (Share $share) { return !$share->isDerived(); }
+                )
+            );
             $count  = count($shares);
             $total  += $count;
 
             foreach($shares as $share) {
-                try {
-                    $password = $this->passwordService->findByUuid($share->getTargetPassword());
-                    $this->passwordService->delete($password);
-                } catch(DoesNotExistException $e) {
+                // Group shares have no target password, they only exist to create the shares of the group members
+                if($share->getTargetPassword() !== null) {
+                    try {
+                        $password = $this->passwordService->findByUuid($share->getTargetPassword());
+                        $this->passwordService->delete($password);
+                    } catch(DoesNotExistException $e) {
+                    }
                 }
                 $this->shareService->delete($share);
             }
         } while($count !== 0);
 
         $this->logger->debugOrInfo(['Deleted %s expired share(s)', $total], $total);
+    }
+
+    /**
+     * Creates and removes the shares for the members of a group share
+     *
+     * @throws Exception
+     */
+    protected function synchronizeGroupShares(): void {
+        $result = $this->groupShareSync->synchronize();
+
+        $this->logger->debugOrInfo(
+            ['Created %s, updated %s and deleted %s group member share(s)', $result['created'], $result['updated'], $result['deleted']],
+            $result['created'] + $result['updated'] + $result['deleted']
+        );
     }
 
     /**

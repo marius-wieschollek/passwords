@@ -20,6 +20,7 @@ use OCA\Passwords\Services\UserService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\IConfig;
+use OCP\IGroupManager;
 use Psr\Container\ContainerInterface;
 
 /**
@@ -50,13 +51,15 @@ class ShareObjectHelper extends AbstractObjectHelper {
      * @param ContainerInterface $container
      * @param EnvironmentService $environment
      * @param PasswordService    $passwordService
+     * @param IGroupManager      $groupManager
      */
     public function __construct(
         protected IConfig            $config,
         protected UserService        $userService,
         protected ContainerInterface $container,
         EnvironmentService           $environment,
-        protected PasswordService    $passwordService
+        protected PasswordService    $passwordService,
+        protected IGroupManager      $groupManager
     ) {
         $this->userId = $environment->getUserId();
     }
@@ -111,6 +114,8 @@ class ShareObjectHelper extends AbstractObjectHelper {
             'editable'      => $share->isEditable(),
             'shareable'     => $shareable,
             'password'      => $password,
+            'type'          => $share->getType(),
+            'parentShare'   => $share->getParentShare(),
             'updatePending' => $share->isSourceUpdated() || $share->isTargetUpdated(),
             'owner'         => [
                 'id'   => $share->getUserId(),
@@ -118,10 +123,28 @@ class ShareObjectHelper extends AbstractObjectHelper {
             ],
             'receiver'      => [
                 'id'   => $share->getReceiver(),
-                'name' => $this->userService->getUserName($share->getReceiver())
+                'name' => $this->getReceiverName($share),
+                'type' => $share->getType()
             ],
             'client'        => $share->getClient(),
         ];
+    }
+
+    /**
+     * The receiver of a group share is a group id, so it can not be resolved with the user service
+     *
+     * @param Share $share
+     *
+     * @return string
+     */
+    protected function getReceiverName(Share $share): string {
+        if($share->isGroupShare()) {
+            $group = $this->groupManager->get($share->getReceiver());
+
+            return $group === null ? $share->getReceiver():$group->getDisplayName();
+        }
+
+        return $this->userService->getUserName($share->getReceiver());
     }
 
     /**
