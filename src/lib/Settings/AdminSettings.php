@@ -17,6 +17,7 @@ use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
 use OCA\Passwords\Helper\Compatibility\ServerVersion;
+use OCA\Passwords\Helper\Favicon\FaviconThrottleHelper;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
 use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
@@ -69,26 +70,34 @@ class AdminSettings implements ISettings {
     protected FileCacheService $fileCacheService;
 
     /**
+     * @var FaviconThrottleHelper
+     */
+    protected FaviconThrottleHelper $faviconThrottle;
+
+    /**
      * AdminSettings constructor.
      *
-     * @param IRequest             $request
-     * @param IURLGenerator        $urlGenerator
-     * @param ConfigurationService $config
-     * @param HelperService        $helperService
-     * @param FileCacheService     $fileCacheService
+     * @param IRequest              $request
+     * @param IURLGenerator         $urlGenerator
+     * @param ConfigurationService  $config
+     * @param HelperService         $helperService
+     * @param FileCacheService      $fileCacheService
+     * @param FaviconThrottleHelper $faviconThrottle
      */
     public function __construct(
-        IRequest             $request,
-        IURLGenerator        $urlGenerator,
-        ConfigurationService $config,
-        HelperService        $helperService,
-        FileCacheService     $fileCacheService
+        IRequest              $request,
+        IURLGenerator         $urlGenerator,
+        ConfigurationService  $config,
+        HelperService         $helperService,
+        FileCacheService      $fileCacheService,
+        FaviconThrottleHelper $faviconThrottle
     ) {
         $this->request          = $request;
         $this->config           = $config;
         $this->urlGenerator     = $urlGenerator;
         $this->helperService    = $helperService;
         $this->fileCacheService = $fileCacheService;
+        $this->faviconThrottle  = $faviconThrottle;
     }
 
     /**
@@ -99,6 +108,7 @@ class AdminSettings implements ISettings {
             'imageServices'    => $this->getImageServices(),
             'wordsServices'    => $this->getWordsServices(),
             'faviconServices'  => $this->getFaviconServices(),
+            'faviconThrottle'  => $this->getFaviconThrottle(),
             'previewServices'  => $this->getWebsitePreviewServices(),
             'securityServices' => $this->getSecurityServices(),
             'purgeTimeout'     => $this->getPurgeTimeout(),
@@ -419,6 +429,17 @@ class AdminSettings implements ISettings {
         }
 
         return $info;
+    }
+
+    /**
+     * @return array
+     */
+    protected function getFaviconThrottle(): array {
+        return [
+            'enabled' => $this->faviconThrottle->isEnabled(),
+            'limit'   => $this->faviconThrottle->getLimit(),
+            'period'  => $this->faviconThrottle->getPeriod()
+        ];
     }
 
     /**

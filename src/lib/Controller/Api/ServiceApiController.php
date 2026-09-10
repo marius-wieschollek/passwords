@@ -15,6 +15,7 @@ use DateTime;
 use Exception;
 use DateTimeInterface;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Favicon\FaviconThrottleHelper;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
 use OCA\Passwords\Services\AvatarService;
 use OCA\Passwords\Services\ConfigurationService;
@@ -66,6 +67,8 @@ class ServiceApiController extends AbstractApiController {
      * @param WebsitePreviewService    $previewService
      * @param EnvironmentService       $environmentService
      * @param PasswordChangeUrlService $passwordChangeUrlService
+     * @param PasswordSecurityCheckService $securityCheckService
+     * @param FaviconThrottleHelper    $faviconThrottle
      */
     public function __construct(
         IRequest $request,
@@ -78,7 +81,8 @@ class ServiceApiController extends AbstractApiController {
         protected WebsitePreviewService $previewService,
         EnvironmentService $environmentService,
         protected PasswordChangeUrlService $passwordChangeUrlService,
-        protected PasswordSecurityCheckService $securityCheckService
+        protected PasswordSecurityCheckService $securityCheckService,
+        protected FaviconThrottleHelper $faviconThrottle
     ) {
         parent::__construct($request);
         $this->userId               = $environmentService->getUserId();
@@ -142,8 +146,8 @@ class ServiceApiController extends AbstractApiController {
      */
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    #[UserRateLimit(limit: 15, period: 15)]
     public function getFavicon(string $domain, int $size = 32): FileDisplayResponse {
+        $this->faviconThrottle->registerRequest();
         $file = $this->faviconService->getFavicon($domain, $size);
 
         return $this->createFileDisplayResponse($file);

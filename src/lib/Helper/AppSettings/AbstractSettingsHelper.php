@@ -102,6 +102,7 @@ abstract class AbstractSettingsHelper {
         }
 
         $configKey = $this->getSettingKey($key);
+        if(is_bool($value)) $value = $value ? '1':'0';
         $this->config->setAppValue($configKey, $value);
 
         return $this->get($key);

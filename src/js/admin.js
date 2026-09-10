@@ -68,8 +68,14 @@ class PasswordsAdminSettings {
             () => { PasswordsAdminSettings._updateApiField('preview'); }
         );
 
+        document.getElementById('passwords-favicon-throttle').addEventListener(
+            'change',
+            () => { PasswordsAdminSettings._updateThrottleFields(); }
+        );
+
         PasswordsAdminSettings._updateApiField('favicon');
         PasswordsAdminSettings._updateApiField('preview');
+        PasswordsAdminSettings._updateThrottleFields();
     }
 
     /**
@@ -119,6 +125,18 @@ class PasswordsAdminSettings {
             apiInput.setAttribute('data-setting', data.key);
             apiInput.value = data.value;
         }
+    }
+
+    /**
+     * Show the limit and period fields only while favicon throttling is enabled
+     *
+     * @private
+     */
+    static _updateThrottleFields() {
+        let enabled   = document.getElementById('passwords-favicon-throttle').checked,
+            container = document.getElementById('passwords-favicon-throttle-container');
+
+        container.style.display = enabled ? '':'none';
     }
 }
 

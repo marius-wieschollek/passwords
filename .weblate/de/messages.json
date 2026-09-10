@@ -3639,5 +3639,14 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Benutzergruppe"
+    },
+    "backend-FaviconThrottleEnabled": {
+        "message": "Favicon-Anfragen drosseln"
+    },
+    "backend-FaviconThrottleLimit": {
+        "message": "Maximale Favicon-Anfragen pro Benutzer"
+    },
+    "backend-FaviconThrottlePeriod": {
+        "message": "Zeitraum für Favicon-Anfragen (Sekunden)"
     }
 }

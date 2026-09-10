@@ -12,6 +12,7 @@
 namespace OCA\Passwords\Helper\AppSettings;
 
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Helper\Favicon\FaviconThrottleHelper;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
 use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
@@ -51,13 +52,16 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $keys
         = [
-            'security'           => 'service/security',
-            'words'              => 'service/words',
-            'images'             => 'service/images',
-            'preview'            => 'service/preview',
-            'favicon'            => 'service/favicon',
-            'security.hibp.url'  => HaveIBeenPwnedProvider::CONFIG_SERVICE_URL,
-            'security.local.url' => BigLocalDbSecurityCheckProvider::CONFIG_DB_SOURCE
+            'security'                 => 'service/security',
+            'words'                    => 'service/words',
+            'images'                   => 'service/images',
+            'preview'                  => 'service/preview',
+            'favicon'                  => 'service/favicon',
+            'favicon.throttle.enabled' => FaviconThrottleHelper::CONFIG_ENABLED,
+            'favicon.throttle.limit'   => FaviconThrottleHelper::CONFIG_LIMIT,
+            'favicon.throttle.period'  => FaviconThrottleHelper::CONFIG_PERIOD,
+            'security.hibp.url'        => HaveIBeenPwnedProvider::CONFIG_SERVICE_URL,
+            'security.local.url'       => BigLocalDbSecurityCheckProvider::CONFIG_DB_SOURCE
         ];
 
     /**
@@ -65,15 +69,18 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $defaults
         = [
-            'security'           => HelperService::SECURITY_HIBP,
-            'preview'            => HelperService::PREVIEW_DEFAULT,
-            'favicon'            => HelperService::FAVICON_DEFAULT,
-            'words'              => HelperService::WORDS_AUTO,
-            'images'             => HelperService::IMAGES_AUTO,
-            'preview.api'        => '',
-            'favicon.api'        => '',
-            'security.hibp.url'  => null,
-            'security.local.url' => null
+            'security'                 => HelperService::SECURITY_HIBP,
+            'preview'                  => HelperService::PREVIEW_DEFAULT,
+            'favicon'                  => HelperService::FAVICON_DEFAULT,
+            'favicon.throttle.enabled' => FaviconThrottleHelper::DEFAULT_ENABLED,
+            'favicon.throttle.limit'   => FaviconThrottleHelper::DEFAULT_LIMIT,
+            'favicon.throttle.period'  => FaviconThrottleHelper::DEFAULT_PERIOD,
+            'words'                    => HelperService::WORDS_AUTO,
+            'images'                   => HelperService::IMAGES_AUTO,
+            'preview.api'              => '',
+            'favicon.api'              => '',
+            'security.hibp.url'        => null,
+            'security.local.url'       => null
         ];
 
     /**
@@ -81,10 +88,13 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
      */
     protected array $types
         = [
-            'preview.api'        => 'string',
-            'favicon.api'        => 'string',
-            'security.hibp.url'  => 'string',
-            'security.local.url' => 'string'
+            'favicon.throttle.enabled' => 'boolean',
+            'favicon.throttle.limit'   => 'number',
+            'favicon.throttle.period'  => 'number',
+            'preview.api'              => 'string',
+            'favicon.api'              => 'string',
+            'security.hibp.url'        => 'string',
+            'security.local.url'       => 'string'
         ];
 
     /**
@@ -104,6 +114,14 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             'favicon.api'        =>
                 [
                     'service.favicon' => [HelperService::FAVICON_BESTICON]
+                ],
+            'favicon.throttle.limit'  =>
+                [
+                    'service.favicon.throttle.enabled' => [true]
+                ],
+            'favicon.throttle.period' =>
+                [
+                    'service.favicon.throttle.enabled' => [true]
                 ],
             'security.hibp.url'  =>
                 [
@@ -147,6 +165,9 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
                 $this->get('preview'),
                 $this->get('security'),
                 $this->get('favicon.api'),
+                $this->get('favicon.throttle.enabled'),
+                $this->get('favicon.throttle.limit'),
+                $this->get('favicon.throttle.period'),
                 $this->get('preview.api'),
                 $this->get('security.hibp.url'),
                 $this->get('security.local.url')
@@ -170,6 +191,9 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
             case 'preview':
             case 'security':
             case 'favicon.api':
+            case 'favicon.throttle.enabled':
+            case 'favicon.throttle.limit':
+            case 'favicon.throttle.period':
             case 'preview.api':
             case 'security.hibp.url':
             case 'security.local.url':
@@ -217,6 +241,22 @@ class ServiceSettingsHelper extends AbstractSettingsHelper {
         }
 
         return 'service/preview/api';
+    }
+
+    /**
+     * @return array
+     * @noinspection PhpUnused
+     */
+    protected function getFaviconThrottleLimitOptions(): array {
+        return ['min' => 1, 'max' => null];
+    }
+
+    /**
+     * @return array
+     * @noinspection PhpUnused
+     */
+    protected function getFaviconThrottlePeriodOptions(): array {
+        return ['min' => 1, 'max' => null];
     }
 
     /**

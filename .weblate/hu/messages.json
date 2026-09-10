@@ -3641,5 +3641,14 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Felhasználócsoport"
+    },
+    "backend-FaviconThrottleEnabled": {
+        "message": "Favicon kérések korlátozása"
+    },
+    "backend-FaviconThrottleLimit": {
+        "message": "Favicon kérések maximális száma felhasználónként"
+    },
+    "backend-FaviconThrottlePeriod": {
+        "message": "Favicon kérések időkerete (másodperc)"
     }
 }
