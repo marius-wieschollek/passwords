@@ -3704,5 +3704,17 @@
     "frontend-BatchShareSubnameGroup": {
         "message": "User group",
         "description": "Subtext in the user selection dropdown in the batch sharing dialog for group entries"
+    },
+    "backend-FaviconThrottleEnabled": {
+        "message": "Throttle favicon requests",
+        "description": "Label of the checkbox in the admin settings that enables the rate limit for favicon requests"
+    },
+    "backend-FaviconThrottleLimit": {
+        "message": "Maximum favicon requests per user",
+        "description": "Label of the number field in the admin settings for how many favicon requests a user may make within the time frame"
+    },
+    "backend-FaviconThrottlePeriod": {
+        "message": "Time frame for favicon requests (seconds)",
+        "description": "Label of the number field in the admin settings for the length of the favicon rate limit time frame in seconds"
     }
 }

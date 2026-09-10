@@ -127,6 +127,14 @@ $footerMessage = $l->t('%s, %s or %s? We\'ve got you covered!', $links);
                 <label for="passwords-favicon-api"><?php p($l->t('Favicon Service Api')); ?></label>
                 <input id="passwords-favicon-api" name="favicon-api" data-setting="" placeholder="<?php p($l->t('(optional)')); ?>">
             </div>
+            <label for="passwords-favicon-throttle"><?php p($l->t('Throttle favicon requests')); ?></label>
+            <input id="passwords-favicon-throttle" name="favicon-throttle" data-setting="service.favicon.throttle.enabled" type="checkbox" <?=$_['faviconThrottle']['enabled'] ? 'checked':''?>>
+            <div class="container" id="passwords-favicon-throttle-container">
+                <label for="passwords-favicon-throttle-limit"><?php p($l->t('Maximum favicon requests per user')); ?></label>
+                <input id="passwords-favicon-throttle-limit" name="favicon-throttle-limit" data-setting="service.favicon.throttle.limit" type="number" min="1" step="1" value="<?=$_['faviconThrottle']['limit']?>">
+                <label for="passwords-favicon-throttle-period"><?php p($l->t('Time frame for favicon requests (seconds)')); ?></label>
+                <input id="passwords-favicon-throttle-period" name="favicon-throttle-period" data-setting="service.favicon.throttle.period" type="number" min="1" step="1" value="<?=$_['faviconThrottle']['period']?>">
+            </div>
 
             <label for="passwords-preview"><?php p($l->t('Website Preview Service')); ?></label>
             <select id="passwords-preview" name="passwords-preview" name="preview" data-setting="service.preview">

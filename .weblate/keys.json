@@ -780,5 +780,8 @@
     "backend-CronPhpVersionSetupCheckSuccess": "Background jobs are executed with the same PHP version.",
     "backend-BreachedPasswordsDbUpdateCheck": "Breached passwords database update",
     "backend-BreachedPasswordsDbUpdateCheckWarning": "Update of breached passwords database failed: %1$s",
-    "backend-BreachedPasswordsDbUpdateCheckOk": "Update of breached passwords database has not reported errors."
+    "backend-BreachedPasswordsDbUpdateCheckOk": "Update of breached passwords database has not reported errors.",
+    "backend-FaviconThrottleEnabled": "Throttle favicon requests",
+    "backend-FaviconThrottleLimit": "Maximum favicon requests per user",
+    "backend-FaviconThrottlePeriod": "Time frame for favicon requests (seconds)"
 }

@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Added
+- Configurable throttling of favicon requests in the admin settings
+
 ## 2026.8.0 - Feature release
 ### Added
 - Nextcloud 35 support

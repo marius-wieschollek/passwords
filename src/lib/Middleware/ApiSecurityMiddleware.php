@@ -9,6 +9,7 @@ namespace OCA\Passwords\Middleware;
 
 use Exception;
 use OCA\Passwords\Exception\ApiException;
+use OCA\Passwords\Exception\RateLimitExceededException;
 use OCA\Passwords\Services\LoggingService;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Db\DoesNotExistException;
@@ -74,8 +75,13 @@ class ApiSecurityMiddleware extends Middleware {
         $id         = 0;
         $statusCode = Http::STATUS_SERVICE_UNAVAILABLE;
 
-        $this->logger->error(['Error "%1$s" in %2$s::%3$s', $exception->getMessage(), get_class($controller), $methodName]);
-        $this->logger->logException($exception);
+        // A client hitting a rate limit is expected behaviour, not an error.
+        // The Nextcloud limiter already writes an info entry for it.
+        $isRateLimit = $exception instanceof RateLimitExceededException;
+        if(!$isRateLimit) {
+            $this->logger->error(['Error "%1$s" in %2$s::%3$s', $exception->getMessage(), get_class($controller), $methodName]);
+            $this->logger->logException($exception);
+        }
 
         if(get_class($exception) === ApiException::class || is_subclass_of($exception, ApiException::class)) {
             /** @var ApiException $exception */
@@ -90,13 +96,20 @@ class ApiSecurityMiddleware extends Middleware {
             $statusCode = 404;
         }
 
-        return new JSONResponse(
+        $response = new JSONResponse(
             [
                 'status'  => 'error',
                 'id'      => $id,
                 'message' => $message
             ], $statusCode
         );
+
+        if($isRateLimit) {
+            /** @var RateLimitExceededException $exception */
+            $response->addHeader('Retry-After', (string) $exception->getRetryAfter());
+        }
+
+        return $response;
     }
 
     /**
