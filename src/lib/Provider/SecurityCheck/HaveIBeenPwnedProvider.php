@@ -15,6 +15,12 @@ use Exception;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Exception\SecurityCheck\InvalidHibpApiResponseException;
+use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\LoggingService;
+use OCP\Cache\CappedMemoryCache;
+use OCP\Http\Client\IClientService;
 
 /**
  * Class HaveIBeenPwnedProvider
@@ -26,16 +32,35 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
     const string PASSWORD_DB        = 'hibp';
     const string CONFIG_SERVICE_URL = 'passwords/hibp/url';
     const string SERVICE_URL        = 'https://api.pwnedpasswords.com/range/:range';
+    const int    RANGE_CACHE_SIZE   = 64;
 
     /**
-     * @var array
+     * @var CappedMemoryCache
      */
-    protected array $checkedRanges = [];
+    protected CappedMemoryCache $checkedRanges;
 
     /**
      * @var bool
      */
     protected bool $isAvailable = false;
+
+    /**
+     * @param LoggingService         $logger
+     * @param IClientService         $httpClientService
+     * @param FileCacheService       $fileCacheService
+     * @param UserRulesSecurityCheck $userRulesCheck
+     * @param ConfigurationService   $configurationService
+     */
+    public function __construct(
+        LoggingService         $logger,
+        IClientService         $httpClientService,
+        FileCacheService       $fileCacheService,
+        UserRulesSecurityCheck $userRulesCheck,
+        ConfigurationService   $configurationService
+    ) {
+        parent::__construct($logger, $httpClientService, $fileCacheService, $userRulesCheck, $configurationService);
+        $this->checkedRanges = new CappedMemoryCache(self::RANGE_CACHE_SIZE);
+    }
 
     /**
      * @param string $hash
@@ -44,12 +69,12 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
      * @throws Exception
      */
     public function isHashSecure(string $hash): bool {
-        if(!isset($this->hashStatusCache[ $hash ])) {
-            $isSecure                       = parent::isHashSecure($hash) && !$this->isHashInHibpDb($hash);
-            $this->hashStatusCache[ $hash ] = $isSecure;
+        if(!$this->hashStatusCache->hasKey($hash)) {
+            $isSecure = parent::isHashSecure($hash) && !$this->isHashInHibpDb($hash);
+            $this->hashStatusCache->set($hash, $isSecure);
         }
 
-        return $this->hashStatusCache[ $hash ];
+        return (bool)$this->hashStatusCache->get($hash);
     }
 
     /**
@@ -59,10 +84,10 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
     public function getHashRange(string $range): array {
         $hibpRange = $this->makeHibpRange($range);
 
-        if(!isset($this->checkedRanges[ $hibpRange ])) {
+        if(!$this->checkedRanges->hasKey($hibpRange)) {
             $hashes = $this->executeApiRequest($hibpRange);
         } else {
-            $hashes = array_keys($this->hashStatusCache);
+            $hashes = $this->checkedRanges->get($hibpRange);
         }
 
         $matchingHashes = [];
@@ -110,14 +135,8 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
     protected function isHashInHibpDb(string $hash): bool {
         $range = $this->makeHibpRange($hash);
 
-        if(isset($this->checkedRanges[ $range ])) {
-            if(strlen($hash) !== 40 && !array_key_exists($hash, $this->hashStatusCache)) {
-                $hashes = array_keys($this->hashStatusCache);
-
-                return $this->checkForHashInHashes($hashes, $hash);
-            }
-
-            return array_key_exists($hash, $this->hashStatusCache) && !$this->hashStatusCache[ $hash ];
+        if($this->checkedRanges->hasKey($range)) {
+            return $this->checkForHashInHashes($this->checkedRanges->get($range), $hash);
         }
 
         $hashes = $this->executeApiRequest($range);
@@ -147,10 +166,7 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
         foreach($response as $line) {
             [$subhash,] = explode(':', $line);
 
-            $currentHash = $range.strtolower($subhash);
-            $hashes[]    = $currentHash;
-
-            $this->hashStatusCache[ $currentHash ] = false;
+            $hashes[] = $range.strtolower($subhash);
         }
 
         return $hashes;
@@ -170,7 +186,7 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
             $response = $client->get($this->getApiUrl($range), ['headers' => ['User-Agent' => 'Passwords App for Nextcloud']]);
         } catch(ClientException $e) {
             if($e->getResponse()->getStatusCode() === 404 || $e->getResponse()->getStatusCode() === 502) {
-                $this->checkedRanges[ $range ] = true;
+                $this->checkedRanges->set($range, []);
 
                 return [];
             }
@@ -185,7 +201,7 @@ class HaveIBeenPwnedProvider extends AbstractSecurityCheckProvider {
 
         $hashes = $this->processResponse($responseData, $range);
         $this->addHashToLocalDb($range, $hashes);
-        $this->checkedRanges[ $range ] = true;
+        $this->checkedRanges->set($range, $hashes);
 
         return $hashes;
     }
