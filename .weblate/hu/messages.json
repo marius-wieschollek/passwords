@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Felhasználócsoport"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Látható"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Törölt rész"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Megosztás lejárata"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "A részvények lejárata $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Részesedés mentése"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Frissítés"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Megosztás $NAME$ -szel",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Nem megosztott jelszó"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "A többi felhasználóval való megosztás itt jelenik meg."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Meg tudod szerkeszteni ezt a jelszót."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Ezt a jelszót nem lehet szerkeszteni."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Megoszthatja ezt a jelszót másokkal."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Nem oszthatod meg ezt a jelszót."
     }
 }
