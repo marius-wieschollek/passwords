@@ -3472,5 +3472,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "使用者群組"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "有能查看的"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "共享已刪除"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "共享已到期"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "共享到期于 $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "儲存共享"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "更新"
+    },
+    "frontend-ShareEditUser": {
+        "message": "与 $NAME$ 共享",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "有其他用戶相通相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相接相相接相接相接相接相接相接相接相接相接相相接相相相相相相接相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相相."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "您可以編輯此密碼 ."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "您不能編輯此密碼 ."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "您可以與其他人分享此密碼 ."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "您不能共享此密碼 ."
     }
 }
