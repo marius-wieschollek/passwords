@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Група користувачів"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Переглянути"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Відшкодувати видалені"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Термін дії"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "$DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Зберегти частку"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Новини"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Поділитися з $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Пароль не поділився"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Тут з’являться акції з іншими користувачами."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Ви можете редагувати цей пароль."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Ви не можете редагувати цей пароль."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Ви можете поділитися цим паролем з іншими."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Ви не можете поділитися цим паролем."
     }
 }
