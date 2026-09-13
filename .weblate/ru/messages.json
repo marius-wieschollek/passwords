@@ -3618,5 +3618,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Пароль не предоставлялся в общий доступ"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Срок действия акции «$PASSWORD$» с кодом «$RECIPIENT$» не может быть истекшим.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
