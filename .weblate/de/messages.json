@@ -3616,5 +3616,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Du kannst keine Freigaben für dieses Passwort anlegen."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Das Ablaufdatum für die Freigabe von „$PASSWORD$“ für „$RECIPIENT$“ darf nicht in der Vergangenheit liegen.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
