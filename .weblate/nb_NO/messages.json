@@ -3625,5 +3625,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Du kan ikke dele dette passordet."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Utløpsdato for \"$PASSWORD$\" delt med \"$RECIPIENT$\" kan ikke være tidligere.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
