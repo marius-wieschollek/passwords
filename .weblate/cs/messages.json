@@ -3612,5 +3612,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Toto heslo nemůžete sdílet."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Heslo nebylo nasdíleno"
     }
 }
