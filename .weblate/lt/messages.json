@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Jūs negalite pasidalinti šiuo slaptažodžiu."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "\"$PASSWORD$\" akcijos su \"$RECIPIENT$\" galiojimo pabaigos data negali būti praeityje.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
