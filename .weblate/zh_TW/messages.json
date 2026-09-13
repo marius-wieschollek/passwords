@@ -3520,5 +3520,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "您不能共享此密碼 ."
+    },
+    "frontend-SharingNoShares": {
+        "message": "未共享密碼"
     }
 }
