@@ -3618,5 +3618,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Mot de passe non partagé"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "La date d'expiration de la part \"$PASSWORD$\" avec \"$RECIPIENT$\" ne peut pas être dans le passé.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
