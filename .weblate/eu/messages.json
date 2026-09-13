@@ -3472,5 +3472,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Erabiltzaile taldea"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Ikus daiteke"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Partekatu ezabatua"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Partekatu iraungitzea"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Akzioa iraungi egiten da $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Gorde partekatzea"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Eguneratu"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Partekatu $NAME$-rekin",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Pasahitza ez da partekatua"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Beste erabiltzaileekin egindakoak hemen agertuko dira."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Pasahitz hau edita dezakezu."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Ezin duzu pasahitz hau editatu."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Pasahitz hau besteekin parteka dezakezu."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Ezin duzu pasahitz hau partekatu."
     }
 }
