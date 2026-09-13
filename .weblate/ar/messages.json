@@ -3622,5 +3622,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "لا يمكنك مشاركة كلمة السر هذه."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "لا يجوز أن يكون تاريخ انتهاء صلاحية السهم «$PASSWORD$» المرتبط بـ «$RECIPIENT$» في الماضي.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
