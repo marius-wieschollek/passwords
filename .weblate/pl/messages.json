@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupa użytkowników"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Może wyświetlać"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Udział usunięty"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Udostępnianie"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Udział wygasa w dniu $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Zapisz udział"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Aktualizacja"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Udział w $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Hasło nie jest udostępniane"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Udziały z innymi użytkownikami pojawią się tutaj."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Możesz edytować to hasło."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Nie można edytować tego hasła."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Możesz podzielić się tym hasłem z innymi."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Nie możesz podzielić się tym hasłem."
     }
 }
