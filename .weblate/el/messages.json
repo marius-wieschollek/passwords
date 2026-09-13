@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Δεν μπορείτε να μοιραστείτε αυτόν τον κωδικό πρόσβασης."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Ημερομηνία λήξης για \"$PASSWORD$\" κοινή χρήση με \"$RECIPIENT$\" δεν μπορεί να είναι στο παρελθόν.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
