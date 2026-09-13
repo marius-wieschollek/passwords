@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Tega gesla ne morete deliti z drugimi."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Datum izteka veljavnosti za delež \"$PASSWORD$\" z \"$RECIPIENT$\" ne more biti v preteklosti.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
