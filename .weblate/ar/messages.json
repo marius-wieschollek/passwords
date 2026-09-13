@@ -3571,5 +3571,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "مجموعة المستخدمين"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "يمكن رؤية"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "حُذفت الحصة"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "تاريخ انتهاء الحصة"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "الحصة تنتهي في [X17]",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "حصة إنقاذ"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "آخر"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Share with $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "كلمة سر غير مشتركة"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "وستظهر هنا حصص مع مستخدمين آخرين."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "يمكنك تحرير كلمة السر هذه."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "لا يمكنك تحرير كلمة السر هذه."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "يمكنك مشاركة كلمة السر هذه مع الآخرين."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "لا يمكنك مشاركة كلمة السر هذه."
     }
 }
