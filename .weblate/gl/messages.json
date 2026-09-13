@@ -3579,5 +3579,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupo de usuarios"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Pódese ver"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Compartir eliminado"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Compartir expiración"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "As accións expiran en $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Salvemos compartir"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Actualización"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Páxinas que ligan con \"X11X\"",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "As conversas con outros usuarios aparecerán aquí."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Podes editar este contrasinal."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Non podes editar este contrasinal."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Podes compartir este contrasinal con outras persoas."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Non podes compartir este contrasinal."
     }
 }
