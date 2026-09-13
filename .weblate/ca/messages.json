@@ -3518,5 +3518,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "No podeu compartir aquesta contrasenya."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Contrasenya no compartida"
     }
 }
