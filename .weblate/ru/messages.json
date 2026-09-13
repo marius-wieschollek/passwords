@@ -3615,5 +3615,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Вы не можете поделиться этим паролем."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Пароль не предоставлялся в общий доступ"
     }
 }
