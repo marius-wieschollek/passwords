@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Toto heslo nemôžete zdieľať."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Dátum platnosti pre \"$PASSWORD$\" podiel s \"$RECIPIENT$\" nemôže byť v minulosti.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
