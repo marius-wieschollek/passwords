@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grup pengguna"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Dapat melihat"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Berbagi dihapus"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Share kadaluwarsa"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Berbagi berakhir pada $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Simpan berbagi"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Perbarui"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Berbagi dengan $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Kata sandi tidak dibagikan"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Berbagi dengan pengguna lain akan muncul di sini."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Anda dapat mengedit sandi ini."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Anda tidak dapat mengedit sandi ini."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Anda dapat berbagi kata sandi ini dengan orang lain."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Anda tidak dapat berbagi kata sandi ini."
     }
 }
