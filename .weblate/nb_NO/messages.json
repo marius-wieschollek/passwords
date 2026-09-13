@@ -3574,5 +3574,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Brukergruppe"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Kan se"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Del slettet"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Deleutløp"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Share utløper på $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Lagre del"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Oppdater"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Del med $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Passord ikke delt"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Deler med andre brukere vil vises her."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Du kan redigere dette passordet."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Du kan ikke redigere dette passordet."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Du kan dele dette passordet med andre."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Du kan ikke dele dette passordet."
     }
 }
