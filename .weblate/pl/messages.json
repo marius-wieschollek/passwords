@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Nie możesz podzielić się tym hasłem."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Data wygaśnięcia \"$PASSWORD$\" akcji z \"$RECIPIENT$\" nie może być w przeszłości.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
