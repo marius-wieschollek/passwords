@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupo de usuários"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Pode ver"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Compartilhar deletado"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Compartilhar a expiração"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "A ação expira em $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Salvar a partilha"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Atualizar"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Compartilhe com $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Compartilhamentos com outros usuários aparecerão aqui."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Você pode editar essa senha."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Você não pode editar esta senha."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Você pode compartilhar essa senha com outros."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Você não pode compartilhar essa senha."
     }
 }
