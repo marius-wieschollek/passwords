@@ -3470,5 +3470,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grup d' usuaris"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Vista"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "S' ha esborrat la compartició"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Expiració de compartició"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Compartir cadudeix en $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Desa la compartició"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Actualitza"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Comparteix amb $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Els recursos compartits amb altres usuaris apareixeran aquí."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Podeu editar aquesta contrasenya."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "No podeu editar aquesta contrasenya."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Podeu compartir aquesta contrasenya amb altres."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "No podeu compartir aquesta contrasenya."
     }
 }
