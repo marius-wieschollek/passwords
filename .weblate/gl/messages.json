@@ -3627,5 +3627,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Non podes compartir este contrasinal."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Contrasinal non compartida"
     }
 }
