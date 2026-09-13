@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Anda tidak dapat berbagi kata sandi ini."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Tanggal expirasi untuk \"$PASSWORD$\" berbagi dengan \"$RECIPIENT$\" tidak dapat di masa lalu.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
