@@ -3565,5 +3565,8 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Benutzergruppe"
+    },
+    "frontend-SharingNoShares": {
+        "message": "Password nicht geteilt"
     }
 }
