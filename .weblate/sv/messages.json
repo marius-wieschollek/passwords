@@ -3618,5 +3618,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Lösenordet har inte delats"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Utgångsdatum för \"$PASSWORD$\" dela med \"$RECIPIENT$\" kan inte vara tidigare.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
