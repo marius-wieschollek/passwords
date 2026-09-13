@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Käyttäjäryhmä"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Näytä"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Jaa poistettu"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Osakkeen päättymispäivä"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Osuus päättyy $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Tallenna osuus"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Päivitä"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Jaa $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Salasanaa ei jaettu"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Osuudet muiden käyttäjien kanssa näkyvät täällä."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Voit muokata tätä salasanaa."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Et voi muokata tätä salasanaa."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Voit jakaa tämän salasanan muiden kanssa."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Et voi jakaa tätä salasanaa."
     }
 }
