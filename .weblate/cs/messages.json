@@ -3615,5 +3615,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Heslo nebylo nasdíleno"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Datum ukončení platnosti pro \"$PASSWORD$\" sdílení s \"$RECIPIENT$\" nemůže být v minulosti.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
