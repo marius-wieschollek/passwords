@@ -3602,6 +3602,20 @@
             }
         }
     },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Expiration date for \"$PASSWORD$\" share with \"$RECIPIENT$\" can not be in the past.",
+        "description": "Error message in the create share action when the given expiration date has already passed",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
     "frontend-BatchActionShareCreatedToast": {
         "message": "$TOTAL$ passwords shared $RECIPIENTS$ users.",
         "description": "Toast message after passwords were shared in batch with one or more users",

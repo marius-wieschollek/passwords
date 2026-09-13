@@ -128,6 +128,12 @@ export default class CreateShareAction {
             return this.#password.share.expires;
         }
 
+        if(this.#options.expires instanceof Date) {
+            if(this.#options.expires.getTime() < Date.now() - 1000) {
+                this.#throwError(['CreateShareErrorAlreadyExpired', {password: this.#password.label, recipient: this.#recipient.displayName}]);
+            }
+        }
+
         return this.#options.expires;
     }
 
