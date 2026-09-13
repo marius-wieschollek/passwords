@@ -3569,16 +3569,16 @@
         "message": "Группа пользователей"
     },
     "frontend-SharePermissionCanView": {
-        "message": "Смотреть"
+        "message": "Можно просматривать"
     },
     "frontend-ShareDeletedToast": {
-        "message": "Акция удалена"
+        "message": "Сообщение удалено"
     },
     "frontend-ShareExpirationHint": {
-        "message": "Срок действия акции"
+        "message": "Срок действия акций"
     },
     "frontend-ShareExpirationTitle": {
-        "message": "Срок действия акции истекает $DATE$",
+        "message": "Срок действия публикации истекает $DATE$",
         "placeholders": {
             "date": {
                 "content": "$1",
@@ -3587,13 +3587,13 @@
         }
     },
     "frontend-ShareActionCreate": {
-        "message": "Сохранить акции"
+        "message": "Сохранить Поделиться"
     },
     "frontend-ShareActionUpdate": {
         "message": "Обновление"
     },
     "frontend-ShareEditUser": {
-        "message": "Поделиться $NAME$",
+        "message": "Поделиться с $NAME$",
         "placeholders": {
             "name": {
                 "content": "$1",
@@ -3602,19 +3602,19 @@
         }
     },
     "frontend-SharingNoSharesText": {
-        "message": "Акции с другими пользователями появятся здесь."
+        "message": "Здесь будут отображаться материалы, которыми поделились другие пользователи."
     },
     "frontend-ShareInfoEditable": {
-        "message": "Вы можете отредактировать этот пароль."
+        "message": "Вы можете изменить этот пароль."
     },
     "frontend-ShareInfoNotEditable": {
-        "message": "Вы не можете редактировать этот пароль."
+        "message": "Этот пароль нельзя изменить."
     },
     "frontend-ShareInfoShareable": {
-        "message": "Вы можете поделиться этим паролем с другими."
+        "message": "Вы можете сообщить этот пароль другим людям."
     },
     "frontend-ShareInfoNotShareable": {
-        "message": "Вы не можете поделиться этим паролем."
+        "message": "Вы не можете никому сообщать этот пароль."
     },
     "frontend-SharingNoShares": {
         "message": "Пароль не предоставлялся в общий доступ"
