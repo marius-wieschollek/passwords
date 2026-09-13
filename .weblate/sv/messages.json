@@ -3615,5 +3615,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Du kan inte dela detta lösenord."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Lösenordet har inte delats"
     }
 }
