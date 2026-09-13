@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Groupe d'utilisateurs"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Peut voir"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Partager supprimé"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Durée du partage"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "L'action expire le $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Enregistrer la part"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Mise à jour"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Partager avec $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Les partages avec d'autres utilisateurs apparaîtront ici."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Vous pouvez modifier ce mot de passe."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Vous ne pouvez pas modifier ce mot de passe."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Vous pouvez partager ce mot de passe avec d'autres personnes."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Vous ne pouvez pas partager ce mot de passe."
     }
 }
