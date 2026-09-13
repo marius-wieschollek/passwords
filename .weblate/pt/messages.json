@@ -3514,10 +3514,10 @@
     "frontend-BatchActionShare": {
         "message": "Compartilhar"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Editar"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Definir data de validade"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3535,37 +3535,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Digite para procurar por usuários"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Apenas para visualização"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Permissões Personalizadas"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revogar o acesso"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opções avançadas"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Pode editar"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Pode partilhar"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Revogar o acesso"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Opções de partilha"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permissões"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Opções de criação em lote"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobrepor as partilhas existentes"
     },
     "frontend-CreateShareErrorNoPermission": {

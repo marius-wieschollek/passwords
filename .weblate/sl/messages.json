@@ -3517,7 +3517,7 @@
     "frontend-BatchActionShareSubmit": {
         "message": "Souporaba"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Uredi"
     },
     "frontend-CreateShareErrorShareWithOwner": {
@@ -3584,40 +3584,40 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Vrsta za iskanje uporabnikov"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Samo pogled"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Lastna dovoljenja"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Opomni dostop"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Napredne možnosti"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Datum izteka"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Uredi"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Lahko delimo"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Opomni dostop"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Možnosti souporabe"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Dovoljenja"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Možnosti ustvarjanja serije"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Nadomesti obstoječe delnice"
     },
     "frontend-CreateShareErrorNoPermission": {

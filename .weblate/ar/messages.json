@@ -3530,28 +3530,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "نوع البحث عن المستخدمين"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "مشاهدة فقط"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Edit"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "الانبعاثات العرفية"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revoke access"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "الخيارات المتقدمة"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "تاريخ انتهاء المدة"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "يمكن تحريره"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "يمكن أن نتشارك"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3560,16 +3560,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Revoke access"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "تقاسم الخيارات"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "الانبعاثات"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "خيارات إنشاء البطاقات"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "تخطي الأسهم القائمة"
     },
     "frontend-CreateShareErrorNoPermission": {

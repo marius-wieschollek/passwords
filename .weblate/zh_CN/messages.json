@@ -3514,10 +3514,10 @@
     "frontend-BatchActionShare": {
         "message": "分享"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "编辑"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "设置过期日期"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3535,37 +3535,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "搜索用户的类型"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "仅查看"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "自定义权限"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "取消访问"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "高级选项"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "可编辑"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "可以分享"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "取消访问"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "共享选项"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "权限"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "批量创建选项"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "覆盖已存在的共享"
     },
     "frontend-CreateShareErrorNoPermission": {

@@ -3526,28 +3526,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Name"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Rodyti tik"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Keisti"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Spausdinti leidimai"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Prieiga prie atstatymų"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Patobulintos galimybės"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "@ info: whatsthis"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "A button on a Remote Control"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "NAME OF TRANSLATORS"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3556,16 +3556,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Prieiga prie atstatymų"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Dalijimosi galimybės"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Leidimai"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Partijos kūrimo galimybės"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Perrašyti esamas akcijas"
     },
     "frontend-CreateShareErrorNoPermission": {

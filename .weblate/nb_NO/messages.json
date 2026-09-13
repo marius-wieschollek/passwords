@@ -3521,10 +3521,10 @@
     "frontend-BatchActionShare": {
         "message": "Dele"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Redigere"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Angi utløpsdato"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3542,37 +3542,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Type å søke etter brukere"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Vis kun"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Egendefinerte tillatelser"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Trekk tilbake tilgang"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Avanserte alternativer"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Kan redigere"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Kan dele"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Trekk tilbake tilgang"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Delingsalternativer"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Tillatelser"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Skapealternativer"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overskriv eksisterende aksjer"
     },
     "frontend-CreateShareErrorNoPermission": {

@@ -3431,28 +3431,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Idatzi erabiltzaileak bilatzeko"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Ikusi bakarrik"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Editatu"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Baimen pertsonalizatuak"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Errebokatu sarbidea"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Aukera aurreratuak"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Ezarri iraungitze-data"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Edita daiteke"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Partekatu daiteke"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3461,16 +3461,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Errebokatu sarbidea"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Partekatzeko aukerak"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Baimenak"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Batch sortzeko aukerak"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Gainidatzi existitzen diren akzioak"
     },
     "frontend-CreateShareErrorNoPermission": {

@@ -20,26 +20,50 @@ class BatchActionManager {
         );
     }
 
+    /**
+     *
+     * @return {Object[]}
+     */
     get folders() {
         return this._state.folders;
     }
 
+    /**
+     *
+     * @return {Object[]}
+     */
     get tags() {
         return this._state.tags;
     }
 
+    /**
+     *
+     * @return {Object[]}
+     */
     get passwords() {
         return this._state.passwords;
     }
 
+    /**
+     *
+     * @return Number
+     */
     get totalSelectedItems() {
         return this._state.folders.length + this._state.tags.length + this._state.passwords.length;
     }
 
+    /**
+     *
+     * @return {Boolean}
+     */
     get hasSelectedItems() {
         return this.totalSelectedItems !== 0;
     }
 
+    /**
+     *
+     * @return {Boolean}
+     */
     get allVisibleSelected() {
         let visible = this._state.visible,
             total   = visible.folders.length + visible.tags.length + visible.passwords.length;
@@ -47,6 +71,10 @@ class BatchActionManager {
         return total !== 0 && this.totalSelectedItems === total;
     }
 
+    /**
+     *
+     * @return {Boolean}
+     */
     get isProcessingItems() {
         return this._state.actions.length !== 0;
     }

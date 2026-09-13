@@ -3514,10 +3514,10 @@
     "frontend-BatchActionShare": {
         "message": "Compartir"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Modificar"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Definir fecha de vencimiento"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3535,37 +3535,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Escribe para buscar usuarios"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Ver sólo"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Permisos aduaneros"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revoque el acceso"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opciones avanzadas"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Puede editar"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Puede compartir"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Revoque el acceso"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Compartir opciones"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permisos"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Opciones de creación de lotes"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobreescribir las acciones existentes"
     },
     "frontend-CreateShareErrorNoPermission": {

@@ -3514,10 +3514,10 @@
     "frontend-BatchActionShare": {
         "message": "Dela"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Editera"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Sätt utgångs datum"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3535,37 +3535,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Typ för att söka efter användare"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Visa endast"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Anpassade behörigheter"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Återkalla åtkomst"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Avancerade alternativ"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Kan redigera"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Kan dela"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Återkalla åtkomst"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Dela alternativ"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Tillstånd"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Batch skapelse alternativ"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Överskriv befintliga aktier"
     },
     "frontend-CreateShareErrorNoPermission": {

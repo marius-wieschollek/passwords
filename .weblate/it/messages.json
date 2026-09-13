@@ -3514,10 +3514,10 @@
     "frontend-BatchActionShare": {
         "message": "Condividi"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Modifica"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Imposta data di scadenza"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3535,37 +3535,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Tipo di ricerca per gli utenti"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Vedi solo"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Permissioni doganali"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Accesso diretto"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opzioni avanzate"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Può modificare"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Può condividere"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Accesso diretto"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Opzioni di condivisione"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permissioni"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Opzioni di creazione batch"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overwrite azioni esistenti"
     },
     "frontend-CreateShareErrorNoPermission": {

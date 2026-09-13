@@ -3529,43 +3529,43 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Τύπος για αναζήτηση χρηστών"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Προβολή μόνο"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Επεξεργασία"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Προσαρμοσμένες άδειες"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Ανακαίνιση πρόσβασης"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Προχωρημένες επιλογές"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Ορισμός ημερομηνίας λήξης"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Μπορεί να επεξεργαστεί"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Μπορέστε να μοιραστείτε"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Ανακαίνιση πρόσβασης"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Επιλογές ανταλλαγής"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Άδειες"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Επιλογές δημιουργίας παρτίδων"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Αντικατάσταση υφιστάμενων μετοχών"
     },
     "frontend-CreateShareErrorNoPermission": {

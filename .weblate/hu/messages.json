@@ -3526,28 +3526,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "A felhasználók keresése"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Csak megtekintés"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Szerkesztés"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Egyéni engedélyek"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Hozzáférés visszaállítása"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Speciális lehetőségek"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "A lejárati idő beállítása"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Szerkeszthető"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Megosztható"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3556,16 +3556,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Hozzáférés visszaállítása"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Megosztási lehetőségek"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Jogosultságok"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "A tétel létrehozásának lehetőségei"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Meglévő részvények felülírása"
     },
     "frontend-CreateShareErrorNoPermission": {

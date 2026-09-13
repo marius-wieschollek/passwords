@@ -3526,28 +3526,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Ketik untuk mencari pengguna"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Hanya tampilkan"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Sunting"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Hak Gubahan"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Mengembalikan akses"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opsi tingkat lanjut"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Menentukan tanggal kedaluwarsa"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Dapat menyunting"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Dapat berbagi"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3556,16 +3556,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Mengembalikan akses"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Opsi Berbagi"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Hak"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Pilihan pembuatan batch"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Timpa saham yang telah ada"
     },
     "frontend-CreateShareErrorNoPermission": {

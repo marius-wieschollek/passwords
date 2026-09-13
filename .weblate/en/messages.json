@@ -926,77 +926,6 @@
     "frontend-000268": {
         "message": "Apps and Extensions"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ and $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Editing allowed"
-    },
-    "frontend-000271": {
-        "message": "Editing disallowed"
-    },
-    "frontend-000272": {
-        "message": "sharing allowed"
-    },
-    "frontend-000273": {
-        "message": "sharing disallowed"
-    },
-    "frontend-000274": {
-        "message": "Search user"
-    },
-    "frontend-000275": {
-        "message": "Set expiration date"
-    },
-    "frontend-000276": {
-        "message": "Expires $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Choose an expiration date or leave empty to share forever"
-    },
-    "frontend-000278": {
-        "message": "Please choose a date in the future"
-    },
-    "frontend-000279": {
-        "message": "Invalid date"
-    },
-    "frontend-000280": {
-        "message": "The user $UID$ does not exist",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Unable to share password: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Toggle write permissions"
-    },
-    "frontend-000283": {
-        "message": "Toggle share permissions"
-    },
-    "frontend-000284": {
-        "message": "Stop sharing"
-    },
     "frontend-000285": {
         "message": "Date"
     },
@@ -3575,35 +3504,39 @@
         "message": "Type to search for users",
         "description": "Placeholder of the user selection field in the batch share dialog"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "View only",
         "description": "Label of the permission preset in the batch share dialog to let the target user only view/use the password. (No edit & re-sharing)"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Edit",
         "description": "Label of the permission preset in the batch share dialog to let the target user view and edit the password"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Custom Permissions",
         "description": "Label of the permission preset in the batch share dialog to set custom permissions"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revoke access",
         "description": "Label of the permission preset in the batch share dialog to revoke the users access"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Advanced options",
         "description": "Label of the button in the batch share dialog to show more sharing options"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Set expiration date",
         "description": "Label of the option in the batch share dialog to enable the expiration date input"
     },
-    "frontend-BatchActionShareCanEdit": {
-        "message": "Can edit",
-        "description": "Label of the option in the batch share dialog to set the permission for the receiver to be able to edit the password"
+    "frontend-SharePermissionCanView": {
+        "message": "Can view",
+        "description": "Label of the option in the share edit dialog and share detail view if the receiver can only view the share"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanEdit": {
+        "message": "Can edit",
+        "description": "Label of the option in the share edit dialog and share detail view if the receiver edit view the share"
+    },
+    "frontend-SharePermissionCanShare": {
         "message": "Can share",
         "description": "Label of the option in the batch share dialog to set the permission for the receiver to be able to edit the password"
     },
@@ -3615,19 +3548,15 @@
         "message": "Revoke access",
         "description": "Label of the submit button in the batch share dialog if the revoke access option has been chosen"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Sharing options",
         "description": "Label of the section in the batch share dialog to set specific options for sharing"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permissions",
         "description": "Label of the section in the batch share dialog to set permissions for sharing"
     },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batch creation options",
-        "description": "Label of the section in the batch share dialog to set options for the batch creation process"
-    },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overwrite existing shares",
         "description": "Label of the option in the batch share dialog to overwrite existing shares in batch creation process"
     },
@@ -3704,5 +3633,65 @@
     "frontend-BatchShareSubnameGroup": {
         "message": "User group",
         "description": "Subtext in the user selection dropdown in the batch sharing dialog for group entries"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Share deleted",
+        "description": "Toast message after password share was deleted"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Share expiration",
+        "description": "Title of the expiration date popover if a share has one"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Share expires on $DATE$",
+        "description": "Accessibility label of the expiration date popover",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Save share",
+        "description": "Label of the save button when creating a new share"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Update",
+        "description": "Label of the save button when editing an existing share"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Share with $NAME$",
+        "description": "Note in the share edit form when editing an existing share",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Password not shared",
+        "description": "Title of the empty content element in the sharing tab of the sidebar."
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Shares with other users will appear here.",
+        "description": "Text of the empty content element in the sharing tab of the sidebar."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "You can edit this password.",
+        "description": "Info in the sidebar share tab when the password is shared with the current user with edit permissions."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "You can not edit this password.",
+        "description": "Info in the sidebar share tab when the password is shared with the current user with no edit permissions."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "You can share this password with others.",
+        "description": "Info in the sidebar share tab when the password is shared with the current user with sharing permissions."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "You can not share this password.",
+        "description": "Info in the sidebar share tab when the password is shared with the current user with no sharing permissions."
     }
 }

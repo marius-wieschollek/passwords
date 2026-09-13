@@ -3417,10 +3417,10 @@
     "frontend-BatchActionShare": {
         "message": "Compartir"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Modificar"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Definir data de venciment"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3438,37 +3438,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Tipus a cercar pels usuaris"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Només veure"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Permisos personalitzats"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revoca l' accés"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opcions avançades"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Pot editar"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Pot compartir"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Revoca l' accés"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Opcions de compartició"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permisos"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Opcions de creació per lots"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobreescriu els recursos compartits existents"
     },
     "frontend-CreateShareErrorNoPermission": {

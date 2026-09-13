@@ -3526,28 +3526,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Typ pre vyhľadávanie užívateľov"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Len pohľad"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Upraviť"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Vlastné práva"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Zrušiť prístup"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Pokročilé opcie"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Nastaviť dátum exspirácie"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Je možné upraviť"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Môže zdieľať"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3556,16 +3556,16 @@
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Zrušiť prístup"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Možnosti zdieľania"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Práva"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Možnosti tvorby šarží"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Prepísať existujúce akcie"
     },
     "frontend-CreateShareErrorNoPermission": {

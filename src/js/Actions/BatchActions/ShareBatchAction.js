@@ -36,9 +36,13 @@ export default class ShareBatchAction extends BatchAction {
             return;
         }
 
-        let sharingOptions = await this.#showShareDialog();
-        if(sharingOptions === null) {
-            return;
+        let sharingOptions = this._options;
+        if(!sharingOptions.hasOwnProperty('recipients')) {
+            sharingOptions = await this.#showShareDialog();
+
+            if(sharingOptions === null) {
+                return;
+            }
         }
 
         if(sharingOptions.action === 'create') {
@@ -86,8 +90,8 @@ export default class ShareBatchAction extends BatchAction {
         for(let recipient of sharingOptions.recipients) {
             let options = {
                 expires  : sharingOptions.expires,
-                editable : sharingOptions.permissions.edit,
-                shareable: sharingOptions.permissions.share,
+                editable : sharingOptions.editable,
+                shareable: sharingOptions.shareable,
                 overwrite: sharingOptions.overwrite
             };
 

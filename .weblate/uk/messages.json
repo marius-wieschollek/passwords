@@ -3514,7 +3514,7 @@
     "frontend-BatchActionShare": {
         "message": "Спільне"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Встановити термін доступности"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3532,40 +3532,40 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Пошук користувачів"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Переглянути тільки"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Редагування"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Спеціальні дозволи"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Відновити доступ"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Додаткові параметри"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Чи можна редагувати"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Чи можна поділитися"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Відновити доступ"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Параметри обробки"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Дозвіли"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Варіанти створення пакета"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Поверніть існуючі акції"
     },
     "frontend-CreateShareErrorNoPermission": {

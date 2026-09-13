@@ -3526,10 +3526,10 @@
     "frontend-BatchActionShare": {
         "message": "Compartir"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Editar"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Definir a data de caducidade"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3547,37 +3547,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Escriba para buscar usuarios"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Só ver"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Permisos personalizados"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Revogar o acceso"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Opcións avanzadas"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Pode editar"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Pode compartir"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Revogar o acceso"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Compartir as opcións"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Permisos"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Opcións de creación por lotes"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobrescribir as accións existentes"
     },
     "frontend-CreateShareErrorNoPermission": {

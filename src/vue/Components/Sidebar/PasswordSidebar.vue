@@ -68,8 +68,11 @@
         <nc-app-sidebar-tab icon="icon-comment" :name="t('Notes')" id="notes-tab" v-if="password.notes">
             <notes :password="password"/>
         </nc-app-sidebar-tab>
-        <nc-app-sidebar-tab icon="icon-share" :name="t('Share')" id="share-tab" v-if="hasSharing">
+        <nc-app-sidebar-tab :name="t('Share')" id="share-tab" v-if="hasSharing">
             <share :password="password"/>
+            <template #icon>
+                <share-variant-icon />
+            </template>
         </nc-app-sidebar-tab>
         <nc-app-sidebar-tab icon="icon-history" :name="t('Revisions')" id="revisions-tab" v-if="password.revisions">
             <revisions :password="password"/>
@@ -106,6 +109,7 @@
     import Share from '@vc/Sidebar/PasswordSidebar/Tabs/Share';
     import LoggingService from "@js/Services/LoggingService";
     import DeferredActivationService from "@js/Services/DeferredActivationService";
+    import ShareVariantIcon from "@icon/ShareVariant.vue";
 
     export default {
         components: {
@@ -118,6 +122,7 @@
             Favicon,
             PencilIcon,
             LockResetIcon,
+            ShareVariantIcon,
             'printer-icon': () => import(/* webpackChunkName: "PrinterIcon" */ '@icon/Printer'),
             Share,
             'notes'       : () => import(/* webpackChunkName: "PasswordNotes" */ '@vc/Sidebar/PasswordSidebar/Tabs/Notes'),

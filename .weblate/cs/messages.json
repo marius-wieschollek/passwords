@@ -3511,10 +3511,10 @@
     "frontend-BatchActionShare": {
         "message": "Sdílet"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Upravit"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Nastavit datum skončení platnosti"
     },
     "frontend-BatchActionShareSubmit": {
@@ -3532,37 +3532,37 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Typ pro vyhledávání uživatelů"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Zobrazit pouze"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Vlastní oprávnění"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Odvolat přístup"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Pokročilé možnosti"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Can edit"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Sdílet"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Odvolat přístup"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Možnosti sdílení"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Povolení"
     },
     "frontend-BatchActionShareCreateOptions": {
         "message": "Možnosti vytváření šarží"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Přepsat stávající akcie"
     },
     "frontend-CreateShareErrorNoPermission": {

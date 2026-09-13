@@ -3512,19 +3512,19 @@
     "frontend-BatchActionShare": {
         "message": "Teilen"
     },
-    "frontend-BatchActionSharePermissionEdit": {
+    "frontend-SharePermissionEdit": {
         "message": "Bearbeiten erlauben"
     },
-    "frontend-BatchActionShareAdvanced": {
+    "frontend-ShareOptionsAdvanced": {
         "message": "Erweiterte Optionen"
     },
-    "frontend-BatchActionShareExpiryDate": {
+    "frontend-ShareOptionsHasExpirationDate": {
         "message": "Ablaufdatum setzen"
     },
     "frontend-BatchActionShareSubmit": {
         "message": "Teilen"
     },
-    "frontend-BatchActionShareCreateOverwrite": {
+    "frontend-ShareOptionsOverwriteExisting": {
         "message": "Bestehende Freigaben überschreiben"
     },
     "frontend-BatchActionShareDialogTitle": {
@@ -3539,28 +3539,28 @@
     "frontend-BatchActionShareSelectUsersPlaceholder": {
         "message": "Tippen, um nach Benutzern zu suchen"
     },
-    "frontend-BatchActionSharePermissionView": {
+    "frontend-SharePermissionView": {
         "message": "Nur anzeigen"
     },
-    "frontend-BatchActionSharePermissionCustom": {
+    "frontend-SharePermissionCustom": {
         "message": "Benutzerdefinierte Berechtigungen"
     },
-    "frontend-BatchActionSharePermissionDelete": {
+    "frontend-ShareRevokeAccess": {
         "message": "Zugriff widerrufen"
     },
-    "frontend-BatchActionShareCanEdit": {
+    "frontend-SharePermissionCanEdit": {
         "message": "Bearbeiten erlauben"
     },
-    "frontend-BatchActionShareCanShare": {
+    "frontend-SharePermissionCanShare": {
         "message": "Teilen erlauben"
     },
     "frontend-BatchActionShareSubmitRevoke": {
         "message": "Zugriff widerrufen"
     },
-    "frontend-BatchActionShareShareOptions": {
+    "frontend-ShareOptionsSharingOptions": {
         "message": "Freigabeoptionen"
     },
-    "frontend-BatchActionSharePermissionOptions": {
+    "frontend-ShareOptionsPermissionOptions": {
         "message": "Berechtigungen"
     },
     "frontend-BatchActionShareCreateOptions": {
