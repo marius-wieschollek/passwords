@@ -3618,5 +3618,18 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Et voi jakaa tätä salasanaa."
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "$PASSWORD$-osakkeen päättymispäivä ei voi olla aikaisempi.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
