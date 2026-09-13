@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Användargrupp"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Kan visa"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Dela bort"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Dela utgången"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Dela utgår från $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Spara andel"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Uppdatering"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Dela med $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Aktier med andra användare visas här."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Du kan redigera detta lösenord."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Du kan inte redigera detta lösenord."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Du kan dela detta lösenord med andra."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Du kan inte dela detta lösenord."
     }
 }
