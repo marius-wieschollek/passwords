@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Ομάδα χρηστών"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Μπορεί να προβληθεί"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Διαγραφή μετοχής"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Λήξη μετοχής"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Η μετοχή λήγει στις $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Αποθήκευση μετοχής"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Ενημέρωση"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Μερίδιο με $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Ο κωδικός πρόσβασης δεν μοιράζεται"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Οι μετοχές με άλλους χρήστες θα εμφανιστούν εδώ."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Μπορείτε να επεξεργαστείτε αυτόν τον κωδικό πρόσβασης."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Δεν μπορείτε να επεξεργαστείτε αυτόν τον κωδικό πρόσβασης."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Μπορείτε να μοιραστείτε αυτόν τον κωδικό πρόσβασης με άλλους."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Δεν μπορείτε να μοιραστείτε αυτόν τον κωδικό πρόσβασης."
     }
 }
