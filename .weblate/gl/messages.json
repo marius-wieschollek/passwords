@@ -3632,7 +3632,7 @@
         "message": "Contrasinal non compartido"
     },
     "frontend-CreateShareErrorAlreadyExpired": {
-        "message": "\"[Mentres facía a película,] falamos do feito de que era moi probable que [Scar e Mufasa] non tivesen ambos os mesmos pais\", declarou o produtor Don Hahn.",
+        "message": "A data de caducidade para compartir «$PASSWORD$» con «$RECIPIENT$» non pode ser anterior á data actual.",
         "placeholders": {
             "password": {
                 "content": "$1",
