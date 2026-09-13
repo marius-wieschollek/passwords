@@ -955,77 +955,6 @@
     "frontend-000268": {
         "message": "Programėlės ir plėtiniai"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ ir $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Leidžiama redaguoti"
-    },
-    "frontend-000271": {
-        "message": "Neleidžiama redaguoti"
-    },
-    "frontend-000272": {
-        "message": "leidžiama dalytis"
-    },
-    "frontend-000273": {
-        "message": "dalijimasis neleidžiamas"
-    },
-    "frontend-000274": {
-        "message": "Ieškoti naudotojo"
-    },
-    "frontend-000275": {
-        "message": "Nustatyti galiojimo datą"
-    },
-    "frontend-000276": {
-        "message": "Galioja iki $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Pasirinkite galiojimo pabaigos datą arba palikite tuščią, kad dalytumėtės visam laikui"
-    },
-    "frontend-000278": {
-        "message": "Prašome pasirinkti datą ateityje"
-    },
-    "frontend-000279": {
-        "message": "Netinkama data"
-    },
-    "frontend-000280": {
-        "message": "Vartotojas $UID$ neegzistuoja",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Nepavyksta bendrinti slaptažodžio: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Perjungti rašymo leidimus"
-    },
-    "frontend-000283": {
-        "message": "Perjungti bendrinimo leidimus"
-    },
-    "frontend-000284": {
-        "message": "Nustokite dalytis"
-    },
     "frontend-000285": {
         "message": "Data"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Leidimai"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Partijos kūrimo galimybės"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Perrašyti esamas akcijas"

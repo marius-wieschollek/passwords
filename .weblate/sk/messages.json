@@ -943,77 +943,6 @@
     "frontend-000268": {
         "message": "Aplikácie a rozšírenia"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ a $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Povolené úpravy"
-    },
-    "frontend-000271": {
-        "message": "Zakázané úpravy"
-    },
-    "frontend-000272": {
-        "message": "povolené zdieľanie"
-    },
-    "frontend-000273": {
-        "message": "zakázané zdieľanie"
-    },
-    "frontend-000274": {
-        "message": "Vyhľadávanie používateľa"
-    },
-    "frontend-000275": {
-        "message": "Nastavenie dátumu ukončenia platnosti"
-    },
-    "frontend-000276": {
-        "message": "Platnosť končí na $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Zvoľte si dátum ukončenia platnosti alebo ho nechajte prázdny, ak chcete zdieľať navždy"
-    },
-    "frontend-000278": {
-        "message": "Vyberte si dátum v budúcnosti"
-    },
-    "frontend-000279": {
-        "message": "Neplatný dátum"
-    },
-    "frontend-000280": {
-        "message": "Používateľ $UID$ neexistuje",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Nie je možné zdieľať heslo: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Prepínanie oprávnení na zápis"
-    },
-    "frontend-000283": {
-        "message": "Prepínanie oprávnení na zdieľanie"
-    },
-    "frontend-000284": {
-        "message": "Prestaňte zdieľať"
-    },
     "frontend-000285": {
         "message": "Dátum"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Práva"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Možnosti tvorby šarží"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Prepísať existujúce akcie"

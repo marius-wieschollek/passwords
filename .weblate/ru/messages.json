@@ -660,54 +660,6 @@
     "frontend-000268": {
         "message": "Приложения и расширения"
     },
-    "frontend-000274": {
-        "message": "Поиск пользователей"
-    },
-    "frontend-000275": {
-        "message": "Установить финальную дату"
-    },
-    "frontend-000276": {
-        "message": "Срок истекает $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Выбрать финальную дату"
-    },
-    "frontend-000278": {
-        "message": "Выберите финальную дату"
-    },
-    "frontend-000279": {
-        "message": "Неверная дата"
-    },
-    "frontend-000280": {
-        "message": "Пользователь $UID$ не существует",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Невозможно предоставить доступ: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Переключить разрешение на запись"
-    },
-    "frontend-000283": {
-        "message": "Переключить возможность поделиться"
-    },
-    "frontend-000284": {
-        "message": "Отключить доступ"
-    },
     "frontend-000285": {
         "message": "Дата"
     },
@@ -2882,29 +2834,6 @@
     "frontend-000263": {
         "message": "Шифрование с помощью libsodium"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ и $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Редактирование разрешено"
-    },
-    "frontend-000271": {
-        "message": "Редактирование запрещено"
-    },
-    "frontend-000272": {
-        "message": "совместное использование"
-    },
-    "frontend-000273": {
-        "message": "совместное использование запрещено"
-    },
     "frontend-000319": {
         "message": "Содержание"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Разрешения"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Варианты создания пакетов"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Перезаписывать существующие акции"

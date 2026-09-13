@@ -640,54 +640,6 @@
     "frontend-000268": {
         "message": "Apps & uitbreidingen"
     },
-    "frontend-000274": {
-        "message": "Gebruiker zoeken"
-    },
-    "frontend-000275": {
-        "message": "Stel verloopdatum in"
-    },
-    "frontend-000276": {
-        "message": "Verloopt op $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Kies een verloopdatum of laat het veld leeg om oneindig lang te delen"
-    },
-    "frontend-000278": {
-        "message": "Kies een verloopdatum die in de toekomst ligt"
-    },
-    "frontend-000279": {
-        "message": "Ongeldige datum"
-    },
-    "frontend-000280": {
-        "message": "De gebruiker $UID$ bestaat niet",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Kan wachtwoord niet delen: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Schijfrechten omschakelen"
-    },
-    "frontend-000283": {
-        "message": "Deelrechten omschakelen"
-    },
-    "frontend-000284": {
-        "message": "Delen beeindigen"
-    },
     "frontend-000285": {
         "message": "Datum"
     },
@@ -2704,29 +2656,6 @@
     "frontend-000263": {
         "message": "Encryptie met libsodium"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ en $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Bewerken toegestaan"
-    },
-    "frontend-000271": {
-        "message": "Bewerken niet toegestaan"
-    },
-    "frontend-000272": {
-        "message": "delen toegestaan"
-    },
-    "frontend-000273": {
-        "message": "delen niet toegestaan"
-    },
     "frontend-000319": {
         "message": "Inhoud"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Rechten"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Aanmaakopties voor batch"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Bestaande aandelen overschrijven"

@@ -988,77 +988,6 @@
     "frontend-000268": {
         "message": "Uygulamalar ve Uzantılar"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ ve $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Düzenlemeye izin verildi"
-    },
-    "frontend-000271": {
-        "message": "Düzenlemeye izin verilmedi"
-    },
-    "frontend-000272": {
-        "message": "paylaşıma izin verildi"
-    },
-    "frontend-000273": {
-        "message": "paylaşıma izin verilmedi"
-    },
-    "frontend-000274": {
-        "message": "Kullanıcı ara"
-    },
-    "frontend-000275": {
-        "message": "Son kullanma tarihini ayarlayın"
-    },
-    "frontend-000276": {
-        "message": "Sona erdi $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Bir son kullanma tarihi seçin veya sonsuza kadar paylaşmak için boş bırakın"
-    },
-    "frontend-000278": {
-        "message": "Lütfen gelecekte bir tarih seçin"
-    },
-    "frontend-000279": {
-        "message": "Geçersiz tarih"
-    },
-    "frontend-000280": {
-        "message": "$UID$ kullanıcısı mevcut değil",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Şifre paylaşılamıyor: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Yazma izinlerini değiştir"
-    },
-    "frontend-000283": {
-        "message": "Paylaşım izinlerini değiştir"
-    },
-    "frontend-000284": {
-        "message": "Paylaşmayı bırakın"
-    },
     "frontend-000285": {
         "message": "Tarih"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "İzinler"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batch oluşturma seçenekleri"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Mevcut hisseleri yazmak için"

@@ -1276,77 +1276,6 @@
     "frontend-000268": {
         "message": "Apps & Extensions"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ 和 $SHAREABLE$。",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "可以编辑"
-    },
-    "frontend-000271": {
-        "message": "不可编辑"
-    },
-    "frontend-000272": {
-        "message": "可以共享"
-    },
-    "frontend-000273": {
-        "message": "不可共享"
-    },
-    "frontend-000274": {
-        "message": "搜索用户"
-    },
-    "frontend-000275": {
-        "message": "设置过期日期"
-    },
-    "frontend-000276": {
-        "message": "过期于 $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "选择过期日期"
-    },
-    "frontend-000278": {
-        "message": "请选择一个未来的日期"
-    },
-    "frontend-000279": {
-        "message": "非法日期"
-    },
-    "frontend-000280": {
-        "message": "该用户 $UID$ 不存在",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "无法共享密码：$MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "切换写入权限"
-    },
-    "frontend-000283": {
-        "message": "切换共享权限"
-    },
-    "frontend-000284": {
-        "message": "停止共享"
-    },
     "frontend-000285": {
         "message": "日期"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "权限"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "批量创建选项"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "覆盖已存在的共享"

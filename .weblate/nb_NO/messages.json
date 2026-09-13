@@ -243,9 +243,6 @@
     "frontend-000267": {
         "message": "Håndbok"
     },
-    "frontend-000277": {
-        "message": "Velg en utløpsdato eller la det stå tomt for å dele for alltid"
-    },
     "frontend-000293": {
         "message": "Redigert"
     },
@@ -985,74 +982,6 @@
     },
     "frontend-000268": {
         "message": "Apper og Utvidelser"
-    },
-    "frontend-000269": {
-        "message": "$EDITABLE$ og $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Redigering tillatt"
-    },
-    "frontend-000271": {
-        "message": "Redigering ikke tillatt"
-    },
-    "frontend-000272": {
-        "message": "deling tillatt"
-    },
-    "frontend-000273": {
-        "message": "deling ikke tillatt"
-    },
-    "frontend-000274": {
-        "message": "Søk etter bruker"
-    },
-    "frontend-000275": {
-        "message": "Angi utløpsdato"
-    },
-    "frontend-000276": {
-        "message": "Utløper $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000278": {
-        "message": "Velg en dato i fremtiden"
-    },
-    "frontend-000279": {
-        "message": "Ugyldig dato"
-    },
-    "frontend-000280": {
-        "message": "Brukeren $UID$ finnes ikke",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Kan ikke dele passord: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Endre skrivetillatelser"
-    },
-    "frontend-000283": {
-        "message": "Endre delingstillatelser"
-    },
-    "frontend-000284": {
-        "message": "Slutt å dele"
     },
     "frontend-000285": {
         "message": "Dato"
@@ -3568,9 +3497,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Tillatelser"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Skapealternativer"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overskriv eksisterende aksjer"

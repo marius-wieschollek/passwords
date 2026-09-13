@@ -941,77 +941,6 @@
     "frontend-000268": {
         "message": "Aplikasi dan Ekstensi"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ dan $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Pengeditan diizinkan"
-    },
-    "frontend-000271": {
-        "message": "Pengeditan tidak diperbolehkan"
-    },
-    "frontend-000272": {
-        "message": "berbagi diperbolehkan"
-    },
-    "frontend-000273": {
-        "message": "berbagi tidak diperbolehkan"
-    },
-    "frontend-000274": {
-        "message": "Cari pengguna"
-    },
-    "frontend-000275": {
-        "message": "Tetapkan tanggal kedaluwarsa"
-    },
-    "frontend-000276": {
-        "message": "Kedaluwarsa $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Pilih tanggal kedaluwarsa atau biarkan kosong untuk dibagikan selamanya"
-    },
-    "frontend-000278": {
-        "message": "Silakan pilih tanggal di masa mendatang"
-    },
-    "frontend-000279": {
-        "message": "Tanggal tidak valid"
-    },
-    "frontend-000280": {
-        "message": "Pengguna $UID$ tidak ada",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Tidak dapat berbagi kata sandi: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Alihkan izin menulis"
-    },
-    "frontend-000283": {
-        "message": "Mengalihkan izin berbagi"
-    },
-    "frontend-000284": {
-        "message": "Berhenti berbagi"
-    },
     "frontend-000285": {
         "message": "Tanggal"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Hak"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Pilihan pembuatan batch"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Timpa saham yang telah ada"

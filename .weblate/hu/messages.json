@@ -952,77 +952,6 @@
     "frontend-000268": {
         "message": "Alkalmazások és bővítmények"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ és $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Szerkesztés engedélyezett"
-    },
-    "frontend-000271": {
-        "message": "Szerkesztés megtiltva"
-    },
-    "frontend-000272": {
-        "message": "megosztás engedélyezett"
-    },
-    "frontend-000273": {
-        "message": "megosztás tilos"
-    },
-    "frontend-000274": {
-        "message": "Felhasználó keresése"
-    },
-    "frontend-000275": {
-        "message": "Lejárati dátum beállítása"
-    },
-    "frontend-000276": {
-        "message": "Lejárat: $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Válasszon egy lejárati dátumot, vagy hagyja üresen, hogy örökre megossza a fájlt."
-    },
-    "frontend-000278": {
-        "message": "Kérjük, válasszon egy jövőbeli időpontot"
-    },
-    "frontend-000279": {
-        "message": "Érvénytelen dátum"
-    },
-    "frontend-000280": {
-        "message": "A $UID$ felhasználó nem létezik",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Jelszó megosztása nem lehetséges: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Írási engedélyek váltása"
-    },
-    "frontend-000283": {
-        "message": "Megosztási engedélyek váltása"
-    },
-    "frontend-000284": {
-        "message": "Ne ossza meg többet"
-    },
     "frontend-000285": {
         "message": "Dátum"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Jogosultságok"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "A tétel létrehozásának lehetőségei"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Meglévő részvények felülírása"

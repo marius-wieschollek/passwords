@@ -657,54 +657,6 @@
     "frontend-000268": {
         "message": "Applications et extensions"
     },
-    "frontend-000274": {
-        "message": "Chercher un utilisateur"
-    },
-    "frontend-000275": {
-        "message": "Définir une date d’expiration"
-    },
-    "frontend-000276": {
-        "message": "Expire le $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Choisissez une date d’expiration"
-    },
-    "frontend-000278": {
-        "message": "La date doit être ultérieure à aujourd’hui"
-    },
-    "frontend-000279": {
-        "message": "Date non valide"
-    },
-    "frontend-000280": {
-        "message": "L’utilisateur $UID$ n’existe pas",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Impossible de partager le mot de passe : $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Changer le droit d’écriture"
-    },
-    "frontend-000283": {
-        "message": "Changer le droit de partage"
-    },
-    "frontend-000284": {
-        "message": "Arrêter le partage"
-    },
     "frontend-000285": {
         "message": "Date"
     },
@@ -2854,29 +2806,6 @@
     "frontend-000263": {
         "message": "Chiffrement avec libsodium"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ et $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Modification autorisée"
-    },
-    "frontend-000271": {
-        "message": "Modification non autorisée"
-    },
-    "frontend-000272": {
-        "message": "partage autorisé"
-    },
-    "frontend-000273": {
-        "message": "partage non autorisé"
-    },
     "backups-CustomFields": {
         "message": "Champs personnalisés"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Autorisations"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Options de création de lots"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Suppression des actions existantes"

@@ -866,54 +866,6 @@
     "frontend-000268": {
         "message": "Aplikace a rozšíření"
     },
-    "frontend-000274": {
-        "message": "Hledat uživatele"
-    },
-    "frontend-000275": {
-        "message": "Nastavit datum skončení platnosti"
-    },
-    "frontend-000276": {
-        "message": "Platnost skončí $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Vyberte datum skončení platnosti nebo pokud chcete sdílet napořád, nevyplňujte"
-    },
-    "frontend-000278": {
-        "message": "Vyberte datum z budoucnosti"
-    },
-    "frontend-000279": {
-        "message": "Neplatné datum"
-    },
-    "frontend-000280": {
-        "message": "Uživatel $UID$ neexistuje",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Heslo není možné sdílet: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Vyp/zap. oprávnění k zápisu"
-    },
-    "frontend-000283": {
-        "message": "Vyp/zap. oprávnění ke sdílení"
-    },
-    "frontend-000284": {
-        "message": "Přestat sdílet"
-    },
     "frontend-000285": {
         "message": "Datum"
     },
@@ -2308,29 +2260,6 @@
     "frontend-000263": {
         "message": "Šifrování knihovnou libsodium"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ a $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Upravování umožněno"
-    },
-    "frontend-000271": {
-        "message": "Upravování neumožněno"
-    },
-    "frontend-000272": {
-        "message": "sdílení umožněno"
-    },
-    "frontend-000273": {
-        "message": "sdílení neumožněno"
-    },
     "frontend-000319": {
         "message": "Obsah"
     },
@@ -3558,9 +3487,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Povolení"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Možnosti vytváření šarží"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Přepsat stávající akcie"

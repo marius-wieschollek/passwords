@@ -875,77 +875,6 @@
     "frontend-000268": {
         "message": "App e estensioni"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ e $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Modifica permessa"
-    },
-    "frontend-000271": {
-        "message": "Modifica non permessa"
-    },
-    "frontend-000272": {
-        "message": "Condivisione consentita"
-    },
-    "frontend-000273": {
-        "message": "Condivisione non consentita"
-    },
-    "frontend-000274": {
-        "message": "Cerca utente"
-    },
-    "frontend-000275": {
-        "message": "Imposta data di scadenza"
-    },
-    "frontend-000276": {
-        "message": "Scade $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Seleziona data di scadenza"
-    },
-    "frontend-000278": {
-        "message": "Per favore, seleziona una data in futuro"
-    },
-    "frontend-000279": {
-        "message": "Data non valida"
-    },
-    "frontend-000280": {
-        "message": "L'utente $UID$ non esiste",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Non è possibile condividere la password: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Cambia permessi scrittura"
-    },
-    "frontend-000283": {
-        "message": "Cambia permessi condivisione"
-    },
-    "frontend-000284": {
-        "message": "Annulla condivisione"
-    },
     "frontend-000285": {
         "message": "Data"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Permissioni"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Opzioni di creazione batch"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overwrite azioni esistenti"

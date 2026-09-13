@@ -940,77 +940,6 @@
     "frontend-000268": {
         "message": "Sovellukset ja laajennukset"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ ja $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Muokkaus sallittu"
-    },
-    "frontend-000271": {
-        "message": "Muokkaus kielletty"
-    },
-    "frontend-000272": {
-        "message": "jakaminen sallittu"
-    },
-    "frontend-000273": {
-        "message": "jakaminen kielletty"
-    },
-    "frontend-000274": {
-        "message": "Etsi käyttäjä"
-    },
-    "frontend-000275": {
-        "message": "Aseta viimeinen käyttöpäivä"
-    },
-    "frontend-000276": {
-        "message": "Vanhentuu $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Valitse päättymispäivä tai jätä tyhjäksi, jos haluat jakaa ikuisesti."
-    },
-    "frontend-000278": {
-        "message": "Valitse päivämäärä tulevaisuudessa"
-    },
-    "frontend-000279": {
-        "message": "Virheellinen päivämäärä"
-    },
-    "frontend-000280": {
-        "message": "Käyttäjää $UID$ ei ole olemassa",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Salasanaa ei voida jakaa: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Kirjoitusoikeuksien vaihtaminen"
-    },
-    "frontend-000283": {
-        "message": "Vaihda jako-oikeuksia"
-    },
-    "frontend-000284": {
-        "message": "Lopeta jakaminen"
-    },
     "frontend-000285": {
         "message": "Päivämäärä"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Lupa"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Erän luontivalinnat"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Korvaa olemassa olevat osakkeet"

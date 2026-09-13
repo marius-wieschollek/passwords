@@ -964,77 +964,6 @@
     "frontend-000268": {
         "message": "Застосунки та розширення"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ та $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Редагування дозволено"
-    },
-    "frontend-000271": {
-        "message": "Редагування заборонено"
-    },
-    "frontend-000272": {
-        "message": "спільний доступ дозволено"
-    },
-    "frontend-000273": {
-        "message": "спільний доступ заборонено"
-    },
-    "frontend-000274": {
-        "message": "Пошук користувача"
-    },
-    "frontend-000275": {
-        "message": "Встановити термін доступности"
-    },
-    "frontend-000276": {
-        "message": "Закінчується $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Виберіть термін доступности або залиште порожнім, в такому разі доступ буде постійним"
-    },
-    "frontend-000278": {
-        "message": "Будь ласка, оберіть дату в майбутньому"
-    },
-    "frontend-000279": {
-        "message": "Невірна дата"
-    },
-    "frontend-000280": {
-        "message": "Користувач $UID$ не існує",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Неможливо поділитися паролем: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Перемикання дозволів на запис"
-    },
-    "frontend-000283": {
-        "message": "Перемикання дозволів надання у спільний доступ"
-    },
-    "frontend-000284": {
-        "message": "Скасувати спільний доступ"
-    },
     "frontend-000285": {
         "message": "Дата"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Дозвіли"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Варіанти створення пакета"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Поверніть існуючі акції"

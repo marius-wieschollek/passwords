@@ -949,77 +949,6 @@
     "frontend-000268": {
         "message": "Apps og udvidelser"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ og $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Redigering tilladt"
-    },
-    "frontend-000271": {
-        "message": "Redigering ikke tilladt"
-    },
-    "frontend-000272": {
-        "message": "deling tilladt"
-    },
-    "frontend-000273": {
-        "message": "deling ikke tilladt"
-    },
-    "frontend-000274": {
-        "message": "Søg bruger"
-    },
-    "frontend-000275": {
-        "message": "Indstil udløbsdato"
-    },
-    "frontend-000276": {
-        "message": "Udløber $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Vælg en udløbsdato, eller lad den være tom for at dele for evigt"
-    },
-    "frontend-000278": {
-        "message": "Vælg venligst en dato i fremtiden"
-    },
-    "frontend-000279": {
-        "message": "Ugyldig dato"
-    },
-    "frontend-000280": {
-        "message": "Brugeren $UID$ findes ikke",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Kan ikke dele adgangskode: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Skift skrivetilladelser"
-    },
-    "frontend-000283": {
-        "message": "Slå delingstilladelser til"
-    },
-    "frontend-000284": {
-        "message": "Stop med at dele"
-    },
     "frontend-000285": {
         "message": "Dato"
     },
@@ -3558,9 +3487,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Tilladelser"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batchtilvalg"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overskriv eksisterende aktier"

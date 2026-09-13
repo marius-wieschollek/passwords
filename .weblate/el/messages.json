@@ -1379,77 +1379,6 @@
     "frontend-000268": {
         "message": "Εφαρμογές και επεκτάσεις"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ και $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Επιτρέπεται η επεξεργασία"
-    },
-    "frontend-000271": {
-        "message": "Απαγορεύεται η επεξεργασία"
-    },
-    "frontend-000272": {
-        "message": "επιτρέπεται η κοινή χρήση"
-    },
-    "frontend-000273": {
-        "message": "διαμοιρασμός δεν επιτρέπεται"
-    },
-    "frontend-000274": {
-        "message": "Αναζήτηση χρήστη"
-    },
-    "frontend-000275": {
-        "message": "Ορισμός ημερομηνίας λήξης"
-    },
-    "frontend-000276": {
-        "message": "Λήγει $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Επιλέξτε μια ημερομηνία λήξης ή αφήστε την κενή για να μοιράζεστε για πάντα"
-    },
-    "frontend-000278": {
-        "message": "Παρακαλώ επιλέξτε μια ημερομηνία στο μέλλον"
-    },
-    "frontend-000279": {
-        "message": "Μη έγκυρη ημερομηνία"
-    },
-    "frontend-000280": {
-        "message": "Ο χρήστης $UID$ δεν υπάρχει",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Δεν είναι δυνατή η κοινή χρήση του κωδικού πρόσβασης: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Εναλλαγή δικαιωμάτων εγγραφής"
-    },
-    "frontend-000283": {
-        "message": "Εναλλαγή δικαιωμάτων κοινής χρήσης"
-    },
-    "frontend-000284": {
-        "message": "Σταματήστε να μοιράζεστε"
-    },
     "frontend-000285": {
         "message": "Ημερομηνία"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Άδειες"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Επιλογές δημιουργίας παρτίδων"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Αντικατάσταση υφιστάμενων μετοχών"

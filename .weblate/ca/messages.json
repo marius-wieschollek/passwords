@@ -904,77 +904,6 @@
     "frontend-000268": {
         "message": "Aplicacions i extensions"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ i $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Permesa la modificació"
-    },
-    "frontend-000271": {
-        "message": "No permesa la modificació"
-    },
-    "frontend-000272": {
-        "message": "Permesa la compartició"
-    },
-    "frontend-000273": {
-        "message": "No permesa la compartició"
-    },
-    "frontend-000274": {
-        "message": "Cercar usuari"
-    },
-    "frontend-000275": {
-        "message": "Definir data de venciment"
-    },
-    "frontend-000276": {
-        "message": "Venç el $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Escollir una data de venciment"
-    },
-    "frontend-000278": {
-        "message": "Heu d'escollir una data futura"
-    },
-    "frontend-000279": {
-        "message": "Data invàlida"
-    },
-    "frontend-000280": {
-        "message": "L'usuari $UID$ no existeix",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "No es pot compartir la contrasenya: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Canviar permisos d'edició"
-    },
-    "frontend-000283": {
-        "message": "Canviar permisos de compartició"
-    },
-    "frontend-000284": {
-        "message": "Deixar de compartir"
-    },
     "frontend-000285": {
         "message": "Data"
     },
@@ -3464,9 +3393,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Permisos"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Opcions de creació per lots"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobreescriu els recursos compartits existents"

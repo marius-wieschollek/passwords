@@ -735,54 +735,6 @@
     "frontend-000268": {
         "message": "Applikationer & Tillägg"
     },
-    "frontend-000274": {
-        "message": "Sök användare"
-    },
-    "frontend-000275": {
-        "message": "Sätt utgångs datum"
-    },
-    "frontend-000276": {
-        "message": "Utgångdatum $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Välj utgångsdatum"
-    },
-    "frontend-000278": {
-        "message": "Välj ett giltigt datum"
-    },
-    "frontend-000279": {
-        "message": "Ogiltigt datum"
-    },
-    "frontend-000280": {
-        "message": "Användaren $UID$ existerar ej",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Misslyckades med att dela lösenord: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Toggla skriv-behörighet"
-    },
-    "frontend-000283": {
-        "message": "Toggla delnings-behörighet"
-    },
-    "frontend-000284": {
-        "message": "Avbryt delning"
-    },
     "frontend-000285": {
         "message": "Datum"
     },
@@ -2650,29 +2602,6 @@
     "frontend-000263": {
         "message": "Kryptering med libsodium"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ och $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Redigering tillåten"
-    },
-    "frontend-000271": {
-        "message": "Redigering inte tillåten"
-    },
-    "frontend-000272": {
-        "message": "delning tillåten"
-    },
-    "frontend-000273": {
-        "message": "delning inte tillåten"
-    },
     "frontend-000319": {
         "message": "Innehåll"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Tillstånd"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batch skapelse alternativ"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Överskriv befintliga aktier"

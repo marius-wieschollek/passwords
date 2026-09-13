@@ -2906,79 +2906,8 @@
     "frontend-000268": {
         "message": "Aplikazioak eta hedapenak"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ eta $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Edizioa baimenduta"
-    },
-    "frontend-000271": {
-        "message": "Edizioa ez dago onartuta"
-    },
-    "frontend-000272": {
-        "message": "partekatzea baimenduta"
-    },
-    "frontend-000273": {
-        "message": "partekatzea debekatuta"
-    },
-    "frontend-000274": {
-        "message": "Bilatu erabiltzailea"
-    },
-    "frontend-000275": {
-        "message": "Ezarri iraungitze-data"
-    },
-    "frontend-000276": {
-        "message": "Iraungitze-data $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Aukeratu iraungitze-data edo utzi hutsik betiko partekatzeko"
-    },
-    "frontend-000278": {
-        "message": "Aukeratu data bat etorkizunean"
-    },
-    "frontend-000279": {
-        "message": "Data baliogabea"
-    },
-    "frontend-000280": {
-        "message": "Erabiltzailea ez da existitzen",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
     "frontend-000310": {
         "message": "Hemen ez dago ezer"
-    },
-    "frontend-000281": {
-        "message": "Ezin da pasahitza partekatu: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Txandakatu idazteko baimenak"
-    },
-    "frontend-000283": {
-        "message": "Txandakatu baimen partekatuak"
-    },
-    "frontend-000284": {
-        "message": "Gelditu partekatzea"
     },
     "frontend-000285": {
         "message": "Data"
@@ -3466,9 +3395,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Baimenak"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batch sortzeko aukerak"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Gainidatzi existitzen diren akzioak"

@@ -2304,82 +2304,11 @@
     "frontend-000268": {
         "message": "應用程式與擴充套件"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$和 $SHAREABLE$ (中文(簡體) ).",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "允許編輯"
-    },
-    "frontend-000271": {
-        "message": "不允許編輯"
-    },
-    "frontend-000272": {
-        "message": "允許共享"
-    },
     "frontend-000288": {
         "message": "Favicon 快取（0 個檔案，0 B）"
     },
-    "frontend-000273": {
-        "message": "不允許共享"
-    },
-    "frontend-000274": {
-        "message": "搜尋使用者"
-    },
-    "frontend-000275": {
-        "message": "設定過期日期"
-    },
-    "frontend-000276": {
-        "message": "過期 $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "選擇到期日期，留空則永久共享"
-    },
     "frontend-000289": {
         "message": "預覽快取（0 個檔案，0 B）"
-    },
-    "frontend-000278": {
-        "message": "請選擇未來的日期"
-    },
-    "frontend-000279": {
-        "message": "無效的日期"
-    },
-    "frontend-000280": {
-        "message": "使用者 $UID$ 不存在",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "無法共享密碼 : $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "切換寫入權限"
-    },
-    "frontend-000283": {
-        "message": "切換共享權限"
-    },
-    "frontend-000284": {
-        "message": "停止共享"
     },
     "frontend-000285": {
         "message": "日期"
@@ -3466,9 +3395,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "權限"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "批次建立選項"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "覆寫已存在共享"

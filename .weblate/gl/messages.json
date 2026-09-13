@@ -917,49 +917,6 @@
     "frontend-000268": {
         "message": "Aplicacións e extensións"
     },
-    "frontend-000270": {
-        "message": "Permitida a edición"
-    },
-    "frontend-000271": {
-        "message": "Non se permite a edición"
-    },
-    "frontend-000272": {
-        "message": "permítese compartir"
-    },
-    "frontend-000273": {
-        "message": "non se permite compartir"
-    },
-    "frontend-000274": {
-        "message": "Buscar usuario"
-    },
-    "frontend-000276": {
-        "message": "Caduca o $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000279": {
-        "message": "Data non válida"
-    },
-    "frontend-000281": {
-        "message": "No é posíbel compartir o contrasinal: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Cambiar os permisos de escritura"
-    },
-    "frontend-000283": {
-        "message": "Cambiar os permisos para compartir"
-    },
-    "frontend-000284": {
-        "message": "Deixar de compartir"
-    },
     "frontend-000285": {
         "message": "Data"
     },
@@ -1082,39 +1039,11 @@
     "frontend-Donate": {
         "message": "Doar"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ e $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000275": {
-        "message": "Definir data de caducidade"
-    },
-    "frontend-000277": {
-        "message": "Escolla unha data de caducidade ou deixe o campo baleiro para compartir para sempre"
-    },
     "frontend-000290": {
         "message": "Memoria caché de contrasinais (0 ficheiros, 0 B)"
     },
     "frontend-000261": {
         "message": "Cifrado simple (Xeración 2)"
-    },
-    "frontend-000278": {
-        "message": "Escolla unha data no futuro"
-    },
-    "frontend-000280": {
-        "message": "Non existe o usuario $UID$",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
     },
     "frontend-000302": {
         "message": "Restaurar este elemento"
@@ -3573,9 +3502,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Permisos"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Opcións de creación por lotes"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Sobrescribir as accións existentes"

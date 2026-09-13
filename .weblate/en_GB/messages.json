@@ -37,9 +37,6 @@
     "frontend-000315": {
         "message": "Your favourites will appear here"
     },
-    "frontend-000277": {
-        "message": "Choose an expiration date or leave empty to share forever"
-    },
     "frontend-000353": {
         "message": "System Maintenance"
     },
@@ -324,23 +321,6 @@
     },
     "frontend-000268": {
         "message": "Apps and Extensions"
-    },
-    "frontend-000269": {
-        "message": "$EDITABLE$ and $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Editing allowed"
-    },
-    "frontend-000271": {
-        "message": "Editing disallowed"
     },
     "frontend-000290": {
         "message": "Passwords Cache (0 files, 0 B)"
@@ -2448,57 +2428,6 @@
     "frontend-000264": {
         "message": "More"
     },
-    "frontend-000272": {
-        "message": "sharing allowed"
-    },
-    "frontend-000273": {
-        "message": "sharing disallowed"
-    },
-    "frontend-000274": {
-        "message": "Search user"
-    },
-    "frontend-000275": {
-        "message": "Set expiration date"
-    },
-    "frontend-000276": {
-        "message": "Expires $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000278": {
-        "message": "Please choose a date in the future"
-    },
-    "frontend-000279": {
-        "message": "Invalid date"
-    },
-    "frontend-000280": {
-        "message": "The user $UID$ does not exist",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Unable to share password: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Toggle write permissions"
-    },
-    "frontend-000283": {
-        "message": "Toggle share permissions"
-    },
-    "frontend-000284": {
-        "message": "Stop sharing"
-    },
     "frontend-000285": {
         "message": "Date"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Permissions"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Batch creation options"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Overwrite existing shares"

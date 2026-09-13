@@ -963,77 +963,6 @@
     "frontend-000268": {
         "message": "Aplikacje i rozszerzenia"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ oraz $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Edycja dozwolona"
-    },
-    "frontend-000271": {
-        "message": "Edycja niedozwolona"
-    },
-    "frontend-000272": {
-        "message": "udostępnianie dozwolone"
-    },
-    "frontend-000273": {
-        "message": "udostępnianie niedozwolone"
-    },
-    "frontend-000274": {
-        "message": "Szukaj użytkownika"
-    },
-    "frontend-000275": {
-        "message": "Ustaw datę wygaśnięcia"
-    },
-    "frontend-000276": {
-        "message": "Wygasa $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Wybierz datę wygaśnięcia lub pozostaw puste, aby udostępnić na zawsze"
-    },
-    "frontend-000278": {
-        "message": "Wybierz datę w przyszłości"
-    },
-    "frontend-000279": {
-        "message": "Nieprawidłowa data"
-    },
-    "frontend-000280": {
-        "message": "Użytkownik $UID$ nie istnieje",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Nie można udostępnić hasła: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Przełączanie uprawnień zapisu"
-    },
-    "frontend-000283": {
-        "message": "Przełączanie uprawnień udostępniania"
-    },
-    "frontend-000284": {
-        "message": "Przestań udostępniać"
-    },
     "frontend-000285": {
         "message": "Data"
     },
@@ -3561,9 +3490,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Uprawnienia"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Opcje tworzenia partii"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Nadpisać istniejące akcje"

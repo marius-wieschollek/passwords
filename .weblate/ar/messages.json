@@ -724,77 +724,6 @@
     "frontend-000268": {
         "message": "تطبيقات وتمديدات"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ and $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "السماح"
-    },
-    "frontend-000271": {
-        "message": "الإصغاء غير مأهول"
-    },
-    "frontend-000272": {
-        "message": "التقاسم"
-    },
-    "frontend-000273": {
-        "message": "التقاسم غير المألوف"
-    },
-    "frontend-000274": {
-        "message": "مستعمل البحث"
-    },
-    "frontend-000275": {
-        "message": "تاريخ انتهاء المدة"
-    },
-    "frontend-000276": {
-        "message": "المصروفات $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "اختر تاريخ انتهاء الصلاحية أو اترك فارغاً لتشاركه للأبد"
-    },
-    "frontend-000278": {
-        "message": "يرجى اختيار موعد في المستقبل"
-    },
-    "frontend-000279": {
-        "message": "التاريخ غير المستقر"
-    },
-    "frontend-000280": {
-        "message": "لا وجود للمستعمل $UID$",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "غير قادر على تقاسم كلمة السر: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "لكتابة التصاريح"
-    },
-    "frontend-000283": {
-        "message": "Toggle share permissions"
-    },
-    "frontend-000284": {
-        "message": "توقف عن المشاركة"
-    },
     "frontend-000285": {
         "message": "التاريخ"
     },
@@ -3565,9 +3494,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "الانبعاثات"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "خيارات إنشاء البطاقات"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "تخطي الأسهم القائمة"

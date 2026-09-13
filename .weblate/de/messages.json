@@ -977,77 +977,6 @@
             }
         }
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ und $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Bearbeiten erlaubt"
-    },
-    "frontend-000271": {
-        "message": "Bearbeiten nicht erlaubt"
-    },
-    "frontend-000272": {
-        "message": "teilen erlaubt"
-    },
-    "frontend-000273": {
-        "message": "teilen nicht erlaubt"
-    },
-    "frontend-000274": {
-        "message": "Benutzer suchen"
-    },
-    "frontend-000275": {
-        "message": "Ablaufdatum setzen"
-    },
-    "frontend-000276": {
-        "message": "Läuft am $DATETIME$ ab",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Wähle ein Ablaufdatum oder lass das Feld leer um endlos zu teilen"
-    },
-    "frontend-000278": {
-        "message": "Bitte Ablaufdatum in der Zukunft auswählen"
-    },
-    "frontend-000279": {
-        "message": "Ungültiges Datum"
-    },
-    "frontend-000280": {
-        "message": "Der Nutzer $UID$ existiert nicht",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Kann Passwort nicht teilen: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Schreibrechte umschalten"
-    },
-    "frontend-000283": {
-        "message": "Weiterverteilrechte umschalten"
-    },
-    "frontend-000284": {
-        "message": "Teilen beenden"
-    },
     "frontend-000285": {
         "message": "Datum"
     },
@@ -3562,9 +3491,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Berechtigungen"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Optionen für die Stapelerstellung"
     },
     "frontend-CreateShareErrorNoPermission": {
         "message": "Du hast nicht die notwendigen Rechte um \"$PASSWORD$\" mit \"$RECIPIENT$\" zu teilen.",

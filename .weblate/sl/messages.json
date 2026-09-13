@@ -1068,77 +1068,6 @@
     "frontend-000268": {
         "message": "Aplikacije in razširitve"
     },
-    "frontend-000269": {
-        "message": "$EDITABLE$ in $SHAREABLE$.",
-        "placeholders": {
-            "editable": {
-                "content": "$1"
-            },
-            "shareable": {
-                "content": "$2"
-            }
-        }
-    },
-    "frontend-000270": {
-        "message": "Dovoljeno urejanje"
-    },
-    "frontend-000271": {
-        "message": "Urejanje ni dovoljeno"
-    },
-    "frontend-000272": {
-        "message": "dovoljena souporaba"
-    },
-    "frontend-000273": {
-        "message": "delitev ni dovoljena."
-    },
-    "frontend-000274": {
-        "message": "Iskanje uporabnika"
-    },
-    "frontend-000275": {
-        "message": "Nastavitev datuma izteka veljavnosti"
-    },
-    "frontend-000276": {
-        "message": "Velja do $DATETIME$",
-        "placeholders": {
-            "datetime": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000277": {
-        "message": "Izberite datum izteka veljavnosti ali pustite prazno, če želite deliti za vedno."
-    },
-    "frontend-000278": {
-        "message": "Izberite datum v prihodnosti"
-    },
-    "frontend-000279": {
-        "message": "Nepravilen datum"
-    },
-    "frontend-000280": {
-        "message": "Uporabnik $UID$ ne obstaja",
-        "placeholders": {
-            "uid": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000281": {
-        "message": "Ne morete deliti gesla: $MESSAGE$",
-        "placeholders": {
-            "message": {
-                "content": "$1"
-            }
-        }
-    },
-    "frontend-000282": {
-        "message": "Preklapljanje dovoljenj za pisanje"
-    },
-    "frontend-000283": {
-        "message": "Preklapljanje dovoljenj za skupno rabo"
-    },
-    "frontend-000284": {
-        "message": "Prenehajte deliti"
-    },
     "frontend-000285": {
         "message": "Datum"
     },
@@ -3613,9 +3542,6 @@
     },
     "frontend-ShareOptionsPermissionOptions": {
         "message": "Dovoljenja"
-    },
-    "frontend-BatchActionShareCreateOptions": {
-        "message": "Možnosti ustvarjanja serije"
     },
     "frontend-ShareOptionsOverwriteExisting": {
         "message": "Nadomesti obstoječe delnice"
