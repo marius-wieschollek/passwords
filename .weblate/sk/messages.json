@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Skupina používateľov"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Môže zobraziť"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Zdieľanie vymazané"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Skončenie platnosti podielov"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Podiel uplynie $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Uložiť zdieľanie"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Aktualizácia"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Podiel s $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Heslo nie je zdieľané"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Tu sa objavia akcie s ostatnými užívateľmi."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Toto heslo môžete upraviť."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Toto heslo nemôžete upraviť."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Toto heslo môžete zdieľať s ostatnými."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Toto heslo nemôžete zdieľať."
     }
 }
