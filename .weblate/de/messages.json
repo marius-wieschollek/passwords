@@ -3567,6 +3567,54 @@
         "message": "Benutzergruppe"
     },
     "frontend-SharingNoShares": {
-        "message": "Password nicht geteilt"
+        "message": "Passwort nicht geteilt"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Nur anzeigen"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Freigabe gelöscht"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Freigabe-Ablaufdatum"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Freigabe läuft am $DATE$ ab",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Freigabe anlegen"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Freigabe speichern"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Freigabe für $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Freigaben für andere Benutzer erscheinen hier."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Du kannst dieses Passwort bearbeiten."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Du kannst dieses Passwort nicht bearbeiten."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Du kannst Freigaben für dieses Passwort anlegen."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Du kannst keine Freigaben für dieses Passwort anlegen."
     }
 }
