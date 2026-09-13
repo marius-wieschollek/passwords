@@ -3618,5 +3618,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Şifre paylaşılmadı"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "\"$PASSWORD$\" için tarih \"$RECIPIENT$\" geçmişte olmayabilir.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
