@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Brugergruppe"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Kan se"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Del slettet"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Del udløb"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Andel udløber den $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Gem aktie"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Opdatering"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Andel med $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Aktier med andre brugere vises her."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Du kan redigere dette kodeord."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Du kan ikke redigere dette kodeord."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Du kan dele denne adgangskode med andre."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Du kan ikke dele denne adgangskode."
     }
 }
