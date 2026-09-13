@@ -3564,5 +3564,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Uživatelská skupina"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Can view"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Podíl smazán"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Konec platnosti sdílení"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Akcie vyprší na $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Uložit sdílení"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Aktualizovat"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Sdílet s $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Podíly s ostatními uživateli se objeví zde."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Toto heslo můžete upravit."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Toto heslo nelze upravit."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Toto heslo můžete sdílet s ostatními."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Toto heslo nemůžete sdílet."
     }
 }
