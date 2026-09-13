@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Grupo de usuarios"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Se puede ver"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Se ha eliminado la publicación"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Vencimiento de las acciones"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "La publicación caduca el $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Guardar, compartir"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Actualización"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Compártelo con $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Aquí aparecerán los contenidos compartidos con otros usuarios."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Puedes modificar esta contraseña."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "No puedes modificar esta contraseña."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Puedes compartir esta contraseña con otras personas."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "No puedes compartir esta contraseña."
     }
 }
