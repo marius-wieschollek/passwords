@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Gebruikersgroep"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Kan bekijken"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Delen verwijderd"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Gedeelde vervaldatum"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Aandeel vervalt op $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Aandeel opslaan"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Bijwerken"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Delen met $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Aandelen met andere gebruikers zullen hier verschijnen."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "U kunt dit wachtwoord bewerken."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "U kunt dit wachtwoord niet bewerken."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "U kunt dit wachtwoord delen met anderen."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "U kunt dit wachtwoord niet delen."
     }
 }
