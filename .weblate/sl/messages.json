@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Skupina uporabnikov"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Pogled"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Delež izbrisan"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Potek deleža"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Delnica preneha veljati $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Shrani souporabo"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Posodobi"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Delež z $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Geslo ni deljeno"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Delnice z drugimi uporabniki se bodo pojavile tukaj."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "To geslo lahko uredite."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Tega gesla ne morete urediti."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "To geslo lahko delite z drugimi."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Tega gesla ne morete deliti z drugimi."
     }
 }
