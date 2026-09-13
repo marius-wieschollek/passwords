@@ -1,9 +1,10 @@
 ## [Unreleased]
-## 2026.8.0 - Feature release
+## 2026.9.0 - Feature release
 ### Added
 - Nextcloud 35 support
 - Batch actions for moving, deleting, favorites and restoring items
 - New Nextcloud design for list view
+- Updated share menu for password details
 - Context menu for list view
 
 ## 2026.7.0 - Feature release
