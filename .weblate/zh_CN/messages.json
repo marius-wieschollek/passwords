@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "用户组"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "可以查看"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "删除共享"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "共享过期"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "共享过期于 $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "保存共享"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "更新"
+    },
+    "frontend-ShareEditUser": {
+        "message": "与 $NAME$ 共享",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "与其他用户的共享会在这里出现."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "您可以编辑此密码 ."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "您无法编辑此密码 ."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "您可以与其他人共享此密码 ."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "您无法共享此密码 ."
     }
 }
