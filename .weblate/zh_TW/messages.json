@@ -3523,5 +3523,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "未共享密碼"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "\"$PASSWORD$\"股份的到期日期已不能是\"$RECIPIENT$\"了.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
