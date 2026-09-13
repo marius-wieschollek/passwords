@@ -3618,5 +3618,18 @@
     },
     "frontend-SharingNoShares": {
         "message": "Contraseña no compartida"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "La fecha de caducidad de la acción «$PASSWORD$» compartida con «$RECIPIENT$» no puede ser anterior a la fecha actual.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
     }
 }
