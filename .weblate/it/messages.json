@@ -3615,5 +3615,8 @@
     },
     "frontend-ShareInfoNotShareable": {
         "message": "Non puoi condividere questa password."
+    },
+    "frontend-SharingNoShares": {
+        "message": "Password non condivisa"
     }
 }
