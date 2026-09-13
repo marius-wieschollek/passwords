@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Группа пользователей"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Смотреть"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Акция удалена"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Срок действия акции"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Срок действия акции истекает $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Сохранить акции"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Обновление"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Поделиться $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Акции с другими пользователями появятся здесь."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Вы можете отредактировать этот пароль."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Вы не можете редактировать этот пароль."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Вы можете поделиться этим паролем с другими."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Вы не можете поделиться этим паролем."
     }
 }
