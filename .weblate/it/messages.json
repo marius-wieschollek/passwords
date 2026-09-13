@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Gruppo utente"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Può vedere"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Condividi cancellato"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Condividi la scadenza"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Condividi scade su $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Salva condivisione"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Aggiornamento"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Condividi con $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Le azioni con altri utenti verranno visualizzate qui."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "È possibile modificare questa password."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Non è possibile modificare questa password."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Puoi condividere questa password con gli altri."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Non puoi condividere questa password."
     }
 }
