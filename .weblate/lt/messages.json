@@ -3567,5 +3567,56 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Vartotojo grupė"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Name"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Pašalinti dalį"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Akcijos galiojimo pabaiga"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Akcija baigia galioti $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Įrašyti dalį"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Atnaujinti"
+    },
+    "frontend-ShareEditUser": {
+        "message": "$NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Slaptažodis nebendrintas"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Čia bus rodomos akcijos su kitais naudotojais."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Galite redaguoti šį slaptažodį."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Jūs negalite redaguoti šio slaptažodžio."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Jūs galite pasidalinti šiuo slaptažodžiu su kitais."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Jūs negalite pasidalinti šiuo slaptažodžiu."
     }
 }
