@@ -3567,5 +3567,53 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "Kullanıcı grubu"
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Can view"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Paylaş"
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Share expire"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Share expires on $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Kaydet Share"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Update"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Share with $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Diğer kullanıcılarla paylaşın burada görünecek."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "Bu şifreyi düzenleyebilirsiniz."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "Bu şifreyi düzenleyebilirsiniz."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "Bu şifreyi başkalarıyla paylaşabilirsin."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "Bu şifreyi paylaşamazsınız."
     }
 }
