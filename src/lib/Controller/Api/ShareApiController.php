@@ -257,7 +257,7 @@ class ShareApiController extends AbstractApiController {
     #[CORS]
     #[NoCSRFRequired]
     #[NoAdminRequired]
-    #[UserRateLimit(limit: 20, period: 30)]
+    #[UserRateLimit(limit: 10, period: 30)]
     public function partners(string $search = '', int $limit = 5): JSONResponse {
         $this->checkAccessPermissions();
 
