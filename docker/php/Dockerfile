@@ -1,4 +1,4 @@
-FROM nc:35-fpm
+FROM nextcloud:35-fpm
 
 RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
