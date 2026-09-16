@@ -3,7 +3,8 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          bootstrap="tests/phpunit/bootstrap.php"
          cacheDirectory=".phpunit.cache"
-         colors="true">
+         colors="true"
+         displayDetailsOnAllIssues="true">
     <testsuites>
         <testsuite name="Passwords">
             <directory suffix="Test.php">tests/phpunit</directory>

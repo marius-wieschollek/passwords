@@ -39,6 +39,11 @@ class PasswordSecurityCheckServiceTest extends TestCase {
     protected PasswordDatabaseUpdateHelper|MockObject $passwordDatabaseUpdateHelper;
 
     /**
+     * @var LoggingService|MockObject
+     */
+    protected LoggingService|MockObject $loggingService;
+
+    /**
      * @var PasswordSecurityCheckService
      */
     protected PasswordSecurityCheckService $passwordSecurityCheckService;

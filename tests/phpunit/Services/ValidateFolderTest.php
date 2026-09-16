@@ -21,7 +21,6 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
  * Class ValidateFolderTest
  *
  * @package OCA\Passwords\Services
- * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateFolderTest extends TestCase {
 

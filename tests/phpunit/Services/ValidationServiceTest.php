@@ -16,7 +16,6 @@ use Psr\Container\ContainerInterface;
  * Class ValidationServiceTest
  *
  * @package OCA\Passwords\Services
- * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidationServiceTest extends TestCase {
 

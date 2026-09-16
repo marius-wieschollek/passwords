@@ -17,7 +17,6 @@ use Psr\Container\ContainerInterface;
  * Class ValidateTagTest
  *
  * @package OCA\Passwords\Services
- * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateTagTest extends TestCase {
 

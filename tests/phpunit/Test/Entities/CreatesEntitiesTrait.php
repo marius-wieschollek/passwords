@@ -96,7 +96,7 @@ trait CreatesEntitiesTrait {
                     return null;
                 }
 
-                if (is_array($tagProperties[$field]) && is_array($tagProperties[$field]['onConsecutive'])) {
+                if (isset($tagProperties[$field]) && is_array($tagProperties[$field]) && is_array($tagProperties[$field]['onConsecutive'])) {
                     return empty($tagProperties[$field]['onConsecutive']) ? null : array_shift(
                         $tagProperties[$field]['onConsecutive']
                     );

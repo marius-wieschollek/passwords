@@ -20,7 +20,6 @@ use Psr\Container\ContainerInterface;
  * Class ValidatePasswordTest
  *
  * @package OCA\Passwords\Services
- * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidatePasswordTest extends TestCase {
 

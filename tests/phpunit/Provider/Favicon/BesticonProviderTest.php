@@ -76,6 +76,11 @@ class BesticonProviderTest extends TestCase {
     private $configurationService;
 
     /**
+     * @var MockObject|IConfig
+     */
+    private $iConfigService;
+
+    /**
      * @var MockObject|LoggerInterface
      */
     private $logger;
