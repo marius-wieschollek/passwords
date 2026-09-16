@@ -712,8 +712,13 @@
     "frontend-000200": {
         "message": "Membuat folder gagal"
     },
-    "frontend-000201": {
-        "message": "Ganti nama folder"
+    "frontend-FolderRenameTitle": {
+        "message": "Ganti nama \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Folder diganti namanya"
@@ -754,8 +759,13 @@
     "frontend-000214": {
         "message": "Membuat tag gagal"
     },
-    "frontend-000215": {
-        "message": "Edit tag"
+    "frontend-TagEditTitle": {
+        "message": "Edit \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Menghasilkan warna acak"

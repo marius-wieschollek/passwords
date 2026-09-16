@@ -691,8 +691,13 @@
     "frontend-000200": {
         "message": "Produciuse un fallo ao crear o cartafol"
     },
-    "frontend-000201": {
-        "message": "Cambiar o nome do cartafol"
+    "frontend-FolderRenameTitle": {
+        "message": "Cambiar o nome do \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "O cartafol cambiou de nome"
@@ -730,8 +735,13 @@
     "frontend-000212": {
         "message": "Crear unha etiqueta"
     },
-    "frontend-000215": {
-        "message": "Editar a etiqueta"
+    "frontend-TagEditTitle": {
+        "message": "Editar a etiqueta \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Xerar unha cor ao chou"

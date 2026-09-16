@@ -460,8 +460,13 @@
     "frontend-000200": {
         "message": "Le dossier n’a pas pu être créé"
     },
-    "frontend-000201": {
-        "message": "Renommer le dossier"
+    "frontend-FolderRenameTitle": {
+        "message": "Renommer \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Dossier renommé"
@@ -502,8 +507,13 @@
     "frontend-000214": {
         "message": "L’étiquette n’a pas pu être effacée"
     },
-    "frontend-000215": {
-        "message": "Modifier l’étiquette"
+    "frontend-TagEditTitle": {
+        "message": "Modifier l’étiquette \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000217": {
         "message": "Étiquette sauvegardée"

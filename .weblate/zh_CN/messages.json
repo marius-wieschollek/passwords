@@ -1047,9 +1047,6 @@
     "frontend-000200": {
         "message": "创建分类失败"
     },
-    "frontend-000201": {
-        "message": "重命名分类"
-    },
     "frontend-000202": {
         "message": "分类已重命名"
     },
@@ -1088,9 +1085,6 @@
     },
     "frontend-000214": {
         "message": "标签创建失败"
-    },
-    "frontend-000215": {
-        "message": "编辑标签"
     },
     "frontend-000216": {
         "message": "生成随机颜色"

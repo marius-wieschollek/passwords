@@ -54,7 +54,7 @@ class FolderManager {
     renameFolder(folder) {
         return new Promise((resolve, reject) => {
             MessageService
-                .prompt('Name', 'Rename folder', null, null, folder.label)
+                .prompt('Name', ['FolderRenameTitle', folder], null, null, folder.label)
                 .then((title) => {
                     let originalTitle = folder.label;
                     folder.label = title;

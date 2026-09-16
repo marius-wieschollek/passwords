@@ -443,9 +443,6 @@
     "frontend-000200": {
         "message": "Map aanmaken mislukt"
     },
-    "frontend-000201": {
-        "message": "Map hernoemen"
-    },
     "frontend-000202": {
         "message": "Map hernoemd"
     },
@@ -485,8 +482,13 @@
     "frontend-000214": {
         "message": "Tag aanmaken mislukt"
     },
-    "frontend-000215": {
-        "message": "Tag bewerken"
+    "frontend-TagEditTitle": {
+        "message": "Tag \"$LABEL$\" bewerken",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000217": {
         "message": "Tag opgeslagen"

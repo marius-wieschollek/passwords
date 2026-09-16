@@ -586,8 +586,13 @@
     "frontend-000214": {
         "message": "اختراق البطاقة"
     },
-    "frontend-000215": {
-        "message": "Edit tag"
+    "frontend-TagEditTitle": {
+        "message": "Edit tag \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "اللون العشوائي"
@@ -3037,8 +3042,13 @@
     "frontend-000200": {
         "message": "اختراق الملفات"
     },
-    "frontend-000201": {
-        "message": "Rename folder"
+    "frontend-FolderRenameTitle": {
+        "message": "Rename \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "إعادة تسمية الجندي"

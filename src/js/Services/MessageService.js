@@ -139,6 +139,7 @@ export default new (class MessageService {
                     input: {
                         label,
                         title,
+                        value,
                         type       : isPassword ? 'password':'text',
                         placeholder: placeholder,
                         required   : true

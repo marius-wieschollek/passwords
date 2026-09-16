@@ -839,9 +839,6 @@
     "frontend-000200": {
         "message": "Ustvarjanje mape ni uspelo"
     },
-    "frontend-000201": {
-        "message": "Preimenovanje mape"
-    },
     "frontend-000202": {
         "message": "Preimenovanje mape"
     },
@@ -880,9 +877,6 @@
     },
     "frontend-000214": {
         "message": "Ustvarjanje oznake ni uspelo"
-    },
-    "frontend-000215": {
-        "message": "Urejanje oznake"
     },
     "frontend-000216": {
         "message": "Ustvari naključno barvo"

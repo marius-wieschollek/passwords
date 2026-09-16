@@ -2087,9 +2087,6 @@
     "frontend-000200": {
         "message": "建立目錄失敗"
     },
-    "frontend-000201": {
-        "message": "重新命名目錄"
-    },
     "frontend-000202": {
         "message": "目錄已重新命名"
     },
@@ -2125,9 +2122,6 @@
     },
     "frontend-000214": {
         "message": "建立標籤失敗"
-    },
-    "frontend-000215": {
-        "message": "編輯標籤"
     },
     "frontend-000216": {
         "message": "產生隨機顏色"

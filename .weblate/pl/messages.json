@@ -734,9 +734,6 @@
     "frontend-000200": {
         "message": "Tworzenie folderu nie powiodło się"
     },
-    "frontend-000201": {
-        "message": "Zmiana nazwy folderu"
-    },
     "frontend-000202": {
         "message": "Zmiana nazwy folderu"
     },
@@ -776,8 +773,13 @@
     "frontend-000214": {
         "message": "Tworzenie tagu nie powiodło się"
     },
-    "frontend-000215": {
-        "message": "Edytuj tag"
+    "frontend-TagEditTitle": {
+        "message": "Edytuj tag \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Generowanie losowego koloru"

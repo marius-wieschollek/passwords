@@ -759,9 +759,6 @@
     "frontend-000200": {
         "message": "Klasör oluşturma başarısız"
     },
-    "frontend-000201": {
-        "message": "Klasörü yeniden adlandır"
-    },
     "frontend-000202": {
         "message": "Klasör yeniden adlandırıldı"
     },
@@ -801,8 +798,13 @@
     "frontend-000214": {
         "message": "Etiket oluşturma başarısız oldu"
     },
-    "frontend-000215": {
-        "message": "Etiketi düzenle"
+    "frontend-TagEditTitle": {
+        "message": "Etiketi düzenle \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Rastgele renk oluştur"

@@ -675,8 +675,13 @@
     "frontend-000200": {
         "message": "No s'ha pogut crear la carpeta"
     },
-    "frontend-000201": {
-        "message": "Reanomenar la carpeta"
+    "frontend-FolderRenameTitle": {
+        "message": "Reanomenar \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "S'ha reanomenat la carpeta"
@@ -717,8 +722,13 @@
     "frontend-000214": {
         "message": "No s'ha pogut crear l'etiqueta"
     },
-    "frontend-000215": {
-        "message": "Modificar l'etiqueta"
+    "frontend-TagEditTitle": {
+        "message": "Modificar l'etiqueta \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Generar un color a l'atzar"

@@ -2441,8 +2441,13 @@
     "frontend-000200": {
         "message": "Huts egin du karpeta sortzean"
     },
-    "frontend-000201": {
-        "message": "Aldatu karpeta"
+    "frontend-FolderRenameTitle": {
+        "message": "Aldatu \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Karpeta izenez aldatuta"
@@ -2483,8 +2488,13 @@
     "frontend-000214": {
         "message": "Huts egin du etiketa sortzean"
     },
-    "frontend-000215": {
-        "message": "Editatu etiketa"
+    "frontend-TagEditTitle": {
+        "message": "Editatu etiketa \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Sortu ausazko kolorea"

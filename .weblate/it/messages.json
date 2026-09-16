@@ -646,8 +646,13 @@
     "frontend-000200": {
         "message": "Creazione cartella fallita"
     },
-    "frontend-000201": {
-        "message": "Rinomina cartella"
+    "frontend-FolderRenameTitle": {
+        "message": "Rinomina \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Cartella rinominata"
@@ -688,8 +693,13 @@
     "frontend-000214": {
         "message": "Impossibile creare etichetta"
     },
-    "frontend-000215": {
-        "message": "Modifica etichetta"
+    "frontend-TagEditTitle": {
+        "message": "Modifica etichetta \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Genera un colore casuale"

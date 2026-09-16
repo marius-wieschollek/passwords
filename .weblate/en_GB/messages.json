@@ -2222,8 +2222,13 @@
     "frontend-000200": {
         "message": "Creating folder failed"
     },
-    "frontend-000201": {
-        "message": "Rename folder"
+    "frontend-FolderRenameTitle": {
+        "message": "Rename folder \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Folder renamed"
@@ -2264,8 +2269,13 @@
     "frontend-000214": {
         "message": "Creating tag failed"
     },
-    "frontend-000215": {
-        "message": "Edit tag"
+    "frontend-TagEditTitle": {
+        "message": "Edit \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Generate random color"

@@ -146,9 +146,6 @@
     "frontend-000200": {
         "message": "Vytvorenie priečinka zlyhalo"
     },
-    "frontend-000201": {
-        "message": "Premenovanie priečinka"
-    },
     "frontend-000202": {
         "message": "Zmena názvu priečinka"
     },
@@ -755,9 +752,6 @@
     },
     "frontend-000214": {
         "message": "Vytvorenie značky zlyhalo"
-    },
-    "frontend-000215": {
-        "message": "Upraviť značku"
     },
     "frontend-000216": {
         "message": "Generovanie náhodnej farby"

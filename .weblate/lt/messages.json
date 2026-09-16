@@ -729,9 +729,6 @@
     "frontend-000200": {
         "message": "Nepavyko sukurti aplanko"
     },
-    "frontend-000201": {
-        "message": "Pakeiskite aplanko pavadinimą"
-    },
     "frontend-000202": {
         "message": "Pakeistas aplanko pavadinimas"
     },
@@ -770,9 +767,6 @@
     },
     "frontend-000214": {
         "message": "Žymos sukūrimas nepavyko"
-    },
-    "frontend-000215": {
-        "message": "Redaguoti žymą"
     },
     "frontend-000216": {
         "message": "Generuoti atsitiktinę spalvą"

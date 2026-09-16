@@ -723,9 +723,6 @@
     "frontend-000200": {
         "message": "A mappa létrehozása sikertelen"
     },
-    "frontend-000201": {
-        "message": "Mappa átnevezése"
-    },
     "frontend-000202": {
         "message": "Mappa átnevezése"
     },
@@ -764,9 +761,6 @@
     },
     "frontend-000214": {
         "message": "A címke létrehozása sikertelen"
-    },
-    "frontend-000215": {
-        "message": "Címke szerkesztése"
     },
     "frontend-000216": {
         "message": "Véletlen szín generálása"

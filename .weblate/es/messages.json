@@ -675,8 +675,13 @@
     "frontend-000200": {
         "message": "Fallo al crear carpeta"
     },
-    "frontend-000201": {
-        "message": "Renombrar carpeta"
+    "frontend-FolderRenameTitle": {
+        "message": "Renombrar \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Carpeta renombrada"
@@ -717,8 +722,13 @@
     "frontend-000214": {
         "message": "Error al crear etiqueta"
     },
-    "frontend-000215": {
-        "message": "Modificar etiqueta"
+    "frontend-TagEditTitle": {
+        "message": "Modificar etiqueta \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Generar un color al azar"

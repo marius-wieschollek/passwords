@@ -530,9 +530,6 @@
     "frontend-000200": {
         "message": "Misslyckades med att skapa mapp"
     },
-    "frontend-000201": {
-        "message": "Byt namn på mapp"
-    },
     "frontend-000202": {
         "message": "Mapp har bytt namn"
     },
@@ -572,8 +569,13 @@
     "frontend-000214": {
         "message": "Misslyckadess med att skapa tagg"
     },
-    "frontend-000215": {
-        "message": "Editera tagg"
+    "frontend-TagEditTitle": {
+        "message": "Editera tagg \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000217": {
         "message": "Tagg sparad"

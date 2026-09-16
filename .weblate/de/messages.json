@@ -740,8 +740,13 @@
     "frontend-000200": {
         "message": "Erstellen des Ordners fehlgeschlagen"
     },
-    "frontend-000201": {
-        "message": "Ordner umbenennen"
+    "frontend-FolderRenameTitle": {
+        "message": "\"$LABEL$\" umbenennen",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Ordner umbenannt"
@@ -782,8 +787,13 @@
     "frontend-000214": {
         "message": "Erstellen des Tags fehlgeschlagen"
     },
-    "frontend-000215": {
-        "message": "Tag bearbeiten"
+    "frontend-TagEditTitle": {
+        "message": "\"$LABEL$\" bearbeiten",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Zufällige Farbe auswählen"

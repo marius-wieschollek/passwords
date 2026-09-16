@@ -711,8 +711,13 @@
     "frontend-000200": {
         "message": "Kansion luominen epäonnistui"
     },
-    "frontend-000201": {
-        "message": "Nimeä kansio uudelleen"
+    "frontend-FolderRenameTitle": {
+        "message": "Nimeä kansio \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Kansio nimetty uudelleen"
@@ -752,9 +757,6 @@
     },
     "frontend-000214": {
         "message": "Tunnisteen luominen epäonnistui"
-    },
-    "frontend-000215": {
-        "message": "Muokkaa tagia"
     },
     "frontend-000216": {
         "message": "Luo satunnainen väri"

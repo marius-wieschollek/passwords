@@ -205,8 +205,13 @@
     "frontend-000200": {
         "message": "Falha ao criar pasta"
     },
-    "frontend-000201": {
-        "message": "Renomear pasta"
+    "frontend-FolderRenameTitle": {
+        "message": "Renomear \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000202": {
         "message": "Pasta renomeada"
@@ -247,8 +252,13 @@
     "frontend-000214": {
         "message": "Falha ao criar etiqueta"
     },
-    "frontend-000215": {
-        "message": "Editar etiqueta"
+    "frontend-TagEditTitle": {
+        "message": "Editar etiqueta \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Gerar cor aleatória"

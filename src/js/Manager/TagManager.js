@@ -101,7 +101,7 @@ class TagManager {
         };
 
         return new Promise((resolve, reject) => {
-            MessageService.form(form, 'Edit tag')
+            MessageService.form(form, ['TagEditTitle', tag], ['TagEditTitle', tag])
                 .then((data) => {
                     tag.label = data.label;
                     tag.color = data.color;

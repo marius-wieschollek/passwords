@@ -826,9 +826,6 @@
     "frontend-000200": {
         "message": "Opprettelse av mappe mislyktes"
     },
-    "frontend-000201": {
-        "message": "Endre navn på mappe"
-    },
     "frontend-000202": {
         "message": "Mappen har fått nytt navn"
     },
@@ -868,8 +865,13 @@
     "frontend-000214": {
         "message": "Opprettelse av tag mislyktes"
     },
-    "frontend-000215": {
-        "message": "Rediger tag"
+    "frontend-TagEditTitle": {
+        "message": "Rediger tag \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     },
     "frontend-000216": {
         "message": "Generer tilfeldig farge"
