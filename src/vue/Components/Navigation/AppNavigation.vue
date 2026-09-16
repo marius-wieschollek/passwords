@@ -10,7 +10,9 @@
 
 <template>
     <nc-app-navigation>
-        <app-navigation-search/>
+        <template #search>
+            <app-navigation-search/>
+        </template>
         <template id="app-passwords-navigation" #list>
             <app-navigation-item :name="t('All')" :to="{ name: 'All'}" :exact="true">
                 <template #icon>
@@ -83,5 +85,9 @@
 .app-navigation-list {
     flex-grow : 1;
     height    : auto !important;
+
+    .app-navigation__body {
+        flex-shrink: 0;
+    }
 }
 </style>
