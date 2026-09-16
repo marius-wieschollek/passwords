@@ -669,9 +669,6 @@
     "frontend-000200": {
         "message": "Vytvoření složky se nezdařilo"
     },
-    "frontend-000201": {
-        "message": "Přejmenovat složku"
-    },
     "frontend-000202": {
         "message": "Složka přejmenována"
     },
