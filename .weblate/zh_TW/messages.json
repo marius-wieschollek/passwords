@@ -3530,5 +3530,21 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "重命名目錄\"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-TagEditTitle": {
+        "message": "編輯\"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }
