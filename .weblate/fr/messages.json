@@ -940,10 +940,10 @@
         "message": "Signaler un bogue"
     },
     "frontend-HandbookMoreHelp": {
-        "message": "Avez-vous besoin d'aide ?"
+        "message": "Avez-vous besoin d'aide ?"
     },
     "frontend-HandbookMoreHelpForum": {
-        "message": "Demandez sur le forum !"
+        "message": "Demandez sur le forum !"
     },
     "frontend-000331": {
         "message": "Erreur réseau"
@@ -3481,7 +3481,7 @@
         "message": "Autorisations douanières"
     },
     "frontend-ShareRevokeAccess": {
-        "message": "Renverser l'accès"
+        "message": "Révoquer l'accès"
     },
     "frontend-ShareOptionsAdvanced": {
         "message": "Options avancées"
@@ -3493,7 +3493,7 @@
         "message": "Peut partager"
     },
     "frontend-BatchActionShareSubmitRevoke": {
-        "message": "Renverser l'accès"
+        "message": "Révoquer l'accès"
     },
     "frontend-ShareOptionsSharingOptions": {
         "message": "Options de partage"
