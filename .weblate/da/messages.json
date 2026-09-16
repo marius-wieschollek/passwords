@@ -3627,7 +3627,7 @@
         }
     },
     "frontend-FolderRenameTitle": {
-        "message": "Omdøb mappen »$LABEL$«",
+        "message": "Omdøb mappe \"$LABEL$\"",
         "placeholders": {
             "label": {
                 "content": "$1"
@@ -3635,7 +3635,7 @@
         }
     },
     "frontend-TagEditTitle": {
-        "message": "Rediger »$LABEL$«",
+        "message": "Redigér \"$LABEL$\"",
         "placeholders": {
             "label": {
                 "content": "$1"
