@@ -3633,5 +3633,13 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "Zmień nazwę folderu \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }
