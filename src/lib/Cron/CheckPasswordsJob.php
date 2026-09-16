@@ -56,14 +56,14 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @param PasswordSecurityCheckService $securityCheckService
      */
     public function __construct(
-        ITimeFactory $time,
-        LoggingService                   $logger,
-        protected MailService            $mailService,
-        ConfigurationService             $config,
-        EnvironmentService               $environment,
-        protected UserSettingsHelper     $userSettingsHelper,
-        protected PasswordRevisionMapper $revisionMapper,
-        protected NotificationService    $notificationService,
+        ITimeFactory                           $time,
+        LoggingService                         $logger,
+        protected MailService                  $mailService,
+        ConfigurationService                   $config,
+        EnvironmentService                     $environment,
+        protected UserSettingsHelper           $userSettingsHelper,
+        protected PasswordRevisionMapper       $revisionMapper,
+        protected NotificationService          $notificationService,
         protected PasswordSecurityCheckService $securityCheckService
     ) {
         parent::__construct($time, $logger, $config, $environment);
@@ -85,40 +85,60 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @throws Exception
      */
     protected function checkAllPasswordRevisions(): void {
-        /** @var PasswordRevision[] $revisions */
-        $revisions = $this->revisionMapper->findAll();
-
+        $page = 0;
         $badRevisionCounter = 0;
-        foreach($revisions as $revision) {
-            $this->checkHashLength($revision);
 
-            if($revision->getStatus() === PasswordSecurityCheckService::LEVEL_BAD || $revision->getStatus() === PasswordSecurityCheckService::LEVEL_UNKNOWN) continue;
+        do {
+            /** @var PasswordRevision[] $revisions */
+            $revisions = $this->revisionMapper->findForSecurityCheck($page, 1000);
 
-            $oldStatusCode = $revision->getStatusCode();
-            [$statusLevel, $statusCode] = $this->securityCheckService->getRevisionSecurityLevel($revision);
-
-            if($oldStatusCode !== $statusCode) {
-                $revision->setStatus($statusLevel);
-                $revision->setStatusCode($statusCode);
-                $revision->setUpdated(time());
-                $this->revisionMapper->update($revision);
-
-                if($statusLevel === PasswordSecurityCheckService::LEVEL_BAD) {
-                    $this->sendBadPasswordNotification($revision);
+            foreach ($revisions as $revision) {
+                if ($this->checkRevision($revision)) {
                     $badRevisionCounter++;
                 }
             }
-        }
+
+            $page++;
+        } while (count($revisions) === 1000);
 
         $this->notifyUsers();
-        $this->logger->debugOrInfo(['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter], $badRevisionCounter);
+        $this->logger->debugOrInfo(
+            ['Checked %s passwords. %s new bad revisions found', count($revisions), $badRevisionCounter],
+            $badRevisionCounter
+        );
+    }
+
+    /**
+     * @param PasswordRevision $revision
+     * @return bool
+     * @throws DecryptedDataException
+     * @throws \OCP\DB\Exception
+     */
+    protected function checkRevision(PasswordRevision $revision): bool {
+        $this->checkHashLength($revision);
+
+        $oldStatusCode = $revision->getStatusCode();
+        [$statusLevel, $statusCode] = $this->securityCheckService->getRevisionSecurityLevel($revision);
+
+        if ($oldStatusCode !== $statusCode) {
+            $revision->setStatus($statusLevel);
+            $revision->setStatusCode($statusCode);
+            $revision->setUpdated(time());
+            $this->revisionMapper->update($revision);
+
+            if ($statusLevel === PasswordSecurityCheckService::LEVEL_BAD) {
+                $this->sendBadPasswordNotification($revision);
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
      *
      */
     protected function notifyUsers(): void {
-        foreach($this->badPasswords as $user => $count) {
+        foreach ($this->badPasswords as $user => $count) {
             $this->notificationService->sendBadPasswordNotification($user, $count);
             $this->mailService->sendBadPasswordMail($user, $count);
         }
@@ -130,15 +150,15 @@ class CheckPasswordsJob extends AbstractTimedJob {
     protected function sendBadPasswordNotification(PasswordRevision $revision): void {
         try {
             $current = $this->revisionMapper->findCurrentRevisionByModel($revision->getModel());
-            if($current->getUuid() === $revision->getUuid()) {
+            if ($current->getUuid() === $revision->getUuid()) {
                 $user = $revision->getUserId();
-                if(!isset($this->badPasswords[ $user ])) {
-                    $this->badPasswords[ $user ] = 1;
+                if (!isset($this->badPasswords[$user])) {
+                    $this->badPasswords[$user] = 1;
                 } else {
-                    $this->badPasswords[ $user ]++;
+                    $this->badPasswords[$user]++;
                 }
             }
-        } catch(Throwable $e) {
+        } catch (Throwable $e) {
             $this->logger->logException($e);
         }
     }
@@ -151,8 +171,8 @@ class CheckPasswordsJob extends AbstractTimedJob {
      */
     protected function checkHashLength(PasswordRevision $revision): void {
         $hashLength = $this->getUserHashLength($revision->getUserId());
-        if(strlen($revision->getHash()) > $hashLength) {
-            if($hashLength !== 0) {
+        if (strlen($revision->getHash()) > $hashLength) {
+            if ($hashLength !== 0) {
                 $revision->setHash(substr($revision->getHash(), 0, $hashLength));
             } else {
                 $revision->setHash('');
@@ -167,15 +187,15 @@ class CheckPasswordsJob extends AbstractTimedJob {
      * @return int
      */
     protected function getUserHashLength($userId): int {
-        if(!isset($this->hashLengths[ $userId ])) {
+        if (!isset($this->hashLengths[$userId])) {
             try {
-                $this->hashLengths[ $userId ] = $this->userSettingsHelper->get('password.security.hash', $userId);
-            } catch(Throwable $e) {
+                $this->hashLengths[$userId] = $this->userSettingsHelper->get('password.security.hash', $userId);
+            } catch (Throwable $e) {
                 $this->logger->logException($e);
-                $this->hashLengths[ $userId ] = 40;
+                $this->hashLengths[$userId] = 40;
             }
         }
 
-        return $this->hashLengths[ $userId ];
+        return $this->hashLengths[$userId];
     }
 }

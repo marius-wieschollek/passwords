@@ -11,12 +11,10 @@
 
 namespace OCA\Passwords\Provider\SecurityCheck;
 
-use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
 use OCP\Cache\CappedMemoryCache;
-use OCP\Http\Client\IClientService;
 use Throwable;
 
 /**
@@ -26,36 +24,15 @@ use Throwable;
  */
 abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInterface {
 
-    const PASSWORD_DB              = 'none';
-    const int HASH_FILE_KEY_LENGTH = 3;
-    const string CONFIG_DB_TYPE    = 'passwords/localdb/type';
-    const int HASH_CACHE_SIZE      = 4096;
-
+    const        PASSWORD_DB          = 'none';
+    const int    HASH_FILE_KEY_LENGTH = 3;
+    const string CONFIG_DB_TYPE       = 'passwords/localdb/type';
+    const int    HASH_CACHE_SIZE      = 4096;
+    const string PASSWORDS_USER_AGENT = 'Passwords App for Nextcloud';
     /**
      * @var FileCacheService
      */
-    protected FileCacheService $fileCacheService;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var LoggingService
-     */
-    protected LoggingService $logger;
-
-    /**
-     * @var IClientService
-     */
-    protected IClientService $httpClientService;
-
-    /**
-     * @var UserRulesSecurityCheck
-     */
-    protected UserRulesSecurityCheck $userRulesCheck;
-
+    protected FileCacheService $fileCache;
     /**
      * @var CappedMemoryCache
      */
@@ -64,25 +41,17 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
     /**
      * AbstractSecurityCheckProvider constructor.
      *
-     * @param LoggingService         $logger
-     * @param IClientService         $httpClientService
-     * @param FileCacheService       $fileCacheService
-     * @param UserRulesSecurityCheck $userRulesCheck
-     * @param ConfigurationService   $configurationService
+     * @param LoggingService       $logger
+     * @param FileCacheService     $fileCacheService
+     * @param ConfigurationService $config
      */
     public function __construct(
-        LoggingService         $logger,
-        IClientService         $httpClientService,
-        FileCacheService       $fileCacheService,
-        UserRulesSecurityCheck $userRulesCheck,
-        ConfigurationService   $configurationService
+        protected LoggingService       $logger,
+        FileCacheService               $fileCacheService,
+        protected ConfigurationService $config
     ) {
-        $this->fileCacheService  = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
-        $this->config            = $configurationService;
-        $this->logger            = $logger;
-        $this->userRulesCheck    = $userRulesCheck;
-        $this->httpClientService = $httpClientService;
-        $this->hashStatusCache   = new CappedMemoryCache(self::HASH_CACHE_SIZE);
+        $this->fileCache = $fileCacheService->getCacheService($fileCacheService::PASSWORDS_CACHE);
+        $this->hashStatusCache = new CappedMemoryCache(self::HASH_CACHE_SIZE);
     }
 
     /**
@@ -104,9 +73,11 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
      * @return bool
      */
     public function isHashSecure(string $hash): bool {
-        if(empty($hash)) return false;
+        if (empty($hash)) {
+            return false;
+        }
 
-        if(!$this->hashStatusCache->hasKey($hash)) {
+        if (!$this->hashStatusCache->hasKey($hash)) {
             $hashes = $this->readPasswordsFile($hash);
             $this->hashStatusCache->set($hash, !$this->checkForHashInHashes($hashes, $hash));
         }
@@ -132,12 +103,16 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
      */
     protected function readPasswordsFile(string $hash): array {
         $file = $this->getPasswordsFileName($hash);
-        if(!$this->fileCacheService->hasFile($file)) return [];
+        if (!$this->fileCache->hasFile($file)) {
+            return [];
+        }
 
         try {
-            $data = $this->fileCacheService->getFile($file)->getContent();
-            if(extension_loaded('zlib')) $data = gzuncompress($data);
-        } catch(Throwable $e) {
+            $data = $this->fileCache->getFile($file)->getContent();
+            if (extension_loaded('zlib')) {
+                $data = gzuncompress($data);
+            }
+        } catch (Throwable $e) {
             $this->logger->logException($e);
 
             return [];
@@ -145,7 +120,7 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
 
         $data = json_decode($data, true);
 
-        return is_array($data) ? $data:[];
+        return is_array($data) ? $data : [];
     }
 
     /**
@@ -156,9 +131,11 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
         $file = $this->getPasswordsFileName($hash);
 
         $data = json_encode(array_unique($hashes));
-        if(extension_loaded('zlib')) $data = gzcompress($data);
+        if (extension_loaded('zlib')) {
+            $data = gzcompress($data);
+        }
 
-        $this->fileCacheService->putFile($file, $data);
+        $this->fileCache->putFile($file, $data);
     }
 
     /**
@@ -167,9 +144,9 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
      * @return string
      */
     protected function getPasswordsFileName(string $hash): string {
-        $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH).'.json';
+        $file = substr($hash, 0, self::HASH_FILE_KEY_LENGTH) . '.json';
 
-        return extension_loaded('zlib') ? $file.'.gz':$file;
+        return extension_loaded('zlib') ? $file . '.gz' : $file;
     }
 
     /**
@@ -180,11 +157,11 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
      */
     protected function checkForHashInHashes($hashes, $hash): bool {
         $length = strlen($hash);
-        if($length === 40) {
+        if ($length === 40) {
             return in_array($hash, $hashes);
         } else {
-            foreach($hashes as $current) {
-                if(substr($current, 0, $length) === $hash) {
+            foreach ($hashes as $current) {
+                if (substr($current, 0, $length) === $hash) {
                     return true;
                 }
             }

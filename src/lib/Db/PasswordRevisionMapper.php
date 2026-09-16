@@ -8,6 +8,7 @@
 namespace OCA\Passwords\Db;
 
 use Exception;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 
 /**
@@ -20,6 +21,31 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
     const string TABLE_NAME = 'passwords_password_rv';
 
     const string MODEL_TABLE_NAME = 'passwords_password';
+
+    /**
+     * @param int $page
+     * @param int $pageSize
+     *
+     * @return EntityInterface[]
+     * @throws \OCP\DB\Exception
+     */
+    public function findForSecurityCheck(int $page = 0, int $pageSize = 500): array {
+        $sql = $this->getStatement();
+
+        $sql->addOrderBy('hash', 'ASC');
+        $sql->addOrderBy('id', 'ASC');
+
+        $sql->andWhere(
+            $sql->expr()->neq('status', $sql->createNamedParameter(PasswordSecurityCheckService::LEVEL_BAD)),
+            $sql->expr()->nonEmptyString('hash')
+        );
+
+        $sql->setMaxResults($pageSize);
+        $sql->setFirstResult($page * $pageSize);
+
+        return $this->findEntities($sql);
+    }
+
 
     /**
      * @param string      $hash
@@ -36,7 +62,7 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
             $sql->expr()->neq('model', $sql->createNamedParameter($model))
         );
 
-        if($user !== null) {
+        if ($user !== null) {
             $sql->andWhere(
                 $sql->expr()->eq('user_id', $sql->createNamedParameter($user))
             );

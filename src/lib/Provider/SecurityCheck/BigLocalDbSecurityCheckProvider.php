@@ -12,9 +12,14 @@
 namespace OCA\Passwords\Provider\SecurityCheck;
 
 use Exception;
+use GuzzleHttp\RequestOptions;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipAccessException;
 use OCA\Passwords\Exception\SecurityCheck\BreachedPasswordsZipExtractException;
 use OCA\Passwords\Exception\SecurityCheck\PasswordDatabaseDownloadException;
+use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Services\FileCacheService;
+use OCA\Passwords\Services\LoggingService;
+use OCP\Http\Client\IClientService;
 use Throwable;
 use ZipArchive;
 
@@ -31,12 +36,27 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
     const        PASSWORD_DB       = 'bigdb';
     const int    PASSWORD_VERSION  = 16;
 
+    /**
+     * @param LoggingService       $logger
+     * @param FileCacheService     $fileCacheService
+     * @param ConfigurationService $config
+     * @param IClientService       $httpClientService
+     */
+    public function __construct(
+        LoggingService           $logger,
+        FileCacheService         $fileCacheService,
+        ConfigurationService     $config,
+        protected IClientService $httpClientService
+    ) {
+        parent::__construct($logger, $fileCacheService, $config);
+    }
+
     public function getHashRange(string $range): array {
         $hashes = $this->readPasswordsFile($range);
 
         $matchingHashes = [];
-        foreach($hashes as $hash) {
-            if(str_starts_with($hash, $range)) {
+        foreach ($hashes as $hash) {
+            if (str_starts_with($hash, $range)) {
                 $matchingHashes[] = $hash;
             }
         }
@@ -57,11 +77,15 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
     public function isLocalDbValid(): bool {
         try {
             $installedVersion = intval($this->config->getAppValue(self::CONFIG_DB_VERSION));
-            if($installedVersion !== static::PASSWORD_VERSION) return false;
+            if ($installedVersion !== static::PASSWORD_VERSION) {
+                return false;
+            }
 
-            $info = $this->fileCacheService->getCacheInfo();
-            if($info['files'] < 64) return false;
-        } catch(Exception $e) {
+            $info = $this->fileCache->getCacheInfo();
+            if ($info['files'] < 64) {
+                return false;
+            }
+        } catch (Exception $e) {
             $this->logger->logException($e);
         }
 
@@ -74,7 +98,9 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
      */
     public function updateDb(): void {
         ini_set('max_execution_time', 0);
-        if(!$this->isAvailable() || (intval(ini_get('max_execution_time')) !== 0 && intval(ini_get('max_execution_time')) < 7200)) {
+        if (!$this->isAvailable() || (intval(ini_get('max_execution_time')) !== 0 && intval(
+                    ini_get('max_execution_time')
+                ) < 7200)) {
             throw new \Exception('Password security check service not available. Consult manual.');
         }
 
@@ -97,14 +123,21 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
      * @throws Throwable
      */
     protected function downloadPasswordsFile(): string {
-        $zipFile = $this->config->getTempDir().uniqid().'.zip';
+        $zipFile = $this->config->getTempDir() . uniqid() . '.zip';
 
         try {
             $client = $this->httpClientService->newClient();
-            $client->get($this->getArchiveUrl(), ['sink' => $zipFile, 'timeout' => 0]);
+            $client->get(
+                $this->getArchiveUrl(),
+                [
+                    RequestOptions::HEADERS => ['User-Agent' => self::PASSWORDS_USER_AGENT],
+                    RequestOptions::SINK    => $zipFile,
+                    RequestOptions::TIMEOUT => 0
+                ]
+            );
 
             return $zipFile;
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             throw new PasswordDatabaseDownloadException($e);
         }
     }
@@ -118,27 +151,29 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
      */
     protected function unpackPasswordsFile(string $zipFile): void {
         try {
-            $zip    = new ZipArchive;
+            $zip = new ZipArchive;
             $result = $zip->open($zipFile);
-            if($result === true) {
-                for($i = 0; $i < $zip->numFiles; $i++) {
+            if ($result === true) {
+                for ($i = 0; $i < $zip->numFiles; $i++) {
                     $contents = $zip->getFromIndex($i);
-                    if(!$contents) {
+                    if (!$contents) {
                         throw new BreachedPasswordsZipExtractException($zip->getStatusString());
                     }
 
                     $name = $zip->getNameIndex($i);
-                    if(!$name) {
+                    if (!$name) {
                         throw new BreachedPasswordsZipExtractException($name);
                     }
 
-                    $this->fileCacheService->putFile($name, $contents);
+                    $this->fileCache->putFile($name, $contents);
                 }
             } else {
                 throw new BreachedPasswordsZipAccessException($result);
             }
-        } catch(Throwable $e) {
-            if(is_file($zipFile)) @unlink($zipFile);
+        } catch (Throwable $e) {
+            if (is_file($zipFile)) {
+                @unlink($zipFile);
+            }
             throw $e;
         }
         unlink($zipFile);
@@ -156,8 +191,10 @@ class BigLocalDbSecurityCheckProvider extends AbstractSecurityCheckProvider {
      * @return string
      */
     protected function getArchiveUrl(): string {
-        $format = extension_loaded('zlib') ? 'gzip':'json';
+        $format = extension_loaded('zlib') ? 'gzip' : 'json';
 
-        return str_replace([':format', ':version'], [$format, static::PASSWORD_VERSION], $this->config->getAppValue(static::CONFIG_DB_SOURCE, static::ARCHIVE_URL));
+        return str_replace([':format', ':version'],
+                           [$format, static::PASSWORD_VERSION],
+                           $this->config->getAppValue(static::CONFIG_DB_SOURCE, static::ARCHIVE_URL));
     }
 }

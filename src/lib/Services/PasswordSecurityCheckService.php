@@ -11,7 +11,6 @@
 
 namespace OCA\Passwords\Services;
 
-use Exception;
 use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Helper\SecurityCheck\PasswordDatabaseUpdateHelper;
 use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
@@ -43,7 +42,8 @@ class PasswordSecurityCheckService {
     public function __construct(
         protected SecurityCheckProviderInterface $securityCheckProvider,
         protected UserRulesSecurityCheck         $userRulesSecurityCheck,
-        protected PasswordDatabaseUpdateHelper   $databaseUpdateHelper
+        protected PasswordDatabaseUpdateHelper   $databaseUpdateHelper,
+        protected LoggingService                 $logger
     ) {
     }
 
@@ -55,14 +55,26 @@ class PasswordSecurityCheckService {
      * @param PasswordRevision $revision
      *
      * @return array
-     * @throws Exception
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if(empty($revision->getHash())) return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
-        if(!$this->isHashSecure($revision->getHash())) return [self::LEVEL_BAD, self::STATUS_BREACHED];
+        if (empty($revision->getHash())) {
+            return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
+        }
 
-        $userRules = $this->userRulesSecurityCheck->getRevisionSecurityLevel($revision);
-        if($userRules !== null) return $userRules;
+        try {
+            if (!$this->isHashSecure($revision->getHash())) {
+                return [self::LEVEL_BAD, self::STATUS_BREACHED];
+            }
+
+            $userRules = $this->userRulesSecurityCheck->getRevisionSecurityLevel($revision);
+            if ($userRules !== null) {
+                return $userRules;
+            }
+        } catch (\Throwable $e) {
+            $this->logger->logException($e, ['revision' => $revision]);
+
+            return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
+        }
 
         return [self::LEVEL_OK, self::STATUS_GOOD];
     }
@@ -97,8 +109,8 @@ class PasswordSecurityCheckService {
      * @return array
      */
     public function getHashRange(string $range): array {
-        if(strlen($range) === 40) {
-            return $this->isHashSecure($range) ? []:[$range];
+        if (strlen($range) === 40) {
+            return $this->isHashSecure($range) ? [] : [$range];
         }
 
         return $this->securityCheckProvider->getHashRange($range);

@@ -1,4 +1,7 @@
 ## [Unreleased]
+### Changed
+- Passwords are now marked as unchecked if the security check fails
+
 ## 2026.9.0 - Feature release
 ### Added
 - Nextcloud 35 support

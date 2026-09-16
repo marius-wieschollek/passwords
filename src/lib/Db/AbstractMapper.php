@@ -17,6 +17,7 @@ use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\Entity;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Db\QBMapper;
+use OCP\Cache\CappedMemoryCache;
 use OCP\DB\QueryBuilder\IQueryBuilder;
 use OCP\IDBConnection;
 
@@ -27,19 +28,18 @@ use OCP\IDBConnection;
  */
 abstract class AbstractMapper extends QBMapper {
 
-    const TABLE_NAME              = '';
+    const       TABLE_NAME        = '';
     const array ALLOWED_OPERATORS = ['eq', 'neq', 'lt', 'gt', 'lte', 'gte'];
     const array FORBIDDEN_FIELDS  = [];
-
+    const       ENTITY_CACHE_SIZE = 1024;
     /**
      * @var string|null
      */
     protected ?string $userId;
-
     /**
-     * @var array
+     * @var CappedMemoryCache
      */
-    protected array $entityCache = [];
+    protected CappedMemoryCache $entityCache;
 
     /**
      * AbstractMapper constructor.
@@ -50,6 +50,7 @@ abstract class AbstractMapper extends QBMapper {
 
     public function __construct(IDBConnection $db, EnvironmentService $environment) {
         parent::__construct($db, static::TABLE_NAME);
+        $this->entityCache = new CappedMemoryCache(static::ENTITY_CACHE_SIZE);
         $this->userId = $environment->getUserId();
     }
 
@@ -60,8 +61,8 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\DB\Exception
      */
     public function delete(Entity $entity): Entity {
-        if(isset($this->entityCache[ $entity->getUuid() ])) {
-            unset($this->entityCache[ $entity->getUuid() ]);
+        if ($this->entityCache->hasKey($entity->getUuid())) {
+            $this->entityCache->remove($entity->getUuid());
         }
 
         return parent::delete($entity);
@@ -74,7 +75,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\DB\Exception
      */
     public function insert(Entity $entity): Entity {
-        $this->entityCache[ $entity->getUuid() ] = $entity;
+        $this->entityCache->set($entity->getUuid(), $entity);
 
         return parent::insert($entity);
     }
@@ -86,7 +87,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\DB\Exception
      */
     public function update(Entity $entity): Entity {
-        $this->entityCache[ $entity->getUuid() ] = $entity;
+        $this->entityCache->set($entity->getUuid(), $entity);
 
         return parent::update($entity);
     }
@@ -100,8 +101,8 @@ abstract class AbstractMapper extends QBMapper {
      * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): EntityInterface {
-        if(isset($this->entityCache[ $uuid ])) {
-            return $this->entityCache[ $uuid ];
+        if ($this->entityCache->hasKey($uuid)) {
+            return $this->entityCache->get($uuid);
         }
 
         return $this->findOneByField('uuid', $uuid);
@@ -130,14 +131,16 @@ abstract class AbstractMapper extends QBMapper {
                $qb->expr()->eq('deleted', $qb->createNamedParameter(true, IQueryBuilder::PARAM_BOOL))
            );
 
-        if($this->userId !== null) {
+        if ($this->userId !== null) {
             $qb->andWhere(
                 $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
             );
-        } else if($userId !== null) {
-            $qb->andWhere(
-                $qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
-            );
+        } else {
+            if ($userId !== null) {
+                $qb->andWhere(
+                    $qb->expr()->eq('user_id', $qb->createNamedParameter($userId))
+                );
+            }
         }
 
         return $this->findEntities($qb);
@@ -156,27 +159,37 @@ abstract class AbstractMapper extends QBMapper {
     /**
      * @param string $field
      * @param string $value
-     * @param mixed    $type
+     * @param mixed  $type
      * @param string $operator
      *
      * @return EntityInterface|Entity
      * @throws DoesNotExistException
      * @throws MultipleObjectsReturnedException
      */
-    public function findOneByField(string $field, string $value, mixed $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): EntityInterface {
+    public function findOneByField(
+        string $field,
+        string $value,
+        mixed  $type = IQueryBuilder::PARAM_STR,
+        string $operator = 'eq'
+    ): EntityInterface {
         return $this->findOneByFields([$field, $value, $type, $operator]);
     }
 
     /**
      * @param string $field
      * @param mixed  $value
-     * @param mixed    $type
+     * @param mixed  $type
      * @param string $operator
      *
      * @return EntityInterface[]
      * @throws Exception
      */
-    public function findAllByField(string $field, mixed $value, mixed $type = IQueryBuilder::PARAM_STR, string $operator = 'eq'): array {
+    public function findAllByField(
+        string $field,
+        mixed  $value,
+        mixed  $type = IQueryBuilder::PARAM_STR,
+        string $operator = 'eq'
+    ): array {
         return $this->findAllByFields([$field, $value, $type, $operator]);
     }
 
@@ -221,7 +234,7 @@ abstract class AbstractMapper extends QBMapper {
                $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
            );
 
-        if($this->userId !== null) {
+        if ($this->userId !== null) {
             $qb->andWhere(
                 $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
             );
@@ -234,7 +247,7 @@ abstract class AbstractMapper extends QBMapper {
      * Clears the entity cache
      */
     public function clearEntityCache(): void {
-        $this->entityCache = [];
+        $this->entityCache->clear();
     }
 
     /**
@@ -249,7 +262,7 @@ abstract class AbstractMapper extends QBMapper {
                $qb->expr()->eq('deleted', $qb->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
            );
 
-        if($this->userId !== null) {
+        if ($this->userId !== null) {
             $qb->andWhere(
                 $qb->expr()->eq('user_id', $qb->createNamedParameter($this->userId))
             );
@@ -265,7 +278,11 @@ abstract class AbstractMapper extends QBMapper {
      *
      * @return IQueryBuilder
      */
-    protected function getJoinStatement(string $toTable, string $fromField = 'revision', string $toField = 'uuid'): IQueryBuilder {
+    protected function getJoinStatement(
+        string $toTable,
+        string $fromField = 'revision',
+        string $toField = 'uuid'
+    ): IQueryBuilder {
         $sql = $this->db->getQueryBuilder();
 
         $sql->select('a.*')
@@ -275,7 +292,7 @@ abstract class AbstractMapper extends QBMapper {
                 $sql->expr()->eq('a.deleted', $sql->createNamedParameter(false, IQueryBuilder::PARAM_BOOL))
             );
 
-        if($this->userId !== null) {
+        if ($this->userId !== null) {
             $sql->andWhere(
                 $sql->expr()->eq('a.user_id', $sql->createNamedParameter($this->userId)),
                 $sql->expr()->eq('b.user_id', $sql->createNamedParameter($this->userId))
@@ -294,22 +311,28 @@ abstract class AbstractMapper extends QBMapper {
     protected function buildQuery(array $fields): IQueryBuilder {
         $sql = $this->getStatement();
 
-        foreach($fields as $field) {
-            if(!isset($field[0])) throw new Exception('Field name is required but not set');
-            $name  = $field[0];
+        foreach ($fields as $field) {
+            if (!isset($field[0])) {
+                throw new Exception('Field name is required but not set');
+            }
+            $name = $field[0];
             $value = $field[1] ?? '';
-            $type  = $field[2] ?? IQueryBuilder::PARAM_STR;
-            $op    = $field[3] ?? 'eq';
+            $type = $field[2] ?? IQueryBuilder::PARAM_STR;
+            $op = $field[3] ?? 'eq';
 
-            if(in_array($name, static::FORBIDDEN_FIELDS)) throw new Exception('Forbidden field in database query');
-            if(!in_array($op, self::ALLOWED_OPERATORS)) throw new Exception('Forbidden operator in database query');
+            if (in_array($name, static::FORBIDDEN_FIELDS)) {
+                throw new Exception('Forbidden field in database query');
+            }
+            if (!in_array($op, self::ALLOWED_OPERATORS)) {
+                throw new Exception('Forbidden operator in database query');
+            }
 
-            if($type !== IQueryBuilder::PARAM_NULL && $value !== null) {
+            if ($type !== IQueryBuilder::PARAM_NULL && $value !== null) {
                 $sql->andWhere(
                     $sql->expr()->{$op}($name, $sql->createNamedParameter($value, $type))
                 );
             } else {
-                $op = $op === 'eq' ? 'isNull':'isNotNull';
+                $op = $op === 'eq' ? 'isNull' : 'isNotNull';
                 $sql->andWhere($sql->expr()->{$op}($name));
             }
         }
@@ -323,13 +346,13 @@ abstract class AbstractMapper extends QBMapper {
      * @return Entity
      */
     protected function mapRowToEntity(array $row): Entity {
-        if(isset($row['uuid']) && isset($this->entityCache[ $row['uuid'] ])) {
-            return $this->entityCache[ $row['uuid'] ];
+        if (isset($row['uuid']) && $this->entityCache->hasKey($row['uuid'])) {
+            return $this->entityCache->get($row['uuid']);
         }
 
         $entity = parent::mapRowToEntity($row);
-        if(isset($row['uuid'])) {
-            $this->entityCache[ $row['uuid'] ] = $entity;
+        if (isset($row['uuid'])) {
+            $this->entityCache->set($row['uuid'], $entity);
         }
 
         return $entity;

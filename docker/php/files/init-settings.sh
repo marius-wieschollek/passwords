@@ -9,7 +9,7 @@
 
 # System Settings
 /var/www/html/occ app:disable firstrunwizard;
-/var/www/html/occ config:system:set loglevel --value=0 --type=int;
+/var/www/html/occ config:system:set loglevel --value=1 --type=int;
 /var/www/html/occ config:system:set defaultapp --value=passwords --type=string;
 /var/www/html/occ config:system:set trusted_domains 0 --value=localhost --type=string;
 /var/www/html/occ config:system:set allow_local_remote_servers --value=true --type=bool;

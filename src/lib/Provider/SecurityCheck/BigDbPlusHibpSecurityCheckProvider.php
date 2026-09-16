@@ -12,7 +12,6 @@
 namespace OCA\Passwords\Provider\SecurityCheck;
 
 use Exception;
-use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
@@ -32,23 +31,21 @@ class BigDbPlusHibpSecurityCheckProvider extends AbstractSecurityCheckProvider {
      * BigDbPlusHibpSecurityCheckProvider constructor.
      *
      * @param LoggingService                  $logger
-     * @param IClientService                  $httpClientService
      * @param FileCacheService                $fileCacheService
-     * @param UserRulesSecurityCheck          $userRulesCheck
-     * @param HaveIBeenPwnedProvider          $hibpSecurityCheck
      * @param ConfigurationService            $configurationService
+     * @param IClientService                  $httpClientService
+     * @param HaveIBeenPwnedProvider          $hibpSecurityCheck
      * @param BigLocalDbSecurityCheckProvider $localSecurityCheck
      */
     public function __construct(
         LoggingService                            $logger,
-        IClientService                            $httpClientService,
         FileCacheService                          $fileCacheService,
-        UserRulesSecurityCheck                    $userRulesCheck,
         ConfigurationService                      $configurationService,
+        protected IClientService                  $httpClientService,
         protected HaveIBeenPwnedProvider          $hibpSecurityCheck,
         protected BigLocalDbSecurityCheckProvider $localSecurityCheck
     ) {
-        parent::__construct($logger, $httpClientService, $fileCacheService, $userRulesCheck, $configurationService);
+        parent::__construct($logger, $fileCacheService, $configurationService);
     }
 
     /**

@@ -15,6 +15,7 @@ use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Uuid\UuidHelper;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCA\Passwords\Services\ValidationService;
 use OCP\EventDispatcher\IEventDispatcher;
 
@@ -169,7 +170,8 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());
-        $revision->setStatus(0);
+        $revision->setStatus(PasswordSecurityCheckService::LEVEL_UNKNOWN);
+        $revision->setStatusCode(PasswordSecurityCheckService::STATUS_NOT_CHECKED);
         $revision->setDeleted(false);
         $revision->_setDecrypted(true);
 
