@@ -3622,5 +3622,21 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "Přejmenujte složku „$LABEL$“",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-TagEditTitle": {
+        "message": "Upravit „$LABEL$“",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }
