@@ -3625,5 +3625,21 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "Preimenuj mapo \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-TagEditTitle": {
+        "message": "Uredi » $LABEL$ «",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }
