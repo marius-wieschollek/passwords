@@ -1,21 +1,24 @@
 <?php
-/**
+/*
+ * @copyright 2026 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Notification;
 
 use Exception;
 use OCA\Passwords\AppInfo\SystemRequirements;
-use OCP\ServerVersion;
-use OCA\Passwords\Services\ConfigurationService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
 use OCP\L10N\IFactory;
 use OCP\Notification\IManager;
 use OCP\Notification\INotification;
+use OCP\ServerVersion;
 
 /**
  * Class UpgradeRequiredNotification
@@ -24,23 +27,21 @@ use OCP\Notification\INotification;
  */
 class UpgradeRequiredNotification extends AbstractNotification {
 
-    const string NAME = 'upgrade_required';
-    const string TYPE = 'admin';
+    const string NAME                           = 'upgrade_required';
+    const string TYPE                           = 'admin';
     const string MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
-     * @param IFactory             $l10nFactory
-     * @param IURLGenerator        $urlGenerator
-     * @param IManager             $notificationManager
-     * @param ConfigurationService $config
-     * @param ServerVersion        $serverVersion
+     * @param IFactory      $l10nFactory
+     * @param IURLGenerator $urlGenerator
+     * @param IManager      $notificationManager
+     * @param ServerVersion $serverVersion
      */
     public function __construct(
-        IFactory $l10nFactory,
-        IURLGenerator $urlGenerator,
-        IManager $notificationManager,
-        protected ConfigurationService $config,
-        protected ServerVersion        $serverVersion,
+        IFactory                $l10nFactory,
+        IURLGenerator           $urlGenerator,
+        IManager                $notificationManager,
+        protected ServerVersion $serverVersion,
     ) {
         parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
     }
@@ -73,23 +74,30 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $ncVersion     = $this->serverVersion->getMajorVersion();
-        $phpVersion    = PHP_VERSION_ID;
-        $parameters    = $notification->getSubjectParameters();
-        $isNcOutdated  = $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;
+        $ncVersion = $this->serverVersion->getMajorVersion();
+        $phpVersion = PHP_VERSION_ID;
+        $parameters = $notification->getSubjectParameters();
+        $isNcOutdated = $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;
         $isPhpOutdated = $phpVersion < SystemRequirements::PHP_NOTIFICATION_ID;
 
-        if(!$isNcOutdated && !$isPhpOutdated || !isset($parameters['appVersion'])) {
+        if (!$isNcOutdated && !$isPhpOutdated || !isset($parameters['appVersion'])) {
             $message = $localisation->t('This notification can be deleted.');
             return $notification
                 ->setParsedSubject($message)
                 ->setParsedMessage($message);
         }
 
-        $phpVersionString = PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;
+        $phpVersionString = PHP_MAJOR_VERSION . '.' . PHP_MINOR_VERSION;
 
-        $title   = $this->getTitle($localisation, $ncVersion, $phpVersionString, $isNcOutdated, $isPhpOutdated);
-        $message = $this->getMessage($localisation, $ncVersion, $phpVersionString, $parameters['appVersion'], $isNcOutdated, $isPhpOutdated);
+        $title = $this->getTitle($localisation, $ncVersion, $phpVersionString, $isNcOutdated, $isPhpOutdated);
+        $message = $this->getMessage(
+            $localisation,
+            $ncVersion,
+            $phpVersionString,
+            $parameters['appVersion'],
+            $isNcOutdated,
+            $isPhpOutdated
+        );
         $this->processLink($notification, self::MANUAL_URL_SYSTEM_REQUIREMENTS, $localisation->t('More information'));
 
         return $notification
@@ -107,11 +115,20 @@ class UpgradeRequiredNotification extends AbstractNotification {
      *
      * @return string
      */
-    protected function getTitle(IL10N $localisation, string $ncVersion, string $phpVersionString, bool $isNcOutdated, bool $isPhpOutdated): string {
-        if($isNcOutdated && $isPhpOutdated) {
-            return $localisation->t('Passwords ends updates for Nextcloud %1$s and PHP %2$s', [$ncVersion, $phpVersionString]);
+    protected function getTitle(
+        IL10N  $localisation,
+        string $ncVersion,
+        string $phpVersionString,
+        bool   $isNcOutdated,
+        bool   $isPhpOutdated
+    ): string {
+        if ($isNcOutdated && $isPhpOutdated) {
+            return $localisation->t(
+                'Passwords ends updates for Nextcloud %1$s and PHP %2$s',
+                [$ncVersion, $phpVersionString]
+            );
         }
-        if($isPhpOutdated) {
+        if ($isPhpOutdated) {
             return $localisation->t('Passwords ends updates for PHP %s', [$phpVersionString]);
         }
 
@@ -128,27 +145,40 @@ class UpgradeRequiredNotification extends AbstractNotification {
      *
      * @return string
      */
-    protected function getMessage(IL10N $localisation, string $ncVersion, string $phpVersionString, string $appVersion, bool $isNcOutdated, bool $isPhpOutdated): string {
+    protected function getMessage(
+        IL10N  $localisation,
+        string $ncVersion,
+        string $phpVersionString,
+        string $appVersion,
+        bool   $isNcOutdated,
+        bool   $isPhpOutdated
+    ): string {
         $text1 = 'Passwords %1$s is the last update for Nextcloud %2$s.';
         $text2 = 'Upgrade to Nextcloud %1$s for future upgrades.';
 
-        if($isNcOutdated && $isPhpOutdated) {
+        if ($isNcOutdated && $isPhpOutdated) {
             $text1 = 'Passwords %1$s is the last update for Nextcloud %2$s and PHP %3$s.';
             $text2 = 'Upgrade to Nextcloud %1$s and PHP %2$s (or PHP %3$s for LSR) for future upgrades.';
-        } else if($isPhpOutdated) {
-            $text1 = 'Passwords %1$s is the last update for PHP %3$s.';
-            $text2 = 'Upgrade to PHP %2$s (or PHP %3$s for LSR) for future upgrades.';
+        } else {
+            if ($isPhpOutdated) {
+                $text1 = 'Passwords %1$s is the last update for PHP %3$s.';
+                $text2 = 'Upgrade to PHP %2$s (or PHP %3$s for LSR) for future upgrades.';
+            }
         }
 
         return
             $localisation->t(
                 $text1,
                 [$appVersion, $ncVersion, $phpVersionString]
-            ).
-            ' '.
+            ) .
+            ' ' .
             $localisation->t(
                 $text2,
-                [SystemRequirements::NC_UPGRADE_MINIMUM, SystemRequirements::PHP_UPGRADE_MINIMUM, SystemRequirements::PHP_UPGRADE_MINIMUM_LSR,]
+                [
+                    SystemRequirements::NC_UPGRADE_MINIMUM,
+                    SystemRequirements::PHP_UPGRADE_MINIMUM,
+                    SystemRequirements::PHP_UPGRADE_MINIMUM_LSR,
+                ]
             );
     }
 }

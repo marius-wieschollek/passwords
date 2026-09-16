@@ -36,6 +36,7 @@ class CheckAppSettings implements IRepairStep {
      *
      * @param AdminUserHelper       $adminHelper
      * @param ConfigurationService  $config
+     * @param ServerVersion         $serverVersion
      * @param NotificationService   $notifications
      * @param ServiceSettingsHelper $serviceSettings
      * @param BackgroundJobService  $backgroundJobService

@@ -1,4 +1,13 @@
 <?php
+/*
+ * @copyright 2026 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
+ * This file is part of the Passwords App
+ * created by Marius David Wieschollek.
+ */
 
 namespace OCA\Passwords\Helper\Survey;
 
@@ -15,6 +24,7 @@ use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
 use OCP\Http\Client\IClientService;
+use OCP\ServerVersion;
 use Throwable;
 
 /**

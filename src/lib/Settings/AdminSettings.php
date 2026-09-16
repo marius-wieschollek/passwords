@@ -51,6 +51,7 @@ class AdminSettings implements ISettings {
      * @param ConfigurationService $config
      * @param HelperService        $helperService
      * @param FileCacheService     $fileCacheService
+     * @param ServerVersion        $serverVersion
      */
     public function __construct(
         protected IRequest             $request,
