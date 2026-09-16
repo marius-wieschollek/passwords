@@ -612,15 +612,12 @@
         grid-template-columns : 3fr 2fr 30px;
         grid-auto-rows        : max-content;
         padding               : 0 0 4em 0;
+        align-items           : center;
 
         h1,
         h3 {
             grid-column-start : 1;
             grid-column-end   : 4;
-        }
-
-        label {
-            line-height : 40px;
         }
 
         select {

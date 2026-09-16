@@ -346,7 +346,7 @@
 
     .handbook-page {
         grid-area : page;
-        font-size : 0.9rem;
+        font-size : 1rem;
         width     : 100%;
         max-width : 975px;
         margin    : 0 auto 6rem;
