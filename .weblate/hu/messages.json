@@ -3625,5 +3625,21 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "A \"$LABEL$\" mappa átnevezése",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-TagEditTitle": {
+        "message": "Szerkesztés \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }

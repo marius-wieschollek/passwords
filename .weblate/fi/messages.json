@@ -3633,5 +3633,13 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-TagEditTitle": {
+        "message": "Muokkaa \"$LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }

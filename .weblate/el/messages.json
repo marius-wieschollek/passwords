@@ -3625,5 +3625,21 @@
                 "description": "Name of the recipient"
             }
         }
+    },
+    "frontend-FolderRenameTitle": {
+        "message": "Μετονομασία φακέλου \" $LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
+    },
+    "frontend-TagEditTitle": {
+        "message": "Επεξεργασία \" $LABEL$\"",
+        "placeholders": {
+            "label": {
+                "content": "$1"
+            }
+        }
     }
 }
