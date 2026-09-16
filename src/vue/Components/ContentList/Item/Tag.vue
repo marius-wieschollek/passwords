@@ -109,6 +109,11 @@ export default {
             event.preventDefault();
             event.stopPropagation();
         },
+    },
+    openedMenu(value) {
+        if(!value) {
+            emit('passwords:contextmenu:closed', {item: this.tag});
+        }
     }
 };
 </script>
