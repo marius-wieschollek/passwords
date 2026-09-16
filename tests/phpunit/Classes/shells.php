@@ -340,3 +340,54 @@ namespace Psr\Container {
         public function has(string $id): bool;
     }
 }
+
+namespace OCP\Cache {
+    class CappedMemoryCache implements \ArrayAccess {
+        private int $capacity;
+        private array $cache = [];
+
+        public function __construct(int $capacity = 512) {
+            $this->capacity = $capacity;
+        }
+
+        public function hasKey($key): bool { return isset($this->cache[ $key ]); }
+        public function get($key) { return $this->cache[ $key ] ?? null; }
+
+        public function set($key, $value, $ttl = 0): bool {
+            if(is_null($key)) {
+                $this->cache[] = $value;
+            } else {
+                $this->cache[ $key ] = $value;
+            }
+            $this->garbageCollect();
+
+            return true;
+        }
+
+        public function remove($key): bool {
+            unset($this->cache[ $key ]);
+
+            return true;
+        }
+
+        public function clear($prefix = ''): bool {
+            $this->cache = [];
+
+            return true;
+        }
+
+        public function getData(): array { return $this->cache; }
+
+        private function garbageCollect(): void {
+            while(count($this->cache) > $this->capacity) {
+                reset($this->cache);
+                $this->remove(key($this->cache));
+            }
+        }
+
+        public function offsetExists($offset): bool { return $this->hasKey($offset); }
+        public function &offsetGet($offset): mixed { return $this->cache[ $offset ]; }
+        public function offsetSet($offset, $value): void { $this->set($offset, $value); }
+        public function offsetUnset($offset): void { $this->remove($offset); }
+    }
+}

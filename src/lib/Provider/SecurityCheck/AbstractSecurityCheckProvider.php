@@ -15,6 +15,7 @@ use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\LoggingService;
+use OCP\Cache\CappedMemoryCache;
 use OCP\Http\Client\IClientService;
 use Throwable;
 
@@ -28,6 +29,7 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
     const PASSWORD_DB              = 'none';
     const int HASH_FILE_KEY_LENGTH = 3;
     const string CONFIG_DB_TYPE    = 'passwords/localdb/type';
+    const int HASH_CACHE_SIZE      = 4096;
 
     /**
      * @var FileCacheService
@@ -55,9 +57,9 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
     protected UserRulesSecurityCheck $userRulesCheck;
 
     /**
-     * @var array
+     * @var CappedMemoryCache
      */
-    protected array $hashStatusCache = [];
+    protected CappedMemoryCache $hashStatusCache;
 
     /**
      * AbstractSecurityCheckProvider constructor.
@@ -80,6 +82,7 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
         $this->logger            = $logger;
         $this->userRulesCheck    = $userRulesCheck;
         $this->httpClientService = $httpClientService;
+        $this->hashStatusCache   = new CappedMemoryCache(self::HASH_CACHE_SIZE);
     }
 
     /**
@@ -103,12 +106,12 @@ abstract class AbstractSecurityCheckProvider implements SecurityCheckProviderInt
     public function isHashSecure(string $hash): bool {
         if(empty($hash)) return false;
 
-        if(!isset($this->hashStatusCache[ $hash ])) {
-            $hashes                         = $this->readPasswordsFile($hash);
-            $this->hashStatusCache[ $hash ] = !$this->checkForHashInHashes($hashes, $hash);
+        if(!$this->hashStatusCache->hasKey($hash)) {
+            $hashes = $this->readPasswordsFile($hash);
+            $this->hashStatusCache->set($hash, !$this->checkForHashInHashes($hashes, $hash));
         }
 
-        return $this->hashStatusCache[ $hash ];
+        return (bool)$this->hashStatusCache->get($hash);
     }
 
     /**
