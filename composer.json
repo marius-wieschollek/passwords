@@ -1,0 +1,24 @@
+{
+  "name": "nextcloud/passwords",
+  "description": "Dev-only dependencies for the Passwords app test suite",
+  "type": "project",
+  "license": "AGPL-3.0-or-later",
+  "require": {
+    "php": ">=8.4"
+  },
+  "require-dev": {
+    "nextcloud/ocp": "^32.0",
+    "phpunit/phpunit": "^11.5"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "OCA\\Passwords\\": "src/lib",
+      "OCA\\Test\\Passwords\\": "tests/phpunit/Test",
+      "OCP\\": "vendor/nextcloud/ocp/OCP/",
+      "NCU\\": "vendor/nextcloud/ocp/NCU/"
+    }
+  }
+}

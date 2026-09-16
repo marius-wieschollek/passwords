@@ -7,15 +7,11 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OC;
 use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\ConfigurationService;
-use OCA\Theming\ThemingDefaults;
-use OCA\Unsplash\ProviderHandler\Provider;
-use OCA\Unsplash\Services\SettingsService;
+use OCA\Passwords\Integrations\ThemingIntegration;
+use OCA\Passwords\Integrations\UnsplashIntegration;
 use OCP\IURLGenerator;
-use Throwable;
 
 /**
  * Class ThemeSettingsHelper
@@ -23,18 +19,21 @@ use Throwable;
  * @package OCA\Passwords\Helper\Settings
  */
 class ThemeSettingsHelper {
+    const string DEFAULT_BACKGROUND_PATH = '/apps/theming/img/background/jo-myoung-hee-fluid.webp';
 
     /**
      * ThemeSettingsHelper constructor.
      *
-     * @param ConfigurationService $config
-     * @param OC_Defaults          $theming
-     * @param IURLGenerator        $urlGenerator
+     * @param OC_Defaults         $theming
+     * @param IURLGenerator       $urlGenerator
+     * @param ThemingIntegration  $themingIntegration
+     * @param UnsplashIntegration $unsplashIntegration
      */
     public function __construct(
-        protected ConfigurationService $config,
         protected OC_Defaults          $theming,
-        protected IURLGenerator        $urlGenerator
+        protected IURLGenerator        $urlGenerator,
+        protected ThemingIntegration   $themingIntegration,
+        protected UnsplashIntegration  $unsplashIntegration
     ) {
     }
 
@@ -44,23 +43,23 @@ class ThemeSettingsHelper {
      * @return null|string
      */
     public function get(string $key) {
-        switch($key) {
+        switch ($key) {
             case 'color':
             case 'color.primary':
                 return $this->getColorPrimary();
             case 'color.text':
             case 'text.color':
-                return $this->theming->getTextColorPrimary();
+                return $this->getTextColor();
             case 'color.background':
                 return $this->getBackgroundColor();
             case 'background':
                 return $this->getBackgroundImage();
             case 'logo':
-                return $this->urlGenerator->getAbsoluteURL($this->theming->getLogo());
+                return $this->getLogoIcon();
             case 'label':
-                return $this->theming->getEntity();
+                return $this->getName();
             case 'app.icon':
-                return $this->getThemedAppIcon();
+                return $this->getAppIcon();
             case 'folder.icon':
                 return $this->getFolderIcon();
         }
@@ -74,12 +73,12 @@ class ThemeSettingsHelper {
     public function list(): array {
         return [
             'server.theme.color.primary'    => $this->getColorPrimary(),
-            'server.theme.color.text'       => $this->get('color.text'),
+            'server.theme.color.text'       => $this->getTextColor(),
             'server.theme.color.background' => $this->getBackgroundColor(),
             'server.theme.background'       => $this->getBackgroundImage(),
-            'server.theme.logo'             => $this->get('logo'),
-            'server.theme.label'            => $this->get('label'),
-            'server.theme.app.icon'         => $this->getThemedAppIcon(),
+            'server.theme.logo'             => $this->getLogoIcon(),
+            'server.theme.label'            => $this->getName(),
+            'server.theme.app.icon'         => $this->getAppIcon(),
             'server.theme.folder.icon'      => $this->getFolderIcon()
         ];
     }
@@ -87,11 +86,21 @@ class ThemeSettingsHelper {
     /**
      * @return string
      */
-    protected function getFolderIcon(): string {
-        if($this->config->isAppEnabled('theming')) {
-            $version = $this->getCacheBuster();
+    public function getLogoIcon(): string {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getLogoIcon();
+        }
 
-            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => $version]);
+        return $this->urlGenerator->getAbsoluteURL($this->theming->getLogo());
+    }
+
+    /**
+     * @return string
+     */
+    protected function getFolderIcon(): string {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getFolderIcon();
+
         }
 
         return $this->urlGenerator->getAbsoluteURL(
@@ -102,11 +111,9 @@ class ThemeSettingsHelper {
     /**
      * @return string
      */
-    protected function getThemedAppIcon(): string {
-        if($this->config->isAppEnabled('theming')) {
-            $version = $this->getCacheBuster();
-
-            return $this->urlGenerator->linkToRouteAbsolute('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => $version]);
+    protected function getAppIcon(): string {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getAppIcon();
         }
 
         return $this->urlGenerator->getAbsoluteURL(
@@ -118,54 +125,29 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getBackgroundImage(): string {
-        try {
-            if(method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
-                $userBackground = $this->config->getUserValue('background_image', '', null, 'theming');
+        if ($this->unsplashIntegration->isAvailable()) {
+            $background = $this->unsplashIntegration->getBackgroundImage();
 
-                if(!empty($userBackground) && !str_starts_with($userBackground, '#') && $userBackground !== 'disabled') {
-                    if($userBackground === 'custom') {
-                        return $this->urlGenerator->linkToRouteAbsolute('theming.userTheme.getBackground', ['v' => $this->getCacheBuster()]);
-                    } else {
-                        return $this->urlGenerator->getAbsoluteURL(
-                            $this->urlGenerator->linkTo('theming', "img/background/{$userBackground}", ['v' => $this->getCacheBuster()])
-                        );
-                    }
-                }
-            }
-        } catch(\Throwable $e) {
+            if ($background) return $background;
         }
 
-        if($this->config->isAppEnabled('unsplash') && class_exists(SettingsService::class)) {
-            try {
-                $settings = OC::$server->get(SettingsService::class);
-
-                return $settings->headerbackgroundLink(Provider::SIZE_NORMAL);
-            } catch(\Throwable $e) {
-            }
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getBackgroundImage();
         }
 
-        if(method_exists($this->theming, 'getBackground')) {
-            return $this->urlGenerator->getAbsoluteURL($this->theming->getBackground());
-        }
-
-        return $this->urlGenerator->getAbsoluteURL(
-            $this->urlGenerator->linkTo('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => $this->getCacheBuster()])
-        );
+        return $this->urlGenerator->getAbsoluteURL(self::DEFAULT_BACKGROUND_PATH);
     }
 
     /**
      * @return string
      */
     protected function getBackgroundColor(): string {
-        try {
-            if(in_array($this->config->getUserValue('theme', 'none', null, 'accessibility'), ['themedark', 'dark'])) {
-                return '#181818';
-            }
-        } catch(Throwable $e) {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getColorBackground();
         }
 
-        if($this->config->isAppEnabled('breezedark')) {
-            return '#31363b';
+        if (method_exists($this->theming, 'getColorBackground')) {
+            return $this->theming->getColorBackground();
         }
 
         return '#ffffff';
@@ -175,35 +157,45 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getColorPrimary(): string {
-        try {
-            $userBackground = $this->config->getUserValue('background_color', '', null, 'theming');
-            if(!empty($userBackground)) {
-                return $userBackground;
-            }
-        } catch(\Throwable $e) {
-
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getColorPrimary();
         }
 
-        if($this->config->isAppEnabled('breezedark')) {
-            return '#3daee9';
+        if (method_exists($this->theming, 'getColorPrimary')) {
+            return $this->theming->getColorPrimary();
         }
 
-        return $this->theming->getColorPrimary();
+        return '#00679e';
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getCacheBuster(): ?string {
-        $version = $this->config->getAppValueInt('cachebuster', 0, 'theming');
-
-        if(method_exists($this->theming, 'isUserThemingDisabled') && !$this->theming->isUserThemingDisabled()) {
-            try {
-                return $this->config->getUserValue('userCacheBuster', '0', null, 'theming').'_'.$version;
-            } catch(\Throwable $e) {
-            }
+    protected function getTextColor(): string {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getTextColorPrimary();
         }
 
-        return (string) $version;
+        if (method_exists($this->theming, 'getTextColorPrimary')) {
+            return $this->theming->getTextColorPrimary();
+        }
+
+        return '#000000';
+    }
+
+    protected function getName(): string {
+        if ($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getName();
+        }
+
+        if (method_exists($this->theming, 'getName')) {
+            return $this->theming->getName();
+        }
+
+        if (method_exists($this->theming, 'getEntity')) {
+            return $this->theming->getEntity();
+        }
+
+        return 'Nextcloud';
     }
 }

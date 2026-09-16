@@ -9,7 +9,7 @@ namespace OCA\Passwords\Notification;
 
 use Exception;
 use OCA\Passwords\AppInfo\SystemRequirements;
-use OCA\Passwords\Helper\Compatibility\ServerVersion;
+use OCP\ServerVersion;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IL10N;
 use OCP\IURLGenerator;
@@ -29,19 +29,20 @@ class UpgradeRequiredNotification extends AbstractNotification {
     const string MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
      * @param IFactory             $l10nFactory
      * @param IURLGenerator        $urlGenerator
      * @param IManager             $notificationManager
      * @param ConfigurationService $config
+     * @param ServerVersion        $serverVersion
      */
-    public function __construct(IFactory $l10nFactory, IURLGenerator $urlGenerator, IManager $notificationManager, ConfigurationService $config) {
+    public function __construct(
+        IFactory $l10nFactory,
+        IURLGenerator $urlGenerator,
+        IManager $notificationManager,
+        protected ConfigurationService $config,
+        protected ServerVersion        $serverVersion,
+    ) {
         parent::__construct($l10nFactory, $urlGenerator, $notificationManager);
-        $this->config = $config;
     }
 
     /**
@@ -72,7 +73,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
      * @return INotification
      */
     public function process(INotification $notification, IL10N $localisation): INotification {
-        $ncVersion     = ServerVersion::getMajorVersion();
+        $ncVersion     = $this->serverVersion->getMajorVersion();
         $phpVersion    = PHP_VERSION_ID;
         $parameters    = $notification->getSubjectParameters();
         $isNcOutdated  = $ncVersion < SystemRequirements::NC_NOTIFICATION_ID;

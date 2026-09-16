@@ -16,7 +16,7 @@ use OC;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\AppInfo\SystemRequirements;
 use OCA\Passwords\Encryption\Object\SseV3KeyProviderInterface;
-use OCA\Passwords\Helper\Compatibility\ServerVersion;
+use OCP\ServerVersion;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
 use OCA\Passwords\Provider\Preview\BrowshotPreviewProvider;
 use OCA\Passwords\Provider\Preview\ScreeenlyProvider;
@@ -44,31 +44,6 @@ class AdminSettings implements ISettings {
     const string LINK_FORUM  = 'https://help.nextcloud.com/tag/passwords-app';
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IRequest
-     */
-    protected IRequest $request;
-
-    /**
-     * @var IURLGenerator
-     */
-    protected IURLGenerator $urlGenerator;
-
-    /**
-     * @var HelperService
-     */
-    protected HelperService $helperService;
-
-    /**
-     * @var FileCacheService
-     */
-    protected FileCacheService $fileCacheService;
-
-    /**
      * AdminSettings constructor.
      *
      * @param IRequest             $request
@@ -78,17 +53,13 @@ class AdminSettings implements ISettings {
      * @param FileCacheService     $fileCacheService
      */
     public function __construct(
-        IRequest             $request,
-        IURLGenerator        $urlGenerator,
-        ConfigurationService $config,
-        HelperService        $helperService,
-        FileCacheService     $fileCacheService
+        protected IRequest             $request,
+        protected IURLGenerator        $urlGenerator,
+        protected ConfigurationService $config,
+        protected HelperService        $helperService,
+        protected FileCacheService     $fileCacheService,
+        protected ServerVersion        $serverVersion
     ) {
-        $this->request          = $request;
-        $this->config           = $config;
-        $this->urlGenerator     = $urlGenerator;
-        $this->helperService    = $helperService;
-        $this->fileCacheService = $fileCacheService;
     }
 
     /**
@@ -425,7 +396,7 @@ class AdminSettings implements ISettings {
      * @return array
      */
     protected function getPlatformSupport(): array {
-        $ncVersion     = ServerVersion::getMajorVersion();
+        $ncVersion     = $this->serverVersion->getMajorVersion();
         $cronType      = $this->config->getAppValue('backgroundjobs_mode', 'ajax', 'core');
         $cronPhpId     = $this->config->getAppValue('cron/php/version/id', PHP_VERSION_ID);
         $cronPhpString = $this->config->getAppValue('cron/php/version/string', phpversion());

@@ -38,7 +38,9 @@
         "cron": "docker exec -u www-data passwords-php php -d memory_limit=2G /var/www/html/cron.php",
         "cypress": "npx cypress open",
         "rector": "node scripts/generate-nc-shells.mjs && rector --version && rector process --clear-cache",
-        "phpunit": "phpunit --bootstrap tests/phpunit/bootstrap.php tests/phpunit/",
+        "phpunit": "docker compose run --rm -u \"$(id -u):$(id -g)\" phpunit vendor/bin/phpunit",
+        "phpunit:install": "docker compose run --rm -u \"$(id -u):$(id -g)\" phpunit composer install --no-interaction",
+        "phpunit:ci": "vendor/bin/phpunit",
         "mkcert": "mkdir -p docker/volumes/nginx && mkcert -cert-file docker/volumes/nginx/default.pem -key-file docker/volumes/nginx/default.key localhost passwords.local && chmod -R 777 docker/volumes/nginx/"
     },
     "devDependencies": {

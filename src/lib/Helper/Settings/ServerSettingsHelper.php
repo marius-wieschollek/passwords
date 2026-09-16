@@ -7,9 +7,9 @@
 
 namespace OCA\Passwords\Helper\Settings;
 
-use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Services\ConfigurationService;
 use OCP\IURLGenerator;
+use OCP\ServerVersion;
 use OCP\Util;
 
 /**
@@ -24,43 +24,21 @@ class ServerSettingsHelper {
     const string SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/';
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var IURLGenerator
-     */
-    protected IURLGenerator $urlGenerator;
-
-    /**
-     * @var ShareSettingsHelper
-     */
-    protected ShareSettingsHelper $shareSettings;
-
-    /**
-     * @var ThemeSettingsHelper
-     */
-    protected ThemeSettingsHelper $themeSettings;
-
-    /**
      * ServerSettingsHelper constructor.
      *
      * @param IURLGenerator        $urlGenerator
      * @param ConfigurationService $config
      * @param ShareSettingsHelper  $shareSettings
      * @param ThemeSettingsHelper  $themeSettings
+     * @param ServerVersion        $serverVersion
      */
     public function __construct(
-        IURLGenerator        $urlGenerator,
-        ConfigurationService $config,
-        ShareSettingsHelper  $shareSettings,
-        ThemeSettingsHelper  $themeSettings
+        protected IURLGenerator        $urlGenerator,
+        protected ConfigurationService $config,
+        protected ShareSettingsHelper  $shareSettings,
+        protected ThemeSettingsHelper  $themeSettings,
+        protected ServerVersion        $serverVersion,
     ) {
-        $this->urlGenerator  = $urlGenerator;
-        $this->shareSettings = $shareSettings;
-        $this->themeSettings = $themeSettings;
-        $this->config        = $config;
     }
 
     /**
@@ -131,7 +109,7 @@ class ServerSettingsHelper {
      * @return string
      */
     protected function getServerVersion(): string {
-        return (string) ServerVersion::getMajorVersion();
+        return (string) $this->serverVersion->getMajorVersion();
     }
 
     /**

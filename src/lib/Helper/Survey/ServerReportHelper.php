@@ -11,7 +11,6 @@ use OCA\Passwords\Db\ShareMapper;
 use OCA\Passwords\Db\TagRevisionMapper;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\AppSettings\ServiceSettingsHelper;
-use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCA\Passwords\Helper\Image\AutoImageHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\HelperService;
@@ -28,46 +27,6 @@ class ServerReportHelper {
     const string API_URL = 'https://statistics.passwordsapp.org/api.php';
 
     /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var ShareMapper
-     */
-    protected ShareMapper $shareMapper;
-
-    /**
-     * @var ServiceSettingsHelper
-     */
-    protected ServiceSettingsHelper $serviceSettings;
-
-    /**
-     * @var TagRevisionMapper
-     */
-    protected TagRevisionMapper $tagRevisionMapper;
-
-    /**
-     * @var FolderRevisionMapper
-     */
-    protected FolderRevisionMapper $folderRevisionMapper;
-
-    /**
-     * @var PasswordRevisionMapper
-     */
-    protected PasswordRevisionMapper $passwordRevisionMapper;
-
-    /**
-     * @var HelperService
-     */
-    protected HelperService $helperService;
-
-    /**
-     * @var IClientService
-     */
-    protected IClientService $httpClientService;
-
-    /**
      * ServerReportHelper constructor.
      *
      * @param ShareMapper            $shareMapper
@@ -76,27 +35,21 @@ class ServerReportHelper {
      * @param IClientService         $httpClientService
      * @param TagRevisionMapper      $tagRevisionMapper
      * @param ServiceSettingsHelper  $serviceSettings
+     * @param ServerVersion          $serverVersion
      * @param FolderRevisionMapper   $folderRevisionMapper
      * @param PasswordRevisionMapper $passwordRevisionMapper
      */
     public function __construct(
-        ShareMapper            $shareMapper,
-        ConfigurationService   $config,
-        HelperService          $helperService,
-        IClientService         $httpClientService,
-        TagRevisionMapper      $tagRevisionMapper,
-        ServiceSettingsHelper  $serviceSettings,
-        FolderRevisionMapper   $folderRevisionMapper,
-        PasswordRevisionMapper $passwordRevisionMapper
+        protected ShareMapper            $shareMapper,
+        protected ConfigurationService   $config,
+        protected HelperService          $helperService,
+        protected IClientService         $httpClientService,
+        protected TagRevisionMapper      $tagRevisionMapper,
+        protected ServiceSettingsHelper  $serviceSettings,
+        protected ServerVersion          $serverVersion,
+        protected FolderRevisionMapper   $folderRevisionMapper,
+        protected PasswordRevisionMapper $passwordRevisionMapper
     ) {
-        $this->config                 = $config;
-        $this->shareMapper            = $shareMapper;
-        $this->helperService          = $helperService;
-        $this->serviceSettings        = $serviceSettings;
-        $this->httpClientService      = $httpClientService;
-        $this->tagRevisionMapper      = $tagRevisionMapper;
-        $this->folderRevisionMapper   = $folderRevisionMapper;
-        $this->passwordRevisionMapper = $passwordRevisionMapper;
     }
 
     /**
@@ -145,7 +98,7 @@ class ServerReportHelper {
      */
     protected function getVersions(): array {
         return [
-            'server'  => ServerVersion::getVersionString(),
+            'server'  => $this->serverVersion->getVersionString(),
             'app'     => $this->config->getAppValue('installed_version'),
             'lsr'     => SystemRequirements::APP_LSR,
             'php'     => $this->config->getAppValue('web/php/version/string', phpversion()),
@@ -219,7 +172,7 @@ class ServerReportHelper {
         if($performance < 0 || $performance > 6) $performance = 2;
 
         return [
-            'channel'     => ServerVersion::getChannel(),
+            'channel'     => $this->serverVersion->getChannel(),
             'nightlies'   => $this->config->getAppValue('nightly/enabled', '0') === '1',
             'handbook'    => $this->config->getAppValue('handbook/url') !== null,
             'performance' => intval($performance)

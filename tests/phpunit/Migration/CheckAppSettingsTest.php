@@ -10,6 +10,8 @@ namespace OCA\Passwords\Migration;
 use Exception;
 use OCP\IUser;
 use OC\Migration\SimpleOutput;
+use OCP\Migration\IOutput;
+use OCP\ServerVersion;
 use PHPUnit\Framework\TestCase;
 use OCA\Passwords\AppInfo\Application;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -58,6 +60,12 @@ class CheckAppSettingsTest extends TestCase {
      */
     protected $backgroundService;
 
+
+    /**
+     * @var MockObject|ServerVersion
+     */
+    protected $serverVersion;
+
     /**
      *
      */
@@ -67,9 +75,11 @@ class CheckAppSettingsTest extends TestCase {
         $this->notificationService = $this->createMock(NotificationService::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $this->backgroundService = $this->createMock(BackgroundJobService::class);
+        $this->serverVersion = $this->createMock(ServerVersion::class);
         $this->checkAppSettings = new CheckAppSettings(
-            $this->adminHelper, $this->configurationService, $this->notificationService, $this->settingsHelper, $this->backgroundService
+            $this->adminHelper, $this->configurationService, $this->serverVersion, $this->notificationService, $this->settingsHelper, $this->backgroundService
         );
+
     }
 
     /**
@@ -94,9 +104,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -117,9 +127,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -140,9 +150,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'value']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -163,9 +173,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => '', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -186,9 +196,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'key', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -202,7 +212,7 @@ class CheckAppSettingsTest extends TestCase {
         $this->notificationService
             ->expects($this->once())
             ->method('sendUpgradeRequiredNotification')
-            ->with('admin', 0, PHP_VERSION_ID, '2022.1.0');
+            ->with('admin', SystemRequirements::NC_NOTIFICATION_ID-1, PHP_VERSION_ID, '2022.1.0');
 
         $this->settingsHelper->method('get')->willReturnMap(
             [
@@ -218,14 +228,12 @@ class CheckAppSettingsTest extends TestCase {
                 ['nightly/enabled', null, Application::APP_NAME, '0'],
             ]
         );
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID-1);
 
-        \OC_Util::$ncVersion =  [0,0,0,0];
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
-        } finally {
-            \OC_Util::$ncVersion =  \OC_Util::$ncDefaultVersion;
         }
     }
 
@@ -246,9 +254,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => 'none']],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -269,9 +277,9 @@ class CheckAppSettingsTest extends TestCase {
                 ['preview.api', ['value' => '', 'depends' => ['service.preview' => ['test']]]],
             ]
         );
-        $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -293,9 +301,10 @@ class CheckAppSettingsTest extends TestCase {
         $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('1');
         $this->backgroundService->expects($this->once())->method('addNightlyUpdates');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
 
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -317,9 +326,10 @@ class CheckAppSettingsTest extends TestCase {
         $this->configurationService->method('getSystemValue')->with('version')->willReturn(SystemRequirements::NC_UPGRADE_MINIMUM.'.0.0.0');
         $this->configurationService->expects($this->once())->method('getAppValue')->with('nightly/enabled', '0')->willReturn('0');
         $this->backgroundService->expects($this->never())->method('addNightlyUpdates');
+        $this->serverVersion->expects($this->once())->method('getMajorVersion')->willReturn(SystemRequirements::NC_NOTIFICATION_ID);
 
         try {
-            $this->checkAppSettings->run(new SimpleOutput());
+            $this->checkAppSettings->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }

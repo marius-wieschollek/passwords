@@ -44,11 +44,6 @@ class HaveIBeenPwnedProviderTest extends TestCase {
     protected FileCacheService|MockObject $fileCacheService;
 
     /**
-     * @var UserRulesSecurityCheck|MockObject
-     */
-    protected UserRulesSecurityCheck|MockObject $userRulesCheck;
-
-    /**
      * @var ConfigurationService|MockObject
      */
     protected ConfigurationService|MockObject $config;
@@ -57,7 +52,6 @@ class HaveIBeenPwnedProviderTest extends TestCase {
         $this->logger            = $this->createMock(LoggingService::class);
         $this->httpClientService = $this->createMock(IClientService::class);
         $this->fileCacheService  = $this->createMock(FileCacheService::class);
-        $this->userRulesCheck    = $this->createMock(UserRulesSecurityCheck::class);
         $this->config            = $this->createMock(ConfigurationService::class);
 
         $this->fileCacheService->method('getCacheService')->willReturnSelf();
@@ -157,7 +151,6 @@ class HaveIBeenPwnedProviderTest extends TestCase {
             $this->logger,
             $this->httpClientService,
             $this->fileCacheService,
-            $this->userRulesCheck,
             $this->config
         );
     }

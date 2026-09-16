@@ -31,7 +31,8 @@ Prepare:
 PHPUnit:
   stage: testing
   script:
-    - npm run phpunit
+    - composer install --no-interaction --no-progress
+    - npm run phpunit:ci
 
 Compile:
   stage: compiling

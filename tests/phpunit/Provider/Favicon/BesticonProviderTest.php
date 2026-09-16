@@ -8,8 +8,6 @@
 namespace OCA\Passwords\Helper\Favicon;
 
 use Exception;
-use OC\Files\SimpleFS\SimpleFile;
-use OC\User\User;
 use OCA\Passwords\AppInfo\Application;
 use OCA\Passwords\Helper\Image\ImagickHelper;
 use OCA\Passwords\Helper\Time\DateTimeHelper;
@@ -19,12 +17,16 @@ use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\FileCacheService;
 use OCA\Passwords\Services\HelperService;
 use OCA\Passwords\Services\NotificationService;
+use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\Http\Client\IClient;
 use OCP\Http\Client\IClientService;
 use OCP\Http\Client\IResponse;
+use OCP\IConfig;
+use OCP\IUser;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
+use ReflectionException;
 
 /**
  * Class BesticonProviderTest
@@ -90,7 +92,7 @@ class BesticonProviderTest extends TestCase {
         $this->fileCacheService     = $this->createMock(FileCacheService::class);
         $this->notificationService  = $this->createMock(NotificationService::class);
         $this->logger               = $this->createMock(LoggerInterface::class);
-        $this->iConfigService       = $this->createMock(\OCP\IConfig::class);
+        $this->iConfigService       = $this->createMock(IConfig::class);
         $this->configurationService = $this->createMock(ConfigurationService::class);
         $helperService->method('getImageHelper')->willReturn($this->imageHelper);
         $this->fileCacheService->method('getCacheService')->willReturn($this->fileCacheService);
@@ -112,7 +114,7 @@ class BesticonProviderTest extends TestCase {
      */
     public function testCachedFaviconReturned() {
         $fileName = 'bi_www.example.com.png';
-        $file     = new SimpleFile();
+        $file     = $this->createMock(ISimpleFile::class);
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(true);
         $this->fileCacheService->method('getFile')->with($fileName)->willReturn($file);
@@ -130,7 +132,7 @@ class BesticonProviderTest extends TestCase {
         $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
@@ -153,7 +155,7 @@ class BesticonProviderTest extends TestCase {
         $apiRequestUrl = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=https://{$domain}&formats=png,ico,gif,jpg";
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(0);
@@ -180,7 +182,7 @@ class BesticonProviderTest extends TestCase {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
@@ -207,7 +209,7 @@ class BesticonProviderTest extends TestCase {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
@@ -235,7 +237,7 @@ class BesticonProviderTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
@@ -250,7 +252,7 @@ class BesticonProviderTest extends TestCase {
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $user = $this->createMock(User::class);
+        $user = $this->createMock(IUser::class);
         $user->method('getUID')->willReturn('admin');
         $this->adminService->method('getAdmins')->willReturn([$user]);
 
@@ -268,7 +270,7 @@ class BesticonProviderTest extends TestCase {
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
         $limit         = $this->besticonHelper::BESTICON_INSTANCE_LIMIT;
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->dateTimeHelper->method('getInternationalWeek')->willReturn(10);
@@ -284,7 +286,7 @@ class BesticonProviderTest extends TestCase {
         $this->httpClientService->method('newClient')->willReturn($client);
         $this->imageHelper->method('supportsImage')->with($faviconData)->willReturn(true);
 
-        $user = $this->createMock(User::class);
+        $user = $this->createMock(IUser::class);
         $user->method('getUID')->willReturn('admin');
         $this->adminService->method('getAdmins')->willReturn([$user]);
 
@@ -302,7 +304,7 @@ class BesticonProviderTest extends TestCase {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
@@ -325,7 +327,7 @@ class BesticonProviderTest extends TestCase {
         $apiRequestUrl2 = "{$serviceUrl}?size=16..128..256&fallback_icon_color=e74c3c&url=http://{$domain}&formats=png,ico,gif,jpg";
         $faviconData    = 'data';
         $fileName       = 'bi_www.example.com.png';
-        $file           = new SimpleFile();
+        $file           = $this->createMock(ISimpleFile::class);
 
         $client  = $this->getHttpClientMock($faviconData, 500);
         $client2 = $this->getHttpClientMock();
@@ -395,7 +397,7 @@ class BesticonProviderTest extends TestCase {
         $domain        = 'www.example.com';
         $faviconData   = 'data';
         $fileName      = 'bi_www.example.com.png';
-        $file          = new SimpleFile();
+        $file          = $this->createMock(ISimpleFile::class);
         $client        = $this->getHttpClientMock();
 
         $this->fileCacheService->method('hasFile')->with($fileName)->willReturn(false);
@@ -414,7 +416,7 @@ class BesticonProviderTest extends TestCase {
      * @param int    $status
      *
      * @return IClient
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     protected function getHttpClientMock($faviconData = 'data', $status = 200) {
         /** @var IResponse|MockObject $response */

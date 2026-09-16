@@ -12,6 +12,9 @@ use OC\Files\SimpleFS\SimpleFile;
 use OC\Files\SimpleFS\SimpleFolder;
 use OC\Migration\SimpleOutput;
 use OCA\Passwords\Services\FileCacheService;
+use OCP\Files\SimpleFS\ISimpleFile;
+use OCP\Files\SimpleFS\ISimpleFolder;
+use OCP\Migration\IOutput;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -64,10 +67,11 @@ class ClearAppCachesTest extends TestCase {
                                    return true;
                                });
 
-        $this->fileCacheService->method('getCache')->willReturn(new SimpleFolder());
+        $folder = $this->createMock(ISimpleFolder::class);
+        $this->fileCacheService->method('getCache')->willReturn($folder);
 
         try {
-            $this->clearAppCaches->run(new SimpleOutput());
+            $this->clearAppCaches->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }
@@ -79,15 +83,15 @@ class ClearAppCachesTest extends TestCase {
     public function testDeletesBrokenFavicons() {
         $this->fileCacheService->method('clearCache')->willReturn(true);
 
-        $goodFavicon = $this->createMock(SimpleFile::class);
+        $goodFavicon = $this->createMock(ISimpleFile::class);
         $goodFavicon->expects($this->once())->method('getSize')->willReturn(123);
         $goodFavicon->expects($this->never())->method('delete');
 
-        $badFavicon = $this->createMock(SimpleFile::class);
+        $badFavicon = $this->createMock(ISimpleFile::class);
         $badFavicon->expects($this->once())->method('getSize')->willReturn(0);
         $badFavicon->expects($this->once())->method('delete');
 
-        $folder = $this->createMock(SimpleFolder::class);
+        $folder = $this->createMock(ISimpleFolder::class);
         $folder->expects($this->once())
                ->method('getDirectoryListing')
                ->willReturn([$goodFavicon, $badFavicon]);
@@ -95,7 +99,7 @@ class ClearAppCachesTest extends TestCase {
         $this->fileCacheService->method('getCache')->willReturn($folder);
 
         try {
-            $this->clearAppCaches->run(new SimpleOutput());
+            $this->clearAppCaches->run($this->createMock(IOutput::class));
         } catch(Exception $e) {
             $this->fail($e->getMessage());
         }

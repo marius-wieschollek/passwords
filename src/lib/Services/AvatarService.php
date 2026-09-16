@@ -8,7 +8,6 @@
 namespace OCA\Passwords\Services;
 
 use OC\Avatar\GuestAvatar;
-use OCA\Passwords\Helper\Compatibility\ServerVersion;
 use OCP\Files\SimpleFS\ISimpleFile;
 use OCP\IAvatarManager;
 use OCP\IConfig;
@@ -63,11 +62,7 @@ class AvatarService {
 
             return $avatar->getFile($size);
         } else {
-            if(ServerVersion::getMajorVersion() < 32) {
-                return (new GuestAvatar($userId, $this->logger))->getFile($size);
-            } else {
-                return (new GuestAvatar($userId, $this->config, $this->logger))->getFile($size);
-            }
+            return (new GuestAvatar($userId, $this->config, $this->logger))->getFile($size);
         }
     }
 

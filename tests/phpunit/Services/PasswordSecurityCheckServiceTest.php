@@ -15,10 +15,14 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Helper\SecurityCheck\PasswordDatabaseUpdateHelper;
 use OCA\Passwords\Helper\SecurityCheck\UserRulesSecurityCheck;
 use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
+use OCA\Test\Passwords\Entities\CreatesEntitiesTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class PasswordSecurityCheckServiceTest extends TestCase {
+
+    use CreatesEntitiesTrait;
+
     /**
      * @var SecurityCheckProviderInterface|MockObject
      */
@@ -43,17 +47,22 @@ class PasswordSecurityCheckServiceTest extends TestCase {
         $this->securityCheckProvider        = $this->createMock(SecurityCheckProviderInterface::class);
         $this->userRulesCheck               = $this->createMock(UserRulesSecurityCheck::class);
         $this->passwordDatabaseUpdateHelper = $this->createMock(PasswordDatabaseUpdateHelper::class);
+        $this->loggingService               = $this->createMock(LoggingService::class);
 
         $this->passwordSecurityCheckService = new PasswordSecurityCheckService(
             $this->securityCheckProvider,
             $this->userRulesCheck,
-            $this->passwordDatabaseUpdateHelper
+            $this->passwordDatabaseUpdateHelper,
+            $this->loggingService
         );
     }
 
     public function testGetRevisionSecurityLevelGood() {
-        $passwordRevision = $this->getPasswordRevisionMock();
-        $passwordRevision->method('getHash')->willReturn(sha1('secure-password'));
+        $passwordRevision = $this->createPasswordRevision(
+            [
+                'hash' => sha1('secure-password')
+            ]
+        );
 
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(true);
@@ -64,8 +73,11 @@ class PasswordSecurityCheckServiceTest extends TestCase {
     }
 
     public function testGetRevisionSecurityLevelBroken() {
-        $passwordRevision = $this->getPasswordRevisionMock();
-        $passwordRevision->method('getHash')->willReturn(sha1('secure-password'));
+        $passwordRevision = $this->createPasswordRevision(
+            [
+                'hash' => sha1('bad-password')
+            ]
+        );
 
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(false);
@@ -76,8 +88,11 @@ class PasswordSecurityCheckServiceTest extends TestCase {
     }
 
     public function testGetRevisionSecurityLevelUserRules() {
-        $passwordRevision = $this->getPasswordRevisionMock();
-        $passwordRevision->method('getHash')->willReturn(sha1('secure-password'));
+        $passwordRevision = $this->createPasswordRevision(
+            [
+                'hash' => sha1('weak-password')
+            ]
+        );
 
         $userRulesResult = [PasswordSecurityCheckService::LEVEL_WEAK, PasswordSecurityCheckService::STATUS_DUPLICATE];
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn($userRulesResult);
@@ -89,8 +104,11 @@ class PasswordSecurityCheckServiceTest extends TestCase {
     }
 
     public function testGetRevisionSecurityLevelNoHash() {
-        $passwordRevision = $this->getPasswordRevisionMock();
-        $passwordRevision->method('getHash')->willReturn('');
+        $passwordRevision = $this->createPasswordRevision(
+            [
+                'hash' => ''
+            ]
+        );
 
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(false);
@@ -183,7 +201,6 @@ class PasswordSecurityCheckServiceTest extends TestCase {
     protected function getPasswordRevisionMock(): MockObject|PasswordRevision {
         $passwordRevision = $this
             ->getMockBuilder(PasswordRevision::class)
-            ->addMethods(['getPassword', 'getHash'])
             ->getMock();
 
         return $passwordRevision;

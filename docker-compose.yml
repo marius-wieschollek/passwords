@@ -1,5 +1,3 @@
-version: '2'
-
 services:
   mysql:
     image: mariadb
@@ -84,6 +82,16 @@ services:
     stop_grace_period: 5s
     cap_add:
       - SYS_NICE
+
+  phpunit:
+    build: ./docker/phpunit/
+    container_name: "passwords-phpunit"
+    profiles: [ "tools" ]
+    volumes:
+      - ./:/app
+    working_dir: /app
+    environment:
+      - XDEBUG_MODE=off
 
 volumes:
   mysql:

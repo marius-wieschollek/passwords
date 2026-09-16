@@ -20,3 +20,5 @@ rector-shells.php
 /src/bundle-report.html
 /src/report-stats.json
 /cypress/screenshots/
+/vendor/
+/.phpunit.cache/

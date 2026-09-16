@@ -8,8 +8,11 @@
 namespace OCA\Passwords\Helper\Settings;
 
 use OC_Defaults;
+use OC_Defaults_With_Everything;
+use OC_Defaults_With_NoName;
 use OCA\Passwords\AppInfo\Application;
-use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Integrations\ThemingIntegration;
+use OCA\Passwords\Integrations\UnsplashIntegration;
 use OCP\IURLGenerator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -22,415 +25,326 @@ use PHPUnit\Framework\TestCase;
 class ThemeSettingsHelperTest extends TestCase {
 
     /**
-     * @var ThemeSettingsHelper
-     */
-    protected $themeSettingsHelper;
-
-    /**
-     * @var MockObject|ConfigurationService
-     */
-    protected $configurationService;
-
-    /**
-     * @var OC_Defaults
+     * @var MockObject|OC_Defaults
      */
     protected $themingDefaults;
 
     /**
-     * @var IURLGenerator
+     * @var MockObject|IURLGenerator
      */
     protected $urlGenerator;
 
     /**
-     *
+     * @var MockObject|UnsplashIntegration
      */
-    protected function setUp(): void {
-        $this->configurationService = $this->createMock(ConfigurationService::class);
-        $this->themingDefaults      = $this->createMock(\OC_Defaults::class);
-        $this->urlGenerator         = $this->createMock(IURLGenerator::class);
-        $this->themeSettingsHelper  = new ThemeSettingsHelper($this->configurationService, $this->themingDefaults, $this->urlGenerator);
-    }
+    protected $unsplashIntegration;
 
     /**
-     * Test if default text color is returned correctly
+     * @var MockObject|ThemingIntegration
      */
-    public function testGetTextColor() {
-        $this->themingDefaults->method('getTextColorPrimary')->willReturn('#000000');
-        $this->themingDefaults->expects($this->once())->method('getTextColorPrimary');
+    protected $themingIntegration;
 
-        $result = $this->themeSettingsHelper->get('color.text');
+    public function testGetPrimaryColorDefault() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorPrimary');
+
+        $result = $this->getThemeSettingsHelper()->get('color.primary');
+        self::assertEquals('#00679e', $result);
+    }
+
+    public function testGetPrimaryColorFromOcDefaults() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorPrimary');
+
+        $this->themingDefaults->expects($this->once())->method('getColorPrimary')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.primary');
+        self::assertEquals('#123456', $result);
+    }
+
+    public function testGetPrimaryColorFromTheming() {
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getColorPrimary')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.primary');
+        self::assertEquals('#123456', $result);
+    }
+
+    public function testGetTextColorDefault() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getTextColorPrimary');
+
+        $result = $this->getThemeSettingsHelper()->get('color.text');
         self::assertEquals('#000000', $result);
     }
 
-    /**
-     * Test if default primary color is returned correctly
-     */
-    public function testGetPrimaryColor() {
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
-        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
-        $this->themingDefaults->expects($this->once())->method('getColorPrimary');
+    public function testGetTextColorFromOcDefaults() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
 
-        $result = $this->themeSettingsHelper->get('color.primary');
-        self::assertEquals('#0082c9', $result);
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getTextColorPrimary');
+
+        $this->themingDefaults->expects($this->once())->method('getTextColorPrimary')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.text');
+        self::assertEquals('#123456', $result);
     }
 
-    /**
-     * Test if breezedark primary color is returned correctly when the app is enabled
-     */
-    public function testGetPrimaryColorWithBreezedarkTheme() {
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(true);
-        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
-        $this->themingDefaults->expects($this->never())->method('getColorPrimary');
+    public function testGetTextColorFromTheming() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getTextColorPrimary')->willReturn('#123456');
 
-        $result = $this->themeSettingsHelper->get('color.primary');
-        self::assertEquals('#3daee9', $result);
+        $result = $this->getThemeSettingsHelper()->get('color.text');
+        self::assertEquals('#123456', $result);
     }
 
-    /**
-     * Test if breezedark primary color is returned correctly when the app is enabled
-     */
-    public function testGetUserPrimaryColor() {
-        $this->configurationService->method('getUserValue')->with('background_color', '', null, 'theming')->willReturn('#ff00ff');
-        $this->configurationService->expects($this->once())->method('getUserValue');
-        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
-        $this->themingDefaults->expects($this->never())->method('getColorPrimary');
+    public function testGetBackgroundColorDefault() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackground');
 
-        $result = $this->themeSettingsHelper->get('color.primary');
-        self::assertEquals('#ff00ff', $result);
-    }
-
-    /**
-     * Test if default background color is returned correctly
-     */
-    public function testGetBackgroundColor() {
-        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
-
-        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
-
-        $result = $this->themeSettingsHelper->get('color.background');
+        $result = $this->getThemeSettingsHelper()->get('color.background');
         self::assertEquals('#ffffff', $result);
     }
 
-    /**
-     * Test if accessibility background color is returned if dark theme enabled
-     */
-    public function testGetBackgroundColorWithAccessibility() {
-        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('themedark');
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+    public function testGetBackgroundColorFromOcDefaults() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
 
-        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
-        $this->configurationService->expects($this->never())->method('isAppEnabled');
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackground');
 
-        $result = $this->themeSettingsHelper->get('color.background');
-        self::assertEquals('#181818', $result);
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background');
+        self::assertEquals('#123456', $result);
     }
 
-    /**
-     * Test if dark theme background color is returned if dark theme enabled
-     */
-    public function testGetBackgroundColorWithDarkTheme() {
-        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('dark');
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(false);
+    public function testGetBackgroundColorFromTheming() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getColorBackground')->willReturn('#123456');
 
-        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
-        $this->configurationService->expects($this->never())->method('isAppEnabled');
-
-        $result = $this->themeSettingsHelper->get('color.background');
-        self::assertEquals('#181818', $result);
+        $result = $this->getThemeSettingsHelper()->get('color.background');
+        self::assertEquals('#123456', $result);
     }
 
-    /**
-     * Test if breezedark primary color is returned correctly when the app is enabled
-     */
-    public function testGetBackgroundColorWithBreezedarkTheme() {
-        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
-        $this->configurationService->method('isAppEnabled')->with('breezedark')->willReturn(true);
+    public function testGetLabelDefault() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getName');
 
-        $this->configurationService->expects($this->once())->method('getUserValue')->with('theme', 'none', null, 'accessibility');
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('breezedark');
-
-        $result = $this->themeSettingsHelper->get('color.background');
-        self::assertEquals('#31363b', $result);
-    }
-
-    /**
-     * Test if server name is returned correctly
-     */
-    public function testGetLabel() {
-        $this->themingDefaults->method('getEntity')->willReturn('Nextcloud');
-        $this->themingDefaults->expects($this->once())->method('getEntity');
-
-        $result = $this->themeSettingsHelper->get('label');
+        $result = $this->getThemeSettingsHelper()->get('label');
         self::assertEquals('Nextcloud', $result);
     }
 
-    /**
-     * Test if the default background image is returned correctly
-     */
-    public function testGetBackgroundImage() {
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+    public function testGetLabelDefaultFromOcName() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+        $this->themingDefaults->expects($this->once())->method('getName')->willReturn('Label1');
+        $this->themingDefaults->expects($this->never())->method('getEntity')->willReturn('Label2');
 
-        $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1'])
-                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
-        $this->urlGenerator->method('getAbsoluteURL')
-                           ->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1')
-                           ->willReturn('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1']);
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1');
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getName');
 
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
-        $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
-
-        $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1', $result);
+        $result = $this->getThemeSettingsHelper()->get('label');
+        self::assertEquals('Label1', $result);
     }
 
-    /**
-     * Test if background image from theme is returned if OC_Defaults supports it
-     */
-    public function testGetThemedBackgroundImage() {
-        $themingDefaults = $this->getMockBuilder(OC_Defaults::class)
-                                ->addMethods(['getBackground'])
-                                ->getMock();
-        $themingDefaults->method('getBackground')->willReturn('/theming/img/background.png');
+    public function testGetLabelDefaultFromOcEntity() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_NoName::class);
+        $this->themingDefaults->expects($this->once())->method('getEntity')->willReturn('Label2');
 
-        $this->urlGenerator->method('imagePath')->with('core', 'background.png')->willReturn('/core/img/background.png');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/theming/img/background.png')->willReturn('https://cloud.com/theming/img/background.png');
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getName');
+
+        $result = $this->getThemeSettingsHelper()->get('label');
+        self::assertEquals('Label2', $result);
+    }
+
+    public function testGetLabelFromTheming() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getName')->willReturn('LabelTheming');
+
+        $result = $this->getThemeSettingsHelper()->get('label');
+        self::assertEquals('LabelTheming', $result);
+    }
+
+    public function testGetBackgroundImageDefault() {
+        $this->unsplashIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->unsplashIntegration->expects($this->never())->method('getBackgroundImage');
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getBackgroundImage');
+
+        $backgroundImage = 'https://example.com' . ThemeSettingsHelper::DEFAULT_BACKGROUND_PATH;
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('getAbsoluteURL')
+            ->with(ThemeSettingsHelper::DEFAULT_BACKGROUND_PATH)
+            ->willReturn(
+                $backgroundImage
+            );
+
+        $result = $this->getThemeSettingsHelper()->get('background');
+        self::assertEquals($backgroundImage, $result);
+    }
+
+    public function testGetBackgroundImageFromTheming() {
+        $backgroundImage = 'https://example.com/theming_image.png';
+
+        $this->unsplashIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->unsplashIntegration->expects($this->never())->method('getBackgroundImage');
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getBackgroundImage')->willReturn($backgroundImage);
+        $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
+
+        $result = $this->getThemeSettingsHelper()->get('background');
+        self::assertEquals($backgroundImage, $result);
+    }
+
+    public function testGetBackgroundImageFromUnsplash() {
+        $backgroundImage = 'https://example.com/unsplash_image.png';
+
+        $this->unsplashIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->unsplashIntegration->expects($this->once())->method('getBackgroundImage')->willReturn($backgroundImage);
+        $this->themingIntegration->expects($this->never())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getBackgroundImage');
+        $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
+
+        $result = $this->getThemeSettingsHelper()->get('background');
+        self::assertEquals($backgroundImage, $result);
+    }
+
+    public function testGetLogoFromOcDefaults() {
+        $logoUrl = 'https://example.com/logo.png';
+
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+        $this->themingDefaults->expects($this->once())->method('getLogo')->willReturn('logo.png');
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getLogoIcon');
+
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('getAbsoluteURL')
+            ->with('logo.png')
+            ->willReturn($logoUrl);
+
+        $result = $this->getThemeSettingsHelper()->get('logo');
+        self::assertEquals($logoUrl, $result);
+    }
+
+    public function testGetLogoFromTheming() {
+        $logoUrl = 'https://example.com/logo.png';
+
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+        $this->themingDefaults->expects($this->never())->method('getLogo');
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getLogoIcon')->willReturn($logoUrl);
+
+        $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
+
+        $result = $this->getThemeSettingsHelper()->get('logo');
+        self::assertEquals($logoUrl, $result);
+    }
+
+    public function testGetAppIconDefault() {
+        $iconUrl = 'https://example.com/path/app-themed.svg';
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getAppIcon');
+
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('imagePath')
+            ->with(Application::APP_NAME,'app-themed.svg')
+            ->willReturn('/path/app-themed.svg');
+
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('getAbsoluteURL')
+            ->with('/path/app-themed.svg')
+            ->willReturn($iconUrl);
+
+        $result = $this->getThemeSettingsHelper()->get('app.icon');
+        self::assertEquals($iconUrl, $result);
+    }
+
+    public function testGetAppIconFromTheming() {
+        $iconUrl = 'https://example.com/path/app-themed.svg';
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getAppIcon')->willReturn($iconUrl);
+
         $this->urlGenerator->expects($this->never())->method('imagePath');
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/theming/img/background.png');
 
-        $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
+        $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
 
-        $themeSettingsHelper = new ThemeSettingsHelper($this->configurationService, $themingDefaults, $this->urlGenerator);
-        $result              = $themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/theming/img/background.png', $result);
+        $result = $this->getThemeSettingsHelper()->get('app.icon');
+        self::assertEquals($iconUrl, $result);
     }
 
-    /**
-     * Test if unspash image is returned when the app is enabled
-     */
-    public function testGetSplashBackgroundImage() {
-        $usSettings = $this->createMock(\OCA\Unsplash\Services\SettingsService::class);
-        $usSettings->method('headerbackgroundLink')->willReturn('https://source.unsplash.com/random/featured/?nature');
+    public function testGetFolderIconDefault() {
+        $iconUrl = 'https://example.com/path/folder-themed.svg';
 
-        \OC::$server = $this->createMock(\OC\Server::class);
-        \OC::$server->method('get')->willReturn($usSettings);
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getFolderIcon');
 
-        $this->urlGenerator->method('imagePath')->with('core', 'background.png')->willReturn('/core/img/background.png');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/background.png')->willReturn('https://cloud.com/core/img/background.png');
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('imagePath')
+            ->with('core', 'filetypes/folder.svg')
+            ->willReturn('/path/folder-themed.svg');
 
-        $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(true);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('unsplash');
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('getAbsoluteURL')
+            ->with('/path/folder-themed.svg')
+            ->willReturn($iconUrl);
 
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
-
-        $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://source.unsplash.com/random/featured/?nature', $result);
+        $result = $this->getThemeSettingsHelper()->get('folder.icon');
+        self::assertEquals($iconUrl, $result);
     }
 
-    /**
-     * Test if user image is returned if user has image selected
-     */
-    public function testGetUserBackgroundImage() {
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
+    public function testGetFolderIconFromTheming() {
+        $iconUrl = 'https://example.com/path/folder-themed.svg';
 
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
-        $this->configurationService->method('getUserValue')->willReturnMap(
-            [
-                ['background_image', '', null, 'theming', 'user-background.jpg'],
-                ['userCacheBuster', '0', null, 'theming', '1']
-            ]
-        );
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getFolderIcon')->willReturn($iconUrl);
 
-        $this->urlGenerator->method('linkTo')->with('theming', 'img/background/user-background.jpg', ['v' => '1_1'])->willReturn('/apps/theming/img/user-background.jpg?v=1_1');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/apps/theming/img/user-background.jpg?v=1_1')->willReturn('https://cloud.com/apps/theming/img/user-background.jpg?v=1_1');
-
-        $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/user-background.jpg?v=1_1', $result);
-    }
-
-    /**
-     * Test if user image is returned if user has custom image selected
-     */
-    public function testGetUserCustomBackgroundImage() {
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
-
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
-        $this->configurationService->method('getUserValue')->willReturnMap(
-            [
-                ['background_image', '', null, 'theming', 'custom'],
-                ['userCacheBuster', '0', null, 'theming', '1']
-            ]
-        );
-
-        $this->urlGenerator->method('linkToRouteAbsolute')->with('theming.userTheme.getBackground', ['v' => '1_1'])->willReturn(
-            'https://cloud.com/theming/img/user-custom-background.jpg?v=1_1'
-        );
-
-        $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/theming/img/user-custom-background.jpg?v=1_1', $result);
-    }
-
-    /**
-     * Test if user image is returned if user has custom image selected
-     */
-    public function testGetUserNoBackgroundImage() {
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(false);
-
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
-        $this->configurationService->method('getUserValue')->willReturnMap(
-            [
-                ['background', '', null, 'theming', ''],
-                ['userCacheBuster', '0', null, 'theming', '1']
-            ]
-        );
-        $this->configurationService->method('isAppEnabled')->with('unsplash')->willReturn(false);
-
-        $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1_1'])
-                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
-        $this->urlGenerator->method('getAbsoluteURL')
-                           ->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1')
-                           ->willReturn('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
-        $this->urlGenerator->expects($this->once())->method('linkTo')->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1_1']);
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1');
-
-        $result = $this->themeSettingsHelper->get('background');
-        self::assertEquals('https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp?v=1_1', $result);
-    }
-
-    /**
-     * Test if the logo is returned correctly
-     */
-    public function testGetLogo() {
-        $this->themingDefaults->method('getLogo')->willReturn('/core/img/logo.svg');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/logo.svg')->willReturn('https://cloud.com/core/img/logo.svg');
-
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/core/img/logo.svg');
-
-        $result = $this->themeSettingsHelper->get('logo');
-        self::assertEquals('https://cloud.com/core/img/logo.svg', $result);
-    }
-
-    /**
-     * Test if the default app icon is returned correctly
-     */
-    public function testGetAppIcon() {
-        $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(false);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-
-        $this->urlGenerator->method('imagePath')->with(Application::APP_NAME, 'app-themed.svg')->willReturn('/apps/passwords/app-themed.svg');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/apps/passwords/app-themed.svg')->willReturn('https://cloud.com/apps/passwords/app-themed.svg');
-
-        $this->urlGenerator->expects($this->once())->method('imagePath')->with(Application::APP_NAME, 'app-themed.svg');
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/apps/passwords/app-themed.svg');
-
-        $result = $this->themeSettingsHelper->get('app.icon');
-        self::assertEquals('https://cloud.com/apps/passwords/app-themed.svg', $result);
-    }
-
-    /**
-     * Test if the themed app icon is returned correctly
-     */
-    public function testGetThemedAppIcon() {
-        $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(true);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(2);
-        $this->configurationService->expects($this->once())->method('getAppValueInt')->with('cachebuster', 0, 'theming');
-
-        $this->urlGenerator->method('linkToRouteAbsolute')
-                           ->with('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => '2'])
-                           ->willReturn('https://cloud.com/apps/theming/passwords/app-themed.svg');
-
-        $this->urlGenerator->expects($this->once())
-                           ->method('linkToRouteAbsolute')
-                           ->with('theming.Icon.getThemedIcon', ['app' => Application::APP_NAME, 'image' => 'app-themed.svg', 'v' => '2']);
         $this->urlGenerator->expects($this->never())->method('imagePath');
         $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
 
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
-
-        $result = $this->themeSettingsHelper->get('app.icon');
-        self::assertEquals('https://cloud.com/apps/theming/passwords/app-themed.svg', $result);
+        $result = $this->getThemeSettingsHelper()->get('folder.icon');
+        self::assertEquals($iconUrl, $result);
     }
 
-    /**
-     * Test if the default folder icon is returned correctly
-     */
-    public function testGetFolderIcon() {
-        $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(false);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-
-        $this->urlGenerator->method('imagePath')->with('core', 'filetypes/folder.svg')->willReturn('/core/img/filetypes/folder.svg');
-        $this->urlGenerator->method('getAbsoluteURL')->with('/core/img/filetypes/folder.svg')->willReturn('https://cloud.com/core/img/filetypes/folder.svg');
-
-        $this->urlGenerator->expects($this->once())->method('imagePath')->with('core', 'filetypes/folder.svg');
-        $this->urlGenerator->expects($this->once())->method('getAbsoluteURL')->with('/core/img/filetypes/folder.svg');
-
-        $result = $this->themeSettingsHelper->get('folder.icon');
-        self::assertEquals('https://cloud.com/core/img/filetypes/folder.svg', $result);
-    }
-
-    /**
-     * Test if the themed folder icon is returned correctly
-     */
-    public function testGetThemedFolderIcon() {
-        $this->configurationService->method('isAppEnabled')->with('theming')->willReturn(true);
-        $this->configurationService->expects($this->once())->method('isAppEnabled')->with('theming');
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(2);
-        $this->configurationService->expects($this->once())->method('getAppValueInt')->with('cachebuster', 0, 'theming');
-
-        $this->urlGenerator->method('linkToRouteAbsolute')
-                           ->with('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => '2'])
-                           ->willReturn('https://cloud.com/apps/theming/filetypes/folder.svg');
-
-        $this->urlGenerator->expects($this->once())
-                           ->method('linkToRouteAbsolute')
-                           ->with('theming.Icon.getThemedIcon', ['app' => 'core', 'image' => 'filetypes/folder.svg', 'v' => '2']);
-        $this->urlGenerator->expects($this->never())->method('imagePath');
-        $this->urlGenerator->expects($this->never())->method('getAbsoluteURL');
-
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
-
-        $result = $this->themeSettingsHelper->get('folder.icon');
-        self::assertEquals('https://cloud.com/apps/theming/filetypes/folder.svg', $result);
-    }
 
     /**
      * Test if the list theme settings method works
      */
     public function testListThemeSettings() {
         $expected = [
-            'server.theme.color.primary'    => '#0082c9',
-            'server.theme.color.text'       => '#ffffff',
-            'server.theme.color.background' => '#ffffff',
-            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp',
+            'server.theme.color.primary'    => '#123456',
+            'server.theme.color.text'       => '#456789',
+            'server.theme.color.background' => '#789123',
+            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/background.webp',
             'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
             'server.theme.label'            => 'Nextcloud',
             'server.theme.app.icon'         => 'https://cloud.com/apps/passwords/app-themed.svg',
             'server.theme.folder.icon'      => 'https://cloud.com/core/img/filetypes/folder.svg'
         ];
 
-        $this->configurationService->method('isAppEnabled')->willReturn(false);
-        $this->configurationService->method('getAppValueInt')->with('cachebuster', 0, 'theming')->willReturn(1);
-        $this->configurationService->method('getUserValue')->with('theme', 'none', null, 'accessibility')->willReturn('none');
 
-        $this->themingDefaults->method('getColorPrimary')->willReturn('#0082c9');
-        $this->themingDefaults->method('getTextColorPrimary')->willReturn('#ffffff');
+        $this->themingIntegration->method('isAvailable')->willReturn(false);
+        $this->unsplashIntegration->method('isAvailable')->willReturn(false);
+
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+        $this->themingDefaults->method('getColorPrimary')->willReturn('#123456');
+        $this->themingDefaults->method('getTextColorPrimary')->willReturn('#456789');
+        $this->themingDefaults->method('getColorBackground')->willReturn('#789123');
         $this->themingDefaults->method('getLogo')->willReturn('/core/img/logo.svg');
-        $this->themingDefaults->method('getEntity')->willReturn('Nextcloud');
-        $this->themingDefaults->method('isUserThemingDisabled')->willReturn(true);
+        $this->themingDefaults->method('getName')->willReturn('Nextcloud');
 
-        $this->urlGenerator->method('linkTo')
-                           ->with('theming', 'img/background/jenna-kim-the-globe.webp', ['v' => '1'])
-                           ->willReturn('/apps/theming/img/background/jenna-kim-the-globe.webp');
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
             [
@@ -444,11 +358,35 @@ class ThemeSettingsHelperTest extends TestCase {
                 ['/core/img/logo.svg', 'https://cloud.com/core/img/logo.svg'],
                 ['/apps/passwords/app-themed.svg', 'https://cloud.com/apps/passwords/app-themed.svg'],
                 ['/core/img/filetypes/folder.svg', 'https://cloud.com/core/img/filetypes/folder.svg'],
-                ['/apps/theming/img/background/jenna-kim-the-globe.webp', 'https://cloud.com/apps/theming/img/background/jenna-kim-the-globe.webp'],
+                [ThemeSettingsHelper::DEFAULT_BACKGROUND_PATH, 'https://cloud.com/apps/theming/img/background/background.webp'],
             ]
         );
 
-        $result = $this->themeSettingsHelper->list();
+        $result = $this->getThemeSettingsHelper()->list();
         self::assertEquals($expected, $result);
+    }
+
+    /**
+     *
+     */
+    protected function setUp(): void {
+        $this->themingDefaults = $this->createMock(OC_Defaults::class);
+        $this->urlGenerator = $this->createMock(IURLGenerator::class);
+        $this->unsplashIntegration = $this->createMock(UnsplashIntegration::class);
+        $this->themingIntegration = $this->createMock(ThemingIntegration::class);
+
+        $this->getThemeSettingsHelper();
+    }
+
+    /**
+     * @return void
+     */
+    protected function getThemeSettingsHelper(): ThemeSettingsHelper {
+        return new ThemeSettingsHelper(
+            $this->themingDefaults,
+            $this->urlGenerator,
+            $this->themingIntegration,
+            $this->unsplashIntegration
+        );
     }
 }

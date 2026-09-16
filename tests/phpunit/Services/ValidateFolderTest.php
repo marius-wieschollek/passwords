@@ -11,6 +11,7 @@ use Exception;
 use OCA\Passwords\Db\FolderRevision;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Services\Object\FolderService;
+use OCA\Test\Passwords\Entities\CreatesEntitiesTrait;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -23,6 +24,8 @@ use SebastianBergmann\RecursionContext\InvalidArgumentException;
  * @covers  \OCA\Passwords\Services\ValidationService
  */
 class ValidateFolderTest extends TestCase {
+
+    use CreatesEntitiesTrait;
 
     /**
      * @var ValidationService
@@ -55,8 +58,11 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderInvalidSse() {
-        $mock = $this->getFolderMock();
-        $mock->method('getSseType')->willReturn('invalid');
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => 'invalid',
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -73,10 +79,12 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderInvalidCse() {
-        $mock = $this->getFolderMock();
-
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn('invalid');
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => 'invalid',
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -93,11 +101,13 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderCseKeyBotNoCse() {
-        $mock = $this->getFolderMock();
-
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
-        $mock->method('getCseKey')->willReturn('cse-key');
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::CSE_ENCRYPTION_NONE,
+                'cseKey' => 'cse-key',
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -114,10 +124,12 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderNoSseAndCse() {
-        $mock = $this->getFolderMock();
-
-        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
-        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_NONE);
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::SSE_ENCRYPTION_NONE,
+                'cseType' => EncryptionService::SSE_ENCRYPTION_NONE
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -134,11 +146,15 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderMissingCseKey() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::SSE_ENCRYPTION_NONE,
+                'cseType' => EncryptionService::CSE_ENCRYPTION_V1R1,
+                'cseKey' => '',
+            ]
+        );
         $this->challengeService->method('hasChallenge')->willReturn(true);
-        $mock->method('getSseType')->willReturn(EncryptionService::SSE_ENCRYPTION_NONE);
-        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
-        $mock->method('getCseKey')->willReturn('');
+
 
         try {
             $this->validationService->validateFolder($mock);
@@ -155,10 +171,12 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderEmptyLabel() {
-        $mock = $this->getFolderMock();
-
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -175,19 +193,19 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsSseType() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => '',
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+                'label' => 'label',
+                'parent' => FolderService::BASE_FOLDER_UUID,
+                'edited' => 1
+            ]
+        );
 
-        $mock->expects($this->any())
-             ->method('getSseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_SSE_ENCRYPTION, EncryptionService::DEFAULT_SSE_ENCRYPTION));
-
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn(FolderService::BASE_FOLDER_UUID);
-        $mock->method('getEdited')->willReturn(1);
-
-        $mock->expects($this->once())->method('setSseType')->with(EncryptionService::DEFAULT_SSE_ENCRYPTION);
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('sseType', $mock->getUpdatedFields());
+        $this->assertSame(EncryptionService::DEFAULT_SSE_ENCRYPTION, $mock->getSseType());
     }
 
     /**
@@ -195,19 +213,19 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsCseType() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => '',
+                'label' => 'label',
+                'parent' => FolderService::BASE_FOLDER_UUID,
+                'edited' => 1
+            ]
+        );
 
-        $mock->expects($this->any())
-             ->method('getCseType')
-             ->will($this->onConsecutiveCalls('', EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION, EncryptionService::DEFAULT_CSE_ENCRYPTION));
-
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn(FolderService::BASE_FOLDER_UUID);
-        $mock->method('getEdited')->willReturn(1);
-
-        $mock->expects($this->once())->method('setCseType')->with(EncryptionService::DEFAULT_CSE_ENCRYPTION);
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('cseType', $mock->getUpdatedFields());
+        $this->assertSame(EncryptionService::DEFAULT_CSE_ENCRYPTION, $mock->getCseType());
     }
 
     /**
@@ -215,16 +233,19 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderCorrectsInvalidFolderUuid() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+                'label' => 'label',
+                'parent' => '1-2-3',
+                'edited' => 1
+            ]
+        );
 
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn('1-2-3');
-        $mock->method('getEdited')->willReturn(1);
-
-        $mock->expects($this->once())->method('setParent')->with(FolderService::BASE_FOLDER_UUID);
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('parent', $mock->getUpdatedFields());
+        $this->assertSame(FolderService::BASE_FOLDER_UUID, $mock->getParent());
     }
 
     /**
@@ -232,17 +253,20 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderCorrectsFolderParentLoop() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+                'label' => 'label',
+                'parent' => '11111111-1111-1111-1111-111111111111',
+                'model' => '11111111-1111-1111-1111-111111111111',
+                'edited' => 1
+            ]
+        );
 
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn('11111111-1111-1111-1111-111111111111');
-        $mock->method('getModel')->willReturn('11111111-1111-1111-1111-111111111111');
-        $mock->method('getEdited')->willReturn(1);
-
-        $mock->expects($this->once())->method('setParent')->with(FolderService::BASE_FOLDER_UUID);
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('parent', $mock->getUpdatedFields());
+        $this->assertSame(FolderService::BASE_FOLDER_UUID, $mock->getParent());
     }
 
     /**
@@ -250,16 +274,18 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenEmpty() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+                'label' => 'label',
+                'parent' => FolderService::BASE_FOLDER_UUID,
+                'edited' => 0
+            ]
+        );
 
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn(FolderService::BASE_FOLDER_UUID);
-        $mock->method('getEdited')->willReturn(0);
-
-        $mock->expects($this->once())->method('setEdited');
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('edited', $mock->getUpdatedFields());
     }
 
     /**
@@ -267,26 +293,30 @@ class ValidateFolderTest extends TestCase {
      * @throws InvalidArgumentException
      */
     public function testValidateFolderSetsEditedWhenInFuture() {
-        $mock = $this->getFolderMock();
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::DEFAULT_CSE_ENCRYPTION,
+                'label' => 'label',
+                'parent' => FolderService::BASE_FOLDER_UUID,
+                'edited' => strtotime('+2 hours')
+            ]
+        );
 
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::DEFAULT_CSE_ENCRYPTION);
-        $mock->method('getLabel')->willReturn('label');
-        $mock->method('getParent')->willReturn(FolderService::BASE_FOLDER_UUID);
-        $mock->method('getEdited')->willReturn(strtotime('+2 hours'));
-
-        $mock->expects($this->once())->method('setEdited');
         $this->validationService->validateFolder($mock);
+        $this->assertArrayHasKey('edited', $mock->getUpdatedFields());
     }
 
     /**
      *
      */
     public function testValidateTagCseUsedButNotAvailable() {
-        $mock = $this->getFolderMock();
-
-        $mock->method('getSseType')->willReturn(EncryptionService::DEFAULT_SSE_ENCRYPTION);
-        $mock->method('getCseType')->willReturn(EncryptionService::CSE_ENCRYPTION_V1R1);
+        $mock = $this->createFolderRevision(
+            [
+                'sseType' => EncryptionService::DEFAULT_SSE_ENCRYPTION,
+                'cseType' => EncryptionService::CSE_ENCRYPTION_V1R1,
+            ]
+        );
 
         try {
             $this->validationService->validateFolder($mock);
@@ -296,19 +326,5 @@ class ValidateFolderTest extends TestCase {
             $this->assertEquals('4e8162e6', $e->getId());
             $this->assertEquals(400, $e->getHttpCode());
         }
-    }
-
-    /**
-     * @return FolderRevision
-     */
-    protected function getFolderMock() {
-        $mock = $this
-            ->getMockBuilder('\OCA\Passwords\Db\FolderRevision')
-            ->addMethods(['getSseType', 'setSseType', 'getCseType', 'setCseType', 'getCseKey', 'getHidden', 'getLabel', 'getParent', 'getModel', 'setParent', 'getEdited', 'setEdited'])
-            ->getMock();
-
-        $mock->method('getHidden')->willReturn(false);
-
-        return $mock;
     }
 }

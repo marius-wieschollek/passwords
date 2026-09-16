@@ -7,7 +7,7 @@
 
 namespace OCA\Passwords\Helper\User;
 
-use OC\User\User;
+use OCP\IUser;
 use OCP\IGroupManager;
 
 /**
@@ -23,7 +23,7 @@ class AdminUserHelper {
     protected IGroupManager $groupManager;
 
     /**
-     * @var null|User[]
+     * @var null|IUser[]
      */
     protected ?array $admins = null;
 
@@ -37,7 +37,7 @@ class AdminUserHelper {
     }
 
     /**
-     * @return User[]
+     * @return IUser[]
      */
     public function getAdmins(): array {
         if($this->admins === null) {
