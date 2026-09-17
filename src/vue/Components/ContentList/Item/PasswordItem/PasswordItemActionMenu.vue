@@ -14,10 +14,12 @@
                 :inline="hasCustomAction ? 1:0"
                 :boundaries-element="getBoundariesElement"
                 :container="getBoundariesElement"
-                :open="openedMenu"
-                @closed="$emit('closed')"
+                :open.sync="menuOpen"
+                @opened="emitOpened"
+                @closed="emitClosed"
                 variant="tertiary"
                 @click.stop.prevent
+                data-pw-role="context-menu"
         >
             <slot name="custom-action">
                 <nc-action-button @click="runCustomAction" v-if="hasCustomAction" close-after-click>
@@ -32,83 +34,83 @@
                     </template>
                 </nc-action-button>
             </slot>
-            <nc-action-button @click="actions.favorite()" close-after-click>
+            <nc-action-button @click="actions.favorite()" data-pw-action="favorite" close-after-click>
                 <template #icon>
                     <star-icon :size="20" fill-color="var(--color-element-warning)" v-if="password.favorite"/>
                     <star-outline-icon :size="20" fill-color="var(--color-placeholder-dark)" v-else/>
                 </template>
                 {{ password.favorite ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('details-action', null)" close-after-click>
+            <nc-action-button @click="$emit('details-action', null)" data-pw-action="details" close-after-click>
                 <template #icon>
                     <information-outline-icon :size="20"/>
                 </template>
                 {{ t('Details') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('details-action', 'share')" close-after-click>
+            <nc-action-button @click="$emit('details-action', 'share')" data-pw-action="share" close-after-click>
                 <template #icon>
                     <account-plus-outline-icon :size="20"/>
                 </template>
                 {{ t('Share') }}
             </nc-action-button>
             <nc-action-separator/>
-            <nc-action-button @click="$emit('edit-action')" v-if="password.editable" close-after-click>
+            <nc-action-button @click="$emit('edit-action')" v-if="password.editable" data-pw-action="edit" close-after-click>
                 <template #icon>
                     <pencil-icon :size="20"/>
                 </template>
                 {{ t('Edit') }}
             </nc-action-button>
-            <nc-action-button @click="actions.clone()" v-if="password.editable" close-after-click>
+            <nc-action-button @click="actions.clone()" v-if="password.editable" data-pw-action="clone" close-after-click>
                 <template #icon>
                     <content-copy-icon :size="20"/>
                 </template>
                 {{ t('Edit as new') }}
             </nc-action-button>
-            <nc-action-button @click="actions.move()">
+            <nc-action-button @click="actions.move()" data-pw-action="move">
                 <template #icon>
                     <folder-move-icon :size="20"/>
                 </template>
                 {{ t('Move') }}
             </nc-action-button>
             <nc-action-separator/>
-            <nc-action-button @click="$emit('copy-action', 'password')" v-if="showCopyOptions" close-after-click>
+            <nc-action-button @click="$emit('copy-action', 'password')" data-pw-action="copy-password" v-if="showCopyOptions" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy Password') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('copy-action', 'username')" v-if="showCopyOptions" close-after-click>
+            <nc-action-button @click="$emit('copy-action', 'username')" data-pw-action="copy-username" v-if="showCopyOptions" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy User') }}
             </nc-action-button>
-            <nc-action-button @click="$emit('copy-action', 'url')" v-if="password.url" close-after-click>
+            <nc-action-button @click="$emit('copy-action', 'url')" data-pw-action="url" v-if="password.url" close-after-click>
                 <template #icon>
                     <clipboard-arrow-left-outline-icon :size="20"/>
                 </template>
                 {{ t('Copy Url') }}
             </nc-action-button>
-            <nc-action-link :href="password.url" target="_blank" close-after-click>
+            <nc-action-link :href="password.url" target="_blank" data-pw-action="url-open" close-after-click>
                 <template #icon>
                     <open-in-new-icon :size="20"/>
                 </template>
                 {{ t('Open Url') }}
             </nc-action-link>
             <nc-action-separator/>
-            <nc-action-button @click="actions.openChangePasswordPage()" v-if="password.url" close-after-click>
+            <nc-action-button @click="actions.openChangePasswordPage()" data-pw-action="change-password" v-if="password.url" close-after-click>
                 <template #icon>
                     <lock-reset-icon :size="20"/>
                 </template>
                 {{ t('PasswordActionChangePwPage') }}
             </nc-action-button>
-            <nc-action-button @click="actions.qrcode()" close-after-click>
+            <nc-action-button @click="actions.qrcode()" data-pw-action="qrcode" close-after-click>
                 <template #icon>
                     <qrcode-icon :size="20"/>
                 </template>
                 {{ t('PasswordActionQrcode') }}
             </nc-action-button>
-            <nc-action-button @click="actions.print()" v-if="isPrintEnabled" close-after-click>
+            <nc-action-button @click="actions.print()" data-pw-action="print" v-if="isPrintEnabled" close-after-click>
                 <template #icon>
                     <printer-icon :size="20"/>
                 </template>
@@ -116,7 +118,7 @@
             </nc-action-button>
             <nc-action-separator/>
             <slot name="restore-action" />
-            <nc-action-button @click="deleteAction" close-after-click>
+            <nc-action-button @click="deleteAction" data-pw-action="delete" close-after-click>
                 <template #icon>
                     <trash-can-outline-icon :size="20"/>
                 </template>
@@ -145,7 +147,7 @@
     import NcActionSeparator from '@nc/NcActionSeparator.js';
     import PasswordActions from "@js/Actions/Password/PasswordActions";
     import SettingsService from "@js/Services/SettingsService";
-    import PasswordManager from "@js/Manager/PasswordManager";
+    import {emit, subscribe, unsubscribe} from "@js/Helper/event-bus";
 
     export default {
         components: {
@@ -175,8 +177,14 @@
             password  : {
                 type: Object
             },
-            openedMenu: {
-                type: Boolean
+            value: {
+                type: PointerEvent
+            }
+        },
+
+        data() {
+            return {
+                menuOpen: false
             }
         },
 
@@ -217,6 +225,35 @@
             },
             deleteAction() {
                 this.actions.delete();
+            },
+            emitOpened() {
+                let event = {item: this.password};
+                if(this.value) {
+                    event.pos = {x: this.value.clientX, y: this.value.clientY};
+                }
+                emit('passwords:contextmenu:opened', event);
+                subscribe('passwords:contextmenu:opened', this.processContextMenuEvent);
+            },
+            emitClosed() {
+                emit('passwords:contextmenu:closed', {item: this.password});
+                unsubscribe('passwords:contextmenu:opened', this.processContextMenuEvent);
+                this.$emit('input', null)
+            },
+            processContextMenuEvent(event) {
+                if(this.menuOpen && event.item.id !== this.password.id) {
+                    this.menuOpen = false;
+                }
+            }
+        },
+
+        watch: {
+            value: {
+                deep: true,
+                handler(value) {
+                    if (value && !this.menuOpen) {
+                        this.menuOpen = true;
+                    }
+                }
             }
         }
     };

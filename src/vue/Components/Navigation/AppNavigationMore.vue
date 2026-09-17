@@ -22,7 +22,7 @@
                 :aria-label="t('Trash')"
                 :title="t('Trash')"
                 :to="{ name: 'Trash'}"
-                data-drop-type="trash" icon="icon-delete">
+                data-pw-drop-type="trash" icon="icon-delete">
             <template #icon>
                 <delete-icon :size="20"/>
             </template>

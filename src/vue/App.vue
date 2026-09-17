@@ -12,7 +12,7 @@
     <nc-content app-name="passwords" :data-passwords-main-version="APP_MAIN_VERSION" :data-passwords-version="APP_FEATURE_VERSION">
         <app-navigation :has-timeout="hasTimeout" :is-mobile="isMobile" :is-search-visible="isSearchVisible" />
 
-        <nc-app-content>
+        <nc-app-content data-pw-role="content">
             <router-view name="main" />
         </nc-app-content>
 

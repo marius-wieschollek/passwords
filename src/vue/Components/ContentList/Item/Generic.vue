@@ -1,5 +1,5 @@
 <template>
-    <div class="row" :class="rowClass" @click="setUrl">
+    <div class="row" data-pw-item="generic" :class="rowClass" @click="setUrl">
         <translate class="title" :icon="icon" :say="label" iconClass="genericIcon"/>
     </div>
 </template>

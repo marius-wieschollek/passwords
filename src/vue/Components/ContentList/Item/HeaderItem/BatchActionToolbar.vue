@@ -9,41 +9,41 @@
   -->
 
 <template>
-    <div class="batch-action-toolbar">
-        <nc-checkbox-radio-switch variant="tertiary" :checked.sync="selectAllValue" :indeterminate="isIntermediate">{{ selectionCountLabel }}</nc-checkbox-radio-switch>
+    <div class="batch-action-toolbar" data-pw-role="batch-actions">
+        <nc-checkbox-radio-switch variant="tertiary" :checked.sync="selectAllValue" :indeterminate="isIntermediate" data-pw-action="select-all">{{ selectionCountLabel }}</nc-checkbox-radio-switch>
         <nc-actions class="selection-more" :force-name="true" :inline="3" v-if="hasSelection">
-            <nc-action-button variant="tertiary" @click="favoriteAction" v-if="canFavorite" close-after-click>
+            <nc-action-button variant="tertiary" @click="favoriteAction" v-if="canFavorite" data-pw-action="favorite" close-after-click>
                 <template #icon>
                     <star-icon :size="20" v-if="allFavorites"/>
                     <star-outline-icon :size="20" v-else/>
                 </template>
                 {{ allFavorites ? t('BatchActionRemoveFavorites'):t('BatchActionAddFavorites') }}
             </nc-action-button>
-            <nc-action-button variant="tertiary" @click="manageTagsAction" v-if="canManageTags" close-after-click>
+            <nc-action-button variant="tertiary" @click="manageTagsAction" v-if="canManageTags" data-pw-action="tags" close-after-click>
                 <template #icon>
                     <tag-multiple-outline-icon :size="20"/>
                 </template>
                 {{ t('BatchActionManageTags') }}
             </nc-action-button>
-            <nc-action-button variant="tertiary" @click="moveAction" v-if="canMove" close-after-click>
+            <nc-action-button variant="tertiary" @click="moveAction" v-if="canMove" data-pw-action="move" close-after-click>
                 <template #icon>
                     <folder-move-outline-icon :size="20"/>
                 </template>
                 {{ t('Move') }}
             </nc-action-button>
-            <nc-action-button variant="tertiary" @click="shareAction" v-if="canShare" close-after-click>
+            <nc-action-button variant="tertiary" @click="shareAction" v-if="canShare" data-pw-action="share" close-after-click>
                 <template #icon>
                     <folder-move-outline-icon :size="20"/>
                 </template>
                 {{ t('BatchActionShare') }}
             </nc-action-button>
-            <nc-action-button variant="tertiary" @click="deleteAction" close-after-click>
+            <nc-action-button variant="tertiary" @click="deleteAction" data-pw-action="delete" close-after-click>
                 <template #icon>
                     <trash-can-outline-icon :size="20"/>
                 </template>
                 {{ t(isTrashSection ? 'BatchActionTrashDelete':'Delete') }}
             </nc-action-button>
-            <nc-action-button variant="tertiary" @click="restoreAction" close-after-click v-if="isTrashSection">
+            <nc-action-button variant="tertiary" @click="restoreAction" data-pw-action="restore" close-after-click v-if="isTrashSection">
                 <template #icon>
                     <restore-icon :size="20"/>
                 </template>

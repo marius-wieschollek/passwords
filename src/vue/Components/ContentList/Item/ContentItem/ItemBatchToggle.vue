@@ -9,7 +9,12 @@
   -->
 
 <template>
-    <nc-checkbox-radio-switch :checked.sync="isSelected" :loading="batchActionActive" :aria-label="t('BatchActionSelectToggleAriaLabel', {item: item.label})"/>
+    <nc-checkbox-radio-switch
+        :checked.sync="isSelected"
+        :loading="batchActionActive"
+        :aria-label="t('BatchActionSelectToggleAriaLabel', {item: item.label})"
+        data-pw-role="batch-toggle"
+    />
 </template>
 
 <script>

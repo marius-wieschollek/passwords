@@ -49,14 +49,18 @@ export default new class DragManager {
         this._state.active = false;
 
         let data = e.target.dataset;
-        if(!data.dropType) {
-            let target = e.target.closest('[data-drop-type]');
+        if(!data.pwDropType) {
+            let target = e.target.closest('[data-pw-drop-type]');
             if(!target) return;
             data = target.dataset;
         }
+        data.dropType = data.pwDropType;
 
-        let types = ['folder'];
-        if(this._state.model.type === 'password') types.push('tag');
+        let types = [];
+        if(this._state.model.type === 'password') types = ['folder', 'tag'];
+        if(this._state.model.type === 'folder') types = ['folder'];
+        if(this._state.model.type === 'tag') types = [];
+        if(!this._state.model.favorite) types.push('favorite');
         if(!this._state.model.trashed) types.push('trash');
 
         if(types.indexOf(data.dropType) !== -1) {
@@ -82,7 +86,9 @@ export default new class DragManager {
 
         let div = document.createElement('div');
         div.id = 'dragicon';
-        div.style.backgroundImage = `url(${image})`;
+        if(image) {
+            div.style.backgroundImage = `url(${image})`;
+        }
         div.innerText = model.label;
         document.body.append(div);
 

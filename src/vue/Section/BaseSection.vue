@@ -69,6 +69,7 @@
                 loading    : true,
                 style      : '',
                 contextMenu: false,
+                contextMenuItemId: null,
                 sorting    : {
                     field    : SettingsService.get('client.ui.sorting.field', 'label'),
                     ascending: SettingsService.get('client.ui.sorting.ascending', true)
@@ -85,7 +86,7 @@
             this.triggerViewUpdate();
             Events.on('data.changed', this.triggerViewUpdate);
             SearchManager.clearDatabase();
-            subscribe('passwords:contextmenu:opened', this.positionContextMenu);
+            subscribe('passwords:contextmenu:opened', this.openContextMenu);
             subscribe('passwords:contextmenu:closed', this.closeContextMenu);
             subscribe('passwords:batch-action:completed', this.triggerViewUpdate);
         },
@@ -94,7 +95,7 @@
             Events.off('data.changed', this.triggerViewUpdate);
             SearchManager.clearDatabase();
             BatchActionManager.clearSelectedItems();
-            unsubscribe('passwords:contextmenu:opened', this.positionContextMenu);
+            unsubscribe('passwords:contextmenu:opened', this.openContextMenu);
             unsubscribe('passwords:contextmenu:closed', this.closeContextMenu);
             unsubscribe('passwords:batch-action:completed', this.triggerViewUpdate);
         },
@@ -193,11 +194,19 @@
                 if(sortingField === 'byTitle') sortingField = SettingsService.get('client.ui.password.field.title');
                 return sortingField;
             },
-            positionContextMenu(event) {
-                this.contextMenu = true;
-                this.style = `--mouse-pos-x:${Math.max(300, event.pos.x - 125)}px;--mouse-pos-y:${Math.max(0, event.pos.y - 30)}px`;
+            openContextMenu(event) {
+                this.contextMenuItemId = event.item.id;
+                if(event.pos) {
+                    this.contextMenu = true;
+                    this.style = `--mouse-pos-x:${Math.max(300, event.pos.x - 125)}px;--mouse-pos-y:${Math.max(0, event.pos.y - 30)}px`;
+                } else {
+                    this.contextMenu = false;
+                    this.style = '';
+                }
             },
-            closeContextMenu() {
+            closeContextMenu(event) {
+                if(this.contextMenuItemId !== event.item.id) return;
+                this.contextMenuItemId = null;
                 this.contextMenu = false;
                 this.style = '';
             }

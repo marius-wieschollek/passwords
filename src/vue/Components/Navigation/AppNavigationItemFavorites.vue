@@ -9,8 +9,18 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :name="t('Favorites')" :to="{ name: 'Favorites'}" :allowCollapse="true" :open="open" :loading="loading" v-on:update:open="loadFavorites">
-        <star-icon :size="20" slot="icon"/>
+    <app-navigation-item
+        ref="navigation-item"
+        :name="t('Favorites')"
+        :to="{ name: 'Favorites'}"
+        :allowCollapse="true"
+        :open="open"
+        :loading="loading"
+        data-pw-drop-type="favorite"
+        v-on:update:open="loadFavorites">
+        <template #icon>
+            <star-icon :size="20" />
+        </template>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
@@ -18,10 +28,13 @@
                     :name="folder.label"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"
-                    :data-folder-id="folder.id"
-                    data-drop-type="folder"
+                    :data-pw-id="folder.id"
+                    data-pw-item="folder"
+                    data-pw-drop-type="folder"
             >
-                <folder-icon :size="20" :fill-color="folderIconColor(folder.id)" slot="icon"/>
+                <template #icon>
+                    <folder-icon :size="20" :fill-color="folderIconColor(folder.id)"/>
+                </template>
             </app-navigation-item>
             <app-navigation-item
                     v-for="tag in tags"
@@ -29,10 +42,13 @@
                     :name="tag.label"
                     :to="{ name: 'Tags', params: {tag: tag.id}}"
                     :exact="true"
-                    :data-tag-id="tag.id"
-                    data-drop-type="tag"
+                    :data-pw-id="tag.id"
+                    data-pw-item="tag"
+                    data-pw-drop-type="tag"
             >
-                <tag-icon :size="20" slot="icon" :fill-color="tag.color"/>
+                <template #icon>
+                    <tag-icon :size="20" :fill-color="tag.color"/>
+                </template>
             </app-navigation-item>
             <nc-loading-icon v-if="foldersLoaded === 0 || tagsLoaded === 0"/>
         </template>

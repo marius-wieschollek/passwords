@@ -10,7 +10,9 @@
 
 <template>
     <app-navigation-item ref="navigation-item" :name="t('Tags')" :to="{ name: 'Tags'}" :allowCollapse="true" :exact="requiresExact" :open="open" :loading="loading" v-on:update:open="loadTags">
-        <tag-icon :size="20" slot="icon"/>
+        <template #icon>
+            <tag-icon :size="20"/>
+        </template>
         <template>
             <app-navigation-item
                     v-for="tag in tags"
@@ -18,10 +20,13 @@
                     :name="tag.label"
                     :to="{ name: 'Tags', params: {tag: tag.id}}"
                     :exact="true"
-                    :data-tag-id="tag.id"
-                    data-drop-type="tag"
+                    :data-pw-id="tag.id"
+                    data-pw-item="tag"
+                    data-pw-drop-type="tag"
             >
-                <tag-icon :size="20" slot="icon" :fill-color="tag.color"/>
+                <template #icon>
+                    <tag-icon :size="20" :fill-color="tag.color"/>
+                </template>
             </app-navigation-item>
             <nc-loading-icon v-if="!hasLoaded"/>
         </template>

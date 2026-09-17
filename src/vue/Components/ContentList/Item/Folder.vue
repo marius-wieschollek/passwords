@@ -11,11 +11,12 @@
 <template>
     <div :class="className"
          @click="openAction($event)"
-         @contextmenu="openContextMenu"
+         @contextmenu.stop.prevent="contextMenu = $event"
          @dragstart="dragStartAction($event)"
-         :data-folder-id="folder.id"
-         :data-folder-title="folder.label"
-         data-drop-type="folder">
+         :data-pw-id="folder.id"
+         :data-pw-label="folder.label"
+         data-pw-item="folder"
+         data-pw-drop-type="folder">
         <folder-item-batch-toggle :item="folder"/>
         <folder-item-favicon :title="folder.label" v-model="isSelected"/>
         <div class="title" :title="folder.label">
@@ -23,12 +24,7 @@
         </div>
         <slot name="middle"/>
         <slot name="actions">
-            <folder-item-action-menu
-                    :actions="actions"
-                    :folder="folder"
-                    :opened-menu.sync="openedMenu"
-                    @closed="openedMenu = false"
-            >
+            <folder-item-action-menu :actions="actions" :folder="folder" v-model="contextMenu">
                 <template v-if="hasCustomAction" #custom-action>
                     <slot name="custom-action"/>
                 </template>
@@ -49,7 +45,6 @@
     import FolderActions from "@js/Actions/Folder/FolderActions";
     import LoggingService from "@js/Services/LoggingService";
     import NcDateTime from "@nextcloud/vue/components/NcDateTime";
-    import {emit} from "@nextcloud/event-bus";
     import ContentItemMenuLoadingIcon from "@vc/ContentList/Item/ContentItem/ContentItemMenuLoadingIcon.vue";
 
     export default {
@@ -72,9 +67,9 @@
 
         data() {
             return {
-                openedMenu: false,
-                isSelected: false,
-                actions   : new FolderActions(this.folder)
+                isSelected : false,
+                contextMenu: null,
+                actions    : new FolderActions(this.folder)
             };
         },
 
@@ -99,36 +94,19 @@
                 if($event.target.closest('.checkbox-radio-switch') !== null) return;
                 this.$router.push({name: 'Folders', params: {folder: this.folder.id}});
             },
-            openContextMenu(event) {
-                if(this.openedMenu) {
-                    return;
-                }
-
-                this.openedMenu = true;
-                emit('passwords:contextmenu:opened', {item: this.folder, pos: {x: event.clientX, y: event.clientY}});
-
-                event.preventDefault();
-                event.stopPropagation();
-            },
             dragStartAction($e) {
                 DragManager
                     .start($e, this.folder)
-                    .then((data) => {
+                    .then(async (data) => {
                         if(data.dropType === 'folder') {
-                            this.actions.move(data.folderId);
+                            this.actions.move(data.pwId);
+                        } else if(data.dropType === 'favorite') {
+                            this.folder = await this.actions.favorite(true);
                         } else if(data.dropType === 'trash') {
                             this.actions.delete(this.folder).catch(LoggingService.catch);
                         }
                     });
             }
         },
-
-        watch: {
-            openedMenu(value) {
-                if(!value) {
-                    emit('passwords:contextmenu:closed', {item: this.folder});
-                }
-            }
-        }
     };
 </script>

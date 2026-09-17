@@ -10,16 +10,24 @@
 
 <template>
     <app-navigation-item :name="t('Security')" :to="{ name: 'Security'}" v-if="isVisible" :allowCollapse="true" :exact="true" :open="open">
-        <shield-half-full-icon :size="20" slot="icon"/>
+        <template #icon>
+            <shield-half-full-icon :size="20"/>
+        </template>
         <template>
             <app-navigation-item :name="t('Secure')" :to="{ name: 'Security', params: {status: '0'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-element-success)" slot="icon"/>
+                <template #icon>
+                    <shield-half-full-icon :size="20" fill-color="var(--color-element-success)"/>
+                </template>
             </app-navigation-item>
             <app-navigation-item :name="t('Weak')" :to="{ name: 'Security', params: {status: '1'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-element-warning)" slot="icon"/>
+                <template #icon>
+                    <shield-half-full-icon :size="20" fill-color="var(--color-element-warning)"/>
+                </template>
             </app-navigation-item>
             <app-navigation-item :name="t('Breached')" :to="{ name: 'Security', params: {status: '2'}}" :exact="true">
-                <shield-half-full-icon :size="20" fill-color="var(--color-element-error)" slot="icon"/>
+                <template #icon>
+                    <shield-half-full-icon :size="20" fill-color="var(--color-element-error)"/>
+                </template>
             </app-navigation-item>
         </template>
     </app-navigation-item>

@@ -29,8 +29,8 @@
         </NcBreadcrumb>
         <NcBreadcrumb v-for="(item) in breadcrumbs"
                       :to="item.path"
-                      :data-folder-id="item.folderId"
-                      :data-drop-type="item.dropType"
+                      :data-pw-id="item.folderId"
+                      :data-pw-drop-type="item.dropType"
                       :name="item.label"
                       :key="item.id"
         />
@@ -156,10 +156,10 @@
                 };
             },
             dataFolderId() {
-                return this.$route.name === 'Folders' ? 'data-folder-id':null;
+                return this.$route.name === 'Folders' ? 'data-pw-id':null;
             },
             dataDropType() {
-                return this.$route.name === 'Folders' ? 'data-drop-type':null;
+                return this.$route.name === 'Folders' ? 'data-pw-drop-type':null;
             }
         },
 

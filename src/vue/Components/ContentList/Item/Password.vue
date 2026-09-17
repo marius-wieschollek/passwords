@@ -12,11 +12,12 @@
     <div @click="clickAction($event)"
          @click.middle="wheelClickAction($event)"
          @dblclick="doubleClickAction($event)"
-         @contextmenu="openContextMenu"
+         @contextmenu.stop.prevent="contextMenu = $event"
          @dragstart="dragStartAction($event)"
          :class="className"
-         :data-password-id="password.id"
-         :data-password-title="password.label">
+         :data-pw-id="password.id"
+         :data-pw-label="password.label"
+         data-pw-item="password">
         <password-item-batch-toggle :item="password" v-model="isSelected"/>
         <password-item-favicon :domain="password.website" :title="getTitle" :favorite="password.favorite" v-if="isVisible"/>
         <div class="title" :title="getTitle">
@@ -30,12 +31,11 @@
             <password-item-action-menu
                     :actions="actions"
                     :password="password"
-                    :opened-menu.sync="openedMenu"
+                    v-model="contextMenu"
                     v-on:edit-action="editAction"
                     v-on:copy-action="copyAction"
                     v-on:details-action="detailsAction"
                     v-on:click-action="clickAction"
-                    @closed="openedMenu = false"
             >
                 <template v-if="hasCustomAction" #custom-action>
                     <slot name="custom-action"/>
@@ -56,7 +56,7 @@
     import PasswordSidebar from "@js/Models/Sidebar/PasswordSidebar";
     import Application from "@js/Init/Application";
     import PasswordActions from "@js/Actions/Password/PasswordActions";
-    import {emit, subscribe, unsubscribe} from '@nextcloud/event-bus';
+    import {emit, subscribe, unsubscribe} from "@js/Helper/event-bus";
     import UtilityService from "@js/Services/UtilityService";
     import NcDateTime from '@nc/NcDateTime.js';
     import PasswordItemSecurityIcon from '@vc/ContentList/Item/PasswordItem/PasswordItemSecurityIcon.vue';
@@ -91,7 +91,7 @@
                 clickTimeout : null,
                 detailsActive: false,
                 isSelected   : false,
-                openedMenu   : false,
+                contextMenu  : null,
                 actions      : new PasswordActions(this.password)
             };
         },
@@ -169,17 +169,6 @@
                     this.actions.clipboard(attribute);
                 }, delay);
             },
-            openContextMenu(event) {
-                if(this.openedMenu) {
-                    return;
-                }
-
-                this.openedMenu = true;
-                emit('passwords:contextmenu:opened', {item: this.password, pos: {x: event.clientX, y: event.clientY}});
-
-                event.preventDefault();
-                event.stopPropagation();
-            },
             detailsAction(section = null) {
                 this.detailsActive = true;
                 Application.sidebar = new PasswordSidebar(this.password, section);
@@ -210,21 +199,15 @@
                     .start($e, this.password)
                     .then(async (data) => {
                         if(data.dropType === 'folder') {
-                            this.password = await this.actions.move(data.folderId);
+                            this.password = await this.actions.move(data.pwId);
                         } else if(data.dropType === 'tag') {
-                            this.password = await this.actions.addTag(data.tagId);
+                            this.password = await this.actions.addTag(data.pwId);
+                        } else if(data.dropType === 'favorite') {
+                            this.password = await this.actions.favorite(true);
                         } else if(data.dropType === 'trash') {
                             this.actions.delete().catch(LoggingService.catch);
                         }
                     });
-            }
-        },
-
-        watch: {
-            openedMenu(value) {
-                if(!value) {
-                    emit('passwords:contextmenu:closed', {item: this.password});
-                }
             }
         }
     };

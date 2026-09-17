@@ -1,5 +1,5 @@
 <template>
-    <div class="row security" :data-security-level="status" @click="setSecurityStatus">
+    <div class="row security" data-pw-item="security" :data-pw-security-level="status" @click="setSecurityStatus">
         <translate class="title" :say="label">
             <template #icon>
                 <shield-half-full-icon :fill-color="fillColor" class="icon"/>

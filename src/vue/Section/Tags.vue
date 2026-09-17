@@ -30,6 +30,9 @@
         },
 
         computed: {
+            isDraggable() {
+                return this.currentTag === null || !this.currentTag.trashed;
+            },
             getBreadcrumb() {
                 let showAddNew = true,
                     items = [],

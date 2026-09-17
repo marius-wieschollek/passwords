@@ -10,11 +10,14 @@
 
 <template>
     <div
-        @contextmenu="openContextMenu"
         :class="className"
+        @contextmenu.stop.prevent="contextMenu = $event"
         @click="openAction($event)"
-        :data-tag-id="tag.id"
-        :data-tag-title="tag.label"
+        @dragstart="dragStartAction($event)"
+        :data-pw-id="tag.id"
+        :data-pw-label="tag.label"
+        data-pw-item="tag"
+        data-pw-drop-type="tag"
     >
         <tag-item-batch-toggle :item="tag" v-model="isSelected"/>
         <tag-item-favicon :favorite="tag.favorite" :color="tag.color" :title="tag.label"/>
@@ -23,12 +26,7 @@
         </div>
         <slot name="middle"/>
         <slot name="actions">
-            <tag-item-action-menu
-                :actions="actions"
-                :tag="tag"
-                :opened-menu.sync="openedMenu"
-                @closed="openedMenu = false"
-            >
+            <tag-item-action-menu :actions="actions" :tag="tag" v-model="contextMenu">
                 <template v-if="hasCustomAction" #custom-action>
                     <slot name="custom-action"/>
                 </template>
@@ -43,13 +41,14 @@
 </template>
 
 <script>
+import DragManager from '@js/Manager/DragManager';
 import SearchManager from "@js/Manager/SearchManager";
 import TagItemFavicon from "@vc/ContentList/Item/TagItem/TagItemFavicon.vue";
 import NcDateTime from "@nextcloud/vue/components/NcDateTime";
 import TagActions from "@js/Actions/Tag/TagActions";
 import TagItemBatchToggle from "@vc/ContentList/Item/TagItem/TagItemBatchToggle.vue";
 import ContentItemMenuLoadingIcon from "@vc/ContentList/Item/ContentItem/ContentItemMenuLoadingIcon.vue";
-import {emit} from "@nextcloud/event-bus";
+import LoggingService from "@js/Services/LoggingService";
 
 export default {
     components: {
@@ -71,9 +70,9 @@ export default {
 
     data() {
         return {
-            openedMenu: false,
-            isSelected: false,
-            actions: new TagActions(this.tag)
+            isSelected : false,
+            contextMenu: null,
+            actions    : new TagActions(this.tag)
         };
     },
 
@@ -98,22 +97,17 @@ export default {
             if ($event.target.closest('.checkbox-radio-switch') !== null) return;
             this.$router.push({name: 'Tags', params: {tag: this.tag.id}});
         },
-        openContextMenu(event) {
-            if (this.openedMenu) {
-                return;
-            }
-
-            this.openedMenu = true;
-            emit('passwords:contextmenu:opened', {item: this.tag, pos: {x: event.clientX, y: event.clientY}});
-
-            event.preventDefault();
-            event.stopPropagation();
+        dragStartAction($e) {
+            DragManager
+                .start($e, this.tag)
+                .then(async (data) => {
+                    if(data.dropType === 'favorite') {
+                        this.tag = await this.actions.favorite(true);
+                    } else if(data.dropType === 'trash') {
+                        this.actions.delete().catch(LoggingService.catch);
+                    }
+                });
         },
-    },
-    openedMenu(value) {
-        if(!value) {
-            emit('passwords:contextmenu:closed', {item: this.tag});
-        }
     }
 };
 </script>

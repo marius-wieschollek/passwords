@@ -9,8 +9,18 @@
   -->
 
 <template>
-    <app-navigation-item ref="navigation-item" :name="t('Folders')" :to="{ name: 'Folders'}" :allowCollapse="true" :exact="requiresExact" :open="open" :loading="loading" v-on:update:open="loadFolders">
-        <folder-icon :size="20" slot="icon"/>
+    <app-navigation-item
+        ref="navigation-item"
+        :name="t('Folders')"
+        :to="{ name: 'Folders'}"
+        :allowCollapse="true"
+        :exact="requiresExact"
+        :open="open"
+        :loading="loading"
+        v-on:update:open="loadFolders">
+        <template #icon>
+            <folder-icon :size="20" />
+        </template>
         <template>
             <app-navigation-item
                     v-for="folder in folders"
@@ -18,10 +28,13 @@
                     :key="folder.id"
                     :to="{ name: 'Folders', params: {folder: folder.id}}"
                     :exact="true"
-                    :data-folder-id="folder.id"
-                    data-drop-type="folder"
+                    :data-pw-id="folder.id"
+                    data-pw-item="folder"
+                    data-pw-drop-type="folder"
             >
-                <folder-icon :size="20" :fill-color="folderIconColor(folder.id)" slot="icon"/>
+                <template #icon>
+                    <folder-icon :size="20" :fill-color="folderIconColor(folder.id)"/>
+                </template>
             </app-navigation-item>
             <nc-loading-icon v-if="!hasLoaded"/>
         </template>
