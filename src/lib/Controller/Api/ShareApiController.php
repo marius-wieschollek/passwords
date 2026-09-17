@@ -156,33 +156,29 @@ class ShareApiController extends AbstractApiController {
     #[NoCSRFRequired]
     #[NoAdminRequired]
     public function create(
-        string $password,
-        string $recipient = null,
-        string $type = 'user',
-        ?int   $expires = null,
-        bool   $editable = false,
-        bool   $shareable = false,
-        string $receiver = null,
+        string  $password,
+        ?string $recipient = null,
+        string  $type = 'user',
+        ?int    $expires = null,
+        bool    $editable = false,
+        bool    $shareable = false,
+        ?string $receiver = null,
     ): JSONResponse {
         $this->checkAccessPermissions();
 
         /**
          * Map deprecated $receiver property
          */
-        if($recipient === null) {
-            if($receiver !== null) {
-                $recipient = $receiver;
-            } else {
-                throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
-            }
+        if($recipient === null && $receiver !== null) {
+            $recipient = $receiver;
+        } elseif($recipient === null) {
+            throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
         }
 
-        $recipient = $this->shareUserList->mapRecipientToUid($recipient);
-        if(!$this->shareUserList->canShareWithUser($recipient)) throw new ApiException('Invalid recipient uid', Http::STATUS_BAD_REQUEST);
-
+        $user  = $this->shareUserList->mapRecipientToUser($recipient);
         $share = $this->createPasswordShare->createPasswordShare(
             $password,
-            $recipient,
+            $user->getUID(),
             $type,
             $expires,
             $editable,

@@ -1,20 +1,23 @@
 <?php
-/**
+/*
+ * @copyright 2026 Passwords App
+ *
+ * @author Marius David Wieschollek
+ * @license AGPL-3.0
+ *
  * This file is part of the Passwords App
- * created by Marius David Wieschollek
- * and licensed under the AGPL.
+ * created by Marius David Wieschollek.
  */
 
 namespace OCA\Passwords\Helper\Sharing;
 
-use OC;
-use OCA\Guests\UserBackend;
 use OCA\Passwords\Exception\ApiException;
 use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
-use OCA\Passwords\Services\ConfigurationService;
+use OCA\Passwords\Integrations\GuestsIntegration;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\AppFramework\Http;
 use OCP\IGroupManager;
+use OCP\IUser;
 use OCP\IUserManager;
 use OCP\Share\IManager;
 
@@ -25,25 +28,26 @@ use OCP\Share\IManager;
  */
 class RecipientSearchHelper {
 
-    const int USER_SEARCH_MINIMUM = 5;
-    const int USER_SEARCH_LIMIT   = 256;
+    const int USER_SEARCH_MINIMUM    = 5;
+    const int USER_SEARCH_LIMIT      = 256;
+    const string RECIPIENT_TYPE_USER = 'user';
+    const string RECIPIENT_TYPE_GROUP               = 'group';
 
     /**
      * RecipientSearchHelper constructor.
      *
-     * @param IManager             $shareManager
-     * @param IUserManager         $userManager
-     * @param IGroupManager        $groupManager
-     * @param ConfigurationService $config
-     * @param EnvironmentService   $environment
+     * @param IManager           $shareManager
+     * @param IUserManager       $userManager
+     * @param IGroupManager      $groupManager
+     * @param EnvironmentService $environment
      */
     public function __construct(
-        protected IManager             $shareManager,
-        protected IUserManager         $userManager,
-        protected IGroupManager        $groupManager,
-        protected ConfigurationService $config,
-        protected EnvironmentService   $environment,
-        protected ShareSettingsHelper  $shareSettings,
+        protected IManager            $shareManager,
+        protected IUserManager        $userManager,
+        protected IGroupManager       $groupManager,
+        protected EnvironmentService  $environment,
+        protected ShareSettingsHelper $shareSettings,
+        protected GuestsIntegration   $guestsIntegration
     ) {
     }
 
@@ -81,36 +85,28 @@ class RecipientSearchHelper {
     /**
      * @param string $recipient
      *
-     * @return string
+     * @return IUser
      * @throws ApiException
      */
-    public function mapRecipientToUid(string $recipient): string {
+    public function mapRecipientToUser(string $recipient): IUser {
         $recipient = trim($recipient);
-        if($this->userManager->userExists($recipient)) return $recipient;
-
-        $recipients = $this->findRecipientSuggestions($recipient);
-        if(count($recipients) === 1) return $recipients[0]['uid'];
-
-        throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
-    }
-
-    /**
-     * @param string $uid
-     *
-     * @return bool
-     */
-    public function canShareWithUser(string $uid): bool {
-        if($uid === $this->environment->getUserId()) return false;
-        if(!$this->userManager->userExists($uid)) return false;
-        if(!$this->shareWithGroupMembersOnly()) return true;
-
-        $user       = $this->userManager->get($uid);
-        $userGroups = $this->groupManager->getUserGroupIds($this->environment->getUser());
-        foreach($userGroups as $userGroup) {
-            if($this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== 'guest_app') return true;
+        if(!$this->userManager->userExists($recipient)) {
+            throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
         }
 
-        return false;
+        $user = $this->userManager->get($recipient);
+        if($user->getUID() === $this->environment->getUserId()) {
+            throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
+        }
+
+        if(!$this->shareWithGroupMembersOnly()) return $user;
+
+        $userGroups = $this->groupManager->getUserGroupIds($this->environment->getUser());
+        if(array_any($userGroups, fn($userGroup) => $this->groupManager->get($userGroup)->inGroup($user) && $userGroup !== 'guest_app')) {
+            return $user;
+        }
+
+        throw new ApiException('Invalid receiver uid', Http::STATUS_BAD_REQUEST);
     }
 
     /**
@@ -121,7 +117,7 @@ class RecipientSearchHelper {
     public function resolveGroup(string $groupId): array {
         if(!$this->shareSettings->get('groups.enabled') || !$this->groupManager->isInGroup($this->environment->getUserId(), $groupId)) {
             return [];
-        };
+        }
 
         $group = $this->groupManager->get($groupId);
         $users = [];
@@ -155,9 +151,9 @@ class RecipientSearchHelper {
                 $partners[ $uid ] = [
                     'id'      => $uid,
                     'name'    => $name,
-                    'type'    => 'user',
+                    'type'    => self::RECIPIENT_TYPE_USER,
                     'context' => $groupName
-                ];;
+                ];
             }
             if(count($partners) >= $limit) break;
         }
@@ -190,7 +186,7 @@ class RecipientSearchHelper {
             $recipients[ $user->getUID() ] = [
                 'id'      => $user->getUID(),
                 'name'    => $user->getDisplayName(),
-                'type'    => 'user',
+                'type'    => self::RECIPIENT_TYPE_USER,
                 'context' => $user->getEMailAddress()
             ];
         }
@@ -226,7 +222,7 @@ class RecipientSearchHelper {
             $recipients[] = [
                 'id'      => $group->getGID(),
                 'name'    => $group->getDisplayName(),
-                'type'    => 'group',
+                'type'    => self::RECIPIENT_TYPE_GROUP,
                 'context' => null
             ];
         }
@@ -240,13 +236,6 @@ class RecipientSearchHelper {
     protected function shareWithGroupMembersOnly(): bool {
         if($this->shareManager->shareWithGroupMembersOnly()) return true;
 
-        if($this->config->isAppEnabled('guests') && $this->config->getAppValueBool('hide_users', true, 'guests')) {
-            // @TODO: Use container instead
-            $guestBackend = OC::$server->get(UserBackend::class);
-
-            return $guestBackend->userExists($this->environment->getUserId());
-        }
-
-        return false;
+        return $this->guestsIntegration->hasCurrentUserGuestGroupSharingRestriction();
     }
 }
