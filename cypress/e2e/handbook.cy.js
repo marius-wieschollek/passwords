@@ -27,6 +27,7 @@ describe('Handbook', () => {
         cy.get('#password-password').type('LongAndStrongPassword');
         cy.get('#password-label').type('Example Password');
         cy.get('#password-url').type('https://www.example.com');
+        cy.get('#password-folder').should('have.value', 'Home');
         cy.get('#passwords-edit-dialog .modal-container').screenshotWithPreview('password-create', {padding: 10});
     });
 
@@ -43,6 +44,7 @@ describe('Handbook', () => {
 
     it('Capture Folder Section', () => {
         cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
+        cy.wait(500);
         cy.get('div[data-pw-label="Work"]').screenshotWithPreview('folder-single');
         cy.get('div[data-pw-label="Work"]').click();
         cy.get('div[data-pw-label="Development"]');
@@ -165,12 +167,12 @@ describe('Handbook', () => {
     it('Capture Trash Section', () => {
         cy.visit('https://localhost/apps/passwords/#/tags', {retryOnNetworkFailure: true});
         cy.get('[data-pw-role="content"] [data-pw-item="tag"]', {timeout: 10000});
-        cy.itemAction({type:'tag', label:'Communication'}, 'delete');
+        cy.itemAction({type: 'tag', label: 'Communication'}, 'delete');
         cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('[data-pw-role="content"] [data-pw-item="folder"]', {timeout: 10000});
         cy.get('[data-pw-role="content"] [data-pw-label="Work"]').click();
-        cy.itemAction({type:'folder', label:'Hosting'}, 'delete');
-        cy.itemAction({type:'password', label:'Nextcloud'}, 'delete');
+        cy.itemAction({type: 'folder', label: 'Hosting'}, 'delete');
+        cy.itemAction({type: 'password', label: 'Nextcloud'}, 'delete');
         cy.contains('Folder deleted', {timeout: 10000});
         cy.visit('https://localhost/apps/passwords/#/trash', {retryOnNetworkFailure: true});
         cy.get('#app-content.section-trash');
@@ -179,7 +181,7 @@ describe('Handbook', () => {
         cy.get('[data-pw-role="content"] [data-pw-label="Communication"]');
         cy.closeSections('Favorites', 'Tags');
         cy.screenshotWithPreview('trash-section');
-        cy.batchAction('.restore', true);
+        cy.batchAction('restore', true);
         cy.dialogConfirm();
         /** Wait for trash restore requests to finish **/
         cy.wait(1000);
@@ -189,7 +191,7 @@ describe('Handbook', () => {
         cy.viewport(1280, 1500);
         cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('div[data-pw-label="Work"]').click();
-        cy.itemAction({type:'folder', label:'Hosting'}, 'details');
+        cy.itemAction({type: 'password', label: 'Nextcloud'}, 'details');
         cy.get('.preview-container .image-loaded', {timeout: 60000});
         cy.screenshotWithPreview('password-details');
         cy.get('#app-sidebar-vue').screenshotWithPreview('password-details-details');

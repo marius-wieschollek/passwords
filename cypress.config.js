@@ -10,10 +10,10 @@ const execFileAsync = promisify(execFile);
 
 module.exports = defineConfig(
     {
-        e2e: {
-            baseUrl: 'https://localhost',
-            viewportHeight: 800,
-            viewportWidth: 1280,
+        e2e   : {
+            baseUrl       : 'https://localhost',
+            viewportHeight: 900,
+            viewportWidth : 1440,
             setupNodeEvents(on, config) {
                 let container = config.expose.phpContainer || 'passwords-php';
 
@@ -29,11 +29,11 @@ module.exports = defineConfig(
                     async thumbnail(fileName) {
                         let source = path.join('cypress', 'screenshots', `${fileName}.png`),
                             target = path.join('cypress', 'screenshots', '_previews', `${fileName}.jpg`),
-                            image = await Jimp.read(source);
+                            image  = await Jimp.read(source);
 
                         await mkdir(path.dirname(target), {recursive: true});
 
-                        if (image.width > 320 || image.height > 200) {
+                        if(image.width > 320 || image.height > 200) {
                             image.scaleToFit({w: 320, h: 200});
                         }
 
