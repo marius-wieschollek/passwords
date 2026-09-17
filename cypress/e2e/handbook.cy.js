@@ -11,7 +11,7 @@ describe('Handbook', () => {
     });
 
     it('Import the sample database', () => {
-        cy.visit('https://localhost/apps/passwords/#/backup/import', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/backup/import', {retryOnNetworkFailure: true});
         cy.get('#passwords-import-source').select('json');
         cy.get('#passwords-import-file').selectFile('./cypress/fixtures/SamplePasswords.json');
         cy.get('#passwords-import-execute', {timeout: 1000});
@@ -20,7 +20,7 @@ describe('Handbook', () => {
 
     it('Capture New Password Dialog', () => {
         cy.viewport(1280, 900);
-        cy.visit('https://localhost/apps/passwords/#/all', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/all', {retryOnNetworkFailure: true});
         cy.get('.passwords-breadcrumbs .breadcrumb__actions .action-item__menutoggle').click();
         cy.get('.action-item__popper .passwords-password-create button').click();
         cy.get('#password-username').type('myuser');
@@ -32,7 +32,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Main Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/all', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/all', {retryOnNetworkFailure: true});
         cy.get('div[data-pw-label="Nextcloud"]')
           .scrollIntoView({offset: {top: -60}});
         /** Wait for Favicons to load **/
@@ -43,7 +43,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Folder Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.wait(500);
         cy.get('div[data-pw-label="Work"]').screenshotWithPreview('folder-single');
         cy.get('div[data-pw-label="Work"]').click();
@@ -54,7 +54,7 @@ describe('Handbook', () => {
     });
 
     it('Capture New Folder Dialog', () => {
-        cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('.passwords-breadcrumbs .breadcrumb__actions .action-item__menutoggle').click();
         cy.get('.action-item__popper .passwords-folder-create button').click();
         cy.modalType('input', 'Example Folder');
@@ -62,7 +62,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Recent Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/recent', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/recent', {retryOnNetworkFailure: true});
         cy.get('div.row', {timeout: 10000});
         /** Wait for Favicons to load **/
         cy.waitForRequestsToFinish();
@@ -70,7 +70,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Favourites Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/favorites', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/favorites', {retryOnNetworkFailure: true});
         cy.get('div.row');
         cy.openSections('Favorites');
         /** Wait for Favicons to load **/
@@ -79,25 +79,25 @@ describe('Handbook', () => {
     });
 
     it('Capture Shared Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/shared', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/shared', {retryOnNetworkFailure: true});
         cy.get('div.row');
         cy.screenshotWithPreview('shared-section');
     });
 
     it('Capture Security Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/security', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/security', {retryOnNetworkFailure: true});
         cy.get('div.row');
         cy.screenshotWithPreview('security-section');
     });
 
     it('Capture Handbook Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/help', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/help', {retryOnNetworkFailure: true});
         cy.get('h1#help-top');
         cy.screenshotWithPreview('handbook-section');
     });
 
     it('Capture Tags Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/tags', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/tags', {retryOnNetworkFailure: true});
         cy.get('div[data-pw-label=Communication]').screenshotWithPreview('tag-single');
 
         cy.closeSections('Favorites');
@@ -105,7 +105,7 @@ describe('Handbook', () => {
     });
 
     it('Capture New Tag Dialog', () => {
-        cy.visit('https://localhost/apps/passwords/#/tags', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/tags', {retryOnNetworkFailure: true});
         cy.get('.passwords-breadcrumbs .breadcrumb__actions .action-item__menutoggle').click();
         cy.get('.action-item__popper .passwords-tag-create button').click();
         cy.get('#password-field-label').type('Example Tag');
@@ -113,7 +113,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Search Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/search/c2hvcA==', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/search/c2hvcA==', {retryOnNetworkFailure: true});
         cy.get('div.row');
         cy.get('.passwords-search-box input').type('shop');
         cy.get('[data-pw-item="folder"]');
@@ -125,7 +125,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Settings Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/settings', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/settings', {retryOnNetworkFailure: true});
         cy.get('section.security h1').scrollIntoView({offset: {top: -60}});
         cy.screenshotWithPreview('settings-section');
         /** Wait for screenshot to finish **/
@@ -136,7 +136,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Export Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/backup/export', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/backup/export', {retryOnNetworkFailure: true});
         cy.get('#passwords-export-execute');
         cy.screenshotWithPreview('export-section');
         cy.get('#passwords-export-target').select('customCsv');
@@ -149,7 +149,7 @@ describe('Handbook', () => {
     });
 
     it('Capture Import Custom CSV', () => {
-        cy.visit('https://localhost/apps/passwords/#/backup/import', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/backup/import', {retryOnNetworkFailure: true});
         cy.get('#passwords-import-source').select('csv');
         cy.get('#passwords-import-file').selectFile('./cypress/fixtures/PasswordList.csv');
         cy.get('#passwords-mapping-0').select('label');
@@ -165,16 +165,16 @@ describe('Handbook', () => {
     });
 
     it('Capture Trash Section', () => {
-        cy.visit('https://localhost/apps/passwords/#/tags', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/tags', {retryOnNetworkFailure: true});
         cy.get('[data-pw-role="content"] [data-pw-item="tag"]', {timeout: 10000});
         cy.itemAction({type: 'tag', label: 'Communication'}, 'delete');
-        cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('[data-pw-role="content"] [data-pw-item="folder"]', {timeout: 10000});
         cy.get('[data-pw-role="content"] [data-pw-label="Work"]').click();
         cy.itemAction({type: 'folder', label: 'Hosting'}, 'delete');
         cy.itemAction({type: 'password', label: 'Nextcloud'}, 'delete');
         cy.contains('Folder deleted', {timeout: 10000});
-        cy.visit('https://localhost/apps/passwords/#/trash', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/trash', {retryOnNetworkFailure: true});
         cy.get('#app-content.section-trash');
         cy.get('[data-pw-role="content"] [data-pw-label="Hosting"]', {timeout: 10000});
         cy.get('[data-pw-role="content"] [data-pw-label="Nextcloud"]');
@@ -189,7 +189,7 @@ describe('Handbook', () => {
 
     it('Capture Password Sidebar', () => {
         cy.viewport(1280, 1500);
-        cy.visit('https://localhost/apps/passwords/#/folders', {retryOnNetworkFailure: true});
+        cy.visit('/apps/passwords/#/folders', {retryOnNetworkFailure: true});
         cy.get('div[data-pw-label="Work"]').click();
         cy.itemAction({type: 'password', label: 'Nextcloud'}, 'details');
         cy.get('.preview-container .image-loaded', {timeout: 60000});
