@@ -29,8 +29,8 @@
         "sqlite:down": "docker exec passwords-php bash -c 'find ./* -maxdepth 0 -not -name 'custom_apps' -print0 | xargs -0 rm -r --' &&  docker compose -f docker-compose.yml -f docker/configs/sqlite.yml down --volumes",
         "logs": "docker compose logs -f app",
         "docker:build": "docker compose build --parallel --pull && docker compose up -d",
-        "shell": "docker exec -itu www-data passwords-php bash",
-        "shell:root": "docker exec -it passwords-php bash",
+        "shell": "docker compose exec -u www-data app bash",
+        "shell:root": "docker compose exec -u www-data app bash",
         "watch": "webpack --env features=true --watch --progress",
         "build": "webpack --mode=production --env debuginfo=true",
         "build:stable": "webpack --mode=production",
@@ -59,18 +59,20 @@
         "css-loader": "^6.7.1",
         "css-minimizer-webpack-plugin": "^3.4.1",
         "csv-hero": "^0.0.4",
+        "cypress-browser-permissions": "^1.1.0",
         "dayjs": "^1.11.7",
         "dompurify": "3.4.0",
         "es-abstract": "1.20.4",
         "eventemitter3": "^4.0.7",
         "file-loader": "^6.2.0",
         "font-awesome": "^4.7.0",
+        "jimp": "^1.6.1",
         "jszip": "^3.10.1",
         "marked": "^4.2.2",
         "mermaid": "^10.6.1",
         "mini-css-extract-plugin": "^2.7.2",
-        "passwords-client": "1.0.0-beta.5974",
         "node-polyfill-webpack-plugin": "^3.0.0",
+        "passwords-client": "1.0.0-beta.5974",
         "process": "^0.11.10",
         "sass": "^1.57.1",
         "sass-loader": "^12.6.0",
@@ -105,6 +107,6 @@
     "license": "SEE LICENSE IN LICENSE",
     "_id": "ncpasswords@2021.12.0",
     "dependencies": {
-        "cypress": "^13.6.2"
+        "cypress": "^16.1.0"
     }
 }
