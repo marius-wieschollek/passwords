@@ -64,6 +64,7 @@ use OCA\Passwords\Events\Tag\TagDeletedEvent;
 use OCA\Passwords\Helper\Settings\ShareSettingsHelper;
 use OCA\Passwords\Helper\Sharing\RecipientSearchHelper;
 use OCA\Passwords\Helper\Words\SpecialCharacterHelper;
+use OCA\Passwords\Integrations\GuestsIntegration;
 use OCA\Passwords\Middleware\ApiSecurityMiddleware;
 use OCA\Passwords\Middleware\ApiSessionMiddleware;
 use OCA\Passwords\Provider\Favicon\BestIconProvider;
@@ -305,9 +306,9 @@ class Application extends App implements IBootstrap {
                     $c->get(ShareManager::class),
                     $c->get(IUserManager::class),
                     $c->get(IGroupManager::class),
-                    $c->get(ConfigurationService::class),
                     $c->get(EnvironmentService::class),
-                    $c->get(ShareSettingsHelper::class)
+                    $c->get(ShareSettingsHelper::class),
+                    $c->get(GuestsIntegration::class)
                 );
             }
         );
