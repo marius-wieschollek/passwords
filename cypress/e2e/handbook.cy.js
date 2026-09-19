@@ -3,6 +3,8 @@ describe('Handbook', () => {
         cy.occ('user:setting', 'admin', 'core', 'lang', 'en');
         cy.occ('user:setting', 'admin', 'core', 'locale', 'en_US');
         cy.occ('user:setting', 'admin', 'theming', 'enabled-themes', '["light"]');
+        cy.occ('user:setting', 'admin', 'dashboard', 'layout', 'passwords-widget');
+        cy.occ('user:setting', 'admin', 'dashboard', 'statuses', '');
         cy.occ('passwords:backup:restore', 'SampleData', '--no-interaction');
     });
 
@@ -217,5 +219,11 @@ describe('Handbook', () => {
         cy.get('.action-item__popper .passwords-password-qrcode').click();
         cy.get('#app-popup .modal-container .disable-warning').click();
         cy.get('#app-popup .modal-container').screenshotWithPreview('password-qrcode', {padding: 10});
+    });
+
+    it('Capture Dashboard Widget', () => {
+        cy.visit('/apps/dashboard/', {retryOnNetworkFailure: true});
+        cy.get('#app-dashboard #passwords-widget', {timeout: 10000});
+        cy.get('#app-dashboard .panel').screenshotWithPreview('dashboard-widget', {closeToasts: false, closeNotifications: false});
     });
 });

@@ -151,7 +151,9 @@ class ThemeSettingsHelper {
         }
 
         if (method_exists($this->theming, 'getColorBackground')) {
-            return $this->theming->getColorBackground();
+            [$r, $g, $b] = sscanf(ltrim($this->theming->getColorBackground(), '#'), '%2x%2x%2x');
+            $yiq = ($r * 299 + $g * 587 + $b * 114) / 1000;
+            return $yiq >= 128 ? '#000000' : '#ffffff';
         }
 
         return '#ffffff';

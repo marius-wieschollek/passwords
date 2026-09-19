@@ -110,7 +110,7 @@ class ThemingIntegration {
      * @return string
      */
     public function getColorBackground(): string {
-        $backgroundColor = $this->getCapability('backgroundColor');
+        $backgroundColor = $this->getCapability('background-text');
 
         return $backgroundColor ?? $this->getThemingDefaults()->getColorBackground();
     }
@@ -135,7 +135,7 @@ class ThemingIntegration {
      * @param string $capability
      * @return mixed|null
      */
-    protected function getCapability(string $capability) {
+    protected function getCapability(string $capability): mixed {
         if (!class_exists(Capabilities::class)) {
             return null;
         }
@@ -144,7 +144,7 @@ class ThemingIntegration {
         if (!$this->capabilities) {
             $capabilities = OC::$server->get(Capabilities::class);
 
-            $this->capabilities = $capabilities->getCapabilities();
+            $this->capabilities = $capabilities->getCapabilities()['theming'];
         }
 
         return $this->capabilities[$capability] ?? null;
