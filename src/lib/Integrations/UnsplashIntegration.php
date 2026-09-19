@@ -14,20 +14,25 @@ namespace OCA\Passwords\Integrations;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Unsplash\ProviderHandler\Provider;
 use OCA\Unsplash\Services\SettingsService;
+use Psr\Container\ContainerInterface;
+use Throwable;
 
 class UnsplashIntegration {
 
     /**
      * @param ConfigurationService $config
      */
-    public function __construct(protected ConfigurationService $config) {
+    public function __construct(
+        protected ConfigurationService $config,
+        protected ContainerInterface   $container
+    ) {
     }
 
     /**
      * @return bool
      */
     public function isAvailable(): bool {
-        return $this->config->isAppEnabled('unsplash') && class_exists(\OCA\Unsplash\Services\SettingsService::class);
+        return $this->config->isAppEnabled('unsplash') && $this->container->has(SettingsService::class);
     }
 
     /**
@@ -35,10 +40,11 @@ class UnsplashIntegration {
      */
     public function getBackgroundImage(): ?string {
         try {
-            $settings = \OC::$server->get(SettingsService::class);
+            /** @var \OCA\Unsplash\Services\SettingsService $guestBackend */
+            $settings = $this->container->get(SettingsService::class);
 
             return $settings->headerbackgroundLink(Provider::SIZE_NORMAL);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return null;
         }
     }

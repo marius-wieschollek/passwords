@@ -11,11 +11,11 @@
 
 namespace OCA\Passwords\Integrations;
 
-use OC;
 use OCA\Guests\UserBackend;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
 use OCP\IGroupManager;
+use Psr\Container\ContainerInterface;
 
 class GuestsIntegration {
 
@@ -23,11 +23,13 @@ class GuestsIntegration {
      * @param IGroupManager        $groupManager
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
+     * @param ContainerInterface   $container
      */
     public function __construct(
         protected IGroupManager        $groupManager,
         protected ConfigurationService $config,
-        protected EnvironmentService   $environment
+        protected EnvironmentService   $environment,
+        protected ContainerInterface   $container
     ) {
     }
 
@@ -45,8 +47,8 @@ class GuestsIntegration {
      */
     public function isCurrentUserAGuest(): bool {
         if($this->isAvailable()) {
-            // @TODO: Use container instead
-            $guestBackend = OC::$server->get(UserBackend::class);
+            /** @var \OCA\Guests\UserBackend $guestBackend */
+            $guestBackend = $this->container->get(UserBackend::class);
 
             return $guestBackend->userExists($this->environment->getUserId());
         }

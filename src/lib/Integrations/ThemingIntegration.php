@@ -11,12 +11,14 @@
 
 namespace OCA\Passwords\Integrations;
 
-use OC;
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Theming\ThemingColorHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Theming\Capabilities;
+use OCA\Theming\Service\BackgroundService;
 use OCA\Theming\ThemingDefaults;
 use OCP\IURLGenerator;
+use Psr\Container\ContainerInterface;
 
 /**
  *
@@ -31,7 +33,9 @@ class ThemingIntegration {
      */
     public function __construct(
         protected ConfigurationService $config,
-        protected IURLGenerator        $urlGenerator
+        protected IURLGenerator        $urlGenerator,
+        protected ThemingColorHelper   $colorHelper,
+        protected ContainerInterface   $container,
     ) {
     }
 
@@ -39,7 +43,7 @@ class ThemingIntegration {
      * @return bool
      */
     public function isAvailable(): bool {
-        return $this->config->isAppEnabled('theming') && class_exists(ThemingDefaults::class);
+        return $this->config->isAppEnabled('theming') && $this->container->has(ThemingDefaults::class);
     }
 
     /**
@@ -74,18 +78,18 @@ class ThemingIntegration {
      * @return string
      */
     public function getLogoIcon(): string {
-        $logoUrl = $this->getCapability('logoUrl');
+        $logoUrl = $this->getCapability('logo');
 
-        return $logoUrl ?? $this->getThemingDefaults()->getLogo();
+        return $logoUrl ?? $this->urlGenerator->getAbsoluteURL($this->getThemingDefaults()->getLogo());
     }
 
     /**
      * @return string
      */
     public function getName(): string {
-        $color = $this->getCapability('name');
+        $name = $this->getCapability('name');
 
-        return $color ?? $this->getThemingDefaults()->getName();
+        return $name ?? $this->getThemingDefaults()->getName();
     }
 
     /**
@@ -112,41 +116,61 @@ class ThemingIntegration {
     public function getColorBackground(): string {
         $backgroundColor = $this->getCapability('background-text');
 
-        return $backgroundColor ?? $this->getThemingDefaults()->getColorBackground();
+        if(!empty($backgroundColor)) {
+            return $backgroundColor;
+        }
+
+        return $this->colorHelper->getTextColor($this->getThemingDefaults()->getColorBackground());
     }
 
     /**
      * @return string
      */
     public function getBackgroundImage(): string {
-        $userBackground = $this->getCapability('background');
+        if($this->getCapability('background-plain') === false) {
+            $userBackground = $this->getCapability('background');
 
-        return $userBackground ?? $this->getThemingDefaults()->getBackground();
+            if($userBackground) {
+                if(parse_url($userBackground, PHP_URL_SCHEME) === null) {
+                    $userBackground = $this->urlGenerator->getAbsoluteURL($userBackground);
+                }
+
+                return $userBackground;
+            }
+        }
+
+        return $this->urlGenerator->getAbsoluteURL(
+            $this->urlGenerator->linkTo(
+                \OCA\Theming\AppInfo\Application::APP_ID,
+                'img/background/'.BackgroundService::DEFAULT_BACKGROUND_IMAGE
+            )
+        );
     }
 
     /**
      * @return ThemingDefaults
      */
     protected function getThemingDefaults(): ThemingDefaults {
-        return \OC::$server->get(ThemingDefaults::class);
+        return $this->container->get(ThemingDefaults::class);
     }
 
     /**
      * @param string $capability
+     *
      * @return mixed|null
      */
     protected function getCapability(string $capability): mixed {
-        if (!class_exists(Capabilities::class)) {
+        if(!$this->container->has(Capabilities::class)) {
             return null;
         }
 
+        if($this->capabilities === null) {
+            /** @var \OCA\Theming\Capabilities $capabilities */
+            $capabilities = $this->container->get(Capabilities::class);
 
-        if (!$this->capabilities) {
-            $capabilities = OC::$server->get(Capabilities::class);
-
-            $this->capabilities = $capabilities->getCapabilities()['theming'];
+            $this->capabilities = $capabilities->getCapabilities()['theming'] ?? [];
         }
 
-        return $this->capabilities[$capability] ?? null;
+        return $this->capabilities[ $capability ] ?? null;
     }
 }

@@ -11,6 +11,7 @@ use OC_Defaults;
 use OC_Defaults_With_Everything;
 use OC_Defaults_With_NoName;
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Theming\ThemingColorHelper;
 use OCA\Passwords\Integrations\ThemingIntegration;
 use OCA\Passwords\Integrations\UnsplashIntegration;
 use OCP\IURLGenerator;
@@ -43,6 +44,11 @@ class ThemeSettingsHelperTest extends TestCase {
      * @var MockObject|ThemingIntegration
      */
     protected $themingIntegration;
+
+    /**
+     * @var MockObject|ThemingColorHelper
+     */
+    protected $colorHelper;
 
     public function testGetPrimaryColorDefault() {
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
@@ -109,16 +115,30 @@ class ThemeSettingsHelperTest extends TestCase {
         self::assertEquals('#ffffff', $result);
     }
 
-    public function testGetBackgroundColorFromOcDefaults() {
+    public function testGetBackgroundColorFromOcDefaultsWhite() {
         $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
 
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
         $this->themingIntegration->expects($this->never())->method('getColorBackground');
 
-        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#123456');
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#000000');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#000000')->willReturn('#ffffff');
 
         $result = $this->getThemeSettingsHelper()->get('color.background');
-        self::assertEquals('#123456', $result);
+        self::assertEquals('#ffffff', $result);
+    }
+
+    public function testGetBackgroundColorFromOcDefaultsBlack() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackground');
+
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#ffffff')->willReturn('#000000');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background');
+        self::assertEquals('#000000', $result);
     }
 
     public function testGetBackgroundColorFromTheming() {
@@ -326,7 +346,7 @@ class ThemeSettingsHelperTest extends TestCase {
         $expected = [
             'server.theme.color.primary'    => '#123456',
             'server.theme.color.text'       => '#456789',
-            'server.theme.color.background' => '#789123',
+            'server.theme.color.background' => '#ffffff',
             'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/background.webp',
             'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
             'server.theme.label'            => 'Nextcloud',
@@ -341,9 +361,11 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
         $this->themingDefaults->method('getColorPrimary')->willReturn('#123456');
         $this->themingDefaults->method('getTextColorPrimary')->willReturn('#456789');
-        $this->themingDefaults->method('getColorBackground')->willReturn('#789123');
+        $this->themingDefaults->method('getColorBackground')->willReturn('#000000');
         $this->themingDefaults->method('getLogo')->willReturn('/core/img/logo.svg');
         $this->themingDefaults->method('getName')->willReturn('Nextcloud');
+
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#000000')->willReturn('#ffffff');
 
 
         $this->urlGenerator->method('imagePath')->willReturnMap(
@@ -374,6 +396,7 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->urlGenerator = $this->createMock(IURLGenerator::class);
         $this->unsplashIntegration = $this->createMock(UnsplashIntegration::class);
         $this->themingIntegration = $this->createMock(ThemingIntegration::class);
+        $this->colorHelper = $this->createMock(ThemingColorHelper::class);
 
         $this->getThemeSettingsHelper();
     }
@@ -386,7 +409,8 @@ class ThemeSettingsHelperTest extends TestCase {
             $this->themingDefaults,
             $this->urlGenerator,
             $this->themingIntegration,
-            $this->unsplashIntegration
+            $this->unsplashIntegration,
+            $this->colorHelper
         );
     }
 }

@@ -13,6 +13,7 @@ namespace OCA\Passwords\Helper\Settings;
 
 use OC_Defaults;
 use OCA\Passwords\AppInfo\Application;
+use OCA\Passwords\Helper\Theming\ThemingColorHelper;
 use OCA\Passwords\Integrations\ThemingIntegration;
 use OCA\Passwords\Integrations\UnsplashIntegration;
 use OCP\IURLGenerator;
@@ -32,12 +33,14 @@ class ThemeSettingsHelper {
      * @param IURLGenerator       $urlGenerator
      * @param ThemingIntegration  $themingIntegration
      * @param UnsplashIntegration $unsplashIntegration
+     * @param ThemingColorHelper  $colorHelper
      */
     public function __construct(
         protected OC_Defaults          $theming,
         protected IURLGenerator        $urlGenerator,
         protected ThemingIntegration   $themingIntegration,
-        protected UnsplashIntegration  $unsplashIntegration
+        protected UnsplashIntegration  $unsplashIntegration,
+        protected ThemingColorHelper   $colorHelper,
     ) {
     }
 
@@ -151,9 +154,7 @@ class ThemeSettingsHelper {
         }
 
         if (method_exists($this->theming, 'getColorBackground')) {
-            [$r, $g, $b] = sscanf(ltrim($this->theming->getColorBackground(), '#'), '%2x%2x%2x');
-            $yiq = ($r * 299 + $g * 587 + $b * 114) / 1000;
-            return $yiq >= 128 ? '#000000' : '#ffffff';
+            return $this->colorHelper->getTextColor($this->theming->getColorBackground());
         }
 
         return '#ffffff';
