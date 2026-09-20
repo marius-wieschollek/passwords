@@ -3461,7 +3461,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "在共享口令上被關閉 ."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "不支持同群分享。 取而代之的是, 密碼會被分別地和目前的團體成員分享 ."
     },
     "frontend-BatchShareSubnameGroup": {

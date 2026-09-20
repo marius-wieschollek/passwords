@@ -20,7 +20,7 @@
             <div class="pw-batch-share">
                 <nc-note-card type="warning" :text="t('BatchActionShareDialogPasswordsOnlyWarning')" v-if="passwordsOnlyWarning"/>
                 <nc-note-card type="warning" :text="t('BatchActionShareDialogCseDisableWarning')" v-if="cseDisableWarning"/>
-                <nc-note-card type="warning" :text="t('BatchActionShareDialogGroupShareWarning')" v-if="groupShareWarning"/>
+                <nc-note-card type="info" :text="t('ShareGroupShareWarning')" v-if="groupShareWarning"/>
 
                 <div class="select-users">
                     <nc-select-users :input-label="t('BatchActionShareSelectUsersLabel')"

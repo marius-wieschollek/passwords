@@ -3584,7 +3584,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "O cifrado de extremo a extremo desactivarase en calquera contrasinal cando se comparta."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "Non se permite compartir con grupos. No canto diso, os contrasinais compartiránse de xeito individual con cada un dos membros actuais do grupo."
     },
     "frontend-BatchShareSubnameGroup": {

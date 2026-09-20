@@ -18,6 +18,7 @@
                 <nc-avatar disable-menu :size="32" :user="share.receiver.id" :display-name="share.receiver.name"/>
             </template>
         </nc-note-card>
+        <nc-note-card type="info" :text="t('ShareGroupShareWarning')" v-if="groupShareWarning"/>
 
         <share-options-form
                 :share="share"
@@ -96,6 +97,9 @@
                 }
 
                 return null;
+            },
+            groupShareWarning() {
+                return this.recipients && this.recipients.some(item => item.isNoUser);
             }
         },
         methods : {

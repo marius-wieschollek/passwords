@@ -3572,7 +3572,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End-to-End encryption will be disabled on any password when shared."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "Sharing with groups is not supported. Instead, the passwords will be shared with each current group member individually."
     },
     "frontend-BatchShareSubnameGroup": {

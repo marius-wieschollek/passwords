@@ -3572,7 +3572,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "Le chiffrement de bout en bout sera désactivé sur tout mot de passe partagé."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "Le partage avec les groupes n'est pas pris en charge. Au lieu de cela, les mots de passe seront partagés avec chaque membre du groupe actuel individuellement."
     },
     "frontend-BatchShareSubnameGroup": {

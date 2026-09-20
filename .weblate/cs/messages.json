@@ -3553,7 +3553,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "End- to - End šifrování bude při sdílení vypnuto na libovolném heslu."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "Sdílení se skupinami není podporováno. Místo toho budou hesla sdílena s každým současným členem skupiny jednotlivě."
     },
     "frontend-BatchShareSubnameGroup": {

@@ -3556,7 +3556,7 @@
     "frontend-BatchActionShareDialogCseDisableWarning": {
         "message": "共享时, 端到端加密将在任何密码上被禁用 ."
     },
-    "frontend-BatchActionShareDialogGroupShareWarning": {
+    "frontend-ShareGroupShareWarning": {
         "message": "不支持与群体共享。 相反,密码将单独与每个现任组成员共享."
     },
     "frontend-BatchShareSubnameGroup": {
