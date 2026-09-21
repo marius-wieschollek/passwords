@@ -3577,5 +3577,69 @@
     },
     "frontend-BatchShareSubnameGroup": {
         "message": "User group"
+    },
+    "frontend-CreateShareErrorAlreadyExpired": {
+        "message": "Expiration date for \"$PASSWORD$\" share with \"$RECIPIENT$\" can not be in the past.",
+        "placeholders": {
+            "password": {
+                "content": "$1",
+                "description": "Name of the password"
+            },
+            "recipient": {
+                "content": "$1",
+                "description": "Name of the recipient"
+            }
+        }
+    },
+    "frontend-ShareExpirationHint": {
+        "message": "Share expiration"
+    },
+    "frontend-ShareExpirationTitle": {
+        "message": "Share expires on $DATE$",
+        "placeholders": {
+            "date": {
+                "content": "$1",
+                "description": "Date when the share expires"
+            }
+        }
+    },
+    "frontend-ShareActionCreate": {
+        "message": "Save share"
+    },
+    "frontend-ShareActionUpdate": {
+        "message": "Update"
+    },
+    "frontend-ShareEditUser": {
+        "message": "Share with $NAME$",
+        "placeholders": {
+            "name": {
+                "content": "$1",
+                "description": "Name of the user this share is for"
+            }
+        }
+    },
+    "frontend-SharingNoShares": {
+        "message": "Password not shared"
+    },
+    "frontend-SharingNoSharesText": {
+        "message": "Shares with other users will appear here."
+    },
+    "frontend-ShareInfoEditable": {
+        "message": "You can edit this password."
+    },
+    "frontend-ShareInfoNotEditable": {
+        "message": "You can not edit this password."
+    },
+    "frontend-ShareInfoShareable": {
+        "message": "You can share this password with others."
+    },
+    "frontend-ShareInfoNotShareable": {
+        "message": "You can not share this password."
+    },
+    "frontend-SharePermissionCanView": {
+        "message": "Can view"
+    },
+    "frontend-ShareDeletedToast": {
+        "message": "Share deleted"
     }
 }
