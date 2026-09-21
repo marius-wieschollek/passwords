@@ -12,7 +12,7 @@ describe('Handbook', () => {
         cy.login('admin', 'admin');
     });
 
-    it('Import the sample database', () => {
+    it('Capture Import Section', () => {
         cy.visit('/apps/passwords/#/backup/import', {retryOnNetworkFailure: true});
         cy.get('#passwords-import-source').select('json');
         cy.get('#passwords-import-file').selectFile('./cypress/fixtures/SamplePasswords.json');
@@ -224,6 +224,7 @@ describe('Handbook', () => {
     it('Capture Dashboard Widget', () => {
         cy.visit('/apps/dashboard/', {retryOnNetworkFailure: true});
         cy.get('#app-dashboard #passwords-widget', {timeout: 10000});
-        cy.get('#app-dashboard .panel').screenshotWithPreview('dashboard-widget', {closeToasts: false, closeNotifications: false});
+        cy.get('#app-dashboard #passwords-widget .list-item', {timeout: 10000});
+        cy.get('#app-dashboard .panel').screenshotWithPreview('dashboard-widget', {closeToasts: false, closeNotifications: false, padding: 10});
     });
 });
