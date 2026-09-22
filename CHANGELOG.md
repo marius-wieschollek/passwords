@@ -1,6 +1,14 @@
 ## [Unreleased]
+### Added
+- Context menu for tags
+- Drag and drop for tags
 ### Changed
 - Passwords are now marked as unchecked if the security check fails
+### Fixed
+- Creation of shares with invalid receivers now blocked
+- Search box squished by app navigation in some cases
+### Removed
+- Breeze theme support
 
 ## 2026.9.0 - Feature release
 ### Added
