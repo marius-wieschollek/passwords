@@ -207,7 +207,7 @@ class ServerReportHelper {
         $appClass = new OC_App();
         $apps     = $appClass->listAllApps();
         $data     = [];
-        foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate', 'passwords_handbook'] as $app) {
+        foreach(['guests', 'occweb', 'theming', 'passman', 'unsplash', 'impersonate', 'passwords_handbook', 'user_migration'] as $app) {
             $data[ $app ] = [
                 'installed' => false,
                 'enabled'   => false
