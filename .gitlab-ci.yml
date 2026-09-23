@@ -54,8 +54,8 @@ Assemble:
   stage: assembling
   script:
     - mkdir passwords
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php ; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --nightly --build "${CI_PIPELINE_ID}" ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then node scripts/set-version.mjs ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then node scripts/set-version.mjs --nightly --build "${CI_PIPELINE_ID}" ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords
     - rsync -r src/js/Static passwords/js/
     - cp CHANGELOG.md passwords/
@@ -81,8 +81,8 @@ Assemble Legacy PHP 8.1 Support Release:
     - mkdir passwords-lsr-81
     - rsync -r .patches/lsr-8.1/* src
     - npm run rector
-    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then php scripts/set-version.php --lsr 1; fi
-    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then php scripts/set-version.php --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
+    - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then node scripts/set-version.mjs --lsr 1; fi
+    - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then node scripts/set-version.mjs --lsr 1 --nightly --build "${CI_PIPELINE_ID}" ; fi
     - rsync -r --exclude="vue" --exclude="js" --exclude="scss" src/* passwords-lsr-81
     - rsync -r src/js/Static passwords-lsr-81/js/
     - cp CHANGELOG.md passwords-lsr-81/
