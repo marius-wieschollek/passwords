@@ -68,6 +68,8 @@ The app also supports most 2FA authentication methods offered by Nextcloud.
 * [Linux App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#linux) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
 * [macOS App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#mac-os) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
 * [iOS App](https://apps.apple.com/app/id1546212226) by [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
+* [Windows App](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop/releases/latest) by [TinyBrickBoy](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop)
+* [Linux App](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop) by [TinyBrickBoy](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop)
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
