@@ -110,6 +110,8 @@ Publish Package:
         --assets-link "{\"name\":\"Passwords Handbook ${APP_VERSION}\",\"url\":\"https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION}\",\"link_type\":\"other\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz\",\"link_type\":\"package\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"link_type\":\"package\"}"
+  environment:
+    name: Stable
   only:
     - stable
 
@@ -131,6 +133,37 @@ Publish Stable:
     name: Stable
   only:
   - stable
+
+Publish GitHub Release:
+  stage: publishing
+  image: passwords-builder
+  variables:
+    GIT_DEPTH: 0
+  needs:
+    - Prepare
+    - Assemble
+    - Assemble Legacy PHP 8.1 Support Release
+    - Publish Package
+  script:
+    - gh auth setup-git
+    - git push "https://github.com/${GH_REPO}.git" "${CI_COMMIT_SHA}:refs/tags/${APP_VERSION}"
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"'
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords-lsr-81.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"'
+    - echo -e "## New in Passwords ${APP_VERSION}\\n${CHANGELOG}\\n\\n[Passwords Handbook ${APP_VERSION}](https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION})" > notes.md
+    - |
+      if gh release view "${APP_VERSION}" >/dev/null 2>&1; then
+        gh release upload "${APP_VERSION}" --clobber passwords.tar.gz passwords-lsr-81.tar.gz
+        gh release edit "${APP_VERSION}" --notes-file notes.md
+      else
+        gh release create "${APP_VERSION}" --verify-tag \
+          --title "Passwords ${APP_VERSION}" --notes-file notes.md \
+          "passwords.tar.gz#Passwords ${APP_VERSION} (tar.gz)" \
+          "passwords-lsr-81.tar.gz#Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (tar.gz)"
+      fi
+  environment:
+    name: Stable
+  only:
+    - stable
 
 Update Handbook:
   stage: hooks

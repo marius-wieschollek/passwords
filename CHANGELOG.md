@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2026.10.0 - Feature release
 ### Added
 - Context menu for tags
 - Drag and drop for tags
