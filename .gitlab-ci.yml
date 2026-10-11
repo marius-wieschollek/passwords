@@ -61,11 +61,13 @@ Assemble:
     - cp CHANGELOG.md passwords/
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
     - tar -zcf passwords.tar.gz passwords
-    - SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords.tar.gz | openssl base64 | tr -d "\n")
+    - openssl dgst -sha512 -sign ${SIGN_KEY} -out signature.sig ./passwords.tar.gz
+    - SIGNATURE=$(openssl base64 -A -in signature.sig)
     - echo "SIGNATURE=${SIGNATURE}" >> variables.env
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords.tar.gz" ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz" ; fi
     - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"'
+    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${UPLOAD_URL}.sig"'
     - echo "Package available at ${UPLOAD_URL}"
   artifacts:
     expire_in: 1 week
@@ -88,9 +90,11 @@ Assemble Legacy PHP 8.1 Support Release:
     - cp CHANGELOG.md passwords-lsr-81/
     - /usr/src/nextcloud/occ integrity:sign-app --path=$(pwd)/passwords-lsr-81 --privateKey=${SIGN_KEY} --certificate=${SIGN_CRT}
     - tar -zcf passwords-lsr-81.tar.gz passwords-lsr-81 --transform s/passwords-lsr-81/passwords/
-    - LSR_SIGNATURE=$(openssl dgst -sha512 -sign ${SIGN_KEY} ./passwords-lsr-81.tar.gz | openssl base64 | tr -d "\n")
+    - openssl dgst -sha512 -sign ${SIGN_KEY} -out signature.sig ./passwords-lsr-81.tar.gz
+    - LSR_SIGNATURE=$(openssl base64 -A -in signature.sig)
     - echo "LSR_SIGNATURE=${LSR_SIGNATURE}" >> variables.env
     - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-81.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"'
+    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz.sig"'
     - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"
   artifacts:
     expire_in: 1 week
@@ -109,7 +113,9 @@ Publish Package:
         --description "description.txt" \
         --assets-link "{\"name\":\"Passwords Handbook ${APP_VERSION}\",\"url\":\"https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION}\",\"link_type\":\"other\"}" \
         --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz\",\"link_type\":\"package\"}" \
-        --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"link_type\":\"package\"}"
+        --assets-link "{\"name\":\"Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (Signature)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz.sig\",\"link_type\":\"other\"}" \
+        --assets-link "{\"name\":\"Passwords ${APP_VERSION} (tar.gz)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz\",\"link_type\":\"package\"}" \
+        --assets-link "{\"name\":\"Passwords ${APP_VERSION} (Signature)\",\"url\":\"${PACKAGE_REGISTRY_URL}/passwords.tar.gz.sig\",\"link_type\":\"other\"}"
   environment:
     name: Stable
   only:
@@ -149,16 +155,20 @@ Publish GitHub Release:
     - git push "https://github.com/${GH_REPO}.git" "${CI_COMMIT_SHA}:refs/tags/${APP_VERSION}"
     - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords.tar.gz "${PACKAGE_REGISTRY_URL}/passwords.tar.gz"'
     - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords-lsr-81.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"'
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords.tar.gz.sig "${PACKAGE_REGISTRY_URL}/passwords.tar.gz.sig"'
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" -o passwords-lsr-81.tar.gz.sig "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz.sig"'
     - echo -e "## New in Passwords ${APP_VERSION}\\n${CHANGELOG}\\n\\n[Passwords Handbook ${APP_VERSION}](https://git.mdns.eu/nextcloud/passwords-handbook/-/releases/${APP_VERSION})" > notes.md
     - |
       if gh release view "${APP_VERSION}" >/dev/null 2>&1; then
-        gh release upload "${APP_VERSION}" --clobber passwords.tar.gz passwords-lsr-81.tar.gz
+        gh release upload "${APP_VERSION}" --clobber passwords.tar.gz passwords-lsr-81.tar.gz passwords.tar.gz.sig passwords-lsr-81.tar.gz.sig
         gh release edit "${APP_VERSION}" --notes-file notes.md
       else
         gh release create "${APP_VERSION}" --verify-tag \
           --title "Passwords ${APP_VERSION}" --notes-file notes.md \
           "passwords.tar.gz#Passwords ${APP_VERSION} (tar.gz)" \
-          "passwords-lsr-81.tar.gz#Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (tar.gz)"
+          "passwords-lsr-81.tar.gz#Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (tar.gz)" \
+          "passwords.tar.gz.sig#Passwords ${APP_VERSION} (Signature)" \
+          "passwords-lsr-81.tar.gz.sig#Passwords ${APP_VERSION} LSR for PHP 8.1/8.2 (Signature)"
       fi
   environment:
     name: Stable
