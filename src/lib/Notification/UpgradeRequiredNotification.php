@@ -29,7 +29,7 @@ class UpgradeRequiredNotification extends AbstractNotification {
 
     const string NAME                           = 'upgrade_required';
     const string TYPE                           = 'admin';
-    const string MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
+    const string MANUAL_URL_SYSTEM_REQUIREMENTS = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Notifications/Platform-Support-Notification';
 
     /**
      * @param IFactory      $l10nFactory

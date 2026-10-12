@@ -20,7 +20,7 @@ body:
           required: true
         - label: This feature is **not** already requested on Github _(I've searched it)_.
           required: true
-        - label: This feature does not already exist _(I checked the [wiki](https://git.mdns.eu/nextcloud/passwords/-/wikis/home))_.
+        - label: This feature does not already exist _(I checked the [wiki](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/home))_.
           required: true
   - type: textarea
     id: current-status

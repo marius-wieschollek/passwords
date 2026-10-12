@@ -7,10 +7,10 @@ contact_links:
     url: https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org
     about: Ask questions and discuss with other users
   - name: User Handbook
-    url: https://git.mdns.eu/nextcloud/passwords/wikis/Users/Index
+    url: https://git.mdns.eu/nextcloud-passwords/passwords/wikis/Users/Index
     about: Learn how to use the app and all the features
   - name: Administrator Handbook
-    url: https://git.mdns.eu/nextcloud/passwords/wikis/Administrators/Index
+    url: https://git.mdns.eu/nextcloud-passwords/passwords/wikis/Administrators/Index
     about: Learn about the app and the configuration options
   - name: Official Browser Extension Bugtracker
     url: https://github.com/marius-wieschollek/passwords-webextension/issues

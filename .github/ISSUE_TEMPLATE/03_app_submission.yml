@@ -21,7 +21,7 @@ body:
           required: true
         - label: My app is not branded as an "official" app
           required: true
-        - label: My app supports [client side encryption](https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/Encryption)
+        - label: My app supports [client side encryption](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Developers/Encryption)
           required: true
   - type: input
     id: app-name

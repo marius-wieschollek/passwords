@@ -37,9 +37,9 @@ use OCP\Settings\ISettings;
  */
 class AdminSettings implements ISettings {
 
-    const string LINK_DOCUMENTATION = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index';
-    const string LINK_HELP          = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/App-Settings';
-    const string LINK_REQUIREMENTS = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/System-Requirements';
+    const string LINK_DOCUMENTATION = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Index';
+    const string LINK_HELP          = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/App-Settings';
+    const string LINK_REQUIREMENTS = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/System-Requirements';
     const string LINK_ISSUES       = 'https://github.com/marius-wieschollek/passwords/issues';
     const string LINK_FORUM  = 'https://help.nextcloud.com/tag/passwords-app';
 

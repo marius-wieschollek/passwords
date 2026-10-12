@@ -15,8 +15,8 @@
 ## Support
 * [Official Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
 * [Official Forum](https://help.nextcloud.com/tag/passwords-app)
-* [User Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/Index)
-* [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)
+* [User Handbook](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Users/Index)
+* [Administrator Handbook](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Index)
 * [Bug Tracker](https://github.com/marius-wieschollek/passwords/issues)
 
 ## Features
@@ -71,18 +71,18 @@ The app also supports most 2FA authentication methods offered by Nextcloud.
 
 ## API
 Passwords offers complete API, giving you access to all features of the app.
-You can use our [javascript client](https://www.npmjs.com/package/passwords-client) or take a look at the [api documentation](https://git.mdns.eu/nextcloud/passwords/-/wikis/developers/index).
+You can use our [javascript client](https://www.npmjs.com/package/passwords-client) or take a look at the [api documentation](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/developers/index).
 
 ## Installation
 Simply install the app from the [Nextcloud App Store](https://apps.nextcloud.com/apps/passwords).
-You can also download the latest release from our [releases page](https://git.mdns.eu/nextcloud/passwords/-/releases) and install it manually by unpacking the archive and placing the folder in the apps directory of your Nextcloud instance.
+You can also download the latest release from our [releases page](https://git.mdns.eu/nextcloud-passwords/passwords/-/releases) and install it manually by unpacking the archive and placing the folder in the apps directory of your Nextcloud instance.
 
 #### Requirements
 * Linux OS
 * Nextcloud ([latest](https://nextcloud.com/install/#instructions-server))
 * PHP (with [active support](https://www.php.net/supported-versions.php))
 * Database (MariaDB, MySQL, PostgreSQL, Sqlite)
-* [Complete list of requirements](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/System-Requirements)
+* [Complete list of requirements](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/System-Requirements)
 
 ## Demo
 We do provide demo servers for testing and development purposes.
@@ -92,10 +92,10 @@ The servers are reset every six hours.
 * [Demo of the latest nightly build](https://next.passwordsapp.org/info.html)
 
 ## Development
-* Install our [nightly build](https://git.mdns.eu/nextcloud/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
+* Install our [nightly build](https://git.mdns.eu/nextcloud-passwords/passwords/-/jobs/artifacts/testing/raw/passwords.tar.gz?job=Pack).
 * Do you want to help us? Read the [guide](CONTRIBUTING.md) and get started.
 * Do you want to translate the app? You can do so on [Weblate](https://weblate.passwordsapp.org/projects/passwords/passwords/).
-* Do you want to use the API? Read the [docs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/Index).
+* Do you want to use the API? Read the [docs](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Developers/Index).
 * For questions and announcements, visit the [Matrix Chat for Developers](https://matrix.to/#/#developers:chat.passwordsapp.org)
 
 ## Donations

@@ -203,4 +203,4 @@ anything that could reach a real deployment.
 - `CONTRIBUTING.md` — contributor rules and full dev setup (**read before contributing**)
 - `CHANGELOG.md` — release notes; `scripts/extract-changelog.mjs` feeds CI
 - `Licenses.md`, `AUTHORS.md`, `Donate.md`
-- Wiki (user, admin, developer/API handbooks): https://git.mdns.eu/nextcloud/passwords/-/wikis/home
+- Wiki (user, admin, developer/API handbooks): https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/home

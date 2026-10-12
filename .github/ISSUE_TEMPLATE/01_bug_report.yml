@@ -87,7 +87,7 @@ body:
       label: Nextcloud Logs
       description: |
         Provide related Nextcloud logs entries.
-        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
+        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
         > NOTE: This will be automatically formatted into code for better readability.
       render: shell
   - type: textarea
@@ -96,7 +96,7 @@ body:
       label: Browser Logs
       description: |
         Provide related log entries from your Browser or Client
-        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
+        [Check out our guide to get the logs](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Guides/Maintenance/App-Debugging)
         > NOTE: This will be automatically formatted into code for better readability.
       render: shell
   - type: textarea

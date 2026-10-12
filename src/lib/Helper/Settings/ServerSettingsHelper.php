@@ -21,7 +21,7 @@ class ServerSettingsHelper {
 
     const string SERVER_MANUAL_URL = 'https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/';
 
-    const string SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/';
+    const string SERVER_MANUAL_URL_WEB = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Users/';
 
     /**
      * ServerSettingsHelper constructor.

@@ -1,6 +1,6 @@
 ## Rules for contributors
 
-* Git commits have to be [signed](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Contributing/Verify-Git-Commits)
+* Git commits have to be [signed](https://git.mdns.eu/nextcloud-passwords/passwords/wikis/Developers/Contributing/Verify-Git-Commits)
 * Code must be created by committer and must be copyrightable under the [LICENSE](https://github.com/marius-wieschollek/passwords/blob/master/LICENSE).
     Code created in significant parts by AI is not copyrightable and can not be submitted.
 * Keep any discussions professional and civil
@@ -59,10 +59,10 @@ You can start development on the passwords app with your existing Nextcloud inst
 ### Sample Data
 The docker setup comes with two test users `max` and `erika` with the password `PasswordsApp`.
 All users have a set of sample data installed.
-You can also download a [file with sample data](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/_files/SamplePasswords.json) from the wiki and can import it on the [backups page](http://localhost/index.php/apps/passwords#/backup).
+You can also download a [file with sample data](https://git.mdns.eu/nextcloud-passwords/passwords/wikis/Developers/_files/SamplePasswords.json) from the wiki and can import it on the [backups page](http://localhost/index.php/apps/passwords#/backup).
 
 ### API Debugging
-We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/_files/postman-collection.json) for the API debugging tool [Postman](https://www.postman.com/).
+We offer a [postman collection](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Developers/_files/postman-collection.json) for the API debugging tool [Postman](https://www.postman.com/).
 
 ### Helpful commands
 * `npm run watch` - Create development build of JS/CSS files and watch for changes
@@ -119,7 +119,7 @@ We offer a [postman collection](https://git.mdns.eu/nextcloud/passwords/-/wikis/
    - Don't forget to set a password for any created user
 
 ## More information
-* [Developer Manual](https://git.mdns.eu/nextcloud/passwords/wikis/Developers/Index)
+* [Developer Manual](https://git.mdns.eu/nextcloud-passwords/passwords/wikis/Developers/Index)
 
 ## Translations
 

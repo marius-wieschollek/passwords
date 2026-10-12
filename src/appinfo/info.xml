@@ -25,8 +25,8 @@ You can also share passwords with other Nextcloud users.
 **Support**
  * [Official Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
  * [Official Forum](https://help.nextcloud.com/tag/passwords-app)
- * [User Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Users/Index)
- * [Administrator Handbook](https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index)
+ * [User Handbook](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Users/Index)
+ * [Administrator Handbook](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Index)
 
 **Apps & Extensions**
  * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?utm_source=app&utm_medium=nc-apps)
@@ -61,8 +61,8 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
 **Hilfe & Unterstützung**
  * [Offizieller Chat](https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org)
  * [Offizielles Forum](https://help.nextcloud.com/tag/passwords-app)
- * [Handbuch für Nutzer](https://git.mdns.eu/nextcloud/passwords/-/wikis/users/Index)
- * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud/passwords/-/wikis/administrators/Index)
+ * [Handbuch für Nutzer](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/users/Index)
+ * [Handbuch für Administratoren](https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/administrators/Index)
 
 **Apps & Extensions**
  * [Official Firefox Add-On](https://addons.mozilla.org/de/firefox/addon/nextcloud-passwords?utm_source=app&utm_medium=nc-apps)
@@ -78,12 +78,12 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     </description>
     <version>2026.2.0-BUILD</version>
     <licence>agpl</licence>
-    <author homepage="https://git.mdns.eu/nextcloud/passwords">Marius David Wieschollek</author>
+    <author homepage="https://www.passwordsapp.org/">Marius David Wieschollek</author>
     <namespace>Passwords</namespace>
     <documentation>
-        <user>https://git.mdns.eu/nextcloud/passwords/-/wikis/users/index</user>
-        <admin>https://git.mdns.eu/nextcloud/passwords/-/wikis/administrators/index</admin>
-        <developer>https://git.mdns.eu/nextcloud/passwords/-/wikis/developers/index</developer>
+        <user>https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/users/index</user>
+        <admin>https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/administrators/index</admin>
+        <developer>https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/developers/index</developer>
     </documentation>
     <category>security</category>
     <category>dashboard</category>
@@ -91,7 +91,7 @@ Sie können auch einzelne Passwörter mit anderen Nutzern teilen.
     <website>https://passwordsapp.org/</website>
     <discussion>https://help.nextcloud.com/tag/passwords-app</discussion>
     <bugs>https://github.com/marius-wieschollek/passwords/issues</bugs>
-    <repository>https://git.mdns.eu/nextcloud/passwords/passwords.git</repository>
+    <repository>https://git.mdns.eu/nextcloud-passwords/passwords/passwords.git</repository>
     <screenshot small-thumbnail="https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/_previews/feature-overview.png">
         <![CDATA[https://raw.githubusercontent.com/wiki/marius-wieschollek/passwords/Users/_files/feature-overview.gif]]>
     </screenshot>

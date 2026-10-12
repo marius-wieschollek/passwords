@@ -21,7 +21,7 @@ class BesticonApiNotification extends AbstractNotification {
 
     const string NAME = 'besticon';
     const string TYPE = 'admin';
-    const string BESTICON_HOSTING_URL = 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Guides/Services/Besticon-Self-Hosting';
+    const string BESTICON_HOSTING_URL = 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Guides/Services/Besticon-Self-Hosting';
 
     /**
      * Send the notification

@@ -76,8 +76,8 @@
                 chatPage  : 'https://matrix.to/#/#nextcloud-passwords:chat.passwordsapp.org',
                 forumPage : 'https://help.nextcloud.com/tag/passwords-app',
                 issuesPage: 'https://github.com/marius-wieschollek/passwords/issues?q=is%3Aissue',
-                adminWiki : 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Administrators/Index',
-                devWiki   : 'https://git.mdns.eu/nextcloud/passwords/-/wikis/Developers/Index'
+                adminWiki : 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Administrators/Index',
+                devWiki   : 'https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Developers/Index'
             };
         },
         watch: {

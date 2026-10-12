@@ -96,7 +96,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://git.mdns.eu/nextcloud/passwords.git"
+        "url": "https://git.mdns.eu/nextcloud-passwords/passwords.git"
     },
     "keywords": [
         "passwords",
