@@ -14,6 +14,7 @@ namespace OCA\Passwords\Services;
 use Exception;
 use OCA\Passwords\AppInfo\Application;
 use OCP\Cache\CappedMemoryCache;
+use OCP\Config\IUserConfig;
 use OCP\HintException;
 use OCP\IAppConfig;
 use OCP\IConfig;
@@ -30,9 +31,14 @@ class ConfigurationService {
     /**
      * @param IConfig            $config
      * @param IAppConfig         $appConfig
+     * @param IUserConfig        $userConfig
      * @param EnvironmentService $environment
      */
-    public function __construct(protected IConfig $config, protected IAppConfig $appConfig, protected EnvironmentService $environment) {
+    public function __construct(
+        protected IConfig $config,
+        protected IAppConfig $appConfig,
+        protected IUserConfig $userConfig,
+        protected EnvironmentService $environment) {
     }
 
     /**
@@ -47,7 +53,7 @@ class ConfigurationService {
     public function getUserValue(string $key, $default = null, ?string $user = null, string $app = Application::APP_NAME): ?string {
         $userId = $this->getUserId($user);
 
-        return $this->config->getUserValue($userId, $app, $key, $default);
+        return $this->userConfig->getValueString($userId, $app, $key, $default);
     }
 
     /**
@@ -105,7 +111,7 @@ class ConfigurationService {
      */
     public function setUserValue(string $key, string $value, ?string $user = null, string $app = Application::APP_NAME): void {
         $userId = $this->getUserId($user);
-        $this->config->setUserValue($userId, $app, $key, $value);
+        $this->userConfig->setValueString($userId, $app, $key, $value);
     }
 
     /**
@@ -153,9 +159,7 @@ class ConfigurationService {
     public function hasUserValue(string $key, ?string $user = null, string $app = Application::APP_NAME): bool {
         $userId = $this->getUserId($user);
 
-        $keys = $this->config->getUserKeys($userId, $app);
-
-        return in_array($key, $keys);
+        return $this->userConfig->hasKey($userId, $app, $key);
     }
 
     /**
@@ -178,7 +182,7 @@ class ConfigurationService {
      */
     public function deleteUserValue(string $key, ?string $user = null): void {
         $userId = $this->getUserId($user);
-        $this->config->deleteUserValue($userId, Application::APP_NAME, $key);
+        $this->userConfig->deleteUserValue($userId, Application::APP_NAME, $key);
     }
 
     /**
@@ -238,6 +242,11 @@ class ConfigurationService {
      */
     public function clearCache(): void {
         $this->appConfig->clearCache();
+
+        $userId = $this->getUserId();
+        if($userId) {
+            $this->userConfig->clearCache($userId);
+        }
     }
 
     /**

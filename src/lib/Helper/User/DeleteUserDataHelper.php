@@ -21,6 +21,7 @@ use OCA\Passwords\Services\Object\KeychainService;
 use OCA\Passwords\Services\Object\PasswordService;
 use OCA\Passwords\Services\Object\ShareService;
 use OCA\Passwords\Services\Object\TagService;
+use OCP\Lock\ILockingProvider;
 
 /**
  * Class DeleteUserDataHelper
@@ -33,51 +34,6 @@ class DeleteUserDataHelper {
      * @var null|string
      */
     protected ?string $userId;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var TagService
-     */
-    protected TagService $tagService;
-
-    /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $settings;
-
-    /**
-     * @var FolderService
-     */
-    protected FolderService $folderService;
-
-    /**
-     * @var PasswordService
-     */
-    protected PasswordService $passwordService;
-
-    /**
-     * @var ShareService
-     */
-    protected ShareService $shareService;
-
-    /**
-     * @var KeychainService
-     */
-    protected KeychainService $keychainService;
-
-    /**
-     * @var ChallengeService
-     */
-    protected ChallengeService $challengeService;
-
-    /**
-     * @var SessionMapper
-     */
-    protected SessionMapper $sessionMapper;
 
     /**
      * @var array
@@ -102,30 +58,23 @@ class DeleteUserDataHelper {
      * @param EnvironmentService   $environment
      * @param PasswordService      $passwordService
      * @param KeychainService      $keychainService
+     * @param ILockingProvider     $lockingProvider
      * @param ChallengeService     $challengeService
      */
     public function __construct(
-        TagService $tagService,
-        ShareService $shareService,
-        SessionMapper $sessionMapper,
-        UserSettingsHelper $settings,
-        FolderService $folderService,
-        ConfigurationService $config,
+        protected TagService $tagService,
+        protected ShareService $shareService,
+        protected SessionMapper $sessionMapper,
+        protected UserSettingsHelper $settings,
+        protected FolderService $folderService,
+        protected ConfigurationService $config,
         EnvironmentService $environment,
-        PasswordService $passwordService,
-        KeychainService $keychainService,
-        ChallengeService $challengeService
+        protected PasswordService $passwordService,
+        protected KeychainService $keychainService,
+        protected ILockingProvider $lockingProvider,
+        protected ChallengeService $challengeService,
     ) {
         $this->userId           = $environment->getUserId();
-        $this->config           = $config;
-        $this->settings         = $settings;
-        $this->tagService       = $tagService;
-        $this->shareService     = $shareService;
-        $this->sessionMapper    = $sessionMapper;
-        $this->folderService    = $folderService;
-        $this->passwordService  = $passwordService;
-        $this->keychainService  = $keychainService;
-        $this->challengeService = $challengeService;
     }
 
     /**
@@ -145,6 +94,7 @@ class DeleteUserDataHelper {
         $this->deleteObjects($this->shareService, $userId);
         $this->deleteUserSettings($userId);
         $this->deleteUserConfig($userId);
+        $this->deleteLocks($userId);
     }
 
     /**
@@ -196,5 +146,15 @@ class DeleteUserDataHelper {
         foreach($sessions as $session) {
             $this->sessionMapper->delete($session);
         }
+    }
+
+    /**
+     * @param string $userId
+     *
+     * @throws Exception
+     */
+    protected function deleteLocks(string $userId): void {
+        $userKeyLock = 'passwords/SSEv1r1/GenerateUserKey/'.sha1($userId);
+        $this->lockingProvider->releaseLock($userKeyLock, ILockingProvider::LOCK_EXCLUSIVE);
     }
 }

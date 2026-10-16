@@ -20,6 +20,7 @@ use OCA\Passwords\Helper\AppSettings\EncryptionSettingsHelper;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\Lock\ILockingProvider;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 use Psr\Container\ContainerInterface;
@@ -31,6 +32,7 @@ class SseV3Encryption extends SseV1Encryption {
      * @param ISecureRandom            $secureRandom
      * @param ConfigurationService     $config
      * @param EnvironmentService       $environment
+     * @param ILockingProvider         $lockingProvider
      * @param ContainerInterface       $container
      * @param EncryptionSettingsHelper $encryptionSettings
      */
@@ -39,10 +41,11 @@ class SseV3Encryption extends SseV1Encryption {
         ISecureRandom                      $secureRandom,
         ConfigurationService               $config,
         EnvironmentService                 $environment,
+        ILockingProvider                   $lockingProvider,
         protected ContainerInterface       $container,
         protected EncryptionSettingsHelper $encryptionSettings
     ) {
-        parent::__construct($crypto, $secureRandom, $config, $environment);
+        parent::__construct($crypto, $secureRandom, $config, $environment, $lockingProvider);
     }
 
     /**

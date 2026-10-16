@@ -20,6 +20,8 @@ use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCP\Lock\ILockingProvider;
+use OCP\Lock\LockedException;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
 
@@ -31,6 +33,7 @@ use OCP\Security\ISecureRandom;
 class SseV1Encryption implements ObjectEncryptionInterface {
 
     const int MINIMUM_KEY_LENGTH = 1024;
+    const int USER_KEY_GENERATE_TIMEOUT = 30;
 
     /**
      * @var array
@@ -61,44 +64,22 @@ class SseV1Encryption implements ObjectEncryptionInterface {
     protected ?string $userId;
 
     /**
-     * @var ICrypto
-     */
-    protected ICrypto $crypto;
-
-    /**
-     * @var ConfigurationService
-     */
-    protected ConfigurationService $config;
-
-    /**
-     * @var EnvironmentService
-     */
-    protected EnvironmentService $environment;
-
-    /**
-     * @var ISecureRandom
-     */
-    protected ISecureRandom $secureRandom;
-
-    /**
      * ShareV1Encryption constructor.
      *
      * @param ICrypto              $crypto
      * @param ISecureRandom        $secureRandom
-     * @param EnvironmentService   $environment
      * @param ConfigurationService $config
+     * @param EnvironmentService   $environment
+     * @param ILockingProvider     $lockingProvider
      */
     public function __construct(
-        ICrypto $crypto,
-        ISecureRandom $secureRandom,
-        ConfigurationService $config,
-        EnvironmentService $environment
+        protected ICrypto $crypto,
+        protected ISecureRandom $secureRandom,
+        protected ConfigurationService $config,
+        protected EnvironmentService $environment,
+        protected ILockingProvider $lockingProvider,
     ) {
         $this->userId       = $environment->getUserId();
-        $this->crypto       = $crypto;
-        $this->secureRandom = $secureRandom;
-        $this->config       = $config;
-        $this->environment  = $environment;
     }
 
     /**
@@ -257,30 +238,30 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @return string
      * @throws Exception
      */
-    protected function generateUserKey(string $userId): string {
-        $this->config->clearCache();
-        $lockCode    = uniqid($userId, true);
-        $currentLock = $this->config->getUserValue('sse.generate.lock', null, $userId);
-        if($currentLock !== null) {
-            sleep(1);
+    protected function generateUserKey(string $userId, int $retryCount = 0): string {
+        $lockName = 'passwords/SSEv1r1/GenerateUserKey/'.sha1($userId);
 
-            return $this->getUserKey($userId);
+        try {
+            $this->lockingProvider->acquireLock($lockName, ILockingProvider::LOCK_EXCLUSIVE);
+        } catch(LockedException $exception) {
+            $retryCount++;
+            if($retryCount > self::USER_KEY_GENERATE_TIMEOUT) throw $exception;
+
+            sleep(1);
+            return $this->generateUserKey($userId, $retryCount);
         }
 
-        $this->config->setUserValue('sse.generate.lock', $lockCode, $userId);
+        try {
+            $this->config->clearCache();
+            if($this->config->hasUserValue('SSEv1UserKey', $userId)) {
+                return $this->config->getUserValue('SSEv1UserKey', null, $userId);
+            }
 
-        $userKey = $this->getSecureRandom();
-
-        $this->config->clearCache();
-        $currentLock = $this->config->getUserValue('sse.generate.lock', null, $userId);
-        if($currentLock !== $lockCode) {
-            sleep(1);
-
-            return $this->getUserKey($userId);
+            $userKey = $this->getSecureRandom();
+            $this->config->setUserValue('SSEv1UserKey', $userKey, $userId);
+        } finally {
+            $this->lockingProvider->releaseLock($lockName, ILockingProvider::LOCK_EXCLUSIVE);
         }
-
-        $this->config->setUserValue('SSEv1UserKey', $userKey, $userId);
-        $this->config->deleteUserValue('sse.generate.lock', $userId);
 
         return $userKey;
     }
