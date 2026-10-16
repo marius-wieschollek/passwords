@@ -221,7 +221,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
 
         $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
         if($userKey === null) {
-            $this->config->clearCache();
+            $this->config->clearCache($userId);
             $userKey = $this->config->getUserValue('SSEv1UserKey', null, $userId);
         }
 
@@ -252,7 +252,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         }
 
         try {
-            $this->config->clearCache();
+            $this->config->clearCache($userId);
             if($this->config->hasUserValue('SSEv1UserKey', $userId)) {
                 return $this->config->getUserValue('SSEv1UserKey', null, $userId);
             }

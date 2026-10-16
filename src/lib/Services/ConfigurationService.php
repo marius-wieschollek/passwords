@@ -239,11 +239,13 @@ class ConfigurationService {
 
     /**
      * Clear the config cache
+     *
+     * @param string|null $user
      */
-    public function clearCache(): void {
+    public function clearCache(?string $user = null): void {
         $this->appConfig->clearCache();
 
-        $userId = $this->getUserId();
+        $userId = $this->getUserId($user);
         if($userId) {
             $this->userConfig->clearCache($userId);
         }
