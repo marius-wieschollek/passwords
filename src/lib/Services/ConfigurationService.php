@@ -53,7 +53,9 @@ class ConfigurationService {
     public function getUserValue(string $key, $default = null, ?string $user = null, string $app = Application::APP_NAME): ?string {
         $userId = $this->getUserId($user);
 
-        return $this->userConfig->getValueString($userId, $app, $key, $default);
+        $result = $this->userConfig->getValueString($userId, $app, $key, 'return-default');
+
+        return $result === 'return-default' ? $default : $result;
     }
 
     /**
@@ -182,7 +184,7 @@ class ConfigurationService {
      */
     public function deleteUserValue(string $key, ?string $user = null): void {
         $userId = $this->getUserId($user);
-        $this->userConfig->deleteUserValue($userId, Application::APP_NAME, $key);
+        $this->userConfig->deleteUserConfig($userId, Application::APP_NAME, $key);
     }
 
     /**
