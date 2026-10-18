@@ -89,6 +89,10 @@ export default class PasswordActions {
         );
     }
 
+    async openUrl() {
+        UtilityService.openLink(this.#password.url);
+    }
+
     async openChangePasswordPage() {
         const ChangePasswordPage = await import(/* webpackChunkName: "ChangePasswordPage" */ '@vue/Dialog/ChangePasswordPage.vue');
 

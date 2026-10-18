@@ -20,13 +20,14 @@
                 variant="tertiary"
                 @click.stop.prevent
                 data-pw-role="context-menu"
+                :data-custom-action="customAction"
         >
             <slot name="custom-action">
-                <nc-action-button @click="runCustomAction" v-if="hasCustomAction" close-after-click>
+                <nc-action-button @click.stop.prevent="runCustomAction" v-if="hasCustomAction" close-after-click>
                     <template #icon>
                         <information-outline-icon :size="20" v-if="customAction === 'details'"/>
                         <account-plus-outline-icon :size="20" v-else-if="customAction === 'share'"/>
-                        <content-copy-icon :size="20" v-else-if="customAction === 'edit'"/>
+                        <pencil-icon :size="20" v-else-if="customAction === 'edit'"/>
                         <printer-icon :size="20" v-else-if="customAction === 'print'"/>
                         <open-in-new-icon :size="20" v-else-if="customAction === 'open-url'"/>
                         <qrcode-icon :size="20" v-else-if="customAction === 'qrcode'"/>
@@ -215,10 +216,16 @@
                 let action = SettingsService.get('client.ui.password.custom.action');
                 if(action === 'share' || action === 'details') {
                     this.$emit('details-action', action);
+                } else if(action === 'password' || action === 'username' || action === 'url') {
+                    this.actions.clipboard(action);
                 } else if(action === 'print') {
                     this.actions.print();
                 } else if(action === 'qrcode') {
                     this.actions.qrcode();
+                } else if(action === 'edit') {
+                    this.actions.edit();
+                } else if(action === 'open-url') {
+                    this.actions.openUrl();
                 } else {
                     this.$emit('click-action', action);
                 }
