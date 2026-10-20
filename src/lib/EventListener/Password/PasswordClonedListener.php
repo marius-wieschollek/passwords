@@ -34,7 +34,7 @@ class PasswordClonedListener extends AbstractPasswordListener {
         $duplicateHashes       = [];
         $currentClonedRevision = null;
         foreach($revisions as $revision) {
-            if($revision->getStatusCode() !== PasswordSecurityCheckService::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
+            if($revision->getStatusCode() !== PasswordSecurityCheckService::STATUS_CODE_DUPLICATE) $duplicateHashes[] = $revision->getHash();
             /** @var PasswordRevision $revisionClone */
             $revisionClone = $this->revisionService->clone($revision, ['model' => $clonedPassword->getUuid()]);
             $this->revisionService->save($revisionClone);

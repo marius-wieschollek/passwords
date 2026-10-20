@@ -170,8 +170,8 @@ class PasswordRevisionService extends AbstractRevisionService {
         $revision->setUuid($this->uuidHelper->generateUuid());
         $revision->setCreated(time());
         $revision->setUpdated(time());
-        $revision->setStatus(PasswordSecurityCheckService::LEVEL_UNKNOWN);
-        $revision->setStatusCode(PasswordSecurityCheckService::STATUS_NOT_CHECKED);
+        $revision->setStatus(PasswordSecurityCheckService::STATUS_UNKNOWN);
+        $revision->setStatusCode(PasswordSecurityCheckService::STATUS_CODE_NOT_CHECKED);
         $revision->setDeleted(false);
         $revision->_setDecrypted(true);
 

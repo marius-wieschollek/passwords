@@ -24,15 +24,15 @@ use OCA\Passwords\Provider\SecurityCheck\SecurityCheckProviderInterface;
  */
 class PasswordSecurityCheckService {
 
-    const string STATUS_BREACHED    = 'BREACHED';
-    const string STATUS_OUTDATED    = 'OUTDATED';
-    const string STATUS_DUPLICATE   = 'DUPLICATE';
-    const string STATUS_GOOD        = 'GOOD';
-    const string STATUS_NOT_CHECKED = 'NOT_CHECKED';
-    const int    LEVEL_OK           = 0;
-    const int    LEVEL_WEAK         = 1;
-    const int    LEVEL_BAD          = 2;
-    const int    LEVEL_UNKNOWN      = 3;
+    const string STATUS_CODE_BREACHED    = 'BREACHED';
+    const string STATUS_CODE_OUTDATED    = 'OUTDATED';
+    const string STATUS_CODE_DUPLICATE   = 'DUPLICATE';
+    const string STATUS_CODE_GOOD        = 'GOOD';
+    const string STATUS_CODE_NOT_CHECKED = 'NOT_CHECKED';
+    const int    STATUS_OK               = 0;
+    const int    STATUS_WEAK             = 1;
+    const int    STATUS_BAD              = 2;
+    const int    STATUS_UNKNOWN          = 3;
 
     /**
      * @param SecurityCheckProviderInterface $securityCheckProvider
@@ -48,6 +48,20 @@ class PasswordSecurityCheckService {
     }
 
     /**
+     * @param PasswordRevision $revision
+     *
+     * @return PasswordRevision
+     */
+    public function updateRevisionSecurityStatus(PasswordRevision $revision): PasswordRevision {
+        [$status, $statusCode] = $this->getRevisionSecurityStatus($revision);
+
+        $revision->setStatus($status);
+        $revision->setStatusCode($statusCode);
+
+        return $revision;
+    }
+
+    /**
      * Checks if the given revision is secure and complies with the users individual password standards
      * No all user password standards can be checked server side
      * 0 = secure, 1 = user standard violation, 2 = compromised
@@ -56,27 +70,27 @@ class PasswordSecurityCheckService {
      *
      * @return array
      */
-    public function getRevisionSecurityLevel(PasswordRevision $revision): array {
-        if (empty($revision->getHash())) {
-            return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
+    public function getRevisionSecurityStatus(PasswordRevision $revision): array {
+        if(empty($revision->getHash())) {
+            return [self::STATUS_UNKNOWN, self::STATUS_CODE_NOT_CHECKED];
         }
 
         try {
-            if (!$this->isHashSecure($revision->getHash())) {
-                return [self::LEVEL_BAD, self::STATUS_BREACHED];
+            if(!$this->isHashSecure($revision->getHash())) {
+                return [self::STATUS_BAD, self::STATUS_CODE_BREACHED];
             }
 
             $userRules = $this->userRulesSecurityCheck->getRevisionSecurityLevel($revision);
-            if ($userRules !== null) {
+            if($userRules !== null) {
                 return $userRules;
             }
-        } catch (\Throwable $e) {
+        } catch(\Throwable $e) {
             $this->logger->logException($e, ['revision' => $revision]);
 
-            return [self::LEVEL_UNKNOWN, self::STATUS_NOT_CHECKED];
+            return [self::STATUS_UNKNOWN, self::STATUS_CODE_NOT_CHECKED];
         }
 
-        return [self::LEVEL_OK, self::STATUS_GOOD];
+        return [self::STATUS_OK, self::STATUS_CODE_GOOD];
     }
 
     /**
@@ -109,8 +123,8 @@ class PasswordSecurityCheckService {
      * @return array
      */
     public function getHashRange(string $range): array {
-        if (strlen($range) === 40) {
-            return $this->isHashSecure($range) ? [] : [$range];
+        if(strlen($range) === 40) {
+            return $this->isHashSecure($range) ? []:[$range];
         }
 
         return $this->securityCheckProvider->getHashRange($range);

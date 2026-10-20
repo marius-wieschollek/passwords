@@ -41,7 +41,7 @@ class PasswordDeletedListener extends AbstractPasswordListener {
 
         $duplicateHashes = [];
         foreach($revisions as $revision) {
-            if($revision->getStatusCode() === PasswordSecurityCheckService::STATUS_DUPLICATE) $duplicateHashes[] = $revision->getHash();
+            if($revision->getStatusCode() === PasswordSecurityCheckService::STATUS_CODE_DUPLICATE) $duplicateHashes[] = $revision->getHash();
             $this->revisionService->delete($revision);
         }
 

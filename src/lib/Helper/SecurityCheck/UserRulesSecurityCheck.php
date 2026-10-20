@@ -55,11 +55,11 @@ class UserRulesSecurityCheck {
      */
     public function getRevisionSecurityLevel(PasswordRevision $revision): ?array {
         if($this->checkMaximumAgeInDaysRule($revision)) {
-            return [PasswordSecurityCheckService::LEVEL_WEAK, PasswordSecurityCheckService::STATUS_OUTDATED];
+            return [PasswordSecurityCheckService::STATUS_WEAK, PasswordSecurityCheckService::STATUS_CODE_OUTDATED];
         }
 
         if($this->checkDuplicateRule($revision)) {
-            return [PasswordSecurityCheckService::LEVEL_WEAK, PasswordSecurityCheckService::STATUS_DUPLICATE];
+            return [PasswordSecurityCheckService::STATUS_WEAK, PasswordSecurityCheckService::STATUS_CODE_DUPLICATE];
         }
 
         return null;

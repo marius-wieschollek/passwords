@@ -112,13 +112,13 @@ class PasswordRevisionRepair extends AbstractRevisionRepair {
         if($this->convertCustomFields($revision)) $fixed = true;
         if($this->cleanCustomFields($revision)) $fixed = true;
 
-        if($revision->getStatus() !== PasswordSecurityCheckService::LEVEL_OK && $revision->getStatusCode() === PasswordSecurityCheckService::STATUS_GOOD) {
-            $revision->setStatus(PasswordSecurityCheckService::LEVEL_OK);
+        if($revision->getStatus() !== PasswordSecurityCheckService::STATUS_OK && $revision->getStatusCode() === PasswordSecurityCheckService::STATUS_CODE_GOOD) {
+            $revision->setStatus(PasswordSecurityCheckService::STATUS_OK);
             $fixed = true;
         }
 
-        if(empty($revision->getHash()) && $revision->getStatus() !== PasswordSecurityCheckService::LEVEL_UNKNOWN) {
-            $revision->setStatus(PasswordSecurityCheckService::LEVEL_UNKNOWN);
+        if(empty($revision->getHash()) && $revision->getStatus() !== PasswordSecurityCheckService::STATUS_UNKNOWN) {
+            $revision->setStatus(PasswordSecurityCheckService::STATUS_UNKNOWN);
             $fixed = true;
         }
 

@@ -55,7 +55,7 @@ class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
             $this->updateRelations($password, $newRevision);
         }
 
-        if($newRevision->getStatus() === 0) {
+        if($newRevision->getStatus() === PasswordSecurityCheckService::STATUS_OK || PasswordSecurityCheckService::STATUS_UNKNOWN) {
             if($newRevision->getHash() === $oldRevision->getHash()) {
                 $newRevision->setStatus($oldRevision->getStatus());
                 $newRevision->setStatusCode($oldRevision->getStatusCode());
@@ -65,7 +65,7 @@ class BeforePasswordSetRevisionListener extends AbstractPasswordListener {
             $this->revisionService->save($newRevision);
         }
 
-        if($oldRevision->getStatusCode() === PasswordSecurityCheckService::STATUS_DUPLICATE && $newRevision->getHash() !== $oldRevision->getHash()) {
+        if($oldRevision->getStatusCode() === PasswordSecurityCheckService::STATUS_CODE_DUPLICATE && $newRevision->getHash() !== $oldRevision->getHash()) {
             $this->updateDuplicateStatus([$oldRevision->getHash()]);
         }
     }

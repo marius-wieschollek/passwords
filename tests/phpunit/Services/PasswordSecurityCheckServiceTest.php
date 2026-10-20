@@ -72,9 +72,9 @@ class PasswordSecurityCheckServiceTest extends TestCase {
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(true);
 
-        $result = $this->passwordSecurityCheckService->getRevisionSecurityLevel($passwordRevision);
+        $result = $this->passwordSecurityCheckService->getRevisionSecurityStatus($passwordRevision);
 
-        $this->assertSame([PasswordSecurityCheckService::LEVEL_OK, PasswordSecurityCheckService::STATUS_GOOD], $result);
+        $this->assertSame([PasswordSecurityCheckService::STATUS_OK, PasswordSecurityCheckService::STATUS_CODE_GOOD], $result);
     }
 
     public function testGetRevisionSecurityLevelBroken() {
@@ -87,9 +87,9 @@ class PasswordSecurityCheckServiceTest extends TestCase {
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(false);
 
-        $result = $this->passwordSecurityCheckService->getRevisionSecurityLevel($passwordRevision);
+        $result = $this->passwordSecurityCheckService->getRevisionSecurityStatus($passwordRevision);
 
-        $this->assertSame([PasswordSecurityCheckService::LEVEL_BAD, PasswordSecurityCheckService::STATUS_BREACHED], $result);
+        $this->assertSame([PasswordSecurityCheckService::STATUS_BAD, PasswordSecurityCheckService::STATUS_CODE_BREACHED], $result);
     }
 
     public function testGetRevisionSecurityLevelUserRules() {
@@ -99,11 +99,11 @@ class PasswordSecurityCheckServiceTest extends TestCase {
             ]
         );
 
-        $userRulesResult = [PasswordSecurityCheckService::LEVEL_WEAK, PasswordSecurityCheckService::STATUS_DUPLICATE];
+        $userRulesResult = [PasswordSecurityCheckService::STATUS_WEAK, PasswordSecurityCheckService::STATUS_CODE_DUPLICATE];
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn($userRulesResult);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(true);
 
-        $result = $this->passwordSecurityCheckService->getRevisionSecurityLevel($passwordRevision);
+        $result = $this->passwordSecurityCheckService->getRevisionSecurityStatus($passwordRevision);
 
         $this->assertSame($userRulesResult, $result);
     }
@@ -118,9 +118,9 @@ class PasswordSecurityCheckServiceTest extends TestCase {
         $this->userRulesCheck->method('getRevisionSecurityLevel')->with($passwordRevision)->willReturn(null);
         $this->securityCheckProvider->method('isHashSecure')->with($passwordRevision->getHash())->willReturn(false);
 
-        $result = $this->passwordSecurityCheckService->getRevisionSecurityLevel($passwordRevision);
+        $result = $this->passwordSecurityCheckService->getRevisionSecurityStatus($passwordRevision);
 
-        $this->assertSame([PasswordSecurityCheckService::LEVEL_UNKNOWN, PasswordSecurityCheckService::STATUS_NOT_CHECKED], $result);
+        $this->assertSame([PasswordSecurityCheckService::STATUS_UNKNOWN, PasswordSecurityCheckService::STATUS_CODE_NOT_CHECKED], $result);
     }
 
     public function testIsPasswordSecureSecure() {

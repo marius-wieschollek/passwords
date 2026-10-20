@@ -55,11 +55,11 @@ abstract class AbstractPasswordListener implements IEventListener {
      * @throws Exception
      */
     protected function checkSecurityStatus(PasswordRevision $revision, bool $searchDuplicates = true): void {
-        [$status, $statusCode] = $this->passwordSecurityCheckService->getRevisionSecurityLevel($revision);
+        [$status, $statusCode] = $this->passwordSecurityCheckService->getRevisionSecurityStatus($revision);
         $revision->setStatus($status);
         $revision->setStatusCode($statusCode);
 
-        if($searchDuplicates && $statusCode === PasswordSecurityCheckService::STATUS_DUPLICATE) {
+        if($searchDuplicates && $statusCode === PasswordSecurityCheckService::STATUS_CODE_DUPLICATE) {
             $this->updateDuplicateStatus([$revision->getHash()]);
         }
     }

@@ -36,7 +36,7 @@ class PasswordRevisionMapper extends AbstractRevisionMapper {
         $sql->addOrderBy('id', 'ASC');
 
         $sql->andWhere(
-            $sql->expr()->neq('status', $sql->createNamedParameter(PasswordSecurityCheckService::LEVEL_BAD)),
+            $sql->expr()->neq('status', $sql->createNamedParameter(PasswordSecurityCheckService::STATUS_BAD)),
             $sql->expr()->nonEmptyString('hash')
         );
 

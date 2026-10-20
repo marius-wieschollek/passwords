@@ -15,6 +15,7 @@ use Exception;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionCreatedEvent;
 use OCA\Passwords\Events\PasswordRevision\BeforePasswordRevisionUpdatedEvent;
 use OCA\Passwords\Helper\Settings\UserSettingsHelper;
+use OCA\Passwords\Services\PasswordSecurityCheckService;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
 
@@ -26,17 +27,15 @@ use OCP\EventDispatcher\IEventListener;
 class BeforePasswordRevisionSavedEventListener implements IEventListener {
 
     /**
-     * @var UserSettingsHelper
-     */
-    protected UserSettingsHelper $userSettingsHelper;
-
-    /**
      * BeforePasswordRevisionSavedEventListener constructor.
      *
-     * @param UserSettingsHelper $userSettingsHelper
+     * @param UserSettingsHelper           $userSettingsHelper
+     * @param PasswordSecurityCheckService $passwordSecurityCheckService
      */
-    public function __construct(UserSettingsHelper $userSettingsHelper) {
-        $this->userSettingsHelper = $userSettingsHelper;
+    public function __construct(
+        protected UserSettingsHelper           $userSettingsHelper,
+        protected PasswordSecurityCheckService $passwordSecurityCheckService
+    ) {
     }
 
     /**
@@ -50,8 +49,14 @@ class BeforePasswordRevisionSavedEventListener implements IEventListener {
         $hashLength = $this->userSettingsHelper->get('password.security.hash', $revision->getUserId());
         if($hashLength === 0) {
             $revision->setHash('');
-        } else if(strlen($revision->getHash()) > $hashLength) {
+            $this->passwordSecurityCheckService->updateRevisionSecurityStatus($revision);
+
+            return;
+        }
+
+        if(strlen($revision->getHash()) > $hashLength) {
             $revision->setHash(substr($revision->getHash(), 0, $hashLength));
+            $this->passwordSecurityCheckService->updateRevisionSecurityStatus($revision);
         }
     }
 }
