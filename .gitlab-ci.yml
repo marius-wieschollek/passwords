@@ -9,6 +9,13 @@ stages:
 
 image: passwords-builder
 
+.check-unpublished:
+  script:
+    - |
+      STATUS=$(curl -s -o /dev/null --head -w "%{http_code}" --header "JOB-TOKEN: ${CI_JOB_TOKEN}" "${CHECK_URL}")
+      if [ "${STATUS}" == "200" ] ; then echo "${CHECK_URL} is already published, raise the version" ; exit 1 ; fi
+      if [ "${STATUS}" != "404" ] ; then echo "Could not check ${CHECK_URL} (HTTP ${STATUS})" ; exit 1 ; fi
+
 Prepare:
   stage: prepare
   script:
@@ -66,8 +73,10 @@ Assemble:
     - echo "SIGNATURE=${SIGNATURE}" >> variables.env
     - if [ "${CI_COMMIT_REF_NAME}" == "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords.tar.gz" ; fi
     - if [ "${CI_COMMIT_REF_NAME}" != "stable" ] ; then UPLOAD_URL="${PACKAGE_REGISTRY_URL}/passwords-nightly.tar.gz" ; fi
-    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"'
-    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${UPLOAD_URL}.sig"'
+    - CHECK_URL="${UPLOAD_URL}"
+    - !reference [.check-unpublished, script]
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords.tar.gz "${UPLOAD_URL}"'
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${UPLOAD_URL}.sig"'
     - echo "Package available at ${UPLOAD_URL}"
   artifacts:
     expire_in: 1 week
@@ -93,8 +102,10 @@ Assemble Legacy PHP 8.1 Support Release:
     - openssl dgst -sha512 -sign ${SIGN_KEY} -out signature.sig ./passwords-lsr-81.tar.gz
     - LSR_SIGNATURE=$(openssl base64 -A -in signature.sig)
     - echo "LSR_SIGNATURE=${LSR_SIGNATURE}" >> variables.env
-    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-81.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"'
-    - 'curl --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz.sig"'
+    - CHECK_URL="${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"
+    - !reference [.check-unpublished, script]
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./passwords-lsr-81.tar.gz "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"'
+    - 'curl -f --retry 5 --retry-all-errors --header "JOB-TOKEN: ${CI_JOB_TOKEN}" --upload-file ./signature.sig "${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz.sig"'
     - echo "Package available at ${PACKAGE_REGISTRY_URL}/passwords-lsr-81.tar.gz"
   artifacts:
     expire_in: 1 week
@@ -188,7 +199,8 @@ Update Handbook:
     - git config --global user.name "Gitlab CI"
     - git config --global user.email "gitlab@git.mdns.eu"
     - git commit -am "Raise version to ${APP_VERSION}"
-    - git push origin
+    - git tag "${APP_VERSION}"
+    - git push --atomic origin HEAD "refs/tags/${APP_VERSION}"
     - echo "Raised version from ${CURRENT_VERSION} to ${APP_VERSION}"
   only:
   - stable
