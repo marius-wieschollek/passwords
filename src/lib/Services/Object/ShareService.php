@@ -99,7 +99,8 @@ class ShareService extends AbstractService {
     public function findBySourceUpdated(): array {
         return $this->mapper->findAllByFields(
             ['source_updated', true, IQueryBuilder::PARAM_BOOL],
-            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq']
+            ['target_updated', null, IQueryBuilder::PARAM_NULL, 'neq'],
+            ['target_password', null, IQueryBuilder::PARAM_NULL, 'neq']
         );
     }
 

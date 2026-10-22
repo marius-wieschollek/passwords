@@ -312,7 +312,6 @@ class SynchronizeShares extends AbstractTimedJob {
             }
 
             foreach($shares as $share) {
-                if($share->getTargetPassword() === null) continue;
                 try {
                     $revision = $this->createNewPasswordRevision($share->getSourcePassword(), $share->getTargetPassword());
 
