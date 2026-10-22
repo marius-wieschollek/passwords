@@ -20,7 +20,6 @@
                 variant="tertiary"
                 @click.stop.prevent
                 data-pw-role="context-menu"
-                :data-custom-action="customAction"
         >
             <slot name="custom-action">
                 <nc-action-button @click.stop.prevent="runCustomAction" v-if="hasCustomAction" close-after-click>
