@@ -58,7 +58,13 @@ class ServerSettingsHelper {
             case 'version':
                 return $this->getServerVersion();
             case 'baseUrl':
-                if($subKey === 'webdav') return Util::linkToRemote('webdav');
+                if($subKey === 'webdav') {
+                    // @TODO Remove in 2027.1.0
+                    if(method_exists($this->urlGenerator, 'linkToRemote')) {
+                        return $this->urlGenerator->linkToRemote('webdav');
+                    }
+                    return Util::linkToRemote('webdav');
+                }
 
                 return $this->urlGenerator->getBaseUrl();
             case 'performance':

@@ -5,7 +5,7 @@
  * and licensed under the AGPL.
  */
 
-namespace OCA\Passwords\Helper\Random;
+namespace OCA\Passwords\Compatibility\Random;
 
 use Random\RandomException;
 

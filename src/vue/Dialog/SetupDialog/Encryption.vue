@@ -4,7 +4,7 @@
             <translate say="Passwords offers modern and strong encryption to protect your data from prying eyes."/>
             <translate say="Choose a secure password below to activate the ultimate protection for your passwords."/>
         </p>
-        <form @submit="setPassword" v-if="!processing">
+        <form @submit.prevent="setPassword" v-if="!processing">
             <div class="password-setup">
                 <input type="password"
                        :placeholder="t('Password (min. 12 characters)')"
@@ -158,6 +158,7 @@
                 if(this.status[type].status === 'success') return '✔';
             },
             async setPassword() {
+                if(this.password !== this.confirm) return;
                 if(!await this.checkPassword()) return;
                 if(this.processing) return;
                 this.processing = true;

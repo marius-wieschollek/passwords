@@ -13,13 +13,10 @@ namespace OCA\Passwords\Services;
 
 use Exception;
 use OCA\Passwords\AppInfo\Application;
-use OCP\Cache\CappedMemoryCache;
 use OCP\Config\IUserConfig;
 use OCP\HintException;
 use OCP\IAppConfig;
 use OCP\IConfig;
-use ReflectionClass;
-use ReflectionException;
 
 /**
  * Class ConfigurationService

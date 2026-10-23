@@ -60,16 +60,12 @@ class EncryptionManager {
      * @returns {Promise<void>}
      */
     async update(password, oldPassword) {
-        try {
-            if(!await this.isPassphraseSecure(password)) {
-                return;
-            }
-
-            await API.setAccountChallenge(password, oldPassword);
-            await this._updateWebAuthn(password);
-        } catch(e) {
-            throw e;
+        if(!await this.isPassphraseSecure(password)) {
+            throw new Error('Insecure password');
         }
+
+        await API.setAccountChallenge(password, oldPassword);
+        await this._updateWebAuthn(password);
     }
 
     /**
@@ -118,6 +114,10 @@ class EncryptionManager {
             );
         } catch(e) {
             return false;
+        }
+
+        if(data.password !== data.repeatPassword || data.password === data.oldPassword) {
+            MessageService.alert(e.message, 'Changing password failed');
         }
 
         try {

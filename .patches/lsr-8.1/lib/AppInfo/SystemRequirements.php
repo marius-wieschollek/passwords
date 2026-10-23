@@ -20,9 +20,9 @@ class SystemRequirements {
 
     const APP_LSR = true;
 
-    const NC_MINIMUM_ID      = 32;
-    const NC_NOTIFICATION_ID = 32;
-    const NC_UPGRADE_MINIMUM = '32';
+    const NC_MINIMUM_ID      = 30;
+    const NC_NOTIFICATION_ID = 30;
+    const NC_UPGRADE_MINIMUM = '30';
 
     const PHP_MINIMUM             = '8.1.0';
     const PHP_MINIMUM_ID          = 80100;
