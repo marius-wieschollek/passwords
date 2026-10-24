@@ -75,6 +75,14 @@ function extractImports(contents, definitions) {
 
 function extractExtendInformation(contents, uses, definitions) {
     let extend = extendsRegex.exec(contents);
+    if(extend !== null && extend[1].startsWith('\\')) {
+        let fqcn      = extend[1].substr(1),
+            divider   = fqcn.lastIndexOf('\\'),
+            namespace = fqcn.substr(0, divider),
+            name      = fqcn.substr(divider + 1);
+        addClassDefinition(definitions, namespace, name);
+        return;
+    }
     if(extend !== null && !uses.hasOwnProperty(extend[1])) {
         let namespace = namespaceRegex.exec(contents);
         if(namespace === null) return;
