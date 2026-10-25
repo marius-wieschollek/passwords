@@ -29,6 +29,12 @@ namespace {
 
         public function getColorBackground() { return ''; }
     }
+
+    class OC_App {
+        public static array $apps = [];
+
+        public function listAllApps(): array { return self::$apps; }
+    }
 }
 
 namespace OC {

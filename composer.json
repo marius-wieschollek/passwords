@@ -8,6 +8,7 @@
   },
   "require-dev": {
     "nextcloud/ocp": "^32.0",
+    "opis/json-schema": "^2.4",
     "phpunit/phpunit": "^11.5"
   },
   "config": {
