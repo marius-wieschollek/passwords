@@ -197,7 +197,24 @@ anything that could reach a real deployment.
 - CI (`.gitlab-ci.yml`) runs PHPUnit, then compiles, packs and releases. `npm run
   phpunit:ci` is the CI entry point.
 
-## 8. Docs
+## 8. Writing clients and apps that use the API
+
+When writing a client, app, browser extension, script or anything else that talks to the
+Passwords API:
+
+- **Read the developer documentation in the wiki first:**
+  https://git.mdns.eu/nextcloud-passwords/passwords/-/wikis/Developers/Index — it covers the API
+  pages (passwords, folders, tags, shares, sessions, keychain, …), authentication and
+  client-side encryption. Work from the documented contract, not from guesses based on
+  the controllers in `src/lib`.
+- **If you need a live server to test against**, use the public test server at
+  https://test.passwordsapp.org/ with the test accounts listed at
+  https://test.passwordsapp.org/info.html. Take the credentials from that page rather than
+  hard-coding or committing them, and never point tests at a real user's instance.
+- The test server is shared and public: never store real passwords or personal data on
+  it, and assume anything you put there can be seen or reset by others.
+
+## 9. Docs
 
 - `README.md` — overview, features, links to handbooks
 - `CONTRIBUTING.md` — contributor rules and full dev setup (**read before contributing**)
