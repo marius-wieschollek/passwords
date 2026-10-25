@@ -1,4 +1,14 @@
 ## [Unreleased]
+### Added
+- NC 30 & 31 patches for LSR release
+### Fixed
+- Softlock in SSEv1 setup
+- Some custom actions not working
+- Missing security check after editing passwords
+- Update loop in share update job
+- Incorrect colors in server theme settings
+- Incorrect statistics data
+
 ## 2026.10.0 - Feature release
 ### Added
 - Context menu for tags

@@ -35,8 +35,10 @@ class ThemingIntegrationTest extends TestCase {
             'name'             => 'capability-name',
             'color'            => '#c01021',
             'color-text'       => '#c02022',
+            'color-element'    => '#c03023',
             'logo'             => 'https://example.com/capability-logo.png',
             'background'       => 'https://example.com/capability-background.webp',
+            'backgroundColor'  => '#c05025',
             'background-text'  => '#c06026',
             'background-plain' => false,
             'cacheBuster'      => 'capability-cache-buster',
@@ -100,12 +102,14 @@ class ThemingIntegrationTest extends TestCase {
 
     public static function capabilityGetterProvider(): array {
         return [
-            'logo'       => ['getLogoIcon', self::CAPABILITIES['logo']],
-            'name'       => ['getName', self::CAPABILITIES['name']],
-            'color-text' => ['getTextColorPrimary', self::CAPABILITIES['color-text']],
-            'color'      => ['getColorPrimary', self::CAPABILITIES['color']],
-            'bg-text'    => ['getColorBackground', self::CAPABILITIES['background-text']],
-            'background' => ['getBackgroundImage', self::CAPABILITIES['background']],
+            'logo'          => ['getLogoIcon', self::CAPABILITIES['logo']],
+            'name'          => ['getName', self::CAPABILITIES['name']],
+            'color-text'    => ['getColorText', self::CAPABILITIES['color-text']],
+            'color-element' => ['getColorElement', self::CAPABILITIES['color-element']],
+            'color'         => ['getColorPrimary', self::CAPABILITIES['color']],
+            'bg-color'      => ['getColorBackground', self::CAPABILITIES['backgroundColor']],
+            'bg-text'       => ['getColorBackgroundText', self::CAPABILITIES['background-text']],
+            'background'    => ['getBackgroundImage', self::CAPABILITIES['background']],
         ];
     }
 
@@ -134,11 +138,11 @@ class ThemingIntegrationTest extends TestCase {
         self::assertEquals('Defaults Name', $this->getThemingIntegration()->getName());
     }
 
-    public function testGetTextColorPrimaryFallsBackToThemingDefaults() {
+    public function testGetColorTextFallsBackToThemingDefaults() {
         $this->capabilities->method('getCapabilities')->willReturn(['theming' => []]);
         $this->themingDefaults->expects($this->once())->method('getTextColorPrimary')->willReturn('#d01031');
 
-        self::assertEquals('#d01031', $this->getThemingIntegration()->getTextColorPrimary());
+        self::assertEquals('#d01031', $this->getThemingIntegration()->getColorText());
     }
 
     public function testGetColorPrimaryFallsBackToThemingDefaults() {
@@ -148,20 +152,58 @@ class ThemingIntegrationTest extends TestCase {
         self::assertEquals('#d02032', $this->getThemingIntegration()->getColorPrimary());
     }
 
-    public function testGetColorBackgroundFallsBackToContrastColor() {
+    public function testGetColorElementFallsBackToThemingDefaultsPrimaryColor() {
+        $this->capabilities->method('getCapabilities')->willReturn(['theming' => []]);
+        $this->themingDefaults->expects($this->once())->method('getColorPrimary')->willReturn('#d07037');
+
+        self::assertEquals('#d07037', $this->getThemingIntegration()->getColorElement());
+    }
+
+    public function testGetColorBackgroundFallsBackToThemingDefaults() {
+        $this->capabilities->method('getCapabilities')->willReturn(['theming' => []]);
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#0082c9');
+        $this->colorHelper->expects($this->never())->method('getTextColor');
+
+        self::assertEquals('#0082c9', $this->getThemingIntegration()->getColorBackground());
+    }
+
+    public function testGetColorBackgroundTreatsEmptyCapabilityAsAbsent() {
+        $this->capabilities->method('getCapabilities')->willReturn(['theming' => ['backgroundColor' => '']]);
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
+        $this->colorHelper->expects($this->never())->method('getTextColor');
+
+        self::assertEquals('#ffffff', $this->getThemingIntegration()->getColorBackground());
+    }
+
+    public function testGetColorBackgroundIgnoresBackgroundTextCapability() {
+        $this->capabilities->method('getCapabilities')->willReturn(['theming' => ['background-text' => '#000000']]);
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#47b182');
+
+        self::assertEquals('#47b182', $this->getThemingIntegration()->getColorBackground());
+    }
+
+    public function testGetColorBackgroundTextFallsBackToContrastColor() {
         $this->capabilities->method('getCapabilities')->willReturn(['theming' => []]);
         $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#0082c9');
         $this->colorHelper->expects($this->once())->method('getTextColor')->with('#0082c9')->willReturn('#000000');
 
-        self::assertEquals('#000000', $this->getThemingIntegration()->getColorBackground());
+        self::assertEquals('#000000', $this->getThemingIntegration()->getColorBackgroundText());
     }
 
-    public function testGetColorBackgroundTreatsEmptyCapabilityAsAbsent() {
+    public function testGetColorBackgroundTextTreatsEmptyCapabilityAsAbsent() {
         $this->capabilities->method('getCapabilities')->willReturn(['theming' => ['background-text' => '']]);
         $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
         $this->colorHelper->expects($this->once())->method('getTextColor')->with('#ffffff')->willReturn('#000000');
 
-        self::assertEquals('#000000', $this->getThemingIntegration()->getColorBackground());
+        self::assertEquals('#000000', $this->getThemingIntegration()->getColorBackgroundText());
+    }
+
+    public function testGetColorBackgroundTextIgnoresBackgroundColorCapability() {
+        $this->capabilities->method('getCapabilities')->willReturn(['theming' => ['backgroundColor' => '#47b182']]);
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#ffffff')->willReturn('#000000');
+
+        self::assertEquals('#000000', $this->getThemingIntegration()->getColorBackgroundText());
     }
 
     public function testCapabilitiesAreNotResolvedWhenNotRegistered() {
@@ -269,7 +311,7 @@ class ThemingIntegrationTest extends TestCase {
 
         $integration = $this->getThemingIntegration();
         $integration->getColorPrimary();
-        $integration->getTextColorPrimary();
+        $integration->getColorText();
         $integration->getName();
     }
 
@@ -281,7 +323,7 @@ class ThemingIntegrationTest extends TestCase {
 
         $integration = $this->getThemingIntegration();
         $integration->getColorPrimary();
-        $integration->getTextColorPrimary();
+        $integration->getColorText();
         $integration->getName();
     }
 

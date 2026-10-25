@@ -31,15 +31,7 @@
         },
         computed: {
             color() {
-                let primaryColor = SettingsService.get('server.theme.color.primary'),
-                    lumaBg       = UtilityService.getColorLuma(SettingsService.get('server.theme.color.background')),
-                    lumaFg       = UtilityService.getColorLuma(primaryColor);
-
-                if(lumaBg - lumaFg < 50) {
-                    return '#000';
-                }
-
-                return primaryColor;
+                return SettingsService.get('server.theme.color.background.text');
             },
             bgColor() {
                 return SettingsService.get('server.theme.color.background');

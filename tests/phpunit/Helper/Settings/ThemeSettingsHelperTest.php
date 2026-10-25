@@ -81,7 +81,7 @@ class ThemeSettingsHelperTest extends TestCase {
 
     public function testGetTextColorDefault() {
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
-        $this->themingIntegration->expects($this->never())->method('getTextColorPrimary');
+        $this->themingIntegration->expects($this->never())->method('getColorText');
 
         $result = $this->getThemeSettingsHelper()->get('color.text');
         self::assertEquals('#000000', $result);
@@ -91,7 +91,7 @@ class ThemeSettingsHelperTest extends TestCase {
         $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
 
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
-        $this->themingIntegration->expects($this->never())->method('getTextColorPrimary');
+        $this->themingIntegration->expects($this->never())->method('getColorText');
 
         $this->themingDefaults->expects($this->once())->method('getTextColorPrimary')->willReturn('#123456');
 
@@ -101,51 +101,113 @@ class ThemeSettingsHelperTest extends TestCase {
 
     public function testGetTextColorFromTheming() {
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
-        $this->themingIntegration->expects($this->once())->method('getTextColorPrimary')->willReturn('#123456');
+        $this->themingIntegration->expects($this->once())->method('getColorText')->willReturn('#123456');
 
         $result = $this->getThemeSettingsHelper()->get('color.text');
         self::assertEquals('#123456', $result);
     }
 
+    public function testGetElementColorDefault() {
+        $this->themingIntegration->expects($this->exactly(2))->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorElement');
+        $this->themingIntegration->expects($this->never())->method('getColorPrimary');
+
+        $result = $this->getThemeSettingsHelper()->get('color.element');
+        self::assertEquals('#00679e', $result);
+    }
+
+    public function testGetElementColorFromOcDefaults() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+
+        $this->themingIntegration->expects($this->exactly(2))->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorElement');
+
+        $this->themingDefaults->expects($this->once())->method('getColorPrimary')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.element');
+        self::assertEquals('#123456', $result);
+    }
+
+    public function testGetElementColorFromTheming() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getColorElement')->willReturn('#123456');
+
+        $result = $this->getThemeSettingsHelper()->get('color.element');
+        self::assertEquals('#123456', $result);
+    }
+
     public function testGetBackgroundColorDefault() {
-        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->exactly(2))->method('isAvailable')->willReturn(false);
         $this->themingIntegration->expects($this->never())->method('getColorBackground');
+        $this->themingIntegration->expects($this->never())->method('getColorPrimary');
 
         $result = $this->getThemeSettingsHelper()->get('color.background');
-        self::assertEquals('#ffffff', $result);
+        self::assertEquals('#00679e', $result);
     }
 
-    public function testGetBackgroundColorFromOcDefaultsWhite() {
+    public function testGetBackgroundColorFromOcDefaults() {
         $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
 
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
         $this->themingIntegration->expects($this->never())->method('getColorBackground');
 
-        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#000000');
-        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#000000')->willReturn('#ffffff');
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#47b182');
+        $this->colorHelper->expects($this->never())->method('getTextColor');
 
         $result = $this->getThemeSettingsHelper()->get('color.background');
-        self::assertEquals('#ffffff', $result);
-    }
-
-    public function testGetBackgroundColorFromOcDefaultsBlack() {
-        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
-
-        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
-        $this->themingIntegration->expects($this->never())->method('getColorBackground');
-
-        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
-        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#ffffff')->willReturn('#000000');
-
-        $result = $this->getThemeSettingsHelper()->get('color.background');
-        self::assertEquals('#000000', $result);
+        self::assertEquals('#47b182', $result);
     }
 
     public function testGetBackgroundColorFromTheming() {
         $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
         $this->themingIntegration->expects($this->once())->method('getColorBackground')->willReturn('#123456');
+        $this->themingIntegration->expects($this->never())->method('getColorBackgroundText');
 
         $result = $this->getThemeSettingsHelper()->get('color.background');
+        self::assertEquals('#123456', $result);
+    }
+
+    public function testGetBackgroundTextColorDefault() {
+        $this->themingIntegration->expects($this->exactly(3))->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackgroundText');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#00679e')->willReturn('#ffffff');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background.text');
+        self::assertEquals('#ffffff', $result);
+    }
+
+    public function testGetBackgroundTextColorFromOcDefaultsWhite() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackgroundText');
+
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#000000');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#000000')->willReturn('#ffffff');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background.text');
+        self::assertEquals('#ffffff', $result);
+    }
+
+    public function testGetBackgroundTextColorFromOcDefaultsBlack() {
+        $this->themingDefaults = $this->createMock(OC_Defaults_With_Everything::class);
+
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(false);
+        $this->themingIntegration->expects($this->never())->method('getColorBackgroundText');
+
+        $this->themingDefaults->expects($this->once())->method('getColorBackground')->willReturn('#ffffff');
+        $this->colorHelper->expects($this->once())->method('getTextColor')->with('#ffffff')->willReturn('#000000');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background.text');
+        self::assertEquals('#000000', $result);
+    }
+
+    public function testGetBackgroundTextColorFromTheming() {
+        $this->themingIntegration->expects($this->once())->method('isAvailable')->willReturn(true);
+        $this->themingIntegration->expects($this->once())->method('getColorBackgroundText')->willReturn('#123456');
+        $this->themingIntegration->expects($this->never())->method('getColorBackground');
+
+        $result = $this->getThemeSettingsHelper()->get('color.background.text');
         self::assertEquals('#123456', $result);
     }
 
@@ -344,14 +406,16 @@ class ThemeSettingsHelperTest extends TestCase {
      */
     public function testListThemeSettings() {
         $expected = [
-            'server.theme.color.primary'    => '#123456',
-            'server.theme.color.text'       => '#456789',
-            'server.theme.color.background' => '#ffffff',
-            'server.theme.background'       => 'https://cloud.com/apps/theming/img/background/background.webp',
-            'server.theme.logo'             => 'https://cloud.com/core/img/logo.svg',
-            'server.theme.label'            => 'Nextcloud',
-            'server.theme.app.icon'         => 'https://cloud.com/apps/passwords/app-themed.svg',
-            'server.theme.folder.icon'      => 'https://cloud.com/core/img/filetypes/folder.svg'
+            'server.theme.color.primary'         => '#123456',
+            'server.theme.color.text'            => '#456789',
+            'server.theme.color.element'         => '#123456',
+            'server.theme.color.background'      => '#000000',
+            'server.theme.color.background.text' => '#ffffff',
+            'server.theme.background'            => 'https://cloud.com/apps/theming/img/background/background.webp',
+            'server.theme.logo'                  => 'https://cloud.com/core/img/logo.svg',
+            'server.theme.label'                 => 'Nextcloud',
+            'server.theme.app.icon'              => 'https://cloud.com/apps/passwords/app-themed.svg',
+            'server.theme.folder.icon'           => 'https://cloud.com/core/img/filetypes/folder.svg'
         ];
 
 

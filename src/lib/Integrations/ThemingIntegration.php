@@ -95,10 +95,19 @@ class ThemingIntegration {
     /**
      * @return string
      */
-    public function getTextColorPrimary(): string {
+    public function getColorText(): string {
         $color = $this->getCapability('color-text');
 
         return $color ?? $this->getThemingDefaults()->getTextColorPrimary();
+    }
+
+    /**
+     * @return string
+     */
+    public function getColorElement(): string {
+        $color = $this->getCapability('color-element');
+
+        return $color ?? $this->getThemingDefaults()->getColorPrimary();
     }
 
     /**
@@ -114,6 +123,19 @@ class ThemingIntegration {
      * @return string
      */
     public function getColorBackground(): string {
+        $backgroundColor = $this->getCapability('backgroundColor');
+
+        if(!empty($backgroundColor)) {
+            return $backgroundColor;
+        }
+
+        return $this->getThemingDefaults()->getColorBackground();
+    }
+
+    /**
+     * @return string
+     */
+    public function getColorBackgroundText(): string {
         $backgroundColor = $this->getCapability('background-text');
 
         if(!empty($backgroundColor)) {

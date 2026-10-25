@@ -36,11 +36,11 @@ class ThemeSettingsHelper {
      * @param ThemingColorHelper  $colorHelper
      */
     public function __construct(
-        protected OC_Defaults          $theming,
-        protected IURLGenerator        $urlGenerator,
-        protected ThemingIntegration   $themingIntegration,
-        protected UnsplashIntegration  $unsplashIntegration,
-        protected ThemingColorHelper   $colorHelper,
+        protected OC_Defaults         $theming,
+        protected IURLGenerator       $urlGenerator,
+        protected ThemingIntegration  $themingIntegration,
+        protected UnsplashIntegration $unsplashIntegration,
+        protected ThemingColorHelper  $colorHelper,
     ) {
     }
 
@@ -50,15 +50,19 @@ class ThemeSettingsHelper {
      * @return null|string
      */
     public function get(string $key) {
-        switch ($key) {
+        switch($key) {
             case 'color':
             case 'color.primary':
                 return $this->getColorPrimary();
             case 'color.text':
             case 'text.color':
-                return $this->getTextColor();
+                return $this->getColorText();
+            case 'color.element':
+                return $this->getColorElement();
             case 'color.background':
-                return $this->getBackgroundColor();
+                return $this->getColorBackground();
+            case 'color.background.text':
+                return $this->getColorBackgroundText();
             case 'background':
                 return $this->getBackgroundImage();
             case 'logo':
@@ -79,14 +83,16 @@ class ThemeSettingsHelper {
      */
     public function list(): array {
         return [
-            'server.theme.color.primary'    => $this->getColorPrimary(),
-            'server.theme.color.text'       => $this->getTextColor(),
-            'server.theme.color.background' => $this->getBackgroundColor(),
-            'server.theme.background'       => $this->getBackgroundImage(),
-            'server.theme.logo'             => $this->getLogoIcon(),
-            'server.theme.label'            => $this->getName(),
-            'server.theme.app.icon'         => $this->getAppIcon(),
-            'server.theme.folder.icon'      => $this->getFolderIcon()
+            'server.theme.color.primary'         => $this->getColorPrimary(),
+            'server.theme.color.text'            => $this->getColorText(),
+            'server.theme.color.element'         => $this->getColorElement(),
+            'server.theme.color.background'      => $this->getColorBackground(),
+            'server.theme.color.background.text' => $this->getColorBackgroundText(),
+            'server.theme.background'            => $this->getBackgroundImage(),
+            'server.theme.logo'                  => $this->getLogoIcon(),
+            'server.theme.label'                 => $this->getName(),
+            'server.theme.app.icon'              => $this->getAppIcon(),
+            'server.theme.folder.icon'           => $this->getFolderIcon()
         ];
     }
 
@@ -94,7 +100,7 @@ class ThemeSettingsHelper {
      * @return string
      */
     public function getLogoIcon(): string {
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getLogoIcon();
         }
 
@@ -105,9 +111,8 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getFolderIcon(): string {
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getFolderIcon();
-
         }
 
         return $this->urlGenerator->getAbsoluteURL(
@@ -119,7 +124,7 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getAppIcon(): string {
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getAppIcon();
         }
 
@@ -132,13 +137,13 @@ class ThemeSettingsHelper {
      * @return string
      */
     protected function getBackgroundImage(): string {
-        if ($this->unsplashIntegration->isAvailable()) {
+        if($this->unsplashIntegration->isAvailable()) {
             $background = $this->unsplashIntegration->getBackgroundImage();
 
-            if ($background) return $background;
+            if($background) return $background;
         }
 
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getBackgroundImage();
         }
 
@@ -148,27 +153,42 @@ class ThemeSettingsHelper {
     /**
      * @return string
      */
-    protected function getBackgroundColor(): string {
-        if ($this->themingIntegration->isAvailable()) {
+    protected function getColorBackground(): string {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getColorBackground();
         }
 
-        if (method_exists($this->theming, 'getColorBackground')) {
+        if(method_exists($this->theming, 'getColorBackground')) {
+            return $this->theming->getColorBackground();
+        }
+
+        return $this->getColorPrimary();
+    }
+
+    /**
+     * @return string
+     */
+    protected function getColorBackgroundText(): string {
+        if($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getColorBackgroundText();
+        }
+
+        if(method_exists($this->theming, 'getColorBackground')) {
             return $this->colorHelper->getTextColor($this->theming->getColorBackground());
         }
 
-        return '#ffffff';
+        return $this->colorHelper->getTextColor($this->getColorBackground());
     }
 
     /**
      * @return string
      */
     protected function getColorPrimary(): string {
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getColorPrimary();
         }
 
-        if (method_exists($this->theming, 'getColorPrimary')) {
+        if(method_exists($this->theming, 'getColorPrimary')) {
             return $this->theming->getColorPrimary();
         }
 
@@ -178,28 +198,39 @@ class ThemeSettingsHelper {
     /**
      * @return string
      */
-    protected function getTextColor(): string {
-        if ($this->themingIntegration->isAvailable()) {
-            return $this->themingIntegration->getTextColorPrimary();
+    protected function getColorText(): string {
+        if($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getColorText();
         }
 
-        if (method_exists($this->theming, 'getTextColorPrimary')) {
+        if(method_exists($this->theming, 'getTextColorPrimary')) {
             return $this->theming->getTextColorPrimary();
         }
 
         return '#000000';
     }
 
+    /**
+     * @return string
+     */
+    protected function getColorElement(): string {
+        if($this->themingIntegration->isAvailable()) {
+            return $this->themingIntegration->getColorElement();
+        }
+
+        return $this->getColorPrimary();
+    }
+
     protected function getName(): string {
-        if ($this->themingIntegration->isAvailable()) {
+        if($this->themingIntegration->isAvailable()) {
             return $this->themingIntegration->getName();
         }
 
-        if (method_exists($this->theming, 'getName')) {
+        if(method_exists($this->theming, 'getName')) {
             return $this->theming->getName();
         }
 
-        if (method_exists($this->theming, 'getEntity')) {
+        if(method_exists($this->theming, 'getEntity')) {
             return $this->theming->getEntity();
         }
 
