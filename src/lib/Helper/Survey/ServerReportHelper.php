@@ -108,11 +108,11 @@ class ServerReportHelper {
      */
     protected function getVersions(): array {
         return [
-            'server'  => $this->serverVersion->getVersionString(),
+            'server'  => implode('.', $this->serverVersion->getVersion()),
             'app'     => $this->config->getAppValue('installed_version'),
             'lsr'     => SystemRequirements::APP_LSR,
-            'php'     => $this->config->getAppValue('web/php/version/string', phpversion()),
-            'cronPhp' => $this->config->getAppValue('cron/php/version/string', phpversion())
+            'php'     => $this->getPhpVersion('web/php/version/id'),
+            'cronPhp' => $this->getPhpVersion('cron/php/version/id')
         ];
     }
 
@@ -262,9 +262,9 @@ class ServerReportHelper {
     }
 
     /**
-     * @return array
+     * @return object
      */
-    protected function getSseEncryption(): array {
+    protected function getSseEncryption(): object {
         $data = [];
         $best = [0, 'none'];
 
@@ -274,17 +274,17 @@ class ServerReportHelper {
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
-        if($best[0] === 0) return [];
+        if($best[0] === 0) return (object) [];
 
         $data['default'] = $best[1];
 
-        return $data;
+        return (object) $data;
     }
 
     /**
-     * @return array
+     * @return object
      */
-    protected function getCseEncryption(): array {
+    protected function getCseEncryption(): object {
         $data = [];
         $best = [0, 'none'];
 
@@ -294,11 +294,11 @@ class ServerReportHelper {
             if($count > $best[0]) $best = [$count, $encryption];
         }
 
-        if($best[0] === 0) return [];
+        if($best[0] === 0) return (object) [];
 
         $data['default'] = $best[1];
 
-        return $data;
+        return (object) $data;
     }
 
     /**
@@ -322,5 +322,25 @@ class ServerReportHelper {
      */
     public function hasData(): bool {
         return count($this->passwordRevisionMapper->findAll()) > 0;
+    }
+
+    /**
+     * @param string $configKey
+     *
+     * @return string
+     */
+    protected function getPhpVersion(string $configKey): string {
+        $phpVersionId = (int) $this->config->getAppValue($configKey, (string) PHP_VERSION_ID);
+        if($phpVersionId < 50000) {
+            $phpVersionId = PHP_VERSION_ID;
+        }
+
+        $phpVersion = [
+            intdiv($phpVersionId, 10000),
+            intdiv($phpVersionId%10000, 100),
+            $phpVersionId%10000%100,
+        ];
+
+        return implode('.', $phpVersion);
     }
 }

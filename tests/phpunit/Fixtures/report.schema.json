@@ -1,0 +1,172 @@
+{
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://passwords-statistics/report.schema.json",
+    "title": "Passwords app statistics report",
+    "description": "Report sent by the Nextcloud Passwords app as a JSON POST to api.php. Mirrors the checks in src/Classes/Controller/ReportController.php: the server silently drops fields that do not match, and drops the whole report if version.app is invalid.",
+    "type": "object",
+    "required": ["version"],
+    "additionalProperties": false,
+    "properties": {
+        "version": {
+            "type": "object",
+            "required": ["app"],
+            "additionalProperties": false,
+            "properties": {
+                "app": {
+                    "description": "App version YEAR.MONTH.PATCH, nightlies add -buildNNNN. Reports with an invalid value are discarded entirely.",
+                    "type": "string",
+                    "pattern": "^20[1-3][0-9]\\.([1-9]|1[0-2])\\.[0-9]{1,3}(-build[0-9]{4,5})?$"
+                },
+                "server": {
+                    "description": "Nextcloud server version with all four parts.",
+                    "type": "string",
+                    "pattern": "^[1-9][0-9]\\.[0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{1,2}$"
+                },
+                "lsr": {
+                    "description": "Whether the app is a long-term support release.",
+                    "type": "boolean"
+                },
+                "php": {"$ref": "#/$defs/phpVersion"},
+                "cronPhp": {
+                    "$ref": "#/$defs/phpVersion",
+                    "description": "PHP version used by the cron job. Accepted but not recorded."
+                }
+            }
+        },
+        "environment": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "os": {
+                    "description": "Kernel name from php_uname('s'), e.g. Linux, Darwin, Windows NT, HP-UX or GNU/kFreeBSD.",
+                    "type": "string",
+                    "pattern": "^[A-Za-z][A-Za-z0-9 _./-]{0,31}$"
+                },
+                "architecture": {
+                    "description": "CPU architecture, x86_64 is stored as amd64.",
+                    "type": "string",
+                    "pattern": "^[A-Za-z0-9_]{3,10}$"
+                },
+                "bits": {"enum": [32, 64]},
+                "database": {"enum": ["mysql", "pgsql", "sqlite3", "sqlite", "oci"]},
+                "cron": {"enum": ["cron", "webcron", "ajax"]},
+                "proxy": {"type": "boolean"},
+                "sslProxy": {"type": "boolean"},
+                "subdirectory": {"type": "boolean"}
+            }
+        },
+        "services": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "images": {"enum": ["imagick", "gdlib", "imaginary"]},
+                "favicons": {"enum": ["local", "bi", "fg", "ddg", "gl", "default"]},
+                "previews": {"enum": ["pageres", "screeenly", "bws", "ssl", "ssm", "ws", "default"]},
+                "words": {"enum": ["auto", "local", "leipzig", "wo4snakes", "random"]},
+                "security": {"enum": ["hibp", "bigdb", "smalldb", "bigdb+hibp"]},
+                "previewApi": {"type": "boolean"},
+                "faviconApi": {"type": "boolean"}
+            }
+        },
+        "settings": {
+            "description": "Omitting this section records the report as minimal telemetry.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "channel": {"enum": ["production", "stable", "beta", "daily", "enterprise", "git"]},
+                "nightlies": {"type": "boolean"},
+                "handbook": {"type": "boolean"},
+                "performance": {"type": "integer"}
+            }
+        },
+        "status": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "autoBackupStatus": {"type": "integer", "minimum": 0, "maximum": 4}
+            }
+        },
+        "apps": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "guests": {"$ref": "#/$defs/appStatus"},
+                "occweb": {"$ref": "#/$defs/appStatus"},
+                "theming": {"$ref": "#/$defs/appStatus"},
+                "passman": {"$ref": "#/$defs/appStatus"},
+                "unsplash": {"$ref": "#/$defs/appStatus"},
+                "impersonate": {"$ref": "#/$defs/appStatus"},
+                "passwords_handbook": {"$ref": "#/$defs/appStatus"},
+                "user_migration": {"$ref": "#/$defs/appStatus"}
+            }
+        },
+        "sharing": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "shares": {
+                    "description": "Number of shares, bucketed. 501 means more than 500.",
+                    "enum": [0, 10, 25, 50, 100, 500, 501]
+                }
+            }
+        },
+        "encryption": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "sse": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "SSEv1r1": {"type": "boolean"},
+                        "SSEv1r2": {"type": "boolean"},
+                        "SSEv2r1": {"type": "boolean"},
+                        "SSEv3r1": {"type": "boolean"},
+                        "none": {"type": "boolean"},
+                        "default": {"enum": ["SSEv1r1", "SSEv1r2", "SSEv2r1", "SSEv3r1", "none"]}
+                    }
+                },
+                "cse": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "properties": {
+                        "CSEv1r1": {"type": "boolean"},
+                        "none": {"type": "boolean"},
+                        "default": {"enum": ["CSEv1r1", "none"]}
+                    }
+                }
+            }
+        },
+        "legacyApi": {
+            "description": "Sent by old app versions. Analysis is currently disabled in the controller.",
+            "deprecated": true,
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "enabled": {
+                    "anyOf": [
+                        {"type": "boolean"},
+                        {"enum": ["0", "1"]},
+                        {"type": "integer", "minimum": 0, "maximum": 3}
+                    ]
+                },
+                "used": {"type": "boolean"}
+            }
+        }
+    },
+    "$defs": {
+        "phpVersion": {
+            "type": "string",
+            "pattern": "^([7-9]|[1-9][0-9])\\.[0-9]{1,2}\\.[0-9]{1,2}$"
+        },
+        "appStatus": {
+            "description": "Installation state of a related Nextcloud app. enabled is only recorded when installed is true.",
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+                "installed": {"type": "boolean"},
+                "enabled": {"type": "boolean"}
+            }
+        }
+    }
+}
