@@ -65,7 +65,9 @@ The app also supports most 2FA authentication methods offered by Nextcloud.
 * [Android App](https://play.google.com/store/apps/details?id=de.jbservices.nc_passwords_app) by [joleaf](https://gitlab.com/joleaf/nc-passwords-app)
 * [Android App](https://play.google.com/store/apps/details?id=com.hegocre.nextcloudpasswords) by [hegocre](https://github.com/hegocre/NextcloudPasswords)
 * [Windows App (WIP)](https://www.microsoft.com/store/apps/9NXVZ0ZP6D5Z) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
+* [Windows App](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop) by [TinyBrickBoy](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop/releases/latest)
 * [Linux App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#linux) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
+* [Linux App](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop) by [TinyBrickBoy](https://github.com/TinyBrickBoy/nextcloud-passworts-desktop/releases/latest)
 * [macOS App (WIP)](https://gitlab.com/j0chn/nextcloud_password_client/-/tree/main#mac-os) by [j0chn](https://gitlab.com/j0chn/nextcloud_password_client)
 * [iOS App](https://apps.apple.com/app/id1546212226) by [Johannes Schliephake](https://github.com/johannes-schliephake/nextcloud-passwords-ios)
 
