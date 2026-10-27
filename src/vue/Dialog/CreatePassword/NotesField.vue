@@ -26,6 +26,7 @@
     import UtilityService from "@js/Services/UtilityService";
     import LocalisationService from "@js/Services/LocalisationService";
     import LoggingService from "@js/Services/LoggingService";
+    import DOMPurify from "dompurify";
 
     const MaxNotesLength = 4096;
 
@@ -75,19 +76,23 @@
              */
             async loadEditor() {
                 try {
+                    const dumPurifyConfig = {
+                        ADD_ATTR: ['rel', 'target', 'hreflang', 'type'],
+                        FORBID_TAGS: ['input', 'script', 'textarea', 'form', 'button', 'select', 'meta', 'style', 'link', 'title', 'object', 'base']
+                    };
 
                     this.editor = new Editor(
                         {
-                            el             : this.$refs.textarea,
-                            autofocus      : false,
-                            height         : '100%',
-                            initialValue   : this.model,
-                            previewStyle   : window.innerWidth <= 640 ? 'tab':'vertical',
-                            usageStatistics: false,
-                            language       : LocalisationService.locale,
-                            placeholder    : LocalisationService.translate('Take some notes'),
-                            hideModeSwitch : true,
-                            toolbarItems   : [
+                            el                 : this.$refs.textarea,
+                            autofocus          : false,
+                            height             : '100%',
+                            initialValue       : this.model,
+                            previewStyle       : window.innerWidth <= 640 ? 'tab':'vertical',
+                            usageStatistics    : false,
+                            language           : LocalisationService.locale,
+                            placeholder        : LocalisationService.translate('Take some notes'),
+                            hideModeSwitch     : true,
+                            toolbarItems       : [
                                 [
                                     {
                                         el: this.$refs.label.$el
@@ -118,7 +123,8 @@
                                     }
                                 ]
                             ],
-                            events         : {
+                            customHTMLSanitizer: (html) => DOMPurify.sanitize(html, dumPurifyConfig) || '',
+                            events             : {
                                 change: () => {
                                     let value = this.editor.getMarkdown();
                                     if(value.length > MaxNotesLength) {

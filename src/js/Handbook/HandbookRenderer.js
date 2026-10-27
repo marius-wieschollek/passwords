@@ -105,15 +105,15 @@ class HandbookRenderer {
      */
     async renderMermaid(source, charts) {
         let themeVariables = {
-            primaryColor: SettingsService.get('server.theme.color.primary'),
-            background  : SettingsService.get('server.theme.color.background')
+            primaryColor    : SettingsService.get('server.theme.color.primary'),
+            background      : SettingsService.get('server.theme.color.background')
         };
-        mermaid.mermaidAPI.initialize({startOnLoad: false, theme: 'base', themeVariables});
+        mermaid.initialize({startOnLoad: false, theme: 'base', themeVariables});
 
         for(let id in charts) {
             if(id === 'length' || !charts.hasOwnProperty(id)) continue;
             let code   = charts[id],
-                result = await mermaid.mermaidAPI.render(id, code);
+                result = await mermaid.render(id, code);
 
             source = source.replace(`###${id}###`, result.svg);
         }
