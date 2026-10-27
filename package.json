@@ -72,7 +72,7 @@
         "mermaid": "^12.2.0",
         "mini-css-extract-plugin": "^2.7.2",
         "node-polyfill-webpack-plugin": "^3.0.0",
-        "passwords-client": "1.0.0-beta.5974",
+        "passwords-client": "1.0.0-beta.6117",
         "process": "^0.11.10",
         "sass": "^1.57.1",
         "sass-loader": "^12.6.0",
