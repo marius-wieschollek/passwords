@@ -1,4 +1,5 @@
 ## [Unreleased]
+## 2026.11.0 - Feature release
 ### Added
 - NC 30 & 31 patches for LSR release
 ### Fixed
@@ -8,6 +9,8 @@
 - Update loop in share update job
 - Incorrect colors in server theme settings
 - Incorrect statistics data
+### Security
+- Added mitigation for DOMPurify embedded in ToastUI vulnerable to CVE-2024-47875
 
 ## 2026.10.0 - Feature release
 ### Added
