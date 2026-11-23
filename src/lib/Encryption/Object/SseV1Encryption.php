@@ -20,7 +20,7 @@ use OCA\Passwords\Exception\Encryption\InvalidEncryptionResultException;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EncryptionService;
 use OCA\Passwords\Services\EnvironmentService;
-use OCP\Lock\ILockingProvider;
+use OCA\Passwords\Services\LockService;
 use OCP\Lock\LockedException;
 use OCP\Security\ICrypto;
 use OCP\Security\ISecureRandom;
@@ -70,14 +70,14 @@ class SseV1Encryption implements ObjectEncryptionInterface {
      * @param ISecureRandom        $secureRandom
      * @param ConfigurationService $config
      * @param EnvironmentService   $environment
-     * @param ILockingProvider     $lockingProvider
+     * @param LockService          $lockService
      */
     public function __construct(
-        protected ICrypto $crypto,
-        protected ISecureRandom $secureRandom,
+        protected ICrypto              $crypto,
+        protected ISecureRandom        $secureRandom,
         protected ConfigurationService $config,
-        protected EnvironmentService $environment,
-        protected ILockingProvider $lockingProvider,
+        protected EnvironmentService   $environment,
+        protected LockService          $lockService,
     ) {
         $this->userId       = $environment->getUserId();
     }
@@ -242,7 +242,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
         $lockName = 'passwords/SSEv1r1/GenerateUserKey/'.sha1($userId);
 
         try {
-            $this->lockingProvider->acquireLock($lockName, ILockingProvider::LOCK_EXCLUSIVE);
+            $this->lockService->acquireLock($lockName);
         } catch(LockedException $exception) {
             $retryCount++;
             if($retryCount > self::USER_KEY_GENERATE_TIMEOUT) throw $exception;
@@ -260,7 +260,7 @@ class SseV1Encryption implements ObjectEncryptionInterface {
             $userKey = $this->getSecureRandom();
             $this->config->setUserValue('SSEv1UserKey', $userKey, $userId);
         } finally {
-            $this->lockingProvider->releaseLock($lockName, ILockingProvider::LOCK_EXCLUSIVE);
+            $this->lockService->releaseLock($lockName);
         }
 
         return $userKey;

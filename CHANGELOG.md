@@ -1,4 +1,8 @@
 ## [Unreleased]
+### Fixed
+- Duplicate share notifications when using background job worker
+
+
 ## 2026.11.0 - Feature release
 ### Added
 - NC 30 & 31 patches for LSR release

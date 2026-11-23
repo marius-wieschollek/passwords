@@ -153,6 +153,13 @@ abstract class AbstractService {
         $this->fireEvent('afterDestroyed', $entity);
     }
 
+    /***
+     * @return void
+     */
+    public function clearCache(): void {
+        $this->mapper->clearEntityCache();
+    }
+
     /**
      * @param EntityInterface $model
      *

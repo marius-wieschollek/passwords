@@ -32,10 +32,11 @@ class ConfigurationService {
      * @param EnvironmentService $environment
      */
     public function __construct(
-        protected IConfig $config,
-        protected IAppConfig $appConfig,
-        protected IUserConfig $userConfig,
-        protected EnvironmentService $environment) {
+        protected IConfig            $config,
+        protected IAppConfig         $appConfig,
+        protected IUserConfig        $userConfig,
+        protected EnvironmentService $environment
+    ) {
     }
 
     /**
@@ -52,7 +53,7 @@ class ConfigurationService {
 
         $result = $this->userConfig->getValueString($userId, $app, $key, 'return-default');
 
-        return $result === 'return-default' ? $default : $result;
+        return $result === 'return-default' ? $default:$result;
     }
 
     /**
@@ -69,9 +70,9 @@ class ConfigurationService {
     }
 
     /**
-     * @param string   $key
-     * @param int $default
-     * @param string   $app
+     * @param string $key
+     * @param int    $default
+     * @param string $app
      *
      * @return int
      */
@@ -80,9 +81,9 @@ class ConfigurationService {
     }
 
     /**
-     * @param string   $key
-     * @param bool $default
-     * @param string   $app
+     * @param string $key
+     * @param bool   $default
+     * @param string $app
      *
      * @return bool
      */
@@ -98,6 +99,26 @@ class ConfigurationService {
      */
     public function getSystemValue(string $key, $default = null): mixed {
         return $this->config->getSystemValue($key, $default);
+    }
+
+    /**
+     * @param string $key
+     * @param bool   $default
+     *
+     * @return bool
+     */
+    public function getSystemValueBool(string $key, bool $default = false): bool {
+        return $this->config->getSystemValueBool($key, $default);
+    }
+
+    /**
+     * @param string $key
+     * @param int    $default
+     *
+     * @return int
+     */
+    public function getSystemValueInt(string $key, int $default = 0): int {
+        return $this->config->getSystemValueInt($key, $default);
     }
 
     /**
@@ -123,7 +144,7 @@ class ConfigurationService {
 
     /**
      * @param string $key
-     * @param int $value
+     * @param int    $value
      */
     public function setAppValueInt(string $key, int $value): void {
         $this->appConfig->setValueInt(Application::APP_NAME, $key, $value);
@@ -131,7 +152,7 @@ class ConfigurationService {
 
     /**
      * @param string $key
-     * @param bool $value
+     * @param bool   $value
      */
     public function setAppValueBool(string $key, bool $value): void {
         $this->appConfig->setValueBool(Application::APP_NAME, $key, $value);

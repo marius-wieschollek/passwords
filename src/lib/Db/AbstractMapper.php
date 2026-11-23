@@ -61,7 +61,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws \OCP\DB\Exception
      */
     public function delete(Entity $entity): Entity {
-        if ($this->entityCache->hasKey($entity->getUuid())) {
+        if ($this->entityCache->offsetExists($entity->getUuid())) {
             $this->entityCache->remove($entity->getUuid());
         }
 
@@ -101,7 +101,7 @@ abstract class AbstractMapper extends QBMapper {
      * @throws MultipleObjectsReturnedException
      */
     public function findByUuid(string $uuid): EntityInterface {
-        if ($this->entityCache->hasKey($uuid)) {
+        if ($this->entityCache->offsetExists($uuid)) {
             return $this->entityCache->get($uuid);
         }
 
@@ -346,7 +346,7 @@ abstract class AbstractMapper extends QBMapper {
      * @return Entity
      */
     protected function mapRowToEntity(array $row): Entity {
-        if (isset($row['uuid']) && $this->entityCache->hasKey($row['uuid'])) {
+        if (isset($row['uuid']) && $this->entityCache->offsetExists($row['uuid'])) {
             return $this->entityCache->get($row['uuid']);
         }
 

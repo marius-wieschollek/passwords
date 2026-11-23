@@ -17,6 +17,7 @@ use OCA\Passwords\Db\PasswordRevision;
 use OCA\Passwords\Db\Share;
 use OCA\Passwords\Services\ConfigurationService;
 use OCA\Passwords\Services\EnvironmentService;
+use OCA\Passwords\Services\LockService;
 use OCA\Passwords\Services\LoggingService;
 use OCA\Passwords\Services\MailService;
 use OCA\Passwords\Services\NotificationService;
@@ -27,6 +28,7 @@ use OCA\Passwords\Services\Object\ShareService;
 use OCP\AppFramework\Db\DoesNotExistException;
 use OCP\AppFramework\Db\MultipleObjectsReturnedException;
 use OCP\AppFramework\Utility\ITimeFactory;
+use OCP\Lock\LockedException;
 
 /**
  * Class SynchronizeShares
@@ -34,8 +36,7 @@ use OCP\AppFramework\Utility\ITimeFactory;
  * @package OCA\Passwords\Cron
  */
 class SynchronizeShares extends AbstractTimedJob {
-
-    const string EXECUTION_TIMESTAMP = 'cron/sharing/time';
+    const string SHARING_CRON_LOCK = 'passwords/cron/sharing';
 
     /**
      * @var array
@@ -54,6 +55,7 @@ class SynchronizeShares extends AbstractTimedJob {
      * @param PasswordService         $passwordService
      * @param NotificationService     $notificationService
      * @param PasswordRevisionService $passwordRevisionService
+     * @param LockService             $lockService
      */
     public function __construct(
         ITimeFactory                      $time,
@@ -64,7 +66,8 @@ class SynchronizeShares extends AbstractTimedJob {
         EnvironmentService                $environment,
         protected PasswordService         $passwordService,
         protected NotificationService     $notificationService,
-        protected PasswordRevisionService $passwordRevisionService
+        protected PasswordRevisionService $passwordRevisionService,
+        protected LockService             $lockService,
     ) {
         parent::__construct($time, $logger, $config, $environment);
     }
@@ -75,17 +78,18 @@ class SynchronizeShares extends AbstractTimedJob {
      * @throws Exception
      */
     protected function runJob($argument): void {
-        if(!$this->canExecute()) return;
-        $this->config->setAppValue(self::EXECUTION_TIMESTAMP, time());
-
-        $this->deleteOrphanedTargetPasswords();
-        $this->deleteExpiredShares();
-        $this->createNewShares();
-        $this->removeSharedAttribute();
-        $this->updatePasswords();
-        $this->notifyUsers();
-
-        $this->config->deleteAppValue(self::EXECUTION_TIMESTAMP);
+        if(!$this->acquireLock()) return;
+        try {
+            $this->clearCaches();
+            $this->deleteOrphanedTargetPasswords();
+            $this->deleteExpiredShares();
+            $this->createNewShares();
+            $this->removeSharedAttribute();
+            $this->updatePasswords();
+            $this->notifyUsers();
+        } finally {
+            $this->lockService->releaseLock(self::SHARING_CRON_LOCK);
+        }
     }
 
     /**
@@ -93,7 +97,7 @@ class SynchronizeShares extends AbstractTimedJob {
      */
     public function runManually(): bool {
         try {
-            if($this->canExecute()) {
+            if(!$this->lockService->isLocked(self::SHARING_CRON_LOCK)) {
                 $this->runJob($this->getArgument());
 
                 return true;
@@ -165,7 +169,7 @@ class SynchronizeShares extends AbstractTimedJob {
                 /** @var PasswordRevision $sourceRevision */
                 try {
                     $sourceRevision = $this->passwordRevisionService->findCurrentRevisionByModel($share->getSourcePassword(), true);
-                } catch (DoesNotExistException $e) {
+                } catch(DoesNotExistException $e) {
                     $this->logger->error("Could not complete share {$share->getUuid()}, source password {$share->getSourcePassword()} does not exist");
                     $this->shareService->delete($share);
                     /**
@@ -180,7 +184,7 @@ class SynchronizeShares extends AbstractTimedJob {
                 $model->setShareId($share->getUuid());
                 $model->setEditable($share->getEditable());
 
-                $revision       = $this->passwordRevisionService->create(
+                $revision = $this->passwordRevisionService->create(
                     $model->getUuid(),
                     $sourceRevision->getPassword(),
                     $sourceRevision->getUsername(),
@@ -299,7 +303,7 @@ class SynchronizeShares extends AbstractTimedJob {
      * @throws MultipleObjectsReturnedException
      */
     protected function updateTargetPasswords(): int {
-        $total = 0;
+        $total     = 0;
         $loopCount = 0;
 
         do {
@@ -367,7 +371,7 @@ class SynchronizeShares extends AbstractTimedJob {
      * @throws MultipleObjectsReturnedException
      */
     protected function updateSourcePasswords(): int {
-        $total = 0;
+        $total     = 0;
         $loopCount = 0;
 
         do {
@@ -454,10 +458,22 @@ class SynchronizeShares extends AbstractTimedJob {
     /**
      * @return bool
      */
-    protected function canExecute(): bool {
-        $this->config->clearCache();
+    protected function acquireLock(): bool {
+        try {
+            $this->lockService->acquireLock(self::SHARING_CRON_LOCK);
+        } catch(LockedException) {
+            return false;
+        }
 
-        return $this->environment->getRunType() === EnvironmentService::TYPE_CRON &&
-               intval($this->config->getAppValue(self::EXECUTION_TIMESTAMP, 0)) < strtotime('-2 hours');
+        return true;
+    }
+
+    /**
+     * @return void
+     */
+    protected function clearCaches(): void {
+        $this->shareService->clearCache();
+        $this->passwordService->clearCache();
+        $this->notifications = ['created' => [], 'deleted' => [], 'loop' => []];
     }
 }
