@@ -7,7 +7,7 @@ use OCP\Server;
 class UserConfig {
 
     public function hasKey(string $userId, string $app, string $key, ?bool $lazy = false): bool {
-        if(class_exists(\OCP\Config\IUserConfig::class)) {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
             return Server::get(\OCP\Config\IUserConfig::class)->hasKey($userId, $app, $key, $lazy);
         }
 
@@ -18,7 +18,7 @@ class UserConfig {
     }
 
     public function getValueString(string $userId, string $app, string $key, string $default = '', bool $lazy = false): string {
-        if(class_exists(\OCP\Config\IUserConfig::class)) {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
             return Server::get(\OCP\Config\IUserConfig::class)->getValueString($userId, $app, $key, $default, $lazy);
         }
 
@@ -26,7 +26,7 @@ class UserConfig {
     }
 
     public function setValueString(string $userId, string $app, string $key, string $value, bool $lazy = false, int $flags = 0): bool {
-        if(class_exists(\OCP\Config\IUserConfig::class)) {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
             return Server::get(\OCP\Config\IUserConfig::class)->setValueString($userId, $app, $key, $value, $lazy, $flags);
         }
 
@@ -36,8 +36,9 @@ class UserConfig {
     }
 
     public function deleteUserConfig(string $userId, string $app, string $key): void {
-        if(class_exists(\OCP\Config\IUserConfig::class)) {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
             Server::get(\OCP\Config\IUserConfig::class)->deleteUserConfig($userId, $app, $key);
+
             return;
         }
 
@@ -45,8 +46,15 @@ class UserConfig {
     }
 
     public function clearCache(string $userId, bool $reload = false): void {
-        if(class_exists(\OCP\Config\IUserConfig::class)) {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
             Server::get(\OCP\Config\IUserConfig::class)->clearCache($userId, $reload);
+        }
+    }
+
+    public function clearCacheAll(): void {
+        if(interface_exists(\OCP\Config\IUserConfig::class)) {
+            $userConfig = Server::get(\OCP\Config\IUserConfig::class);
+            if(method_exists($userConfig, 'clearCacheAll')) $userConfig->clearCacheAll();
         }
     }
 }

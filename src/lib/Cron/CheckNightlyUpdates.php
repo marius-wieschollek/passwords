@@ -42,7 +42,7 @@ class CheckNightlyUpdates extends AbstractTimedJob {
         protected NightlyAppFetcher $nightlyAppFetcher
     ) {
         parent::__construct($time, $logger, $config, $environment);
-        $this->setInterval(0);
+        $this->setInterval(60);
     }
 
     /**

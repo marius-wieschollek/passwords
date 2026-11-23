@@ -70,6 +70,7 @@ class SynchronizeShares extends AbstractTimedJob {
         protected LockService             $lockService,
     ) {
         parent::__construct($time, $logger, $config, $environment);
+        $this->setInterval(60);
     }
 
     /**

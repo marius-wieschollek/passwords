@@ -54,6 +54,7 @@ abstract class AbstractTimedJob extends TimedJob {
 
         $this->config->setAppValue('cron/php/version/id', PHP_VERSION_ID);
         $this->config->setAppValue('cron/php/version/string', phpversion());
+        $this->config->clearCache();
 
         try {
             $this->runJob($argument);

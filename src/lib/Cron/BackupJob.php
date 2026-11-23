@@ -57,5 +57,8 @@ class BackupJob extends AbstractTimedJob {
         $file = $this->backupService->createBackup(null, BackupService::AUTO_BACKUPS);
         $this->logger->info(['Created Backup %s with %s', $file->getName(), Util::humanFileSize($file->getSize())]);
         $this->backupService->removeOldBackups();
+
+        $interval = (int) $this->config->getAppValue('backup/interval', 86400);
+        $this->setInterval($interval);
     }
 }

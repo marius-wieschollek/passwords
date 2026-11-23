@@ -268,6 +268,8 @@ class ConfigurationService {
         $userId = $this->getUserId($user);
         if($userId) {
             $this->userConfig->clearCache($userId);
+        } else {
+            $this->userConfig->clearCacheAll();
         }
     }
 
